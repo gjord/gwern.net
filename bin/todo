@@ -1,0 +1,82 @@
+# -*- mode: text; -*-
+#When:  Time-stamp: "03-Nov-2008 10:22:26 gwern"
+
+* <http://www.haskell.org/haskellwiki/Category:Applications>
+*Cabalize & upload GF <http://www.cs.chalmers.se/~aarne/GF/>
+* BNF Converter <http://www.cs.chalmers.se/Cs/Research/Language-technology/BNFC/>
+* Functional Morphology <http://www.cs.chalmers.se/~markus/FM/>
+* WASH <http://www.informatik.uni-freiburg.de/~thiemann/haskell/WASH/>: HTML and MAIL look particularly useful.
+* <http://www.eyrie.org/~zednenem/2004/07/26/hsce>?
+* <http://www.cs.chalmers.se/~bringert/darcs/>
+* <http://www.cs.waikato.ac.nz/Research/fm/amuzed.html>
+* Clean up Shellac per -Wall and send patches.
+* Copy Cpuperf's Sudo monad
+* Fix Darcs' lack of ".darcs" option
+* Work my way backwards in time from <http://haskell.org/haskellwiki/News/2006>
+* What backups is Galois keeping of haskell.org?
+* Buddha is old; see if there is a darcs: <http://www.cs.mu.oz.au/~bjpop/buddha>
+*  http://n-heptane.com/nhlab/repos/haskell-freetype/
+   http://n-heptane.com/nhlab/repos/haskell-glx/
+* All of Oleg Kiselyisov's stuff (ZFS and HList are done)
+* HaRe: <http://www.cs.kent.ac.uk/projects/refactor-fp/hare.html>
+* Pivotal: <http://www.cs.kent.ac.uk/projects/pivotal/downloads.html>
+* Steal Programmatica's stuff: <http://ogi.altocumulus.org/~hallgren/Programatica/cvs.html> and <http://programatica.cs.pdx.edu/>
+* dons says track down everything by Mark Jones <http://web.cecs.pdx.edu/~mpj/>
+* <http://mail.cs.uu.nl/mailman/listinfo/hut> <https://svn.cs.uu.nl:12443/repos/uust-repo/uuagc/trunk/>
+* Zao on #haskell has a largely complete xtris OpenGL client <http://www.acc.umu.se/~zao/Hastris/>. No downloads yet...
+* What's up with 'HaskellNet'? <http://darcs.haskell.org/SoC/haskellnet/> and <http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/> It seems to have a good memcached client: <http://sequence.complete.org/node/213>
+* Hazakura: <http://web.archive.org/web/20061012042957/http://www.city5.org/haskellprog/hazakura/> & <http://haskell.org/pipermail/haskell/2006-April/017901.html>
+* Look at HOOD, or is it too old? <http://www.haskell.org/hood/>
+* Petri nets: <http://www.cs.kent.ac.uk/people/staff/cr3/HCPN/>
+* hpaste
+* 'Frob - an Embedded Domain Specific Language for controlling robots. It is built using the principals of Functional Reactive Programming, as developed by Conal Elliott for the Fran animation system. The current incarnation of Frob is part of the Yampa FRP system.'
+* PUre: <http://wiki.di.uminho.pt/twiki/bin/view/Research/PURe/UsingCVS>
+* <http://tothepowerofdisco.com/repo/HaskellLibraries/>
+* Also, de-haskell98 everything.
+* http://www.cs.kent.ac.uk/people/staff/cr3/toolbox/haskell/FunWorlds/
+* http://programatica.cs.pdx.edu/House/
+* http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/Haskell2LaTeX/
+* http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/Fraskell/ <-- is this too old?
+* http://research.microsoft.com/users/daan/ddata.html <-- are these already included in Hackage'd libraries?
+* everything on <http://repetae.net/computer/>.
+* hscursesify stuff: ginsu, mage, and minstrel <http://urchin.earth.li/darcs/ian/minstrel/>
+* <http://www.cs.york.ac.uk/fp/darcs/>
+* <http://www.cs.york.ac.uk/fp/software.php>
+* Conjure has Int problems on >2gig files - hSeeks on an Int
+* <http://cdsmith.twu.net/demos/haskell.html>
+*Functional reactive programming is in a sorry state. Currently the field consists of Conal Elliot, Wolfgang Jeltschand, and two students (one for Paul Hudak, and for Henrik Nilsson).
+* <http://www.cs.uu.nl/wiki/Ehc/WebHome>
+* Is HTK still worth salvaging? <http://www.informatik.uni-bremen.de/htk/download/INSTALL.BINARY.html#TheSource>
+* RDF stuff: <http://www.ninebynine.org/Software/HaskellRDF/RDF/Harp/>
+* I've contacted <http://nautilus.cs.miyazaki-u.ac.jp/~skata/MagicHaskeller.html>'s author about packaging it.
+
+* Clean up the SHA1 mess:
+** Ginsu: module SHA1 (sha1,  sha1ShowHash, sha1String, sha1HashToBytes)
+** HAppS: Kind of similar to Ginsu?
+** Yi:   module Data.Digest.SHA1( SHA1, initSHA1, digest, add, hash', hash, fileHash) where
+** Conjure: BSD FFI, module Conjure.Utils.SHA1 (sha1 :: ByteString -> ByteString)
+** jhc: based on Igloo's original - module Util.SHA1 (sha1String,sha1file,sha1Bytes,hashToBytes,sha1Handle,ABCDE(..),Hash,emptyHash) where
+* <http://www.haskell.org/hdirect/> too obsolete?
+
+* Mnemosyne plugins:
+** Spell-checker for adding cards
+** Metadata adder: in comment tags, add current date.
+** Per-category 'vice-versa' setting
+* <http://wxhaskell.sourceforge.net/applications.html>
+* Add --pager option to 'darcs changes'
+* Translate the Lisp from _Metamagical Themas_ into Haskell
+
+Broken on Hackage:
+
+ObjectIO
+PostgreSQL
+StrategyLib
+cabalrpmdeps
+catch
+classify
+codec-libevent
+compression
+derangement
+fitsio
+functorm
+generic-xml
