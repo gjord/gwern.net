@@ -1,0 +1,255 @@
+Everything old is new again. Wikipedia is the collaboration of amateur gentlemen, writ in countless epistolary IRC or email or talk page messages. And the American public's untrammeled betting on elections and victories has been reborn as [prediction markets](https://secure.wikimedia.org/wikipedia/en/wiki/Prediction_market).
+
+# Prediction markets
+
+Wikipedia admirably summarizes the basic idea:
+
+> "Prediction markets ... are speculative markets created for the purpose of making predictions. Assets are created whose final cash value is tied to a particular event (e.g., will the next US president be a Republican) or parameter (e.g., total sales next quarter). The *current market prices can be interpreted as predictions of the probability of the event or the [expected value](https://secure.wikimedia.org/wikipedia/en/wiki/Expected_value)* of the parameter. Prediction markets are thus structured as betting exchanges, without any risk for the bookmaker."
+
+Emphasis is added on the most important characteristic of a prediction market, the way in which it differs from regular stock markets.
+
+### Events, not dividends or sales
+
+Imagine a prediction market in which every day the administrator sells off pairs of shares (he doesn't want to risk paying out more than he received) for 1$ a share, and all the shares say either heads or tails. Then he flips a coin and gives everyone with a 'right' share 2$. Obviously if people bid up heads to 5$, this is crazy and irrational - even if heads wins today, one would still lose. Similarly for any amount greater than 2$. But 2$ is also crazy: the only way this share price doesn't lose money is if heads is 100% guarantee. Of course, it isn't. It is quite precisely guaranteed to not be the case - 50% not the case. Anything above 50% is going to lose in the long run.
+
+A smart investor could come into this market, and blindly buy any share whatsoever that was less than 1$; they would make money. If their shares were even 99¢, then about half would turn into 2$ and half into 0...
+
+This is all elementary and obvious, and its how we can convince ourselves that market prices can indeed be interpreted as predictions of expected value. But that's only because the odds are known in advance! We specified it was a fair coin. If the odds of the event were not known, then things would be much more interesting. No one bets on a coin flip: we bet on whether John is bluffing.
+
+Real prediction markets famously prefer to make the subject of a share a topic like the party of the victor of the 2008 American presidential elections; a topic with a relatively clear outcome (barring the occasional George W. Bush or coin landing on its edge) and of considerable interest to many.
+
+Interest, I mean, not merely for speculating on, but possibly of real world importance. Advocates for prediction markets as tools, such as [Robin Hanson](https://secure.wikimedia.org/wikipedia/en/wiki/Robin_Hanson), tirelessly remind us of the possible benefits in 'aggregating information'. A prediction market rewards clear thinking and insider information, but they focus on topics it'd be difficult to clearly bet for or against on regular financial markets.
+
+Yes, if I thought the financial markets were undervaluing green power stocks because they were too weighing Senator John McCain's presidential candidacy too heavily, then I could do something like short those stocks. But suppose that's all I know about the green power stocks and the financial markets? It'd be madness to go and trade on that belief alone. I'd be exposing myself to countless risks, countless ways for the price of green stocks to be unconnected to McCain's odds, countless intermediaries, countless other relations of green stocks which may cancel out my correct appraisal of one factor. Certainly in the long run, weakly related factors will have exactly the effect they deserve to have. But this is a long run in which the investor is quite dead.
+
+Prediction markets offer a way to cut through all the confounding effects of proxies, and bet directly and precisely on that bit of information. If I believe Senator Barack Obama has been unduly discounted, then I can directly buy shares in him instead of casting about for some class of stocks that might be correlated with him - which is a formidable task in and of itself; perhaps oil stocks will rise because Obama's platform includes withdrawal from Iraq which render the Middle East less stable, or perhaps green stocks will rise for similar reasons, or perhaps they'll all fall because people think he'll be incompetent, or perhaps optimism over a historic election of a half-black man and enthusiasm over his plans will lift all boats...
+
+One will never get a faithful summation of all the information about Obama scattered among hundreds or thousands of traders if one places multiple difficult barriers in front of a trader who wishes to turn his superior knowledge or analysis into money.
+
+Or here's another example: many of the early uses of prediction markets have been inside corporations, betting on metrics like quarterly sales. Now, all of those metrics are important and will in the long run affect stock prices or dividends. But what employee working down in the R&D department is going to say 'People are too optimistic about next year's sales, the prototypes just aren't working as well as they would need to' and go short the company's stock? No one, of course. A small difference in their assessment from everyone else's is unlikely to make a noticeable price difference, even if the transaction costs of shorting didn't bar it. And yet, the company needs to know what this employee knows.
+
+
+## Specific markets
+
+So once we are interested in prediction markets and would like to try them out, we need to pick one. There are several. I generally ignore the 'play money' markets like the [Hollywood Stock Exchange](https://secure.wikimedia.org/wikipedia/en/wiki/Hollywood_Stock_Exchange), despite their similar levels of accuracy to the real money markets; I just have a prejudice that if I make a killing, then I ought to have a real reward like a nice steak dinner and not just increment some bits on a computer. The primary markets to consider are:
+
+* [Betfair](https://secure.wikimedia.org/wikipedia/en/wiki/Betfair) and [BETDAQ](https://secure.wikimedia.org/wikipedia/en/wiki/BETDAQ) are probably the 2 largest prediction markets, but unfortunately, it is difficult for Americans to make use of them - Betfair bans them outright.
+* [Intrade](https://secure.wikimedia.org/wikipedia/en/wiki/Intrade) is another European prediction market, similar to Betfair and BETDAQ, but it does not go out of its way to bar Americans, and thus is likely the most popular market in the United States. (Its sister site [TradeSports](https://secure.wikimedia.org/wikipedia/en/wiki/TradeSports) was sport-only, and is now defunct.)
+* [Bet2Give](https://secure.wikimedia.org/wikipedia/en/wiki/Bet2Give) is a charity prediction market; the result of contracts merely establishes to which charity funds go.
+* [HedgeStreet](https://secure.wikimedia.org/wikipedia/en/wiki/HedgeStreet) is some sort of hybrid of derivatives and predictions. I know little about it.
+* [The Iowa Electronic Markets](https://secure.wikimedia.org/wikipedia/en/wiki/Iowa_Electronic_Markets) (IEM) is an old prediction markets, and one of the better covered in American press. It's a research prediction market, so it handles only small quantities of money and trades. Accounts max out at 500$.
+
+I didn't want to wager too much money on what was only a lark, and the IEM has the favorable distinction of being clearly legal in the USA. So I chose them.
+
+### IEM
+
+In 2003, I sent in a check for 20$. A given market's contracts in the IEM are supposed to sum to 1$, so 20$ would let me buy around 40 shares - enough to play around with.
+
+#### My IEM trading
+##### 2004
+
+Prediction markets are known to have a number of biases. Some of these biases are shared with other betting exchanges; horse-racing is plagued with a 'long-shot favoritism' just like prediction markets are. (An example of long-shot favoritism would be Intrade and IEM shares for libertarian Ron Paul winning the 2008 Republican nomination trading at ludicrous valuations like 10¢, or Al Gore - who wasn't even running - for the Democratic nomination at 5¢.) The financial structure of markets also seems to make shorting of such low-value (but still over-valued) shares more difficult. They can be manipulated, consciously or unconsciously, due to not being very good markets (["They are thin, trading volumes are anemic, and the dollar amounts at risk are pitifully small"](http://www.wired.com/techbiz/it/magazine/16-06/st_essay)), and that's where they aren't reflecting the prejudices of their users (one can't help but suspect Ron Paul shares were overpriced because he has so many fans among techies).
+
+I began experimenting with some small trades on IEM's Federal Reserve interest rate market; I had a theory that there was a 'favorites bias' (the inverse of long-shot favoritism, where traders buck the conventional wisdom despite it being more correct). I simply based my trades on what I read in the _New York Times_. It worked fairly well. In 2005, I also dabbled in the markets on Microsoft and Apple share prices, but I didn't find any values I liked.
+
+2004 was, of course, a presidential election year. I couldn't resist, and traded heavily. I avoided Democratic nominations, reasoning that I was too ignorant that year - which was true, I did not expect John Kerry to eventually win the nomination - and focused on the party-victory market. The traders there were far too optimistic about a Democratic victory; I knew 'Bush is a war-time president' (in addition to the incumbency!) as people said, and that this matter a lot to the half of the electorate that voted for him in 2000. Giving him a re-election probability of under 40% was too foolish for words.
+
+I did well on these trades, and then in October, I closed out all my trades, sold my Republican/Bush shares, and bought Kerry. I thought the debates had gone well for Kerry and was confident the Swift Boating wouldn't do much in the end, and certainly couldn't compensate for the albatross of Iraq.
+
+As you know, I was quite wrong in this strategy. Bush did win, and won more than in 2000. And I lost somewhere between 5 and 10$. (Between a quarter and a half my initial capital. Ouch! I was glad I hadn't invested some more substantial sum like 200$.) I had profited early on from people who had confused what they *wanted* to happen with what *would*, but then I had succumbed to the same thing. Yes, everyone around me (I live in a liberal state) was sure Kerry would win, but that's no excuse for starting off with a correct assessment and then choosing a false one. It was a valuable lesson for me; this experience makes me sometimes wonder whether 'personal' prediction markets, if you will, could be a useful tool.
+
+##### 2005/2006
+
+In 2005 & 2006, I did minimal interesting trading. I largely continued my earlier strategies in the interest rate markets. Slowly, I made up for my failures in 2004.
+
+##### 2007
+
+In 2007, the presidential markets started back up! I surveyed the markets and the political field with great excitement. As anyone remembers, it was the most interesting election in a very long, with such memorable characters (Hillary Clinton, Ron Paul, Barack Obama, John McCain, Sarah Palin) and unexpected twists.
+
+###### The Republicans
+
+As in 2004, the odds of an ultimate Republican victory were far too low - hovering in the range of 30-40%. This is obviously wrong on purely historical considerations (Democrats don't win the presidency *that* often), and seems particularly wrong when we consider that George W. Bush won in 2004. Anyone arguing that GWB poisoned the well for a succeeding Republican administration faces the difficult task of explaining (at least) 2 things:
+
+1. How association with GWB would be so damaging when GWB himself was re-elected in 2004 with a larger percentage of votes than 2000
+2. How association with GWB policies like Iraq would be so damaging when the daily security situation in Iraq has clearly improved since 2004.
+3. And in general: how a fresh Republican face (with the same old policies) could do any worse than GWB did, given that he will possess all the benefits of GWB's policies and none of the personal animus against GWB.
+
+The key to Republican betting was figuring out who was hopeless, and work from there by essentially short selling them. As time passed, one could sharpen one's bets and begin betting for a candidate rather than against. My list ultimately looked like this:
+
+1. *Ron Paul* was so obviously not going to win. He appealed to only a small minority of the Republican party, had views idiosyncratic where they weren't offensive, and wanted to destroy important Republican constituencies. If the Internets were America, perhaps he could've won.
+2. *Rudy Giuliani* was another easy candidate to bet against. He had multiple strikes: he was far too skeevy, questionable ethically (the investigations of Bernard Kerik were well underway at this point), had made himself a parody, had few qualifications, and a campaign strategy that was as ruinous as it was perplexing. He was unacceptable culturally, what with his divorces, loose living, humorous cross-dressing, and New York ways. He would not play well in Peoria.
+3. *Jack Thompson* was undone by being a bad version of Reagan. He didn't campaign nearly as industriously as he needed to. The death knell, as far as I was concerned, was when national publications began mentioning the 'lazy like a fox' joke as an old joke. No special appeal, no special resources, no conventional ability...
+4. *Mitt Romney* had 2 problems: he was skeevy and seemed inauthentic, and people focused too much on his being Mormon and Massachusetts governorship (a position that would've been a great aid - if it hadn't been in that disgustingly liberal state). I was less confident about striking him off, but I decided his odds of 20% or so were too generous.
+5. *Mike Huckabee* struck me as not having the resources to make it to the nomination. I was even less sure about this one than Mitt, but I lucked out - the supporters of Huckabee began infighting with Romney supporters.
+
+This didn't leave very many candidates for consideration. By this process of elimination, I was in fact left with only John McCain as a serious Republican contender. If you remember the early days, this was in fact a very strange result to reach: John McCain appeared tired, a beaten man from 2004 making one last _pro forma_ try, his campaign inept and riven by infighting, and he was just in general - old, old, old.
+
+But hey, his shares were trading in the 5-15% range. They were the best bargain going in the market. I held them for a long time and  ultimately would sell them at 94-99¢ for a roughly 900% gain. (I sold them instead of waiting for the Republican convention because I was forgoing minimal gains, and I was concerned by reports on his health.)
+
+###### The Democrats
+
+A similar process obtained for the Democrats. A certain dislike of Hillary Clinton led me to think that her status as the heir presumptive (reflected in share proces) would be damaged at some point. All of the other candidates struck me as flakes and hopeless causes, with the exception of John Edwards and Barack Obama.
+
+I eventually ruled out John Edwards as having no compelling characteristics and smacking of phoniness (much like Romney). I was never tempted to change my mind on him, and the adultery and hair flaps turned out to be waiting in the wings for him. So I could get rid of Edwards as a choice.
+
+Is it any surprise I lighted on Obama? He had impressed me (and just about everyone else) with his 2004 convention speech, his campaign seemed quite competent and well-funded, the media clearly loved him, and so on. Best of all, his shares were relatively low (30-40%) and I had money left after the Republicans. So I bought Obama and sold Clinton. I eventually sold out of Obama at the quite respectable 78¢.
+
+#### Summing up
+
+By the end of the election, I had made a killing on my Obama and McCain shares. My account balance stood at 38$; so over the 3 or 4 years of trading I had nearly doubled my investment. 18$ is perhaps enough for a steak dinner.
+
+Further, I had learned a valuable lesson in 2004 about my own political biases and irrationality, and had earned the right in 2008 to be smug about foreseeing a McCain and Obama match-up when the majority of pundits were trying to figure out whether Hillary would be running against Huckabee or Romney.
+
+And finally, I've concluded that my few observations aside, prediction markets are pretty accurate. I often use them to sanity-check myself by asking 'If I disagree, what special knowledge do I have?' Often I have none.
+
+I'm currently out of the IEM, but I had a good experience, and I've come out a believer. One day I'd like to try out a more substantial and varied market, like Intrade.
+
+#### IEM logs
+
+The following is a lightly edited, and incomplete, IEM trading history for me. (IEM doesn't seem to allow export in any more structured format.)
+
+> Order date | Order time | Market | Contract | Order type | Quantity | Unit price | Expiration time | Resolution market | Resolution type | Resolution quantity | Resolution price | Resolution time
+
+- 12/29/04  20:16:23    FedPolicyB  FRsame0205  Purchase Asset  20  0.048 FedPolicyB  Traded  10  0.048   12/29/2004 8:16:23 PM
+- 12/29/04  20:17:26    FedPolicyB  FRup0205    Purchase Asset  2   0.956 FedPolicyB  Traded  2   0.956   12/29/2004 8:17:26 PM
+- 12/29/04  20:17:46    FedPolicyB  FRsame0205  Purchase Asset  10  0.049 FedPolicyB  Traded  10  0.049   12/29/2004 8:17:46 PM
+- 01/01/05  21:02:18    FedPolicyB  FRup0205    Bid Order   5   0.94    1/3/2005 11:59:00 PM    FedPolicyB  Expired     5   0.94    1/3/2005 11:59:17 PM
+- 01/07/05  21:46:43    FedPolicyB  FRup0305    Bid Order   5   0.934   1/9/2005 11:59:00 PM    FedPolicyB  Expired     5   0.934   1/9/2005 11:59:20 PM
+- 02/12/05  17:48:51    Comp\_Ret   AAPL\_05b   Bid Order   5   0.96 3/14/2005 11:59:00 PM   Comp\_Ret   Canceled by Manager    5   0.96 2/23/2005 2:20:03 PM
+- 02/12/05  17:50:29    MSFT\_Price     MS025\_05bL     Bid Order   20  0.014 2/14/2005 11:59:00 PM   MSFT\_Price     Expired     20  0.014   2/14/2005 11:59:55 PM
+- 02/12/05  17:50:58    MSFT\_Price     MS025\_05bH     Bid Order   7   0.789 2/14/2005 11:59:00 PM   MSFT\_Price     Expired     7   0.789   2/14/2005 11:59:55 PM
+- 02/13/05  16:31:37    Comp\_Ret   AAPL\_05b   Bid Order   7   0.965 2/15/2005 11:59:00 PM   Comp\_Ret   Expired     7   0.965   2/15/2005 11:59:06 PM
+- 02/13/05  16:43:33    Comp\_Ret   AAPL\_05b   Bid Order   7   0.982 3/15/2005 11:59:00 PM   Comp\_Ret   Traded  7   0.98    2/13/2005 4:43:33 PM
+- 02/13/05  16:45:12    FedPolicyB  FRup0505    Bid Order   5   0.93 2/15/2005 11:59:00 PM   FedPolicyB  Expired     5   0.93    2/15/2005 11:59:09 PM
+- 02/21/05  10:03:45    FedPolicyB  FRsame0505  Bid Order   12  0.053 4/23/2005 11:59:00 PM   FedPolicyB  Traded  12  0.053   2/24/2005 11:44:15 AM
+- 02/21/05  10:04:35    FedPolicyB  FRup0305    Bid Order   7   0.988 3/23/2005 11:59:00 PM   FedPolicyB  Traded  7   0.988   2/21/2005 10:05:55 AM
+-                               FedPolicyB  Traded  3   0.007   3/3/2005 9:23:33 AM
+- 02/21/05  10:06:59    FedPolicyB  FRsame0305  Bid Order   6   0.007 3/23/2005 11:59:00 PM   FedPolicyB  Traded  3   0.007   2/21/2005 10:43:09 AM
+- 02/21/05  10:07:51    Comp\_Ret   AAPL\_05b   Bid Order   5   0.998 3/23/2005 11:59:00 PM   Comp\_Ret   Canceled by Manager    5   0.998 2/23/2005 2:20:03 PM
+-                               Comp\_Ret   Traded  4   0.889   2/28/2005 8:56:07 AM
+- 02/26/05  10:14:08    Comp\_Ret   AAPL\_05c   Bid Order   5   0.889 3/28/2005 11:59:00 PM   Comp\_Ret   Traded  1   0.889   2/26/2005 11:35:17 AM
+- 02/26/05  10:14:30    Comp\_Ret   MSFT\_05c   Bid Order   1   0.889 3/28/2005 11:59:00 PM   Comp\_Ret   Traded  1   0.889   2/26/2005 11:35:25 AM
+- 02/26/05  10:15:43    FedPolicyB  FRup0505    Bid Order   3   0.944 2/28/2005 11:59:00 PM   FedPolicyB  Expired     3   0.944   2/28/2005 11:59:51 PM
+-                               MSFT\_Price     Traded  1   0.4     3/5/2005 10:39:47 PM
+- 03/05/05  12:51:45    MSFT\_Price     MS025\_05cL     Bid Order   5   0.4 4/7/2005 11:59:00 PM    MSFT\_Price     Traded  4   0.4     3/5/2005 10:34:38 PM
+- 03/05/05  12:53:27    Comp\_Ret   AAPL\_05c   Ask Order   4   0.95    7/7/2005 11:59:00 PM    Comp\_Ret   Canceled by Manager    4   0.95    3/22/2005 2:14:36 PM
+- 03/05/05  12:53:56    Comp\_Ret   MSFT\_05c   Ask Order   1   0.5     7/7/2005 11:59:00 PM    Comp\_Ret   Canceled by Manager    1   0.5     3/22/2005 2:14:37 PM
+- 03/05/05  12:54:38    FedPolicyB  FRsame0505  Ask Order   12  0.7     9/7/2005 11:59:00 PM    FedPolicyB  Canceled by Manager    12  0.7     5/3/2005 4:58:57 PM
+- 03/05/05  12:55:07    FedPolicyB  FRsame0305  Ask Order   6   0.2     9/7/2005 11:59:00 PM    FedPolicyB  Canceled by Manager    6   0.2     4/6/2005 6:59:36 AM
+- 03/05/05  12:55:33    FedPolicyB  FRup0305    Ask Order   6   0.998   6/7/2005 11:59:00 PM    FedPolicyB  Traded  6   0.998   3/13/2005 2:04:52 AM
+-                               FedPolicyB  Traded  2   0.803   9/16/2005 3:37:16 PM
+-                               FedPolicyB  Traded  5   0.803   9/16/2005 3:34:02 PM
+- 09/16/05  14:38:57    FedPolicyB  FRup0905    Bid Order   12  0.803 9/20/2005 11:59:00 PM   FedPolicyB  Traded  5   0.803   9/16/2005 2:44:05 PM
+- 09/16/05  14:39:34    FedPolicyB  FRsame0905  Bid Order   6   0.17 9/22/2005 11:59:00 PM   FedPolicyB  Traded  6   0.17    9/17/2005 10:35:26 AM
+- 09/28/05  23:49:01    FedPolicyB  FRsame1105  Bid Order   15  0.066 10/1/2005 11:59:00 PM   FedPolicyB  Traded  15  0.066   9/30/2005 8:07:42 PM
+- 10/02/05  11:56:14    FedPolicyB  FRup1105    Bid Order   3   0.931 10/4/2005 11:59:00 PM   FedPolicyB  Expired     3   0.931   10/4/2005 11:59:34 PM
+- 10/07/05  12:28:48    FedPolicyB  FRsame1105  Ask Order   15  0.07 10/9/2006 11:59:00 PM   FedPolicyB  Canceled by Manager    15  0.07 11/3/2005 9:14:55 AM
+- 10/07/05  12:29:23    FedPolicyB  FRup1105    Bid Order   2   0.95 10/9/2006 11:59:00 PM   FedPolicyB  Canceled by Manager    2   0.95 11/3/2005 9:14:52 AM
+- 10/10/05  14:54:45    FedPolicyB  FRup1105    Bid Order   3   0.97 10/12/2005 11:59:00 PM  FedPolicyB  Traded  3   0.97    10/11/2005 3:05:34 PM
+- 12/09/05  15:02:02    FedPolicyB  FRup1205    Bid Order   15  0.995 12/12/2005 11:59:00 PM  FedPolicyB  Traded  15  0.995   12/9/2005 10:37:58 PM
+- 12/09/05  15:02:20    FedPolicyB  FRsame1205  Bid Order   10  0.002 12/12/2005 11:59:00 PM  FedPolicyB  Traded  10  0.002   12/12/2005 6:30:07 PM
+- 12/09/05  15:02:43    FedPolicyB  FRdown1205  Bid Order   2   0.001 12/13/2005 11:59:00 PM  FedPolicyB  Traded  2   0.001   12/12/2005 9:02:14 AM
+-                               FedPolicyB  Traded  2   0.719   6/2/2006 8:41:40 AM
+-                               FedPolicyB  Traded  10  0.719   6/2/2006 8:39:46 AM
+- 05/31/06  21:28:25    FedPolicyB  FRup0606    Bid Order   22  0.719   6/6/2006 11:59:00 PM    FedPolicyB  Traded  10  0.719   6/2/2006 8:38:23 AM
+- 08/07/06  21:19:08    FedPolicyB  FRup0806    Bid Order   20  0.27 8/22/2006 11:59:00 PM   FedPolicyB  Traded  20  0.27    8/8/2006 1:14:15 PM
+-                               FedPolicyB  Traded  7   0.608   8/8/2006 1:13:17 PM
+- 08/07/06  21:19:47    FedPolicyB  FRsame0806  Bid Order   10  0.608   8/9/2006 11:59:00 PM    FedPolicyB  Traded  3   0.608   8/8/2006 11:33:36 AM
+-                               FedPolicyB  Traded  7   0.7     8/7/2006 9:52:43 PM
+- 08/07/06  21:20:29    FedPolicyB  FRsame0906  Bid Order   10  0.7     8/9/2006 11:59:00 PM    FedPolicyB  Traded  3   0.7     8/7/2006 9:52:00 PM
+- 08/07/06  21:20:54    FedPolicyB  FRdown0906  Bid Order   10  0.006   8/9/2006 11:59:00 PM    FedPolicyB  Traded  10  0.006   8/8/2006 1:25:44 PM
+- 08/07/06  21:23:04    PRES08\_WTA     DEM08\_WTA  Bid Order   15  0.5 12/23/2006 11:59:00 PM  PRES08\_WTA     Traded  15  0.5     9/18/2006 5:45:57 PM
+- 08/07/06  21:23:30    PRES08\_WTA     REP08\_WTA  Bid Order   5   0.4 12/23/2006 11:59:00 PM  PRES08\_WTA     Expired     5   0.4     12/23/2006 11:59:28 PM
+- 08/18/06  20:14:58    PRES08\_VS  UREP08\_VS  Bid Order   10  0.455 10/20/2006 11:59:00 PM  PRES08\_VS  Expired     10  0.455   10/20/2006 11:59:24 PM
+- 08/28/06  09:20:10    PRES08\_VS  UREP08\_VS  Bid Order   10  0.48 12/30/2006 11:59:00 PM  PRES08\_VS  Traded  10  0.48    8/29/2006 1:12:12 PM
+-                               PRES08\_VS  Traded  3   0.5     9/19/2006 10:24:08 AM
+- 08/28/06  09:20:26    PRES08\_VS  UDEM08\_VS  Bid Order   10  0.5 12/30/2006 11:59:00 PM  PRES08\_VS  Traded  1   0.5     9/12/2006 12:00:23 PM
+- 06/01/07  20:00:20    PRES08\_WTA     DEM08\_WTA  Ask Order   10  0.66 9/3/2007 11:59:00 PM    PRES08\_WTA     Traded  10  0.66    6/15/2007 3:35:29 PM
+- 06/01/07  20:01:24    PRES08\_WTA     DEM08\_WTA  Ask Order   5   0.7 6/3/2008 11:59:00 PM    PRES08\_WTA     Traded  5   0.7     7/11/2007 9:27:32 PM
+- 06/01/07  20:02:21    PRES08\_WTA     REP08\_WTA  Bid Order   10  0.33 9/3/2007 11:59:00 PM    PRES08\_WTA     Traded  10  0.33    8/8/2007 4:45:31 PM
+- 06/01/07  20:04:26    RConv08     ROMN\_NOM   Bid Order   5   0.2     7/3/2007 11:59:00 PM    RConv08     Traded  5   0.2     6/4/2007 2:20:26 PM
+- 06/01/07  20:05:17    DConv08     EDWA\_NOM   Bid Order   5   0.06    7/3/2007 11:59:00 PM    DConv08     Expired     5   0.06    7/3/2007 11:59:21 PM
+- 06/01/07  20:05:33    DConv08     OBAM\_NOM   Purchase Asset  5   0.322 DConv08     Traded  1   0.322   6/1/2007 8:05:33 PM
+- 06/06/07  23:30:07    RConv08     GIUL\_NOM   Ask Order   5   0.4     8/8/2007 11:59:00 PM    RConv08     Expired     5   0.4     8/8/2007 11:59:56 PM
+- 06/06/07  23:33:28    PRES08\_WTA     DEM08\_WTA  Bid Order   10  0.3 6/8/2008 11:59:00 PM    PRES08\_WTA     Order Withdrawn     10  0.3     5/9/2008 4:23:16 PM
+- 06/06/07  23:41:39    DConv08     DConv08     Buy Bundle at fixed price   3 1 DConv08     Traded  3   1   6/6/2007 11:41:39 PM
+- 06/06/07  23:42:20    DConv08     EDWA\_NOM   Ask Order   3   0.1     6/8/2008 11:59:00 PM    DConv08     Traded  3   0.1     6/21/2007 10:25:30 AM
+- 06/06/07  23:42:46    DConv08     DROF\_NOM   Ask Order   3   0.13    6/8/2008 11:59:00 PM    DConv08     Traded  3   0.13    6/27/2007 10:47:16 AM
+- 06/06/07  23:43:09    DConv08     CLIN\_NOM   Bid Order   5   0.39 7/19/2007 11:59:00 PM   DConv08     Expired     5   0.39    7/19/2007 11:59:05 PM
+- 06/06/07  23:44:29    RConv08     RConv08     Buy Bundle at fixed price   3 1 RConv08     Traded  3   1   6/6/2007 11:44:29 PM
+- 06/06/07  23:45:12    RConv08     GIUL\_NOM   Ask Order   3   0.21 9/20/2007 11:59:00 PM   RConv08     Traded  3   0.21    6/8/2007 7:37:32 AM
+- 06/06/07  23:45:34    RConv08     MCCA\_NOM   Ask Order   3   0.15 9/20/2007 11:59:00 PM   RConv08     Traded  3   0.15    6/18/2007 10:42:05 PM
+- 06/06/07  23:46:08    PRES08\_VS  UREP08\_VS  Ask Order   5   0.53 12/29/2007 11:59:00 PM  PRES08\_VS  Expired     5   0.53    12/29/2007 11:59:08 PM
+- 06/06/07  23:46:32    PRES08\_VS  UDEM08\_VS  Bid Order   10  0.4     6/8/2008 11:59:00 PM    PRES08\_VS  Order Withdrawn     10  0.4     5/3/2008 2:11:06 PM
+- 06/06/07  23:46:55    PRES08\_VS  UDEM08\_VS  Ask Order   4   0.56    6/8/2008 11:59:00 PM    PRES08\_VS  Traded  4   0.56    2/12/2008 9:06:35 PM
+- 12/11/07  16:08:57    RConv08     HUCK\_NOM   Ask Order   3   0.22 12/13/2007 11:59:00 PM  RConv08     Traded  3   0.22    12/12/2007 1:33:52 AM
+- 12/11/07  16:10:08    RConv08     ROMN\_NOM   Ask Order   4   0.25 12/13/2007 11:59:00 PM  RConv08     Traded  4   0.25    12/11/2007 7:06:09 PM
+- 12/11/07  16:14:22    RConv08     RROF\_NOM   Ask Order   3   0.03 12/13/2007 11:59:00 PM  RConv08     Traded  3   0.03    12/11/2007 5:00:29 PM
+- 12/11/07  16:14:47    RConv08     THOMF\_NOM  Ask Order   3   0.05 12/13/2007 11:59:00 PM  RConv08     Expired     3   0.05    12/13/2007 11:59:01 PM
+- 12/11/07  16:15:36    RConv08     GIUL\_NOM   Bid Order   3   0.35 12/13/2007 11:59:00 PM  RConv08     Expired     3   0.35    12/13/2007 11:59:02 PM
+- 12/11/07  16:16:12    RConv08     MCCA\_NOM   Bid Order   5   0.1 12/13/2008 11:59:00 PM  RConv08     Traded  5   0.1     12/15/2007 6:45:05 AM
+- 12/11/07  16:16:57    RConv08     RConv08     Buy Bundle at fixed price   5 1 RConv08     Traded  5   1   12/11/2007 4:16:57 PM
+- 12/11/07  16:17:39    RConv08     GIUL\_NOM   Sell Asset  5   0.375 RConv08 Traded  5   0.375   12/11/2007 4:17:39 PM
+- 12/11/07  16:18:01    RConv08     HUCK\_NOM   Sell Asset  5   0.207 RConv08 Traded  5   0.207   12/11/2007 4:18:01 PM
+- 12/11/07  16:18:10    RConv08     MCCA\_NOM   Sell Asset  5   0.108 RConv08 Traded  5   0.108   12/11/2007 4:18:10 PM
+- 12/11/07  16:18:22    RConv08     ROMN\_NOM   Sell Asset  5   0.241 RConv08 Traded  5   0.241   12/11/2007 4:18:22 PM
+- 12/11/07  16:18:33    RConv08     THOMF\_NOM  Sell Asset  5   0.04 RConv08 Traded  5   0.04    12/11/2007 4:18:33 PM
+- 12/11/07  16:18:46    RConv08     RROF\_NOM   Sell Asset  5   0.02 RConv08 Traded  5   0.02    12/11/2007 4:18:46 PM
+- 12/11/07  16:19:03    RConv08     ROMN\_NOM   Sell Asset  4   0.24 RConv08 Traded  4   0.24    12/11/2007 4:19:03 PM
+- 12/11/07  16:20:28    DConv08     DConv08     Buy Bundle at fixed price   10 1 DConv08     Traded  10  1   12/11/2007 4:20:28 PM
+- 12/11/07  16:20:51    DConv08     DROF\_NOM   Ask Order   10  0.03 12/13/2008 11:59:00 PM  DConv08     Traded  10  0.03    12/14/2007 7:08:40 PM
+-                               DConv08     Traded  5   0.09    12/19/2007 3:34:22 PM
+- 12/11/07  16:21:31    DConv08     EDWA\_NOM   Ask Order   10  0.09 12/13/2008 11:59:00 PM  DConv08     Traded  5   0.09    12/19/2007 1:58:59 PM
+-                               DConv08     Traded  1   0.58    12/11/2007 9:40:12 PM
+-                               DConv08     Traded  9   0.58    12/11/2007 9:40:01 PM
+- 12/11/07  16:25:21    DConv08     CLIN\_NOM   Ask Order   13  0.58 12/13/2008 11:59:00 PM  DConv08     Traded  3   0.58    12/11/2007 5:23:47 PM
+- 12/11/07  16:26:08    DConv08     OBAM\_NOM   Ask Order   14  0.45 12/13/2008 11:59:00 PM  DConv08     Traded  14  0.45    1/3/2008 8:46:53 PM
+- 12/11/07  16:27:05    DConv08     OBAM\_NOM   Bid Order   5   0.3 12/31/2007 11:59:00 PM  DConv08     Traded  5   0.3     12/20/2007 7:23:38 AM
+- 12/11/07  16:28:51    FedPolicyB  FRsame0108  Bid Order   3   0.31 12/31/2007 11:59:00 PM  FedPolicyB  Traded  3   0.31    12/11/2007 4:30:31 PM
+- 12/11/07  16:36:22    PRES08\_WTA     REP08\_WTA  Bid Order   3   0.38 12/31/2007 11:59:00 PM  PRES08\_WTA     Expired     3   0.38    12/31/2007 11:59:25 PM
+- 02/05/08  22:41:41    RConv08     THOMF\_NOM  Sell Asset  3   0.002 RConv08 Traded  3   0.002   2/5/2008 10:41:41 PM
+- 02/05/08  22:47:46    DConv08     OBAM\_NOM   Bid Order   10  0.42    2/7/2008 11:59:00 PM    DConv08     Traded  10  0.42    2/5/2008 10:48:32 PM
+- 02/05/08  22:48:09    DConv08     OBAM\_NOM   Bid Order   5   0.43    2/7/2008 11:59:00 PM    DConv08     Traded  5   0.425   2/5/2008 10:48:09 PM
+- 02/07/08  14:34:32    RConv08     MCCA\_NOM   Ask Order   5   0.96    2/9/2008 11:59:00 PM    RConv08     Expired     5   0.96    2/9/2008 11:59:37 PM
+- 02/07/08  14:46:34    DConv08     DConv08     Buy Bundle at fixed price   5 1 DConv08     Traded  5   1   2/7/2008 2:46:34 PM
+- 02/07/08  14:46:56    DConv08     CLIN\_NOM   Ask Order   5   0.45    2/9/2008 11:59:00 PM    DConv08     Expired     5   0.45    2/9/2008 11:59:35 PM
+- 02/07/08  14:47:21    DConv08     EDWA\_NOM   Sell Asset  5   0.002 DConv08 Traded  5   0.002   2/7/2008 2:47:21 PM
+- 02/07/08  14:47:34    DConv08     DROF\_NOM   Sell Asset  5   0.006 DConv08 Traded  5   0.006   2/7/2008 2:47:34 PM
+- 02/07/08  14:47:54    DConv08     OBAM\_NOM   Ask Order   15  0.6     2/9/2008 11:59:00 PM    DConv08     Traded  15  0.6     2/9/2008 7:49:09 PM
+- 02/07/08  15:11:51    PRES08\_WTA     REP08\_WTA  Ask Order   10  0.51 2/9/2009 11:59:00 PM    PRES08\_WTA     Traded  10  0.51    3/22/2008 2:31:32 AM
+- 02/07/08  15:13:24    RConv08     RConv08     Buy Bundle at fixed price   4 1 RConv08     Traded  4   1   2/7/2008 3:13:24 PM
+- 02/07/08  15:13:42    RConv08     GIUL\_NOM   Sell Asset  4   0.001 RConv08 Traded  4   0.001   2/7/2008 3:13:42 PM
+- 02/07/08  15:13:49    RConv08     HUCK\_NOM   Sell Asset  4   0.017 RConv08 Traded  4   0.017   2/7/2008 3:13:49 PM
+- 02/07/08  15:13:58    RConv08     ROMN\_NOM   Purchase Asset  4   0.005 RConv08     Traded  4   0.005   2/7/2008 3:13:58 PM
+- 02/07/08  15:14:06    RConv08     THOMF\_NOM  Sell Asset  4   0.003 RConv08 Traded  4   0.003   2/7/2008 3:14:07 PM
+- 02/07/08  15:14:14    RConv08     RROF\_NOM   Sell Asset  4   0.009 RConv08 Traded  4   0.009   2/7/2008 3:14:14 PM
+- 02/07/08  15:14:29    RConv08     RConv08     Buy Bundle at fixed price   1 1 RConv08     Traded  1   1   2/7/2008 3:14:29 PM
+- 02/07/08  15:14:44    RConv08     ROMN\_NOM   Sell Asset  9   0.002 RConv08 Traded  9   0.002   2/7/2008 3:14:44 PM
+- 02/07/08  15:14:54    RConv08     GIUL\_NOM   Sell Asset  1   0.001 RConv08 Traded  1   0.001   2/7/2008 3:14:55 PM
+- 02/07/08  15:15:02    RConv08     HUCK\_NOM   Sell Asset  1   0.017 RConv08 Traded  1   0.017   2/7/2008 3:15:02 PM
+- 02/07/08  15:15:10    RConv08     THOMF\_NOM  Purchase Asset  1   0.006 RConv08     Traded  1   0.006   2/7/2008 3:15:10 PM
+- 02/07/08  15:15:22    RConv08     RROF\_NOM   Sell Asset  1   0.009 RConv08 Traded  1   0.009   2/7/2008 3:15:22 PM
+- 02/07/08  15:15:30    RConv08     THOMF\_NOM  Sell Asset  2   0.003 RConv08 Traded  2   0.003   2/7/2008 3:15:30 PM
+- 04/06/08  13:52:28    DConv08     CLIN\_NOM   Ask Order   5   0.15    4/8/2008 11:59:00 PM    DConv08     Traded  4   0.15    4/8/2008 6:44:29 PM
+- 04/06/08  13:52:51    DConv08     CLIN\_NOM   Ask Order   1   0.14    4/8/2008 11:59:00 PM    DConv08     Traded  1   0.14    4/7/2008 5:48:22 PM
+-                               DConv08     Traded  3   0.79    4/10/2008 6:45:56 PM
+- 04/06/08  13:55:08    DConv08     OBAM\_NOM   Bid Order   5   0.79    4/8/2009 11:59:00 PM    DConv08     Traded  2   0.79    4/10/2008 6:45:42 PM
+- 04/06/08  13:59:43    RConv08     RConv08     Buy Bundle at fixed price   10 1 RConv08     Traded  10  1   4/6/2008 1:59:43 PM
+- 04/06/08  14:00:27    RConv08     GIUL\_NOM   Sell Asset  10  0.004 RConv08 Traded  10  0.004   4/6/2008 2:00:27 PM
+- 04/06/08  14:00:41    RConv08     HUCK\_NOM   Sell Asset  10  0.007 RConv08 Traded  10  0.007   4/6/2008 2:00:41 PM
+- 04/06/08  14:00:54    RConv08     ROMN\_NOM   Sell Asset  10  0.01 RConv08 Traded  10  0.01    4/6/2008 2:00:55 PM
+- 04/06/08  14:01:07    RConv08     THOMF\_NOM  Sell Asset  10  0.004 RConv08 Traded  10  0.004   4/6/2008 2:01:07 PM
+- 04/06/08  14:01:20    RConv08     RROF\_NOM   Sell Asset  10  0.025 RConv08 Traded  10  0.025   4/6/2008 2:01:20 PM
+- 04/06/08  14:07:00    PRES08\_VS  UREP08\_VS  Ask Order   10  0.51    4/8/2008 11:59:00 PM    PRES08\_VS  Expired     10  0.51    4/8/2008 11:59:44 PM
+- 04/06/08  14:07:22    PRES08\_VS  UREP08\_VS  Ask Order   5   0.5     4/8/2008 11:59:00 PM    PRES08\_VS  Expired     5   0.5     4/8/2008 11:59:45 PM
+- 04/06/08  14:07:42    PRES08\_VS  UDEM08\_VS  Bid Order   5   0.47    4/8/2008 11:59:00 PM    PRES08\_VS  Expired     5   0.47    4/8/2008 11:59:45 PM
+- 04/14/08  13:51:41    DConv08     OBAM\_NOM   Bid Order   3   0.78 4/16/2008 11:59:00 PM   DConv08     Traded  3   0.78    4/14/2008 2:50:46 PM
+- 05/03/08  12:06:18    DConv08     OBAM\_NOM   Ask Order   18  0.78    5/5/2008 11:59:00 PM    DConv08     Traded  18  0.78    5/5/2008 1:51:39 PM
+- 05/03/08  12:08:25    RConv08     MCCA\_NOM   Ask Order   20  0.99    5/5/2008 11:59:00 PM    RConv08     Order Withdrawn     20  0.99    5/5/2008 8:21:26 PM
+- 05/03/08  14:12:29    PRES08\_VS  UREP08\_VS  Ask Order   10  0.6     5/5/2008 11:59:00 PM    PRES08\_VS  Expired     10  0.6     5/5/2008 11:59:00 PM
+- 05/05/08  20:21:52    RConv08     MCCA\_NOM   Ask Order   20  0.94    5/7/2008 11:59:00 PM    RConv08     Traded  20  0.94    5/6/2008 5:15:52 PM
+- 05/09/08  16:24:56    PRES08\_VS  UREP08\_VS  Ask Order   10  0.6 5/20/2008 11:59:00 PM   PRES08\_VS  Order Withdrawn     10  0.6     5/19/2008 10:21:02 PM
+- 05/18/08  12:44:31    PRES08\_VS  UREP08\_VS  Ask Order   10  0.51 5/20/2008 11:59:00 PM   PRES08\_VS  Order Withdrawn     10  0.51    5/19/2008 10:21:05 PM
+- 05/19/08  21:11:53    PRES08\_VS  UREP08\_VS  Ask Order   10  0.5 5/21/2008 11:59:00 PM   PRES08\_VS  Expired     10  0.5     5/21/2008 11:59:15 PM
+- 05/20/08  15:44:10    PRES08\_VS  UREP08\_VS  Sell Asset  10  0.483 PRES08\_VS Traded  1   0.483   5/20/2008 3:44:10 PM
+- 05/20/08  15:45:29    PRES08\_VS  UREP08\_VS  Sell Asset  10  0.482 PRES08\_VS Traded  9   0.482   5/20/2008 3:45:29 PM
