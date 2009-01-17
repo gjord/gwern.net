@@ -14,7 +14,7 @@ But the problem is, a long string simply has more 'room' (possibilities) than a 
 
 Fundamentally, you cannot pack 10 pounds of stuff into a 5 pound bag. TANSTAAFL.
 
-## You keep using that word
+## You keep using that word...
 
 The foregoing may seem to have proven lossless compression impossible, but we know that we do it routinely; so how does that work? Well, we have proven that losslessly mapping a set of long strings onto a set of shorter substrings is impossible. The answer is to relax the shorter requirement: we can have our algorithm 'compress' a string into a *longer* one. Now the Pigeonhole Principle works for us - there is plenty of space in the longer strings for all our to-be-compressed strings. And as it happens, one can devise 'pathological' input to some compression algorithms in which a short input compresses into a much larger output - there are such files available which empirically demonstrate the possibility.
 
