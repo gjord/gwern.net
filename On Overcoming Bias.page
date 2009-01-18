@@ -1,20 +1,31 @@
 I'd like to see researchers and commentators focus on  more practical stuff. For example, I've been reading OB since the start, and although I find the more theoretical stuff (such as Eliezer posts) very interesting, I seem to have profited little despite reading thousands upon thousands of words. While it's fine to cover all sorts of interesting little biases and ideas, there seems to be more theory than praxis; another way I might put it is that by focusing on low probability issues, we ignore realizing the payoffs.
 
-What real-life recommendations have we come up with? By real-life, I mean it is something one could start doing today, not a general recommendation like 'respect majority opinions'. An example: if I wanted to memorize material such as foreign language vocabulary, a real-life recommendation would be to use a flashcard program that exploits the spacing effect (such as SuperMemo or Mnemosyne).
+# The lowdown
+
+What real-life recommendations have we come up with? By real-life, I mean it is something one could start doing today, not a general recommendation like 'respect majority opinions'. An example: if I wanted to memorize material such as foreign language vocabulary, a real-life recommendation would be to use a flashcard program that exploits the spacing effect (such as SuperMemo or [Mnemosyne]()).
 
 Here's a few I can think of:
-* Invest in index funds; you can't beat the market.
-* Don't spend too much on medicine; it's not as useful as you think. (Apologies to Dr. Hanson if I've misinterpreted his postings.)
-* By default, believe what the prediction markets say about politics and events; you are more partial and less accurate than you think, as is are media and your favorite pundits.
-** If you still think the markets are wrong, prove it by making money off them.
 
-For that matter, aren't we neglecting an entire fields? For example, there seem to me to be a lot of possibilities to come up with algorithms or software to correct for all our human frailties.
+- Invest in index funds; you can't beat the market.
+- Don't spend too much on medicine; it's not as useful as you think.[^medicine] 
+- By default, believe what the prediction markets say about politics and events; you are more partial and less accurate than you think, as is are the media and your favorite pundits.
+-- If you still think the markets are wrong, prove it by making money off them.
 
-Here's a suggestion. Just occasionally dabbling in prediction markets isn't going to help us increase our predictions much. We're only going to put our money at risk when we're certain, and we'll only risk a little. Only risking a little, we get very little feedback. Sometimes this feedback can be very useful - I learned quite a bit from losing money on Kerry in 2004, and making a mint on McCain and Obama for nominees in 2008. But most of the time it isn't that useful. What does one really learn from selling out and profiting a few percentage points once or twice a month? Not a whole lot.
+For that matter, aren't we neglecting an entire field? For example, there seem to me to be a lot of possibilities to come up with algorithms or software to correct for human frailties.
 
-So why not write a program which sucks down all the existing bets from Intrade, IEM, Betfair etc. and has the user make a bet on x markets a day. Throw in some crude confidences ('I think McCain will win the popular vote, with 70% confidence.') Then it tracks the market until resolution.
+# Mental prosthetics
+
+Here's a suggestion. Just occasionally dabbling in prediction markets isn't going to help us increase our predictions much. We're only going to put our money at risk when we're certain, and we'll only risk a little. Only risking a little, we get very little feedback. Sometimes this feedback can be [very useful](Prediction markets) - I learned quite a bit from losing money on Kerry in 2004, and making a mint on McCain and Obama for nominees in 2008. But most of the time it isn't that useful. What does one really learn from selling out and profiting a few percentage points once or twice a month? Not a whole lot.
+
+## Gauging our politics
+
+So why not write a program which sucks down all the existing bets from Intrade, IEM, Betfair etc. and has the user make a bet on <tt>x</tt> markets a day. Throw in some crude confidences ('I think McCain will win the popular vote, with 70% confidence')[^ui]. Then it tracks the market until resolution.
 
 Given that it's September, many markets will close relatively soon, at which point the user can review her performance and find out whether they were overconfident, underconfident etc. Further refinements: periodically ask the user for a fresh assessment; the software could check against Intrade, say, and if the user is out of whack with market prices and very confident, then ask the user to either buy shares or revise their estimates; various other statistical tests could be run (did the user assess as the markets did, but lagged them? Or did they exhibit foresight?) and so on.
 
+## Home economics
+
 That's an example which I think is clearly OB-y, but I'll admit things can get dicey. A plugin to MythTV which tracks how often you watch a channel or DVD and tells you whether you should've rented or bought? Hm... Keeping track of purchases and whether you were happy with them? Probably not.
 
+[^ui]: Confidence levels are actually pretty easy from a UI perspective, I think. Provide 10 buttons, for 0% to 100% in 10% intervals; you'll note that this doesn't leave a button for 50%, which is a good thing as it makes the confidence level a [forced choice](https://secure.wikimedia.org/wikipedia/en/wiki/Ipsative). A user has to make some sort of specific commitment; this prevents users from chickening out and always picking 50%.
+[^medicine]: Apologies to Dr. Hanson if I've misinterpreted his postings.
