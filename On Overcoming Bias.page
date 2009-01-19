@@ -1,4 +1,4 @@
-I'd like to see researchers and commentators focus on  more practical stuff. For example, I've been reading OB since the start, and although I find the more theoretical stuff (such as Eliezer posts) very interesting, I seem to have profited little despite reading thousands upon thousands of words. While it's fine to cover all sorts of interesting little biases and ideas, there seems to be more theory than praxis; another way I might put it is that by focusing on low probability issues, we ignore realizing the payoffs.
+I'd like to see researchers and commentators focus on  more practical stuff. For example, I've been reading OB since the start, and although I find the more theoretical stuff (such as Eliezer's posts) very interesting, I seem to have profited little despite reading thousands upon thousands of words. While it's fine to cover all sorts of interesting little biases and ideas, there seems to be more theory than praxis; another way I might put it is that by focusing on low probability issues, we ignore realizing the payoffs.
 
 # The lowdown
 
@@ -25,7 +25,20 @@ Given that it's September, many markets will close relatively soon, at which poi
 
 ## Home economics
 
-That's an example which I think is clearly OB-y, but I'll admit things can get dicey. A plugin to MythTV which tracks how often you watch a channel or DVD and tells you whether you should've rented or bought? Hm... Keeping track of purchases and whether you were happy with them? Probably not.
+That's an example which I think is clearly OB-y, but I'll admit it's a little dicey. 
+
+Looking around an average middle-class American living room, and you'll often find an enormous collection of DVDs - a collection so enormous that it's unlikely that the owner has watched the entire collection twice, much less once! It's pretty easy to accumulate a collection larger than one can watch - just TV show box sets can fill an astonishing amount of time. I have a large black binder that contains all my DVDs (and much else besides); just the Monty Python DVDs could fill up more than a month, assuming I watched an hour a day.
+
+But these DVDs can be awfully expensive; at 20 or 30$ a piece, that swiftly adds up. An owner would often be better off just renting a copy or downloading something she's only going to watch once, instead of buying it. I think a major reason people buy instead of some cheaper approach is not just the convenience, but as insurance against the unlikely event they'll love the film. Their thinking goes, 'If I like it, then by buying I'll have it for later; but if I rent/download and like it, then I will need to buy it in addition to the money I already spent to rent! So I'll buy to be safe.'
+
+They buy because of the uncertainty about whether they'll like it. But it's not like this is impossible to estimate! If one's TV periodically asked how much one liked a particular show or movie, and also kept track of watches, it would be easy for it to then tell the user that she is buying too many things, or that a particular show is a rent and not a buy for her. (A MythTV plugin could probably do all this.) 
+
+Just the basic statistical data ('Buying is 10x more expensive than renting; you would break even buying instead of renting with only 5% of your collection. Please take this into consideration.') would be a big help. --We can't really blame people for [base rate neglect](https://secure.wikimedia.org/wikipedia/en/wiki/Base_rate_fallacy) if they don't know the base rate.
+
+The plugin could be even smarter than that. There's nothing stopping such a plugin from integrating with NetFlix: storing user ratings, querying it about how recommended something is[^netflix], etc.
+
+There are all sorts of ways our faint memories of the past and fallible powers of inference & induction can be improved upon by software, but so far precious few of them have wormed their way into our daily life where they could be so helpful. This is a too bad..
 
 [^ui]: Confidence levels are actually pretty easy from a UI perspective, I think. Provide 10 buttons, for 0% to 100% in 10% intervals; you'll note that this doesn't leave a button for 50%, which is a good thing as it makes the confidence level a [forced choice](https://secure.wikimedia.org/wikipedia/en/wiki/Ipsative). A user has to make some sort of specific commitment; this prevents users from chickening out and always picking 50%.
 [^medicine]: Apologies to Dr. Hanson if I've misinterpreted his postings.
+[^netflix]: Obviously the more highly recommended for a user an item is, the greater the odds it is a 'buy' and not a 'rent' item.
