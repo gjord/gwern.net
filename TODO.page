@@ -53,7 +53,6 @@ When:  Time-stamp: "2009-01-19 20:55:50 gwern"
 
 - Extend <http://haskell.org/haskellwiki/Simple_unix_tools> to include more coreutils and maybe QuickCheck tests, and merge into HSH's ShellEquivs. Is there any useful merger of [HSH](http://software.complete.org/software/projects/show/hsh), and [Language.Sh/ShSh](http://code.haskell.org/shsh/)
 - look for vector graphics libraries for Haskell; think about cloning DEFCON
-- With the MediaWiki bindings, can I automatically download all the xmonad.hs pages on haskell.org? And parse them into files I could analyze for commonalities?
 - Translate the Lisp from _Metamagical Themas_ into Haskell
 - Look into Test.IOSpec <http://www.cs.nott.ac.uk/~wss/repos/IOSpec/>
 - Conjure has Int problems on >2gig files - hSeeks on an Int
@@ -129,6 +128,11 @@ Look into build failures of:
 - trhsx
 
 Also, what backups are Galois keeping of haskell.org _et al_?
+
+## XMonad
+- With the MediaWiki bindings, can I automatically download all the xmonad.hs pages on haskell.org? And parse them into compilable files?
+- Look through my collection of XMonad configuration files. What can be done in XMonad core and XMonadContrib to simplify them?
+- Figure out how to clean up the godawful mess that is XMonad key binding. A user should be able to write her keybindings as a list, and pass that list straight to the <tt>keys</tt> field in the Config record. There should be none of this <tt>', keys = \c -> myKeys c `M.union` keys defaultConfig c'</tt> and <tt>Map.fromList</tt> nonsense, much less having 4 or 5 different ways and styles of setting keybindings. --sjanssen says multiple sets of keys, with overriding, forms a Monoid, so <tt>'updateKeys = flip mappend'</tt>?
 
 ## Darcs
 - Add --pager option to 'darcs changes'
