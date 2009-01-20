@@ -137,10 +137,10 @@ Also, what backups are Galois keeping of haskell.org _et al_?
 
 ## Yi
 - Needs more syntax highlighting modes, and modes in general. I particularly need
-    i. Markdown mode
-    ii. Shell mode^[Needed for the many many configuration files which use that style]
-    iii. Lisp mode^[If I could switch completely from Emacs, this wouldn't be so important.
-    iv. Wikimarkup (Mediawiki specifically) mode
+     i. Markdown mode
+     ii. Shell mode^[Needed for the many many configuration files which use that style]
+     iii. Lisp mode^[If I could switch completely from Emacs, this wouldn't be so important.]
+     iv. Wikimarkup (Mediawiki specifically) mode
 - [longlines-mode](http://www.gnu.org/software/emacs/manual/html_node/emacs/Longlines.html)[](http://www.emacswiki.org/emacs/LongLines). Absolutely crucial for editing documents that use long lines (such as Markdown or Wikipedia articles). Yi currently displays longlines by wrapping them at the end of the terminal, which both looks ugly and is very hard to navigate or work with.
 - [Macros](http://code.google.com/p/yi-editor/issues/detail?id=89). Obviously. If you don't understand why this is a must-have, then you don't understand text editing.
 - Spellcheck. See macros - a basic feature. (And ideally a realtime spellcheck, like flyspell; but I could probably live with a manually invoked spellchecker.)
