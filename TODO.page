@@ -132,7 +132,16 @@ Also, what backups are Galois keeping of haskell.org _et al_?
 ## XMonad
 - With the MediaWiki bindings, can I automatically download all the xmonad.hs pages on haskell.org? And parse them into compilable files?
 - Look through my collection of XMonad configuration files. What can be done in XMonad core and XMonadContrib to simplify them?
-- Figure out how to clean up the godawful mess that is XMonad key binding. A user should be able to write her keybindings as a list, and pass that list straight to the <tt>keys</tt> field in the Config record. There should be none of this <tt>', keys = \c -> myKeys c `M.union` keys defaultConfig c'</tt> and <tt>Map.fromList</tt> nonsense, much less having 4 or 5 different ways and styles of setting keybindings. --sjanssen says multiple sets of keys, with overriding, forms a Monoid, so <tt>'updateKeys = flip mappend'</tt>?
+- Figure out how to clean up the godawful mess that is XMonad key binding. A user should be able to write her keybindings as a list, and pass that list straight to the <tt>keys</tt> field in the Config record. There should be none of this <tt>', keys = \c -> myKeys c `M.union` keys defaultConfig c'</tt> and <tt>Map.fromList</tt> nonsense, much less having 4 or 5 different ways and styles of setting keybindings. --sjanssen says multiple sets of keys, with overriding, forms a Monoid. That is, on Maps mappend is our 'update' operator, so if we have code that looks like this:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell .numberLines}
+updateKeys = flip mappend
+keys = updateKeys new old
+    where new = Data.Map.fromList [(1,1)]
+          old = Data.Map.fromList [(1,2), (3,4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Then the value of <tt>keys</tt> will be <tt>[(1,1),(3,4)]</tt>: the 'old' value had 1 corresponding to 2, but the 'new' value had it corresponding to 1. When <tt>mappend</tt> did its stuff, the old Map got partially overwritten by the new Map.^[Just because that's how the Data.Map's Monoid instance was written. Monoid on a list, for example, would be just <tt>(++)</tt> - there would be no 'overwriting'. To continue our example, if one removed the <tt>fromList</tt> calls from the where-clause, <tt>keys</tt> would now evaluate to <tt>[(1,2),(3,4),(1,1)]</tt>.]
 
 ## Darcs
 - Add --pager option to 'darcs changes'
