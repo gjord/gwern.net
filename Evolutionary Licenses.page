@@ -1,9 +1,42 @@
-You need to think of it evolutionarily.
+# The Problem
+Why are there so many[^osi] different FLOSS licenses? 
 
-Projects using relatively restrictive copyleft licenses (ie. GPL) are like poisondart frogs which produce poison in themselves and have bright colors advertising this. Now, this is good for them since it means the big predators will leave them alone. But it's also bad because they might poison themselves, and even if that doesn't happen, they've still expended resources to constantly produce those colors and poisons.
+## One Answer
+The obvious explanation is that many are just historical, or are copies in all but name of another license; others differ on how to handle the difficult issue of software patents; still others add idiosyncratic clauses (like the T~e~X license) like forbidding use by any entity connected to the United States Military.
 
-So you get free-riders - frogs which cut out the poison and just wear the poison colors. Everything is gravy for these frogs: the predators leave them alone and they have a small edge over the genuine article. But of course, fake poison frogs aren't an *evolutionarily stable strategy* (ESS). Predators do eat poison-colored frogs if they get hungry or stupid enough, and if they're all fake, then the poison colors cease to be a deterrent.
+But the fundamental divide in FLOSS licenses is that of copyleft. Is it needed? Are BSD licenses 'more free' than the GPL? BSD licenses seem to work well enough - practically the entire Haskell community uses only BSD - so what good is the difficult[^compl] GPL? You need to think of it evolutionarily.
 
-And then conditions are ripe for real poisontree frogs to make a comeback! But just when they are triumphant and all the predators have learned to ignore them, along comes hopping a defective frog with poison-colors, but no actual poison... of course, eventually things reach an equilibrium with enough real poisontree frogs to keep the predators honest and a reasonable number of fakers. If things get out of kilter for a while, evolution will bring it back into whack.
+## Frogs and Game Theory
 
-So a mix of reals and fakes constitute the ESS. In the same way, if every project used Affero GPL, then every frog is producing poison, which is inefficient. (One wouldn't expect a country to train every citizen as a soldier; more efficient to just train a few well). But if no frog produced poison/copyleft, then all the snakes will slither in and start gulping as they please. Either way is suboptimal. The best is a mixture - some BSD, some GPL etc. It may be confusing, but it works.
+Let us consider the case of poisondart frogs. They famously store poison in themselves and have bright colors advertising this. Now, this is a good trick for them since it means the big predators will leave them alone. It's a good enough trick that warning coloration can be found all over the animal kingdom. But it's also bad because they might poison themselves, and even if that doesn't happen, they've still expended resources to constantly produce those colors and poisons.
+
+So you get free-riders - frogs which cut out the poison and just wear the poison colors. Everything is gravy for these frogs: the predators leave them alone and they have a small edge over the genuine article. But of course, fake poison frogs aren't an [*evolutionarily stable strategy*](https://secure.wikimedia.org/wikipedia/en/wiki/Evolutionarily_stable_strategy) (ESS). Predators do eat poison-colored frogs if they get hungry or stupid enough, and if they're all fake, then the predators will learn this & the poison colors cease to be a deterrent.
+
+And then conditions are ripe for real poisontree frogs to make a comeback! But just when they are triumphant and all the predators have learned to ignore them, along comes hopping a defective frog with poison-colors, but no actual poison... 
+
+So a 'pure' population of real or fakes is not stable. (This is a specific example of [Prisoner's dilemma](https://secure.wikimedia.org/wikipedia/en/wiki/Prisoner's_dilemma) thinking; a population of defecting players can be invaded by a few cooperators, and a population of cooperators can easily be infected by free-riders/defectors.)
+
+What happens? Eventually things reach an equilibrium with enough real poisontree frogs to keep the predators honest and a reasonable number of fakers. If things get out of kilter for a while, evolution will bring it back into whack.
+
+### The Analogy
+
+So for frogs, a mix of reals and fakes constitute the ESS. What insight does this give us into software licenses?
+
+Well, remember that the stated purpose of the GPL is to prevent users and modifiers of a software package from not making their changes public. The GPL is trying to compel them to make their work public, just as the original was public. Instead of having a public domain of software, which is increasingly smaller than the private domain as the private domain always takes and never gives[^mickey], one has a public domain that grows. 
+
+So in our analogy, let's consider frogs to be software projects. Our predators - snakes, spiders - are those who would copy a project and then contribute little or nothing back. (This is a hostile action because it can starve a project of interest and contributors, even if there is no 'direct' harm.)
+
+So, suppose every project used Affero GPLv3. This license is poison to any company which doesn't want to release source, as it blocks [Tivoization](https://secure.wikimedia.org/wikipedia/en/wiki/Tivoization) *and* it also plugs the 'services' hole in the GPL[^services]. This poison comes at a cost - even non-predators may fear the poison, and contributors may be confused by the license or at philosophical odds with it. 
+
+In this scenario, every frog is producing poison, if you will. It is inefficient. (One wouldn't expect a country to train every citizen as a soldier; more efficient to just train a few well). But at least the frogs don't have to worry about predators, as the syllogism is simple for a predator - All FLOSS projects are poison; all poison is unusable/unpreyable; all FLOSS projects are unusable.
+
+People offput by the Affero GPLv3 or employed by those who dislike it, or just annoyed at the increased difficulty of contribution will set up projects of their own. Now the second step kicks in - of course they aren't going to use the Affero GPLv3. They're going to use public domain or BSD or some other non-copyleft license. And for a while, they'll be safe. The old conventional wisdom about FLOSS projects will take time to die. And they will prosper and grow with their slight edge over more encumbered projects.
+
+But if no frog produced poison/copyleft, then sooner or later, all the snakes will slither in and start gulping as they please. If the project is lucky, maybe they'll even be tossed a few tidbits as thanks (think Apple's occasional contribution to FreeBSD).
+
+But either way leads to suboptimal outcomes. The best is a mixture - some BSD, some GPL etc. It may be confusing, but it works.
+
+[^osi]: The OSI lists [over 70](http://www.opensource.org/licenses) FLOSS licenses - and those are just the ones they have reviewed and approved of!
+[^compl]: The GPL is admittedly much more difficult to understand than the BSD licenses. Even once you've grasped the elegant legal Judo move at its heart, the details are many and niggling. Other copyleft licenses can be even more difficult to understand; it's the rare Wikipedian who fully understands the GFDL *and* Wikipedia's use of it *and* also the FSF amendments to it that allow a one-time transfer to Creative Commons's BY-SA license.
+[^mickey]: When was the last time Disney gave anything to the public domain? Now, when was the last time Disney took from the public domain?
+[^services]: The straight GPL license technically only requires public changes if the source code or compiled binaries are distributed. If the code & binaries always remain on one's own private servers, the GPL never applies. The paradigmatic example here is Google: despite using & modifying millions of lines of GPL code, its FLOSS contributions are relatively small. This is because Google users always connect to Google's servers for searches or emails &etc., and never download 'the Google search engine' or anything. With no public distribution, the GPL doesn't apply, and so Google goes on its merry way complying with the letter (if not the spirit) of the GPL.
