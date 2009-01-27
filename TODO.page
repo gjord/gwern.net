@@ -146,6 +146,17 @@ When:  Time-stamp: "2009-01-19 20:55:50 gwern"
 - Spellcheck. See macros - a basic feature. (And ideally a realtime spellcheck, like flyspell; but I could probably live with a manually invoked spellchecker.)
 - Persistent state: Yi should remember my previously-opened files, my killring, the last position of the point in a buffer/file etc. Emacs provides this [session](http://www.phys.ufl.edu/docs/emacs/emacs_423.html), and I find it very convenient.
 
+## Gitit
+- Use Pandoc's <tt>withProcess</tt> function to implement necessary features:
+     i. Signatures: this could be done something like [described here](http://groups.google.com/group/pandoc-discuss/browse_thread/thread/54272f922c80b7b0) - we'd plug in that function to withProcess. Probably we'll first define <tt>@date</tt> to substitute in the current date, so users can go '--Gwern @date@', and then we could work on defining <tt>@sig@</tt> which does all that.
+     ii. interwiki links. Currently there's no support for easy linking to a particular site with regular URLs (the paradigmatic case being linking to Wikipedia). We need to parse inside a <tt>Link</tt> and do some URL substitution (content from 'pandoc -w native'). You can see in #3 that we want to replace "wiki:" with, say, "http://en.wikipedia.org/wiki/" - which transforms it to an external link to the right place.
+
+~~~~~~{.haskell .numberLines}
+[foo](wiki:bar) -- parses as:
+Pandoc (Meta [] [] "")
+[ Para [Link [Str "foo"] ("wiki:bar","")] ]
+~~~~~~
+
 # Programming (in general)
 
 - English mode
