@@ -38,7 +38,11 @@ It's lovely to be able to make use of other people's extensions in your shiny ne
 # Comprehensibility
 - You should be able to **understand** it.
 
-This is a valuable property for a number of reasons also. An example I like to use is the XMonad tiled windowing manager for X. Before, I had used Ratpoison and StumpWM, but I was never really satisfied because I didn't understand C or Common Lisp so many things were and remained a mystery to me. This made extending them, debugging them, even just reading the documentation to use them - it made them all more difficult than they had to be. But with XMonad, I understand most of it. I see how the extensions work, and have written my own. The imperfect mirror of the documentation does not confuse, as I can easily turn to the code which is the ultimate documentation. This point ties into the first and second points. If you understand the code and the architecture, then you are in a much better position to extend it, and potentially maintain it. This goes back to the first point; you should never need to maintain it, but given your investment in it, you may want to and it's better to be able to maintain it to the degree you need it to function - sometimes maintenance is just a matter of updating a few files or the packaging system.
+This is a valuable property for a number of reasons also. An example I like to use is the XMonad tiled windowing manager for X. Before, I had used Ratpoison and StumpWM, but I was never really satisfied because I didn't understand C or Common Lisp so many things were and remained a mystery to me. This made extending them, debugging them, even just reading the documentation to use them - it made them all more difficult than they had to be. 
+
+With XMonad, I understand most of it. I see how the extensions work, and have written my own. The imperfect mirror of the documentation does not confuse, as I can easily turn to the code which is the ultimate documentation. This point ties into the first and second points. If you understand the code and the architecture, then you are in a much better position to extend it, and potentially maintain it. 
+
+This goes back to the first point; you should never need to maintain it, but given your investment in it, you may want to and it's better to be able to maintain it to the degree you need it to function - sometimes maintenance is just a matter of updating a few files or the packaging system.
 
 # Popularity
 - Try to use **standard** stuff.
