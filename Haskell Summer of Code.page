@@ -207,7 +207,7 @@ So, what lessons can we learn from the 3 SoCs? It seems to me like there are rou
 2) _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
 3) _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
 
-#### Don Stewart's view
+##### Don Stewart's view
 [Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
 
 > We explicitly pushed harder in 2008 to clarify and simplify the goals of
@@ -218,5 +218,5 @@ focus on libraries and tools that directly benefit the communtity. [_sic_]<br>
 developers and users, and from students with proven Haskell development
 experience. You can't learn Haskell from zero on the job, during SoC.
 
-[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. (You can see Waeren's defense [here](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
+[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. (You can read Waeren's reply to this [here](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
 [^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen Oleg Kiselyovs; Oleg's work is mindblowingly awesome in quantity and quality, everyone acknowledges, but how often does anyone actually use any of it?
