@@ -1,0 +1,210 @@
+# Summer of Code
+
+As part of Google's [Summer of code](http://en.wikipedia.org/wiki/Google_Summer_of_Code)[](http://code.google.com/soc/) program, Google sponsors 5-10 [projects for Haskell](http://hackage.haskell.org/trac/summer-of-code/).
+
+The Haskell Summer of Codes have often produced excellent results, but how excellent is excellent? Are there any features or commonalities between successful projects or unsuccessful ones?
+
+(This questions are particularly important as SoC 2009 isn't too far away; yet we don't have even a general sense of where we are.)
+
+## Example retrospective: Debian
+
+An energetic blogger & Debian developer has produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) series on the many Debian-related Summer of Code projects.
+
+The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. Let's see whether that holds true of Haskell.
+
+### Haskell retrospective
+
+Haskell wasn't part of the first Summer of Code in 2005, but it was accepted for 2006. We start there.
+
+#### 2006
+The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006) lists the following projects:
+
+- "Fast Mutable Collection Types for Haskell"
+
+    Caio Marcelo de Oliveira Filho, mentored by Audrey Tang
+
+    This ultimately resulted in the [HsJudy](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/HsJudy) library ('fast mutable collection' here meaning 'array'; see the [application](http://darcs.haskell.org/judy/SOC_APP.txt)). HsJudy was apparently used in Pugs at one time, but no more. Thus, I judge this to have been **unsuccessful**.
+
+- "Port Haddock to use GHC"
+
+       David Waern, mentored by Simon Marlow
+
+       **Successful**. Haddock has used the GHC API ever since.[^complaints]
+
+- "A model for client-side scripts with HSP"
+
+    Joel Björnson, mentored by Niklas Broberg
+
+    Was initially unsuccessful, but seems to've been picked up again. So I give this a tentative **successful**
+
+- "GHCi based debugger for Haskell"
+
+    José Iborra López, mentored by David Himmelstrup
+
+    **Successful**. The GHCi debugger was accepted into GHC HEAD, and by now is in production use,
+
+- "HaskellNet"
+
+    Jun Mukai, mentored by Shae Erisson
+
+    **Unsuccessful**. HaskellNet is dead, and nothing of it has propagated elsewhere. (I'm not entirely sure what happened with the HaskellNet code - I know of [two](http://darcs.haskell.org/SoC/haskellnet/) [repos](http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/), but that's about it.) Shae tells me that this poor uptake is probably due to a lack of advertising, and not any actual defect in the HaskellNet code.
+
+- "Language.C - a C parser written in Haskell"
+
+    Marc van Woerkom, mentored by Manuel Chakravarty
+
+    **Failure**. According to [Don Stewart's outline](http://www.haskell.org/pipermail/haskell-cafe/2007-February/022509.html) of the 2006 SoC, this project was not completed.
+
+- "Implement a better type checker for Yhc"
+
+    Leon P Smith, mentored by Malcolm Wallace
+
+    **Failure**. See Language.C
+
+- "Thin out cabal-get and integrate in GHC"
+
+    Paolo Martini, mentored by Isaac Jones
+
+    **Successful**. Code is in Cabal, which we all know and love.
+
+- "Unicode ByteString, Data.Rope, Parsec for generic strings"
+
+    Spencer Janssen, mentored by Don Stewart
+
+    **Successful**. (Again, per Don.)
+
+4 successful; 2 unsuccessful; and 2 failures.
+
+#### 2007
+
+The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
+
+- "Darcs conflict handling"
+
+    Jason Dagit, mentored by David Roundy
+
+    **Successful**. The work was successful in almost completely getting rid of the exponential conflict bug, and has been in the regular releases of Darcs 2.x for some time now.
+
+- "Automated building of packages and generation of Haddock documentation"
+
+    Sascha Böhme, mentored by Ross Paterson
+
+    **Successful**. The auto build and doc generation are long-standing and very useful parts of Hackage.
+
+- "Rewrite the typechecker for YHC and nhc98"
+
+    Mathieu Boespflug, mentored by Malcolm Wallace
+
+    Unknown.
+
+- "Cabal Configurations"
+
+    Thomas Schilling, mentored by Michael Isaac Jones
+
+    **Successful**. Cabal configurations have been around for a while and are very useful for enabling/disabling things
+
+- Update the Hat tracer
+
+    Kenn Knowles, mentored by Malcolm Wallace
+
+    **Unsuccessful**. The update apparently happened, since the [Hat homepage](http://www.haskell.org/hat/) says "Version 2.06 released 2nd Oct 2008", but it is [described](http://www.haskell.org/hat/download.html) as unmaintained, and I can't seem to find any examples of people actually using Hat.
+
+- Generalizing Parsec to ParsecT and arbitrary input (ByteStrings)
+
+    Paolo Martini, mentored by Philippa Jane Cowderoy
+
+    **Success**. But a mixed one – I understand the performance is terrible so few people use it.
+
+- Shared Libraries for GHC
+
+    Clemens Fruhwirth, mentored by Simon Marlow
+
+    **Unsuccessful**. The situation is unclear to me, but I know that for some period dynamic linking worked for some platforms. However, it's 2009 and I still have static linking; so I'm going to chalk this one up as existing but not in use.
+
+- "Libcurl"
+
+    Mieczysław Bąk, mentored by Bryan O'Sullivan
+
+    **Success**. Libcurl does exist and has been used, and is maintained. I understand it has been used, even if I personally don't know of any examples.
+
+- "Extending GuiHaskell: An IDE for Haskell Hackers"
+
+    Asumu Takikawa, mentored by Neil David Mitchell
+
+    **Failure**. GuiHaskell does not exist in any usable form. (The homepage summarizes the situation thusly: ["**Warning**: This project is fragile, unfinished, and I do not recommend that anyone tries using it."](http://www-users.cs.york.ac.uk/~ndm/guihaskell/))
+
+4 successes; 2 unsuccessful; 1 failure, and 1 unknown.
+
+##### See also
+- [The Monad.Reader's](http://haskell.org/haskellwiki/The_Monad_Reader)
+[issue 9](http://haskell.org/sitewiki/images/5/5d/TMR-Issue9.pdf) covers SoC projects
+- <http://www.serpentine.com/blog/2007/04/12/haskellorg-and-googles-summer-of-code/>
+
+#### 2008
+The [2008 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2008) isn't so kind enough as to list all the projects as before, but it does tell us that only 7 projects were accepted by Google.
+
+So we can work from the [code.google.com](http://code.google.com/p/google-summer-of-code-2008-haskell/downloads/list) page which lists 6:
+
+- "C99 Parser/Pretty-Printer"
+
+    by Benedikt Huber, mentored by Iavor Diatchki
+
+    **Success**. The first try failed, but the second won through, and now people are doing things like [parsing the Linux kernel](http://www.galois.com/blog/2008/09/17/parsing-the-linux-kernel-with-haskell-experience-with-languagec/) with it.
+
+- "GMap - Fast composable maps"
+
+    by Jamie Brandon
+
+    **Successful**. GMap is on [Hackage](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/gmap), and I believe I've seen it used.
+
+- "Haskell API Search"
+
+    Neil Mitchell
+
+    **Successful**. The improved performance and search capability have made it into Hoogle releases.
+
+- "Cabal 'make-like' dependency framework"
+
+    Andrea Vezzosi
+
+    **Successful**? (I don't actually know, but this probably made it into Cabal.)
+
+
+- "GHC plugins"
+
+    Maximilian Conroy Bolingbroke
+
+    **Successful**?
+
+- "Data parallel physics engine"
+
+    Roman Cheplyaka
+
+    **Unsuccessful**? It seems to be finished but no use made of the actual engine (that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/)).
+
+
+- "GHC API".
+
+    Thomas Schilling
+
+    According to the [Haskell Weekly News](http://sequence.complete.org/hwn/20080702):
+
+> "Thomas Schilling (nominolo) is working on improvements to the GHC API. Officials at HWN headquarters have released a statement reversing their previous position regarding the existence of Thomas, citing regrettably faulty information to explain their previous misapprehensions. Expect to hear more from Thomas soon, now that he has finished graduating and moving."
+
+5 successful, 1 unsuccessful, 1 unknown. (These assessments are the most untrustworthy of all, since relatively little time has passed; it's much easier to see whether 2006 projects have had a lasting effect than these 2008 projects.)
+
+##### See also
+- The Monad.Reader's [Issue 12](http://haskell.org/sitewiki/images/f/f0/TMR-Issue12.pdf)
+
+#### 2009
+Yet to come.. The student apps are due during 23 March – 3 April. Look forward to it!
+
+#### Haskell roundup
+
+So, what lessons can we learn from the 3 SoCs? It seems to me like there are roughly 3 groups explanations of unsuccess or failure fall into. They are:
+
+1) _Hubris_. GuiHaskell is probably a good example; it is essentially a bare-bones IDE, from its description. It is expecting a bit much of a single student in a single summer to write *that*!
+2) _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
+3) _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing of their benefits, which convinces people to actually take the effort to learn and use them, and eventually by network effects the whole Haskell community is affected & improved. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
+
+[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you.
