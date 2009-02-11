@@ -12,11 +12,11 @@ An energetic blogger & Debian developer has produced [a](http://www.milliways.fr
 
 The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. Let's see whether that holds true of Haskell.
 
-### Haskell retrospective
+## Haskell retrospective
 
 Haskell wasn't part of the first Summer of Code in 2005, but it was accepted for 2006. We start there.
 
-#### 2006
+### 2006
 The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006) lists the following projects:
 
 - "Fast Mutable Collection Types for Haskell"
@@ -75,7 +75,7 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
 
 4 successful; 2 unsuccessful; and 2 failures.
 
-#### 2007
+### 2007
 
 The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
 
@@ -135,12 +135,12 @@ The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
 
 5 successes; 2 unsuccessful; 1 failure.
 
-##### See also
+#### See also
 - [The Monad.Reader's](http://haskell.org/haskellwiki/The_Monad_Reader)
 [issue 9](http://haskell.org/sitewiki/images/5/5d/TMR-Issue9.pdf) covers SoC projects
 - <http://www.serpentine.com/blog/2007/04/12/haskellorg-and-googles-summer-of-code/>
 
-#### 2008
+### 2008
 The [2008 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2008) isn't so kind enough as to list all the projects as before, but it does tell us that only 7 projects were accepted by Google.
 
 So we can work from the [code.google.com](http://code.google.com/p/google-summer-of-code-2008-haskell/downloads/list) page which lists 6:
@@ -193,13 +193,13 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 5 successful, 1 unsuccessful, 1 unknown. (These assessments are the most untrustworthy of all, since relatively little time has passed; it's much easier to see whether 2006 projects have had a lasting effect than these 2008 projects.)
 
-##### See also
+#### See also
 - The Monad.Reader's [Issue 12](http://haskell.org/sitewiki/images/f/f0/TMR-Issue12.pdf)
 
-#### 2009
+### 2009
 Yet to come.. The student apps are due during 23 March – 3 April. Look forward to it!
 
-#### Haskell roundup
+### Haskell roundup
 
 So, what lessons can we learn from the 3 SoCs? It seems to me like there are roughly 3 groups explanations of unsuccess or failure fall into. They are:
 
@@ -207,7 +207,7 @@ So, what lessons can we learn from the 3 SoCs? It seems to me like there are rou
 2) _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
 3) _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
 
-##### Don Stewart's view
+#### Don Stewart's view
 [Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
 
 > We explicitly pushed harder in 2008 to clarify and simplify the goals of
