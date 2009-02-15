@@ -1,14 +1,15 @@
 One of the best ways to learn something practical like Haskell is to simply dive in and make it do something useful for you. In my case, I've wanted to learn Haskell for a long time: the syntax was gorgeous compared to Common Lisp, sh, or Java (the only other languages I had any sort of experience with); various ideas such as monads, lazy evaluation, and purity struck me as fascinating and exciting; and the community was excellent in so far as I was smart enough to understand it.
 
-But I didn't have any practical use for it, and I'm too lazy to learn it unless I have to. Bash worked well enough for my shell scripts, my Java days were thankfully far behind me, and I generally only messed with Common Lisp because of my use of the Stump window manager <http://en.wikipedia/wiki/StumpWM>, but I had finished configuring and extending StumpWM to my liking (and I use Xmonad these days). Fortunately, I am a heavy user and long-time editor of Wikipedia, and there have long been a number of technical things bugging me.
+But I didn't have any practical use for it, and I'm too lazy to learn it unless I have to. Bash worked well enough for my shell scripts, my Java days were thankfully far behind me, and I generally only messed with Common Lisp because of my use of the [Stump window manager](http://en.wikipedia/wiki/StumpWM), but I had finished configuring and extending StumpWM to my liking (and I use Xmonad these days). Fortunately, I am a heavy user and long-time editor of Wikipedia, and there have long been a number of technical things bugging me.
 
 Two in particular struck me as fixable without requiring modifications to the MediaWiki codebase (a messy and featureful pile of PHP):
+
 1) the "feature" of MediaWiki that by default, [[Fujiwara no Teika]] is distinct from [[Fujiwara no teika]], and going to the latter does not automatically redirect to the former. The reason this is very annoying is that one must either create n^2-1 redirects to the correct title or simply accept that mis-capitalizations will result in broken links and needless searches.
 2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the Internet Archive doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from Alexa, which are provided an eternity (6 months or more) after the original spidering of the external link. Thus, an external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
 
 Let's talk about Problem 2.
 
-The beginning of a solution is to realize that the Internet Archive is not useful here. Their FAQ specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything. Fortunately, if we poke around on the subject of archiving URLs, we'll eventually discover something like WebCite <http://www.webcitation.org/>, which is tailor-made for our purposes. They offer persistent archiving services, for free, and best of all they can archive on demand!
+The beginning of a solution is to realize that the Internet Archive is not useful here. Their FAQ specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything. Fortunately, if we poke around on the subject of archiving URLs, we'll eventually discover something like [WebCite](http://www.webcitation.org/), which is tailor-made for our purposes. They offer persistent archiving services, for free, and best of all they can archive on demand!
 
 Reading through their documentation, it seems they will eventually allow you to upload a file containing a large number of URLs to cite, but not yet. That's alright - just trying out the archiving (or reading the technical FAQ) reveals the URL encodes everything in a very simple format; it's really just as simple as
 
@@ -24,7 +25,7 @@ Our first question is naturally "How on Earth do we even get the addresses of al
 >     cause enormous numbers of redirects to be created. Its what comes before that matters. -}
 >     list <- liftM (\bs -> [n | n<-bs,  genericLength n <= (2^4)]) $ liftM words $ getContents
 
-Redirect-bot.hs <http://en.wikipedia.org/wiki/User:Gwern/Redirect-bot.hs> is assuming here that stdin is the source of a list. This potentially extremely long (as in >9,555,933 lines) list takes this form:
+[Redirect-bot.hs]() is assuming here that stdin is the source of a list. This potentially extremely long (as in >9,555,933 lines) list takes this form:
 
  ...
  Delehaye
