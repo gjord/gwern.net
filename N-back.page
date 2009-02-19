@@ -5,6 +5,7 @@
 Imagine a poor programmer who has suffered brain damage and has only enough working memory for 1 definition at a time. How could he write anything? To write a correct program, he needs to know simultaneously 2 things - what a variable, say, contains, and what is valid input for a program. But unfortunately, our programmer can know that the variable <tt>foo</tt> contains a string with the input, or he can know that the function 'processInput' uses a string, but he can't remember these 2 things simultaneously! He will deadlock forever, unsure either what to do with this <tt>foo</tt>, or unsure what exactly 'processInput' was supposed to work on.
 
 More seriously, working memory can be useful since it allows one to grasp more of the structure of something at any one time. Commentators on programming write that one of the great challenges of programming, besides accepting the reality that a computer really is just a mindless rule-following machine, is that programming requires one to keep in mind dozens of things and circumstances - any one of which could completely bollix things up. Focus is absolutely essential. One of the characteristics of great programmers is their apparent omniscience. Obsession grants them this ability to *know what they are actually doing*:
+
 > "With programmers, it's especially hard. Productivity depends on being able to juggle a lot of little details in short term memory all at once. Any kind of interruption can cause these details to come crashing down. When you resume work, you can't remember any of the details (like local variable names you were using, or where you were up to in implementing that search algorithm) and you have to keep looking these things up, which slows you down a lot until you get back up to speed."[^spolsky]
 
 ## The Silver Bullet
@@ -23,7 +24,7 @@ But as great as things like garbage collection & touch-typing & multiple monitor
 
 # Training
 
-Unfortunately, in general, IQ/_g_ and memory don't seem to be trainable. Many apparent effects are swamped by exercise or nutrition or by simple practice. They do not [_transfer_](http://en.wikipedia.org/wiki/Transfer_of_learning).
+Unfortunately, in general, IQ/[_g_](http://en.wikipedia.org/wiki/General_intelligence_factor) and memory don't seem to be trainable. Many apparent effects are swamped by exercise or nutrition or by simple practice. They do not [_transfer_](http://en.wikipedia.org/wiki/Transfer_of_learning).
 
 But there are a few exceptions. Lately, I've been reading about and trying out one of them - a game which stresses working memory. It's called [N-back](http://en.wikipedia.org/wiki/N-back).
 
@@ -56,7 +57,8 @@ Have I seen any benefits yet? Not really. Thus far it's like meditation: I haven
 
     > "Working memory is generally considered to have limited capacity. The earliest quantification of the capacity limit associated with short-term memory was the ["magical number seven"](http://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two)
  introduced by Miller (1956).[10] He noticed that the memory span of young adults was around seven elements, called chunks, regardless whether the elements were digits, letters, words, or other units. Later research revealed that span does depend on the category of chunks used (e.g., span is around seven for digits, around six for letters, and around five for words), and even on features of the chunks within a category....Several other factors also affect a person's measured span, and therefore it is difficult to pin down the capacity of short-term or working memory to a number of chunks. Nonetheless, Cowan (2001)[12] has proposed that working memory has a capacity of about four chunks in young adults (and fewer in children and old adults)."
-[^jaeggi]: TODO: insert ref here to jaeggi paper showing transfer to [_g_](http://en.wikipedia.org/wiki/General_intelligence_factor).
+[^jaeggi]: Jaeggi, S. M., Buschkuehl, M., Jonides, J., Perrig, W. J. (2008),
+[_Improving fluid intelligence with training on working memory_](http://www.iapsych.com/articles/jaeggi2008.pdf), _Proceedings of the National Academy of Sciences_, vol. 105 no. 19
 [^spolsky]: Joel Spolsky, ["Where do These People Get Their (Unoriginal) Ideas?"](http://www.joelonsoftware.com/articles/fog0000000068.html)
 [^atwood]: Jeff Atwood; ["Multiple Monitors and Productivity"](http://www.codinghorror.com/blog/archives/000012.html), ["The Programmer's Bill of Rights"](http://www.codinghorror.com/blog/archives/000666.html), ["Joining the Prestigious Three Monitor Club"](http://www.codinghorror.com/blog/archives/000740.html), ["Does More Than One Monitor Improve Productivity?"](http://www.codinghorror.com/blog/archives/001076.html) etc.
 [^atwood2]: Jeff Atwood, ["The Large Display Paradox"](http://www.codinghorror.com/blog/archives/000928.html)
