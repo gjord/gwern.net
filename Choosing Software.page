@@ -38,9 +38,9 @@ It's lovely to be able to make use of other people's extensions in your shiny ne
 # Comprehensibility
 - You should be able to **understand** it.
 
-This is a valuable property for a number of reasons also. An example I like to use is the XMonad tiled windowing manager for X. Before, I had used Ratpoison and StumpWM, but I was never really satisfied because I didn't understand C or Common Lisp so many things were and remained a mystery to me. This made extending them, debugging them, even just reading the documentation to use them - it made them all more difficult than they had to be. 
+This is a valuable property for a number of reasons also. An example I like to use is the XMonad tiled windowing manager for X. Before, I had used Ratpoison and StumpWM, but I was never really satisfied because I didn't understand C or Common Lisp so many things were and remained a mystery to me. This made extending them, debugging them, even just reading the documentation to use them - it made them all more difficult than they had to be.
 
-With XMonad, I understand most of it. I see how the extensions work, and have written my own. The imperfect mirror of the documentation does not confuse, as I can easily turn to the code which is the ultimate documentation. This point ties into the first and second points. If you understand the code and the architecture, then you are in a much better position to extend it, and potentially maintain it. 
+With XMonad, I understand most of it. I see how the extensions work, and have written my own. The imperfect mirror of the documentation does not confuse, as I can easily turn to the code which is the ultimate documentation. This point ties into the first and second points. If you understand the code and the architecture, then you are in a much better position to extend it, and potentially maintain it.
 
 This goes back to the first point; you should never need to maintain it, but given your investment in it, you may want to and it's better to be able to maintain it to the degree you need it to function - sometimes maintenance is just a matter of updating a few files or the packaging system.
 
@@ -51,7 +51,7 @@ For example, Bash is by all the former criterion a good choice for one's shell. 
 
 And if an operating system doesn't run Bash as default, it is basically guaranteed that Bash will run on it (or there will at least be shells with Bash-compatibility). This is an advantage you should not underestimate. Because of this ubiquity, there are powerful network effects operating in favor of Bash guaranteeing that it will be useful for you for a very long time. Standard means you will be able to get your hands on it, standard means there will be documentation and people working to solve bugs and other people taking advantage of the extensibility, and so on. Standard means that new implementations and forks are that much easier. Standard means many things, but from a user's perspective, standard is generally a good thing for software and languages to be.
 
-The final major consideration was left to last. It should come as no surprise to modern programmer - (sinfully awash amongst high-level garbage-collected interpreted languages as they are - that the least important factor to consider is the level of:
+The final major consideration was left to last. It should come as no surprise to modern programmer - sinfully awash amongst high-level garbage-collected interpreted languages as they are - that the least important factor to consider is the level of:
 
 # Efficiency
 
