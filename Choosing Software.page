@@ -57,7 +57,7 @@ The final major consideration was left to last. It should come as no surprise to
 
 - **efficiency** of a program.
 
-This is the final concern because applications spend little time doing inefficient things. The rationale here is that, perhaps Emacs may be somewhat slower than a less capable or portable editor - but you will not save _so_ much time on quicker screen updates &etc. as to make up for real hours lost in porting the other editor or working around its lack of features (see [Amdahl's Law](https://secure.wikimedia.org/wikipedia/en/wiki/Amdahl's_law).
+This is the final concern because applications spend little time doing inefficient things. The rationale here is that, perhaps Emacs may be somewhat slower than a less capable or portable editor - but you will not save _so_ much time on quicker screen updates &etc. as to make up for real hours lost in porting the other editor or working around its lack of features (see [Amdahl's Law](https://secure.wikimedia.org/wikipedia/en/wiki/Amdahl's_law)).
 
 There are other concerns here: it is easier to make an extensible/powerful/portable editor more efficient in the bottlenecks than it is to hack in those features to an efficient editor never intended for those features[^vim]. But if you are truly faced with two choices - each of whom seems equally solidly maintained, extensible, standard, etc. - then go with the more efficient one. After all, efficiency is a virtue and does make the experience more pleasant and gives you the option of using it on slower computers.
 
