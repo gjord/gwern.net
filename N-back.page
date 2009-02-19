@@ -26,11 +26,19 @@ But as great as things like garbage collection & touch-typing & multiple monitor
 
 Unfortunately, in general, IQ/[_g_](http://en.wikipedia.org/wiki/General_intelligence_factor) and memory don't seem to be trainable. Many apparent effects are swamped by exercise or nutrition or by simple practice. They do not [_transfer_](http://en.wikipedia.org/wiki/Transfer_of_learning).
 
-But there are a few exceptions. Lately, I've been reading about and trying out one of them - a game which stresses working memory. It's called [N-back](http://en.wikipedia.org/wiki/N-back).
+But there are a few exceptions. Lately, I've been reading about and trying out one of them - a game which stresses working memory. It's called Dual [N-back](http://en.wikipedia.org/wiki/N-back), and it's a variant on an old working-memory test.
 
 ## N-back
 
-N-back is a turn-based game. In the [Brain Workshop](http://brainworkshop.sourceforge.net/) version, you are presented with a 3x3 grid in which every turn, a block appears in 1 of the 9 spaces and a letter is spoken aloud.[^details]
+The original N-back test simply asked that you remember a stream of letters, and signal if any letters were precisely, say, 2 positions apart. 'assr' wouldn't merit a signal, but 'asar' would since there are 'a' characters exactly 2 positions away from each other. The tester would give you another letter, you would signal or not, and so on. This is simple enough.
+
+## Dual N-back
+
+In 2003, Susan Jaeggi and her team began fMRI studies using a variant of N-back which tried to increase the burden on each turn - remembering multiple things instead of 1 letter. The abstract describes the reason why:
+
+> "With reference to single tasks, activation in the prefrontal cortex (PFC) commonly increases with incremental memory load, whereas for dual tasks it has been hypothesized previously that activity in the PFC decreases in the face of excessive processing demands, i.e., if the capacity of the working memory’s central executive system is exceeded. However, our results show that during both single and dual tasks, prefrontal activation increases continuously as a function of memory load. An increase of prefrontal activation was observed in the dual tasks even though processing demands were excessive in the case of the most difficult condition, as indicated by behavioral accuracy measures. The hypothesis concerning the decrease in prefrontal activation could not be supported and was discussed in terms of motivation factors."[^jaeggi2003]
+
+In this version, sometimes called 'dual N-back' (to distinguish it from the classic N-back), one is still playing a turn-based game. In the [Brain Workshop](http://brainworkshop.sourceforge.net/) version, you are presented with a 3x3 grid in which every turn, a block appears in 1 of the 9 spaces and a letter is spoken aloud.[^details]
 
 ### 1-back
 
@@ -58,7 +66,8 @@ Have I seen any benefits yet? Not really. Thus far it's like meditation: I haven
     > "Working memory is generally considered to have limited capacity. The earliest quantification of the capacity limit associated with short-term memory was the ["magical number seven"](http://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two)
  introduced by Miller (1956).[10] He noticed that the memory span of young adults was around seven elements, called chunks, regardless whether the elements were digits, letters, words, or other units. Later research revealed that span does depend on the category of chunks used (e.g., span is around seven for digits, around six for letters, and around five for words), and even on features of the chunks within a category....Several other factors also affect a person's measured span, and therefore it is difficult to pin down the capacity of short-term or working memory to a number of chunks. Nonetheless, Cowan (2001)[12] has proposed that working memory has a capacity of about four chunks in young adults (and fewer in children and old adults)."
 [^jaeggi]: Jaeggi, S. M., Buschkuehl, M., Jonides, J., Perrig, W. J. (2008),
-[_Improving fluid intelligence with training on working memory_](http://www.iapsych.com/articles/jaeggi2008.pdf), _Proceedings of the National Academy of Sciences_, vol. 105 no. 19
+["Improving fluid intelligence with training on working memory"](http://www.iapsych.com/articles/jaeggi2008.pdf), _Proceedings of the National Academy of Sciences_, vol. 105 no. 19
+[^jaeggi2003]: Jaeggi, S. M., Seewer, R., Nirkko, A. C., Eckstein, D., Schroth, G., Groner, R., et al, (2003). ["Does excessive memory load attenuate activation in the prefrontal cortex? Load-dependent processing in single and dual tasks: functional magnetic resonance imaging study"](jaeggi2003.pdf), _Neuroimage_ 19(2) 210-225.
 [^spolsky]: Joel Spolsky, ["Where do These People Get Their (Unoriginal) Ideas?"](http://www.joelonsoftware.com/articles/fog0000000068.html)
 [^atwood]: Jeff Atwood; ["Multiple Monitors and Productivity"](http://www.codinghorror.com/blog/archives/000012.html), ["The Programmer's Bill of Rights"](http://www.codinghorror.com/blog/archives/000666.html), ["Joining the Prestigious Three Monitor Club"](http://www.codinghorror.com/blog/archives/000740.html), ["Does More Than One Monitor Improve Productivity?"](http://www.codinghorror.com/blog/archives/001076.html) etc.
 [^atwood2]: Jeff Atwood, ["The Large Display Paradox"](http://www.codinghorror.com/blog/archives/000928.html)
