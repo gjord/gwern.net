@@ -161,6 +161,8 @@ Pandoc (Meta [] [] "")
 [ Para [Link [Str "foo"] ("wiki:bar","")] ]
 ~~~~~~
 
+- Caching needs improvements. Perhaps we can borrow from hackage-server and use 'Content-MD5' headers? This might be superior to expire headers.
+
 # Programming (in general)
 
 - English mode
