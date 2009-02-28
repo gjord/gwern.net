@@ -33,13 +33,13 @@ But these DVDs can be awfully expensive; at 20 or 30$ a piece[^python], that swi
 
 They buy because of the uncertainty about whether they'll like it. But it's not like this is impossible to estimate! If one's TV periodically asked how much one liked a particular show or movie, and also kept track of watches, it would be easy for it to then tell the user that she is buying too many things, or that a particular show is a rent and not a buy for her. (A MythTV plugin could probably do all this.) 
 
-Just the basic statistical data ('Buying is 10x more expensive than renting; you would break even buying instead of renting with only 5% of your collection. Please take this into consideration.') would be a big help. --We can't really blame people for [base rate neglect](https://secure.wikimedia.org/wikipedia/en/wiki/Base_rate_fallacy) if they don't know the base rate.
+Just the basic statistical data ('Buying is 10x more expensive than renting; you would break even buying instead of renting with only 5% of your collection. Please take this into consideration.') would be a big help. --We can't really blame people for [base rate neglect](Wikipedia!Base_rate_fallacy) if they don't know the base rate.
 
 The plugin could be even smarter than that. There's nothing stopping such a plugin from integrating with NetFlix: storing user ratings, querying it about how recommended something is[^netflix], etc.
 
 There are all sorts of ways our faint memories of the past and fallible powers of inference & induction can be improved upon by software, but so far precious few of them have wormed their way into our daily life where they could be so helpful. This is too bad...
 
-[^ui]: Confidence levels are actually pretty easy from a UI perspective, I think. Provide 10 buttons, for 0% to 100% in 10% intervals; you'll note that this doesn't leave a button for 50%, which is a good thing as it makes the confidence level a [forced choice](https://secure.wikimedia.org/wikipedia/en/wiki/Ipsative). A user has to make some sort of specific commitment; this prevents users from chickening out and always picking 50%.
+[^ui]: Confidence levels are actually pretty easy from a UI perspective, I think. Provide 10 buttons, for 0% to 100% in 10% intervals; you'll note that this doesn't leave a button for 50%, which is a good thing as it makes the confidence level a [forced choice](Wikipedia!Ipsative). A user has to make some sort of specific commitment; this prevents users from chickening out and always picking 50%.
 [^medicine]: Apologies to Dr. Hanson if I've misinterpreted his postings.
 [^netflix]: Obviously the more highly recommended for a user an item is, the greater the odds it is a 'buy' and not a 'rent' item.
 [^python]: _Monty Python's Flying Circus_ was a very large boxset, so the per-disc costs works out to something very reasonable like 10$/disc.
