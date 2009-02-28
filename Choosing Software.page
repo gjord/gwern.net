@@ -16,7 +16,7 @@ The point of a program is to make something easier or to do something you could 
 
 A commitment to maintenance is also a useful thing. Take GNU Emacs, or the GNU command line utilities in general. There are quite a few of them, they are complex and powerful, and take a while to learn. To profitably use them, you will need to invest time - I had learned enough about the Coreutils to use them comfortably within a few months, and GNU Emacs took about half a year to really learn to any satisfactory degree. Other alternatives like 'nano' would have taken less time to learn, but the GNU tools offered me more power.
 
-More importantly, the whole reason I was willing to spend so much time learning Emacs was because Emacs has a _history_. It was begun in 1984 and has been in constant development in the more than 2 decades since. It is likely to continue to be developed for decades (if only by the [Doomsday Argument](https://secure.wikimedia.org/wikipedia/en/wiki/Doomsday_argument) by the same gnarled old hackers who wrote it originally.
+More importantly, the whole reason I was willing to spend so much time learning Emacs was because Emacs has a _history_. It was begun in 1984 and has been in constant development in the more than 2 decades since. It is likely to continue to be developed for decades (if only by the [Doomsday Argument](Wikipedia!Doomsday_argument) by the same gnarled old hackers who wrote it originally.
 
 Even better, it has the institutional support of being the GNU Project's official text editor. In other words, learning Emacs is indeed a steep price to pay but that's alright since it is entirely plausible that you could be using it for the rest of your computing life. Six months of not particularly productive text editing may sound like a lot, but when set against 20 or 30 years of use, the productivity gains seem worthwhile.
 
@@ -57,7 +57,7 @@ The final major consideration was left to last. It should come as no surprise to
 
 - **efficiency** of a program.
 
-This is the final concern because applications spend little time doing inefficient things. The rationale here is that, perhaps Emacs may be somewhat slower than a less capable or portable editor - but you will not save _so_ much time on quicker screen updates &etc. as to make up for real hours lost in porting the other editor or working around its lack of features (see [Amdahl's Law](https://secure.wikimedia.org/wikipedia/en/wiki/Amdahl's_law)).
+This is the final concern because applications spend little time doing inefficient things. The rationale here is that, perhaps Emacs may be somewhat slower than a less capable or portable editor - but you will not save _so_ much time on quicker screen updates &etc. as to make up for real hours lost in porting the other editor or working around its lack of features (see [Amdahl's Law](Wikipedia!Amdahl's_law)).
 
 There are other concerns here: it is easier to make an extensible/powerful/portable editor more efficient in the bottlenecks than it is to hack in those features to an efficient editor never intended for those features[^vim]. But if you are truly faced with two choices - each of whom seems equally solidly maintained, extensible, standard, etc. - then go with the more efficient one. After all, efficiency is a virtue and does make the experience more pleasant and gives you the option of using it on slower computers.
 
@@ -89,4 +89,4 @@ Try to keep matters elegant and uncluttered. There is a difference between elega
 
 [^xmonad]: For my purposes, the many variants such as the XMonad model are immaterial. Yes, it is a very interesting model (the program compiles a fresh binary with the user's new config hardwired in, serializes out the current global state, and restarts itself with the new binary and passes it the serialized state) - but the details of how the extensibility is accomplished are only important if the method is crappy and unreliable.
 [^vim]: As a bigoted Emacs user, I of course see Vim as the classic example of attempting to shoehorn in a feature like a first-class extension language - with humorous results!
-[^hoarding]: Often due to mental disease; see [Pathological hoarding](https://secure.wikimedia.org/wikipedia/en/wiki/Compulsive_hoarding)
+[^hoarding]: Often due to mental disease; see [Pathological hoarding](Wikipedia!Compulsive_hoarding)
