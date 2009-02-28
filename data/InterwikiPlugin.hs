@@ -1,14 +1,17 @@
-module Interwiki (plugin) where
+module InterwikiPlugin (plugin) where
+
+-- This plugin causes link URLs of the form wikiname!articlename to be
+-- treated as interwiki links.  So, for example,
+-- [Emperor Palpatine](Wookieepedia!Emperor Palpatine) links to the
+-- article on "Emperor Palpatine" in Wookieepedia.
+
+-- (written by Gwern Branwen)
 
 import Gitit.Interface
 
 import Data.List.Split (splitOn)
 import qualified Data.Map as M
 import Network.URI (escapeURIString, isAllowedInURI)
-
--- plugin = PageTrans {
---  description = "Parse links for possible interwiki shortcuts, and replace with long URL",
---  transformation = interwikiTransform }
 
 plugin :: Plugin
 plugin = PageTransform interwikiTransform
@@ -21,10 +24,12 @@ interwikiTransform _ = return . processWith convertInterwikiLinks
 -- If it's there, we get back the canonical URL, and we concatenate the article to the site, and feed it back.
 -- If there aren't 2 elements, or we get back a Nothing, we just return the Link unchanged.
 convertInterwikiLinks :: Inline -> Inline
-convertInterwikiLinks (Link _ref (short, _z)) = if length splat == 2 then case (M.lookup (head splat) interwikiMap) of 
-                                                                                Just l -> Link _ref ((escapeURIString isAllowedInURI $ l ++ (splat !! 1)), _z)
-                                                                                Nothing -> Link _ref (short, _z)
-                                                 else Link _ref (short, _z)
+convertInterwikiLinks (Link _ref (short, _z)) =
+  if length splat == 2
+     then case M.lookup (head splat) interwikiMap of 
+                Just l  -> Link _ref ((escapeURIString isAllowedInURI $ l ++ (splat !! 1)), _z)
+                Nothing -> Link _ref (short, _z)
+     else Link _ref (short, _z)
     where splat = splitOn "!" short
 convertInterwikiLinks x = x
 
