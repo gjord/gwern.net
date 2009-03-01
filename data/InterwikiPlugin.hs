@@ -25,7 +25,7 @@ interwikiTransform _ = return . processWith convertInterwikiLinks
 -- If there aren't 2 elements, or we get back a Nothing, we just return the Link unchanged.
 convertInterwikiLinks :: Inline -> Inline
 convertInterwikiLinks (Link _ref (short, _z)) =
-  if length splat == 2
+  if length splat > 1 -- same as saying 'at least one delimiter'
      then case M.lookup (head splat) interwikiMap of 
                 Just l  -> Link _ref ((escapeURIString isAllowedInURI $ l ++ (splat !! 1)), _z)
                 Nothing -> Link _ref (short, _z)
