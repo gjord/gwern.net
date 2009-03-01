@@ -8,7 +8,7 @@ One of the more elegant ideas in computer science is the proof that lossless com
 
 > "There ain't no such thing as a free lunch."
 
-There is no free lunch in compression. The normal proof of this invokes the [Pigeonhole Principle](http://en.wikipedia.org/wiki/Pigeonhole_principle); the proof goes that each file must map onto a single unique shorter file, and that shorter file must uniquely map back to the longer file (if the shorter did not, you would have devised a singularly useless compression algorithm - one that did not admit of decompression).
+There is no free lunch in compression. The normal proof of this invokes the [Pigeonhole Principle](Wikipedia!Pigeonhole principle); the proof goes that each file must map onto a single unique shorter file, and that shorter file must uniquely map back to the longer file (if the shorter did not, you would have devised a singularly useless compression algorithm - one that did not admit of decompression).
 
 But the problem is, a long string simply has more 'room' (possibilities) than a shorter string. Consider a simple case: we have a number between 0 and 1000, and we wish to compress it. Our compressed output is between 0 and 10 - obviously shorter, yes? But suppose we compress 1000 into 10. Which numbers do 900-999 get compressed to? Do they all go to 9? But then given a 9, we have absolutely no idea what it is supposed to expand into. Perhaps 999 goes to 9, 998 to 8, 9997 to 7 and so on - but just a few numbers later we run out of single-digit numbers, and we face the problem again.
 
