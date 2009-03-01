@@ -1,4 +1,4 @@
-Recently I was playing with and working on a Haskell clone of the old [_Gradius_](Wikipedia!Gradius_(series\)) arcade games, [_Monadius_](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Monadius). Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all <tt>Integer</tt>s to <tt>Int</tt>s and so on), but in its Demo.hs, I found an interesting solution to a problem, and it seems like a good & real example of how Haskell's abstractions can shine.
+Recently I was playing with and working on a Haskell clone of the old [_Gradius_](!Wikipedia "Gradius_(series\")) arcade games, [_Monadius_](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Monadius). Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all <tt>Integer</tt>s to <tt>Int</tt>s and so on), but in its Demo.hs, I found an interesting solution to a problem, and it seems like a good & real example of how Haskell's abstractions can shine.
 
 # Examples
 
