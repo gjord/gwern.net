@@ -1,5 +1,5 @@
 # The Problem
-Why are there so many[^osi] different FLOSS licenses? 
+Why are there so many[^osi] different FLOSS licenses?
 
 ## One Answer
 The obvious explanation is that many are just historical, or are copies in all but name of another license; others differ on how to handle the difficult issue of software patents; still others add idiosyncratic clauses (like the T~e~X license) like forbidding use by any entity connected to the United States Military.
@@ -8,29 +8,29 @@ But the fundamental divide in FLOSS licenses is that of copyleft. Is it needed? 
 
 ## Frogs and Game Theory
 
-Let us consider the case of poisondart frogs. They famously store poison in themselves and have bright colors advertising this. Now, this is a good trick for them since it means the big predators will leave them alone. It's a good enough trick that warning coloration can be found all over the animal kingdom. But it's also bad because they might poison themselves, and even if that doesn't happen, they've still expended resources to constantly produce those colors and poisons.
+Let us consider the case of poison-dart frogs. They famously store poison in themselves and have bright colors advertising this. Now, this is a good trick for them since it means the big predators will leave them alone. It's a good enough trick that warning coloration can be found all over the animal kingdom. But it's also bad because they might poison themselves, and even if that doesn't happen, they've still expended resources to constantly produce those colors and poisons.
 
-So you get free-riders - frogs which cut out the poison and just wear the poison colors. Everything is gravy for these frogs: the predators leave them alone and they have a small edge over the genuine article. But of course, fake poison frogs aren't an [*evolutionarily stable strategy*](Wikipedia!Evolutionarily_stable_strategy) (ESS). Predators do eat poison-colored frogs if they get hungry or stupid enough, and if they're all fake, then the predators will learn this & the poison colors cease to be a deterrent.
+So you get free-riders - frogs which cut out the poison and just wear the poison colors. Everything is gravy for these frogs: the predators leave them alone and they have a small edge over the genuine article. But of course, fake poison frogs aren't an [*evolutionarily stable strategy*](!Wikipedia "Evolutionarily_stable_strategy") (ESS). Predators do eat poison-colored frogs if they get hungry or stupid enough, and if they're all fake, then the predators will learn this & the poison colors cease to be a deterrent.
 
-And then conditions are ripe for real poisontree frogs to make a comeback! But just when they are triumphant and all the predators have learned to ignore them, along comes hopping a defective frog with poison-colors, but no actual poison... 
+And then conditions are ripe for real poison-dart frogs to make a comeback! But just when they are triumphant and all the predators have learned to ignore them, along comes hopping a defective frog with poison-colors, but no actual poison...
 
-So a 'pure' population of real or fakes is not stable. (This is a specific example of [Prisoner's dilemma](Wikipedia!Prisoner's_dilemma) thinking; a population of defecting players can be invaded by a few cooperators, and a population of cooperators can easily be infected by free-riders/defectors.)
+So a 'pure' population of real or fakes is not stable. (This is a specific example of [Prisoner's dilemma](!Wikipedia "Prisoner's_dilemma") thinking; a population of defecting players can be invaded by a few cooperators, and a population of cooperators can easily be infected by free-riders/defectors.)
 
-What happens? Eventually things reach an equilibrium with enough real poisontree frogs to keep the predators honest and a reasonable number of fakers. If things get out of kilter for a while, evolution will bring it back into whack.
+What happens? Eventually things reach an equilibrium with enough real poison-dart frogs to keep the predators honest and a reasonable number of fakers. If things get out of kilter for a while, evolution will bring it back into whack.
 
 ### The Analogy
 
 So for frogs, a mix of reals and fakes constitute the ESS. What insight does this give us into software licenses?
 
-Well, remember that the stated purpose of the GPL is to prevent users and modifiers of a software package from not making their changes public. The GPL is trying to compel them to make their work public, just as the original was public. Instead of having a public domain of software, which is increasingly smaller than the private domain as the private domain always takes and never gives[^mickey], one has a public domain that grows. 
+Well, remember that the stated purpose of the GPL is to prevent users and modifiers of a software package from not making their changes public. The GPL is trying to compel them to make their work public, just as the original was public. Instead of having a public domain of software, which is increasingly smaller than the private domain as the private domain always takes and never gives[^mickey], one has a public domain that grows.
 
 So in our analogy, let's consider frogs to be software projects. Our predators - snakes, spiders - are those who would copy a project and then contribute little or nothing back. (This is a hostile action because it can starve a project of interest and contributors, even if there is no 'direct' harm.)
 
-So, suppose every project used Affero GPLv3. This license is poison to any company which doesn't want to release source, as it blocks [Tivoization](Wikipedia!Tivoization) *and* it also plugs the 'services' hole in the GPL[^services]. This poison comes at a cost - even non-predators may fear the poison, and contributors may be confused by the license or at philosophical odds with it. 
+So, suppose every project used Affero GPLv3. This license is poison to any company which doesn't want to release source, as it blocks [Tivoization](!Wikipedia "Tivoization") *and* it also plugs the 'services' hole in the GPL[^services]. This poison comes at a cost - even non-predators may fear the poison, and contributors may be confused by the license or at philosophical odds with it.
 
 In this scenario, every frog is producing poison, if you will. It is inefficient. (One wouldn't expect a country to train every citizen as a soldier; more efficient to just train a few well). But at least the frogs don't have to worry about predators, as the syllogism is simple for a predator - All FLOSS projects are poison; all poison is unusable/unpreyable; all FLOSS projects are unusable.
 
-People offput by the Affero GPLv3 or employed by those who dislike it, or just annoyed at the increased difficulty of contribution will set up projects of their own. Now the second step kicks in - of course they aren't going to use the Affero GPLv3. They're going to use public domain or BSD or some other non-copyleft license. And for a while, they'll be safe. The old conventional wisdom about FLOSS projects will take time to die. And they will prosper and grow with their slight edge over more encumbered projects.
+People put off by the Affero GPLv3 or employed by those who dislike it, or just annoyed at the increased difficulty of contribution will set up projects of their own. Now the second step kicks in - of course they aren't going to use the Affero GPLv3. They're going to use public domain or BSD or some other non-copyleft license. And for a while, they'll be safe. The old conventional wisdom about FLOSS projects will take time to die. And they will prosper and grow with their slight edge over more encumbered projects.
 
 But if no frog produced poison/copyleft, then sooner or later, all the snakes will slither in and start gulping as they please. If the project is lucky, maybe they'll even be tossed a few tidbits as thanks (think Apple's occasional contribution to FreeBSD).
 
