@@ -149,13 +149,6 @@ When:  Time-stamp: "2009-01-19 20:55:50 gwern"
 ## Gitit
 - Use Pandoc's <tt>withProcess</tt> function to implement necessary features:
      i. Signatures: this could be done something like [described here](http://groups.google.com/group/pandoc-discuss/browse_thread/thread/54272f922c80b7b0) - we'd plug in that function to withProcess. Probably we'll first define <tt>@date</tt> to substitute in the current date, so users can go '--Gwern @date@', and then we could work on defining <tt>@sig@</tt> which does all that.
-     ii. interwiki links. Currently there's no support for easy linking to a particular site with regular URLs (the paradigmatic case being linking to Wikipedia). We need to parse inside a <tt>Link</tt> and do some URL substitution (content from 'pandoc -w native'). You can see in #3 that we want to replace "wiki:" with, say, "http://en.wikipedia.org/wiki/" - which transforms it to an external link to the right place.
-
-~~~~~~{.haskell .numberLines}
-[foo](wiki:bar) -- parses as:
-Pandoc (Meta [] [] "")
-[ Para [Link [Str "foo"] ("wiki:bar","")] ]
-~~~~~~
 
 - Caching needs improvements. Perhaps we can borrow from hackage-server and use 'Content-MD5' headers? This might be superior to expire headers.
 
