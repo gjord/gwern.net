@@ -1,19 +1,27 @@
 {- | This plugin causes link URLs of the form wikiname!articlename to be
   treated as interwiki links.  So, for example,
 
-> [Emperor Palpatine]!@Wookieepedia "Emperor Palpatine") 
+> [The Emperor Palpatine](!Wookieepedia "Emperor Palpatine")
 
   links to the article on "Emperor Palpatine" in Wookieepedia
   (<http://starwars.wikia.com/wiki/Emperor_Palpatine>).
+
+  This module also supports a shorter syntax, for when the link text
+  is identical to the article name. Example:
+
+> [Emperor Palpatine](!Wookieepedia)
+
+  will link to the right place, same as the previous example.
 
   (written by Gwern Branwen) -}
 
 module InterwikiPlugin (plugin) where
 
-import Gitit.Interface 
+import Gitit.Interface
+import Gitit.Convert (refToUrl)
 
 import qualified Data.Map as M (fromList, lookup, Map)
-import Network.URI (escapeURIString, isAllowedInURI)
+import Network.URI (escapeURIString, isAllowedInURI, unEscapeString)
 
 plugin :: Plugin
 plugin = PageTransform interwikiTransform
@@ -22,25 +30,28 @@ interwikiTransform :: AppState -> Pandoc -> Web Pandoc
 interwikiTransform _ = return . processWith convertInterwikiLinks
 
 {- | A good interwiki link looks like '!Wookieepedia "Emperor Palpatine"'. So we check for a leading '!'.
-     We strip it off, and now we have the canonical sitename (in this case, "Wookieepedia" and we look it up 
+     We strip it off, and now we have the canonical sitename (in this case, "Wookieepedia" and we look it up
      in our database.
-     The database should return the URL for that site; we only need append the (escaped) article name to that, and we 
-     have the full URL!
-     If there isn't a leading '!', we get back a Nothing (the database doesn't know the site), we just return 
+     The database should return the URL for that site; we only need append the (escaped) article name to that,
+     and we have the full URL! If there isn't one there, then we look back at the link-text for the article
+     name; this is how we support the shortened syntax (see module description).
+     If there isn't a leading '!', we get back a Nothing (the database doesn't know the site), we just return
      the Link unchanged. -}
 convertInterwikiLinks :: Inline -> Inline
-convertInterwikiLinks (Link _ref (interwiki, article)) =
-  if head interwiki == '!' 
-     then case M.lookup interwiki' interwikiMap of 
-                Just url  -> Link _ref (interwikiurl url, summary)
-                Nothing -> Link _ref (interwiki, article)
-     else Link _ref (interwiki, article)
+convertInterwikiLinks (Link ref (interwiki, article)) =
+  if head interwiki == '!'
+     then case M.lookup interwiki' interwikiMap of
+                Just url  -> case article of
+                                  "" ->Link ref (url ++ (refToUrl ref), (summary $ unEscapeString $ refToUrl ref))
+                                  _ ->Link ref (interwikiurl article url, summary article)
+                Nothing -> Link ref (interwiki, article)
+     else Link ref (interwiki, article)
  where -- '!Wookieepedia' -> 'Wookieepedia'
        interwiki' = tail interwiki
        -- 'http://starwars.wikia.com/wiki/Emperor_Palpatine'
-       interwikiurl u = escapeURIString isAllowedInURI $ u ++ article
+       interwikiurl a u = escapeURIString isAllowedInURI $ u ++ a
        -- 'Wookieepedia: Emperor Palpatine'
-       summary = interwiki' ++ ": " ++ article
+       summary a = interwiki' ++ ": " ++ a
 convertInterwikiLinks x = x
 
 {- | Large table of constants; this is a mapping from shortcuts to a URL. The URL can be used by
