@@ -1,0 +1,53 @@
+Consider the poor consumer. Insurance is offered for all sorts of things, and often the consumer buys it - even when he shouldn't. One of the problems in an inefficient marketplace - like the ones we often must purchase in - is that there's a [no-trade theorem](!Wikipedia) of sorts in play: if the insurance was 'fair', the insurer would make no profit, so would would they offer it at all? They'll only offer one which makes them a profit. Therefore, all the insurances on offer are unfair (you'll get less out of it than you paid) and you shouldn't accept any.
+
+Of course, we know why one would purchase insurance: because the risks one is insuring against are too large to be born at any given time (even though one can pay for them eventually). A house burning down, chemotherapy, a car totaled, etc. One buys insurance as a way to trade many small payments for a single impossibly large payment. This is a valuable service to you, so you don't mind buying 'unfair' insurance; your lower [expected value](!Wikipedia) is traded off against a smaller [variance](!Wikipedia) of your future expenses.
+
+But not all insurance is of the 'catastrophic' variety. I've seen insurance offered on travel trips, and even video game consoles! And that insurance is expensive - it's strange that people apparently think they can afford the steep insurance fees but not bear the cost of just buying a new console or whatever.
+
+# Worst Buy 
+Let's at a real example. The smaller the good, the more obviously a bad deal these kinds of insurances are. I recently saw offers of console insurance at [Best Buy](!Wikipedia) (sandwiched between $100 [HDMI](!Wikipedia) cables), and was struck at how exploitative the offer must be. (Best Buy is notorious among geeks for its extraordinarily high prices and poor customer service[^worstbuy].) 
+
+## What a deal
+The price varies per item, but let's take a presumably common one. As of 9 March 2009, bestbuy.com offered an Xbox 360 for $399.99. The basic insurance plan on that Xbox 360 will run $59.99. That is, you will pay ~16% extra for insurance (1/6). And it's good only for 2 years or so. What does this considerable premium buy you?
+
+> "Our obligations under this Plan will be fulfilled in their entirety if we replace your product, issue you a voucher or gift card or reimburse you for replacement of your product pursuant to these terms and conditions."
+
+It buys you one replacement; or:
+
+> "After three qualified (3) service repairs have been completed on an individual product and that individual product requires a fourth qualified (4th) repair, as determined by us, we will replace it with a product of comparable performance of like kind and quality not to exceed the original purchase price."
+
+3 repairs and a replacement. And that's it. But of course, it's not unconditional. You can't simply walk into Best Buy after a few days and announce you want a new Xbox 360. Here's invalid reasons to seek repair:
+
+> "This Plan does not cover: (i) damage to your product caused by accident (unless you have purchased the optional ADH Coverage), abuse, neglect, intentional physical damage, misuse (including faulty installation, repair, or maintenance by anyone other than an authorized service provider), unauthorized modification, viruses, extreme environment (including extreme temperature or humidity), external condensation, lightning, static electricity, fire, flood, insect infestation, rodents, war, terrorism, computer software related failures (unless you have the Vi-Spy Coverage) Acts of God or other external causes; (ii) products that have been lost or stolen. This Plan only covers products that are returned to us in their entirety; (iii) cosmetic damage to your product including but not limited to scratches, dents and broken plastic on parts, that does not otherwise affect its functionality or materially impair your use; (iv) products with a serial number that has been altered, defaced or removed; (v) problems caused by a device that is not your product, including equipment purchased at the same time as your product; (vi) consumable parts, such as batteries, unless expressly provided for herein; (vii) damage to, or loss of any software or data residing or recorded in your product.....(xi) damage to your xBox 360 due to Microsoft's "Red Ring of Death";"
+
+Well, shucks. That seems to cover just about everything that *would* damage my new Xbox 360! If it ships broken, then it's the original manufacturer's problem (Microsoft); if I break it by accident, it's my problem; if it gets scratched up, it's my problem (and god help me if the scratches are anywhere near the serial number! Then I can't use the plan at all!); if my house damages it, it's my problem; if one of the many mechanical and electronic problems with the Xbox manifests, it's my or Microsoft's problem; etc. This doesn't seem to cover very much, although I suppose it covers if my Xbox stops working for no reason whatsoever one day. (Which isn't a terribly common problem with video game consoles.)
+
+We're interested not in what happens if we get lucky and immediately the Xbox 360 breaks and the manufacturer's warranty doesn't cover it and Best Buy will give us a new one^[A situation in which the insurance is obviously profitable, as what would have been an $800 expenditure becomes a $460 expenditure - which saves a healthy $340.] - after all, if we only go by best case scenario, the lottery is the greatest deal around - but rather in what we can expect on average; we have no _a priori_ reason to expect to be luckier or unluckier than average. So we use the [usual](!Wikipedia "Expected_value#Mathematical_definition") expected value formula: 
+
+> payoff * probability-of-payoff = expected-value
+
+Generally, one only wants to engage in deals or actions which have a *positive* expected value. Does the Xbox insurance have a positive value? Let's say I have no idea. Certainly neither you nor I have access to good information about how many of Best Buy's customers actually use the insurance successfully (although Best Buy surely does). But we can still put some bounds on it: we can ask the question, "how likely would Xbox-breaking have to be before the insurance has a positive payoff?" That is, we know the payoff - it's 340. And we know the expected value we want by definition is for it to be greater than 0; but we want to get more out than we put in, so we need to get back *at least* $60 if we want to just break-even. With 2 out of the 3 variables solved,  basic algebra can now figure out the final variable, the probability:
+
+> 340 * p = 60<br>
+> (340*p)/60 = 60/60<br>
+> (340/60)*p = 1<br>
+> 5.7*p = 1<br>
+> p = 1/5.7
+
+## More details
+So we need a 1-in-6 chance of redeeming the insurance. But wait! The 1/6 doesn't apply directly to the chance of breaking an Xbox. Rather, it applies to the conjunction I expressed before: breaking the Xbox *and* Microsoft not covering it *and* Best Buy making good^[not a trivial consideration, given their customer service and the lengthy list of excluded issues] *and* us actually using it. As we all know, a conjunction of a bunch of probabilities is going to be less likely than any of the probabilities in themselves. So the first probability, 'breaking the Xbox' is going to be more likely than just 1/6. 
+
+How much more likely? Well, we can play with some more numbers here. Let's see what happens if we are very generous & assign all the other probabilities something like a 90% chance. We know the total is 1/6, and we know the other 3 we've defined to 0.90, and we leave one variable to solve for, 'breaking the Xbox' (px):
+
+> 1/6 = 0.90 * 0.90 * 0.90 * px<br>
+> 1/6 = 0.729 * px<br>
+> (1/6) / 0.729 = px<br>
+> px = (1/6) / 0.729<br>
+> px =  0.17 / 0.729<br>
+> px = 0.229
+
+So just by being a little more realistic, we see that for the insurance to make sense, we need an awfully high rate of Xbox breakage. And the necessary breakage rate for us to break-even becomes still worse, still more incredible, if we were to be less generous in the conjunction.
+
+I don't know about you, but I don't believe I have a 1 in 4 chance of breaking my new Xbox within the 2 years the insurance covers. I believe the chances are much lower. And that makes this insurance one lousy deal.
+
+[^worstbuy]: See eg. Wikipedia's [Best Buy#Criticism and controversy](!Wikipedia) section, Google for "best buy sucks", the [break-down by category](http://minnesota.app.bbb.org/report/7663) of complaints to the [Better Business Bureau](!Wikipedia); or you can just read Fortune Magazine's ["Best Buy's giant gamble"](http://money.cnn.com/magazines/fortune/fortune_archive/2006/04/03/8373034/index.htm) article for yourself. (If you read through this article without realizing that Best Buy admits that its corporate strategy is to charge suckers high prices, then you need to work on your critical thinking skills.)
