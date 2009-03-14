@@ -1,0 +1,288 @@
+# Chapter 1
+
+## 1.1.1: Syntax & Semantics
+
+Chapter 1 mingles syntax with the basic functional/applicative idea of 'evaluating and substituting'. 1 evaluates to 1, `1 + 1` evaluates to 2, `1 + 1 / 2` evaluates to `2 / 2` which evaluates to 2, and so on.
+
+It's something of an unobvious idea - when you think about it, it's not the same as *equaling*, but it doesn't exactly seem like the normal idea of an algorithm. Evaluation is kind of a do-while loop: 'while the result of evaluation is different from the evaluated thing, keep evaluating.' One expects a fixed number of steps. Think of a child doing chores: you don't tell her to clean each part of the living room until it's clean, you tell her to clean first the cat throwup over in the corner, then take care of the overfull garbage bag, then vacuum, then sweep and finally you can go play.
+
+Iteration is more natural and intuitive in a sense. I don't think I've ever seen any youngster express things in a functional or recursive form very naturally. They have tremendous trouble when their math classes start touching on algebra and functions and evaluation.
+
+### Parentheses syntax
+After this, the author begin tackling Lisp's infamous prefix notation. The explanation is quite serviceable, and the reasons in favor of it are cogent enough. It is a little disturbing, though, that the suggestion given for readability - the tab-based [prettyprinting](!Wikipedia "prettyprint") - is given with so little self-awareness:
+
+> ["The resulting indentations display clearly the structure of the expression."](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.1)
+
+This is disturbing! This strikes me as a [code smell](!Wikipedia) & a violation of the [DRY principle](!Wikipedia "Don't repeat yourself"), as one is essentially encoding the logical structure *twice*: once in the actual parentheses and again in the tab/whitespace formatting. The indentations display the structure clearly - so clearly that the parentheses would seem to be irrelevant, redundant.
+
+We shouldn't have both. If indentation is as parsable as parenthesizing, but easier to read, then that's what we should use. The lingering use of parentheses is a warning sign to me. Of what, I'm not quite sure - a bad community, fundamentally flawed syntax design, or just a wart?
+
+## 1.1.2: Variables Don't
+
+To Lisp's credit, the rest of the core syntax is really marvelously simple.
+
+Consider the `define` function. It's basically a = operator. `(define two 2)`, `(define item "foobar")`, etc. But notice how regular it is! It's always just `(define x y)`. You type it into the prompt and all is well.
+
+Consider the comparable situation in Haskell: in GHCi you have the choice between `let x = y`, and `x <- y`; and then in a source file you could also do `x = y`! If you want to understand fully when `let` is appropriate, or when to do `<-`, or when a bald mathematical definition is appropriate, you need to have at least some knowledge of monads & their do-syntax, the peculiarities of GHCi (conceptually, you're inside an IO monad, and not at the top-level of a file), and so on. There're good reasons for all this (such as controlling side-effects), but how do you explain them to a beginner? For that matter, the value of controlling side-effects doesn't become obvious for a while, and the experienced imperative programmer might never appreciate it.
+
+## 1.1.4: The Evil That Functions Do...
+
+Defining functions is similarly simple & pleasant. We go `(define (square x) (* x x))` and that's that. The opening keyword, a function name & a argument, and then the actual math.
+
+This is actually worse than Haskell. There's no way to define a square pointlessly like we can in Haskell (`square = join (*)`) and certainly we can't employ a lambda as flexibly (`square = \x -> x * x`) - what one would expect to work just doesn't seem to work (at least, `(define (square) (lambda (x) (* x x)))` doesn't even parse). For that matter, the most basic square function just looks better in Haskell: `square x = x*x`. You basically can't get more readable than that. Yes, it's harder to parse, but still...
+
+Well, the syntax is not the important part. The important part is that we now have a way to package up manipulations at the prompt - instead of defining a variable and manually typing in `(* variable variable)` every time, we give the procedure a name and can reuse it. Note how we're ascending in abstraction: first we divided between literals like 1 and variables which point to literals like an `x`, and now we're abstracting *ourselves*! Our monkey-punching at the keyboard is being replaced; the operator of a prompt need not be human. We're almost at a loop here - the prompt generates things which are fed to the prompt... But we're not there yet. We need to understand what's going on better. by seeing how functions are substitutable as well.
+
+## 1.1.5: About that elegant model...
+
+Turns out it wasn't so simple or accurate at all. Sorry about that:
+
+> "The purpose of the substitution is to help us think about procedure application, not to provide a description of how the interpreter really works. Typical interpreters do not evaluate procedure applications by manipulating the text of a procedure to substitute values for the formal parameters. In practice, the 'substitution' is accomplished by using a local environment for the formal parameters. We will discuss this more fully in chapters 3 and 4 when we examine the implementation of an interpreter in detail."[](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.5)
+
+But if 'how a computer works' were really so simple, would this really be the 'Structure and *Interpretation* of Computer Programs'? It just means we can look forward to still more fun:
+
+> "Over the course of this book, we will present a sequence of increasingly elaborate models of how interpreters work, culminating with a complete implementation of an interpreter and compiler in chapter 5. The substitution model is only the first of these models -- a way to get started thinking formally about the evaluation process. In general, when modeling phenomena in science and engineering, we begin with simplified, incomplete models. As we examine things in greater detail, these simple models become inadequate and must be replaced by more refined models. The substitution model is no exception. In particular, when we address in chapter 3 the use of procedures with 'mutable data', we will see that the substitution model breaks down and must be replaced by a more complicated model of procedure application."
+
+### Lazy vs. Strict evaluation
+
+One of the promised complexities of evaluation comes in *how* one evaluates. We have been implicitly using 'applicative-order' evaluation - a top-down model, if you will. Haskellers (when they're not being technical) call this 'strict evaluation', since the idea is that the evaluator is being strict and evaluating all expressions as one heads down to the bottom of tree, with no exceptions. The alternative obviously is expanding out the tree to the bottom, but only starting there! ('normal order' evaluation)
+
+The difference seems minor, but suppose we're going left to right in the expression `if 0 == 0 then 5 else launchMissiles`; the tree gets fully expanded, 0 is seen to equal 0, and so 5 immediately gets returned, and the else-clause never gets touched - which is a good thing! One of the interesting things about this is that every languages needs some normal order evaluation, else conditionals make no sense[^cond]. Your favorite language already has some lazy evaluation, but it's restricted to conditionals.
+
+If the conditional confuses you, consider the given Scheme example (exercise 1.5):
+
+~~~~~~~~~~~~~~~~~~ {.scheme}
+(define (p) (p))
+
+(define (test x y)
+  (if (= x 0)
+      0
+      y))
+~~~~~~~~~~~~~~~~~~
+
+
+What does `(test 0 (p))` do if we use applicative order?? Well, let's think it through. `p` evaluates to `p` always - it's a loop. So `test 0 p` expands to `(if (= 0 0) ) p`; = evaluates to =, as do both 0s; but `p` expands to `p`; `p` is a variable, so we need to evaluate it further, and `p` expands to `p` which expands to `p`... You see the issue. Our function will never finish. What is the value of an infinite loop?
+
+What happens with normal order? Well, we expand as before, but we first evaluate the `= x 0` which becomes `t`/True, which lets us evaluate the `if` to get 0, which evaluates to 0, which becomes the value of `test 0 p`. In other words, the trap (`p`) gets ignored because it's not needed! So you can see how normal order acquired sobriquets like 'lazy evaluation' (lazy people do only what's necessary) and 'call-by-need' (one only calls eval on something if it's needed for the final answer).
+
+Cool concept, but as the authors remark, it's not always clear that we save more work by being lazy than we lose to having to evaluate some things more than once. ("Lisp uses applicative-order evaluation, partly because of the additional efficiency obtained from avoiding multiple evaluations of expressions such as those illustrated with `(+ 5 1)` and `(* 5 2)` above and, more significantly, because normal-order evaluation becomes much more complicated to deal with when we leave the realm of procedures that can be modeled by substitution.")
+
+## 1.1.6 Maybe yes, maybe no
+
+Now we set our hand to conditionals. Lisp differs markedly from Haskell in that its basic conditional is not the if-then-else, but this `cond` structure. Cond takes a list of pairs: the first item is a test, and the second is the value to return. So `(cond ((= 0 0) 0) ((= 1 2) 1))` would evaluate to 0. Further, cond returns the *first* item to be true, so even if we changed it to read `((= 1 1) 1)`, it'd still return 0.
+
+
+The Haskeller immediately objects that Haskell has a perfectly suitable work-alike - guards. We can almost transcribe from Lisp `cond` to Haskell guards:
+
+~~~~{.scheme}
+(define (abs x)
+  (cond ((> x 0) x)
+        ((= x 0) 0)
+        ((< x 0) (- x))
+        (true (error "error")))
+~~~~
+
+becomes
+
+
+~~~~~~~ {.haskell}
+abs x
+    | x > 0  = x
+    | x == 0 = 0
+    | x < 0  = -x
+    | otherwise = error "error"
+~~~~~~~
+
+### On Primitives
+
+But there's an important distinction here. `cond` is a primitive in Scheme/Common Lisp. If you want to define if-then-else, you define it as a specialization of `cond` which takes only 3 formal arguments:
+
+~~~~{.scheme}
+(define (ifthenelse test thn els)
+        (cond (test thn)
+              (true els)))
+~~~~
+
+In Haskell, the primitive is the syntax/function if-then-else! The previous guarded definition just desugars to something like:
+
+~~~~{.haskell}
+abs x = if (x > 0) then x else if (x == 0) then 0 else if (x < 0) then -x else error "error"
+~~~~
+
+This general approach of having a few primitives everything else is written in is very characteristic of functional & mathematical languages in general; but Haskell seems to combine this approach to give a richer syntax than Scheme does. It's interesting that Lisp gives the generalized conditional as the primitive which you use to write more restricted functions, while Haskell starts with the restricted conditional and lets you write a generalized cond if you want, something like:
+
+~~~~~~~ {.haskell}
+cond :: [(Bool, a)] -> a
+cond [] = error "all results were false"
+cond xs = if head (fst x) then head (snd x) else cond (tail xs)
+~~~~~~~
+
+Note I say 'something like'; this isn't the same. In particular, the type signature tells us that all the 'results' must have the same type. In Scheme, we could have some results be a string, some be a number, and so on. This is a consequence of the different typing paradigms. It's unimportant here, since presumably callers can conditionalize on the type of output they need, but I wonder whether the tension of dynamicism versus staticness will be an issue later? Also, normally, I'd write a Haskell function like this with some
+pattern-matching - the argument would be `(x:xs)`, not `xs`, and then I could drop the calls to `head` and `tail`. But this way is more basic.
+
+Somewhat disappointingly, writing Scheme's `if` in terms of `cond` isn't covered even as an exercise. It would've gone well with the theme of building from small pieces. It's also a little disappointing that there's a 'special-case'[^special] explanation of the laziness of logical operators (much like the special laziness of conditionals), despite the fact that evaluation strategies were *just* covered in the previous section!
+
+### Exercises
+#### 1.1
+~~~~ {.scheme}
+10
+-> 10
+
+(+ 5 3 4)
+-> 12
+
+(- 9 1)
+-> 8
+
+(/ 6 2)
+-> 3
+
+(+ (* 2 4) (- 4 6))
+-> 6
+
+(define a 3)
+-> <a>
+
+(define b (+ a 1))
+-> <b>
+
+(+ a b (* a b))
+-> 19
+
+(= a b)
+-> false
+
+(if (and (> b a) (< b (* a b)))
+    b
+    a)
+-> 4
+
+(cond ((= a 4) 6)
+      ((= b 4) (+ 6 7 a))
+      (else 25))
+-> 16
+
+(+ 2 (if (> b a) b a))
+-> 6
+
+(* (cond ((> a b) a)
+         ((< a b) b)
+         (else -1))
+   (+ a 1))
+-> 16
+~~~~
+
+Haskell translation; the answers are the same, and so are omitted:
+
+~~~~{.haskell}
+10
+
+5+3+4
+
+9-1
+
+6/2
+
+(2*4) + (4-6)
+
+let a = 3
+
+let b = a + 1
+
+a + b + (a*b)
+
+a==b
+
+if ((b>a) && (b < a*b)) then b else a
+
+if a=4 then 6 else if b=4 then (6+7+a) else 25
+
+2 + (if (b > a) then b else a)
+
+a+1 * if (a > b) then a else if (a < b) then b else -1
+
+~~~~
+
+You'll note that I'm manually desugaring the `cond` expressions into chains of if-then-elses. This is kind of ugly, but that's how we have to translate it. They would look just fine with guard expressions, but we can only use guards in 2 places: case expressions and function definitions. So we could either name these fragments and use guards, or we could hack around with case expressions - which in these cases would look something like `case undefined of _ | b > a -> b`. (I also cheat slightly in #10 by using the dyadic `(&&)` instead of the n-ary Haskell list function `and`.)
+
+#### 1.2
+
+One is supposed to translate a reasonably complicated expression into prefix form, but I can't honestly read that image. Are those squiggles '1'? Is that fraction supposed to be '1/5'?
+
+#### 1.3
+
+> "Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers."
+
+~~~~{.scheme}
+(define (tri x y z)
+  (cond
+    ((and (>= x y) (>= y z)) (+ (* x x) (* y y)))
+    ((and (>= x y) (<= y z)) (+ (* x x) (* z z)))
+    (true                    (+ (* y y) (* z z)))
+    ))
+~~~~
+
+~~~~{.haskell}
+tri x y z
+    | x >= y && y >= z = x*x + y*y
+    | x >= y && y <= z = x*x + z*z
+    | otherwise        = y*y + z*z
+~~~~
+
+#### 1.4
+> "Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:<br>
+>`(define (a-plus-abs-b a b)
+>  ((if (> b 0) + -) a b))`"
+
+Well, let's see. `(a-plus-abs-b 5 10)` becomes `(if (> 10 0) + -) 5 10)`, and we evaluate from the inside, so then we get `(if (true) + -) 5 10)`, which then becomes `((+) 5 10)`, and then `(+ 5 10)` and thence to `15`. This obviously doesn't make sense if first-class functions aren't supported - what would it mean for the `if` to return a + or a -? I omit the similar reduction for Haskell; for those Eli's [post](http://eli.thegreenplace.net/2007/06/21/sicp-section-11/) on chapter 1, you'll note that there are no shenanigans necessary as for Common Lisp - both Haskell & Scheme have 1 & the same namespace for functions as for data variables (in Haskell, at least, because variables *are* functions).
+
+#### 1.5
+
+We covered this exercise [previously](#Lazy vs. Strict evaluation).
+
+## 1.1.7: ...of beautiful and practical design
+
+Now this is an interesting section. It's an interesting exercise, and even more interesting for a Haskeller is the introductory discussion:
+
+> "As a case in point, consider the problem of computing square roots. We can define the square-root function as √x = such that y >= 0 and y^2^ = x. This describes a perfectly legitimate mathematical function...Indeed, it tells us almost nothing about how to actually find the square root of a given number. It will not help matters to rephrase this definition in pseudo-Lisp...This only begs the question."[](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.7)
+
+Immediately one recognizes the distinction between constructive and non-constructive definitions! It's a long way from asserting that something exists (cf. the [Axiom of Choice](!Wikipedia)) and being able to create or demonstrate that something. This is a very profound distinction, and extremely important because any bit of logic which is constructive ('Intuitionistic') can be mechanically turned into a working program, of which all the same logical properties hold! This is the famous [Curry-Howard isomorphism](!Wikipedia), and it's very important for both Haskellers and FPers in general.
+
+This was just a short aside to introduce a constructive method of taking square roots, and isn't pursued any further. Oh well. Perhaps we can look forward to more asides like this? Although Lispers generally don't seem too interested in FP languages' connections to formal logics, so it's doubtful.
+
+Well, on to [Newton's method](!Wikipedia). That's one recursive example you don't see too often; and imagine, this textbook was written decades before people began whining about factorials and Fibonacci sequences!
+
+### The last exercises
+#### 1.6
+
+Once again, we dance around the issue of lazy evaluation without dealing with it directly... Seems to be something of a trend. In this example, we learn why strict languages don't let you roll your own control structures:
+
+The proffered definition of `if` is too strict, and when used on a recursive function, Bad Things happen.
+
+#### 1.7
+
+These problems with large & small numbers are basic facts of floating-point approximations and large numbers. Boring stuff.
+
+#### 1.8
+
+As the summary hints, our code is basically identical - just tweaked slightly:
+
+~~~~{.scheme}
+(defun improve (guess x)
+  (/ (+ (/ x (square guess))
+        (* 2 guess))
+     3)))
+~~~~
+
+## 1.1.8
+
+This section pulls together our recursion from 1.1.7, and teaches us about black boxes, and how functions should be like them. The 'Local names' section came as something of a surprise to me; I've been programming in Haskell so long, which is like Scheme in being lexically scoped, that I've plumb forgotten about how name-shadowing is both counter-intuitive and also necessary for making a function reliable/referentially transparent!
+
+> "This principle -- that the meaning of a procedure should be independent of the parameter names used by its author -- seems on the surface to be self-evident, but its consequences are profound. The simplest consequence is that the parameter names of a procedure must be local to the body of the procedure....A formal parameter of a procedure has a very special role in the procedure definition, in that it doesn't matter what name the formal parameter has. Such a name is called a bound variable, and we say that the procedure definition binds its formal parameters. The meaning of a procedure definition is unchanged if a bound variable is consistently renamed throughout the definition. If a variable is not bound, we say that it is free. The set of expressions for which a binding defines a name is called the scope of that name. In a procedure definition, the bound variables declared as the formal parameters of the procedure have the body of the procedure as their scope."[](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.8)
+
+# Finishing up
+
+This first chapter has certainly met my expectations. The authors did a good job, and are moving very fast and touching on very important issues. I do wonder whether the chapter moves *too* fast, but perhaps the MIT students could keep up? I look forward to [Chapter 2](sicp/Chapter 2) - a preview shows use of both iteration recursion, which may make it challenging to keep up in Haskell!
+
+[^cond]: Imagine a language in which all the branches of a conditional got evaluated/run. You wouldn't be able to write something perfectly sensible like `if doSave then saveFileToDisk foo else deleteFile foo`, because no matter how the user set `doSave`, their file would be first saved and then deleted!
+[^special]: "Notice that `and` and `or` are special forms, not procedures, because the subexpressions are not necessarily all evaluated. `not` is an ordinary procedure."
