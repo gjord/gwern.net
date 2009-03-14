@@ -1,0 +1,24 @@
+_[The Structure and Interpretation of Computer Programs](!Wikipedia)_. What can be said about it that hasn't been said a thousand times before? It is perhaps the single greatest computer science textbook, and surely one of the preeminent [Lisp](!Wikipedia "Scheme (programming language)") or [functional programming](!Wikipedia) textbooks. It is renowned for its imaginative exercises and mind-blowing techniques.
+
+So it's pretty good.
+
+Best of all, it's freely available and people are working through SICP all the time. It's tailor-made for autodidacts!
+
+# Resources
+
+There's an embarrassment of riches for the prospective SICP student.
+
+1. First is the book itself, [available online](http://mitpress.mit.edu/sicp/) in its entirety; it includes all the graphics in a nicely formatted hypertext and is licensed under [CC-BY-NC](http://creativecommons.org/licenses/by-nc/3.0/).
+    i. The site also supplies some larger programming tasks; see its ["Sample Programming Assignments"](http://mitpress.mit.edu/sicp/psets/index.html) and the [OCW](!Wikipedia "MIT OpenCourseWare") [materials](http://ocw.mit.edu/OcwWeb/Electrical-Engineering-and-Computer-Science/6-001Spring-2005/CourseHome/index.htm).
+2. With the book, one can [watch the actual lectures](http://groups.csail.mit.edu/mac/classes/6.001/abelson-sussman-lectures/) of the MIT course taught by Abelson & Sussman. These too are free for the download and CC-licensed.
+3. One needs a Scheme environment. One of the best, and very well suited for SICP, is Dr. Scheme or [PLT Scheme](http://www.plt-scheme.org/) (as it's now called). It is Free, and available in a Linux distro near you.
+4. Perhaps one isn't using Scheme? Your solutions may not be obviously correct. You can double-check yourself by looking at [solutions in other languages](http://www.codepoetics.com/wiki/index.php?title=Topics:SICP_in_other_languages).
+5. Finally, companions on the SICP are always good. I can recommend the [blogging journey of Eli Bendersky](http://eli.thegreenplace.net/category/programming/lisp/sicp/), in which he documented working through the entirety of SICP. It's an impressive achievement, and one I look to as a model.
+
+# My plan
+
+I'm going to try to work through SICP in both Haskell and Scheme. The 2 languages represent the premier languages of functional programming, embodying one-half of the divide between dynamic/runtime typechecking and static/compiletime typechecking.
+
+While I do it, I, like Eli, am going to write my experiences up. This serves many purposes - it encourages me to do it because I will have tangible products; it will further my experience in writing [Markdown](!Wikipedia) and exercise [Gitit](http://github.com/jgm/gitit/tree/master) functionality (ie. be a sort of "[Eating one's own dog food](!Wikipedia)"), force me to think critically about what I'm reading (lest there bee unseemly many short gushing sections), and write well enough for the putative audience.
+
+So! That's the introduction. On to [Chapter 1](sicp/Chapter 1)!
