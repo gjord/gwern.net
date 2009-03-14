@@ -1,5 +1,5 @@
 <!-- -*- mode: markdown; -*-
-When:  Time-stamp: "2009-01-19 20:55:50 gwern"
+When:  Time-stamp: "2009-03-14 19:37:12 gwern"
 -->
 
 # Haskell
@@ -147,8 +147,8 @@ When:  Time-stamp: "2009-01-19 20:55:50 gwern"
 - Persistent state: Yi should remember my previously-opened files, my killring, the last position of the point in a buffer/file etc. Emacs provides this [session](http://www.phys.ufl.edu/docs/emacs/emacs_423.html), and I find it very convenient.
 
 ## Gitit
-- Use Pandoc's <tt>withProcess</tt> function to implement necessary features:
-     i. Signatures: this could be done something like [described here](http://groups.google.com/group/pandoc-discuss/browse_thread/thread/54272f922c80b7b0) - we'd plug in that function to withProcess. Probably we'll first define <tt>@date</tt> to substitute in the current date, so users can go '--Gwern @date@', and then we could work on defining <tt>@sig@</tt> which does all that.
+- Use Pandoc's `withProcess` function to implement necessary features:
+     i. Signatures: this could be done something like [described here](http://groups.google.com/group/pandoc-discuss/browse_thread/thread/54272f922c80b7b0) - we'd plug in that function to withProcess. Probably we'll first define `@date` to substitute in the current date, so users can go '--Gwern @date@', and then we could work on defining `@sig@` which does all that automatically.
 
 - Caching needs improvements. Perhaps we can borrow from hackage-server and use 'Content-MD5' headers? This might be superior to expire headers.
 
