@@ -56,7 +56,7 @@ We could squeeze most of the information from the algorithm to the file, if we w
 
 The other end of the spectrum is where the algorithm possesses most of the information and the file very little. How do we construct such a situation?
 
-Well, consider the most degenerate example: an algorithm which contains in it an array of frames which are _Titanic_. This executable would require 0 bits of input. A less extreme example: the executable holds each frame of _Titanic_, numbered from 1 to (say) 1 million. The input would then merely consist of <tt>1,2,3,4..1000000</tt>. And when we ran the algorithm on appropriate input, lo and behold - _Titanic_!
+Well, consider the most degenerate example: an algorithm which contains in it an array of frames which are _Titanic_. This executable would require 0 bits of input. A less extreme example: the executable holds each frame of _Titanic_, numbered from 1 to (say) 1 million. The input would then merely consist of `1,2,3,4..1000000`. And when we ran the algorithm on appropriate input, lo and behold - _Titanic_!
 
 Absurd, you say. That demonstrates nothing. Well, would you be satisfied if instead it had 4 million quarter-frames? No? Perhaps 16 million sixteenth-frames will be sufficiently un-_Titanic_-y. If that does not satisfy you, I am willing to go down to the pixel level. It is worth noting that even a pixel level version of the algorithm can still encode all other movies! It may be awkward to have to express the other movies pixel by pixel (a frame would be a nearly arbitrary sequence like 456788,67,89,189999,1001..20000), but it can be done.
 
