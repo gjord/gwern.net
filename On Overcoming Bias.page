@@ -19,7 +19,7 @@ Here's a suggestion. Just occasionally dabbling in prediction markets isn't goin
 
 ## Gauging our politics
 
-So why not write a program which sucks down all the existing bets from Intrade, IEM, Betfair etc. and has the user make a bet on <tt>x</tt> markets a day. Throw in some crude confidences ('I think McCain will win the popular vote, with 70% confidence')[^ui]. Then it tracks the market until resolution.
+So why not write a program which sucks down all the existing bets from Intrade, IEM, Betfair etc. and has the user make a bet on `x` markets a day. Throw in some crude confidences ('I think McCain will win the popular vote, with 70% confidence')[^ui]. Then it tracks the market until resolution.
 
 Given that it's September, many markets will close relatively soon, at which point the user can review her performance and find out whether they were overconfident, underconfident etc. Further refinements: periodically ask the user for a fresh assessment; the software could check against Intrade, say, and if the user is out of whack with market prices and very confident, then ask the user to either buy shares or revise their estimates; various other statistical tests could be run (did the user assess as the markets did, but lagged them? Or did they exhibit foresight?) and so on.
 
