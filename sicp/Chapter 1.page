@@ -11,9 +11,9 @@ Iteration is more natural and intuitive in a sense. I don't think I've ever seen
 ### Parentheses syntax
 After this, the author begin tackling Lisp's infamous prefix notation. The explanation is quite serviceable, and the reasons in favor of it are cogent enough. It is a little disturbing, though, that the suggestion given for readability - the tab-based [prettyprinting](!Wikipedia "prettyprint") - is given with so little self-awareness:
 
-> ["The resulting indentations display clearly the structure of the expression."](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.1)
+> "The resulting indentations display clearly the structure of the expression."[^ln]
 
-This is disturbing! This strikes me as a [code smell](!Wikipedia) & a violation of the [DRY principle](!Wikipedia "Don't repeat yourself"), as one is essentially encoding the logical structure *twice*: once in the actual parentheses and again in the tab/whitespace formatting. The indentations display the structure clearly - so clearly that the parentheses would seem to be irrelevant, redundant.
+This is inadequate! This strikes me as a [code smell](!Wikipedia) & a violation of the [DRY principle](!Wikipedia "Don't repeat yourself"), as one is essentially encoding the logical structure *twice*: once in the actual parentheses and again in the tab/whitespace formatting. The indentations display the structure clearly - so clearly that the parentheses would seem to be irrelevant, redundant.
 
 We shouldn't have both. If indentation is as parsable as parenthesizing, but easier to read, then that's what we should use. The lingering use of parentheses is a warning sign to me. Of what, I'm not quite sure - a bad community, fundamentally flawed syntax design, or just a wart?
 
@@ -37,7 +37,7 @@ Well, the syntax is not the important part. The important part is that we now ha
 
 Turns out it wasn't so simple or accurate at all. Sorry about that:
 
-> "The purpose of the substitution is to help us think about procedure application, not to provide a description of how the interpreter really works. Typical interpreters do not evaluate procedure applications by manipulating the text of a procedure to substitute values for the formal parameters. In practice, the 'substitution' is accomplished by using a local environment for the formal parameters. We will discuss this more fully in chapters 3 and 4 when we examine the implementation of an interpreter in detail."[](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.5)
+> "The purpose of the substitution is to help us think about procedure application, not to provide a description of how the interpreter really works. Typical interpreters do not evaluate procedure applications by manipulating the text of a procedure to substitute values for the formal parameters. In practice, the 'substitution' is accomplished by using a local environment for the formal parameters. We will discuss this more fully in chapters 3 and 4 when we examine the implementation of an interpreter in detail."[^ln3]
 
 But if 'how a computer works' were really so simple, would this really be the 'Structure and *Interpretation* of Computer Programs'? It just means we can look forward to still more fun:
 
@@ -61,7 +61,7 @@ If the conditional confuses you, consider the given Scheme example (exercise 1.5
 ~~~~~~~~~~~~~~~~~~
 
 
-What does `(test 0 (p))` do if we use applicative order?? Well, let's think it through. `p` evaluates to `p` always - it's a loop. So `test 0 p` expands to `(if (= 0 0) ) p`; = evaluates to =, as do both 0s; but `p` expands to `p`; `p` is a variable, so we need to evaluate it further, and `p` expands to `p` which expands to `p`... You see the issue. Our function will never finish. What is the value of an infinite loop?
+What does `(test 0 (p))` do if we use applicative order? Well, let's think it through. `p` evaluates to `p` always - it's a loop. So `test 0 p` expands to `(if (= 0 0) ) p`; = evaluates to =, as do both 0s; but `p` expands to `p`; `p` is a variable, so we need to evaluate it further, and `p` expands to `p` which expands to `p`... You see the issue. Our function will never finish. What is the value of an infinite loop?
 
 What happens with normal order? Well, we expand as before, but we first evaluate the `= x 0` which becomes `t`/True, which lets us evaluate the `if` to get 0, which evaluates to 0, which becomes the value of `test 0 p`. In other words, the trap (`p`) gets ignored because it's not needed! So you can see how normal order acquired sobriquets like 'lazy evaluation' (lazy people do only what's necessary) and 'call-by-need' (one only calls eval on something if it's needed for the final answer).
 
@@ -230,6 +230,7 @@ tri x y z
 ~~~~
 
 #### 1.4
+
 > "Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:<br>
 >`(define (a-plus-abs-b a b)
 >  ((if (> b 0) + -) a b))`"
@@ -244,7 +245,7 @@ We covered this exercise [previously](#Lazy vs. Strict evaluation).
 
 Now this is an interesting section. It's an interesting exercise, and even more interesting for a Haskeller is the introductory discussion:
 
-> "As a case in point, consider the problem of computing square roots. We can define the square-root function as √x = such that y >= 0 and y^2^ = x. This describes a perfectly legitimate mathematical function...Indeed, it tells us almost nothing about how to actually find the square root of a given number. It will not help matters to rephrase this definition in pseudo-Lisp...This only begs the question."[](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.7)
+> "As a case in point, consider the problem of computing square roots. We can define the square-root function as √x = such that y >= 0 and y^2^ = x. This describes a perfectly legitimate mathematical function...Indeed, it tells us almost nothing about how to actually find the square root of a given number. It will not help matters to rephrase this definition in pseudo-Lisp...This only begs the question."[^ln4]
 
 Immediately one recognizes the distinction between constructive and non-constructive definitions! It's a long way from asserting that something exists (cf. the [Axiom of Choice](!Wikipedia)) and being able to create or demonstrate that something. This is a very profound distinction, and extremely important because any bit of logic which is constructive ('Intuitionistic') can be mechanically turned into a working program, of which all the same logical properties hold! This is the famous [Curry-Howard isomorphism](!Wikipedia), and it's very important for both Haskellers and FPers in general.
 
@@ -278,7 +279,7 @@ As the summary hints, our code is basically identical - just tweaked slightly:
 
 This section pulls together our recursion from 1.1.7, and teaches us about black boxes, and how functions should be like them. The 'Local names' section came as something of a surprise to me; I've been programming in Haskell so long, which is like Scheme in being lexically scoped, that I've plumb forgotten about how name-shadowing is both counter-intuitive and also necessary for making a function reliable/referentially transparent!
 
-> "This principle -- that the meaning of a procedure should be independent of the parameter names used by its author -- seems on the surface to be self-evident, but its consequences are profound. The simplest consequence is that the parameter names of a procedure must be local to the body of the procedure....A formal parameter of a procedure has a very special role in the procedure definition, in that it doesn't matter what name the formal parameter has. Such a name is called a bound variable, and we say that the procedure definition binds its formal parameters. The meaning of a procedure definition is unchanged if a bound variable is consistently renamed throughout the definition. If a variable is not bound, we say that it is free. The set of expressions for which a binding defines a name is called the scope of that name. In a procedure definition, the bound variables declared as the formal parameters of the procedure have the body of the procedure as their scope."[](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.8)
+> "This principle -- that the meaning of a procedure should be independent of the parameter names used by its author -- seems on the surface to be self-evident, but its consequences are profound. The simplest consequence is that the parameter names of a procedure must be local to the body of the procedure....A formal parameter of a procedure has a very special role in the procedure definition, in that it doesn't matter what name the formal parameter has. Such a name is called a bound variable, and we say that the procedure definition binds its formal parameters. The meaning of a procedure definition is unchanged if a bound variable is consistently renamed throughout the definition. If a variable is not bound, we say that it is free. The set of expressions for which a binding defines a name is called the scope of that name. In a procedure definition, the bound variables declared as the formal parameters of the procedure have the body of the procedure as their scope."[^ln2]
 
 # Finishing up
 
@@ -286,3 +287,7 @@ This first chapter has certainly met my expectations. The authors did a good job
 
 [^cond]: Imagine a language in which all the branches of a conditional got evaluated/run. You wouldn't be able to write something perfectly sensible like `if doSave then saveFileToDisk foo else deleteFile foo`, because no matter how the user set `doSave`, their file would be first saved and then deleted!
 [^special]: "Notice that `and` and `or` are special forms, not procedures, because the subexpressions are not necessarily all evaluated. `not` is an ordinary procedure."
+[^ln]: <http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.1>
+[^ln2]: <http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.8>
+[^ln3]: <http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.5>
+[^ln4]: <http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1.7>
