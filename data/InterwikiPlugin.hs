@@ -13,7 +13,7 @@
 
   will link to the right place, same as the previous example.
 
-  (written by Gwern Branwen) -}
+  (Written by Gwern Branwen; put in public domain, 2009) -}
 
 module InterwikiPlugin (plugin) where
 
