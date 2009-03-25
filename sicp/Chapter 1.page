@@ -253,6 +253,106 @@ This was just a short aside to introduce a constructive method of taking square 
 
 Well, on to [Newton's method](!Wikipedia). That's one recursive example you don't see too often; and imagine, this textbook was written decades before people began whining about factorials and Fibonacci sequences!
 
+### Implementing Newton's method
+
+Here's the provided Lisp code, in one block:
+
+~~~~~{.scheme}
+(define (square x) (* x x)) ; defined in 1.1.4
+(define (sqrt-iter guess x)
+    (if (good-enough? guess x)
+    guess
+     (sqrt-iter (improve guess x) x)))
+
+(define (improve guess x)
+    (average guess (/ x guess)))
+
+(define (average x y)
+    (/ (+ x y) 2))
+
+(define (good-enough? guess x)
+    (< (abs (- (square guess) x)) 0.001))
+
+(define (sqrt x)
+    (sqrt-iter 1.0 x))
+~~~~~
+
+Let's transliterate into Haskell (minding the syntax):
+
+~~~~{.haskell}
+square x = x*x
+
+sqrtIter guess x = if goodEnough guess x
+                            then guess
+                            else sqrtIter (improve guess x) x
+
+improve guess x = average guess (x / guess)
+
+average x y = (x+y) / 2
+
+goodEnough guess x = (abs $ (square guess) - x) < 0.001
+
+sqrt x = sqrtIter 1.0 x
+~~~~
+
+We can clean this up a little: `average` is called once, so we can inline it with little loss, and the same is true of `square`. This would work as well with the Scheme.
+
+~~~~{.haskell}
+sqrtIter guess x = if goodEnough guess x  then guess else sqrtIter (improve guess x) x
+
+improve guess x = (guess + (x / guess)) / 2
+
+goodEnough guess x = (abs $ (guess*guess) - x) < 0.001
+
+sqrt x = sqrtIter 1.0 x
+~~~~
+
+This is just syntactic, of course. A good Haskeller knows in his bones that every time he employs [primitive recursion](!Wikipedia), he's Doing It Wrong. There's some combinator in the standard libraries he should be using which packages up his particular recursion. In this case, we are intuitively applying a function to a value again and again until it meets some boolean function.
+
+If we think about the types, we get something like `(x -> Bool) -> (x -> x) -> x -> x`: we have a 'stopping function', an 'improvement function', a seed value, and then the result (remember that in Haskell type syntax, parentheses denote a function, and the last thing in the last is the result).
+
+When we ask that estimable tool, [Hoogle](http://haskell.org/hoogle/), whether any such function has already been written, we get back the answer [Yes](http://haskell.org/hoogle/?hoogle=%28x+-%3E+Bool%29+-%3E+%28x+-%3E+x%29+-%3E+x+-%3E+x)! There is such a function! It's called [`until`](http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#v:until). Here's an example use of it: divide by 2 until the result is less than 0.001:
+
+~~~~{.haskell}
+until (\x -> x < 0.001) (\x -> x / 2) 5
+~> 6.103515625e-4
+~~~~
+
+How handy. So now we can define `sqrtIter` as `sqrtIter guess x = until (\x y -> goodEnough guess x) (guess) base-case`.
+
+Now, base-case is obviously just 1. So our definition becomes `sqrtIter guess x = until (\x -> goodEnough guess x) (\x -> improve x) 1`
+
+OK, so what's `improve` written as a lambda? It's `(\x -> (x + (orig / x)) / 2)`. So now we have: `sqrtIter guess x = until (\x -> goodEnough x) (\x -> (x + (orig / x)) / 2) 1`
+
+
+Finally, we substitute in the simple `goodEnough` definition, to wind up with: our one-liner Newton's Method:
+
+~~~~{.haskell}
+sqrt n lmt = until (\x -> abs (x^2 - n) <= lmt) (\x -> (x + (n / x)) / 2) 1
+~~~~
+
+Let's try it out:
+
+~~~~~
+sqrt 25 0.0001
+~> 5.000000000053722
+~~~~~
+
+It's worth comparing to trying a Scheme version of this. There is no definition of `until` I know of in Scheme, and certainly there is no equivalent of Hoogle's type-based searches. (I genuinely didn't know about `until` before I wrote down what type signature I needed and checked in Hoogle.) `until` here is so useful because it eliminates most of the boilerplate in `sqrt-iter`. Haskell syntax for lambdas come in handy here; with Scheme, the syntax is so verbose (`(lambda (x) (bar x))`, compared with `\x -> bar x`) that you simply couldn't fit it. As it is, the one-liner is a little long.
+
+Of course, this isn't the only way we could've written it in Haskell. There's a third decent way, using `iterate` (as I originally expected to write it). This way is particularly satisfactory because it relies on infinite lists. It goes [like this](http://www.cs.bham.ac.uk/~ard/modules/swh05.html)[](http://web.archive.org/web/20070319202251/http://www.cs.bham.ac.uk/~ard/modules/swh05.html):
+
+~~~~{.haskell}
+root :: Float -> Float
+root x = head (filter (satisfactory x) (iterate (improve x) 1))
+
+satisfactory :: Float -> Float -> Bool
+satisfactory x y = abs (y*y - x) < 0.01
+
+improve :: Float -> Float -> Float
+improve x y = (y + x/y)/2
+~~~~
+
 ### The last exercises
 #### 1.6
 
@@ -262,7 +362,7 @@ The proffered definition of `if` is too strict, and when used on a recursive fun
 
 #### 1.7
 
-These problems with large & small numbers are basic facts of floating-point approximations and large numbers. Boring stuff.
+These problems with large & small numbers are basic facts of floating-point approximations and large numbers. Boring stuff. Type inference pops it head up, as Haskell defaults to Integer, so we get arbitrary precision in that aspect; Double will give us trouble at some point.
 
 #### 1.8
 
@@ -273,6 +373,13 @@ As the summary hints, our code is basically identical - just tweaked slightly:
   (/ (+ (/ x (square guess))
         (* 2 guess))
      3)))
+~~~~
+
+The Haskell one-liner becomes
+
+
+~~~~{.haskell}
+cbrt n lmt = until (\x -> abs (x^3 - n) <= lmt) (\x -> (n/x^2 + 2*x) / 3) 1
 ~~~~
 
 ## 1.1.8
