@@ -42,8 +42,8 @@ convertInterwikiLinks (Link ref (interwiki, article)) =
   if head interwiki == '!'
      then case M.lookup interwiki' interwikiMap of
                 Just url  -> case article of
-                                  "" ->Link ref (url ++ (refToUrl ref), (summary $ unEscapeString $ refToUrl ref))
-                                  _ ->Link ref (interwikiurl article url, summary article)
+                                  "" -> Link ref (url ++ (refToUrl ref), (summary $ unEscapeString $ refToUrl ref))
+                                  _ -> Link ref (interwikiurl article url, summary article)
                 Nothing -> Link ref (interwiki, article)
      else Link ref (interwiki, article)
  where -- '!Wookieepedia' -> 'Wookieepedia'
