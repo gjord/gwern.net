@@ -1,8 +1,8 @@
-# Chapter 1
+# Chapter 1.1
 
 ## 1.1.1: Syntax & Semantics
 
-Chapter 1 mingles syntax with the basic functional/applicative idea of 'evaluating and substituting'. 1 evaluates to 1, `1 + 1` evaluates to 2, `1 + 1 / 2` evaluates to `2 / 2` which evaluates to 2, and so on.
+Chapter 1.1 mingles syntax with the basic functional/applicative idea of 'evaluating and substituting'. 1 evaluates to 1, `1 + 1` evaluates to 2, `1 + 1 / 2` evaluates to `2 / 2` which evaluates to 2, and so on.
 
 It's something of an unobvious idea - when you think about it, it's not the same as *equaling*, but it doesn't exactly seem like the normal idea of an algorithm. Evaluation is kind of a do-while loop: 'while the result of evaluation is different from the evaluated thing, keep evaluating.' One expects a fixed number of steps. Think of a child doing chores: you don't tell her to clean each part of the living room until it's clean, you tell her to clean first the cat throwup over in the corner, then take care of the overfull garbage bag, then vacuum, then sweep and finally you can go play.
 
@@ -235,7 +235,7 @@ tri x y z
 >`(define (a-plus-abs-b a b)
 >  ((if (> b 0) + -) a b))`"
 
-Well, let's see. `(a-plus-abs-b 5 10)` becomes `(if (> 10 0) + -) 5 10)`, and we evaluate from the inside, so then we get `(if (true) + -) 5 10)`, which then becomes `((+) 5 10)`, and then `(+ 5 10)` and thence to `15`. This obviously doesn't make sense if first-class functions aren't supported - what would it mean for the `if` to return a + or a -? I omit the similar reduction for Haskell; for those Eli's [post](http://eli.thegreenplace.net/2007/06/21/sicp-section-11/) on chapter 1, you'll note that there are no shenanigans necessary as for Common Lisp - both Haskell & Scheme have 1 & the same namespace for functions as for data variables (in Haskell, at least, because variables *are* functions).
+Well, let's see. `(a-plus-abs-b 5 10)` becomes `(if (> 10 0) + -) 5 10)`, and we evaluate from the inside, so then we get `(if (true) + -) 5 10)`, which then becomes `((+) 5 10)`, and then `(+ 5 10)` and thence to `15`. This obviously doesn't make sense if first-class functions aren't supported - what would it mean for the `if` to return a + or a -? I omit the similar reduction for Haskell; for those Eli's [post](http://eli.thegreenplace.net/2007/06/21/sicp-section-11/) on chapter 1.1, you'll note that there are no shenanigans necessary as for Common Lisp - both Haskell & Scheme have 1 & the same namespace for functions as for data variables (in Haskell, at least, because variables *are* functions).
 
 #### 1.5
 
