@@ -18,7 +18,6 @@
 module InterwikiPlugin (plugin) where
 
 import Gitit.Interface
-import Gitit.Convert (refToUrl)
 
 import qualified Data.Map as M (fromList, lookup, Map)
 import Network.URI (escapeURIString, isAllowedInURI, unEscapeString)
@@ -42,7 +41,7 @@ convertInterwikiLinks (Link ref (interwiki, article)) =
   if head interwiki == '!'
      then case M.lookup interwiki' interwikiMap of
                 Just url  -> case article of
-                                  "" -> Link ref (url ++ (refToUrl ref), (summary $ unEscapeString $ refToUrl ref))
+                                  "" -> Link ref (url ++ (inlinesToURL ref), (summary $ unEscapeString $ inlinesToURL ref))
                                   _ -> Link ref (interwikiurl article url, summary article)
                 Nothing -> Link ref (interwiki, article)
      else Link ref (interwiki, article)
