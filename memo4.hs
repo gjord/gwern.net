@@ -1,11 +1,44 @@
--- | Useful for converting lists into
+{- | Useful for converting lists into multiple questions.
+   For example, if we *really* wanted to memorize the order of the early Chinese
+   dynasties, which "Shang -> Zhou -> Han", and we don't trust ourselves to
+   write some basic questions to remember it, we could just do something like
+
+> echo -e 'Shang\nZhou\nHan' | runhaskell memo4.hs
+
+   and it will write 14 questions for us, which will make sure we remember it!
+   The generated question are in tab-separated format (accepted by most SRS
+   programs such as Mnemosyne or Anki) and look like this:
+
+> What did Shang come before?\tZhou
+> What succeeded Shang?\tZhou
+> What ordinal position was Shang?\t1st
+> What was 1st?\tShang
+> What came before Zhou?\tShang
+> What preceded Zhou?\tShang
+> What did Zhou come before?\tHan
+> What succeeded Zhou?\tHan
+> What ordinal position was Zhou?\t2nd
+> What was 2nd?\tZhou
+> What came before Han?\tZhou
+> What preceded Han?\tZhou
+> What ordinal position was Han?\t3rd
+> What was 3rd?\tHan
+
+   If after these questions you can't remember the order instantly, then you
+   need to consult a doctor! :)
+-}
 module Main (main) where
 import Data.Maybe (fromJust)
 
-{- The general design/idea. May not be isomorphic to the actual code...
+{- -- The general design/idea. May not be isomorphic to the actual code...
 x = ["Franklin", "Jefferson", "Adams"]
 x' = zip [1..] x
 x' == [(1, "Franklin"), (2, "Jefferson"), (3, "Adams")]
+
+-- pair might seem like a lot of trouble, but now that each item has
+-- a copy of all the data it needs (previous, next, and its logical position),
+-- we can treat each item independently, and avoid things like zippers or folds
+-- in favor of straightforward maps.
 
 x'' = pair x'
 x'' == [(Nothing, Just "Franklin", Just "Jefferson", Just 1),
