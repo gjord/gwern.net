@@ -1,0 +1,176 @@
+# Chapter 1.2
+
+> "A procedure is a pattern for the local evolution of a computational process. It specifies how each stage of the process is built upon the previous stage. We would like to be able to make statements about the overall, or global, behavior of a process whose local evolution has been specified by a procedure. This is very difficult to do in general, but we can at least try to describe some typical patterns of process evolution."
+
+This is exactly the correct approach to [Big O notation](!Wikipedia). So many people^[I'm looking at you, Redditers!] are captious & carp on Big Os, nitpick over constants, fiddle with the exact expression, and they seem to've forgotten this point. It's *trying*. That's all I really ask of it.
+
+## 1.2.1
+
+Our first bit of code in this chapter, where we examine the 'shapes' and primordial patterns of computation is.... this:
+
+~~~{.scheme}
+(define (factorial n)
+  (if (= n 1)
+      1
+      (* n (factorial (- n 1)))))
+~~~
+
+Factorial‽ You *dogs*; I trusted you! How dare you make us do the factorial function _again_. But if we must, we must.
+
+~~~{.haskell}
+factorial n = if n == 1 then 1 else n * factorial (n-1)
+~~~
+
+But then you ask us to write it iteratively, not recursively? Abelson, Sussman - I forgive you. (For now.)
+
+~~~{.scheme}
+(define (factorial n)
+  (fact-iter 1 1 n))
+
+(define (fact-iter product counter max-count)
+  (if (> counter max-count)
+      product
+      (fact-iter (* counter product)
+                 (+ counter 1)
+                 max-count)))
+~~~
+
+This isn't particularly clear. As they write:
+
+> "We could describe a rule for computing n! by specifying that we first multiply 1 by 2, then multiply the result by 3, then by 4, and so on until we reach n. More formally, we maintain a running product, together with a counter that counts from 1 up to n. We can describe the computation by saying that the counter and the product simultaneously change from one step to the next according to the rule:
+>
+> > product ← counter · product<br>
+> > counter ← counter + 1"
+
+~~~{.haskell}
+factorial n = factIter 1 1 n
+
+factIter product counter max = if (counter > max)
+                             then product
+                             else factIter (counter*product) (counter+1) max
+~~~
+
+So this is interesting. Intuitively, one feels that there's some deep connection here. Both are using recursion, but with different focuses. Both have the call to self, both involve a multiplication. But the iterative one^[and note that this is just iterative, and not imperative; the distinction is important. And we're certainly not using mutation or destructive mutation!] is more explicit. With the original recursive definition, we've hidden away some of the details - almost punned on the fact that the number (that we are finding the factorial of) just happens to be the number of function calls we need to make. The iterative function makes this 'double-duty' clearer - `factIter 1 1`. It makes this so clear that if you look at it, there's almost only one function.
+
+SICP doesn't take the trouble to expand the recursive function for you, but it does show the iterative one. Let's look at them both:
+
+~~~{.haskell}
+factorial 5
+factorial $ 5 * factorial 4
+factorial $ 5 * factorial $ 4 * factorial 3
+factorial $ 5 * factorial $ 4 * factorial $ 3 * factorial 2
+factorial $ 5 * factorial $ 4 * factorial $ 3 * factorial 2 * factorial 1
+factorial $ 5 * factorial $ 4 * factorial $ 3 * factorial 2 * factorial $ 1
+-- or 5 * 4 * 3 * 2 * 1
+
+factorial 5
+factorial $ factIter 1 1 5
+factorial $ factIter 1 2 5
+factorial $ factIter 2 3 5
+factorial $ factIter 6 4 5
+factorial $ factIter 24 5 5
+factorial $ factIter 120 6 5
+-- and then with 6 > 5, we just return 120
+~~~
+
+Presumably the iterative definition is in a way more flexible: it can make more or fewer function calls than `n`.
+
+Complexity never goes away, though. The graph may look simpler in the case of `factIter` - no heaps of expressions! - but the computation is still going on. Now, hardware-wise, numbers are incredibly more efficient than stacking up expressions, so that's why we try to compile down into expressions which store the complexity in the former rather than the latter; but they're doing the same stuff. This is a little hard to understand, but perhaps if approached obliquely, an intuitive conviction grows:
+
+> "In computing `n!`, the number of steps required grows linearly with `n`. Such a process is called a linear iterative process.<br>
+> The contrast between the two processes can be seen in another way. In the iterative case, the program variables provide a complete description of the state of the process at any point. If we stopped the computation between steps, all we would need to do to resume the computation is to supply the interpreter with the values of the three program variables. Not so with the recursive process. In this case there is some additional 'hidden' information, maintained by the interpreter and not contained in the program variables, which indicates 'where the process is' in negotiating the chain of deferred operations. The longer the chain, the more information must be maintained."
+
+But hold on! Is this quite right? There's only one `factIter` in my ad-hoc graph above. If `factIter` is running a new `factIter`, why is there only ever one `factIter` call in the graph? Shouldn't it look something like this:
+
+~~~~{.haskell}
+factorial 5
+factorial $ factIter 1 1 5
+factorial $ factIter 1 1 5 $ factIter 1 2 5
+factorial $ factIter 1 1 5 $ factIter 1 2 5 $ factIter  2 3 5
+factorial $ factIter 1 1 5 $ factIter 1 2 5 $ factIter  2 3 5 $ factIter 6 4 5
+factorial $ factIter 1 1 5 $ factIter 1 2 5 $ factIter  2 3 5 $ factIter 6 4 5 $ factIter 24 4 5
+factorial $ factIter 1 1 5 $ factIter 1 2 5 $ factIter  2 3 5 $ factIter 6 4 5 $ factIter 24 4 5 $ factIter 120 6 5
+~~~~
+
+Well, that is true. Which brings us to SICP's next point: tail recursion. If you think about the definition of factIter, one branch says basically `foo x = x` Appealing to algebra, why can't we just remove all the `foo` calls and see what actually matters? All those previous `factIter` calls make no difference whatsoever to the final answer, and never will. Worse, they are taking up valuable resources. If we systematically turn our elegant recursion functions into iterative functions, then do this algebraic transformation on our iterative functions, then we've done something very neat^[It's also worth noting that a program which computes answers correctly, but uses so many resources that it can't actually finish, is almost as useless as a fast & wrong program. Many times O(n) -> O(1) is the difference between right and wrong; so tail recursion is both an optimization and a correction!]: we've turned a factorial with O(n) space usage into O(1) usage!
+
+This is very cool. As it happens, I don't believe Haskell precisely needs tail recursion due to laziness[^links], but it is still a concept well worth knowing.
+
+Speaking of Haskell, I couldn't help but be slightly smug when I read this:
+
+> "As a consequence, these languages can describe iterative processes only by resorting to special-purpose "looping constructs" such as `do`, `repeat`, `until`, `for`, and `while`. The implementation of Scheme we shall consider in chapter 5 does not share this defect. It will execute an iterative process in constant space, even if the iterative process is described by a recursive procedure. An implementation with this property is called tail-recursive. With a tail-recursive implementation, iteration can be expressed using the ordinary procedure call mechanism, so that special iteration constructs are useful only as syntactic sugar."
+
+Or you could, you know, be lazy and get both used-defined iteration and control structures.
+
+### Exercise 1.9
+~~~{.scheme}
+(define (+ a b)
+  (if (= a 0)
+      b
+      (inc (+ (dec a) b))))
+
+(define (+ a b)
+  (if (= a 0)
+      b
+      (+ (dec a) (inc b))))
+~~~
+
+Next, our transliterations:
+
+~~~~{.haskell}
+a + b = if a==0 then b else inc (dec a + b)
+
+a + b = if a==0 then b else (dec a) + (inc b)
+~~~~
+
+Which one is recursive, and which iterative? Obviously it's all about the last line. If we think about what the foregoing showed us, it's that there's a subset of recursive functions which follows this tail-call pattern. If we look for the pattern, we know whether it's iterative or 'just' recursive. In this case, we see that the first one calls `inc` on the output of recursion. Suppose we expanded this out and applied the transformation? We'd wipe out a bunch of `inc` calls, which are doing things! But with the second one, all the information is in the two variables being passed `+`, so our transformation would be safe. The first function is doing stuff other than calling itself, so it's recursive, and the second iterative.
+
+### Exercise 1.10
+
+~~~{.scheme}
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1)
+                 (A x (- y 1))))))
+~~~
+
+Our Haskell-alike:
+
+~~~{.haskell}
+ackerman x y
+         | y == 0 = 0
+         | y == 1 = 2
+         | otherwise = ackerman (x-1) (ackerman x (y-1))
+~~~
+
+The [Ackerman function](!Wikipedia) is infamous for being slow. I'm not even going to try to evaluate `ackerman 3 3`!
+
+## 1.2.2
+
+
+## 1.2.3
+
+## 1.2.4
+
+## 1.2.5
+
+## 1.2.6
+
+# External links
+Eli blog links:
+
+- [1.2.1](http://eli.thegreenplace.net/2007/06/26/sicp-section-121/)
+- [1.2.2](http://eli.thegreenplace.net/2007/06/28/sicp-section-122/)
+- [1.2.3](http://eli.thegreenplace.net/2007/06/28/sicp-section-123/)
+- [1.2.4](http://eli.thegreenplace.net/2007/07/04/sicp-sections-124-125/)
+- [1.2.5](http://eli.thegreenplace.net/2007/07/09/sicp-section-126/)
+
+[^links]: But tail recursion and Haskell is a surprisingly contentious topic; here are some assorted links:
+
+    - [Hawiki: Tail recursion](http://haskell.org/haskellwiki/Tail_recursion)
+    - [Hawiki: Stack overflow](http://haskell.org/haskellwiki/Stack_overflow)
+    - [Good Math, Bad Math: Tail recursion & iteration in Haskell](http://scienceblogs.com/goodmath/2006/12/tail_recursion_iteration_in_ha_1.php)
+    - ["To tail recurse or not"](http://debasishg.blogspot.com/2009/01/to-tail-recurse-or-not-part-2-follow-up.html)
+    - Haskell-cafe even has a thread on ["Debunking tail recursion"](http://www.haskell.org/pipermail/haskell-cafe/2007-May/thread.html#25570)
