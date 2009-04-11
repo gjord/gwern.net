@@ -420,7 +420,7 @@ This section pulls together our recursion from 1.1.7, and teaches us about black
 
 # Finishing up
 
-This first chapter has certainly met my expectations. The authors did a good job, and are moving very fast and touching on very important issues. I do wonder whether the chapter moves *too* fast, but perhaps the MIT students could keep up? I look forward to [Chapter 2](Chapter 2) - a preview shows use of both iteration recursion, which may make it challenging to keep up in Haskell!
+This first chapter has certainly met my expectations. The authors did a good job, and are moving very fast and touching on very important issues. I do wonder whether the chapter moves *too* fast, but perhaps the MIT students could keep up? I look forward to [Chapter 1.2]() - a preview shows use of both iteration recursion, which may make it challenging to keep up in Haskell!
 
 [^cond]: Imagine a language in which all the branches of a conditional got evaluated/run. You wouldn't be able to write something perfectly sensible like `if doSave then saveFileToDisk foo else deleteFile foo`, because no matter how the user set `doSave`, their file would be first saved and then deleted!
 [^special]: "Notice that `and` and `or` are special forms, not procedures, because the subexpressions are not necessarily all evaluated. `not` is an ordinary procedure."
