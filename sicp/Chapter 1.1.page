@@ -23,7 +23,7 @@ This is inadequate! This strikes me as a [code smell](!Wikipedia) & a violation 
                           5))
 ~~~
 
-With Haskell's infix syntax, we need to tweak the formula only slightly^[It'd be a little much to expect Haskell to be so smart as to treat `14x` as `14*x`!]:
+With Haskell's infix syntax, we need to tweak the formula only slightly^[It'd be a little much to expect Haskell to be so smart as to treat _14x_ as `14*x`!]:
 
 ~~~{.haskell}
 secondOrder x = 3*x^2 + 14*x - 5
