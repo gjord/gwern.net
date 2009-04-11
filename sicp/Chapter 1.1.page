@@ -35,6 +35,7 @@ $x = \frac{{ - b \pm \sqrt {b^2 - 4ac} }}{{2a}}$
 ~~~{.haskell}
 quadraticRoot a b c = ((-b) + sqrt (b^2 - 4*a*c)) / 2*a
 ~~~
+
 ~~~{.scheme}
 (define (quadratic-root a b c) (/ (+ (- b)
                                      (sqrt (-
