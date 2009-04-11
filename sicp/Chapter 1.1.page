@@ -13,9 +13,38 @@ After this, the author begin tackling Lisp's infamous prefix notation. The expla
 
 > "The resulting indentations display clearly the structure of the expression."[^ln]
 
-This is inadequate! This strikes me as a [code smell](!Wikipedia) & a violation of the [DRY principle](!Wikipedia "Don't repeat yourself"), as one is essentially encoding the logical structure *twice*: once in the actual parentheses and again in the tab/whitespace formatting. The indentations display the structure clearly - so clearly that the parentheses would seem to be irrelevant, redundant.
+This is inadequate! This strikes me as a [code smell](!Wikipedia) & a violation of the [DRY principle](!Wikipedia "Don't repeat yourself"), as one is essentially encoding the logical structure *twice*: once in the actual parentheses and again in the tab/whitespace formatting. The indentations display the structure clearly - so clearly that the parentheses would seem to be irrelevant, redundant. And that's when the parentheses aren't being made to serve the pretty-printing function of infix notation's precedence levels. Consider the arithmetic expression $3x^2 + 14x - 5$. If we were to define a Scheme function for this, it might look something like this because of all the nesting:
 
-We shouldn't have both. If indentation is as parsable as parenthesizing, but easier to read, then that's what we should use. The lingering use of parentheses is a warning sign to me. Of what, I'm not quite sure - a bad community, fundamentally flawed syntax design, or just a wart?
+~~~{.scheme}
+(define (second-order x) (-
+                          (+
+                           (* 3 (expt x 2))
+                           (* 14 x))
+                          5))
+~~~
+
+With Haskell's infix syntax, we need to tweak the formula only slightly^[It'd be a little much to expect Haskell to be so smart as to treat `14x` as `14*x`!]:
+
+~~~{.haskell}
+secondOrder x = 3*x^2 + 14*x - 5
+~~~
+
+Or consider the quadratic equation, the solution to which is
+$x = \frac{{ - b \pm \sqrt {b^2 - 4ac} }}{{2a}}$
+
+~~~{.haskell}
+quadraticRoot a b c = ((-b) + sqrt (b^2 - 4*a*c)) / 2*a
+~~~
+~~~{.scheme}
+(define (quadratic-root a b c) (/ (+ (- b)
+                                     (sqrt (-
+                                            (expt b 2)
+                                            (* 4 a c))))
+                                  (* b a)))
+~~~
+
+
+We shouldn't have both indentation *and* parentheses. If indentation is as parsable as parenthesizing, but easier to read, then that's what we should use. The lingering use of parentheses is a warning sign to me. Of what, I'm not quite sure - a bad community, fundamentally flawed syntax design, or just a wart? Is the vaunted simplicity and malleability of Lisp syntax worth these trade-offs? Hopefully we'll learn that by the end of SICP.
 
 ## 1.1.2: Variables Don't
 
