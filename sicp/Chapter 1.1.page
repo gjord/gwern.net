@@ -233,7 +233,7 @@ a+1 * if (a > b) then a else if (a < b) then b else -1
 
 ~~~~
 
-You'll note that I'm manually desugaring the `cond` expressions into chains of if-then-elses. This is kind of ugly, but that's how we have to translate it. They would look just fine with guard expressions, but we can only use guards in 2 places: case expressions and function definitions. So we could either name these fragments and use guards, or we could hack around with case expressions - which in these cases would look something like `case undefined of _ | b > a -> b`. (I also cheat slightly in #10 by using the dyadic `(&&)` instead of the n-ary Haskell list function `and`.)
+You'll note that I'm manually desugaring the `cond` expressions into chains of if-then-elses. This is kind of ugly, but that's how we have to translate it. They would look just fine with guard expressions, but we can only use guards in 2 places: case expressions and function definitions. So we could either name these fragments and use guards, or we could hack around with case expressions - which in these cases would look something like `case undefined of _ | b -> a -> b`. (I also cheat slightly in #10 by using the dyadic `(&&)` instead of the n-ary Haskell list function `and`.)
 
 #### 1.2
 
