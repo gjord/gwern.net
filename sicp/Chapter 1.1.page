@@ -41,7 +41,7 @@ quadraticRoot a b c = ((-b) + sqrt (b^2 - 4*a*c)) / 2*a
                                      (sqrt (-
                                             (expt b 2)
                                             (* 4 a c))))
-                                  (* b a)))
+                                  (* a 2)))
 ~~~
 
 
