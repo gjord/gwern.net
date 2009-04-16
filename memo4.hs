@@ -24,11 +24,13 @@
 > What ordinal position was Han?\t3rd
 > What was 3rd?\tHan
 
-   If after these questions you can't remember the order instantly, then you
-   need to consult a doctor! :)
--}
+   If after all these questions you can't remember the order, then you
+   need to consult a doctor! :) -}
+
 module Main (main) where
-import Data.Maybe (fromJust)
+
+import Data.Maybe -- (fromJust)
+import System.Environment (getArgs)
 
 {- -- The general design/idea. May not be isomorphic to the actual code...
 x = ["Franklin", "Jefferson", "Adams"]
@@ -71,7 +73,12 @@ main = do list <- fmap lines getContents
 -}
 
 main :: IO ()
-main = interact (unlines . filter (/= "") . concat . clozeify . pair . number . lines)
+main = do args <- getArgs
+          let arg = listToMaybe args
+          let item = case arg of
+                      Nothing -> ""
+                      Just a -> " " ++ a ++ " "
+          interact (unlines . filter (/= "") . concat . clozeify item . pair . number . lines)
 
 number :: [String] -> [(Int, String)]
 number = zip [1..]
@@ -88,22 +95,24 @@ pair x = map bar x
                        lookup (index + 1) x,
                        Just $ fst y)
 
-clozeify :: [Answers] -> [[String]]
-clozeify = map (\(a, b, c, d) -> let b' = fromJust b in [(case a of
+-- clozeify :: [Answers] -> [[String]]
+clozeify item = map (\(a, b, c, d) -> let b' = fromJust b in [(case a of
                                   Nothing -> ""
-                                  Just a' -> "What came before " ++ b' ++ "?\t" ++ a' ++
+                                  Just a' -> "What" ++ item ++ "came before " ++ b' ++ "?\t" ++ a' ++
                                             "\n" ++
-                                            "What preceded " ++ b' ++ "?\t" ++ a'),
+                                            "What" ++ item ++ "preceded " ++ b' ++ "?\t" ++ a'),
                                (case c of
                                   Nothing -> ""
-                                  Just c' -> "What did " ++ b' ++ " come before?\t" ++ c' ++
+                                  Just c' -> "What" ++ item ++ "did " ++ b' ++ " come before?\t" ++ c' ++
                                             "\n" ++
-                                            "What succeeded " ++ b' ++ "?\t" ++ c'),
+                                            "What" ++ item ++ "succeeded " ++ b' ++ "?\t" ++ c'),
                                (case d of
                                   Nothing -> ""
-                                  Just d' -> "What ordinal position was " ++ b' ++ "?\t" ++ englishfy d' ++
+                                  Just d' -> "What" ++ item ++ "had the " ++ englishfy d' ++ " position?\t" ++ englishfy d' ++
                                             "\n" ++
-                                            "What was " ++ englishfy d' ++ "?\t" ++ b')])
+                                            "What" ++ item ++ "was " ++ englishfy d' ++ "?\t" ++ b' ++
+                                            "\n" ++
+                                            "What position" ++ item ++ "was " ++ b' ++ "?\t" ++ englishfy d')])
 
 englishfy :: Int -> String
 englishfy n
