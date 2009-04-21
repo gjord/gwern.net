@@ -194,10 +194,44 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 5 successful, 1 unsuccessful, 1 unknown. (These assessments are the most untrustworthy of all, since relatively little time has passed; it's much easier to see whether 2006 projects have had a lasting effect than these 2008 projects.)
 
 #### See also
+
 - The Monad.Reader's [Issue 12](http://haskell.org/sitewiki/images/f/f0/TMR-Issue12.pdf)
 
 ### 2009
-Yet to come.. The student apps are due during 23 March – 3 April. Look forward to it!
+
+5 projects were [accepted](http://socghop.appspot.com/org/home/google/gsoc2009/haskell) this year; Darcs tried to apply in its own right was rejected. The 5 were:
+
+- "Optimising Darcs for medium to large repositories",
+
+     by Petr Ročkai; Eric Kow, mentor
+
+> "Darcs is known to have performance issues when repositories extend beyond certain size. There are several "directions" in which repositories grow -- out of these, size of the working tree and length of history my primary focus. Common commands involving the working tree should be comfortable to use and should not introduce delays in workflow. Moreover, big repositories should be stored efficiently and it should be possible to efficiently retrieve both full repositories and new patches remotely."
+
+- "haskell-src-exts -> haskell-src"
+
+    by Niklas Broberg; Neil Mitchell, mentor
+
+> "This project aims to improve on my haskell-src-exts library for working with Haskell source code. The goal of the project is to have haskell-src-exts supercede the haskell-src library. The main thing involved is to add a mechanism that allows the user to conditionally choose what extensions the parser should be aware of. Further, I would extend haskell-src(-exts) with functionality to handle comments and exact layout, to allow for things like automatic code generation and refactoring."
+
+- "Haddock improvements"
+
+    by Isaac Dupree; David Waern, mentor
+
+> "A project to improve Haddock, the Haskell documentation tool, both substantively in the short term and to be better factored in the long term. I will resolve many Haddock Trac tickets; specific projects are to make cross-package documentation work, and to refactor the comment-parsing out of GHC and into the Haddock code-base."
+
+- "Improving space profiling experience"
+
+    by Gergely Patai; Johan Tibell, mentor
+
+> "At the present moment, heap profiling Haskell programs means analysing logs off-line, using conversion tools to visualise data. However, instead of generating graphs with hp2ps, it should be possible to present the data in a graphical application in real time, which is useful while developing interactive applications. This project aims at creating an interactive profiler as well as a Haskell reimplementation of hp2ps to resolve some long-standing issues and improve its maintainability."
+
+- "Extend EclipseFP functionality for Haskell"
+
+    by Thomas ten Cate; Thomas Schilling, mentor
+
+> "EclipseFP is a plugin for the Java IDE Eclipse that adds support for Haskell. However, it is not yet perfect, and contains many bugs and UI quirks. I will bring this plugin to a more usable state, starting with some bugfixes and small improvements. The next step is to make Eclipse communicate with the GHC API through the scion library, so that more advanced features such as type inference become possible. I will also add support for the de-facto standard package manager Cabal."
+
+In general, these look good. Most of them will be widely useful -- especially the Darcs and Haddock SoCs -- or address longstanding complaints (many criticisms of laziness revolve around how unpredictable it makes memory consumption). The only one that bothers me is the EclipseFP project. I'm not sure Eclipse is common enough among Haskellers or potential Haskellers to warrant the effort, but at least the project is focused on improving an existing plugin than writing one _ab initio_.
 
 ### Haskell roundup
 
