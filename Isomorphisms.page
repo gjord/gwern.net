@@ -111,7 +111,11 @@ How to know when something is essential, and when the property is accidental, is
 
 # Appendix: the code
 
-A few notes on the code: we have that `LANGUAGE` pragma there so we can define our own addition on lists (as the default List type doesn't define a silly thing like addition); we're actually using Ints here which allow for both negative and positive integers, while unary notation is usually just for the [naturals](!Wikipedia "Natural number") (and the encoding of negative numbers into unary is tedious), so we generally ignore the possibility of negative numbers except our test property, `unEqualDec`, which just discards any negative numbers.
+A few notes on the code:
+- we have that `LANGUAGE` pragma there so we can define our own addition on lists (as the default List type doesn't define a silly thing like addition);
+     - the very acute Haskeller will be asking himself, "why not define the abstract structure as that of a [monoid](!Wikipedia) (see [Data.Monoid](http://haskell.org/ghc/docs/latest/html/libraries/base/Data-Monoid.html)), and get list concatenation & integer addition for free?" That's because while there's only one sensible monoid on lists, there are *2* for integers - `Sum` and `Product`.
+- we're actually using Ints here which allow for both negative and positive integers, while unary notation is usually just for the [naturals](!Wikipedia "Natural number") (and the encoding of negative numbers into unary is tedious), so we generally ignore the possibility of negative numbers except our test property, `unEqualDec`, which just discards any negative numbers.
+- we don't define a `newtype` or `data` for Unary because that's overkill
 
 The consolidated code, with type signatures and a test harness:
 
