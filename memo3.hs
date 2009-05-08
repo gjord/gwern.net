@@ -1,5 +1,9 @@
+import System.Environment (getArgs)
+import Data.Maybe (fromMaybe, listToMaybe)
+
 main :: IO ()
-main = interact (unlines . concat . map (map tabify . generateQuestions . parseQuestion) . lines)
+main = do delim <- fmap (head . fromMaybe "%" . listToMaybe) getArgs
+          interact (unlines . concat . map (map tabify . generateQuestions . parseQuestion delim) . lines)
 
 data Stuff = Question String | Answer String deriving (Eq, Show)
 
@@ -13,9 +17,9 @@ getAnswer xs = concat $ [x | Answer x <- xs]
 tabify :: (String, String) -> String
 tabify (q,a) = q ++ "\t" ++ a
 
--- parseQuestion "David Hume was born %1711%." ~> [Question "David Hume was born ",Answer "1711"]
-parseQuestion :: String -> [Stuff]
-parseQuestion = filter (/= Question "") . parseIntoStuff . split (=='%')
+-- parseQuestion '%' "David Hume was born %1711%." ~> [Question "David Hume was born ",Answer "1711"]
+parseQuestion :: Char -> String -> [Stuff]
+parseQuestion d = filter (/= Question "") . parseIntoStuff . split (==d)
 
 -- Non-destructively break a list into sublists based on occurrence of an entry:
 -- split (=='%') "Plato died in %328% BCE." ~> ["Plato died in ","%","328","%"," BCE."]
