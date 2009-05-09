@@ -2,7 +2,7 @@ import Control.Monad (liftM)
 import Data.List (intersperse)
 
 main :: IO ()
-main = do arg <- liftM (concat . map (permuteAndPutTogether . lines) . breakBlankLines) $ getContents
+main = do arg <- liftM (concatMap (permuteAndPutTogether . lines) . breakBlankLines) getContents
           mapM_ putStrLn arg
 
 -- Utility function. It *should* be in the base libraries, but alas...
@@ -33,7 +33,7 @@ breakBlankLines = map (\x -> if head x == nl then tail x else x) . filter (not .
  generality of 'onNths', but I haven't tested it with anything but the
  rubaiyats of Omar Khayyam.) -}
 permuteAndPutTogether:: [String] -> [String]
-permuteAndPutTogether str = map (\x -> x ++ "\t" ++ concatQuestn str) $ map (concatQuestn) $ onHalves hide str
+permuteAndPutTogether str = map ((\x -> x ++ "\t" ++ concatQuestn str) . concatQuestn) $ onHalves hide str
            where concatQuestn = concat . intersperse "<br>"
 
 {- | Take an answer, and hide it, so we can do Cloze deletion. ie, you could do
