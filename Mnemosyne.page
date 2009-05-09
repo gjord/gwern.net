@@ -41,7 +41,17 @@ On average, I add 3 or 4 questions a day, which combined with my particular memo
 
 # Where was I going with this?
 
-Nowhere, really. Mnemosyne/SR software in general are just one of my favorite tools: it's based on a famous effect[^proudest] discovered by science, and it exploits it very elegantly[^me] and usefully. It's a testament to the Enlightenment ideal of improving humanity through reason and overcoming our human flaws; the idea of SR is seductive in its mathematical rigor[^splendor]. In this age where so often the ideal of 'self-improvement' and progress are deried, and gloom are espoused by even the common people, it's really nice to just have a small example like this in one's daily life, an example not yet so prosaic and boring as the lightbulb.
+Nowhere, really. Mnemosyne/SR software in general are just one of my favorite tools: it's based on a famous effect[^proudest] discovered by science, and it exploits it very elegantly[^me] and usefully. It's a testament to the Enlightenment ideal of improving humanity through reason and overcoming our human flaws; the idea of SR is seductive in its mathematical rigor[^splendor]. In this age where so often the ideal of 'self-improvement' and progress are decried, and gloom are espoused by even the common people, it's really nice to just have a small example like this in one's daily life, an example not yet so prosaic and boring as the lightbulb.
+
+# See also
+
+In the course of using Mnemosyne, I've written a number of scripts to generate repetitively varying cards.
+
+- [memo.hs](haskell/memo.hs) will take any newline-delimited chunk of text, like a poem, and generates to  every possible [Cloze deletion](!Wikipedia); that is, a ABC poem will become 3 questions: \_BC/ABC, A\_C/ABC, AB\_C/ABC
+- [memo2.hs](haskell/memo2.hs) works as above, but is more limited and is intended for long chunks of text where memo.hs would cause a combinatorial explosion of generated questions; it generates a subset: for ABCD, one gets \_\_CD/ABCD, A\_\_D/ABCD, and AB\_\_/ABCD (it removes 2 lines, and iterates through the list).
+- [memo3.hs](haskell/memo3.hs) is intended for date or name-based questions. It'll take input like 'Barack Obama is %47%.' and spit out some questions based on this: 'Barack Obama is \_7./47', 'Barack Obama is 4\_./47' etc.
+- [memo4.hs](haskell/memo4.hs) is intended for long lists of items. If one wants to memorize the list of US Presidents, the natural questions for flashcards goes something like 'Who was the 3rd president?/Thomas Jefferson', 'Thomas Jefferson was the \_rd president./3', 'Who was president after John Adams?/Thomas Jefferson', 'Who was president before James Madison?/Thomas Jefferson'.<br>
+You note there's repetition if you do this for each president - one asks the ordinal position of the item both ways (item -> position, position -> item), what precedes it, and what succeeds it. memo4.hs automates this, given a list. In order to be general, the wording is a bit odd, but it's better than writing it all out by hand! (Example output is in the [comments](!Wikipedia "Comment (computer programming)") to the source code).
 
 [^splendor]: See [page 7](http://www.wired.com/medtech/health/magazine/16-05/ff_wozniak?currentPage=7), Wolf 2008
 
