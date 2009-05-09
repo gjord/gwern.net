@@ -22,7 +22,7 @@ main = do
   cd "/home/gwern/bin/pywikipedia/" -- Let's hard-code file locations in only *one* place, OK?
   list <- liftM (\bs -> [n | n<-bs,  length n <= (2^(4::Int))]) $ liftM words getContents -- We assume that a list of whitespace-delimited article names for us to consume os being fed to us. Break into words, and filter out the too long ones.</nowiki>
   let replace a b = map (\x -> if a == x then b else x)
-  mapM_ match (map (replace '_' ' ') list)  -- Simplify. Now match only has to deal with one article name at a time
+  mapM_ (match . replace '_' ' ') list  -- Simplify. Now match only has to deal with one article name at a time
   runIO "python pagefromfile.py -putthrottle:20 -safe -file:dict.txt -summary:'Bot edit: Creating a redirect from a miscapitalized name to appropriate page.\'"
   writeFile "dict.txt" "" -- Clean up.
 
