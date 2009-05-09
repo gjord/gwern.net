@@ -29,7 +29,7 @@
 
 module Main (main) where
 
-import Data.Maybe -- (fromJust)
+import Data.Maybe (fromJust, listToMaybe)
 import System.Environment (getArgs)
 
 {- -- The general design/idea. May not be isomorphic to the actual code...
@@ -73,15 +73,10 @@ main = do list <- fmap lines getContents
 -}
 
 main :: IO ()
-main = do args <- getArgs
-          let arg = listToMaybe args
-          let item = case arg of
-                      Nothing -> ""
-                      Just a -> " " ++ a ++ " "
+main = do item <- fmap (maybe "" (\a -> " " ++ a ++ " ") . listToMaybe) getArgs
           interact (unlines . filter (/= "") . concat . clozeify item . pair . number . lines)
-
-number :: [String] -> [(Int, String)]
-number = zip [1..]
+            where number :: [String] -> [(Int, String)]
+                  number = zip [1..]
 
 type Answers = (Maybe String, -- ^ Previous entry in list
                 Maybe String, -- ^ Current entry in list
@@ -90,12 +85,13 @@ type Answers = (Maybe String, -- ^ Previous entry in list
 
 pair :: [(Int, String)] -> [Answers]
 pair x = map bar x
-    where bar = \y -> let index = fst y in (lookup (index - 1) x, -- we  look up the previous entry
-                       Just $ snd y, -- our current item, eg "Franklin"; this is guaranteed to be there, so we Just it
-                       lookup (index + 1) x,
-                       Just $ fst y)
+    where bar y = let index = fst y in (lookup (index - 1) x, -- we  look up the previous entry
+                                        -- our current item, eg "Franklin"; this is guaranteed to be there, so we Just it
+                                        Just $ snd y, 
+                                        lookup (index + 1) x,
+                                        Just $ fst y)
 
--- clozeify :: [Answers] -> [[String]]
+clozeify :: String -> [(Maybe String, Maybe String, Maybe String, Maybe Int)] -> [[String]]
 clozeify item = map (\(a, b, c, d) -> let b' = fromJust b in [(case a of
                                   Nothing -> ""
                                   Just a' -> "What" ++ item ++ "came before " ++ b' ++ "?\t" ++ a' ++
