@@ -3,7 +3,7 @@ import Data.Maybe (fromMaybe, listToMaybe)
 
 main :: IO ()
 main = do delim <- fmap (head . fromMaybe "%" . listToMaybe) getArgs
-          interact (unlines . concat . map (map tabify . generateQuestions . parseQuestion delim) . lines)
+          interact (unlines . concatMap (map tabify . generateQuestions . parseQuestion delim) . lines)
 
 data Stuff = Question String | Answer String deriving (Eq, Show)
 
@@ -12,7 +12,7 @@ extract (Answer x) = x
 extract (Question x) = x
 
 getAnswer :: [Stuff] -> String
-getAnswer xs = concat $ [x | Answer x <- xs]
+getAnswer xs = concat [x | Answer x <- xs]
 
 tabify :: (String, String) -> String
 tabify (q,a) = q ++ "\t" ++ a
