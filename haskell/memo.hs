@@ -40,7 +40,7 @@ permuteAndPutTogether str = map ((\x -> x ++ "\t" ++ concatQuestn str) . concatQ
  question = [hide "First line", "Second line"]; answer = ["First line",
  "Second line"]. -}
 hide :: String -> String
-hide x = replicate (length x) '_'
+hide = map (\x -> if x==' ' then ' ' else '_' )
 
 {- | A highly general list function exploiting the capabilities of the List
  monad to generate permutations of a list such that we apply a function to all
