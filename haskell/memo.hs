@@ -1,4 +1,5 @@
 import Control.Monad (liftM)
+import Data.Char (isAlphaNum)
 import Data.List (intersperse)
 
 main :: IO ()
@@ -40,7 +41,7 @@ permuteAndPutTogether str = map ((\x -> x ++ "\t" ++ concatQuestn str) . concatQ
  question = [hide "First line", "Second line"]; answer = ["First line",
  "Second line"]. -}
 hide :: String -> String
-hide = map (\x -> if x==' ' then ' ' else '_' )
+hide = map (\x -> if isAlphaNum x then ' ' else x)
 
 {- | A highly general list function exploiting the capabilities of the List
  monad to generate permutations of a list such that we apply a function to all
