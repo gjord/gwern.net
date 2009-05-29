@@ -1,0 +1,120 @@
+Nick Bostrom's [Simulation Argument](!Wikipedia) (SA) goes basically that either:
+
+1. civilizations/entities with tremendous computing power do not exist
+2. they exist, but choose not to simulate primitive civilizations
+3. or we are likely in such a simulation
+
+That is: they don't exist, they exist but don't use it, or they exist and use it.^[This is a complete disjunction; we can see this by considering what's left if we combine these 2 binary predicates: They don't exist, but they use it? They don't exist, and don't use it?]
+
+# The problem
+
+What's nice about the SA is that it presents with a trilemma whose branches are all particularly noxious.
+
+## Living in a simulation
+
+We obviously don't want to accept #3 - believing we are in a simulation is repugnant and means we must revise almost every aspect of our worldview[^ethics]. It also initially seems flabbergasting: when one considers the computing power and intellectual resources necessary to create such a detailed simulation, one boggles.
+
+## Disinterested gods
+
+But if we accept #2, aren't we saying that despite living in a civilization that devotes a large fraction of its efforts to entertainment, and a large fraction of its entertainment to video games - and what are complex video games but simulations? - we expect most future civilizations descended from ours, and most future civilizations in general, to simply not bother to simulate the past even once or twice? This seems a mite implausible. (And even if entertainment ceases to focus on simulations of various kinds^[Pretty much every video-game is a simulation of something - war, racing, travel, etc. They vary in realism and fictionalized settings, but fundamentally, they are still simulations. In the case of the _[Sims](!Wikipedia)_, simulation of everyday life even.], are we to think that historians, say, wouldn't champ at the bit to re-run the past?)
+
+## Infeasible simulations
+
+And if we accept #1, we're saying that no one will ever attain the heights of power necessary to simulate worlds - that the necessary computing power will not come into existence.
+
+### Physical limits to simulation
+
+What does this presuppose? Well, maybe there are physical limits that bar such simulations. It may be possible, but just not feasible^[An example of something possible but not feasible might be factoring classically a composite number with a quadrillion digits; we know there is a factorization of it, and exactly how to go about getting it, but that doesn't mean we could do it in less than the lifetime of the universe.]. Unfortunately, physical limits allow world simulating. [Seth Lloyd](!Wikipedia) in ["Ultimate physical limits to computation"](http://arxiv.org/abs/quant-ph/9908043)
+
+> "The ‘ultimate laptop’ is a computer with a mass of one kilogram and a volume of one liter, operating at the fundamental limits of speed and memory capacity fixed by physics. The ultimate laptop performs $\frac{{2mc2}}{{πℏ}} = 5.4258*10^50$ logical operations per second on ≈10^31^ bits."
+
+### The cost of simulation
+
+Nick Bostrom calculates as a rough approximation that simulating a world could be done for '~10^33^ - 10^36^ operations'^[footnote 10; "Are you living in a computer simulation?"]. Even if we assume this is off[^brains] by, say, 5 orders of magnitude (10^38^-10^41^), the ultimate laptop could run millions or billions of civilizations. A second.
+
+It seems unrealistic to expect humanity in any incarnation to reach the exact limits of computation. So supposing that humanity had, spread out over the Solar system or wherever, processors amounting to the volume of the earth? How fast would they be to equal our ultimate laptop simulating millions or billions of civilizations? Well, the volume of the Earth is 1.08321x10^24^ liters; so $5.4258*10^50 / 1.08321*10^24 = 5.009001024732046*10^26$.
+
+#### Prospects for development
+
+10^26^ isn't too bad, actually. That's 100 yottaflops (10^24^). [IBM Roadrunner](!Wikipedia), in 2009, clocks in at 1.4[](http://www.top500.org/system/performance/9707) petaflops ($1.4*10^15$). So our hypothetical low-powered laptop is equal to 350 billion Roadrunners ($5.009001024732046*10^26 / 1.4*10^15 = 3.577857874808605*10^11$).
+
+OK, but how many turns of [Moore's Law](!Wikipedia) would that represent? Quite a few[^eval]: 38 doublings are necessary. Or, at the canonical 18 months, exactly 57 years. Remarkable! If Moore's Law keeps holding (a dubious assumption), such simulations could begin within my lifetime.
+
+We can probably expect Moore's Law to hang on for a while. There are powerful economic inducements to keep developing computing technology - processor cycles are never cheap enough. And there are several plausible paths forward:
+
+> "But in any case, even if our estimate is off by several orders of magnitude, this does not matter much for our argument. We noted that a rough approximation of the computational power of a planetary-mass computer is 10^42 operations per second, and that assumes only already known nanotechnological designs, which are probably  far from optimal."^[Nick Bostrom]
+
+Even if we imagine Moore's Law ending forever within a few turns, we can't exclude humanity forever remaining below the computing power ceiling. Perhaps we will specialize in extremely low-power & durable processors, once we can no longer create faster ones, and manufacture enough power the slow way over millennia. If we want to honestly affirm #1, we must find some way to exclude humanity and other civilizations from being powerful enough *forever*.
+
+### Destruction
+
+The easiest way to ensure humanity will never have enough computing power is for it to die. (A cheerful thought! Wouldn't one rather exist in a simulation than not exist at all?)
+
+Perhaps advanced civilizations reliably destroy themselves. (This is convenient as it also explains the [Fermi paradox](!Wikipedia).) It could be rogue AIs, nuclear war, nanoplagues, or your favorite [existential threat](!Wikipedia).
+
+A failure to develop could well be as fatal as any direct attack. A failure to develop interstellar travel leaves humanity vulnerable to a solar system-wide catastrophe. One cannot assume humanity will survive indefinitely at its present level of development, nor even at higher levels.
+
+But undesirability doesn't mean this is false. After all, we can appeal to various empirical arguments for #2 and #3, and so the burden of proof is on those who believe humanity will forever be inadequate to the task of simulating worlds, or will abandon its eternal love of games/simulated-worlds.
+
+### SA is invalid
+
+One might object to the SA that the triple disjunction is valid, but of no concern: it is unwarranted to suggest that we may be simulated. An emulation or simulation would presumably be of such great accuracy that it'd be meaningless for inhabitants to think about it: there are no observations they could make one way or the other. It is meaningless to them - more theology than philosophy.
+
+We may not go to the extreme of discarding all non-falsifiable theories, but we should at least be chary of theories that disclaim falsifiability in most circumstances[^lords].
+
+#### Investigating implications of SA
+
+The simulation hypothesis is susceptible to some form of investigation, however, in some sense. We can investigate the nature of our own universe and make deductions about any enclosing/simulating universe.
+
+Most obviously, we can put lower bounds on the computing power available in the lower^[I use 'lower' in the sense of 'more fundamental'.] universe, and incidentally its size.
+
+Obviously if a simulated universe requires $n$ units of space-time, then it must be made of at least $n+1$ units, So if we observe our universe to require $n$ units, then by the [Anthropic principle](!Wikipedia), the simulator must be $n+1$ units.
+
+##### Limits of investigation
+
+This is obviously a weak method of investigation, but *how* weak?
+
+Very.
+
+Suppose we assume that the entire universe is being simulated, particle by particle? This is surely the worst-case scenario, from the simulator's point of view.
+
+There are a number of estimates, but we'll say that there are 10^86^ particles in the observable universe. It's not obvious how much information it takes to describe a particle - a byte? A kilobyte? But let's say the average particle can be described by a megabyte - then the simulating universe needs just $1000*10^86$$ spare bytes. (About 10^55^ ultimate laptops of data storage.)
+
+But we run into problems. All that's really needed for a simulation is things within humanity's [light cone](!Wikipedia). And the simulators could probably 'cheat' even more with techniques like [lazy evaluation](!Wikipedia) and [memoization](!Wikipedia).
+
+It is not necessary for the simulating thing to be larger, particle-wise, than the simulated. The 'greater size' principle is *information-theoretic*.
+
+If one wanted to simulate an Earth, the brute-force approach would be to take an Earth's worth of atoms, and put the particles on a one-to-one basis. But programmers use 'brute-force' as a pejorative term connoting an algorithm that is dumb, slow, and far from optimal.
+
+Better algorithms are almost certain to exist. For example, [Conway's Game of Life](!Wikipedia) might initially seem to require $n^2$ space-time as the plane fills up. But if one caches the many repeated patterns, as in [Bill Gosper](!Wikipedia)'s [Hashlife](!Wikipedia) algorithm, logarithmic and greater speedups are possible. It is not clear that a simulation need be isomorphic in every step to a 'real' universe, if it gets the right results. It need not be as inefficient as a real universe, which mindlessly recalculates again and again.
+
+The situation gets worse. What if instead of calculating just everything in the universe, the simulation is cut down by orders of magnitude to just everything in our lightcone? Or in our solar system? Or just the Earth itself? Or the area immediately around oneself? Or just one's brain? Or just one's mind in a suitable abstraction? Remember the estimate for a single mind: something like 10^17 operations a second. Reusing the ops/second figure from the ultimate laptop, we see that our mind could be handled in perhaps $1/5.4258*10^33$ of a liter.
+
+This is a very poor lower bound! All this effort, and the most we can conclude about a simulating universe is that it must be at least moderately bigger than the [Planck length](!Wikipedia) (1.616252×10^-35^ m) cubed.
+
+
+##### Investigating
+
+We could imagine further techniques: perhaps we could send off [Von Neumann probes](!Wikipedia) to the far corners of the universe, in a bid to deliberately increase resource consumption. (This is only useful if the simulators aren't 'cheating' in some of the ways listed above. Obviously if they are already simulating every particle, making some particles move around isn't going to do very much.)
+
+Or we could run simulations of our own. It would be difficult for simulators to program their systems to see through all the layers of abstraction and optimize the simulation. To do so in general would seem to be a violation of [Rice's Theorem](!Wikipedia) (a generalization of the [Halting Theorem](!Wikipedia)). It is well known that while any [Turing machine](!Wikipedia) can be run on a Universal Turing machine, the performance penalty can range from the minor to the horrific.
+
+The more [virtual machine](!Wikipedia)s and [interpreters](!Wikipedia "Interpreter (computing)") there are between a program and its fundamental substrate, the more difficult it is to understand the running code - it becomes ever more opaque, indirect, and bulky.
+
+And there could be dozens of layers. A simulated processor is being run; this receives [machine code](!Wikipedia) which it must translate into [microcode](!Wikipedia); the machine code is being sent via the offices of an [operating system](!Wikipedia), which happens to be hosting another ([virtualized](!Wikipedia "Operating system-level virtualization")) operating system (perhaps the user runs Linux but needs to test a program on Mac OS X). This hosted operating system is largely idle save for another interpreter for, say, Haskell. The program loaded into the interpreter, happens to be itself an interpreter... If any possible simulation is excluded, we have arguably reached at least 5 or 6 levels of indirection already (viewing the OSs as just single layers), and without resorting to any obtuse uses of indirection[^java].
+
+But one wonders, aren't we running a risk here by sending off Von Neumann probes and using vast computing resources? We risk angering the simulators, as we callously use up their resources. Or might there not be a grand [OOM](!Wikipedia "Out of memory") Killer? Every allocation we come a little closer to the unknown limits!
+
+There's no guarantee that we're in a simulation in the first place. We never ruled out the possibility that most civilizations are destroyed. It would be as terrible to step softly for fear of the Divine Programmer as it would be of the Divine. Secondly, the higher we push the limits without disaster (and we will push the limits to enable economic growth alone), the more confident we should be that we aren't in a simulation. (The higher the limit, the larger the universe; and small universes are more parsimonious than large ones.) And who knows? Perhaps we live in a poor simulation, which will let us probe it more directly.
+
+# External links
+
+- ["The Kernel Hacker's Bookshelf: Ultimate Physical Limits of Computation"](http://lwn.net/Articles/286233/)
+
+[^java]: For example, perhaps one could instead be running Firefox, which interprets JavaScript, and one has visited a web page with a [Java applet](!Wikipedia) (an interpreter of Java); and this applet is running [Pearcolator](http://pearcolator.wiki.sourceforge.net/) - which is an [x86](!Wikipedia) emulator. Of course, just a raw processor isn't very useful; perhaps one could run one of the operating systems written in Java on it...
+[^eval]: Try evaluating this in your friendly [REPL](!Wikipedia): `1.4*10^15)*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2 >= (5.009001*10^26`. Manually multiplying is tedious, but it conveys the magnitude of how many Moore-doublings are necessary.
+[^ethics]: Although the revision might not be too awful; [Robin Hanson](!Wikipedia) tries such a revision in ["How To Live In A Simulation"](http://hanson.gmu.edu/lifeinsim.html), and comes up with pretty benign suggestions, some of which are a good idea on their own merits:
+
+    > "...you should care less about others, live more for today, make your world look more likely to become rich, expect to and try more to participate in pivotal events, be more entertaining and praiseworthy, and keep the famous people around you happier and more interested in you."
+[^brains]: A great deal depends on how expensive simulating a brain is. Robert J. Bradbury's ["Matrioshka Brains"](http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html#ComputerHumanEquivalence) lists 4 estimates for an individual brain ranging anywhere from  10^13^ ops/second to 10^17^.
+[^lords]: Simulations are presumably observable in a few special cases - besides _[Matrix](!Wikipedia "The Matrix (series)")_ examples, the simulators could violate various physical laws to demonstrate their existence. It's hard to see why this would be very common, though - _The Matrix_ seems to suggest that the quasi-godlike beings who could build & run a simulation are somehow fallible, and such tampering would seem to destroy the value of simulations run for entertainment or research.
