@@ -62,7 +62,7 @@ One might object to the SA that the triple disjunction is valid, but of no conce
 
 We may not go to the extreme of discarding all non-falsifiable theories, but we should at least be chary of theories that disclaim falsifiability in most circumstances[^lords].
 
-#### Investigating implications of SA
+### Investigating implications of SA
 
 The simulation hypothesis is susceptible to some form of investigation, however, in some sense. We can investigate the nature of our own universe and make deductions about any enclosing/simulating universe.
 
@@ -70,7 +70,7 @@ Most obviously, we can put lower bounds on the computing power available in the 
 
 Obviously if a simulated universe requires $n$ units of space-time, then it must be made of at least $n+1$ units, So if we observe our universe to require $n$ units, then by the [Anthropic principle](!Wikipedia), the simulator must be $n+1$ units.
 
-##### Limits of investigation
+#### Limits of investigation
 
 This is obviously a weak method of investigation, but *how* weak?
 
@@ -92,7 +92,7 @@ The situation gets worse. What if instead of calculating just everything in the 
 
 This is a very poor lower bound! All this effort, and the most we can conclude about a simulating universe is that it must be at least moderately bigger than the [Planck length](!Wikipedia) ($1.616252*10^{-35}$ m) cubed.
 
-##### Investigating
+#### Investigating
 
 We could imagine further techniques: perhaps we could send off [Von Neumann probes](!Wikipedia) to the far corners of the universe, in a bid to deliberately increase resource consumption. (This is only useful if the simulators are 'cheating' in some of the ways listed above. Obviously if they are simulating every single particle, making some particles move around isn't going to do very much.)
 
@@ -101,6 +101,8 @@ Or we could run simulations of our own. It would be difficult for simulators to 
 The more [virtual machine](!Wikipedia)s and [interpreters](!Wikipedia "Interpreter (computing)") there are between a program and its fundamental substrate, the more difficult it is to understand the running code - it becomes ever more opaque, indirect, and bulky.
 
 And there could be dozens of layers. A simulated processor is being run; this receives [machine code](!Wikipedia) which it must translate into [microcode](!Wikipedia); the machine code is being sent via the offices of an [operating system](!Wikipedia), which happens to be hosting another ([virtualized](!Wikipedia "Operating system-level virtualization")) operating system (perhaps the user runs Linux but needs to test a program on Mac OS X). This hosted operating system is largely idle save for another interpreter for, say, [Haskell](!Wikipedia "Haskell (programming language)"). The program loaded into the interpreter, [Pugs](!Wikipedia), happens to be itself an interpreter... If any possible simulation is excluded, we have arguably reached at least 5 or 6 levels of indirection already (viewing the OSs as just single layers), and without resorting to any obtuse uses of indirection[^java].
+
+### Risks
 
 But one wonders, aren't we running a risk here by sending off Von Neumann probes and using vast computing resources? We risk angering the simulators, as we callously use up their resources. Or might there not be a grand [OOM](!Wikipedia "Out of memory") Killer? Every allocation we come a little closer to the unknown limits!
 
