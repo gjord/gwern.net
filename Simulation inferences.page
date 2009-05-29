@@ -94,7 +94,7 @@ This is a very poor lower bound! All this effort, and the most we can conclude a
 
 ##### Investigating
 
-We could imagine further techniques: perhaps we could send off [Von Neumann probes](!Wikipedia) to the far corners of the universe, in a bid to deliberately increase resource consumption. (This is only useful if the simulators aren't 'cheating' in some of the ways listed above. Obviously if they are already simulating every particle, making some particles move around isn't going to do very much.)
+We could imagine further techniques: perhaps we could send off [Von Neumann probes](!Wikipedia) to the far corners of the universe, in a bid to deliberately increase resource consumption. (This is only useful if the simulators are 'cheating' in some of the ways listed above. Obviously if they are simulating every single particle, making some particles move around isn't going to do very much.)
 
 Or we could run simulations of our own. It would be difficult for simulators to program their systems to see through all the layers of abstraction and optimize the simulation. To do so in general would seem to be a violation of [Rice's Theorem](!Wikipedia) (a generalization of the [Halting Theorem](!Wikipedia)). It is well known that while any [Turing machine](!Wikipedia) can be run on a Universal Turing machine, the performance penalty can range from the minor to the horrific.
 
