@@ -1,3 +1,5 @@
+#!/usr/bin/env runhaskell
+
 {- | Useful for converting lists into multiple questions.
    For example, if we *really* wanted to memorize the order of the early Chinese
    dynasties, which "Shang -> Zhou -> Han", and we don't trust ourselves to
