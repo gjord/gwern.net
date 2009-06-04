@@ -1,3 +1,5 @@
+#!/usr/bin/env runhaskell
+
 import Control.Monad (liftM)
 import Data.Char (isAlphaNum)
 import Data.List (intersperse)
