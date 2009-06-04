@@ -1,3 +1,5 @@
+#!/usr/bin/env runhaskell
+
 import System.Environment (getArgs)
 import Data.Maybe (fromMaybe, listToMaybe)
 
