@@ -1,0 +1,48 @@
+# Xmonad vs. Awesome
+
+## pros
+
+22:51:58 < jrick> in awesome, tabs are provided through a lua library called Tabulous. unfortunately, you can't have a "tab titlebar" at the
+                  top, so you don't know what other windows are in that group
+
+in awesome, if you break your configuration and reload, nothing loads up
+in xmonad, it just won't compile and you can continue using the old one
+
+awesome config file keeps changing
+
+awesome has many dependencies
+
+awesome is less reliable than xmonad, which hardly ever crashes
+
+awesome is GPL against xmonad's BSD
+
+## cons
+
+xmonad users have to setup third-party statusbars like dzen, while awesome has a statusbar built in (this is related to the dependencies)
+
+xmonad uses virtual desktop model by default, while awesome uses tags; xmonad has tag extensions, though
+
+awesome statusbar apparently can embed arbitrary windows; eg. space invaders
+
+non-issues
+
+awesome uses XCB and xmonad Xlib; any speed advantage is unnoticeable by the user and swamped by just about anything else (like app rendering)
+xmonad requires learning at least a little haskell syntax; awesome requires lua knowledge, but this may be more accessible
+
+# Xmonad vs. stumpwm
+
+## pros
+
+live hacking means you can hose your X session
+
+minimal type safety - try and pray?
+
+xmonad being compiled means easier and more reliable setup than stumpwm - interpreter setup can be tricky
+
+xmonad has smaller binaries and uses less memory than a SBCL with stumpwm loaded; this leads to noticeable performance differences on RAM-limited systems
+
+## cons
+
+xmonad cannot really do live hacking
+
+different paradigms; possible to do static tiling in xmonad, but not nearly as easy as with stumpwm
