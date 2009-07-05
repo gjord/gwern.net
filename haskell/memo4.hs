@@ -89,28 +89,26 @@ pair :: [(Int, String)] -> [Answers]
 pair x = map bar x
     where bar y = let index = fst y in (lookup (index - 1) x, -- we  look up the previous entry
                                         -- our current item, eg "Franklin"; this is guaranteed to be there, so we Just it
-                                        Just $ snd y, 
+                                        Just $ snd y,
                                         lookup (index + 1) x,
                                         Just $ fst y)
 
 clozeify :: String -> [(Maybe String, Maybe String, Maybe String, Maybe Int)] -> [[String]]
 clozeify item = map (\(a, b, c, d) -> let b' = fromJust b in [(case a of
                                   Nothing -> ""
-                                  Just a' -> "What" ++ item ++ "came before " ++ b' ++ "?\t" ++ a' ++
+                                  Just a' -> "What" ++ item ++ " came before " ++ b' ++ "?\t" ++ a' ++
                                             "\n" ++
-                                            "What" ++ item ++ "preceded " ++ b' ++ "?\t" ++ a'),
+                                            "What" ++ item ++ " preceded " ++ b' ++ "?\t" ++ a'),
                                (case c of
                                   Nothing -> ""
-                                  Just c' -> "What" ++ item ++ "did " ++ b' ++ " come before?\t" ++ c' ++
+                                  Just c' -> "What" ++ item ++ " did " ++ b' ++ " come before?\t" ++ c' ++
                                             "\n" ++
-                                            "What" ++ item ++ "succeeded " ++ b' ++ "?\t" ++ c'),
+                                            "What" ++ item ++ " succeeded " ++ b' ++ "?\t" ++ c'),
                                (case d of
                                   Nothing -> ""
-                                  Just d' -> "What" ++ item ++ "had the " ++ englishfy d' ++ " position?\t" ++ englishfy d' ++
+                                  Just d' -> "What" ++ item ++ " was " ++ englishfy d' ++ "?\t" ++ b' ++
                                             "\n" ++
-                                            "What" ++ item ++ "was " ++ englishfy d' ++ "?\t" ++ b' ++
-                                            "\n" ++
-                                            "What position" ++ item ++ "was " ++ b' ++ "?\t" ++ englishfy d')])
+                                            "What position" ++ item ++ " was " ++ b' ++ "?\t" ++ englishfy d')])
 
 englishfy :: Int -> String
 englishfy n
