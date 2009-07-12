@@ -155,17 +155,18 @@ The [Ackerman function](!Wikipedia) is infamous for being slow. I'm not even goi
 
 Recursive:
 
-~~~~{.haskell}
+~~~{.haskell}
 f n | n<3 = n
     | otherwise = f(n-1) + 2*f(n-2) + 3*f(n-3)
-~~~~
-~~~~{.scheme}
+~~~
+
+~~~{.scheme}
 (define (f n) (if (< n 3)
                   n
                   (+ (f (- n 1))
                              (* 2 (f (- n 2)))
                              (* 3 (f (- n 3))))))
-~~~~
+~~~
 
 Iterative:
 
@@ -175,6 +176,7 @@ helper n x y z | n == 2 = x
                -- Where did the subtractions go? They're in the seed.
                | otherwise = helper (n-1) (x + 2*y + 3*z) x y
 ~~~~
+
 ~~~~{.scheme}
 (define (F n) (helper n 2 1 0))
 (define (helper n x y z) (if (= n 2)
@@ -196,6 +198,7 @@ pascal x y | y==1 = 1 -- everything in the first row is 1
            | x==y = 1 -- everything on the rightmost edge is also 1
            | otherwise = (pascal (x-1) y) + (pascal (x-1) (y-1)) -- sum previous & previous-right
 ~~~~
+
 ~~~~{.scheme}
 (define (pascal x y) (cond ((= 1 1) 1)
                            (= x y) 1)
