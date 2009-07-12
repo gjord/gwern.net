@@ -105,12 +105,12 @@ Or you could, you know, be lazy and get both used-defined iteration and control 
 ### Exercise 1.9
 ~~~{.scheme}
 (define (+ a b)
-  (if (= a 0)
+  (if (zero? a)
       b
       (inc (+ (dec a) b))))
 
 (define (+ a b)
-  (if (= a 0)
+  (if (zero? a)
       b
       (+ (dec a) (inc b))))
 ~~~
@@ -129,8 +129,8 @@ Which one is recursive, and which iterative? Obviously it's all about the last l
 
 ~~~{.scheme}
 (define (A x y)
-  (cond ((= y 0) 0)
-        ((= x 0) (* 2 y))
+  (cond ((zero? 0) 0)
+        ((zero? 0) (* 2 y))
         ((= y 1) 2)
         (else (A (- x 1)
                  (A x (- y 1))))))
@@ -244,12 +244,73 @@ This was incomplete, as it handled only the simplest case of powers of 2; the fu
 ~~~~{.scheme}
 ; recursive successive squaring
 (define (fast-expt b n)
-  (cond ((= n 0) 1)
+  (cond ((zero? n) 1)
         ((even? n) (square (fast-expt b (/ n 2))))
         (else (* b (fast-expt b (- n 1))))))
 ~~~~
 
 The description of the problem is coy. Why does it matter that $(b^\frac{{n}}{{2}})^2 = (b^2)^\frac{{n}}{{2}}$? What is this $ab^n$ and why should it be a constant over all invocations?
+
+The key is to realize that the full successive squaring algorithm we did before has 2 branches: 1 for odd powers, and 1 for even. We've just been given another version of the rule for even powers, which is somehow better for iteration.
+
+The $a$ business is to remind us that iteration is all about storing our 'state' explicitly inside the arguments, and not implicitly in the call tree.
+
+Pretending that `expt` exists, our pseudo-code goes:
+
+~~~~{.scheme}
+(define (fast-expti b n)
+  (expt (square b) (/ n 2)) ; even
+  (* b (expt b (- n 1))) ; odd
+  )
+~~~~
+
+`expt` can't really be `fast-expti`, it must be some sort of helper. And there's no accumulation going on here either.
+
+The body of `fast-expti` must look like
+
+~~~~{.scheme}
+(define (fast-expti b n)
+  (fast-expti-iter b n 1))
+~~~~
+
+(We know `a` must be initialized to 1 because the problem tells us we'll be doing some sort of multiplication against `a`, and obviously we don't want to start with 0!)
+
+OK, let's consider the odd branch. We need to leave the base, `b`, alone (so `b`). We're cranking through one call, so we need to reduce the power by 1 (`(- n 1)`). And then we're doing something to the state variable `a`. Remember that $ab^n$ equals the constant which is our ultimate answer. If we reduce the power by 1, then `a` must increase by...? A power, or $a \times b$ (`(* a b)`). Which gives us:
+
+~~~~{.scheme}
+(fast-expti-iter  b (- n 1) (* a b))
+~~~~
+
+The even branch is not very similar. This is the one the transformation applies to. Instead of leaving the base alone, we have to square it per the $b^2$ part of the equation (`(square b)`), and then implement the $\frac{{n}}{{2}}$ part of the equation (`(/ n 2)`). (What do we do with the `a`? Nothing. This is just rearranging according to an identity; it's the odd branch that is doing the grunt-work. The even branch is rewriting the number in a more tractable form.)
+
+~~~~{.scheme}
+(fast-expti-iter (square b) (/ n 2))
+~~~~
+
+So far so good. We add a conditional to choose branches, and we have
+
+~~~~{.scheme}
+(define (fast-expti-iter b n a)
+  (if (even? n)
+      (fast-expti-iter (square b) (/ n 2)) a)
+      (fast-expti-iter b (- n 1) (* a b) ))
+~~~~
+
+If we run this, we don't get an answer. Why? We may call it iteration, but like recursion, it still needs a base case. If we go all the way back to our first iterative function, the base case was `if (zero? n) a (...)`. Ditto for here: the state variable encodes our sum-to-date and when the function has cycled all the way down to $n^0$, it's done. So our answer is:
+
+~~~~{.scheme}
+(define (fast-expti b n)
+  (fast-expti-iter b n 1))
+
+(define (fast-expti-iter b n a)
+  (if (zero? n)
+  a
+  (if (even? n)
+      (fast-expti-iter (square b) (/ n 2) a)
+      (fast-expti-iter b (- n 1) (* a b) )
+      )))
+~~~~
+
 
 ## 1.2.3
 http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.3
