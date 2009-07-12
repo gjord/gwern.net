@@ -189,7 +189,7 @@ helper n x y z | n == 2 = x
 
 Whew! It's not at all obvious how to juggle the seeds and state variables when converting from recursive to iterative.
 
-### Exercise 1.12.
+### Exercise 1.12
 
 Let's compute Pascal's triangle! To get the value of a cell, we sum the 2 cells 'previous' to us; so the easy way is recursion - we ask for the value of the cell with the same _x_-coordinate, but one cell up on _y_, and the value of the cell one to the right _x_-wise, and also up. So:
 
@@ -206,6 +206,50 @@ pascal x y | y==1 = 1 -- everything in the first row is 1
                                     (pascal (- x 1) (- y 1)))))
 ~~~~
 
+### Exercise 1.16
+
+We want an iterative, successive-squaring, exponentiation procedure. This problem is both one of the assigned problems in the textbook and in the web tutor. (You *are* doing the web problems, right?) So you know it's important.
+
+First, we remember our simplest versions of the exponential written recursively and iteratively:
+
+~~~~{.scheme}
+; simplest iterative exponential
+(define (expt-iter a n)
+  (helper a n 1))
+(define (helper a n c)
+  (if (zero? n)
+      c
+      (helper a (- n 1) (* a c))))
+
+; simplest recursive exponential
+(define (expt-recur a n) (if (zero? n)
+                             1
+                             (* a (expt-recur a (- n 1)))))
+~~~~
+
+Next, we recall our first successive squaring algorithm written recursively:
+
+~~~~{.scheme}
+; recursive successive squaring - powers of 2
+(define (ex a n)
+  (if (= n 1)
+      a
+  (* (ex a (/ n 2))
+     (ex a (/ n 2))
+     )))
+~~~~
+
+This was incomplete, as it handled only the simplest case of powers of 2; the full monty (from the textbook) was:
+
+~~~~{.scheme}
+; recursive successive squaring
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+        ((even? n) (square (fast-expt b (/ n 2))))
+        (else (* b (fast-expt b (- n 1))))))
+~~~~
+
+The description of the problem is coy. Why does it matter that $(b^\frac{{n}}{{2}})^2 = (b^2)^\frac{{n}}{{2}}$? What is this $ab^n$ and why should it be a constant over all invocations?
 
 ## 1.2.3
 http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.3
