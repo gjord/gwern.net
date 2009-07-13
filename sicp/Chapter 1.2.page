@@ -311,16 +311,88 @@ If we run this, we don't get an answer. Why? We may call it iteration, but like 
       )))
 ~~~~
 
-
-## 1.2.3
-http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.3
-http://eli.thegreenplace.net/2007/06/28/sicp-section-123/
-
-## 1.2.4
+As of here I am skipping to 1.2.5. I am not a little sick of the iterative problems, and while what's left of 1.2 seems to involve some more, I at least would like some subject matter other than addition, multiplication, and exponentiation - this much is _de trop_!
 
 ## 1.2.5
+### 1.2.0
+
+The functions in question:
+
+~~~~{.scheme}
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+(gcd 206 40)
+~~~~
+
+How many times is `remainder` called if this is evaluated strictly (applicative)? Lazily (normal order)?
+
+This, I think, is a good example of a general flaw in SICP; there are all these questions and theoretical excursia with minimal explanation or justification. Why do we care enough to manually trace out the hierarchy of called functions under 2 regimes of evaluation? Why do we care enough to laboriously convert recursive functions into iterative and vice-versa? Presumably we're supposed to be learning lessons about expressing the same concept/task in multiple abstractions, or maybe it's about performance. Certainly it's not clearly explained why we're spending so much time on this.
+
+Let's trace through applicative:
+
+~~~~{.scheme}
+(gcd 206 (remainder 206 40))
+     b = 6
+(gcd 40 (remainder 40 6))
+     b = 4
+(gcd 6 (remainder 6 4))
+     b = 2
+(gcd 4 (remainder 4 2))
+     b = 0 ; terminate
+~~~~
+
+4 calls, then.
+
+In normal order, we expand out everything first. The full expansion is way too long to include, but you should wind up with 18 calls, I think.
 
 ## 1.2.6
+### 1.2.1
+199, 1999, and 199999 are prime. Curiously, the missing number 19999 isn't and yields 7.
+
+### 1.2.2
+
+Here we benchmark the fast primality tests the textbook gives us. (A little surprising they didn't make us write it, but these functions are unusually heavy on library functions like `random`; perhaps that's why.)
+
+The text is a little out of date: the standard timing function seems to be named `time` these days, not `run-time`. This is true at least of PLT Scheme, and I found some [comments](http://stackoverflow.com/questions/256647/time-code-in-plt-scheme/262916#262916) that say most Scheme implementations use that name.
+
+Funnily enough, the largest number my Dr. Scheme's `random` will take is 4294967087, and the runtime on the `(fermat-test 4294967087)` is so small `time` doesn't record anything.
+
+The stated problem is pretty trivial with higher-order functions (or Haskell); we basically just write:
+
+~~~{.haskell}
+searchForPrimes x y = take 3 $ filter fastPrime [x,(x+2)..y]
+                where x' = if x `rem` 2 == 0 then x+1 else x
+~~~
+
+(If we don't mind the performance hit of generating even numbers as well as odd, which is why the `where` clause and the `(x+2)` is about, we can just write the nicer `take 3 $ filter fastPrime [x..y]`. As ever, speed implies ugliness.)
+
+In Scheme, I don't know any `take` equivalent, and I do not know how to use its `filter`. (I would feel guilty about using it since clearly we're meant to write out recursion schemas and catamorphisms by hand.) And apparently there is no `enumFromThenTo` (which `..` is an alias for), so we'd have to write our own (remembering the odds-only business) out as
+
+~~~{.scheme}
+(define (range x y) (if (even? x)
+                         (range-aux (+ x 1) y)
+                         (range-aux x y)))
+(define (range-aux x y) (if (>= x y)
+                        y
+                        (cons x (range-aux (+ x 2) y))))
+~~~
+
+We could then try to write a manual `filter`: if the first entry in the list isn't prime according to `fast-prime?`, return the empty list; if it is, cons it onto whatever our function produces with the `cdr` of the list. (So obviously our function should recurse down the list, replacing composites with empty lists and primes with themselves.) It'd look something like this:
+
+~~~~{.scheme}
+(define (search-for-primes x y) (search-aux (range x y)))
+
+(define (search-aux z) (if (null? z)
+                        ()
+                        (if (fast-prime? (car z) 1)
+                           (cons (car z) (search-aux (cdr z)))
+                           (search-aux (cdr z)))
+                            ))
+~~~~
+
+(But not exactly. There's some error in there somewhere which I don't care enough to track down.)
 
 # External links
 Eli blog links:
