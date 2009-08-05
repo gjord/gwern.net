@@ -1,0 +1,252 @@
+<!-- -*- mode: markdown; -*- -->
+
+"And on that dread day, the Ineffable One will summon the artificers and makers of graven images, and He will command them to give life to their creations, and
+failing they and their creations will be dedicated to the flames..."
+
+"Some say that a god lives on in the faith and memory of its believers. They point to computers and say, 'Behold, they need but think all together in a particular & precise mode, and from nowhere appear things real and greater than any they thought. Might not the same be true of humans, who are so much greater?' But this is no more true than a painting of a flower the flower itself."
+
+"Do there exist things like evolutionary compilers? Consider that for types like Int or Bool there exist a finite and enumerable number of values, so it is possible (though possibly tiresome) to compare two functions over those enumerated values and ascertain that they are identical in that regard. Could we not use evolutionary computational techniques for one of these two functions to gain considerable efficiency while retaining confidence in the soundness of our program.
+This wouldn't work for types like Integer or String (the types we really care about) because they can have indefinitely large sets of members, but we could compare equality over as large subsets as we care to test and then include conditionals: 'if x < 10e10 then quick-Function else full-Precision-Function' and such like. This is kind of like specialization, I believe, but more general and using a general optimization process. There is no free lunch, but only if you already have a ideal algorithm implemented.
+This raises a further question: does multi-level evolution work well? That is, could it make sense to evolve fragments of Haskell which type-check and then once one has reached a plateau of quality (presumably corresponding to the discovery of a quick algorithm in which no more gains are to be squeezed out by syntactic modifications, and then take the compiled code and evolve that - seeking micro-optimization gains. I have read a number of studies evolving Lisp fragments, and a number evolving binary streams, but none combining the two in any manner.
+As for implementation, it might run something like this: take a copy of the Prelude as a seed; take a copy of whatever one is working on and concatenate it with the Prelude. Separate out each function into its own 'unit' or file or whatever. On each unit, permute once and compile until it succeeds; once it successfully compiles, run the defined QuickChecks on it. How ever many it passes is its score. Save a copy if the score meets a certain value (like not in the bottom 10%), and continue the permute-compile-test cycle. Once all the QuickChecks are being passed, we can switch over to using SmallCheck and engaging in checks of all possible input up to a certain upper bound. Upon hitting the point of diminishing returns, you could then turn to optimizing the low-level definition... This is rather complicated and I hope there is a framework I can use - it seems to me that someone would've already set up a framework for evolving code and then my task would be much easier as I could focus on the fitness evaluation function."
+
+-paper idea: ''True Visions and Other Dangers: the esoteric and exoteric
+tales of Frank Herbert''
+--summary: in Herbert's Dune series, 'forward prescience' is often
+detected and discussed in critical analysis. But short shrift has
+been given to the subtle indications of 'backwards prescience',
+variants of the well-known device of self-fulfilling prophecy, except
+in this case, the prophecy causes the events -before- it to happen.
+Example: Muad'Dib apparently caused the prescience that led him to
+become emperor of the known universe, despite his attempts to avoid
+it. And his own prophecies apparently led to his fall. But! His vision
+in Dune Messiah should have determined everything, up to and definitely
+including the number and gender of his offspring by Chani. But he was
+wrong: Leto II was born, and he should not have been. How could he
+have been born? His vision was more powerful than Paul's, and he
+conquered him in Children of Dune. His overriding vision was the Golden Path, but
+the Golden Path could not have existed without Leto, and Leto without
+Paul's victory. Paul foolishly dabbled in prescience, a power he did
+not understand. A BG writing at the end of Dune revealingly says, "To
+use power is to make oneself infinitely vulnerable to greater powers."
+Paul used power; to whom did he make himself vulnerable?
+--What makes Dune, Dune?
+---Polyphony
+---A texturing of sayings, teachings, and poetry
+---A constant undercutting of beliefs and ideas; see how everyone
+believes in the Great Men theory of history - except the Great Men
+---Evolution and change
+---Psychology
+
+-Paper idea: ''The anxiety of influence: RahXephon's response to Neon Genesis Evangelion''
+--http://en.wikipedia.org/wiki/The_Anxiety_of_Influence. every artist makes his predecessors... Borges. RahXephon and Eva... http://en.wikipedia.org/wiki/RahXephon#Neon_Genesis_Evangelion (comparison). Eva ineluctably influenced RahXephon... RahXephon's manga begun 2001, Evangelion's
+TV 1995. mecha anime are remixes... variations. the pleasure of watching one is
+seeing the variation on the Truth, of trying to see each one get
+closer and closer to the heart of the matter. "I've taken on a risk:
+"It's just an imitation". And for now I can only write this
+explanation. But perhaps our "original" lies somewhere within there."
+(Hideaki Anno, from his story treatment "What were we trying to make
+here?" written before NGE began being produced by Gainax, as recorded
+on page 171 of ''Neon Genesis Evangelion Volume 1'', Yoshiyuki
+Sadamoto, translated by Fred Burke. August 2003. ISBN 1-56931-294-X). There is a deep relation here to Japanese poetry, in which originality
+is not necessarily valued. every change in a mecha anime from its predecessors is a reply, an
+ongoing dialog back and forth. how do mecha change? where have they
+gone to? look for the RahXephon bibles. Evangelion used Greek in Evangelion... rahx-ephon - "-ephon" as a suffix for
+instrument". RahXephon's creators wanted to create something new... track down
+references 2-5 of
+--http://en.wikipedia.org/wiki/RahXephon#Notes_and_reference. See also
+--"Dharma Cats": <http://www.geocities.com/sephkhan/rants/dharma.html>
+--Interesting idea: for God to exist, it must necessarily be limited and vulnerable to change, or be limited an unchanging. Either is unacceptable. If God exists, that is a truly atheistic enterprise.
+---"What do I mean by this, Eva fans? Simply that while there may not be any indication that there is a God behind the world of Evangelion, such a lack is not supposed either. Alternately, it may mean that there is a God, but that such a God, by virtue of existence, is imperfect, and thus not the Absolute so many of us seem to take it to be. And consider Eva's addition of a first half of the underlying Final Lie of the 108. Perhaps the assignment of a concrete God would be the most atheistic project Eva could undertake."
+----Note especially the Confidential Information's lack of a god and materialist conception of the universe.
+
+--
+
+"That is, from January 1926 through December 2002, when holding periods were 19 years or longer, the cumulative real return on stocks was never negative..."
+
+How does one engage in extremely long investments? On a time-scale of centuries, investment is a difficult task, especially if one seeks to avoid erosion of returns by the costs of active management.
+
+'Unit Investment Trust (UIT) is a US investment company offering a fixed (unmanaged) portfolio of securities having a definite life.'
+
+'A closed-end fund is a collective investment scheme with a limited number of shares'
+
+In long-term investments, one must become concerned about biases in the data used to make decisions. Many of these biases fall under the general rubric of "observer biases" - the canonical example being that stocks look like excellent investments if you only consider America's stock market, where returns over long periods have been quite good. For example, if you had invested by tracking the major indices any time period from January 1926 through December 2002 and had held onto your investment for at least 19 years, you were guaranteed a positive real return. Of course, the specification of place (America) and time period (before the Depression and after the Internet bubble) should alert us that this guarantee may not hold elsewhere. Had a long-term investor in the middle of the 19th century decided to invest in a large up-and-coming country with a booming economy and strong military (much like the United States has been for much of the 20th century), they would have reaped excellent returns. That is, until the hyperinflation of the Wiemar Republic. Should their returns have survived the inflation and imposition of a new currency, then the destruction of the 3rd Reich would surely have rendered their shares and Reichmarks worthless. Similarly for another up-and-coming nation - Japan. Mention of Russia need not even be made.
+
+Clearly, diversifying among companies in a sector, or even sectors in a national economy is not enough. Disaster can strike an entire nation. Rosy returns for stocks quietly ignore those bloody years in which exchanges plunged thousands of percent in real terms, and whose records burned in the flames of war. Over a timespan of a century, it is impossible to know whether such destruction will be visited on a given country or even whether it will still exist as a unit. How could Germany, the preeminent power on the Continent, with a burgeoning navy rivaling Britain's, with the famous Prussian military and Junkers, with an effective industrial economy still famed for the quality of its mechanisms, and with a large homogeneous population of hardy people possibly fall so low as to be utterly conquered? And by the United States and others, for that matter? How could Japan, with its fanatical warriors and equally fanatical populace, its massive fleet and some of the best airplanes in the world - a combination that had humbled Russia, that had occupied Korea for nigh on 40 years, which easily set up puppet governments in Manchuria and China when and where it pleased - how could it have been defeated so wretchedly as to see its population literally decimated and its governance wholly supplanted? How could a god be dethroned?
+
+It is perhaps not too much to say that investors in the United States, who say that the Treasury Bond has never failed to be redeemed and that the United States can never fall, are perhaps overconfident in their assessment. Inflation need not be hyper to cause losses. Greater nations have been destroyed quickly. Who remembers the days when the Dutch fought the English and the French to a standstill and ruled over the shipping lanes? Remember that Nineveh is one with the dust.
+
+In short, our data on returns is biased. This bias indicates that stocks and cash are much more risky than most people think, and that this risk inheres in exogenous shocks to economies - it may seem odd to invest globally, in multiple currencies, just to avoid the rare black swans of total war and hyperinflation. But these risks are catastrophic risks. Even one may be too many.
+
+This risk is more general. Governments can die, and so their bonds and other instruments (such as cash) rendered worthless; how many governments have died or defaulted over the last century? Many. The default assumption must be that the governments with good credit, who are not in that number, may simply have been lucky. And luck runs out.
+
+In general, entities die unpredictably, and one has no guarantee that a, say, 1500 year old Koren construction company will honor its bills in another 500 years because all it takes is one bubble to drive it into bankruptcy. When one looks at securities turning into money, of course all you see are ones for those entities which survived. This is 'survivorship bias'; our observations are biased because we aren't looking at all of the past, but the present. This can be exploited, however. Obviously if an entity perishes, it has no need for assets.
+
+Suppose one wishes to make a very long-term investment. One groups with a large number of other investors who wish to make similar investments, in a closed-end mutual fund with a share per investor, which is set to liquidate at some remote period. This fund would invest in assets all over the world and of various kinds, seeking great diversification. The key ingredient would be that shares are not allowed to be transferred. Should an investor perish, the value of their share would be split up amongst the other investors' shares (a percentage could be used to pay for management, perhaps). Because of this ingredient, the expected return for any individual investor would be extremely high - the potential loss is 100%, but the investor by definition will never be around for that loss. Because the identity and number of investments is fixed, potential control of the assets could be dispersed among the investors so as to avoid the situation where war destroys the headquarters of whomever is managing the assets. The technical details are unimportant; cryptography has many ingenious schemes for such matters (one can easily heavily encrypt a file and then distribute n keys where n - k are needed to decrypt the file).
+
+'Suppose you think that gold will become worthless on April 27th, 2020 at between four and four-thirty in the morning. I, on the other hand, think this event will not occur until 2030. We can sign a contract in which I pay you one ounce of gold per year from 2010 to 2020, and then you pay me two ounces of gold per year from 2020 to 2030. If gold becomes worthless when you say, you will have profited; if gold becomes worthless when I say, I will have profited. We can have a prediction market on a generic apocalypse, in which participants who believe in an earlier apocalypse are paid by believers in a later apocalypse, until they pass the date of their prediction, at which time the flow reverses with interest. I don't see any way to distinguish between apocalypses, but we can ask the participants why they were willing to bet, and probably receive a decent answer.'
+
+--
+
+01:04 < gwern> I think one of the more interesting trends in anime is the massive number of adaptations of light novels done in the '90s and 00s; it is interesting because no such trend exists in American media as far as I can tell (the closest I can think of are comic book adaptations, but of course those are analogous to the many mangas -> animes)
+01:04 < gwern> now, American media absolutely adapts many novels, but they are all normal Serious Business Novels
+01:05 < gwern> we do not seem to even have the light novel media - young adult novels do not cut the mustard. light novels are odd as they are kind of like speculative fiction novellas
+
+--
+
+In _Human Achievement_, one of the strongest indicators for genius is contact with a foreign culture. However, the modern era which is likely the most globalized one, in which English-speakers have access like they have never had before (compare how much classic Japanese & Chinese literature has been translated and stored in libraries as of 2009 to what was available when Waley began translating _Genji Monogatari_ in 1921!). This would seem to be something of a contradiction: if a little foreign contact was enough to inspire the 'chinoiserie' of France's Rococo period, then why wouldn't all the Asian immigrants and translations and economic contact to America spark even greater revolutions? There has been influence, absolutely; but the influence is striking for how a little bit helped (how many haiku did the Imagists have access to?) and a lot done not much more, and perhaps even less.
+This is a little perplexing. What's the explanation? Did the early artists suck out all the novelty? Or is there something stimulating about having only a few examples - does one draw faulty but fruitful inferences based on idiosyncrasies of the small data set?
+
+
+--
+
+10$ Kari Uncle Russ Emilie
+40$ Birches
+25$ the Naaktgeborens
+
+
+---
+
+<http://www.asofterworld.com/index.php?id=251>
+
+I'm going to start setting realistic goals for myself.
+-I'm going to practice picking locks more regularly.
+-I'm going to improve my French.
+-I'm going to learn to fight.
+-I'm going to live in a decommissioned submarine with my friends. Good morning, Jeff. Ping. Are we out of toast? Ping. We'll have to send someone into town. Ping.
+-I'm going to start going out at night, dressed all in black, with my hood up.
+-I'm going to stand in the shadows where a lot of people walk past.
+-I'm going to encrypt my hard drive for fun.
+-I'm going to encrypt the words, "You do good work" and I'm going to send it to every intelligence agency I can think of.
+-I'm going to play chess more.
+-I'm going to live my life like it's a chess game.
+-No. I'm going to live my life like it's a game of rock paper scissors.
+-I'm going to sit very still in the park until I am surrounded by pigeons and then I am going to leap up with my arms outstretched and they will all take flight. I am going to do this to teenagers in the food court, too.
+-I am going to read books about economics and apply those principles to my love life.
+-I am going to write thank you notes on nude photographs of myself and send them to my heroes. You know what? Forget heroes. I'm going to send them to strangers. To people who catch my eye. To beautiful broken future best friends. That is a pretty good way to make friends I think, but maybe I'm the wrong person to ask.
+-While I'm still young and healthy, I am going to make a video tape where I am shaking my head sadly. This is for me to watch when I am old and I regret everything. Regrets? Fuck you, future Joey. If they ever make a biopic about me it will be that first dip on the roller-coaster and it will last the whole movie, clutching the bar, screaming and crying and terrified, with a belly full of tiny donuts.
+
+Today I feel optimistic about tomorrow.
+
+---
+
+Purchases
+
+-10$ : Donation to WMF : Satisfied
+-100$ : Adrafinil/Hydergine : Very unsatisfied
+-140$ : French textbook, Quia subscription : Very unsatisfied
+-15$ : Grip strengthener : Satisfied
+-20$ : New wallet : Satisfied
+-88.50$ : Sunday NY Times : Very satisfied; done.
+-30-40$ : BookMooch shipping : Unknown, points not yet redeemed
+-30$ : Leg weights : Satisfied, but lost
+-30$ : New alarm clock : Satisfied
+-5$ : kung fu-style shoes : Satisfied, but not yet repaired
+-50$ : Astronomy textbook : Unsatisfied
+-500$ : ADX investment : not yet bought
+-60$ : Absolute Sandman 2 : Satisfied
+-800$ : New computer : Very satisfied
+-40$ : Stonybrook application :
+-30$ : Scrapped Princess box set for Molly :
+-20$ : Oolong samplers from Upton : Jade Oolong Imperial, Satisfied; Baked : Interesting, but not worth buying; Formosa Fancy Imperial Grade : Very satisfied
+-260$ : Australian Outback coat : Very satisfied
+-6$ : Edie's mint ice cream : Unsatisfied
+-59$ : Absolute Sandman Vol.3 : Very satisfied
+-21$ : Oil, oil filter, power-wash fluid : Satisfied
+-6$ : Melatonin : Satisfied
+-17$ : Hearing aid batteries : Satisfied
+-7$ : Shower timer : Satisfied
+
+---
+
+Wearable computers have many possibilities:
+- 10 second audio loop for when you miss something
+- directional/boom mikes
+- voice-to-text dictation of conversations (even high error rate would be useful for search)
+- random Mnemosyne quizzes
+
+--
+
+What's the connection between Newcomb's Paradox and large-scale voting?
+
+--
+
+Evolution idea:
+- ~40% of men never reproduce
+- most women do reproduce
+- there's a greater extremeness about male ability than female
+- why?
+- perhaps males are 'lottery tickets'; no problem if male winds up retarded because the lottery winners make up. But females are modest sure bets, so no need for dangerous genetic gambling - just wasteful in their case
+
+--
+
+https://secure.wikimedia.org/wikipedia/en/wiki/Ego_depletion
+'Ego depletion refers to the idea that self-control and other mental processes that require focused conscious effort rely on energy that can be used up. When that energy is low (rather than high), mental activity that requires self-control is impaired. In other words, using one's self-control impairs the ability to control one's self later on. In this sense, the idea of (limited) willpower is correct.'
+
+Wonder whether this has any connection with minimalism?
+Clutter might just damage https://secure.wikimedia.org/wikipedia/en/wiki/Executive_functions
+
+See also
+https://secure.wikimedia.org/wikipedia/en/wiki/Latent_inhibition
+"Latent inhibition is a process by which exposure to a stimulus of little or no consequence prevents conditioned associations with that stimulus being formed. The ability to disregard or even inhibit formation of memory, by preventing associative learning of observed stimuli, is an automatic response and is thought to prevent information overload. Latent inhibition is observed in many species, and is believed to be an integral part of the observation/learning process, to allow the self to interact successfully in a social environment."
+"Most people are able to shut out the constant stream of incoming stimuli, but those with low latent inhibition cannot. It is hypothesized that a low level of latent inhibition can cause either psychosis, a high level of creativity[1] or both, which is usually dependent on the subject's intelligence.[2][3] Those of above average intelligence are thought to be capable of processing this stream effectively, an ability that greatly aids their creativity and ability to recall trivial events in incredible detail and which categorizes them as almost creative geniuses. Those with less than average intelligence, on the other hand, are less able to cope, and so as a result are more likely to suffer from mental illness."
+
+--
+
+Interesting declutter: 100 Things Challenge
+http://zenhabits.net/2007/09/minimalist-fun-the-100-things-challenge/
+http://www.guynameddave.com/100-thing-challenge.html
+http://www.time.com/time/magazine/article/0,9171,1812048,00.html
+http://www.denverpost.com/room/ci_8060057
+
+--
+
+The count of monte cristo as a nietzschean hero?
+
+--
+
+If one were giving away 1$ or $2, how many people would decline the 2 out of suspicion?
+
+--
+
+Professor Grim tells a story about an acquaintance of his, who had once accepted a job at Yale's psychology department. He was driving into New Haven on his way to it, when he stopped for gas. The fellow working the station began filling up his car and they fell to chatting. (This was long ago.) When he mentioned that he was going to his new job there, the attendant stiffened up, removing the gas pump, and retreated into the far side of the garage. Incensed, he followed the attendant and demanded an answer. The attendant eventually stopped the cold shoulder and quietly said that once he had participated in Milgram's infamous authoritarian experiments, and was one of those who had gone through with it all. "And", he added, "I have not slept well since."
+
+--
+
+Down on the grasses,
+I gaze at the summer sun -
+And it gazes back!
+
+--
+
+Good poem title: 'The Scarecrow Appeals to Glenda the Good'
+
+--
+
+novel idea: an ancient british family has a 144 character (no spaces) string which encodes the political outcomes of the future eg. the restoration, the glorious rebellion, napoleon, nazis etc. thus the family has been able to pick the winning side every time and maintain its place. but they cannot interpret the remaining characters pertaining to our time. they hire researcher/librarians to crack it. one of them is our narrator. in the course of figuring it out, he becomes one of the sides mentioned. possible plot device: he has a corrupted copy?
+
+--
+
+Death poems are all just
+falling blossoms and nonsense -
+dying is dying
+
+---
+
+What's the killer app for non-medical genetic engineering in humans?
+
+How about geneline engineering of hair color? think about it. hair color is controlled by relatively few, and well-understood, genes. hair color is a dramatic change. there is massive demand for hair dye as it is, even with the extra effort and impernance and unsatisfactory results. how many platinum blondes would jump at the chance to have kids who are *truly* enviably blond? or richly red-headed (and not washed-out Irish read)? A heck of a lot, I'd say. The health risks need not be enormous - aside from the intervention itself, what risk could swapping a brunette gene for 2 recessive blondes cause?
+
+What sort of market could we expect? https://secure.wikimedia.org/wikipedia/en/wiki/Demographics_of_the_United_States
+103,129,321 women between 15 and 64; these are women who could be using dye themselves, so appreciate the benefit, and are of child-bearing years
+likely, the treatment will only work if there's natural variation to begin with - that is, for caucasians only. We'll probably want to exclude hispanics and latin americans, who are almost as homogenous in hair color as blacks and asians, so that leaves us 66% of the total US population. 66% * 103,129,321 will get us a rough estimate of 6.806535186e7 or 68,065,351.
+
+Here's a random report http://www.researchandmarkets.com/reportinfo.asp?report_id=305358 saying hair dye is worth 1 billion USD a year. Let's assume that this is all consumed domestically.
+
+A woman using hair dye on a permanent basis will be dying every month or so, or 12 times a year. Assume that one dye job is ~20 USD (she's not doing it herself); then ((1b / 20) / 12) gives us ~4,166,666 women using hair dye, or 1/24 or 4.1% of eligible women. This seems rather low to me, based on observations, but I suppose it may be that elderly women do not use much hair dye, or the trend to using highlights and less-than-complete dye jobs. But 4% seems like a rather safe lower end. That's a pretty large market - 4 million potential customers, who are regularly expressing their financial commitment to their desire to have some hair color other than their natural one.
+
+If each is spending even 100$ a year on it, a genetic engineering treatment could pay for itself very quickly. At 1000$, just 10 years. (And women can expect to live ~80). Not to mention, one would expect the natural hair to simply look better than the dye job.
+
+----
+
+There doesn't seem to be any good method of crowd-sourcing translation, despite excellent tools like Google Translate. Perhaps there could be a variant on the [ESP Game](!Wikipedia)? Not entirely sure how it works, but: use Google Translate as a base line, and compete to improve it? or maybe, the players could be given a word, then a sentence, then a paragraph?
