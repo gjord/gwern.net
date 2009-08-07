@@ -1,37 +1,35 @@
-import System.Environment
-import Data.List
+import System.Environment (getArgs)
+import Data.List ((\\))
 
+type PronounConj = (String, -- ^ basic French pronoun eg. "Je"
+                    String, -- ^ the translation of previous; eg. "I"
+                    String) -- ^ the selected verb's conjugation, eg. for avoir "ai"
 main :: IO ()
-main = do vs@(inf:pron:meaning:je:tu:il:nous:vous:ils:[]) <- getArgs
+main = do vs@(inf:pronunc:meaning:_je:_tu:_il:_nous:_vous:_ils:[]) <- getArgs 
           let prefix = getPrefix $ drop 2 vs
-          viceversa ("Define: " ++ inf ++ " (<i>" ++ pron ++ "</i>; v.)") meaning
-          viceversa ("Je " ++ je) ("I " ++ meaning)
-          viceversa ("Tu " ++ tu) ("You " ++ meaning)
-          viceversa ("Il " ++ il) ("He " ++ meaning)
-          viceversa ("Elle " ++ il) ("She " ++ meaning)
-          viceversa ("On " ++ il) ("It " ++ meaning)
-          viceversa ("Nous " ++ nous) ("We " ++ meaning)
-          viceversa ("Vous " ++ vous) ("Y'all " ++ meaning)
-          viceversa ("Ils " ++ ils) ("They <small>(m. pl)</small> " ++ meaning)
-          viceversa ("Elles " ++ ils) ("They <small>(f. pl)</small> " ++ meaning)
-          let foo' = foo meaning prefix
-          foo' "I" "Je"  je 
-          foo' "You" "Tu"  tu
-          foo' "He" "Il" il
-          foo' "She" "Elle" il
-          foo' "It" "On" il
-          foo' "We" "Nous" nous
-          foo' "Y'all" "Vous" vous
-          foo' "They <small>(m. pl)</small>" "Ils" ils
-          foo' "They <small>(f. pl)</small>" "Elles" ils
+          let allpron = zip3 ["Je", "Tu", "Il", "Elle", "On", "Nous", "Vous", "Ils", "Elles"]
+                          ["I", "You", "He", "She", "It", "We", "Y'all", 
+                           "They <small>(m. pl)</small> ", "They <small>(m. pl)</small> "] 
+                          vs
+          viceversa ("Define: " ++ inf ++ " (<i>" ++ pronunc ++ "</i>; v.)") meaning
+          mapM_ (viceversa3 meaning) allpron
+          let cloze' = clozeDelete meaning prefix -- since it's same verb and prefix for all of the conjugations
+          mapM_ cloze' allpron
 
-foo m pre x y v = putStrLn $ "\"" ++ x ++ " " ++ m ++ ".\": " ++ y ++ " " ++ (pre ++ (replicate (length v - length pre) '_')) ++
+clozeDelete :: String -> String -> PronounConj -> IO ()
+clozeDelete m pre (y,x,v) = putStrLn $ "\"" ++ x ++ " " ++ m ++ ".\": " ++ y ++ " " ++ (pre ++ (replicate (length v - length pre) '_')) ++
                       ".\t" ++ y ++ " " ++ (pre ++ "<b>" ++ (v \\ pre) ++ "</b>.")
 
 -- > getPrefix ["fooi", "foobar", "fooqux"] ~> "foo"
 getPrefix :: [String] -> String
 getPrefix v = let comm (x:xs) (y:ys) | x == y = x : comm xs ys; comm _ _ = [] in foldl1 comm v
 
+-- Print out a question/answer, and then answer/question - good for definitions
 viceversa :: String -> String -> IO ()
 viceversa x y = do putStrLn $ x ++ ".\t" ++ y ++ "."
                    putStrLn $ y ++ ".\t" ++ x ++ "."
+
+-- abstract out repetition like 
+-- > viceversa ("Je " ++ je) ("I " ++ meaning)..."Ils" ++ ils
+viceversa3 :: String -> PronounConj -> IO ()
+viceversa3 meaning (fr,en,conj) = viceversa (fr ++ " " ++ conj) (en ++ " " ++ meaning)
