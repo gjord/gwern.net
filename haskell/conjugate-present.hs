@@ -7,16 +7,15 @@ type PronounConj = (String, -- ^ basic French pronoun eg. "Je"
 main :: IO ()
 main = do vs <- getArgs
           case vs of 
-           (inf:pronunc:meaning:_je:_tu:_il:_nous:_vous:_ils:[]) -> do
+           (inf:pronunc:meaning:je:tu:il:nous:vous:ils:[]) -> do
                let prefix = getPrefix $ drop 2 vs
                let allpron = zip3 ["Je", "Tu", "Il", "Elle", "On", "Nous", "Vous", "Ils", "Elles"]
                           ["I", "You", "He", "She", "It", "We", "Y'all", 
                            "They <small>(m. pl)</small> ", "They <small>(m. pl)</small> "] 
-                          vs
-               viceversa ("Define: " ++ inf ++ " (<i>" ++ pronunc ++ "</i>; v.)") meaning
+                          [je, tu, il, il, il, nous, vous, ils, ils]
+               viceversa ("Define: " ++ inf ++ " (<i>" ++ pronunc ++ "</i>; v.)") ("to " ++ meaning)
                mapM_ (viceversa3 meaning) allpron
-               let cloze' = clozeDelete meaning prefix -- since it's same verb and prefix for all of the conjugations
-               mapM_ cloze' allpron
+               mapM_ (clozeDelete meaning prefix) allpron
            -- fallback if the input isn't *exactly* right
            _ -> putStrLn  "Example usage:\n$ conjugate-present avoir '/avwaʀ/' 'have/possess' ai as a avons allez ont"
 
