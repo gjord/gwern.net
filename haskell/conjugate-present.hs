@@ -5,16 +5,20 @@ type PronounConj = (String, -- ^ basic French pronoun eg. "Je"
                     String, -- ^ the translation of previous; eg. "I"
                     String) -- ^ the selected verb's conjugation, eg. for avoir "ai"
 main :: IO ()
-main = do vs@(inf:pronunc:meaning:_je:_tu:_il:_nous:_vous:_ils:[]) <- getArgs 
-          let prefix = getPrefix $ drop 2 vs
-          let allpron = zip3 ["Je", "Tu", "Il", "Elle", "On", "Nous", "Vous", "Ils", "Elles"]
+main = do vs <- getArgs
+          case vs of 
+           (inf:pronunc:meaning:_je:_tu:_il:_nous:_vous:_ils:[]) -> do
+               let prefix = getPrefix $ drop 2 vs
+               let allpron = zip3 ["Je", "Tu", "Il", "Elle", "On", "Nous", "Vous", "Ils", "Elles"]
                           ["I", "You", "He", "She", "It", "We", "Y'all", 
                            "They <small>(m. pl)</small> ", "They <small>(m. pl)</small> "] 
                           vs
-          viceversa ("Define: " ++ inf ++ " (<i>" ++ pronunc ++ "</i>; v.)") meaning
-          mapM_ (viceversa3 meaning) allpron
-          let cloze' = clozeDelete meaning prefix -- since it's same verb and prefix for all of the conjugations
-          mapM_ cloze' allpron
+               viceversa ("Define: " ++ inf ++ " (<i>" ++ pronunc ++ "</i>; v.)") meaning
+               mapM_ (viceversa3 meaning) allpron
+               let cloze' = clozeDelete meaning prefix -- since it's same verb and prefix for all of the conjugations
+               mapM_ cloze' allpron
+           -- fallback if the input isn't *exactly* right
+           _ -> putStrLn  "Example usage:\n$ conjugate-present avoir '/avwaʀ/' 'have/possess' ai as a avons allez ont"
 
 clozeDelete :: String -> String -> PronounConj -> IO ()
 clozeDelete m pre (y,x,v) = putStrLn $ "\"" ++ x ++ " " ++ m ++ ".\": " ++ y ++ " " ++ (pre ++ (replicate (length v - length pre) '_')) ++
