@@ -47,7 +47,7 @@ When:  Time-stamp: "2009-04-14 22:53:26 gwern"
 - <http://wxhaskell.sourceforge.net/applications.html>
 - [Two games](http://www.maths.tcd.ie/~icecube/2008/11/endless-cavern/)
 
-## Programming
+## General
 
 - Extend <http://haskell.org/haskellwiki/Simple_unix_tools> to include more coreutils and maybe QuickCheck tests, and merge into HSH's ShellEquivs. Is there any useful merger of [HSH](http://software.complete.org/software/projects/show/hsh), and [Language.Sh/ShSh](http://code.haskell.org/shsh/)
 - look for vector graphics libraries for Haskell; think about cloning DEFCON
@@ -115,6 +115,7 @@ When:  Time-stamp: "2009-04-14 22:53:26 gwern"
     - Shellac-readline.cabal
     - yhc.cabal
 - Collect all the rewrite rules invented in haskell-cafe and #haskell, and put them into a cabalized package split between safe rules and unsafe ones
+- Improve GHC's 'sort' function with [YHC's superior version](http://www.reddit.com/r/haskell/comments/994g9/timsort/c0bxmek)
 
 ## Pandoc
 - Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
