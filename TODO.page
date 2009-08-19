@@ -120,9 +120,6 @@ When:  Time-stamp: "2009-04-14 22:53:26 gwern"
 ## Pandoc
 - Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
 - Replace Pandoc's shell scripts with Haskell scripts
-- <http://groups.google.com/group/gitit-discuss/msg/cb2763d964577e6c>
-     
-     > "Pandoc already supports LaTeXMathML, which is a javascript latex -> mathml converter. It wouldn't be hard to modify gitit to use that instead of jsMath. But this doesn't work in all browsers, which is why I went with jsMath by default.<br>I would love it if someone with more FFI skill than me would write haskell bindings for itex2MML  <http://golem.ph.utexas.edu/~distler/blog/itex2MML.html>), which exports C functions that convert inline and block level LaTeX math to MathML. (Or, even better, write a pure Haskell module to do the same thing.)"
 
 ## Hackage
 - Look into build failures of:
