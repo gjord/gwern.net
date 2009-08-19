@@ -24,27 +24,27 @@ Well, shucks. That seems to cover just about everything that *would* damage my n
 
 We're interested not in what happens if we get lucky and immediately the Xbox 360 breaks and the manufacturer's warranty doesn't cover it and Best Buy will give us a new one^[A situation in which the insurance is obviously profitable, as what would have been an $800 expenditure becomes a $460 expenditure - which saves a healthy $340.] - after all, if we only go by best case scenario, the lottery is the greatest deal around - but rather in what we can expect on average; we have no _a priori_ reason to expect to be luckier or unluckier than average. So we use the [usual](!Wikipedia "Expected value#Mathematical definition") expected value formula:
 
-> payoff * probability-of-payoff = expected-value
+> $\text{payoff} \times \text{probabilityOfPayoff} = \text{expectedValue}$
 
 Generally, one only wants to engage in deals or actions which have a *positive* expected value. Does the Xbox insurance have a positive value? Let's say I have no idea. Certainly neither you nor I have access to good information about how many of Best Buy's customers actually use the insurance successfully (although Best Buy surely does). But we can still put some bounds on it: we can ask the question, "how likely would Xbox-breaking have to be before the insurance has a positive payoff?" That is, we know the payoff - it's 340. And we know the expected value we want by definition is for it to be greater than 0; but we want to get more out than we put in, so we need to get back *at least* $60 if we want to just break-even. With 2 out of the 3 variables solved,  basic algebra can now figure out the final variable, the probability:
 
-> 340 * p = 60<br>
-> (340 * p)/60 = 60/60<br>
-> (340/60) * p = 1<br>
-> 5.7 * p = 1<br>
-> p = 1/5.7
+1. $340 \times p = 60$
+2. $\frac{340 \times p}{60} = \frac{60}{60}$
+3. $\frac{340}{60} \times p = 1$
+4. $5.7 \times p = 1$
+5. $p = \frac{1}{5.7}$
 
 ## More details
 So we need a 1-in-6 chance of redeeming the insurance. But wait! The 1/6 doesn't apply directly to the chance of breaking an Xbox. Rather, it applies to the conjunction I expressed before: breaking the Xbox *and* Microsoft not covering it *and* Best Buy making good^[not a trivial consideration, given their customer service and the lengthy list of excluded issues] *and* us actually using it. As we all know, a conjunction of a bunch of probabilities is going to be less likely than any of the probabilities in themselves. So the first probability, 'breaking the Xbox' is going to be more likely than just 1/6.
 
 How much more likely? Well, we can play with some more numbers here. Let's see what happens if we are very generous & assign all the other probabilities something like a 90% chance. We know the total is 1/6, and we know the other 3 we've defined to 0.90, and we leave one variable to solve for, 'breaking the Xbox' (px):
 
-> 1/6 = 0.90 * 0.90 * 0.90 * px<br>
-> 1/6 = 0.729 * px<br>
-> (1/6) / 0.729 = px<br>
-> px = (1/6) / 0.729<br>
-> px =  0.17 / 0.729<br>
-> px = 0.229
+1. $\frac{1}{6} = 0.90 \times 0.90 \times 0.90 \times px$
+2. $\frac{1}{6} = 0.729 \times px$
+3. $\frac{\frac{1}{6}}{0.729} = px$
+4. $px = \frac{\frac{1}{6}}{0.729}$
+5. $px = \frac{0.17}{0.729}$
+6. $px = 0.229$
 
 So just by being a little more realistic, we see that for the insurance to make sense, we need an awfully high rate of Xbox breakage. And the necessary breakage rate for us to break-even becomes still worse, still more incredible, if we were to be less generous in the conjunction.
 
