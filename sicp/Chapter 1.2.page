@@ -326,7 +326,7 @@ The functions in question:
 (gcd 206 40)
 ~~~~
 
-How many times is `remainder` called if this is evaluated strictly (applicative)? Lazily (normal order)?
+How many times is `remainder` (defined by SRS) called if this is evaluated strictly (applicative)? Lazily (normal order)?
 
 This, I think, is a good example of a general flaw in SICP; there are all these questions and theoretical excursia with minimal explanation or justification. Why do we care enough to manually trace out the hierarchy of called functions under 2 regimes of evaluation? Why do we care enough to laboriously convert recursive functions into iterative and vice-versa? Presumably we're supposed to be learning lessons about expressing the same concept/task in multiple abstractions, or maybe it's about performance. Certainly it's not clearly explained why we're spending so much time on this.
 
@@ -393,6 +393,83 @@ We could then try to write a manual `filter`: if the first entry in the list isn
 ~~~~
 
 (But not exactly. There's some error in there somewhere which I don't care enough to track down.)
+
+### 1.23
+
+~~~~{.haskell}
+next = \x -> if x == 2 then 3 else x+2
+~~~~
+
+~~~~{.scheme}
+(lambda (x) (if (= x 2)
+            3
+            (* x 2)))
+~~~~
+
+### 1.25
+
+The modified `expmod` winds up calling `remainder` many times more than it could, since our longer version was doing some successive squaring (the `(/ exp 2)` expressions in the conditional).
+
+### 1.26
+
+Louis's error is actually quite straightforward. The difference lies in using `square` or using `*`. `square` was defined as taking a single argument, which is evaluated, and then multiplying itself against itself, while `*` takes 2 distinct arguments which could be quite different and multiplying them. This distinction allows `square` to evaluate/cause-the-evaluation-of its argument only *once*, while `*` must do so twice because it is more general. (It cannot assume that the evaluation of argument #1 will be the same as argument #2.)
+
+This is a consequence of strictness, although it is possible to do the same thing in Haskell, I think - these are not the same:
+
+~~~~{.haskell}
+foo y = let x = y*y in x + x + 2
+foo' y = (y*y) + (y*y) + 2
+~~~~
+
+(But this probably depends on the evaluation strategy of the compiler/interpreter: Haskell is non-strict, which means it allows a number of different evaluation strategies, some of which will calculate out `y*y` once and then reuse it then on - in which case `foo` = `foo'` - and some of which may choose to recalculate it.)
+
+TODO: check with #haskell that I'm not utterly mistaken here. also, how do 'where' play in?
+
+So every 'level' of our recursion, with `square` we replace the current level with another level, tail recursion-like, and we have something like `f(f(f(f(n))))`, which is logarithmic in its depth; but with `*`, we get a pyramidal call graph like `f(f(f(f(n) * f(n)) * f(f(n) * f(n))) * f(f(f(n) * f(n)) * (f(n) * f(n))))`. Oops!
+
+### 1.27
+
+The Carmichael numbers are
+
+- 561
+- 1105
+- 1729
+- 2465
+- 2821
+- 6601
+
+~~~~{.scheme}
+(define (fermat-test n)
+  (define (fermat-aux a)
+    (cond ((= a 1) #t)
+          ((not (= (expmod a n n) a)) #f)
+          (else (fermat-aux (- a 1)))))
+    (fermat-aux (- n 1))
+  )
+
+(define (expmod base exponent m)
+  (cond ((= exponent 0) 1)
+        ((even? exponent)
+          (remainder  (square (expmod base (/ exponent 2) m))
+                m))
+        (else
+          (remainder  (* base (expmod base (- exponent 1) m))
+                m))))
+~~~~
+
+One of the neat things I noticed was that since every definition in Scheme is in IO and the results printed out, we can build up a mini testsuite by just appending some lines like `(fermat-test 561)` to our definitions - and since they should all return `#t` (being good little Fermat-fooling Carmichael numbers), we can lump them into a single `and` and on every reload of our buffer (`C-t` in Dr. Scheme), learn whether our code is good or not like thus:
+
+~~~~{.scheme
+(and
+        (fermat-test 561)
+        (fermat-test 1105)
+        (fermat-test 1729)
+        (fermat-test 2465)
+        (fermat-test 2821)
+        (fermat-test 6601))
+~~~~
+
+It's not static typing nor QuickCheck tests, but it can at least give us confidence that there are none of the *really* dumb-mistakes-Scheme-oughta-catch like supplying the wrong number of arguments to a function, or using an undefined name/symbol thanks to a typo. Which is something.
 
 # External links
 Eli blog links:
