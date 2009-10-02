@@ -54,6 +54,8 @@ In the course of using Mnemosyne, I've written a number of scripts to generate r
 - [memo4.hs](haskell/memo4.hs) is intended for long lists of items. If one wants to memorize the list of US Presidents, the natural questions for flashcards goes something like 'Who was the 3rd president?/Thomas Jefferson', 'Thomas Jefferson was the \_rd president./3', 'Who was president after John Adams?/Thomas Jefferson', 'Who was president before James Madison?/Thomas Jefferson'.<br>
 You note there's repetition if you do this for each president - one asks the ordinal position of the item both ways (item -> position, position -> item), what precedes it, and what succeeds it. memo4.hs automates this, given a list. In order to be general, the wording is a bit odd, but it's better than writing it all out by hand! (Example output is in the [comments](!Wikipedia "Comment (computer programming)") to the source code).
 
+The reader might well be curious by this point what *my* Mnemosyne database looks like. Said reader may find a not-too-old version of my database exported as XML at [docs/gwern.xml]().
+
 # External links
 
 > "Two psychology journals have recently published papers showing that this strategy works, the latest findings from a decades-old body of research. When students study on their own, "active recall" — recitation, for instance, or flashcards and other self-quizzing — is the most effective way to inscribe something in long-term memory.<br>Yet many college instructors are only dimly familiar with that research..." from ["Close the Book. Recall. Write It Down.: That old study method still works, researchers say. So why don't professors preach it?"](http://chronicle.com/free/v55/i34/34a00101.htm); _[The Chronicle of Higher Education](!Wikipedia)_
