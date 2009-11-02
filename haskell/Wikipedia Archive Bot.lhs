@@ -245,3 +245,6 @@ But here is the final, ugly, fast and frugal version. This combines the lazy IO 
 > archiveURL :: B.ByteString -> IO ()
 > archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com") >>
  return ();
+
+# See also
+- [Wikipedia RSS Archive Bot.lhs]() -(the next step)
