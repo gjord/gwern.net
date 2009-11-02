@@ -1,0 +1,39 @@
+I wrote this essay many years ago, in the first flush of my philosophical reading about observer bias; to my dismay, several months later I would discover that this was actually a very well developed field of insurance - [life annuity](!Wikipedia) or more specifically, [longevity insurance](!Wikipedia).
+
+I still find it interesting that I got 'here' from 'there', though, so for your amusement:
+
+# On the Application of Observer-Bias effects to contract law
+
+[Observer bias](!Wikipedia) effects have long been applied to issues in philosophy, and in other areas, like cosmology, history, macro-economics (such as in quantifying survivorship biases in long-term projections of national economies). But the relevance of this relatively esoteric philosophical topic to micro-economics has not been clear. I propose a way to exploit a sub-category of observer biases, survivorship bias, to construct a novel financial instrument of possible utility in various roles like retirement planning.
+
+This instrument I call a "life contract", since its payoffs are conditional on the status of various lives; that is, they act as a form of arbitrage for life and death. They are conceptually similar to a form of insurance known as "endowment insurance".
+
+In an abbreviated form, the contract runs thus: an agent A ("Alice") enters into a contract with another agent B ("Bob"). Bob pays Alice a certain sum X at the outset of the contract.  The contract specifies a certain (presumably large) time period T; after T has elapsed, Alice pays to Bob a sum X + Z (where Z is an amount related to the return on X minus a certain amount to recompense Alice) if and only if Bob is still alive.  If Bob has died during T, Alice does not pay Bob's heirs or designees anything, but rather keeps the entire sum X + Z.
+
+Interestingly, when you take a game theoretical view of a number of contracts (since deaths are probabilistic, Alice would be safest and most insulated from simple bad luck by contracting with multiple Bobs), no one loses- almost by definition, the agents (the Bobs), who would lose money in such arrangements cannot be said to lose anything, since they would be dead.
+
+It is trivial to see that for any Bob, if the payoff at the end of the time period T is greater than the sum X would otherwise have returned if invested otherwise (the opportunity cost, in other words), the Bob cannot lose; if he dies and thus forfeits the total amount, considerations of profit and loss are from his perspective meaningless. On the other hand, if he survives, he profits considerably.
+
+The incentive for Alice to participate is not so clear- if Bob survives, she could stand to lose quite a bit of money to Bob. For instance, if she contracted with multiple bobs and all the Bobs survived, and the actual stock market return was 9% and she had promised an 11% return (counting on the forfeited money from the dead Bobs to more than cover this premium, with the excess making up her profit), then she would lose her entire capital pool, and more.
+
+So it is not immediately clear that Alices would willingly participate, since if more Bobs died than anticipated, Alice could lose, depending on how competitive the contract and how thing her profit margin, anywhere from merely some of her profit to actual capital. I contend that under a reasonable range of variables (ex. the time interval, premium paid to surviving Bobs, percentage of surviving Bobs), both Alice and Bob turn out to profit, and not just profit, but realize a return greater than that available on the open equity markets, and with low risk.
+
+//This will eventually be a full mathematical description.
+alice-income = (#bobDead * X)
+alice-profit = (income) - (Z * #bobAlive)
+Z = return-on-X after T
+return-on-X = ?
+
+T = ?
+X = ?
+#bobAlive = ?
+#bobDead = ?
+prove that alice-profit is >= 0.
+
+Under reasonable assumptions, like a ratio of 50:50 for dead:alive Bobs (or, bobAlive = bobDead), with an according period T, and a rate of return above the historical 9% (~10%), this contract can yield a profit for both Alice and the surviving Bobs.  Indeed, even under a worst-case scenario where the return on investment for Bobs is equal to Alice's ROI for the invested X, or when Alice's ROI is unexpectedly low, a possible but unlikely result for long-term investments (a situation which eliminates a major source of profit for Alice), Alice has a built-in safety margin- the dead Bobs provide a cushion.  Thus, both Alice and Bob benefit from such life contracts.
+
+There are a number of weaknesses to this suggested instrument: what it means to die for a corporation is by no means clear (does it have to declare bankruptcy, or dissolve itself, or be bought by another corporation or individual? If any of the former, then life contracts would of necessity have a low return, and be rather unattractive). Even whether a life contract is workable is unknown; to my knowledge, no-one has ever contracted in life contracts, so there is no empirical evidence either way as to whether this could work. It does offer a superior return over investing in conventional instruments, and so a rational egotistical agent would surely invest. But people are not necessarily rational egotists- they might well prefer to accept lesser returns on their investments so they could have the flexibility of choosing whether to pass on the gains to their heirs, or to charities, or any number of other parties. Indeed, from an heir's viewpoint, a life contract might well have a very poor rate of return- money was paid out, but no money was received in turn.  Or, a Bob might decide that the risk of Alice not performing (either through personal insolvency, criminal intent, or in the case of corporations, having been dissolved or merged with) is not worth the potential gains, and invest in something else; such a risk would not be ameliorated by the long time spans inherent in life contracts but rather increased.
+
+There are some precedents to suggest that some people might well invest. Already mentioned was endowment insurance. An agent could also take out a long-term loan like a mortgage, at an interest rate less than the long-term returns on the equity markets, and they would only repay the loan if they survived. The venerable Social Security could be seen as being in essence a long-term, massive, and considerably less effective variant on life contracts; albeit skewed towards the poor and yielding an effective return on investment on the order of 2, 3%.
+
+Social Security's relative ineptness but continued support by the American populace suggests that life contracts have the potential to be very useful in retirement planning; a person could purchase a contract while young and earning money, and then scores of years later, when the contract ends (since the return improves the longer the contract is for, and hence the greater the mortality rate) receive a considerable lump sum, and in the time of one's life, retirement, during which ready cash is most needed, and often least available.
