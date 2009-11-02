@@ -61,9 +61,9 @@ Purely arbitrarily, we'll have fetchArticleURLs work on pages from the live Engl
 
 It's not too hard to see how to get the URL for any given article ("http://en.wikipedia.org/wiki/" ++ article), nor how to use Network.HTTP to download the HTML file constituting an article (couldn't be more than 10 lines) - but reliably parsing that HTML to extract genuine external links doesn't seem trivial at all! We could go with some sort of clumsy regexp matching on "http://", but hit-or-miss regular expressions just aren't The Haskell Way.
 
-Stumped, the thing to do is to go bum around on the Haskell wiki and #haskell, where some excellent fellow willeventually inform us that "Hey, you know, parsing Wikipedia pages' HTML to extract out all external links kind of reminds me of one of the examples for ndm's little TagSoup library. You should go check it out."
+Stumped, the thing to do is to go bum around on the Haskell wiki and #haskell, where some excellent fellow will eventually inform us that "Hey, you know, parsing Wikipedia pages' HTML to extract out all external links kind of reminds me of one of the examples for Neil Mitchell's TagSoup library. You should go check it out."
 
-Indeed, we need some sort of library to parse HTML for us and maybe handle the network business, and TagSoup <http://www-users.cs.york.ac.uk/~ndm/tagsoup/> fits the bill admirably. One of the examples in Example.hs (googleTechNews) does almost precisely what we want, except for Google Tech News. The example in its entirety:
+Indeed, we need some sort of library to parse HTML for us and maybe handle the network business, and [TagSoup](http://www-users.cs.york.ac.uk/~ndm/tagsoup/) fits the bill admirably. One of the examples in Example.hs (googleTechNews) does almost precisely what we want, except for Google Tech News. The example in its entirety:
 
 > googleTechNews = do
 >        tags <- liftM parseTags $ openURL "http://news.google.com/?ned=us&topic=t"
@@ -149,7 +149,7 @@ But alas, we see an all too common problem with beautiful concise Haskell: it do
 
 > $ head -n 20 enwiki-all-titles-in-ns0 | archive-bot
 
-It performs acceptably for small values of n, but if we try 100 or more, we quickly notice extreme slowness andoutsized memory usage. Looking through the code, 'nub' immediately comes to mind as a culprit. Everywhere else, we're using maps and the like, but nub operates on the whole list of URLs at once, so perhaps it's slow. nub apparently has O(n^2) because it compares every member against every other entry in a list. Let's optimize it. Nub has to do the n^2 matches because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than nub. So add in:
+It performs acceptably for small values of n, but if we try 100 or more, we quickly notice extreme slowness and outsized memory usage. Looking through the code, 'nub' immediately comes to mind as a culprit. Everywhere else, we're using maps and the like, but nub operates on the whole list of URLs at once, so perhaps it's slow. nub apparently has O(n^2) because it compares every member against every other entry in a list. Let's optimize it. Nub has to do the n^2 matches because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than nub. So add in:
 
 > import Data.Set (toList, fromList)
 
@@ -212,7 +212,7 @@ Remember getContents is lazy, and it can achieve this magic using 'unsafeInterle
 
 So now we have:
 
-> import System.IO.Unsafe (unsafeInterleaveIO) -- Scary name, but it's safe and useful for us, at least
+> import System.IO.Unsafe (unsafeInterleaveIO) -- Scary name, but it's safe and useful for us
 > fetchArticleURLs article = liftM (B.lines . extractURLs) (unsafeInterleaveIO $ openURL(wiki ++ B.unpack article))
 
 Let's think about the flow now. getContents keeps on delivering a few characters to words, which is waiting for a newline, at which point it turns those characters into a string and passes them onto mapM which will immediately run fetchArticleURLs - and fetchArticleURLs will immediately 'finish', leaving behind some thunks or whatever holding a promise that it'll run the IO actions (downloading a particular Web page) whenever it's needed. And that promise gets passed into uniq, which is busy concatenating and then uniqueifying the results of those thunks. So now the program will basically run in constant space (I notice that even when I pass it 10000 or 20000 names it'll use a steady 7.6% or so of memory as opposed to a varying ~40% with previous versions running on a few hundred names). It may take a while longer, but this is a small price to pay - now my computer will still be usable while the program is running.
@@ -222,17 +222,18 @@ Are we tired of this program yet? I've thought of one last and particularly nast
 But here is the final, ugly, fast and frugal version. This combines the lazy IO covered previously and adds in the hardwired filter.
 
 > module Main () where
-> import Monad (liftM) -- Is there any particular order you're s'posed to go in?
-> import Data.List (isPrefixOf)
+>
 > import Control.Concurrent (forkIO)
+> import Control.Monad (liftM)
+> import Data.List (isPrefixOf)
 > import System.IO.Unsafe (unsafeInterleaveIO)
-> import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, pack, unpack, words)
-> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
 > import Text.HTML.Download (openURL)
+> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+> import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, pack, unpack, words)
 
 > main :: IO ()
 > main = mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
->                 where uniq :: [[B.ByteString]] -> [B.ByteString] -- So hideous
+>                 where uniq :: [[B.ByteString]] -> [B.ByteString]
 >                       uniq = filter (\x -> if x == B.pack "http://wikimediafoundation.org/" || x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations" || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising" || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy" || x == B.pack "http://www.mediawiki.org/" || x == B.pack "http://www.wikimediafoundation.org" then False else True) . concat
 
 > fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
