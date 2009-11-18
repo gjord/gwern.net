@@ -37,14 +37,12 @@ Now we can solve #5. Given `extractURLs`, we fire off the request using `openURL
 
 And point #3 is trivial given the URL to new articles, so we are left with #1 and #2. Now, the first thing that should pop into any good Wikipedian's head upon being asked how to get new articles is, 'go to [Special:Newpages](!Wikipedia)!' But how is a poor little bot to deal with that human-centric interface? Fortunately, upon visiting we notice that little RSS icon. That's how we will do it: download the RSS feed for Newpages and parse it.
 
-We will use the [feed](TODO) library to parse the RSS feed. Looking at the types, we see a RSS feed is a list of RSS items, `[RSSItem]`, and each RSSItem has several fields - but we only need the title. So:
-
-TODO: what is an RSS channel?
+We will use the [feed](http://hackage.haskell.org/package/feed) library to parse the RSS feed. Looking at the types, we see a RSS feed is a list of RSS items, `[RSSItem]`, and each RSSItem has several fields - but we only need the title. So:
 
 > items :: String -> [RSSItem]
 > items feed = rssItems $ rssChannel $ fromJust $ parseFeedString feed
 
-parseFeedString is actually `String -> Maybe Feed`, but we know Wikipedia won't give us a bad feed, so we bypass error checking; then we drill down past the metadata into a RSSChannel, and then we pull out the RSSItems, and then finally the actual URL links:
+parseFeedString is actually `String -> Maybe Feed`, but we know Wikipedia won't give us a bad feed, so we bypass error checking; then we drill down past the metadata into a RSSChannel (an [RSS channel](http://www.mnot.net/rss/channel.html)[](http://www.w3schools.com/rss/rss_channel.asp) is a finer subdivision of the overall feed; you might have 2 channels, 1 for articles & 1 for pics, or aggregating multiple websites or streams into 1 feed), and then we pull out the RSSItems, and then finally the actual URL links:
 
 > titles :: [RSSItem] -> [String]
 > titles itms = map (fromJust . rssItemLink) itms
@@ -123,7 +121,7 @@ Tada! This gives us the completed program:
 > archiveURL email url = openURL url' >> return ()
 >               where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
 
-We can tweak it further if we want. [hlint](TODO) will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
+We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/)[](http://hackage.haskell.org/package/hlint) will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
 
 Now we have our finished prototype. We can compile it and run it like:
 
@@ -137,7 +135,7 @@ How's the efficiency? Not too bad, but as with the other bot, we'll find network
 
 > archiveURL email url = forkIO (openURL url') >> return ()
 
-This only parallelizes the archive request. We could independently parallelize, using [mboxes](TODO), the downloads of the articles, but now things are getting complex. It'd be better to try to parallelize each article - have each article be a single thread which downloads the article, parses it for links, and fire off archive requests. With lightweight [green thread](!Wikipedia)s, this is actually the best way.
+This only parallelizes the archive request. We could independently parallelize, using [MVars](http://haskell.org/ghc/docs/latest/html/libraries/base/Control-Concurrent-MVar.html) [for synchronization](http://bartoszmilewski.wordpress.com/2009/02/26/message-passing-atoms-mvars/), the downloads of the articles, but now things are getting complex. It'd be better to try to parallelize each article - have each article be a single thread which downloads the article, parses it for links, and fire off archive requests. With lightweight [green thread](!Wikipedia)s, this is actually the best way.
 
 This might sound difficult, but here too writing from the bottom-up with independent functions will make it easier to reorganize the program. In fact, we will only need to modify `archiveBot` a little bit, factoring out the independent bit and wrapping it in a `forkIO`:
 
