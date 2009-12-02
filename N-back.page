@@ -52,7 +52,11 @@ But 1-back is pretty easy. The turns come fast enough that you could easily keep
 
 The next step up is a doozy: 2-back. In 2-back, you do the same thing as 1-back but as the name suggests, you are instead matching against *2* turns ago. So before you would be looking for repeated letters - 'a a' - but now you need to look for separated letters - 'a b a'. And of course, you can't forget so quickly, since you still need to match against something like 'a b a b a'.
 
-2-back stresses your working memory even more, as now you are remembering 6 things, not 4: 2 turns ago, the previous turn, and the current turn - all of which have 2 salient features. (At 6 items, we're also in the mid-range of estimates for normal working memory capacity.[^size]) Worse, the gap between elements is deeply confusing. It's particularly bad when there's repetition involved - if the same square is selected twice with the same letter, you might wind up forgetting both!
+2-back stresses your working memory even more, as now you are remembering 6 things, not 4: 2 turns ago, the previous turn, and the current turn - all of which have 2 salient features. (At 6 items, we're also in the mid-range of estimates for normal working memory capacity.[^size])
+
+And even if there are only a few things to remember, the number of responses you have to choose between go up exponentially with how many 'modes' there are, so Triple N-back has not $\frac{1}{3}$ more possible responses than Dual N-back, but more than twice as many: if _m_ is the number of modes, then the number of possible responses is $2^m - 1$^[The $-1$ is there because one can nothing in every mode, but that's boring and requires no choice or thought.], so DNB has 3 possible responses[^math], while TNB has 7^[$2^3 - 1$], Quadruple N-back 15^[$2^4 - 1$], and Quintuple N-back 31^[$2^5 - 1$]!  
+
+Worse, the temporal gap between elements is deeply confusing. It's particularly bad when there's repetition involved - if the same square is selected twice with the same letter, you might wind up forgetting both!
 
 So 2-back is where the challenge first really manifests. The good thing is that after about 20 games I started to get the hang of it. (It helped to play a few games focusing only on one of the stimuli, like the letters; this helps you get used to the 'reaching back' of 2-back.) I'm still in just the 80-90% range, but when I start hitting 100%, I'll move on up to 3-back.
 
@@ -86,3 +90,8 @@ Not long after starting N-back, while still at 2-back, I did the iqtest.dk and w
 [^atwood2]: Jeff Atwood, ["The Large Display Paradox"](http://www.codinghorror.com/blog/archives/000928.html)
 [^yegge]: Steve Yegge, ["Programming's Dirtiest Little Secret"](http://steve-yegge.blogspot.com/2008/09/programmings-dirtiest-little-secret.html)
 [^details]: There are any number of variants: the NATO phonetic alphabet, piano keys, etc. And Brain Workshop has any number of modes, like 'Arithmetic N-back' or Quintuple N-back (the very concept scares me), so please accept that this is a very summarized description.
+[^math]: $2^2 = 4; 4-1 = 3$. For DNB, the 3 responses are:
+
+     1) audio match
+     2) visual match
+     3) audio & visual matches
