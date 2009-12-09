@@ -155,6 +155,7 @@ So now if `parseRSSIO` returns 100 entries, we will fork off 100 `archiveOne` wo
 
 What more can we do? Well, as constructed, the bot is one-shot: it downloads the Newpages RSS feed *once*, processes it, and exits.
 
+If we don't like `openURL`, we could always do `import Network.HTTP (getRequest, simpleHTTP)` and then `openURL = simpleHTTP . getRequest`
 TODO update with cleaner code
 
 > import Control.Concurrent (forkIO)
@@ -168,6 +169,7 @@ TODO update with cleaner code
 > import System.Environment (getArgs)
 
 > import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+> import Text.HTML.Download (openURL)
 
 > import Text.Feed.Import (parseFeedString)
 > import Text.Feed.Types (Feed(RSSFeed))
