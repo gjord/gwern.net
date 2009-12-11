@@ -1,3 +1,8 @@
+---
+format: markdown+lhs
+title: A bot to archive Wikipedia URLs using WebCite
+...
+
 One of the best ways to learn something practical like Haskell is to simply dive in and make it do something useful for you. In my case, I've wanted to learn Haskell for a long time: the syntax was gorgeous compared to Common Lisp, sh, or Java (the only other languages I had any sort of experience with); various ideas such as monads, lazy evaluation, and purity struck me as fascinating and exciting; and the community was excellent in so far as I was smart enough to understand it.
 
 But I didn't have any practical use for it, and I'm too lazy to learn it unless I have to. Bash worked well enough for my shell scripts, my Java days were thankfully far behind me, and I generally only messed with Common Lisp because of my use of the [Stump window manager](http://en.wikipedia/wiki/StumpWM), but I had finished configuring and extending StumpWM to my liking (and I use Xmonad these days). Fortunately, I am a heavy user and long-time editor of Wikipedia, and there have long been a number of technical things bugging me.
