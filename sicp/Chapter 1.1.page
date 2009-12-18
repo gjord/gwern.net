@@ -341,7 +341,7 @@ This is just syntactic, of course. A good Haskeller knows in his bones that ever
 
 If we think about the types, we get something like `(x -> Bool) -> (x -> x) -> x -> x`: we have a 'stopping function', an 'improvement function', a seed value, and then the result (remember that in Haskell type syntax, parentheses denote a function, and the last thing in the last is the result).
 
-When we ask that estimable tool, [Hoogle](http://haskell.org/hoogle/), whether any such function has already been written, we get back the answer [Yes](http://haskell.org/hoogle/?hoogle=%28x+-%3E+Bool%29+-%3E+%28x+-%3E+x%29+-%3E+x+-%3E+x)! There is such a function! It's called [`until`](http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#v:until). Here's an example use of it: divide by 2 until the result is less than 0.001:
+When we ask that estimable tool, [Hoogle](http://www.haskell.org/hoogle/), whether any such function has already been written, we get back the answer [Yes](!Hoogle "(x -> Bool) -> (x -> x) -> x -> x")! There is such a function! It's called [`until`](http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#v:until). Here's an example use of it: divide by 2 until the result is less than 0.001:
 
 ~~~~{.haskell}
 until (\x -> x < 0.001) (\x -> x / 2) 5
