@@ -116,6 +116,7 @@ When:  Time-stamp: "2009-12-17 20:28:45 gwern"
     - yhc.cabal
 - Collect all the rewrite rules invented in haskell-cafe and #haskell, and put them into a cabalized package split between safe rules and unsafe ones
 - Improve GHC's 'sort' function with [YHC's superior version](http://www.reddit.com/r/haskell/comments/994g9/timsort/c0bxmek)
+- write a tool to recurse through $HOME, open every file looking for text, and submit any found URLs to <http://webcitation.org>
 
 ## Pandoc
 - Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
