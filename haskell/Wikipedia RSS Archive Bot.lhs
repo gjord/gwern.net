@@ -42,7 +42,7 @@ Now we can solve #5. Given `extractURLs`, we fire off the request using `openURL
 
 And point #3 is trivial given the URL to new articles, so we are left with #1 and #2. Now, the first thing that should pop into any good Wikipedian's head upon being asked how to get new articles is, 'go to [Special:Newpages](!Wikipedia)!' But how is a poor little bot to deal with that human-centric interface? Fortunately, upon visiting we notice that little RSS icon. That's how we will do it: download the RSS feed for Newpages and parse it.
 
-We will use the [feed](http://hackage.haskell.org/package/feed) library to parse the RSS feed. Looking at the types, we see a RSS feed is a list of RSS items, `[RSSItem]`, and each RSSItem has several fields - but we only need the title. So:
+We will use the [feed](!Hackage) library to parse the RSS feed. Looking at the types, we see a RSS feed is a list of RSS items, `[RSSItem]`, and each RSSItem has several fields - but we only need the title. So:
 
 > items :: String -> [RSSItem]
 > items feed = rssItems $ rssChannel $ fromJust $ parseFeedString feed
@@ -126,7 +126,7 @@ Tada! This gives us the completed program:
 > archiveURL email url = openURL url' >> return ()
 >               where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
 
-We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/)[](http://hackage.haskell.org/package/hlint) will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
+We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/)[](!Hackage "hlint") will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
 
 Now we have our finished prototype. We can compile it and run it like:
 
