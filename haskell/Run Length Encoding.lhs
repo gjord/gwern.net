@@ -3,7 +3,7 @@ format: markdown+lhs
 title: Run Length Encoding
 ...
 
-Recently I was playing with and working on a Haskell clone of the old [_Gradius_](!Wikipedia "Gradius_(series\")) arcade games, [_Monadius_](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Monadius). Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all <tt>Integer</tt>s to <tt>Int</tt>s and so on), but in its Demo.hs, I found an interesting solution to a problem, and it seems like a good & real example of how Haskell's abstractions can shine.
+Recently I was playing with and working on a Haskell clone of the old [_Gradius_](!Wikipedia "Gradius_(series\")) arcade games, [_Monadius_](!Hackage). Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all `Integer`s to `Int`s and so on), but in its Demo.hs, I found an interesting solution to a problem, and it seems like a good & real example of how Haskell's abstractions can shine.
 
 # Examples
 
@@ -59,24 +59,24 @@ Suppose we have levels which are specified by a pair of numbers and then a long 
 > 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 >  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
 
-This is clearly a bad way of representing things. We could just scrap this representation as <tt>Int</tt>s completely and perhaps define it as
+This is clearly a bad way of representing things. We could just scrap this representation as `Int`s completely and perhaps define it as
 
 > level1 :: ((Geometry,Geometry),[Enemy])
 > level1 = ((Tall,Narrow), [FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,Shooter,PowerUp,Boss..])
 
-But this representation, while certainly more symbolic, is still very repetitious. It will, in fact, take even more space to write down. We could have the <tt>Read</tt> and <tt>Show</tt> typeclasses auto-derived for our <tt>Geometry</tt> and <tt>Enemy</tt> datatypes, and then we could ship <tt>level1</tt>, <tt>level2</tt> etc. as some sort of "levelinformation.dat" file, and read the level information in at runtime. But that makes installation and running more difficult, and it doesn't address the core issue: the information is written in a way that is so ungainly that it's next to impossible to write or even *modify*!
+But this representation, while certainly more symbolic, is still very repetitious. It will, in fact, take even more space to write down. We could have the `Read` and `Show` typeclasses auto-derived for our `Geometry` and `Enemy` datatypes, and then we could ship `level1`, `level2` etc. as some sort of "levelinformation.dat" file, and read the level information in at runtime. But that makes installation and running more difficult, and it doesn't address the core issue: the information is written in a way that is so ungainly that it's next to impossible to write or even *modify*!
 
 # The solution
 
 We need some way of expressing this more concisely, of, in short, *compressing* it. In this vein of thought, our first observation should be that we do not need to resort to Gzipping it or adding dependencies on fancy compression libraries or anything; there is a very obvious way to compress it already - the entire thing is practically just a series of repeated numbers.
 
-We should be able to replace the length enumeration of <tt>[0,0,0,0,0,0,0,0,0,0,0,0]</tt> with something simpler, like the number of repetitions, and what is to be repeated. Our entry would look like <tt>(12,0)</tt>.
+We should be able to replace the length enumeration of `[0,0,0,0,0,0,0,0,0,0,0,0]` with something simpler, like the number of repetitions, and what is to be repeated. Our entry would look like `(12,0)`.
 
 This representation is definitely shorter and more importantly, easier to modify. It is possible that there may be a performance benefit here, as we've gotten rid of a large constant that would have to be defined in the program itself and instead replaced it with a shorter function which evaluates to the same thing. (If we're only on level 1, we don't need to carry around the expanded version of the other levels, and when we go to level 2, level 1 will be garbage-collected.)
 
 ## Writing it
 
-So, what is the type of our decompressing function? Well, we need to turn a <tt>(Int,Int)</tt> into a <tt>[Int]</tt>; even better, we want to turn a whole list of <tt>(Int,Int)</tt>s into a single list of <tt>Int</tt>s. Thus, our end goal is going to be a function of this type:
+So, what is the type of our decompressing function? Well, we need to turn a `(Int,Int)` into a `[Int]`; even better, we want to turn a whole list of `(Int,Int)`s into a single list of `Int`s. Thus, our end goal is going to be a function of this type:
 
 > rleDecode :: [(Int,Int)] -> [Int]
 
@@ -95,7 +95,7 @@ So, what is the lazy way of doing things? Infinite lists, of course. We create a
 > rleLazyDecode :: (Int,Int) -> [Int]
 > rleLazyDecode (n,b) = take n (reduplicate b)
 
-Now, <tt>reduplicate</tt> is a simple enough function to define, but it already has a definition in the standard libraries - <tt>cycle</tt>. (I assume you know what <tt>take</tt> is, but that is also fairly easy to define once you seen the need for it.)
+Now, `reduplicate` is a simple enough function to define, but it already has a definition in the standard libraries - `cycle`. (I assume you know what `take` is, but that is also fairly easy to define once you seen the need for it.)
 
 So:
 
@@ -105,11 +105,11 @@ Might as well remove the parentheses:
 
 > rleLazyDecode (n,b) = take n $ cycle b
 
-A satisfying, short, functional, and lazy one-liner. From here the definition of rleDecode is almost trivial: we extend it to a list of tuples by throwing in a <tt>map</tt>, and we turn the resulting list of lists into a single list by way of <tt>concat</tt>:
+A satisfying, short, functional, and lazy one-liner. From here the definition of rleDecode is almost trivial: we extend it to a list of tuples by throwing in a `map`, and we turn the resulting list of lists into a single list by way of `concat`:
 
 > rleDecode ns = concat $ map rleLazyDecode ns
 
-We can tweak this further, as <tt>'concat . map'</tt> is a common enough idiom that there is a shortcut:
+We can tweak this further, as `'concat . map'` is a common enough idiom that there is a shortcut:
 
 > rleDecode ns = concatMap rleLazyDecode ns
 
@@ -117,15 +117,15 @@ Aw heck - let's make it point-free:
 
 > rleDecode = concatMap rleLazyDecode
 
-And then we substitute in the <tt>rleLazyDecode</tt> definition:
+And then we substitute in the `rleLazyDecode` definition:
 
 > rleDecode = concatMap (\(n,b) -> take n $ cycle b)
 
-We could also write a version that omits the explicit lambda and naming of parameters by use of the helpful (but somewhat esoteric) <tt>uncurry</tt> function; <tt>uncurry</tt> takes apart the tuple. Its type is:
+We could also write a version that omits the explicit lambda and naming of parameters by use of the helpful (but somewhat esoteric) `uncurry` function; `uncurry` takes apart the tuple. Its type is:
 
 > uncurry :: (a -> b -> c) -> (a, b) -> c
 
-We can actually go even further into the realms of incomprehensibility. It turns out that lists are a monad! This means we can use <tt>bind</tt> and all the rest of the operations defined by the <tt>Monad</tt> typeclass to operate on lists and other things. So we can write this bizarre (but short and effective) version of rleDecode:
+We can actually go even further into the realms of incomprehensibility. It turns out that lists are a monad! This means we can use `bind` and all the rest of the operations defined by the `Monad` typeclass to operate on lists and other things. So we can write this bizarre (but short and effective) version of rleDecode:
 
 > rleDecode = (uncurry replicate =<<)
 
