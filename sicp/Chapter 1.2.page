@@ -39,7 +39,7 @@ This isn't particularly clear. As they write:
 
 > "We could describe a rule for computing n! by specifying that we first multiply 1 by 2, then multiply the result by 3, then by 4, and so on until we reach n. More formally, we maintain a running product, together with a counter that counts from 1 up to n. We can describe the computation by saying that the counter and the product simultaneously change from one step to the next according to the rule:
 >
-> > product ← counter · product<br>
+> > product ← counter · product\
 > > counter ← counter + 1"
 
 ~~~{.haskell}
@@ -77,7 +77,7 @@ Presumably the iterative definition is in a way more flexible: it can make more 
 
 Complexity never goes away, though. The graph may look simpler in the case of `factIter` - no heaps of expressions! - but the computation is still going on. Now, hardware-wise, numbers are incredibly more efficient than stacking up expressions, so that's why we try to compile down into expressions which store the complexity in the former rather than the latter; but they're doing the same stuff. This is a little hard to understand, but perhaps if approached obliquely, an intuitive conviction grows:
 
-> "In computing `n!`, the number of steps required grows linearly with `n`. Such a process is called a linear iterative process.<br>
+> "In computing `n!`, the number of steps required grows linearly with `n`. Such a process is called a linear iterative process.\
 > The contrast between the two processes can be seen in another way. In the iterative case, the program variables provide a complete description of the state of the process at any point. If we stopped the computation between steps, all we would need to do to resume the computation is to supply the interpreter with the values of the three program variables. Not so with the recursive process. In this case there is some additional 'hidden' information, maintained by the interpreter and not contained in the program variables, which indicates 'where the process is' in negotiating the chain of deferred operations. The longer the chain, the more information must be maintained."
 
 But hold on! Is this quite right? There's only one `factIter` in my ad-hoc graph above. If `factIter` is running a new `factIter`, why is there only ever one `factIter` call in the graph? Shouldn't it look something like this:
