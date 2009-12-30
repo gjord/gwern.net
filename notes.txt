@@ -403,3 +403,18 @@ But there are issues.
 - Pop culture is known to have a very strong influence on baby names (cf. the popularity of _Star Wars_ and the subsequent massive spike in 'Luke'). The counter-arguments to [The Long Tail](!Wikipedia) marketing theory say that pop culture is becoming ever more monolithic and hit-driven. The fewer hits, and the more mega-hits, the more we could expect a few names to spike and drive down the rate of other names. The effect on a rare name can be incredible even from relatively small hits (the song in question was only a Top 10):
 
     > "Kayleigh became a particularly popular name in the United Kingdom following the release of a song by the British rock group Marillion. Government statistics in 2005 revealed that 96% of Kayleighs were born after 1985, the year in which Marillion released "Kayleigh"."^[Wikipedia again]
+---
+
+Here's an interesting idea: the glyphs of the Phoenician-style alphabet are not optimized in any sense. They are bad in several ways, and modern glyphs are little better. For example, v and w, or m and n. People confuse them all the time, both in reading and in writing.
+
+So that's one criterion: glyphs should be as distinct from all the rest as possible.
+
+What's a related criterion? m and w are another pair which seem suboptimal, yet they are as dissimilar as, say, a and b, under many reasonable metrics. m and w are related via *symmetry*. Even though they share relatively few pixels, they are still identical under rotation, and we can see that. We could confuse them if we were reading upside down, or at an angle, or just confuse them period.
+
+So that's our next criterion: the distinctness must also hold when the glyph is rotated by any degree and then compared to the rest.
+
+OK, so we now have a set of unique and dissimilar glyphs that are unambiguous about their orientation. What else? Well, we might want them to be easy to write as well as read. How do we define 'easy to write'? We could have a complicated physiological model about what strokes can easily follow what movements and so on, but we will cop out and say: it is made of as few straight lines and curves as possible. Rather than unwritable pixels in a grid, our primitives will be little geometric primitives.
+
+The fewer the primitives and the closer to integers or common fractions the positioning of said primitives, the simpler and the better.
+
+We throw all these rules in, add a random starting population or better yet a population modeled after the existing alphabet, and begin our genetic algorithm. What 26 glyphs will we get?
