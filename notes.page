@@ -3,12 +3,22 @@
 "And on that dread day, the Ineffable One will summon the artificers and makers of graven images, and He will command them to give life to their creations, and
 failing they and their creations will be dedicated to the flames..."
 
+---
+
 "Some say that a god lives on in the faith and memory of its believers. They point to computers and say, 'Behold, they need but think all together in a particular & precise mode, and from nowhere appear things real and greater than any they thought. Might not the same be true of humans, who are so much greater?' But this is no more true than a painting of a flower the flower itself."
 
+---
+
 "Do there exist things like evolutionary compilers? Consider that for types like Int or Bool there exist a finite and enumerable number of values, so it is possible (though possibly tiresome) to compare two functions over those enumerated values and ascertain that they are identical in that regard. Could we not use evolutionary computational techniques for one of these two functions to gain considerable efficiency while retaining confidence in the soundness of our program.
+
 This wouldn't work for types like Integer or String (the types we really care about) because they can have indefinitely large sets of members, but we could compare equality over as large subsets as we care to test and then include conditionals: 'if x < 10e10 then quick-Function else full-Precision-Function' and such like. This is kind of like specialization, I believe, but more general and using a general optimization process. There is no free lunch, but only if you already have a ideal algorithm implemented.
+
 This raises a further question: does multi-level evolution work well? That is, could it make sense to evolve fragments of Haskell which type-check and then once one has reached a plateau of quality (presumably corresponding to the discovery of a quick algorithm in which no more gains are to be squeezed out by syntactic modifications, and then take the compiled code and evolve that - seeking micro-optimization gains. I have read a number of studies evolving Lisp fragments, and a number evolving binary streams, but none combining the two in any manner.
-As for implementation, it might run something like this: take a copy of the Prelude as a seed; take a copy of whatever one is working on and concatenate it with the Prelude. Separate out each function into its own 'unit' or file or whatever. On each unit, permute once and compile until it succeeds; once it successfully compiles, run the defined QuickChecks on it. How ever many it passes is its score. Save a copy if the score meets a certain value (like not in the bottom 10%), and continue the permute-compile-test cycle. Once all the QuickChecks are being passed, we can switch over to using SmallCheck and engaging in checks of all possible input up to a certain upper bound. Upon hitting the point of diminishing returns, you could then turn to optimizing the low-level definition... This is rather complicated and I hope there is a framework I can use - it seems to me that someone would've already set up a framework for evolving code and then my task would be much easier as I could focus on the fitness evaluation function."
+
+As for implementation, it might run something like this: take a copy of the
+Prelude as a seed; take a copy of whatever one is working on and concatenate it with the Prelude. Separate out each function into its own 'unit' or file or whatever. On each unit, permute once and compile until it succeeds; once it successfully compiles, run the defined QuickChecks on it. How ever many it passes is its score. Save a copy if the score meets a certain value (like not in the bottom 10%), and continue the permute-compile-test cycle. Once all the QuickChecks are being passed, we can switch over to using SmallCheck and engaging in checks of all possible input up to a certain upper bound. Upon hitting the point of diminishing returns, you could then turn to optimizing the low-level definition... This is rather complicated and I hope there is a framework I can use - it seems to me that someone would've already set up a framework for evolving code and then my task would be much easier as I could focus on the fitness evaluation function."
+
+---
 
 - paper idea: ''True Visions and Other Dangers: the esoteric and exoteric
 tales of Frank Herbert''
@@ -20,7 +30,7 @@ in this case, the prophecy causes the events -before- it to happen.
 Example: Muad'Dib apparently caused the prescience that led him to
 become emperor of the known universe, despite his attempts to avoid
 it. And his own prophecies apparently led to his fall. But! His vision
-in Dune Messiah should have determined everything, up to and definitely
+in _Dune Messiah_ should have determined everything, up to and definitely
 including the number and gender of his offspring by Chani. But he was
 wrong: Leto II was born, and he should not have been. How could he
 have been born? His vision was more powerful than Paul's, and he
@@ -42,6 +52,8 @@ believes in the Great Men theory of history - except the Great Men
          - Evolution and change
          - Psychology
 
+---
+
 - Paper idea: ''The anxiety of influence: RahXephon's response to Neon Genesis Evangelion''
         - <http://en.wikipedia.org/wiki/The_Anxiety_of_Influence>. every artist makes his predecessors... Borges. RahXephon and Eva... <http://en.wikipedia.org/wiki/RahXephon#Neon_Genesis_Evangelion> (comparison). Eva ineluctably influenced RahXephon... RahXephon's manga begun 2001, Evangelion's TV 1995. mecha anime are remixes... variations. the pleasure of watching one is seeing the variation on the Truth, of trying to see each one get closer and closer to the heart of the matter. "I've taken on a risk: "It's just an imitation". And for now I can only write this explanation. But perhaps our "original" lies somewhere within there." (Hideaki Anno, from his story treatment "What were we trying to make here?" written before NGE began being produced by Gainax, as recorded on page 171 of ''Neon Genesis Evangelion Volume 1'', Yoshiyuki Sadamoto, translated by Fred Burke. August 2003. ISBN 1-56931-294-X).
           There is a deep relation here to Japanese poetry, in which originality is not necessarily valued. every change in a mecha anime from its predecessors is a reply, an ongoing dialog back and forth. how do mecha change? where have they gone to? look for the RahXephon bibles. Evangelion used Greek in Evangelion... rahx-ephon - "-ephon" as a suffix for instrument". RahXephon's creators wanted to create something new... track down references 2-5 of <http://en.wikipedia.org/wiki/RahXephon#Notes_and_reference>. See also
@@ -54,7 +66,7 @@ believes in the Great Men theory of history - except the Great Men
 
         - Note especially the Confidential Information's lack of a god and materialist conception of the universe.
 
---
+---
 
 > "That is, from January 1926 through December 2002, when holding periods were 19 years or longer, the cumulative real return on stocks was never negative..."
 
@@ -80,19 +92,19 @@ Suppose one wishes to make a very long-term investment. One groups with a large 
 
 'Suppose you think that gold will become worthless on April 27th, 2020 at between four and four-thirty in the morning. I, on the other hand, think this event will not occur until 2030. We can sign a contract in which I pay you one ounce of gold per year from 2010 to 2020, and then you pay me two ounces of gold per year from 2020 to 2030. If gold becomes worthless when you say, you will have profited; if gold becomes worthless when I say, I will have profited. We can have a prediction market on a generic apocalypse, in which participants who believe in an earlier apocalypse are paid by believers in a later apocalypse, until they pass the date of their prediction, at which time the flow reverses with interest. I don't see any way to distinguish between apocalypses, but we can ask the participants why they were willing to bet, and probably receive a decent answer.'
 
---
+---
 
     01:04 < gwern> I think one of the more interesting trends in anime is the massive number of adaptations of light novels done in the '90s and 00s; it is interesting because no such trend exists in American media as far as I can tell (the closest I can think of are comic book adaptations, but of course those are analogous to the many mangas -> animes)
     01:04 < gwern> now, American media absolutely adapts many novels, but they are all normal Serious Business Novels
     01:05 < gwern> we do not seem to even have the light novel media - young adult novels do not cut the mustard. light novels are odd as they are kind of like speculative fiction novellas
 
---
+---
 
 In _[Human Achievement](!Wikipedia)_, one of the strongest indicators for genius is contact with a foreign culture. However, the modern era which is likely the most globalized one, in which English-speakers have access like they have never had before (compare how much classic Japanese & Chinese literature has been translated and stored in libraries as of 2009 to what was available when Waley began translating _Genji Monogatari_ in 1921!). This would seem to be something of a contradiction: if a little foreign contact was enough to inspire the 'chinoiserie' of France's Rococo period, then why wouldn't all the Asian immigrants and translations and economic contact to America spark even greater revolutions? There has been influence, absolutely; but the influence is striking for how a little bit helped (how many haiku did the Imagists have access to?) and a lot done not much more, and perhaps even less.
 This is a little perplexing. What's the explanation? Did the early artists suck out all the novelty? Or is there something stimulating about having only a few examples - does one draw faulty but fruitful inferences based on idiosyncrasies of the small data set?
 
 
---
+---
 
 - 10$ Kari Uncle Russ Emilie
 - 40$ Birches
@@ -100,8 +112,8 @@ This is a little perplexing. What's the explanation? Did the early artists suck 
 
 Graduation:
 
-- 20$ russ, janet, kari, emily, and krista
-- 50$ 'grandma' valerie
+- 20$ Russ, Janet, Kari, Emily, and Krista
+- 50$ 'grandma' Valerie
 - 50$ grandparents Naaktgeboren
 - 200$ mom & dad
 - 1000$ grandparents birch
@@ -174,11 +186,11 @@ Wearable computers have many possibilities:
 - voice-to-text dictation of conversations (even high error rate would be useful for search)
 - random Mnemosyne quizzes
 
---
+---
 
 What's the connection between Newcomb's Paradox and large-scale voting?
 
---
+---
 
 Evolution idea:
 - ~40% of men never reproduce
@@ -187,7 +199,7 @@ Evolution idea:
 - why?
 - perhaps males are 'lottery tickets'; no problem if male winds up retarded because the lottery winners make up. But females are modest sure bets, so no need for dangerous genetic gambling - just wasteful in their case
 
---
+---
 
 <https://secure.wikimedia.org/wikipedia/en/wiki/Ego_depletion>
 'Ego depletion refers to the idea that self-control and other mental processes that require focused conscious effort rely on energy that can be used up. When that energy is low (rather than high), mental activity that requires self-control is impaired. In other words, using one's self-control impairs the ability to control one's self later on. In this sense, the idea of (limited) willpower is correct.'
@@ -200,7 +212,7 @@ See also
 "Latent inhibition is a process by which exposure to a stimulus of little or no consequence prevents conditioned associations with that stimulus being formed. The ability to disregard or even inhibit formation of memory, by preventing associative learning of observed stimuli, is an automatic response and is thought to prevent information overload. Latent inhibition is observed in many species, and is believed to be an integral part of the observation/learning process, to allow the self to interact successfully in a social environment."
 "Most people are able to shut out the constant stream of incoming stimuli, but those with low latent inhibition cannot. It is hypothesized that a low level of latent inhibition can cause either psychosis, a high level of creativity[1] or both, which is usually dependent on the subject's intelligence.[2][3] Those of above average intelligence are thought to be capable of processing this stream effectively, an ability that greatly aids their creativity and ability to recall trivial events in incredible detail and which categorizes them as almost creative geniuses. Those with less than average intelligence, on the other hand, are less able to cope, and so as a result are more likely to suffer from mental illness."
 
---
+---
 
 Interesting decluttering approach: 100 Things Challenge
 - <http://zenhabits.net/2007/09/minimalist-fun-the-100-things-challenge/>
@@ -208,33 +220,33 @@ Interesting decluttering approach: 100 Things Challenge
 - <http://www.time.com/time/magazine/article/0,9171,1812048,00.html>
 - <http://www.denverpost.com/room/ci_8060057>
 
---
+---
 
 The count of Monte Cristo as a Nietzschean hero?
 
---
+---
 
 If one were giving away 1$ or $2, how many people would decline the 2 out of suspicion?
 
---
+---
 
 Professor Grim tells a story about an acquaintance of his, who had once accepted a job at Yale's psychology department. He was driving into New Haven on his way to it, when he stopped for gas. The fellow working the station began filling up his car and they fell to chatting. (This was long ago.) When he mentioned that he was going to his new job there, the attendant stiffened up, removing the gas pump, and retreated into the far side of the garage. Incensed, he followed the attendant and demanded an answer. The attendant eventually stopped the cold shoulder and quietly said that once he had participated in Milgram's infamous authoritarian experiments, and was one of those who had gone through with it all. "And", he added, "I have not slept well since."
 
---
+---
 
 Down on the grasses,
 I gaze at the summer sun -
 And it gazes back!
 
---
+---
 
 Good poem title: 'The Scarecrow Appeals to Glenda the Good'
 
---
+---
 
 novel idea: an ancient British family has a 144 character (no spaces) string which encodes the political outcomes of the future eg. the restoration, the glorious rebellion, napoleon, Nazis etc. thus the family has been able to pick the winning side every time and maintain its place. but they cannot interpret the remaining characters pertaining to our time. they hire researcher/librarians to crack it. one of them is our narrator. in the course of figuring it out, he becomes one of the sides mentioned. possible plot device: he has a corrupted copy?
 
---
+---
 
 Death poems are all just
 falling blossoms and nonsense -
@@ -313,7 +325,7 @@ but the second is almost trivial, unless it's a truly alien paradigm
 TODO: is it easier to learn a second natural language, or a second computer language? haskell after some java was a lot easier than before; learning french after learning haskell, it seems easier than before but not that much
 what is the knack of programming? Why do people never seem to cease being programmers - what irreversible paradigm shift happens in their heads?
 
---
+---
 
 blog title: 'joining clouds'? doesn't seem to be common - 80 google hits, most small
 "The clouds above join and separate
@@ -322,7 +334,7 @@ Life is like that, so why not relax?
 Who can stop us from celebrating?"
 Lu Yu
 
---
+---
 
 > "Tellman initialized the Celest board to level nine, Rosas noticed. The kid studied the setup with a calculating look. Tellman's display was a flat, owing a hypothetical solar system as seen from above the plane of rotation. The three planets were small disks of light moving around the primary. Their size gave a clue to mass, but the precise values appeared near the bottom of the display. Departure and arrival planets moved in visibly eccentric orbits, the departure planet at one rev every five seconds — fast enough so precession was clearly occurring. Between it and the destination planet moved a third world, also in eccentric orbit. Rosas grimaced. No doubt the only reason Tellman left the problem coplanar was that he didn't have a holo display for his Celest. Mike had never seen anyone without a symbiotic processor play the departure/destination version of Celest at level nine. The timer on the display showed that the player — the kid — had ten seconds to launch his rocket and try to make it to the destination. From the fuel display, Rosas was certain that there was not enough energy available to make the flight in a direct orbit. A cushion shot on top everything else!
 
@@ -386,9 +398,9 @@ Theory: as time passes, it becomes more and more costly to have a 'common' name:
 
 But online, it is important to be findable. You want your friends on Facebook to find you with the first hit. You want potential employers doing surreptitious Google searches before an interview to see your accomplishments and not others' demerits.
 
-This isn't obvious. It's easy to raise relatively rare risks as objections (but how many cases of identity theft are made possible solely by a relatively unique name making a person googleable? Surely few compared to the techniques of mass identity theft: corporate espionage, dumpster diving, cracking, skimming etc.) To appreciate the advantages, you have to be a 'digital native'. Until you've tried to Google friends or acquaintances, the hypothesis that unique names might be important will never occur to you. Until then, as long as your name was unique inside your school classes, or your neighborhood, or your section of the company, you would never notice. Even researchers spend their time researching unimportant correlations like people named Baker becoming bakers more often, or people tending to move to a state whose name they share (like Georgia).
+This isn't obvious. It's easy to raise relatively rare risks as objections (but how many cases of identity theft are made possible solely by a relatively unique name making a person google-able? Surely few compared to the techniques of mass identity theft: corporate espionage, dumpster diving, cracking, skimming etc.) To appreciate the advantages, you have to be a 'digital native'. Until you've tried to Google friends or acquaintances, the hypothesis that unique names might be important will never occur to you. Until then, as long as your name was unique inside your school classes, or your neighborhood, or your section of the company, you would never notice. Even researchers spend their time researching unimportant correlations like people named Baker becoming bakers more often, or people tending to move to a state whose name they share (like Georgia).
 What does one do? One avoids as much as possible choosing any name which is in the say, top 100 most popular names. People with especially rare surnames may be able to get away with common personal names, but not the Smiths.
-But one doesn't wake up and say I will name myself Zacariah today because John is so damn common. After 20 years or more, one is heavily invested in one's name. It's acceptable to change one's surname (women do it all the time), but not the first name.
+But one doesn't wake up and say I will name myself Zachariah today because John is so damn common. After 20 years or more, one is heavily invested in one's name. It's acceptable to change one's surname (women do it all the time), but not the first name.
 
 One *does* decide the first name of one's children, though, and it's iron tradition that one does so. So we can expect digital natives to shy away from common names when naming their kids. But remember who are the 'digital natives' - kids and teenagers of the '00s, at the very earliest. If they haven't been on, say, Facebook for years, they don't count. Let's say their ages are 0-20 during 2008 when Facebook really picked up steam in the non-college population; and let's say that they won't have kids until ~30. The oldest of this cohort will reach child-bearing age at around 2018, and every one after that can be considered a digital native from osmosis if nothing else. 2018 is when we will see a growing '[long tail](!Wikipedia "Heavy-tailed distribution")' of baby names.
 
