@@ -151,6 +151,7 @@ When:  Time-stamp: "2009-12-17 20:28:45 gwern"
 - [Macros](http://code.google.com/p/yi-editor/issues/detail?id=89). Obviously. If you don't understand why this is a must-have, then you don't understand text editing.
 - Spellcheck. See macros - a basic feature. (And ideally a realtime spellcheck, like flyspell; but I could probably live with a manually invoked spellchecker.)
 - Persistent state: Yi should remember my previously-opened files, my killring, the last position of the point in a buffer/file etc. Emacs provides this [session](http://www.phys.ufl.edu/docs/emacs/emacs_423.html), and I find it very convenient.
+- improve ireader-mode. Idea: have bindings 5-9 map to 1-5, and that jumps the buffer forward in the Seq by 1/n+1th. So M-1 would jump to 1/2, M-2 would merely put it at 1/3 the Seq away from the end, and so on.
 
 ## Gitit
 
