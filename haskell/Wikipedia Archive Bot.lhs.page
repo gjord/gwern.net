@@ -9,9 +9,12 @@ But I didn't have any practical use for it, and I'm too lazy to learn it unless 
 
 2 in particular struck me as fixable without requiring modifications to the MediaWiki codebase (a messy yet featureful pile of PHP):
 
-1) the "feature" of MediaWiki that by default, `Fujiwara no Teika` is a pagename distinct from `Fujiwara no teika`. Going to the latter does not automatically redirect to the former. One must either create $n^2-1$ redirects to the right pagename, or simply accept that mis-capitalizations will result in broken links and needless searches.
+1) the "feature" of MediaWiki that by default, `Fujiwara no Teika` is a pagename distinct from `Fujiwara no teika`. Going to the latter does not automatically redirect to the former. One must either create redirects to the right pagename^[$n^2-1$, where $n$ is how many spaces there are in the pagename.] , or simply accept that mis-capitalizations will result in broken links and needless searches.
 2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the [Internet Archive](!Wikipedia) doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from Alexa, which are provided an eternity (6 months or more) after the original spidering of the external link. An external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
 
+# Archiving
+
+## How to?
 Let's talk about Problem 2.
 
 The beginning of a solution is to realize that the Internet Archive is not useable here. Their [FAQ](http://www.archive.org/about/faqs.php#1) specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything^[It is possible, though difficult, to script the forms in Haskell.]. Their [Archive-It](http://www.archive-it.org/) service does do on-demand archiving, but at steep institution-targeted fees; not something for individual users.
@@ -22,7 +25,11 @@ Reading through their documentation, it seems they will eventually allow you to 
 
 > "http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com"
 
+## The steps
+
 So going back to our problem. Our problem is that we want to take all the articles of the English Wikipedia, somehow extract all the external links from said articles, transform those URLs according to the previous paragraph, and then actually open them (which will cause the embedded URL to be archived).
+
+### Article names 
 
 Our first question is naturally "How on Earth do we even get the addresses of the millions of Wikipedia articles? Saying they're all 'somewhere in `en.wikipedia.org/wiki/`' doesn't help." I'm going to cop out a bit here and not actually explain how I hit upon this approach, but we'll borrow some code from the bot I coded to fix Problem 1, which looks a little like this:
 
@@ -52,9 +59,12 @@ Notice that spaces are being escaped as underscores, and that each page name is 
 So, we have getContents lazily slurping in names of articles to standard in, and we have [words](!Hoogle) (it's a pure non-IO function, but [liftM](!Hoogle) lets us use it in the IO monad) breaking  a single long string with lots of newlines into a list of strings.
 
 > import Control.Monad (liftM) -- Don't forget your imports!
+>
 > main :: IO ()
 > main = do
 >          articlelist <- liftM words $ getContents
+
+### Article contents
 
 Now what? Well, a list of items each of which we want to perform the exact same operation on almost cries out for us to use a (monadic) `map` on it.
 
@@ -65,6 +75,8 @@ But what *is* this mystery function `fetchArticleText`? Well, obviously it will 
 > fetchArticleURLs :: String -> IO [String]
 
 Purely arbitrarily, we'll have `fetchArticleURLs` work on pages from the live English Wikipedia; but you could probably also go the route of working from an offline database dump, which would have the advantage of halving network requests and parsing out URLs much faster (since there'd be no need to request individual pages over the network).
+
+### Parsing HTML
 
 It's not too hard to see how to get the URL for any given article (`"http://en.wikipedia.org/wiki/" ++ article`), nor how to use [Network.HTTP](!Hoogle) to download the HTML file (couldn't be more than 10 lines) - but reliably parsing that HTML to extract genuine external links doesn't seem trivial at all! We could go with some sort of clumsy regexp matching on "http://", but hit-or-miss regular expressions just aren't The Haskell Way.
 
@@ -84,6 +96,7 @@ Indeed, we need some sort of library to parse HTML for us and maybe handle the n
 Reading this, one is struck by `openURL`; we don't even need to read the documentation to know what it does. We already have the beginning of our `fetchArticleURLs` definition:
 
 > import Text.HTML.Download (openURL)
+>
 > fetchArticleURLs :: String -> IO [String]
 > fetchArticleURLs article = ...something... $ openURL("http://en.wikipedia.org/wiki/" ++ article)
 
@@ -97,6 +110,9 @@ So we're up to this:
 
 The definition of `extractURLs` is a bit magical, since we don't immediately understand the entire hierarchy of types and constructors which TagSoup operate ons:
 
+> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+> import Data.List (isPrefixOf)
+>
 > extractURLs :: String -> [String]
 > extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
 >                        (_,x) <- atts,
@@ -110,10 +126,7 @@ But how does `TagOpen "a" atts` do anything? We can think of a list comprehensio
 
 The second line is exactly the same. We're still working on a `[Tag]`, and our little `filter` is still testing away, but now our 'test' is really just pulling out the second entry in each `TagOpen`'s `[Attribute]` - it's equivalent to a `map` of [snd](!Hoogle). And this gives us a `[String]` of URLs! The first entry in the lists are "href", and the second are the URLs the href points to. But when we test out our two-liner, we realize to our dismay we are getting junk results like `["/wiki/Japanese_poetry",..]`. A quick [isPrefixOf](!Hoogle) and we fix that, and that finishes our list comprehension.
 
-Don't forget that all the new things need to be imported:
-
-> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
-> import Data.List (isPrefixOf)
+### Archiving URLs
 
 Oy. So we wrote `extractURLs`, which was used in `fetchArticleURLs`, which was used in `main`. Let's backtrack a bit; we had left `main` at:
 
@@ -121,26 +134,42 @@ Oy. So we wrote `extractURLs`, which was used in `fetchArticleURLs`, which was u
 >          articlelist <- liftM words $ getContents
 >          urllist <- mapM fetchArticleURLs articlelist
 
-By the time urllist is generated, we've got an IO [String] which is containing all the external links. Now we can once again indulge the desire to map some sort of function over it. Another map, another hypothetical function:
+By the time `urllist` is generated, we've got an `IO [String]` which is containing all the external links. Now we can once again indulge the desire to map some sort of function over it. Another map, another hypothetical function:
 
 >          mapM archiveURL urllist
 
-For convenience's sake, we'll reuse openURL even though we really want something like this which will throw away the superfluous output:
+For convenience's sake, we'll reuse `openURL` even though we don't want output, we really want something like this:
 
-> archiveURL :: String -> IO () -- Ideal
+> archiveURL :: String -> IO ()
 
 The simplest way to define it is this:
 
 > archiveURL :: String -> IO String -- Reality
 > archiveURL url = openURL("http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com")
 
-But we can improve on this! We are using mapM which will go to all the trouble of retaining all the output from archiveURL being run on the dozens, hundreds, thousands, or millions of entries in urllist. Can't we be more efficient somehow? This sort of situation is exactly where naming conventions can come in handy. I happen to remember that just as foo' denotes some stricter version of a function foo, a foo_ denotes some sort of IO function that will throw away any output (learned that using zipWith_ in Redirect-bot.hs). One tries mapM_ instead, and it works!
+But we can improve on this! We are using [mapM](!Hoogle) which will go to all the trouble of retaining all the output from `archiveURL` being run on the dozens, hundreds, thousands, or millions of entries in `urllist`.
 
-We compile the entire program, and it is short. It is sweet. It works, and does what we want, and has explicit types and import statements, and we've reasoned out every bit of it. So we should be pretty happy with it. But I've noticed one thing while playing around in GHCi: it's naive and inefficient. Not only does it eat up ungodly amounts of memory and time, it also seems to be making duplicate requests! The reason for this is that on every Wikipedia webpage containing an article, there are a number of external links which aren't part of the article itself; this includes linking to the WikiMedia Foundation (the non-profit organization which runs all the Wikipedias and associated projects), links to donations, etc.
+Can't we be more efficient somehow? This sort of situation is exactly where naming conventions can come in handy. I happen to remember that just as `foo'` denotes some stricter version of a function `foo`, a `foo_` denotes some sort of function that will throw away its output. One blindly tries [mapM_](!Hoogle) instead, and it works!
 
-Well, not a hard problem. We want to ensure there are no duplicate entries in our list; one suspects this is a common desire in list processing, and yes, if we check Data.List we will find a function 'nub' which does exactly this. It makes the most sense to put nub just before we begin mapping archiveURL over urllist, so in it goes:
+We could have been more consistent. We know that `mapM :: (a -> m b) -> [a] -> m [b]`, and we want to get rid of the output, or turn the `[b]` into nothing, not even a list, which means `()`; we throw the new [type signature](!Wikipedia) into [Hoogle](!Hoogle "(a -> m b) -> [a] -> m ()"), and the very first result is `mapM_`.
+
+### Duplicate URLs
+
+We compile the entire program, and it is short. It is sweet. It works, and does what we want, and has explicit types and import statements, and we've reasoned out every bit of it. So we should be pretty happy with it. But I've noticed one thing while playing around in GHCi: it's naive and inefficient. Not only does it eat up ungodly amounts of memory and time, it also seems to be making duplicate requests! The reason for this is that on every Wikipedia webpage containing an article, there are a number of external links which aren't part of the article itself; this includes linking to the [WikiMedia Foundation](!Wikipedia) (the non-profit organization which runs all the Wikipedias and associated projects), links to donations, etc.
+
+Well, not a hard problem. We want to ensure there are no duplicate entries in our list; one suspects this is a common desire in list processing.
+
+The type signature would be `[a] -> [a]`, but unfortunately, this is far too general: [Hoogle](!Hoogle "[a] -> [a]") will not even put the right function on the first page.
+
+We need to think: any function of this sort must go through the list, and compare entries. Compare what? For greater-than, less-than, etc.? That would imply an [Ord](!Hoogle) constraint, but punched in, [we see](!Hoogle "Ord a => [a] -> [a]") nothing useful. No, those are useful for sorting, but we only want the entries to be unique and not sorted in anyway. We only need `==`, which means an [Eq](!Hoogle) constraint. [nub](!Hoogle) is the very first hit for [Eq a => [a] -> [a]](!Hoogle).
+
+(Of course, we could just read through [Data.List](!Hoogle).).
+
+It makes the most sense to put `nub` just before we begin mapping `archiveURL` over `urllist`, so in it goes:
 
 >          mapM_ (archiveURL) (liftM nub urllist)
+
+### Prototype
 
 Well, that's that! Let's put it all together:
 
@@ -167,9 +196,9 @@ Is this not lovely? Not counting imports or type signatures, it's 6 lines (10 wi
 
 But alas, we see an all too common problem with beautiful concise Haskell: it doesn't perform well. We use it from the shell like thus:
 
-> $ head -n 20 enwiki-all-titles-in-ns0 | archive-bot
+    $ head -n 20 enwiki-all-titles-in-ns0 | archive-bot
 
-It performs acceptably for small values of n, but if we try 100 or more, we quickly notice extreme slowness and outsized memory usage. Looking through the code, 'nub' immediately comes to mind as a culprit. Everywhere else, we're using maps and the like, but nub operates on the whole list of URLs at once, so perhaps it's slow. nub apparently has O(n^2) because it compares every member against every other entry in a list. Let's optimize it. Nub has to do the n^2 matches because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than nub. So add in:
+It performs acceptably for small values of $n$, but if we try 100 or more, we quickly notice extreme slowness and outsized memory usage. Looking through the code, 'nub' immediately comes to mind as a culprit. Everywhere else, we're using maps and the like, but nub operates on the whole list of URLs at once, so perhaps it's slow. nub apparently has O(n^2) because it compares every member against every other entry in a list. Let's optimize it. Nub has to do the n^2 matches because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than nub. So add in:
 
 > import Data.Set (toList, fromList)
 
