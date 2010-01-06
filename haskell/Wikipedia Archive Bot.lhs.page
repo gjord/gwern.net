@@ -223,7 +223,8 @@ The conventional wisdom is whenever you are using String and it isn't fast enoug
 
 To convert to ByteString, we first convert to ByteString equivalents wherever possible - `B.words $ B.getContents`, for example. Unfortunately for our main function, ByteString introduces some weirdness, so we de-sugar the do notation to use the good old [=<<](!Hoogle) operator to make sure everything fits together. But take heart, it's shorter than before:
 
-> main = do mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
+> main = mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs
+>                                =<< (liftM B.words $ B.getContents))
 >               where uniq :: (Ord a) => [[a]] -> [a]
 >                     uniq = toList $ fromList $ concat
 
@@ -243,7 +244,7 @@ The other bit of trickiness is that TagSoup regular Strings, so we need manually
 >              (ByteString(), getContents, lines, unlines, pack, unpack, words)
 
 > main :: IO ()
-> main = do mapM_ archiveURL
+> main = mapM_ archiveURL
 >            =<< (liftM uniq $ mapM fetchArticleURLs
 >                 =<< (liftM B.words $ B.getContents))
 >               where uniq :: (Ord a) => [[a]] -> [a]
@@ -286,7 +287,7 @@ We change `mapM_`:
 
 > import Control.Concurrent (forkIO)
 >
-> main = do mapM_ (forkIO . archiveURL) =<<
+> main = mapM_ (forkIO . archiveURL) =<<
 >            (liftM uniq $ mapM fetchArticleURLs
 >               =<< (liftM B.words $ B.getContents))
 > -- We need return () because otherwise it'd return a String and break forkIO's heart
