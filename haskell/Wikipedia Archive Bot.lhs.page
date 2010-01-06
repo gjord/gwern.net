@@ -194,11 +194,17 @@ Well, that's that! Let's put it all together:
 
 Is this not lovely? Not counting imports or type signatures, it's 6 lines (10 with imports, 14 all told) all in clear natural Haskell.
 
+### Performance
+
+#### nub
+
 But alas, we see an all too common problem with beautiful concise Haskell: it doesn't perform well. We use it from the shell like thus:
 
     $ head -n 20 enwiki-all-titles-in-ns0 | archive-bot
 
-It performs acceptably for small values of $n$, but if we try 100 or more, we quickly notice extreme slowness and outsized memory usage. Looking through the code, 'nub' immediately comes to mind as a culprit. Everywhere else, we're using maps and the like, but nub operates on the whole list of URLs at once, so perhaps it's slow. nub apparently has O(n^2) because it compares every member against every other entry in a list. Let's optimize it. Nub has to do the n^2 matches because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than nub. So add in:
+It performs acceptably for small values of $n$, but if we try 100 or more, we quickly notice extreme slowness and outsized memory usage. Looking through the code, `nub` immediately comes to mind as a culprit. Everywhere else, we're using `map`s and the like, which are lazy and make nice streams with constant memory-use, but `nub` operates on the whole list of URLs at once, so perhaps it's slow. `nub` is $O(n^2)$ because it compares every entry against every other entry in a list. Let's optimize it.
+
+`nub` has to do $O(n^2)$ matches in part because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than `nub`. So add in:
 
 > import Data.Set (toList, fromList)
 
@@ -208,19 +214,23 @@ And replace the last line of main with:
 
 But we must continue our quest for it is still not fast enough.
 
-The conventional wisdom in the Haskell community seems to be that whenever you are doing String programming and it isn't fast enough, to just use the ByteString library. Our next version will make use of lazy ByteStrings <http://www.cse.unsw.edu.au/~dons/fps.html>:
+#### Bytestrings
+
+The conventional wisdom is whenever you are using String and it isn't fast enough, use the [bytestring](!Hackage) library. Our next version will make use of lazy ByteStrings:
 
 > import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, lines, unlines, pack, unpack, words)
 
-To convert to ByteString, we first convert to ByteString equivalents wherever possible - B.words $ B.getContents, for example. Unfortunately for our main function, ByteString introduces some weirdness, so we de-sugar the do notation to use the good old =<< operator to make sure everything fits together. But take heart, it's shorter than before:
+To convert to ByteString, we first convert to ByteString equivalents wherever possible - `B.words $ B.getContents`, for example. Unfortunately for our main function, ByteString introduces some weirdness, so we de-sugar the do notation to use the good old [=<<](!Hoogle) operator to make sure everything fits together. But take heart, it's shorter than before:
 
 > main = do mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
 >               where uniq :: (Ord a) => [[a]] -> [a] -- Just to be neat; makes clear not ByteString specific
 >                     uniq = toList $ fromList $ concat
 
-Notice how we've split out our concatenating and uniqueifying code to its own little points-free local definition. You may've also noticed that we're using the regular concat and not the ByteString concat; this is because we actually aren't concatenating the ByteStrings themselves but merely the list of lists.
+Notice how we've split out our concatenating and uniqueifying code to its own little points-free local definition. You may've also noticed that we're using the regular [concat](!Hoogle) and not `ByteString.concat`; this is because we actually aren't concatenating the ByteStrings themselves but merely the list of lists.
 
-The other bit of trickiness is that TagSoup regular Strings, so we need manually convert back and forth between Strings and ByteStrings using B.pack and B.unpack, and of course the type signatures need to be updated. But this is all pretty simple and mechanical; the final result of all this fiddling is the noticeably uglier but also noticeably faster and leaner Archive-bot.hs:
+##### Bytestring bot
+
+The other bit of trickiness is that TagSoup regular Strings, so we need manually convert back and forth between Strings and ByteStrings using `B.pack` and `B.unpack`, and of course the type signatures need to be updated. But this is all pretty simple and mechanical; the final result of all this fiddling is the noticeably uglier but also noticeably faster and leaner code:
 
 > module Main () where
 > import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
@@ -244,29 +254,67 @@ The other bit of trickiness is that TagSoup regular Strings, so we need manually
 > extractURLs :: String -> [B.ByteString]
 > extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
 
-What's that, you say? While ByteStrings has indeed made some difference, it's marginal and not even 10%? Fortunately, we can go still further - there's not a whole lot we can do for the algorithm itself yet, but we can investigate parallelizing matters. Remember me mentioning that archiveURL was a bit inefficient because even with mapM_, each entry was being processed one at a time? Well, is this not Haskell? Aren't functional programming languages famous for having functions like map which are embarrassingly easy to parallelize? If archiveURL were pure, we'd use Control.Parallel.Strategies, but it's not. Remember that we're throwing away the output from openURL inside archiveURL. So ideally we would somehow be mapping a function over urllist which would say in effect "Take this single ByteString and go off somewhere by yourself and do whatever needs doing; don't bother coming back." In short, we want to fork archiveURL off, and we want forkIO.
+### Parallelizing requests
 
-Import forkIO and change the mapM_ to use it:
+What's that, you say? While ByteStrings has indeed made some difference, it's marginal?
+
+Fortunately, we can go still further - there's not a whole lot we can do for the algorithm itself yet, but we can investigate parallelizing matters.
+
+Remember that `archiveURL` was a bit inefficient because even with `mapM_`, each entry was being processed one at a time? Well, is this not Haskell? Aren't functional programming languages famous for having functions like `map` which are embarrassingly easy to parallelize? If `archiveURL` were pure, we'd use [Control.Parallel.Strategies](!Hoogle), but it's not.
+
+We're throwing away the output from `openURL` inside `archiveURL`. Ideally we would somehow be mapping a function over `urllist` which would say in effect "Take this single ByteString and go off somewhere by yourself and do whatever needs doing; don't bother coming back." In short, we want to fork `archiveURL` off.
+
+But what function will do this for us? What is its signature? Let us think about it.
+
+Clearly, if it really is going away forever, it cannot be pure, because such a function would be useless. If we can only write `fork (1+1)`, how do we know it ever ran at all? So the result of the argument must be something in IO. Perhaps it is `IO [a]`? But that's not good, since the argument doesn't *have* to evaluate to a list - what about arguments which mess around with tuples, or sets, or all the other data structures we have? The most general argument type is `IO a`.
+
+We could imagine a 'goAway :: (a -> IO a) -> a -> IO ()', and many other variants; but we cannot communicate with `goAway` - that's the whole point - and so like a spaceship, it must have everything it needs and its arguments combined must be `IO a` - so why insist on one particular call-scheme? `goAway :: IO a -> IO ()` is more general.
+
+Unfortunately, Hoogle cannot help us here. If we ask for [IO a -> IO ()](!Hoogle) or [IO a -> IO a](!Hoogle) or other plausible types we could think of, we get a wide variety of functions, none of which we want. What we want is `forkIO`, with the signature [IO a -> IO ThreadId](!Hoogle).
+
+This is a good illustration of why purity is important: it narrows down the range of possibilities. When a function starts with IO actions and ends with IO actions, it could be doing anything, and our search results reflect that. In comparison, a type like `(a,b) -> a` is so specific that [djinn](!Hackage) can mechanically generate the function for that type.
+
+We change `mapM_`:
 
 > import Control.Concurrent (forkIO)
+>
 > main = do mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
 > -- We need return () because otherwise it'd return a String and break forkIO's heart
 > archiveURL url = do openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com"); return ();
 
-Much better! I've noticed improvements of between 20 to 100 percent, so that little change was certainly worth it. But these speed increases have made me greedy - I want to be able to process a few thousand names at once, not a measly few hundred. This should cause us to ponder. Don Stewart has a quite fast program to check the viability of links, [urlcheck](!Hackage); it delves pretty heavily into threads and gets great performance but it honestly looks pretty scary and hard to read. Do we have to resort to such nastiness?
+Much better! I've noticed improvements of 20-100%, since we can run on multiple CPUs.That little change was certainly worth it.
 
-Well, there's a saying I've seen: "Make it lazier or make it stricter." It's already strict in a lot of places because of the IO, and going further doesn't seem like a good option - how can one pipe in thousands of articles if the program is going to strictly and immediately eat all one's RAM? Laziness is the way to go. To figure out how to get greater laziness, let's go through step by step. We know getContents is lazy because it makes use of unsafeInterleaveIO according to the documentation - which is why we can have lazy IO. Let's hold onto that thought. Next is B.words. A quick experiment in GHCi (take 100 $ unwords $ repeat "Yes "; that sort of thing) convinces me that words is lazy as well. Next is 'mapM fetchArticleURLs'. Here's a problem. fetchArticleURLs does IO and so is strict, and mapM means it is little better than a loop over the list - the entire list. There goes our laziness since the whole list will be processed before being passed onto forkIO and archiveURL. But laziness and IO can co-exist in peace and harmony!
+### Laziness
 
-Remember getContents is lazy, and it can achieve this magic using 'unsafeInterleaveIO'. Reading through the documentation, it seems to be safe in certain situations, like when the IO target isn't going to change, isn't going to change as a result of whatever is done - or as with us, whether we don't care when the IO is performed. In our situation, it's irrelevant whether we access an article at time n or time n+1. We don't care about whatever changes between then, even if it's something as drastic as the article being deleted (hey, we have 1.7 million other articles to cover). So we can safely use unsafeInterleaveIO! We could stick it in main or fetchArticleURLs, but for convenience's sake, I put it in the latter.
+But these speed increases have made me greedy - I want to be able to process a few thousand names at once, not a measly few hundred. This should cause us to ponder. Don Stewart has a quite fast program to check the viability of links, [urlcheck](!Hackage); it delves pretty heavily into threads and gets great performance but it honestly looks pretty scary and hard to read. Do we have to resort to such nastiness?
+
+Well, there's a Haskell saying: "the best way to optimize a program is to make it lazier or stricter".
+
+It's already strict in a lot of places because of the IO, and going further doesn't seem like a good option - how can one pipe in thousands of articles if the program is going to strictly and immediately eat all one's RAM? Laziness is the way to go.
+
+To figure out how to get greater laziness, let's go through step by step. We know [getContents](!Hoogle) is lazy because it makes use of [unsafeInterleaveIO](!Hoogle) according to the documentation - which is why we can have lazy IO. Let's hold onto that thought.
+
+Next is `B.words`. A quick experiment in GHCi (take 100 $ unwords $ repeat "Yes "; that sort of thing) convinces me that `words` is lazy as one would expect. 
+
+Next is `mapM fetchArticleURLs`. Here's a problem. `fetchArticleURLs` does IO and so is strict, and mapM means it is little better than a loop over the list - the entire list. There goes our laziness since the *whole* list will be processed before being passed onto `forkIO` and `archiveURL`. But laziness and IO can co-exist in peace and harmony!
+
+Remember `getContents` is lazy, and it can achieve this magic using `unsafeInterleaveIO`. Reading through the documentation, it seems to be safe in certain situations: when the IO target isn't going to change, isn't going to change as a result of whatever is done - or one doesn't care when the IO is performed.
+
+In our situation, it's irrelevant whether we access an article at time $n$ or time $n+1$. When you're working on millions of articles, it doesn't matter much if one article is changed or even deleted. So we can safely use `unsafeInterleaveIO`! We could stick it in `main` or `fetchArticleURLs`, but for convenience's sake, I put it in the latter.
 
 So now we have:
 
 > import System.IO.Unsafe (unsafeInterleaveIO) -- Scary name, but it's safe and useful for us
+>
 > fetchArticleURLs article = liftM (B.lines . extractURLs) (unsafeInterleaveIO $ openURL(wiki ++ B.unpack article))
 
-Let's think about the flow now. getContents keeps on delivering a few characters to words, which is waiting for a newline, at which point it turns those characters into a string and passes them onto mapM which will immediately run fetchArticleURLs - and fetchArticleURLs will immediately 'finish', leaving behind some thunks or whatever holding a promise that it'll run the IO actions (downloading a particular Web page) whenever it's needed. And that promise gets passed into uniq, which is busy concatenating and then uniqueifying the results of those thunks. So now the program will basically run in constant space (I notice that even when I pass it 10000 or 20000 names it'll use a steady 7.6% or so of memory as opposed to a varying ~40% with previous versions running on a few hundred names). It may take a while longer, but this is a small price to pay - now my computer will still be usable while the program is running.
+Let's think about the flow now. `getContents` keeps on delivering a few characters to `words`, which is waiting for a [newline](!Wikipedia), at which point it turns those characters into a String and passes them onto `mapM` which will immediately run `fetchArticleURLs` - and `fetchArticleURLs` will immediately 'finish', leaving behind some thunks or whatever holding a promise that it'll run the IO actions (downloading a particular Web page) whenever it's needed. And that promise gets passed into `nub`, which is busy concatenating and then uniqueifying the results of those thunks.
 
-Are we tired of this program yet? I've thought of one last and particularly nasty thing to do to speed things up and recover the speed lost to laziness. We have uniq in there to remove duplicate entries and be a little friendlier to WebCite, correct? But if the program is hardwired to always run on en.wikipedia.org pages, then we can just run fetchArticleURLs on a few pages, note down the duplicates, and hard-wire in a filter to remove them. As I said, this is truly terrible and if I thought anyone else might want to use this program on any other website, I would've never contemplated it.
+So now the program will basically run in constant space (I notice that even when I pass it 10000 or 20000 names it'll use a steady 7.6% or so of memory as opposed to a varying ~40% with previous versions running on a few hundred names). It may take a while longer, but this is a small price to pay - now my computer will still be usable while the program is running.
+
+### Frugal removal
+
+Are we tired of this program yet? I've thought of one last and particularly nasty thing to do to speed things up and recover the speed lost to laziness. We have uniq in there to remove duplicate entries and be a little friendlier to WebCite, correct? But if the program is hardwired to always run on Wikipedia pages, then we can just run `fetchArticleURLs` on a few pages, note down all the duplicates to help pages and legal notices etc., and hard-wire in a `filter` to remove them. This obviously is a hack.
 
 But here is the final, ugly, fast and frugal version. This combines the lazy IO covered previously and adds in the hardwired filter.
 
@@ -292,8 +340,7 @@ But here is the final, ugly, fast and frugal version. This combines the lazy IO 
 > extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
 
 > archiveURL :: B.ByteString -> IO ()
-> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com") >>
- return ();
+> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com") >> return ();
 
 # See also
 - [Wikipedia RSS Archive Bot.lhs]() -(the next step)
