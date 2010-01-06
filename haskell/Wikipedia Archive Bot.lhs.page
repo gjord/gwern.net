@@ -190,7 +190,9 @@ Well, that's that! Let's put it all together:
 > fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
 
 > extractURLs :: String -> [String]
-> extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
+> extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
+>                        (_,x) <- atts,
+>                        "http://" `isPrefixOf` x]
 
 Is this not lovely? Not counting imports or type signatures, it's 6 lines (10 with imports, 14 all told) all in clear natural Haskell.
 
@@ -291,7 +293,7 @@ We change `mapM_`:
 >            (liftM uniq $ mapM fetchArticleURLs
 >               =<< (liftM B.words $ B.getContents))
 > -- We need return () because otherwise it'd return a String and break forkIO's heart
-> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com")
+> archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
 >                      >> return ()
 
 Much better! I've noticed improvements of 20-100%, since we can run on multiple CPUs.That little change was certainly worth it.
@@ -364,7 +366,7 @@ But here is the final, ugly, fast and frugal version. This combines the lazy IO 
 >                                     "http://" `isPrefixOf` x]
 
 > archiveURL :: B.ByteString -> IO ()
-> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com")
+> archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
 >                    >> return ()
 
 # See also
