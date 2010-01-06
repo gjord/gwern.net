@@ -78,7 +78,7 @@ Purely arbitrarily, we'll have `fetchArticleURLs` work on pages from the live En
 
 ### Parsing HTML
 
-It's not too hard to see how to get the URL for any given article (`"http://en.wikipedia.org/wiki/" ++ article`), nor how to use [Network.HTTP](!Hoogle) to download the HTML file (couldn't be more than 10 lines) - but reliably parsing that HTML to extract genuine external links doesn't seem trivial at all! We could go with some sort of clumsy regexp matching on "http://", but hit-or-miss regular expressions just aren't The Haskell Way.
+It's not too hard to see how to get the URL for any given article (`"http://en.wikipedia.org/wiki/"++article`), nor how to use [Network.HTTP](!Hoogle) to download the HTML file (couldn't be more than 10 lines) - but reliably parsing that HTML to extract genuine external links doesn't seem trivial at all! We could go with some sort of clumsy regexp matching on "http://", but hit-or-miss regular expressions just aren't The Haskell Way.
 
 Stumped, the thing to do is to go bum around on the [Haskell wiki](!Hawiki) and #haskell, where some excellent fellow will eventually inform us that "Hey, you know, parsing Wikipedia pages' HTML to extract out all external links kind of reminds me of one of the examples for Neil Mitchell's [TagSoup](!Hackage) library. You should go check it out."
 
@@ -98,13 +98,13 @@ Reading this, one is struck by `openURL`; we don't even need to read the documen
 > import Text.HTML.Download (openURL)
 >
 > fetchArticleURLs :: String -> IO [String]
-> fetchArticleURLs article = ...something... $ openURL("http://en.wikipedia.org/wiki/" ++ article)
+> fetchArticleURLs article = undefined $ openURL("http://en.wikipedia.org/wiki/"++article)
 
-We could insert into the ellipsis whatever parsing we cook up, but we might want to use it somewhere else, and besides, it's bad practice to muddy up a function that could be pure (like our hypothetical `extractURLs` function) with IO. [Separation of concerns](!Wikipedia), and all that.
+We could replace `undefined` with whatever parsing we cook up, but we might want to use it somewhere else, and besides, it's bad practice to muddy up a function that could be pure (like our hypothetical `extractURLs` function) with IO. [Separation of concerns](!Wikipedia), and all that.
 
 So we're up to this:
 
-> fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/" ++ article)
+> fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
 > extractURLs :: String -> [String]
 > extractURLs arg = undefined
 
@@ -187,7 +187,7 @@ Well, that's that! Let's put it all together:
 > archiveURL url = openURL("http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com")
 
 > fetchArticleURLs :: String -> IO [String]
-> fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/" ++ article)
+> fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
 
 > extractURLs :: String -> [String]
 > extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
