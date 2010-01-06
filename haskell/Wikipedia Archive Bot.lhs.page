@@ -36,8 +36,8 @@ Our first question is naturally "How on Earth do we even get the addresses of th
 > main = do
 >     cd "/home/gwern/bin/pywikipedia/"
 >     {- The list comprehension is to prevent from operating on page titles which will
->     cause enormous numbers of redirects to be created. Its what comes before that matters. -}
->     list <- liftM (\bs -> [n | n<-bs,  genericLength n <= (2^4)]) $ liftM words $ getContents
+>     cause enormous numbers of redirects to be created. It's what comes before that matters. -}
+>     list <- liftM (\bs -> [n | n<-bs,  length n <= (2^4)]) $ liftM words $ getContents
 
 [Redirect-bot.hs]() is assuming here that stdin is the source of a list. This long (>9,555,933 lines) list takes this form:
 
