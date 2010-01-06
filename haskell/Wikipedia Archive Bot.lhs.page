@@ -345,13 +345,14 @@ But here is the final, ugly, fast and frugal version. This combines the lazy IO 
 > main = mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs
 >                                          =<< (liftM B.words $ B.getContents))
 >                 where uniq :: [[B.ByteString]] -> [B.ByteString]
->                       uniq = filter (\x -> if x == B.pack "http://wikimediafoundation.org/" ||
->                                   x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations"
->                                  || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising"
->                                  || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy"
->                                  || x == B.pack "http://www.mediawiki.org/"
->                                  || x == B.pack "http://www.wikimediafoundation.org"
->                                  then False else True) . concat
+>                       uniq = filter (\x ->
+                           if x == B.pack "http://wikimediafoundation.org/"
+>                           || x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations"
+>                           || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising"
+>                           || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy"
+>                           || x == B.pack "http://www.mediawiki.org/"
+>                           || x == B.pack "http://www.wikimediafoundation.org"
+>                          then False else True) . concat
 
 > fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
 > fetchArticleURLs article = liftM extractURLs $ unsafeInterleaveIO $ 
