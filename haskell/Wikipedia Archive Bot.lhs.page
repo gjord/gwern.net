@@ -3,26 +3,28 @@ format: markdown+lhs
 title: A bot to archive Wikipedia URLs using WebCite
 ...
 
-One of the best ways to learn something practical like Haskell is to simply dive in and make it do something useful for you. In my case, I've wanted to learn Haskell for a long time: the syntax was gorgeous compared to Common Lisp, sh, or Java (the only other languages I had any sort of experience with); various ideas such as monads, lazy evaluation, and purity struck me as fascinating and exciting; and the community was excellent in so far as I was smart enough to understand it.
+One of the best ways to learn something like [Haskell](!Wikipedia "Haskell (programming language)") is to simply dive in and make it do something useful. In my case, I've wanted to learn Haskell for a long time: the syntax was gorgeous compared to [Common Lisp](!Wikipedia), [Bash](!Wikipedia), or Java (the only other languages I had experience with); various ideas such as [monads](!Wikipedia "Monad (functional programming)"), [lazy evaluation](!Wikipedia), and [functional purity](!Wikipedia) struck me as fascinating and exciting; and the community was excellent.
 
-But I didn't have any practical use for it, and I'm too lazy to learn it unless I have to. Bash worked well enough for my shell scripts, my Java days were thankfully far behind me, and I generally only messed with Common Lisp because of my use of the [Stump window manager](http://en.wikipedia/wiki/StumpWM), but I had finished configuring and extending StumpWM to my liking (and I use Xmonad these days). Fortunately, I am a heavy user and long-time editor of Wikipedia, and there have long been a number of technical things bugging me.
+But I didn't have any practical use for it, and I'm too lazy to learn it unless I have to. Bash worked well enough for my shell scripts, and I generally only messed with Common Lisp because of my use of the [Stump window manager](!Wikipedia StumpWM), but I had finished configuring and extending StumpWM to my liking^[I use [Xmonad](!Wikipedia) these days.]. Fortunately, I am a heavy user and long-time editor of Wikipedia, and some technical details bug me.
 
-Two in particular struck me as fixable without requiring modifications to the MediaWiki codebase (a messy and featureful pile of PHP):
+2 in particular struck me as fixable without requiring modifications to the MediaWiki codebase (a messy yet featureful pile of PHP):
 
-1) the "feature" of MediaWiki that by default, [[Fujiwara no Teika]] is distinct from [[Fujiwara no teika]], and going to the latter does not automatically redirect to the former. The reason this is very annoying is that one must either create n^2-1 redirects to the correct title or simply accept that mis-capitalizations will result in broken links and needless searches.
-2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the Internet Archive doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from Alexa, which are provided an eternity (6 months or more) after the original spidering of the external link. Thus, an external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
+1) the "feature" of MediaWiki that by default, `Fujiwara no Teika` is a pagename distinct from `Fujiwara no teika`. Going to the latter does not automatically redirect to the former. One must either create $n^2-1$ redirects to the right pagename, or simply accept that mis-capitalizations will result in broken links and needless searches.
+2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the [Internet Archive](!Wikipedia) doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from Alexa, which are provided an eternity (6 months or more) after the original spidering of the external link. An external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
 
 Let's talk about Problem 2.
 
-The beginning of a solution is to realize that the Internet Archive is not useful here. Their FAQ specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything. Fortunately, if we poke around on the subject of archiving URLs, we'll eventually discover something like [WebCite](http://www.webcitation.org/), which is tailor-made for our purposes. They offer persistent archiving services, for free, and best of all they can archive on demand!
+The beginning of a solution is to realize that the Internet Archive is not useable here. Their [FAQ](http://www.archive.org/about/faqs.php#1) specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything^[It is possible, though difficult, to script the forms in Haskell.]. Their [Archive-It](http://www.archive-it.org/) service does do on-demand archiving, but at steep institution-targeted fees; not something for individual users.
 
-Reading through their documentation, it seems they will eventually allow you to upload a file containing a large number of URLs to cite, but not yet. That's alright - just trying out the archiving (or reading the technical FAQ) reveals the URL encodes everything in a very simple format; it's really just as simple as
+Fortunately, if we poke around on the subject of archiving URLs, we'll eventually discover something like [WebCite](!Wikipedia), which is tailor-made for our purposes. They offer persistent archiving services, for free, and best of all they can archive on demand!
+
+Reading through their documentation, it seems they will eventually allow you to upload a file containing a large number of URLs to cite, but not yet. That's alright - just trying out the archiving (or reading the [technical FAQ](http://www.webcitation.org/doc/WebCiteBestPracticesGuide.pdf)) reveals the submission URL encodes everything in a very simple format:
 
 > "http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com"
 
-So going back to our problem. Our problem is that we want to take all the articles of the English Wikipedia, somehow extract all the external links from said articles, transform those  URLs according to the previous paragraph, and then actually open them (which will cause the embedded URL to be archived).
+So going back to our problem. Our problem is that we want to take all the articles of the English Wikipedia, somehow extract all the external links from said articles, transform those URLs according to the previous paragraph, and then actually open them (which will cause the embedded URL to be archived).
 
-Our first question is naturally "How on Earth do we even get the addresses of all 1.7 million Wikipedia articles? Saying they're all somewhere in en.wikipedia.org/wiki/ doesn't help." I'm going to cop out a bit here and not actually explain how I hit upon this approach, but we'll borrow some code from the bot I coded to fix Problem 1, which looks a little like this:
+Our first question is naturally "How on Earth do we even get the addresses of the millions of Wikipedia articles? Saying they're all 'somewhere in `en.wikipedia.org/wiki/`' doesn't help." I'm going to cop out a bit here and not actually explain how I hit upon this approach, but we'll borrow some code from the bot I coded to fix Problem 1, which looks a little like this:
 
 > main = do
 >     cd "/home/gwern/bin/pywikipedia/"
@@ -30,45 +32,45 @@ Our first question is naturally "How on Earth do we even get the addresses of al
 >     cause enormous numbers of redirects to be created. Its what comes before that matters. -}
 >     list <- liftM (\bs -> [n | n<-bs,  genericLength n <= (2^4)]) $ liftM words $ getContents
 
-[Redirect-bot.hs]() is assuming here that stdin is the source of a list. This potentially extremely long (as in >9,555,933 lines) list takes this form:
+[Redirect-bot.hs]() is assuming here that stdin is the source of a list. This long (>9,555,933 lines) list takes this form:
 
- ...
- Delehaye
- Delekovac
- Delele
- Delemont
- Delemont_(Jura)
- Delemont_JU
- Delena
- Delena_cancerides
- Delenda
- Deleni
- ...
+    ...
+    Delehaye
+    Delekovac
+    Delele
+    Delemont
+    Delemont_(Jura)
+    Delemont_JU
+    Delena
+    Delena_cancerides
+    Delenda
+    Deleni
+    ...
 
-Notice that spaces are being escaped as underscores, and that each page name is on a separate line. We are getting all this information from a special file kindly provided by Wikipedia precisely for people like us, who don't want to spend the effort to parse the Special:Allpages <http://en.wikipedia/wiki/Special:Specialpages> to get the live list of article names; parsing Allpages is how all the serious Wikipedia bots work, but relying on old database dumps gets us 90% of the functionality at 10% the effort. Go visit <http://download.wikimedia.org/enwiki/latest/> and look for a file called 'all_titles_in_ns0.gz'. When it's downloaded and uncompressed to a ~60M file, it provides suitable fodder.
+Notice that spaces are being escaped as underscores, and that each page name is on a separate line. We are getting all this information from a special file kindly provided by Wikipedia precisely for people like us, who don't want to spend the effort to parse [Special:Allpages](!Wikipedia) to get the live list of article names; parsing Allpages is how all the serious Wikipedia bots work, but relying on old database dumps gets us 90% of the functionality at 10% the effort. Go visit <http://download.wikimedia.org/enwiki/latest/> and look for a file called `all_titles_in_ns0.gz`. When it's downloaded and uncompressed to a ~60M file, it provides suitable fodder.
 
-So, we have getContents lazily slurping in names of articles to standard in, and we have 'words' (it's a pure non-IO function, but liftM lets us use it in the IO monad) breaking  a single long string with lots of newlines into a list of strings.
+So, we have getContents lazily slurping in names of articles to standard in, and we have [words](!Hoogle) (it's a pure non-IO function, but [liftM](!Hoogle) lets us use it in the IO monad) breaking  a single long string with lots of newlines into a list of strings.
 
-> import Monad (liftM) -- Don't forget to import stuff!
+> import Control.Monad (liftM) -- Don't forget your imports!
 > main :: IO ()
 > main = do
 >          articlelist <- liftM words $ getContents
 
-Now what? Well, a list of items each of which we want to perform the exact same operation on almost cries out for us to use a (monadic) map on it.
+Now what? Well, a list of items each of which we want to perform the exact same operation on almost cries out for us to use a (monadic) `map` on it.
 
 >          urllist <- mapM fetchArticleURLs articlelist
 
-But what *is* this mystery function 'fetchArticleText'? Well, obviously it will take as its single argument a string, and equally obviously it will return a list of strings since any given article might have 0, 1, or many different external links in it. And since we certainly aren't loading into memory an immutable copy of Wikipedia (regardless of whether we download a full dump of the articles or decide to fetch articles over the Internet), the result will be promoted into the IO monad. So the type signature must be:
+But what *is* this mystery function `fetchArticleText`? Well, obviously it will take as its single argument a String, and equally obviously it will return a list of Strings since any given article might have many different external links in it. And since we certainly aren't loading into memory an immutable copy of Wikipedia (regardless of whether we download a full dump of the articles or decide to fetch articles over the Internet), the result will be promoted into the IO monad. So the type signature must be:
 
 > fetchArticleURLs :: String -> IO [String]
 
-Purely arbitrarily, we'll have fetchArticleURLs work on pages from the live English Wikipedia; but you could probably also go the route of working from an offline database dump, which would have the advantage of halving network requests and parsing out URLs much faster (since there'd be no need to request individual pages over the network).
+Purely arbitrarily, we'll have `fetchArticleURLs` work on pages from the live English Wikipedia; but you could probably also go the route of working from an offline database dump, which would have the advantage of halving network requests and parsing out URLs much faster (since there'd be no need to request individual pages over the network).
 
-It's not too hard to see how to get the URL for any given article ("http://en.wikipedia.org/wiki/" ++ article), nor how to use Network.HTTP to download the HTML file constituting an article (couldn't be more than 10 lines) - but reliably parsing that HTML to extract genuine external links doesn't seem trivial at all! We could go with some sort of clumsy regexp matching on "http://", but hit-or-miss regular expressions just aren't The Haskell Way.
+It's not too hard to see how to get the URL for any given article (`"http://en.wikipedia.org/wiki/" ++ article`), nor how to use [Network.HTTP](!Hoogle) to download the HTML file (couldn't be more than 10 lines) - but reliably parsing that HTML to extract genuine external links doesn't seem trivial at all! We could go with some sort of clumsy regexp matching on "http://", but hit-or-miss regular expressions just aren't The Haskell Way.
 
-Stumped, the thing to do is to go bum around on the Haskell wiki and #haskell, where some excellent fellow will eventually inform us that "Hey, you know, parsing Wikipedia pages' HTML to extract out all external links kind of reminds me of one of the examples for Neil Mitchell's TagSoup library. You should go check it out."
+Stumped, the thing to do is to go bum around on the [Haskell wiki](!Hawiki) and #haskell, where some excellent fellow will eventually inform us that "Hey, you know, parsing Wikipedia pages' HTML to extract out all external links kind of reminds me of one of the examples for Neil Mitchell's [TagSoup](!Hackage) library. You should go check it out."
 
-Indeed, we need some sort of library to parse HTML for us and maybe handle the network business, and [TagSoup](http://www-users.cs.york.ac.uk/~ndm/tagsoup/) fits the bill admirably. One of the examples in Example.hs (googleTechNews) does almost precisely what we want, except for Google Tech News. The example in its entirety:
+Indeed, we need some sort of library to parse HTML for us and maybe handle the network business, and [TagSoup](http://www-users.cs.york.ac.uk/~ndm/tagsoup/) fits the bill admirably. One of the examples in Example.hs (`googleTechNews`) does almost precisely what we want, except for Google Tech News. The example in its entirety:
 
 > googleTechNews = do
 >        tags <- liftM parseTags $ openURL "http://news.google.com/?ned=us&topic=t"
@@ -79,28 +81,41 @@ Indeed, we need some sort of library to parse HTML for us and maybe handle the n
 >              Match.tagOpenAttrNameLit "a" "id"
 >               (\value -> "r" `isPrefixOf` value && 'i' `notElem` value)
 
-Reading this, one is struck by 'openURL'; we don't even need to read the documentation to know what it does. We already have the beginning of our fetchArticleURLs definition:
+Reading this, one is struck by `openURL`; we don't even need to read the documentation to know what it does. We already have the beginning of our `fetchArticleURLs` definition:
 
 > import Text.HTML.Download (openURL)
 > fetchArticleURLs :: String -> IO [String]
 > fetchArticleURLs article = ...something... $ openURL("http://en.wikipedia.org/wiki/" ++ article)
 
-We could insert into the ellipsis whatever parsing we cook up, but we might want to use it somewhere else, and besides, it's bad practice to muddy up a function that could be pure (like our hypothetical extractURLs function) with IO. Separation of concerns, yay! So we're up to this:
+We could insert into the ellipsis whatever parsing we cook up, but we might want to use it somewhere else, and besides, it's bad practice to muddy up a function that could be pure (like our hypothetical `extractURLs` function) with IO. [Separation of concerns](!Wikipedia), and all that.
+
+So we're up to this:
 
 > fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/" ++ article)
 > extractURLs :: String -> [String]
 > extractURLs arg = undefined
 
-I'm afraid the definition of extractURLs is a bit magical; I don't entirely understand it. It's clear enough to me that one wants <href>s, which are listed under the 'TagOpen "a"' output, hence the first condition of the list comprehension, and the actual URL comes last, hence the second clause with the pattern matching, and the third filter is to make sure relative URLs are filtered out (when one makes an internal link to another Wikipedia article, it's not given fully qualified with the "http://en.wikipedia.org/" leader but starting with "/wiki/foo_bar"; just another example of a pervasive Unixism). But I simply couldn't've put it all together. Just another example of the power of #haskell:
+The definition of `extractURLs` is a bit magical, since we don't immediately understand the entire hierarchy of types and constructors which TagSoup operate ons:
 
-> extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
+> extractURLs :: String -> [String]
+> extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
+>                        (_,x) <- atts,
+>                        "http://" `isPrefixOf` x]
+
+Alright. This [list comprehension](!Wikipedia) has 3 parts, which we will read from top down. We start with our `arg`, a String. It immediately passes to [parseTags](http://hackage.haskell.org/packages/archive/tagsoup/0.6/doc/html/Text-HTML-TagSoup-Parser.html#v%3AparseTags), which turns it into [Tag] - notice it's not a tree or hierarchical structure like our String actually represents; this is why it's 'soup'.
+
+A `Tag` can be [a lot of things](http://hackage.haskell.org/packages/archive/tagsoup/0.6/doc/html/Text-HTML-TagSoup-Parser.html#v%3AparseTags), but we quickly realize we only want `TagOpen`.^[The Position, Warning, Comment, and Close tags are obviously useless and do not contain the hyperlinks we want; and `TagText` after investigation turns out to be exactly what it says it is.] The `"a"` is there because `<href>` actually begins with `<a href=...>`.
+
+But how does `TagOpen "a" atts` do anything? We can think of a list comprehension as syntax sugar over a bunch of [filter](!Hoogle)s and whatnot. In this case, what's really happening is something like `filter (\TagOpen "a" x -> x) (parseTags arg)`; any entry which isn't a `TagOpen` is omitted from the intermediate list.
+
+The second line is exactly the same. We're still working on a `[Tag]`, and our little `filter` is still testing away, but now our 'test' is really just pulling out the second entry in each `TagOpen`'s `[Attribute]` - it's equivalent to a `map` of [snd](!Hoogle). And this gives us a `[String]` of URLs! The first entry in the lists are "href", and the second are the URLs the href points to. But when we test out our two-liner, we realize to our dismay we are getting junk results like `["/wiki/Japanese_poetry",..]`. A quick [isPrefixOf](!Hoogle) and we fix that, and that finishes our list comprehension.
 
 Don't forget that all the new things need to be imported:
 
 > import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
 > import Data.List (isPrefixOf)
 
-Oy. So we wrote extractURLs, which was used in fetchArticleURLs, which was used in main. Let's backtrack a bit; we had left main at:
+Oy. So we wrote `extractURLs`, which was used in `fetchArticleURLs`, which was used in `main`. Let's backtrack a bit; we had left `main` at:
 
 > main = do
 >          articlelist <- liftM words $ getContents
