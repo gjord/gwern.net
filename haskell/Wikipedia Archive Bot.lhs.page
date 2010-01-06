@@ -218,12 +218,13 @@ But we must continue our quest for it is still not fast enough.
 
 The conventional wisdom is whenever you are using String and it isn't fast enough, use the [bytestring](!Hackage) library. Our next version will make use of lazy ByteStrings:
 
-> import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, lines, unlines, pack, unpack, words)
+> import qualified Data.ByteString.Lazy.Char8 as B
+>             (ByteString(), getContents, lines, unlines, pack, unpack, words)
 
 To convert to ByteString, we first convert to ByteString equivalents wherever possible - `B.words $ B.getContents`, for example. Unfortunately for our main function, ByteString introduces some weirdness, so we de-sugar the do notation to use the good old [=<<](!Hoogle) operator to make sure everything fits together. But take heart, it's shorter than before:
 
 > main = do mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
->               where uniq :: (Ord a) => [[a]] -> [a] -- Just to be neat; makes clear not ByteString specific
+>               where uniq :: (Ord a) => [[a]] -> [a]
 >                     uniq = toList $ fromList $ concat
 
 Notice how we've split out our concatenating and uniqueifying code to its own little points-free local definition. You may've also noticed that we're using the regular [concat](!Hoogle) and not `ByteString.concat`; this is because we actually aren't concatenating the ByteStrings themselves but merely the list of lists.
@@ -238,21 +239,28 @@ The other bit of trickiness is that TagSoup regular Strings, so we need manually
 > import Data.List (isPrefixOf)
 > import Monad (liftM)
 > import Data.Set (toList, fromList)
-> import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, lines, unlines, pack, unpack, words)
+> import qualified Data.ByteString.Lazy.Char8 as B
+>              (ByteString(), getContents, lines, unlines, pack, unpack, words)
 
 > main :: IO ()
-> main = do mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
+> main = do mapM_ archiveURL
+>            =<< (liftM uniq $ mapM fetchArticleURLs
+>                 =<< (liftM B.words $ B.getContents))
 >               where uniq :: (Ord a) => [[a]] -> [a]
 >                     uniq = toList $ fromList $ concat
 
 > archiveURL :: B.ByteString -> IO String
-> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com")
+> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) 
+>                           ++ "&email=foo@bar.com")
 
 > fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
-> fetchArticleURLs article = liftM extractURLs $ openURL("en.wikipedia.org/wiki/" ++ (B.unpack article))
+> fetchArticleURLs article = liftM extractURLs $ openURL("en.wikipedia.org/wiki/" 
+>                                                       ++ (B.unpack article))
 
 > extractURLs :: String -> [B.ByteString]
-> extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
+> extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg),
+>                                     (_,x) <- atts,
+>                                     "http://" `isPrefixOf` x]
 
 ### Parallelizing requests
 
@@ -278,9 +286,12 @@ We change `mapM_`:
 
 > import Control.Concurrent (forkIO)
 >
-> main = do mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
+> main = do mapM_ (forkIO . archiveURL) =<<
+>            (liftM uniq $ mapM fetchArticleURLs
+>               =<< (liftM B.words $ B.getContents))
 > -- We need return () because otherwise it'd return a String and break forkIO's heart
-> archiveURL url = do openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com"); return ();
+> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com")
+>                      >> return ()
 
 Much better! I've noticed improvements of 20-100%, since we can run on multiple CPUs.That little change was certainly worth it.
 
@@ -304,9 +315,10 @@ In our situation, it's irrelevant whether we access an article at time $n$ or ti
 
 So now we have:
 
-> import System.IO.Unsafe (unsafeInterleaveIO) -- Scary name, but it's safe and useful for us
+> import System.IO.Unsafe (unsafeInterleaveIO)
 >
-> fetchArticleURLs article = liftM (B.lines . extractURLs) (unsafeInterleaveIO $ openURL(wiki ++ B.unpack article))
+> fetchArticleURLs article = liftM (B.lines . extractURLs)
+>                             (unsafeInterleaveIO $ openURL(wiki ++ B.unpack article))
 
 Let's think about the flow now. `getContents` keeps on delivering a few characters to `words`, which is waiting for a [newline](!Wikipedia), at which point it turns those characters into a String and passes them onto `mapM` which will immediately run `fetchArticleURLs` - and `fetchArticleURLs` will immediately 'finish', leaving behind some thunks or whatever holding a promise that it'll run the IO actions (downloading a particular Web page) whenever it's needed. And that promise gets passed into `nub`, which is busy concatenating and then uniqueifying the results of those thunks.
 
@@ -329,18 +341,29 @@ But here is the final, ugly, fast and frugal version. This combines the lazy IO 
 > import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, pack, unpack, words)
 
 > main :: IO ()
-> main = mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs =<< (liftM B.words $ B.getContents))
+> main = mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs
+>                                          =<< (liftM B.words $ B.getContents))
 >                 where uniq :: [[B.ByteString]] -> [B.ByteString]
->                       uniq = filter (\x -> if x == B.pack "http://wikimediafoundation.org/" || x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations" || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising" || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy" || x == B.pack "http://www.mediawiki.org/" || x == B.pack "http://www.wikimediafoundation.org" then False else True) . concat
+>                       uniq = filter (\x -> if x == B.pack "http://wikimediafoundation.org/" ||
+>                                   x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations"
+>                                  || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising"
+>                                  || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy"
+>                                  || x == B.pack "http://www.mediawiki.org/"
+>                                  || x == B.pack "http://www.wikimediafoundation.org"
+>                                  then False else True) . concat
 
 > fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
-> fetchArticleURLs article = liftM extractURLs $ unsafeInterleaveIO $ openURL("http://en.wikipedia.org/wiki/" ++ B.unpack article)
+> fetchArticleURLs article = liftM extractURLs $ unsafeInterleaveIO $ 
+>                             openURL("http://en.wikipedia.org/wiki/" ++ B.unpack article)
 
 > extractURLs :: String -> [B.ByteString]
-> extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg), (_,x) <- atts, "http://" `isPrefixOf` x]
+> extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg),
+>                                     (_,x) <- atts,
+>                                     "http://" `isPrefixOf` x]
 
 > archiveURL :: B.ByteString -> IO ()
-> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com") >> return ();
+> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) ++ "&email=foo@bar.com")
+>                    >> return ()
 
 # See also
 - [Wikipedia RSS Archive Bot.lhs]() -(the next step)
