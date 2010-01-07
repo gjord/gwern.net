@@ -2,42 +2,44 @@
 
 One of the problems with 'productivity' devices and methods is assessing their worth.
 
-Many of them claim unmeasurable gains, like [mindmaps](!Wikipedia "Mind map"), or perhaps they do offer gains but it is unclear they are worth the hassle, like [personal organizers](!Wikipedia "Personal organizer") and schedulers.
+Many of them claim unmeasurable gains^[[mindmaps](!Wikipedia "Mind map")], dubious gains^['image-streaming'], or clear gains which mayn't be worth the overhead^[schedulers, [personal organizers](!Wikipedia), _[Getting Things Done](!Wikipedia)_].
 
-The benefits of others are perfectly measurable, like adding [keybindings](!Wikipedia "Keyboard shortcut") for repetitive tasks (time the manual way versus the shortcut, and multiply it by the usage), but then the cost is hard to measure. How to assess the price of creating, learning, and rendering habitual a custom shortcut? There are many useful default bindings in [Emacs](!Wikipedia) alone that I have tried to learn, only to forget them or remember them too late when I have need of them.
+The benefits of others are perfectly measurable, like adding [keybindings](!Wikipedia) for repetitive tasks; just time the manual way versus the shortcut, and multiply it by the usage. But then the cost is hard to measure. How to assess the price of creating, learning, and rendering habitual a custom shortcut? There are scads of useful bindings in [Emacs](!Wikipedia) that I have tried to learn, only to forget them or remember them after I needed them.
 
 My favorite 'productivity tool' is one that suffers from none of these problems, and has refreshingly clear-cut costs and benefits.
 
 ## Use
 
-[Melatonin](!Wikipedia) is a [hormone](!Wikipedia) secreted by the [pineal gland](!Wikipedia). Its primary purpose is regulating the sleep cycle; its abatement permits waking. It's available over the counter just about everywhere. Odds are your local greengrocer's or pharmacy carries it. It's often used by people suffering from insomnia or to combat conditions such as [jet lag](!Wikipedia).
+[Melatonin](!Wikipedia) is a [hormone](!Wikipedia) secreted by the [pineal gland](!Wikipedia). Its primary purpose is regulating the sleep cycle; its abatement permits waking. Odds are your local greengrocer carries it. It's often used by people suffering from insomnia or to combat conditions such as [jet lag](!Wikipedia).
 
-But it's also useful for people with perfectly normal sleep-cycles. I am unsure whether its effect is to put one to sleep faster, or to do that and also deepen sleep, but whatever it does, it does well. It has been my rule of thumb over the past several years that the net effect of taking melatonin before bed is that one effectively gains an hour. That is: if one slept for 7 hours, one awakes as refreshed as if one had slept for 8 hours (and so on). There are no side-effects to melatonin use, and it is not addictive or habit-forming. The usual dose for a night is 1-3 mg; I take 1.5.[^od]
+But it's also useful for people with perfectly normal sleep-cycles. I am unsure whether its effect is to put one to sleep faster, or to do that and also deepen sleep, but melatonin does it well. My rule of thumb is melatonin subtracts an hour. That is: if one slept for 7 hours, one awakes as refreshed as if one had slept for 8 hours (and so on). There are no side-effects to melatonin use, and it is not addictive or habit-forming like caffeine is. The usual dose for a night is 1-3 mg; I take 1.5mg[^od].
 
 ## Benefits
 ### _Tempus Fugit_
 
 So that's what it does: it lets one cut 1 hour of sleep. (There are other benefits, such as enforcing a bedtime - invaluable for young people - but their values are indeterminate.)
 
-Let's work out the cost of regularly using melatonin. A bottle of melatonin pills will cost about 6 USD for 150 pills. Per milligram, the 3 mg pills are the least costly, and are easily convertible into lower dosages. Regardless, one will get a minimum of 150 doses per 6 USD. $\frac{600}{150}$ = 4¢ per pill. 1 night requires 1 dose, so each night costs 4¢.  We need to consider much we value the effort of remembering and taking the pill, though. Let us be conservative and price it as high as 10¢. So the very pessimistic total is 14¢ per night[^price]. The reward is that we gain an hour.
+Let's work out the cost of regularly using melatonin. Conservatively, a bottle of melatonin pills will cost about 6 USD for 150 pills. Per milligram, the 3 mg pills are the least costly, and are easily convertible into lower dosages. Regardless, one will get a minimum of 150 doses per $6. $\frac{600}{150}$ = 4¢ per pill. 1 night requires 1 dose, so each night costs 4¢.  We need to consider much we value the effort of remembering and taking the pill, though. Let us be conservative and price it as high as 10¢. So we spend 14¢ per night[^price]. The reward is that we gain an hour.
 
-Now how do we value an hour of our time? One could make an intuitive guess, or consider one's current salary and things like that, but it's common to just set the value of an hour at [minimum wage](!Wikipedia). This will hopefully not be *too* erroneous, since high-wage hours will balance out no-wage or worthless hours. More concretely, the minimum wage is the floor for one's [opportunity cost](!Wikipedia); even if the hour's opportunity you forgo by sleeping more is not an opportunity that will make you a billion dollars, you could still have worked a unskilled minimum wage job and been guaranteed the minimum wage.
+Now how do we value an hour of our time? One could make an intuitive guess, or consider one's current salary and things like that, but in economics 101, it's common to just set the value of an hour at [minimum wage](!Wikipedia). This will hopefully not be *too* erroneous, since over our lifetime, the days where that extra hour was really valuable will balance out the days where the hour was worthless.
 
-The current federal minimum wage as of 2008 is 6.55 USD an hour[^conservative]. So let's say that is the reward.
+More concretely, the minimum wage is the floor for one's [opportunity cost](!Wikipedia); even if the hour's opportunity you forgo by sleeping more wasn't worth a million dollars, you could still have worked a unskilled minimum wage job and gotten the minimum wage.
+
+The federal minimum wage as of 2008 is $6.55 an hour[^conservative]. So let's say that is the reward.
 
 ### ROI
 
-In other words, by investing 14¢, we realize a net of 655¢, or a profit of 641¢. This represents a return on our investment of approximately ~4678% ($\frac{655}{14} \times 100$). A worthwhile investment in my opinion.
+In other words, by investing 14¢, we realize a net of 655¢, for a profit of 641¢. This represents a return on our investment of approximately 4678% ($\frac{655}{14} \times 100$).
 
-Suppose we use only half a pill a night? Then our number of nights doubles, our pill price per night halves (though our 10¢ of effort remains constant), and our return becomes ~5458% ($\frac{655}{12} \times 100$).
+Suppose we use only half a pill a night? Then our number of doses doubles, our pill price per night halves (though our 10¢ of effort remains constant), and our return becomes 5458% ($\frac{655}{12} \times 100$).
 
-My local store sometimes runs a 2-for-1 sale on melatonin. I only buy at these sales. I can afford to wait, as the low consumption rate (1 a night, or less) means I buy roughly once a year. Thus, the pill price halves again to 1¢ per night, and now our return is ~5959% ($\frac{655}{11} \times 100$).
+My local store sometimes runs a 2-for-1 sale on melatonin. One could buy only at these sales - the low consumption rate (1 a night, or less) means you must buy less than annually. Thus, the pill price halves again to 1¢ per night, and now tje return is 5959% ($\frac{655}{11} \times 100$).
 
 ### Absolute gains
 
-Let's look at another perspective. Those are impressive percentages, but they're on a low base so perhaps it's not worthwhile even with 6000% returns. What are the absolute gains one would realize over the course of a year? Well, to calculate: ($(365 \times 6.55) - (365 \times 0.11)$), or to simplify: ($365 \times (6.55 - 0.11)$) = 2350.60 USD.
+Let's look at another perspective. Those are impressive percentages, but they're on a low base so perhaps it's not worthwhile even with 6000% returns. What are the absolute gains one would realize over the course of a year? Well, to calculate: ($(365 \times 6.55) - (365 \times 0.11)$), or to simplify: ($365 \times (6.55 - 0.11)$) = $2350.60. We would have to assume our calculations are 3 or 4 orders of magnitude before melatonin stops being a good deal.
 
-I consider an annual gain of over 2000 dollars worth of my time to have been well-worth the original costs of learning about and experimenting with melatonin.
+One year of melatonin amply repays the original costs of learning about and experimenting with it. (And the long-run benefits are substantial.[^future])
 
 ## Self-discipline
 
@@ -83,3 +85,4 @@ A parting thought: millions of Americans regularly take [multivitamin](!Wikipedi
 
     > "Large doses of melatonin can even be counterproductive: Lewy et al[68] provide support to the "idea that too much melatonin may spill over onto the wrong zone of the melatonin phase-response curve" (PRC). In one of their subjects, 0.5 mg of melatonin was effective while 20 mg was not."
 [^price]: I say very pessimistic because my actual price is ~1.4¢ per night. Tommy Health recently sold 120 3mg pills for $2.49; I bought 6, with shipping, at $20.89. Remembering that I take half a pill, the price per night is $\frac{\frac{2000}{6 \times 120}}{2}$, or, 1.38¢
+[^future]: Applying the usual 'present value of a future sum' formula, which goes $\text{present-value} = \frac{\text{future-value}}{(1+growth)^n}$, we find that 60 years from now, the $2000 is worth $92: $2000 * (1-0.05)^60 = 92.1$. Even if we are pessimistic and value the annual return at $200, the present value is still positive. We can sum the 60 years in Haskell with `sum (map (\x -> 200 * (1-0.05)^x) [0..60])`, or $38245.
