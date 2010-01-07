@@ -3,11 +3,11 @@ format: markdown+lhs
 title: Run Length Encoding
 ...
 
-Recently I was playing with and working on a Haskell clone of the old [_Gradius_](!Wikipedia "Gradius_(series\")) arcade games, [_Monadius_](!Hackage). Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all `Integer`s to `Int`s and so on), but in its Demo.hs, I found an interesting solution to a problem, and it seems like a good & real example of how Haskell's abstractions can shine.
+Recently I was playing with and working on a Haskell clone of the old [_Gradius_](!Wikipedia "Gradius (series)")) arcade games, [_Monadius_](!Hackage). Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all `Integer` to `Int` and so on), but in its Demo.hs, I found an interesting solution to a problem, and it seems like a good small example of Haskell abstraction.
 
 # Examples
 
-One of the problems with language advocacy is that it's hard to have good examples, since someone who is writing an essay probably will only come up with trivial ones, and someone dealing with meaty problems isn't thinking about advocacy but how to solve their problem. I hope this example will be in-between.
+One of the problems with language advocacy is that it's hard to have good examples, since someone who is writing an essay probably will only come up with trivial ones, and someone dealing with meaty problems isn't thinking about advocacy but how to solve their problem. I hope this example will be a little more substantial than the one-liners examples of [closures](!Wikipedia "Closure (computer science)") or [partial application](!Wikipedia).
 
 # Level data in _Monadius_
 
@@ -59,20 +59,24 @@ Suppose we have levels which are specified by a pair of numbers and then a long 
 > 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 >  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
 
-This is clearly a bad way of representing things. We could just scrap this representation as `Int`s completely and perhaps define it as
+This is an ugly way to define a level. We could just scrap this representation as `Int` completely and perhaps define it using a hypothetical [enumerated type](!Wikipedia) as
 
 > level1 :: ((Geometry,Geometry),[Enemy])
 > level1 = ((Tall,Narrow), [FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,Shooter,PowerUp,Boss..])
 
-But this representation, while certainly more symbolic, is still very repetitious. It will, in fact, take even more space to write down. We could have the `Read` and `Show` typeclasses auto-derived for our `Geometry` and `Enemy` datatypes, and then we could ship `level1`, `level2` etc. as some sort of "levelinformation.dat" file, and read the level information in at runtime. But that makes installation and running more difficult, and it doesn't address the core issue: the information is written in a way that is so ungainly that it's next to impossible to write or even *modify*!
+But this representation, while certainly more understandable, is still very repetitious. It will take even more space to write down.
+
+We *could* auto-derive the [Read](!Hoogle) and [Show](!Hoogle) typeclasses for `Geometry` and `Enemy` datatypes, and then we could store `level1`, `level2` etc. as some sort of "levelinformation.dat" file, and read the level information in at runtime.
+
+But that makes installation and running more difficult^[Although Cabal makes this quite easy with its [Paths_\*](http://www.haskell.org/cabal/release/cabal-latest/doc/users-guide/authors.html#paths-module) mechanism.] still quite possible, , and it doesn't address the core issue: the information is written in a way that is so ungainly that it's next to impossible to write or even *modify*!
 
 # The solution
 
-We need some way of expressing this more concisely, of, in short, *compressing* it. In this vein of thought, our first observation should be that we do not need to resort to Gzipping it or adding dependencies on fancy compression libraries or anything; there is a very obvious way to compress it already - the entire thing is practically just a series of repeated numbers.
+We need some way of expressing this more concisely, of, in short, *compressing* it. In this vein of thought, our first observation should be that we do not need to resort to fancy [compression libraries](http://hackage.haskell.org/packages/archive/pkg-list.html#cat:codec) or anything; there is an obvious way to compress it - the entire thing is a series of repeated numbers.
 
-We should be able to replace the length enumeration of `[0,0,0,0,0,0,0,0,0,0,0,0]` with something simpler, like the number of repetitions, and what is to be repeated. Our entry would look like `(12,0)`.
+We should be able to replace the lengthy enumeration of fragments like `[0,0,0,0,0,0,0,0,0,0,0,0]` with something simpler. For example, the number of repetitions, and what is to be repeated: `(12,0)`.
 
-This representation is definitely shorter and more importantly, easier to modify. It is possible that there may be a performance benefit here, as we've gotten rid of a large constant that would have to be defined in the program itself and instead replaced it with a shorter function which evaluates to the same thing. (If we're only on level 1, we don't need to carry around the expanded version of the other levels, and when we go to level 2, level 1 will be garbage-collected.)
+This [run-length encoding](!Wikipedia) is shorter and easier to modify. It is possible that there may be a performance benefit here, as we've gotten rid of a large constant that would have to be defined in the program itself and instead replaced it with a shorter function which evaluates to the same thing. (If we're only on level 1, we don't need to carry around the expanded version of the other levels, and when we go to level 2, level 1 will be garbage-collected.)
 
 ## Writing it
 
@@ -80,24 +84,37 @@ So, what is the type of our decompressing function? Well, we need to turn a `(In
 
 > rleDecode :: [(Int,Int)] -> [Int]
 
-Let us tackle the single tuple example first. The second entry defines what we need, and the first entry defines how many we need. We could write a recursive function that takes the parameter, decreases the first entry by one, and cons on one example of the second entry. It could look like this:
+Let us tackle the single tuple example first. The second entry defines what we need, and the first entry defines how many we need, and that's our type right there:
+
+> rleRecursiveDecode :: (Int, a) -> [a]
+
+ We could write a [primitive recursive](!Wikipedia) function that takes the parameter, decreases the counter by 1, and cons on a copy of the second entry. It could look like this:
 
 > rleRecursiveDecode (0,_) = []
 > rleRecursiveDecode (n,b) = b : (rleRecursiveDecode (n-1,b))
 
-But this really is not the best way to go. It is not necessarily easy to follow, and if there is one thing I have learned about Haskell programming, it is that the most obvious approach (in this case, primitive recursion) may not be the best way to go. This is code that could have as well been written in Scheme or something. It is complicated because we are trying to ensure that we generate an item for the list only at the exact moment we need to add it into the list; we are programming as if our language is strict, in other words.
+But this really is not the best way to go. It is not necessarily easy to follow, and if there is one thing I have learned about Haskell programming, it is that the most obvious approach (in this case, primitive recursion) may not be the best way to go.
 
-So, what is the lazy way of doing things? Infinite lists, of course. We create an infinite list containing only the second entry, and we merely take as many as the first entry says we need. Simple enough!
+This is code that could have as well been written in Scheme or something. It is complicated because we are trying to ensure that we generate an item for the list only at the exact moment we need to add it into the list; we are programming as if our language is strict, in other words. So, what is the lazy way of doing things? Why do we like laziness to begin with?
+
+One of the key rationale for [lazy evaluation](!Wikipedia) is that it promotes [separation of concerns](!Wikipedia) - one function doesn't need to know when or how much has been done by another function. In this case, what concerns ought to be separated? Well, our desired list has 2 properties: its length, and the single repeated item. 
+
+Since we can create infinite lists, there is no need for the length to be set at the same time as the repeated-item is being generated. We can create an infinite list containing the item, and we demand as many as we need. Lazy evaluation means our infinite list doesn't blow up. Simple enough!
+
+The generation is too easy for words:
 
 > -- Define an infinite list of our item.
-> reduplicate a = a:a
+> duplicate :: a -> [a]
+> duplicate a = a:a
+
+But what's our demand function? A little thinking and we know that we have a list, a number, and we get back a list. [Int -> [a] -> [a]](!Hoogle) describes a few functions, the second of which turns out to be what we want: [take](!Hoogle).
 
 > rleLazyDecode :: (Int,Int) -> [Int]
-> rleLazyDecode (n,b) = take n (reduplicate b)
+> rleLazyDecode (n,b) = take n (duplicate b)
 
-Now, `reduplicate` is a simple enough function to define, but it already has a definition in the standard libraries - `cycle`. (I assume you know what `take` is, but that is also fairly easy to define once you seen the need for it.)
+Now, `duplicate` is a simple enough function to define, but another type-search will show that [a -> [a]](!Hoogle) is already defined in the standard libraries - [cycle](!Hoogle).
 
-So:
+So we scrap `duplicate`:
 
 > rleLazyDecode (n,b) = take n (cycle b)
 
@@ -105,7 +122,7 @@ Might as well remove the parentheses:
 
 > rleLazyDecode (n,b) = take n $ cycle b
 
-A satisfying, short, functional, and lazy one-liner. From here the definition of rleDecode is almost trivial: we extend it to a list of tuples by throwing in a `map`, and we turn the resulting list of lists into a single list by way of `concat`:
+A satisfying, short, functional, and lazy one-liner. From here the definition of `rleDecode` is almost trivial: we extend it to a list of tuples by throwing in a [map](!Hoogle), and we turn the resulting list of lists into a single list by way of [concat](!Hoogle):
 
 > rleDecode ns = concat $ map rleLazyDecode ns
 
@@ -113,7 +130,9 @@ We can tweak this further, as `'concat . map'` is a common enough idiom that the
 
 > rleDecode ns = concatMap rleLazyDecode ns
 
-Aw heck - let's make it point-free:
+(As before, we could have found `concatMap` by searching for the type signature of `concat . map`: [(a1 -> [a]) -> [a1] -> [a]](!Hoogle)).
+
+Aw heck - let's make it [points-free](!Wikipedia "Tacit programming"):
 
 > rleDecode = concatMap rleLazyDecode
 
@@ -121,18 +140,19 @@ And then we substitute in the `rleLazyDecode` definition:
 
 > rleDecode = concatMap (\(n,b) -> take n $ cycle b)
 
-We could also write a version that omits the explicit lambda and naming of parameters by use of the helpful (but somewhat esoteric) `uncurry` function; `uncurry` takes apart the tuple. Its type is:
+We could also write a version that omits the explicit lambda and naming of parameters by use of the helpful (but somewhat esoteric) [uncurry](!Hoogle) function. Its implementation is much clearer than its type:
 
 > uncurry :: (a -> b -> c) -> (a, b) -> c
+> uncurry f (a,b) = f a b
 
-We can actually go even further into the realms of incomprehensibility. It turns out that lists are a monad! This means we can use `bind` and all the rest of the operations defined by the `Monad` typeclass to operate on lists and other things. So we can write this bizarre (but short and effective) version of rleDecode:
+We can actually go even further into the realms of incomprehensibility. It turns out that lists are a monad. This means we can use `bind` and all the rest of the operations defined by the [Monad](!Hoogle) typeclass to operate on lists and other things. So we can write this bizarre (but short and effective) version of `rleDecode`:
 
 > rleDecode = (uncurry replicate =<<)
 
 And we are done! We can now represent the first level like this:
 
 > d1 = ((2,1),d)
->     where d = rleDecode [(5, 3), (10, 67), (6, 3), (5, 67), (29, 3), (2, 11),
+>   where d = rleDecode [(5, 3), (10, 67), (6, 3), (5, 67), (29, 3), (2, 11),
 >      (29, 3), (5, 35), (3, 3), (3, 35), (24, 3), (2, 35), (19, 3), (7, 19), (21, 51),
 >      (63, 35), (15, 43), (5, 11), (8, 43), (8, 35), (3, 3), (9, 35), (20, 3), (52,
 >      67), (32, 3), (13, 35), (3, 3), (11, 35), (5, 3), (9, 35), (4, 3), (6, 35), (4,
@@ -144,6 +164,6 @@ And we are done! We can now represent the first level like this:
 >      11), (7, 3), (26, 67), (7, 3), (13, 35), (5, 43), (7, 11), (2, 3), (5, 67), (1,
 >      83), (2, 19), (2, 3), (10, 67), (21, 3), (147, 0)]
 
-Much nicer, don't you think? And the best part is, we should be able to reuse this run-length decoding even if we replace the arbitrary numbers by more descriptive type constructors!
+Much nicer! And since our list-processing code is [polymorphic](!Wikipedia "Type polymorphism"), so even if we replace the arbitrary numbers by constructors, we change nothing.
 
-(My thanks to the good denizens of #haskell, and [Don Stewart's blog entry](http://cgi.cse.unsw.edu.au/~dons/blog/2007/07) on run-length encoding/decoding using Arrows.)
+(Thanks to the denizens of #haskell for refactoring tips, and [Don Stewart's blog entry](http://cgi.cse.unsw.edu.au/~dons/blog/2007/07) on run-length encoding/decoding using [Arrows](!Hawiki "Arrow").)
