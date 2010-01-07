@@ -43,15 +43,15 @@ One year of melatonin amply repays the original costs of learning about and expe
 
 ## Self-discipline
 
-Speaking from personal experience, I know that one of the obstacles to sleeping well is going to bed on time and at the right time. The problem is that even though one knows that one ought to go to bed & not doing so will cause problems, it's hard to actually do so since that means stopping whatever one is doing - finishing a book, chatting with friends, playing a game, etc. It is even more difficult when one doesn't feel tired.
+Speaking from personal experience, I know that one of the obstacles to sleeping well is going to sleep at all. TEven though one knows that one ought to go to bed on time, and that not doing so will cause problems, it's hard to actually do it, One wants to finish the book, chat with friends, play a game, etc. It is even more difficult when one doesn't feel tired.
 
 This dilemma is far from unique. It is called [hyperbolic discounting](!Wikipedia); humans can make the rational decision when at a great distance from a choice, but the closer they come, the more warped their decisions are. Procrastination is often thanks to hyperbolic discounting - 'hard work pays off tomorrow but procrastination pays off now', and never mind that tomorrow always comes. Similarly, addicts want to be free of their addiction, but their want for a drink _right now_ overwhelms their lifetime desire to not have drinks. (For more on the topic, see ["Akrasia, hyperbolic discounting, and picoeconomics"](http://lesswrong.com/lw/6c/picoeconomics/) and ["Applied Picoeconomics"](http://lesswrong.com/lw/ep/applied_picoeconomics/).)
 
-How do we deal with this? The classic mechanisms are to raise the cost of 'procrastination' - making the addict pay $100 for every drink they take, perhaps - or avoiding the choice entirely. We can't avoid the need to sleep in the real world like an addict could simply avoid bars, so we need to somehow change the incentives entirely to make us want to sleep rather than keep on gaming.
+How do we deal with this? The classic mechanisms are to raise the cost of 'procrastination' - making the addict pay $100 for every drink they take, perhaps - or avoiding the choice entirely. An addict can avoid bars or liquor stores, but no one can avoid sleep. We need to raise the cost, then, and somehow change the incentives to make us want to sleep.
 
-We can do this simply by waiting until the need to sleep is so strong we can no longer resist. But few of us have the luxury of the bizarre schedule this entails. (MIT hackers were legendary for doing exactly this, and ending up with 20-30 hour sleep cycles that would loop throughout the week.) And if you're a college student, you may not be able to afford a vow painful enough to deter you.
+We can do this simply by waiting until the need to sleep is so strong we can no longer resist. But few of us have the luxury of the bizarre schedule this entails. We could try some sort of monetary fine for not going to bed by midnight, but enforcement is difficult and if you're a college student, you may not be able to afford a vow painful enough to deter you.
 
-But melatonin allows us a different way of raising the cost, a _physiological_ way. Half an hour before we plan to go to sleep, we take a pill. The procrastinating effect will not work - half an hour is so far away that our decision-making process & willpower are undistorted and can make the right decision, which is to follow our going-to-bed plan. When the half-hour is up, the melatonin has begun to kick in and now we feel sleepy. Procrastination/staying up has ceased to be free, to be the default option; now it is costly to fight the melatonin and remain awake. The choice of sleep may now prevail over even the hyperbolically-distorted choice of video games.
+Melatonin allows us a different way of raising the cost, a _physiological_ & self-enforcing way. Half an hour before we plan to go to sleep, we take a pill. The procrastinating effect will not work - half an hour is so far away that our decision-making process & willpower are undistorted and can make the right decision (viz. following the schedule). When the half-hour is up, the melatonin has begun to make us sleepy. Staying awake ceases to be free, to be the default option; now it is costly to fight the melatonin and remain awake. The choice of sleep may now prevail over the hyperbolically-distorted choice of video games.
 
 And going to sleep when you need to go to sleep is, in the long-run, a very valuable thing in its own right.
 
@@ -64,11 +64,11 @@ Melatonin is a clear-cut Good Thing. The gains I have laid out are significant e
 2) You are *so* poor that 6 dollars every 150 or 300 days is a crippling expense. 
      - But then how come you to have the free time to read this?
 3) Melatonin supplements just doesn't work on you, period.
-     - Possible, but unlikely.
-4) They work, but not enough.
-     - This implies that melatonin save you only a few minutes or second, else the gain would be smaller but still be positive. (This too strikes me as unlikely.)
+     - Possible, but unlikely. This isn't some mental trick - it's a fundamental fact of mammalian biology.
+4) They work, but not well enough.
+     - This implies that melatonin save you only a few minutes or seconds, else the gain would be smaller but still be positive. (This too strikes me as unlikely.)
 4) You value a simpler, less complicated life *that* much.
-     - Taking a pill at night, and buying some pills once a year stresses you out that much?
+     - Taking a pill at night, and buying some pills once every year or two stresses you out?
 5) You value an hour at less than 11¢, so melatonin is not profitable.
      - Please contact me. I would like to hire you at the princely rate of a dime an hour to do drudge-work on Wikipedia.
 
@@ -85,4 +85,4 @@ A parting thought: millions of Americans regularly take [multivitamin](!Wikipedi
 
     > "Large doses of melatonin can even be counterproductive: Lewy et al[68] provide support to the "idea that too much melatonin may spill over onto the wrong zone of the melatonin phase-response curve" (PRC). In one of their subjects, 0.5 mg of melatonin was effective while 20 mg was not."
 [^price]: I say very pessimistic because my actual price is ~1.4¢ per night. Tommy Health recently sold 120 3mg pills for $2.49; I bought 6, with shipping, at $20.89. Remembering that I take half a pill, the price per night is $\frac{\frac{2000}{6 \times 120}}{2}$, or, 1.38¢
-[^future]: Applying the usual 'present value of a future sum' formula, which goes $\text{present-value} = \frac{\text{future-value}}{(1+growth)^n}$, we find that 60 years from now, the $2000 is worth $92: $2000 * (1-0.05)^60 = 92.1$. Even if we are pessimistic and value the annual return at $200, the present value is still positive. We can sum the 60 years in Haskell with `sum (map (\x -> 200 * (1-0.05)^x) [0..60])`, or $38245.
+[^future]: Applying the usual 'present value of a future sum' formula, which goes $present = \frac{future}{(1-discount)^n}$, we find that 60 years from now, the $2000 is worth $92: $2000 \times (1-0.05)^60 = 92.1$. We can be pessimistic and value the annual return at $200, and sum the 60 years in Haskell with `sum (map (\x -> 200 * (1-0.05)^x) [0..60])`, or $38245.
