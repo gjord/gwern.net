@@ -14,7 +14,7 @@ One of the problems with language advocacy is that it's hard to have good exampl
 Suppose we have levels which are specified by a pair of numbers and then a long list of numbers, often very repetitious. Perhaps a particular level might be represented this way:
 
 > level1 :: ((Int, Int), [Int])
-> level1 = ((2,1),[0,0,0,0,0,0,0,0,0,0,0,0,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+> level1 = ((2,1),[0,0,0,0,0,0,0,0,0,0,0,0,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
 > 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,73,73,73,
 > 65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,
 > 69,69,65,17,17,17,17,17,17,17,17,17,17,17,17,17,25,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
@@ -62,7 +62,7 @@ Suppose we have levels which are specified by a pair of numbers and then a long 
 This is an ugly way to define a level. We could just scrap this representation as `Int` completely and perhaps define it using a hypothetical [enumerated type](!Wikipedia) as
 
 > level1 :: ((Geometry,Geometry),[Enemy])
-> level1 = ((Tall,Narrow), [FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,FlyEnemy,Shooter,PowerUp,Boss..])
+> level1 = ((Tall,Narrow), [Flyer,Flyer,Flyer,Flyer,Flyer,Flyer,Shooter,PowerUp,Boss..])
 
 But this representation, while certainly more understandable, is still very repetitious. It will take even more space to write down.
 
