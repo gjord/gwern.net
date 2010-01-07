@@ -112,15 +112,15 @@ But what's our demand function? A little thinking and we know that we have a lis
 > rleLazyDecode :: (Int,Int) -> [Int]
 > rleLazyDecode (n,b) = take n (duplicate b)
 
-Now, `duplicate` is a simple enough function to define, but another type-search will show that [a -> [a]](!Hoogle) is already defined in the standard libraries - [cycle](!Hoogle).
+Now, `duplicate` is a simple enough function to define, but another type-search will show that [a -> [a]](!Hoogle) is already defined in the standard libraries - [repeat](!Hoogle).
 
 So we scrap `duplicate`:
 
-> rleLazyDecode (n,b) = take n (cycle b)
+> rleLazyDecode (n,b) = take n (repeat b)
 
 Might as well remove the parentheses:
 
-> rleLazyDecode (n,b) = take n $ cycle b
+> rleLazyDecode (n,b) = take n $ repeat b
 
 A satisfying, short, functional, and lazy one-liner. From here the definition of `rleDecode` is almost trivial: we extend it to a list of tuples by throwing in a [map](!Hoogle), and we turn the resulting list of lists into a single list by way of [concat](!Hoogle):
 
@@ -138,7 +138,7 @@ Aw heck - let's make it [points-free](!Wikipedia "Tacit programming"):
 
 And then we substitute in the `rleLazyDecode` definition:
 
-> rleDecode = concatMap (\(n,b) -> take n $ cycle b)
+> rleDecode = concatMap (\(n,b) -> take n $ repeat b)
 
 We could also write a version that omits the explicit lambda and naming of parameters by use of the helpful (but somewhat esoteric) [uncurry](!Hoogle) function. Its implementation is much clearer than its type:
 
