@@ -1,8 +1,3 @@
----
-format: markdown+lhs
-title: A bot to archive Wikipedia URLs using WebCite
-...
-
 One of the best ways to learn something like [Haskell](!Wikipedia "Haskell (programming language)") is to simply dive in and make it do something useful. In my case, I've wanted to learn Haskell for a long time: the syntax was gorgeous compared to [Common Lisp](!Wikipedia), [Bash](!Wikipedia), or Java (the only other languages I had experience with); various ideas such as [monads](!Wikipedia "Monad (functional programming)"), [lazy evaluation](!Wikipedia), and [functional purity](!Wikipedia) struck me as fascinating and exciting; and the community was excellent.
 
 But I didn't have any practical use for it, and I'm too lazy to learn it unless I have to. Bash worked well enough for my shell scripts, and I generally only messed with Common Lisp because of my use of the [Stump window manager](!Wikipedia StumpWM), but I had finished configuring and extending StumpWM to my liking^[I use [Xmonad](!Wikipedia) these days.]. Fortunately, I am a heavy user and long-time editor of Wikipedia, and some technical details bug me.
@@ -17,27 +12,31 @@ But I didn't have any practical use for it, and I'm too lazy to learn it unless 
 ## How to?
 Let's talk about Problem 2.
 
-The beginning of a solution is to realize that the Internet Archive is not useable here. Their [FAQ](http://www.archive.org/about/faqs.php#1) specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything^[It is possible, though difficult, to script the forms in Haskell.]. Their [Archive-It](http://www.archive-it.org/) service does do on-demand archiving, but at steep institution-targeted fees; not something for individual users.
+The beginning of a solution is to realize that the Internet Archive is not usable here. Their [FAQ](http://www.archive.org/about/faqs.php#1) specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything^[It is possible, though difficult, to script the forms in Haskell.]. Their [Archive-It](http://www.archive-it.org/) service does do on-demand archiving, but at steep institution-targeted fees; not something for individual users.
 
 Fortunately, if we poke around on the subject of archiving URLs, we'll eventually discover something like [WebCite](!Wikipedia), which is tailor-made for our purposes. They offer persistent archiving services, for free, and best of all they can archive on demand!
 
 Reading through their documentation, it seems they will eventually allow you to upload a file containing a large number of URLs to cite, but not yet. That's alright - just trying out the archiving (or reading the [technical FAQ](http://www.webcitation.org/doc/WebCiteBestPracticesGuide.pdf)) reveals the submission URL encodes everything in a very simple format:
 
-> "http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com"
+~~~~{.haskell}
+"http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com"
+~~~~~
 
 ## The steps
 
 So going back to our problem. Our problem is that we want to take all the articles of the English Wikipedia, somehow extract all the external links from said articles, transform those URLs according to the previous paragraph, and then actually open them (which will cause the embedded URL to be archived).
 
-### Article names 
+### Article names
 
 Our first question is naturally "How on Earth do we even get the addresses of the millions of Wikipedia articles? Saying they're all 'somewhere in `en.wikipedia.org/wiki/`' doesn't help." I'm going to cop out a bit here and not actually explain how I hit upon this approach, but we'll borrow some code from the bot I coded to fix Problem 1, which looks a little like this:
 
-> main = do
->     cd "/home/gwern/bin/pywikipedia/"
->     {- The list comprehension is to prevent from operating on page titles which will
->     cause enormous numbers of redirects to be created. It's what comes before that matters. -}
->     list <- liftM (\bs -> [n | n<-bs,  length n <= (2^4)]) $ liftM words $ getContents
+~~~~{.haskell}
+main = do
+    cd "/home/gwern/bin/pywikipedia/"
+    {- The list comprehension is to prevent from operating on page titles which will
+    cause enormous numbers of redirects to be created. It's what comes before that matters. -}
+    list <- liftM (\bs -> [n | n<-bs,  length n <= (2^4)]) $ liftM words $ getContents
+~~~~~
 
 [Redirect-bot.hs]() is assuming here that stdin is the source of a list. This long (>9,555,933 lines) list takes this form:
 
@@ -58,21 +57,27 @@ Notice that spaces are being escaped as underscores, and that each page name is 
 
 So, we have getContents lazily slurping in names of articles to standard in, and we have [words](!Hoogle) (it's a pure non-IO function, but [liftM](!Hoogle) lets us use it in the IO monad) breaking  a single long string with lots of newlines into a list of strings.
 
-> import Control.Monad (liftM) -- Don't forget your imports!
->
-> main :: IO ()
-> main = do
->          articlelist <- liftM words $ getContents
+~~~~{.haskell}
+import Control.Monad (liftM) -- Don't forget your imports!
+
+main :: IO ()
+main = do
+         articlelist <- liftM words $ getContents
+~~~~~
 
 ### Article contents
 
 Now what? Well, a list of items each of which we want to perform the exact same operation on almost cries out for us to use a (monadic) `map` on it.
 
->          urllist <- mapM fetchArticleURLs articlelist
+~~~~{.haskell}
+         urllist <- mapM fetchArticleURLs articlelist
+~~~~~
 
 But what *is* this mystery function `fetchArticleText`? Well, obviously it will take as its single argument a String, and equally obviously it will return a list of Strings since any given article might have many different external links in it. And since we certainly aren't loading into memory an immutable copy of Wikipedia (regardless of whether we download a full dump of the articles or decide to fetch articles over the Internet), the result will be promoted into the IO monad. So the type signature must be:
 
-> fetchArticleURLs :: String -> IO [String]
+~~~~{.haskell}
+fetchArticleURLs :: String -> IO [String]
+~~~~~
 
 Purely arbitrarily, we'll have `fetchArticleURLs` work on pages from the live English Wikipedia; but you could probably also go the route of working from an offline database dump, which would have the advantage of halving network requests and parsing out URLs much faster (since there'd be no need to request individual pages over the network).
 
@@ -84,39 +89,47 @@ Stumped, the thing to do is to go bum around on the [Haskell wiki](!Hawiki) and 
 
 Indeed, we need some sort of library to parse HTML for us and maybe handle the network business, and [TagSoup](http://www-users.cs.york.ac.uk/~ndm/tagsoup/) fits the bill admirably. One of the examples in Example.hs (`googleTechNews`) does almost precisely what we want, except for Google Tech News. The example in its entirety:
 
-> googleTechNews = do
->        tags <- liftM parseTags $ openURL "http://news.google.com/?ned=us&topic=t"
->        let links = mapMaybe extract $ sections match tags
->        putStr $ unlines links
->    where extract xs = maybeTagText (xs !! 2)
->          match =
->              Match.tagOpenAttrNameLit "a" "id"
->               (\value -> "r" `isPrefixOf` value && 'i' `notElem` value)
+~~~~{.haskell}
+googleTechNews = do
+       tags <- liftM parseTags $ openURL "http://news.google.com/?ned=us&topic=t"
+       let links = mapMaybe extract $ sections match tags
+       putStr $ unlines links
+   where extract xs = maybeTagText (xs !! 2)
+         match =
+             Match.tagOpenAttrNameLit "a" "id"
+              (\value -> "r" `isPrefixOf` value && 'i' `notElem` value)
+~~~~~
 
 Reading this, one is struck by `openURL`; we don't even need to read the documentation to know what it does. We already have the beginning of our `fetchArticleURLs` definition:
 
-> import Text.HTML.Download (openURL)
->
-> fetchArticleURLs :: String -> IO [String]
-> fetchArticleURLs article = undefined $ openURL("http://en.wikipedia.org/wiki/"++article)
+~~~~{.haskell}
+import Text.HTML.Download (openURL)
+
+fetchArticleURLs :: String -> IO [String]
+fetchArticleURLs article = undefined $ openURL("http://en.wikipedia.org/wiki/"++article)
+~~~~~
 
 We could replace `undefined` with whatever parsing we cook up, but we might want to use it somewhere else, and besides, it's bad practice to muddy up a function that could be pure (like our hypothetical `extractURLs` function) with IO. [Separation of concerns](!Wikipedia), and all that.
 
 So we're up to this:
 
-> fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
-> extractURLs :: String -> [String]
-> extractURLs arg = undefined
+~~~~{.haskell}
+fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
+extractURLs :: String -> [String]
+extractURLs arg = undefined
+~~~~~
 
 The definition of `extractURLs` is a bit magical, since we don't immediately understand the entire hierarchy of types and constructors which TagSoup operate ons:
 
-> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
-> import Data.List (isPrefixOf)
->
-> extractURLs :: String -> [String]
-> extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
->                        (_,x) <- atts,
->                        "http://" `isPrefixOf` x]
+~~~~{.haskell}
+import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+import Data.List (isPrefixOf)
+
+extractURLs :: String -> [String]
+extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
+                       (_,x) <- atts,
+                       "http://" `isPrefixOf` x]
+~~~~~
 
 Alright. This [list comprehension](!Wikipedia) has 3 parts, which we will read from top down. We start with our `arg`, a String. It immediately passes to [parseTags](http://hackage.haskell.org/packages/archive/tagsoup/0.6/doc/html/Text-HTML-TagSoup-Parser.html#v%3AparseTags), which turns it into [Tag] - notice it's not a tree or hierarchical structure like our String actually represents; this is why it's 'soup'.
 
@@ -130,22 +143,30 @@ The second line is exactly the same. We're still working on a `[Tag]`, and our l
 
 Oy. So we wrote `extractURLs`, which was used in `fetchArticleURLs`, which was used in `main`. Let's backtrack a bit; we had left `main` at:
 
-> main = do
->          articlelist <- liftM words $ getContents
->          urllist <- mapM fetchArticleURLs articlelist
+~~~~{.haskell}
+main = do
+         articlelist <- liftM words $ getContents
+         urllist <- mapM fetchArticleURLs articlelist
+~~~~~
 
 By the time `urllist` is generated, we've got an `IO [String]` which is containing all the external links. Now we can once again indulge the desire to map some sort of function over it. Another map, another hypothetical function:
 
->          mapM archiveURL urllist
+~~~~{.haskell}
+         mapM archiveURL urllist
+~~~~~
 
 For convenience's sake, we'll reuse `openURL` even though we don't want output, we really want something like this:
 
-> archiveURL :: String -> IO ()
+~~~~{.haskell}
+archiveURL :: String -> IO ()
+~~~~~
 
 The simplest way to define it is this:
 
-> archiveURL :: String -> IO String -- Reality
-> archiveURL url = openURL("http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com")
+~~~~~{.haskell}
+archiveURL :: String -> IO String -- Reality
+archiveURL url = openURL("http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com")
+~~~~~
 
 But we can improve on this! We are using [mapM](!Hoogle) which will go to all the trouble of retaining all the output from `archiveURL` being run on the dozens, hundreds, thousands, or millions of entries in `urllist`.
 
@@ -167,16 +188,19 @@ We need to think: any function of this sort must go through the list, and compar
 
 It makes the most sense to put `nub` just before we begin mapping `archiveURL` over `urllist`, so in it goes:
 
->          mapM_ (archiveURL) (liftM nub urllist)
+~~~~{.haskell}
+         mapM_ (archiveURL) (liftM nub urllist)
+~~~~~
 
 ### Prototype
 
 Well, that's that! Let's put it all together:
 
-> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
-> import Text.HTML.Download (openURL)
-> import Data.List (isPrefixOf, nub)
-> import Monad (liftM)
+~~~~{.haskell}
+import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+import Text.HTML.Download (openURL)
+import Data.List (isPrefixOf, nub)
+import Monad (liftM)
 
 > main :: IO ()
 > main = do articlelist <- liftM words $ getContents
@@ -193,6 +217,7 @@ Well, that's that! Let's put it all together:
 > extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
 >                        (_,x) <- atts,
 >                        "http://" `isPrefixOf` x]
+~~~~~
 
 Is this not lovely? Not counting imports or type signatures, it's 6 lines (10 with imports, 14 all told) all in clear natural Haskell.
 
@@ -208,27 +233,35 @@ It performs acceptably for small values of $n$, but if we try 100 or more, we qu
 
 `nub` has to do $O(n^2)$ matches in part because it's trying to preserve order (which is sort of important for a list). But we don't care at all about order, so we're free to do something clever... like convert the list to the mathematical structure of sets and then back! We know in sets each member is unique (no {1,1,2} business), so we know it works, and the performance is better than `nub`. So add in:
 
-> import Data.Set (toList, fromList)
+~~~~{.haskell}
+import Data.Set (toList, fromList)
+~~~~~
 
 And replace the last line of main with:
 
->           mapM_ archiveURL $ liftM (toList . fromList) urllist
+~~~~{.haskell}
+          mapM_ archiveURL $ liftM (toList . fromList) urllist
+~~~~~
 
 But we must continue our quest for it is still not fast enough.
 
-#### Bytestrings
+#### ByteStrings
 
 The conventional wisdom is whenever you are using String and it isn't fast enough, use the [bytestring](!Hackage) library. Our next version will make use of lazy ByteStrings:
 
-> import qualified Data.ByteString.Lazy.Char8 as B
->             (ByteString(), getContents, lines, unlines, pack, unpack, words)
+~~~~{.haskell}
+import qualified Data.ByteString.Lazy.Char8 as B
+            (ByteString(), getContents, lines, unlines, pack, unpack, words)
+~~~~~
 
 To convert to ByteString, we first convert to ByteString equivalents wherever possible - `B.words $ B.getContents`, for example. Unfortunately for our main function, ByteString introduces some weirdness, so we de-sugar the do notation to use the good old [=<<](!Hoogle) operator to make sure everything fits together. But take heart, it's shorter than before:
 
-> main = mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs
->                                =<< (liftM B.words $ B.getContents))
->               where uniq :: (Ord a) => [[a]] -> [a]
->                     uniq = toList $ fromList $ concat
+~~~~{.haskell}
+main = mapM_ archiveURL =<< (liftM uniq $ mapM fetchArticleURLs
+                               =<< (liftM B.words $ B.getContents))
+              where uniq :: (Ord a) => [[a]] -> [a]
+                    uniq = toList $ fromList $ concat
+~~~~~
 
 Notice how we've split out our concatenating and uniqueifying code to its own little points-free local definition. You may've also noticed that we're using the regular [concat](!Hoogle) and not `ByteString.concat`; this is because we actually aren't concatenating the ByteStrings themselves but merely the list of lists.
 
@@ -236,34 +269,36 @@ Notice how we've split out our concatenating and uniqueifying code to its own li
 
 The other bit of trickiness is that TagSoup regular Strings, so we need manually convert back and forth between Strings and ByteStrings using `B.pack` and `B.unpack`, and of course the type signatures need to be updated. But this is all pretty simple and mechanical; the final result of all this fiddling is the noticeably uglier but also noticeably faster and leaner code:
 
-> module Main () where
-> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
-> import Text.HTML.Download (openURL)
-> import Data.List (isPrefixOf)
-> import Monad (liftM)
-> import Data.Set (toList, fromList)
-> import qualified Data.ByteString.Lazy.Char8 as B
->              (ByteString(), getContents, lines, unlines, pack, unpack, words)
+~~~~{.haskell}
+module Main () where
+import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+import Text.HTML.Download (openURL)
+import Data.List (isPrefixOf)
+import Monad (liftM)
+import Data.Set (toList, fromList)
+import qualified Data.ByteString.Lazy.Char8 as B
+             (ByteString(), getContents, lines, unlines, pack, unpack, words)
 
-> main :: IO ()
-> main = mapM_ archiveURL
->            =<< (liftM uniq $ mapM fetchArticleURLs
->                 =<< (liftM B.words $ B.getContents))
->               where uniq :: (Ord a) => [[a]] -> [a]
->                     uniq = toList $ fromList $ concat
+main :: IO ()
+main = mapM_ archiveURL
+           =<< (liftM uniq $ mapM fetchArticleURLs
+                =<< (liftM B.words $ B.getContents))
+              where uniq :: (Ord a) => [[a]] -> [a]
+                    uniq = toList $ fromList $ concat
 
-> archiveURL :: B.ByteString -> IO String
-> archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url) 
->                           ++ "&email=foo@bar.com")
+archiveURL :: B.ByteString -> IO String
+archiveURL url = openURL("www.webcitation.org/archive?url=" ++ (B.unpack url)
+                          ++ "&email=foo@bar.com")
 
-> fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
-> fetchArticleURLs article = liftM extractURLs $ openURL("en.wikipedia.org/wiki/" 
->                                                       ++ (B.unpack article))
+fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
+fetchArticleURLs article = liftM extractURLs $ openURL("en.wikipedia.org/wiki/"
+                                                      ++ (B.unpack article))
 
-> extractURLs :: String -> [B.ByteString]
-> extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg),
->                                     (_,x) <- atts,
->                                     "http://" `isPrefixOf` x]
+extractURLs :: String -> [B.ByteString]
+extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg),
+                                    (_,x) <- atts,
+                                    "http://" `isPrefixOf` x]
+~~~~~
 
 ### Parallelizing requests
 
@@ -287,14 +322,16 @@ This is a good illustration of why purity is important: it narrows down the rang
 
 We change `mapM_`:
 
-> import Control.Concurrent (forkIO)
->
-> main = mapM_ (forkIO . archiveURL) =<<
->            (liftM uniq $ mapM fetchArticleURLs
->               =<< (liftM B.words $ B.getContents))
-> -- We need return () because otherwise it'd return a String and break forkIO's heart
-> archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
->                      >> return ()
+~~~~{.haskell}
+import Control.Concurrent (forkIO)
+
+main = mapM_ (forkIO . archiveURL) =<<
+           (liftM uniq $ mapM fetchArticleURLs
+              =<< (liftM B.words $ B.getContents))
+-- We need return () because otherwise it'd return a String and break forkIO's heart
+archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
+                     >> return ()
+~~~~~
 
 Much better! I've noticed improvements of 20-100%, since we can run on multiple CPUs.That little change was certainly worth it.
 
@@ -308,7 +345,7 @@ It's already strict in a lot of places because of the IO, and going further does
 
 To figure out how to get greater laziness, let's go through step by step. We know [getContents](!Hoogle) is lazy because it makes use of [unsafeInterleaveIO](!Hoogle) according to the documentation - which is why we can have lazy IO. Let's hold onto that thought.
 
-Next is `B.words`. A quick experiment in GHCi (take 100 $ unwords $ repeat "Yes "; that sort of thing) convinces me that `words` is lazy as one would expect. 
+Next is `B.words`. A quick experiment in GHCi (take 100 $ unwords $ repeat "Yes "; that sort of thing) convinces me that `words` is lazy as one would expect.
 
 Next is `mapM fetchArticleURLs`. Here's a problem. `fetchArticleURLs` does IO and so is strict, and mapM means it is little better than a loop over the list - the entire list. There goes our laziness since the *whole* list will be processed before being passed onto `forkIO` and `archiveURL`. But laziness and IO can co-exist in peace and harmony!
 
@@ -318,10 +355,12 @@ In our situation, it's irrelevant whether we access an article at time $n$ or ti
 
 So now we have:
 
-> import System.IO.Unsafe (unsafeInterleaveIO)
->
-> fetchArticleURLs article = liftM (B.lines . extractURLs)
->                             (unsafeInterleaveIO $ openURL(wiki ++ B.unpack article))
+~~~~{.haskell}
+import System.IO.Unsafe (unsafeInterleaveIO)
+
+fetchArticleURLs article = liftM (B.lines . extractURLs)
+                            (unsafeInterleaveIO $ openURL(wiki ++ B.unpack article))
+~~~~~
 
 Let's think about the flow now. `getContents` keeps on delivering a few characters to `words`, which is waiting for a [newline](!Wikipedia), at which point it turns those characters into a String and passes them onto `mapM` which will immediately run `fetchArticleURLs` - and `fetchArticleURLs` will immediately 'finish', leaving behind some thunks or whatever holding a promise that it'll run the IO actions (downloading a particular Web page) whenever it's needed. And that promise gets passed into `nub`, which is busy concatenating and then uniqueifying the results of those thunks.
 
@@ -333,41 +372,43 @@ Are we tired of this program yet? I've thought of one last and particularly nast
 
 But here is the final, ugly, fast and frugal version. This combines the lazy IO covered previously and adds in the hardwired filter.
 
-> module Main () where
->
-> import Control.Concurrent (forkIO)
-> import Control.Monad (liftM)
-> import Data.List (isPrefixOf)
-> import System.IO.Unsafe (unsafeInterleaveIO)
-> import Text.HTML.Download (openURL)
-> import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
-> import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, pack, unpack, words)
+~~~~{.haskell}
+module Main () where
 
-> main :: IO ()
-> main = mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs
->                                          =<< (liftM B.words $ B.getContents))
->                 where uniq :: [[B.ByteString]] -> [B.ByteString]
->                       uniq = filter (\x ->
->                          if x == B.pack "http://wikimediafoundation.org/"
->                           || x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations"
->                           || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising"
->                           || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy"
->                           || x == B.pack "http://www.mediawiki.org/"
->                           || x == B.pack "http://www.wikimediafoundation.org"
->                          then False else True) . concat
+import Control.Concurrent (forkIO)
+import Control.Monad (liftM)
+import Data.List (isPrefixOf)
+import System.IO.Unsafe (unsafeInterleaveIO)
+import Text.HTML.Download (openURL)
+import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
+import qualified Data.ByteString.Lazy.Char8 as B (ByteString(), getContents, pack, unpack, words)
 
-> fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
-> fetchArticleURLs article = liftM extractURLs $ unsafeInterleaveIO $ 
->                             openURL("http://en.wikipedia.org/wiki/" ++ B.unpack article)
+main :: IO ()
+main = mapM_ (forkIO . archiveURL) =<< (liftM uniq $ mapM fetchArticleURLs
+                                         =<< (liftM B.words $ B.getContents))
+                where uniq :: [[B.ByteString]] -> [B.ByteString]
+                      uniq = filter (\x ->
+                         if x == B.pack "http://wikimediafoundation.org/"
+                          || x == B.pack "http://wikimediafoundation.org/wiki/Deductibility_of_donations"
+                          || x == B.pack "http://wikimediafoundation.org/wiki/Fundraising"
+                          || x == B.pack "http://wikimediafoundation.org/wiki/Privacy_policy"
+                          || x == B.pack "http://www.mediawiki.org/"
+                          || x == B.pack "http://www.wikimediafoundation.org"
+                         then False else True) . concat
 
-> extractURLs :: String -> [B.ByteString]
-> extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg),
->                                     (_,x) <- atts,
->                                     "http://" `isPrefixOf` x]
+fetchArticleURLs :: B.ByteString -> IO [B.ByteString]
+fetchArticleURLs article = liftM extractURLs $ unsafeInterleaveIO $
+                            openURL("http://en.wikipedia.org/wiki/" ++ B.unpack article)
 
-> archiveURL :: B.ByteString -> IO ()
-> archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
->                    >> return ()
+extractURLs :: String -> [B.ByteString]
+extractURLs arg = map B.pack $ [x | TagOpen "a" atts <- (parseTags arg),
+                                    (_,x) <- atts,
+                                    "http://" `isPrefixOf` x]
+
+archiveURL :: B.ByteString -> IO ()
+archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
+                   >> return ()
+~~~~~
 
 # See also
 - [Wikipedia RSS Archive Bot.lhs]() -(the next step)
