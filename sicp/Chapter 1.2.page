@@ -459,7 +459,7 @@ The Carmichael numbers are
 
 One of the neat things I noticed was that since every definition in Scheme is in IO and the results printed out, we can build up a mini testsuite by just appending some lines like `(fermat-test 561)` to our definitions - and since they should all return `#t` (being good little Fermat-fooling Carmichael numbers), we can lump them into a single `and` and on every reload of our buffer (`C-t` in Dr. Scheme), learn whether our code is good or not like thus:
 
-~~~~{.scheme
+~~~~{.scheme}
 (and
         (fermat-test 561)
         (fermat-test 1105)
