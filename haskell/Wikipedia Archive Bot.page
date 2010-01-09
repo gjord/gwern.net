@@ -202,21 +202,21 @@ import Text.HTML.Download (openURL)
 import Data.List (isPrefixOf, nub)
 import Monad (liftM)
 
-> main :: IO ()
-> main = do articlelist <- liftM words $ getContents
->           urllist <- liftM concat $ mapM fetchArticleURLs articlelist
->           mapM_ (archiveURL) (liftM nub urllist)
+main :: IO ()
+main = do articlelist <- liftM words $ getContents
+          urllist <- liftM concat $ mapM fetchArticleURLs articlelist
+          mapM_ (archiveURL) (liftM nub urllist)
 
-> archiveURL :: String -> IO String
-> archiveURL url = openURL("http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com")
+archiveURL :: String -> IO String
+archiveURL url = openURL("http://www.webcitation.org/archive?url=" ++ url ++ "&email=foo@bar.com")
 
-> fetchArticleURLs :: String -> IO [String]
-> fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
+fetchArticleURLs :: String -> IO [String]
+fetchArticleURLs article = liftM extractURLs $ openURL("http://en.wikipedia.org/wiki/"++article)
 
-> extractURLs :: String -> [String]
-> extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
->                        (_,x) <- atts,
->                        "http://" `isPrefixOf` x]
+extractURLs :: String -> [String]
+extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
+                       (_,x) <- atts,
+                       "http://" `isPrefixOf` x]
 ~~~~~
 
 Is this not lovely? Not counting imports or type signatures, it's 6 lines (10 with imports, 14 all told) all in clear natural Haskell.
