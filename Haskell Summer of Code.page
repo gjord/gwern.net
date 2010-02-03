@@ -203,7 +203,7 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
      by Petr Ročkai; Eric Kow, mentor
 
-> "Darcs is known to have performance issues when repositories extend beyond certain size. There are several "directions" in which repositories grow -- out of these, size of the working tree and length of history my primary focus. Common commands involving the working tree should be comfortable to use and should not introduce delays in workflow. Moreover, big repositories should be stored efficiently and it should be possible to efficiently retrieve both full repositories and new patches remotely."
+     **Unknown**. [hashed-storage](http://hackage.haskell.org/package/hashed-storage) exists and is used in Darcs, but from watching the bugtracker traffic, it's unclear whether Darcs saw a net gain from it.
 
 - "haskell-src-exts -> haskell-src"
 
