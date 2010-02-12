@@ -1,5 +1,5 @@
 <!-- -*- mode: markdown; -*-
-When:  Time-stamp: "2009-12-17 20:28:45 gwern"
+When:  Time-stamp: "2010-02-11 20:24:27 gwern"
 -->
 
 # Haskell
@@ -15,7 +15,6 @@ When:  Time-stamp: "2009-12-17 20:28:45 gwern"
 - Buddha is old; see if there is a darcs: <http://www.cs.mu.oz.au/~bjpop/buddha>
 -  <http://n-heptane.com/nhlab/repos/haskell-freetype/>
    <http://n-heptane.com/nhlab/repos/haskell-glx/>
-- All of Oleg Kiselyisov's stuff (but ZFS and HList are done); [liboleg](!Hackage) seems to be incomplete. At least, I would expect it to be larger...
 - HaRe: <http://www.cs.kent.ac.uk/projects/refactor-fp/hare.html>
 - Pivotal: <http://www.cs.kent.ac.uk/projects/pivotal/downloads.html>
 - Steal Programmatica's stuff: <http://ogi.altocumulus.org/~hallgren/Programatica/cvs.html> and <http://programatica.cs.pdx.edu/>
@@ -142,14 +141,13 @@ When:  Time-stamp: "2009-12-17 20:28:45 gwern"
 ## Yi
 - Needs more syntax highlighting modes, and modes in general. I particularly need
      i. Markdown mode
-     ii. Shell mode^[Needed for the many many configuration files which use that style]
+     ii. Shell mode^[Needed for the many configuration files which use that style]
      iii. Lisp mode^[If I could switch completely from Emacs, this wouldn't be so important.]
-     iv. Wikimarkup (Mediawiki specifically) mode
+     iv. Wiki markup (MediaWiki specifically) mode
 - [longlines-mode](http://www.gnu.org/software/emacs/manual/html_node/emacs/Longlines.html)[](http://www.emacswiki.org/emacs/LongLines). Absolutely crucial for editing documents that use long lines (such as Markdown or Wikipedia articles). Yi currently displays longlines by wrapping them at the end of the terminal, which both looks ugly and is very hard to navigate or work with.
 - [Macros](http://code.google.com/p/yi-editor/issues/detail?id=89). Obviously. If you don't understand why this is a must-have, then you don't understand text editing.
 - Spellcheck. See macros - a basic feature. (And ideally a realtime spellcheck, like flyspell; but I could probably live with a manually invoked spellchecker.)
 - Persistent state: Yi should remember my previously-opened files, my killring, the last position of the point in a buffer/file etc. Emacs provides this [session](http://www.phys.ufl.edu/docs/emacs/emacs_423.html), and I find it very convenient.
-- improve ireader-mode. Idea: have bindings 5-9 map to 1-5, and that jumps the buffer forward in the Seq by 1/n+1th. So M-1 would jump to 1/2, M-2 would merely put it at 1/3 the Seq away from the end, and so on.
 
 ## Gitit
 
@@ -180,10 +178,8 @@ When:  Time-stamp: "2009-12-17 20:28:45 gwern"
 - Per-category 'vice-versa' setting
 
 # General
-- Learn French: general French sites: <http://www.babbel.com/>, <http://www.livemocha.com/>, <http://www.bbc.co.uk/languages/french/> [FSI course materials](http://www.fsi-language-courses.com/French.aspx), [French poetry podcasts](http://www.learnfrenchinboston.com/podcast/), [grammar podcasts](http://pienews.blogs.com/verbcast/), [French podcasts](http://frenchpodclass.com/), [Coffee Break French](http://www.radiolinguamedia.com/cbf/www/index.html).
 - Look into throwing knives as a supplementary hobby to archery
 - Math [notes](http://tutorial.math.lamar.edu/)
-- Write up my inchoate ideas about Gainax & Anno & _Evangelion_ (_Daicon_, _Welcome to the N.H.K.!_, _Otaku no Video_ etc.) & 'otaku-therapy' into one solid essay
 - Compile a [_Lexicon Urthus_](http://www.siriusfiction.com/lexicon.html) but for the [_Long Sun_](!Wikipedia "The Book of the Long Sun") & [_Short Sun_](!Wikipedia "The Book of the Short Sun") series instead; focusing particularly on the [thieves' cant](!Wikipedia) in it. Resources:
      - <http://www.fromoldbooks.org/NathanBailey-CantingDictionary/transcription.html>
      - <http://www.gutenberg.org/ebooks/5402>
@@ -191,7 +187,7 @@ When:  Time-stamp: "2009-12-17 20:28:45 gwern"
      - <http://www.gutenberg.org/dirs/etext04/dcvgr10.txt>
 
 ## Devices
-- A personal death clock: a LED panel counting down seconds until an actuarily predicted death date. Example for me: Sep 26 2069, or [1902614400](http://www.onlineconversion.com/days_between_advanced.htm) seconds from the moment I write this. It may be morbid, but I think it'd be a good motivational tool.
+- A personal death clock: a LED panel counting down seconds until an actuarially predicted death date. Example for me: September 26 2069, or [1902614400](http://www.onlineconversion.com/days_between_advanced.htm) seconds from the moment I write this. It may be morbid, but I think it'd be a good motivational tool.
 - A direction sensor belt (a ring of vibrators around one's waist; the one closest to North buzzes gently). See the [_Wired_](http://www.wired.com/wired/archive/15.04/esp.html) article on it, and a [2009 article](http://hplusmagazine.com/articles/enhanced/my-new-sense-organ) describing Sensebridge's Northpaw product  The [feelSpace](http://feelspace.cogsci.uni-osnabrueck.de/en/technology_01.html) homepage is here. There is a thread on [Hackers News](http://news.ycombinator.com/item?id=609983) about building one's own; but [these people](https://bandgap.rsnsoft.com/mediawiki/index.php/Compass_Belt) have apparently finished one. Here's a [version of the belt](http://www.exothermia.net/monkeys_and_robots/2009/02/04/on-the-haptic-compass/) made using [Arduino](!Wikipedia). There's a quasi-commercial version available for 95$ from [Sensebridge](http://sensebridge.net/projects/northpaw), intended for wearing on one's ankle (the original ankle-based project is ["Noisebridge"](https://www.noisebridge.net/wiki/Compass_Vibro_Anklet). And then there's a [_hat_](https://www.noisebridge.net/wiki/Compass_Vibro_Anklet) (also using Arduino)! I think most approaches are just a little baroque; it might make more sense to have each vibrator be independent - with a vibrator, a compass, and a battery. After all, each one should be able to know independently of the others whether it is facing North or not.
      Parts:
      - http://www.imagesco.com/catalog/DigitalCompass/DigitalCompass.html
