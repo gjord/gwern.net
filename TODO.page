@@ -1,5 +1,5 @@
 <!-- -*- mode: markdown; -*-
-When:  Time-stamp: "2010-02-11 20:24:27 gwern"
+When:  Time-stamp: "20-Feb-2010 17:23:01 gwern"
 -->
 
 # Haskell
@@ -20,9 +20,7 @@ When:  Time-stamp: "2010-02-11 20:24:27 gwern"
 - Steal Programmatica's stuff: <http://ogi.altocumulus.org/~hallgren/Programatica/cvs.html> and <http://programatica.cs.pdx.edu/>
 - dons says track down everything by Mark Jones <http://web.cecs.pdx.edu/~mpj/>
 - <http://mail.cs.uu.nl/mailman/listinfo/hut> <https://svn.cs.uu.nl:12443/repos/uust-repo/uuagc/trunk/>
-- Zao on #haskell has a largely complete xtris OpenGL client <http://www.acc.umu.se/~zao/Hastris/>. No download available...
 - Hazakura: <http://web.archive.org/web/20061012042957/http://www.city5.org/haskellprog/hazakura/> & <http://haskell.org/pipermail/haskell/2006-April/017901.html>
-- Look at HOOD, or is it too old? <http://www.haskell.org/hood/>
 - Petri nets: <http://www.cs.kent.ac.uk/people/staff/cr3/HCPN/>
 - 'Frob - an Embedded Domain Specific Language for controlling robots. It is built using the principals of Functional Reactive Programming, as developed by Conal Elliott for the Fran animation system. The current incarnation of Frob is part of the Yampa FRP system.'
 - PUre: <http://wiki.di.uminho.pt/twiki/bin/view/Research/PURe/UsingCVS>
@@ -37,14 +35,12 @@ When:  Time-stamp: "2010-02-11 20:24:27 gwern"
 - <http://www.cs.york.ac.uk/fp/software.php>
 - <http://cdsmith.twu.net/demos/haskell.html>
 - <http://www.cs.uu.nl/wiki/Ehc/WebHome>
-- Is HTK still worth salvaging? <http://www.informatik.uni-bremen.de/htk/download/INSTALL.BINARY.html#TheSource>
 - RDF stuff: <http://www.ninebynine.org/Software/HaskellRDF/RDF/Harp/>
 - I've contacted <http://nautilus.cs.miyazaki-u.ac.jp/~skata/MagicHaskeller.html>'s author about packaging it.
 - cabalize <http://homepages.cwi.nl/~tromp/cl/cl.html>
 - <http://www.haskell.org/hdirect/> too obsolete?
 - <https://datura.dylex.net:9947/src/> (particular ztail, set, and Joy compiler; maybe libraries too)
 - <http://wxhaskell.sourceforge.net/applications.html>
-- [Two games](http://www.maths.tcd.ie/~icecube/2008/11/endless-cavern/)
 
 ## General
 
@@ -53,9 +49,7 @@ When:  Time-stamp: "2010-02-11 20:24:27 gwern"
 - Translate the Lisp from _Metamagical Themas_ into Haskell
 - Look into Test.IOSpec <http://www.cs.nott.ac.uk/~wss/repos/IOSpec/>
 - Conjure has Int problems on >2gig files - hSeeks on an Int
-- Clean up Shellac per -Wall and send patches.
 - Split out Cpuperf's Sudo monad and make safer
-- hscursesify stuff: ginsu, mage, and minstrel <http://urchin.earth.li/darcs/ian/minstrel/> (We shouldn't have 5 different curses bindings floating around!)
 - Clean up the SHA1 mess:
     i. Ginsu: module SHA1 (sha1,  sha1ShowHash, sha1String, sha1HashToBytes)
     ii. HAppS: Kind of similar to Ginsu?
@@ -113,20 +107,11 @@ When:  Time-stamp: "2010-02-11 20:24:27 gwern"
     - geniconvert.cabal
     - Shellac-readline.cabal
     - yhc.cabal
-- write a tool to recurse through $HOME, open every file looking for text, and submit any found URLs to <http://webcitation.org>
 
 ## Pandoc
 - Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
+     figure out how the new TeXmath figures in
 - Replace Pandoc's shell scripts with Haskell scripts
-
-## Hackage
-- Look into build failures of:
-    i. ivor
-    ii. mage
-    iii. mpdmate
-    iv. trhsx
-- What backups are Galois keeping of haskell.org _et al_?
-- The current Haskell situation on Debian/Ubuntu is untenable. The packages are badly out of date, and the selection is poor. Arch Linux is in much better shape both because dons is so active, and because he has a Cabal->Arch conversion tool. A Cabal->.deb conversion tool would help out a lot. Multiple people have tried this - [John Goerzen](http://darcs.complete.org/), [Magnus Therning](http://therning.org/magnus/archives/458), the Linspire/seereason devs' [cabal-debian](http://src.seereason.com/cabal-debian/) & [auto-builder](http://src.seereason.com/autobuilder/), etc. This mess needs to be straightened out and one quality tool produced.
 
 ## XMonad
 - Look through my collection of XMonad configuration files. What can be done in XMonad core and XMonadContrib to simplify them?
@@ -152,10 +137,6 @@ When:  Time-stamp: "2010-02-11 20:24:27 gwern"
 ## Gitit
 
 - Caching needs improvements. Perhaps we can borrow from hackage-server and use 'Content-MD5' headers? This might be superior to expire headers.
-
-## Darcswatch
-
-- Needs a better interface; sending emails is hopeless - there should just be a button to mark accepted/rejected/etc.
 
 # Programming (in general)
 
@@ -196,4 +177,3 @@ When:  Time-stamp: "2010-02-11 20:24:27 gwern"
      Tutorials:
      - http://www.sparkfun.com/commerce/tutorials.php
 - In the same vein as the feelSpace belt, it might be interesting to build a belt that vibrates in the direction of an desired object or location. Possible uses: in a library, it could buzz in the direction of a desired call #. Would be a cool project, anyway!
-- Lifelogging resources: <http://www.highlightcam.com/> summarizes long video files; intended for surveillance, but excellent for lifeloggers too? Kevin Kelly has some musings & links here: <http://www.kk.org/thetechnium/archives/2007/02/lifelogging_an.php>
