@@ -160,6 +160,7 @@ When:  Time-stamp: "20-Feb-2010 17:23:01 gwern"
     - ./flm/FermatsLastMargin.cabal
     - ./flm/FLM.cabal
     - ./haxml/HaXml.cabal
+- Remove [Data.Map.map](!Hoogle); see [original](http://www.mail-archive.com/haskell-cafe@haskell.org/msg22115.html) [email thread](http://old.nabble.com/Why-the-Prelude-must-die-td9646480.html) and the GHC [bug report](http://hackage.haskell.org/trac/ghc/ticket/1249).
 
 ## Pandoc
 - Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
