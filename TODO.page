@@ -55,12 +55,7 @@ When:  Time-stamp: "20-Feb-2010 17:23:01 gwern"
     iii. Conjure: BSD FFI, module Conjure.Utils.SHA1 (sha1 :: ByteString -> ByteString)
     iv. jhc: based on Igloo's original - module Util.SHA1 (sha1String,sha1file,sha1Bytes,hashToBytes,sha1Handle,ABCDE(..),Hash,emptyHash) where
 - de-haskell98 everything:
-    - ./cabal/tests/systemTests/twoMains/test.cabal
-    - ./cabal/tests/systemTests/wash2hs/wash2hs.cabal
-    - ./HaDE/HaDE.cabal
-    - ./GenI/geniconvert/geniconvert.cabal
     - ./SybWidget/SybWidget.cabal
-    - ./bnfc/BNFC.cabal
     - ./obj/examples/loadObject.cabal
     - ./obj/obj.cabal
     - ./MazesOfMonad/MazesOfMonad.cabal
