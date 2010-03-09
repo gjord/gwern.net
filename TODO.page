@@ -55,8 +55,6 @@ When:  Time-stamp: "20-Feb-2010 17:23:01 gwern"
     iii. Conjure: BSD FFI, module Conjure.Utils.SHA1 (sha1 :: ByteString -> ByteString)
     iv. jhc: based on Igloo's original - module Util.SHA1 (sha1String,sha1file,sha1Bytes,hashToBytes,sha1Handle,ABCDE(..),Hash,emptyHash) where
 - de-haskell98 everything:
-    - ./hiccup/hiccup.cabal
-    - ./hat/src/lib/hat.cabal
     - ./HQmpd/src/hqmpd.cabal
     - ./haskell-src/haskell-src.cabal
     - ./hinvaders/hinvaders.cabal
@@ -67,10 +65,6 @@ When:  Time-stamp: "20-Feb-2010 17:23:01 gwern"
     - ./jhc/lib/haskell98.cabal
     - ./ehc/build/libutil/lib-eh-util.cabal
     - ./popen/popenhs.cabal
-    - ./HERA/prelude/hera-prelude.cabal
-    - ./HERA/hera.cabal
-    - ./HERA/ajaxgui/hera-ajaxgui.cabal
-    - ./HERA/engine/hera-engine.cabal
     - ./missingh/MissingH.cabal
     - ./hmatrix/hmatrix.cabal
     - ./metaplug/metaplug.cabal
