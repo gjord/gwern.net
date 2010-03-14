@@ -555,3 +555,50 @@ It is expected then, that someone measured at 180 doesn't make the rest of us lo
 My little sister Molly went to Hawkin's Path Elementary much the same as all of us did. Early on, one morning before classes began, she went to the cafeteria and got on the line for the breakfasts. Pretty much the only people who ate breakfast at Hawkin's Path were the (very) poor kids who qualified for the Federal free breakfast program. Molly, as it happens, was neither on the list nor had a card. But the lunch lady was new to the job & school, so when her turn came up, she said, "I'm Molly!" with such straightforwardness and assurance - as though *of course* that explained everything, who didn't know Molly? - that the flummoxed lady simply gave her a breakfast.
 
 Some time later, Molly's kindergarten teacher Mrs. MacNamara would approach Mom & Dad at a book fair (or something) and shock them by enquiring as to whether Molly qualified for the program.
+
+---
+
+One curious event, that well illustrates the uncanny hold that coincidences can exert on our minds, is worth recording. One day, I had read part of Frank Herbert's _Dune_ and run into the word 'spannungsbogen' - a kind of self-discipline or restraint as Herbert described it. The word had an entry in [Wiktionary](!Wikipedia) but the entry lacked sources & examples, and was at risk of deletion. So I went to one of my favorite sources - _The New York Times_ - and searched their archives, found one useful hit (later, I would not remember anything about what the hit said; just that it existed), and listed it on the talk page (since I'm not familiar with Wiktionary conventions and prefer to let the regulars integrate new references into entries).
+
+Then I woke up.
+
+Some time later, I remembered the dream and thought to myself that I ought to check whether I had not actually added it yesterday and was mis-remembering; I had not - the talk page was devoid of my contribution - but the entry did need work. I then thought it would be amusing to see what the NYT *did* have, so I went and searched - and found one useful hit. Disquieted, I edited the talk page as in my dream, and moved on.
+
+---
+
+Consider the plight of an upload - a human mind running on a computer rather than a brain. It has the advantage of all digital data: perfect fidelity in replication, fast replication - replication period. An upload could well be immortal. But an upload is also very fragile. It needs storage at every instance of its existence, and it needs power for every second of thought. It doesn't carry with it any reserves - a bit is a bit, there are no bits more durable than other bits, nor bits which carry small batteries or [UPSes](!Wikipedia "Uninterruptable power supply") with themselves.
+
+So reliable backups are literally life and death for uploads.
+
+But backups are a double-edged sword for uploads. If I backup my photos to [Amazon S3](!Wikipedia) and a bored employee pages through them, that's one thing; annoying or  career-ending as it may be, pretty much the worst thing that could happen is that I get put in jail for a few decades for child pornography. But for an upload? If an enemy got a copy of its full backups, the upload has essentially been kidnapped. The enemy can now run copies and torture them for centuries, or use them to attack the original running copy (as hostages, in [false flag attacks](!Wikipedia), or simply to understand & predict what the original will do). The negative consequences of a leak are severe.
+
+So backups need to be both reliable and secure. These are conflicting desires, though.
+
+One basic principle of long-term storage is '[LOCKSS](!Wikipedia)': "lots of copies keeps stuff safe". Libraries try to distribute copies of books to as many holders as possible, on the premise that each holder's failure to preserve a copy is a random event independent of all the other holders; thus, increasing the number of holders can give arbitrarily high assurances that *a* copy will survive. But the more copies, the more risk one copy will be misused. That's fine if 'misuse' of a book is selling it to a book collector or letting it rot in a damp basement; but 'misuse' of a conscious being is unacceptable.
+
+Suppose one encrypts the copies? Suppose one uses a [one-time pad](!Wikipedia), since one worries that an encrypted copy which is bullet-proof *today* may be copied and saved for centuries until the encryption has been broken, and is perfectly certain the backups are 'secure'. Now one has 2 problems: making sure the backups survive until one needs them, and making sure the one-time pad survives as well! If the future upload is missing either one, nothing works.
+
+The trade-off is unfortunate, but let's consider secure backups. The first and most obvious level is physical security. Most systems are highly vulnerable to attackers who have physical access; desktop computers are trivially hacked, and [DRM](!Wikipedia) is universally a failure.
+
+Any backup ought to be as inaccessible as possible. [Security through obscurity](!Wikipedia) might work, but let's imagine *really* inaccessible backups. How about hard drives in orbit? No, that's too close: commercial services can reach orbit easily, to say nothing of governments. And orbit doesn't offer too much hiding space. How about orbit not around the Earth, but around the Solar System? Say, past the orbit of Pluto?
+
+That offers an enormous volume: the Kuiper Belt is roughly ~1.95^30^ cubic kilometers[^volume]. The lightspeed delay is at least 20 minutes, but [latency](!Wikipedia) isn't an issue; a backup protocol on Earth could fire off one request to an orbiting device and the device would then transmit back everything it stored without waiting for any replies or confirmations (somewhat like [UDP](!Wikipedia)).
+
+10^30^ cubic kilometers is more than enough to hide small stealthy devices in. But once it sends a message back to Earth, its location has been given away - the Doppler effect will yield its velocity and the message gives its location at a particular time. This isn't enough to specify its orbit, but it cuts down significantly on where the device could be. 2 such messages and the orbit is known. A restore would require more than 2 messages.
+
+The device could self-destruct after sending off its encrypted payload. But that is very wasteful. We want the orbit to change unpredictably after each broadcast.
+
+If we imagine that at each moment the device chooses between firing a thruster to go 'left' or 'right', then we could imagine the orbit as being a message encrypted with a one-time pad - a one-time pad, remember, being a string of random bits. The message is the original orbit; the one-time pad is a string of random bits shared by Earth and the device. Given the original orbit, and knowing when and how many messages have been sent by the device, Earth can compute what the new orbit is and where the device will be in the future. ('It started off on this orbit, then the random bit-string said at time X to go left, then at X+1, go left again, then at X+Y, go right; remembering how fast it was going, that means it should now be... there in the constellation of Virgo.')
+
+The next step up is a symmetric cipher: a shared secret used not to determine future orbit changes, but to send messages back and forth - 'go this way next; I'm going this way next; start a restore' etc. But an enemy can observe where the messages are coming from, and can work out that 'the first message must've been X, since if it was at point N and then showed up at point O, only one choice fits, which means this encrypted message meant X, which lets me begin to figure out the shared secret'.
+
+A public-key system would be better: the device encrypts all its messages against Earth's private key, and vice versa. Now the device can randomly choose where to go and tell Earth its choice so Earth knows where to aim its receivers and transmitters next.
+
+But can we do better?
+
+[^volume]: The area of a sphere is given by the equation: $\frac{4}{3} \times \pi \times r^3$\
+       1 AU = $149.60 \times 10^6$ kilometers\
+       30 AU = $30 \times 149.60 \times 10^6$, or $4.488 \times 10^9$ km\
+       55 AU = $55 \times 149.60 \times 10^6$, or $8.228 \times 10^9$ km\
+       So the shell is the volume of the outer sphere minus the inner sphere:\
+       $(\frac{4}{3} \times \pi \times (8.228 \times 10^9)^3) - (\frac{4}{3} \times \pi \times (4.488 \times 10^9)^3)$, or $1.9546466984296578 \times 10^{30}$.
