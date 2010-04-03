@@ -19,8 +19,12 @@ This will be useful for approximation. But note that it's not useful for straigh
 ~~~~{.haskell}
 summation cond next seed = takeWhile cond $ iterate next seed
 sumCube start end = summation (< end) (^3) start
-~~~
+~~~~
 
-To rewrite `sum`, we need to pay attention to what dependencies are where. Given the parameters `a b`, we can get the targets with just `[a..b]`; then, we take whatever function and `map` it onto the targets: `foo f a b = map f [a..b]`; then we fold the resulting list into a final answer: `foo f a b = sum $ map f [a..b]`, and finally `sumCube start end = foo (^3) start end`.
+To rewrite `sum`, we need to pay attention to what dependencies are where. Given the parameters `a b`, we can get the targets with just `[a..b]`; then, we take whatever function and `map` it onto the targets: `foo f a b = map f [a..b]`; then we fold the resulting list into a final answer: `foo f a b = sum $ map f [a..b]`, and finally:
+
+~~~~{.haskell}
+sumCube start end = foo (^3) start end
+~~~~
 
 But `sum` has 4 parameters, not 3. The `[a..b]` hides the `(+1)` or `inc` specification.
