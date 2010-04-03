@@ -1,5 +1,7 @@
 # Chapter 1.3: Formulating Abstractions with Higher-Order Procedures
 
+1.3 presents the following higher-order function:
+
 ~~~~{.scheme}
 (define (sum term a next b)
   (if (> a b)
@@ -10,9 +12,11 @@
 
 It's worth noting that `sum` is not as general as it could be. It hardwires in a terminal value of 0, and the `+` and `>` operator & conditional. Its type would be something like `sum :: (Num a) => (a -> a) -> a -> (a -> a) -> a -> a`; a more general approach would be to require a general boolean function rather than a particular value.
 
-[iterate](!Hoogle) is a bit like that, but more general. It generates an infinite list - we can think of it as the zeroth entry is `x`, the first entry `f x`, the 2^nd^ entry is `f (f x)`, the 3^rd^ entry is `f (f (f x))`, and so on^[This is the idea; the actual implementation is more efficient: `iterate f x = x : iterate f (f x)`.].
+[iterate](!Hoogle) is similar, but note that it has a type signature that initially seems simpler and less powerful: `iterate :: (a -> a) -> a -> [a]`. Surely the more paramterizable a function, the more general it is? `iterate` has but 1 function argument, while `sum` has 2.
 
-If we called `iterate (^3) 2`, we would get the infinite list  `[2,8,512,134217728,2417851639229258349412352,141347765182270746366663800059..`, but `sum` clearly has a stopping case. So we [compose](!Wikipedia "Function composition") `iterate` with [takeWhile](!Hoogle): `iterate` gets the seed value and the knowledge of how to keep changing the seed value, and `takeWhile` gets the knowledge of when the seed value has changed enough. 
+But `iterate` has 2 arguments in a sense, when we remember how it generates an infinite list - we can think of it as the zeroth entry is `x`, the first entry `f x`, the 2^nd^ entry is `f (f x)`, the 3^rd^ entry is `f (f (f x))`, and so on^[This is the idea; the actual implementation is more syntactically efficient: `iterate f x = x : iterate f (f x)`.]. The missing function is whatever is calling `iterate` and using its values; in `sum`, the termination is explicitly handled by a function because the evaluation scheme in Scheme is strict.
+
+Here's an example. If we called `iterate (^3) 2`, we would get the infinite list  `[2,8,512,134217728,2417851639229258349412352..]`; but `sum` clearly has a stopping case. So we [compose](!Wikipedia "Function composition") `iterate` with [takeWhile](!Hoogle): `iterate` gets the seed value and the knowledge of how to keep changing the seed value, and `takeWhile` gets the knowledge of when the seed value has changed enough. 
 
 This will be useful for approximation. But note that it's not useful for straight summing like `sum-cubes`, because `iterate` uses the passed-in function to generate the next target from the old target, while `sum` has the passed-in function doing something else entirely (moving from old to new is hardwired to use the function `(+1)`). So if we wrote the obvious Haskell `summation` and `sumCube` definitions, they would be utterly wrong: `sumCube 1 10` will loop because $1^3=1$, and if we tried `sumCube 2 10`, it'd still be wrong - we'd get `[2,8]` because the test will return false for $8^3<10$.
 
