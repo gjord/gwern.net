@@ -233,6 +233,31 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 2 unknown, 2 successful, 1 failure.
 
+### 2010
+(TODO: In progress.)
+
+[7 projects](http://donsbot.wordpress.com/2010/04/26/the-7-haskell-projects-in-the-google-summer-of-code/) were accepted:
+
+1. Thomas Tuegel, [Improvements to Cabal's test support](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760295)
+2. Matthew Gruen, [Infrastructure for a more social Hackage 2.0](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760520)
+3. Jasper Van der Jeugt, [A high performance HTML generation library](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760572)
+4. Alp Mestanogullari, [Improvements to the GHC LLVM backend](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760615)
+5. Marco Silva, [Implementing the Immix Garbage Collection Algorithm](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760695)
+6. Matthew Arsenault, [GObject-Introspection based bindings for gtk2hs](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760750)
+7. Alexey Levan, [Improving Darcs's network performance](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760775)
+
+Borrowing from our 3 cardinal sins of SoCs (see directly below), what predictions can we make?
+
+Most of the 7 are laudably focused on an existing application. You don't need to justify a speedup of normal Darcs operations because there's a relatively large installed base of Darcs users that will benefit it; a new GC for GHC or a LLVM backend will be used by essentially every Haskeller; better Cabal support for testing may go unused by many package authors who either have no tests or don't want to bother - but a fair number will bother, and it will get maintained as part of Cabal, and similarly for the Hackage 2.0 project.
+
+The Immix GC strikes me as a very challenging summer project; a GC is one of the most low-level pieces of a functional language and is intertwined with all sorts of code and considerations. It would not surprise me if that project wound up just getting a little closer to a working Immix GC but not producing a production-quality GC scheduled to come to compilers near you.
+
+2 in particular concern me as potentially falling prey to sins #2 & 3: the GObject-binder tool, and the high-performance HTML library.
+
+Let's assume that the HTML library does wind up as being faster than existing libraries, and as useful - that compromises don't destroy its utility. Who will use it? It will almost surely have an API different enough from existing libraries that a conversion will be painful. There are roughly 42 users of the existing [xhtml](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/package/xhtml-3000.2.0.1)-generating library; will their authors wish to embrace a cutting-edge infant library? Is HTML generation even much of a bottleneck for them? (Speaking just for Gitit, Pandoc and its HTML generation are not usually a bottleneck.)
+
+The case against the GObject project presents itself; GTK2Hs isn't as widely used as one would expect, and this seems to be due to the difficulty of installation and its general complexity. So there are few users of existing libraries; would there be more users for those libraries no one has bothered to bind nor yet clamored for? (This project might fall afoul of sin #1, but I do not know how difficult the GObject data is to interpret.)
+
 ### Haskell roundup
 
 So, what lessons can we learn from the 3 SoCs? It seems to me like there are roughly 3 groups explanations of unsuccess or failure fall into. They are:
@@ -244,9 +269,7 @@ So, what lessons can we learn from the 3 SoCs? It seems to me like there are rou
 #### Don Stewart's view
 [Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
 
-> We explicitly pushed harder in 2008 to clarify and simplify the goals of
-the projects, ensure adequate *prior Haskell experience* and to
-focus on libraries and tools that directly benefit the communtity. [_sic_]\
+> We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the communtity. [_sic_]\
 > And our success rate was much higher.\
 > So: look for things that benefit the largest number of Haskell developers and users, and from students with proven Haskell development experience. You can't learn Haskell from zero on the job, during SoC.
 
