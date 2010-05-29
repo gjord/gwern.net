@@ -66,3 +66,37 @@ De Blanc, Peter. " Convergence of Expected Utilities with Algorithmic Probabilit
 McGee, Vann. "An airtight Dutch book", Analysis 59:4 (1999), pp. 257-65
 Yudkowsky, Eliezer. "Pascal's Mugging: Tiny Probabilities of Vast Utilities", LessWrong.com, 19 October 2007. <http://lesswrong.com/lw/kd/pascals_mugging_tiny_probabilities_of_vast/>
 
+
+----
+
+One way to try to escape a mugging is to unilaterally declare that all probabilities below a certain small probability will be treated as zero. With the right pair of lower limit and mugger's credibility, the mugging will not take place.
+
+But such a _ad hoc_ method violates common axioms of probability theory, and thus we can expect there to be repercussions. It turns out to be easy to turn such a person into a money pump, if not by the mugging itself.
+
+Suppose your friend adopts this position, and he says specifically that any probabilities less than or equal to 1/20 are 0. You then suggest a game; the two of you will roll a d20 die, and if the die turns up 1-19, you will pay him one penny and if the die turns up 20, he pays you one dollar - no, one *bazillion* dollars.
+
+Your friend then calculates: there is a 19/20 chance that he will win a little money, and there is a 1/20 chance he will lose a lot of money - but wait, 1/20 is too small to matter! It is zero chance, by his rule. So, there is no way he can lose money on this game and he can only make money.
+
+He is of course wrong, and on the 5th roll you walk away with everything he owns. (And you can do this as many times as you like.)
+
+Nor can it be rescued simply by shrinking the probability; the same game that defeated a limit of 1/20 can easily be generalized to 1/n, and in fact, we can make the game even worse: instead of 1 to n-1 winning, we define 0 and 1 as winning, and each increment as losing. As n increases, the large percentage of instant losses increases.
+
+So clearly this modification doesn't work.
+
+If we think about the scaling of the prior probability of a reward, there's clearly 3 general sorts of behavior:
+
+1) sublinear relationship where the probability shrinks slower than the reward increases
+2) a linear relationship where the probability shrinks as fast as the reward increases
+3) and a superlinear relationship where the probability shrinks faster than the reward increases.
+
+The first doesn't resolve the mugging. If the mugging is ever rejected, then the mugger merely increases the reward and can always devise an accepted mugging.
+
+The second and third both resolve the mugging - the agent will reject a large mugging if it rejected a smaller one. But is there any reason to prefer the linear relationship to the superlinear?
+
+Yes, by the same reasoning as leads us to reject the lower limit solution. We can come up with a game or a set of deals which presents the same payoff but which an agent will accept when they should reject and vice versa.
+
+Let's suppose a mugger tries a different mugging. Instead of asking for 20$ he asks for a penny, and he mentions that he will ask this another 1999 times; because the reward is so small, the probability is much higher than if he had asked for a flat $20 and offered a consequently larger reward.
+
+If the agent's prior was not so low that they *always* rejected the mugger, then we would see an odd flip - for small sums, the agent would accept the mugging and then as the sums increased, it would suddenly start rejecting muggings, even when the same total sums would have been transacted. That is, just by changing some labels while leaving the aggregate utility alone, we change the agent's decisions.
+
+If the agent had been using a linear relationship, there would be no such flip. If the agent rejected the penny offer it would reject the 20$ offer and vice versa. It would be consistently right (or wrong). The sublinear and superlinear relationships are inconsistently wrong.
