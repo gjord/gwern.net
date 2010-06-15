@@ -12,7 +12,7 @@
 
 It's worth noting that `sum` is not as general as it could be. It hardwires in a terminal value of 0, and the `+` and `>` operator & conditional. Its type would be something like `sum :: (Num a) => (a -> a) -> a -> (a -> a) -> a -> a`; a more general approach would be to require a general boolean function rather than a particular value.
 
-[iterate](!Hoogle) is similar, but note that it has a type signature that initially seems simpler and less powerful: `iterate :: (a -> a) -> a -> [a]`. Surely the more paramterizable a function, the more general it is? `iterate` has but 1 function argument, while `sum` has 2.
+[iterate](!Hoogle) is similar, but note that it has a type signature that initially seems simpler and less powerful: `iterate :: (a -> a) -> a -> [a]`. Surely the more parameterizable a function, the more general it is? `iterate` has but 1 function argument, while `sum` has 2.
 
 But `iterate` has 2 arguments in a sense, when we remember how it generates an infinite list - we can think of it as the zeroth entry is `x`, the first entry `f x`, the 2^nd^ entry is `f (f x)`, the 3^rd^ entry is `f (f (f x))`, and so on^[This is the idea; the actual implementation is more syntactically efficient: `iterate f x = x : iterate f (f x)`.]. The missing function is whatever is calling `iterate` and using its values; in `sum`, the termination is explicitly handled by a function because the evaluation scheme in Scheme is strict.
 
