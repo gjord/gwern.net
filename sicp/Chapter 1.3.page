@@ -32,3 +32,102 @@ sumCube start end = foo (^3) start end
 ~~~~
 
 But `sum` has 4 parameters, not 3. The `[a..b]` hides the `(+1)` or `inc` specification.
+
+## Exercise 1.30
+
+Our `sum` rewritten for multiplication is of course (modulo better variable names):
+
+~~~~{.scheme}
+(define (product f begin increase end)
+  (if (> begin end)
+      1
+      (* (f begin)
+         (product f (increase begin) increase end))))
+~~~~
+
+All we had to change was the 'seed' and the inner function (`*` versus `+`).
+
+Writing a `factorial` requires a little imagination, but here Haskell prevents me from having to think too much; Haskell's [product](!Hoogle) has the type signature `Num a => [a] -> a`, so immediately the obvious way to define `factorial` is to generate a list of the right length:
+
+~~~~{.haskell}
+factorial n = product [1..n]
+~~~~
+
+How can we generate such a list with this Scheme function? We have to pass in 2 functions and 2 integers which will somehow do this.
+
+The answer is to make our first function *do nothing*, and the second function just increment the seed; an example:
+
+~~~~{.scheme}
+(product (lambda (a) a) 1 (lambda (g) (+ g 1)) 5)
+~>
+120
+~~~~
+
+The `(lambda (a) a)` is bound to the variable `f`, which gets called on the first multiplication, but does nothing - exactly as needed. Then `(lambda (g) (+ g 1))` takes care of generating the next entry in the Scheme equivalent of `[1..n]`.
+
+### Monoids
+
+A worldly Haskeller will look at this and immediately think, 'an initial seed value, and some way of combining values... could this idea be a *[monoid](!Wikipedia)*?!'
+
+As [sigfpe's](http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html) excellent tutorial on monoids will tell us, yes - this is a monoid. In fact, integers (our topic) form two different monoids, one for addition (Sum) and one for multiplication (Product).
+
+The `Monoid` typeclass requires the following:
+
+~~~~{.haskell}
+class Monoid a where
+   mempty  :: a
+   mappend :: a -> a -> a
+   mconcat :: [a] -> a
+~~~~
+
+`mempty` is our 'seed' value - it is the identity. For Sum, $0+n=n$; for Product, $1*n=n$.
+
+`mappend` is how to combine 2 such monoids. Both `(+)` and `(*)` have the right type signature: `Num a => a -> a -> a`.
+
+`mconcat` can be automatically defined from `mempty` and `mappend` - you just prefix a `mempty` onto the list, and then proceed to `mappend` your way down it.
+
+This works out perfectly for `+` and `*`:
+
+~~~~{.haskell}
+mconcat [1..5] -- for Product
+~>
+fold [mempty, 1, 2, 3, 4, 5] -- not the actual fold; artistic license
+~>
+mempty `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend 5
+~>
+1 `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend 5
+~>
+1 * 1 * 2 * 3 * 4 * 5
+~>
+120
+
+mconcat [1..5] -- for Sum
+~>
+fold [mempty, 1, 2, 3, 4, 5] -- not the actual fold; artistic license
+~>
+mempty `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend 5
+~>
+0 `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend 5
+~>
+15
+~~~~
+
+Notice that right up to the final steps everything was the same.
+
+If we wanted to use the Sum or Product monoids in actual code, we would use the [Data.Monoid](!Hoogle) library, which gives us Sum and Product on everything in the [Num](!Hoogle) typeclass:
+
+~~~~{.haskell}
+import Data.Monoid
+...
+mconcat (map Product [1..5])
+~>
+Product {getProduct = 120}
+
+mconcat (map Sum [1..5])
+~>
+Sum {getSum = 15}
+~~~~
+
+So, `mconcat` is basically our `sum` or `product` but abstracted away from a specific monoid and how to generate the `[a]` argument.
+
+A great many data structures or datatypes are monoids; they're worth knowing about.
