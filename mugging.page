@@ -100,3 +100,22 @@ Let's suppose a mugger tries a different mugging. Instead of asking for 20$ he a
 If the agent's prior was not so low that they *always* rejected the mugger, then we would see an odd flip - for small sums, the agent would accept the mugging and then as the sums increased, it would suddenly start rejecting muggings, even when the same total sums would have been transacted. That is, just by changing some labels while leaving the aggregate utility alone, we change the agent's decisions.
 
 If the agent had been using a linear relationship, there would be no such flip. If the agent rejected the penny offer it would reject the 20$ offer and vice versa. It would be consistently right (or wrong). The sublinear and superlinear relationships are inconsistently wrong.
+
+
+----------
+
+http://lesswrong.com/lw/2kl/open_thread_august_2010_part_2/2iuf?c=1&context=1#comments
+
+While raking, I think I finally thought of a proof that the before-offer-probability can't be known.
+
+The question is basically 'what fraction of all Turing machines making an offer (which is accepted) will then output a certain result?'
+
+We could rewrite this as 'what is the probability that a random Turing machine will output a certain result?
+
+We could then devise a rewriting of all those Turing machines into Turing machines that halt or not when their offer is accepted (eg. halting might = delivering, not halting = welshing on the deal. This is like Rice's theorem).
+
+Now we are asking 'what fraction of all these Turing machines will halt?'
+
+However, this is asking 'what is Chaitin's constant for this rewritten set of Turing machines?' and that is uncomputable!
+
+Since Turing machine-based agents are a subset of all agents that might try to employ Pascal's Mugging (even if we won't grant that agents must be Turing machines), the probability is at least partially uncomputable. A decision procedure which entails uncomputability is unacceptable, so we reject giving the probability in advance, and so our probability must be contingent on the offer's details (like its payoff).
