@@ -2,6 +2,83 @@
 
 See my article on [N-back]() in general. It's mental training intended to improve your intelligence, and specifically your [working memory](!Wikipedia). The theory goes that WM predicts and correlates with IQ very well^[See for example ["Do working memory and susceptibility to interference predict individual differences in fluid intelligence?"](http://www.informaworld.com/smpp/content~db=all~content=a757621823), Borella 2006; WM predicts IQ better than strong focus/attention. Available in Group Files] and may well use the same neural networks^[["Brain networks for working memory and factors of intelligence assessed in males and females with fMRI and DTI"](http://www.citeulike.org/article/7117360), Tang 2010; it found that "individual differences in activation during the n-back task were correlated to the general intelligence factor (g), as well as to distilled estimates (removing g) of speed of reasoning, numerical ability, and spatial ability, but not to memory". PDF available in Group Files.]
 
+## The Argument
+
+[Working memory is important stuff](!Wikipedia "Working memory#Working memory and learning") for learning and also just general intelligence.[^jaeggi][^nyt] It's not too hard to see why working memory could be so important. Working memory boils down to 'how much stuff you can think about at the same time'.
+
+Imagine a poor programmer who has suffered brain damage and has only enough working memory for 1 definition at a time. How could he write anything? To write a correct program, he needs to know simultaneously 2 things - what a variable, say, contains, and what is valid input for a program. But unfortunately, our programmer can know that the variable `foo` contains a string with the input, or he can know that the function `processInput` uses a string, but he can't remember these 2 things simultaneously! He will deadlock forever, unsure either what to do with this `foo`, or unsure what exactly `processInput` was supposed to work on.
+
+More seriously, working memory can be useful since it allows one to grasp more of the structure of something at any one time. Commentators on programming write that one of the great challenges of programming^[Besides the challenge of accepting & dealing with the reality that a computer really is just a mindless rule-following machine; that can be hard, though, which is why [the camel has 2 humps.](http://www.google.com/search?q=the camel has two humps)], is that programming requires one to keep in mind dozens of things and circumstances - any one of which could completely bollix things up. Focus is absolutely essential. One of the characteristics of great programmers is their apparent omniscience. Obsession grants them this ability to *know what they are actually doing*:
+
+> "With programmers, it's especially hard. Productivity depends on being able to juggle a lot of little details in short term memory all at once. Any kind of interruption can cause these details to come crashing down. When you resume work, you can't remember any of the details (like local variable names you were using, or where you were up to in implementing that search algorithm) and you have to keep looking these things up, which slows you down a lot until you get back up to speed."[^spolsky]
+
+### The Silver Bullet
+
+It's not all that obvious, but just about every productivity innovation in computing is about either cutting down on how much a programmer needs to know (eg. garbage collection), or making it easier for him to shuffle things in and out of his 'short term memory'.  Why are some commentators like Jeff Atwood so focused[^atwood] on having multiple [monitors](!Wikipedia "Visual display unit")? For that matter, why *are* there real studies showing surprisingly large productivity boosts by simply adding a second monitor? It's not like the person is any different afterwards. And arguably multiple or larger monitors come with damaging overheads[^atwood2].
+
+Or, why does Steve Yegge think touch-typing is one of the few skills programmers *must* know (along with reading)? Typing hardly seems very important - it's what you say, not how you say it. The compiler doesn't care if you typed the source code in at 30WPM or 120WPM, after all.
+
+> "I love being able to type that without looking! It's _empowering_, being able to type almost as fast as you can think. Why would you want it any other way?"[^yegge]
+
+The thing is, multiple monitors, touch-typing - they're all about making the external world part of your mind. What's the real difference between having a type signature in your short-term or prominently displayed in your second monitor? What's the real difference between writing a [comment](!Wikipedia "Comment (computer programming")) in your mind or touch-typing it as fast as you create it?
+
+Just some speed. Just some time. And the more visible that type signature is, the faster you can type out that comment, the larger your 'memory' gets. And the larger your memory is, the more intelligent/productive you can be. (Think of this as the [Extended Mind](!Wikipedia "Extended Mind") thesis as applied to programming!)
+
+But as great as things like garbage collection & touch-typing & multiple monitors are (I am a fan & user of the foregoing), they are still imperfect substitutes. Wouldn't it be better if one could just improve one's short-term/working memory directly? It might be more effective, and certainly would be more portable!
+
+## Training
+
+Unfortunately, in general, IQ/[_g_](!Wikipedia "General intelligence factor") and memory don't seem to be trainable. Many apparent effects are swamped by exercise or nutrition or by simple practice. They do not [_transfer_](!Wikipedia "Transfer of learning").
+
+But there are a few exceptions. Lately, I've been reading about and trying out one of them - a game which stresses working memory. It's called Dual [N-back](!Wikipedia "N-back"), and it's a variant on an old working-memory test.
+
+### N-back
+
+The original N-back test simply asked that you remember a stream of letters, and signal if any letters were precisely, say, 2 positions apart. 'assr' wouldn't merit a signal, but 'asar' would since there are 'a' characters exactly 2 positions away from each other. The tester would give you another letter, you would signal or not, and so on. This is simple enough.
+
+### Dual N-back
+
+In 2003, Susan Jaeggi and her team began [fMRI](!Wikipedia "Functional magnetic resonance imaging") studies using a variant of N-back which tried to increase the burden on each turn - remembering multiple things instead of 1 letter. The abstract describes the reason why:
+
+> "With reference to single tasks, activation in the prefrontal cortex (PFC) commonly increases with incremental memory load, whereas for dual tasks it has been hypothesized previously that activity in the PFC decreases in the face of excessive processing demands, i.e., if the capacity of the working memory’s central executive system is exceeded. However, our results show that during both single and dual tasks, prefrontal activation increases continuously as a function of memory load. An increase of prefrontal activation was observed in the dual tasks even though processing demands were excessive in the case of the most difficult condition, as indicated by behavioral accuracy measures. The hypothesis concerning the decrease in prefrontal activation could not be supported and was discussed in terms of motivation factors."[^jaeggi2003]
+
+In this version, sometimes called 'dual N-back' (to distinguish it from the classic N-back), one is still playing a turn-based game. In the [Brain Workshop](http://brainworkshop.sourceforge.net/) version, you are presented with a 3x3 grid in which every turn, a block appears in 1 of the 9 spaces and a letter is spoken aloud.[^details]
+
+#### 1-back
+
+In 1-back, the task is to correctly answer whether the *letter* is the same as the previous round, and whether the *position* is the same as the previous round. It can be both. So assuming 'a' means 'same position' and 'l' means 'same sound', you would on every turn type in either 'a', 'l', 'al', or nothing.
+
+This stresses working memory since you need to keep in mind 4 things simultaneously: the position and letter of the previous turn, and the position and letter of the current turn (so you can compare the current letter with the old letter and the current position with the old position). Then on the next turn you need to forget the old position & letter (which are now 3 turns old) and remember the new position and letter. So you are constantly remembering and forgetting and comparing.
+
+#### 2-back
+
+But 1-back is pretty easy. The turns come fast enough that you could easily keep the letters in your [phonological loop](!Wikipedia "Baddeley's model of working memory#Phonological loop") and lighten the load on your working memory. Indeed, after 10 rounds or so of 1-back, I mastered it - I now get 100%, unless I forget for a second that it's 1-back and not 2-back (or I simply lose my concentration completely).
+
+The next step up is a doozy: 2-back. In 2-back, you do the same thing as 1-back but as the name suggests, you are instead matching against *2* turns ago. So before you would be looking for repeated letters - 'a a' - but now you need to look for separated letters - 'a b a'. And of course, you can't forget so quickly, since you still need to match against something like 'a b a b a'.
+
+2-back stresses your working memory even more, as now you are remembering 6 things, not 4: 2 turns ago, the previous turn, and the current turn - all of which have 2 salient features. (At 6 items, we're also in the mid-range of estimates for normal working memory capacity.[^size])
+
+And even if there are only a few things to remember, the number of responses you have to choose between go up exponentially with how many 'modes' there are, so Triple N-back has not $\frac{1}{3}$ more possible responses than Dual N-back, but more than twice as many: if _m_ is the number of modes, then the number of possible responses is $2^m - 1$^[The $-1$ is there because one can nothing in every mode, but that's boring and requires no choice or thought.], so DNB has 3 possible responses[^math], while TNB has 7^[$2^3 - 1$], Quadruple N-back 15^[$2^4 - 1$], and Quintuple N-back 31^[$2^5 - 1$]!  
+
+Worse, the temporal gap between elements is deeply confusing. It's particularly bad when there's repetition involved - if the same square is selected twice with the same letter, you might wind up forgetting both!
+
+So 2-back is where the challenge first really manifests. The good thing is that after about 20 games I started to get the hang of it. (It helped to play a few games focusing only on one of the stimuli, like the letters; this helps you get used to the 'reaching back' of 2-back.) I'm still in just the 80-90% range, but when I start hitting 100%, I'll move on up to 3-back.
+
+### Results
+
+Have I seen any benefits yet? Not really. Thus far it's like meditation: I haven't seen any specific improvements, but it's been interesting just to explore concentration - I've learned that my ability to focus is much less than I thought it was!^[It is very sobering to get 30% scores on something as trivial as 1-back.] Besides the intrinsic interest of changing one's brain through a simple exercise - meditation is equally interesting for how one's mind refuses to cooperate with the simple work of meditating, and I understand that there are even vivid hallucinations at the higher levels - N-back might function as a kind of mental calisthenics. Few people exercise and stretch because they find the activities intrinsically valuable, but they serve to further some other goal; some people jog because they just enjoy running, but many more jog so they can play soccer better or live longer. I am young, and it's good to explore these sorts of calisthenics while one has a long life ahead of one; then one can reap the most benefits.
+
+#### IQ testing
+
+But it's foolish to do any long-term test with no metrics! Fortunately, the Internet has available a number of IQ tests. We want to avoid any test which uses, say, vocabulary as an item. [Mnemosyne]() usage aside, fluid intelligence & working memory specifically likely won't change performance there much. (Either you know the difference between 'perspicuous' and 'perspicacious', or you don't.) So I focus on the culture-neutral tests, the ones of pure reasoning - basically, tests modeled on [Raven's Progressive Matrices](!Wikipedia).
+
+Raven tests aren't too popular online (perhaps because they can be very hard and aren't fun or flattering). I've found a few online, though; they're compiled in my [N-back FAQ]()
+
+Not long after starting N-back, while still at 2-back, I did the iqtest.dk and was scored at 115. This may not be particularly accurate (I was hungry, and haven't taken such a test in at least a decade), but that's what I got. I plan to retest in a few months. Hopefully I will have forgotten enough about the .dk test (the questions don't change, alas) that a second time through won't be too inaccurate.
+
+<!-- Note to self: I started taking piracetam on 13 September during a N-back break. I currently peaking at 60% on 5-back as of 14 September. The above IQ test was in the middle of February. TODO: attach my stats file? -->
+
+
 ## Terminology
 
 N-back training is sometimes referred to simply as 'N-backing', and participants in such training are called 'N-backers'. Almost everyone uses the Free, featureful & portable program [Brain Workshop](http://brainworkshop.sourceforge.net/), abbreviated "BW" (but see [the software section](#software) for alternatives).
@@ -648,3 +725,24 @@ based upon our perception of its passing.\
 as expected from a machine. When I'm resetting after a tricky double-back, the next instance always comes way too quickly, as if a second had been removed.  The same perception happens on an upped level, and it is so persistent. It's like some time had vanished.\
      > For the longest time I thought the program had a bug, being the mere human."
 [^division]: Tofu: "I should also add, my score on the number test jumped dramatically from the first test to the second test probably because I taught myself how to do long division before the second test (which was the only studying I did for all 3 tests)."
+[^nyt]:  ["Guest Column: Can We Increase Our Intelligence?"](http://judson.blogs.nytimes.com/2009/03/10/guest-column-can-we-increase-our-intelligence/); Sam Wang & Sandra Aamodt; _The New York Times_
+
+    > "Differences in working memory capacity account for 50 to 70 percent of individual differences in fluid intelligence (abstract reasoning ability) in various meta-analyses, suggesting that it is one of the major building blocks of I.Q. (Ackerman et al; Kane et al; [Süss et al.](http://eis.bris.ac.uk/~psxko/Suess.et-al.2002.Intelligence.pdf)) This idea is intriguing because working memory can be improved by training."
+[^size]: See [Wikipedia](!Wikipedia "Working memory#Working memory capacity")
+[](http://en.wikipedia.org/w/index.php?title=Working_memory&oldid=269488909)on working memory size:
+
+    > "Working memory is generally considered to have limited capacity. The earliest quantification of the capacity limit associated with short-term memory was the ["magical number seven"](!Wikipedia "The Magical Number Seven, Plus or Minus Two")
+ introduced by Miller (1956). He noticed that the memory span of young adults was around seven elements, called chunks, regardless whether the elements were digits, letters, words, or other units. Later research revealed that span does depend on the category of chunks used (e.g., span is around seven for digits, around six for letters, and around five for words), and even on features of the chunks within a category....Several other factors also affect a person's measured span, and therefore it is difficult to pin down the capacity of short-term or working memory to a number of chunks. Nonetheless, Cowan (2001) has proposed that working memory has a capacity of about four chunks in young adults (and fewer in children and old adults)."
+[^jaeggi]: Jaeggi, S. M., Buschkuehl, M., Jonides, J., Perrig, W. J. (2008),
+["Improving fluid intelligence with training on working memory"](http://www.iapsych.com/articles/jaeggi2008.pdf), _[Proceedings of the National Academy of Sciences](!Wikipedia)_, vol. 105 no. 19
+[^jaeggi2003]: Jaeggi, S. M., Seewer, R., Nirkko, A. C., Eckstein, D., Schroth, G., Groner, R., et al, (2003). ["Does excessive memory load attenuate activation in the prefrontal cortex? Load-dependent processing in single and dual tasks: functional magnetic resonance imaging study"](jaeggi2003.pdf), _Neuroimage_ 19(2) 210-225.
+[^spolsky]: Joel Spolsky, ["Where do These People Get Their (Unoriginal) Ideas?"](http://www.joelonsoftware.com/articles/fog0000000068.html)
+[^atwood]: Jeff Atwood; ["Multiple Monitors and Productivity"](http://www.codinghorror.com/blog/archives/000012.html), ["The Programmer's Bill of Rights"](http://www.codinghorror.com/blog/archives/000666.html), ["Joining the Prestigious Three Monitor Club"](http://www.codinghorror.com/blog/archives/000740.html), ["Does More Than One Monitor Improve Productivity?"](http://www.codinghorror.com/blog/archives/001076.html) etc.
+[^atwood2]: Jeff Atwood, ["The Large Display Paradox"](http://www.codinghorror.com/blog/archives/000928.html)
+[^yegge]: Steve Yegge, ["Programming's Dirtiest Little Secret"](http://steve-yegge.blogspot.com/2008/09/programmings-dirtiest-little-secret.html)
+[^details]: There are any number of variants: the NATO phonetic alphabet, piano keys, etc. And Brain Workshop has any number of modes, like 'Arithmetic N-back' or Quintuple N-back (the very concept scares me), so please accept that this is a very summarized description.
+[^math]: $2^2 = 4; 4-1 = 3$. For DNB, the 3 responses are:
+
+     1) audio match
+     2) visual match
+     3) audio & visual matches
