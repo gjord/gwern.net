@@ -28,7 +28,6 @@ One will never get a faithful summation of all the information about Obama scatt
 
 Or here's another example: many of the early uses of prediction markets have been inside corporations, betting on metrics like quarterly sales. Now, all of those metrics are important and will in the long run affect stock prices or dividends. But what employee working down in the R&D department is going to say 'People are too optimistic about next year's sales, the prototypes just aren't working as well as they would need to' and go short the company's stock? No one, of course. A small difference in their assessment from everyone else's is unlikely to make a noticeable price difference, even if the transaction costs of shorting didn't bar it. And yet, the company needs to know what this employee knows.
 
-
 ## Specific markets
 
 So once we are interested in prediction markets and would like to try them out, we need to pick one. There are several. I generally ignore the 'play money' markets like the [Hollywood Stock Exchange](!Wikipedia), despite their similar levels of accuracy to the real money markets; I just have a prejudice that if I make a killing, then I ought to have a real reward like a nice steak dinner and not just increment some bits on a computer. The primary markets to consider are:
@@ -253,5 +252,31 @@ The following is a lightly edited, and incomplete, IEM trading history for me. (
 - 05/19/08  21:11:53    PRES08\_VS  UREP08\_VS  Ask Order   10  0.5 5/21/2008 11:59:00 PM   PRES08\_VS  Expired     10  0.5     5/21/2008 11:59:15 PM
 - 05/20/08  15:44:10    PRES08\_VS  UREP08\_VS  Sell Asset  10  0.483 PRES08\_VS Traded  1   0.483   5/20/2008 3:44:10 PM
 - 05/20/08  15:45:29    PRES08\_VS  UREP08\_VS  Sell Asset  10  0.482 PRES08\_VS Traded  9   0.482   5/20/2008 3:45:29 PM
+
+### Intrade
+
+In 2010, I signed up for Intrade since the IEM was too small and had too few contracts to maintain my interest.
+
+#### Payment
+
+Paying Intrade, as a foreign company in Ireland, was a little tricky. I first looked into paying via debit card, but Intrade demanded considerable documentation, so I abandoned that approach. I then tried a bank transfer since that would be quick; but my credit union failed me and said Intrade had not provided enough information (which seemed unlikely to me, and Intrade's customer service agreed) - and even if they had, they would charge me $10! Finally, I decide to just snail-mail them a check. I was pleasantly surprised to see that postage to Ireland was ~$1, and it made it there without a problem. But very slowly: perhaps 15 days or so before the check finally cleared and my initial $200 was deposited.
+
+#### Trading
+
+Intrade has a considerably less usable system than IEM. In IEM, selling short is very easy: you purchase a pair of contracts (yes/no) which sum to $0, and then you sell off the opposite. If I think DEM08 is too high compared to REP08, I get 1 share of each and sell the DEM08. Intrade, on the other hand, requires you to 'sell' a share. I don't entirely understand it, but it *seems* to be equivalent.
+
+I wanted to sell short some of the more crazy probabilities such as on Japan going nuclear or the USA attacking North Korea or Iran, but it turned out that to make even small profits on them, I would have to hold them a long time and because their probabilities were so low already, Intrade was holding large margins - to buy 4 or 5 shorts would lock up half my account. (The problem is that if a contract is at 10%, and you buy 10 contracts, then if the contract actually pays off, you have to come up with 100% to pay the other people their winnings. Intrade, to guarantee them payment, will make you pay the full 10%, and then freeze the 90% in your account.)
+
+My first trade was to sell short the [Intrade contract](https://www.intrade.com/jsp/intrade/common/c_cd.jsp?conDetailID=702407&z=1285870999458) on [California Proposition 19 (2010)](!Wikipedia), which would legalize non-medical marijuana possession.I reasoned that California recently banned gay marriage at the polls, and medical marijuana is well-known as a joke (lessening the incentive to pass Prop 19), and that its true probability of passing was more like 30% - significantly below its current price. The contract would expire in just 2 months, making it even more attractive.
+
+It was at 49 when I shorted it. 2 days later, the price had increased to 53.3.
+
+My second trade dipped into the highly liquid 2012 US presidential elections. The partisan contracts were trading at ~36% for the Republicans and ~73% for the [Democrats](https://www.intrade.com/jsp/intrade/common/c_cd.jsp?conDetailID=639648&z=1285871684768). I would agree that the true odds are >50% for the Democrats since presidents are usually re-elected and the Republicans have few good-looking candidates compared to Obama, who has accomplished quite a bit in office. However, I think 73% is overstated, and further, that the markets always panic during an election and squish the ratio to around 50:50. So I sold Democrat and bough Republican. (I wound up purchasing more Republican contracts than selling Democrat contracts because of the aforementioned margin issues.)
+
+I bought 5 Reps at 39, and 1 Dem at 60.8. 2 days later, they had changed to 37.5 and 62.8 respectively.
+
+Finally, I decided that Sarah Palin has next to no chance at the Republican nomination since she blew a major hole in her credentials by her bizarre resignation as governor, and [her shares](https://www.intrade.com/jsp/intrade/common/c_cd.jsp?conDetailID=652756&z=1285872122100) at 18% were just crazy.
+
+I shorted 10 at 18%. 2 days later, they had risen to 19%.
 
 [^size]: On 27 January 2008, the IEM sent out an email which accidentally listed all recipients in the CC; the listed emails totaled 292 emails. Given that many of these traders (like myself) are surely inactive or infrequent, and only a fraction will be active at a given time, this means the 10 or so markets are thinly inhabited.
