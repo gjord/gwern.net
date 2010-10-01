@@ -6,12 +6,12 @@ type PronounConj = (String, -- ^ basic French pronoun eg. "Je"
                     String) -- ^ the selected verb's conjugation, eg. for avoir "ai"
 main :: IO ()
 main = do vs <- getArgs
-          case vs of 
+          case vs of
            (inf:pronunc:meaning:je:tu:il:nous:vous:ils:[]) -> do
                let prefix = getPrefix $ drop 2 vs
                let allpron = zip3 ["Je", "Tu", "Il", "Elle", "On", "Nous", "Vous", "Ils", "Elles"]
-                          ["I", "You", "He", "She", "It", "We", "Y'all", 
-                           "They <small>(m. pl)</small> ", "They <small>(m. pl)</small> "] 
+                          ["I", "You", "He", "She", "It", "We", "Y'all",
+                           "They <small>(m. pl)</small> ", "They <small>(m. pl)</small> "]
                           [je, tu, il, il, il, nous, vous, ils, ils]
                viceversa ("Define: " ++ inf ++ " (<i>" ++ pronunc ++ "</i>; v.)") ("to " ++ meaning)
                mapM_ (viceversa3 meaning) allpron
@@ -32,7 +32,7 @@ viceversa :: String -> String -> IO ()
 viceversa x y = do putStrLn $ x ++ ".\t" ++ y ++ "."
                    putStrLn $ y ++ ".\t" ++ x ++ "."
 
--- abstract out repetition like 
+-- abstract out repetition like
 -- > viceversa ("Je " ++ je) ("I " ++ meaning)..."Ils" ++ ils
 viceversa3 :: String -> PronounConj -> IO ()
 viceversa3 meaning (fr,en,conj) = viceversa (fr ++ " " ++ conj) (en ++ " " ++ meaning)
