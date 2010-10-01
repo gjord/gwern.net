@@ -1,0 +1,105 @@
+html {
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+    color: black;
+    font-family: sans-serif;
+    line-height: 160%;
+}
+
+body {
+    padding: 0px 0px 60px 0px;
+    margin: 0px;
+}
+
+div#header img {
+    display: inline;
+    vertical-align: middle;
+}
+
+div#header h1 {
+    padding-left: 10px;
+    display: inline;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+div#main {
+margin-left: 1em; margin-right: 1em; border: none;
+
+}
+
+div#sidebar {
+    margin-right: 15px;
+    width: 20px;
+    float: left;
+    text-align: left;
+}
+
+div#sidebar a {
+    display: block;
+    font-size: 110%;
+    text-decoration: none;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+div#content {
+    width: 95%;
+    float: right;
+}
+
+div#footer {
+    padding-top: 30px;
+    clear: both;
+    font-size: 90%;
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+
+h2 {
+    font-size: 120%;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 100%;
+    text-transform: uppercase;
+}
+
+div.column {
+    width: 50%;
+    float: left;
+}
+
+img {
+    display: block;
+    margin: 10px auto 10px auto;
+    border: none;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 1em;
+    margin-left: 1em;
+}
+
+code {
+    background-color: rgb(250, 250, 250);
+    border: 1px solid rgb(200, 200, 200);
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+pre code {
+    display: block;
+    padding: 8px;
+    margin-bottom: 2em;
+}
+
+p.caption {
+    display: none;
+}
