@@ -38,6 +38,7 @@ changeLinks = writeDoc . processWith (map (convertInterwikiLinks . convertEmptyW
 -- | Convert links with no URL to wikilinks.
 convertEmptyWikiLinks :: Inline -> Inline
 convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (inlinesToURL ref ++ ".html", "Go to wiki page")
+convertEmptyWikiLinks (Link ref (y, x)) =   Link ref (y ++ ".html", x)
 convertEmptyWikiLinks x = x
 
 -- | Derives a URL from a list of Pandoc Inline elements.
