@@ -25,14 +25,15 @@ div#header h1 {
 }
 
 div#main {
-margin-left: 1em; margin-right: 1em; border: none;
+    margin-left: 1em;
+    margin-right: 1em;
+    border: none;
 
 }
 
 div#sidebar {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 15px;
+    width: 80px;
+    float: left;
 }
 
 div#sidebar a {
@@ -44,7 +45,8 @@ div#sidebar a {
 }
 
 div#content {
-    display: inline-block;
+    margin-left: 80px;
+    padding-left: 10px;
 }
 
 div#footer {
