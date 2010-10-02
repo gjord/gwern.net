@@ -30,10 +30,9 @@ margin-left: 1em; margin-right: 1em; border: none;
 }
 
 div#sidebar {
+    display: inline-block;
+    vertical-align: top;
     margin-right: 15px;
-    width: 20px;
-    float: left;
-    text-align: left;
 }
 
 div#sidebar a {
@@ -45,8 +44,7 @@ div#sidebar a {
 }
 
 div#content {
-    width: 95%;
-    float: right;
+    display: inline-block;
 }
 
 div#footer {
