@@ -12,6 +12,7 @@ main :: IO ()
 main = hakyll "http://gwern.net" $ do
     directory css "css"
     directory static "images"
+    directory static "_darcs"
     directory static "docs"
 
     pages <-liftM sort $ getRecursiveContents "./"
