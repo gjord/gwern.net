@@ -4,6 +4,7 @@ import Data.List -- (sort)
 import Network.URI -- (escapeURIString, isAllowedInURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import qualified Data.Map as M (fromList, lookup, Map)
+import System.FilePath (hasExtension)
 
 import Text.Hakyll
 import Text.Pandoc
@@ -38,7 +39,7 @@ changeLinks = writeDoc . processWith (map (convertInterwikiLinks . convertEmptyW
 -- | Convert links with no URL to wikilinks.
 convertEmptyWikiLinks :: Inline -> Inline
 convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (inlinesToURL ref ++ ".html", "Go to wiki page")
-convertEmptyWikiLinks l@(Link ref (y, x)) =   if not (isURI y) && not (".html" `isInfixOf` y) && not ("!" `isPrefixOf` y) then Link ref (y ++ ".html", x) else l
+convertEmptyWikiLinks l@(Link ref (y, x)) =   if not (isURI y) && not ("!" `isPrefixOf` y) && not (hasExtension y) then Link ref (y ++ ".html", x) else l
 convertEmptyWikiLinks x = x
 
 -- | Derives a URL from a list of Pandoc Inline elements.
