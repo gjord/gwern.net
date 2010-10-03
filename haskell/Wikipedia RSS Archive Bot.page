@@ -52,7 +52,7 @@ items :: String -> [RSSItem]
 items feed = rssItems $ rssChannel $ fromJust $ parseFeedString feed
 ~~~
 
-parseFeedString is actually `String -> Maybe Feed`, but we know Wikipedia won't give us a bad feed, so we bypass error checking; then we drill down past the metadata into a RSSChannel (an [RSS channel](http://www.mnot.net/rss/channel.html)[](http://www.w3schools.com/rss/rss_channel.asp) is a finer subdivision of the overall feed; you might have 2 channels, 1 for articles & 1 for pics, or aggregating multiple websites or streams into 1 feed), and then we pull out the RSSItems, and then finally the actual URL links:
+parseFeedString is actually `String -> Maybe Feed`, but we know Wikipedia won't give us a bad feed, so we bypass error checking; then we drill down past the metadata into a RSSChannel (an [RSS](http://www.mnot.net/rss/channel.html) [channel](http://www.w3schools.com/rss/rss_channel.asp) is a finer subdivision of the overall feed; you might have 2 channels, 1 for articles & 1 for pictures, or aggregating multiple websites or streams into 1 feed), and then we pull out the RSSItems, and then finally the actual URL links:
 
 ~~~{.haskell}
 titles :: [RSSItem] -> [String]
