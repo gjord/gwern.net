@@ -143,7 +143,7 @@ archiveURL email url = openURL url' >> return ()
               where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
 ~~~
 
-We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/)[](!Hackage "hlint") will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
+We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/) ([Hackage](!Hackage "hlint")) will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
 
 Now we have our finished prototype. We can compile it and run it like:
 
