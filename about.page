@@ -1,14 +1,13 @@
----
-title: About
----
+This wiki is available at `darcs get --lazy http://www.gwern.net`
 
-## Code
+It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)").
 
-The code for Hakyll is freely available on
-[github](http://github.com/jaspervdj/Hakyll/).
+To use Hakyll, you `cd` into the repository and do `runhaskell hakyll.hs build`, and Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index.html`.
 
-This wiki is available at
+To use Gitit, you likewise `cd` but this time you run `gitit -f static/gwern.conf` and hopefully the configuration will pick up all elements and plugins; you then would do something like `firefox http://127.0.0.1:5001/`.
+
+(Both Hakyll & Gitit setups assume you are running the latest version from HEAD. Nothing is guaranteed with older versions.)
 
 ## License
 
-This site is licensed under CC's PD-0
+This site is licensed under [CC](127.0.0.1:5001)'s [public domain](http://creativecommons.org/about/cc0) license.
