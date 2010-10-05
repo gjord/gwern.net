@@ -1,4 +1,4 @@
 --- sidebar
 [Home]($root/index.html)
-[Me]($root/about me.html)
+[Me]($root/links.html)
 [Site]($root/about site.html)
