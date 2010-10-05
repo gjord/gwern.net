@@ -1,3 +1,4 @@
+
 import Control.Arrow
 import Control.Monad (liftM)
 import Data.List -- (sort)
@@ -28,19 +29,24 @@ main = hakyll "http://gwern.net" $ do
     directory static "home/gwern/bin/archiver"
 
 render' :: [FilePath] -> FilePath -> Hakyll ()
-render' templates = renderChain templates .  (>>> renderBody changeLinks) . withSidebar . createPage
+render' templates = renderChain templates  . withSidebar . page
+ where 
+     withSidebar :: HakyllAction () Context -> HakyllAction () Context
+     withSidebar a = a `combine` createPage "sidebar.markdown"
+
+page :: FilePath -> HakyllAction () Context
+page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionWith
+   where 
+       total :: String -> String
+       total = writeHtmlString options . changeLinks . readMarkdown defaultParserState
 
        options = defaultWriterOptions{ writerStandalone = True,
                                      writerTableOfContents=True,
                                      writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
                                      writerHTMLMathMethod = Text.Pandoc.MathML Nothing}
 
-readDoc :: String -> Pandoc
-readDoc = readHtml defaultParserState
-writeDoc :: Pandoc -> String
-writeDoc = writeHtmlString defaultWriterOptions
-changeLinks :: String -> String
-changeLinks = writeDoc . processWith (map (convertInterwikiLinks . convertEmptyWikiLinks)) . readDoc
+       changeLinks :: Pandoc -> Pandoc
+       changeLinks = processWith (map (convertEmptyWikiLinks . convertInterwikiLinks))
 
 -- | Convert links with no URL to wikilinks.
 convertEmptyWikiLinks :: Inline -> Inline
