@@ -4,7 +4,7 @@ import Data.List -- (sort)
 import Network.URI -- (escapeURIString, isAllowedInURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import qualified Data.Map as M (fromList, lookup, Map)
-import System.FilePath (hasExtension)
+import System.FilePath (takeExtension)
 
 import Text.Hakyll
 import Text.Pandoc
@@ -43,8 +43,27 @@ changeLinks = writeDoc . processWith (map (convertInterwikiLinks . convertEmptyW
 -- | Convert links with no URL to wikilinks.
 convertEmptyWikiLinks :: Inline -> Inline
 convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (inlinesToURL ref ++ ".html", "Go to wiki page")
-convertEmptyWikiLinks l@(Link ref (y, x)) =   if not (isURI y) && not ("!" `isPrefixOf` y) && not (hasExtension y) then Link ref (y ++ ".html", x) else l
+convertEmptyWikiLinks (Link ref (y, x)) =  Link ref (transform y, x)
 convertEmptyWikiLinks x = x
+
+{- specification for 'transform':
+test :: Bool
+test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
+        transform "sicp/Introduction" == "sicp/Introduction.html",
+        transform "sicp/Chapter 1.1" == "sicp/Chapter 1.1.html",
+        transform "In Defense of Inclusionism.html" == "In Defense of Inclusionism.html",
+        transform "!Wikipedia 'foo'" == "!Wikipedia 'foo'",
+        transform "!Hoogle 'foo'" == "!Hoogle 'foo'",
+        transform "Chernoff Faces" == "Chernoff Faces.html",
+        transform "http://www.google.com" == "http://www.google.com",
+        transform "http://www.gwern.net/N-Back FAQ.html#fn1" == "http://www.gwern.net/N-Back FAQ.html#fn1",
+        transform "#Benefits" == "#Benefits"] -}
+transform :: String -> String
+transform y = if
+                (isURI y || length extension > 0 || "!" `isPrefixOf` y || "#" `isPrefixOf` y) &&
+                (extension `notElem` map show [(0 :: Int) .. 9])
+             then y else y ++ ".html"
+                    where extension = drop 1 $ takeExtension y
 
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
