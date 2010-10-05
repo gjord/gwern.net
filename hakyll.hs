@@ -30,8 +30,10 @@ main = hakyll "http://gwern.net" $ do
 render' :: [FilePath] -> FilePath -> Hakyll ()
 render' templates = renderChain templates .  (>>> renderBody changeLinks) . withSidebar . createPage
 
-withSidebar :: HakyllAction () Context -> HakyllAction () Context
-withSidebar a = a `combine` createPage "sidebar.markdown"
+       options = defaultWriterOptions{ writerStandalone = True,
+                                     writerTableOfContents=True,
+                                     writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
+                                     writerHTMLMathMethod = Text.Pandoc.MathML Nothing}
 
 readDoc :: String -> Pandoc
 readDoc = readHtml defaultParserState
