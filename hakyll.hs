@@ -11,7 +11,7 @@ import Text.Pandoc
 
 main :: IO ()
 main = hakyll "http://gwern.net" $ do
-    pages <-liftM sort $ getRecursiveContents "./"
+    pages <- liftM sort $ getRecursiveContents "./"
 
     let articles = havingExtension ".page" pages
     let sources = havingExtension ".hs" pages
@@ -29,13 +29,13 @@ main = hakyll "http://gwern.net" $ do
 
 render' :: [FilePath] -> FilePath -> Hakyll ()
 render' templates = renderChain templates  . withSidebar . page
- where 
+ where
      withSidebar :: HakyllAction () Context -> HakyllAction () Context
      withSidebar a = a `combine` createPage "sidebar.markdown"
 
 page :: FilePath -> HakyllAction () Context
 page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionWith
-   where 
+   where
        total :: String -> String
        total = writeHtmlString options . changeLinks . readMarkdown defaultParserState
 
