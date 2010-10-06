@@ -1,11 +1,10 @@
-
 import Control.Arrow
 import Control.Monad (liftM)
 import Data.List -- (sort)
 import Network.URI -- (escapeURIString, isAllowedInURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
-import qualified Data.Map as M (fromList, lookup, Map)
 import System.FilePath (takeExtension)
+import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
 import Text.Pandoc
