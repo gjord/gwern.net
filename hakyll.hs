@@ -1,13 +1,14 @@
-import Control.Arrow
+import Control.Arrow (arr, (>>>), (&&&))
 import Control.Monad (liftM)
-import Data.List -- (sort)
-import Network.URI -- (escapeURIString, isAllowedInURI, unEscapeString, isUnescapedInURI)
+import Data.List (isPrefixOf, sort)
+import Network.URI (escapeURIString, isAllowedInURI, isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.FilePath (takeExtension)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
-import Text.Pandoc
+import Text.Pandoc (defaultParserState, defaultWriterOptions, readMarkdown, processWith, writeHtmlString,
+                    HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 
 main :: IO ()
 main = hakyll "http://gwern.net" $ do
