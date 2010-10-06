@@ -11,14 +11,7 @@ import Text.Pandoc
 
 main :: IO ()
 main = hakyll "http://gwern.net" $ do
-    pages <- liftM sort $ getRecursiveContents "./"
-
-    let articles = havingExtension ".page" pages
-    let sources = havingExtension ".hs" pages
-
-    -- TODO: make this faster - 'forkHakyll'?
-    mapM_ (render' ["templates/default.html"]) (articles++sources)
-
+    
     directory css "css"
     directory static "images"
     directory static "docs"
@@ -26,6 +19,14 @@ main = hakyll "http://gwern.net" $ do
     directory static "/home/gwern/_darcs"
     directory static "/home/gwern/bin/hcorpus"
     directory static "home/gwern/bin/archiver"
+
+    pages <- liftM sort $ getRecursiveContents "./"
+
+    let articles = havingExtension ".page" pages
+    let sources = havingExtension ".hs" pages
+
+    -- TODO: make this faster - 'forkHakyll'?
+    mapM_ (render' ["templates/default.html"]) (articles++sources)
 
 render' :: [FilePath] -> FilePath -> Hakyll ()
 render' templates = renderChain templates  . withSidebar . page
