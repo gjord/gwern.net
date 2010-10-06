@@ -13,13 +13,13 @@ import Text.Pandoc (defaultParserState, defaultWriterOptions, readMarkdown, proc
 main :: IO ()
 main = hakyll "http://gwern.net" $ do
     
-    directory css "css"
-    directory static "images"
-    directory static "docs"
-    directory static "_darcs"
-    directory static "/home/gwern/_darcs"
-    directory static "/home/gwern/bin/hcorpus"
-    directory static "home/gwern/bin/archiver"
+    _ <- forkHakyllWait $ directory css "css"
+    mapM_ (directory static) ["images",
+                              "docs",
+                              "_darcs",
+                              "/home/gwern/_darcs",
+                              "/home/gwern/bin/hcorpus",
+                              "home/gwern/bin/archiver"]
 
     pages <- liftM sort $ getRecursiveContents "./"
 
