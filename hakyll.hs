@@ -17,6 +17,7 @@ main = hakyll "http://gwern.net" $ do
     mapM_ (directory static) ["images",
                               "docs",
                               "_darcs",
+                              "static",
                               "/home/gwern/_darcs",
                               "/home/gwern/bin/hcorpus",
                               "home/gwern/bin/archiver"]
