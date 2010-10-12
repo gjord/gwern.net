@@ -1,6 +1,6 @@
 # What is N-back anyway?
 
-It's mental training intended to your [working memory](!Wikipedia), and hopefully your intelligence as well. The theory goes that WM predicts and correlates with IQ very well^[See for example ["Do working memory and susceptibility to interference predict individual differences in fluid intelligence?"](http://www.informaworld.com/smpp/content~db=all~content=a757621823), Borella 2006; WM predicts IQ better than strong focus/attention. Available in Group Files] and may well use the same neural networks^[["Brain networks for working memory and factors of intelligence assessed in males and females with fMRI and DTI"](http://www.citeulike.org/article/7117360), Tang 2010; it found that "individual differences in activation during the n-back task were correlated to the general intelligence factor (_g_), as well as to distilled estimates (removing _g_) of speed of reasoning, numerical ability, and spatial ability, but not to memory". PDF available in Group Files.]
+It's mental training intended to expand your [working memory](!Wikipedia), and hopefully your intelligence as well. The theory goes that WM predicts and correlates with IQ very well^[See for example ["Do working memory and susceptibility to interference predict individual differences in fluid intelligence?"](http://www.informaworld.com/smpp/content~db=all~content=a757621823), Borella 2006; WM predicts IQ better than strong focus/attention. Available in Group Files] and may well use the same neural networks^[["Brain networks for working memory and factors of intelligence assessed in males and females with fMRI and DTI"](http://www.citeulike.org/article/7117360), Tang 2010; it found that "individual differences in activation during the n-back task were correlated to the general intelligence factor (_g_), as well as to distilled estimates (removing _g_) of speed of reasoning, numerical ability, and spatial ability, but not to memory". PDF available in Group Files.]
 
 ## The Argument
 
@@ -14,13 +14,13 @@ More seriously, working memory can be useful since it allows one to grasp more o
 
 ### The Silver Bullet
 
-It's not all that obvious, but just about every productivity innovation in computing is about either cutting down on how much a programmer needs to know (eg. garbage collection), or making it easier for him to shuffle things in and out of his 'short term memory'.  Why are some commentators like Jeff Atwood so focused[^atwood] on having multiple [monitors](!Wikipedia "Visual display unit")? For that matter, why *are* there real studies showing surprisingly large productivity boosts by simply adding a second monitor? It's not like the person is any different afterwards. And arguably multiple or larger monitors come with damaging overheads[^atwood2].
+It's not all that obvious, but just about every productivity innovation in computing is about either cutting down on how much a programmer needs to know (eg. [garbage collection](!Wikipedia "Garbage collection (computer science)"), or making it easier for him to shuffle things in and out of his 'short term memory'.  Why are some commentators like [Jeff Atwood](!Wikipedia) so focused[^atwood] on having multiple [monitors](!Wikipedia "Visual display unit")? For that matter, why *are* there real studies showing surprisingly large productivity boosts by simply adding a second monitor? It's not like the person is any different afterwards. And arguably multiple or larger monitors come with damaging overheads[^atwood2].
 
-Or, why does Steve Yegge think touch-typing is one of the few skills programmers *must* know (along with reading)? Typing hardly seems very important - it's what you say, not how you say it. The compiler doesn't care if you typed the source code in at 30WPM or 120WPM, after all.
+Or, why does [Steve Yegge](!Wikipedia) think touch-typing is one of the few skills programmers *must* know (along with reading)? Typing hardly seems very important - it's what you say, not how you say it. The compiler doesn't care if you typed the source code in at 30WPM or 120WPM, after all.
 
 > "I love being able to type that without looking! It's _empowering_, being able to type almost as fast as you can think. Why would you want it any other way?"[^yegge]
 
-The thing is, multiple monitors, touch-typing - they're all about making the external world part of your mind. What's the real difference between having a type signature in your short-term or prominently displayed in your second monitor? What's the real difference between writing a [comment](!Wikipedia "Comment (computer programming)") in your mind or touch-typing it as fast as you create it?
+The thing is, multiple monitors, touch-typing - they're all about making the external world part of your mind. What's the real difference between having a [type signature](!Wikipedia) in your short-term memory or prominently displayed in your second monitor? What's the *real* difference between writing a [comment](!Wikipedia "Comment (computer programming)") in your mind or touch-typing it as fast as you create it?
 
 Just some speed. Just some time. And the more visible that type signature is, the faster you can type out that comment, the larger your 'memory' gets. And the larger your memory is, the more intelligent/productive you can be. (Think of this as the [Extended Mind](!Wikipedia "Extended Mind") thesis as applied to programming!)
 
@@ -34,7 +34,7 @@ But there are a few exceptions. The one this FAQ focuses on is called Dual [N-ba
 
 ### N-back
 
-The original N-back test simply asked that you remember a stream of letters, and signal if any letters were precisely, say, 2 positions apart. 'ASSR wouldn't merit a signal, but _A_S_A_R' would since there are 'A' characters exactly 2 positions away from each other. The program would give you another letter, you would signal or not, and so on. This is simple enough.
+The original N-back test simply asked that you remember a stream of letters, and signal if any letters were precisely, say, 2 positions apart. 'ASSR' wouldn't merit a signal, but '_A_S_A_R' would since there are 'A' characters exactly 2 positions away from each other. The program would give you another letter, you would signal or not, and so on. This is simple enough.
 
 ### Dual N-back
 
