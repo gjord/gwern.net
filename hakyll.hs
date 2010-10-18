@@ -67,7 +67,11 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "Chernoff Faces" == "Chernoff Faces.html",
         transform "http://www.google.com" == "http://www.google.com",
         transform "http://www.gwern.net/N-back FAQ.html#fn1" == "http://www.gwern.net/N-back FAQ.html#fn1",
-        transform "#Benefits" == "#Benefits"] -}
+        transform "#Benefits" == "#Benefits",
+        transform "Terrorism is not about Terror#the-problem" == "Terrorism is not about Terror.html#the-problem",
+        transform "N-back FAQ#hardcore" == "N-back FAQ.html#hardcore",
+        transform "Redirect-bot.hs" == "Redirect-bot.hs",
+        transform "docs/gwern.xml" == "docs/gwern.xml"]
 transform :: String -> String
 transform y = if
                 (isURI y || length extension > 0 || "!" `isPrefixOf` y || "#" `isPrefixOf` y) &&
