@@ -66,7 +66,7 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "!Hoogle 'foo'" == "!Hoogle 'foo'",
         transform "Chernoff Faces" == "Chernoff Faces.html",
         transform "http://www.google.com" == "http://www.google.com",
-        transform "http://www.gwern.net/N-Back FAQ.html#fn1" == "http://www.gwern.net/N-Back FAQ.html#fn1",
+        transform "http://www.gwern.net/N-back FAQ.html#fn1" == "http://www.gwern.net/N-back FAQ.html#fn1",
         transform "#Benefits" == "#Benefits"] -}
 transform :: String -> String
 transform y = if
