@@ -74,7 +74,8 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "Terrorism is not about Terror#the-problem" == "Terrorism is not about Terror.html#the-problem",
         transform "N-back FAQ#hardcore" == "N-back FAQ.html#hardcore",
         transform "Redirect-bot.hs" == "Redirect-bot.hs",
-        transform "docs/gwern.xml" == "docs/gwern.xml"]
+        transform "docs/gwern.xml" == "docs/gwern.xml",
+        transform "http://en.wikipedia.org/wiki/Angst" == "http://en.wikipedia.org/wiki/Angst"]
 -}
 transform :: String -> String
 transform y = let extension = drop 1 $ takeExtension y in
