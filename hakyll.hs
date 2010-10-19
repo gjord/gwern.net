@@ -79,8 +79,8 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
 -}
 transform :: String -> String
 transform y = let extension = drop 1 $ takeExtension y in
-              if
-                 (isURI y || length extension > 0) &&
+              if 
+                 (length extension > 0) &&
                  hasExtension y
               then if extension `notElem` map show [(0 :: Int) .. 9]
                    then y
@@ -92,7 +92,9 @@ transform y = let extension = drop 1 $ takeExtension y in
                        then
                         let (lnk, sctn) = splitAt (fromJust $ elemIndex '#' y) y in
                         lnk ++ ".html" ++ sctn
-                       else y ++ ".html"
+                       else if isURI y
+                            then y
+                            else y ++ ".html"
 
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
