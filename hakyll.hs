@@ -1,6 +1,7 @@
 import Control.Arrow (arr, (>>>), (&&&))
 import Control.Monad (liftM)
-import Data.List (isPrefixOf, sort)
+import Data.List (elemIndex, isInfixOf, isPrefixOf, sort)
+import Data.Maybe (fromJust)
 import Network.URI (escapeURIString, isAllowedInURI, isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.FilePath (takeExtension)
@@ -12,7 +13,7 @@ import Text.Pandoc (defaultParserState, defaultWriterOptions, readMarkdown, proc
 
 main :: IO ()
 main = hakyll "http://gwern.net" $ do
-    
+
     _ <- forkHakyllWait $ directory css "css"
     mapM_ (directory static) ["images",
                               "docs",
@@ -56,7 +57,7 @@ convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (inlinesToURL ref ++ ".ht
 convertEmptyWikiLinks (Link ref (y, x)) =  Link ref (transform y, x)
 convertEmptyWikiLinks x = x
 
-{- specification for 'transform':
+{- specification for 'transform': -}
 test :: Bool
 test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "sicp/Introduction" == "sicp/Introduction.html",
@@ -74,9 +75,13 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "docs/gwern.xml" == "docs/gwern.xml"]
 transform :: String -> String
 transform y = if
-                (isURI y || length extension > 0 || "!" `isPrefixOf` y || "#" `isPrefixOf` y) &&
+                (isURI y || length extension > 0 || "!" `isPrefixOf` y) &&
                 (extension `notElem` map show [(0 :: Int) .. 9])
-             then y else y ++ ".html"
+             then y 
+             else if  "#" `isInfixOf` y 
+                          then let (lnk,sctn) = splitAt (fromJust $ elemIndex '#' y) y
+                               in lnk ++ ".html" ++ sctn
+                          else y ++ ".html"
                     where extension = drop 1 $ takeExtension y
 
 -- | Derives a URL from a list of Pandoc Inline elements.
