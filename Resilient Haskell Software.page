@@ -13,4 +13,4 @@
 - Avoid binding to C++ software if possible. I once tried to cabalize Qthaskell, which binds to the QT GUI library. Apparently, you can only link to a C++ library after generating a C interface, and the procedure for this is non-portable, unreliable, and definitely not supported by Cabal.
 
 [^mark]: Mark Pilgrim, ["Freedom 0"](http://diveintomark.org/archives/2004/05/14/freedom-0); he is quoting/paraphrasing [Matthew Thomas](http://web.archive.org/web/20051107103030/http://mpt.phrasewise.com/2003/05/02)
-[^lhs]: For an explanation of this task, and how that monad stuff works, see [Run Length Encoding.lhs]()
+[^lhs]: For an explanation of this task, and how that monad stuff works, see [Run Length Encoding](haskell/Run Length Encoding)
