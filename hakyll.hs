@@ -10,6 +10,7 @@ import qualified Data.Map as M (fromList, lookup, Map)
 import Text.Hakyll
 import Text.Pandoc (defaultParserState, defaultWriterOptions, readMarkdown, processWith, writeHtmlString,
                     HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
+import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 main :: IO ()
 main = hakyll "http://gwern.net" $ do
@@ -44,9 +45,10 @@ page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionW
        total = writeHtmlString options . changeLinks . readMarkdown defaultParserState
 
        options = defaultWriterOptions{ writerStandalone = True,
-                                     writerTableOfContents=True,
+                                     writerTableOfContents = True,
                                      writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
-                                     writerHTMLMathMethod = Text.Pandoc.MathML Nothing}
+                                     writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
+                                     writerEmailObfuscation = NoObfuscation }
 
        changeLinks :: Pandoc -> Pandoc
        changeLinks = processWith (map (convertEmptyWikiLinks . convertInterwikiLinks))
