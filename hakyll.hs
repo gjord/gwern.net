@@ -57,7 +57,7 @@ convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (transform (inlinesToURL 
 convertEmptyWikiLinks (Link ref (y, x)) =  Link ref (transform y, x)
 convertEmptyWikiLinks x = x
 
-{- specification for 'transform': -}
+{- specification for 'transform':
 test :: Bool
 test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "sicp/Introduction" == "sicp/Introduction.html",
@@ -73,6 +73,7 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "N-back FAQ#hardcore" == "N-back FAQ.html#hardcore",
         transform "Redirect-bot.hs" == "Redirect-bot.hs",
         transform "docs/gwern.xml" == "docs/gwern.xml"]
+-}
 transform :: String -> String
 transform y = let extension = drop 1 $ takeExtension y in
              if
