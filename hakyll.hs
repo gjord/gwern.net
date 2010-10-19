@@ -4,7 +4,7 @@ import Data.List (elemIndex, isInfixOf, isPrefixOf, sort)
 import Data.Maybe (fromJust)
 import Network.URI (escapeURIString, isAllowedInURI, isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
-import System.FilePath (takeExtension)
+import System.FilePath (hasExtension, takeExtension)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
@@ -74,15 +74,21 @@ test = and [transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "Redirect-bot.hs" == "Redirect-bot.hs",
         transform "docs/gwern.xml" == "docs/gwern.xml"]
 transform :: String -> String
-transform y = if
-                (isURI y || length extension > 0 || "!" `isPrefixOf` y) &&
-                (extension `notElem` map show [(0 :: Int) .. 9])
-             then y 
-             else if  "#" `isInfixOf` y 
-                          then let (lnk,sctn) = splitAt (fromJust $ elemIndex '#' y) y
-                               in lnk ++ ".html" ++ sctn
-                          else y ++ ".html"
-                    where extension = drop 1 $ takeExtension y
+transform y = let extension = drop 1 $ takeExtension y in
+             if
+                (isURI y || length extension > 0) &&
+                hasExtension y
+             then if (extension `notElem` map show [(0 :: Int) .. 9])
+                  then y
+                  else  y ++ ".html"
+             else if ( "!" `isPrefixOf` y)
+                       then y
+                       else if ("#" `isPrefixOf` y)
+                            then y
+                            else if  "#" `isInfixOf` y
+                                 then let (lnk,sctn) = splitAt (fromJust $ elemIndex '#' y) y
+                                      in lnk ++ ".html" ++ sctn
+                                 else y ++ ".html"
 
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
