@@ -53,7 +53,7 @@ page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionW
 
 -- | Convert links with no URL to wikilinks.
 convertEmptyWikiLinks :: Inline -> Inline
-convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (inlinesToURL ref ++ ".html", "Go to wiki page")
+convertEmptyWikiLinks (Link ref ("", "")) =   Link ref (transform (inlinesToURL ref), "Go to wiki page")
 convertEmptyWikiLinks (Link ref (y, x)) =  Link ref (transform y, x)
 convertEmptyWikiLinks x = x
 
