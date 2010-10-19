@@ -21,7 +21,7 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
 
     Caio Marcelo de Oliveira Filho, mentored by Audrey Tang
 
-    **unsuccessful**. This ultimately resulted in the [HsJudy](!Hackage) library ('fast mutable collection' here meaning 'array'; see the [application](http://darcs.haskell.org/judy/SOC_APP.txt)). HsJudy was apparently used in Pugs at one time, but no more.
+    **unsuccessful**. This ultimately resulted in the [HsJudy](!Hackage) library ('fast mutable collection' here meaning 'array'). HsJudy was apparently used in Pugs at one time, but no more.
 
 - "Port Haddock to use GHC"
 
@@ -45,7 +45,7 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
 
     Jun Mukai, mentored by Shae Erisson
 
-    **Unsuccessful**. HaskellNet is dead, and nothing of it has propagated elsewhere. (I'm not entirely sure what happened with the HaskellNet code - I know of [two](http://darcs.haskell.org/SoC/haskellnet/) [repos](http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/), but that's about it.) Shae tells me that this poor uptake is probably due to a lack of advertising, and not any actual defect in the HaskellNet code.
+    **Unsuccessful**. HaskellNet is dead, and nothing of it has propagated elsewhere. (I'm not entirely sure what happened with the HaskellNet code - I know of [two](https://patch-tag.com/r/wrwills/HaskellNet/home) [repos](http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/), but that's about it.) Shae tells me that this poor uptake is probably due to a lack of advertising, and not any actual defect in the HaskellNet code.
 
 - "Language.C - a C parser written in Haskell"
 
@@ -153,7 +153,7 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
     by Jamie Brandon
 
-    **Successful**. GMap is on [Hackage](!Hackage), and I believe I've seen it used.
+    **Successful**. GMap is on [Hackage](http://hackage.haskell.org/packages/archive/pkg-list.html), and I believe I've seen it used.
 
 - "Haskell API Search"
 
@@ -254,7 +254,7 @@ The Immix GC strikes me as a very challenging summer project; a GC is one of the
 
 2 in particular concern me as potentially falling prey to sins #2 & 3: the GObject-binder tool, and the high-performance HTML library.
 
-Let's assume that the HTML library does wind up as being faster than existing libraries, and as useful - that compromises don't destroy its utility. Who will use it? It will almost surely have an API different enough from existing libraries that a conversion will be painful. There are roughly 42 users of the existing [xhtml](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/package/xhtml-3000.2.0.1)-generating library; will their authors wish to embrace a cutting-edge infant library? Is HTML generation even much of a bottleneck for them? (Speaking just for Gitit, Pandoc and its HTML generation are not usually a bottleneck.)
+Let's assume that the HTML library does wind up as being faster than existing libraries, and as useful - that compromises don't destroy its utility. Who will use it? It will almost surely have an API different enough from existing libraries that a conversion will be painful. There are roughly 42 users of the existing [xhtml](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/package/xhtml)-generating library; will their authors wish to embrace a cutting-edge infant library? Is HTML generation even much of a bottleneck for them? (Speaking just for Gitit, Pandoc and its HTML generation are not usually a bottleneck.)
 
 The case against the GObject project presents itself; GTK2Hs isn't as widely used as one would expect, and this seems to be due to the difficulty of installation and its general complexity. So there are few users of existing libraries; would there be more users for those libraries no one has bothered to bind nor yet clamored for? (This project might fall afoul of sin #1, but I do not know how difficult the GObject data is to interpret.)
 
