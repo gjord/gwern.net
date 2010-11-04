@@ -5,6 +5,7 @@ import Data.Maybe (fromJust)
 import Network.URI (escapeURIString, isAllowedInURI, isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.FilePath (hasExtension, takeExtension)
+import System.Directory (removeFile)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
@@ -12,25 +13,45 @@ import Text.Pandoc (defaultParserState, defaultWriterOptions, readMarkdown, proc
                     HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
+import Network.Gitit.Feed (filestoreToXmlFeed, FeedConfig(..))
+import Data.FileStore (darcsFileStore)
+
 main :: IO ()
-main = hakyll "http://gwern.net" $ do
+main = do
+    -- set up RSS
+    atom <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
+    let feed = "atom.xml"
+    writeFile feed atom
 
-    _ <- forkHakyllWait $ directory css "css"
-    mapM_ (directory static) ["images",
-                              "docs",
-                              "_darcs",
-                              "static",
-                              "/home/gwern/_darcs",
-                              "/home/gwern/bin/hcorpus",
-                              "home/gwern/bin/archiver"]
+    hakyll "http://gwern.net" $ do
 
-    pages <- liftM sort $ getRecursiveContents "./"
+        _ <- forkHakyllWait $ directory css "css"
+        mapM_ (directory static) ["_darcs",
+                                  "/home/gwern/_darcs",
+                                  "/home/gwern/bin/hcorpus",
+                                  "/home/gwern/bin/archiver",
+                                  "images",
+                                  "docs",
+                                  "static"]
+        static feed -- cp RSS in
 
-    let articles = havingExtension ".page" pages
-    let sources = havingExtension ".hs" pages
+        pages <- liftM sort $ getRecursiveContents "./"
+    
+        let articles = havingExtension ".page" pages
+        let sources = havingExtension ".hs" pages
 
-    -- TODO: make this faster - 'forkHakyll'?
-    mapM_ (render' ["templates/default.html"]) (articles++sources)
+        -- TODO: make this faster - 'forkHakyll'?
+        mapM_ (render' ["templates/default.html"]) (articles++sources)
+
+    -- back in the original RSS 'do'; we clean up after ourselves
+    removeFile feed 
+
+rssConfig :: FeedConfig
+rssConfig =  FeedConfig {
+                        fcTitle = "Joining Clouds"
+                        , fcBaseUrl  = "http://www.gwern.net"
+                        , fcFeedDays = 10
+                        }
 
 render' :: [FilePath] -> FilePath -> Hakyll ()
 render' templates = renderChain templates  . withSidebar . page
