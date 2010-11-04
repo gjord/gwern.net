@@ -84,21 +84,17 @@ test = and [
 -}
 transform :: String -> String
 transform y = let extension = drop 1 $ takeExtension y in
-              if 
-                 (length extension > 0) &&
-                 hasExtension y
-              then if extension `notElem` map show [(0 :: Int) .. 9]
-                   then y
-                   else  y ++ ".html"
-              else if ("!" `isPrefixOf` y) || ("#" `isPrefixOf` y)
-                     then y
-                     else
-                      if isURI y
-                       then y
-                       else if "#" `isInfixOf` y
-                            then let (lnk, sctn) = splitAt (fromJust $ elemIndex '#' y) y in
-                                  lnk ++ ".html" ++ sctn
-                            else y ++ ".html"
+               if (length extension > 0) &&hasExtension y
+               then if extension `notElem` map show [(0 :: Int) .. 9]
+                    then y
+                    else  y ++ ".html"
+               else if ("!" `isPrefixOf` y) || ("#" `isPrefixOf` y) || isURI y
+                      then y
+                      else
+                       if "#" `isInfixOf` y
+                       then let (lnk, sctn) = splitAt (fromJust $ elemIndex '#' y) y in
+                                lnk ++ ".html" ++ sctn
+                       else y ++ ".html"
 
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
