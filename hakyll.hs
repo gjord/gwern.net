@@ -73,6 +73,7 @@ test = and [
         transform "Terrorism is not about Terror#the-problem" == "Terrorism is not about Terror.html#the-problem",
         transform "doc/foo.pdf" == "doc/foo.pdf",
         transform "docs/gwern.xml" == "docs/gwern.xml",
+        transform "docs/gwern.xml.gz" == "docs/gwern.xml.gz",
         transform "http://en.wikipedia.org/wiki/Angst" == "http://en.wikipedia.org/wiki/Angst",
         transform "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement" == "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement",
         transform "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against" == "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against",
