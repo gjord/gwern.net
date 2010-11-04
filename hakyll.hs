@@ -36,7 +36,7 @@ render' :: [FilePath] -> FilePath -> Hakyll ()
 render' templates = renderChain templates  . withSidebar . page
  where
      withSidebar :: HakyllAction () Context -> HakyllAction () Context
-     withSidebar a = a `combine` createPage "sidebar.markdown"
+     withSidebar a = a `combine` createPage "templates/sidebar.markdown"
 
 page :: FilePath -> HakyllAction () Context
 page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionWith
