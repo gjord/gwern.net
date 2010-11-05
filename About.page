@@ -1,3 +1,15 @@
+# Technical aspects
+
+The source of this wiki is available at `darcs get --lazy http://www.gwern.net`
+
+It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
+
+To use Hakyll, you `cd` into the repository and do `runhaskell hakyll.hs build`, and Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index.html`.
+
+To use Gitit, you likewise `cd` but this time you run `gitit -f static/gwern.conf` and hopefully the configuration will pick up all resources and plugins; you then would do something like `firefox http://127.0.0.1:5001/`.
+
+(My Hakyll & Gitit setups assume you are running their latest version from HEAD. Nothing is guaranteed with older versions. Neither Hakyll nor Gitit was intended to be used with the same group of documents, so I have had to do a good deal of modification and extension.)
+
 # Content
 
 The content here varies wildly from philosophy to poetry to programming to prosaic FAQ; it is everything I felt worth writing for the past few years that didn't fit somewhere else like Wikipedia. I never expected to write so much, but I discovered that once I had the hammer, I began seeing nails everywhere. I believe that someone who has been well-educated will think of something worth reading at least once a week; to a surprising extent, this has been true (I have added roughly 130 documents to this repository over the past 3 years).
@@ -36,18 +48,6 @@ What is next? So far the pages will persist through time, and they will graduall
 One idea I am exploring is adding long-term predictions to pages like the predictions I have been recording on [PredictionBook.com](http://predictionbook.com/users/gwern). Many[^fiction] pages explicitly or implicitly make predictions about the future. As time passes, predictions would be validated or falsified, providing objective feedback on the ideas.
 
 For example, the Evangelion essay's paradigm implies many things about the 2 yet-unmade movies in _[Rebuild of Evangelion](!Wikipedia)_; [The Melancholy of Kyon]() is an extended prediction^[I already have 2 predictions registered about the thesis on PB.com: TODO] of future major plot developments in _[The Melancholy of Haruhi Suzumiya](!Wikipedia)_ series; [Haskell Summer of Code]() has suggestions about what makes good projects, which could be turned into predictions by applying them to predict success or failure when the next Summer of Code choices are announced. And so on.
-
-# Technical aspects
-
-The source of this wiki is available at `darcs get --lazy http://www.gwern.net`
-
-It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
-
-To use Hakyll, you `cd` into the repository and do `runhaskell hakyll.hs build`, and Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index.html`.
-
-To use Gitit, you likewise `cd` but this time you run `gitit -f static/gwern.conf` and hopefully the configuration will pick up all resources and plugins; you then would do something like `firefox http://127.0.0.1:5001/`.
-
-(My Hakyll & Gitit setups assume you are running their latest version from HEAD. Nothing is guaranteed with older versions. Neither Hakyll nor Gitit was intended to be used with the same group of documents, so I have had to do a good deal of modification and extension.)
 
 # License
 
