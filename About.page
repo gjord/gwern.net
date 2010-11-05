@@ -4,11 +4,15 @@ The content here varies wildly from philosophy to poetry to programming to prosa
 
 One of my personal interests is the idea of the [Long Now](!Wikipedia); what and how do you write a personal site with the long-term in mind? After all, we live most of our lives in the future, and the actuarial tables give me until the 2070s; what sort of writing could you create if you resolved to work on it (be it ever so rarely) for the next 60 years?
 
+## Long Site
+
 Merely keeping the site running is a challenge in and of itself, and leads to recommendations similar to that for [Resilient Haskell Software](): [FLOSS](!Wikipedia), standards, human-readability, staticness.
 
 Preserving the content is another challenge. Keeping the content in a [DVCS](!Wikipedia) like [darcs](!Wikipedia) buys one protection against file corruption and makes it much easier for other people (or programs) to mirror the content; regular backups and burning the occasional copy onto DVD help as well. I have taken additional measures: [WebCitation](!Wikipedia) has archived most pages and almost all external links, sometimes on multiple occasions; the Internet Archive hopefully is also archiving pages & external links^[One can't be sure; the IA is fed by [Alexa](!Wikipedia), and Alexa doesn't guarantee pages will be [spidered](!Wikipedia TODO) & preserved even if one goes through their request form.].
 
 One could continue in this vein, devising ever more powerful & robust storage methods (perhaps combine the DVCS with [forward error recovery](!Wikipedia) through [PAR2](!Wikipedia), a la [bup](TODO)), but what is one fill the methods with?
+
+## Long Content
 
 My current answer is that one uses such a framework to work on projects that are too big to tackle even with a month of free time; that knowing your site *will* survive for decades to come gives you the mental wherewithal to gather information for years. I have a few examples of this:
 
