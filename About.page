@@ -1,5 +1,15 @@
 # Technical aspects
 
+## Hosting
+
+<http://www.gwern.net> exists as a set of static CSS, HTML, JS, & PDF files served by [NearlyFreeSpeech.net](!Wikipedia) ([NFSN homepage](http://www.nearlyfreespeech.net).
+
+NFSN is an old niche hosting company; its specific niche is controversial material and activist-friendly price structure - that is, its libertarian owners cast a jaundiced eye on [takedown request](!Wikipedia)s, and pricing is [pay-as-you-go](!Wikipedia). I like the former aspect, but it's the latter that sold me on NFSN.
+
+Before I stumbled on NFSN^[Someone mentioned it to me in [#lesswrong](irc://freenode.net#lesswrong).], I was getting ready to pay $10-15 a month ($120 yearly) to a service like [Linode](!Wikipedia). I knew that Linode's offerings were overkill for my purposes since I didn't plan to run complex dynamic websites or even something like [Haskell.org](http://www.haskell.org) (which covers a number of services like mailing lists and darcs hosting), but I didn't know a good alternative. NFSN's price structure meant that I paid for actual usage rather than flat fees. I put in $32 to cover registering `gwern.net` until 2014, and then another $10 to cover bandwidth & storage price - and that has cost only a few cents so far. The $10 might well cover `gwern.net` for years to come, and that was what I had been willing to pay Linode for just a month! (Quite a [consumer surplus](!Wikipedia).)
+
+## Source
+
 The source of this wiki is available at `darcs get --lazy http://www.gwern.net`
 
 It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
