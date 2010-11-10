@@ -4,7 +4,7 @@ import Data.List (elemIndex, isInfixOf, isPrefixOf, sort)
 import Data.Maybe (fromJust)
 import Network.URI (escapeURIString, isAllowedInURI, isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
-import System.FilePath (hasExtension, takeExtension)
+import System.FilePath (hasExtension, takeExtension, takeBaseName)
 import System.Directory (removeFile)
 import qualified Data.Map as M (fromList, lookup, Map)
 
@@ -60,7 +60,7 @@ render' templates = renderChain templates  . withSidebar . page
      withSidebar a = a `combine` createPage "templates/sidebar.markdown"
 
 page :: FilePath -> HakyllAction () Context
-page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionWith
+page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionWith >>> renderValue "path" "title" takeBaseName
    where
        total :: String -> String
        total = writeHtmlString options . changeLinks . readMarkdown defaultParserState
