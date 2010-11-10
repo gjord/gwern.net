@@ -12,7 +12,7 @@ Before I stumbled on NFSN^[Someone mentioned it to me in [#lesswrong](irc://free
 
 The source of this wiki is available at `darcs get --lazy http://www.gwern.net`
 
-It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
+It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit. The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/), math is written in simple [LaTeX](!Wikipedia) & compiled to [MathML](!Wikipedia) (which a JS script forces browsers to render), and the comments are outsourced to [Disqus](!Wikipedia)^[Since I am not interested in writing a dynamic system to do it, and their anti-spam techniques are much better than mine.].
 
 To use Hakyll, you `cd` into the repository and do `runhaskell hakyll.hs build`, and Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index.html`.
 
