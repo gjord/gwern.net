@@ -2,7 +2,8 @@ import Control.Arrow (arr, (>>>), (&&&))
 import Control.Monad (liftM)
 import Data.List (elemIndex, isInfixOf, isPrefixOf, sort)
 import Data.Maybe (fromJust)
-import Network.URI (escapeURIString, isAllowedInURI, isURI, unEscapeString, isUnescapedInURI)
+import Network.HTTP (urlEncode)
+import Network.URI (isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.FilePath (hasExtension, takeExtension)
 import System.Directory (removeFile)
@@ -104,6 +105,7 @@ test = and [
         transform "sicp/Introduction" == "sicp/Introduction.html"
         ]
 -}
+
 transform :: String -> String
 transform y = let extension = drop 1 $ takeExtension y in
                if (length extension > 0) &&hasExtension y
@@ -136,11 +138,12 @@ convertInterwikiLinks (Link ref (interwiki, article)) =
     ('!':interwiki') ->
         case M.lookup interwiki' interwikiMap of
                 Just url  -> case article of
-                                  "" -> Link ref (url ++ inlinesToURL ref, summary $ unEscapeString $ inlinesToURL ref)
-                                  _  -> Link ref (interwikiurl article url, summary article)
+                                  "" -> Link ref (url `interwikiurl` (inlinesToString ref), summary $ unEscapeString $ inlinesToString ref)
+                                  _  -> Link ref (url `interwikiurl` article, summary article)
                 Nothing -> Link ref (interwiki, article)
             where -- 'http://starwars.wikia.com/wiki/Emperor_Palpatine'
-                  interwikiurl a u = escapeURIString isAllowedInURI $ u ++ a
+                  -- TODO: `urlEncode` breaks Unicode strings like "Shōtetsu"!
+                  interwikiurl u a = u ++ urlEncode a
                   -- 'Wookieepedia: Emperor Palpatine'
                   summary a = interwiki' ++ ": " ++ a
     _ -> Link ref (interwiki, article)
