@@ -122,3 +122,37 @@ Now we are asking 'what fraction of all these Turing machines will halt?'
 However, this is asking 'what is Chaitin's constant for this rewritten set of Turing machines?' and that is uncomputable!
 
 Since Turing machine-based agents are a subset of all agents that might try to employ Pascal's Mugging (even if we won't grant that agents must be Turing machines), the probability is at least partially uncomputable. A decision procedure which entails uncomputability is unacceptable, so we reject giving the probability in advance, and so our probability must be contingent on the offer's details (like its payoff).
+
+----
+
+continuing above:
+
+Last I emailed you, I had an intuition that a linear relationship was best but no real justification. I think I have one now that goes like this:
+
+Inasmuch as the mugger could be the robotic instantiation of an arbitrary Turing Machine, making predictions about what the mugger will output ('do') in response to your input is tantamount to solving the Halting Problem (see Rice's theorem). Trying to make a prediction about the fraction of all muggers which will welsh on the deal is like trying to compute Chaitin's omega; if you only compute part of it, you will make mistakes when the offered reward is very close to the right value to make the expected utility positive, but to compute all of it is impossible. This is true for the same reasons that most universal priors (like for Solomonoff induction) are uncomputable.
+
+So, it is impossible to be an optimal agent when being mugged. An agent must have an erroneous prior and make mistakes. The question becomes what kind of prior and what kind of mistakes should the agent make?
+
+We can look at our prior as a monotonic function on a Cartesian graph with the y-axis for offered-reward and the x-axis for the prior of said reward; for example:
+
+1. the graph might be a simple inverse relationship where prior is inverse to reward; small increases cause small decreases and large increases large decreases
+2. it might look more like an exponential where a large increase in reward leads to only a small decrease in the prior probability
+3. or it might look logarithmic where small reward increases lead to a large decrease the prior probability.
+
+These three general classes are all there are. (small/small; large/small; small/large.)
+
+Suppose we make our agent with strategy #2. The mugger presents the agent with a mugging, is turned down, and simply throws in a few exponentials and succeeds. The prior doesn't decrease *as* fast as the reward increases, so a patient mugger will always win. And this is true even if the agent updates the prior probability so all the previous deals are now considered negative expected utility - the mugger comes back and simply escalates the offer!
+
+Suppose we make our agent have #3. A mugger presents our agent with a mugging, but makes a mistake and offers too high a reward. The agent instantly rejects it because the large reward incurs a massive penalty. So far so good. But the mugger reflects, and decides to break the offer up into 1 billion smaller offers summing to the same reward. Since each of the 1 billion muggings is for a much smaller reward, they incur little penalty and the agent accepts them all and is thoroughly mugged. Oops.
+
+We could try to repair #3 by translating the curve leftwards, if you will - reducing the prior probability down to something safe even at very small values. For example, if a #3 agent would take a dollar in exchange for a penny and its prior is 2%, it can be mugged, and one would repair by forcing the prior down to <1% so now it is either indifferent or rejects outright the mugging. But alas, as most _ad hoc_ interventions do, this doesn't fix the problem entirely. Now our mugger can simply make 100 billion offers for slivers of a penny rather than dollars. Each deal will seem like a good deal, yet add up to ruin. Not a good system. Worse, any adjustment to the prior based on updates from the mugger's failure to deliver would seem to leave this hole intact! Suppose they run through the 100 billion offers and the next day the mugger is nowhere to be seen. So the agent cuts the prior in half. Now the mugger can come back and make offers for half slivers of pennies...
+
+If our agent is a #1 agent, matters are a little different.
+
+A #1 agent does not have the disaggregation problem of a #3 agent; whether it's one big offer or a billion small offers, the expected utilities sum the same no matter how they are divvied up.
+
+Does it have the escalation problem of a #2 agent? It would seem not to; the question of whether it would take a large reward is the same as the question of whether it would take the small reward - would it accept *any* mugging? It all depends on how far leftwards the line starts off, on whether the equation looks like $y \times x = 1$ or $y \times x = 0.9$ or $y \times x = 1.1$. The degree that the constant differs from 1 is the degree to which our agent is prejudiced towards or against mugging. If the constant is 0.9 then it will accept no muggings, of course, since all rewards come pre-assessed as negative-sum offers; if the constant is 1.1, then vice versa.
+
+So with a bad constant, our #1 agent could be even worse than a #2 or #3 agent! But actually, it's better. It will make errors and accept some muggings, but each mugging the agent will learn. Each time the mugger fails to deliver, the constant will shrink until it reaches the magic 1 and then the agent will start rejecting muggings. Its losses are finite and limited by how large the constant starts off with, so it doesn't matter what that constant is. It could be lower than 1, since our agent could learn to increase its constant as well as decrease; if the mugger really is a Dark Lord of the Matrix, the mugger simply has to offer a little proof and our agent will be happy to transact with him.
+
+Considering all the possibilities, the agent with the fewest problems is #1, and we have our answer to how to avoid Pascal's Mugging: choose a prior which decreases in simple proportion to the offer.
