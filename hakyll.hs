@@ -83,29 +83,28 @@ convertEmptyWikiLinks x = x
 
 {- specification for 'transform':
 test :: Bool
-test = and [
-        transform "!Hoogle 'foo'" == "!Hoogle 'foo'",
-        transform "!Wikipedia 'Multivitamin#Evidence against'" == "!Wikipedia 'Multivitamin#Evidence against'",
-        transform "!Wikipedia 'foo'" == "!Wikipedia 'foo'",
-        transform "#Benefits" == "#Benefits",
-        transform "Chernoff Faces" == "Chernoff Faces.html",
-        transform "In Defense of Inclusionism.html" == "In Defense of Inclusionism.html",
-        transform "N-back FAQ#hardcore" == "N-back FAQ.html#hardcore",
-        transform "Redirect-bot.hs" == "Redirect-bot.hs",
-        transform "Terrorism is not about Terror#the-problem" == "Terrorism is not about Terror.html#the-problem",
-        transform "doc/foo.pdf" == "doc/foo.pdf",
-        transform "docs/gwern.xml" == "docs/gwern.xml",
-        transform "docs/gwern.xml.gz" == "docs/gwern.xml.gz",
-        transform "http://en.wikipedia.org/wiki/Angst" == "http://en.wikipedia.org/wiki/Angst",
-        transform "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement" == "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement",
-        transform "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against" == "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against",
-        transform "http://www.google.com" == "http://www.google.com",
-        transform "http://www.gwern.net/N-back FAQ.html#fn1" == "http://www.gwern.net/N-back FAQ.html#fn1",
-        transform "sicp/Chapter 1.1" == "sicp/Chapter 1.1.html",
-        transform "sicp/Introduction" == "sicp/Introduction.html"
+test = all (\(a,b) -> transform a == b) [
+        ("!Hoogle 'foo'", "!Hoogle 'foo'"),
+        ("!Wikipedia 'Multivitamin#Evidence against'", "!Wikipedia 'Multivitamin#Evidence against'"),
+        ("!Wikipedia 'foo'", "!Wikipedia 'foo'"),
+        ("#Benefits", "#Benefits"),
+        ("Chernoff Faces", "Chernoff Faces.html"),
+        ("In Defense of Inclusionism.html", "In Defense of Inclusionism.html"),
+        ("N-back FAQ#hardcore", "N-back FAQ.html#hardcore"),
+        ("Redirect-bot.hs", "Redirect-bot.hs"),
+        ("Terrorism is not about Terror#the-problem", "Terrorism is not about Terror.html#the-problem"),
+        ("doc/foo.pdf", "doc/foo.pdf"),
+        ("docs/gwern.xml", "docs/gwern.xml"),
+        ("docs/gwern.xml.gz", "docs/gwern.xml.gz"),
+        ("http://en.wikipedia.org/wiki/Angst", "http://en.wikipedia.org/wiki/Angst"),
+        ("http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement", "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement"),
+        ("http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against", "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against"),
+        ("http://www.google.com", "http://www.google.com"),
+        ("http://www.gwern.net/N-back FAQ.html#fn1", "http://www.gwern.net/N-back FAQ.html#fn1"),
+        ("sicp/Chapter 1.1", "sicp/Chapter 1.1.html"),
+        ("sicp/Introduction", "sicp/Introduction.html")
         ]
 -}
-
 transform :: String -> String
 transform y = let extension = drop 1 $ takeExtension y in
                if (length extension > 0) &&hasExtension y
