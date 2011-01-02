@@ -10,7 +10,7 @@ import System.Directory (removeFile)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
-import Text.Pandoc (defaultParserState, defaultWriterOptions, readMarkdown, processWith, writeHtmlString,
+import Text.Pandoc (bottomUp, defaultParserState, defaultWriterOptions, readMarkdown, writeHtmlString,
                     HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
@@ -73,7 +73,7 @@ page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionW
                                      writerEmailObfuscation = NoObfuscation }
 
        changeLinks :: Pandoc -> Pandoc
-       changeLinks = processWith (map (convertEmptyWikiLinks . convertInterwikiLinks))
+       changeLinks = bottomUp (map (convertEmptyWikiLinks . convertInterwikiLinks))
 
 -- | Convert links with no URL to wikilinks.
 convertEmptyWikiLinks :: Inline -> Inline
