@@ -28,7 +28,6 @@ main = do
 
         _ <- forkHakyllWait $ directory css "css"
         mapM_ (directory static) ["_darcs",
-                                  "/home/gwern/_darcs",
                                   "/home/gwern/bin/hcorpus",
                                   "/home/gwern/bin/archiver",
                                   "images",
