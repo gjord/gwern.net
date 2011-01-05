@@ -15,6 +15,7 @@ A graphic might help; imagine here one can afford to review a given piece of inf
 ![Massed versus spaced](images/spaced-repetition-forgetting-curves.png)
 
 ## If you're so good...
+
 Of course, the latter strategy (cramming) is precisely what students do. They cram the night before the test, and a month later can't remember anything. So why do people do it? (I'm not innocent myself.)
 
 Because it does work, sort of. Cramming is a trade-off: you trade a strong memory now for no memory later. And tests are usually of all the new material, with occasional old questions, so this strategy pays off! That's the damnable thing about it - its memory longevity & quality are, in sum, less than that of spaced repetition, but cramming delivers its goods *now*. So cramming is a rational, if short-sighted, response.
@@ -24,17 +25,48 @@ That explains why it's an uncommon studying technique: the pay-off is long-term 
 The paradox is resolved by letting a computer handle all the calculations. We can thank Ebbinghaus for investigating in such tedious detail than we can, in fact, program a computer to calculate both the forgetting curve and optimal set of reviews^["Make no mistake about it: Computers process numbers - not symbols. We measure our understanding (and control) by the extent to which we can arithmetize an activity." Perlis, _ibid._]. This is the insight behind [spaced repetition](!Wikipedia) software: ask the same question over and over, but over increasing spans of time. You start with asking it once every few days, and soon the human remembers it reasonably well. Then you expand intervals out to weeks, then months, and then years. Once the memory is formed and dispatched to long-term memory, it needs but occasional exercise to remain hale and hearty^[this exponential expansion is how a SR program can handle continual input of cards: obviously if cards were scheduled at fixed intervals, like every other day, review would soon become quite impossible - I have >8000 items in Mnemosyne, but I don't have time to review 4500 questions a day!] - I remember well the large dinosaurs made of cardboard for my 4^th^ or 5^th^ birthday, or the tunnel made out of boxes, even though I recollect them once or twice a year at most.
 
 ## Using it
+
 One doesn't need to use SuperMemo, of course; there are plenty of free alternatives. I like [Mnemosyne](!Wikipedia "Mnemosyne (software)") ([homepage](http://www.mnemosyne-proj.org/)) myself - [Free](!Wikipedia "Free software"), packaged for [Ubuntu Linux](!Wikipedia), and quite easy to use.
 
 OK, but what does one do with it? It's a surprisingly difficult question, actually. It's akin to "the  tyranny of the blank page" (or blank wiki); now that I have all this power - a mechanical golem that will never forget and never let me forget whatever I chose to - what do I choose to remember?
 
+
 ### Problems
+
 One common experience of new users to spaced repetition is to add too much stuff - trivialities and things they don't really care about. But they soon learn the curse of [Borges's](!Wikipedia "Jorge Luis Borges") [Funes the Memorious](!Wikipedia). If they don't actually want to learn the material they put in, they will soon stop doing the daily reviews - which will cause reviews to pile up, which will be further discouraging, and so they stop. At least with physical fitness there isn't a precisely dismaying number indicating how far behind you are! But if you have too little at the beginning, you'll have few repetitions per day, and you'll see no obvious benefit from the technique itself - it looks just like boring flash card review.
 
 ### What to add
+
 The most difficult task, beyond that of just persisting until the benefits do become obvious, is deciding what's valuable enough to add in. In a 3 year period, one can expect to spend "30-40 seconds"^[["SuperMemo as a new tool increasing the productivity of a programmer. A case study: programming in Object Windows"](http://www.supermemo.com/articles/programming.htm)] on any given item. Over the long term, we might as well call it 5 minutes to learn an item. So that's the informal rule of thumb: if over your lifetime you will spend more than 5 minutes trying to re-find or look something up or will lose more than 5 minutes as a result of not knowing something, then it's worthwhile to add it in. This is the line dividing trivia from useful data.[^memorizing]
 
 I find one of the best uses for Mnemosyne is, besides adding questions relating to class material, to add in words from [A Word A Day](!Wikipedia)^[which neatly addresses the issue of such mailing lists being useless ('who learns a word after just one exposure?').] and [Wiktionary](!Wikipedia), memorable quotes I see^[Mnemosyne in this case constitutes both a way to learn the quotes so I can use them, and a [waste book](!Wikipedia "Notebook (style)"); just the other day I had 3 or 4 apposite quotes for an essay because I had entered them into Mnemosyne months or years ago], personal information such as birthdays ^[I could never remember my license plate number until I entered 3 or 4 questions [anent](http://www.google.com/search?q=define%3Aanent)'t into Mnemosyne.], and so on. Quotidian uses, but valuable to me.
+
+#### Prospects: extended flashcards
+
+Let's step back for a moment. What are all our flashcards, small and large, doing for us? Why do I have a pair of flashcards for the word 'anent' among many others? I can just look it up.
+
+But look ups take time compared to already knowing something. (Let's ignore the previously discussed 5 minute rule.) If we think about this abstractly in a computer science context, we might recognize it as an old concept in algorithms & optimization discussions - the [space-time tradeoff](!Wikipedia). We trade off lookup time against limited skull space.
+
+The most obvious example is the sort of factual data already given as examples - we might one day need to know the average annual rainfall in Honolulu or Austin, but it would require too much space to memorize such data for all capitals. There are millions of English words, but in practice any more than 100,000 is excessive.
+
+Less obvious is a sort of procedural knowledge. An extreme form of space-time tradeoffs in computers is when a computation is replaced by pre-calculated constants. We could take a math [function](!Wikipedia "Function (mathematics)") and calculate its output for each possible input. Usually such a [lookup table](!Wikipedia) of input to output is really large. Think about how many entries would be in such a table for all possible integer multiplications between 1 and 1 billion. But sometimes the table is really small (like binary Boolean functions) or small (like trigonometric tables) or very large but still useful ([rainbow table](!Wikipedia)s usually start in the gigabytes and easily reach terabytes).
+
+Given an infinitely large lookup table, we could replace *completely* the skill of, say, addition or multiplication by the lookup table. No computation. The space-time tradeoff taken to the extreme of the space side of the continuum. (We could go the other way and define multiplication or addition as the very slow computation which doesn't know any specifics like the [multiplication table](!Wikipedia) - as if every time you wanted to add $2+2$ you had to count on 4 fingers.)
+
+So suppose we were children who wanted to learn multiplication. SRS and Mnemosyne can't help because multiplication is not a specific factoid? The space-time tradeoff shows us that we can de-proceduralize multiplication and turn it partly into factoids. It wouldn't be hard for us to write a quick script or macro to generate, say, 500 random cards which ask us to multiply AB by XY, and import them to Mnemosyne.^[Presumably one would immediately give them all some high grade like 5 to avoid suddenly having a daily load of 500 cards for a while.]
+
+After all, which is your mind going to do - get good at multiplying 2 numbers (generate on-demand), or memorize 500 different multiplication problems ([memoize](!Wikipedia))? From my experience with multiple subtle variants on a card, the mind gives up after just a few and falls back on a problem-solving approach
+- which is exactly what one wants to exercise, in this case. Congratulations; you have done the impossible.
+
+From a software engineering point of view, we might want to modify or improve the cards, and 500 snippets of text would be a tad hard to update. So coolest would be a 'dynamic card'. Add a markup type like `<eval src="">`  , and then Mnemosyne feeds the `src` argument straight into the Python interpreter, which returns a [tuple](!Wikipedia) of the question text and the answer text. The question text is displayed to the user as usual, the user thinks, requests the answer, and grades himself.
+
+So for multiplication, the dynamic card would get 2 random integers, print a question like 'x * y = ?' and then print x*y as the answer. Every so often you would get a new multiplication question, and as you get better at multiplication, you see it less often - exactly as you should.
+
+This approach generalizes to anything you can generate random problems of or have large databases of examples of. For example, maybe you are studying Go and are interested in learning [life-and-death positions](!Wikipedia "Life and death"). Those are things that can be generated by computer Go programs, or fetched from places like <http://www.goproblems.com/>. For even more examples, Go is rotationally invariant - the best move remains the same regardless of which way the board is oriented and since there is no canonical direction for the board (like in chess) a good player ought to be able to play the same no matter how the board looks - so each specific example can be mirrored in 3 other ways. Or one could test one's ability to 'read' a board by writing a dynamic card which takes each example board/problem and adds some random pieces as long as some go-playing program like [GNU Go](!Wikipedia) says the best move hasn't changed because of the added noise.
+
+One could learn an awful lot of things this way. Programming languages could be learned this way - someone learning [Haskell](!Wikipedia "Haskell (programming language)") could take all the functions listed in the Prelude or his Haskell textbook, and ask [QuickCheck](!Wikipedia) to generate random arguments for the functions and ask the [GHC](!Wikipedia "Glasgow Haskell Compiler") interpreter `ghci` what the function and its arguments evaluate to. Games other than go, like chess. A fair bit of mathematics. If the dynamic card has Internet access, it can pull down fresh questions from an [RSS feed](!Wikipedia) or just a website; this functionality could be quite useful in a foreign language learning context with every day bringing a fresh sentence to translate or another exercise.
+
+Even though these things seem like 'skills' and not 'data'!
 
 ### The workload
 
