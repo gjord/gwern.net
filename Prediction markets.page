@@ -4,7 +4,7 @@ Everything old is new again. Wikipedia is the collaboration of amateur gentlemen
 
 Wikipedia admirably summarizes the basic idea:
 
-> "Prediction markets ... are speculative markets created for the purpose of making predictions. Assets are created whose final cash value is tied to a particular event (e.g., will the next US president be a Republican) or parameter (e.g., total sales next quarter). The *current market prices can be interpreted as predictions of the probability of the event or the [expected value](!Wikipedia)* of the parameter. Prediction markets are thus structured as betting exchanges, without any risk for the bookmaker."
+> "Prediction markets...are speculative markets created for the purpose of making predictions. Assets are created whose final cash value is tied to a particular event (e.g., will the next US president be a Republican) or parameter (e.g., total sales next quarter). The *current market prices can be interpreted as predictions of the probability of the event or the [expected value](!Wikipedia)* of the parameter. Prediction markets are thus structured as betting exchanges, without any risk for the bookmaker."
 
 Emphasis is added on the most important characteristic of a prediction market, the way in which it differs from regular stock markets.
 
@@ -26,7 +26,62 @@ Prediction markets offer a way to cut through all the confounding effects of pro
 
 One will never get a faithful summation of all the information about Obama scattered among hundreds or thousands of traders if one places multiple difficult barriers in front of a trader who wishes to turn his superior knowledge or analysis into money.
 
-Or here's another example: many of the early uses of prediction markets have been inside corporations, betting on metrics like quarterly sales. Now, all of those metrics are important and will in the long run affect stock prices or dividends. But what employee working down in the R&D department is going to say 'People are too optimistic about next year's sales, the prototypes just aren't working as well as they would need to' and go short the company's stock? No one, of course. A small difference in their assessment from everyone else's is unlikely to make a noticeable price difference, even if the transaction costs of shorting didn't bar it. And yet, the company needs to know what this employee knows.
+Or here's another example: many of the early uses of prediction markets have been inside corporations, betting on metrics like quarterly sales. Now, all of those metrics are important and will in the long run affect stock prices or dividends. But what employee working down in the R&D department is going to say 'People are too optimistic about next year's sales, the prototypes just aren't working as well as they would need to' and go short the company's stock? No one, of course. A small difference in their assessment from everyone else's is unlikely to make a noticeable price difference, even if the transaction costs of shorting didn't bar it. And yet, the company wants to know what this employee knows.
+
+## How much to bet
+
+There's something of an [efficient market](!Wikipedia) issue with prediction markets, specifically a [no-trade theorem](!Wikipedia). Given that unlike the regular stock market, prediction markets are necessarily [zero-sum](!Wikipedia)^[Or negative-sum, when you consider the costs of running the prediction market and the various fees that might be assessed on participants.], and so lots of traders are going to be net losers. If you don't have any particular reason to think you are one of the wolves canny enough to make money off the sheep, then you're one of the sheep, and why trade at all? (I understand poker players have a saying - if you can't spot the fish at the table, you're the fish.)
+
+So, the bad-and-self-aware won't participate. If you are trading in a prediction market, you are either good-and-aware or good-and-ignorant or bad-but-ignorant. Ironically, the latter two can't tell whether they are the first group or not. It reminds me of the [smoking lesion](http://wiki.lesswrong.com/wiki/Smoking_lesion) puzzle in [decision theory](!Wikipedia): you may have many [cognitive bias](!Wikipedia)es such as the [overconfidence effect](!Wikipedia) (the lesion), and they may cause you to fail or succeed on the prediction market (get cancer or not) and also want to participate therein. What do you do?
+
+Best of course is to test for the lesion directly - to test whether our predictions are [calibrated](!Wikipedia "Calibration (statistics)")^[See also the [LessWrong articles](http://lesswrong.com/r/lesswrong/tag/calibration/) on the topic.], whether events we confidently predict at 0% do in fact never happen and so on. We can do this sort of testing with the relevant biases - just knowing about them and introspecting about one's predictions can improve them. Coming up with the precise reasons one is making a prediction can also help with the [hindsight bias](!Wikipedia)^[See ["Eliminating the hindsight bias"](http://dl.dropbox.com/u/5317066/Arkes%20et%20al--Eliminating%20the%20Hindsight%20Bias.pdf), Arkes 1988.], which is important to figuring out how well you will do in the future. We can quickly test calibration using our partial ignorance about many factual questions, eg. the links in ["Test Your Calibration!"](http://lesswrong.com/lw/1f8/test_your_calibration/). [My recent practice](http://predictionbook.com/users/gwern) with hundreds of real-world predictions on [PredictionBook.com](http://predictionbook.com/) has surely helped my calibration.
+
+So, how much better are you than your competing traders? What is your edge? This, believe it or not, is pretty much all you need to know to know how much to bet on any contract. The exact fraction of your portfolio to bet given a particular edge is defined by the [Kelly criterion](!Wikipedia) which gives the greatest possible expected utility of [your growth rate](http://r6.ca/blog/20070816T193609Z.html). (But you need to be psychologically tough[^wp] to use it lest you begin to [play irrationally](!Wikipedia "Tilt (poker)"): it's not a [risk averse](!Wikipedia) strategy.)
+
+[^wp]: Wikipedia's [criticism section](!Wikipedia "Kelly criterion#Reasons to bet less than Kelly") remarks that "Kelly betting leads to highly volatile short-term outcomes which many people find unpleasant, even if they believe they will do well in the end."
+
+The formula is:
+
+$x = \frac{o \times e - (1 - e)}{o}$
+
+- _o_ = odds
+- _e_ = your edge
+- _x_ = the fraction to invest
+
+To quote the Wikipedia explanation:
+
+> "As an example, if a gamble has a 60% chance of winning ($e = 0.60$), but the gambler receives 1-to-1 odds on a winning bet ($o = 1$), then the gambler should bet 20% of the bankroll at each opportunity ($x = 0.20$), in order to maximize the long-run growth rate of the bankroll."
+
+So, suppose the President's re-election contract was floating at 50%, but based on his performance and past incumbent re-election rates, you decide the true odds are 60%; you can buy the contract at 50% and if you hold until the election and are right, you get back double your money, so the odds are 1:1. The filled-in equation looks like
+
+1. $x = \frac{1 \times 0.6 - (1 - 0.6)}{1}$
+2. $x = 1 \times 0.6 - (1 - 0.6)$
+3. $x = 0.6 - (1 - 0.6)$
+4. $x = 0.6 - 0.4$
+5. $x = 0.2$
+
+Hence, you ought to put 20% of your portfolio into buying the President's contract.
+
+It's not too hard to apply this to more complex situations. Suppose the president were at, say, 10% but you are convinced the unfortunate equine sex scandal will soon be forgotten and the electorate will properly appreciate _el Presidente_ for winning World War III by making his true re-election odds 80%. You can buy in at 10% and you resolve to sell out at 80%, for a reward of 70% or 7 times your initial stake (7:1). And we'll again say you're right 60% of the time. So your Kelly criterion looks like:
+
+1. $x = \frac{7 \times 0.6 - (1 - 0.6)}{7}$
+2. $x = \frac{(7 \times 0.6) - 0.4}{7}$
+3. $x = \frac{4.2 - 0.4}{7}$
+4. $x = \frac{3.8}{7}$
+5. $x = 0.54$
+
+Wow! We're supposed to bet more than half our portfolio despite knowing we'll lose the bet 40% of the time? Well, yes. With an upside like 7x, we can lose several bets in a row and eventually make up our loss. And if we win the first time, we just won huge.
+
+It goes both ways, of course. If we have a market/true-odds of 80%/90% and we do the same thing, we have a return of 12.5% (9/8) rather than 100%, and for that little return ought to risk only:
+
+1. $x = \frac{0.875 \times 0.6 - (1 - 0.6)}{0.875}$
+2. $x = \frac{0.875 - 0.4}{0.875}$
+3. $x = \frac{0.125}{0.875}$
+4. $x = 0.142856$
+
+As one would expect, with a smaller reward but equal risk compared to our first example, the KC recommends a smaller than 0.2 fraction invested.
+
+If one doesn't enjoy calculating the KC, one could always write a program to do so; Russell O'Connor has a nice Haskell blog post on ["Implementing the Kelly Criterion"](http://r6.ca/blog/20070820T175938Z.html) (who also has an interesting post on the [KC and the lottery](http://r6.ca/blog/20090522T015739Z.html).)
 
 ## Specific markets
 
@@ -83,7 +138,7 @@ The key to Republican betting was figuring out who was hopeless, and work from t
 
 This didn't leave very many candidates for consideration. By this process of elimination, I was in fact left with only John McCain as a serious Republican contender. If you remember the early days, this was in fact a very strange result to reach: John McCain appeared tired, a beaten man from 2004 making one last _pro forma_ try, his campaign inept and riven by infighting, and he was just in general - old, old, old.
 
-But hey, his shares were trading in the 5-15% range. They were the best bargain going in the market. I held them for a long time and  ultimately would sell them at 94-99¢ for a roughly 900% gain. (I sold them instead of waiting for the Republican convention because I was forgoing minimal gains, and I was concerned by reports on his health.)
+But hey, his shares were trading in the 5-15% range. They were the best bargain going in the market. I held them for a long time and ultimately would sell them at 94-99¢ for a roughly 900% gain. (I sold them instead of waiting for the Republican convention because I was forgoing minimal gains, and I was concerned by reports on his health.)
 
 ###### The Democrats
 
@@ -269,7 +324,7 @@ I wanted to sell short some of the more crazy probabilities such as on Japan goi
 
 My first trade was to sell short the [Intrade contract](https://www.intrade.com/jsp/intrade/common/c_cd.jsp?conDetailID=702407&z=1285870999458) on [California Proposition 19 (2010)](!Wikipedia), which would legalize non-medical marijuana possession.I reasoned that California recently banned gay marriage at the polls, and medical marijuana is well-known as a joke (lessening the incentive to pass Prop 19), and that its true probability of passing was more like 30% - significantly below its current price. The contract would expire in just 2 months, making it even more attractive.
 
-It was at 49 when I shorted it. 2 days later, the price had increased to 53.3, and on 4 October, it had spiked all the way to 76%. I began to seriously consider how confident I was in my prediction, and whether I was faced with a choice between losing the full $40 I had invested or buying shares at 76% (to fulfill my shorting contracts) and eating the loss of ~$20. I meditated, and reasoned that there wasn't *that* much liquidity and I had found no germane information online (like a poll registering strong public support), and decided to hold onto my shares. As of 27 October, the price had plummeted all the way to 27%, and continued to bounce around the 25-35% price range. I had at the beginning decided that the true probability was in the 30% decile, and if anything, it was now *underpriced*. Given that, I was running a risk holding onto my shorts. So on 30 October, I bought 10 shares at 26%, closing out my shorts, and netting me $75.83, for a return of $25.83, or 50% over the month I held it.
+It was at 49 when I shorted it. I put around 20% of my portfolio (or ~$40) after consulting with the [Kelly criterion](#how-much-to-bet). 2 days later, the price had increased to 53.3, and on 4 October, it had spiked all the way to 76%. I began to seriously consider how confident I was in my prediction, and whether I was faced with a choice between losing the full $40 I had invested or buying shares at 76% (to fulfill my shorting contracts) and eating the loss of ~$20. I meditated, and reasoned that there wasn't *that* much liquidity and I had found no germane information online (like a poll registering strong public support), and decided to hold onto my shares. As of 27 October, the price had plummeted all the way to 27%, and continued to bounce around the 25-35% price range. I had at the beginning decided that the true probability was in the 30% decile, and if anything, it was now *underpriced*. Given that, I was running a risk holding onto my shorts. So on 30 October, I bought 10 shares at 26%, closing out my shorts, and netting me $75.83, for a return of $25.83, or 50% over the month I held it.
 
 My second trade dipped into the highly liquid 2012 US presidential elections. The partisan contracts were trading at ~36% for the Republicans and ~73% for the [Democrats](https://www.intrade.com/jsp/intrade/common/c_cd.jsp?conDetailID=639648&z=1285871684768). I would agree that the true odds are >50% for the Democrats since presidents are usually re-elected and the Republicans have few good-looking candidates compared to Obama, who has accomplished quite a bit in office. However, I think 73% is overstated, and further, that the markets always panic during an election and squish the ratio to around 50:50. So I sold Democrat and bough Republican. (I wound up purchasing more Republican contracts than selling Democrat contracts because of the aforementioned margin issues.)
 
