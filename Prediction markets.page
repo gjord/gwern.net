@@ -60,7 +60,7 @@ So, suppose the President's re-election contract was floating at 50%, but based 
 4. $x = 0.6 - 0.4$
 5. $x = 0.2$
 
-Hence, you ought to put 20% of your portfolio into buying the President's contract.
+Hence, you ought to put 20% of your portfolio into buying the President's contract. (If we assume that all bets are double-or-nothing, Wikipedia tells us it simplifies to $x = (2 \times p) - 1$, which in this example would be $(2 \times 0.6) - 1$ = $1.2 - 1$ = $0.2$. But usually our contracts in prediction markets won't be that simple, so the simplification isn't very useful here.)
 
 It's not too hard to apply this to more complex situations. Suppose the president were at, say, 10% but you are convinced the unfortunate equine sex scandal will soon be forgotten and the electorate will properly appreciate _el Presidente_ for winning World War III by making his true re-election odds 80%. You can buy in at 10% and you resolve to sell out at 80%, for a reward of 70% or 7 times your initial stake (7:1). And we'll again say you're right 60% of the time. So your Kelly criterion looks like:
 
