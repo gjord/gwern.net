@@ -203,6 +203,45 @@ So now if `parseRSSIO` returns 100 entries, we will fork off 100 `archiveOne` wo
 
 What more can we do? Well, as constructed, the bot is one-shot: it downloads the Newpages RSS feed *once*, processes it, and exits.
 
+The obvious thing to do is to do some sort of infinite loop or recursion - make `archiveBot` call itself once it's done, and fetch the RSS feed all over again. We can't wait on some notification, because RSS is a 'pull' protocol rather than 'push'. So we simply loop as fast as we can. (Don't worry, it's OK! NewPages doesn't change as fast as the blinding RecentChanges, but it still changes so fast that by the time we've dealt with the latest batch of articles, we need to get a fresh RSS feed anyway.)
+
+In an interesting technical note, one of the factors that enabled the English Wikipedia to survive its exponential expansion, particularly past 2006, is the widespread use of increasingly sophisticated anti-vandalism bots. These anti-vandalism bots often are written as [IRC bot](!Wikipedia)s, since IRC *is* a 'push' protocol - the few dozen active anti-vandalism bots sit in an IRC channel and [Special:RecentChanges](!Wikipedia) is piped into the channel by a dedicated RSS bot. This way, the anti-vandalism bots can be written as event-driven loops (fetching URLs as they are posted in the channel) and only one bot is constantly reloading the RecentChanges RSS.
+
+Also interestingly, there is already a Haskell program for watching an RSS feed and posting related text on IRC - Don Stewart's [rss2irc](!Hackage). We can steal some of its code, replace parts with our functions and we wind up with:
+
+~~~~{.haskell}
+reader :: String -> String -> IO ()
+reader email url = items url >>= go
+ where
+   go old = do new <- items url
+               -- remove duplicates
+               let diff = foldl' (flip $ deleteBy matchingTitles) new old
+               forM_ (take 100 diff) $ \itm ->
+                case rssItemLink itm of
+                    Nothing -> return ()
+                    Just t  -> ignore $ forkIO $ archiveBot email t
+               go new
+
+   matchingTitles :: RSSItem -> RSSItem -> Bool
+   matchingTitles x y = let title = (fromJust . rssItemTitle) in title x == title y
+~~~~
+
+We will want to avoid repeating articles, though. We could store a persistent `Data.Set` of every URL we've visited, but that's overkill. We'll simply do a list disjunction - hence the `foldl'` and `deleteBy`.
+
+The case-expression is there because sometimes there apparently are entries which don't link to a new page and assuming otherwise leads to a crash. I never bothered to check what those links were. Probably articles which had been deleted that quickly.
+
+And as previously mentioned, we might as well collapse all the little RSS functions and inline them to the `where` clause along with `go` and the new `matchingTitles`:
+
+~~~~{.haskell}
+   -- Actually fetch a RSS feed and turn it from String to [RSSItem]
+   items :: String -> IO [RSSItem]
+   items rurl = do s <- get' rurl
+                   let RSSFeed r = fromJust $ parseFeedString s
+                   return $ nubBy matchingTitles $ rssItems $ rssChannel r
+~~~~
+
+And now we have a bot which will loop, reloading the RSS, and not repeating *too* much work, in a few more lines of code. Hopefully they're not much more difficult to read, too.
+
 ## Rewriting network code
 
 If we don't like using TagSoup's `openURL`, we could always do `import Network.HTTP (getRequest, simpleHTTP)` and then `openURL = simpleHTTP . getRequest`
@@ -280,7 +319,7 @@ fetchArticleURLs = fmap extractURLs . get'
 extractURLs :: String -> [String]
 extractURLs arg = [x | TagOpen "a" atts <- parseTags arg, (_,x) <- atts, "http://" `isPrefixOf` x]
 
--- | Webcitation.org is set up so one can archive a url just by doing a request for 'webcitation.org/archive?url=url&email=email'
+-- | WebCitation.org is set up so one can archive a url just by doing a request for 'webcitation.org/archive?url=url&email=email'
 -- So it's very easy, given a URL and an email, to archive a page. You don't even need to see what the response was.
 archiveURL :: String -> String -> IO ()
 archiveURL email url = print url' >> ignore (get' url')
@@ -415,7 +454,7 @@ main = do args <- getArgs
                      else "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
           reader email url
 
--- inspiried by rss2irc
+-- inspired by rss2irc
 -- | wait on an RSS thread, updating every so often. Each RSS item links to some diff or page,
 -- in addition to whatever other content the RSS item may contain (date, summary, etc.)
 -- This runs 'archiveBot' on just that link, ignoring the rest.
