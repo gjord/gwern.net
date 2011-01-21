@@ -2,7 +2,11 @@ We let [Wikipedia Archive Bot]() at the point where it could take its stdin (new
 
 But where does one get the list of names? Wikipedia [dumps](!Wikipedia "WP:DUMP") are occasionally available, but we have to get them manually, and they are irregularly created. Our bot will never archive links in very new pages because by the time they show up in a database dump and actually get processed, the page is no longer 'very new'. Worse, it tends to be the new pages that most need their hyperlinks backed up in WebCitation, because the [Internet Archive](!Wikipedia) has a rolling 6-month blackout; here too, by the time a link is publicly available in the Internet Archive, the article is no longer new. Sufficiently ephemeral links might never even be spidered by the Internet Archive, for that matter.
 
+# Task
+
 Dead links are an issue for new articles because often key claims or their very notability rests on online newspaper articles (frequently paywalled after a few days) or on blogs which might delete away the embarrassing information, or change or disappear for any of a thousand reasons. So we want our bot to be able to handle *new* pages. This is going to require extensive changes.
+
+# Design
 
 As usual, we begin by identifying the 'pure' core to our program. We can separate the program into a few pieces of functionality:
 
@@ -17,6 +21,8 @@ Point #4 is the pure core. A raw webpage is just a long String, and we want a li
 ~~~{.haskell}
 extractURLs :: String -> [String]
 ~~~
+
+## Parsing HTML
 
 As before, our tool of choice is TagSoup. TagSoup supplies `parseTags :: String -> [Tags]`, and then all we need to do is look for any hyperlink which is a HTTP link; easily done with a [list comprehension](!Wikipedia):
 
@@ -42,6 +48,8 @@ archiveURL :: String -> String -> IO ()
 archiveURL email url = openURL url' >> return ()
               where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
 ~~~
+
+## RSS
 
 And point #3 is trivial given the URL to new articles, so we are left with #1 and #2. Now, the first thing that should pop into any good Wikipedian's head upon being asked how to get new articles is, 'go to [Special:Newpages](!Wikipedia)!' But how is a poor little bot to deal with that human-centric interface? Fortunately, upon visiting we notice that little RSS icon. That's how we will do it: download the RSS feed for Newpages and parse it.
 
@@ -73,6 +81,8 @@ parseRSSIO :: String -> IO [String]
 parseRSSIO str = fmap parseRSS $ openURL str
 ~~~
 
+## CLI interface
+
 So #2 is done. Now for #1, interfacing with the user. We'll just be quick & lazy with some CLI arguments
 
 ~~~{.haskell}
@@ -92,6 +102,8 @@ archiveBot email website = do rss <- parseRSSIO website
                               concatMap (archiveURL email) urls
                               return ()
 ~~~
+
+### Putting things together
 
 Tada! This gives us the completed program:
 
@@ -143,13 +155,19 @@ archiveURL email url = openURL url' >> return ()
               where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
 ~~~
 
-We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/) ([Hackage](!Hackage "hlint")) will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
-
 Now we have our finished prototype. We can compile it and run it like:
 
 > $ wp-archivebot "gwern0@gmail.com"
 
 (Installation is just as easy; this bot is available on Hackage, so it's a `cabal install wp-archivebot` away.)
+
+# Improving
+
+## Hlint
+
+We can tweak it further if we want. [hlint](http://community.haskell.org/~ndm/hlint/) ([Hackage](!Hackage "hlint")) will tell us that `archiveBot` could be improved by using `mapM_` instead of `mapM...return ()`, and `concat $ map` is better written `concatMap`. We could probably fuse `items`, `titles`, and `parseRSS` into just one line without hurting readability too much. And as ever, the type signatures are optional, which would save 6 lines.
+
+## Parallelism
 
 How's the efficiency? Not too bad, but as with the other bot, we'll find network latency a bottleneck. No reason that the archives couldn't proceed in parallel:
 
@@ -181,7 +199,11 @@ archiveBot email website = do rss <- parseRSSIO website
 
 So now if `parseRSSIO` returns 100 entries, we will fork off 100 `archiveOne` workers. Combine this with the parallel version of `archiveURL`, and there would not seem to be no more real parallelism left to use.
 
+## Looping
+
 What more can we do? Well, as constructed, the bot is one-shot: it downloads the Newpages RSS feed *once*, processes it, and exits.
+
+## Rewriting network code
 
 If we don't like using TagSoup's `openURL`, we could always do `import Network.HTTP (getRequest, simpleHTTP)` and then `openURL = simpleHTTP . getRequest`
 
