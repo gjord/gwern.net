@@ -1,6 +1,6 @@
 We let [Wikipedia Archive Bot]() at the point where it could take its stdin (newline-delimited article names), download the English Wikipedia article, parse the HTML for hyperlinks, and fire off an archive request to [WebCitation.org](!Wikipedia).
 
-But where does one get the list of names? Wikipedia [dumps](!Wikipedia "WP:DUMP") are occasionally available, but we have to get them manually, and they are irregularly created. Our bot will never archive links in very new pages because by the time they show up in a database dump and actually get processed, the page is no longer 'very new'. Worse, it tends to be the new pages that most need their hyperlinks backed up in WebCitation, because the [Internet Archive](!Wikipedia) has a rolling 9-month blackout; here too, by the time a link is publicly available in the Internet Archive, the article is no longer new. Sufficiently ephemeral links might never even be spidered by the Internet Archive, for that matter.
+But where does one get the list of names? Wikipedia [dumps](!Wikipedia "WP:DUMP") are occasionally available, but we have to get them manually, and they are irregularly created. Our bot will never archive links in very new pages because by the time they show up in a database dump and actually get processed, the page is no longer 'very new'. Worse, it tends to be the new pages that most need their hyperlinks backed up in WebCitation, because the [Internet Archive](!Wikipedia) has a rolling 6-month blackout; here too, by the time a link is publicly available in the Internet Archive, the article is no longer new. Sufficiently ephemeral links might never even be spidered by the Internet Archive, for that matter.
 
 Dead links are an issue for new articles because often key claims or their very notability rests on online newspaper articles (frequently paywalled after a few days) or on blogs which might delete away the embarrassing information, or change or disappear for any of a thousand reasons. So we want our bot to be able to handle *new* pages. This is going to require extensive changes.
 
@@ -18,7 +18,7 @@ Point #4 is the pure core. A raw webpage is just a long String, and we want a li
 extractURLs :: String -> [String]
 ~~~
 
-As before, our tool of choice is TagSoup. TagSoup supplies `parseTags :: String -> [Tags]`, and then all we need to do is look for any hyperlink which is a HTTP links, a basic [list comprehension](!Wikipedia):
+As before, our tool of choice is TagSoup. TagSoup supplies `parseTags :: String -> [Tags]`, and then all we need to do is look for any hyperlink which is a HTTP link; easily done with a [list comprehension](!Wikipedia):
 
 ~~~{.haskell}
 import Text.HTML.TagSoup (parseTags, Tag(TagOpen))
@@ -45,14 +45,14 @@ archiveURL email url = openURL url' >> return ()
 
 And point #3 is trivial given the URL to new articles, so we are left with #1 and #2. Now, the first thing that should pop into any good Wikipedian's head upon being asked how to get new articles is, 'go to [Special:Newpages](!Wikipedia)!' But how is a poor little bot to deal with that human-centric interface? Fortunately, upon visiting we notice that little RSS icon. That's how we will do it: download the RSS feed for Newpages and parse it.
 
-We will use the [feed](!Hackage) library to parse the RSS feed. Looking at the types, we see a RSS feed is a list of RSS items, `[RSSItem]`, and each RSSItem has several fields - but we only need the title. So:
+We will use the [feed](!Hackage) library to parse the RSS feed. Looking at the types, we see a RSS feed is a list of RSS items, `[RSSItem]`, and each `RSSItem` has several fields - but we only need the title. So:
 
 ~~~{.haskell}
 items :: String -> [RSSItem]
 items feed = rssItems $ rssChannel $ fromJust $ parseFeedString feed
 ~~~
 
-parseFeedString is actually `String -> Maybe Feed`, but we know Wikipedia won't give us a bad feed, so we bypass error checking; then we drill down past the metadata into a RSSChannel (an [RSS](http://www.mnot.net/rss/channel.html) [channel](http://www.w3schools.com/rss/rss_channel.asp) is a finer subdivision of the overall feed; you might have 2 channels, 1 for articles & 1 for pictures, or aggregating multiple websites or streams into 1 feed), and then we pull out the RSSItems, and then finally the actual URL links:
+`parseFeedString` is actually `String -> Maybe Feed`, but we know Wikipedia won't give us a bad feed, so we bypass error checking; then we drill down past the metadata into a `RSSChannel` (an [RSS](http://www.mnot.net/rss/channel.html) [channel](http://www.w3schools.com/rss/rss_channel.asp) is a finer subdivision of the overall feed; you might have 2 channels, 1 for articles & 1 for pictures, or aggregating multiple websites or streams into 1 feed), and then we pull out the `RSSItem`, and then finally the actual URL links:
 
 ~~~{.haskell}
 titles :: [RSSItem] -> [String]
@@ -159,7 +159,9 @@ import Control.Concurrent (forkIO)
 archiveURL email url = forkIO (openURL url') >> return ()
 ~~~
 
-This only parallelizes the archive request. We could independently parallelize, using [MVars](http://haskell.org/ghc/docs/latest/html/libraries/base/Control-Concurrent-MVar.html) [for synchronization](http://bartoszmilewski.wordpress.com/2009/02/26/message-passing-atoms-mvars/), the downloads of the articles, but now things are getting complex. It'd be better to try to parallelize each article - have each article be a single thread which downloads the article, parses it for links, and fire off archive requests. With lightweight [green thread](!Wikipedia)s, this is actually the best way.
+(As with the previous bot, the `>> return ()` could be replaced with `Control.Monad.void` with GHC 7.)
+
+This only parallelizes the archive request. We could independently parallelize, using [MVars](http://haskell.org/ghc/docs/latest/html/libraries/base/Control-Concurrent-MVar.html) [for synchronization](http://bartoszmilewski.wordpress.com/2009/02/26/message-passing-atoms-mvars/), the downloads of the articles, but now things are getting complex. It'd be better to try to parallelize each *article* - have each article be a single thread which downloads the article, parses it for links, and fire off archive requests. With lightweight [green thread](!Wikipedia)s, this is actually the best way.
 
 This might sound difficult, but here too writing from the bottom-up with independent functions will make it easier to reorganize the program. In fact, we will only need to modify `archiveBot` a little bit, factoring out the independent bit and wrapping it in a `forkIO`:
 
@@ -181,8 +183,7 @@ So now if `parseRSSIO` returns 100 entries, we will fork off 100 `archiveOne` wo
 
 What more can we do? Well, as constructed, the bot is one-shot: it downloads the Newpages RSS feed *once*, processes it, and exits.
 
-If we don't like `openURL`, we could always do `import Network.HTTP (getRequest, simpleHTTP)` and then `openURL = simpleHTTP . getRequest`
-TODO update with cleaner code
+If we don't like using TagSoup's `openURL`, we could always do `import Network.HTTP (getRequest, simpleHTTP)` and then `openURL = simpleHTTP . getRequest`
 
 ~~~{.haskell}
 import Control.Concurrent (forkIO)
