@@ -318,7 +318,7 @@ We could imagine a 'goAway :: (a -> IO a) -> a -> IO ()', and many other variant
 
 Unfortunately, Hoogle cannot help us here. If we ask for [IO a -> IO ()](!Hoogle) or [IO a -> IO a](!Hoogle) or other plausible types we could think of, we get a wide variety of functions, none of which we want. What we want is `forkIO`, with the signature [IO a -> IO ThreadId](!Hoogle).
 
-This is a good illustration of why purity is important: it narrows down the range of possibilities. When a function starts with IO actions and ends with IO actions, it could be doing anything, and our search results reflect that. In comparison, a type like `(a,b) -> a` is so specific that [djinn](!Hackage) can mechanically generate the function for that type.
+This is a good illustration of why purity is important: it narrows down the range of possibilities. When a function starts with IO actions and ends with IO actions, it could be doing anything, and our search results reflect that. In comparison, a type like `(a,b) -> a` is so specific that [djinn](!Hackage) can mechanically generate the function for that type^[The function is `f (a,_) = a`, if you were wondering - the tuple function named [fst](!Hoogle).]
 
 We change `mapM_`:
 
@@ -328,12 +328,18 @@ import Control.Concurrent (forkIO)
 main = mapM_ (forkIO . archiveURL) =<<
            (liftM uniq $ mapM fetchArticleURLs
               =<< (liftM B.words $ B.getContents))
--- We need return () because otherwise it'd return a String and break forkIO's heart
-archiveURL url = openURL("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
+-- We need return () because otherwise `openURL` would return a String and break forkIO's heart
+archiveURL url = openURL ("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com")
                      >> return ()
 ~~~~~
 
-Much better! I've noticed improvements of 20-100%, since we can run on multiple CPUs.That little change was certainly worth it.
+Much better! I've noticed improvements of 20-100%, since we can run on multiple CPUs. That little change was certainly worth it.
+
+One small tweak occurs to me; if we ask a GHC 7 version of Hoogle for a function with the type `m a -> m ()`, it will return a hit named `Control.Monad.void`, which is basically our `>> return ()` (in functor garb). If `void` is available, we would rewrite `archiveURL` like this:
+
+~~~~{.haskell}
+archiveURL url = void (openURL ("www.webcitation.org/archive?url="++B.unpack url++"&email=foo@bar.com"))
+~~~~
 
 ### Laziness
 
