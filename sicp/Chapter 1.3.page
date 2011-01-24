@@ -1,5 +1,7 @@
 # Chapter 1.3: Formulating Abstractions with Higher-Order Procedures
 
+## 1.3.1
+
 [1.3](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-12.html#%_sec_1.3) presents the following higher-order function:
 
 ~~~~{.scheme}
@@ -33,7 +35,82 @@ sumCube start end = foo (^3) start end
 
 But `sum` has 4 parameters, not 3. The `[a..b]` hides the `(+1)` or `inc` specification.
 
-## Exercise 1.30
+### Exercise 1.29
+
+Pseudo-code from the specification:
+
+~~~{.haskell}
+simpson f a b n =
+    (h/x) * [y 0 + 4 * y 1 + 2 * y 2 ... + y n]
+ where h = (b - a) / n
+       y k = f (a + k * h)
+~~~
+
+The tricky part is the middle of the summation. We need to multiply by 2 or 4 *except* for the first and last terms. Kind of hard to express that as a simple recursion. We could generate that middle directly by generating the indices (`[1..(n-1)]`), running `y` on them (`map y`), creating an infinite list of coefficients (`cycle [2,4]`), and combining the coefficients with the transformed indices (`zipWith (*)`), and then directly specify the `y 0` and `y n` calls so we have something like:
+
+~~~{.haskell}
+simpson :: (Fractional a, Enum a) => (a -> a) -> a -> a -> a -> a
+simpson f a b n =
+    (h/3) * y 0 * (sum $ zipWith (*) (cycle [2,4]) (map y [1..(n-1)])) * y n
+ where h = (b - a) / n
+       y k = f (a + k * h)
+~~~
+
+Ugly, though it works, for example
+
+~~~{.haskell}
+simpson cube 0 1 1000 ~> 0.2496671666666665
+~~~
+
+(This has diminishing returns; a _n_ of 1000000 gives the three-places more precise 0.24999966666716916 but is much slower.)
+
+If we *didn't* want to use the various Prelude operators in a Scheme version, we'd have to drag around state in the form of a variable.
+
+~~~{.scheme}
+(define (simpson f a b n)
+  (let ((h (/ (- b a) n)))
+    (define (simpson-term k)
+      (*  (f (+ a (* k h)))
+          (cond ((or (= k 0) (= k n)) 1)
+                ((odd? k) 4)
+                (else 2))))
+    (*  (/ h 3)
+        (sum simpson-term 0 inc n))))
+~~~
+
+Interestingly, Dr. Scheme evaluates `(simpson-integral cube 0 1 1000)` to $\frac{1}{4}$. I don't know how it can be so precise.
+
+### Exercise 1.30
+
+~~~{.scheme}
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+         (sum term (next a) next b))))
+~~~
+
+~~~{.scheme}
+(define (sum term a next b)
+  (define (iter a result)
+    (if <??>
+        <??>
+        (iter <??> <??>)))
+  (iter <??> <??>))
+~~~
+
+Ought to be straightforward by this point (especially since half the battle is figuring out the auxiliary function `iter a result`):
+
+~~~{.scheme}
+(define (sum term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (+ result (term a)))))
+  (iter a 0))
+~~~
+
+### Exercise 1.31
 
 Our `sum` rewritten for multiplication is of course (modulo better variable names):
 
@@ -65,7 +142,7 @@ The answer is to make our first function *do nothing*, and the second function j
 
 The `(lambda (a) a)` is bound to the variable `f`, which gets called on the first multiplication, but does nothing - exactly as needed. Then `(lambda (g) (+ g 1))` takes care of generating the next entry in the Scheme equivalent of `[1..n]`.
 
-### Monoids
+#### Monoids
 
 A worldly Haskeller will look at this and immediately think, 'an initial seed value, and some way of combining values... could this idea be a *[monoid](!Wikipedia)*?!'
 
@@ -131,3 +208,97 @@ Sum {getSum = 15}
 So, `mconcat` is basically our `sum` or `product` but abstracted away from a specific monoid and how to generate the `[a]` argument.
 
 A great many data structures or datatypes are monoids; they're worth knowing about.
+
+### Exercise 1.32
+
+> "`(accumulate combiner null-value term a next b)`
+>
+> `accumulate` takes as arguments the same term and range specifications as `sum` and `product`, together with a combiner procedure (of two arguments) that specifies how the current term is to be combined with the accumulation of the preceding terms and a null-value that specifies what base value to use when the terms run out. Write `accumulate` and show how `sum` and `product` can both be defined as simple calls to `accumulate`."
+
+~~~{.scheme}
+(define (accumulate combiner null-value term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (combiner (term a) result))))
+  (iter a null-value))
+~~~
+
+Then we define `sum` and `product` by specializing `accumulate` in its first 2 arguments:
+
+~~~{.scheme}
+(define (sum term a next b)
+ (accumulate + 0 term a next b))
+
+(define (product term a next b)
+ (accumulate * 1 term a next b))
+~~~
+
+#### With monoids
+
+So. `combiner` takes 2 arguments of the same data type (such as `Int` and `Int`) and produces a third argument of the same data type; that is, `combiner :: a -> a -> a`, or since we just covered monoids, we'll say [(Monoid a) => a -> a -> a](!Hoogle). The first hit is `Data.Monoid mappend :: Monoid a => a -> a -> a`.
+
+The null-value is simply that same data type, [(Monoid a) => a](!Hoogle); the first hit is `Data.Monoid mempty :: Monoid a => a`
+
+With an instance of the Monoid typeclass, we can scrap the null-value and `combiner` arguments since they are pre-defined. We just need the range (`a` and `b`) and how to increment (`next) since the Monoid typeclass doesn't cover that. A fairly literal translation of the previous section:
+
+~~~{.haskell}
+accumulate :: (Monoid (t -> a1 -> a1), Ord a, Monoid a1) => (a -> t) -> a -> (a -> a) -> a -> a1
+accumulate term a next b =
+  let iter a result = if (a > b)
+        then result
+        else iter (next a) (term a `mempty` result)
+  in
+   iter a mempty
+~~~
+
+### Exercise 1.33
+
+I cheat a little here, and just rewrite `combiner` to get the filter effect:
+
+~~~{.scheme}
+(define (accumulate-filter combiner filter null-value term a next b)
+  (define (combiner-filter x y) (if (filter x) (combiner (term x) y) y))
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (combiner-filter a result))))
+  (iter a null-value))
+~~~
+
+Again we specialize (assuming the obvious definitions for `square`, `inc`, `prime?`, and `gcd`):
+
+~~~{.scheme}
+(define (sum-squared-primes a b)
+   (accumulate-filter + 0 square a inc b prime?))
+
+(define (product-relative-prime n)
+  (define (relative? k) (= (gcd k n) 1))
+  (filtered-accumulator * 1 (lambda x x) 1 inc (- 1 n) relative?))
+~~~
+
+## 1.3.2
+
+The remarks on scoping and how lambda is what lurks behind the sugar of `let` are true in Haskell as far as I know, and thus a bit boring to me.
+
+### Exercise 1.34
+
+We're asked to evaluate `(f f)` given:
+
+~~~{.scheme}
+(define (f g)
+  (g 2))
+~~~
+
+Quickly eyeballing it, I assumed it would turn out to be an infinite loop, as it became something like `f(f(f(f(f...`. But when I calculate it out by hand, I realize that that isn't the case!
+
+1. `(f f)`
+2. `(lambda (x) (x 2) f)`
+3. `(f 2)`
+4. `(lambda (x) (x 2) 2)`
+5. `(2 2)`
+6. Dr. Scheme error: "procedure application: expected procedure, given: '2'; arguments were: '2'"
+
+## 1.3.3
+
+
