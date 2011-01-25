@@ -146,7 +146,7 @@ The `(lambda (a) a)` is bound to the variable `f`, which gets called on the firs
 
 A worldly Haskeller will look at this and immediately think, 'an initial seed value, and some way of combining values... could this idea be a *[monoid](!Wikipedia)*?!'
 
-As [sigfpe's](http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html) excellent tutorial on monoids will tell us, yes - this is a monoid. In fact, integers (our topic) form two different monoids, one for addition (Sum) and one for multiplication (Product).
+As [sigfpe's](http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html) excellent tutorial or [_Learn You A Haskell_](http://learnyouahaskell.com/functors-applicative-functors-and-monoids#monoids) or [_Real World Haskell_](http://book.realworldhaskell.org/read/data-structures.html#id637702) will tell us, yes - this is a monoid. In fact, integers (our topic) form two different monoids, one for addition ([Sum](!Hoogle)) and one for multiplication ([Product](!Hoogle)).
 
 The `Monoid` typeclass requires the following:
 
@@ -240,17 +240,31 @@ So. `combiner` takes 2 arguments of the same data type (such as `Int` and `Int`)
 
 The null-value is simply that same data type, [(Monoid a) => a](!Hoogle); the first hit is `Data.Monoid mempty :: Monoid a => a`
 
-With an instance of the Monoid typeclass, we can scrap the null-value and `combiner` arguments since they are pre-defined. We just need the range (`a` and `b`) and how to increment (`next) since the Monoid typeclass doesn't cover that. A fairly literal translation of the previous section:
+With an instance of the Monoid typeclass, we can scrap the null-value and `combiner` arguments since they are pre-defined. We just need the range (`a` and `b`) and how to increment (`next`) since the Monoid typeclass doesn't cover that. A fairly literal translation of the previous section:
 
 ~~~{.haskell}
-accumulate :: (Monoid (t -> a1 -> a1), Ord a, Monoid a1) => (a -> t) -> a -> (a -> a) -> a -> a1
+accumulate :: (Ord a, Monoid a1) => (a -> a1) -> a -> (a -> a) -> a -> a1
 accumulate term a next b =
-  let iter a result = if (a > b)
+  let iter a' result = if a' > b
         then result
-        else iter (next a) (term a `mempty` result)
+        else iter (next a') (term a' `mappend` result)
   in
    iter a mempty
+
+product :: (Ord a1, Num a) => (Product a1 -> Product a) -> a1 -> (Product a1 -> Product a1) -> a1 -> a
+product a b c d = getProduct $ accumulate a (Product b) c (Product d)
+
+sum :: (Ord a1, Num a) => (Sum a1 -> Sum a) -> a1 -> (Sum a1 -> Sum a1) -> a1 -> a
+sum a b c d = getSum $ accumulate a (Sum b) c (Sum d)
 ~~~
+
+Usage would look like
+
+~~~{.haskell}
+sum id 1 (\(Sum a) -> (Sum (a+1))) 5
+~~~
+
+(This example evaluates to 15, and is equivalent to `sum [1..5]`.)
 
 ### Exercise 1.33
 
@@ -290,7 +304,7 @@ We're asked to evaluate `(f f)` given:
   (g 2))
 ~~~
 
-Quickly eyeballing it, I assumed it would turn out to be an infinite loop, as it became something like `f(f(f(f(f...`. But when I calculate it out by hand, I realize that that isn't the case!
+Quickly eyeballing it, I assumed it would turn out to be an infinite loop, as it became something like `(f (f (f (f (f...`. But when I calculate it out by hand, I realize that is not the case!
 
 1. `(f f)`
 2. `(lambda (x) (x 2) f)`
