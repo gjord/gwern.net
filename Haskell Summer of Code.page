@@ -177,21 +177,28 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
     The [basic idea](http://wiki.darcs.net/Internals/OptimizeHTTP) is to combine all the small files into a single [tarball](!Wikipedia "tar (file format)") which can be downloaded at full speed, and avoid the latency of many roundtrips. The 2.8 release description claims that when `darcs optimize --http` was used on the Darcs repository, a full download went from 40 minutes to 3 minutes. This feature would not be enabled by default, but the gain for larger repositories would be large enough that I feel comfortable classifying it as a successful SoC.
 
-Borrowing from our 3 cardinal sins of SoCs (see directly below), what predictions can we make?
+#### Predicting 2010 results
 
-Most of the 7 are laudably focused on an existing application. You don't need to justify a speedup of normal Darcs operations because there's a relatively large installed base of Darcs users that will benefit it; a new GC for GHC or a LLVM backend will be used by essentially every Haskeller; better Cabal support for testing may go unused by many package authors who either have no tests or don't want to bother - but a fair number will bother, and it will get maintained as part of Cabal, and similarly for the Hackage 2.0 project.
+Borrowing from our [3 cardinal sins](#haskell-roundup) of SoCs, what predictions can we make?
+
+Most of the 7 SoCs are laudably focused on an existing application. You don't need to justify a speedup of normal Darcs operations because there's an installed base of Darcs users that will benefit; a new GC for GHC or a LLVM backend will benefit every Haskeller; better Cabal support for testing may go unused by many package authors who either have no tests or don't want to bother - but a fair number will bother, and it will get maintained as part of Cabal, and similarly for the Hackage 2.0 project.
 
 The Immix GC strikes me as a very challenging summer project; a GC is one of the most low-level pieces of a functional language and is intertwined with all sorts of code and considerations. It would not surprise me if that project wound up just getting a little closer to a working Immix GC but not producing a production-quality GC scheduled to come to compilers near you.
 
-2 in particular concern me as potentially falling prey to sins #2 & 3: the GObject-binder tool, and the high-performance HTML library.
+2 in particular concern me as potentially falling prey to sins #2 & 3: the GObject-binder tool, and the high-performance HTML library:
 
-Let's assume that the HTML library does wind up as being faster than existing libraries, and as useful - that compromises don't destroy its utility. Who will use it? It will almost surely have an API different enough from existing libraries that a conversion will be painful. There are roughly 42 users of the existing [xhtml](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/package/xhtml)-generating library; will their authors wish to embrace a cutting-edge infant library? Is HTML generation even much of a bottleneck for them? (Speaking just for Gitit, Pandoc and its HTML generation are not usually a bottleneck.)
+1. Let's assume that the HTML library does wind up as being faster than existing libraries, and as useful - that compromises don't destroy its utility. Who will use it? It will almost surely have an API different enough from existing libraries that a conversion will be painful. There are roughly 42 users of the existing [xhtml](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/package/xhtml)-generating library; will their authors wish to embrace a cutting-edge infant library? Is HTML generation even much of a bottleneck for them? (Speaking just for Gitit, Pandoc and its HTML generation are not usually a bottleneck.)
+2. The case against the GObject project presents itself; GTK2Hs isn't as widely used as one would expect, and this seems to be due to the difficulty of installation and its general complexity. So there are few users of existing libraries; would there be more users for those libraries no one has bothered to bind nor yet clamored for? (This project might fall afoul of sin #1, but I do not know how difficult the GObject data is to interpret.)
 
-The case against the GObject project presents itself; GTK2Hs isn't as widely used as one would expect, and this seems to be due to the difficulty of installation and its general complexity. So there are few users of existing libraries; would there be more users for those libraries no one has bothered to bind nor yet clamored for? (This project might fall afoul of sin #1, but I do not know how difficult the GObject data is to interpret.)
+#### 2010 results
+
+As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 2 unknown, and 2 unsuccessful. (One unknown, Hackage 2.0, will probably turn out to be a success once it goes live as the main Hackage site. I am agnostic about whether I will ultimately judge the LLVM SoC a success or not.) As one would hope, the results seem to be better than the results for 2008 or 2009.
+
+Of my original predictions, I think I was completely right about the GObject SoC, right about the Immix GC and Darcs, semi-right about Hackage 2.0 & Cabal testing support, and completely wrong about the HTML/`blaze` SoC. (I am not sure why I was wrong about the last.)
 
 ### Haskell roundup
 
-So, what lessons can we learn from the 3 SoCs? It seems to me like there are roughly 3 groups explanations of unsuccess or failure fall into. They are:
+So, what lessons can we learn from the 3 SoCs? It seems to me like there are roughly 3 groups explanations for failure. They are:
 
 1) _Hubris_. GuiHaskell is probably a good example; it is essentially a bare-bones IDE, from its description. It is expecting a bit much of a single student in a single summer to write *that*!
 2) _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
