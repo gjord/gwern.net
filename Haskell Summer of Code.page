@@ -15,59 +15,34 @@ The results are interesting: some projects were a failure and the relevant stude
 Haskell wasn't part of the first Summer of Code in 2005, but it was accepted for 2006. We start there.
 
 ### 2006
+
 The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006) lists the following projects:
 
-- "Fast Mutable Collection Types for Haskell"
-
-    Caio Marcelo de Oliveira Filho, mentored by Audrey Tang
+- "Fast Mutable Collection Types for Haskell"; Caio Marcelo de Oliveira Filho, mentored by Audrey Tang
 
     **unsuccessful**. This ultimately resulted in the [HsJudy](!Hackage) library ('fast mutable collection' here meaning 'array'). HsJudy was apparently used in Pugs at one time, but no more.
-
-- "Port Haddock to use GHC"
-
-       David Waern, mentored by Simon Marlow
+- "Port Haddock to use GHC"; David Waern, mentored by Simon Marlow
 
        **Successful**. Haddock has used the GHC API ever since.[^complaints]
-
-- "A model for client-side scripts with HSP"
-
-    Joel Björnson, mentored by Niklas Broberg
+- "A model for client-side scripts with HSP"; Joel Björnson, mentored by Niklas Broberg
 
     **Successful?** Was initially unsuccessful, but seems to've been picked up again.
-
-- "GHCi based debugger for Haskell"
-
-    José Iborra López, mentored by David Himmelstrup
+- "GHCi based debugger for Haskell"; José Iborra López, mentored by David Himmelstrup
 
     **Successful**. The GHCi debugger was accepted into GHC HEAD, and by now is in production use,
-
-- "HaskellNet"
-
-    Jun Mukai, mentored by Shae Erisson
+- "HaskellNet"; Jun Mukai, mentored by Shae Erisson
 
     **Unsuccessful**. HaskellNet is dead, and nothing of it has propagated elsewhere. (I'm not entirely sure what happened with the HaskellNet code - I know of [two](https://patch-tag.com/r/wrwills/HaskellNet/home) [repos](http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/), but that's about it.) Shae tells me that this poor uptake is probably due to a lack of advertising, and not any actual defect in the HaskellNet code.
-
-- "Language.C - a C parser written in Haskell"
-
-    Marc van Woerkom, mentored by Manuel Chakravarty
+- "Language.C - a C parser written in Haskell"; Marc van Woerkom, mentored by Manuel Chakravarty
 
     **Unsuccessful**. According to [Don Stewart's outline](http://www.haskell.org/pipermail/haskell-cafe/2007-February/022509.html) of the 2006 SoC, this project was not completed.
-
-- "Implement a better type checker for Yhc"
-
-    Leon P Smith, mentored by Malcolm Wallace
+- "Implement a better type checker for Yhc"; Leon P Smith, mentored by Malcolm Wallace
 
     **Unsuccessful**. See Language.C
-
-- "Thin out cabal-get and integrate in GHC"
-
-    Paolo Martini, mentored by Isaac Jones
+- "Thin out cabal-get and integrate in GHC"; Paolo Martini, mentored by Isaac Jones
 
     **Successful**. Code is in Cabal, which we all know and love.
-
-- "Unicode ByteString, Data.Rope, Parsec for generic strings"
-
-    Spencer Janssen, mentored by Don Stewart
+- "Unicode ByteString, Data.Rope, Parsec for generic strings"; Spencer Janssen, mentored by Don Stewart
 
     **Successful**. (Again, per Don.)
 
@@ -77,57 +52,31 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
 
 The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
 
-- "Darcs conflict handling"
-
-    Jason Dagit, mentored by David Roundy
+- "Darcs conflict handling"; Jason Dagit, mentored by David Roundy
 
     **Successful**. The work was successful in almost completely getting rid of the exponential conflict bug, and has been in the regular releases of Darcs 2.x for some time now.
-
-- "Automated building of packages and generation of Haddock documentation"
-
-    Sascha Böhme, mentored by Ross Paterson
+- "Automated building of packages and generation of Haddock documentation"; Sascha Böhme, mentored by Ross Paterson
 
     **Successful**. The auto build and doc generation are long-standing and very useful parts of Hackage.
-
-- "Rewrite the typechecker for YHC and nhc98"
-
-    Mathieu Boespflug, mentored by Malcolm Wallace
+- "Rewrite the typechecker for YHC and nhc98"; Mathieu Boespflug, mentored by Malcolm Wallace
 
     **Successful**. According to the TMR writeup, the type-checker code has made it into (at least) YHC.
-
-- "Cabal Configurations"
-
-    Thomas Schilling, mentored by Michael Isaac Jones
+- "Cabal Configurations"; Thomas Schilling, mentored by Michael Isaac Jones
 
     **Successful**. Cabal configurations have been around for a while and are very useful for enabling/disabling things
-
-- Update the Hat tracer
-
-    Kenn Knowles, mentored by Malcolm Wallace
+- Update the Hat tracer; Kenn Knowles, mentored by Malcolm Wallace
 
     **Unsuccessful**. The update apparently happened, since the [Hat homepage](http://www.haskell.org/hat/) says "Version 2.06 released 2nd Oct 2008", but it is [described](http://www.haskell.org/hat/download.html) as unmaintained, and I can't seem to find any examples of people actually using Hat.
-
-- Generalizing Parsec to ParsecT and arbitrary input (ByteStrings)
-
-    Paolo Martini, mentored by Philippa Jane Cowderoy
+- Generalizing Parsec to ParsecT and arbitrary input (ByteStrings); Paolo Martini, mentored by Philippa Jane Cowderoy
 
     **Successful?**. The performance is still so terrible that few people use it.
-
-- Shared Libraries for GHC
-
-    Clemens Fruhwirth, mentored by Simon Marlow
+- Shared Libraries for GHC; Clemens Fruhwirth, mentored by Simon Marlow
 
     **Successful?**. The situation is unclear to me, but I know that for some period dynamic linking worked for some platforms. However, it's 2010 and I still have static linking, although GHC 6.12 apparently gets dynamic linking; so I'm going to chalk this one up as a mixed success.
-
-- "Libcurl"
-
-    Mieczysław Bąk, mentored by Bryan O'Sullivan
+- "Libcurl"; Mieczysław Bąk, mentored by Bryan O'Sullivan
 
     **Successful**. Libcurl does exist and has been used, and is maintained. I understand it has been used, even if I personally don't know of any examples.
-
-- "Extending GuiHaskell: An IDE for Haskell Hackers"
-
-    Asumu Takikawa, mentored by Neil David Mitchell
+- "Extending GuiHaskell: An IDE for Haskell Hackers"; Asumu Takikawa, mentored by Neil David Mitchell
 
     **Unsuccessful**. GuiHaskell does not exist in any usable form. (The homepage summarizes the situation thusly: ["**Warning**: This project is fragile, unfinished, and I do not recommend that anyone tries using it."](http://www-users.cs.york.ac.uk/~ndm/guihaskell/))
 
@@ -144,47 +93,25 @@ The [2008 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2008)
 
 So we can work from the [code.google.com](http://code.google.com/p/google-summer-of-code-2008-haskell/downloads/list) page which lists 6:
 
-- "C99 Parser/Pretty-Printer"
-
-    by Benedikt Huber, mentored by Iavor Diatchki
+- "C99 Parser/Pretty-Printer"; by Benedikt Huber, mentored by Iavor Diatchki
 
     **Successful**. The first try failed, but the second won through, and now people are doing things like [parsing the Linux kernel](http://www.galois.com/blog/2008/09/17/parsing-the-linux-kernel-with-haskell-experience-with-languagec/) with it.
-
-- "GMap - Fast composable maps"
-
-    by Jamie Brandon
+- "GMap - Fast composable maps"; by Jamie Brandon
 
     **Successful**. GMap is on [Hackage](http://hackage.haskell.org/packages/archive/pkg-list.html), and I believe I've seen it used.
-
-- "Haskell API Search"
-
-    Neil Mitchell
+- "Haskell API Search"; Neil Mitchell
 
     **Successful**. The improved performance and search capability have made it into Hoogle releases.
-
-- "Cabal 'make-like' dependency framework"
-
-    Andrea Vezzosi
+- "Cabal 'make-like' dependency framework"; Andrea Vezzosi
 
     **Unsuccessful**? ([His code](http://code.haskell.org/~Saizan/cabal/) [wound](http://code.haskell.org/hbuild/) [up](http://vezzosi.blogspot.com/2008/09/even-if-this-blog-has-been-silent-since.html) becoming [hbuild](http://hackage.haskell.org/trac/hackage/wiki/HBuild), which is not on Hackage or apparently used by anyone.)
-
-
-- "GHC plugins"
-
-    Maximilian Conroy Bolingbroke
+- "GHC plugins"; Maximilian Conroy Bolingbroke
 
     **Successful**? (As of [January 2010](http://old.nabble.com/GHC-core-plugins-td27320762.html), the patch adding plugins functionality has yet to be accepted & applied.)
-
-- "Data parallel physics engine"
-
-    Roman Cheplyaka
+- "Data parallel physics engine"; Roman Cheplyaka
 
     **Unsuccessful**? It seems to be finished but no use made of the actual engine (that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/)).
-
-
-- "GHC API".
-
-    Thomas Schilling
+- "GHC API"; Thomas Schilling
 
     **Unsuccessful**. Schilling's fixes went in, but they were in general minor changes (like adding the GHC monad) or bug-fixes; the GHC API remains a mess.
 
@@ -200,35 +127,23 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 In general, these looked good. Most of them will be widely useful -- especially the Darcs and Haddock SoCs -- or address longstanding complaints (many criticisms of laziness revolve around how unpredictable it makes memory consumption). The only one that bothers me is the EclipseFP project. I'm not sure Eclipse is common enough among Haskellers or potential Haskellers to warrant the effort, but at least the project is focused on improving an existing plugin than writing one _ab initio_. The 5 were:
 
-- "Optimising Darcs for medium to large repositories",
-
-     by Petr Ročkai; Eric Kow, mentor
+- "Optimising Darcs for medium to large repositories"; by Petr Ročkai; Eric Kow, mentor
 
      **Unknown**. [hashed-storage](http://hackage.haskell.org/package/hashed-storage) exists and is used in Darcs, but from watching the bugtracker traffic, it's unclear whether Darcs saw a net gain from it.
-
-- "haskell-src-exts -> haskell-src"
-
-    by Niklas Broberg; Neil Mitchell, mentor
+- "haskell-src-exts -> haskell-src"; by Niklas Broberg; Neil Mitchell, mentor
 
     **Unknown**. Niklas added a large number of [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/Niklas_Broberg.tar.gz) but it's unclear to mean what practical benefit it adds. But it *does* handle comments now.
 
-> "This project aims to improve on my haskell-src-exts library for working with Haskell source code. The goal of the project is to have haskell-src-exts supercede the haskell-src library. The main thing involved is to add a mechanism that allows the user to conditionally choose what extensions the parser should be aware of. Further, I would extend haskell-src(-exts) with functionality to handle comments and exact layout, to allow for things like automatic code generation and refactoring."
+    > "This project aims to improve on my haskell-src-exts library for working with Haskell source code. The goal of the project is to have haskell-src-exts supercede the haskell-src library. The main thing involved is to add a mechanism that allows the user to conditionally choose what extensions the parser should be aware of. Further, I would extend haskell-src(-exts) with functionality to handle comments and exact layout, to allow for things like automatic code generation and refactoring."
 
-- "Haddock improvements"
-
-    by Isaac Dupree; David Waern, mentor
+- "Haddock improvements"; by Isaac Dupree; David Waern, mentor
 
     **Successful?**. Dupree's [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/IsaacA_Dupree.tar.gz) have been applied to head and apparently make cross-package links [usually work](http://haddock2009.wordpress.com/category/cross-package-documentation/).
-
-- "Improving space profiling experience"
-
-    by Gergely Patai; Johan Tibell, mentor
+- "Improving space profiling experience"; by Gergely Patai; Johan Tibell, mentor
 
     **Successful**. [hp2any](http://www.haskell.org/haskellwiki/Hp2any) seems quite alive and usable.
 
-- "Extend EclipseFP functionality for Haskell"
-
-    by Thomas ten Cate; Thomas Schilling, mentor
+- "Extend EclipseFP functionality for Haskell"; by Thomas ten Cate; Thomas Schilling, mentor
 
     **Unsuccessful**. See [Cate's summing-up](http://eclipsefp.wordpress.com/2009/08/25/endgame/).
 
@@ -236,29 +151,27 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 ### 2010
 
-(TODO: In progress.)
-
 [7 projects](http://donsbot.wordpress.com/2010/04/26/the-7-haskell-projects-in-the-google-summer-of-code/) were accepted:
 
-- Thomas Tuegel, [Improvements to Cabal's test support](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760295)
+- [Improvements to Cabal's test support](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760295); Thomas Tuegel, mentored by Johan Tibell
 
     **Successful**? A few packages use the provided test syntax, but to run tests, one needs the unreleased `cabal-install-0.10`. 
-- Matthew Gruen, [Infrastructure for a more social Hackage 2.0](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760520)
+- [Infrastructure for a more social Hackage 2.0](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760520); Matthew Gruen, mentored by Edward Kmett 
 
     **Unknown**. [Gruen's blog](http://cogracenotes.wordpress.com/) was last updated October 2010, and Hackage still hasn't switched over and gotten the new features & benefit of the rewrite. But the code exists and there is a running [public demo](http://sparky.haskell.org:8080/), so this may yet be a success.
-- Jasper Van der Jeugt, [A high performance HTML generation library](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760572)
+- [A high performance HTML generation library](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760572); Jasper Van der Jeugt, mentored by Simon Meier
 
     **Successful** [blaze-html](!Hackage) has been released and is actively developed; version 0.4.0.0 has [50 total reverse dependencies](http://sparky.haskell.org:8080/package/blaze-html/reverse/all) and [blaze-builder](!Hackage) has [97 reverse dependencies](http://sparky.haskell.org:8080/package/blaze-builder/reverse/all) though there's much overlap. (This site is built on [hakyll](!Hackage), which uses blaze-html.)
-- Alp Mestanogullari, [Improvements to the GHC LLVM backend](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760615)
+- [Improvements to the GHC LLVM backend](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760615); Alp Mestanogullari, mentored by Maximilian Bolingbroke
 
     **Unknown**. The LLVM backend seems to still be on track to become the default GHC backend^[A development that surprises me, since I had been under the impression that most GHC work ultimately winds up being scrapped or abandoned like Liskell or Mobile Haskell.], but I don't know enough about Mestanogullari's work to decide whether it was useful or whether his work was even merged into GHC HEAD. (Comments especially welcomed on this one.)
-- Marco Silva, [Implementing the Immix Garbage Collection Algorithm](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760695)
+- [Implementing the Immix Garbage Collection Algorithm](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760695); Marco Silva, mentored by Simon Marlow
 
     **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I’m happy with the state it is now. I think it’s a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.)
-- Matthew Arsenault, [GObject-Introspection based bindings for gtk2hs](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760750)
+- [GObject-Introspection based bindings for gtk2hs](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760750); Matthew Arsenault, mentored by Axel Simon
 
     **Unsuccessful**. [bindings-gobject](!Hackage)'s first release was in November 2009. Since then, exactly [one](http://sparky.haskell.org:8080/package/bindings-gobject-0.3/reverse) 2 other packages have made use of it - [binding-gts](!Hackage) and [bitspeak](!Hackage).
-- Alexey Levan, [Improving Darcs's network performance](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760775)
+- [Improving Darcs's network performance](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760775); Alexey Levan, mentored by Petr Rockai
 
     **Successful**. Levan divided his SoC into 2 parts, improving Darcs's performance in fetching the many small files that make up a repository's revision history, and writing 'a smart server that can provide clients with only files they need in one request'. The 'smart server' seems to have been abandoned as not being worthwhile, but the fetching idea was implemented and will be in the [2.8 release](http://blog.darcs.net/2010/11/coming-in-darcs-28-new-features.html).
 
@@ -285,6 +198,7 @@ So, what lessons can we learn from the 3 SoCs? It seems to me like there are rou
 3) _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
 
 #### Don Stewart's view
+
 [Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
 
 > We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the communtity. [_sic_]
