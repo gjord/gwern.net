@@ -18,30 +18,30 @@ Haskell wasn't part of the first Summer of Code in 2005, but it was accepted for
 
 The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006) lists the following projects:
 
-- "Fast Mutable Collection Types for Haskell"; Caio Marcelo de Oliveira Filho, mentored by Audrey Tang
+- ["Fast Mutable Collection Types for Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/61); Caio Marcelo de Oliveira Filho, mentored by Audrey Tang
 
-    **unsuccessful**. This ultimately resulted in the [HsJudy](!Hackage) library ('fast mutable collection' here meaning 'array'). HsJudy was apparently used in Pugs at one time, but no more.
-- "Port Haddock to use GHC"; David Waern, mentored by Simon Marlow
+    **Unsuccessful**. This ultimately resulted in the [HsJudy](!Hackage) library ('fast mutable collection' here meaning 'array'). HsJudy was apparently used in Pugs at one time, but no more.
+- ["Port Haddock to use GHC"](http://hackage.haskell.org/trac/summer-of-code/ticket/44); David Waern, mentored by Simon Marlow
 
-       **Successful**. Haddock has used the GHC API ever since.[^complaints]
-- "A model for client-side scripts with HSP"; Joel Björnson, mentored by Niklas Broberg
+    **Successful**. Haddock has used the GHC API ever since.[^complaints]
+- ["A model for client-side scripts with HSP"](http://hackage.haskell.org/trac/summer-of-code/ticket/54); Joel Björnson, mentored by Niklas Broberg
 
     **Successful?** Was initially unsuccessful, but seems to've been picked up again.
 - "GHCi based debugger for Haskell"; José Iborra López, mentored by David Himmelstrup
 
-    **Successful**. The GHCi debugger was accepted into GHC HEAD, and by now is in production use,
-- "HaskellNet"; Jun Mukai, mentored by Shae Erisson
+    **Successful**. The [GHCi debugger](http://www.haskell.org/ghc/docs/latest/html/users_guide/ghci-debugger.html) was accepted into GHC HEAD, and is in production use.
+- ["HaskellNet"](http://hackage.haskell.org/trac/summer-of-code/ticket/30); Jun Mukai, mentored by Shae Erisson
 
-    **Unsuccessful**. HaskellNet is dead, and nothing of it has propagated elsewhere. (I'm not entirely sure what happened with the HaskellNet code - I know of [two](https://patch-tag.com/r/wrwills/HaskellNet/home) [repos](http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/), but that's about it.) Shae tells me that this poor uptake is probably due to a lack of advertising, and not any actual defect in the HaskellNet code.
-- "Language.C - a C parser written in Haskell"; Marc van Woerkom, mentored by Manuel Chakravarty
+    **Unsuccessful**. HaskellNet is dead, was noted to be ["uncompleted"](http://hackage.haskell.org/trac/summer-of-code/ticket/1574), and none of it has propagated elsewhere. (I'm not entirely sure what happened with the HaskellNet code - I know of [two](https://patch-tag.com/r/wrwills/HaskellNet/home) [repos](http://stuff.mit.edu/afs/sipb/project/suez/src/haskell/haskellnet/), but that's about it.) Shae tells me that this poor uptake is probably due to a lack of advertising, and not any actual defect in the HaskellNet code.
+- ["Language.C - a C parser written in Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1545); Marc van Woerkom, mentored by Manuel Chakravarty
 
     **Unsuccessful**. According to [Don Stewart's outline](http://www.haskell.org/pipermail/haskell-cafe/2007-February/022509.html) of the 2006 SoC, this project was not completed.
-- "Implement a better type checker for Yhc"; Leon P Smith, mentored by Malcolm Wallace
+- ["Implement a better type checker for Yhc"](http://hackage.haskell.org/trac/summer-of-code/ticket/81); Leon P Smith, mentored by Malcolm Wallace
 
     **Unsuccessful**. See Language.C
-- "Thin out cabal-get and integrate in GHC"; Paolo Martini, mentored by Isaac Jones
+- ["Thin out cabal-get and integrate in GHC"](http://hackage.haskell.org/trac/summer-of-code/ticket/3); Paolo Martini, mentored by Isaac Jones
 
-    **Successful**. Code is in Cabal, which we all know and love.
+    **Successful**. Code lives on as `cabal-install`, which we all know and love.
 - "Unicode ByteString, Data.Rope, Parsec for generic strings"; Spencer Janssen, mentored by Don Stewart
 
     **Successful**. (Again, per Don.)
@@ -50,33 +50,33 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
 
 ### 2007
 
-The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
+The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007) lists:
 
-- "Darcs conflict handling"; Jason Dagit, mentored by David Roundy
+- ["Darcs conflict handling"](http://replay.waybackmachine.org/20071203063254/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=647C914C97658198); Jason Dagit, mentored by David Roundy
 
-    **Successful**. The work was successful in almost completely getting rid of the exponential conflict bug, and has been in the regular releases of Darcs 2.x for some time now.
-- "Automated building of packages and generation of Haddock documentation"; Sascha Böhme, mentored by Ross Paterson
+    **Successful**. The work was successful in almost completely getting rid of the exponential conflict bug, and has been in released Darcs for years
+- ["Automated building of packages and generation of Haddock documentation"](http://replay.waybackmachine.org/20071201141912/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=D505A03B8B64C3BF); Sascha Böhme, mentored by Ross Paterson
 
     **Successful**. The auto build and doc generation are long-standing and very useful parts of Hackage.
-- "Rewrite the typechecker for YHC and nhc98"; Mathieu Boespflug, mentored by Malcolm Wallace
+- ["Rewrite the typechecker for YHC and nhc98"](http://replay.waybackmachine.org/20071203042207/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=AB859DA837B7BDCD); Mathieu Boespflug, mentored by Malcolm Wallace
 
     **Successful**. According to the TMR writeup, the type-checker code has made it into (at least) YHC.
-- "Cabal Configurations"; Thomas Schilling, mentored by Michael Isaac Jones
+- ["Cabal Configurations"](http://replay.waybackmachine.org/20071201115804/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=21BCDEABD117783D); Thomas Schilling, mentored by Michael Isaac Jones
 
-    **Successful**. Cabal configurations have been around for a while and are very useful for enabling/disabling things
-- Update the Hat tracer; Kenn Knowles, mentored by Malcolm Wallace
+    **Successful**. Cabal configurations are very useful for enabling/disabling things and are extremely common in the wild.
+- ["Update the Hat tracer"](http://replay.waybackmachine.org/20071201121817/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=637BFC2B6B13D512); Kenn Knowles, mentored by Malcolm Wallace
 
     **Unsuccessful**. The update apparently happened, since the [Hat homepage](http://www.haskell.org/hat/) says "Version 2.06 released 2nd Oct 2008", but it is [described](http://www.haskell.org/hat/download.html) as unmaintained, and I can't seem to find any examples of people actually using Hat.
-- Generalizing Parsec to ParsecT and arbitrary input (ByteStrings); Paolo Martini, mentored by Philippa Jane Cowderoy
+- ["Generalizing Parsec to ParsecT and arbitrary input (ByteStrings)"](http://replay.waybackmachine.org/20071201123144/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=B97EF4562EF3B244); Paolo Martini, mentored by Philippa Jane Cowderoy
 
     **Successful?**. The performance is still so terrible that few people use it.
-- Shared Libraries for GHC; Clemens Fruhwirth, mentored by Simon Marlow
+- ["Shared Libraries for GHC"](http://replay.waybackmachine.org/20090504093628/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=D0137F8B637176F1); Clemens Fruhwirth, mentored by Simon Marlow
 
-    **Successful?**. The situation is unclear to me, but I know that for some period dynamic linking worked for some platforms. However, it's 2010 and I still have static linking, although GHC 6.12 apparently gets dynamic linking; so I'm going to chalk this one up as a mixed success.
-- "Libcurl"; Mieczysław Bąk, mentored by Bryan O'Sullivan
+    **Successful**. The situation is unclear to me, but I know that for some period dynamic linking worked for some platforms. However, it's 2010 and I still have static linking, although GHC 6.12 apparently gets dynamic linking; so I'm going to chalk this one up as a mixed success.
+- ["Libcurl"](http://replay.waybackmachine.org/20080204074446/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=D4DEE221DAC4E810); Mieczysław Bąk, mentored by Bryan O'Sullivan
 
     **Successful**. Libcurl does exist and has been used, and is maintained. I understand it has been used, even if I personally don't know of any examples.
-- "Extending GuiHaskell: An IDE for Haskell Hackers"; Asumu Takikawa, mentored by Neil David Mitchell
+- ["Extending GuiHaskell: An IDE for Haskell Hackers"](http://replay.waybackmachine.org/20070813151006/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=152CF82F48143D59); Asumu Takikawa, mentored by Neil David Mitchell
 
     **Unsuccessful**. GuiHaskell does not exist in any usable form. (The homepage summarizes the situation thusly: ["**Warning**: This project is fragile, unfinished, and I do not recommend that anyone tries using it."](http://www-users.cs.york.ac.uk/~ndm/guihaskell/))
 
@@ -98,30 +98,30 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
     **Successful**. The first try failed, but the second won through, and now people are doing things like [parsing the Linux kernel](http://www.galois.com/blog/2008/09/17/parsing-the-linux-kernel-with-haskell-experience-with-languagec/) with it.
 - "GMap - Fast composable maps"; by Jamie Brandon
 
-    **Successful**. GMap is on [Hackage](http://hackage.haskell.org/packages/archive/pkg-list.html), and I believe I've seen it used.
+    **Unsuccessful**. GMap is on [Hackage](http://hackage.haskell.org/packages/archive/pkg-list.html), but there are [0 users](http://sparky.haskell.org:8080/package/gmap/reverse/all) after 3 years.
 - "Haskell API Search"; Neil Mitchell
 
-    **Successful**. The improved performance and search capability have made it into Hoogle releases.
-- "Cabal 'make-like' dependency framework"; Andrea Vezzosi
+    **Successful**. The improved performance and search capability have made it into [Hoogle](!Hackage) releases, and Hoogle is one of the more popular Haskell applications (with [1.7m web searches](http://neilmitchell.blogspot.com/2011/01/hoogle-at-17-million-searches.html)).
+- ["Cabal 'make-like' dependency framework"](http://replay.waybackmachine.org/20080616045128/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=56D60241D77CA94C); Andrea Vezzosi
 
-    **Unsuccessful**? ([His code](http://code.haskell.org/~Saizan/cabal/) [wound](http://code.haskell.org/hbuild/) [up](http://vezzosi.blogspot.com/2008/09/even-if-this-blog-has-been-silent-since.html) becoming [hbuild](http://hackage.haskell.org/trac/hackage/wiki/HBuild), which is not on Hackage or apparently used by anyone.)
-- "GHC plugins"; Maximilian Conroy Bolingbroke
+    **Unsuccessful**. ([His code](http://code.haskell.org/~Saizan/cabal/) [wound](http://code.haskell.org/hbuild/) [up](http://vezzosi.blogspot.com/2008/09/even-if-this-blog-has-been-silent-since.html) becoming [hbuild](http://hackage.haskell.org/trac/hackage/wiki/HBuild), which is not on Hackage or apparently used by anyone.)
+- ["GHC plugins"](http://replay.waybackmachine.org/20080501130545/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=69C2ABD1E013EE0C_; Maximilian Conroy Bolingbroke
 
-    **Successful**? (As of [January 2010](http://old.nabble.com/GHC-core-plugins-td27320762.html), the patch adding plugins functionality has yet to be accepted & applied.)
+    **Unsuccessful**? As of [January 2010](http://old.nabble.com/GHC-core-plugins-td27320762.html), the patch adding plugins functionality has yet to be accepted & applied; as of February 2011, the [ticket](http://hackage.haskell.org/trac/ghc/ticket/3843) remains open and the code unmerged. The code is apparently not yet bitrotten by the passage of 3 years but how long can its luck last?
 - "Data parallel physics engine"; Roman Cheplyaka
 
-    **Unsuccessful**? It seems to be finished but no use made of the actual engine (that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/)).
-- "GHC API"; Thomas Schilling
+    **Unsuccessful**. It seems to be finished but no use made of the actual engine (that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/)).
+- "GHC API" <!-- http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A -->; Thomas Schilling
 
     **Unsuccessful**. Schilling's fixes went in, but they were in general minor changes (like adding the GHC monad) or bug-fixes; the GHC API remains a mess.
 
-4 successful, 3 unsuccessful.
+2 successful, 5 unsuccessful.
 
 #### Don Stewart's view
 
 [Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
 
-> We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the communtity. [_sic_]
+> We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the community.
 >
 > And our success rate was much higher.
 >
@@ -137,27 +137,23 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 In general, these looked good. Most of them will be widely useful -- especially the Darcs and Haddock SoCs -- or address longstanding complaints (many criticisms of laziness revolve around how unpredictable it makes memory consumption). The only one that bothers me is the EclipseFP project. I'm not sure Eclipse is common enough among Haskellers or potential Haskellers to warrant the effort, but at least the project is focused on improving an existing plugin than writing one _ab initio_. The 5 were:
 
-- "Optimising Darcs for medium to large repositories"; by Petr Ročkai; Eric Kow, mentor
+- ["Optimising Darcs for medium to large repositories"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467805); by Petr Ročkai; Eric Kow, mentor
 
      **Unknown**. [hashed-storage](http://hackage.haskell.org/package/hashed-storage) exists and is used in Darcs, but from watching the bugtracker traffic, it's unclear whether Darcs saw a net gain from it.
-- "haskell-src-exts -> haskell-src"; by Niklas Broberg; Neil Mitchell, mentor
+- ["haskell-src-exts -> haskell-src"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467962); by Niklas Broberg; Neil Mitchell, mentor
 
-    **Unknown**. Niklas added a large number of [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/Niklas_Broberg.tar.gz) but it's unclear to mean what practical benefit it adds. But it *does* handle comments now.
-
-    > "This project aims to improve on my haskell-src-exts library for working with Haskell source code. The goal of the project is to have haskell-src-exts supercede the haskell-src library. The main thing involved is to add a mechanism that allows the user to conditionally choose what extensions the parser should be aware of. Further, I would extend haskell-src(-exts) with functionality to handle comments and exact layout, to allow for things like automatic code generation and refactoring."
-
-- "Haddock improvements"; by Isaac Dupree; David Waern, mentor
+    **Successful**. Niklas added a large number of [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/Niklas_Broberg.tar.gz) but it's unclear to mean what practical benefit it adds besides handling comments now (which was useful for hlint). Speaking practically, [haskell-src](http://sparky.haskell.org:8080/package/haskell-src/reverse/all) has 104 reverse dependencies, and [haskell-src-exts](http://sparky.haskell.org:8080/package/haskell-src-exts/reverse/all) has 223; so the latter seems to have indeed surpassed its predecessor.
+- ["Haddock improvements"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468112); by Isaac Dupree; David Waern, mentor
 
     **Successful?**. Dupree's [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/IsaacA_Dupree.tar.gz) have been applied to head and apparently make cross-package links [usually work](http://haddock2009.wordpress.com/category/cross-package-documentation/).
-- "Improving space profiling experience"; by Gergely Patai; Johan Tibell, mentor
+- ["Improving space profiling experience"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468245); by Gergely Patai; Johan Tibell, mentor
 
     **Successful**. [hp2any](http://www.haskell.org/haskellwiki/Hp2any) seems quite alive and usable.
-
-- "Extend EclipseFP functionality for Haskell"; by Thomas ten Cate; Thomas Schilling, mentor
+- ["Extend EclipseFP functionality for Haskell"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468390); by Thomas ten Cate; Thomas Schilling, mentor
 
     **Unsuccessful**. See [Cate's summing-up](http://eclipsefp.wordpress.com/2009/08/25/endgame/).
 
-2 unknown, 2 successful, 1 failure.
+3 successful, 1 unknown, 1 unsuccessful.
 
 ### 2010
 
@@ -165,8 +161,8 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 - [Improvements to Cabal's test support](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760295); Thomas Tuegel, mentored by Johan Tibell
 
-    **Successful**? A few packages use the provided test syntax, but to run tests, one needs the unreleased `cabal-install-0.10`. 
-- [Infrastructure for a more social Hackage 2.0](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760520); Matthew Gruen, mentored by Edward Kmett 
+    **Successful**? A few packages use the provided test syntax, but to run tests, one needs the unreleased `cabal-install-0.10`.
+- [Infrastructure for a more social Hackage 2.0](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760520); Matthew Gruen, mentored by Edward Kmett
 
     **Unknown**. [Gruen's blog](http://cogracenotes.wordpress.com/) was last updated October 2010, and Hackage still hasn't switched over and gotten the new features & benefit of the rewrite. But the code exists and there is a running [public demo](http://sparky.haskell.org:8080/), so this may yet be a success.
 - [A high performance HTML generation library](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760572); Jasper Van der Jeugt, mentored by Simon Meier
@@ -231,12 +227,12 @@ Let's look at the first 12 and see whether they're good ideas, bad ideas, or ind
 6. ["Combine Threadscope with Heap Profiling Tools"](http://hackage.haskell.org/trac/summer-of-code/ticket/1585): Uncertain. Going by the [Arch download statistics](http://www.galois.com/~dons/arch-haskell-status.html), Threadscope is downloaded more often than one would expect, so perhaps integration would be useful.
 7. ["Haddock with embedded wiki feature, a la RWH, so we can collaborate on improving the documentation"](http://www.reddit.com/r/haskell_proposals/comments/7qnwq/haddock_with_embedded_wiki_feature_a_la_rwh_so_we/): This is a bad idea mostly because there are so many diverging ideas and possible implementations - it's just not clear what one would do. Is it some sort of Haddock server? A Gitit wiki with clever hooks? Some lightweight in-browser editor combined with Darcs?
 8. ["HTTP Library Replacement"](http://hackage.haskell.org/trac/summer-of-code/ticket/1122): A good idea, assuming the linked attempts and alternate libraries haven't already solved the issue.
-9. ["Using Type Inference to Highlight Code *Properly*"](http://www.reddit.com/r/haskell_proposals/comments/biaew/using_type_inference_to_highlight_code_properly/): The difficult part is accessing the type information of an identifier inside a GHCi sessions - a problem probably already solved by [scion](!Hackage). Colorizing the display of a snippet is trivial. So this would make a bad SoC. 
+9. ["Using Type Inference to Highlight Code *Properly*"](http://www.reddit.com/r/haskell_proposals/comments/biaew/using_type_inference_to_highlight_code_properly/): The difficult part is accessing the type information of an identifier inside a GHCi sessions - a problem probably already solved by [scion](!Hackage). Colorizing the display of a snippet is trivial. So this would make a bad SoC.
 10. ["Transformation and Optimisation Tool"](http://hackage.haskell.org/trac/summer-of-code/ticket/1536): This initially sounds attractive, but previous refactoring tools have been ignored. The tools that have gotten uptake are things like GHC's `-Wall` (which warns about possible semantic issues) and [hlint](!Hackage) (which warns about style issues and redundancy with standard library functions) - not like Hera.
-11. ["Webkit-based browser written in Haskell, similar in architecture to Xmonad"](http://www.reddit.com/r/haskell_proposals/comments/98vxo/webkitbased_browser_written_in_haskell_similar_in/): This is probably the worst single idea in the whole bunch. A web browser these days is an entire operating system, but worse, one in which one must supply and maintain the userland as well; it is a thankless task that will not benefit the Haskell community (except incidentally through supporting libraries), nor a task it is uniquely equipped for. It is an infinite time sink - the only thing worse than this sort of SoC failing would be it succeeding. 
+11. ["Webkit-based browser written in Haskell, similar in architecture to Xmonad"](http://www.reddit.com/r/haskell_proposals/comments/98vxo/webkitbased_browser_written_in_haskell_similar_in/): This is probably the worst single idea in the whole bunch. A web browser these days is an entire operating system, but worse, one in which one must supply and maintain the userland as well; it is a thankless task that will not benefit the Haskell community (except incidentally through supporting libraries), nor a task it is uniquely equipped for. It is an infinite time sink - the only thing worse than this sort of SoC failing would be it succeeding.
 12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): DPH is rarely used; a CUDA backend would be even more rarely utilized; CUDA has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. All in all, there are many better SoCs.
 
 [^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. (You can read Waern's reply to this [here](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
 [^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen Oleg Kiselyovs; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in quantity and quality, everyone acknowledges, but how often does anyone actually use any of it?
 
-    ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratees](!Hackage) has picked up [10 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee-0.7.0.0), and iteratees may one day become as widely used as `bytestring`.)
+    ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratees](!Hackage) has picked up [10 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee-0.7.0.0), its most popular successor [33](http://sparky.haskell.org:8080/package/enumerator/reverse) and iteratees in gneeral may one day become as widely used as bytestrings.)
