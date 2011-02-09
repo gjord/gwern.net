@@ -186,7 +186,7 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 #### Predicting 2010 results
 
-Borrowing from our [3 cardinal sins](#haskell-roundup) of SoCs, what predictions can we make?
+Borrowing from our [3 cardinal sins](#lessons-learned) of SoCs, what predictions can we make?
 
 Most of the 7 SoCs are laudably focused on an existing application. You don't need to justify a speedup of normal Darcs operations because there's an installed base of Darcs users that will benefit; a new GC for GHC or a LLVM backend will benefit every Haskeller; better Cabal support for testing may go unused by many package authors who either have no tests or don't want to bother - but a fair number will bother, and it will get maintained as part of Cabal, and similarly for the Hackage 2.0 project.
 
@@ -203,7 +203,7 @@ As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 1 unkno
 
 Of my original predictions, I think I was completely right about the GObject SoC, right about the Immix GC and Darcs, semi-right about Hackage 2.0 & Cabal testing support, somewhat wrong about the LLVM work, and completely wrong about the HTML/`blaze` SoC. (I am not sure why I was wrong about the last, and don't judge myself harshly for not predicting the [exogenous](!Wikipedia) failure of the LLVM SoC.)
 
-### Haskell roundup
+### Lessons learned
 
 So, what lessons can we learn from the past years of SoCs? It seems to me like there are roughly 3 groups of explanations for failure. They are:
 
@@ -211,7 +211,7 @@ So, what lessons can we learn from the past years of SoCs? It seems to me like t
 2) _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
 3) _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
 
-### Future SoCs
+### Future SoC proposals
 
 There are 2 major collections of ideas for future SoC projects:
 
