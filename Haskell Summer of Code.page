@@ -96,22 +96,22 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 - "C99 Parser/Pretty-Printer"; by Benedikt Huber, mentored by Iavor Diatchki
 
     **Successful**. The first try failed, but the second won through, and now people are doing things like [parsing the Linux kernel](http://www.galois.com/blog/2008/09/17/parsing-the-linux-kernel-with-haskell-experience-with-languagec/) with it.
-- "GMap - Fast composable maps"; by Jamie Brandon
+- ["GMap - Fast composable maps"](http://hackage.haskell.org/trac/summer-of-code/ticket/1560); by Jamie Brandon. mentored by Adrian Charles Hey
 
     **Unsuccessful**. GMap is on [Hackage](http://hackage.haskell.org/packages/archive/pkg-list.html), but there are [0 users](http://sparky.haskell.org:8080/package/gmap/reverse/all) after 3 years.
-- "Haskell API Search"; Neil Mitchell
+- "Haskell API Search"; Neil Mitchell, mentored by Niklas Broberg
 
     **Successful**. The improved performance and search capability have made it into [Hoogle](!Hackage) releases, and Hoogle is one of the more popular Haskell applications (with [1.7m web searches](http://neilmitchell.blogspot.com/2011/01/hoogle-at-17-million-searches.html)).
-- ["Cabal 'make-like' dependency framework"](http://replay.waybackmachine.org/20080616045128/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=56D60241D77CA94C); Andrea Vezzosi
+- ["Cabal 'make-like' dependency framework"](http://replay.waybackmachine.org/20080616045128/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=56D60241D77CA94C); Andrea Vezzosi, mentored by Duncan Coutts
 
     **Unsuccessful**. ([His code](http://code.haskell.org/~Saizan/cabal/) [wound](http://code.haskell.org/hbuild/) [up](http://vezzosi.blogspot.com/2008/09/even-if-this-blog-has-been-silent-since.html) becoming [hbuild](http://hackage.haskell.org/trac/hackage/wiki/HBuild), which is not on Hackage or apparently used by anyone.)
-- ["GHC plugins"](http://replay.waybackmachine.org/20080501130545/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=69C2ABD1E013EE0C_; Maximilian Conroy Bolingbroke
+- ["GHC plugins"](http://replay.waybackmachine.org/20080501130545/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=69C2ABD1E013EE0C); Maximilian Conroy Bolingbroke, mentored by Sean Seefried
 
     **Unsuccessful**? As of [January 2010](http://old.nabble.com/GHC-core-plugins-td27320762.html), the patch adding plugins functionality has yet to be accepted & applied; as of February 2011, the [ticket](http://hackage.haskell.org/trac/ghc/ticket/3843) remains open and the code unmerged. The code is apparently not yet bitrotten by the passage of 3 years but how long can its luck last?
-- "Data parallel physics engine"; Roman Cheplyaka
+- "Data parallel physics engine"; Roman Cheplyaka, mentored by Manuel M. T. Chakravarty
 
     **Unsuccessful**. It seems to be finished but no use made of the actual engine (that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/)).
-- "GHC API" <!-- http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A -->; Thomas Schilling
+- "GHC API" <!-- http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A -->; Thomas Schilling, mentored by Simon Marlow
 
     **Unsuccessful**. Schilling's fixes went in, but they were in general minor changes (like adding the GHC monad) or bug-fixes; the GHC API remains a mess.
 
@@ -137,19 +137,19 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 In general, these looked good. Most of them will be widely useful -- especially the Darcs and Haddock SoCs -- or address longstanding complaints (many criticisms of laziness revolve around how unpredictable it makes memory consumption). The only one that bothers me is the EclipseFP project. I'm not sure Eclipse is common enough among Haskellers or potential Haskellers to warrant the effort, but at least the project is focused on improving an existing plugin than writing one _ab initio_. The 5 were:
 
-- ["Optimising Darcs for medium to large repositories"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467805); by Petr Ročkai; Eric Kow, mentor
+- ["Optimising Darcs for medium to large repositories"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467805); by Petr Ročkai; mentored by Eric Kow
 
      **Unknown**. [hashed-storage](http://hackage.haskell.org/package/hashed-storage) exists and is used in Darcs, but from watching the bugtracker traffic, it's unclear whether Darcs saw a net gain from it.
-- ["haskell-src-exts -> haskell-src"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467962); by Niklas Broberg; Neil Mitchell, mentor
+- ["haskell-src-exts -> haskell-src"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467962); by Niklas Broberg; mentored by Neil Mitchell
 
     **Successful**. Niklas added a large number of [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/Niklas_Broberg.tar.gz) but it's unclear to mean what practical benefit it adds besides handling comments now (which was useful for hlint). Speaking practically, [haskell-src](http://sparky.haskell.org:8080/package/haskell-src/reverse/all) has 104 reverse dependencies, and [haskell-src-exts](http://sparky.haskell.org:8080/package/haskell-src-exts/reverse/all) has 223; so the latter seems to have indeed surpassed its predecessor.
-- ["Haddock improvements"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468112); by Isaac Dupree; David Waern, mentor
+- ["Haddock improvements"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468112); by Isaac Dupree; mentored by David Waern
 
     **Successful?**. Dupree's [patches](http://google-summer-of-code-2009-haskell.googlecode.com/files/IsaacA_Dupree.tar.gz) have been applied to head and apparently make cross-package links [usually work](http://haddock2009.wordpress.com/category/cross-package-documentation/).
-- ["Improving space profiling experience"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468245); by Gergely Patai; Johan Tibell, mentor
+- ["Improving space profiling experience"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468245); by Gergely Patai; mentored by Johan Tibell
 
     **Successful**. [hp2any](http://www.haskell.org/haskellwiki/Hp2any) seems quite alive and usable.
-- ["Extend EclipseFP functionality for Haskell"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468390); by Thomas ten Cate; Thomas Schilling, mentor
+- ["Extend EclipseFP functionality for Haskell"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022468390); by Thomas ten Cate; mentored by Thomas Schilling
 
     **Unsuccessful**. See [Cate's summing-up](http://eclipsefp.wordpress.com/2009/08/25/endgame/).
 
