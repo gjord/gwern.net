@@ -2,11 +2,11 @@ As part of Google's [Summer of code](!Wikipedia "Google Summer of Code") ([homep
 
 The Haskell Summer of Codes have often produced excellent results, but how excellent is excellent? Are there any features or commonalities between successful projects or unsuccessful ones?
 
-(This questions are particularly important as SoC 2011 is just a few months away - students apply in late March.)
+These questions are particularly important with SoC 2011 just a few months away.^[Students apply in late March.]
 
 ## Example retrospective: Debian
 
-An energetic blogger & Debian developer has produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) series on the many Debian-related Summer of Code projects.
+In 2009, a blogger & Debian developer has produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) retrospective series on the Debian Summer of Code projects.
 
 The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. Let's see whether that holds true of Haskell.
 
@@ -38,7 +38,7 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
     **Unsuccessful**. According to [Don Stewart's outline](http://www.haskell.org/pipermail/haskell-cafe/2007-February/022509.html) of the 2006 SoC, this project was not completed.
 - ["Implement a better type checker for Yhc"](http://hackage.haskell.org/trac/summer-of-code/ticket/81); Leon P Smith, mentored by Malcolm Wallace
 
-    **Unsuccessful**. See Language.C
+    **Unsuccessful**. See the Language.C SoC
 - ["Thin out cabal-get and integrate in GHC"](http://hackage.haskell.org/trac/summer-of-code/ticket/3); Paolo Martini, mentored by Isaac Jones
 
     **Successful**. Code lives on as [cabal-install](!Hawiki), which we all know and love.
@@ -89,7 +89,7 @@ The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
 
 ### 2008
 
-The [2008 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2008) isn't so kind enough as to list all the projects as before, but it does tell us that only 7 projects were accepted by Google.
+The [2008 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2008) isn't kind enough to list all the projects, but it does tell us that only 7 projects were accepted by Google.
 
 So we can work from the [code.google.com](http://code.google.com/p/google-summer-of-code-2008-haskell/downloads/list) page which lists 6:
 
@@ -121,11 +121,11 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 [Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
 
-> We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the community.
+> "We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the community.
 >
 > And our success rate was much higher.
 >
-> So: look for things that benefit the largest number of Haskell developers and users, and from students with proven Haskell development experience. You can't learn Haskell from zero on the job, during SoC.
+> So: look for things that benefit the largest number of Haskell developers and users, and from students with proven Haskell development experience. You can't learn Haskell from zero on the job, during SoC."
 
 #### See also
 
@@ -195,7 +195,7 @@ The Immix GC strikes me as a very challenging summer project; a GC is one of the
 2 in particular concern me as potentially falling prey to sins #2 & 3: the GObject-binder tool, and the high-performance HTML library:
 
 1. Let's assume that the HTML library does wind up as being faster than existing libraries, and as useful - that compromises don't destroy its utility. Who will use it? It will almost surely have an API different enough from existing libraries that a conversion will be painful. There are roughly 42 users of the existing [xhtml](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/package/xhtml)-generating library; will their authors wish to embrace a cutting-edge infant library? Is HTML generation even much of a bottleneck for them? (Speaking just for Gitit, Pandoc and its HTML generation are not usually a bottleneck.)
-2. The case against the GObject project presents itself; GTK2Hs isn't as widely used as one would expect, and this seems to be due to the difficulty of installation and its general complexity. So there are few users of existing libraries; would there be more users for those libraries no one has bothered to bind nor yet clamored for? (This project might fall afoul of sin #1, but I do not know how difficult the GObject data is to interpret.)
+2. The case against the GObject project makes itself; GTK2Hs isn't as widely used as one would expect, and this seems to be due to the difficulty of installation and its general complexity. So there are few users of existing libraries; would there be more users for those libraries no one has bothered to bind nor yet clamored for? (This project might fall afoul of sin #1, but I do not know how difficult the GObject data is to interpret.)
 
 #### 2010 results
 
@@ -231,7 +231,7 @@ Let's look at the first 12 and see whether they're good ideas, bad ideas, or ind
 9. ["Using Type Inference to Highlight Code *Properly*"](http://www.reddit.com/r/haskell_proposals/comments/biaew/using_type_inference_to_highlight_code_properly/): The difficult part is accessing the type information of an identifier inside a GHCi sessions - a problem probably already solved by [scion](!Hackage). Colorizing the display of a snippet is trivial. So this would make a bad SoC.
 10. ["Transformation and Optimisation Tool"](http://hackage.haskell.org/trac/summer-of-code/ticket/1536): This initially sounds attractive, but previous refactoring tools have been ignored. The tools that have gotten uptake are things like GHC's `-Wall` (which warns about possible semantic issues) and [hlint](!Hackage) (which warns about style issues and redundancy with standard library functions) - not like Hera.
 11. ["Webkit-based browser written in Haskell, similar in architecture to Xmonad"](http://www.reddit.com/r/haskell_proposals/comments/98vxo/webkitbased_browser_written_in_haskell_similar_in/): This is probably the worst single idea in the whole bunch. A web browser these days is an entire operating system, but worse, one in which one must supply and maintain the userland as well; it is a thankless task that will not benefit the Haskell community (except incidentally through supporting libraries), nor a task it is uniquely equipped for. It is an infinite time sink - the only thing worse than this sort of SoC failing would be it succeeding.
-12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): DPH is rarely used; a CUDA backend would be even more rarely utilized; CUDA has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. (DPH/CUDA use unboxed strict data, but there are interface issues with the rest of the boxed lazy Haskell universe.) All in all, there are many better SoCs.
+12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): [DPH](!Hawiki "GHC/Data Parallel Haskell") is rarely used; a CUDA backend would be even more rarely utilized; [CUDA](!Wikipedia) has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. (DPH/CUDA use unboxed strict data, but there are interface issues with the rest of the boxed lazy Haskell universe.) All in all, there are many better SoCs.
 
 # External links
 
