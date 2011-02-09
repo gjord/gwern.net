@@ -233,7 +233,30 @@ Let's look at the first 12 and see whether they're good ideas, bad ideas, or ind
 11. ["Webkit-based browser written in Haskell, similar in architecture to Xmonad"](http://www.reddit.com/r/haskell_proposals/comments/98vxo/webkitbased_browser_written_in_haskell_similar_in/): This is probably the worst single idea in the whole bunch. A web browser these days is an entire operating system, but worse, one in which one must supply and maintain the userland as well; it is a thankless task that will not benefit the Haskell community (except incidentally through supporting libraries), nor a task it is uniquely equipped for. It is an infinite time sink - the only thing worse than this sort of SoC failing would be it succeeding.
 12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): DPH is rarely used; a CUDA backend would be even more rarely utilized; CUDA has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. (DPH/CUDA use unboxed strict data, but there are interface issues with the rest of the boxed lazy Haskell universe.) All in all, there are many better SoCs.
 
-[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. (You can read Waern's reply to this [here](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
-[^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen Oleg Kiselyovs; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in quantity and quality, everyone acknowledges, but how often does anyone actually use any of it?
+# External links
 
-    ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratees](!Hackage) has picked up [10 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee-0.7.0.0), its most popular successor [33](http://sparky.haskell.org:8080/package/enumerator/reverse) and iteratees in gneeral may one day become as widely used as bytestrings.)
+It's difficult to quantify how 'useful' a package is; it's easier to punt and ask instead how 'popular' it is. There are a few different sources we can appeal to:
+
+1. Package downloads:
+
+      i. Don Stewart provides, for [Arch Linux](!Wikipedia), [a status page](http://www.galois.com/~dons/arch-haskell-status.html) which includes Arch download numbers
+      ii. The [Debian](http://popcon.debian.org/) (and [Ubuntu](http://popcon.ubuntu.com/)) Popularity Contest offers limited popularity data; eg. [xmonad](http://qa.debian.org/popcon.php?package=xmonad)
+      iii. some 2006-2009 [Hackage statistics](http://corp.galois.com/blog/2009/3/23/one-million-haskell-downloads.html) are available by [month](http://www.galois.com/~dons/hackage/hackage.html) & [ranking](http://www.galois.com/~dons/hackage/popularity.html); live Hackage statistics is an open [bug report](http://hackage.haskell.org/trac/hackage/ticket/162) which will be closed by Matthew Gruen's Hackage 2.0 (2010 SoC)
+2. [Reverse dependencies](http://hackage.haskell.org/trac/hackage/ticket/576) can be examined several ways:
+
+    i. <http://bifunctor.homelinux.net/~roel/hackage/packages/hackage.html>
+    ii. <http://sparky.haskell.org:8080/>
+    iii. [cabal-query](!Hackage)
+    iv. [HackageOneFive](https://github.com/sol/HackageOneFive)
+3. Searching for mentions, blog posts, and unreleased packages elsewhere; key sites to search include:
+
+    i. [Haskell subreddit](http://www.reddit.com/r/haskell/)
+    ii. [Github](https://github.com/)
+    iii. [Google Code](http://code.google.com/)
+    iv. the [Haskell wiki](http://haskell.org/haskellwiki/index.php?title=&search=&fulltext=Search)
+    v. [Haskell mailing lists](http://dir.gmane.org/index.php?prefix=gmane.comp.lang.haskell)
+
+[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. ([Waern's reply](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
+[^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen of Oleg Kiselyov; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in quantity and quality, everyone acknowledges, but how often does anyone actually use any of it?
+
+    ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratees](!Hackage) has picked up [10 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee-0.7.0.0), its most popular successor [33](http://sparky.haskell.org:8080/package/enumerator/reverse) and iteratees in general may one day become as widely used as bytestrings.)
