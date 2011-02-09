@@ -117,6 +117,16 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 4 successful, 3 unsuccessful.
 
+#### Don Stewart's view
+
+[Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
+
+> We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the communtity. [_sic_]
+>
+> And our success rate was much higher.
+>
+> So: look for things that benefit the largest number of Haskell developers and users, and from students with proven Haskell development experience. You can't learn Haskell from zero on the job, during SoC.
+
 #### See also
 
 - The Monad.Reader's [Issue 12](http://www.haskell.org/wikiupload/f/f0/TMR-Issue12.pdf)
@@ -225,16 +235,6 @@ Let's look at the first 12 and see whether they're good ideas, bad ideas, or ind
 10. ["Transformation and Optimisation Tool"](http://hackage.haskell.org/trac/summer-of-code/ticket/1536): This initially sounds attractive, but previous refactoring tools have been ignored. The tools that have gotten uptake are things like GHC's `-Wall` (which warns about possible semantic issues) and [hlint](!Hackage) (which warns about style issues and redundancy with standard library functions) - not like Hera.
 11. ["Webkit-based browser written in Haskell, similar in architecture to Xmonad"](http://www.reddit.com/r/haskell_proposals/comments/98vxo/webkitbased_browser_written_in_haskell_similar_in/): This is probably the worst single idea in the whole bunch. A web browser these days is an entire operating system, but worse, one in which one must supply and maintain the userland as well; it is a thankless task that will not benefit the Haskell community (except incidentally through supporting libraries), nor a task it is uniquely equipped for. It is an infinite time sink - the only thing worse than this sort of SoC failing would be it succeeding. 
 12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): DPH is rarely used; a CUDA backend would be even more rarely utilized; CUDA has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. All in all, there are many better SoCs.
-
-#### Don Stewart's view
-
-[Don Stewart writes](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055531.html) in reply to the foregoing:
-
-> We explicitly pushed harder in 2008 to clarify and simplify the goals of the projects, ensure adequate *prior Haskell experience* and to focus on libraries and tools that directly benefit the communtity. [_sic_]
->
-> And our success rate was much higher.
->
-> So: look for things that benefit the largest number of Haskell developers and users, and from students with proven Haskell development experience. You can't learn Haskell from zero on the job, during SoC.
 
 [^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. (You can read Waern's reply to this [here](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
 [^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen Oleg Kiselyovs; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in quantity and quality, everyone acknowledges, but how often does anyone actually use any of it?
