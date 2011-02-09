@@ -175,9 +175,9 @@ In general, these looked good. Most of them will be widely useful -- especially 
 - [Implementing the Immix Garbage Collection Algorithm](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760695); Marco Silva, mentored by Simon Marlow
 
     **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I’m happy with the state it is now. I think it’s a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.)
-- [GObject-Introspection based bindings for gtk2hs](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760750); Matthew Arsenault, mentored by Axel Simon
+- ["Improving Darcs Performance"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127358115580); Adolfo Builes, mentored by Eric Kow
 
-    **Unsuccessful**. [bindings-gobject](!Hackage)'s first release was in November 2009. Since then, exactly [one](http://sparky.haskell.org:8080/package/bindings-gobject-0.3/reverse) 2 other packages have made use of it - [binding-gts](!Hackage) and [bitspeak](!Hackage).
+    **Unknown**. This replaced a previous proposal to write a Haskell binding to the [GObject](!Wikipedia) library, which never started. Looking through the Darcs repository history, I see a number of new tests related to the global cache, but no major edits to cache-related modules.
 - [Improving Darcs's network performance](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760775); Alexey Levan, mentored by Petr Rockai
 
     **Successful**. Levan divided his SoC into 2 parts, improving Darcs's performance in fetching the many small files that make up a repository's revision history, and writing 'a smart server that can provide clients with only files they need in one request'. The 'smart server' seems to have been abandoned as not being worthwhile, but the fetching idea was implemented and will be in the [2.8 release](http://blog.darcs.net/2010/11/coming-in-darcs-28-new-features.html).
@@ -199,9 +199,9 @@ The Immix GC strikes me as a very challenging summer project; a GC is one of the
 
 #### 2010 results
 
-As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 1 unknown, and 3 unsuccessful. (The unknown, Hackage 2.0, will probably turn out to be a success once it goes live as the main Hackage site.) As one would hope, the results seem to be better than the results for 2008 or 2009.
+As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 2 unknown, and 2 unsuccessful. (One unknown, Hackage 2.0, will probably turn out to be a success once it goes live as the main Hackage site.) As one would hope, the results seem to be better than the results for 2008 or 2009.
 
-Of my original predictions, I think I was completely right about the GObject SoC, right about the Immix GC and Darcs, semi-right about Hackage 2.0 & Cabal testing support, somewhat wrong about the LLVM work, and completely wrong about the HTML/`blaze` SoC. (I am not sure why I was wrong about the last, and don't judge myself harshly for not predicting the [exogenous](!Wikipedia) failure of the LLVM SoC.)
+Of my original predictions, I think I was right about the Immix GC & GObject & Darcs network optimization, semi-right about Hackage 2.0 & Cabal testing support, somewhat wrong about the LLVM work, and completely wrong about the HTML/`blaze` SoC. (I am not sure why I was wrong about the last, and don't judge myself harshly for not predicting the [exogenous](!Wikipedia) failure of the LLVM SoC.)
 
 ### Lessons learned
 
