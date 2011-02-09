@@ -60,7 +60,7 @@ The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
     **Successful**. The auto build and doc generation are long-standing and very useful parts of Hackage.
 - ["Rewrite the typechecker for YHC and nhc98"](http://replay.waybackmachine.org/20071203042207/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=AB859DA837B7BDCD); Mathieu Boespflug, mentored by Malcolm Wallace
 
-    **Successful**. According to the TMR writeup, the type-checker code has made it into (at least) YHC.
+    **Successful**? According to the TMR writeup, the type-checker code has made it into YHC. (I add a question mark because YHC is so little used.)
 - ["Cabal Configurations"](http://replay.waybackmachine.org/20071201115804/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=21BCDEABD117783D); Thomas Schilling, mentored by Michael Isaac Jones
 
     **Successful**. Cabal configurations are very useful for enabling/disabling things and are extremely common in the wild.
@@ -75,12 +75,12 @@ The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
     **Successful**. The situation is unclear to me, but I know that for some period dynamic linking worked for some platforms. However, it's 2010 and I still have static linking, although GHC 6.12 apparently gets dynamic linking; so I'm going to chalk this one up as a mixed success.
 - ["Libcurl"](http://replay.waybackmachine.org/20080204074446/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=D4DEE221DAC4E810); Mieczysław Bąk, mentored by Bryan O'Sullivan
 
-    **Successful**. Libcurl does exist and has been used, and is maintained. I understand it has been used, even if I personally don't know of any examples.
+    **Unknown** The archived homepage [homepage](http://web.archive.org/web/20070706103752/http://varsztat.com/projects/curl/) and [repo](http://web.archive.org/web/20070708071534/varsztat.com/projects/curl/darcs/) indicate that the package name was [curl](!Hackage) and indeed a [curl](!Wikipedia "cURL") binding of that name exists - but none of the metadata points to Bąk as either author or maintainer; if it is the same package, it is pretty successful with [158 reverse dependencies](http://sparky.haskell.org:8080/package/curl/reverse/all)
 - ["Extending GuiHaskell: An IDE for Haskell Hackers"](http://replay.waybackmachine.org/20070813151006/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=152CF82F48143D59); Asumu Takikawa, mentored by Neil David Mitchell
 
     **Unsuccessful**. GuiHaskell does not exist in any usable form. (The homepage summarizes the situation thusly: ["**Warning**: This project is fragile, unfinished, and I do not recommend that anyone tries using it."](http://www-users.cs.york.ac.uk/~ndm/guihaskell/))
 
-6 successes; 1 unsuccessful; 1 failure.
+6 successes; 2 unsuccessful; 1 unknown.
 
 #### See also
 
@@ -110,8 +110,8 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
     **Unsuccessful**? As of [January 2010](http://old.nabble.com/GHC-core-plugins-td27320762.html), the patch adding plugins functionality has yet to be accepted & applied; as of February 2011, the [ticket](http://hackage.haskell.org/trac/ghc/ticket/3843) remains open and the code unmerged. The code is apparently not yet bitrotten by the passage of 3 years but how long can its luck last?
 - "Data parallel physics engine"; Roman Cheplyaka, mentored by Manuel M. T. Chakravarty
 
-    **Unsuccessful**. It seems to be finished but no use made of the actual engine (that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/)).
-- "GHC API" <!-- http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A -->; Thomas Schilling, mentored by Simon Marlow
+    **Unsuccessful**. It seems to be finished but no use made of the actual engine that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/). (I would give reverse dependency statiscs, but [Hpysics](!Hawiki) seems to have never been uploaded to Hackage.)
+- "GHC API"; Thomas Schilling, mentored by Simon Marlow <!-- http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A -->
 
     **Unsuccessful**. Schilling's fixes went in, but they were in general minor changes (like adding the GHC monad) or bug-fixes; the GHC API remains a mess.
 
