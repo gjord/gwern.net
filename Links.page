@@ -2,7 +2,6 @@
 
 > "A transition from an author's book to his conversation, is too often like an entrance into a large city, after a distant prospect. Remotely, we see nothing but spires of temples and turrets of palaces, and imagine it the residence of splendour, grandeur and magnificence; but when we have passed the gates, we find it perplexed with narrow passages, disgraced with despicable cottages, embarrassed with obstructions, and clouded with smoke."^[Dr. Samuel Johnson; _The Rambler_, No. 14 (5 May 1750)]
 
-- [Darcs](!Wikipedia) repository for personal configs: `darcs get --lazy http://www.gwern.net/home/gwern/`
 - Darcs repository for this site: `darcs get --lazy http://www.gwern.net/`
 - [Reddit](http://www.reddit.com/user/gwern/)
 - [LessWrong.com](http://lesswrong.com/user/gwern)
@@ -66,13 +65,13 @@ aj6R/z9IBCpkIowEOu8biE8EGBECAA8FAkZD2aoCGwwFCRLMAwAACgkQvpDo5Pfl
 
 # Wikis
 
-I have been active on Wikipedia and related projects since January 2004. Cumulatively[^sock], I have over 90,000 edits and have written or worked on [hundreds of articles](Wikipedia resume); during my time as an administrator, I performed thousands of administrative actions; I am an admin on the Haskell wiki.
+I have been active on Wikipedia and related projects since January 2004. Cumulatively[^sock], I have over 90,000 edits and have written or worked on [hundreds of articles](Wikipedia resume); during my time as an administrator, I performed thousands of administrative actions; I am an admin on the Haskell wiki, handling routine spam & vandalism:
 
 - [English Wikipedia](http://en.wikipedia.org/wiki/User:Gwern)
 - [English Wikibooks](http://en.wikibooks.org/wiki/User:Gwern)
 - [Haskell wiki](http://haskell.org/haskellwiki/User:Gwern)
 
-I also run a [custom Google search tool](!Wikipedia "Google Co-op") at ["Wikipedia RSs for anime & manga"](http://www.google.com/cse/home?cx=009114923999563836576:1eorkzz2gp4); this is a custom Google search with >1800 websites on its [black](!Wikipedia "Blacklist (computing)")  and [whitelist](!Wikipedia)s. It returns much more useful^[Compare the [CSE results](http://www.google.com/cse?cx=009114923999563836576%3A1eorkzz2gp4&q=Wings+of+Honneamise) with the [Google Results](http://www.google.com/search?q=Wings+of+Honneamise) for the anime _[Wings of Honnêamise](!Wikipedia)_. Which is more useful for an editor? For more details, see my [release announcement](http://www.mail-archive.com/wikien-l@lists.wikimedia.org/msg09145.html).] results for topics in popular culture, and as the name suggests, anime & manga in particular.
+I also run a [custom Google search tool](!Wikipedia "Google Co-op") at ["Wikipedia Reliable Sources for anime & manga"](http://www.google.com/cse/home?cx=009114923999563836576:1eorkzz2gp4); this is a custom Google search with >1800 websites on its [black](!Wikipedia "Blacklist (computing)")  and [whitelist](!Wikipedia)s. It returns much more useful^[Compare the [CSE results](http://www.google.com/cse?cx=009114923999563836576%3A1eorkzz2gp4&q=Wings+of+Honneamise) with the [Google Results](http://www.google.com/search?q=Wings+of+Honneamise) for the anime _[Wings of Honnêamise](!Wikipedia)_. Which is more useful for an editor? For more details, see my [release announcement](http://www.mail-archive.com/wikien-l@lists.wikimedia.org/msg09145.html).] results for topics in popular culture, and as the name suggests, anime & manga in particular.
 
 # Mailing lists
 
@@ -82,7 +81,6 @@ I also run a [custom Google search tool](!Wikipedia "Google Co-op") at ["Wikiped
 - [Haskell libraries](http://www.google.com/search?q=gwern+site%3Ahttp%3A%2F%2Fwww.haskell.org%2Fpipermail%2Flibraries%2F)
 - [SL4](http://www.google.com/search?q=gwern+site%3Ahttp%3A%2F%2Fwww.sl4.org%2Farchive%2F)
 - [Urth](http://www.google.com/search?q=gwern+site%3Aurth.net)
-
 
 # Collaboration style
 
@@ -110,7 +108,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 
 #. Switched from FastPackedStrings to ByteStrings
 #. Low-level C optimization
-#. Initiated Cabalization
+#. Initiated Cabalization (my work initially appeared as [darcs-cabalized](!Hackage) and then was merged into HEAD and `darcs-cabalized` deprecated)
 #. Refactoring of shell tests
 #. Initiated switch from [MoinMoin](!Wikipedia) wiki to Gitit
 #. Identified performance issue & instigated addition of `--max-count` option for Filestore
@@ -138,10 +136,10 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. (Re)Cabalized[^cabalized]
 #. Adapted to use Mueval
 #. Refactored out code in multiple packages:
-    i. show
-    ii. lambdabot-utils
-    iii. brainfuck
-    iv. unlambda
+    i. [show](!Hackage)
+    ii. [lambdabot-utils](!Hackage)
+    iii. [brainfuck](!Hackage)
+    iv. [unlambda](!Hackage)
 #. Implemented run-in-any-directory functionality (previously Lambdabot could only run in the repository directory)
 #. Cleanup
 #. Maintain it (with Cale Gibbard)
@@ -176,8 +174,8 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 
 #### Base libraries
 ##### Base
-- Added Control.Monad.void
-- Helped replace Data.List.sort with YHC's more efficient implementation (see <http://hackage.haskell.org/trac/ghc/ticket/2143>)
+- Added [Control.Monad.void](!Hoogle)
+- Helped replace [Data.List.sort](!Hoogle) with YHC's more efficient implementation (see <http://hackage.haskell.org/trac/ghc/ticket/2143>)
 
 ##### Unix
 - fixed a possible runtime crash in `mkstemp`
@@ -190,7 +188,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 - Maintain it
 
 #### Frag
-- Updated for GHC 6.8.x & 6.10[^ghc]
+- Updated for GHC 6.8 & 6.10[^ghc]
 - Cleanup
 - Replaced the non-Free level data and graphics with Free ones
 
@@ -292,6 +290,93 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 
 ### Tagsoup
 - replaced old custom HTTP download code with standard library functions
+
+### The others & the rest
+
+I cabalized and/or uploaded (according to the [Hackage upload log](TODO)):
+
+- [Barracuda](!Hackage)
+- [DBus](!Hackage)
+- [DisTract](!Hackage)
+- [DrIFT-cabalized](!Hackage)
+- [FermatsLastMargin](!Hackage)
+- [Flippi](!Hackage)
+- [HFuse](!Hackage)
+- [HRay](!Hackage)
+- [Hashell](!Hackage)
+- [HsJudy](!Hackage)
+- [TypeIlluminator](!Hackage)
+- [ZMachine](!Hackage)
+- [adhoc-network](!Hackage)
+- [bio](!Hackage)
+- [blockio](!Hackage)
+- [botpp](!Hackage)
+- [child](!Hackage)
+- [clustertools](!Hackage)
+- [condorect](!Hackage)
+- [conjure](!Hackage)
+- [dephd](!Hackage)
+- [estreps](!Hackage)
+- [fst](!Hackage)
+- [genericserialize](!Hackage)
+- [goa](!Hackage)
+- [greencard](!Hackage) & [greencard-lib](!Hackage)
+- [harp](!Hackage)
+- [haskell-src-exts](!Hackage)
+- [helisp](!Hackage)
+- [hetris](!Hackage)
+- [hgeometric](!Hackage)
+- [highWaterMark](!Hackage)
+- [hinstaller](!Hackage)
+- [hjs](!Hackage)
+- [hopenssl](!Hackage)
+- [hs-fltk](!Hackage)
+- [hscurses](!Hackage)
+- [hsdip](!Hackage)
+- [hsdns](!Hackage)
+- [hsdns](!Hackage)
+- [hsemail](!Hackage)
+- [hsgnutls](!Hackage)
+- [hsgnutls](!Hackage)
+- [hsntp](!Hackage)
+- [hsp](!Hackage)
+- [hspr-sh](!Hackage)
+- [hybrid](!Hackage)
+- [infix](!Hackage)
+- [interlude](!Hackage)
+- [ivor](!Hackage)
+- [lazysmallcheck](!Hackage)
+- [linkchk](!Hackage)
+- [mohws](!Hackage)
+- [monadenv](!Hackage)
+- [mpdmate](!Hackage)
+- [nanocurses](!Hackage)
+- [nymphaea](!Hackage)
+- [pesca](!Hackage)
+- [pkcs1](!Hackage)
+- [plugins](!Hackage)
+- [popenhs](!Hackage)
+- [powermate](!Hackage)
+- [pugs-HsSyck](!Hackage)
+- [pugs-hsregex](!Hackage)
+- [rbr](!Hackage)
+- [reify](!Hackage)
+- [roguestar-engine](!Hackage)
+- [roguestar-gl](!Hackage)
+- [rsagl](!Hackage)
+- [simseq](!Hackage)
+- [smallcheck](!Hackage)
+- [tetris](!Hackage)
+- [thih](!Hackage)
+- [trhsx](!Hackage)
+- [type-equality-check](!Hackage)
+- [vty](!Hackage)
+- [xml-parsec](!Hackage)
+- [xml2x](!Hackage)
+- [xmonad-utils](!Hackage)
+- [xsact](!Hackage)
+- [yi-gtk](!Hackage)
+- [yi-vty](!Hackage)
 
 [^emacs]: For example, my clean up and extension of the browse-url module was completely rewritten by [RMS](!Wikipedia "Richard Stallman") - so I can hardly take credit there.
 [^clean]: Henceforth, 'cleanup' should be taken as referring to extensive miscellaneous changes which include (in no particular order):
