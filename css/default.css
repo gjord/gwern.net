@@ -114,3 +114,12 @@ p { margin-top: -0.2em; }
 p.hang { text-indent: -0.44em }
 
 .num { font-size: 85%; }
+
+/* CSS written by cwillu of #lesswrong in order to rewrite the Modafinil page's table of prices */
+#suppliers-prices td,#suppliers-prices th { padding: 0px 15px; }
+#suppliers-prices td:nth-child(1):after { content: "mg" }
+#suppliers-prices td:nth-child(2):before { content: "x" }
+#suppliers-prices td:nth-child(3) { text-align: right; }
+#suppliers-prices td:nth-child(3):before { content: "$" }
+#suppliers-prices td:nth-child(4):before { content: "$" }
+#suppliers-prices td:nth-child(5):after { content: "mg/$" }
