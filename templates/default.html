@@ -16,7 +16,7 @@
     <meta name="description" content="Joining Clouds - a personal site"/>
 
     <link href="$root/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
-  
+
     <link rel="shortcut icon" type="image/x-icon" href="$root/images/favicon.ico" />
 
     <!--
@@ -64,20 +64,31 @@
 
      <div id="disqus_thread"></div>
      <script type="text/javascript">
-           if (document.title != "index") { <!-- avoid Disqus comments on front page -->
-           (function() {
-           var SHORTNAME = 'example'; // Your website's shortname on Disqus
-           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-           dsq.src = 'http://disqus.com/forums/gwern/embed.js';
-           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-           })();
-           var disqus_shortname = 'gwern';
-           (function () {
-           var s = document.createElement('script'); s.async = true;
-           s.src = 'http://disqus.com/forums/gwern/count.js';
-           (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-           }());
-           }
+       if (document.title != "index") { <!-- avoid Disqus comments on front page -->
+        (function() {
+        var SHORTNAME = 'example'; // Your website's shortname on Disqus
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://disqus.com/forums/gwern/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+        var disqus_shortname = 'gwern';
+        (function () {
+         var s = document.createElement('script'); s.async = true;
+         s.src = 'http://disqus.com/forums/gwern/count.js';
+         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+       }());
+       }
+       else
+       {
+       var head  = document.getElementsByTagName('head')[0];
+       var link  = document.createElement('link');
+       link.id   = 'parallelColumns';
+       link.rel  = 'stylesheet';
+       link.type = 'text/css';
+       link.href = '/css/index.css';
+       link.media = 'all';
+       head.appendChild(link);
+       }
      </script>
   </body>
 </html>
