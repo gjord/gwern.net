@@ -850,3 +850,30 @@ So, I had always expected a break in my pseudonymity to come from the online dir
 I was idling in #wikipedia, discussing Wikipedia matters, as one does on the weekend, when [Andrew Garrett](!Wikipedia "User:Werdna") happened to also be hanging out with my older sister at Carnegie-Mellon; they fell to discussing Wikipedia and she mentioned that her younger brother did an awful lot of Wikipedia editing (as I [do](Links#wikis)), and Andrew inquired as to who I was when I was not at home. It was some strange nickname she couldn't remember. But she *did* remember that I frequently edited Japanese literature articles and the nick started with 'g' or something. (I'm particularly proud of [Fujiwara no Teika](!Wikipedia), incidentally.)
 
 Well, says Garrett, I don't know many Japanese literature editors; but I do chat with this guy named Gwern on IRC who does a lot of that sort of thing. That's it!, she says (as she destroys my pseudonymity), the odd nickname was 'gwern'. They both have a good laugh about what a small world it is, and then Andrew goes on IRC and knocks me for a loop by 'guessing' personal details until he finally reveals that my 'hot sister' is there feeding him information. And of course since she now works in San Francisco, and he's a PHP developer contracted to the Wikimedia Foundation (headquartered in SF), he occasionally visits & stays with her and I have to hear about it online. Oy vey.
+
+# Efficient natural language
+
+A single English character can be expressed (in [ASCII](!Wikipedia)) using a byte, or ignoring the wasted high-order bit, a full 7 bits. But English is pretty predictable, and isn't using those 7 bits to good effect. [Claude Shannon](!Wikipedia) found that each character was carrying more like 1 bit of unguessable information[^shannon]; Hamid Moradi found 1.62-2.28 bits on various books[^moradi], and Cover came up with 1.3 bits[^cover]. In practice, existing algorithms can make it down to just 2 bits to represent a character, and theory suggests the true entropy was around 0.8 bits per character.[^grassberger]
+
+[^shannon]: Claude E. Shannon, ["Prediction and entropy of printed English"](http://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf), _Bell Syst. Techn. J._, pp. 50-64, Jan. 1951
+[^cover]: T. M. Cover, ["A convergent gambling estimate of the entropy of English"](http://www.stanford.edu/~cover/papers/transIT/0413cove.pdf), _IEEE Trans. Info. Theory_, Vol. IT-24, no. 4, pp. 413-421, 1978
+[^moradi]: H. Moradi, ["Entropy of English text: Experiments with humans and a machine learning system based on rough sets"](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.5610&rep=rep1&type=pdf), _Information Sciences, An International Journal_ 104 (1998), 31-47
+[^grassberger]: Peter Grassberger, ["Data Compression and Entropy Estimates by Non-sequential Recursive Pair Substitution"](http://arxiv.org/abs/physics/0207023) (2002)
+
+Whatever the true entropy, it's clear existing English spelling is pretty wasteful. How many characters could we get away with? We could ask, how many bits does it take to uniquely specify 1 out of, say, 100,000 words?  Well, _n_ bits can uniquely specify 2^_n_^ items; we want at least 100,000 items covered by our bits, and as it happens, 2^17^ is 131072, which gives us some room to spare. (2^16^ only gives us 65536, which would be enough for a pidgin or something.) We already pointed out that a character can be represented by 7 bits (in ASCII), so each character accounts for 7 of those 17 bits. 7+7+7 > 17, so 3 characters. In this encoding, one of our 100,000 words would look like 'AxC' (and we'd have 30,000 unused triplets to spare). That's not so bad.
+
+But as has often been [pointed out](http://www.zompist.com/kitlong.html#howmany), one of the advantages of our verbose system which can take as many as 9 characters to express a word like 'advantage' is that the waste also lets us understand partial messages. The example given is a disemvoweled sentence: 'y cn ndrstnd Nglsh txt vn wtht th vwls'.
+
+The answer given when anyone points out that a compressed file can be turned to nonsense by a single error is that errors aren't that common, and the 'natural' redundancy is *very* inefficient in correcting for errors[^vowel]; so with a good [FEC](!Wikipedia "Forward error correction"), you can compress and eat your cake too. Exactly how much error we can detect or correct is given by the [Shannon limit](!Wikipedia)
+
+> $\frac{\text{channelCapacity}}{1 - (-(\text{mistakeRate} \times log_2(\text{mistakeRate}) + (1 - \text{mistakeRate}) \times log_2(1 - \text{mistakeRate})))}$
+
+If we suppose that each word is 3 characters long, and we get 1 error every 2 words on average, our channel capacity is 6 characters' of bits (or 7*6, or 42), and our mistake rate 1/6 of the characters (or 7/42), substituting in we get:
+
+> $\frac{42}{1 - (-(\frac{1}{6} \times log_2(\frac{1}{6}) + (1 + \frac{1}{6}) \times log_2(1 - \frac{1}{6})))}$
+
+42 / 1 - (-(1/6 * l(1/6) + (1 - 1/6) * l(1 - 1/6)))
+
+TODO: what does this evaluate to? `bc` says 41, but that was using the natural log.
+
+[^vowel]: If we argue that vowels are serving a useful purpose, then there's a problem. There are only 3 vowels and some semi-vowels, so we have at the very start given up at least 20 letters - tons of possibilities. To make a business analogy, you can't burn 90% of your revenue on booze & parties, and make it up on volume. Even the most trivial error-correction is better than vowels. For example, the last letter of every word could specify how many letters there were and what fraction are vowels; 'a' means there was 1 letter and it was a vowel, 'A' means 1 consonant, 'b' means 2 vowels, 'B' means 2 consonants', 'c' means 1 vowel & 1 consonant (in that order), 'C' means the reverse, etc. So if you see 'John looked _tc Julian', the trailing 'c' implies the missing letter is a vowel, which could only be 'a'.
