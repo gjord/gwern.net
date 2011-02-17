@@ -880,6 +880,6 @@ Or in Haskell, we evaluate (using [logBase](!Hoogle) because [log](!Hoogle) is t
 42 / 1 - (-(1/6 * logBase 2 (1/6) + (1 - 1/6) * logBase 2 (1 - 1/6)))
 ~~~~
 
-Which evaluates to 41.35 out of the original 42. In comparison, if our 2 words had one vowel, we just blew 7 bits, and if there were more than 1 vowel...
+Which evaluates to ~41. In other words, we started with 42 bits of possibly corrupted information, assumed a certain error rate, and asked how much could we communicate given that error rate; the difference is whatever we had to spend on ECC - 1 bit. Try comparing that to a vowel-scheme. The vowel would not guarantee detection or correction (you may be able to decade 'he st' as 'he sat', but can you decode 'he at' correctly?), and even worse, vowels demand an entire character, a single block of 7/8 bits, and can't be subtly spread over all the characters. So if our 2 words had one vowel, we just blew 7 bits of information on that and that alone, and if there were more than 1 vowel...
 
 Of course, the Shannon limit is the theoretical ideal and requires complex solutions humans couldn't mentally calculate on the fly. In reality, we would have to use something much simpler and hence couldn't get away with devoting just 1 bit to the FEC. But hopefully it demonstrates that vowels are a really atrocious form of error-correction. What would be a good compromise between humanly possible simplicity and inefficiency (compared to the Shannon limit)? I don't know.
