@@ -2,13 +2,25 @@ Consider the poor consumer. Insurance is offered for all sorts of things, and of
 
 Of course, we know why one would purchase insurance: because the risks one is insuring against are too large to be borne at any given time (even though one can pay for them eventually). A house burning down, chemotherapy, a car totaled, etc. One buys insurance as a way to trade many small payments for a single impossibly large payment. This is a valuable service to you, so you don't mind buying 'unfair' insurance; your lower [expected value](!Wikipedia) is traded off against a smaller [variance](!Wikipedia) of your future expenses.
 
-But not all insurance is of the 'catastrophic' variety. I've seen insurance offered on travel trips, and even video game consoles! And that insurance is *expensive*, easily hundreds of dollars - it's strange that people apparently think they can afford the steep insurance fees but not bear the cost of just buying a new console or whatever.
+But not all insurance is of the 'catastrophic' variety. I've seen insurance offered on travel trips, and even video game consoles! And that insurance is *expensive*, easily hundreds of dollars - it's strange that people apparently think they can afford the steep insurance fees but not bear the cost of just buying a new console or whatever. Nor are these insurances trivial side-lines companies run to humor consumers, but they are popular services (~30%[^popular] of purchases) and they are highly profitable[^profitable].
+
+[^popular]: From Stross 2011:
+
+    > "Professor Kalra was co-author of a 2009 article published in the _Journal of Consumer Research_ that examined purchase records from the electronics department of an unidentified retailer. [Tao Chen, Ajay Kalra and Baohong Sun (2009) “Why do Consumers Buy Extended Service Contracts”, _Journal of Consumer Research_ Volume 36 (December), 611-623]
+    >
+    > An extended service contract was bought in about 3 of every 10 transactions."
+[^profitable]: From Stross 2011:
+
+    > "Mr. Fassler says Best Buy has not disclosed for many years how much extended warranties contribute to its profits. Consumer electronics retailing is “historically a low-margin business that is dependent on extended warranties for profitability,” he says. “Perhaps extended warranties have become even more valuable to Best Buy recently, as its content businesses — like movies and music — have shrunk.”"
+
 
 # Worst Buy
+
 Let's at a real example. The smaller the good, the more obviously a bad deal these kinds of insurances are. I recently saw offers of console insurance at [Best Buy](!Wikipedia) (sandwiched between $100 [HDMI](!Wikipedia) cables), and was struck at how exploitative the offer must be. (Best Buy is notorious among geeks for its extraordinarily high prices and poor customer service[^worstbuy].)
 
 ## What a deal
-The price varies per item, but let's take a presumably common one. As of 9 March 2009, bestbuy.com offered an Xbox 360 for $399.99. The basic insurance plan on that Xbox 360 will run $59.99. That is, you will pay ~16% extra for insurance (1/6). And it's good only for 2 years or so. What does this considerable premium buy you?
+
+The price varies per item, but let's take a presumably common one. As of 9 March 2009, `bestbuy.com` offered an [Xbox 360](!Wikipedia) for $399.99. The basic insurance plan on that Xbox 360 will run $59.99. That is, you will pay ~16% extra for insurance (\frac{1}{6}). And it's good only for 2 years or so. What does this considerable premium buy you?
 
 > "Our obligations under this Plan will be fulfilled in their entirety if we replace your product, issue you a voucher or gift card or reimburse you for replacement of your product pursuant to these terms and conditions."
 
@@ -18,7 +30,16 @@ It buys you one replacement; or:
 
 3 repairs and a replacement. And that's it. But of course, it's not unconditional. You can't simply walk into Best Buy after a few days and announce you want a new Xbox 360. Here's invalid reasons to seek repair:
 
-> "This Plan does not cover: (i) damage to your product caused by accident (unless you have purchased the optional ADH Coverage), abuse, neglect, intentional physical damage, misuse (including faulty installation, repair, or maintenance by anyone other than an authorized service provider), unauthorized modification, viruses, extreme environment (including extreme temperature or humidity), external condensation, lightning, static electricity, fire, flood, insect infestation, rodents, war, terrorism, computer software related failures (unless you have the Vi-Spy Coverage) Acts of God or other external causes; (ii) products that have been lost or stolen. This Plan only covers products that are returned to us in their entirety; (iii) cosmetic damage to your product including but not limited to scratches, dents and broken plastic on parts, that does not otherwise affect its functionality or materially impair your use; (iv) products with a serial number that has been altered, defaced or removed; (v) problems caused by a device that is not your product, including equipment purchased at the same time as your product; (vi) consumable parts, such as batteries, unless expressly provided for herein; (vii) damage to, or loss of any software or data residing or recorded in your product.....(xi) damage to your xBox 360 due to Microsoft's "Red Ring of Death";"
+> "This Plan does not cover:
+>
+> (i) damage to your product caused by accident (unless you have purchased the optional ADH Coverage), abuse, neglect, intentional physical damage, misuse (including faulty installation, repair, or maintenance by anyone other than an authorized service provider), unauthorized modification, viruses, extreme environment (including extreme temperature or humidity), external condensation, lightning, static electricity, fire, flood, insect infestation, rodents, war, terrorism, computer software related failures (unless you have the Vi-Spy Coverage) [Acts of God](!Wikipedia) or other external causes;
+> (ii) products that have been lost or stolen. This Plan only covers products that are returned to us in their entirety;
+> (iii) cosmetic damage to your product including but not limited to scratches, dents and broken plastic on parts, that does not otherwise affect its functionality or materially impair your use;
+> (iv) products with a serial number that has been altered, defaced or removed;
+> (v) problems caused by a device that is not your product, including equipment purchased at the same time as your product;
+> (vi) consumable parts, such as batteries, unless expressly provided for herein;
+> (vii) damage to, or loss of any software or data residing or recorded in your product...
+> (xi) damage to your xBox 360 due to Microsoft's '[Red Ring of Death](!Wikipedia "Xbox 360 technical problems")'"
 
 Well, shucks. That seems to cover just about everything that *would* damage my new Xbox 360! If it ships broken, then it's the original manufacturer's problem (Microsoft); if I break it by accident, it's my problem; if it gets scratched up, it's my problem (and god help me if the scratches are anywhere near the serial number! Then I can't use the plan at all!); if my house damages it, it's my problem; if one of the many mechanical and electronic problems with the Xbox manifests, it's my or Microsoft's problem; etc. This doesn't seem to cover very much, although I suppose it covers if my Xbox stops working for no reason whatsoever one day. (Which isn't a terribly common problem with video game consoles.)
 
@@ -35,9 +56,10 @@ Generally, one only wants to engage in deals or actions which have a *positive* 
 5. $p = \frac{1}{5.7}$
 
 ## More details
-So we need a 1-in-6 chance of redeeming the insurance. But wait! The 1/6 doesn't apply directly to the chance of breaking an Xbox. Rather, it applies to the conjunction I expressed before: breaking the Xbox *and* Microsoft not covering it *and* Best Buy making good^[not a trivial consideration, given their customer service and the lengthy list of excluded issues] *and* us actually using it. As we all know, a conjunction of a bunch of probabilities is going to be less likely than any of the probabilities in themselves. So the first probability, 'breaking the Xbox' is going to be more likely than just 1/6.
 
-How much more likely? Well, we can play with some more numbers here. Let's see what happens if we are very generous & assign all the other probabilities something like a 90% chance. We know the total is 1/6, and we know the other 3 we've defined to 0.90, and we leave one variable to solve for, 'breaking the Xbox' (px):
+So we need a 1-in-6 chance of redeeming the insurance. But wait! The \frac{1}{6} doesn't apply directly to the chance of breaking an Xbox. Rather, it applies to the conjunction I expressed before: breaking the Xbox *and* Microsoft not covering it *and* Best Buy making good^[not a trivial consideration, given their customer service and the lengthy list of excluded issues] *and* us actually using it. As we all know, a conjunction of a bunch of probabilities is going to be less likely than any of the probabilities in themselves. So the first probability, 'breaking the Xbox' is going to be more likely than just \frac{1}{6}.
+
+How much more likely? Well, we can play with some more numbers here. Let's see what happens if we are very generous & assign all the other probabilities something like a 90% chance. We know the total is \frac{1}{6}, and we know the other 3 we've defined to 0.90, and we leave one variable to solve for, 'breaking the Xbox' (px):
 
 1. $\frac{1}{6} = 0.90 \times 0.90 \times 0.90 \times px$
 2. $\frac{1}{6} = 0.729 \times px$
@@ -61,4 +83,4 @@ Nor is console insurance the worst offer Best Buy has. It recently (February 201
     >
     > Even if the product does break, the cost of repair is not much more, on average, than the cost of the warranty, he says. He concludes that extended warranties “are a bad bet.”
     >
-    > Ajay Kalra, a marketing professor at Rice University, agrees. “All the statistics are compelling: in almost all cases, you shouldn’t buy the extended warranty,” he says. 
+    > Ajay Kalra, a marketing professor at Rice University, agrees. “All the statistics are compelling: in almost all cases, you shouldn’t buy the extended warranty,” he says.
