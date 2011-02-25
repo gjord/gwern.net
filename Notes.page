@@ -912,13 +912,13 @@ The only thing sadder, I think, would be if we could know of our failure and go 
 
 
 
-19:08:18 < foucist> sipa: gwern> idea is to conver the hashes bittorrent does already into bitcoin style hashes, which are only  assembleable by the server; if the
+19:08:18 < foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into bitcoin style hashes, which are only  assembleable by the server; if the
                     creator=server, then we just invented a way to turn downloards  into nanopayments with zero mental transaction costs
 
-19:11:34 < gwern> sipa: well, let's call this bitcoin2. suppose there were a bitcoin2-based economy but there were no upperlimit but a builtin steady inflation. if downloads
-                  solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'bittorrent/p2p is killing ...
+19:11:34 < gwern> sipa: well, let's call this bitcoin2. suppose there were a bitcoin2-based economy but there were no upper limit but a built-in steady inflation. if downloads
+                  solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing ...
 19:11:34 < gwern> ... creators' livelihoods!'
-19:12:47 < foucist> it might be entirely possible to do that with the current bitcoin system,  modify bittorent to use a different combo hash that ties into bitcoins somehow
+19:12:47 < foucist> it might be entirely possible to do that with the current bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
 19:15:00 < gwern> sipa: I thought about the bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new
                   bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
 19:15:22 < foucist> gwern: well the argument is that bitcoins isn't about mining
@@ -928,16 +928,16 @@ The only thing sadder, I think, would be if we could know of our failure and go 
                   failed in their thousands
 19:16:54 < foucist> i think the base idea is to find a way to tie bitcoins into bittorents such that it's an automatic micropayment for creators of that content
 19:17:18 < sipa> but you're describing two ideas
-19:17:27 < gwern> (or at least, hundreds. micropayments seems ike the sort of thing internet folks have been trying for ages and failing miserably every time.)
+19:17:27 < gwern> (or at least, hundreds. micropayments seems like the sort of thing Internet folks have been trying for ages and failing miserably every time.)
 19:17:28 < sipa> 1) using bitcoins to pay for downloads
 19:17:30 < foucist> sipa Necr0s he's not using creators to mean miners
 19:17:35 < foucist> the term*
 19:17:37 < sipa> i know
 19:17:48 < sipa> you mean content creators
-19:18:15 < sipa> 2) reusing the hashing done by bittorrent for bitcoin
+19:18:15 < sipa> 2) reusing the hashing done by BitTorrent for bitcoin
 19:18:28 < gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover
                   advantage)
-19:18:52 < sipa> furthermore, i don't see how you are going to reuse the hashing power... bittorrent uses it in a deterministic way to verify whether data is identical, while
+19:18:52 < sipa> furthermore, i don't see how you are going to reuse the hashing power... BitTorrent uses it in a deterministic way to verify whether data is identical, while
                  bitcoin uses it as a pseudorandom function to look for a lot of zeroes
 19:19:16 < gwern> sipa: #1 is boring. it's the same damn failed idea that has been tried hundreds of times. #2 is more interesting. is there any variant which does both?
 19:19:36 < gwern> that's where I fail because I don't know the math
@@ -952,15 +952,15 @@ The only thing sadder, I think, would be if we could know of our failure and go 
 19:22:55 < sipa> but that's little more than a using-bitcoins-to-pay-for-data system
 19:22:56 < foucist> gwern: ok so you think only a purely generative way would work ?  hmm
 19:23:12 < sipa> and it's very wasteful
-19:23:28 < sipa> since the profitability of cpu mining is already long gone
+19:23:28 < sipa> since the profitability of CPU mining is already long gone
 19:23:44 < gwern> sipa: in the current bitcoin system, yeah, not some new bitcoin system
 19:24:01 < sipa> explain me why people would value your bitcoin2's?
-19:24:29 < gwern> foucist: well, you need to keep the bitcoin+bittorrent not much more expensive in time than plain bittorrent. if the new system took 3 times as long to
-                  download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at itunes
-19:25:10 < foucist> gwern: bitcoin mining of any kind is still kinda wasteful though, those cpu power could be used for solving real problems etc ;)
-19:25:36 < sipa> indeed, do that as payment in your paying-for-creators bittorrent system
+19:24:29 < gwern> foucist: well, you need to keep the bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
+                  download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
+19:25:10 < foucist> gwern: bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc ;)
+19:25:36 < sipa> indeed, do that as payment in your paying-for-creators BitTorrent system
 19:25:43 < gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular bitcoin, it'd give you access to the new stuff, you'd not feel
-                  guilty about piracy, that sort of thing. (again, why does anyone download from itunes?)
+                  guilty about piracy, that sort of thing. (again, why does anyone download from iTunes?)
 19:25:47 < sipa> pay with folding@home work units or some
 19:26:07 < sipa> gwern: but it wouldn't have limited total supply
 
@@ -970,7 +970,7 @@ The only thing sadder, I think, would be if we could know of our failure and go 
 
 19:33:28 < gwern> foucist: wouldn't surprise me if the research has already been done, actually; this is starting to remind me of the 'proof of work' subfield of crypto
 19:34:38 < Necr0s> I need to understand a bit more about crypto.
-19:34:40 < foucist> a quick google on 'micropayment hash' reveals a variety of research papers on micropyaments with hash-chains
+19:34:40 < foucist> a quick google on 'micropayment hash' reveals a variety of research papers on micropayments with hash-chains
 19:35:11 < Necr0s> Particularly asymmetric public/private key systems.
 19:35:27 < foucist> "Micro-payment Protocol Based on Multiple Hash Chains" "A Study of Micro-payment Based on One-Way Hash Chain'
 19:35:50 < Necr0s> And their use in signing content.
