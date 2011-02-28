@@ -28,7 +28,7 @@ Or, why does [Steve Yegge](!Wikipedia) think touch-typing is one of the few skil
 
 The thing is, multiple monitors, touch-typing - they're all about making the external world part of your mind. What's the real difference between having a [type signature](!Wikipedia) in your short-term memory or prominently displayed in your second monitor? What's the *real* difference between writing a [comment](!Wikipedia "Comment (computer programming)") in your mind or touch-typing it as fast as you create it?
 
-Just some speed. Just some time. And the more visible that type signature is, the faster you can type out that comment, the larger your 'memory' gets. And the larger your memory is, the more intelligent/productive you can be. (Think of this as the [Extended Mind](!Wikipedia "Extended Mind") thesis as applied to programming!)
+Just some speed. Just some time. And the more visible that type signature is, the faster you can type out that comment, the larger your 'memory' gets. And the larger your memory is, the more intelligent/productive you can be. (Think of this as the [Extended Mind](!Wikipedia "Extended Mind") thesis as applied to programming!) Great programmers often[^codersatwork] talk vaguely about 'keeping a system in your head' or 'having a model'; I think what they are talking about is trying to store all the relevant details inside their short-term or working memory.
 
 But as great as things like garbage collection & touch-typing & multiple monitors are (I am a fan & user of the foregoing), they are still imperfect substitutes. Wouldn't it be better if one could just improve one's short-term/working memory directly? It might be more effective, and certainly would be more portable!
 
@@ -888,3 +888,42 @@ seems that performance for the two tasks relies on different sources of variance
 
     > "Recently, attempts have been made to alter the capacity of working memory (WMC) through extensive practice on adaptive working memory tasks that adjust difficulty in response to user performance. We discuss the design criteria required to claim validity as well as generalizability and how recent studies do or do not satisfy those criteria. It is concluded that, as of yet, the results are inconsistent and this is likely driven by inadequate controls and ineffective measurement of the cognitive abilities of interest."
 [^zinc]: See for example ["Zinc status and cognitive function of pregnant women in Southern Ethiopia"](http://www.ncbi.nlm.nih.gov/pubmed/19190668) or ["Zinc supplementation improved cognitive performance and taste acuity in Indian adolescent girls"](http://www.ncbi.nlm.nih.gov/pubmed/20368377)
+[^codersatwork]: From the interview anthology _[Coders at Work](!Wikipedia)_ (2009), pg 114:
+
+    > [`Peter Seibel`](http://www.gigamonkeys.com/): "Do you think that programming is at all biased toward being young?"
+    >
+    > [`Douglas Crockford`](!Wikipedia): "I used to think so. A few years ago I had [sleep apnea](!Wikipedia), but I didn't know it. I thought I was just getting tired and old, and I got to the point where it was so difficult to concentrate that I couldn't program anymore because I just couldn't keep enough stuff in my head. A lot of programming is you keep stuff in your head until you can get it written down and structured properly. And I just couldn't do it.
+    >
+    > I had lost that ability and I thought it was just because I was getting older. Fortunately, I got better and it came back and so I'm programming again. I'm doing it well and maybe a little bit better now because I've learned how not to depend so much on my memory. I'm better at documenting my code now than I used to be because I'm less confident that I'll remember next week why I did this. In fact, sometimes I'll be going through my stuff and I'm amazed at stuff that I had written: I don't remember having done it and it's either really either awful or brilliant. I had no idea I was capable of that."
+    
+    From pg 154:
+    
+    > `Seibel`: "How do you design code?"
+    > 
+    > [`Brendan Eich`](!Wikipedia): "A lot of prototyping. I used to do sort of high-level pseudocode, and then I'd start filling in bottom up. I do less of the high-level pseudocode because I can usually hold it in my head and just do bottom-up until it joins.
+    > 
+    > Often I'm working with existing pieces of code adding some new subsystem or something on the side and I can almost do it bottom-up. When I get in trouble in the middle I do still write pseudo-code and just start working bottom up until I can complete it. I try not to let that take too long because you've got to be able to test it; you've got to be able to see it run and step through it and make sure it's doing what it's supposed to be doing."
+    
+    From pg 202:
+    
+    > `Seibel`: "Speaking of writing intricate code, I've noticed that people who are too smart, in a certain dimension anyway, make the worst code. Because they can actually fit the whole thing in their head they can write these great reams of spaghetti code."
+    > 
+    > [`Joshua Bloch`](!Wikipedia): "I agree with you that people who are both smart enough to cope with enormous complexity and lack empathy with the rest of us may fall prey to that. They think, 'I can understand this and I can use it, so it has to be good.'"
+     
+    From pg 236:
+    
+    > [`Joe Armstrong`](!Wikipedia "Joe Armstrong (programming)"): "I read somewhere, that you have to have a good memory to be a reasonable programmer. I believe that to be true."
+    > 
+    > `Seibel`: "Bill Gates once claimed that he could still go to a blackboard and write out big chunks of the code to the BASIC that he written for the Altair, a decade or so after he had originally written it. Do you think you can remember your old code that way?"
+    > 
+    > `Armstrong`: "Yeah. Well, I could reconstruct something. Sometimes I've just completely lost some old code and it doesn't worry me in the slightest."
+     
+    From page 246:
+    
+    > [`Simon Peyton Jones`](!Wikipedia): "Yeah, that's right. So essentially we wrote out our types by drawing them on large sheets of papers with arrows. That was our type system. That was a pretty large program—in fact it was over ambitious; we never completed it."
+    > 
+    > `Seibel`: "Do you think you learned any lessons from that failure?"
+    > 
+    > `Peyton Jones`: "That was probably when I first became aware that writing a really big program you could end up with problems of scale—you couldn't keep enough of it in your head at the same time. Previously all the things I had written, you could keep the whole thing in your head without any trouble. So it was probably the first time I'd done any serious attempt at long-standing documentation."
+    > 
+    > `Seibel`: "But even that wasn't enough, in this case..."
