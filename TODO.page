@@ -38,7 +38,7 @@
 
 ## General
 
-- Extend [Simple unix tools](!Hawiki) to include more coreutils and maybe QuickCheck tests, and merge into HSH's ShellEquivs. Is there any useful merger of [HSH](http://software.complete.org/software/projects/show/hsh), and [Language.Sh/ShSh](http://code.haskell.org/shsh/)
+- Extend [Simple unix tools](!Hawiki) to include more coreutils and maybe QuickCheck tests, and merge into HSH's ShellEquivs. Is there any useful merger of [HSH](http://software.complete.org/software/projects/show/hsh), and `Language.Sh`/ShSh <!-- shsh survives in my local repo -->
 - look for vector graphics libraries for Haskell; think about cloning DEFCON
 - Translate the Lisp from Hofstadter's _Metamagical Themas_ into Haskell
 - Split out Cpuperf's Sudo monad and make safer
@@ -75,7 +75,7 @@
     - ./flm/FermatsLastMargin.cabal
     - ./flm/FLM.cabal
     - ./haxml/HaXml.cabal
-- Remove [Data.Map.map](!Hoogle); see [original](http://www.mail-archive.com/haskell-cafe@haskell.org/msg22115.html) [email thread](http://old.nabble.com/Why-the-Prelude-must-die-td9646480.html) and the GHC [bug report](http://hackage.haskell.org/trac/ghc/ticket/1249).
+- Remove [Data.Map.map](!Hoogle); see [original](http://www.mail-archive.com/haskell-cafe@haskell.org/msg22115.html) [email thread](http://www.mail-archive.com/haskell-cafe@haskell.org/msg22055.html) and the GHC [bug report](http://hackage.haskell.org/trac/ghc/ticket/1249).
 
 ## Pandoc
 - Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
