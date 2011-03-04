@@ -42,7 +42,7 @@ Anecdotally, the troll under the bridge for modafinil seems to be that one can d
 
 There are two pieces of good news in the anecdotes, though. It seems that it is only tolerance, and not dependence. Caffeine tolerance builds up rapidly, and worse, there is dependence: one declines to below baseline mental performance when one stops using the caffeine; but there seems only to be tolerance to modafinil - I have seen no anecdotes reported performance declines after tolerance and ceasing use. (But one's baseline productivity may be so low compared to productivity while using modafinil that one feels like there is dependence.) Secondly, some anecdotes report that modafinil can be used indefinitely on a weekly or more frequent basis without developing tolerance.
 
-So even this downside isn't very large. There's no evidence that modafinil tolerance (if it exists, whatever it is) is linked to irreversible changes in the brain like use of [MAOI inhibitors](!Wikipedia TODO) is, so I'll ignore it in the following cost-benefit analysis. A drug which offers a high return on investment but can only be used once a week is still offering a high return on one's investment.
+So even this downside isn't very large. There's no evidence that modafinil tolerance (if it exists, whatever it is) is linked to irreversible changes in the brain like use of [MAO inhibitors](!Wikipedia "Monoamine oxidase inhibitor") is, so I'll ignore it in the following cost-benefit analysis. A drug which offers a high return on investment but can only be used once a week is still offering a high return on one's investment.
 
 # Analysis
 
@@ -152,7 +152,7 @@ Internet suppliers are not known for their transparency or reliability; and the 
 For modafinil we can come up with a few distinct ordering scenarios:
 
 1. a one-shot order
-2. multiple orders, with oneself as an [oracle](!Wikipedia TODO) (perhaps one has used genuine Provigil in the past and is sufficiently rational to avoid mistakes caused by things like the placebo effect)
+2. multiple orders, with oneself as an oracle (perhaps one has used genuine Provigil in the past and is sufficiently rational to avoid mistakes caused by things like the placebo effect)
 3. multiple orders, with laboratory assays as the oracle
 
 ## One-shot ordering
@@ -173,7 +173,9 @@ If it was modafinil, then great. You've found an honest supplier. You might want
 
 If it was not, then you have a problem. Are you the vengeful sort who assumes that suppliers are all rotten? Then you blacklist them and order from the next cheapest supplier (by unit-price adjusted for perceived risk). If you're not vengeful, if you believe the suppliers who say that they don't have control of their supply chain and sometimes bad products slip in, then you have to do more work.
 
-If we interpret our distrust probability as instead 'what percentage of delivered product is genuine', then to continue the previous example, my trust probability would drop only a little if EDAndMore sent me caffeine/fake modafinil. Why? Because I estimated a 60% chance of them sending me modafinil, and 60% is another way of saying there's a 40% chance they'll send me not-modafinil. 40% chances happen quite often and I wouldn't be very surprised if one happened when I ordered. On the other hand, I expected mostly pure product out of Airsealed (95% of their shipments being good), so if Airsealed sent fakes to me, then I would be quite shocked - 5% chances don't happen all that often (it's like rolling a 20 in D&D). How much do I knock down my estimate of Airsealed? By more than EDAndMore, obviously. But *how* much more? Well, you have to apply [Bayes's theorem](!Wikipedia TODO). (One basic property of Bayes's theorem is that extreme probabilities are hugely damaged by opposed observations, while equivocal probabilities like 51% take a lot of data to knock down.)
+If we interpret our distrust probability as instead 'what percentage of delivered product is genuine', then to continue the previous example, my trust probability would drop only a little if EDAndMore sent me caffeine/fake modafinil. Why? Because I estimated a 60% chance of them sending me modafinil, and 60% is another way of saying there's a 40% chance they'll send me not-modafinil. 40% chances happen quite often and I wouldn't be very surprised if one happened when I ordered. On the other hand, I expected mostly pure product out of Airsealed (95% of their shipments being good), so if Airsealed sent fakes to me, then I would be quite shocked - 5% chances don't happen all that often (it's like rolling a 20 in D&D). How much do I knock down my estimate of Airsealed? By more than EDAndMore, obviously. But *how* much more? Well, you have to apply [Bayes' theorem](!Wikipedia). (One basic property of Bayes' theorem is that extreme probabilities are hugely damaged by opposed observations, while equivocal probabilities like 51% take a lot of data to knock down. For a good explanation, see ["An Intuitive Explanation of Bayes' Theorem"](http://yudkowsky.net/rational/bayes).)
+
+$P(a|b) = \frac{P(b|a) \times P(a)}{P(b)}$
 
 So, if we started with just the two hypotheses that Airsealed ships 95% modafinil and Airsealed ships only 5% modafinil, and we gave the former a 0.95 probability (and thus the latter 0.05), then our fake leads us to the following calculation:
 
@@ -191,7 +193,7 @@ But a wrinkle comes to mind. $1000 is a lot. Quite a lot, really. You could buy 
 
 Are we sure we want to spend that? I mean, what if the price difference between the last 2 suppliers is just a few pennies - would we still want to spend $1000 just to be sure? Even if we plan to buy for years, decades, or the rest of our life, that $1000 might not be worth spending to optimize and save a few pennies. We could ask ourselves - is the possible penalty of a few pennies every order over our lifetime *worth* the $1000 right now? As it happens, there's a nifty formula for this.
 
-We want to compare an infinite stream of small savings against a single large expenditure. The savings would make us slightly wealthier each time period. In fact, you could imagine that we were actually discussing savings bonds or annuities: is the small payoff each year worth the large upfront investment? In economics terminology, the question is whether the '[net present value](!Wikipedia TODO)' of that payoff stream is larger than our investment.
+We want to compare an infinite stream of small savings against a single large expenditure. The savings would make us slightly wealthier each time period. In fact, you could imagine that we were actually discussing savings bonds or annuities: is the small payoff each year worth the large upfront investment? In economics terminology, the question is whether the '[net present value](!Wikipedia)' of that payoff stream is larger than our investment.
 
 Net present value can be approximated based on knowing one's [discount rate](!Wikipedia) (which is a percentage) and then plugging in the numbers to the following formula:
 
@@ -207,11 +209,11 @@ But it would cost us $1000 to assay and find out whether there was a savings or 
 
 As it happens, at a discount rate of 7%, we would have to potentially save about $68 before the assay became a good idea. (For $20 a year to be worthwhile, your discount rate has to fall down to around 2%, and very few people are *that* patient and self-sacrificing!) If you look back at the supplier chart, it runs the gamut from 222 mg per dollar to 16 mg; so for the first few purchases the assay might well be worthwhile.
 
-Thus we solve situation #3. You apply the #1 method to decide at any point which supplier to order from next by their risk-adjusted unit-price; then you update the risk-adjusted unit-price through #2's idea of using Bayes's theorem; then if testing is not free, you decide to stop testing and stop searching suppliers when, as given by #3's present value formula, the testing (assays) start costing more than one can hope to gain.
+Thus we solve situation #3. You apply the #1 method to decide at any point which supplier to order from next by their risk-adjusted unit-price; then you update the risk-adjusted unit-price through #2's idea of using Bayes' theorem; then if testing is not free, you decide to stop testing and stop searching suppliers when, as given by #3's present value formula, the testing (assays) start costing more than one can hope to gain.
 
 A final thought about modafinil:
 
-> "I am not interested in talking about my ideas. I am interested in your application of them to your life."^[[Miyamoto Musashi](!Wikipedia), "Book of Water", _[Book of Five Rings](!Wikipedia TODO can link to book of water subsection?)]
+> "I am not interested in talking about my ideas. I am interested in your application of them to your life."^[[Miyamoto Musashi](!Wikipedia), "Book of Water", _[Book of Five Rings](!Wikipedia "The Book of Five Rings#The Book of Water")]
 
 It goes without saying that #1-3 are all simplified models which may not apply to every situation; but at some point, the would-be users of nootropics must start thinking for themselves...
 
