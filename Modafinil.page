@@ -16,6 +16,10 @@ Don't believe me? Then try this quote from the abstract of a journal review of m
 
 > "Furthermore, modafinil appears to be well-tolerated, with a low rate of adverse events and a low liability to abuse."[^review]
 
+# Usage
+
+> "Modafinil can be reliably determined in plasma and urine (Schwertner and Kong, 2005; Tseng et al, 2005), and is readily absorbed (40–65%, as measured by urinary recovery) after single (Wong et al, 1999a) or multiple oral doses (Wong et al, 1999b), reaching peak plasma concentrations 2–4 h after administration (Wong et al, 1999a). The presence of food in the gastrointestinal tract can slow the rate but does not affect the total extent of absorption. Steady-state plasma concentrations are achieved between 2 and 4 days with repeated dosing. It is highly lipophilic, and approximately 60% bound to plasma proteins, primarily albumin. Major pharmacokinetic parameters are independent of doses in the range of 200–600 mg/day (Robertson and Hellriegel, 2003). The major circulating metabolites modafinil acid and modafinil sulfone do not appear to exert any significant activity in the brain or periphery (Robertson and Hellriegel, 2003). The elimination half-life is approximately 12–15 h (Wong et al, 1999a), and single daily dosing is adequate and common in clinical practice."^[Minzenberg again.]
+
 # Benefits
 
 Modafinil has a couple different but closely related benefits - assuming you are a person for whom modafinil works ([genetic variation](http://www.snpedia.com/index.php/Rs4680) has been linked to responding or not responding). You can sum them up as pretty much it cuts your sleep need by about 2/3s, or it allows you to go without sleep for a day with no penalty. (If you aren't sleep-deprived, it seems to just increase your alertness and energy levels.)
@@ -61,7 +65,6 @@ The [general feeling](http://www.drugbuyers.com/freeboard/ubbthreads.php?ubb=sho
 1. Modapro
 2. Modalert
 3. Alertec
-
 
 Vendor notes:
 
@@ -132,11 +135,78 @@ mg    Amt            $             S&H   mg/$         Provider
 100   20            180      16.5       17            [QHI](http://www.qhi.co.uk/list.asp?r=910)
 100   30            168      15         16            [Biogenesis AntiAging](http://www.biogenesis-antiaging.com/p88/Modafinil-%28Modiodal%29/product_info.html)
 
-# Usage
+# Ordering behavior
 
-> "Modafinil can be reliably determined in plasma and urine (Schwertner and Kong, 2005; Tseng et al, 2005), and is readily absorbed (40–65%, as measured by urinary recovery) after single (Wong et al, 1999a) or multiple oral doses (Wong et al, 1999b), reaching peak plasma concentrations 2–4 h after administration (Wong et al, 1999a). The presence of food in the gastrointestinal tract can slow the rate but does not affect the total extent of absorption. Steady-state plasma concentrations are achieved between 2 and 4 days with repeated dosing. It is highly lipophilic, and approximately 60% bound to plasma proteins, primarily albumin. Major pharmacokinetic parameters are independent of doses in the range of 200–600 mg/day (Robertson and Hellriegel, 2003). The major circulating metabolites modafinil acid and modafinil sulfone do not appear to exert any significant activity in the brain or periphery (Robertson and Hellriegel, 2003). The elimination half-life is approximately 12–15 h (Wong et al, 1999a), and single daily dosing is adequate and common in clinical practice."^[Minzenberg again.]
+Internet suppliers are not known for their transparency or reliability; and the few retailers online of modafinil which are trustworthy tend to be more expensive (as a look at the above chart shows) or they require prescriptions for US buyers (like the Canadian online pharmacies). So we are faced with a classic problem of risk: given that any supplier may shaft us, how should we rationally order products to reduce our risk?
 
-# See also
+For modafinil we can come up with a few distinct ordering scenarios:
+
+1. a one-shot order
+2. multiple orders, with oneself as an [oracle](!Wikipedia TODO) (perhaps one has used genuine Provigil in the past and is sufficiently rational to avoid mistakes caused by things like the placebo effect)
+3. multiple orders, with laboratory assays as the oracle
+
+## One-shot ordering
+
+For #1, the simple answer is best. You decide roughly how much you trust each supplier based on factors like how their website looks, what descriptions of them you found online, whether they seem 'too good to be true', etc - what is the percentage that they will pay? An obvious scam is 0%, a totally trusted source is 100% and everyone else is a shade of gray. Then you multiply their trustworthiness against their modafinil/mg price. Whomever comes out on top, you order from.
+
+So, if I thought EDAndMore had only a 60% chance of delivering real modafinil rather than caffeine pills, I would multiply their unit-price 222 against the trust-penalty of 0.6 and get 133.2 ($222 \times 0.6$). And then I might decide United Pharmacies smells a bit better and give them a 70% chance, for a total of 145.6 ($208 \times 0.7$); and perhaps Airsealed gets a whopping 95% trust from me, for a total of 71.25 ($75 \times 0.95$). In this scenario, Airsealed is highly trustworthy compared to the other two, but because Airsealed costs nearly 3 times its competitors, it comes out poorly against United Pharmacies; UP is only a little more expensive than EDAndMore, but has a noticeable edge over EDAndMore in trust and so wins. For Airsealed to win, I would have to trust both EDAndMore and United Pharmacies somewhere less than 33%.
+
+I order and I get... something. This is where the one-shot strategy ends. You calculated, did your best, and either won or lost.
+
+If you plan to order again (and modafinil is such a useful drug that it is hard to see why one would not plan to use it indefinitely as tolerance and finances permit), you have a chance to update based on how the first order went.
+
+Presumably one has learned from one's own experiences whether the product was modafinil or not. Modafinil is fairly distinct from caffeine; one gains tolerance to caffeine very quickly, and caffeine will not keep one going overnight with little mental penalty. So we'll assume one knows.
+
+If it was modafinil, then great. You've found an honest supplier. You might want to order a few years' supply while you can. If you really want an optimally cheap supply, you can try some of the other suppliers. Naturally you will not try any supplier whose per-unit price is more expensive, because you trust your current supplier 100% and must distrust the others at least a little, so the list of possible suppliers has been cut down.
+
+## Ordering with learning
+
+If it was not, then you have a problem. Are you the vengeful sort who assumes that suppliers are all rotten? Then you blacklist them and order from the next cheapest supplier (by unit-price adjusted for perceived risk). If you're not vengeful, if you believe the suppliers who say that they don't have control of their supply chain and sometimes bad products slip in, then you have to do more work.
+
+If we interpret our distrust probability as instead 'what percentage of delivered product is genuine', then to continue the previous example, my trust probability would drop only a little if EDAndMore sent me caffeine/fake modafinil. Why? Because I estimated a 60% chance of them sending me modafinil, and 60% is another way of saying there's a 40% chance they'll send me not-modafinil. 40% chances happen quite often and I wouldn't be very surprised if one happened when I ordered. On the other hand, I expected mostly pure product out of Airsealed (95% of their shipments being good), so if Airsealed sent fakes to me, then I would be quite shocked - 5% chances don't happen all that often (it's like rolling a 20 in D&D). How much do I knock down my estimate of Airsealed? By more than EDAndMore, obviously. But *how* much more? Well, you have to apply [Bayes's theorem](!Wikipedia TODO). (One basic property of Bayes's theorem is that extreme probabilities are hugely damaged by opposed observations, while equivocal probabilities like 51% take a lot of data to knock down.)
+
+So, if we started with just the two hypotheses that Airsealed ships 95% modafinil and Airsealed ships only 5% modafinil, and we gave the former a 0.95 probability (and thus the latter 0.05), then our fake leads us to the following calculation:
+
+TODO
+
+Phew! So, now we have a full system for situation #2. First, go through the [expected utility](!Wikipedia) calculation for all the prices you've gathered in which you trade off risk versus price. Then order, test for modafinil or not-modafinil, and do a Bayesian update on the supplier. Rinse, and repeat. This procedure terminates if there are any good suppliers (suppose you luck out and the second supplier you test, #4 on the per-unit list, is honest; now you only need to test 3 more suppliers).
+
+## Ordering when learning isn't free
+
+How do we extend this procedure to handle situation #3, where we no longer trust ourselves to test the supposed modafinil (for free)?
+
+Let's assume it costs $1000 to assay some pills and like in #2, we'll assume the assay is infallible. Then we just repeat the #2 procedure except with the assay replacing our own subjective testing. Fair enough, right?
+
+But a wrinkle comes to mind. $1000 is a lot. Quite a lot, really. You could buy a *lot* of modafinil with $1000; even if we played it safe and bought from Nubrain, $1000 would get us $62 \times 1000$, or 62,000 mg, or at 200mg a day, 310 days' worth^[Which is more than a year's supply because taking it every single day is asking for tolerance to build up.].
+
+Are we sure we want to spend that? I mean, what if the price difference between the last 2 suppliers is just a few pennies - would we still want to spend $1000 just to be sure? Even if we plan to buy for years, decades, or the rest of our life, that $1000 might not be worth spending to optimize and save a few pennies. We could ask ourselves - is the possible penalty of a few pennies every order over our lifetime *worth* the $1000 right now? As it happens, there's a nifty formula for this.
+
+We want to compare an infinite stream of small savings against a single large expenditure. The savings would make us slightly wealthier each time period. In fact, you could imagine that we were actually discussing savings bonds or annuities: is the small payoff each year worth the large upfront investment? In economics terminology, the question is whether the '[net present value](!Wikipedia TODO)' of that payoff stream is larger than our investment.
+
+Net present value can be approximated based on knowing one's [discount rate](!Wikipedia) (which is a percentage) and then plugging in the numbers to the following formula:
+
+$\frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)}$
+
+What is my discount rate? If I introspect and ask myself, would I prefer $150 in a year to $100 right now; I say yes, so I know my discount rate is less than 0.5/50%; would I prefer $125 to $100 now? Yes, so it's less than 0.25/25%; and so on down to around $107 versus $100. So let's say 7% for me.
+
+What do our two suppliers look like? Maybe one charges me $220 for a year's supply and the other, the one I haven't yet tested, supplies it for $200. So $20 a year is at stake. Let's plug it in:
+
+$\frac{20}{\ln(1+0.07} = \frac{20}{\ln(1.07)} = \frac{20}{0.06765} = 295.6$
+
+But it would cost us $1000 to assay and find out whether there was a savings or not! Clearly it's not a good idea to spend the money for the assay. $20 a year is just not enough.
+
+As it happens, at a discount rate of 7%, we would have to potentially save about $68 before the assay became a good idea. (For $20 a year to be worthwhile, your discount rate has to fall down to around 2%, and very few people are *that* patient and self-sacrificing!) If you look back at the supplier chart, it runs the gamut from 222 mg per dollar to 16 mg; so for the first few purchases the assay might well be worthwhile.
+
+Thus we solve situation #3. You apply the #1 method to decide at any point which supplier to order from next by their risk-adjusted unit-price; then you update the risk-adjusted unit-price through #2's idea of using Bayes's theorem; then if testing is not free, you decide to stop testing and stop searching suppliers when, as given by #3's present value formula, the testing (assays) start costing more than one can hope to gain.
+
+A final thought about modafinil:
+
+> "I am not interested in talking about my ideas. I am interested in your application of them to your life."^[[Miyamoto Musashi](!Wikipedia), "Book of Water", _[Book of Five Rings](!Wikipedia TODO can link to book of water subsection?)]
+
+It goes without saying that #1-3 are all simplified models which may not apply to every situation; but at some point, the would-be users of nootropics must start thinking for themselves...
+
+# External links
+
 - [Google Answers (Q: Modafinil Brands)](http://answers.google.com/answers/threadview/id/777105.html)
 - [Modafinil at Erowid](http://www.erowid.org/smarts/modafinil/modafinil.shtml)
 - <http://www.modafinil.com/>
