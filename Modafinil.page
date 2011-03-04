@@ -175,11 +175,52 @@ If it was not, then you have a problem. Are you the vengeful sort who assumes th
 
 If we interpret our distrust probability as instead 'what percentage of delivered product is genuine', then to continue the previous example, my trust probability would drop only a little if EDAndMore sent me caffeine/fake modafinil. Why? Because I estimated a 60% chance of them sending me modafinil, and 60% is another way of saying there's a 40% chance they'll send me not-modafinil. 40% chances happen quite often and I wouldn't be very surprised if one happened when I ordered. On the other hand, I expected mostly pure product out of Airsealed (95% of their shipments being good), so if Airsealed sent fakes to me, then I would be quite shocked - 5% chances don't happen all that often (it's like rolling a 20 in D&D). How much do I knock down my estimate of Airsealed? By more than EDAndMore, obviously. But *how* much more? Well, you have to apply [Bayes' theorem](!Wikipedia). (One basic property of Bayes' theorem is that extreme probabilities are hugely damaged by opposed observations, while equivocal probabilities like 51% take a lot of data to knock down. For a good explanation, see ["An Intuitive Explanation of Bayes' Theorem"](http://yudkowsky.net/rational/bayes).)
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{P(b)}$
+$P(a|x) = \frac{P(x|a) \times P(a)}{P(x)}$
 
-So, if we started with just the two hypotheses that Airsealed ships 95% modafinil and Airsealed ships no modafinil, and we gave the former a 0.95 probability (and thus the latter 0.05), then our fake leads us to the following calculation:
+The former is a little complex, so we'll simplify down again. Here's our scenario: 95% of the orders delivered by a 'good' supplier will be real (all modafinil); but bad suppliers have only 5% of the orders be real. (Apparently this isn't all that unrealistic; whether it's because supply chains are unreliable or deliberate profit-maximizing behavior, often neither good or bad suppliers ship *all* fakes or *all* genuine modafinil.)
 
-TODO
+Now, supplier Z, whom you had calculated was probably good with 90% probability, sent you a fake. Keeping in mind that you might just be one of the unlucky 5%, now how much do you think that Z is good?
+
+A rearrangement of Bayes' theorem from the end of Eliezer Yudkowsky's "Intuitive Explanation of Bayes' Theorem" (he explains its derivation if you don't trust me):
+
+$P(a|x) = \frac{P(x|a) \times P(a)}{(P(x|a) \times P(a)) + (P(x|\lnot a) \times P(\lnot a))}$
+
+How confusing and intimidating! Where does one start, with all the differing entries?
+
+Let's break it down step by step. If you didn't read either Wikipedia or Yudkowsky, you should have, but remember the pipe is read backwards: $P(foo|bar)$ means 'how likely foo is now that I have observed bar' (you could mentally rewrite it to something like $P(bar \rightarrow foo)$). $x$ represents our observation, whatever it is. In this case, it's the not-modafinil, the fake pills. $a$ represents our new, reduced, belief that Z is a good place to order from. So at the beginning we can make a few definitions:
+
+- $a$ = being a good supplier
+- $x$ = receiving fakes
+
+If you look, the right-hand side of that equation has exactly 4 pieces in its puzzle:
+
+1. $P(a)$
+
+    This is something we already know, 'probability of being a good supplier'. Well, we specified a few paragraphs above that we had somehow concluded that Z was a good supplier with 90% odds.
+2. $P(\lnot a)$
+
+    This is the opposite of the previous. Now logically, if something has a 90% chance of being true, then obviously it has a 10% chance of *not* being true. Either one or the other. So this is simply equal to 10%.
+3. $P(x|a)$
+
+    Remember, we read the pipe notation backwards, so this is 'the probability that a good supplier ($a$) will send us fakes ($x$)'. We also said that good suppliers send 95% good orders; by the same logic as above, that's another way of saying they send 5% fakes. So this is simply 5%.
+4. $P(x|\lnot a)$
+
+    Finally, we have 'the probability that a bad supplier will send us fakes'. We said bad suppliers send 5% good orders, so again, subtracting from 100 and we know they must send 95% fakes. So this is simply 95%.
+
+To put all these definitions in a list:
+
+1. $a$ = good supplier
+2. $x$ = fakes
+3. $P(a)$ = probability of being a good supplier = 90% = 0.90
+4. $P(\lnot a)$ = probability of being a bad supplier = 10% = 0.10
+5. $P(x|a)$ = probability a good supplier will send fakes = 5% = 0.05
+6. $P(x|\lnot a)$ = probability a bad supplier will send fakes = 95% = 0.95
+
+We substitute in to the original equation:
+
+$\frac{0.05 \times 0.9}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{(0.045 + 0.095)} = \frac{0.045}{0.14} = 0.32$
+
+32% seems like a reasonable answer. Intuitively, I'd expect my trust to drop considerably below 50%, but still noticeably above 5%, and 32% is well within that range.
 
 Phew! So, now we have a full system for situation #2. First, go through the [expected utility](!Wikipedia) calculation for all the prices you've gathered in which you trade off risk versus price. Then order, test for modafinil or not-modafinil, and do a Bayesian update on the supplier. Rinse, and repeat. This procedure terminates if there are any good suppliers (suppose you luck out and the second supplier you test, #4 on the per-unit list, is honest; now you only need to test 3 more suppliers).
 
