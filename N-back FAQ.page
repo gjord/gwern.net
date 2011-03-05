@@ -22,9 +22,15 @@ More seriously, working memory can be useful since it allows one to grasp more o
 
 It's not all that obvious, but just about every productivity innovation in computing is about either cutting down on how much a programmer needs to know (eg. [garbage collection](!Wikipedia "Garbage collection (computer science)"), or making it easier for him to shuffle things in and out of his 'short term memory'.  Why are some commentators like [Jeff Atwood](!Wikipedia) so focused[^atwood] on having multiple [monitors](!Wikipedia "Visual display unit")? For that matter, why *are* there real studies showing surprisingly large productivity boosts by simply adding a second monitor? It's not like the person is any different afterwards. And arguably multiple or larger monitors come with damaging overheads[^atwood2].
 
-Or, why does [Steve Yegge](!Wikipedia) think touch-typing is one of the few skills programmers *must* know (along with reading)?[^yegge] Typing hardly seems very important - it's what you say, not how you say it. The compiler doesn't care if you typed the source code in at 30WPM or 120WPM, after all.
+Or, why does [Steve Yegge](!Wikipedia) think touch-typing is one of the few skills programmers *must* know (along with reading)?[^yegge] Why is Unix guru [Ken Thompson](!Wikipedia)'s one regret not learning typing?[^thompson] Typing hardly seems very important - it's what you say, not how you say it. The compiler doesn't care if you typed the source code in at 30WPM or 120WPM, after all.
 
 > "I love being able to type that without looking! It's _empowering_, being able to type almost as fast as you can think. Why would you want it any other way?"
+
+[^thompson]: Page 457, _Coders at Work_:
+    
+    > Seibel: "Is there anything you would have done differently about learning to program? Do you have any regrets about the sort of path you took or do you wish you had done anything earlier?"
+    >
+    > Ken Thompson: "Oh, sure, sure. In high school I wish I’d taken typing. I suffer from poor typing yet today, but who knew. I didn't plan anything or do anything. I have no discipline. I did what I wanted to do next, period, all the time. If I had some foresight or planning or something, there are things, like typing, I would have done when I had the chance."
 
 The thing is, multiple monitors, touch-typing - they're all about making the external world part of your mind. What's the real difference between having a [type signature](!Wikipedia) in your short-term memory or prominently displayed in your second monitor? What's the *real* difference between writing a [comment](!Wikipedia "Comment (computer programming)") in your mind or touch-typing it as fast as you create it?
 
@@ -941,3 +947,7 @@ seems that performance for the two tasks relies on different sources of variance
     > `Peyton Jones`: "That was probably when I first became aware that writing a really big program you could end up with problems of scale—you couldn't keep enough of it in your head at the same time. Previously all the things I had written, you could keep the whole thing in your head without any trouble. So it was probably the first time I'd done any serious attempt at long-standing documentation."
     > 
     > `Seibel`: "But even that wasn't enough, in this case..."
+
+    From page 440:
+    
+    > [[David Deutsch](!Wikipedia):] "The second reason I like Python is that—and maybe this is just the way my brain has changed over the years—I can't keep as much stuff in my head as I used to. It's more important for me to have stuff in front of my face. So the fact that in Smalltalk you effectively cannot put more than one method on the screen at a time drives me nuts. As far as I'm concerned the fact that I edit Python programs with Emacs is an advantage because I can see more than ten lines' worth at a time."
