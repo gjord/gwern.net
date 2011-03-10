@@ -1,0 +1,114 @@
+Given my interest in [long term content](About#long-content) and extensive linking, [link rot](!Wikipedia) is an issue of deep concern to me. It's not much good to have an extensive essay on some topic where half the links are dead and the reader can neither verify my claims nor get context for my claims.
+
+The statistics are dismal. To quote [Wikipedia](!Wikipedia "Link rot#Prevalence"):
+
+> "In a 2003 experiment, Fetterly et al. discovered that about one link out of every 200 disappeared each week from the Internet. McCown et al. (2005) discovered that half of the URLs cited in D-Lib Magazine articles were no longer accessible 10 years after publication, and other studies have shown link rot in academic literature to be even worse (Spinellis, 2003, Lawrence et al., 2001). Nelson and Allen (2002) examined link rot in digital libraries and found that about 3% of the objects were no longer accessible after one year."
+
+Even in a highly stable, funded, curated environment, link rot happens anyway. [Bruce Schneier](!Wikipedia) remarks that one friend experienced 50% bitrot in one of his pages over less than 9 years (not that the situation was any better [in 1998](http://www.pantos.org/atw/35654.html)), and that his own blog posts link to news articles that go dead in days.[^schneier]
+
+[^schneier]: ["When the Internet Is My Hard Drive, Should I Trust Third Parties?"](http://www.wired.com/politics/security/commentary/securitymatters/2008/02/securitymatters_0221), _Wired_:
+
+    > "Bits and pieces of the web disappear all the time. It's called 'link rot', and we're all used to it. A friend saved 65 links in 1999 when he planned a trip to Tuscany; only half of them still work today. In my own blog, essays and news articles and websites that I link to regularly disappear -- sometimes within a few days of my linking to them."
+
+My specific target date is 2070, 60 years from now. As of 10 March 2011, gwern.net has around 6800 external links. Even at the very lowest percentage of 3% annually, that suggests only a handful will survive to 2070. (TODO You could model this as a [Poisson distribution](!Wikipedia).) It would be a good idea to simply assume that *no* link will survive.
+
+With that in mind, one can consider remedies. (If we lie to ourselves and say it won't be a problem in the future, then we guarantee that it *will* be a problem. ["People can stand what is true, for they are already enduring it."](http://wiki.lesswrong.com/wiki/Litany_of_Gendlin))
+
+# Detection
+
+The first and most obvious remedy is to learn about broken links as soon as they happen. I currently use [linkchecker](http://linkchecker.sourceforge.net/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
+
+~~~{.bash}
+@monthly linkchecker www.gwern.net --no-warnings --anchors --timeout=1200 --threads=20 --file-output=html
+~~~
+
+The quicker you know about a dead link, the sooner you can look for replacements or its new home.
+
+# Prevention
+## Local caching
+
+On a roughly monthly basis, I run a shell script named, imaginatively enough, `local-archiver`:
+
+~~~{.bash}
+#!/bin/sh
+set -e
+
+cp `find ~/.mozilla/ -name "places.sqlite"` ~/
+sqlite3 places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
+                       WHERE moz_places.id = moz_historyvisits.place_id and visit_date > strftime('%s','now','-1.5 month')*1000000 ORDER by \
+                       visit_date;" | filter-urls >> ~/.tmp
+rm ~/places.sqlite
+split -l500 ~/.tmp ~/.tmp-urls
+rm ~/.tmp
+
+cd ~/www/
+for file in ~/.tmp-urls*;
+ do (wget --continue --convert-links --page-requisites --timestamping --input-file $file && rm $file &);
+done
+
+find ~/www -size +4M -delete
+~~~
+
+The code is not the prettiest, but it's fairly straightforward:
+
+- the script grabs my Firefox browsing history by extracting it from the SQL database, and feeds the URLs into [wget](!Wikipedia)
+- The script splits the long list of URLs into a bunch of files and runs that many `wget`s because `wget` apparently has no way of simultaneously downloading from multiple domains.
+- The `filter-urls` command is another shell script, which removes URLs I don't want archived. This script is a hack which looks like this:
+
+    ~~~{.bash}
+    #!/bin/sh
+    set -e
+    alias gv="grep -v"
+    cat /dev/stdin | sort -u | gv 127.0 | gv 4chan ...
+    ~~~
+
+A local copy is not the best resource - what if a link goes dead in a way your tool cannot detect so you don't *know* to put up your copy somewhere? But it solves the problem pretty decisively.
+
+The space consumed by such a backup is not that bad; only 20 gigabytes for a year of browsing, and less depending on how hard you prune the downloads. ($80 will buy you at least [2 terabytes](http://forre.st/storage#sata), that works out to 4 cents a gigabyte or 80 cents for the downloads; that is much better than the $25 annual fee that somewhere like [Pinboard](http://pinboard.in/upgrade/) charges. Of course, you need to back this up yourself.)
+
+## Remote caching
+
+We can ask a third party to keep a cache for us. The only two general [archive site](!Wikipedia) I know of are the [Internet Archive](!Wikipedia) and [WebCite](!Wikipedia). (Google does not make its archives public^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies.], and to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.)
+
+(An example would be <http://bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/> being archived at <http://webcitation.org/5ur7ifr12>.)
+
+My first program in this vein of thought was a bot which fired off WebCite and Internet Archive/Alexa requests: [Wikipedia Archiving Bot](haskell/Wikipedia Archive Bot), quickly followed up by a [RSS version](haskell/Wikipedia RSS Archive Bot). (Or you could install the [Alexa Toolbar](!Wikipedia) to get automatic submission to the Internet Archive, if you have ceased to care about privacy.)
+
+The core code was quickly adapted into a [gitit](!Hackage) wiki plugin which hooked into the save-page functionality and tried to archive every link in the newly-modified page, [Interwiki.hs](https://github.com/jgm/gitit/blob/master/plugins/Interwiki.hs)
+
+Finally, I wrote [archiver](!Hackage), a daemon which watches a text file. (Source is available via `darcs get http://community.haskell.org/~gwern/archiver/`.)
+
+The library half of `archiver` is a simple wrapper around the appropriate HTTP requests; the executable half reads a specified text file and loops as it (slowly) fires off requests and deletes the appropriate URL.
+
+That is, `archiver` is a daemon which will process a specified text file, each line of which is a URL, and will one by one request that the URLs be archived or spidered
+
+Usage of `archiver` might look like `while true; do archiver ~/.urls.txt gwern0@gmail.com; done`
+
+There are a number of ways to populate the source text file. For example, I have a script `firefox-urls`:
+
+~~~{.bash}
+#!/bin/sh
+set -e
+
+cp `find ~/.mozilla/ -name "places.sqlite"` ~/
+sqlite3 places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
+                       WHERE moz_places.id = moz_historyvisits.place_id and visit_date > strftime('%s','now','-1 day')*1000000 ORDER by \
+                       visit_date;" | filter-urls >> ~/.urls.txt
+rm ~/places.sqlite
+~~~
+
+(`filter-urls` is the same script as in `local-archiver`. If I don't want a domain locally, I'm not going to bother with remote backups either. In fact, because of WebCite's rate-limiting, `archiver` is almost perpetually back-logged, and I *especially* don't want it wasting time on worthless links like [4chan](!Wikipedia).)
+
+This is called every hour by `cron`:
+
+~~~{.bash}
+@hourly firefox-urls
+~~~
+
+This gets all visited URLs in the last time period and prints them out to the file for archiver to process. Hence, everything I browse is backed-up through `archiver`.
+
+More useful perhaps is a script to extract external links from Markdown files and print them to stdout: [link-extractor.hs](haskell/link-extractor.hs)
+
+So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in my wiki as arguments, and add the thousand or so external links to the archiver queue (eg. `find . -name "*.page" | xargs runhaskell link-extractor.hs >> ~/.urls.txt`); they will eventually be archived/backed up.
+
+Combined with a tool like `link-checker` means that there never need be any broken links on gwern.net since one can either find a live link or use the archived version.
