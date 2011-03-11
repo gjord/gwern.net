@@ -518,3 +518,8 @@ openURL u = do res <- simpleHTTP $ getRequest u
 ignore :: Functor f => f a -> f ()
 ignore = fmap $ const ()
 ~~~~
+
+# See also
+
+- [Wikipedia Archive Bot]() -(the previous step)
+- [Archiving URLs](/Archiving URLs) -(general discussion of the topic & supporting scripts)
