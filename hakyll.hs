@@ -5,8 +5,9 @@ import Data.Maybe (fromJust)
 import Network.HTTP (urlEncode)
 import Network.URI (isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
-import System.FilePath (hasExtension, takeExtension)
 import System.Directory (copyFile)
+import System.FilePath (hasExtension, takeExtension)
+import System.Process (runCommand)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
@@ -42,7 +43,14 @@ main = do
     atom <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
     writeFile "_site/atom.xml" atom
 
+    -- Apache configuration (caching, compression)
     copyFile ".htaccess" "_site/.htaccess"
+
+    _ <- runCommand "find _site/ -name \"*.css\"  -exec gzip --best --rsyncable {} \\;"
+    _ <- runCommand "find _site/ -name \"*.html\" -exec gzip --best --rsyncable {} \\;"
+    _ <- runCommand "find _site/ -name \"*.js\"   -exec gzip --best --rsyncable {} \\;"
+    return ()
+
 
 rssConfig :: FeedConfig
 rssConfig =  FeedConfig {
