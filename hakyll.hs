@@ -6,7 +6,7 @@ import Network.HTTP (urlEncode)
 import Network.URI (isURI, unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.FilePath (hasExtension, takeExtension)
-import System.Directory (removeFile)
+import System.Directory (copyFile)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Text.Hakyll
@@ -43,8 +43,11 @@ main = do
         -- TODO: make this faster - 'forkHakyll'?
         mapM_ (render' ["templates/default.html"]) (articles++sources)
 
-    -- back in the original RSS 'do'; we clean up after ourselves
-    removeFile feed 
+    -- set up RSS
+    atom <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
+    writeFile atom "_site/atom.xml"
+
+    copyFile ".htaccess" "_site/.htaccess"
 
 rssConfig :: FeedConfig
 rssConfig =  FeedConfig {
