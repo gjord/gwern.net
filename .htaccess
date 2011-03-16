@@ -22,8 +22,9 @@ FileETag MTime
 
 
 # http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
-RemoveType .gz
-AddEncoding x-gzip .gz .tgz
+# https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
+Options +MultiViews
+AddEncoding x-gzip .gz
 
 RewriteEngine on
 RewriteOptions Inherit

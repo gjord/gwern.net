@@ -46,9 +46,9 @@ main = do
     -- Apache configuration (caching, compression)
     copyFile ".htaccess" "_site/.htaccess"
 
-    _ <- runCommand "find _site/ -name \"*.css\"  -exec gzip --best --rsyncable {} \\;"
-    _ <- runCommand "find _site/ -name \"*.html\" -exec gzip --best --rsyncable {} \\;"
-    _ <- runCommand "find _site/ -name \"*.js\"   -exec gzip --best --rsyncable {} \\;"
+    _ <- runCommand "find _site/ -name \"*.css\"  -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable '{}' > '{}.gz'\" \\;"
+    _ <- runCommand "find _site/ -name \"*.html\" -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable '{}' > '{}.gz'\" \\;"
+    _ <- runCommand "find _site/ -name \"*.js\"   -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable '{}' > '{}.gz'\" \\;"
     return ()
 
 
