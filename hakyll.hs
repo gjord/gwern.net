@@ -19,10 +19,6 @@ import Data.FileStore (darcsFileStore)
 
 main :: IO ()
 main = do
-    -- set up RSS
-    atom <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-    let feed = "atom.xml"
-    writeFile feed atom
 
     hakyll "http://gwern.net" $ do
 
@@ -33,10 +29,9 @@ main = do
                                   "images",
                                   "docs",
                                   "static"]
-        static feed -- cp RSS in
 
         pages <- liftM sort $ getRecursiveContents "./"
-    
+
         let articles = havingExtension ".page" pages
         let sources = havingExtension ".hs" pages
 
@@ -45,7 +40,7 @@ main = do
 
     -- set up RSS
     atom <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-    writeFile atom "_site/atom.xml"
+    writeFile "_site/atom.xml" atom
 
     copyFile ".htaccess" "_site/.htaccess"
 
