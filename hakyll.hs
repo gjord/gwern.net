@@ -1,3 +1,5 @@
+#!/usr/bin/env runhaskell
+
 import Control.Arrow (arr, (>>>), (&&&))
 import Control.Monad (liftM)
 import Data.List (elemIndex, isInfixOf, isPrefixOf, sort)
