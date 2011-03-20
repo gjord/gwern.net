@@ -1,12 +1,14 @@
 # Why download?
 
-Along the lines of [Archiving URLs](), I like to keep copies of [Haskell](!Wikipedia "Haskell (programming language)")-related source-code [repositories](!Wikipedia "Revision control") (a collection of logically related files and a detailed history of modifications) because the files & history might come in handy on occasion, and because having a large collection of repositories lets me search them for random purposes. (For example, part of my lobbying for [Control.Monad.void](!Hoogle)[^void] was based on producing a list of dozens of source files which rewrote that particular idiom, and I have been able to [usefully](http://www.haskell.org/pipermail/haskell-cafe/2011-February/089614.html) [comment](http://www.haskell.org/pipermail/haskell-cafe/2008-January/038948.html) & [judge](Haskell Summer of Code) based on crude statistics gathered by [grepping](!Wikipedia) through my hundreds of repositories.)
+Along the lines of [Archiving URLs](), I like to keep copies of [Haskell](!Wikipedia "Haskell (programming language)")-related source-code [repositories](!Wikipedia "Revision control")^[This page assumes a basic understanding of how version control programs work, Haskell syntax, and the Haskell standard library. For those not _au courant_, repositories are basically a collection of logically related files and a detailed history of the modifications that built them up from nothing.] because the files & history might come in handy on occasion, and because having a large collection of repositories lets me search them for random purposes.
+
+(For example, part of my lobbying for [Control.Monad.void](!Hoogle)[^void] was based on producing a list of dozens of source files which rewrote that particular idiom, and I have been able to [usefully](http://www.haskell.org/pipermail/haskell-cafe/2011-February/089614.html) [comment](http://www.haskell.org/pipermail/haskell-cafe/2008-January/038948.html) & [judge](Haskell Summer of Code) based on crude statistics gathered by [grepping](!Wikipedia) through my hundreds of repositories.)
 
 [^void]: From my [initial email](http://www.haskell.org/pipermail/libraries/2009-June/011880.html):
 
     > "I'd think it'd be useful for more than just me. Agda is lousy with calls to ">> return ()"; and then there's ZMachine, arrayref, whim, the barracuda packages, binary, bnfc, buddha, bytestring, c2hs, cabal, chesslibrary, comas, conjure, curl, darcs, darcs-benchmark, dbus-haskell, ddc, dephd, derive, dhs, drift, easyvision, ehc, filestore, folkung, geni, geordi, gtk2hs, gnuplot, ginsu, halfs, happstack, haskeline, hback, hbeat... You get the picture."
 
-[Previously](http://blog.patch-tag.com/2010/03/13/mirroring-patch-tag/) I wrote a simple script to download the repos of the relatively obscure source repository hosting site, [Patch-tag.com](http://www.patch-tag.com/). Patch-tag specializes in hosting [Darcs](!Wikipedia) repositories, which are almost always Haskell-related. [GitHub](!Wikipedia) is a much larger & more popular hosting site, and even though it does not support Darcs but [git](!Wikipedia "Git (software)") (as the name indicates), it is so popular that it still hosts a great deal of Haskell material. I'd picked up a few dozen repositories from time to time out of curiosity or because I was working on the program (as in the case of the [gitit](https://github.com/jgm/gitit) wiki engine), but there were far too many to download manually. I needed a script.
+[Previously](http://blog.patch-tag.com/2010/03/13/mirroring-patch-tag/) I wrote a simple script to download the repositories of the relatively obscure source repository hosting site, [Patch-tag.com](http://www.patch-tag.com/). Patch-tag specializes in hosting [Darcs](!Wikipedia) repositories (usually Haskell-related). [GitHub](!Wikipedia) is a much larger & more popular hosting site, and though it does not support Darcs but [git](!Wikipedia "Git (software)") (as the name indicates), it is so popular that it still hosts a great deal of Haskell. I've downloaded a few repositories out of curiosity or because I was working on the contents of the repository (eg. [gitit](https://github.com/jgm/gitit)), but there are too many to download manually. I needed a script.
 
 Patch-tag.com was nice enough to supply a URL which provided exactly the URLs I needed, but I couldn't expect such personalized support from GitHub. GitHub does supply an API of sorts for developers and hobbyists, said API provides [no obvious way](http://support.github.com/discussions/email/6782-contact-extending-api-to-easily-get-list-of-repos-by-language) to get what I want: 'URLs for all Haskell-related repos'. So, [scraping](!Wikipedia "Data scraping") it is - I'd write a script to munge some GitHub HTML and get the URLs I want *that* way.
 
@@ -25,11 +27,11 @@ main = do html <- openURL "https://github.com/languages/Haskell/created"
 linkify l = [x | TagOpen "a" atts <- parseTags l, (_,x) <- atts]
 ~~~
 
-## Downloading pages (or, don't parse your eggs before they hatch)
+## Downloading pages (the lazy way)
 
 We run it and it throws an exception! `*** Exception: getAddrInfo: does not exist (No address associated with hostname)`
 
-Sounds like a problem with the `openURL` call - '[hostname](!Wikipedia)' is a networking term, not a parsing or printing term. So we try running just `openURL "https://github.com/languages/Haskell/created"` - same error. Not helpful.
+Oops. We got all wrapped up in parsing the HTML we forgot to make sure that downloading worked in the first place. Well, we're lazy programmers, so now, on demand, we'll investigate that problem. The exception thrown sounds like a problem with the `openURL` call - '[hostname](!Wikipedia)' is a networking term, not a parsing or printing term. So we try running just `openURL "https://github.com/languages/Haskell/created"` - same error. Not helpful.
 
 So we try a different version of `openURL`, mentioned in the [other scraping script](haskell/Wikipedia RSS Archive Bot#rewriting-network-code):
 
@@ -54,7 +56,7 @@ Location: https://github.com/languages/Haskell/created
 
 Oh dear. It seems that the [`HTTP`](!Hackage "HTTP") package just won't handle HTTP*S*; nor does the description mention HTTPS nor any of the module names seem connected. Best to give up entirely on it.
 
-If we google 'Haskell https', one of the first 20 hits happens to be a [Stack Overflow](!Wikipedia) question/page which sounds promising, ["Haskell Network.Browser HTTPS Connection"](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection). The [one answer](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection/3988829#3988829) says to simply use the [Haskell binding](!Hackage "curl") to [curl](!Wikipedia "cURL")). Well, fine. I already had that installed because Darcs uses the binding for downloads.
+If we google 'Haskell https', one of the first 20 hits happens to be a [Stack Overflow](!Wikipedia) question/page which sounds promising: ["Haskell Network.Browser HTTPS Connection"](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection). The [one answer](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection/3988829#3988829) says to simply use the [Haskell binding](!Hackage "curl") to [curl](!Wikipedia "cURL")). Well, fine. I already had that installed because Darcs uses the binding for downloads.
 
 We go to the [top level module](http://hackage.haskell.org/packages/archive/curl/1.3.6/doc/html/Network-Curl.html) hoping for an easy download. Scrolling down, one's eye is caught by a [curlGetString](http://hackage.haskell.org/packages/archive/curl/1.3.6/doc/html/Network-Curl.html#v:curlGetString), which while not necessarily a promising name, does have an interesting type: `URLString -> [CurlOption] -> IO (CurlCode, String)`.
 
@@ -70,11 +72,12 @@ Note especially the return value - from past experience with the HTML package, o
     <link rel=\"search\" type=\"application/opensearchdescription+xml\" href=\"/opensearch.xml\" title=\"GitHub\" />
     <link rel=\"fluid-icon\" href=\"https://github.com/fluidicon.png\" title=\"GitHub\" />
 
-    <link href=\"https://d3nwyuy0nl342s.cloudfront.net/b3091bd0632b07457de744de1c8022f33a6a6fbd/stylesheets/bundle_common.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />
+    <link href=\"https://d3nwyuy0nl342s.cloudfront.net/b3091bd0632b07457de744de1c8022f33a6a6fbd/stylesheets/bundle_common.css\"
+      media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />
 ...
 ~~~
 
-Great! As they say, 'try the simplest possible thing that could possibly work', and this seems to. We don't really care about the exit code, since this is a hacky script; we'll throw it away and only keep the second part of the tuple with the usual `snd`. It's in IO so we need to use `liftM` or `fmap` before we can apply `snd`. Combined with our previous Tagsoup code, we get:
+Great! As they say, 'try the simplest possible thing that could possibly work', and this seems to. We don't really care about the exit code, since this is a hacky script^[What would we do? Keep retrying?]; we'll throw it away and only keep the second part of the tuple with the usual `snd`. It's in IO so we need to use `liftM` or `fmap` before we can apply `snd`. Combined with our previous Tagsoup code, we get:
 
 ~~~{.haskell}
 import Text.HTML.TagSoup
@@ -98,7 +101,53 @@ linkify l = [x | TagOpen "a" atts <- parseTags l, (_,x) <- atts]
 What's the output of this?
 
 ~~~{.haskell}
-["logo boring","https://github.com","/plans","/explore","/features","/blog","/login?return_to=https://github.com/languages/Haskell/created","/languages/Haskell","/explore","explore_main","/repositories","explore_repos","/languages","selected","explore_languages","/timeline","explore_timeline","/search","code_search","/tips","explore_tips","/languages/Haskell","/languages/Haskell/created","selected","/languages/Haskell/updated","/languages","/languages/ActionScript/created","/languages/Ada/created","/languages/Arc/created","/languages/ASP/created","/languages/Assembly/created","/languages/Boo/created","/languages/C/created","/languages/C%23/created","/languages/C++/created","/languages/Clojure/created","/languages/CoffeeScript/created","/languages/ColdFusion/created","/languages/Common%20Lisp/created","/languages/D/created","/languages/Delphi/created","/languages/Duby/created","/languages/Eiffel/created","/languages/Emacs%20Lisp/created","/languages/Erlang/created","/languages/F%23/created","/languages/Factor/created","/languages/FORTRAN/created","/languages/Go/created","/languages/Groovy/created","/languages/HaXe/created","/languages/Io/created","/languages/Java/created","/languages/JavaScript/created","/languages/Lua/created","/languages/Max/MSP/created","/languages/Nu/created","/languages/Objective-C/created","/languages/Objective-J/created","/languages/OCaml/created","/languages/ooc/created","/languages/Perl/created","/languages/PHP/created","/languages/Pure%20Data/created","/languages/Python/created","/languages/R/created","/languages/Racket/created","/languages/Ruby/created","/languages/Scala/created","/languages/Scheme/created","/languages/sclang/created","/languages/Self/created","/languages/Shell/created","/languages/Smalltalk/created","/languages/SuperCollider/created","/languages/Tcl/created","/languages/Vala/created","/languages/Verilog/created","/languages/VHDL/created","/languages/VimL/created","/languages/Visual%20Basic/created","/languages/XQuery/created","/brownnrl","/brownnrl/Real-World-Haskell","/joh","/joh/tribot","/bjornbm","/bjornbm/publicstuff","/codemac","/codemac/yi","/poconnell93","/poconnell93/chat","/jillianfu","/jillianfu/Angel","/jaspervdj","/jaspervdj/sup-host","/serras","/serras/scion-ghc-7-requisites","/serras","/serras/scion","/iand675","/iand675/cgen","/shangaslammi","/shangaslammi/haskeroids","/rukav","/rukav/ReplayTrace","/jaspervdj","/jaspervdj/wol","/tomlokhorst","/tomlokhorst/wol","/bos","/bos/concurrent-barrier","/jkingry","/jkingry/projectEuler","/olshanskydr","/olshanskydr/xml-enumerator","/lorenz","/lorenz/fypmaincode","/jaspervdj","/jaspervdj/data-object-json","/jaspervdj","/jaspervdj/data-object-yaml","/languages/Haskell/created?page=2","next","/languages/Haskell/created?page=3","/languages/Haskell/created?page=4","/languages/Haskell/created?page=5","/languages/Haskell/created?page=6","/languages/Haskell/created?page=7","/languages/Haskell/created?page=8","/languages/Haskell/created?page=9","/languages/Haskell/created?page=208","/languages/Haskell/created?page=209","/languages/Haskell/created?page=2","l","next","http://www.rackspace.com","logo","http://www.rackspace.com ","http://www.rackspacecloud.com","https://github.com/blog","/login/multipass?to=http%3A%2F%2Fsupport.github.com","https://github.com/training","http://jobs.github.com","http://shop.github.com","https://github.com/contact","http://develop.github.com","http://status.github.com","/site/terms","/site/privacy","https://github.com/security","nofollow","?locale=de","nofollow","?locale=fr","nofollow","?locale=ja","nofollow","?locale=pt-BR","nofollow","?locale=ru","nofollow","?locale=zh","#","minibutton btn-forward js-all-locales","nofollow","?locale=en","nofollow","?locale=af","nofollow","?locale=ca","nofollow","?locale=cs","nofollow","?locale=de","nofollow","?locale=es","nofollow","?locale=fr","nofollow","?locale=hr","nofollow","?locale=hu","nofollow","?locale=id","nofollow","?locale=it","nofollow","?locale=ja","nofollow","?locale=nl","nofollow","?locale=no","nofollow","?locale=pl","nofollow","?locale=pt-BR","nofollow","?locale=ru","nofollow","?locale=sr","nofollow","?locale=sv","nofollow","?locale=zh","#","js-see-all-keyboard-shortcuts"]
+["logo boring","https://github.com","/plans","/explore","/features","/blog","/login?return_to=https://github.com/languages/Haskell/created",
+    "/languages/Haskell","/explore","explore_main","/repositories","explore_repos","/languages",
+    "selected","explore_languages","/timeline","explore_timeline","/search","code_search",
+    "/tips","explore_tips","/languages/Haskell","/languages/Haskell/created","selected","/languages/Haskell/updated",
+    "/languages","/languages/ActionScript/created","/languages/Ada/created","/languages/Arc/created","/languages/ASP/created",
+    "/languages/Assembly/created",
+    "/languages/Boo/created","/languages/C/created","/languages/C%23/created","/languages/C++/created","/languages/Clojure/created",
+    "/languages/CoffeeScript/created",
+    "/languages/ColdFusion/created","/languages/Common%20Lisp/created","/languages/D/created","/languages/Delphi/created","/languages/Duby/created",
+    "/languages/Eiffel/created",
+    "/languages/Emacs%20Lisp/created","/languages/Erlang/created","/languages/F%23/created","/languages/Factor/created","/languages/FORTRAN/created",
+    "/languages/Go/created",
+    "/languages/Groovy/created","/languages/HaXe/created","/languages/Io/created","/languages/Java/created","/languages/JavaScript/created",
+    "/languages/Lua/created",
+    "/languages/Max/MSP/created","/languages/Nu/created","/languages/Objective-C/created","/languages/Objective-J/created","/languages/OCaml/created",
+    "/languages/ooc/created",
+    "/languages/Perl/created","/languages/PHP/created","/languages/Pure%20Data/created","/languages/Python/created","/languages/R/created",
+    "/languages/Racket/created",
+    "/languages/Ruby/created","/languages/Scala/created","/languages/Scheme/created","/languages/sclang/created","/languages/Self/created",
+    "/languages/Shell/created",
+    "/languages/Smalltalk/created","/languages/SuperCollider/created","/languages/Tcl/created","/languages/Vala/created","/languages/Verilog/created",
+    "/languages/VHDL/created",
+    "/languages/VimL/created","/languages/Visual%20Basic/created","/languages/XQuery/created","/brownnrl","/brownnrl/Real-World-Haskell","/joh",
+    "/joh/tribot","/bjornbm","/bjornbm/publicstuff","/codemac","/codemac/yi","/poconnell93",
+    "/poconnell93/chat","/jillianfu","/jillianfu/Angel","/jaspervdj","/jaspervdj/sup-host","/serras",
+    "/serras/scion-ghc-7-requisites","/serras","/serras/scion","/iand675","/iand675/cgen","/shangaslammi",
+    "/shangaslammi/haskeroids","/rukav","/rukav/ReplayTrace","/jaspervdj","/jaspervdj/wol","/tomlokhorst",
+    "/tomlokhorst/wol","/bos","/bos/concurrent-barrier","/jkingry","/jkingry/projectEuler","/olshanskydr",
+    "/olshanskydr/xml-enumerator","/lorenz","/lorenz/fypmaincode","/jaspervdj","/jaspervdj/data-object-json","/jaspervdj",
+    "/jaspervdj/data-object-yaml","/languages/Haskell/created?page=2","next","/languages/Haskell/created?page=3","/languages/Haskell/created?page=4",
+    "/languages/Haskell/created?page=5",
+    "/languages/Haskell/created?page=6","/languages/Haskell/created?page=7","/languages/Haskell/created?page=8","/languages/Haskell/created?page=9",
+    "/languages/Haskell/created?page=208","/languages/Haskell/created?page=209",
+    "/languages/Haskell/created?page=2","l","next","http://www.rackspace.com","logo","http://www.rackspace.com ",
+    "http://www.rackspacecloud.com","https://github.com/blog","/login/multipass?to=http%3A%2F%2Fsupport.github.com","https://github.com/training",
+    "http://jobs.github.com","http://shop.github.com",
+    "https://github.com/contact","http://develop.github.com","http://status.github.com","/site/terms","/site/privacy","https://github.com/security",
+    "nofollow","?locale=de","nofollow","?locale=fr","nofollow","?locale=ja",
+    "nofollow","?locale=pt-BR","nofollow","?locale=ru","nofollow","?locale=zh",
+    "#","minibutton btn-forward js-all-locales","nofollow","?locale=en","nofollow","?locale=af",
+    "nofollow","?locale=ca","nofollow","?locale=cs","nofollow","?locale=de",
+    "nofollow","?locale=es","nofollow","?locale=fr","nofollow","?locale=hr",
+    "nofollow","?locale=hu","nofollow","?locale=id","nofollow","?locale=it",
+    "nofollow","?locale=ja","nofollow","?locale=nl","nofollow","?locale=no",
+    "nofollow","?locale=pl","nofollow","?locale=pt-BR","nofollow","?locale=ru",
+    "nofollow","?locale=sr","nofollow","?locale=sv","nofollow","?locale=zh",
+    "#","js-see-all-keyboard-shortcuts"]
 ~~~
 
 Quite a mouthful, but we can easily filter things down. "/languages/Haskell/created?page=3" is an example of a link to the next page listing Haskell repositories; presumably the current page would be "?page=1", and the highest listed seems to be "/languages/Haskell/created?page=209". The actual repositories look like "/jaspervdj/data-object-yaml".
@@ -142,8 +191,8 @@ import Text.HTML.TagSoup
 main :: IO ()
 main = do html <- openURL "https://github.com/languages/Haskell/created"
           let lst = lastPage $ linkify html
-          let indexPages = take lst listPages
-          print indexPages
+          let indxPgs = take lst listPages
+          print indxPgs
 
 openURL :: URLString -> IO String
 openURL target = fmap snd $ curlGetString target []
@@ -158,14 +207,20 @@ listPages :: [String]
 listPages = map (\x -> "https://github.com/languages/Haskell/created?page=" ++ show x) [(1::Int)..]
 ~~~
 
-So where were we? We had a [String] (in a variable named `indexPages`) which represents all the index pages. We can get the HTML source of each page just by reusing `openURL` (it works on the first one, so it stands to reason it'd work on all index pages), which is trivial by this point: `mapM openURL indexPages`.
+So where were we? We had a `[String]` (in a variable named `indxPgs`) which represents all the index pages. We can get the HTML source of each page just by reusing `openURL` (it works on the first one, so it stands to reason it'd work on all index pages), which is trivial by this point: `mapM openURL indxPgs`.
 
 ## Filtering repositories
 
-In the TagSoup result, we saw the addresses of the repos listed on the first index page:
+In the TagSoup result, we saw the addresses of the repositories listed on the first index page:
 
 ~~~{.haskell}
-["/brownnrl","/brownnrl/Real-World-Haskell","/joh","/joh/tribot","/bjornbm","/bjornbm/publicstuff","/codemac","/codemac/yi","/poconnell93","/poconnell93/chat","/jillianfu","/jillianfu/Angel","/jaspervdj","/jaspervdj/sup-host","/serras","/serras/scion-ghc-7-requisites","/serras","/serras/scion","/iand675","/iand675/cgen","/shangaslammi","/shangaslammi/haskeroids","/rukav","/rukav/ReplayTrace","/jaspervdj","/jaspervdj/wol","/tomlokhorst","/tomlokhorst/wol","/bos","/bos/concurrent-barrier","/jkingry","/jkingry/projectEuler","/olshanskydr","/olshanskydr/xml-enumerator","/lorenz","/lorenz/fypmaincode","/jaspervdj","/jaspervdj/data-object-json","/jaspervdj","/jaspervdj/data-object-yaml"]
+["/brownnrl","/brownnrl/Real-World-Haskell","/joh","/joh/tribot","/bjornbm","/bjornbm/publicstuff",
+    "/codemac","/codemac/yi","/poconnell93","/poconnell93/chat","/jillianfu","/jillianfu/Angel",
+    "/jaspervdj","/jaspervdj/sup-host","/serras","/serras/scion-ghc-7-requisites","/serras","/serras/scion",
+    "/iand675","/iand675/cgen","/shangaslammi","/shangaslammi/haskeroids","/rukav","/rukav/ReplayTrace",
+    "/jaspervdj","/jaspervdj/wol","/tomlokhorst","/tomlokhorst/wol","/bos","/bos/concurrent-barrier",
+    "/jkingry","/jkingry/projectEuler","/olshanskydr","/olshanskydr/xml-enumerator","/lorenz","/lorenz/fypmaincode",
+    "/jaspervdj","/jaspervdj/data-object-json","/jaspervdj","/jaspervdj/data-object-yaml"]
 ~~~
 
 Without looking at the rendered page in our browser, it's obvious that GitHub is linking first to whatever user owns or created the repository, and then linking to the repository itself. We don't want the users, but the repositories. Fortunately, it's equally obvious that this is true: no user page has two forward-slashes in it, while all repository pages have two forward-slashes in it.
@@ -175,7 +230,12 @@ So we want to count the forward-slashes and keep every address with exactly 2 fo
 This is not quite right. If we run this on the original parsed output, we get
 
 ~~~{.haskell}
-["https://github.com","/languages/Haskell","/languages/Haskell","/plategreaves/unordered-containers","/vincenthz/hs-tls-extra","/aculich/fix-symbols-gitit","/sphynx/euler-hs","/DRMacIver/unordered-containers","/hamishmack/yesod-slides","/GNUManiacs/hoppla","/DRMacIver/hs-rank-aggregation","/naota/hackage-autoebuild","/magthe/hsini","/dagit/gnuplot-test","/imbaczek/HBPoker","/sergeyastanin/simpleea","/cbaatz/hamu8080","/aristidb/xml-enumerator","/elliottt/value-supply","/gnumaniacs-org/hoppla","/emillon/tyson","/quelgar/hifive","/quelgar/haskell-websockets","http://www.rackspace.com","http://www.rackspace.com ","http://www.rackspacecloud.com","/login/multipass?to=http%3A%2F%2Fsupport.github.com","http://jobs.github.com","http://shop.github.com","http://develop.github.com","http://status.github.com","/site/terms","/site/privacy"]
+["https://github.com","/languages/Haskell","/languages/Haskell","/plategreaves/unordered-containers","/vincenthz/hs-tls-extra","/aculich/fix-symbols-gitit",
+    "/sphynx/euler-hs","/DRMacIver/unordered-containers","/hamishmack/yesod-slides","/GNUManiacs/hoppla","/DRMacIver/hs-rank-aggregation","/naota/hackage-autoebuild",
+    "/magthe/hsini","/dagit/gnuplot-test","/imbaczek/HBPoker","/sergeyastanin/simpleea","/cbaatz/hamu8080","/aristidb/xml-enumerator",
+    "/elliottt/value-supply","/gnumaniacs-org/hoppla","/emillon/tyson","/quelgar/hifive","/quelgar/haskell-websockets","http://www.rackspace.com",
+    "http://www.rackspace.com ","http://www.rackspacecloud.com","/login/multipass?to=http%3A%2F%2Fsupport.github.com","http://jobs.github.com","http://shop.github.com","http://develop.github.com",
+    "http://status.github.com","/site/terms","/site/privacy"]
 ~~~
 
 It doesn't look like we mistakenly omitted a repository, but it does look like we mistakenly included things we should not have. We need to filter out anything beginning with a "http://", "https://", "/site/", "/languages/", or "/login/".^[Oh no - a blacklist! This should make us unhappy, because as computer security has taught us, blacklists fall out of date quickly or were never correct to begin with. Much better to whitelist, but how can we do that? People could name their repositories any damn thing, and pick any accursed username; for all our code knows, '/site/terms' *is* the repository - perhaps the user 'site' maintains some sort a natural language library called 'terms'.]
@@ -190,15 +250,16 @@ We could call `filter` multiple times, or use a tricky `foldr` to accumulate onl
         exceptions = ["wikimediafoundation", "http://www.mediawiki.org/", "wikipedia", "&curid=", "index.php?title=", "&action="]
 ~~~
 
-In our case, we replace `isInfixOf` with `isPrefixOf`, and we have a different definition for `exceptions`. To put it all together into a new filtering function, we have:
+In our case, we replace `isInfixOf` with `isPrefixOf`, and we have different constants defined in `exceptions`. To put it all together into a new filtering function, we have:
 
 ~~~{.haskell}
 repos :: String -> [String]
-repos l = uniq $ linkify l
+repos = uniq . linkify
   where  uniq :: [String] -> [String]
          uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) exceptions)
          exceptions :: [String]
          exceptions = ["/languages/", "/login/", "/site/", "http://", "https://"]
+         count :: String -> Int
          count x = length (elemIndices '/' x) == 2
 ~~~
 
@@ -220,18 +281,22 @@ linkify :: String -> [String]
 linkify l = [x | TagOpen "a" atts <- parseTags l, (_,x) <- atts]
 
 repos :: String -> [String]
-repos l = uniq $ linkify l
+repos = uniq . linkify
   where  uniq :: [String] -> [String]
          uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) exceptions)
          exceptions :: [String]
          exceptions = ["/languages/", "/login/", "/site/", "http://", "https://"]
+         count :: String -> Int
          count x = length (elemIndices '/' x) == 2
 ~~~
 
 The output:
 
 ~~~{.haskell}
-["/plategreaves/unordered-containers","/vincenthz/hs-tls-extra","/aculich/fix-symbols-gitit","/sphynx/euler-hs","/DRMacIver/unordered-containers","/hamishmack/yesod-slides","/GNUManiacs/hoppla","/DRMacIver/hs-rank-aggregation","/naota/hackage-autoebuild","/magthe/hsini","/dagit/gnuplot-test","/imbaczek/HBPoker","/sergeyastanin/simpleea","/cbaatz/hamu808a0","/aristidb/xml-enumerator","/elliottt/value-supply","/gnumaniacs-org/hoppla","/emillon/tyson","/quelgar/hifive","/quelgar/haskell-websockets"]
+["/plategreaves/unordered-containers","/vincenthz/hs-tls-extra","/aculich/fix-symbols-gitit","/sphynx/euler-hs","/DRMacIver/unordered-containers","/hamishmack/yesod-slides",
+    "/GNUManiacs/hoppla","/DRMacIver/hs-rank-aggregation","/naota/hackage-autoebuild","/magthe/hsini","/dagit/gnuplot-test","/imbaczek/HBPoker",
+    "/sergeyastanin/simpleea","/cbaatz/hamu808a0","/aristidb/xml-enumerator","/elliottt/value-supply","/gnumaniacs-org/hoppla","/emillon/tyson",
+    "/quelgar/hifive","/quelgar/haskell-websockets"]
 ~~~
 
 ## Transforming links (the lazy way)
@@ -254,8 +319,8 @@ So here's how things go:
 main :: IO ()
 main = do html <- openURL "https://github.com/languages/Haskell/created"
           let lst = lastPage $ linkify html
-          let indexPages = take lst listPages
-          repourls <- mapM (fmap repos . openURL) indexPages -- we should split out the clause out a a function like `getRepos`
+          let indxPgs = take lst listPages
+          repourls <- mapM (fmap repos . openURL) indxPgs -- we should split out the clause out a a function like `getRepos`
           ???
           ???
 ~~~
@@ -269,7 +334,7 @@ gitify x = "https://github.com" ++ x ++ ".git"
 
 ## Shelling out to git
 
-That leaves the 'shell out to git' functionality. We could try stealing the [spawn](!Hoogle) (call out to `/bin/sh`) code from XMonad, but the point of `spawn` is that it [forks](!Wikipedia "Fork (operating system)") away completely from our script, which will completely screw up our desired lack of parallelism.^[A quick point: in the previous scripts, I went to some effort to get greater parallelism, but in this case, we don't want to hammer GitHub with a few thousand simultaneous `git clone` invocations; Haskell repositories are created rarely enough that we can afford to be friendly and only download one repository at a time.] I ultimately wound up using a function from [System.Process](!Hoogle), [readProcessWithExitCode](!Hoogle). (Why `readProcessWithExitCode` and not `readProcess`? Because if a directory already exists, git/`readProcess` throws an exception which kills the script!) In retrospect, it might have been a better idea to try to use [runCommand](!Hoogle) or [System.Cmd](!Hoogle). Regardless, this will work:
+That leaves the 'shell out to git' functionality. We could try stealing the [spawn](!Hoogle) (call out to `/bin/sh`) code from XMonad, but the point of `spawn` is that it [forks](!Wikipedia "Fork (operating system)") away completely from our script, which will completely screw up our desired *lack* of parallelism.^[A quick point: in the previous scripts, I went to some effort to get greater parallelism, but in this case, we don't want to hammer GitHub with a few thousand simultaneous `git clone` invocations; Haskell repositories are created rarely enough that we can afford to be friendly and only download one repository at a time.] I ultimately wound up using a function from [System.Process](!Hoogle), [readProcessWithExitCode](!Hoogle). (Why `readProcessWithExitCode` and not `readProcess`? Because if a directory already exists, git/`readProcess` throws an exception which kills the script!) In retrospect, it might have been a better idea to try to use [runCommand](!Hoogle) or [System.Cmd](!Hoogle). Regardless, this will work:
 
 ~~~{.haskell}
 shellToGit :: String -> IO ()
@@ -281,13 +346,13 @@ Now it's easy to fill in our 2 missing lines:
 
 ~~~{.haskell}
           ...
-          repourls <- mapM getRepos indexPages
+          repourls <- mapM getRepos indxPgs
           let gitURLs = map gitify $ concat repourls
           mapM_ shellToGit gitURLs
 ~~~
 
 
-(The `concat` is there because `getRepos` gave us a `[String]` for each `String`, and then we ran it on a `[String]` - so our result is `[[String]]`! But we don't care about preserving the information about where each String came from, so we smush it down to a single list. Strictly speaking, we didn't need to do `print y` in `shellToGit`, but I like to see what git was doing - get a sense of where the script is; a nice thing, once you've done that, to is to sort the list of repository URLs so we download them in order by user.)
+(The `concat` is there because `getRepos` gave us a `[String]` for each `String`, and then we ran it on a `[String]` - so our result is `[[String]]`! But we don't care about preserving the information about where each String came from, so we smush it down to a single list. Strictly speaking, we didn't need to do `print y` in `shellToGit`, but I like to see what git was doing - get a sense of where the script is; a nice thing, once you've done that, to is to `sort` the list of repository URLs so we download them in order by user.)
 
 ## The script
 
@@ -302,8 +367,8 @@ import Text.HTML.TagSoup
 main :: IO ()
 main = do html <- openURL "https://github.com/languages/Haskell/created"
           let lst = lastPage $ linkify html
-          let indexPages = take lst listPages
-          repourls <- mapM getRepos indexPages
+          let indxPgs = take lst listPages
+          repourls <- mapM getRepos indxPgs
           let gitURLs = map gitify $ sort $ concat repourls
           mapM_ shellToGit gitURLs
 
@@ -320,11 +385,12 @@ listPages :: [String]
 listPages = map (\x -> "https://github.com/languages/Haskell/created?page=" ++ show x) [(1::Int)..]
 
 repos :: String -> [String]
-repos l = uniq $ linkify l
+repos = uniq . linkify
   where  uniq :: [String] -> [String]
          uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) exceptions)
          exceptions :: [String]
          exceptions = ["/languages/", "/login/", "/site/", "http://", "https://"]
+         count :: String -> Int
          count x = length (elemIndices '/' x) == 2
 
 getRepos :: String -> IO [String]
@@ -339,6 +405,30 @@ shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u] ""
 ~~~
 
 This, or a version of it, works well. But I caution people from mis-using it! There are a *lot* of repositories on GitHub; please don't go running this carelessly. It will pull down 2-4 gigabytes of data. GitHub is a good FLOSS-friendly business by all accounts, and doesn't deserve people wasting its bandwidth & money if they are not even going to hold on to what they downloaded.
+
+### The script golfed
+
+For kicks, let's see what a shorter, more unmaintainable and unreadable, version looks like (in the best scripting language tradition):
+
+~~~{.haskell}
+import Data.List (elemIndices, isPrefixOf, sort)
+import Network.Curl (curlGetString)
+import System.Process (readProcessWithExitCode)
+import Text.HTML.TagSoup
+
+main = do html <- openURL "https://github.com/languages/Haskell/created"
+          let indxPgs = take (lastPage $ linkify html) $ map (("https://github.com/languages/Haskell/created?page="++) . show) [1..]
+          repourls <- mapM (fmap (uniq . linkify) . openURL) indxPgs
+          mapM_ shellToGit $ map (\x -> "https://github.com" ++ x ++ ".git") $ sort $ concat repourls
+       where openURL target = fmap snd $ curlGetString target []
+             linkify l = [x | TagOpen "a" atts <- parseTags l, (_,x) <- atts]
+             lastPage = maximum . map (read . drop 32) . filter ("/languages/Haskell/created?page=" `isPrefixOf`)
+             uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) ["/languages/", "/login/", "/site/", "http://", "https://"])
+             count x = length (elemIndices '/' x) == 2
+             shellToGit u = do { (_,y,_) <- readProcessWithExitCode "git" ["clone", u] ""; print y }
+~~~
+
+14 lines of code isn't too bad, especially considering that Haskell is not usually considering a language suited for scripting or scraping purposes like this. Nor do I see any obvious missing abstractions - `count` is a function that might be useful in `Data.List`, and `openURL` is something that the Curl binding could provide on its own, but everything else looks pretty necessary.
 
 # Exercises for the reader
 
