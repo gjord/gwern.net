@@ -334,12 +334,26 @@ gitify x = "https://github.com" ++ x ++ ".git"
 
 ## Shelling out to git
 
-That leaves the 'shell out to git' functionality. We could try stealing the [spawn](!Hoogle) (call out to `/bin/sh`) code from XMonad, but the point of `spawn` is that it [forks](!Wikipedia "Fork (operating system)") away completely from our script, which will completely screw up our desired *lack* of parallelism.^[A quick point: in the previous scripts, I went to some effort to get greater parallelism, but in this case, we don't want to hammer GitHub with a few thousand simultaneous `git clone` invocations; Haskell repositories are created rarely enough that we can afford to be friendly and only download one repository at a time.] I ultimately wound up using a function from [System.Process](!Hoogle), [readProcessWithExitCode](!Hoogle). (Why `readProcessWithExitCode` and not `readProcess`? Because if a directory already exists, git/`readProcess` throws an exception which kills the script!) In retrospect, it might have been a better idea to try to use [runCommand](!Hoogle) or [System.Cmd](!Hoogle). Regardless, this will work:
+That leaves the 'shell out to git' functionality. We could try stealing the [spawn](!Hoogle) (call out to `/bin/sh`) code from XMonad, but the point of `spawn` is that it [forks](!Wikipedia "Fork (operating system)") away completely from our script, which will completely screw up our desired *lack* of parallelism.^[A quick point: in the previous scripts, I went to some effort to get greater parallelism, but in this case, we don't want to hammer GitHub with a few thousand simultaneous `git clone` invocations; Haskell repositories are created rarely enough that we can afford to be friendly and only download one repository at a time.] I ultimately wound up using a function from [System.Process](!Hoogle), [readProcessWithExitCode](!Hoogle). (Why `readProcessWithExitCode` and not `readProcess`? Because if a directory already exists, git/`readProcess` throws an exception which kills the script!) This will work:
 
 ~~~{.haskell}
 shellToGit :: String -> IO ()
 shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u] ""
                   print y
+~~~
+
+In retrospect, it might have been a better idea to try to use [runCommand](!Hoogle) or [System.Cmd](!Hoogle). Alternatively, we could use the same shelling out functionality from the original [patch-tag.com](https://patch-tag.com/r/tphyahoo/mirrorpatchtag/snapshot/current/content/pretty/patch-tag-mirror.hs) script:
+
+~~~{.haskell}
+          mapM_ (\x ->runProcess "darcs" ["get", "--lazy", "http://patch-tag.com"++x] Nothing Nothing Nothing Nothing Nothing) targets
+~~~
+
+Which could be rewritten for us (sans logging) as
+
+~~~{.haskell}
+shellToGit :: String -> IO ()
+shellToGit u = runProcess "git" ["clone", u] Nothing Nothing Nothing Nothing Nothing >> return ()
+                                             -- or replace `return ()` with Control.Monad.void to drop `IO ProcessHandle` result
 ~~~
 
 Now it's easy to fill in our 2 missing lines:
