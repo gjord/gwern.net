@@ -1,42 +1,32 @@
-# redirect 301 /old/old.htm http://www.you.com/new.htm
-
+# Add caching/expire headers for performance
 FileETag MTime
-
 <ifModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 2 days"
-
   ExpiresByType text/css "access plus 40 days"
   ExpiresByType text/javascript "access plus 60 days"
   ExpiresByType application/javascript "access plus 60 days"
-
-  # expire images after a month or so
+  ## expire images after a month or so
   ExpiresByType image/png A3592000
   ExpiresByType image/jpg A3592000
   ExpiresByType image/svg A3592000
   ExpiresByType image/vnd.microsoft.icon A7592000
-
-  # the PDFs are likewise usually unchanging
+  ## the PDFs are likewise usually unchanging
   ExpiresByType application/pdf A4592000
 </ifModule>
 
-
-# http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
-# https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
+# Add static gzip'd support, again, for performance
+## http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
+## https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
 Options +MultiViews
 AddEncoding x-gzip .gz
-
 RewriteEngine on
 RewriteOptions Inherit
-
-# Check to see if browser can accept gzip files.
+## Check to see if browser can accept gzip files.
 ReWriteCond %{HTTP:accept-encoding} (gzip.*)
-
-# make sure there's no trailing .gz on the url
+## make sure there's no trailing .gz on the url
 ReWriteCond %{REQUEST_FILENAME} !^.+\.gz$
-
-# check to see if a .gz version of the file exists.
+## check to see if a .gz version of the file exists.
 RewriteCond %{REQUEST_FILENAME}.gz -f
-
-# All conditions met so add .gz to URL filename (invisibly)
+## All conditions met so add .gz to URL filename (invisibly)
 RewriteRule ^(.+) $1.gz [L]
