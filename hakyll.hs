@@ -73,11 +73,12 @@ page pg = readPageAction pg >>> (arr id &&& arr (const total)) >>> renderActionW
        total :: String -> String
        total = writeHtmlString options . changeLinks . readMarkdown defaultParserState
 
-       options = defaultWriterOptions{ writerStandalone = True,
-                                     writerTableOfContents = True,
-                                     writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
-                                     writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
-                                     writerEmailObfuscation = NoObfuscation }
+       options = defaultWriterOptions{ writerSectionDivs = True,
+                                       writerStandalone = True,
+                                       writerTableOfContents = True,
+                                       writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
+                                       writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
+                                       writerEmailObfuscation = NoObfuscation }
 
        changeLinks :: Pandoc -> Pandoc
        changeLinks = bottomUp (map (convertEmptyWikiLinks . convertInterwikiLinks))
