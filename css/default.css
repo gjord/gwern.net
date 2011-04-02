@@ -131,7 +131,9 @@ li p { margin: 0.2em; }
 /* Add very modest drop shadows, partially inspired by http://nicolasgallagher.com/css-drop-shadows-without-images/demo/ */
 blockquote {
     z-index: -2;
-    width: 90%;
+    width: -moz-max-content; /* `width:` prevents line from going all way right; thanks to AngryParsley */
+    width: intrinsic;
     -webkit-box-shadow:-7px 4px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow:-7px 4px 0px rgba(0, 0, 0, 0.1);
+
     box-shadow:-7px 4px 0px rgba(0, 0, 0, 0.1); }
