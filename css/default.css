@@ -137,3 +137,6 @@ blockquote {
     -moz-box-shadow:-7px 4px 0px rgba(0, 0, 0, 0.1);
 
     box-shadow:-7px 4px 0px rgba(0, 0, 0, 0.1); }
+
+/* make footnotes better: http://bytes.com/topic/html-css/answers/97932-superscript-doesnt-distort-line-spacing#post340658 */
+sub, sup { line-height: 0.3em; }
