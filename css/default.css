@@ -140,3 +140,16 @@ blockquote {
 
 /* make footnotes better: http://bytes.com/topic/html-css/answers/97932-superscript-doesnt-distort-line-spacing#post340658 */
 sub, sup { line-height: 0.3em; }
+
+/* http://ignorethecode.net/blog/2010/04/20/footnotes/
+If we don't have this CSS for the floating footnotes, they're too see-through and unreadable. */
+#footnotediv div {
+background-color: white;
+padding: 3px;
+padding-left: 12px;
+padding-right: 12px;
+border: 1px solid #CDBBB5;
+box-shadow: #555 0 0 10px;
+-webkit-box-shadow: #555 0 0 10px;
+-moz-box-shadow: 0 0 10px #555;
+}
