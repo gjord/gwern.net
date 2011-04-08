@@ -34,7 +34,7 @@ main = do
         mapM_ (render' ["templates/default.html"]) articles
         mapM_ static sources -- no fancy HTML rendering for the Haskell source
 
-        _ <- forkHakyllWait $ directory css "css"
+        _ <- forkHakyllWait $ directory css "static/css"
         mapM_ (directory static) ["_darcs",
                                   "/home/gwern/bin/hcorpus",
                                   "/home/gwern/bin/archiver",
