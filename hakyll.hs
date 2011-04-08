@@ -25,6 +25,15 @@ main = do
 
     hakyll "http://gwern.net" $ do
 
+        pages <- liftM sort $ getRecursiveContents "./"
+
+        let articles = havingExtension ".page" pages
+        let sources = havingExtension ".hs" pages
+
+        -- TODO: make this faster - 'forkHakyll'?
+        mapM_ (render' ["templates/default.html"]) articles
+        mapM_ static sources -- no fancy HTML rendering for the Haskell source
+
         _ <- forkHakyllWait $ directory css "css"
         mapM_ (directory static) ["_darcs",
                                   "/home/gwern/bin/hcorpus",
@@ -33,17 +42,8 @@ main = do
                                   "docs",
                                   "static"]
 
-        pages <- liftM sort $ getRecursiveContents "./"
-
-        let articles = havingExtension ".page" pages
-        let sources = havingExtension ".hs" pages
-
-        -- TODO: make this faster - 'forkHakyll'?
-        mapM_ (render' ["templates/default.html"]) (articles++sources)
-
     -- set up RSS
-    atom <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-    writeFile "_site/atom.xml" atom
+    writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
 
     -- Apache configuration (caching, compression)
     copyFile ".htaccess" "_site/.htaccess"
