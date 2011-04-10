@@ -8,9 +8,9 @@ Along the lines of [Archiving URLs](), I like to keep copies of [Haskell](!Wikip
 
     > "I'd think it'd be useful for more than just me. Agda is lousy with calls to ">> return ()"; and then there's ZMachine, arrayref, whim, the barracuda packages, binary, bnfc, buddha, bytestring, c2hs, cabal, chesslibrary, comas, conjure, curl, darcs, darcs-benchmark, dbus-haskell, ddc, dephd, derive, dhs, drift, easyvision, ehc, filestore, folkung, geni, geordi, gtk2hs, gnuplot, ginsu, halfs, happstack, haskeline, hback, hbeat... You get the picture."
 
-[Previously](http://blog.patch-tag.com/2010/03/13/mirroring-patch-tag/) I wrote a simple script to download the repositories of the relatively obscure source repository hosting site, [Patch-tag.com](http://www.patch-tag.com/). Patch-tag specializes in hosting [Darcs](!Wikipedia) repositories (usually Haskell-related). [GitHub](!Wikipedia) is a much larger & more popular hosting site, and though it does not support Darcs but [git](!Wikipedia "Git (software)") (as the name indicates), it is so popular that it still hosts a great deal of Haskell. I've downloaded a few repositories out of curiosity or because I was working on the contents of the repository (eg. [gitit](https://github.com/jgm/gitit)), but there are too many to download manually. I needed a script.
+[Previously](http://blog.patch-tag.com/2010/03/13/mirroring-patch-tag/) I wrote a simple script to download the repositories of the source repository hosting site [Patch-tag.com](http://www.patch-tag.com/). Patch-tag specializes in hosting [Darcs](!Wikipedia) repositories (usually Haskell-related). [GitHub](!Wikipedia) is a much larger & more popular hosting site, and though it does not support Darcs but [git](!Wikipedia "Git (software)") (as the name indicates), it is so popular that it still hosts a great deal of Haskell. I've downloaded a few repositories out of curiosity or because I was working on the contents of the repository (eg. [gitit](https://github.com/jgm/gitit)), but there are too many to download manually. I needed a script.
 
-Patch-tag.com was nice enough to supply a URL which provided exactly the URLs I needed, but I couldn't expect such personalized support from GitHub. GitHub does supply an API of sorts for developers and hobbyists, said API provides [no obvious way](http://support.github.com/discussions/email/6782-contact-extending-api-to-easily-get-list-of-repos-by-language) to get what I want: 'URLs for all Haskell-related repos'. So, [scraping](!Wikipedia "Data scraping") it is - I'd write a script to munge some GitHub HTML and get the URLs I want *that* way.
+Patch-tag was nice enough to supply a URL which provided exactly the URLs I needed, but I couldn't expect such personalized support from GitHub. GitHub does supply an API of sorts for developers and hobbyists, said API provides [no obvious way](http://support.github.com/discussions/email/6782-contact-extending-api-to-easily-get-list-of-repos-by-language) to get what I want: 'URLs for all Haskell-related repos'. So, [scraping](!Wikipedia "Data scraping") it is - I'd write a script to munge some GitHub HTML and get the URLs I want *that* way.
 
 # Archiving GitHub
 ## Parsing pages
@@ -33,7 +33,7 @@ We run it and it throws an exception! `*** Exception: getAddrInfo: does not exis
 
 Oops. We got all wrapped up in parsing the HTML we forgot to make sure that downloading worked in the first place. Well, we're lazy programmers, so now, on demand, we'll investigate that problem. The exception thrown sounds like a problem with the `openURL` call - '[hostname](!Wikipedia)' is a networking term, not a parsing or printing term. So we try running just `openURL "https://github.com/languages/Haskell/created"` - same error. Not helpful.
 
-So we try a different version of `openURL`, mentioned in the [other scraping script](haskell/Wikipedia RSS Archive Bot#rewriting-network-code):
+We try a different implementation of `openURL`, mentioned in the [other scraping script](haskell/Wikipedia RSS Archive Bot#rewriting-network-code):
 
 ~~~{.haskell}
 import Network.HTTP (getRequest, simpleHTTP)
@@ -56,7 +56,7 @@ Location: https://github.com/languages/Haskell/created
 
 Oh dear. It seems that the [`HTTP`](!Hackage "HTTP") package just won't handle HTTP*S*; nor does the description mention HTTPS nor any of the module names seem connected. Best to give up entirely on it.
 
-If we google 'Haskell https', one of the first 20 hits happens to be a [Stack Overflow](!Wikipedia) question/page which sounds promising: ["Haskell Network.Browser HTTPS Connection"](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection). The [one answer](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection/3988829#3988829) says to simply use the [Haskell binding](!Hackage "curl") to [curl](!Wikipedia "cURL")). Well, fine. I already had that installed because Darcs uses the binding for downloads. (Besides `curl`, there is the [http-wget](!Hackage) wrapper, and the [http-enumerator](!Wikipedia) package claims to natively support HTTPS. I have not tried them.)
+If we google 'Haskell https', one of the first 20 hits happens to be a [Stack Overflow](!Wikipedia) question/page which sounds promising: ["Haskell Network.Browser HTTPS Connection"](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection). The [one answer](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection/3988829#3988829) says to simply use the [Haskell binding](!Hackage "curl") to [curl](!Wikipedia "cURL")). Well, fine. I already had that installed because Darcs uses the binding for downloads. I'll use that package.^[Besides `curl`, there is the [http-wget](!Hackage) wrapper, and the [http-enumerator](!Wikipedia) package claims to natively support HTTPS. I have not tried them.]
 
 We go to the [top level module](http://hackage.haskell.org/packages/archive/curl/1.3.6/doc/html/Network-Curl.html) hoping for an easy download. Scrolling down, one's eye is caught by a [curlGetString](http://hackage.haskell.org/packages/archive/curl/1.3.6/doc/html/Network-Curl.html#v:curlGetString), which while not necessarily a promising name, does have an interesting type: `URLString -> [CurlOption] -> IO (CurlCode, String)`.
 
@@ -77,7 +77,7 @@ Note especially the return value - from past experience with the HTML package, o
 ...
 ~~~
 
-Great! As they say, 'try the simplest possible thing that could possibly work', and this seems to. We don't really care about the exit code, since this is a hacky script^[What would we do? Keep retrying?]; we'll throw it away and only keep the second part of the tuple with the usual `snd`. It's in IO so we need to use `liftM` or `fmap` before we can apply `snd`. Combined with our previous Tagsoup code, we get:
+Great! As they say, 'try the simplest possible thing that could possibly work', and this seems to. We don't really care about the exit code, since this is a hacky script^[What would we do? Keep retrying? There are going to be tons of errors in this script anyway, from repositories incorrectly identified as Haskell-related to repository duplicates to transient network errors, that we gain a great deal of complexity from retrying and may make the script *less* reliable.]; we'll throw it away and only keep the second part of the tuple with the usual `snd`. It's in IO so we need to use `liftM` or `fmap` before we can apply `snd`. Combined with our previous Tagsoup code, we get:
 
 ~~~{.haskell}
 import Text.HTML.TagSoup
@@ -85,7 +85,6 @@ import Network.Curl (curlGetString, URLString)
 
 main :: IO ()
 main = do html <- openURL "https://github.com/languages/Haskell/created"
-          return ()
           let links = linkify html
           print links
 
@@ -325,7 +324,7 @@ main = do html <- openURL "https://github.com/languages/Haskell/created"
           ???
 ~~~
 
-Hopefully turning a relatively repository URL into an absolute git URL will be a pure operation, so let's tentatively define that function as `gitify :: String -> String`. Let's look at a random repository page <https://github.com/plategreaves/unordered-containers> (in our example output as `/plategreaves/unordered-containers`), whose git repository is at... <https://github.com/plategreaves/unordered-containers.git>! What luck, there's a very obvious transformation there:
+Hopefully turning a relatively repository URL into an absolute git URL will be a pure operation, so let's tentatively define that function as `gitify :: String -> String`. Let's look at a random repository page <https://github.com/plategreaves/unordered-containers> (in our example output as `/plategreaves/unordered-containers`), whose git repository is at... <https://github.com/plategreaves/unordered-containers.git>! What luck, there's an obvious transformation there:
 
 ~~~{.haskell}
 gitify :: String -> String
@@ -345,7 +344,7 @@ shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u] ""
 In retrospect, it might have been a better idea to try to use [runCommand](!Hoogle) or [System.Cmd](!Hoogle). Alternatively, we could use the same shelling out functionality from the original [patch-tag.com](https://patch-tag.com/r/tphyahoo/mirrorpatchtag/snapshot/current/content/pretty/patch-tag-mirror.hs) script:
 
 ~~~{.haskell}
-          mapM_ (\x ->runProcess "darcs" ["get", "--lazy", "http://patch-tag.com"++x] Nothing Nothing Nothing Nothing Nothing) targets
+mapM_ (\x ->runProcess "darcs" ["get", "--lazy", "http://patch-tag.com"++x] Nothing Nothing Nothing Nothing Nothing) targets
 ~~~
 
 Which could be rewritten for us (sans logging) as
@@ -353,7 +352,7 @@ Which could be rewritten for us (sans logging) as
 ~~~{.haskell}
 shellToGit :: String -> IO ()
 shellToGit u = runProcess "git" ["clone", u] Nothing Nothing Nothing Nothing Nothing >> return ()
-                                             -- or replace `return ()` with Control.Monad.void to drop `IO ProcessHandle` result
+                                     -- or replace `return ()` with Control.Monad.void to drop `IO ProcessHandle` result
 ~~~
 
 Now it's easy to fill in our 2 missing lines:
@@ -366,7 +365,7 @@ Now it's easy to fill in our 2 missing lines:
 ~~~
 
 
-(The `concat` is there because `getRepos` gave us a `[String]` for each `String`, and then we ran it on a `[String]` - so our result is `[[String]]`! But we don't care about preserving the information about where each String came from, so we smush it down to a single list. Strictly speaking, we didn't need to do `print y` in `shellToGit`, but I like to see what git was doing - get a sense of where the script is; a nice thing, once you've done that, to is to `sort` the list of repository URLs so we download them in order by user.)
+(The `concat` is there because `getRepos` gave us a `[String]` for each `String`, and then we ran it on a `[String]` - so our result is `[[String]]`! But we don't care about preserving the information about where each String came from, so we smush it down to a single list. Strictly speaking, we didn't need to do `print y` in `shellToGit`, but while developing, it's a good idea to have some sort of logging - get a sense of what the script is doing. And once you are printing at all, you can  `sort` the list of repository URLs to download them in order by user.)
 
 ## The script
 
@@ -418,7 +417,7 @@ shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u] ""
                   print y
 ~~~
 
-This, or a version of it, works well. But I caution people from mis-using it! There are a *lot* of repositories on GitHub; please don't go running this carelessly. It will pull down 2-4 gigabytes of data. GitHub is a good FLOSS-friendly business by all accounts, and doesn't deserve people wasting its bandwidth & money if they are not even going to hold on to what they downloaded.
+This, or a version of it, works well. But I caution people from mis-using it! There are a *lot* of repositories on GitHub; please don't go running this carelessly. It will pull down 2-4 gigabytes of data. GitHub is a good FLOSS-friendly business by all accounts, and doesn't deserve people wasting its bandwidth & money if they are not even going to keep what they downloaded.
 
 ### The script golfed
 
@@ -431,8 +430,8 @@ import System.Process (readProcessWithExitCode)
 import Text.HTML.TagSoup
 
 main = do html <- openURL "https://github.com/languages/Haskell/created"
-          let indxPgs = take (lastPage $ linkify html) $ map (("https://github.com/languages/Haskell/created?page="++) . show) [1..]
-          repourls <- mapM (fmap (uniq . linkify) . openURL) indxPgs
+          let i = take (lastPage $ linkify html) $ map (("https://github.com/languages/Haskell/created?page="++) . show) [1..]
+          repourls <- mapM (fmap (uniq . linkify) . openURL) i
           mapM_ shellToGit $ map (\x -> "https://github.com" ++ x ++ ".git") $ sort $ concat repourls
        where openURL target = fmap snd $ curlGetString target []
              linkify l = [x | TagOpen "a" atts <- parseTags l, (_,x) <- atts]
