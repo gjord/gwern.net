@@ -259,7 +259,7 @@ repos = uniq . linkify
          uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) exceptions)
          exceptions :: [String]
          exceptions = ["/languages/", "/login/", "/site/", "http://", "https://"]
-         count :: String -> Int
+         count :: String -> Bool
          count x = length (elemIndices '/' x) == 2
 ~~~
 
@@ -286,7 +286,7 @@ repos = uniq . linkify
          uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) exceptions)
          exceptions :: [String]
          exceptions = ["/languages/", "/login/", "/site/", "http://", "https://"]
-         count :: String -> Int
+         count :: String -> Bool
          count x = length (elemIndices '/' x) == 2
 ~~~
 
@@ -404,7 +404,7 @@ repos = uniq . linkify
          uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) exceptions)
          exceptions :: [String]
          exceptions = ["/languages/", "/login/", "/site/", "http://", "https://"]
-         count :: String -> Int
+         count :: String -> Bool
          count x = length (elemIndices '/' x) == 2
 
 getRepos :: String -> IO [String]
