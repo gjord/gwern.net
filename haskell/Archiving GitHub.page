@@ -367,17 +367,21 @@ Now it's easy to fill in our 2 missing lines:
 
 (The `concat` is there because `getRepos` gave us a `[String]` for each `String`, and then we ran it on a `[String]` - so our result is `[[String]]`! But we don't care about preserving the information about where each String came from, so we smush it down to a single list. Strictly speaking, we didn't need to do `print y` in `shellToGit`, but while developing, it's a good idea to have some sort of logging - get a sense of what the script is doing. And once you are printing at all, you can  `sort` the list of repository URLs to download them in order by user.)
 
+### Unique repositories
+
 There is one subtlety here worth noting that our script is running rough-shod over. Each URL we download is unique, because usernames are unique on GitHub and each URL is formed from a "/username/reponame" pair. But each *downloaded* repository is *not* unique, because git will shuck off the username and create a directory with just the repository name - "/john/bar" and "/jack/bar" will clash, and if you download in that order, the `bar` repository will be John's repository and not Jack's repository. Git will error out the second time, but this error is ignored by the shelling code. The solution would be to tell git to `clone` to a non-default but unique directory (for example, one could reuse the "/username/reponame" and then one's target directory would be neatly populated by several hundred directories named after users, each populated by a few repositories with non-unique names). If we went with the per-user approach, our new version would look like this:
 
 ~~~{.haskell}
 shellToGit :: String -> IO ()
-shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u, drop 1 u] ""
+shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u, drop 19 u] ""
                   print y
 ~~~
 
 Why the `drop 19 u`? Well, `u` is the fully qualified URL, eg. "https://www.github.com/sergeyastanin/simpleea". Obviously we don't want to execute `git clone "https://www.github.com/sergeyastanin/simpleea" "https://www.github.com/sergeyastanin/simpleea"` (even though that'd be perfectly valid), because it makes for ugly folders. But `drop 19 "https://www.github.com/sergeyastanin/simpleea"` turns into "sergeyastanin/simpleea", giving us the right local directory name with no prefixed slash.
 
 Or you just pass in the original "/username/reponame" and use `drop 1` on that instead. (Either way, you need to do additional work. Might as well just use `drop 19`.)
+
+One final note: many of the URLs end in ".git". If we disliked this, then we could enhance the `drop 19` with [System.FilePath.dropExtension](!Hoogle): `dropExtension $ drop 19 u`.
 
 ## The script
 
@@ -386,6 +390,7 @@ The final program, clean of -Wall or [hlint](!Hackage) warnings:
 ~~~{.haskell}
 import Data.List (elemIndices, isPrefixOf, sort)
 import Network.Curl (curlGetString, URLString)
+import System.FilePath (dropExtension)
 import System.Process (readProcessWithExitCode)
 import Text.HTML.TagSoup
 
@@ -425,7 +430,7 @@ gitify :: String -> String
 gitify x = "https://github.com" ++ x ++ ".git"
 
 shellToGit :: String -> IO ()
-shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u, drop 19 u] ""
+shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u, dropExtension $ drop 19 u] ""
                   print y
 ~~~
 
@@ -438,6 +443,7 @@ For kicks, let's see what a shorter, more unmaintainable and unreadable, version
 ~~~{.haskell}
 import Data.List (elemIndices, isPrefixOf, sort)
 import Network.Curl (curlGetString)
+import System.FilePath (dropExtension)
 import System.Process (readProcessWithExitCode)
 import Text.HTML.TagSoup
 
@@ -450,7 +456,7 @@ main = do html <- openURL "https://github.com/languages/Haskell/created"
              lastPage = maximum . map (read . drop 32) . filter ("/languages/Haskell/created?page=" `isPrefixOf`)
              uniq = filter count . filter (\x -> not $ any (`isPrefixOf` x) ["/languages/", "/login/", "/site/", "http://", "https://"])
              count x = length (elemIndices '/' x) == 2
-             shellToGit u = do { (_,y,_) <- readProcessWithExitCode "git" ["clone", u, drop 19 u] ""; print y }
+             shellToGit u = do { (_,y,_) <- readProcessWithExitCode "git" ["clone", u, dropExtension $ drop 19 u] ""; print y }
 ~~~
 
 14 lines of code isn't too bad, especially considering that Haskell is not usually considering a language suited for scripting or scraping purposes like this. Nor do I see any obvious missing abstractions - `count` is a function that might be useful in `Data.List`, and `openURL` is something that the Curl binding could provide on its own, but everything else looks pretty necessary.
