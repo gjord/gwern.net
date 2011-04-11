@@ -434,7 +434,7 @@ shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u, dropExte
                   print y
 ~~~
 
-This, or a version of it, works well. But I caution people from mis-using it! There are a *lot* of repositories on GitHub; please don't go running this carelessly. It will pull down 2-4 gigabytes of data. GitHub is a good FLOSS-friendly business by all accounts, and doesn't deserve people wasting its bandwidth & money if they are not even going to keep what they downloaded.
+This, or a version of it, works well. But I caution people from mis-using it! There are a *lot* of repositories on GitHub; please don't go running this carelessly. It will pull down 4-12 gigabytes of data. GitHub is a good FLOSS-friendly business by all accounts, and doesn't deserve people wasting its bandwidth & money if they are not even going to keep what they downloaded.
 
 ### The script golfed
 
