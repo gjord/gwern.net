@@ -52,7 +52,7 @@ find ~/www -size +4M -delete
 The code is not the prettiest, but it's fairly straightforward:
 
 - the script grabs my Firefox browsing history by extracting it from the SQL database, and feeds the URLs into [wget](!Wikipedia)
-- The script splits the long list of URLs into a bunch of files and runs that many `wget`s because `wget` apparently has no way of simultaneously downloading from multiple domains.
+- The script `split`s the long list of URLs into a bunch of files and runs that many `wget`s because `wget` apparently has no way of simultaneously downloading from multiple domains.
 - The `filter-urls` command is another shell script, which removes URLs I don't want archived. This script is a hack which looks like this:
 
     ~~~{.bash}
@@ -76,7 +76,9 @@ My first program in this vein of thought was a bot which fired off WebCite and I
 
 The core code was quickly adapted into a [gitit](!Hackage) wiki plugin which hooked into the save-page functionality and tried to archive every link in the newly-modified page, [Interwiki.hs](https://github.com/jgm/gitit/blob/master/plugins/Interwiki.hs)
 
-Finally, I wrote [archiver](!Hackage), a daemon which watches a text file. (Source is available via `darcs get http://community.haskell.org/~gwern/archiver/`.)
+Finally, I wrote [archiver](!Hackage), a daemon which watches[^watch]/reads a text file. (Source is available via `darcs get http://community.haskell.org/~gwern/archiver/`.)
+
+[^watch]: Version [0.1](http://hackage.haskell.org/package/archiver-0.1) of my `archiver` daemon didn't simply read the file until it was empty and exit, but actually watched it for modifications with [inotify](!Wikipedia). I removed this functionality when I realized that the required WebCite choking (just one URL every ~25 seconds) meant that `archiver` would *never* finish any reasonable workload.
 
 The library half of `archiver` is a simple wrapper around the appropriate HTTP requests; the executable half reads a specified text file and loops as it (slowly) fires off requests and deletes the appropriate URL.
 
