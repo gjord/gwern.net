@@ -51,6 +51,7 @@ main = do  hakyll $ do
            _ <- runCommand "find _site/ -name \"*.js\"   -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
            return ()
 
+options :: WriterOptions
 options = defaultWriterOptions{ writerSectionDivs = True,
                                        writerStandalone = True,
                                        writerTableOfContents = True,
@@ -61,12 +62,63 @@ options = defaultWriterOptions{ writerSectionDivs = True,
 rssConfig :: FeedConfig
 rssConfig =  FeedConfig { fcTitle = "Joining Clouds", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
 
+myPageCompiler :: Compiler Resource (Page String)
 myPageCompiler = cached "myPageCompiler" $ readPageCompiler >>> addDefaultFields >>> arr applySelf >>> myPageRenderPandocWith
+
+myPageRenderPandocWith :: Compiler (Page String) (Page String)
 myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
 
 pandocTransform :: Pandoc -> Pandoc
-pandocTransform = bottomUp (map (convertInterwikiLinks))
+pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
 
+--
+-- GITIT -> HAKYLL LINKS PLUGIN
+--
+-- | Convert links with no URL to wikilinks.
+convertHakyllLinks :: Inline -> Inline
+convertHakyllLinks (Link ref ("", "")) =   let ref' = inlinesToURL ref in Link ref (transform ref', "Go to wiki page: " ++ ref')
+convertHakyllLinks (Link ref (y, x)) =  Link ref (transform y, x)
+convertHakyllLinks x = x
+
+{- specification for 'transform':
+test :: Bool
+test = all (\(a,b) -> transform a == b) [
+        ("!Hoogle 'foo'", "!Hoogle 'foo'"),
+        ("!Wikipedia 'Multivitamin#Evidence against'", "!Wikipedia 'Multivitamin#Evidence against'"),
+        ("!Wikipedia 'foo'", "!Wikipedia 'foo'"),
+        ("#Benefits", "#Benefits"),
+        ("Chernoff Faces", "Chernoff Faces.html"),
+        ("In Defense of Inclusionism.html", "In Defense of Inclusionism.html"),
+        ("N-back FAQ#hardcore", "N-back FAQ.html#hardcore"),
+        ("Redirect-bot.hs", "Redirect-bot.hs"),
+        ("Terrorism is not about Terror#the-problem", "Terrorism is not about Terror.html#the-problem"),
+        ("doc/foo.pdf", "doc/foo.pdf"),
+        ("docs/gwern.xml", "docs/gwern.xml"),
+        ("docs/gwern.xml.gz", "docs/gwern.xml.gz"),
+        ("http://en.wikipedia.org/wiki/Angst", "http://en.wikipedia.org/wiki/Angst"),
+        ("http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement", "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement"),
+        ("http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against", "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against"),
+        ("http://www.google.com", "http://www.google.com"),
+        ("http://www.gwern.net/N-back FAQ.html#fn1", "http://www.gwern.net/N-back FAQ.html#fn1"),
+        ("sicp/Chapter 1.1", "sicp/Chapter 1.1.html"),
+        ("sicp/Introduction", "sicp/Introduction.html") ] -}
+transform :: String -> String
+transform y = let extension = drop 1 $ takeExtension y in
+               if (length extension > 0) &&hasExtension y
+               then if extension `notElem` map show [(0 :: Int) .. 9]
+                    then y
+                    else  y ++ ".html"
+               else if ("!" `isPrefixOf` y) || ("#" `isPrefixOf` y) || isURI y
+                      then y
+                      else
+                       if "#" `isInfixOf` y
+                       then let (lnk, sctn) = splitAt (fromJust $ elemIndex '#' y) y in
+                                lnk ++ ".html" ++ sctn
+                       else y ++ ".html"
+
+--
+-- INTERWIKI PLUGIN
+--
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
 inlinesToURL = encString False isUnescapedInURI . inlinesToString
@@ -105,8 +157,7 @@ customInterwikiMap = [("Hackage", "http://hackage.haskell.org/package/"),
                       ("Hawiki", "http://haskell.org/haskellwiki/"),
                       ("Hayoo", "http://holumbus.fh-wedel.de/hayoo/hayoo.html#0:"),
                       ("Hoogle", "http://www.haskell.org/hoogle/?hoogle=")]
-wpInterwikiMap = [
-                 ("Commons", "http://commons.wikimedia.org/wiki/"),
+wpInterwikiMap = [ ("Commons", "http://commons.wikimedia.org/wiki/"),
                  ("EmacsWiki", "http://www.emacswiki.org/cgi-bin/wiki.pl?"),
                  ("Google", "http://www.google.com/search?q="),
                  ("Wikimedia", "http://wikimediafoundation.org/wiki/"),
