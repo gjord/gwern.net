@@ -1,22 +1,22 @@
 #!/usr/bin/env runhaskell
 {-# LANGUAGE OverloadedStrings #-}
-import Control.Arrow
+import Control.Arrow (arr, (>>>), (>>^))
 import Data.FileStore (darcsFileStore)
 import Data.List (elemIndex, isInfixOf, isPrefixOf)
 import Data.Maybe (fromJust)
+import Network.HTTP (urlEncode)
+import Network.URI (unEscapeString, isUnescapedInURI, isURI)
+import Network.URL (encString)
+import System.Directory (copyFile)
+import System.FilePath (hasExtension, takeExtension)
+import System.Process (runCommand)
+import qualified Data.Map as M (fromList, lookup, Map)
+
 import Hakyll
 import Network.Gitit.Feed (filestoreToXmlFeed, FeedConfig(..))
-import Network.HTTP (urlEncode)
-import Network.URI (isURI)
-import Network.URI (unEscapeString, isUnescapedInURI)
-import Network.URL (encString)
-import System.FilePath (hasExtension, takeExtension)
-import Text.Pandoc (bottomUp, defaultParserState, defaultWriterOptions, readMarkdown, writeHtmlString,HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
+import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
-import qualified Data.Map as M (fromList, lookup, Map)
-import System.Directory
-import System.Process (runCommand)
--- outstanding issues: Notenki Memoirs not rendered into HTML
+
 -- TODO: is it a good thing to have my pages ending in .html? maybe I should
   -- switch completely over to extensionless pages and use .htaccess redirects
 main :: IO ()
