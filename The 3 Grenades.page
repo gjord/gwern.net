@@ -93,3 +93,59 @@ And that's that. we have learned that while the Warden was correct in using 4 qu
 > With windlasses and with assays of bias,
 >
 > By indirections find directions out."
+
+## Boxo's Tale
+
+Haskeller [Boxo](http://oneboxo.wordpress.com/) (he of the [decision theory monad](http://oneboxo.wordpress.com/2011/01/25/udt-diagrams-in-haskell-or-decision-problems-form-a-monad-draft/))  offers the following twisty examination of a very similar problem to the preceding where one *can* learn the truth in just 2 questions:
+
+---
+
+Suppose you want to know whether _p_ and there is a person that knows whether _p_, but they may lie depending on arbitrary circumstances, including what question they're asked.
+
+Ask them this:
+
+> "If I asked you whether _p_ and your choice of lying or truth-telling was the same as in the case of this question would you answer yes?"
+
+1. _p_ and askee truth-tells:
+
+    _p_ and askee's choice is truth-telling, so they would answer "yes", and since they're truth-telling, they answer "yes"
+2. not _p_ and askee truth-tells: "no"
+
+    not _p_ and askee's choice is truth-telling, so they would answer "no", and since they're truth-telling, they answer "no"
+3. _p_ and askee lies: "yes"
+
+    _p_ and askee's choice is lying, so they would answer "no", but since their choice is lying they answer "yes"
+
+4. not _p_ and askee lies: "no"
+
+    not _p_ and and askee's choice is lying, so they would answer "yes", but since their choice is lying they answer "no"
+
+So they will tell you the truth about _p_.
+
+### The 2 Questions
+
+Now, to find out the color of the ball, just ask the two questions you would ask of a honest person, namely:
+
+> "Is it green or blue"?
+
+and if the answer is yes, "Is it green?"
+
+But replace them with the propositions "It is green or blue" and "It is green" and ask them in the place of _p_ in the question:
+
+> "If I asked you whether _p_ and your choice of lying or truth-telling was the same as in the case of this question would you answer yes?"
+
+The askee will always answer with the truth, and you will find out the truth in at most two questions.
+
+### The 1 Model
+
+Here I'll explain my technique in coming up with the answer.
+
+In my model, a person chooses whether to lie or tell the truth, not whether to say "yes" or "no". More precisely - an answerer has access to a function evaluate of type `(Proposition -> Bool)` such that `(evaluate p) = True iff p`, and for every pair of answerer and circumstances there is a function `f` of type `(Bool -> Bool)` such that when you ask of them "p?", they answer with `(f (evaluate p))`. In the case of an answerer who has decided to lie, f=not. In the case of a truth-telling, `f = id`^.[[id](!Hoogle) is the identity function, defined as `f x = x`]
+
+Now, you just ask "given that in the current circumstances your function is `f`, is it the case that `(f (evaluate p)) = True`?". As an answer, you'll get `(f (evaluate [(f (evaluate p)) = True]))`, which is equivalent to `(f (f (evaluate p)))` since - ie., for liars and truth-tellers, `(not (not (evaluate p)))` and `(id (id (evaluate p)))` respectively, which both reduce to `(evaluate p)`.
+
+### The Null Case
+
+But consider answerers who have decided to either answering "yes" or answering "no" to your question.
+
+In this case, `f = (const True)` or `f = (const False)` respectively. You may see the problem: no clever question will help you if in the end a [constant function](!Wikipedia) is applied to the answer. The solution presented above fails in the presence of "constant answerers".
