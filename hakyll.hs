@@ -18,7 +18,7 @@ import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inli
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 -- TODO: is it a good thing to have my pages ending in .html? maybe I should
-  -- switch completely over to extensionless pages and use .htaccess redirects
+-- switch completely over to extensionless pages and use .htaccess redirects
 main :: IO ()
 main = do  hakyll $ do
              let static = route idRoute >> compile copyFileCompiler
@@ -30,10 +30,10 @@ main = do  hakyll $ do
 
              match "**.css" $ route idRoute >> compile compressCssCompiler
 
-             match "**.page" $ do
-               route idRoute
+             group "html" $ match "**.page" $ do
+               route $ setExtension "html"
                compile $ myPageCompiler
-                 route $ setExtension "html"
+
                  >>> requireA "templates/sidebar.markdown" (setFieldA "sidebar" $ arr pageBody)
                  >>> applyTemplateCompiler "templates/default.html"
                  >>> relativizeUrlsCompiler
