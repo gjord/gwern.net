@@ -149,3 +149,17 @@ Now, you just ask "given that in the current circumstances your function is `f`,
 But consider answerers who have decided to either answering "yes" or answering "no" to your question.
 
 In this case, `f = (const True)` or `f = (const False)` respectively. You may see the problem: no clever question will help you if in the end a [constant function](!Wikipedia) is applied to the answer. The solution presented above fails in the presence of "constant answerers".
+
+### The One True Question
+
+Here's a way to arguably get the answer with just one question in the absence of constant answerers & allowing non-answering^[In some respects, this is smuggling in additional information; there are connections to denotative semantics in computer science and the [bottom type](!Wikipedia).]. Consider this proposition:
+
+> "The ball is green or it is the case that the ball is blue and this proposition is false."
+
+It's true if the ball is green, false if the ball is red, and undefined if the ball is blue. 
+
+Now just plug this proposition into our liar-rectifying question like so:
+
+> "If I asked you whether the ball is green or it is the case that the ball is blue and this proposition is false; and your choice of lying or truth-telling was the same as in the case of this question, would you answer yes?"
+
+Now ask the above question. If they answer "yes", the ball is green. If they answer "no", the ball is red. If they answer nothing, or if they answer "mu", or if their head explodes, the ball is blue.
