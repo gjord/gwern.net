@@ -26,7 +26,8 @@ main = do  hakyll $ do
                                        "images/**",
                                        "**.hs",
                                        "_darcs/**",
-                                       "static/**"]
+                                       "static/**",
+                                       "**.page"]
 
              match "**.css" $ route idRoute >> compile compressCssCompiler
 
