@@ -1,0 +1,372 @@
+# 1
+
+What suffix do Python source files have?
+<code>.py</code>
+
+Name the Python source file <tt>ex1</tt>
+<code>ex1.py</code>
+
+How would one execute ex1.py?
+<code>python ex1.py</code>
+
+Is this correct?
+<code>print "Hello World!"</code>
+yes
+
+Is this correct?
+<code>print "Hello World!'</code>
+no
+
+Is this correct?
+<code>print 'Hello World!'</code>
+yes
+
+Is this correct?
+<code>print "I'd much rather you 'not'."</code>
+yes
+
+Is this correct?
+<code>print 'I'd much rather you "not".'</code>
+no
+
+Is this correct?
+<code>print 'I "said" do not touch this.'</code>
+yes
+
+Is this correct?
+<code>print 'I\'d much rather you "not".'</code>
+yes
+
+Is this correct?
+<code>print 'I\'d much rather you \"not\".'</code>
+yes
+
+Is this correct?
+<code>print 'I'd much rather you \"not\".'</code>
+no
+
+Evaluate:
+<code>print "Hello World!"</code>
+Hello World!
+
+Evaluate:
+<code>print "Hello Again"</code>
+Hello Again
+
+Evaluate:
+<code>print "I like typing this."</code>
+I like typing this.
+
+Evaluate:
+<code>print "This is fun."</code>
+This is fun.
+
+Evaluate:
+<code>print 'Yay! Printing.'</code>
+Yay! Printing
+
+Evaluate:
+<code>print "I'd much rather you 'not'."</code>
+I'd much rather you 'not'.
+
+Evaluate:
+<code>print 'I "said" do not touch this.'</code>
+I "said" do not touch this.
+
+# 2
+
+Python comments are...?
+anything following a '#'
+
+Evaluate:
+<code>print "I could have code like this." # comment
+# print "This won't run."</code>
+I could have code like this.
+
+Evaluate:
+<code># print "I could have code like this." # comment
+# print "This will run."</code>
+(nothing)
+
+# 3
+
+Evaluate:
+<code>print "I will now count my chickens:"</code>
+I will now count my chickens:
+
+Evaluate:
+<code>print "Hens", 25 + 30 / 6</code>
+Hens 30
+
+Correct?
+<code>print "Hens" 25 + 30 / 6</code>
+no; <tt>SyntaxError: invalid syntax</tt>
+
+Correct?
+<code>print "Hens", 25 + 30 / 6,</code>
+yes
+
+Evaluate:
+<code>print "Hens", 25 + 30 / 6,</code>
+Hens 30
+
+Correct?
+<code>print "Hens", (25 + 30 / 6)</code>
+yes
+
+Evaluate:
+<code>print "Roosters", 100 - 25 * 3 % 4</code>
+Roosters 97
+
+Evaluate:
+<code>print "Roosters", 100 - 25 * 3 % 4</code>
+Roosters 97
+
+Evaluate:
+<code>print "Roosters", 100 - 25 * (3 % 4)</code>
+Roosters 25
+
+Evaluate:
+<code>print "Roosters", 100 - (25 * 3 % 4)</code>
+Roosters 97
+
+Evaluate:
+<code>print "Roosters", 100 - (25 * 3) % 4</code>
+Roosters 97
+
+Evaluate:
+<code>print "Now I will count the eggs:"</code>
+Now I will count the eggs:
+
+Evaluate:
+<code>print 3 + 2 + 1 - 5 + 4 % 2 - 1 / 4 + 6</code>
+7
+
+Evaluate:
+<code>print "Is it true that 3 + 2 < 5 - 7?"</code>
+Is it true that 3 + 2 < 5 - 7?
+
+Evaluate:
+<code>print 3 + 2 < 5 - 7</code>
+False
+
+Evaluate:
+<code>print "What is 3 + 2?", 3 + 2</code>
+What is 3 + 2? 5
+
+Evaluate:
+<code>print "What is 5 - 7?", 5 - 7</code>
+What is 5 - 7? -2
+
+Evaluate:
+<code>print "Oh, that's why it's False."</code>
+Oh, that's why it's False.
+
+Evaluate:
+<code>print "How about some more."</code>
+How about some more.
+
+Evaluate:
+<code>print "Is it greater?", 5 > -2</code>
+Is it greater? True
+
+Evaluate:
+<code>print "Is it greater or equal?", 5 >= -2</code>
+Is it greater or equal? True
+
+Evaluate:
+<code>print "Is it less or equal?", 5 <= -2</code>
+Is it less or equal? False
+
+Evaluate:
+<code>25 + 30 / 6</code>
+30
+
+Evaluate:
+<code>25 + (30 / 6)</code>
+30
+
+Evaluate:
+<code>100 - 25 * 3 % 4</code>
+97
+
+Evaluate:
+<code>100 - 25 * (3 % 4)</code>
+25
+
+Evaluate:
+<code>100 - 25.0 * (3 % 4)</code>
+25.0
+
+Evaluate:
+<code>100 - 25.0 * 3 % 4</code>
+97.0
+
+Evaluate:
+<code>100 - 25 * 3 % 4.0</code>
+97.0
+
+Evaluate:
+<code>30 / 7</code>
+4
+
+Evaluate:
+<code>30.0 / 7</code>
+4.2857142857142856
+
+Evaluate:
+<code>30 / 7.0</code>
+4.2857142857142856
+
+Correct?
+<code>true & true</code>
+no
+
+Correct?
+<code>true & True</code>
+no
+
+Correct?
+<code>True & True</code>
+yes
+
+Evaluate:
+<code>true</code>
+error: <tt>NameError: name 'true' is not defined</tt>
+
+Evaluate:
+<code>True</code>
+<code>True</code>
+
+Evaluate:
+<code>False</code>
+False
+
+Evaluate:
+<code>false</code>
+error: <tt>NameError: name 'false' is not defined</tt>
+
+# 4
+
+Correct?
+<code>cars_driven = 30
+space_in_a_car = 4.0 # comment
+carpool_capacity = cars_driven * space_in_a_car
+print "We can transport", carpool_capacity, "people today."</code>
+yes
+
+Evaluate:
+<code>cars_driven = 30
+space_in_a_car = 4.0 # comment
+carpool_capacity = cars_driven * space_in_a_car
+print "We can transport", carpool_capacity, "people today."</code>
+We can transport 120.0 people today.
+
+Evaluate:
+<code>var = 2
+var = 4
+print var</code>
+4
+
+Evaluate:
+<code>cars_driven = 30
+space_in_a_car = 4 # comment
+carpool_capacity = cars_driven * space_in_a_car
+print "We can transport", carpool_capacity, "people today."</code>
+We can transport 120 people today.
+
+Evaluate:
+<code>cars_driven = 30
+space_in_a_car = 4 # comment
+carpool_capacity = cars_driven * space_in_a_car
+print "We can transport" carpool_capacity "people today."</code>
+error; <tt>SyntaxError: invalid syntax</tt>
+
+Correct?
+<code>cars = 100
+print "There are", cars, "cars available."</code>
+yes
+
+Correct?
+<code>val cars = 100
+print "There are", cars, "cars available."</code>
+no
+
+Correct?
+<code>int cars = 100
+print "There are", cars, "cars available."</code>
+no
+
+Correct?
+<code>int cars = 100;
+print "There are", cars, "cars available.";</code>
+no
+
+Correct?
+<code>cars = 100
+print "There are", cars, "cars available.";</code>
+yes
+
+Correct?
+<code>cars = 100;
+print "There are", cars, "cars available.";</code>
+yes
+
+Evaluate:
+<code>space_in_a_car = 4.0 # why 4.0?
+drivers = 10
+carpool_capacity = drivers * space_in_a_car
+print "We can transport", car_pool_capacity, "people today."</code>
+error; <tt>NameError: name 'car_pool_capacity' is not defined</tt>
+
+# 5
+
+my_name = 'Zed A. Shaw'
+my_age = 35 # not a lie
+my_height = 74 # inches
+my_weight = 180 # lbs
+my_eyes = 'Blue'
+my_teeth = 'White'
+my_hair = 'Brown'
+
+my_name = 'Zed A. Shaw'
+print "Let's talk about %s." % my_name
+
+print "Let's talk about %s." % 'Zed A. Shaw'
+
+my_weight = 180
+print "He's %d inches tall." % my_height
+
+my_height = 180
+print "He's %d% inches tall." % my_height
+error
+
+my_height = 180
+print "He's %d% inches tall." % (my_height)
+error
+
+my_height = 180
+print "He's %d inches tall." % (my_height)
+
+
+print "He's %d pounds heavy." % my_weight
+
+print "He's got %s eyes and %s hair." % (my_eyes, my_hair)
+print "His teeth are usually %s depending on the coffee." % my_teeth
+
+my_age = 35
+my_height = 74
+my_weight = 180
+print "If I add %d, %d, and %d I get %d." % (my_age, my_height, my_weight, my_age + my_height + my_weight)
+
+print "he's %d feet tall" % 10.0
+he's 10 feet tall
+
+print "he's %r feet tall" % 10.0
+he's 10.0 feet tall
+
+print "he's %s feet tall" % 10.0
+he's 10.0 feet tall
+
+
+%r formatter
