@@ -203,6 +203,41 @@ As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 2 unkno
 
 Of my original predictions, I think I was right about the Immix GC & GObject & Darcs network optimization, semi-right about Hackage 2.0 & Cabal testing support, somewhat wrong about the LLVM work, and completely wrong about the HTML/`blaze` SoC. (I am not sure why I was wrong about the last, and don't judge myself harshly for not predicting the [exogenous](!Wikipedia) failure of the LLVM SoC.)
 
+### 2011
+
+[Haskell.org](http://www.google-melange.com/gsoc/org/google/gsoc2011/haskell) got 7 projects again for 2011. They are:
+
+1. ["Improve EclipseFP"](http://www.google-melange.com/gsoc/project/google/gsoc2011/serras/50001); Alejandro Serrano, mentored by Thomas Schilling
+
+    > "Eclipse is one of the most popular IDEs in our days. EclipseFP is a project developing a plug-in for it that supports Haskell. Now, it has syntax highlighting, integration of GHCi and supports some properties of Cabal files. My idea is to extend the set of tools available, at least with:
+    > - Autocompletion and better links to documentation,
+    > - A way to run unit tests within Eclipse,
+    > - More support for editing Cabal files visually, including a browser of the available packages."
+2. ["Simplified OpenGL bindings"](http://www.google-melange.com/gsoc/project/google/gsoc2011/pastorn/14001); Alexander Göransson, mentored by Jason Dagit
+
+    > "Modernize and simplify OpenGL bindings for Haskell. Focus on safety, shaders and simplicity."
+3. ["Interpreter Support for the Cabal-Install Build TOol"](http://www.google-melange.com/gsoc/project/google/gsoc2011/anklesaria/60001); anklesaria, by Duncan Coutts
+
+    > "This project aims to provide cabal-install with an 'repl' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
+4. ["Convert the text package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett
+
+    > "For Haskell projects handling unicode text, the Text library offers both speed and simplicity-of-use. When it was written, benchmarks indicated that UTF-16 would be a good choice for the internal encoding in the library. However, these (rather artificial) benchmarks were did not take into account the time taken to
+    > 1) decode the "Real World" data and
+    > 2) encode it to write it back.
+    >
+    > I propose to
+    > 1) benchmark and
+    > 2) convert the library to UTF-8 if it is a faster choice for "Real World"-applications."
+5. ["Build multiple Cabal packages in parallel"](http://www.google-melange.com/gsoc/project/google/gsoc2011/refold/31001); Mikhail Glushenkov, by Johan Tibell
+
+    > "Cabal is a system for building and packaging Haskell libraries and programs. This project's aim is to augment Cabal with support for building packages in parallel. Many developers have multi-core machines, but Cabal runs the build process in a single thread, only making use of one core. If the build process could be parallelized, build times could be cut by perhaps a factor of 2-8, depending on the number of cores and opportunity of parallel execution available."
+6. ["Darcs Bridge"](http://www.google-melange.com/gsoc/project/google/gsoc2011/owst/18001); Owen Stephens, by Ganesh Sittampalam
+
+    > "My proposed project is to create a generic bridge that will enable easy interoperability and synchronisation between Darcs and other VCSs. The bridge will be designed to be generic, but the focus of this project will be Darcs2 ↔ Git and Darcs2 ↔ Darcs1. The bridge should allow loss-less, correct conversion to and from Darcs repositories, allowing users to use the tool that suits them and their project best, be that Darcs as it currently exists, or another tool."
+7. ["Darcs: primitive patches version 3"](http://www.google-melange.com/gsoc/project/google/gsoc2011/mornfall/26001); Petr Ročkai, by Eric Kow
+
+    > "Darcs, a revision control system, uses so-called patches to represent changes to individual version-controlled files, where the "primitive" patches are the lowest level of this representation, capturing notions like "hunks" (akin to what `diff(1)` produces), token replace and file and directory addition/removal. I propose to implement a different representation of these primitive patches, hoping to improve both performance and flexibility of darcs and to facilitate future development."
+
 ### Lessons learned
 
 So, what lessons can we learn from the past years of SoCs? It seems to me like there are roughly 3 groups of explanations for failure. They are:
