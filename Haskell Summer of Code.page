@@ -216,7 +216,7 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
 2. ["Simplified OpenGL bindings"](http://www.google-melange.com/gsoc/project/google/gsoc2011/pastorn/14001); Alexander Göransson, mentored by Jason Dagit
 
     > "Modernize and simplify OpenGL bindings for Haskell. Focus on safety, shaders and simplicity."
-3. ["Interpreter Support for the Cabal-Install Build TOol"](http://www.google-melange.com/gsoc/project/google/gsoc2011/anklesaria/60001); anklesaria, by Duncan Coutts
+3. ["Interpreter Support for the Cabal-Install Build Tool"](http://www.google-melange.com/gsoc/project/google/gsoc2011/anklesaria/60001); anklesaria, by Duncan Coutts
 
     > "This project aims to provide cabal-install with an 'repl' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
 4. ["Convert the text package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett
@@ -236,7 +236,27 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
     > "My proposed project is to create a generic bridge that will enable easy interoperability and synchronisation between Darcs and other VCSs. The bridge will be designed to be generic, but the focus of this project will be Darcs2 ↔ Git and Darcs2 ↔ Darcs1. The bridge should allow loss-less, correct conversion to and from Darcs repositories, allowing users to use the tool that suits them and their project best, be that Darcs as it currently exists, or another tool."
 7. ["Darcs: primitive patches version 3"](http://www.google-melange.com/gsoc/project/google/gsoc2011/mornfall/26001); Petr Ročkai, by Eric Kow
 
-    > "Darcs, a revision control system, uses so-called patches to represent changes to individual version-controlled files, where the "primitive" patches are the lowest level of this representation, capturing notions like "hunks" (akin to what `diff(1)` produces), token replace and file and directory addition/removal. I propose to implement a different representation of these primitive patches, hoping to improve both performance and flexibility of darcs and to facilitate future development."
+    > "Darcs, a revision control system, uses so-called patches to represent changes to individual version-controlled files, where the 'primitive' patches are the lowest level of this representation, capturing notions like 'hunks' (akin to what `diff(1)` produces), token replace and file and directory addition/removal. I propose to implement a different representation of these primitive patches, hoping to improve both performance and flexibility of darcs and to facilitate future development."
+
+#### Predicting 2011 results
+
+Which seem like good selections for SoC, and which seem less appropriate?
+
+1. \#1 is the *second* EclipseFP SoC, after a failed [2009](#2009) attempt; why should we think this one will do better?
+2. With #2, the fear is that the result will not be used; there is an OpenGL binding already, after all, and I haven't heard that there are very many people who want to do OpenGL graphics but were deterred by complexity or danger in it.
+3. `cabal ghci` is a long-request Cabal feature, and it sounds as if all the groundwork and experimentation has been done. I have no problem with this one.
+4. Benchmarking sounds quite doable, and `text` is increasingly used; but if I had to criticize it, I would criticize it for *under*ambition, for sounding too modest and not a good use of a slot.
+5. \#5 is a second crack at the parallel compilation problem (building on a [2008](#2008) SoC) and is troubling in the same way the EclipseFP SoC is.
+6. There are multiple existing Darcs->other VCS programs, so the task is quite doable. An escape hatch would be very valuable for users (even if rarely used).
+7. This one sounds tremendously speculative to me.
+
+     I respect Ročkai & Kow, but in idling on `#darcs` and reading the occasional Darcs-related emails & Reddit posts, I don't know of any fully worked out design for said patch design, which makes it a challenging theoretical problem (patch theory being general & powerful), a major implementation issue (since the existing primitive patches are naturally assumed all throughout the Darcs codebase), and difficult to verify that it will not backfire on users or legacy repositories. All in all, #7 sounds like the sort of project where the *best* case scenario is a repository branch/fork somewhere that few besides the author understands, which is better on some usecases and worse on others, but not actually in general use. That might be a success by the Darcs's team's lights, but not in the sense I have been using in this history.
+
+To summarize my feelings:
+
+- I predict #2 & #7 will likely fail
+- I would be mildly surprised if both #3 & #5 succeed^[Since they're challenging and long-outstanding Cabal features], but I expect at least one of them to succeed. Which, I am not sure.
+- \#1 seems a bit doubtful but is more likely to succeed (because presumably most of the heavy lifting was done previously). I expect with confidence that #4 & #6 will succeed.
 
 ### Lessons learned
 
