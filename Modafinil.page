@@ -192,6 +192,31 @@ Alternative price charts:
 1. [Pharmacy Reviewer](http://www.pharmacyreviewer.com/?q=modafinil&option=com_medicine&view=search)
 2. [Ben on Imminst.org](http://www.longecity.org/forum/topic/44117-modafinil-sources/page__view__findpost__p__454141)
 
+## Margins
+
+One way to evaluate whether something is 'too good to be true' is to figure out what the cost to the seller is. Obviously it is impossible for them to sell it for less in the long run - they would lose money on each purchase. And they have overhead, too, so their price to you must be greater than cost. There are exceptions where you can buy for less than cost and *not* be scammed, but every exception has some exceptional reason driving it. If you can't figure the reason out, you should be suspicious.
+
+So what's the raw cost of modafinil to these online pharmacies? They are almost all sourcing their modafinil (if it's actual modafinil) from Indian sources. We can get a first estimate by looking at affiliate commissions. Commissions are part of the cost structure, so we can subtract the commission from the price and get an upper bound on how much the modafinil cost. (A company might be willing to pay a commission so high it makes a sale unprofitable if it generates a lot of return business, but this seems unlikely in an online pharmacy scenario.)
+
+I have signed up for 3 affiliate programs. In order, by price per mg as given in the above chart (cheapest first):
+
+1. EDAndMore: 20%[^edandmore]
+2. ThePharmacyExpress: [15%](http://thepharmacyexpress.com/Default.asp?ID=20)
+3. OneMedStore: [30%](http://affiliate.onemedstore.com/affiliates/faq.php)
+
+[^edandmore]: They seem to do ~20% commission; for the cheapest modafinil, as of 28 April 2011:
+
+    1. 200x200 sells for  $197.95, commission of $39.59
+    2. 100x200 sells for $131.95, commission of $26.39
+
+Interestingly, there is only a weak pattern of commissions shrinking with prices; if EDAndMore can offer both the cheapest prices and higher commissions, that suggests there is considerable margin to cut. Further, EDAndMore offers shipping 'for free', but of course, there is no such thing as a free lunch so what that actually means is that the shipping is built into the price. If we assume that shipping costs them $10 a package of 200x200 and exclude it from their modafinil cost, and we cut 20% for commission, that suggests a price of $\frac{200 \times 200}{180 - (180 \times 0.2) - 10}$, or ~300 mg/$ - substantially higher than the 222 mg/$ available to the consumer. More directly, there are scattered reports online about pricing in places like Russia or, most relevant, India:
+
+> "the modalert from india, which is sold through both european and indian online pharmacies, costs about 12$ / 10 pills - 200mg
+>
+> now the same stuff in an indian pharmacy costs only $3 / 10 pills - 200mg"^[<http://www.longecity.org/forum/topic/44117-modafinil-sources/page__st__20__p__454877#entry454877>]
+
+Such a pharmacy price would be $\frac{10 \times 200}{3}$ or 667 mg/$. So this sets another bound - it's highly unlikely any online pharmacy would be able to beat an Indian pharmacy.
+
 # Ordering behavior
 
 Internet suppliers are not known for their transparency or reliability; and the few retailers online of modafinil which are trustworthy tend to be more expensive (as a look at the above chart shows) or they require prescriptions for US buyers (like the Canadian online pharmacies). So we are faced with a classic problem of risk: given that any supplier may shaft us, how should we rationally order products to reduce our risk?
