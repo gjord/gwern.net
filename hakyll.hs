@@ -2,13 +2,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Control.Arrow (arr, (>>>), (>>^))
 import Data.FileStore (darcsFileStore)
-import Data.List (elemIndex, isInfixOf, isPrefixOf)
-import Data.Maybe (fromJust)
 import Network.HTTP (urlEncode)
-import Network.URI (unEscapeString, isUnescapedInURI, isURI)
+import Network.URI (unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.Directory (copyFile)
-import System.FilePath (hasExtension, takeExtension)
 import System.Process (runCommand)
 import qualified Data.Map as M (fromList, lookup, Map)
 
@@ -17,8 +14,6 @@ import Network.Gitit.Feed (filestoreToXmlFeed, FeedConfig(..))
 import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
--- TODO: is it a good thing to have my pages ending in .html? maybe I should
--- switch completely over to extensionless pages and use .htaccess redirects
 main :: IO ()
 main = do  hakyll $ do
              let static = route idRoute >> compile copyFileCompiler
@@ -32,7 +27,7 @@ main = do  hakyll $ do
              match "**.css" $ route idRoute >> compile compressCssCompiler
 
              group "html" $ match "**.page" $ do
-               route $ setExtension "html"
+               route $ setExtension ""
                compile $ myPageCompiler
 
                  >>> requireA "templates/sidebar.markdown" (setFieldA "sidebar" $ arr pageBody)
@@ -77,45 +72,10 @@ pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
 --
 -- | Convert links with no URL to wikilinks.
 convertHakyllLinks :: Inline -> Inline
-convertHakyllLinks (Link ref ("", "")) =   let ref' = inlinesToURL ref in Link ref (transform ref', "Go to wiki page: " ++ ref')
-convertHakyllLinks (Link ref (y, x)) =  Link ref (transform y, x)
+convertHakyllLinks (Link ref ("", "")) =   let ref' = inlinesToURL ref in Link ref (ref', "Go to wiki page: " ++ ref')
 convertHakyllLinks x = x
 
-{- specification for 'transform':
-test :: Bool
-test = all (\(a,b) -> transform a == b) [
-        ("!Hoogle 'foo'", "!Hoogle 'foo'"),
-        ("!Wikipedia 'Multivitamin#Evidence against'", "!Wikipedia 'Multivitamin#Evidence against'"),
-        ("!Wikipedia 'foo'", "!Wikipedia 'foo'"),
-        ("#Benefits", "#Benefits"),
-        ("Chernoff Faces", "Chernoff Faces.html"),
-        ("In Defense of Inclusionism.html", "In Defense of Inclusionism.html"),
-        ("N-back FAQ#hardcore", "N-back FAQ.html#hardcore"),
-        ("Redirect-bot.hs", "Redirect-bot.hs"),
-        ("Terrorism is not about Terror#the-problem", "Terrorism is not about Terror.html#the-problem"),
-        ("doc/foo.pdf", "doc/foo.pdf"),
-        ("docs/gwern.xml", "docs/gwern.xml"),
-        ("docs/gwern.xml.gz", "docs/gwern.xml.gz"),
-        ("http://en.wikipedia.org/wiki/Angst", "http://en.wikipedia.org/wiki/Angst"),
-        ("http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement", "http://en.wikipedia.org/wiki/Melatonin#Use%20as%20a%20dietary%20supplement"),
-        ("http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against", "http://en.wikipedia.org/wiki/Multivitamin#Evidence%20against"),
-        ("http://www.google.com", "http://www.google.com"),
-        ("http://www.gwern.net/N-back FAQ.html#fn1", "http://www.gwern.net/N-back FAQ.html#fn1"),
-        ("sicp/Chapter 1.1", "sicp/Chapter 1.1.html"),
-        ("sicp/Introduction", "sicp/Introduction.html") ] -}
-transform :: String -> String
-transform y = let extension = drop 1 $ takeExtension y in
-               if (length extension > 0) &&hasExtension y
-               then if extension `notElem` map show [(0 :: Int) .. 9]
-                    then y
-                    else  y ++ ".html"
-               else if ("!" `isPrefixOf` y) || ("#" `isPrefixOf` y) || isURI y
-                      then y
-                      else
-                       if "#" `isInfixOf` y
-                       then let (lnk, sctn) = splitAt (fromJust $ elemIndex '#' y) y in
-                                lnk ++ ".html" ++ sctn
-                       else y ++ ".html"
+
 
 --
 -- INTERWIKI PLUGIN

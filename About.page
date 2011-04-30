@@ -2,7 +2,7 @@
 
 ## Hosting
 
-<http://www.gwern.net> exists as a set of static CSS, HTML, JS, & PDF files served by [NearlyFreeSpeech.net](!Wikipedia) ([NFSN homepage](http://www.nearlyfreespeech.net)). The source is available for download, or if one only wants one page, one can visit a page with the ".page" suffix (eg. you could look at the source of this page at <http://www.gwern.net/About.page> rather than <http://www.gwern.net/About.html>).
+<http://www.gwern.net> exists as a set of static CSS, HTML, JS, & PDF files served by [NearlyFreeSpeech.net](!Wikipedia) ([NFSN homepage](http://www.nearlyfreespeech.net)). The source is available for download, or if one only wants one page, one can visit a page with the ".page" suffix (eg. you could look at the source of this page at <http://www.gwern.net/About.page> rather than the HTML <http://www.gwern.net/About>).
 
 NFSN is an old hosting company; its specific niche is controversial material and activist-friendly pricing. Its libertarian owners cast a jaundiced eye on [takedown request](!Wikipedia)s, and pricing is [pay-as-you-go](!Wikipedia). I like the former aspect, but the latter sold me on NFSN.
 
@@ -38,7 +38,7 @@ It works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site
 
 The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/), and math is written in [LaTeX](!Wikipedia) compiled to [MathML](!Wikipedia). Comments are outsourced to [Disqus](!Wikipedia)^[Since I am not interested in writing a dynamic system to do it, and their anti-spam techniques are much better than mine.]. (These tools encourage a minimalistic site; I believe that [minimalism](!Wikipedia) helps one focus on the content. Anything besides the content is a distraction. 'Attention!', as [Ikkyu](!Wikipedia) would say[^attention].)
 
-- To use Hakyll, you `cd` into the repository and `runhaskell hakyll.hs build`. Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index.html`.
+- To use Hakyll, you `cd` into the repository and `runhaskell hakyll.hs build`. Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index`.
 - To use Gitit, you likewise `cd` but run `gitit -f static/gwern.conf`. The configuration will pick up all resources and plugins; you then would do something like `firefox http://127.0.0.1:5001/`.
 
 (My Hakyll & Gitit setups assume you are running HEAD. Nothing is guaranteed with older versions. Neither Hakyll nor Gitit was intended to be used with the same group of documents, so I have requested many changes.)

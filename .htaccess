@@ -1,3 +1,7 @@
+# force extensionless 'cool URIs' like 'http://www.gwern.net/index' to be served as HTML
+DefaultType text/html
+DirectoryIndex index
+
 # Add caching/expire headers for performance
 FileETag MTime
 <ifModule mod_expires.c>
@@ -13,19 +17,6 @@ FileETag MTime
   ExpiresByType image/vnd.microsoft.icon A7592000
   ## the PDFs are likewise usually unchanging
   ExpiresByType application/pdf A4592000
-</ifModule>
-
-# Add static gzip'd support, again, for performance
-## http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
-## https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
-<ifModule mod_rewrite.c>
-    Options +MultiViews
-    AddEncoding x-gzip .gz
-    RewriteEngine on
-    RewriteOptions Inherit
-    RewriteCond %{HTTP:Accept-Encoding} .*gzip.*
-    RewriteCond %{REQUEST_FILENAME}.gz -s
-    RewriteRule ^(.+) $1.gz
 </ifModule>
 
 # redirect URLs that people commonly misspell
@@ -44,3 +35,27 @@ Redirect 301 "/modafinil.html"              "http://www.gwern.net/Modafinil.html
 Redirect 301 "/n-back faq.html"             "http://www.gwern.net/N-back FAQ.html"
 Redirect 301 "/nootropics.html"             "http://www.gwern.net/Nootropics.html"
 Redirect 301 "/haskell/Archiving%20GitHub.html" "http://www.gwern.net/haskell/Archiving GitHub.html"
+
+# Add static gzip'd support, again, for performance
+## http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
+## https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
+<ifModule mod_rewrite.c>
+    Options +MultiViews
+    AddEncoding x-gzip .gz
+    RewriteEngine on
+    RewriteOptions Inherit
+    RewriteCond %{HTTP:Accept-Encoding} .*gzip.*
+    RewriteCond %{REQUEST_FILENAME}.gz -s
+    RewriteRule ^(.+) $1.gz
+
+    # http://httpd.apache.org/docs/1.3/misc/rewriteguide.html
+    #   parse out basename, but remember the fact
+    RewriteRule   ^(.*)\.html$              $1      [C,E=WasHTML:yes]
+    #   rewrite 'document.html' to 'document' if exists
+    RewriteCond   %{REQUEST_FILENAME} -f
+    RewriteRule   ^(.*)$ $1                   [S=1]
+    #   else reverse the previous basename cutout
+    RewriteCond   %{ENV:WasHTML}            ^yes$
+    RewriteRule   ^(.*)$ $1.html
+</ifModule>
+

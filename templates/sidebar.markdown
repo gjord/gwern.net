@@ -1,3 +1,3 @@
-[Home](/index.html)
-[Me](/Links.html)
-[Site](/About.html)
+[Home](/index)
+[Me](/Links)
+[Site](/About)
