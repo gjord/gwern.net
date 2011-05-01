@@ -17,12 +17,12 @@ import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 main :: IO ()
 main = do  hakyll $ do
              let static = route idRoute >> compile copyFileCompiler
-             mapM_ (flip match static) ["docs/**",
-                                       "images/**",
-                                       "**.hs",
-                                       "_darcs/**",
-                                       "static/**",
-                                       "**.page"]
+             mapM_ (`match` static) ["docs/**",
+                                     "images/**",
+                                     "**.hs",
+                                     "_darcs/**",
+                                     "static/**",
+                                     "**.page"]
 
              match "**.css" $ route idRoute >> compile compressCssCompiler
 
@@ -42,9 +42,7 @@ main = do  hakyll $ do
            -- Apache configuration (caching, compression)
            copyFile ".htaccess" "_site/.htaccess"
 
-           _ <- runCommand "find _site/ -name \"*.css\"  -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
-           _ <- runCommand "find _site/ -name \"*.html\" -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
-           _ <- runCommand "find _site/ -name \"*.js\"   -type f -exec /bin/sh -c \"gzip --stdout --best --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
+           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -o -exec /bin/sh -c \"gzip --stdout --best --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
            return ()
 
 options :: WriterOptions
@@ -67,19 +65,13 @@ myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pa
 pandocTransform :: Pandoc -> Pandoc
 pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
 
---
 -- GITIT -> HAKYLL LINKS PLUGIN
---
 -- | Convert links with no URL to wikilinks.
 convertHakyllLinks :: Inline -> Inline
 convertHakyllLinks (Link ref ("", "")) =   let ref' = inlinesToURL ref in Link ref (ref', "Go to wiki page: " ++ ref')
 convertHakyllLinks x = x
 
-
-
---
 -- INTERWIKI PLUGIN
---
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
 inlinesToURL = encString False isUnescapedInURI . inlinesToString
