@@ -131,7 +131,7 @@ extractURLs arg = [x | TagOpen "a" atts <- (parseTags arg),
                        "http://" `isPrefixOf` x]
 ~~~~~
 
-Alright. This [list comprehension](!Wikipedia) has 3 parts, which we will read from top down. We start with our `arg`, a String. It immediately passes to [parseTags](http://hackage.haskell.org/packages/archive/tagsoup/0.6/doc/html/Text-HTML-TagSoup-Parser.html#v%3AparseTags), which turns it into [Tag] - notice it's not a tree or hierarchical structure like our String actually represents; this is why it's 'soup'.
+Alright. This [list comprehension](!Wikipedia) has 3 parts, which we will read from top down. We start with our `arg`, a String. It immediately passes to [parseTags](http://hackage.haskell.org/packages/archive/tagsoup/0.6/doc/html/Text-HTML-TagSoup-Parser.html#v:parseTags), which turns it into [Tag] - notice it's not a tree or hierarchical structure like our String actually represents; this is why it's 'soup'.
 
 A `Tag` can be [a lot of things](http://hackage.haskell.org/packages/archive/tagsoup/0.6/doc/html/Text-HTML-TagSoup-Parser.html#v%3AparseTags), but we quickly realize we only want `TagOpen`.^[The Position, Warning, Comment, and Close tags are obviously useless and do not contain the hyperlinks we want; and `TagText` after investigation turns out to be exactly what it says it is.] The `"a"` is there because `<href>` actually begins with `<a href=...>`.
 
