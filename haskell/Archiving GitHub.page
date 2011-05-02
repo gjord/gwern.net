@@ -15,7 +15,7 @@ Patch-tag was nice enough to supply a URL which provided exactly the URLs I need
 # Archiving GitHub
 ## Parsing pages
 
-The closest I can get to a target URL is <https://github.com/languages/Haskell/created>. We'll be parsing that. The first thing to do is to steal [TagSoup](http://community.haskell.org/~ndm/tagsoup/) code from my [previous scrapers](haskell/Wikipedia Archive Bot#parsing-html), so our very crudest version looks like this:
+The closest I can get to a target URL is <https://github.com/languages/Haskell/created>. We'll be parsing that. The first thing to do is to steal [TagSoup](http://community.haskell.org/~ndm/tagsoup/) code from my [previous scrapers](/haskell/Wikipedia Archive Bot#parsing-html), so our very crudest version looks like this:
 
 ~~~{.haskell}
 import Text.HTML.TagSoup
@@ -239,7 +239,7 @@ This is not quite right. If we run this on the original parsed output, we get
 
 It doesn't look like we mistakenly omitted a repository, but it does look like we mistakenly included things we should not have. We need to filter out anything beginning with a "http://", "https://", "/site/", "/languages/", or "/login/".^[Oh no - a blacklist! This should make us unhappy, because as computer security has taught us, blacklists fall out of date quickly or were never correct to begin with. Much better to whitelist, but how can we do that? People could name their repositories any damn thing, and pick any accursed username; for all our code knows, '/site/terms' *is* the repository - perhaps the user 'site' maintains some sort a natural language library called 'terms'.]
 
-We could call `filter` multiple times, or use a tricky `foldr` to accumulate only results which don't match any of the items in our list `["/languages/", "/login/", "/site/", "http://", "https://"]`. But I already wrote [the solution](haskell/Wikipedia RSS Archive Bot) to this problem back in the original WP RSS archive-bot where I noticed that my [original giant `filter` call](haskell/Wikipedia Archive Bot#duplicate-urls) could be replaced by a much more elegant use of [any](!Wikipedia)
+We could call `filter` multiple times, or use a tricky `foldr` to accumulate only results which don't match any of the items in our list `["/languages/", "/login/", "/site/", "http://", "https://"]`. But I already wrote [the solution](/haskell/Wikipedia RSS Archive Bot) to this problem back in the original WP RSS archive-bot where I noticed that my [original giant `filter` call](/haskell/Wikipedia Archive Bot#duplicate-urls) could be replaced by a much more elegant use of [any](!Wikipedia)
 
 ~~~{.haskell}
  where  uniq :: [String] -> [String]
