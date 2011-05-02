@@ -159,26 +159,26 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 [7 projects](http://donsbot.wordpress.com/2010/04/26/the-7-haskell-projects-in-the-google-summer-of-code/) were accepted:
 
-- [Improvements to Cabal's test support](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760295); Thomas Tuegel, mentored by Johan Tibell
+- [Improvements to Cabal's test support](http://webcitation.org/5tC0nXXN6); Thomas Tuegel, mentored by Johan Tibell
 
     **Successful**? The functionality is now in a released version of `cabal-install` and a number of packages use the provided test syntax.^[As of 18 March 2011, I have local copies of 8 repositories which seem to make use of the new syntax: `angle, cabal, concurrent-extra, hashable, rrt, safeint, spatialIndex, unordered-containers, wai-app-static`.] <!-- TODO: update using shell command in ~/bin: find . -name "*.cabal" -exec fgrep --files-with-matches --ignore-case 'test-suite ' {} \; | fgrep -v share | fgrep -v 'abal/tests/' | sort -->
-- [Infrastructure for a more social Hackage 2.0](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760520); Matthew Gruen, mentored by Edward Kmett
+- [Infrastructure for a more social Hackage 2.0](http://webcitation.org/5tC0nYPyJ); Matthew Gruen, mentored by Edward Kmett
 
     **Unknown**. [Gruen's blog](http://cogracenotes.wordpress.com/) was last updated October 2010, and Hackage still hasn't switched over and gotten the new features & benefit of the rewrite. But the code exists and there is a running [public demo](http://sparky.haskell.org:8080/), so this may yet be a success.
-- [A high performance HTML generation library](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760572); Jasper Van der Jeugt, mentored by Simon Meier
+- [A high performance HTML generation library](http://webcitation.org/5tC0nYXFR); Jasper Van der Jeugt, mentored by Simon Meier
 
     **Successful** [blaze-html](!Hackage) has been released and is actively developed; version 0.4.0.0 has [50 total reverse dependencies](http://sparky.haskell.org:8080/package/blaze-html/reverse/all) and [blaze-builder](!Hackage) has [97 reverse dependencies](http://sparky.haskell.org:8080/package/blaze-builder/reverse/all) though there's much overlap. (This site is built on [hakyll](!Hackage), which uses blaze-html.)
-- [Improvements to the GHC LLVM backend](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760615); Alp Mestanogullari, mentored by Maximilian Bolingbroke
+- [Improvements to the GHC LLVM backend](http://webcitation.org/5tC0nYbNw); Alp Mestanogullari, mentored by Maximilian Bolingbroke
 
     **Unsuccessful**. Dan Peebles in #haskell says that Alp's SoC never got off the ground when his computer died at the beginning of the summer; with nothing written or turned in, this can't be considered a successful SoC, exactly. But could it have been?
     The LLVM backend is still be on track to become the default GHC backend^[A development that surprises me, since I had been under the impression that most GHC work ultimately winds up being scrapped or abandoned like [Liskell](http://www.liskell.org/) or [Mobile Haskell](http://www.macs.hw.ac.uk/~dubois/mhaskell/).], suggesting that it's popular in GHC HQ (and the [DDC](http://disciple.ouroborus.net/) dialect), and it seems to also be popular among [Haskell bloggers](http://www.reddit.com/r/haskell/search?q=LLVM&restrict_sr=on). The scope is restricted to taking a working backend and optimizing it. In general, it seems like a decent SoC proposal, and better than the next one:
-- [Implementing the Immix Garbage Collection Algorithm](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760695); Marco Silva, mentored by Simon Marlow
+- [Implementing the Immix Garbage Collection Algorithm](http://webcitation.org/5tC0naN8O); Marco Silva, mentored by Simon Marlow
 
     **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I’m happy with the state it is now. I think it’s a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.) The [GHC wiki](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage/GC/Immix) says that "it's functional, doesn't have known bugs and gets better results than the default GC in the nofib suite. On the other hand, it gets worse results than the default GC for the nofib/gc suite."
-- ["Improving Darcs Performance"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127358115580); Adolfo Builes, mentored by Eric Kow
+- ["Improving Darcs Performance"](http://webcitation.org/5wV5g2TP2); Adolfo Builes, mentored by Eric Kow
 
     **Unknown**. This replaced a previous proposal to write a Haskell binding to the [GObject](!Wikipedia) library, which never started. Looking through the Darcs repository history, I see a number of new tests related to the global cache, but no major edits to cache-related modules.
-- [Improving Darcs's network performance](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760775); Alexey Levan, mentored by Petr Rockai
+- [Improving Darcs's network performance](http://webcitation.org/5tC0naNuM); Alexey Levan, mentored by Petr Rockai
 
     **Successful**. Levan divided his SoC into 2 parts, improving Darcs's performance in fetching the many small files that make up a repository's revision history, and writing 'a smart server that can provide clients with only files they need in one request'. The 'smart server' seems to have been abandoned as not being worthwhile, but the fetching idea was implemented and will be in the [2.8 release](http://blog.darcs.net/2010/11/coming-in-darcs-28-new-features.html).
 
