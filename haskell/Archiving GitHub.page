@@ -33,7 +33,7 @@ We run it and it throws an exception! `*** Exception: getAddrInfo: does not exis
 
 Oops. We got all wrapped up in parsing the HTML we forgot to make sure that downloading worked in the first place. Well, we're lazy programmers, so now, on demand, we'll investigate that problem. The exception thrown sounds like a problem with the `openURL` call - '[hostname](!Wikipedia)' is a networking term, not a parsing or printing term. So we try running just `openURL "https://github.com/languages/Haskell/created"` - same error. Not helpful.
 
-We try a different implementation of `openURL`, mentioned in the [other scraping script](haskell/Wikipedia RSS Archive Bot#rewriting-network-code):
+We try a different implementation of `openURL`, mentioned in the [other scraping script](/haskell/Wikipedia RSS Archive Bot#rewriting-network-code):
 
 ~~~{.haskell}
 import Network.HTTP (getRequest, simpleHTTP)
