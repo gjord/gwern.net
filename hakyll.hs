@@ -32,7 +32,6 @@ main = do  hakyll $ do
 
                  >>> requireA "templates/sidebar.markdown" (setFieldA "sidebar" $ arr pageBody)
                  >>> applyTemplateCompiler "templates/default.html"
-                 >>> relativizeUrlsCompiler
 
              match "templates/default.html" $ compile templateCompiler
              match "templates/sidebar.markdown" $ compile pageCompiler
