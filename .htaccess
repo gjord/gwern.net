@@ -28,13 +28,13 @@ FileETag MTime
 ### "WP redirect generator" ~> "Wikipedia Redirect Generator"
 ### "Wikipedia and Dark side editing" ~> "Wikipedia and Dark Side Editing"
 ### "Wikipedia and Other Wikis" ~> "Wikipedia and other Wikis"
-Redirect 301 "/haskell summer of code.html" "http://www.gwern.net/Haskell Summer of Code.html"
-Redirect 301 "/melatonin.html"              "http://www.gwern.net/Melatonin.html"
-Redirect 301 "/mnemosyne.html"              "http://www.gwern.net/Mnemosyne.html"
-Redirect 301 "/modafinil.html"              "http://www.gwern.net/Modafinil.html"
-Redirect 301 "/n-back faq.html"             "http://www.gwern.net/N-back FAQ.html"
-Redirect 301 "/nootropics.html"             "http://www.gwern.net/Nootropics.html"
-Redirect 301 "/haskell/Archiving%20GitHub.html" "http://www.gwern.net/haskell/Archiving GitHub.html"
+RedirectPermanent "/haskell summer of code.html" "http://www.gwern.net/Haskell Summer of Code.html"
+RedirectPermanent "/melatonin.html"              "http://www.gwern.net/Melatonin.html"
+RedirectPermanent "/mnemosyne.html"              "http://www.gwern.net/Mnemosyne.html"
+RedirectPermanent "/modafinil.html"              "http://www.gwern.net/Modafinil.html"
+RedirectPermanent "/n-back faq.html"             "http://www.gwern.net/N-back FAQ.html"
+RedirectPermanent "/nootropics.html"             "http://www.gwern.net/Nootropics.html"
+RedirectPermanent "/haskell/Archiving%20GitHub.html" "http://www.gwern.net/haskell/Archiving GitHub.html"
 
 # Add static gzip'd support, again, for performance
 ## http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
