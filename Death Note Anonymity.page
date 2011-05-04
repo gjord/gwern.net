@@ -1,0 +1,75 @@
+% _DN_: L, Anonymity & Eluding Entropy; Applied CS: On Murder Considered as one of the Hard Arts
+
+> This essay assumes a familiarity with the early plot of _[Death Note](!Wikipedia)_ and [Light Yagami](!Wikipedia); if you are unfamiliar with it, see my [_Death Note_ Ending]() essay or consult [Wikipedia](!Wikipedia "Death Note#Plot").
+
+I have elsewhere called Light 'hubristic' and said he made mistakes. So I am obliged to explain what he did wrong and how he could do better.
+
+While Light starts scheming and taking serious risks as early as the arrival of the FBI team in Japan, he has fundamentally already screwed up. L should never have gotten that close to Light. The Death Note kills flawlessly without forensic trace and over arbitrary distances; _Death Note_ is almost a thought-experiment - given the *perfect* murder weapon, how can you screw up *anyway*?
+
+Some of the other Death Note users highlight the problem. The user in the [Yotsuba Group](!Wikipedia "List of Death Note characters#Yotsuba Group") carries out the normal executions, but *also* kills a number of prominent competitors. The killings directly point to the Yotsuba Group and eventually the user's death. The moral of the story is that indirect relationships can be fatal in narrowing down the possibilities from 'everyone' to 'these 8 men'.
+
+# Detective stories as optimization problems
+
+In Light's case, L starts with the world's entire population of 7 billion people and needs to narrow it down to 1 person. It's a search problem. It maps fairly directly onto basic [information theory](!Wikipedia), in fact. (See also [Copyright](), [Simulation inferences](), and [The 3 Grenades]().) To uniquely specify one item out of 7 billion, you need 33 bits of information because $log_2(7000000000) = ~32.7$; to use an analogy, your 32-bit computer can only address one unique location in memory out of *4* billion locations, and adding another bit doubles the capacity to >8 billion. Is 33 bits of information a lot?
+
+Not really. L could get one bit just by looking at history or crime statistics, and noting that most mass murderers are *male*, thereby ruling out half the world population.[^misa] (In fact, every single person mentioned in my [Terrorism is not Effective](Terrorism is not Effective#competent-murders) is male.)
+
+[^misa]: This reasoning would be wrong in the case of [Misa Amane](!Wikipedia), but Misa is an absurd character - a Gothic lolita pop star who falls in love with Light through an extraordinary coincidence and doesn't flinch at anything, even sacrificing 75% of her lifespan or her memories; hence it's not surprising to learn that the motivation for her character was to avoid a "boring" all-male cast and be "a cute female". (_Death Note_ is not immune to the [Rule of Cool](http://tvtropes.org/pmwiki/pmwiki.php/Main/RuleOfCool) or [Sexy](http://tvtropes.org/pmwiki/pmwiki.php/Main/RuleOfSexy).)
+
+We should first point out that Light is always going to leak *some* bits. The only way he could remain perfectly hidden is to not use the Death Note at all. If you change the world in even the slightest way, then you have leaked information about yourself in principle. Everything is connected in some sense; you cannot magically wave away the existence of fire without creating a cascade of consequences that result in [every living thing dying](http://lesswrong.com/lw/hq/universal_fire/). For example, the fundamental point of Light executing criminals is to *shorten their lifespan* - there's no way to hide that. You can't shorten their lives and *not* shorten their lives. He is going to reveal himself this way, at the very least to the actuaries and statisticians.
+
+So there is a real challenge here: one party is trying to infer as much as possible from observed effects, and the other is trying to minimize how much the former can observe while not stopping entirely. How well does Light balance the competing demands?
+
+# Mistake 1
+
+However, he can try to reduce the leakage and make his [anonymity set](!Wikipedia "Degree of anonymity") as large as possible. For example, killing every criminal with a heart attack is a dead give-away. Criminals do not die of heart attacks that often. (The point is more dramatic if you replace 'heart attack' with 'lupus'; as we all know, in real life it's never lupus.) Heart attacks are a subset of all deaths, and by restricting himself, Light makes it easier to detect his activities. 1000 deaths of lupus are a blaring red alarm; 1000 deaths of heart attacks are an oddity; and 1000 deaths distributed over the statistically likely suspects of cancer and heart disease etc. are almost invisible (but still noticeable in principle).
+
+So, Light's fundamental mistake is to kill in ways unrelated to his goal. Killing through heart attacks does not just make him visible early on, but the deaths reveals that his assassination method is supernaturally precise. L has been tipped off that Kira exists. First mistake.
+
+# Mistake 2
+
+Worse, the deaths are non-random in other ways - they tend to occur at particular times! Graphed, there are obvious patterns.
+
+On a side-note, some might be skeptical that one can infer much of anything from the graph and that _Death Note_ was just glossing over this part. "How can anyone infer that it was someone living in Japan just from 2 clumpy lines at morning and evening in Japan?" But actually, such a graph is surprisingly precise. I learned this years before I watched _Death Note_, when I was heavily active on Wikipedia; often I would wonder if two editors were the same person or roughly where an editor lived. What I would do if their edits or user page did not reveal anything useful is I would go to [Kate's](http://toolserver.org/~river/cgi-bin/count_edits) [edit counter](!Wikipedia "Wikipedia:WikiProject edit counters") and I would examine the times of day all their hundreds or thousands of edits were made at. Typically, what one would see was ~4 hours where there were no edits whatsoever, then ~4 hours with moderate to high activity, a trough, then another gradual rise to 8 hours later and a further decline down to the first 4 hours of no activity. These periods quite clearly corresponded to sleep (pretty much everyone is asleep at 4 AM), morning, lunch & work hours, evening, and then night with people occasionally staying up late and editing. There was noise, of course, from people staying up especially late or getting in a bunch of editing during their workday or occasionally traveling, but the overall patterns were clear - never did I discover that someone was actually a nightwatchman and my guess was an entire hemisphere off.
+
+So, L was able to narrow down to a particular range of longitude, say 125-150° out of 180°; and what country is most obvious in that range? Japan. So that cut down the 7 billion people to around 0.128 billion; 0.128 billion requires 27 bits ($log_2 (128000000) = ~26.93$) so just the scheduling of deaths cost Light 6 bits of anonymity!
+
+# Mistake 3
+
+Light's third mistake was reacting to the provocation of Lind L. Tailor. Running the broadcast in 1 region was a gamble on L's part; he had no real reason to think Light was in [Kanto](!Wikipedia "Kantō region") and should have arranged for it to be broadcast to exactly half of Japan's population. But it was one that paid off; he narrowed his target down to $\frac{1}{3}$ the original Japanese population, for a gain of 1.5 bits. (You can see it was a gamble by considering if Light had been outside Kanto; obviously he would not have reacted in any fashion, and all L would learn is that his suspect was in that other $\frac{2}{3}$ of the population, for a gain of only 0.5 bits.)
+
+But even this wasn't a *huge* mistake. He lost 6 bits to his schedule of killing, and lost another 1.5 bits to temperamentally killing Lind L. Tailor, but since the population of Kanto is 43 million, he still has ~25 bits of anonymity left ($log_2 (43000000) = ~25.36$). That's not too terrible.
+
+# Mistake 4
+
+Light's fourth mistake was the largest. Interestingly, most _Death Note_ fans do not seem to regard this as his largest mistake, instead pointing to killing Lind L. Tailor or perhaps relying on Mikami. The information theoretical perspective strongly disagrees, and lets us quantify how large this mistake was.
+
+Light's fourth mistake was to use confidential police information. When he acts on this information, he instantly cuts down his possible identity to one out of a few thousand people connected to the police. Let's be generous and say 10,000. It takes 14 bits to specify 1 person out of 10,000 ($log_2 (10000) = ~13.29$) - as compared to the 25 bits to specify a Kanto dweller.
+
+This mistake cost him 11 bits of anonymity; in other words, this mistake cost him *twice* what his scheduling cost him and almost *8* times the murder of Tailor!
+
+# Mistake 5
+
+In comparison, the fifth mistake, murdering Ray Penbar's fiancee and focusing L's suspicion on Penbar's assigned targets was positively cheap. If we assume Penbar was tasked 200 leads out of the 10,000, then murdering him and the fiancee dropped Light from 14 bits to 8 bits ($log_2 (200) = ~7.64$) or just 6 bits or a little over half the fourth mistake.
+
+# Endgame
+
+At this point in the plot, L resorts to direct measures and enters Light's life directly, enrolling at the university. From this point on, Light is pretty much screwed. He frittered away >25 bits of anonymity and then L intuited the rest and suspected him all along. (We could justify L skipping over the remaining 8 bits by pointing out that L can analyze the deaths and infer psychological characteristics like arrogance, puzzle-solving, and great intelligence, which combined with heuristically searching the remaining candidates, could lead him to zero in on Light.)
+
+From the theoretical point of view, the game was over at that point. The question became proving it to L's satisfaction.
+
+# Security is Hard (Let's Go Shopping)
+
+What *should* Light have done? That's easy to answer, but tricky to implement.
+
+Even if we assume that Light was bound and determined to reveal the existence of Kira and gain publicity and international notoriety^[A major character flaw in its own right. Accomplishing things, taking credit - choose one.], he still did not have to reduce his anonymity much past 33 bits.
+
+1. Each execution's time could be determined by a random dice roll (say, a 24-sided dice for hours and a 60-sided dice for minutes).
+2. Selecting method of death could be done similarly based on easily researched demographic data, although perhaps irrelevant (serving mostly to conceal that a killing has taken place).
+3. Selecting criminals could be based on internationally accessible periodicals that plausibly every human has access to, such as the _New York Times_, and deaths could be delayed by months or years to broaden the possibilities as to where the Kira learned of the victim (TV? books? the Internet?) and avoiding issues like killing a criminal only publicized on one obscure Japanese public television channel. And so on.
+
+Randomization is the answer. Randomization and encryption scramble the correlations between input and output, and they would serve as well in _Death Note_ as they do in cryptography in the real world, at the cost of some efficiency.
+
+# External links
+
+- ["On Murder Considered as one of the Fine Arts"](http://en.wikipedia.org/wiki/On_Murder_Considered_as_one_of_the_Fine_Arts), Thomas De Quincey
