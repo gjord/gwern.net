@@ -324,7 +324,7 @@ main = do html <- openURL "https://github.com/languages/Haskell/created"
           ???
 ~~~
 
-Hopefully turning a relatively repository URL into an absolute git URL will be a pure operation, so let's tentatively define that function as `gitify :: String -> String`. Let's look at a random repository page <https://github.com/hamishmack/yesod-slides> (in our example output as `/hamishmack/yesod-slides`), whose git repository is at... <https://github.com/hamishmack/yesod-slides.git>! What luck, there's an obvious transformation there:
+Hopefully turning a relatively repository URL into an absolute git URL will be a pure operation, so let's tentatively define that function as `gitify :: String -> String`. Let's look at a random repository page <https://github.com/hamishmack/yesod-slides> (in our example output as `/hamishmack/yesod-slides`), whose git repository is at... `https://github.com/hamishmack/yesod-slides.git`! What luck, there's an obvious transformation there:
 
 ~~~{.haskell}
 gitify :: String -> String
