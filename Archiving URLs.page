@@ -23,7 +23,7 @@ With that in mind, one can consider remedies. (If we lie to ourselves and say it
 The first and most obvious remedy is to learn about broken links as soon as they happen. I currently use [linkchecker](http://linkchecker.sourceforge.net/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
 
 ~~~{.bash}
-@monthly linkchecker www.gwern.net --no-warnings --anchors --timeout=1200 --threads=20 --file-output=html
+@monthly linkchecker www.gwern.net --anchors --timeout=1200 --threads=20 --file-output=html
 ~~~
 
 The quicker you know about a dead link, the sooner you can look for replacements or its new home.
