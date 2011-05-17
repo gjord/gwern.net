@@ -156,3 +156,7 @@ Does it have the escalation problem of a #2 agent? It would seem not to; the que
 So with a bad constant, our #1 agent could be even worse than a #2 or #3 agent! But actually, it's better. It will make errors and accept some muggings, but each mugging the agent will learn. Each time the mugger fails to deliver, the constant will shrink until it reaches the magic 1 and then the agent will start rejecting muggings. Its losses are finite and limited by how large the constant starts off with, so it doesn't matter what that constant is. It could be lower than 1, since our agent could learn to increase its constant as well as decrease; if the mugger really is a Dark Lord of the Matrix, the mugger simply has to offer a little proof and our agent will be happy to transact with him.
 
 Considering all the possibilities, the agent with the fewest problems is #1, and we have our answer to how to avoid Pascal's Mugging: choose a prior which decreases in simple proportion to the offer.
+
+---
+
+An example of [Kolmogorov complexity](!Wikipedia): [Fabrice Bellard](!Wikipedia) has written a [475-byte C program](http://www0.us.ioccc.org/2000/bellard.c) which computes the prime [2^6972593^ − 1](http://www0.us.ioccc.org/2000/bellard.hint), which has over 2 million digits - and does so in a few seconds. Other examples are pretty much anything written for the [demoscene](!Wikipedia), which prized writing complex graphics & audio [programs](!Wikipedia "Demo (computer programming)") in just a few hundred bytes.
