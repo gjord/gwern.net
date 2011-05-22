@@ -159,4 +159,14 @@ Considering all the possibilities, the agent with the fewest problems is #1, and
 
 ---
 
+Now, it's obvious that you don't want to scale any prior probability *more* or *less* than the reward because either way involves you in difficulties. But do we have any non-ad hoc reason to specifically scale the size of the reward by 1/n, to regard the complexity as equal to the size?
+
+I think there may be a Kolmogorov complexity argument that size *does* equal complexity, and welcome anyone capable of formally dealing with it. My intuition goes: Kolmogorov complexity is about lengths of strings in some language which map onto outputs. By the pigeonhole principle, not all outputs have short inputs. But various languages will favor different outputs with the scarce short inputs, much like a picture compressor won't do so hot on music files. 3^^^^3 has a short representation in the usual mathematical language, but that language is just one of indefinitely many possible mathematical languages; there are languages where 3^^^^3 has a very long representation, one 3^^^^3 long even, or longer still! Just like there are inputs to `zip` which compress very well and inputs which [aren't so great](http://en.wikipedia.org/wiki/Zip_bomb).
+
+Now, given that our *particular* language favors 3^^^^3 with such a short encoding rather than many other numbers relatively nearby to 3^^^^3, doesn't Pascal's mugging start looking like an issue with our language favoring certain numbers? It's not *necessary* to favor 3^^^^3, other languages don't favor it or actively disfavor it. Those other languages would seem to be as valid and logically true as the current one, just the proofs or programs may be longer and written differently of course.
+
+So, what do you get when you abstract away from the particular outputs favored by a language? When you add together and average the languages with long encodings and the ones with short encodings for 3^^^^3? What's the length of the average program for 3^^^^3? I suggest it's 3^^^^3, with every language that gives it a shorter encoding counterbalanced by a language with an exactly longer encoding.
+
+---
+
 An example of [Kolmogorov complexity](!Wikipedia): [Fabrice Bellard](!Wikipedia) has written a [475-byte C program](http://www0.us.ioccc.org/2000/bellard.c) which computes the prime [2^6972593^ − 1](http://www0.us.ioccc.org/2000/bellard.hint), which has over 2 million digits - and does so in a few seconds. Other examples are pretty much anything written for the [demoscene](!Wikipedia), which prized writing complex graphics & audio [programs](!Wikipedia "Demo (computer programming)") in just a few hundred bytes.
