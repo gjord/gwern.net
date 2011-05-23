@@ -41,17 +41,17 @@
     <!-- licensing; see also /About -->
     <div id="footer"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" style="text-decoration:none;"></a></div>
 
-    <!-- Implement floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
-    <script src="/static/js/jquery-1.5.2.min.js" type="text/javascript"></script>
-    <script src="/static/js/footnotes.js" type="text/javascript"></script>
-
-    <script id="forceMathmlRendering" type="text/javascript">
-      (function() {
+    <!-- Implement MathML & floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
+    <script type="text/javascript">
+      function async(loaded) {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = 'http://www.gwern.net/static/js/MathMLinHTML.js';
+          ga.src = loaded;
           var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(ga, s);
-      })();
+          s.parentNode.insertBefore(ga, s); }
+
+      async("/static/js/MathMLinHTML.js")
+      async("/static/js/jquery-1.5.2.min.js")
+      async("/static/js/footnotes.js")
       </script>
 
     <script id="googleAnalytics" type="text/javascript">
