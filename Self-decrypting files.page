@@ -41,7 +41,7 @@ And that for time-lock puzzles:
 
 Rivest et al then points out that the most obvious approach - encrypt the file to a random short key, short enough that brute-forcing takes only a few months/years as opposed to eons - is flawed because brute-forcing a key is very [parallelizable](!Wikipedia "EFF DES cracker"). (And as well, the randomness of searching a key space means that the key might be found very early or very late; any estimate of how long it will take to brute force is just a guess.)
 
-Rivest et al propose a scheme in which one encrypts the file with a very strong key as usual, but then one encrypts the key in such a way that one must calculate $\text{encryptedKey}^{2^t} modulo n$ where _t_ is the adjustable difficulty factor. With the original numbers, one can easily avoid doing the [successive squarings](http://mathworld.wolfram.com/SuccessiveSquareMethod.html) since it's just $2^t = e modulo \Phi(n)$ (Rivest says).
+Rivest et al propose a scheme in which one encrypts the file with a very strong key as usual, but then one encrypts the key in such a way that one must calculate $\text{encryptedKey}^{2^t} \text{mod}(n)$ where _t_ is the adjustable difficulty factor. With the original numbers, one can easily avoid doing the [successive squarings](http://mathworld.wolfram.com/SuccessiveSquareMethod.html) since it's just $2^t = e \times \text{mod}(\Phi(n))$ (Rivest says).
 
 ### Constant factors
 
