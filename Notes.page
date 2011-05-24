@@ -891,21 +891,21 @@ It is sad and pitiable that we spend so much on things like dog food and cosmeti
 
 # A Bitcoin+BitTorrent-driven economy for creators
 
-    < foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into bitcoin style hashes, which are only  assembleable by the server; if the
-               creator=server, then we just invented a way to turn downloards  into nanopayments with zero mental transaction costs
+    < foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into Bitcoin style hashes, which are only  assemble-able by the server; if the
+               creator=server, then we just invented a way to turn downloads  into nanopayments with zero mental transaction costs
 
-    < gwern> sipa: well, let's call this bitcoin2. suppose there were a bitcoin2-based economy but there were no upper limit but a built-in steady inflation. if downloads
+    < gwern> sipa: well, let's call this Bitcoin2. suppose there were a Bitcoin2-based economy but there were no upper limit but a built-in steady inflation. if downloads
              solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing ...
     < gwern> ... creators' livelihoods!'
-    < foucist> it might be entirely possible to do that with the current bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
-    < gwern> sipa: I thought about the bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new
-             bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
+    < foucist> it might be entirely possible to do that with the current Bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
+    < gwern> sipa: I thought about the Bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new
+             Bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
     < foucist> gwern: well the argument is that bitcoins isn't about mining
-    < gwern> 'even if I release my awesome new movie, I probably won't get this year's bitcoin. so why bother?'
+    < gwern> 'even if I release my awesome new movie, I probably won't get this year's Bitcoin. so why bother?'
 
     < gwern> sipa: paying creators using inflation isn't that bad an idea. inflation is invisible and doesn't require assent. assent is why microtransaction schemes have
              failed in their thousands
-    < foucist> i think the base idea is to find a way to tie bitcoins into bittorents such that it's an automatic micropayment for creators of that content
+    < foucist> i think the base idea is to find a way to tie bitcoins into BitTorrent such that it's an automatic micropayment for creators of that content
     < sipa> but you're describing two ideas
     < gwern> (or at least, hundreds. micropayments seems like the sort of thing Internet folks have been trying for ages and failing miserably every time.)
     < sipa> 1) using bitcoins to pay for downloads
@@ -913,11 +913,11 @@ It is sad and pitiable that we spend so much on things like dog food and cosmeti
     < foucist> the term*
     < sipa> i know
     < sipa> you mean content creators
-    < sipa> 2) reusing the hashing done by BitTorrent for bitcoin
+    < sipa> 2) reusing the hashing done by BitTorrent for Bitcoin
     < gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover
              advantage)
     < sipa> furthermore, i don't see how you are going to reuse the hashing power... BitTorrent uses it in a deterministic way to verify whether data is identical, while
-            bitcoin uses it as a pseudorandom function to look for a lot of zeroes
+            Bitcoin uses it as a pseudorandom function to look for a lot of zeroes
     < gwern> sipa: #1 is boring. it's the same damn failed idea that has been tried hundreds of times. #2 is more interesting. is there any variant which does both?
     < gwern> that's where I fail because I don't know the math
     < gwern> (is there any way to force mining as part of the download? of course the users/downloaders could volunteer some hashing, but then someone will write a client
@@ -925,25 +925,25 @@ It is sad and pitiable that we spend so much on things like dog food and cosmeti
 
     < gwern> foucist: I don't think that'd work, because suppose you have no bitcoins? you have an incentive to find a plaintext torrent
 
-    < sipa> and that you pay with bitcoin hashes to get the data
-    < gwern> foucist: 'oh, but my backup server doesn't have access to my bitcoin account'
+    < sipa> and that you pay with Bitcoin hashes to get the data
+    < gwern> foucist: 'oh, but my backup server doesn't have access to my Bitcoin account'
     < gwern> sipa: hm, that sounds more sensible. what measures could be put in place to prevent colluding clients?
     < sipa> but that's little more than a using-bitcoins-to-pay-for-data system
-    < foucist> gwern: ok so you think only a purely generative way would work ?  hmm
+    < foucist> gwern: OK so you think only a purely generative way would work ?  hmm
     < sipa> and it's very wasteful
     < sipa> since the profitability of CPU mining is already long gone
-    < gwern> sipa: in the current bitcoin system, yeah, not some new bitcoin system
-    < sipa> explain me why people would value your bitcoin2's?
-    < gwern> foucist: well, you need to keep the bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
+    < gwern> sipa: in the current Bitcoin system, yeah, not some new Bitcoin system
+    < sipa> explain me why people would value your Bitcoin2's?
+    < gwern> foucist: well, you need to keep the Bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
              download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
-    < foucist> gwern: bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc ;)
+    < foucist> gwern: Bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc ;)
     < sipa> indeed, do that as payment in your paying-for-creators BitTorrent system
-    < gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular bitcoin, it'd give you access to the new stuff, you'd not feel
+    < gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular Bitcoin, it'd give you access to the new stuff, you'd not feel
              guilty about piracy, that sort of thing. (again, why does anyone download from iTunes?)
     < sipa> pay with folding@home work units or some
     < sipa> gwern: but it wouldn't have limited total supply
 
-    < gwern> sipa: would people suddenly stop being interested in bitcoin if the guarantee weren't 0% inflation but, say, 0.1% inflation?
+    < gwern> sipa: would people suddenly stop being interested in Bitcoin if the guarantee weren't 0% inflation but, say, 0.1% inflation?
     < sipa> some, certainly
     < gwern> (US GDP is 14.6 trillion, so 0.1% inflation would be a lot.)
 
