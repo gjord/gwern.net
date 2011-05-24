@@ -20,19 +20,20 @@ We should first point out that Light is always going to leak *some* bits. The on
 
 So there is a real challenge here: one party is trying to infer as much as possible from observed effects, and the other is trying to minimize how much the former can observe while not stopping entirely. How well does Light balance the competing demands?
 
-# Mistake 1
+# Mistakes
+## Mistake 1
 
 However, he can try to reduce the leakage and make his [anonymity set](!Wikipedia "Degree of anonymity") as large as possible. For example, killing every criminal with a heart attack is a dead give-away. Criminals do not die of heart attacks that often. (The point is more dramatic if you replace 'heart attack' with 'lupus'; as we all know, in real life it's never lupus.) Heart attacks are a subset of all deaths, and by restricting himself, Light makes it easier to detect his activities. 1000 deaths of lupus are a blaring red alarm; 1000 deaths of heart attacks are an oddity; and 1000 deaths distributed over the statistically likely suspects of cancer and heart disease etc. are almost invisible (but still noticeable in principle).
 
 So, Light's fundamental mistake is to kill in ways unrelated to his goal. Killing through heart attacks does not just make him visible early on, but the deaths reveals that his assassination method is supernaturally precise. L has been tipped off that Kira exists. First mistake.
 
-# Mistake 2
+## Mistake 2
 
 Worse, the deaths are non-random in other ways - they tend to occur at particular times! Graphed, there are obvious patterns.
 
 L was able to narrow down the active times of the presumable student or worker to a particular range of longitude, say 125-150° out of 180°; and what country is most obvious in that range? Japan. So that cut down the 7 billion people to around 0.128 billion; 0.128 billion requires 27 bits ($log_2 (128000000) = ~26.93$) so just the scheduling of deaths cost Light 6 bits of anonymity!
 
-## De-anonymization
+### De-anonymization
 
 On a side-note, some might be skeptical that one can infer much of anything from the graph and that _Death Note_ was just glossing over this part. "How can anyone infer that it was someone living in Japan just from 2 clumpy lines at morning and evening in Japan?" But actually, such a graph is surprisingly precise. I learned this years before I watched _Death Note_, when I was heavily active on Wikipedia; often I would wonder if two editors were the same person or roughly where an editor lived. What I would do if their edits or user page did not reveal anything useful is I would go to [Kate's](http://toolserver.org/~river/cgi-bin/count_edits) [edit counter](!Wikipedia "Wikipedia:WikiProject edit counters") and I would examine the times of day all their hundreds or thousands of edits were made at. Typically, what one would see was ~4 hours where there were no edits whatsoever, then ~4 hours with moderate to high activity, a trough, then another gradual rise to 8 hours later and a further decline down to the first 4 hours of no activity. These periods quite clearly corresponded to sleep (pretty much everyone is asleep at 4 AM), morning, lunch & work hours, evening, and then night with people occasionally staying up late and editing. There was noise, of course, from people staying up especially late or getting in a bunch of editing during their workday or occasionally traveling, but the overall patterns were clear - never did I discover that someone was actually a nightwatchman and my guess was an entire hemisphere off.
 
@@ -64,7 +65,7 @@ To summarize: [differential privacy](!Wikipedia) is [almost](http://radar.oreill
 
     > ‘Quasi-identifier’ is a notion that arises from attempting to see some attributes (such as ZIP code) but not others (such as tastes and behavior) as contributing to re-identifiability. However, the major lesson from the re-identification papers of the last few years has been that *any information at all about a person* can be potentially used to aid re-identification.
 
-# Mistake 3
+## Mistake 3
 
 Light's third mistake was reacting to the provocation of Lind L. Tailor. Running the broadcast in 1 region was a gamble on L's part; he had no real reason to think Light was in [Kanto](!Wikipedia "Kantō region") and should have arranged for it to be broadcast to exactly half of Japan's population. But it was one that paid off; he narrowed his target down to $\frac{1}{3}$ the original Japanese population, for a gain of ~1.6 bits. (You can see it was a gamble by considering if Light had been outside Kanto; obviously he would not have reacted in any fashion, and all L would learn is that his suspect was in that other $\frac{2}{3}$ of the population, for a gain of only ~0.3 bits.)
 
@@ -72,7 +73,7 @@ But even this wasn't a *huge* mistake. He lost 6 bits to his schedule of killing
 
 This mistake also shows us that the important thing that information theory buys us, really, is not the *bit* (we could be using $log_10$ rather than $log_2$, and compares [dits](http://en.wikipedia.org/wiki/Ban_%28information%29) rather than bits) so much as comparing events in the plot on a *logarithmic* scale. If we simply looked at how the absolute number of how many people were ruled out at each step, we'd conclude that the very first mistake by Light was a debacle without compare in human history since it let L rule out >6 billion people, approximately 60x more people than all the other mistakes put together would let L rule out. Mistakes are relative to each other, not absolutes.
 
-# Mistake 4
+## Mistake 4
 
 Light's fourth mistake was the largest. Interestingly, most _Death Note_ fans do not seem to regard this as his largest mistake, instead pointing to killing Lind L. Tailor or perhaps relying on Mikami. The information theoretical perspective strongly disagrees, and lets us quantify how large this mistake was.
 
@@ -80,11 +81,11 @@ Light's fourth mistake was to use confidential police information. When he acts 
 
 This mistake cost him 11 bits of anonymity; in other words, this mistake cost him *twice* what his scheduling cost him and almost *8* times the murder of Tailor!
 
-# Mistake 5
+## Mistake 5
 
 In comparison, the fifth mistake, murdering Ray Penbar's fiancee and focusing L's suspicion on Penbar's assigned targets was positively cheap. If we assume Penbar was tasked 200 leads out of the 10,000, then murdering him and the fiancee dropped Light from 14 bits to 8 bits ($log_2 (200) = ~7.64$) or just 6 bits or a little over half the fourth mistake.
 
-# Endgame
+## Endgame
 
 At this point in the plot, L resorts to direct measures and enters Light's life directly, enrolling at the university. From this point on, Light is pretty much screwed. He frittered away >25 bits of anonymity and then L intuited the rest and suspected him all along. (We could justify L skipping over the remaining 8 bits by pointing out that L can analyze the deaths and infer psychological characteristics like arrogance, puzzle-solving, and great intelligence, which combined with heuristically searching the remaining candidates, could lead him to zero in on Light.)
 
