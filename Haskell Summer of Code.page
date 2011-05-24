@@ -213,10 +213,10 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
     > - Autocompletion and better links to documentation,
     > - A way to run unit tests within Eclipse,
     > - More support for editing Cabal files visually, including a browser of the available packages."
-2. ["Simplified OpenGL bindings"](http://www.google-melange.com/gsoc/project/google/gsoc2011/pastorn/14001); Alexander Göransson, mentored by Jason Dagit
+2. ["Simplified OpenGL bindings"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/pastorn/1); Alexander Göransson, mentored by Jason Dagit
 
     > "Modernize and simplify OpenGL bindings for Haskell. Focus on safety, shaders and simplicity."
-3. ["Interpreter Support for the Cabal-Install Build Tool"](http://www.google-melange.com/gsoc/project/google/gsoc2011/anklesaria/60001); anklesaria, by Duncan Coutts
+3. ["Interpreter Support for the Cabal-Install Build Tool"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/anklesaria/1); anklesaria, by Duncan Coutts
 
     > "This project aims to provide cabal-install with an 'repl' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
 4. ["Convert the text package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett
@@ -231,10 +231,10 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
 5. ["Build multiple Cabal packages in parallel"](http://www.google-melange.com/gsoc/project/google/gsoc2011/refold/31001); Mikhail Glushenkov, by Johan Tibell
 
     > "Cabal is a system for building and packaging Haskell libraries and programs. This project's aim is to augment Cabal with support for building packages in parallel. Many developers have multi-core machines, but Cabal runs the build process in a single thread, only making use of one core. If the build process could be parallelized, build times could be cut by perhaps a factor of 2-8, depending on the number of cores and opportunity of parallel execution available."
-6. ["Darcs Bridge"](http://www.google-melange.com/gsoc/project/google/gsoc2011/owst/18001); Owen Stephens, by Ganesh Sittampalam
+6. ["Darcs Bridge"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/owst/1); Owen Stephens, by Ganesh Sittampalam
 
     > "My proposed project is to create a generic bridge that will enable easy interoperability and synchronisation between Darcs and other VCSs. The bridge will be designed to be generic, but the focus of this project will be Darcs2 ↔ Git and Darcs2 ↔ Darcs1. The bridge should allow loss-less, correct conversion to and from Darcs repositories, allowing users to use the tool that suits them and their project best, be that Darcs as it currently exists, or another tool."
-7. ["Darcs: primitive patches version 3"](http://www.google-melange.com/gsoc/project/google/gsoc2011/mornfall/26001); Petr Ročkai, by Eric Kow
+7. ["Darcs: primitive patches version 3"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/mornfall/1) ([expanded blog description](http://web.mornfall.net/blog/soc_reloaded:_darcs_primitive_patches_version_3.html)); Petr Ročkai, by Eric Kow
 
     > "Darcs, a revision control system, uses so-called patches to represent changes to individual version-controlled files, where the 'primitive' patches are the lowest level of this representation, capturing notions like 'hunks' (akin to what `diff(1)` produces), token replace and file and directory addition/removal. I propose to implement a different representation of these primitive patches, hoping to improve both performance and flexibility of darcs and to facilitate future development."
 
