@@ -10,7 +10,7 @@ import System.Process (runCommand)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
-import Network.Gitit.Feed (filestoreToXmlFeed, FeedConfig(..))
+import Feed (filestoreToXmlFeed, FeedConfig(..))
 import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
