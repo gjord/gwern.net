@@ -355,7 +355,7 @@ ignore = fmap $ const ()
 
 The actual rewrite:
 
-~~~~
+~~~~{.diff}
 82,98c79,83
 < get' :: String -> IO String
 < get' = get . fromJust . parseURI
@@ -385,7 +385,7 @@ The actual rewrite:
 
 Then we do the renames:
 
-~~~~
+~~~~{.diff}
 50c47
 <    items rurl = do s <- get' rurl
 ---
@@ -402,7 +402,7 @@ Then we do the renames:
 
 Our rewrite of `get'` simplifies our imports:
 
-~~~~
+~~~~{.diff}
 3d2
 < import Data.Char (intToDigit)
 6,8c5,6
@@ -418,7 +418,7 @@ Our rewrite of `get'` simplifies our imports:
 
 And then, because the exception list was annoying me by being needlessly long to filter out the repeated links:
 
-~~~~
+~~~~{.diff}
 63c59,60
 <         exceptions = ["wikimediafoundation", "http://www.mediawiki.org/", "wikipedia", "&curid=", "index.php?title=", "&action="]
 ---
