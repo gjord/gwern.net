@@ -1,0 +1,106 @@
+Some wonder who is the real man under the Satoshi Nakamoto mask; a hard question - how many libertarian cryptographers are there? But the interesting thing is, Satoshi could be *anybody*. Bitcoin involves no major intellectual breakthroughs, so Satoshi need have no credentials in cryptography or be anything but a self-taught programmer! Satoshi published his [whitepaper](http://www.bitcoin.org/bitcoin.pdf) May 2009^[`bitcoin.org` was registered 18 August 2008, so presumably Satoshi had been developing the bitcoin idea at least as early as 2008.], but if you look at the cryptography that makes up Bitcoin, they can basically be divided into:
+
+- Public key cryptography
+- Cryptographic signatures
+- Cryptographic hash functions
+- Hash chain used for proof-of-work
+     i. Hash tree
+     ii. Bit gold
+- cryptographic time-stamps
+
+# Pre-requisites
+
+The interesting thing is that by even the most generous accounting, all the pieces were in place for at least 8 years before Satoshi's publication, which was followed more than half a year later^[The first revision in the [Github repository](https://github.com/bitcoin/bitcoin) is dated August 2009 by 'sirius-m'.] by the first public[^private] prototype. If we look at the citations in the whitepaper and others, and then order the relevant technologies by year in descending order:
+
+1. 2001-2005[^bitgold]: Nick Szabo, Bit Gold
+2. 2001: [SHA-256](!Wikipedia) finalized
+3. 1998: Wei Dai, [B-money](http://weidai.com/bmoney.txt)
+4. 1997: [HashCash](!Wikipedia)
+5. 1992-1993: Proof-of-work for spam^["Pricing via Processing, Or, Combating Junk Mail, Advances in Cryptology", Dwork 1993, published in _CRYPTO'92_.]
+6. 1991: cryptographic timestamps
+7. 1980: public key cryptography^[This is Satoshi's citation date; Diffie-Hellman, the [first published system](!Wikipedia "Public key cryptography#History"), was in 1976, not 1980.]
+8. 1979: Hash tree
+
+[^private]: Satoshi claims that before he write the whitepaper, he [wrote a prototype](http://www.mail-archive.com/cryptography@metzdowd.com/msg10011.html)
+[^bitgold]: It's hard to figure out when Szabo devised bit gold; his [post](http://unenumerated.blogspot.com/2005/12/bit-gold.html) claims to be from December 2008 but the URL indicates 2005 and it is linked in November 2008 emails. Szabo has long been interested in proof-of-work systems, writing on them in ~1998. [A paper](http://szabo.best.vwh.net/ttps.html) started in 2001 motivates the existence of bit gold and describes, but that may be material from the 2004 or 2005 revisions. [Hal Finney](!Wikipedia "Hal Finney (cypherpunk)") [mentioned](http://www.mail-archive.com/cryptography@metzdowd.com/msg09975.html) bit gold in 2008 (in the context of a bitcoin discussion) describing Szabo's proposal as 'many years ago', and inasmuch as Hal has been active in cryptography circles since the '80s (was a member of the Cypherpunks mailing list etc.), it seems unlikely Hal was speaking of something then just 3 years ago.
+
+This lack of novelty is part of the appeal - the fewer new parts of a cryptosystem, the less danger. All that was lacking was a Satoshi to start a Bitcoin.
+
+# Delay
+
+But why this delay? If the idea is easy to understand and uses basic ideas[^laurie], if it is very far from the cutting-edge of cryptography^[One thinks of the formidable mathematical difficulties surrounding the area of [homomorphic encryption](!Wikipedia) where one *would* expect any breakthrough to be from a bona fide genius, or at least a credentialed expert.], then there's no obvious reason it would not be seriously tried. Certainly the [cypherpunks](!Wikipedia) of the '90s were wildly creative, inventing everything from [Cypherpunk](!Wikipedia "Cypherpunk anonymous remailer")/[Mixmaster](!Wikipedia "Mixmaster anonymous remailer") to [MojoNation](!Wikipedia) to [assassination markets](!Wikipedia) to [data havens](!Wikipedia) (memorably depicted in _[Cryptonomicon](!Wikipedia)_). We have already seen 2 of their proposed cryptocurrencies, and proof-of-work was one of the most common proposals to deal with the rising tsunami of spam^[Although ironically, proof-of-work never seemed to go into widespread use because of general inertia and because to deter large amounts of spam, proof-of-work would [deter legitimate users](http://www.cl.cam.ac.uk/~rnc1/proofwork.pdf) under some models; spam seems to have been kept in check by better filtering techniques (eg. [Paul Graham](!Wikipedia "Paul Graham (computer programmer)")'s ["A Plan for Spam"](http://www.paulgraham.com/spam.html) using [Bayesian spam filtering](!Wikipedia)) and [legal action](!Wikipedia "CAN-SPAM Act of 2003") against botnets & spammers.]. Why did Bitcoin take a decade to be born? The problem nags at me - similar to the historical question of why England experienced the Industrial Revolution and grew to empire, and not China, which seems better equipped in every respect[^china]. There must be an answer.
+
+[^china]: For more on that history, see Wikipedia on [Industrial Revolution#Causes for occurrence in Europe](!Wikipedia), [Chinese_industrialization#Reasons_for_the_delay_in_industrialization](!Wikipedia), the [Great Divergence](!Wikipedia); I strongly recommend [Gregory Clark's](!Wikipedia "Gregory Clark (economist)") _A Farewell to Alms_.
+[^laurie]: I am only a layman with an interest in cryptography, but I am not alone in seeing this lack of really novel primitives or ideas in the Bitcoin scheme; Ben Laurie expresses exactly this idea in an aside in [a blog post](http://www.links.org/?p=1164) attacking Bitcoin:
+
+    > "A friend alerted to me to a sudden wave of excitement about Bitcoin. I have to ask: why? What has changed in the last 10 years to make this work when it didn't in, say, 1999, when many other related systems (including one of my own) were causing similar excitement? Or in the 20 years since the wave before that, in 1990? As far as I can see, nothing."
+
+## Impractical?
+
+Is the problem one of resources? In the whitepaper, Satoshi remarks:
+
+> A block header with no transactions would be about 80 bytes. If we suppose blocks are generated every 10 minutes, 80 bytes * 6 * 24 * 365 = 4.2MB per year. With computer systems typically selling with 2GB of RAM as of 2008, and Moore's Law predicting current growth of 1.2GB per year, storage should not be a problem even if the block headers must be kept in memory.
+
+That's fine to say in 2008, after many doublings. Would memory be a problem in the 1990s? It doesn't have to be. The difficulty of bitcoin mining is obviously adjustable, so the problem boils down to:
+
+1. disk usage
+
+    - With a smaller hash like SHA1^[SHA-1, as of 2011, has not been cracked [in practice](!Wikipedia "SHA1#SHA-1").], the 80 bytes can be shrunk
+    - 10 minutes is not graven in stone; why not 20 minutes? Right there we have halved the hash tree
+    - the hash tree can be 'garbage collected' and shrunk^[My understanding is that simply no one has bothered to program this functionality since 400MB is not that much space.]
+    - it is only necessary to maintain a full hash tree if one is paranoid.
+
+        In practice, like many programs of the era such as mail or Usenet clients, the default could simply be to hold onto the last _n_ blocks/hashes (Satoshi estimates [12kb/day](http://www.mail-archive.com/cryptography@metzdowd.com/msg09964.html)); this would consume a limited amount of disk space.
+2. network connectivity is solvable by solutions to #1
+
+    1. A function of the existing hash tree size
+    2. And frequency of new transactions
+
+It's worth pointing out that it's generally expected that at some point ordinary desktop users like you or me are expected to stop being full-fledged nodes and bitcoin miners and will instead make use of some specialist service running powerful servers of its own; in a counterfactual universe where Bitcoin was begun in the early 1990s, the changeover would simply have occurred sooner. (And with all the investment money desperately investing in the first Internet bubble, it would be quite easy to start such a service regardless of the technical demands.)
+
+# Contemporary objections
+
+As well, few of the objections to cryptocurrencies seem to have been "computers which can run it are fantastically expensive"^[Or rather, the objections were that cryptocurrencies had to be mobile - usable on the contemporary PDAs and cellphones, with the computing power of a watch.]. In computing, applications and techniques are often invented many decades before Moore's law makes them practically useful^[[Garbage collection](!Wikipedia "Garbage collection (computer science)") and most of artificial intelligence (or machine learning in particular) seem to have waited decades for sufficiently fast hardware. Indeed, I sometimes feel that Alan Kay's entire career has essentially been sketching out what he could do if only he had some decent cheap hardware.], but this does *not* seem to have happened with Bitcoin. A similar objection obtains with patents or published papers; if Bitcoin was a known idea, where are they? I have yet to see anybody point out what patents might have deterred cryptography researchers & implementers; the obvious answer is that there were none. Because there was no investor interest? Not that Satoshi needed investors, but there were a tremendous number of online payment services started in the '90s, each searching for the secret sauce that would let them win 'mindshare' and ride 'network effects' to victory; [DigiCash](!Wikipedia) again comes to mind.
+
+So if the basic idea is accessible, and it's useful on consumer-grade hardware for the last 20 years or so, then what's the problem?
+
+## Cryptographers' objections
+
+I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archive.com/cryptography@metzdowd.com/msg09959.html) on the Cryptography newsgroup/mailing list; particularly the various early criticisms:
+
+- [disk/bandwidth won't scale](http://www.mail-archive.com/cryptography@metzdowd.com/msg09963.html)
+- [proposal is underspecified](http://www.mail-archive.com/cryptography@metzdowd.com/msg09975.html) (omitting all the possible [race conditions](!Wikipedia) and scenarios in a distributed system) and details [available only in code](http://www.mail-archive.com/cryptography@metzdowd.com/msg09996.html)
+- [conflating transactions with bitcoin creation](http://www.mail-archive.com/cryptography@metzdowd.com/msg09984.html) requires constant inflation
+- it is [very difficult](http://www.mail-archive.com/cryptography@metzdowd.com/msg09995.html) to achieve consensus on large amounts of distributed data even without incentives to corrupt it or attacks
+- [domination of the hash tree](http://www.mail-archive.com/cryptography@metzdowd.com/msg10005.html) by fast nodes and starvation of transactions
+- [pseudonymity & linkable transactions](http://www.mail-archive.com/cryptography@metzdowd.com/msg10007.html)[^szabo] (irreversible transactions also implies [double-spend](http://www.mail-archive.com/cryptography@metzdowd.com/msg10015.html) must be very quickly detectable)
+
+[^szabo]: Nick Szabo, discussing [Chaumian ecash](http://szabo.best.vwh.net/bearer_contracts.html), comments (with almost palpable distaste) of a hypothetical system akin to Bitcoin in this respect:
+
+    > "A use-once-address communications mix plus foreswearing any reputation gain from keeping accounts, in theory also buys us unlinkability, but a communications mix is weak and very expensive."
+
+As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [Ben Laurie](!Wikipedia)
+
+1. ["Bitcoin"](http://www.links.org/?p=1164)
+2. ["Bitcoin 2"](http://www.links.org/?p=1171)
+3. ["Bitcoin is Slow Motion"](http://www.links.org/?p=1175)
+
+What's the common thread? Is there any particular fatal flaw of Bitcoin that explains why no one but Satoshi came up with it?
+
+### Aesthetics
+
+No! What's wrong with Bitcoin is that it's *ugly*. It is not [elegant](!Wikipedia "Mathematical beauty"). It's clever to define your bitcoin balance as whatever hash tree is longer, has won more races to find a new block, but it's *ugly* to make your network's security depend solely on having more brute-force computing power [than your opponents](http://www.mail-archive.com/cryptography@metzdowd.com/msg09966.html), *ugly* to need at least half the processing power just to avoid double-spending. It's clever to have a P2P network distributing updated blocks which can be cheaply & independently checked, but there are tons of ugly edge cases which Satoshi has not proven (in the sense that most cryptosystems have security proofs) to be safe and he himself says that what happens will be a 'coin flip' at some points. It's ugly to have a hash tree that [just keeps growing](http://www.mail-archive.com/cryptography@metzdowd.com/msg09963.html) and is going to be gigabytes and gigabytes in not terribly many years. It's ugly to have a system which can't be used offline without proxies and workarounds, unlike Chaum's [elegant](!Wikipedia "ecash"). It's ugly to have a system that has to track all transactions, publicly; even if one can use bitcoins pseudonymously, that doesn't count for much, a cryptographer has learned from incidents like [anon.penet.fi](!Wikipedia "Penet remailer") and decades of successful attacks on pseudonymity^[For example, see some of the most recent research I linked in [_Death Note_: L, Anonymity & Eluding Entropy](Death Note Anonymity#de-anonymization).]. And what's with that arbitrary looking 21 million bitcoin limit? Couldn't it have been a rounder number or at least a power of 2? (Not that the bitcoin mining is much better, as it's a massive give-away to early adopters. [Coase's theorem](!Wikipedia) may say it doesn't matter how bitcoins are allocated in the long run, but such a blatant bribe to early adopters rubs against the grain. Again, ugly and inelegant.) Bitcoins can simply disappear if you send them to an invalid address.
+
+### How Worse is Better
+
+In short, Bitcoin is a perfect example of [Worse is Better](!Wikipedia) ([original essay](http://www.dreamsongs.com/WorseIsBetter.html)). You can see the tradeoffs that Richard P. Gabriel enumerates: Bitcoin has many edge cases; it lacks many properties one would desire for a cryptocurrency; the whitepaper is badly underspecified; much of the behavior is socially determined by what the miners and clients collectively agree to accept, not by the protocol; etc.
+
+But it *seems to work*. Just like Unix, there were countless ways to destroy your data or crash the system, which didn't exist on more 'proper' OSs like [OpenVMS](!Wikipedia), and there were countless lacking features compared to systems like [ITS](!Wikipedia "Incompatible Timesharing System") or the [Lisp machine](!Wikipedia) OSs. But like the proverbial cockroaches, Unix spread, networked, survived - and the rest did not.[^preface]
+
+A cryptographer would have difficulty coming up with Bitcoin because it is so ugly and there are so many elegant features he wants in it. Programmers and mathematicians often speak of 'taste', and how they lead one to better solutions. A cryptographer's taste is for cryptosystems optimized for efficiency and theorems; it is not for systems optimized for virulence, for their sociological appeal^["Bitcoin, like the recent commercial phenomenon Groupon, tends to turn people into marketers because they feel they have something to gain, however small it might be in the end; I think that partly accounts for its temporary success." [is](http://www.links.org/?p=1171#comment-415465) an example of what I mean.]. Centralized systems are natural solutions because they are easy, like the integers are easy; but like the integers are but a vanishingly small subset of the reals, so too are centralized systems a tiny subset of decentralized ones. DigiCash and all the other cryptocurrency startups may have had many nifty features, may have been far more efficient, and all that jazz, but they died anyway. They had no communities, and their centralization meant that they fell with their corporate patrons. They had to win in their compressed timeframe or die out completely. But "that is not dead which can eternal lie".
+
+It may be that Bitcoin's greatest virtue is not its deflation, nor its microtransactions, but its viral distributed nature; it can wait for its opportunity. "If you sit by the bank of the river long enough, you can watch the bodies of your enemies float by."
+
+[^preface]: _[The UNIX-HATERS Handbook](!Wikipedia)_, which contains many entertaining and often still-applicable descriptions of the fecklessness and sharp edges of Unixes, also contains an extremely funny 'Anti-Foreword' by Dennis Ritchie:
+
+    > "To the contributors to this book: I have succumbed to the temptation you offered in your preface: I *do* write you off as envious malcontents and romantic keepers of memories. The systems you remember so fondly (TOPS-20, ITS, Multics, Lisp Machine, Cedar/Mesa, the Dorado) are not just out to pasture, they are fertilizing it from below...You claim to seek progress, but you succeed mainly in whining. Here is my metaphor: your book is a pudding stuffed with apposite observations, many well-conceived. Like excrement, it contains enough undigested nuggets of nutrition to sustain life for some. But it is not a tasty pie: it reeks too much of contempt and of envy. Bon appetit!"
