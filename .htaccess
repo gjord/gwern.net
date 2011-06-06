@@ -1,8 +1,11 @@
 # force extensionless 'cool URIs' like 'http://www.gwern.net/index' to be served as HTML
 DefaultType text/html
 DirectoryIndex index
+
 # cover source files - text/html runs all lines together; ugly & semantics-destroying
-AddType text/plain .page
+AddType text/x-markdown .page
+AddType text/x-haskell .hs
+AddType text/x-literate-haskell .lhs
 
 # Add caching/expire headers for performance
 FileETag MTime
