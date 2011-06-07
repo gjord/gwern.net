@@ -75,7 +75,7 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
 - [domination of the hash tree](http://www.mail-archive.com/cryptography@metzdowd.com/msg10005.html) by fast nodes and starvation of transactions
 - [pseudonymity & linkable transactions](http://www.mail-archive.com/cryptography@metzdowd.com/msg10007.html)[^szabo] (irreversible transactions also implies [double-spend](http://www.mail-archive.com/cryptography@metzdowd.com/msg10015.html) must be very quickly detectable)
 
-[^messy]: Recent criticism, too, focuses on the codebase and _ad hoc_ nature of many of the choices; from an [anonymous Facebook comment](https://gist.github.com/1005927/4836d6231566bebd766966c7689c4094c1296700):
+[^messy]: Recent criticism, too, sometimes focuses on the [quality](http://www.reddit.com/r/Anarchism/comments/hdf2t/so_i_guess_bitcoin_is_probably_a_mutualists_wet/c1uobdl) of the C++ codebase and _ad hoc_ nature of many of the choices; from an [anonymous Facebook comment](https://gist.github.com/1005927/4836d6231566bebd766966c7689c4094c1296700):
 
     > "The protocol is not well-defined and clearly designed by an amateur (that is, not someone who has done much protocol implementation work). It's a binary protocol with a smattering of length-prefixing, [null terminated strings](!Wikipedia), etc. The messages look reasonable, just a horrible encoding. The rules of the protocol are poorly defined and tightly coupled to implementation; the implementation is done by someone who feels it's good and well to have only 5 major source files for 17 [KLOC](!Wikipedia "Source lines of code"). Due to lack of a well-specified protocol, there is also a bit of client monoculture going on.
     >
