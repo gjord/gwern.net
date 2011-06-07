@@ -83,7 +83,7 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
     > ...The protocol also has had no thought put into it re: network architecture -- there are peers and that's it. Due to the cryptographic nature of transactions, it's simply not possible to have realtime transactions with bitcoin as the network scales (it already take 5-10 mins on average for the network to see a single transaction). Thus, there will need to be some concept of a node in the network that can facilitate interactions between two peers in a faster fashion, with the assumption of a measure of trust. You shouldn't *require* it, of course, but it should be defined, I think."
 [^szabo]: Nick Szabo, discussing [Chaumian ecash](http://szabo.best.vwh.net/bearer_contracts.html) ("the greatest simple equation since $e=mc^2$"), comments with almost palpable distaste of a hypothetical system akin to Bitcoin in this respect:
 
-    > "A use-once-address communications mix plus forswearing any reputation gain from keeping accounts, in theory also buys us unlinkability, but a communications mix is weak and very expensive."
+    > "A use-once-address communications mix plus forswearing any reputation gain from keeping accounts, in theory also buys us unlinkability, but a communications mix [BTC: ["mixing service"](https://en.bitcoin.it/wiki/Mixing_service)] is weak and very expensive."
 
 As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [Ben Laurie](!Wikipedia)
 
