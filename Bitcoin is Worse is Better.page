@@ -68,7 +68,7 @@ So if the basic idea is accessible, and it's useful on consumer-grade hardware f
 
 I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archive.com/cryptography@metzdowd.com/msg09959.html) on the Cryptography newsgroup/mailing list; particularly the various early criticisms:
 
-- [disk/bandwidth won't scale](http://www.mail-archive.com/cryptography@metzdowd.com/msg09963.html)
+- [disk/bandwidth won't scale](http://www.mail-archive.com/cryptography@metzdowd.com/msg09963.html)^[It probably will. [Some](https://en.bitcoin.it/wiki/Scalability) [informal](http://www.reddit.com/r/Anarchism/comments/hdf2t/so_i_guess_bitcoin_is_probably_a_mutualists_wet/c1ulirk) projections have been made of what it would take to run millions of transactions worth trillions of dollars, and they tend to come in at comparable to the existing resource use of companies like Google (which [fund](http://articles.economictimes.indiatimes.com/2011-04-12/news/29410039_1_energy-projects-solar-energy-clean-energy) [their](http://www.fastcompany.com/1748331/google-sinks-100-million-into-worlds-largest-wind-project) own power plants or monopolize convenient [hydroelectric](http://www.itmanagement.com/features/columbia-river-security-risk-062507/) [dams](http://www.nytimes.com/2006/06/14/technology/14search.html) to run their datacenters).]
 - [proposal is underspecified](http://www.mail-archive.com/cryptography@metzdowd.com/msg09975.html) (omitting all the possible [race conditions](!Wikipedia) and scenarios in a distributed system) and details [available only in ad hoc code](http://www.mail-archive.com/cryptography@metzdowd.com/msg09996.html)[^messy]
 - [conflating transactions with bitcoin creation](http://www.mail-archive.com/cryptography@metzdowd.com/msg09984.html) requires constant inflation
 - it is [very difficult](http://www.mail-archive.com/cryptography@metzdowd.com/msg09995.html) to achieve consensus on large amounts of distributed data even without incentives to corrupt it or attacks
@@ -85,11 +85,12 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
 
     > "A use-once-address communications mix plus forswearing any reputation gain from keeping accounts, in theory also buys us unlinkability, but a communications mix [BTC: ["mixing service"](https://en.bitcoin.it/wiki/Mixing_service)] is weak and very expensive."
 
-As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [Ben Laurie](!Wikipedia)
+As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [Ben Laurie](!Wikipedia) and Victor Grischchenko:
 
 1. ["Bitcoin"](http://www.links.org/?p=1164)
 2. ["Bitcoin 2"](http://www.links.org/?p=1171)
 3. ["Bitcoin is Slow Motion"](http://www.links.org/?p=1175)
+4. ["Bitcoin?"](http://www.pds.ewi.tudelft.nl/~victor/bitcoin.html)
 
 What's the common thread? Is there any particular fatal flaw of Bitcoin that explains why no one but Satoshi came up with it?
 
