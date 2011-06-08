@@ -49,6 +49,7 @@ Computer security research offers more scary results. There are an amazing numbe
 8. Your hospital records can be [de-anonymized](http://dataprivacylab.org/dataprivacy/projects/law/law1.html) just by looking at public voting rolls^[eg. 97% of the Cambridge, Massachusetts voters could be identified with birth-date and zip code, and 29% by birth-date and just gender.]
 9. Your [typing](!Wikipedia "Keystroke dynamics#References") is surprisingly unique
 10. Knowing your morning commute as loosely as to the individual blocks (or less granular) [uniquely identifies](http://33bits.org/2009/05/13/your-morning-commute-is-unique-on-the-anonymity-of-homework-location-pairs/) ([PDF](http://crypto.stanford.edu/~pgolle/papers/commute.pdf)) you; knowing your commute to the zip code/census tract uniquely identifies 5% of people
+11. Your handwriting is fairly unique, obviously - but so is how you fill in bubbles on tests[^bubbles]
 
 To summarize: [differential privacy](!Wikipedia) is [almost](http://radar.oreilly.com/2011/05/anonymize-data-limits.html) impossible[^faq] and privacy is dead.
 
@@ -64,6 +65,9 @@ To summarize: [differential privacy](!Wikipedia) is [almost](http://radar.oreill
     In general, there's no clear distinction between 'useful' and 'useless' information from the perspective of identifying/breaking privacy/reversing anonymization ([emphasis added](http://33bits.org/2009/10/14/de-anonymization-is-not-x-the-need-for-re-identification-science/)):
 
     > ‘Quasi-identifier’ is a notion that arises from attempting to see some attributes (such as ZIP code) but not others (such as tastes and behavior) as contributing to re-identifiability. However, the major lesson from the re-identification papers of the last few years has been that *any information at all about a person* can be potentially used to aid re-identification.
+[^bubbles]: See ["Bubble Trouble: Off-Line De-Anonymization of Bubble Forms"](http://www.cs.princeton.edu/~wclarkso/bubble-trouble.pdf), USENIX 2011S Security Symposium; from ["New Research Result: Bubble Forms Not So Anonymous"](http://www.freedom-to-tinker.com/blog/wclarkso/new-research-result-bubble-forms-not-so-anonymous):
+
+    > "If bubble marking patterns were completely random, a classifier could do no better than randomly guessing a test set’s creator, with an expected accuracy of 1/92 ≈ 1%. Our classifier achieves over 51% accuracy. The classifier is rarely far off: the correct answer falls in the classifier’s top three guesses 75% of the time (vs. 3% for random guessing) and its top ten guesses more than 92% of the time (vs. 11% for random guessing)."
 
 ## Mistake 3
 
