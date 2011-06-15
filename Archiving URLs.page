@@ -47,7 +47,7 @@ rm ~/.tmp
 
 cd ~/www/
 for file in ~/.tmp-urls*;
- do (wget --continue --convert-links --page-requisites --timestamping --input-file $file && rm $file &);
+ do (wget --continue --page-requisites --timestamping --input-file $file && rm $file &);
 done
 
 find ~/www -size +4M -delete
@@ -90,7 +90,9 @@ The library half of `archiver` is a simple wrapper around the appropriate HTTP r
 
 That is, `archiver` is a daemon which will process a specified text file, each line of which is a URL, and will one by one request that the URLs be archived or spidered
 
-Usage of `archiver` might look like `while true; do archiver ~/.urls.txt gwern0@gmail.com; done`
+Usage of `archiver` might look like `archiver ~/.urls.txt gwern0@gmail.com`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern0@gmail.com; done`. If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com; done'`.
+
+`archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way. For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping"; done'`.
 
 There are a number of ways to populate the source text file. For example, I have a script `firefox-urls`:
 
@@ -119,4 +121,4 @@ More useful perhaps is a script to extract external links from Markdown files an
 
 So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in my wiki as arguments, and add the thousand or so external links to the archiver queue (eg. `find . -name "*.page" | xargs runhaskell link-extractor.hs >> ~/.urls.txt`); they will eventually be archived/backed up.
 
-Combined with a tool like `link-checker` means that there never need be any broken links on gwern.net since one can either find a live link or use the archived version. Specifically, one can take the `wget` dump and since it's been turned into a full local file-based version with `--convert-links --page-requisites`, convert it into something like a standalone PDF. I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
+Combined with a tool like `link-checker` means that there never need be any broken links on gwern.net since one can either find a live link or use the archived version. Specifically, one can take the `wget` dump and if it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert it into something like a standalone PDF. I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
