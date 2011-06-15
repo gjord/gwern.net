@@ -17,13 +17,14 @@ I personally want the data for a few distinct purposes:
     - do n-backing just before sleep, and see whether percentages shift (more deep sleep as the brain grows/changes?) or whether one sleeps better (fewer awakenings, less light sleep).
     - do n-backing after waking up, to look for correlation between good/bad sleeps and performance (one would expect good sleep ~> good scores).
     - test the costs of polyphasic sleep on memory^[My own suspicion is that given the existence of [neuron-level sleep in mice](http://www.cosmosmagazine.com/news/4264/can-we-be-awake-and-asleep-same-time), [poor self-monitoring in humans](http://www.nytimes.com/2011/04/17/magazine/mag-17Sleep-t.html), and [anecdotal reports](http://lesswrong.com/lw/5n0/optimizing_sleep/44zu) about polyphasic sleep, is that polyphasic sleep is a real & workable phenomenon but that it comes at the price of a significant chunk of mental performance.]
-8. effect of [one-legged standing](http://www.blog.sethroberts.net/2011/03/22/effect-of-one-legged-standing-on-sleep/) on sleep depth/efficiency
+8. effect of [Seth Roberts](!Wikipedia)'s [one-legged standing](http://www.blog.sethroberts.net/2011/03/22/effect-of-one-legged-standing-on-sleep/) on sleep depth/efficiency
 
 [^ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his _The Four-hour Body_ claims:
 
     > "Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20 –30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using."
 
-# First night
+# First impressions
+## First night
 
 Christmas morning, I unpacked it and admired the packaging, and then looked through the manual. The base-station/alarm-clock seems pretty sturdy and has a large clear screen. The headband seemed comfortable enough that it wouldn't bother me. The various writings with it seemed rather fluffy and preppy, but I did my technical homework before hand, so could ignore their crap.
 
@@ -37,17 +38,55 @@ So that explains the strange Zeo data for the first day:
 
 The major surprise in this data was how quickly I fell asleep: 18 minutes. I had always thought that I took much longer to fall asleep, more like 45 minutes, and had budgeted accordingly; but apparently [being deluded](http://blog.myzeo.com/sleep-forgetting-to-remember-to-forget/) about when you are awake and asleep is common. The rest of the data seemed too messed up by the alarm to learn anything from.
 
-# Meditation
+# Uses
+## Meditation
 
 One possible application for Zeo was meditation. If it's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, _Modern Japanese diaries_, for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well!
 
-# Smart alarm
+## Smart alarm
 
 The second night I had set the alarm to a more reasonable time, and also enabled its smart alarm mode (["SmartWake"](http://blog.myzeo.com/smartwake-a-different-way-to-wake-up/)), where the alarm will go off up to 30 minutes early if you are ever detected to be awake or in light sleep (as opposed to REM or deep sleep). One thing I forgot to do was take my melatonin; I keep my supplements in the car and there was a howling blizzard outside. It didn't bother me since I am not addicted to melatonin.
 
 In the morning, the smart alarm mode seemed to work pretty well. I woke up early in a good mode, thought clearly and calmly about the situation - and went back to sleep. (It's a holiday, after all.)
 
-# Melatonin testing
+## Replacing headband
+
+Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for $35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric) from http://www.myzeo.com/product/31_headband_strap_sensor_replacement_package_x3_.cfm A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually $40, or ~$13 a piece. I won't say that buying replacement headbands every 4 or 5 months is something that *thrills* me, but $20 a year for sleep data is a pretty small sum. (Certainly it's more cost-effective than even the better [nootropics](Nootropics) I use.)
+
+![The old headband, with electrical tape residue](/images/zeo-headband-original.jpg)
+![The disposable headband with the cloth covering removed](/images/zeo/zeo-headband-deconstructed.jpg)
+![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg)
+![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)
+![The new headband's wrapper](/images/zeo/zeo-wrapper.jpg)
+![The new headband](/images/zeo/zeo-new-headband.jpg)
+
+In the future, I might try to make my own; buying the fabric is apparently cheaper than ordering from Zeo, see <http://www.flickr.com/photos/eokgnah/5489407407/>
+
+# Melatonin
+## Melatonin Analysis
+
+The [following section](#melatonin-data) represents 3 or 4 months of data; some of the data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a lot.
+
+As expected, when using melatonin, total sleep and 'times awoken' were both reduced:
+
+![](/images/zeo/melatonin-totalz.png)
+![](/images/zeo/melatonin-timeswoken.png)
+
+Deep sleep was unaffected ('time in wake' apparently had too small a sample):
+
+![](/images/zeo/melatonin-timedeep.png)
+
+Surprisingly, total REM sleep fell:
+
+![](/images/zeo/melatonin-timerem.png)
+
+Given that the ZQ metric seems to be primarily determined by total sleep and REM sleep, it's not surprising - given the REM graph - that ZQ also fell:
+
+![](/images/zeo/melatonin-zq.png)
+
+REM's average fell by 29 minutes, deep sleep fell by 1 minute, but total sleep fell by 54 minutes; this implies that light sleep fell by 24 minutes. I am not sure what to make of this. While my original Melatonin heuristic of one hour turns out to be surprisingly accurate, I had expected light and deep sleep to take most of the time hit. Do I get enough REM sleep? I don't know how I would answer that. I felt fine on the days after melatonin use, but I didn't track it.
+
+## Melatonin Data
 
 The data looked much better than the first night, except for a big 2-hour gap where I vaguely recall the sensor headband having slipped off. (I don't think it was because it was uncomfortable but due to shifting positions or something.) Judging from the cycle of sleep phases, I think I lost data on a REM peak. The REM peaks interest me because it's a standard theory of polyphasic sleeping that thriving on 2 or 3 hours of sleep a day is possible because REM (and deep sleep) is the only phase that truly matters, and REM can dominate sleep time through [REM rebound](!Wikipedia) and training.
 
@@ -261,38 +300,17 @@ April 4th was one of the few nights that I was not on melatonin during this time
 ![off](images/zeo/2011-05-07.png)
 ![on](images/zeo/2011-05-08.png)
 
-Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for $35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric) from http://www.myzeo.com/product/31_headband_strap_sensor_replacement_package_x3_.cfm A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually $40, or ~$13 a piece. I won't say that buying replacement headbands every 4 or 5 months is something that *thrills* me, but $20 a year for sleep data is a pretty small sum. (Certainly it's more cost-effective than even the better [nootropics](Nootropics) I use.)
+# One-legged standing
 
+Seth Roberts found that for him, standing a lot [helped him sleep](http://escholarship.org/uc/item/2xc2h866). This seems very plausible to me - more fatigue to repair, closer to ancestral conditions of constant walking - and tallied with my own experience. (One summer I worked at Yawgoog Scout Camp, where I spent the entire day on my feet; I always slept very well though my bunk was uncomfortable.) He also found that stressing his legs by standing on one at a time for a few minutes also [helped him sleep](http://blog.sethroberts.net/2011/03/22/effect-of-one-legged-standing-on-sleep/). That did not seem as plausible to me. But still worth trying: standing is free, and if it does nothing, at least I got a little more exercise.
 
-![The old headband, with electrical tape residue](/images/zeo-headband-original.jpg)
-![The disposable headband with the cloth covering removed](/images/zeo/zeo-headband-deconstructed.jpg)
-![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg)
-![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)
+Roberts tried a fairly complicated randomized routine. I am simply alternating days as with melatonin (note that I have resumed taking melatonin every day). My standing method is also simple; for 5 minutes, I stand on one leg, rise up onto the ball of my foot (because my calves are in good shape), and then sink down a foot or two and hold it until the burning sensation in my thigh forces me to switch to the other leg. (I seem to alternate every minute.)
 
-![The new headband's wrapper](/images/zeo/zeo-wrapper.jpg)
-![The new headband](/images/zeo/zeo-new-headband.jpg)
-
-In the future, I might try to make my own; buying the fabric is apparently cheaper than ordering from Zeo, see <http://www.flickr.com/photos/eokgnah/5489407407/>
-
-## Analysis
-
-So the above represents 3 or 4 months of data; some of the data is very dirty, but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a lot.
-
-As expected, when using melatonin, total sleep and 'times awoken' were both reduced:
-
-![](/images/zeo/melatonin-totalz.png)
-![](/images/zeo/melatonin-timeswoken.png)
-
-Deep sleep was unaffected ('time in wake' apparently had too small a sample):
-
-![](/images/zeo/melatonin-timedeep.png)
-
-Surprisingly, total REM sleep fell:
-
-![](/images/zeo/melatonin-timerem.png)
-
-Given that the ZQ metric seems to be primarily determined by total sleep and REM sleep, it's not surprising - given the REM graph - that ZQ also fell:
-
-![](/images/zeo/melatonin-zq.png)
-
-REM's average fell by 29 minutes, deep sleep fell by 1 minute, but total sleep fell by 54 minutes; this implies that light sleep fell by 24 minutes. I am not sure what to make of this. While my original Melatonin heuristic of one hour turns out to be surprisingly accurate, I had expected light and deep sleep to take most of the time hit. Do I get enough REM sleep? I don't know how I would answer that. I felt fine on the days after melatonin use, but I didn't track it.
+<!--
+So far the results are promising. Of the 5 days, 3 are 'on' and 2 are off. All 3 on-days have higher ZQs than the 2 off-days.
+11: on
+12: off
+13: on
+14: off
+15: on
+-->
