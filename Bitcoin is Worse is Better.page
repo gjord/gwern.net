@@ -106,6 +106,26 @@ But it *seems to work*. Just like Unix, there were countless ways to destroy you
 
 A cryptographer would have difficulty coming up with Bitcoin because it is so ugly and there are so many elegant features he wants in it. Programmers and mathematicians often speak of 'taste', and how they lead one to better solutions. A cryptographer's taste is for cryptosystems optimized for efficiency and theorems; it is not for systems optimized for virulence, for their sociological appeal[^ponzi]. Centralized systems are natural solutions because they are easy, like the integers are easy; but like the integers are but a vanishingly small subset of the reals, so too are centralized systems a tiny subset of decentralized ones[^subset]. DigiCash and all the other cryptocurrency startups may have had many nifty features, may have been far more efficient, and all that jazz, but they died anyway. They had no communities, and their centralization meant that they fell with their corporate patrons. They had to win in their compressed timeframe or die out completely. But "that is not dead which can eternal lie".
 
+<!--
+
+### Objection: Bitcoin is not Worse, it's Better
+
+Nick Szabo and Zooko Wilcox-O'Hearn disagree strongly with the thesis that 'Bitcoin is Worse is Better'. They contend while there may be bad parts to Bitcoin, there is a novel core idea which is actually very clever - the hash chain is a clever sidestep around classic problems of distributed computing, which gives us something similar enough to a trustworthy non-centralized2 authority that we can use it in practice.
+
+> "Gwern's post fails to appreciate the technical advances that BitCoin originated. I have been trying, off and on, to invent a decentralized digital payment system for fifteen years (since I was at DigiCash). I wasn't sure that a practical system was even *possible*, until BitCoin was actually implemented and became as popular as it has. Scientific advances often seem obvious in retrospect, and so it is with BitCoin" http://themonetaryfuture.blogspot.com/2011/05/bitcoin-timing-is-everything.html?showComment=1306860158361#c6958602700376442348
+
+Satoshi explains this in an [early email](http://www.mail-archive.com/cryptography@metzdowd.com/msg09997.html). The hash chain can be seen as a way to coordinate mutually untrusting nodes (or trusting nodes using untrusted communication links), and to solve the [Byzantine Generals' Problem](!Wikipedia). If they try to collaborate on some agreed transaction log which permits some transactions and forbids others (as attempted double-spends), naive solutions will fracture the network and lead to no consensus. So they adopt a new scheme in which the reality of transactions is whatever the group with the most computing power says it is! The transaction log does not aspire to record true reality or figure out who is a scammer or not, but like Wikipedia, simply mirrors one somewhat arbitrarily chosen group's consensus:
+
+> "...It has been decided that anyone who feels like it will announce a time, and whatever time is heard first will be the official attack time.  The problem is that the network is not instantaneous, and if two generals announce different attack times at close to the same time, some may hear one first and others hear the other first.
+>
+> They use a proof-of-work chain to solve the problem.  Once each general receives whatever attack time he hears first, he sets his computer to solve an extremely difficult proof-of-work problem that includes the attack time in its hash.  The proof-of-work is so difficult, it's expected to take 10 minutes of them all working at once before one of them finds a solution.  Once one of the generals finds a proof-of-work, he broadcasts it to the network, and everyone changes their current proof-of-work computation to include that proof-of-work in the hash they're working on.  If anyone was working on a different attack time, they switch to this one, because its proof-of-work chain is now longer.
+>
+> After two hours, one attack time should be hashed by a chain of 12 proofs-of-work.  Every general, just by verifying the difficulty of the proof-of-work chain, can estimate how much parallel CPU power per hour was expended on it and see that it must have required the majority of the computers to produce that much proof-of-work in the allotted time.  They had to all have seen it because the proof-of-work is proof that they worked on it.  If the CPU power exhibited by the proof-of-work chain is sufficient to crack the password, they can safely attack at the agreed time.
+>
+> The proof-of-work chain is how all the synchronisation, distributed database and global view problems you've asked about are solved."
+
+-->
+
 [^ponzi]: Many [anonymous commenters](http://www.links.org/?p=1171#comment-415465) point this out because it makes Bitcoin smell like some sort of Ponzi or multilevel marketing scheme:
 
     > "Bitcoin, like the recent commercial phenomenon Groupon, tends to turn people into marketers because they feel they have something to gain, however small it might be in the end; I think that partly accounts for its temporary success."
