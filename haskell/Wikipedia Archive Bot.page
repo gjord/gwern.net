@@ -5,7 +5,7 @@ But I didn't have any practical use for it, and I'm too lazy to learn it unless 
 2 in particular struck me as fixable without requiring modifications to the MediaWiki codebase (a messy yet featureful pile of PHP):
 
 1) the "feature" of MediaWiki that by default, `Fujiwara no Teika` is a pagename distinct from `Fujiwara no teika`. Going to the latter does not automatically redirect to the former. One must either create redirects to the right pagename^[$n^2-1$, where $n$ is how many spaces there are in the pagename.] , or simply accept that mis-capitalizations will result in broken links and needless searches.
-2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the [Internet Archive](!Wikipedia) doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from Alexa, which are provided an eternity (6 months or more) after the original spidering of the external link. An external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
+2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the [Internet Archive](!Wikipedia) doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from [Alexa](!Wikipedia) & its [toolbar](!Wikipedia "Alexa Toolbar"), which are provided an eternity (6 months or more) after the original spidering of the external link. An external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
 
 # Archiving
 
@@ -141,6 +141,8 @@ The second line is exactly the same. We're still working on a `[Tag]`, and our l
 
 ### Archiving URLs
 
+#### Archiving in WebCite
+
 Oy. So we wrote `extractURLs`, which was used in `fetchArticleURLs`, which was used in `main`. Let's backtrack a bit; we had left `main` at:
 
 ~~~~{.haskell}
@@ -173,6 +175,297 @@ But we can improve on this! We are using [mapM](!Hoogle) which will go to all th
 Can't we be more efficient somehow? This sort of situation is exactly where naming conventions can come in handy. I happen to remember that just as `foo'` denotes some stricter version of a function `foo`, a `foo_` denotes some sort of function that will throw away its output. One blindly tries [mapM_](!Hoogle) instead, and it works!
 
 We could have been more consistent. We know that `mapM :: (a -> m b) -> [a] -> m [b]`, and we want to get rid of the output, or turn the `[b]` into nothing, not even a list, which means `()`; we throw the new [type signature](!Wikipedia) into [Hoogle](!Hoogle "(a -> m b) -> [a] -> m ()"), and the very first result is `mapM_`.
+
+#### Archiving in Alexa
+
+We *could* also throw in a speculative request to Alexa, which handles archiving for the Internet Archive. Supposedly any URL visited by someone using their toolbar will be spidered and then the spidered copy given to the Internet Archive. We can mimic the request of the toolbar. It turns out to be not that difficult to do, not nearly as difficult as Alexa could have made it. (Ironically, my first attempt was based on trying to read the Javascript source code to the Alexa toolbar, which I followed in detail - and the moment I checked an actual request URL, I realized I had gotten it completely wrong.) This code, for brevity's sake, will not be in the final WP archive bot code, but it is included in the general-purpose [`archiver`](http://hackage.haskell.org/package/archiver) daemon which will archive any URLs in a file in multiple ways and can be seen as the generalized version of this WP archive bot.
+
+With the handy Firefox extension [Live HTTP Headers](https://addons.mozilla.org/en-US/firefox/addon/live-http-headers/), we can easily snoop on the toolbar's traffic. I turned it on, visited a few domains with short names, saved the traffic to a file, and grepped for 'alexa.com' and 'http://':
+
+~~~~
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
+http://widgets.alexa.com/traffic/sparky/?v=1&url=cnn.com
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D1%26wid%3D7005%26ttl%3D1400&ref=&url=http%3A%2F%2Fwww.iana.org%2Fdomains%2Fexample%2F
+http://widgets.alexa.com/traffic/sparky/?v=1&url=iana.org
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D2%26wid%3D7005%26ttl%3D989&ref=&url=http%3A%2F%2Fwebcitation.org%2F
+http://widgets.alexa.com/traffic/sparky/?v=1&url=webcitation.org
+http://widgets.alexa.com/traffic/rankr/?ref=http%3A%2F%2Fwebcitation.org%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D3%26wid%3D7005%26ttl%3D2241&ref=&url=http%3A%2F%2Fwww.archive.org%2Findex.php
+http://widgets.alexa.com/traffic/sparky/?v=1&url=archive.org
+~~~~
+
+We can rule out `widgets.alexa.com` - the URL structure and the name indicates that these requests are being made by the part of the toolbar that is showing the little traffic-vs-time graph in the Firefox GUI. So:
+
+~~~~
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D1%26wid%3D7005%26ttl%3D1400&ref=&url=http%3A%2F%2Fwww.iana.org%2Fdomains%2Fexample%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D2%26wid%3D7005%26ttl%3D989&ref=&url=http%3A%2F%2Fwebcitation.org%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D3%26wid%3D7005%26ttl%3D2241&ref=&url=http%3A%2F%2Fwww.archive.org%2Findex.php
+~~~~
+
+To split the last URL:
+
+1. `http://data.alexa.com/data/SbADd155Tq0000`
+2. `?cli=10`
+3. `&ver=spkyf-1.5.0`
+4. `&dat=ns`
+5. `&cdt=rq%3D2%26wid%3D7005%26ttl%3D989`
+6. `&ref=`
+7. `&url=http%3A%2F%2Fwebcitation.org%2F` (the [URL-encoding](!Wikipedia "Percent-encoding") form of `http://webcitation.org/`)
+
+We can obviously hardwire #1 & #3; I am guessing that we can hardwire #2 and #4; #6 can be left empty since none of the examples used it; #7 is just the payload; but unfortunately, #5 seems a little more difficult. We have 4 examples here for the `cdt` field:
+
+~~~~
+rq%3D0%26wid%3D7005
+rq%3D1%26wid%3D7005%26ttl%3D1400
+rq%3D2%26wid%3D7005%26ttl%3D989
+rq%3D3%26wid%3D7005%26ttl%3D2241
+~~~~
+
+What is this gibberish? `ttl` looks like a field name ('[time to live](!Wikipedia)', perhaps?); it's URL-encoded gunk, so let's [decode](http://meyerweb.com/eric/tools/dencoder/) it:
+
+~~~~{.has
+rq=0&wid=7005
+rq=1&wid=7005&ttl=1400
+rq=2&wid=7005&ttl=989
+rq=3&wid=7005&ttl=2241
+~~~~
+
+- `rq` is obviously short for 'request', and an incrementing integer suggests that it's counting how many pages one has visited. For the archiver bot, we can hardwire it as '0' because there will be a good 20 seconds between each request (due to the WebCite timeout).
+- `wid` is troubling because it's constant, and a fairly large number. It doesn't seem large enough to be a user ID - surely the toolbar has had more than 7000 users, since the [toolbar](https://addons.mozilla.org/en-us/firefox/addon/alexa-sparky/) page says it has had 1.6 million downloads. Is it a user ID? We'll leave it for now.
+- `ttl` is also troubling because it changes but isn't even in the first request. *Does* it stand for 'time to live'? Does it vary if I load the same page many times, is it a measure of how fast pages load or something (a metric very important to search engines, who rank higher the sites which are faster)? Can we get away with omitting it?
+
+We need more information on `ttl` and `wid`. So let's visit a bunch more URLs and see whether more data says anything:
+
+~~~
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D4%26wid%3D15698%26ttl%3D1830&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D5%26wid%3D15698%26ttl%3D425&ref=&url=http%3A%2F%2Fwww.gwern.net%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D6%26wid%3D15698%26ttl%3D1614&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D7%26wid%3D15698%26ttl%3D376&ref=&url=http%3A%2F%2Fwww.gwern.net%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D8%26wid%3D15698%26ttl%3D1468&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D9%26wid%3D15698%26ttl%3D2092&ref=&url=http%3A%2F%2Flesswrong.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D10%26wid%3D15698%26ttl%3D1717&ref=&url=http%3A%2F%2Fwww.overcomingbias.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D11%26wid%3D15698%26ttl%3D2010&ref=http%3A%2F%2Fwww.overcomingbias.com%2F&url=http%3A%2F%2Fwww.overcomingbias.com%2F2011%2F06%2Frevised-growth-claim.html%23comments
+~~~
+
+Filter and URL-decode the `ttl` field:
+
+~~~
+ttl=1830
+ttl=425
+ttl=1614
+ttl=376
+ttl=1468
+ttl=2092
+ttl=1717
+ttl=2010
+~~~
+
+The smallest in any `ttl` is 376, the largest is 2241. This is a range which smells suspiciously like a page load time - few sites load much faster than 0.25 seconds and most clock in at a second or two. Combined with the observation that the first sample URL doesn't have a `ttl`, I think we can safely omit the `ttl` field.
+
+And `wid`? We speculated it's some kind of user ID. In this second batch, the field is `wid%3D15698` or `wid=15698`. So the `wid` is not consistent across Firefox sessions, but it is consistent across multiple page loads. This suggests to me that Alexa is only aggregating URLs by a 'browser session' ID (maybe it originally tracked individual 'windows', hence the 'w' part of the ID). We can probably just generate a random number between 1000 and 20000 every time we archive a URL. So, all told our pseudocode goes like this:
+
+~~~{.haskell}
+"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=" ++ escape ("rq=0&wid=" ++ show randomint ++ "&ref=&url=" ++ url)
+~~~
+
+How do we get our `randomint` and `urlEncode`? I have had to URL-encode strings in the past, for XMonad's [XMonad.Actions.Search](!Hoogle) module:
+
+~~~{.haskell}
+escape :: String -> String
+escape = concatMap escapeURIChar
+    where escapeURIChar :: Char -> String
+          escapeURIChar c | isAscii c && isAlphaNum c = [c]
+                          | otherwise                 = concatMap (printf "%%%02X") $ encode [c]
+~~~
+
+We'll do the random IO with System.Random, hide it internally inside the Alexa toolbar archive function since that function *has* to be in IO anyway, and reuse `openURL`:
+
+~~~{.haskell}
+import System.Random (getStdGen, randomR)
+import Text.HTML.Download (openURL)
+import Data.Char (isAlphaNum, isAscii)
+import Text.Printf (printf)
+
+alexaToolbar :: String -> IO ()
+alexaToolbar url = do gen <- getStdGen
+                      let rint = fst $ randomR (1000::Int,20000) gen
+                      let payload = escape ("wid=" ++ show rint ++ "&ref=&url=" ++ url)
+                      print $ "http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&" ++ payload
+
+             where escape :: String -> String
+                   escape = concatMap escapeURIChar
+                   escapeURIChar :: Char -> String
+                   escapeURIChar c | isAscii c && isAlphaNum c = [c]
+                                   | otherwise                = concatMap (printf "%%%02X") [c]
+
+~~~
+
+We'll test it first. `alexaToolbar "http://www.google.com"` evaluates to:
+
+~~~
+"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26wid%3D%2819413%2C218941083%2040692%29%26ref%3D%26url%3Dhttp%3A%2F%2Fwww%2Egoogle%2Ecom%2F"
+~~~
+
+We run it in `curl`, and we get:
+
+~~~{.xml}
+<?xml version="1.0" encoding="UTF-8"?>
+<ALEXA VER="0.9" URL="404" HOME="0" AID="=">
+</ALEXA>
+~~~
+
+Is that right? Let's see what the very first URL example said, since as far as we could tell, the URL examples should be indefinitely reusable:
+
+~~~{.xml}
+<?xml version="1.0" encoding="UTF-8"?>
+<ALEXA VER="0.9" URL="cnn.com/" HOME="0" AID="=">
+<RLS PREFIX="http://" more="92">
+<RL HREF="foxnews.com/" TITLE="Fox News Channel"/>
+<RL HREF="abcnews.go.com/" TITLE="Abc News : Online News, Breaking News, Feature Stories And More"/>
+<RL HREF="www.cbsnews.com/" TITLE="CBS News"/>
+<RL HREF="news.bbc.co.uk/" TITLE="BBC News"/>
+<RL HREF="cnnenespanol.com/entv" TITLE="CNNenEspanol"/>
+<RL HREF="nytimes.com/" TITLE="The New York Times"/>
+<RL HREF="www.msnbc.com/" TITLE="Msnbc"/>
+<RL HREF="news.google.com/?output=rss" TITLE="Google News"/>
+<RL HREF="www.microsite.reuters.com/rss/worldNews" TITLE="Reuters - World News"/>
+<RL HREF="www.pbs.org/" TITLE="Pbs"/>
+<RL HREF="fullcoverage.yahoo.com/" TITLE="fullcoverage.yahoo.com/"/>
+</RLS>
+<SD TITLE="A" FLAGS="DMOZ" HOST="cnn.com">
+<TITLE TEXT="CNN - Cable News Network"/>
+<ADDR STREET="1 CNN Center, One CNN Center" CITY="Atlanta" STATE="GA" ZIP="30303" COUNTRY="US" />
+<CREATED DATE="22-Sep-1993" DAY="22" MONTH="09" YEAR="1993"/>
+<PHONE NUMBER="404.827.1500"/>
+<OWNER NAME="Cable News Network"/>
+<EMAIL ADDR="TMGROUP@turner.com"/>
+<DOS>
+<DO DOMAIN="insidersadvantage.com" TITLE="insidersadvantage.com"/>
+</DOS>
+<TICKER SYMBOL="AOL"/>
+<LANG LEX="en"/>
+<LINKSIN NUM="77443"/>
+<SPEED TEXT="1451" PCT="49"/>
+<REVIEWS AVG="3.0" NUM="53"/>
+<CHILD SRATING="0"/>
+</SD>
+<KEYWORDS>
+<KEYWORD VAL="Networks"/>
+<KEYWORD VAL="Cable"/>
+<KEYWORD VAL="CNN News Group"/>
+</KEYWORDS><DMOZ>
+<SITE BASE="cnn.com/" TITLE="CNN Interactive" DESC="News, weather, sports, and services including e-mail news alerts and downloadable audio/video reports.">
+<CATS>
+<CAT ID="Top/News" TITLE="English/News" CID="998601"/>
+<CAT ID="Top/Arts/Television/News" TITLE="Television/News" CID="395700"/>
+<CAT ID="Top/Arts/Television/Networks/Cable/CNN" TITLE="Cable/CNN" CID="392942"/>
+</CATS>
+</SITE>
+</DMOZ>
+<SD>
+<POPULARITY URL="cnn.com/" TEXT="49"/>
+<REACH RANK="42"/>
+<RANK DELTA="+1"/>
+</SD>
+</ALEXA>
+~~~
+
+Well, drat. That looks very different. What could the error be? We compare our generated with an original, and they match, but only up to `wid` and later parameters:
+
+~~~
+wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
+wid%3D%288260%2C2113025614%2040692%29%26ref%3D%26url%3Dhttp%3A%2F%2Fwww%2Ecnn%2Ecom
+~~~
+
+So maybe we need to escape only the URL, so:
+
+~~~{.haskell}
+let payload = "rq=0&wid=" ++ show rint ++ "&ref=&url=" ++ escape url
+~~~
+
+and now `alexaToolbar "http://www.cnn.com"` evaluates to:
+
+~~~{.haskell}
+"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&wid=8100&ref=&url=http%3A%2F%2Fwww%2Ecnn%2Ecom"
+~~~
+
+Which seems to work:
+
+~~~{.xml}
+<?xml version="1.0" encoding="UTF-8"?>
+<ALEXA VER="0.9" URL="cnn.com/" HOME="0" AID="=">
+<RLS PREFIX="http://" more="92">
+<RL HREF="foxnews.com/" TITLE="Fox News Channel"/>
+<RL HREF="abcnews.go.com/" TITLE="Abc News : Online News, Breaking News, Feature Stories And More"/>
+<RL HREF="www.cbsnews.com/" TITLE="CBS News"/>
+<RL HREF="news.bbc.co.uk/" TITLE="BBC News"/>
+<RL HREF="cnnenespanol.com/entv" TITLE="CNNenEspanol"/>
+<RL HREF="nytimes.com/" TITLE="The New York Times"/>
+<RL HREF="www.msnbc.com/" TITLE="Msnbc"/>
+<RL HREF="news.google.com/?output=rss" TITLE="Google News"/>
+<RL HREF="www.microsite.reuters.com/rss/worldNews" TITLE="Reuters - World News"/>
+<RL HREF="www.pbs.org/" TITLE="Pbs"/>
+<RL HREF="fullcoverage.yahoo.com/" TITLE="fullcoverage.yahoo.com/"/>
+</RLS>
+<SD TITLE="A" FLAGS="DMOZ" HOST="cnn.com">
+<TITLE TEXT="CNN - Cable News Network"/>
+<ADDR STREET="1 CNN Center, One CNN Center" CITY="Atlanta" STATE="GA" ZIP="30303" COUNTRY="US" />
+<CREATED DATE="22-Sep-1993" DAY="22" MONTH="09" YEAR="1993"/>
+<PHONE NUMBER="404.827.1500"/>
+<OWNER NAME="Cable News Network"/>
+<EMAIL ADDR="TMGROUP@turner.com"/>
+<DOS>
+<DO DOMAIN="insidersadvantage.com" TITLE="insidersadvantage.com"/>
+</DOS>
+<TICKER SYMBOL="AOL"/>
+<LANG LEX="en"/>
+<LINKSIN NUM="77443"/>
+<SPEED TEXT="1451" PCT="49"/>
+<REVIEWS AVG="3.0" NUM="53"/>
+<CHILD SRATING="0"/>
+</SD>
+<KEYWORDS>
+<KEYWORD VAL="Networks"/>
+<KEYWORD VAL="Cable"/>
+<KEYWORD VAL="CNN News Group"/>
+</KEYWORDS><DMOZ>
+<SITE BASE="cnn.com/" TITLE="CNN Interactive" DESC="News, weather, sports, and services including e-mail news alerts and downloadable audio/video reports.">
+<CATS>
+<CAT ID="Top/News" TITLE="English/News" CID="998601"/>
+<CAT ID="Top/Arts/Television/News" TITLE="Television/News" CID="395700"/>
+<CAT ID="Top/Arts/Television/Networks/Cable/CNN" TITLE="Cable/CNN" CID="392942"/>
+</CATS>
+</SITE>
+</DMOZ>
+<SD>
+<POPULARITY URL="cnn.com/" TEXT="49"/>
+<REACH RANK="42"/>
+<RANK DELTA="+1"/>
+</SD>
+</ALEXA>
+~~~
+
+Similarly, if we try "http://www.google.com", that seems to work as well. Now we can modify the function to be directly usable:
+
+~~~{.haskell}
+import System.Random (getStdGen, randomR)
+import Text.HTML.Download (openURL)
+import Data.Char (isAlphaNum, isAscii)
+import Text.Printf (printf)
+
+alexaToolbar :: String -> IO ()
+alexaToolbar url = do gen <- getStdGen
+                      let rint = fst $ randomR (1000::Int,20000) gen
+                      let payload = "wid=" ++ show rint ++ "&ref=&url=" ++ escape url
+                      _ <- openURL $ "http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&" ++ payload
+                      return ()
+             where escape :: String -> String
+                   escape = concatMap escapeURIChar
+                   escapeURIChar :: Char -> String
+                   escapeURIChar c | isAscii c && isAlphaNum c = [c]
+                                   | otherwise                = concatMap (printf "%%%02X") [c]
+~~~
 
 ### Duplicate URLs
 
