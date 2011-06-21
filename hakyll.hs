@@ -41,7 +41,7 @@ main = do  hakyll $ do
            -- Apache configuration (caching, compression)
            copyFile ".htaccess" "_site/.htaccess"
 
-           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -o -exec /bin/sh -c \"gzip --stdout --best --no-name --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
+           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o -exec /bin/sh -c \"gzip --stdout --best --no-name --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
            return ()
 
 options :: WriterOptions
