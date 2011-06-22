@@ -67,7 +67,7 @@ But this representation, while certainly more understandable, is still very repe
 
 We *could* auto-derive the [Read](!Hoogle) and [Show](!Hoogle) typeclasses for `Geometry` and `Enemy` datatypes, and then we could store `level1`, `level2` etc. as some sort of "levelinformation.dat" file, and read the level information in at runtime.
 
-But that makes installation and running more difficult^[Although Cabal makes this quite easy with its [Paths_\*](http://www.haskell.org/cabal/release/cabal-latest/doc/users-guide/authors.html#paths-module) mechanism.] still quite possible, , and it doesn't address the core issue: the information is written in a way that is so ungainly that it's next to impossible to write or even *modify*!
+But that makes installation and running more difficult^[Although Cabal makes this quite easy with its [Paths_\*](http://www.haskell.org/cabal/users-guide/#accessing-data-files-from-package-code) mechanism.] still quite possible, , and it doesn't address the core issue: the information is written in a way that is so ungainly that it's next to impossible to write or even *modify*!
 
 # The solution
 
