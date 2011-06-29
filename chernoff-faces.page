@@ -1,18 +1,18 @@
 One of the really attractive aspects of such faces is how much data you can pack in, and how clear the mapping between the statistics and any one feature is.
 
-Consider a regular Chernoff face. It has eyebrows, a nose, a mouth, and the head's shape. Let's just take the eyebrows. How many parameters does an eyebrow reasonably have which could convey information?
+Consider a regular [Chernoff face](!Wikipedia). It has eyebrows, a nose, a mouth, and the head's shape. Let's just take the eyebrows. How many parameters does an eyebrow reasonably have which could convey information?
 
 Well, there's the:
 
-1) length of the eyebrow. Is it short (-) or long (\-\-\-) or something in between? (\-\-)
-2) The angle of the eyebrow. This conveys emotion; a flat, 180 degree eyebrow conveys annoyance or nonplussity, perhaps, whereas 45 degrees expresses interest or shock, and 135 degrees skepticism.
-3) The curve of the eyebrow. Is it a straight line, or is it convex, or concave? This too we notice, even if the curvature isn't as significant as angle.
-4) The location of the eyebrow; how far is it from the middle of the face? Are the eyebrows squashed together in a unibrow, or is there a yawning canyon betwixt?
-5) ... We could go on, depending on the richness of our graphics. What color is the hair? How thick is the eyebrow? What shape does it have? (If we have a quadrilateral for an eyebrow instead of just a line, even more parameters become available).
+1. length of the eyebrow. Is it short (-) or long (--) or something in between? (\-\-)
+2. The angle of the eyebrow. This conveys emotion; a flat, 180 degree eyebrow conveys annoyance or nonplussity, perhaps, whereas 45 degrees expresses interest or shock, and 135 degrees skepticism.
+3. The curve of the eyebrow. Is it a straight line, or is it convex, or concave? This too we notice, even if the curvature isn't as significant as angle.
+4. The location of the eyebrow; how far is it from the middle of the face? Are the eyebrows squashed together in a unibrow, or is there a yawning canyon betwixt?
+5. ...We could go on, depending on the richness of our graphics. What color is the hair? How thick is the eyebrow? What shape does it have? (If we have a quadrilateral for an eyebrow instead of just a line, even more parameters become available).
 
-So we can pack in at least 4 parameters into the eyebrows alone. Some of these features have an almost idiot-proof definition. We can get 3 parameters into the shape of the head quite easily. In Cartesian graphing, a circle is, of course, x^2^ + y^2^ = n. n gets us 1 parameter. If we move to ellipses, or f*x^2^ + g*y^2^ = n, we now can plug in our statistical data to f, g, and n - and now we have 3 parameters, just with ellipses.
+So we can pack in at least 4 parameters into the eyebrows alone. Some of these features have an almost idiot-proof definition. We can get 3 parameters into the shape of the head quite easily. In Cartesian graphing, a circle is, of course, x^2^ + y^2^ = n. n gets us 1 parameter. If we move to ellipses, or $f \times x^2 + g \ times y^2 = n$, we now can plug in our statistical data to $f$, $g$, and $n$ - and now we have 3 parameters, just with ellipses.
 
-And it's not hard to add still more variation. Faces have vertical symmetry: the left is a copy of the right. In essence we're wasting half our space on redundant data. Why not make use of it? With parameters a-m, create a Chernoff face and take the left side. With parameters n-z, create a second Chernoff face and take the right side. Paste left and right into a new face with twice the information of either.
+And it's not hard to add still more variation. Faces have vertical symmetry: the left is a copy of the right. In essence we're wasting half our space on redundant data. Why not make use of it? With parameters $a$-$m$, create a Chernoff face and take the left side. With parameters $n$-$z$, create a second Chernoff face and take the right side. Paste left and right into a new face with twice the information of either.
 
 Or what about the relationships of the features? We could add a 4th parameter to the overall shape: location within the ellipse. Perhaps the nose/mouth/eyebrows/eyes could be treated as a single item and moved around inside the head. There's 2 dimensions to move it in, so that's another 2 parameters...
 

@@ -222,12 +222,12 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
 4. ["Convert the text package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett
 
     > "For Haskell projects handling unicode text, the Text library offers both speed and simplicity-of-use. When it was written, benchmarks indicated that UTF-16 would be a good choice for the internal encoding in the library. However, these (rather artificial) benchmarks were did not take into account the time taken to
-    > 1) decode the "Real World" data and
-    > 2) encode it to write it back.
+    > 1. decode the "Real World" data and
+    > 2. encode it to write it back.
     >
     > I propose to
-    > 1) benchmark and
-    > 2) convert the library to UTF-8 if it is a faster choice for "Real World"-applications."
+    > 1. benchmark and
+    > 2. convert the library to UTF-8 if it is a faster choice for "Real World"-applications."
 5. ["Build multiple Cabal packages in parallel"](http://www.google-melange.com/gsoc/project/google/gsoc2011/refold/31001); Mikhail Glushenkov, by Johan Tibell
 
     > "Cabal is a system for building and packaging Haskell libraries and programs. This project's aim is to augment Cabal with support for building packages in parallel. Many developers have multi-core machines, but Cabal runs the build process in a single thread, only making use of one core. If the build process could be parallelized, build times could be cut by perhaps a factor of 2-8, depending on the number of cores and opportunity of parallel execution available."
@@ -262,9 +262,9 @@ To summarize my feelings:
 
 So, what lessons can we learn from the past years of SoCs? It seems to me like there are roughly 3 groups of explanations for failure. They are:
 
-1) _Hubris_. GuiHaskell is probably a good example; it is essentially a bare-bones IDE, from its description. It is expecting a bit much of a single student in a single summer to write *that*!
-2) _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
-3) _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
+1. _Hubris_. GuiHaskell is probably a good example; it is essentially a bare-bones IDE, from its description. It is expecting a bit much of a single student in a single summer to write *that*!
+2. _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
+3. _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
 
 ### Future SoC proposals
 
