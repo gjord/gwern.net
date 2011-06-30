@@ -29,7 +29,6 @@ FileETag MTime
 ## Article targets for moving:
 ### "Copyright" ~> "Incoherence of Copyright" (?)
 ### "Culture is not about esthetics" ~> "Culture is not about Esthetics"
-### "N-back FAQ" ~> "DNB FAQ"
 ### "WP RSS bot" ~> "Wikipedia RSS Bot"
 ### "WP redirect generator" ~> "Wikipedia Redirect Generator"
 ### "Wikipedia and Dark side editing" ~> "Wikipedia and Dark Side Editing"
@@ -46,9 +45,12 @@ RedirectPermanent "/mnemosyne"                   "http://www.gwern.net/Spaced re
 RedirectPermanent "/mnemosyne.html"              "http://www.gwern.net/Spaced repetition"
 RedirectPermanent "/modafinil"                   "http://www.gwern.net/Modafinil"
 RedirectPermanent "/modafinil.html"              "http://www.gwern.net/Modafinil"
-RedirectPermanent "/n-back faq.html"             "http://www.gwern.net/N-back FAQ"
+RedirectPermanent "/n-back faq"                  "http://www.gwern.net/DNB FAQ"
+RedirectPermanent "/n-back faq.html"             "http://www.gwern.net/DNB FAQ"
 RedirectPermanent "/nootropics.html"             "http://www.gwern.net/Nootropics"
 RedirectPermanent "/spaced repetition"           "http://www.gwern.net/Spaced repetition"
+RedirectPermanent "N-back FAQ"                   "http://www.gwern.net/DNB FAQ"
+RedirectPermanent "N-back FAQ.html"              "http://www.gwern.net/DNB FAQ"
 
 # Add static gzip'd support, again, for performance
 ## http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
