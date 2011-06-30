@@ -928,12 +928,12 @@ When you run a few numbers, this seems like a pretty uncontroversial conclusion.
 
 It is sad and pitiable that we spend so much on things like dog food and cosmetics rather than saving lives; but isn't it even sadder that we can avoid that error, and *try* to do good, and still fail? The only thing sadder, I think, would be if we could know of our failure and go on supporting Folding@home - if charity was not about helping people.
 
-# A Bitcoin+BitTorrent-driven economy for creators
+# A Bitcoin+BitTorrent-driven economy for creators (Artcoin)
 
     < foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into Bitcoin style hashes, which are only  assemble-able by the server; if the
                creator=server, then we just invented a way to turn downloads  into nanopayments with zero mental transaction costs
 
-    < gwern> sipa: well, let's call this Bitcoin2. suppose there were a Bitcoin2-based economy but there were no upper limit but a built-in steady inflation. if downloads
+    < gwern> sipa: well, let's call this Artcoin. suppose there were a Artcoin-based economy but there were no upper limit but a built-in steady inflation. if downloads
              solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing ...
     < gwern> ... creators' livelihoods!'
     < foucist> it might be entirely possible to do that with the current Bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
@@ -948,9 +948,6 @@ It is sad and pitiable that we spend so much on things like dog food and cosmeti
     < sipa> but you're describing two ideas
     < gwern> (or at least, hundreds. micropayments seems like the sort of thing Internet folks have been trying for ages and failing miserably every time.)
     < sipa> 1. using bitcoins to pay for downloads
-    < foucist> sipa Necr0s he's not using creators to mean miners
-    < foucist> the term*
-    < sipa> i know
     < sipa> you mean content creators
     < sipa> 2. reusing the hashing done by BitTorrent for Bitcoin
     < gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover
@@ -972,7 +969,7 @@ It is sad and pitiable that we spend so much on things like dog food and cosmeti
     < sipa> and it's very wasteful
     < sipa> since the profitability of CPU mining is already long gone
     < gwern> sipa: in the current Bitcoin system, yeah, not some new Bitcoin system
-    < sipa> explain me why people would value your Bitcoin2's?
+    < sipa> explain me why people would value your Artcoin's?
     < gwern> foucist: well, you need to keep the Bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
              download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
     < foucist> gwern: Bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc ;)
@@ -995,6 +992,10 @@ It is sad and pitiable that we spend so much on things like dog food and cosmeti
 
     < foucist> gwern: http://www.few.vu.nl/~srijith/publications/confs/icccn08.pdf   "Floodgate: A Micropayment Incentivized P2P Content Delivery Network"  it talks about
                         hash-chains a bit and such, so it could be relevant to bitcoins
+
+Alternate blockchains are not an impossible idea. The [Namecoin](https://en.bitcoin.it/wiki/Namecoin) network is up and running with another blockchain, specialized for registering and paying for domain names.
+
+And there's already a quasi-implementation of this: [Bitcoin Plus](http://www.bitcoinplus.com/miner/embeddable). It is a piece of JavaScript that does the SHA-256 mining like the regular GPU miners. The idea is that one includes a link to it on one's website and then all one's website visitors' browsers will be bitcoin mining while they visit. In effect, they are 'paying' for their visit with their computational power. This is more efficient than [parasitic computing](!Wikipedia) (although visitors could simply disable JavaScript and so it is more avoidable than parasitic comptuing), but from the global view, it's still highly inefficient: JavaScript is not the best language in which to write tight loops and even if browser JavaScript were up to snuff, CPU mining in general is extremely inefficient compared to GPU mining. Bitcoin Plus works because the costs of electricity and computers is externalized to the visitors. Reportedly, CPU mining is no longer able to even pay for the cost of the electricity involved, so Bitcoin Plus would be an example of [negative externalities](!Wikipedia). A good Artcoin scheme should be Pareto-improving.
 
 # Good governance & Girl Scouts
 
