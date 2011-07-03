@@ -8,7 +8,7 @@ These translations become more pathological the more detailed and thought throug
 > "You don't say."\
 > "I am not the one who says; it is the thing itself that says. The [drive shaft](!Wikipedia) is the trunk of the tree. Count the parts: [engine](!Wikipedia "Internal combustion engine"), 2 front wheels, [clutch](!Wikipedia), [transmission](!Wikipedia "Transmission (mechanics)"), two [axles](!Wikipedia "axle"), [differential](!Wikipedia "Differential (mechanical device)"), and 2 rear wheels. Ten parts, ten Sefirot."\
 > "But the positions don't coincide."\
-"Who says they don't? Diotallevi explained to us that in certain versions [Tiferet](!Wikipedia) isn't the sixth Sefirah, but the eighth, below [Nezah](!Wikipedia "Netzach") and [Hod](!Wikipedia "Hod (Kabbalah)"). My axle-tree is the tree of Belboth."\
+> "Who says they don't? Diotallevi explained to us that in certain versions [Tiferet](!Wikipedia) isn't the sixth Sefirah, but the eighth, below [Nezah](!Wikipedia "Netzach") and [Hod](!Wikipedia "Hod (Kabbalah)"). My axle-tree is the tree of Belboth."\
 > "Fiat."\
 > "But let's pursue the dialectic of the tree. At the summit is the engine, _Omnia Movens_, of which more later: this is the Creative Source. The engine communicates its creative energy to the 2 front or higher wheels: the Wheel of Intelligence and the Wheel of Knowledge."\
 > "If the car has [front-wheel drive](!Wikipedia)."\
@@ -25,7 +25,7 @@ These translations become more pathological the more detailed and thought throug
 > "They never saw the connection between the philosopher's stone and [Firestone](!Wikipedia "Firestone Tire and Rubber Company")."\
 > "For tomorrow, I'll prepare a mystical interpretation of the phone book."'
 
-The acute reader will be either horrified or amused by the foregoing. Sometimes the translating is self-consciously void of any truth, and being used solely didactically; no-one reading through the tedious allegories of _[Pilgrim's Progress](!Wikipedia)_ will seriously think that the layout of a room 'really' has anything to do with Protestant Christianity.
+The acute reader will be either horrified or amused by the foregoing. Sometimes the translating is self-consciously void of any truth, and being used solely didactically; no-one reading through the tedious allegories of _[Pilgrim's Progress](!Wikipedia)_ will seriously think that the layout of a room 'really' has anything to do with Protestant Christianity. But then didn't the readers of the past who made it a best-seller which every English and American family had a copy of (sitting next to their Bible) take it quite seriously? Wasn't it a commonplace of older theological thought that everything in the Bible had - at the very least - 2 meanings (such as the exoteric and esoteric)? Why is it a bad interpretation?
 
 # Telling the good from bad
 
@@ -39,7 +39,7 @@ Here's an example of what I mean. Suppose we had invented the decimal number sys
 
 We can't be sure _a priori_ that they're just the same, that they're both number systems and have done with it. [Complex numbers](!Wikipedia) function differently from the [hyperreals](!Wikipedia), which are very different from the natural numbers. Or, another example might be if we add 2 apples together, we have 2 things; but if I add 2 pails of liquids together, I have only 1 water - it's the volume that increases, not the number of components.[^wiseguy]
 
-So if we were interested in showing a good translation between unary and decimal, what would this even mean? Well, it would mean that a [roundtrip](!Wikipedia "Round-trip format conversion") property holds ^[In a strong mathematical sense, 'round-trip' means we're asking for a [bijection](!Wikipedia) between the 2 sets of numbers.]: we can turn a decimal into an unary and then back again, and vice-versa.
+So if we were interested in showing a good translation between unary and decimal, what would this even mean? Well, it would mean that a [roundtrip](!Wikipedia "Round-trip format conversion") property holds: if we take a system as a single function, 'round-trip' means we're asking for a [bijection](!Wikipedia) between the inputs and outputs of the 2 functions. For example, we can turn a decimal into an unary and then back again into the original, and vice-versa. If we prefer to see our systems as little machines or [networks of 'states](!Wikipedia "State transition system")', we're defining their equality as a [bisimulation](!Wikipedia).
 
 ### Hacking the code
 
@@ -66,7 +66,7 @@ udProp x = x>=0 ==> -- discard all non-natural integers
 duProp x = decimalToUnary (unaryToDecimal x) == x
 ~~~~
 
-QuickCheck duly verifies that these two properties were true for all hundred or whatever cases it could devise.
+QuickCheck duly verifies that these two properties were true for all the cases it devised.
 
 #### Check addition
 
@@ -107,14 +107,16 @@ How would we express this in unary? The key is that we're speaking about 0 - and
 
 If this example doesn't satisfy you, consider other possible properties. How about properties based on how many vowels the English words of a number have? We can get sillier, but I think the point is clear: there are 'essential' properties and 'accidental' ones. The vowel-count of 'five' is accidental, but something like $2*5=10$ is essential.
 
-How to know when something is essential, and when the property is accidental, is unclear.
+When the systems are formalized such that we can ask for their bijection or their bisimulation, then we have well-defined ways to see whether essential properties hold. (Peter de Blanc [suggests that](http://arxiv.org/pdf/1105.3821v1) if an agent has a simple model of the world, it can update its model based on surprising observations by picking a new, more complex model, which accounts for all past observations but differs minimally - as defined by [Kullback-Leibler divergence](!Wikipedia) - from the previous model.)
+
+How to know when something is essential, and when the property is accidental, is unclear, and this is because, as Alan J. Perlis [reminds us](http://www-pu.informatik.uni-tuebingen.de/users/klaeren/epigrams.html), "One can't proceed from the informal to the formal by formal means.
 
 # Appendix: the code
 
 A few notes on the code:
 
 - we have that `LANGUAGE` pragma there so we can define our own addition on lists (as the default List type doesn't define a silly thing like addition);
-      - the very acute Haskeller will be asking himself, "why not define the abstract structure as that of a [monoid](!Wikipedia) (see [Data.Monoid](http://haskell.org/ghc/docs/latest/html/libraries/base/Data-Monoid.html)^[apfelmus's [fingetree tutorial](http://apfelmus.nfshost.com/monoid-fingertree.html) also ably covers monoids.]), and get list concatenation & integer addition for free?" That's because while there's only one sensible monoid on lists, there are *2* for integers - `Sum` and `Product`.
+      - the very acute Haskeller will be asking himself, "why not define the abstract structure as that of a [monoid](!Wikipedia) (see [Data.Monoid](http://haskell.org/ghc/docs/latest/html/libraries/base/Data-Monoid.html)^[apfelmus's [fingertree tutorial](http://apfelmus.nfshost.com/monoid-fingertree.html) also ably covers monoids.]), and get list concatenation & integer addition for free?" That's because while there's only one sensible monoid on lists, there are *2* for integers - `Sum` and `Product`.
 - we're actually using Ints here which allow for both negative and positive integers, while unary notation is usually just for the [naturals](!Wikipedia "Natural number") (and the encoding of negative numbers into unary is tedious), so we generally ignore the possibility of negative numbers except our test property, `unEqualDec`, which just discards any negative numbers.
 - we don't define a `newtype` or `data` for Unary because that's overkill
 
