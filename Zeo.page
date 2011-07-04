@@ -84,9 +84,13 @@ Given that the ZQ metric seems to be primarily determined by total sleep and REM
 
 ![](/images/zeo/melatonin-zq.png)
 
-REM's average fell by 29 minutes, deep sleep fell by 1 minute, but total sleep fell by 54 minutes; this implies that light sleep fell by 24 minutes. I am not sure what to make of this. While my original Melatonin heuristic of one hour turns out to be surprisingly accurate, I had expected light and deep sleep to take most of the time hit. Do I get enough REM sleep? I don't know how I would answer that. I felt fine on the days after melatonin use, but I didn't track it.
+REM's average fell by 29 minutes, deep sleep fell by 1 minute, but total sleep fell by 54 minutes; this implies that light sleep fell by 24 minutes. I am not sure what to make of this. While my original Melatonin heuristic of one hour turns out to be surprisingly accurate, I had expected light and deep sleep to take most of the time hit. Do I get enough REM sleep? I don't know how I would answer that.
 
-During this period, I didn't regularly do my [n-backing](DNB FAQ) either, so there'd be little point trying to graph that. What I spent a lot of my free time doing was editing `gwern.net`, so it might be worth looking at whether nights on melatonin correspond to increased edits the next day. In this graph of edits, the red dots are days without melatonin and the green are days with melatonin; I don't see any clear trend, although it's worth noting almost all of the very busy days were melatonin days:
+I felt fine on the days after melatonin use, but I didn't track it very systematically. The best I have is the 'morning feel' parameter, which the Zeo asks you on waking up; in practice I entered the values as: a '2' means I woke feeling poor or unrested, '3' was fine or mediocre, and '4' was feeling good. When we graph the average of morning feel against melatonin use or non-use, we find that melatonin was noticeably better:
+
+![](/images/zeo/melatonin-morningfeel.png)
+
+Unfortunately, this dataseries doesn't distinguish between addition to melatonin or benefits from melatonin - perhaps the 3.2 is my 'normal' sleep quality and the 2.9 comes from withdrawal. So, onwards to other measures of mental performance. Also unfortunately, during this period, I didn't regularly do my [n-backing](DNB FAQ) either, so there'd be little point trying to graph that. What I spent a lot of my free time doing was editing `gwern.net`, so it might be worth looking at whether nights on melatonin correspond to increased edits the next day. In this graph of edits, the red dots are days without melatonin and the green are days with melatonin; I don't see any clear trend, although it's worth noting almost all of the very busy days were melatonin days:
 
 ![Days versus # of edits versus melatonin on/off](/images/zeo/melatonin-usage-versus-darcs.png)
 
@@ -120,7 +124,7 @@ Melatonin night, and 32 minutes to sleep. (I'm starting to notice a trend here.)
 
 Perhaps I should try a biphasic schedule where I sleep for an hour at the beginning and end? That'd seem to pick up most of my deep sleep, and REM would hopefully take care of itself with REM rebound. Need to sum my average REM & deep sleep times (that sum seems to differ quite a bit, eg one fellow needs [4+ hours](http://blog.myzeo.com/forum/polyphasic-sleep-experiment-discussion/rem-deep-sleep/#p627). My own need seems to be similar) so I don't try to pick a schedule doomed to fail.
 
-Another night, no melatonin. Time to sleep, just 18 minutes and the ZQ sets a new record even though Stormy the cat woke me up in the morning:
+Another night, no melatonin. Time to sleep, just 18 minutes and the ZQ sets a new record even though my cat Stormy woke me up in the morning^[_Technology Review_ editor Emily Singer [noticed the same problem](http://www.technologyreview.com/blog/themeasuredlife/26894/) when using her Zeo.]:
 
 ![](/images/zeo/2010-12-30.png)
 
@@ -312,7 +316,7 @@ Roberts tried a fairly complicated randomized routine. I am simply alternating d
 
 <!--
 So far the results are promising. Of the 5 days, 3 are 'on' and 2 are off. All 3 on-days have higher ZQs than the 2 off-days.
-
+june
 11: on
 12: off
 13: on
@@ -327,4 +331,15 @@ So far the results are promising. Of the 5 days, 3 are 'on' and 2 are off. All 3
 22: off
 23: on but bad data!
 24: off
+25; on
+26: off
+27: on
+28: off
+29: on
+30: off
+july
+01; on
+02: off
+03: on
+04: off
 -->
