@@ -6,6 +6,7 @@ DirectoryIndex index
 AddType text/x-markdown .page
 AddType text/x-haskell .hs
 AddType text/x-literate-haskell .lhs
+AddType application/x-gzip *.gz
 
 # Add caching/expire headers for performance
 FileETag MTime
@@ -36,6 +37,9 @@ FileETag MTime
 RedirectPermanent "/In Defense of Inclusionism"  "http://www.gwern.net/In%20Defense%20Of%20Inclusionism"
 RedirectPermanent "/Mnemosyne"                   "http://www.gwern.net/Spaced repetition"
 RedirectPermanent "/Mnemosyne.html"              "http://www.gwern.net/Spaced repetition"
+RedirectPermanent "/N-back FAQ"                   "http://www.gwern.net/DNB FAQ"
+RedirectPermanent "/N-back FAQ.html"              "http://www.gwern.net/DNB FAQ"
+RedirectPermanent "/N-back%20FAQ.html"            "http://www.gwern.net/DNB%20FAQ"
 RedirectPermanent "/about.html"                  "http://www.gwern.net/About"
 RedirectPermanent "/haskell summer of code.html" "http://www.gwern.net/Haskell Summer of Code"
 RedirectPermanent "/haskell/Archiving%20GitHub.html" "http://www.gwern.net/haskell/Archiving GitHub"
@@ -49,8 +53,6 @@ RedirectPermanent "/n-back faq"                  "http://www.gwern.net/DNB FAQ"
 RedirectPermanent "/n-back faq.html"             "http://www.gwern.net/DNB FAQ"
 RedirectPermanent "/nootropics.html"             "http://www.gwern.net/Nootropics"
 RedirectPermanent "/spaced repetition"           "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "N-back FAQ"                   "http://www.gwern.net/DNB FAQ"
-RedirectPermanent "N-back FAQ.html"              "http://www.gwern.net/DNB FAQ"
 
 # Add static gzip'd support, again, for performance
 ## http://www.hunlock.com/blogs/Compressed_HTML_makes_your_pages_zippy
