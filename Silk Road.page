@@ -1,20 +1,26 @@
-The website [Silk Road](https://secure.wikimedia.org/wikipedia/en/wiki/Silk_Road_%28anonymous_marketplace%29) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+> This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it.
 
-But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](https://secure.wikimedia.org/wikipedia/en/wiki/Eternal_September) ("*I* used Silk Road when it was still underground and no one had heard of it")?
+The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+
+But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")?
 
 No way to know but to go. So, let's take a 'brazen' stroll down the Silk Road.
 
 # Preparations
 
-Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for payment, and access to it being possible only through the [anonymizing Tor network](https://secure.wikimedia.org/wikipedia/en/wiki/Tor_%28anonymity_network%29), on which Silk Road and the Silk Road forum live as ["*hidden sites*"](https://secure.wikimedia.org/wikipedia/en/wiki/Tor_(anonymity_network)#Hidden_services) - both you and the server funnel your requests into a set of Tor nodes and you meet in the middle. (This isn't as slow as it might sound.)
+Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for payment, and access to it being possible only through the [anonymizing Tor network](!Wikipedia "Tor (anonymity network)"), on which Silk Road and the Silk Road forum live as ["*hidden sites*"](!Wikipedia "Tor (anonymity network)#Hidden services") - both you and the server funnel your requests into a set of Tor nodes and you meet in the middle. (This isn't as slow as it might sound.)
 
 As it happened, I already have some bitcoins. Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton.
 
-With Tor running and the Torbutton enabled, we can easily connect to Silk Road; we simply visit <http://ianxz6zefk72ulzz.onion>. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](https://secure.wikimedia.org/wikipedia/en/wiki/Man-in-the-middle_attack).)
+With Tor running and the Torbutton enabled, we can easily connect to Silk Road; we simply visit <http://ianxz6zefk72ulzz.onion>. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
 
 Upon connecting, you will see a bare log-in form:
 
 ![](/images/silkroad/joinpage.png)
+
+Alternately, you might see an error page like the following; Silk Road is occasionally down for maintenance & new features or temporarily overloaded. Usually waiting a minute is enough, and longer downtimes are discussed on the Silk Road forums.
+
+![](/images/silkroad/silkroad-down.png)
 
 Click on the join, and you will be taken to another page for registering your account, much like any other site. (I suggest picking a strong password. Learn from the Mt.Gox fiasco.) With your new account, you can now log in and see what there is to see on the main page:
 
@@ -22,7 +28,7 @@ Click on the join, and you will be taken to another page for registering your ac
 
 The [stimulants](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/52) category contains much what you'd expect:
 
-![](/images/silkroad/)
+![](/images/silkroad/stimulants.png)
 
 Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or the ['services'](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
 
@@ -55,7 +61,7 @@ No big surprise there - it's another one-time address which expired at noon, so 
 
 # Shopping
 
-After some browsing, I personally decided on an offering of the nootropic [selegiline](http://en.wikipedia.org/wiki/Selegiline). Safe, potentially useful, and not even especially illegal. The price was right:
+After some browsing, I personally decided on an offering of the nootropic [selegiline](!Wikipedia). Safe, potentially useful, and not even especially illegal. The price was right:
 
 ![](/images/silkroad/selegiline.png)
 
@@ -95,7 +101,7 @@ Well sure, but *why* was it canceled? I speculate the seller decided he didn't w
 
 ## Try, try again
 
-After some more browsing, I decide to go with either the cheapest [Adderall](http://en.wikipedia.org/wiki/Adderall) or the new [modafinil](http://en.wikipedia.org/wiki/Modafinil) posting, which mentioned being Provigil. But is it real branded Provigil or just the usual Indian generics? Also, the Adderall seller has no public key listed! I take this opportunity to message the two, asking for more information and to post a public key, respectively.
+After some more browsing, I decide to go with either the cheapest [Adderall](!Wikipedia) or the new [modafinil](!Wikipedia) posting, which mentioned being Provigil. But is it real branded Provigil or just the usual Indian generics? Also, the Adderall seller has no public key listed! I take this opportunity to message the two, asking for more information and to post a public key, respectively.
 
 Both have replied the next day; the Adderall seller has put up his public key, and the modafinil seller clarifies it's Indian - but it doesn't matter since the item's page has disappeared, indicating someone bought it already. Naturally, I reply and then delete all messages. One must assume that Silk Road will be compromised at some point... But the Adderall it is. The listing looks pretty good, and the price per pill is far superior to that I was quoted by one of my college-age friends (less than 1/3 the price):
 
@@ -116,7 +122,7 @@ The contents are as described, 10 blue Adderall, in a double ziplock baggy (the 
 
 ![](/images/silkroad/adderall-pills.jpg)
 
-The very sharp-eyed will notice that these are the 'generic' Adderall pills, but as it turns out, the generic Adderall pills are manufactured by the exact same pharmacorp as the branded Adderall - the two products are probably a case of [price discrimination](http://en.wikipedia.org/wiki/Price_discrimination). Economics can be a counter-intuitive thing.
+The very sharp-eyed will notice that these are the 'generic' Adderall pills, but as it turns out, the generic Adderall pills are manufactured by the exact same pharmacorp as the branded Adderall - the two products are probably a case of [price discrimination](!Wikipedia). Economics can be a counter-intuitive thing.
 
 They work fine, and I leave the seller a nice review. My third order proceeds as straightforwardly as the second order, and results in an even better packaged shipment of product that seems to be genuine as far as I can tell. Heedful of the risks and probabilities, I leave another nice review; the review form (reached when you click the 'finalize' link) is as straightforward as the rest of the process:
 
