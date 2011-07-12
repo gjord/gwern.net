@@ -1,18 +1,35 @@
-> This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it.
+> This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it.[^hamlet]
 
-The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+[^hamlet]: While BW held up its end of the deal, I am a little disappointed that they chose after reflection not to publish it; I was reminded of _Hamlet_:
 
-But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")?
+        "Thus conscience does make cowards of us all,
+        And thus the native hue of resolution
+        Is sicklied o'er with the pale cast of thought,
+        And enterprises of great pith and moment,
+        With this regard their currents turn awry,
+        And lose the name of action."
+
+The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+
+But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")? Shouldn't we keep quiet about it like Fight Club?[^fightclub]
+
+[^fightclub]: Whenever classic, illegal, cypherpunk applications are implemented using Bitcoin, you are sure to find someone complaining that you must not talk about Fight Club - how will that play in Peoria? To such people, my general reply is - What makes you so sure I'm a Bitcoiner? It's interesting but that doesn't mean I have bought into the project and all its ideals.
+
+    Would such critics be congratulating me if this article turned out to help Bitcoin by discussing and documenting a demand driver and important test-case? I suspect they wouldn't. Their argument is unfalsifiable and based more on their prejudices than hard data. Silk Road, at least, seems to have not been harmed by its national coverage; the number of accounts and transactions have all increased dramatically, and SR's admin has stated his satisfaction with the new status quo. (Not that the admin ever sought secrecy - he announced Silk Road's official opening on the Bitcoin forums!)
+
+    And if this did hurt Bitcoin even to the extent that it would be worth devoting one neuron to thinking about it, I would publish anyway because that would mean that *the Bitcoin experiment has failed and needs to be terminated immediately*. (If Bitcoin can be hurt by the truth, then it is already doomed - you cannot build on quicksand, and ["That which can be destroyed by the truth should be."](!Wikipedia "P. C. Hodgell")) Good game, chaps, let's all meet back here when the next Satoshi figures out how to patch the vulnerabilities.
 
 No way to know but to go. So, let's take a 'brazen' stroll down the Silk Road.
 
 # Preparations
 
-Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for payment, and access to it being possible only through the [anonymizing Tor network](!Wikipedia "Tor (anonymity network)"), on which Silk Road and the Silk Road forum live as ["*hidden sites*"](!Wikipedia "Tor (anonymity network)#Hidden services") - both you and the server funnel your requests into a set of Tor nodes and you meet in the middle. (This isn't as slow as it might sound.)
+Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for payment, and access to it being possible only through the [anonymizing Tor network](!Wikipedia "Tor (anonymity network)"), on which Silk Road and the Silk Road forum live as ["*hidden sites*"](!Wikipedia "Tor (anonymity network)#Hidden services") - both you and the server funnel your requests into a set of Tor nodes and you meet in the middle. (This isn't as slow as it might sound, and hidden sites eliminate the main security weakness of Tor: [evil exit nodes](!Wikipedia "Tor (anonymity network)#Weaknesses").)
 
-As it happened, I already have some bitcoins. Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton.
+As it happened, I already have some bitcoins. Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/projects/torbrowser) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient.
 
-With Tor running and the Torbutton enabled, we can easily connect to Silk Road; we simply visit <http://ianxz6zefk72ulzz.onion>. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
+With Tor running and the Torbutton enabled in the browser (along with any [privacy mode](!Wikipedia)), we can easily connect to Silk Road; we simply visit <http://ianxz6zefk72ulzz.onion>[^address]. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
+
+[^address]: Note that this is *not* a normal WWW site; there are no normal WWW sites for the Silk Road. There is <http://silkroadmarket.org/> which is apparently controlled in some fashion by SR (probably to stop domain squatting or scam sites pretending to be SR), but whatever it is, it's not important; it's not even updated regularly - the status descriptions on it are sometimes weeks or months out of date.
 
 Upon connecting, you will see a bare log-in form:
 
@@ -22,7 +39,9 @@ Alternately, you might see an error page like the following; Silk Road is occasi
 
 ![](/images/silkroad/silkroad-down.png)
 
-Click on the join, and you will be taken to another page for registering your account, much like any other site. (I suggest picking a strong password. Learn from the Mt.Gox fiasco.) With your new account, you can now log in and see what there is to see on the main page:
+Click on the join, and you will be taken to another page for registering your account, much like any other site. (I suggest picking a strong password[^hash]. Learn from the Mt.Gox fiasco.) With your new account, you can now log in and see what there is to see on the main page:
+
+[^hash]: Specifically, one that will be very difficult to brute-force the hash. This won't protect you from some compromises of Silk Road (for example, the server being controlled by an attacker and harvesting passwords as they are entered by live users), but it will protect you from others - for example, if the database is stolen, a long password helps frustrate an attempt to derive the original password and let them log into your account and engineer endless nefarious misdeeds.
 
 ![](/images/silkroad/silkroad-mainpage.png)
 
@@ -92,7 +111,7 @@ There are a great many guides to GPG; the official [GPG handbook](http://www.gnu
 
 ![](/images/silkroad/selegiline-shoppingcart-message.png)
 
-Now, one might wonder how one would post one's *own* public key in case one asks questions and would like the answers from the seller to be as encrypted as one's addresses. It's easy to make one with `gpg --gen-key` and then a `gpg --armor --export USERNAME`, but where to post it? It used to be that you could simply push a button in your profile to register as a seller and then fill your own profile field with the public key like any seller, and I did just that. But recently Silk Road has closed free seller accounts, and [has announced](http://dkn255hz262ypmii.onion/index.php?topic=360.msg2059#msg2059) that they are being auctioned off. The [justification for this](http://dkn255hz262ypmii.onion/index.php?topic=360.msg3574#msg3574) is SR claims to have received an anonymous threat to register many free seller accounts and simply mail poisoned pills out (which he [alluded to earlier](http://dkn255hz262ypmii.onion/index.php?topic=207.msg1033#msg1033)). Hopefully buyers will soon be able to edit their profile, but until then, there is a [thread on the SR forums]() devoted to buyers posting their public keys.
+Now, one might wonder how one would post one's *own* public key in case one asks questions and would like the answers from the seller to be as encrypted as one's addresses. It's easy to make one with `gpg --gen-key` and then a `gpg --armor --export USERNAME`, but where to post it? It used to be that you could simply push a button in your profile to register as a seller and then fill your own profile field with the public key like any seller, and I did just that. But recently Silk Road has closed free seller accounts, and [has announced](http://dkn255hz262ypmii.onion/index.php?topic=360.msg2059#msg2059) that they are being auctioned off. The [justification for this](http://dkn255hz262ypmii.onion/index.php?topic=360.msg3574#msg3574) is SR claims to have received an anonymous threat to register many free seller accounts and simply mail poisoned pills out (which he [alluded to earlier](http://dkn255hz262ypmii.onion/index.php?topic=207.msg1033#msg1033)). Hopefully buyers will soon be able to edit their profile, but until then, there is a [thread on the SR forums](http://dkn255hz262ypmii.onion/index.php?topic=174.0) devoted to buyers posting their public keys.
 
 ## Now what?
 
@@ -100,7 +119,9 @@ Once you have submitted the order, the ball is in the seller's court. The order 
 
 ![](/images/silkroad/selegiline-ordered.png)
 
-Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in escrow. SR holds onto your Bitcoins until you finalize the transaction with a review - one of the protections for the buyers. (It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that. A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can.)
+Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in escrow[^escrow]. SR holds onto your Bitcoins until you finalize the transaction with a review - one of the protections for the buyers. (It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that. (See the [Silk Road subforum on shipping](http://dkn255hz262ypmii.onion/index.php?board=6.0).) A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can.)
+
+[^escrow]: I only used the standard Bitcoin escrow. Silk Road has another escrow scheme where the escrowed amount is tied to the current exchange rate, in order to protect the seller against exchange rate volatility; that escrow is documented in the [announcement](http://dkn255hz262ypmii.onion/index.php?topic=819.0) and the "Escrow hedge" section of the [Buyer's Guide](http://ianxz6zefk72ulzz.onion/index.php/silkroad/buyers_guide).
 
 I check in 1 day later: the order still processing. Items apparently aren't public once you've escrowed your dosh. 2 days later: still processing. 3 days later: canceled! My Bitcoins are unlocked, of course, but I'm not keen on ordering again right away. Need to browse more and look for deals. The cancellation message is not very informative:
 
@@ -118,12 +139,12 @@ Both have replied the next day; the Adderall seller has put up his public key, a
 
 1 day after ordering: still processing, and 2 days, 'in transit':
 
-![](/images/silkroad/adderall-processing.png
+![](/images/silkroad/adderall-processing.png)
 ![](/images/silkroad/adderall-intransit.png)
 
 ## Evaluating and reviewing
 
-3rd day: still in transit. 4th day: the package arrived! I go over immediately, and it's this harmless-looking little padded mailer. One would not suspect it of anything nefarious, not with those cute stamps:
+3rd day: still in transit. 4th day: the package arrived! I go over immediately, and it's this harmless-looking little padded mailer. One would not suspect it of anything nefarious, not with those cute stamps^[I have no idea why the stamps are not [canceled](!Wikipedia "Cancellation (mail)"); Wikipedia mentions that sometimes the stamp cancellation machines fail and the stamps get a [pen cancel](!Wikipedia) instead.]:
 
 ![](/images/silkroad/adderall-package.jpg)
 
@@ -141,8 +162,16 @@ Feedback is an important part of the process. I was surprised to revisit one of 
 
 # _Finis_
 
-But I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road, and shipments do get lost in the mail or seized or otherwise not delivered. This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
+There is no proof of all of the above - anything here could have been faked with Photoshop or simply reused (perhaps I have a legitimate Adderall prescription). Take it for what it is and see whether it convinces you: [argument screens off authority](http://lesswrong.com/lw/lx/argument_screens_off_authority/).
+
+But looking back, I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road^[Looking at the reviews posted to the front page and sentiment on the forum, I would hazard a guesstimate that scammers are 0-10% of the marketplace, and probably to the low end of that spectrum.], and shipments do get lost in the mail or seized or otherwise not delivered. ([I do not expect](http://predictionbook.com/predictions/2911) any legal problems; law enforcement always go after the sellers, to achieve maximum impact, and Silk Road presents both technical and jurisdictional problems for law enforcement.) This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
 
 > "Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there."
 
-On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://ianxz6zefk72ulzz.onion/index.php/forums/thread/894)
+On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://ianxz6zefk72ulzz.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
+
+# External links
+
+- Reddit discussion: [First submission](http://www.reddit.com/r/Bitcoin/comments/imoc0/using_silk_road/), [resubmission](http://www.reddit.com/r/Drugs/comments/imq8h/how_to_use_the_silk_road_the_cats_out_of_the_bag/)
+- Reddit: [Seller Q&A](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/)
+- ["Traveling Down the Silk road to Buy Drugs With Bitcoins"](http://motherboard.tv/2011/6/24/traveling-down-the-silkroad-to-buy-drugs-with-bitcoins) -(another SR article, by Ryan Broderick; much shorter & incomplete)
