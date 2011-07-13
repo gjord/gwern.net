@@ -1,6 +1,6 @@
 > This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it.[^hamlet]
 
-[^hamlet]: While BW held up its end of the deal, I am a little disappointed that they chose after reflection not to publish it; I was reminded of _Hamlet_:
+[^hamlet]: While BW held up its end of the deal and I understand why they might fear the legal consequences, I am a little disappointed that they chose after reflection not to publish it; I was reminded of _Hamlet_:
 
         "Thus conscience does make cowards of us all,
         And thus the native hue of resolution
@@ -9,7 +9,9 @@
         With this regard their currents turn awry,
         And lose the name of action."
 
-The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise[^blackmarket] using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+
+[^blackmarket]: I know of one competing marketplace using Bitcoin+Tor, named BlackMarket which apparently lives at <http://5onwnspjvuk7cwvk.onion/>; the general rumor seems to be that it is very low-volume and stagnant.
 
 But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")? Shouldn't we keep quiet about it like Fight Club?[^fightclub]
 
@@ -39,7 +41,7 @@ Alternately, you might see an error page like the following; Silk Road is occasi
 
 ![](/images/silkroad/silkroad-down.png)
 
-Click on the join, and you will be taken to another page for registering your account, much like any other site. (I suggest picking a strong password[^hash]. Learn from the Mt.Gox fiasco.) With your new account, you can now log in and see what there is to see on the main page:
+Click on the join, and you will be taken to another page for registering your account, much like any other site. Invitations are not currently required, although to register a *seller* account is neither easy nor cheap, see later sections. (I suggest picking a strong password[^hash]. Learn from the Mt.Gox fiasco.) With your new account, you can now log in and see what there is to see on the main page:
 
 [^hash]: Specifically, one that will be very difficult to brute-force the hash. This won't protect you from some compromises of Silk Road (for example, the server being controlled by an attacker and harvesting passwords as they are entered by live users), but it will protect you from others - for example, if the database is stolen, a long password helps frustrate an attempt to derive the original password and let them log into your account and engineer endless nefarious misdeeds.
 
@@ -49,7 +51,7 @@ The [stimulants](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/52) c
 
 ![](/images/silkroad/stimulants.png)
 
-Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or the ['services'](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
+Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or [German pretzels](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25dwkd), or the ['services'](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
 
 ![](/images/silkroad/collectibles.png)
 ![](/images/silkroad/services.png)
@@ -84,11 +86,17 @@ After some browsing, I personally decided on an offering of the nootropic [seleg
 
 ![](/images/silkroad/selegiline.png)
 
+Should I buy it?
+
+## Evaluating sellers
+
 Now, you will notice that for most sellers, there is no '(99)' or '(100)' after the seller's name; for example, this random seller:
 
 ![](/images/silkroad/generic-profile.png)
 
-This is due to the simple fact that when I joined, the post-_Gawker_ rush had resulted in membership jumping from the high-hundreds/low-thousands range to north of 10,000 accounts, and while many transactions had been entered into, the reviews and closures of transactions had only started. So I was not *too* bothered by the lack of feedback on this seller profile. I also used the handy SR forums and found no bad mentions of the seller. So, I was willing to take a chance on him.
+This is due to the simple fact that when I joined, the post-_Gawker_ rush had resulted in membership jumping from the high-hundreds/low-thousands range to north of 10,000 accounts, and while many transactions had been entered into, the reviews and closures of transactions had only started. So I was not *too* bothered by the lack of feedback on this seller profile. I also used the handy SR forums and found no bad mentions of the seller. The user number was not terribly high, the description was detailed enough that it looked like he took selling seriously, there are no bad reviews, they posted a public key, etc. So, I was willing to take a chance on him.
+
+Both the seller and the example above had standard [PGP](!Wikipedia "Pretty Good Privacy")-compliant [*public keys*](!Wikipedia "Public-key cryptography") posted (the long string of gibberish under that odd header - quite unmistakable), which one will need to encrypt the personal information one sends the seller. (It is a given on Silk Road that sellers have public keys; you instantly fail at security if you send the seller the address unencrypted.) Public-key cryptography is an old and vital concept to understand, and there are a great many descriptions or introductions online so I will not explain it further here.
 
 I add it to my cart (no one-click checkout, so at least SR doesn't have to worry about Amazon!):
 
@@ -119,9 +127,20 @@ Once you have submitted the order, the ball is in the seller's court. The order 
 
 ![](/images/silkroad/selegiline-ordered.png)
 
-Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in escrow[^escrow]. SR holds onto your Bitcoins until you finalize the transaction with a review - one of the protections for the buyers. (It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that. (See the [Silk Road subforum on shipping](http://dkn255hz262ypmii.onion/index.php?board=6.0).) A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can.)
+Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in escrow[^escrow]. SR holds onto your Bitcoins until you finalize the transaction with a review - one of the protections for the buyers.
 
-[^escrow]: I only used the standard Bitcoin escrow. Silk Road has another escrow scheme where the escrowed amount is tied to the current exchange rate, in order to protect the seller against exchange rate volatility; that escrow is documented in the [announcement](http://dkn255hz262ypmii.onion/index.php?topic=819.0) and the "Escrow hedge" section of the [Buyer's Guide](http://ianxz6zefk72ulzz.onion/index.php/silkroad/buyers_guide).
+It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that[^shipping]. (See the [Silk Road subforum on shipping](http://dkn255hz262ypmii.onion/index.php?board=6.0).) A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can. Shipping is so safe for the seller that many of them will, without complaint, ship worldwide or across national borders because customs so rarely stops drug shipments.^[For example, I have never had a shipment of anything I have ordered stopped or apparently even looked at hard by a Customs. In the 2 SR orders' cases, this turned out to be irrelevant as both sellers were in-country.]
+
+[^shipping]: To quote a [SR](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c259lb5) [seller](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c2590df):
+
+    > "I don't think I'm risking much. It would be almost impossible for law enforcement to find me. They would need to find out where the package came from, and go to that mailbox, and have a police officer wait a few weeks for me to return to that mailbox. All just because they found a 100mg of a Schedule II drug in an envelope. Also, they wouldn't suspect me. My criminal record is perfectly clean. Not even a parking misdemeanor."
+    >
+    > "I doubt that I could be caught. They would need to find out the mailbox that I've been putting the packages in, and then have someone wait there and watch me, and then they would need to prove that I was the one who put it in the mailbox. So if they could back-track and find out where the package came from, then maybe they could catch me. Also, there are many different mailboxes around me, so I put the packages in different mailboxes each time. Definitely can't hurt."
+
+    [A Redditor](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25a3ni) comments on the jurisdictional advantages of going through USPS (as is usually recommended in seller discussions); I do not know if he is correct, but the description sounds plausible:
+
+    > "Also, once it's in the mailbox, it's property of the US postal service, and they're VERY particular about what happens to it. No one (including other agencies) can carry weapons in a post office except for postal inspectors, nor can they investigate mail on their own; it has to go through the post office itself."
+[^escrow]: I only used the standard Bitcoin escrow. (Needless to say, Paypal is *completely* out of the question.) Silk Road has another escrow scheme where the escrowed amount is tied to the current exchange rate, in order to protect the seller against exchange rate volatility; that escrow is documented in the [announcement](http://dkn255hz262ypmii.onion/index.php?topic=819.0) and the "Escrow hedge" section of the [Buyer's Guide](http://ianxz6zefk72ulzz.onion/index.php/silkroad/buyers_guide).
 
 I check in 1 day later: the order still processing. Items apparently aren't public once you've escrowed your dosh. 2 days later: still processing. 3 days later: canceled! My Bitcoins are unlocked, of course, but I'm not keen on ordering again right away. Need to browse more and look for deals. The cancellation message is not very informative:
 
@@ -144,7 +163,7 @@ Both have replied the next day; the Adderall seller has put up his public key, a
 
 ## Evaluating and reviewing
 
-3rd day: still in transit. 4th day: the package arrived! I go over immediately, and it's this harmless-looking little padded mailer. One would not suspect it of anything nefarious, not with those cute stamps^[I have no idea why the stamps are not [canceled](!Wikipedia "Cancellation (mail)"); Wikipedia mentions that sometimes the stamp cancellation machines fail and the stamps get a [pen cancel](!Wikipedia) instead.]:
+3rd day: still in transit. 4th day: the package arrived! I go over immediately, and it's this harmless-looking little padded mailer. One would not suspect it of anything nefarious, not with those cute stamps^[I have no idea why the stamps are not [canceled](!Wikipedia "Cancellation (mail)"); Wikipedia mentions that sometimes the stamp cancellation machines fail and the stamps get a [pen cancel](!Wikipedia) instead. One seller mentions that [sometimes he receives](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25aico) uncanceled stamps, and asking older relatives, they did too (and sometimes the package or envelope *was* canceled - just not on the stamps).]:
 
 ![](/images/silkroad/adderall-package.jpg)
 
