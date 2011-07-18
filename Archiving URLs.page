@@ -1,3 +1,7 @@
+---
+description: Archiving the Web, because nothing lasts forever - pulling together all the previous archive tools.
+...
+
 Given my interest in [long term content](About#long-content) and extensive linking, [link rot](!Wikipedia) is an issue of deep concern to me. I need backups not just for my files[^backups], but for the web pages I read and use - they're all part of my [exomind](!Wikipedia). It's not much good to have an extensive essay on some topic where half the links are dead and the reader can neither verify my claims nor get context for my claims.
 
 [^backups]: I mirror important directories on a weekly or monthly basis to [Amazon S3](!Wikipedia) using [`s3cmd`](http://s3tools.org/s3cmd); on a similar schedule, I use [`rdiff-backup`](http://www.nongnu.org/rdiff-backup/) to backup my entire home directory to a cheap 1.5TB hard drive (bought from Newegg using <http://forre.st/storage#sata>).

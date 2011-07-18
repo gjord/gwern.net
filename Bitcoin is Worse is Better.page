@@ -1,3 +1,7 @@
+---
+description: Bitcoin's long gestation indicates it is an example of the 'Worse is Better' paradigm
+...
+
 Some wonder who is the real man under the Satoshi Nakamoto mask; a hard question - how many libertarian cryptographers are there? But the interesting thing is, Satoshi could be *anybody*. Bitcoin involves no major intellectual breakthroughs, so Satoshi need have no credentials in cryptography or be anything but a self-taught programmer! Satoshi published his [whitepaper](http://www.bitcoin.org/bitcoin.pdf) May 2009^[`bitcoin.org` was registered 18 August 2008, so presumably Satoshi had been developing the bitcoin idea at least as early as 2008.], but if you look at the cryptography that makes up Bitcoin, they can basically be divided into:
 
 - Public key cryptography
@@ -71,7 +75,7 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
 - [disk/bandwidth won't scale](http://www.mail-archive.com/cryptography@metzdowd.com/msg09963.html)^[It probably will. [Some](https://en.bitcoin.it/wiki/Scalability) [informal](http://www.reddit.com/r/Anarchism/comments/hdf2t/so_i_guess_bitcoin_is_probably_a_mutualists_wet/c1ulirk) projections have been made of what it would take to run millions of transactions worth trillions of dollars, and they tend to come in at comparable to the existing resource use of companies like Google (which [fund](http://articles.economictimes.indiatimes.com/2011-04-12/news/29410039_1_energy-projects-solar-energy-clean-energy) [their](http://www.fastcompany.com/1748331/google-sinks-100-million-into-worlds-largest-wind-project) own power plants or monopolize convenient [hydroelectric](http://www.itmanagement.com/features/columbia-river-security-risk-062507/) [dams](http://www.nytimes.com/2006/06/14/technology/14search.html) to run their datacenters).]
 - [proposal is underspecified](http://www.mail-archive.com/cryptography@metzdowd.com/msg09975.html) (omitting all the possible [race conditions](!Wikipedia) and scenarios in a distributed system) and details [available only in ad hoc code](http://www.mail-archive.com/cryptography@metzdowd.com/msg09996.html)[^messy]
 - [conflating transactions with bitcoin creation](http://www.mail-archive.com/cryptography@metzdowd.com/msg09984.html) requires constant inflation
-- it is [very difficult](http://www.mail-archive.com/cryptography@metzdowd.com/msg09995.html) to achieve consensus on large amounts of distributed data even without incentives to corrupt it or attacks
+- it is [very difficult](http://www.mail-archive.com/cryptography@metzdowd.com/msg09995.html) to achieve [consensus](!Wikipedia "Consensus (computer science)") on large amounts of distributed data even without incentives to corrupt it or attacks
 - [domination of the hash tree](http://www.mail-archive.com/cryptography@metzdowd.com/msg10005.html) by fast nodes and starvation of transactions
 - [pseudonymity & linkable transactions](http://www.mail-archive.com/cryptography@metzdowd.com/msg10007.html)[^szabo] (irreversible transactions also implies [double-spend](http://www.mail-archive.com/cryptography@metzdowd.com/msg10015.html) must be very quickly detectable)
 

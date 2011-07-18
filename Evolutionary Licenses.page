@@ -1,3 +1,7 @@
+---
+description: Game theory on BSD vs. GPL: partnership
+...
+
 # The Problem
 
 Why are there so many[^osi] different & conflicting [FLOSS](!Wikipedia) licenses?
@@ -16,11 +20,11 @@ We can look at it through standard economic models - [common-pool resource](!Wik
 
 Let us consider the case of poison-dart frogs. They famously store poison in themselves and have bright colors advertising this. Now, this is a good trick for them since it means the big predators will leave them alone. It's a good enough trick that warning coloration can be found all over the animal kingdom. But it's also bad because they might poison themselves, and besides they still have to pay to constantly produce those colors and poisons. The frogs would like to have their cake and eat it too.
 
-So you get free-riders - frogs which cut out the poison and just wear the poison colors. Everything is gravy for these frogs: the predators leave them alone and they have a small edge over the genuine article. But of course, fake poison frogs aren't an [*evolutionarily stable strategy*](!Wikipedia "Evolutionarily_stable_strategy") (ESS). Predators do eat poison-colored frogs if they get hungry or stupid enough, and if they're all fake, then the predators will learn this & the poison colors cease to be a deterrent.
+So you get free-riders - frogs which cut out the poison and just wear the poison colors. Everything is gravy for these frogs: the predators leave them alone and they have a small edge over the genuine article. But of course, fake poison frogs aren't an [*evolutionarily stable strategy*](!Wikipedia "Evolutionarily stable strategy") (ESS). Predators do eat poison-colored frogs if they get hungry or stupid enough, and if they're all fake, then the predators will learn this & the poison colors cease to be a deterrent.
 
 And then conditions are ripe for real poison-dart frogs to make a comeback! But just when they are triumphant and all the predators have learned to ignore them, along comes hopping a defective frog with poison-colors, but no actual poison...
 
-So a 'pure' population of real or fakes is not stable. (This is a specific example of [Prisoner's dilemma](!Wikipedia "Prisoner's_dilemma") thinking; a population of defecting players can be invaded by a few cooperators, and a population of cooperators can easily be infected by free-riders/defectors.)
+So a 'pure' population of real or fakes is not stable. (This is a specific example of [Prisoner's dilemma](!Wikipedia "Prisoner's dilemma") thinking; a population of defecting players can be invaded by a few cooperators, and a population of cooperators can easily be infected by free-riders/defectors.)
 
 What happens? Eventually things reach an equilibrium with enough real poison-dart frogs to keep the predators honest and a reasonable number of fakers. If things get out of kilter for a while, evolution will bring it back into whack.
 
