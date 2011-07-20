@@ -62,7 +62,7 @@ find ~/www -size +4M -delete
 
 The code is not the prettiest, but it's fairly straightforward:
 
-- the script grabs my Firefox browsing history by extracting it from the SQL database, and feeds the URLs into [wget](!Wikipedia)
+- the script grabs my Firefox browsing history by extracting it from the history SQL database file^[Much easier than it was in the past; [Jamie Zawinski](!Wikipedia) records his travails with the *previous* Mozilla history format in the aptly-named ["when the database worms eat into your brain"](http://www.jwz.org/blog/2004/03/when-the-database-worms-eat-into-your-brain/).], and feeds the URLs into [wget](!Wikipedia)
 - The script `split`s the long list of URLs into a bunch of files and runs that many `wget`s because `wget` apparently has no way of simultaneously downloading from multiple domains.
 - The `filter-urls` command is another shell script, which removes URLs I don't want archived. This script is a hack which looks like this:
 
