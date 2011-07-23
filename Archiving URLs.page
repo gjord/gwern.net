@@ -2,6 +2,8 @@
 description: Archiving the Web, because nothing lasts forever - pulling together all the previous archive tools.
 ...
 
+> "Decay is inherent in all compound things. Work out your own salvation with diligence."^[Last words of the Buddha.]
+
 Given my interest in [long term content](About#long-content) and extensive linking, [link rot](!Wikipedia) is an issue of deep concern to me. I need backups not just for my files[^backups], but for the web pages I read and use - they're all part of my [exomind](!Wikipedia). It's not much good to have an extensive essay on some topic where half the links are dead and the reader can neither verify my claims nor get context for my claims.
 
 [^backups]: I mirror important directories on a weekly or monthly basis to [Amazon S3](!Wikipedia) using [`s3cmd`](http://s3tools.org/s3cmd); on a similar schedule, I use [`rdiff-backup`](http://www.nongnu.org/rdiff-backup/) to backup my entire home directory to a cheap 1.5TB hard drive (bought from Newegg using <http://forre.st/storage#sata>).
@@ -21,7 +23,7 @@ The statistics are dismal. To quote [Wikipedia](!Wikipedia "Link rot#Prevalence"
 
     > "Bits and pieces of the web disappear all the time. It's called 'link rot', and we're all used to it. A friend saved 65 links in 1999 when he planned a trip to Tuscany; only half of them still work today. In my own blog, essays and news articles and websites that I link to regularly disappear -- sometimes within a few days of my linking to them."
 
-My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites). Even at the very lowest estimate of 3% annual linkrot, few will survive to 2070. (If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.17$ or just 17%, or to put it another way, an 83% chance any given link *will* die. The 95% [confidence interval](!Wikipedia) for the [Poisson distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~338-409 will survive to 2070. If we try to predict using a more reasonable estimate of 50% linkrot, then approximately 0 links will survive ($0.50^{2070-2011} = 1.73472348 \times 10^{-16} = \~0$). It would be a good idea to simply assume that *no* link will survive.
+My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites). Even at the very lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.17$ or just 17%, or to put it another way, an 83% chance any given link *will* die. The 95% [confidence interval](!Wikipedia) for the [Poisson distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~338-409 will survive to 2070. If we try to predict using a more reasonable estimate of 50% linkrot, then approximately 0 links will survive ($0.50^{2070-2011} = 1.73472348 \times 10^{-16} = \~0$). It would be a good idea to simply assume that *no* link will survive.
 
 With that in mind, one can consider remedies. (If we lie to ourselves and say it won't be a problem in the future, then we guarantee that it *will* be a problem. ["People can stand what is true, for they are already enduring it."](http://wiki.lesswrong.com/wiki/Litany_of_Gendlin))
 
