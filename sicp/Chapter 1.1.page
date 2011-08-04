@@ -370,7 +370,7 @@ sqrt 25 0.0001
 
 It's worth comparing to trying a Scheme version of this. There is no definition of `until` I know of in Scheme, and certainly there is no equivalent of Hoogle's type-based searches. (I genuinely didn't know about `until` before I wrote down what type signature I needed and checked in Hoogle.) `until` here is so useful because it eliminates most of the boilerplate in `sqrt-iter`. Haskell syntax for lambdas come in handy here; with Scheme, the syntax is so verbose (`(lambda (x) (bar x))`, compared with `\x -> bar x`) that you simply couldn't fit it. As it is, the one-liner is a little long.
 
-Of course, this isn't the only way we could've written it in Haskell. There's a third decent way, using `iterate` (as I originally expected to write it). This way is particularly satisfactory because it relies on infinite lists. It goes [like this](http://www.cs.bham.ac.uk/~ard/modules/swh05.html) ([archive](http://web.archive.org/web/20070319202251/http://www.cs.bham.ac.uk/~ard/modules/swh05.html)):
+Of course, this isn't the only way we could've written it in Haskell. There's a third decent way, using `iterate` (as I originally expected to write it). This way is particularly satisfactory because it relies on infinite lists. It goes [like this](http://web.archive.org/web/20070319202251/http://www.cs.bham.ac.uk/~ard/modules/swh05.html):
 
 ~~~~{.haskell}
 root :: Float -> Float

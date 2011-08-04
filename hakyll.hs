@@ -24,16 +24,16 @@ main = do  hakyll $ do
                                      "static/**",
                                      "**.page"]
 
-             match "**.css" $ route idRoute >> compile compressCssCompiler
+             _ <- match "**.css" $ route idRoute >> compile compressCssCompiler
 
-             group "html" $ match "**.page" $ do
+             _ <- group "html" $ match "**.page" $ do
                route $ setExtension ""
                compile $ myPageCompiler
 
                  >>> requireA "templates/sidebar.markdown" (setFieldA "sidebar" $ arr pageBody)
                  >>> applyTemplateCompiler "templates/default.html"
 
-             match "templates/default.html" $ compile templateCompiler
+             _ <- match "templates/default.html" $ compile templateCompiler
              match "templates/sidebar.markdown" $ compile pageCompiler
 
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
@@ -72,7 +72,9 @@ convertHakyllLinks x = x
 -- INTERWIKI PLUGIN
 -- | Derives a URL from a list of Pandoc Inline elements.
 inlinesToURL :: [Inline] -> String
-inlinesToURL = encString False isUnescapedInURI . inlinesToString
+inlinesToURL x = let x' = inlinesToString x
+                     (a,b) = break (=='%') x'
+                 in encString False isUnescapedInURI a ++ b
 
 -- | Convert a list of inlines into a string.
 inlinesToString :: [Inline] -> String
@@ -87,7 +89,7 @@ convertInterwikiLinks (Link ref (interwiki, article)) =
     ('!':interwiki') ->
         case M.lookup interwiki' interwikiMap of
                 Just url  -> case article of
-                                  "" -> Link ref (url `interwikiurl` (inlinesToString ref), summary $ unEscapeString $ inlinesToString ref)
+                                  "" -> Link ref (url `interwikiurl` inlinesToString ref, summary $ unEscapeString $ inlinesToString ref)
                                   _  -> Link ref (url `interwikiurl` article, summary article)
                 Nothing -> Link ref (interwiki, article)
             where -- 'http://starwars.wikia.com/wiki/Emperor_Palpatine'
