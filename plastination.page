@@ -5,13 +5,9 @@ description: Break down survival to Drake equation, see on which terms & how pla
 
 > "No man is an iland, intire of it selfe; every man is a peece of the Continent, a part of the maine; if a clod bee washed away by the Sea, Europe is the lesse, as well as if a Promontorie were, as well as if a Mannor of thy friends or of thine owne were; any mans death diminishes me, because I am involved in Mankinde; And therefore never send to know for whom the bell tolls; It tolls for thee...."^[[John Donne](!Wikipedia), [Meditation 17](!Wikisource "Meditation XVII")]
 
-The [Drake equation](!Wikipedia) for [cryonics](!Wikipedia): is just a number of sequential steps with independent probabilities, all of which must succeed, none more important than the others. (One software version is the [Cryonics Calculator](http://www.cryonicscalculator.com/).) Specific equations and values have been proposed[^drake], usually yielding probability of success 0<x<10%, but let's look at how the steps interact and what that implies about alternatives. Because they are multiplied together with no weights, an improvement in one factor is as good as the same improvement in another factor: a 10% improvement in organizational continuity is as good as a 10% improvement in the odds that the vitrification preserves necessary information is as good as a 10% improvement in odds that revival tech will be developed, while similar thoughts are true for balancing profit and loss (it's all the same). A technology that increases the organizational parameter by 11% and decreases the information preservation parameter by 10% would be a net gain, because the 11% gain in one step outweighs the 10% loss in another, regardless of what concrete values one assigns.
+The [Drake equation](!Wikipedia) for [cryonics](!Wikipedia): is just a number of sequential steps with independent probabilities, all of which must succeed, none more important than the others. (One software version is the [Cryonics Calculator](http://www.cryonicscalculator.com/).) Specific equations and values have been proposed[^drake], usually yielding probability of success 0<_x_<10%.
 
 [^drake]: For example, Steven Harris in 1989 calculated [0.2-15%](http://www.alcor.org/Library/html/WillCryonicsWork.html) chance, Mike Perry in the same article runs a different analysis to arrive at 13-77%; Robin Hanson calculated in 2009 a [~6%](http://www.overcomingbias.com/2009/03/break-cryonics-down.html) chance, Roko, [23%](http://lesswrong.com/lw/3j/rationality_cryonics_and_pascals_wager/); and Mike Darwin in 2011 (personal communication) put the odds at <10%.
-
-[Plastination](!Wikipedia) and [chemical brain preservation](!Wikipedia) have been seriously proposed^[As far as I can tell, pretty much every pro-con for plastination vs cryonics applies to chemical fixation with the exception of the lipids, so in the following I treat them as synonymous.] as an alternative to cryonics, apparently first by Charles Olson in ["A Possible Cure for Death"](http://web.archive.org/web/20080924030010/http://www.charlesolson.com/CBOCureForDeath.html). R Perry discusses it favorably in ["The Road Less Traveled: Alternatives to Cryonics"](http://www.alcor.org/cryonics/cryonics0703.pdf). Greg Jordan says no convincing counter-arguments have been raised since Olson and strongly approves of it in his post ["Biostasis through chemopreservation"](http://www.depressedmetabolism.com/2008/02/25/better-biostasis-through-chemosuspension/).
-
-Is plastination a net gain?
 
 # Equation
 
@@ -23,7 +19,23 @@ One such Drake equation might break out the steps as follows:
 4. \* existence of organizations or entities arranging revival
 5. \* the actual revival
 
-# Advantages
+With those 5 values, one multiplies to get the final probability of each step coming true and hence of a successful revival. Because each step is multiplied together with no weights, improvements are equal - an improvement in one factor is as good as the same improvement in another factor: a 10% improvement in organizational continuity is as good as a 10% improvement in the odds that the vitrification preserves necessary information, which is as good as a 10% improvement in odds that revival tech will be developed. This also holds for balancing profit and loss (it's all the same). A technology that increases the organizational parameter by 11% and decreases the information preservation parameter by 10% would be a net gain, because the 11% gain in one step outweighs the 10% loss in another, regardless of what concrete values one assigns.
+
+# Plastination
+
+Biological samples have been accidentally preserved from the deep past through dehydration, freezing, anoxia, and chemical preservation; [ancient DNA](!Wikipedia) has (possibly) been recovered from 250 million year old salt crystals, and ice samples have preserved [800,000 year old](http://www.cbcb.umd.edu/confcour/CMSC828G-materials/Willerslev-etal-Science-2007.pdf) ([abstract](http://www.sciencemag.org/content/317/5834/111.abstract) and [400,000 year](http://www.sciencemag.org/content/300/5620/791) old DNA. 38,000 year old Neanderthal DNA has been [partially recovered & sequenced](http://www.ncbi.nlm.nih.gov/pubmed/17110569?dopt=AbstractPlus), as has 28,000 year old [woolly mammoth](http://www.ncbi.nlm.nih.gov/pubmed/16368896?dopt=AbstractPlus) DNA. One 4000 year old human genome was [sequenced](http://news.bbc.co.uk/2/hi/8506080.stm). Many of the samples chemically preserved in [amber](!Wikipedia) turned out to be [contaminated mistakes](!Wikipedia "Ancient DNA#Antediluvian DNA studies"), but nevertheless, the [preservation](!Wikipedia "Amber#Paleontological significance") is very good and down to [the cellular level](http://www.sciencemag.org/content/215/4537/1241.short):
+
+> "Examination of the ultrastructure of preserved tissue in the abdomen of a fossil fly (_Mycetophilidae Diptera_) entombed in Baltic amber revealed recognizable cell organelles. Structures that corresponded to muscle fibers, nuclei, ribosomes, lipid droplets, endoplasmic reticulum, and mitochondria were identified with the transmission electron microscope. Preservation was attributed to inert dehydration as well as the presence of compounds in the original sap which functioned as natural fixatives. This evidence of cell organelles in fossilized soft tissues represent an extreme form of mummification since Baltic amber is considered to have formed about 40 million years ago."
+
+[Ben Best](!Wikipedia) describes amber's preservative mechanism in ["Ancient DNA & Preservation in Amber"](http://benbest.com/misc/DNAamber.html):
+
+> "Tree sap (resin) contains sugars as well as alcohols & aldehydes (including terpenes), which are dehydrating & antibiotic as well as providing an air-tight seal to prevent further entry of oxygen. Myrrh is a mixture of resin, gum and essential oils from the _Commiphora_ plant that was used by the ancient Egyptians for embalming (by pouring it into the cranial, chest, abdominal and pelvic cavities) and mummification (by soaking the wrapping bandages in it)....Amber, as a sticky pitch from certain trees, can trap insects when fresh from a tree-wound. The sugars, alcohols & terpene-aldehydes diffuse into the insect to dehydrate & preserve. The amber surrounds the insect, providing an air-tight seal. Further oxidation & polymerization of the terpenes protect the insect from further damage. The continued polymerization of the amber terpenes eventually results in an insoluble gemstone-quality glass that preserves the insect in a strong encasement. Although such fortuituous combination of chemical preservation and oxygen-tight encasement should not be expected for preservation of large specimens (like humans or dinosaurs), the use of some hardened plastic or resin encasement could assist chemical and/or dehydration preservation."
+
+[Plastination](!Wikipedia) and [chemical brain preservation](!Wikipedia) have been seriously proposed^[As far as I can tell, pretty much every pro-con for plastination vs cryonics applies to chemical fixation with the exception of the lipids, so in the following I treat them as synonymous.] as an alternative to cryonics, apparently first by Charles Olson in ["A Possible Cure for Death"](http://web.archive.org/web/20080924030010/http://www.charlesolson.com/CBOCureForDeath.html). R Perry discusses it favorably in ["The Road Less Traveled: Alternatives to Cryonics"](http://www.alcor.org/cryonics/cryonics0703.pdf). Greg Jordan says no convincing counter-arguments have been raised since Olson and strongly approves of it in his post ["Biostasis through chemopreservation"](http://www.depressedmetabolism.com/2008/02/25/better-biostasis-through-chemosuspension/).
+
+Is plastination a net gain?
+
+## Advantages
 
 Advantage for plastination:
 
@@ -51,7 +63,7 @@ Advantage for plastination:
 
     This reads like it was written yesterday, and not in 1984 - more than 27 years ago. The predictions about the Human Genome Project have fared little better. My rule of thumb is that in the future, our understanding and information will outstrip our laboratory prototypes by even more than today, and the prototypes as much outstrip the generally available products; hence, I am unsurprised by the astounding progress in DNA sequencing, and equally unsurprised by the astounding dearth of new drugs and treatments. Fortunately for plastinated brains, enough information and understanding can make up for stasis in other areas; as long as computers and scanning technology continue to advance, things may yet work out for them.
 
-# Disadvantages
+## Disadvantages
 
 Disadvantages:
 
@@ -79,7 +91,7 @@ Disadvantages:
 
     > "A second example of redundancy involves the locations of the neuronal membranes (i.e. the neuronal configuration). The information of the membranes' positions is contained not only in the physical positions of the membrane lipids, but also in the cellular cytoskeleton (which is made of proteins) whose purpose is, among other things, to hold the membrane in its configuration (15). Thus, even if a substantial proportion of lipids were extracted in the course of chemical preservation of a brain (as is the case with some preservation techniques), it is plausible that the information of the neuronal configuration would still exist in the crosslinked cytoskeletons of the neurons."
 
-# Analysis
+## Analysis
 
 Counting the discrete items, we found 4 for plastination and 2 against (yes, one point is counted twice). This is a useless count, of course. Of those favorable 5, 2 seem to me to be probability differentials of magnitude. Of the unfavorable 3, 1 seems to be of magnitude. This count favors plastination as well.
 
