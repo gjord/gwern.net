@@ -184,7 +184,9 @@ fold [mempty, 1, 2, 3, 4, 5] -- not the actual fold; artistic license
 ~>
 mempty `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend 5
 ~>
-0 `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend 5
+0 `mappend` 1 `mappend` 2 `mappend` 3 `mappend` 4 `mappend` 5
+~>
+0 + 1 + 2 + 3 + 4 + 5
 ~>
 15
 ~~~~
