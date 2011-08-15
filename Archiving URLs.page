@@ -110,6 +110,10 @@ Usage of `archiver` might look like `archiver ~/.urls.txt gwern0@gmail.com`. In 
 
 `archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way. For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping"; done'`. Alternately, you might use a heavy-duty archive program like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
 
+### URL sources
+
+#### Browser history
+
 There are a number of ways to populate the source text file. For example, I have a script `firefox-urls`:
 
 ~~~{.bash}
@@ -133,8 +137,29 @@ This is called every hour by `cron`:
 
 This gets all visited URLs in the last time period and prints them out to the file for archiver to process. Hence, everything I browse is backed-up through `archiver`.
 
+#### Document links
+
 More useful perhaps is a script to extract external links from Markdown files and print them to standard out: [link-extractor.hs](haskell/link-extractor.hs)
 
 So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in my wiki as arguments, and add the thousand or so external links to the archiver queue (eg. `find . -name "*.page" | xargs runhaskell link-extractor.hs >> ~/.urls.txt`); they will eventually be archived/backed up.
 
-Combined with a tool like `link-checker` means that there never need be any broken links on gwern.net since one can either find a live link or use the archived version. Specifically, one can take the `wget` dump and if it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert it into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.) I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
+#### Website spidering
+
+Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
+
+~~~{.bash}
+linkchecker -odot -v --ignore-url=^mailto --no-warnings --timeout=100 http://www.longbets.org | fgrep http | fgrep -v "label=" | fgrep -v -- "->" | fgrep -v '" [' | fgrep -v "/ " | sed -e "s/href=\"//" -e "s/\",//" | tr -d ' ' | sort -u >> ~/.urls.txt
+~~~
+
+# Reacting to broken links
+
+`archiver` combined with a tool like `link-checker` means that there will rarely be any broken links on `gwern.net` since one can either find a live link or use the archived version. In theory, one has multiple options now:
+
+0. Search for a copy on the live Web
+1. link the Internet Archive copy
+2. link the WebCite copy
+3. use the `wget` dump
+
+    If it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert the dump into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.)
+
+    I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
