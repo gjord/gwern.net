@@ -115,7 +115,7 @@ The generation is too easy for words:
 ~~~~{.haskell}
 -- Define an infinite list of our item.
 duplicate :: a -> [a]
-duplicate a = a:a
+duplicate a = a : duplicate a
 ~~~~~
 
 But what's our demand function? A little thinking and we know that we have a list, a number, and we get back a list. [Int -> [a] -> [a]](!Hoogle) describes a few functions, the second of which turns out to be what we want: [take](!Hoogle).
