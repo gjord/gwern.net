@@ -262,6 +262,31 @@ To summarize my feelings:
 - I would be mildly surprised if both #3 & #5 succeed^[Since they're challenging and long-outstanding Cabal features], but I expect at least one of them to succeed. Which, I am not sure.
 - \#1 seems a bit doubtful but is more likely to succeed (because presumably most of the heavy lifting was done previously). I expect with confidence that #4 & #6 will succeed.
 
+<!--
+#### 2011 results
+
+1. "Improve EclipseFP"; Alejandro Serrano, mentored by Thomas Schilling
+
+   Successful? http://serras-haskell-gsoc.blogspot.com/2011/08/end-of-summer.html
+
+   > "One of the tasks I've also done during the summer is building a new webpage for EclipseFP. You can find it in <http://eclipsefp.github.com/>. In the next days, a new release of EclipseFP with all the changes I've done though the summer will be made available."
+2. "Simplified OpenGL bindings"; Alexander Göransson, mentored by Jason Dagit
+3. "Interpreter Support for the Cabal-Install Build Tool"; anklesaria, by Duncan Coutts
+4. "Convert the text package to use UTF-8 internally"; Jasper Van der Jeugt, by Edward Kmett
+5. "Build multiple Cabal packages in parallel"; Mikhail Glushenkov, by Johan Tibell
+
+    Successful? http://dissocial.st/blog/2011-08-22-GSoC-Final
+
+    1. First of all, the parallel patches need to be merged into the mainline repository, which may take some time.
+    2. Next, there are possibilities for improvement. Current version of the code works at the package granularity (a package is always built by a single thread), which doesn’t work so well for giant packages like Agda and Darcs. We can get better speedup by ditching ghc --make and instead compiling each module separately with ghc -c; the dependency graph can be extracted with ghc -M. This should be also integrated with the build command.
+    3. Third, there is the question of other compilers (e.g. Hugs). At the moment, only GHC is supported by the parallel install code, but it should be possible to adapt it to work with other compilers. This is not considered a top priority, though.
+
+    but, not very fast? asked at http://dissocial.st/blog/2011-08-22-GSoC-Final#comment-293233466
+6. "Darcs Bridge"; Owen Stephens, by Ganesh Sittampalam
+7. "Darcs: primitive patches version 3"; Petr Ročkai, by Eric Kow
+
+-->
+
 ### Lessons learned
 
 So, what lessons can we learn from the past years of SoCs? It seems to me like there are roughly 3 groups of explanations for failure. They are:
