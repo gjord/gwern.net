@@ -148,7 +148,7 @@ So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in 
 Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
 
 ~~~{.bash}
-linkchecker -odot -v --ignore-url=^mailto --no-warnings --timeout=100 http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | sort -u >> ~/.urls.txt
+nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | sort -u >> ~/.urls.txt
 ~~~
 
 # Reacting to broken links
@@ -158,7 +158,8 @@ linkchecker -odot -v --ignore-url=^mailto --no-warnings --timeout=100 http://www
 0. Search for a copy on the live Web
 1. link the Internet Archive copy
 2. link the WebCite copy
-3. use the `wget` dump
+3. link the WikiWix copy
+4. use the `wget` dump
 
     If it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert the dump into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.)
 
