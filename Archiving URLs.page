@@ -79,7 +79,7 @@ The code is not the prettiest, but it's fairly straightforward:
     ~~~{.bash}
     #!/bin/sh
     set -e
-    cat /dev/stdin | sed -e "s/#.*//" | sed -e "s/&sid=.*$//" | sed -e "s/\/$//" | sort -u | grep -v -e 4chan -e reddit ...
+    cat /dev/stdin | sed -e "s/#.*//" | sed -e "s/&sid=.*$//" | sed -e "s/\/$//" | grep -v -e 4chan -e reddit ...
     ~~~
 
 A local copy is not the best resource - what if a link goes dead in a way your tool cannot detect so you don't *know* to put up your copy somewhere? But it solves the problem pretty decisively.
@@ -148,7 +148,7 @@ So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in 
 Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
 
 ~~~{.bash}
-nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | sort -u >> ~/.urls.txt
+nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | filter-urls >> ~/.urls.txt
 ~~~
 
 # Reacting to broken links
