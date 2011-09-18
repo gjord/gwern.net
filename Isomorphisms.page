@@ -2,11 +2,11 @@
 description: Investigating when two theories or representations *mean* the same things.
 ...
 
-We often speak of systems being translatable or being equivalent in some sense, and especially we want to use systems to look at each other and gain insight; but a translation between systems with no commonality strikes us as senseless and wrong in some way.
+Metaphors and analogies are the coin of human thought and key to interpretation in art. We often speak of systems being translatable or being equivalent in some sense, and especially we want to use systems to look at each other and gain insight; but a translation between systems with no commonality strikes us as senseless and wrong in some way. We know that some translations are good and valid, and some are not. But how are we judging this?
 
 # Mad morphisms
 
-These translations become more pathological the more detailed and thought through they are. That such translations are not useful, or of value, or even harmless is the reason why we need to know what separates the healthy from the ill. Umberto Eco's _[Foucault's Pendulum](!Wikipedia)_ has a passage^[Chapter 66] (but one of many well worth reading) on precisely this mania:
+Translations become more pathological the more detailed and thorough they are. That such translations are not useful, or of value, or even harmless is the reason why we need to know what separates the healthy from the ill; you may not be interested in diseased thinking, but diseased thinking is interested in you (ask survivors of ideological regimes like Communism). [Umberto Eco](!Wikipedia)'s _[Foucault's Pendulum](!Wikipedia)_ has a passage^[Chapter 66] (but one of many well worth reading) on precisely this mania:
 
 > '"Last night I happened to come across a driver's manual. Maybe it was the semidarkness, or what you had said to me, but I began to imagine that those pages were saying Something Else. Suppose the automobile existed only to serve as metaphor of creation? And we mustn't confine ourselves to the exterior, or to the surface reality of the dashboard; we must learn to see what only the Maker sees, what lies beneath. What lies beneath and what lies above. It is the Tree of the [Sefirot](!Wikipedia)."\
 > "You don't say."\
@@ -43,7 +43,7 @@ Here's an example of what I mean. Suppose we had invented the decimal number sys
 
 We can't be sure _a priori_ that they're just the same, that they're both number systems and have done with it. [Complex numbers](!Wikipedia) function differently from the [hyperreals](!Wikipedia), which are very different from the natural numbers. Or, another example might be if we add 2 apples together, we have 2 things; but if I add 2 pails of liquids together, I have only 1 water - it's the volume that increases, not the number of components.[^wiseguy]
 
-So if we were interested in showing a good translation between unary and decimal, what would this even mean? Well, it would mean that a [roundtrip](!Wikipedia "Round-trip format conversion") property holds: if we take a system as a single function, 'round-trip' means we're asking for a [bijection](!Wikipedia) between the inputs and outputs of the 2 functions. For example, we can turn a decimal into an unary and then back again into the original, and vice-versa. If we prefer to see our systems as little machines or [networks of 'states](!Wikipedia "State transition system")', we're defining their equality as a [bisimulation](!Wikipedia).
+So if we were interested in showing a good translation between unary and decimal, what would this even mean? Well, it would mean that a [round-trip](!Wikipedia "Round-trip format conversion") property holds: if we take a system as a single function, 'round-trip' means we're asking for a [bijection](!Wikipedia) between the inputs and outputs of the 2 functions. For example, we can turn a decimal into an unary and then back again into the original, and vice-versa. If we prefer to see our systems as little machines or [networks of 'states'](!Wikipedia "State transition system"), we're defining their equality as a [bisimulation](!Wikipedia).
 
 ### Hacking the code
 
@@ -90,7 +90,7 @@ instance Num Unary where
 -- We reuse the + defined on Ints, of course
 ~~~~
 
-This seems intuitively right. If |||| -> 4, and ||||| -> 5, and 9 -> |||||||||, then the obvious way from |||| and ||||| to ||||||||| is to smoosh them together. (Is intuition not good enough a justification? Well, it's simple; and it's not like all the other possible operators for implementing addition in unary have any better claim to our attention. The ultimate justification is whether it works.)
+This seems intuitively right. If |||| -> 4, and ||||| -> 5, and 9 -> |||||||||, then the obvious way from |||| and ||||| to ||||||||| is to smash them together. (Is intuition not good enough a justification? Well, it's simple; and it's not like all the other possible operators for implementing addition in unary have any better claim to our attention. The ultimate justification is whether it works.)
 
 So two properties looks like:
 
