@@ -31,6 +31,7 @@ main = do  hakyll $ do
                compile $ myPageCompiler
 
                  >>> requireA "templates/sidebar.markdown" (setFieldA "sidebar" $ arr pageBody)
+                 >>> renderModificationTime "modified" "%e %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "templates/default.html"
 
              _ <- match "templates/default.html" $ compile templateCompiler
