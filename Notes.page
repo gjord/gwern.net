@@ -1197,3 +1197,24 @@ In other words, the shadow rate is a proxy for how corrupt the media is.
 [^adultery]: ["Married, With Infidelities"](https://www.nytimes.com/2011/07/03/magazine/infidelity-will-keep-us-together.html):
 
     > "In 2001, The Journal of Family Psychology summarized earlier research, finding that "infidelity occurs in a reliable minority of American marriages." Estimates that "between 20 and 25 percent of all Americans will have sex with someone other than their spouse while they are married" are conservative, the authors wrote. In 2010, NORC, a research center at the University of Chicago, found that, among those who had ever been married, 14 percent of women and 20 percent of men admitted to affairs."
+
+# Defining 'but'
+
+The word 'but' is pretty interesting. It seems to be short hand for a pretty complex logical argument, which isn't *just* [modus tollens](!Wikipedia) but something else.
+
+(Modus tollens, in a quick refresher, is 'A ~> B', 'not B', therefore, 'not A'. Its counterpart is [modus ponens](!Wikipedia), 'A ~> B', 'A', therefore, 'B'.)
+
+Most arguments proceed by repeated modus ponens; 'this' implies 'that' which implies 'the other', and 'this' is in fact the case, so you must agree with me about 'the other'. It's fairly rare to try to dispute an argument immediately by denying 'this' but conceding the rest of the argument; instead, one replies with a 'but'. But what?
+
+I thought, and I think we could formalize 'but' as a probabilistic modus tollens. Usually we know we're dealing in slippery probabilities and inductions; if I make an argument about GDP and tax rates, I only get a reliable conclusion if I am not talking about the cooked books of Greece. My conclusion is always less reliable than my premises because probability intervenes at every step: the probability of both A and B must be less than or equal to the probability of either A or B. So, when we argue by repeated modus ponens, what we are actually saying (although we pretend to be using good old syllogisms and deductive logic) is something more like: 'A implies B; probably A; therefore (less) probably B'.
+
+When someone replies with 'But C!', what they are saying is: 'C implies ~B;  both A implies B and C implies ~B cannot be true as it is a contradiction, and C is more likely than A, so we should really conclude that C and ~A, and therefore, ~B'.
+
+They are setting up an unstated parallel chain of arguments. Imagine a physicist discussing FTL neutrinos; 'this observation therefore that belief therefore this conclusion that the neutrinos arrived faster than light'. And someone speaks up, saying 'But there was no burst of neutrinos *before* we saw light from that recent supernova!' What is going on here is the audience is weighing the probabilities of two premises, which then work backwards to the causal chains. One might conclude that it is more likely that the supernova observations were correct than the FTL observations were correct, and thus reason with modus tollens about the FTL - 'FTL-Correct ~> (seeing neutrino burst)^[To be clear, '~Seeing-neutrino-burst' means something like 'the equipment or staff screwed up and the lack of observation is some mistake or bad luck'. In this case, both theories think that the neutrino burst *does* exist.]; ~(seeing neutrino burst); therefore, ~FTL-Correct'. But if it goes the other way, then one would reason, 'Seeing-neutrino-burst ~> ~FTL; FTL; therefore, ~Seeing-neutrino-burst'.
+
+You don't really find such probabilistic inference in  English except in 'but'. Try to explain it without 'but'. Here's an example:
+
+1. 'Steve ran by with a bloody sword, but he likes to role-play games so I don't think he's a serial killer' versus
+2. 'Steve ran by clutching a sword which is consistent with the theory that he is a serial killer and also consistent with the theory that he is role-playing a game; I have a low prior for him ever being a serial killer and a high prior for him carrying a sword, bloody or otherwise, for reasons like role-playing and when I multiply them out, the role-playing explanation has a higher probability than the serial killer explanation'
+
+I exaggerate a little here; nevertheless, I think this shows 'but' is a little more complex and sophisticated than one would initially suspect.o
