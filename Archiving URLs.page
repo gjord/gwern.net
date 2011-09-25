@@ -90,7 +90,13 @@ There are ways to cut down on the size; if you tar it all up and run [7-Zip](!Wi
 
 ## Remote caching
 
-We can ask a third party to keep a cache for us. The only three general [archive site](!Wikipedia) I know of are the [Internet Archive](!Wikipedia), [WebCite](!Wikipedia), and Linterweb's WikiWix^[Which I suspect is only accidentally 'general' and would shut down access if there were some other way to ensure that Wikipedia external links still got archived.]. There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which obviously are not publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](http://news.ycombinator.com/item?id=2880427).]
+We can ask a third party to keep a cache for us. The only three general [archive site](!Wikipedia) I know of are
+
+1. the [Internet Archive](!Wikipedia)
+2. [WebCite](!Wikipedia)
+3. Linterweb's WikiWix^[Which I suspect is only accidentally 'general' and would shut down access if there were some other way to ensure that Wikipedia external links still got archived.].
+
+There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which obviously are not publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](http://news.ycombinator.com/item?id=2880427).]
 
 (An example would be <http://bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/> being archived at <http://webcitation.org/5ur7ifr12>.)
 
@@ -108,7 +114,11 @@ That is, `archiver` is a daemon which will process a specified text file, each l
 
 Usage of `archiver` might look like `archiver ~/.urls.txt gwern0@gmail.com`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern0@gmail.com; done`. If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com; done'`.
 
-`archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way. For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping"; done'`. Alternately, you might use a heavy-duty archive program like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
+`archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way.
+
+For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm"; done'`.
+
+Alternately, you might use `curl` or a specialized archive downloader like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
 
 ### URL sources
 
