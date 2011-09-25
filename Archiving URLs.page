@@ -120,8 +120,8 @@ There are a number of ways to populate the source text file. For example, I have
 #!/bin/sh
 set -e
 
-cp `find ~/.mozilla/ -name "places.sqlite"` ~/
-sqlite3 places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
+cp --force `find ~/.mozilla/firefox/ -name "places.sqlite"|sort|head -1` ~/
+sqlite3 -batch places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
                        WHERE moz_places.id = moz_historyvisits.place_id and visit_date > strftime('%s','now','-1 day')*1000000 ORDER by \
                        visit_date;" | filter-urls >> ~/.urls.txt
 rm ~/places.sqlite
