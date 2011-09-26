@@ -116,7 +116,7 @@ Usage of `archiver` might look like `archiver ~/.urls.txt gwern0@gmail.com`. In 
 
 `archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way.
 
-For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm"; done'`.
+For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm --user-agent='Firefox/3.5'"; done'`.
 
 Alternately, you might use `curl` or a specialized archive downloader like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
 
