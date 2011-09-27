@@ -19,7 +19,7 @@ Electricity doesn't come from nowhere. If we are to do even the most simplistic 
 
 The most obvious cost is *air pollution*. It is major enough that we don't even need to consider any other costs, because [air pollution kills](http://nextbigfuture.com/2011/03/global-health-risks.html). The editors of Next Big Future have listed a number of interesting statistics from the WHO and other studies of electricity generation and the deadliness of air pollution.
 
-For example, half the world's electricity production is done by that filthiest and most dangerous of sources, coal. (In comparison, nuclear power is a stroll in the park. French users can run Folding@home with 75% cleaner conscience that the rest of us.) We will - generously - pretend that everyone contributing to Folding@home is located in the US, with its relatively clean coal plants. Nevertheless, each terawatt-hour of coal kills [15 people](http://nextbigfuture.com/2011/03/deaths-per-twh-by-energy-source.html). How often does Folding@home burn through a terawatt? Well, 1000 megawatt-hours is one gigawatt-hour, and 1000 gigawatt-hours is one terawatt-hour, and $1000 \times 1000 = 1,000,000$, so how fast does Folding@home burn through 1 million megawatt-hours? Each year, Folding@home uses $15 \times 24 \times 365.25 = 131,490$ megawatt-hours, or 13.15% of a terawatt-hour. Each terawatt-hour means, remember, 15 dead people; in our grim calculus, what is 13.15% of 15 dead people? 1.8 dead people.
+For example, half the world's electricity production is done by that filthiest and most dangerous of sources, coal. (In comparison, nuclear power is a stroll in the park. French users can run Folding@home with 75% cleaner conscience that the rest of us.) We will - generously - pretend that everyone contributing to Folding@home is located in the US, with its relatively clean coal plants. Nevertheless, each terawatt-hour of coal kills [15 people](http://nextbigfuture.com/2011/03/deaths-per-twh-by-energy-source.html). How often does Folding@home burn through a terawatt? Well, 1000 megawatt-hours is one gigawatt-hour, and 1000 gigawatt-hours is one terawatt-hour, and $1000 \times 1000 = 1,000,000$, so how fast does Folding@home burn through 1 million megawatt-hours? Each year, Folding@home uses $15 \times 24 \times 365.25 = 131,490$ megawatt-hours, or 131.5 gigawatts, or 13.15% of a terawatt-hour. Each terawatt-hour means, remember, 15 dead people; in our grim calculus, what is 13.15% of 15 dead people? 1.8 dead people.
 
 So if the power is entirely derived from coal, Folding@home kills 2 people a year.
 
@@ -62,6 +62,42 @@ Wikipedia has a [partial list](!Wikipedia "Folding@home#Results") of 75 papers p
 
 As I am not a biologist nor omniscient, I can't say for *sure* that the Folding@home work wasn't useful, and I certainly couldn't say it looks pretty worthless. But I feel much more comfortable asserting that the $12.65m could have been better spent on saving those 12,000 people (and the 12,000 people the year before, and the 12,000 the year before that, and...).
 
+### Updating on evidence
+#### The hope function
+
+No one has yet shown me anything valuable done by Folding@home; but, they argue, it may yet produce something next year or perhaps the year after that. This is a statistical argument. There is an interesting perspective on this suggestion, known as the [hope function](http://www.xamuel.com/hope-function/). The idea is that you are looking at each time period (each year) for some sort of singular event (a discovery justifying Folding@home's air-pollution and fatalities), but you also have a certain probability for the event *never* happening, for example because it is impossible. As each time period passes without the event, unsurprisingly, one's probability that the event will happen the next period increases - as does the belief the event is impossible! (This isn't contradictory.)
+
+##### Example: AI
+
+Interestingly, depending on one's belief as to the probability distribution, the increases can be very small. One example I've run concerns the creation of Artificial Intelligence; AI enthusiasts have suggested AI could be invented anywhere in a very broad time span (Alan Turing, for example, putting it at post-1990). Many of those dates (like 1990) have already passed, and AI has clearly not happened. This has lead to a skepticism and belief that AI enthusiasts are irrational dreamers who refuse to update on the evidence; but what does the hope function say? [I and others](http://lesswrong.com/lw/5hq/an_inflection_point_for_probability_estimates_of/428t) ran some estimates and found that for reasonable values, the failure of AI to happen only minimally supports the belief that AI is impossible!
+
+For example, suppose one thought AI if possible would show up in the 100 years between 2000 and 2100 (a superset of [many expert forecasts](http://www.aleph.se/andart/archives/2011/04/when_will_we_get_our_robot_overlords.html)), that its possibility was 90% (0.9), but it was an essentially random breakthrough which could as easily happen in 2000 as 2099 (a [uniform distribution](!Wikipedia "Uniform distribution (discrete)")). In _x_ years, what is our new belief about its possibility? The equation goes:
+
+$\frac{\text{numberOfPeriods} - x}{\frac{\text{numberOfPeriods}}{\text{possibility}} - x}$
+
+We substitute in our 100 years and 90% belief:
+
+$\frac{100 - x}{\frac{100}{0.9} - x}$ <!-- let fai x = (100-x) / ((100 / 0.9) - x) in fai 11 -->
+
+We plug the year of interest into the hope function and find that in 2050, or in 50 years ($\frac{100 - 50}{\frac{100}{0.9} - 50} = 0.81$), our original 90% belief AI is possible has fallen only 9%, to 81%! (Intuitively^[For example, [`bcoburn`](http://lesswrong.com/lw/5hq/an_inflection_point_for_probability_estimates_of/432q) remarks: "I personally expected that P(AI) would drop-off roughly linearly as _n_ increased, so this certainly seems counter-intuitive to me."], one might think that a half-century of failure would count for more, but it doesn't.) Even in 2090, after 90 years of failure ($\frac{100 - 90}{\frac{100}{0.9} - 90} = 0.474$), our view that AI is impossible has fallen only to 47%.
+
+If we adopt [a more realistic distribution](http://lesswrong.com/lw/5hq/an_inflection_point_for_probability_estimates_of/4291) like a [bell curve](!Wikipedia) centered in 2050, we get similar results - very small decreases each year until 2050, followed by a sudden plummet (as most of the chances get used up each year at or near the peak of the bell curve), and then a gradual curve downwards to 0% as 2100 draws near.
+
+##### Waiting for Foldot
+
+Setting up a hope function equation for Folding@home is conceptually clear: what is the full lifetime of Folding@home, how many years has it run without finding such a thing, what is the probability it will ever find anything useful, and what is the distribution of said probability?
+
+1. Internet distributed-computing projects are young enough that there's no clear lifecycle. [Seti@home](!Wikipedia) looks like it will never shut down, other projects shut down after a year or two or finished their goals, like a number of the cryptographic brute-forcing projects TODO. Let's guess and say Folding@home has another decade to go, for a total _n_ = 20
+2. Folding@home began in 2000 or so, so we can put _x_ at 11
+3. This is the contentious one. Let's see what 90% does - that is surely a favorable probability
+4. We could choose either the uniform or bell curve distribution; both are attractive as models (Folding@home as serendipity machine! Folding@home as project gearing up in the early years for its maturity and eventual decline!) But as it happens, we already put _n_ = 20 and _x_ = 11, so we'd be in the middle of the bell curve and that's almost the same as the uniform distribution. So we'll use the simpler uniform distribution.
+
+We substitute in:
+
+$\frac{10 - 11}{\frac{20}{0.9} - 11} = 0.8$ or a fall of 10% in our belief that Folding@home will ever produce anything, which is a little sobering. Switching to the bell curve distribution will only make matters worse; recall that after the midpoint, the bell curve plummeted. With a bell curve centered on 2010 or 2011 and an end date of 2020, the hope function drops the 90% belief down to the <30% range by 2012 or 2013. (Further examples would not be enlightening; the reader can calculate out the variations himself.)
+
+I leave some questions for the Folding@home enthusiast to ponder: Are these unreasonable assumptions? (Aren't they favorable?) Do you have any real reason to believe that Folding@home's discoveries ought to be heavily back-loaded, that one would expect it to take, say, 15 years (consuming ~2 terawatt-hours)? Would you have argued for this back-loading *before* reading about the hope function? If you do not dispute the assumptions, have you actually dropped your faith in Folding@home by ~10%? Or at all? What sort of evidence would convince you Folding@home is harmful?
+
 ## Doing it less wrong: Rosetta@home
 
 So what's the right way then? Look at a very similar grid computing project, [Rosetta@home](!Wikipedia). Rosetta@home has only $\frac{1}{175}$th the computing power of Folding@home and presumably consumes proportionately less electricity; hence it directly kills $\frac{1.01}{175}$ people a year and indirectly kills $\frac{12650}{175} = 72$. This is three orders of magnitude fewer deaths. And with its applied focus, the [benefits](!Wikipedia "Rosetta@home#Disease-related research") are a *little* bit better than Folding@home.
@@ -88,7 +124,7 @@ When you run a few numbers, this seems like a pretty uncontroversial conclusion.
     >
     > One dignitary was conspicuously absent from the gala: the event's third honorary co-chair, Michelle Obama. Her office said that a scheduling conflict had prevented her from attending. Yet had the First Lady shared the stage with Koch it might have created an awkward tableau..."
 
-    A quick calculation: $3+100+20+10+40=173$, so a vastly incomplete tally of the Koch donations is $200 million or roughly 200,000 dead Africans. Does anyone want to argue that the Kochs' philanthropy is even *remotely* close to being efficient, and that these donations were anything but purchasing status? In some cases, one wonders why they even try to pretend the event was charity; ["More Cash to Go to a Hall Than to Haiti"](http://www.nytimes.com/2010/03/18/arts/music/18benefit.html), _The New York Times_:
+    A quick calculation: $3+100+20+10+40=173$, so a vastly incomplete tally of the Koch donations is $200 million or roughly 200,000 dead Africans. Does anyone want to argue that the Kochs' philanthropy is even *remotely* close to being efficient, and that these donations were anything but purchasing status? In some cases, one wonders why they even pretend; ["More Cash to Go to a Hall Than to Haiti"](http://www.nytimes.com/2010/03/18/arts/music/18benefit.html), _The New York Times_:
 
     > "Even if the event's nearly $200,000 worth of tickets sell out, less than $8,000 from the sales will go to the cause. The concert, though, is expected to raise some money, thanks mainly to a $50,000 subsidy by the Montblanc company and $10,000 by CAMI Music, the concert's presenter and Mr. Lang's management agency...No hard and fast guidelines exist on how much money raised in a benefit should go for expenses, and it is not unusual for galas to raise little money or even lose it...In an accounting provided by CAMI Music, the costs will total $181,590. If the hall sells out, box office proceeds will total $189,793, excluding complimentary tickets."
 
@@ -110,9 +146,9 @@ When you run a few numbers, this seems like a pretty uncontroversial conclusion.
 
     > "GiveWell customers never seem interested in public recognition. In our first year, we considered posting acknowledgments to major supporters on our website, but there was no interest. Since then, we have had many customers who require anonymity (even when we ask them to take public credit for our sake) and no customers who've requested that we publicly thank them or otherwise help them get recognition."
 
-    It is a little difficult for Hansonian theories of charity to explain wholly anonymous charity. Possibly charity in such cases is due to signaling within a small group, rather than public signaling to thousands or millions of people (the general populace). And who knows; maybe there is genuine altruism in this world of dust.
+    It is a little difficult for Hansonian theories of charity to explain wholly anonymous charity. Possibly charity in such cases is due to signaling within a small group, rather than public signaling to thousands or millions of people (the general populace). And who knows; maybe there is genuine altruism in this world of dust and delusions.
 
-It is sad and pitiable that we spend so many billions on things like dog food and cosmetics rather than saving lives; but isn't it even sadder that we can avoid that error, and *try* to do good, and *still* fail? The only thing sadder, I think, would be if we could know of our failure and go on supporting Folding@home - if charity was not about helping.
+It is sad and pitiable that we spend so many billions on things like dog food and cosmetics rather than saving lives; but isn't it even sadder that we can avoid that error, and *try* to do good, and *still* fail? The only thing sadder, I think, would be if we could know of our failure and go on supporting Folding@home. If charity truly was not about helping.
 
 # See Also
 
