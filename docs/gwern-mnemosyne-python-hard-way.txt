@@ -332,10 +332,14 @@ my_hair = 'Brown'
 my_name = 'Zed A. Shaw'
 print "Let's talk about %s." % my_name
 
+Let's talk about Zed A. Shaw.
+
 print "Let's talk about %s." % 'Zed A. Shaw'
 
 my_weight = 180
 print "He's %d inches tall." % my_height
+
+He's 74 inches tall.
 
 my_height = 180
 print "He's %d% inches tall." % my_height
@@ -348,16 +352,22 @@ error
 my_height = 180
 print "He's %d inches tall." % (my_height)
 
-
 print "He's %d pounds heavy." % my_weight
+He's 180 pounds heavy.
 
 print "He's got %s eyes and %s hair." % (my_eyes, my_hair)
+He's got Blue eyes and Brown hair.
+
 print "His teeth are usually %s depending on the coffee." % my_teeth
+His teeth are usually White depending on the coffee.
+
+
 
 my_age = 35
 my_height = 74
 my_weight = 180
 print "If I add %d, %d, and %d I get %d." % (my_age, my_height, my_weight, my_age + my_height + my_weight)
+If I add 35, 74, and 180 I get 289.
 
 print "he's %d feet tall" % 10.0
 he's 10 feet tall
