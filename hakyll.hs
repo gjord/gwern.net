@@ -48,7 +48,7 @@ options :: WriterOptions
 options = defaultWriterOptions{ writerSectionDivs = True,
                                        writerStandalone = True,
                                        writerTableOfContents = True,
-                                       writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
+                                       writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
                                        writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
                                        writerEmailObfuscation = NoObfuscation }
 
