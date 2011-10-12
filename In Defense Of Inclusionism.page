@@ -138,7 +138,34 @@ troubling: http://www.kaggle.com/c/wikichallenge/forums/t/674/sampling-approach 
 <!--
 ### The anime editing community is dead; who killed it?
 
-I no longer edit as much as I used to; frequently when I find an excellent citation (article, review, interview etc.) I will often just copy it into the External links section or (if I am feeling especially energetic) I will excerpt the important bits onto the article's Talk page. I realized that this constitute a [natural experiment](!Wikipedia): I could go back and see how often the excerpts were copied by another editor into the article. This is better than just looking at how often anime editors edit because it is less related to outside events - perhaps anime news was simply boring over that period. Whereas if there are no anime editors who will edit even when presented with gift-wrapped RSs (link & excerpt specifically called out for their attention, and easily copy-pasted into the article), then that's pretty convincing evidence that there is no longer a 'there' there.
+I no longer edit as much as I used to; frequently when I find an excellent citation (article, review, interview etc.) I will often just copy it into the External links section or (if I am feeling especially energetic) I will excerpt the important bits onto the article's Talk page. I realized that this constitutes what one might call a "[natural experiment](!Wikipedia)": I could go back and see how often the excerpts were copied by another editor into the article. This is better than just looking at how often anime editors edit because it is less related to outside events - perhaps anime news was simply boring over that period. Whereas if there are no anime editors who will edit even when presented with gift-wrapped RSs (link & excerpt specifically called out for their attention, and easily copy-pasted into the article), then that's pretty convincing evidence that there is no longer a 'there' there.
+
+I've begun to wonder: how many of our readers actually look at the talk page as well? I know some writers writing articles on Wikipedia have mentioned or rhapsodized at length on the interest of the talk pages for articles, but they are rare birds and statistically irrelevant.
+
+It might be enough simply to know how much traffic to talk pages there is period. I doubt editors make up much of Wikipedia's traffic, with the shriveling of the editing population, which never kept pace with the growth into a top 10/20 website, so that would give a good upper bound. It would seem to be very small; there's not a single Talk page in the top 1000 on <http://stats.grok.se/en/top>. We can look at individual articles; [Talk:Anime](!Wikipedia) has 273 hits over [one month](http://stats.grok.se/en/201109/Talk%3AAnime) while the article [Anime](!Wikipedia) has [128,657 hits](http://stats.grok.se/en/201109/Anime) (a factor of 471); or [Talk:Barack Obama](!Wikipedia) with 1800 over [that month](http://stats.grok.se/en/201109/Talk%3ABarack_Obama) compared to [Barack Obama](!Wikipedia) with its [504,827 hits](http://stats.grok.se/en/201109/Barack%20Obama) (a factor of 280).
+
+The raw stats used by `stats.grok.se` are [available](http://dumps.wikimedia.org/other/pagecounts-raw/2011/2011-09/) for download, so we can look at *all* page hits, sum all article and all Talk hits and see what the ratio is for the entire English Wikipedia is on one day. (each file seems to be an hour of the day so I downloaded 24 and gunzipped them all.) We do some quick shell scripting. To find the aggregate hits for just talk pages:
+
+~~~~{.sh}
+grep -e '^en Talk:' -e '^en talk:' pagecounts-* | cut -d ' ' -f 3 | paste -sd +|bc
+~>
+582771
+~~~~
+
+To find aggregate hits for non-talk pages:
+
+~~~~{.sh}
+grep -e '^en ' pagecounts-* | grep -v -e '^en Talk:' -e '^en talk:' | cut -d ' ' -f 3 | paste -sd + | bc
+~>
+202680742
+~~~~
+
+The numbers look sane - 58,2771 for all talk page hits versus 2,0268,0742 for all non-talk page hits. A factor of 347 is pretty much around where I was expecting based on those previous 2 pages. The traffic data's respective developer, Domas, says the statistics exclude API hits but includes logged-in editor hits, so we can safely say that anonymous users made far *fewer* than 58k page views that day and hence the true ratios are worse than our previous ratios of 471/280/347. To put the relative numbers into proper perspective, we can convert into percentages:
+
+- If we take the absolutely most favorable ratio, Obama's at 280, and then further assume it was looked at by 0 logged-in users (yeah right), then that implies something posted on its talk page will be seen by <0.35% of interested readers ($(\frac{504827}{1800} \times 1.0) \times 100$).
+- If we use the aggregate statistic and say, generously, that registered users make up only 90% of the page views, then something on the talk page will be seen by <*0.028*% of interested readers ($(\frac{202680742}{582771} \times 0.1) \times 100$).
+
+This suggests that the common practice of 'moving reference/link to the Talk page' be named what it is: a subtle form of deletion. It would be a service to our readers to end this practice entirely: if a link is good enough to be hidden on a talk page (supposedly in the interests of incorporating it in the future), then it is good enough to put at the end of External Links or a Further Reading section, and our countless thousands of readers will not be deprived of the chance to make use of it.
 
 On at least two articles ([Talk:Gurren Lagann#Interviews](!Wikipedia) & [Talk:Royal Space Force: The Wings of Honnêamise#Sources](!Wikipedia)), I have been strenuously opposed by editors who object to having more than a handful of links in the designated External links section; they acknowledged the links were (mostly) all undoubted RSs and relevant to the article - but they refused to incorporate the links into the article. This is bad from every angle, yet few other editors were interested in helping me.
 
