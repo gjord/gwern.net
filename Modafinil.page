@@ -325,7 +325,7 @@ So, if I thought EDAndMore had only a 60% chance of delivering real modafinil ra
 
 I order and I get... something. This is where the one-shot strategy ends. You calculated, did your best, and either won or lost.
 
-If you plan to order again (and modafinil is such a useful drug that it is hard to see why one would not plan to use it indefinitely as tolerance and finances permit), you have a chance to update based on how the first order went.
+If you plan to order again (and modafinil is such a useful drug that it is hard to see why one would not plan to use it indefinitely as side-effects, tolerance, and finances permit), you have a chance to update based on how the first order went.
 
 Presumably one has learned from one's own experiences whether the product was modafinil or not. Modafinil is fairly distinct from caffeine; one gains tolerance to caffeine very quickly, and caffeine will not keep one going overnight with little mental penalty. So we'll assume one knows.
 
@@ -364,7 +364,7 @@ If you look, the right-hand side of that equation has exactly 4 pieces in its pu
     This is the opposite of the previous. Now logically, if something has a 90% chance of being true, then obviously it has a 10% chance of *not* being true. Either one or the other. So this is simply equal to 10%.
 3. $P(b|a)$
 
-    Remember, we read the pipe notation backwards, so this is 'the probability that a good supplier ($a$) will send us fakes ($b$)'. We also said that good suppliers send 95% good orders; by the same logic as above, that's another way of saying they send 5% fakes. So this is simply 5%.
+    Remember, we read the pipe notation *backwards*, so this is 'the probability that a good supplier ($a$) will send us fakes ($b$)'. We also said that good suppliers send 95% good orders; by the same logic as above, that's another way of saying they send 5% fakes. So this is simply 5%.
 4. $P(b|\lnot a)$
 
     Finally, we have 'the probability that a bad supplier will send us fakes'. We said bad suppliers send 5% good orders, so again, subtracting from 100 and we know they must send 95% fakes. So this is simply 95%.
@@ -384,7 +384,9 @@ $\frac{0.05 \times 0.9}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{
 
 32% seems like a reasonable answer. Intuitively, I'd expect my trust to drop considerably below 50%, but still noticeably above 5%, and 32% is well within that range.
 
-Phew! So, now we have a full system for situation #2. First, go through the [expected utility](!Wikipedia) calculation for all the prices you've gathered in which you trade off risk versus price. Then order, test for modafinil or not-modafinil, and do a Bayesian update on the supplier. Rinse, and repeat. This procedure terminates if there are any good suppliers (suppose you luck out and the second supplier you test, #4 on the per-unit list, is honest; now you only need to test 3 more suppliers).
+Phew! So, now we have a full system for situation #2. First, go through the [expected utility](!Wikipedia) calculation for all the prices you've gathered in which you trade off risk versus price. Then order, test for modafinil or not-modafinil, and do a Bayesian update on the supplier. Rinse, and repeat. This procedure terminates if there are any good suppliers (suppose you luck out and the second supplier you test, #4 on the per-unit list, is honest; now you only need to test 3 more suppliers since they are the only ones cheaper - why would you care about a equally reliable but *more expensive* supplier?).
+
+Of course, this does require you to already have beliefs about the reliability of a supplier. If one is willing to order blind, there's a cute frequentist trick for rough estimation when you have a bunch of independent binary experiments: the [rule of three](!Wikipedia "Rule of three (medicine)"), which goes simply that if you haven't observed $x$ despite looking $n$ times, then 95% of the time $x$ has a probability of $\frac{n}{3}$. So if we had ordered 10 times from a seller and we assume the seller isn't doing anything tricky like 'send a new customer 11 real orders and then sell him only fakes' but is randomly sending reals and fakes, we can calculate the seller sends fakes less than $\frac{10}{3} = 3.3%$ of the time. (Related is Laplace's [Rule of succession](!Wikipedia), which says the odds of a fake in the next order, given $n$ real orders, is just $\frac{1}{n}$ - the idea being that we should assume the worse, that we get a fake in the next order; then, if one looked at one of our orders randomly, there'd be only 1 fake and $n$ real orders and so the odds of a fake are that $\frac{1}{n}$.)
 
 ## Ordering when learning isn't free
 
