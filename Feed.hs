@@ -77,7 +77,7 @@ generateEmptyfeed :: Generator -> String ->String ->Maybe String -> [Person] -> 
 generateEmptyfeed generator title home mbPath authors now =
   baseNull {feedAuthors = authors,
             feedGenerator = Just generator,
-            feedLinks = [ (nullLink $ home ++ "_feed/" ++ escape (fromMaybe "" mbPath))
+            feedLinks = [ (nullLink $ home ++ "atom.xml")
                            {linkRel = Just (Left "self")}]
             }
     where baseNull = nullFeed home (TextString title) now
