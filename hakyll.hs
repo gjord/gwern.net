@@ -20,7 +20,6 @@ main = do  hakyll $ do
              mapM_ (`match` static) ["docs/**",
                                      "images/**",
                                      "**.hs",
-                                     "_darcs/**",
                                      "static/**",
                                      "**.page"]
 
