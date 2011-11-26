@@ -25,7 +25,6 @@ import Data.Time (UTCTime, formatTime, getCurrentTime, addUTCTime)
 import System.Locale (defaultTimeLocale)
 import Data.Foldable as F (concatMap)
 import Data.List (intercalate, sortBy, nub)
-import Data.Maybe (fromMaybe)
 import Data.Ord (comparing)
 import Network.URI (isUnescapedInURI, escapeURIString)
 import System.FilePath (dropExtension, takeExtension, (<.>))
@@ -74,7 +73,7 @@ changeLog days a mbPath now' = do
   return $ sortBy (comparing revDateTime) rs
 
 generateEmptyfeed :: Generator -> String ->String ->Maybe String -> [Person] -> Date -> Feed
-generateEmptyfeed generator title home mbPath authors now =
+generateEmptyfeed generator title home _ authors now =
   baseNull {feedAuthors = authors,
             feedGenerator = Just generator,
             feedLinks = [ (nullLink $ home ++ "atom.xml")

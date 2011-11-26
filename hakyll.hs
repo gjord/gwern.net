@@ -6,7 +6,6 @@ import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.Directory (copyFile)
-import System.Process (runCommand)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
@@ -54,7 +53,7 @@ rssConfig :: FeedConfig
 rssConfig =  FeedConfig { fcTitle = "Joining Clouds", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
 
 myPageCompiler :: Compiler Resource (Page String)
-myPageCompiler = cached "myPageCompiler" $ readPageCompiler >>> addDefaultFields >>> arr applySelf >>> myPageRenderPandocWith
+myPageCompiler = cached "myPageCompiler" $ readPageCompiler >>> addDefaultFields >>> arr (changeField "description" escapeHtml) >>> arr applySelf >>> myPageRenderPandocWith
 
 myPageRenderPandocWith :: Compiler (Page String) (Page String)
 myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
