@@ -1586,7 +1586,7 @@ This upper bound on our certainty may force us to disregard certain rare risks b
 
     [Saul Kripke](!Wikipedia), [reconstructing a Wittgensteinian skeptical argument](!Wikipedia "Wittgenstein on Rules and Private Language"), points out one way to react to such issues:
 
-    "A *skeptical* solution of a philosophical problem begins... by conceding that the skeptic's negative assertions are unanswerable. Nevertheless our ordinary practice or belief is justified because—contrary appearances notwithstanding—it need not require the justification the sceptic has shown to be untenable. And much of the value of the sceptical argument consists precisely in the fact that he has shown that an ordinary practice, if it is to be defended at all, cannot be defended in a certain way."
+    > "A *skeptical* solution of a philosophical problem begins... by conceding that the skeptic's negative assertions are unanswerable. Nevertheless our ordinary practice or belief is justified because—contrary appearances notwithstanding—it need not require the justification the sceptic has shown to be untenable. And much of the value of the sceptical argument consists precisely in the fact that he has shown that an ordinary practice, if it is to be defended at all, cannot be defended in a certain way."
 
 How big is this upper bound? Mathematicians have often made errors in proofs. We can divide errors into 2 basic cases:
 
@@ -1601,10 +1601,10 @@ Case 1 is perhaps the most common case, with innumerable examples; this is somet
     > A more recent example was the discovery that Andrew Wiles' original proof of Fermat's Last Theorem was flawed (but not, as it turned out, fatally flawed, as Wiles managed to fix the problem (Singh, 1997))...More recently, Larry Wos has been using Otter to find smaller proofs of theorems than the current ones. To this end, he uses Otter to find more succinct methods than those originally proposed. This often results in detecting double negations and removing unnecessary lemmas, some of which were thought to be indispensable. (Wos, 1996) presents a methodology using a strategy known as resonance to search for elegant proofs with Otter. He gives examples from mathematics and logic, and also argues that this work also implications for other fields such as circuit design.
     >
     > (Fleuriot & Paulson, 1998) have studied the geometric proofs in Newton's _Principia_ and investigated ways to prove them automatically with the Isabelle interactive theorem prover (Paulson, 1994). To do this, they formalized the _Principia_ in both Euclidean geometry and non-standard analysis. While working through one of the key results (proposition 11 of book 1, the Kepler problem) they discovered an anomaly in the reasoning. Newton was appealing to a cross-multiplication result which wasn't true for infinitesimals or infinite numbers. Isabelle could therefore not prove the result, but Fleuriot managed to derive an alternative proof of the theorem that the system found acceptable."
-[^Neumann]: von Neumann, "The Mathematician" 1947:
+[^Neumann]: John von Neumann, ["The Mathematician"](http://www.math.ubc.ca/~fsl/von%20Neumann.pdf) 1947:
 
     > "That Euclid's axiomatization does at some minor points not meet the modern requirements of absolute axiomatic rigour is of lesser importance in this respect...The first formulations of the calculus were not even mathematically rigorous. An inexact, semi-physical formulation was the only one available for over a hundred and fifty years after Newton! And yet, some of the most important advances of analysis took place during this period, against this inexact, mathematically inadequate background! Some of the leading mathematical spirits of the period were clearly not rigorous, like Euler; but others, in the main, were, like Gauss or Jacobi. The development was as confused and ambiguous as can be, and its relation to empiricism was certainly not according to our present (or Euclid's) ideas of abstraction and rigour. Yet no mathematician would want to exclude it from the fold — that period produced mathematics as first-class as ever existed! And even after the reign of rigour was essentially re-established with Cauchy, a very peculiar relapse into semi-physical methods took place with Riemann."
-[^Nathanson]: ["Desperately seeking mathematical proof"](http://arxiv.org/pdf/0905.3590) ([arXiv](http://arxiv.org/abs/0905.3590)), Melvyn B. Nathanson 2009
+[^Nathanson]: ["Desperately seeking mathematical proof"](http://arxiv.org/pdf/0905.3590) ([arXiv](http://arxiv.org/abs/0905.3590)), Melvyn B. Nathanson 2009:
 
     > The history of mathematics is full of philosophically and ethically troubling reports about bad proofs of theorems. For example, the [fundamental theorem of algebra](!Wikipedia) states that every polynomial of degree _n_ with complex coefficients has exactly _n_ complex roots. D'Alembert published a proof in 1746, and the theorem became known "D'Alembert's theorem," but the proof was wrong. Gauss published his first proof of the fundamental theorem in 1799, but this, too, had gaps. Gauss's subsequent proofs, in 1816 and 1849, were OK. It seems to have been hard to determine if a proof of the fundamental theorem of algebra was correct. Why?
     >
@@ -1639,8 +1639,8 @@ Other times, the correct result is known and proven, but many are unaware of the
     > - Burton, Leone (2004): _Mathematicians as enquirers: Learning about learning mathematics_; Dordrecht: Kluwer Academic Publishers
 [^Goldstein]: To take a random example (which could be multiplied indefinitely); from [Gödel and the Nature of Mathematical Truth: A Talk with Rebecca Goldstein](http://www.edge.org/3rd_culture/goldstein05/goldstein05_index.html) (6.8.2005):
 
-    > Einstein told the philosopher of science [Hans Reichenbach](!Wikipedia) that he'd known even before the solar eclipse of 1918 supported his general theory of relativity that the theory must be true because it was so beautiful. And [Hermann Weyl](!Wikipedia), who worked on both relativity theory and quantum mechanics, said "My work always tried to unite the true with the beautiful, but when I had to choose one or the other, I usually chose the beautiful."...Mathematics seems to be the one place where you don't have to choose, where truth and beauty are always united. One of my all-time favorite books is _[A Mathematicians' Apology](!Wikipedia)_. [G.H. Hardy](!Wikipedia) tries to demonstrate to a general audience that mathematics is intimately about beauty. He gives as examples two proofs, one showing that the square root of 2 is irrational, the other showing that there's no largest prime number. Simple, easily graspable proofs, that stir the soul with wonder.
-[Erdos]: Nathanson 2009 claims the opposite:
+    > "Einstein told the philosopher of science [Hans Reichenbach](!Wikipedia) that he'd known even before the solar eclipse of 1918 supported his general theory of relativity that the theory must be true because it was so beautiful. And [Hermann Weyl](!Wikipedia), who worked on both relativity theory and quantum mechanics, said "My work always tried to unite the true with the beautiful, but when I had to choose one or the other, I usually chose the beautiful."...Mathematics seems to be the one place where you don't have to choose, where truth and beauty are always united. One of my all-time favorite books is _[A Mathematicians' Apology](!Wikipedia)_. [G.H. Hardy](!Wikipedia) tries to demonstrate to a general audience that mathematics is intimately about beauty. He gives as examples two proofs, one showing that the square root of 2 is irrational, the other showing that there's no largest prime number. Simple, easily graspable proofs, that stir the soul with wonder."
+[^Erdos]: Nathanson 2009 claims the opposite:
 
     > "Many mathematicians have the opposite opinion; they do not or cannot distinguish the beauty or importance of a theorem from its proof. A theorem that is first published with a long and difficult proof is highly regarded. Someone who, preferably many years later, finds a short proof is "brilliant." But if the short proof had been obtained in the beginning, the theorem might have been disparaged as an "easy result." Erdős was a genius at finding brilliantly simple proofs of deep results, but, until recently, much of his work was ignored by the mathematical establishment."
 [^enduring]: An example of this would be ["An Enduring Error"](http://digital.lib.washington.edu/dspace/bitstream/handle/1773/4592/An_enduring_error.pdf?sequence=1), Branko Grünbaum:
@@ -1658,7 +1658,7 @@ So we might forgive case 1 errors entirely: if a community of mathematicians tak
 
 [^Weiner]: The missing steps may be quite difficult to fully prove, though; Nathanson 2009:
 
-    > "There is a lovely but probably apocryphal anecdote about [Norbert Weiner](!Wikipedia). Teaching a class at MIT, he wrote something on the blackboard and said it was "obvious." One student had the temerity to ask for a proof. Weiner started pacing back and forth, staring at what he had written on the board and saying nothing. Finally, he left the room, walked to his office, closed the door, and worked. After a long absence he returned to the classroom. "It *is* obvious," he told the class, and continued his lecture."
+    > "There is a lovely but probably apocryphal anecdote about [Norbert Weiner](!Wikipedia). Teaching a class at MIT, he wrote something on the blackboard and said it was 'obvious.' One student had the temerity to ask for a proof. Weiner started pacing back and forth, staring at what he had written on the board and saying nothing. Finally, he left the room, walked to his office, closed the door, and worked. After a long absence he returned to the classroom. 'It *is* obvious', he told the class, and continued his lecture."
 [^Groupthink]: What conditions count as full scrutiny by the math community may not be too clear; Nathanson 2009 trenchantly mocks math talks:
 
     > "Social pressure often hides mistakes in proofs. In a seminar lecture, for example, when a mathematician is proving a theorem, it is technically possible to interrupt the speaker in order to ask for more explanation of the argument. Sometimes the details will be forthcoming. Other times the response will be that it's "obvious" or "clear" or "follows easily from previous results." Occasionally speakers respond to a question from the audience with a look that conveys the message that the questioner is an idiot. That's why most mathematicians sit quietly through seminars, understanding very little after the introductory remarks, and applauding politely at the end of a mostly wasted hour."
@@ -1696,6 +1696,86 @@ The [parallel postulate](!Wikipedia "Parallel postulate#History") is another fas
     > "[Johann Heinrich Lambert](!Wikipedia) was one of the mathematicians who worked on the problem of Postulate 5. Lambert explicitly recognized that he had not been able to prove it, and considered that it might always have to remain a postulate. He even briefly suggested a possible geometry on a sphere with an imaginary radius. But Lambert also observed that the parallel postulate is related to the law of the lever [20, p. 75]. He said that a lever with weightless arms and with equal weights at equal distances is balanced by a force in the opposite direction at the center equal to the sum of the weights, and that all these forces are parallel. So either we are using the parallel postulate, or perhaps, Lambert thought, some day we could use this physical result to prove the parallel postulate....These men did not want to do mechanics, as, say, Newton had done. They wanted to show not only that the world was this way, but that it necessarily had to be. A modern philosophical critic, Helmut Pulte, has said that Lagrange's attempt to "reduce" mechanics to analysis strikes us today as "a misplaced endeavour to mathematize. . . an empirical science, and thus to endow it with infallibility" [39, p. 220]. Lagrange would have responded, "Right! That's just exactly what we are all doing."
 
 Should [P=NP](!Wikipedia) or the continuum hypothesis be false, a far larger math holocaust would ensue.
+
+# The morality of sperm donation
+
+It is generally agreed that increasing IQ is a good thing; IQ is a good correlate with general health, and IQ itself is useful. IQ correlates with countless good outcomes in individuals' lives, and produces [positive](http://lesswrong.com/lw/7e1/rationality_quotes_september_2011/4r37) [externalities](http://lesswrong.com/lw/7e1/rationality_quotes_september_2011/4r86). Hence, charities like iodizing salt.
+
+I would like to suggest another charity: [sperm donation](!Wikipedia). The average IQ of sperm donors is likely lower than it could be; donations by high IQ donors would increase the average and likely would lead to, on the margin, smarter offspring. LessWrongers [claim](http://lesswrong.com/lw/fk/survey_results/) to have significantly higher than average IQs, which is somewhat plausible given the abstruse material on LessWrong; absent similarly extreme filters on sperm donors, one would expect lower IQs.
+
+How large is the margin? It's hard to be sure, but individual donors can be used in many pregnancies - the deviations from whatever average are really deviate. From the 5 September 2011 _New York Times_, ["One Sperm Donor, 150 Offspring"](http://www.nytimes.com/2011/09/06/health/06donor.html):
+
+> "Over the years, she watched the number of children in her son’s group grow. And grow. Today there are 150 children, all conceived with sperm from one donor, in this group of half siblings, and more are on the way...While Ms. Daily’s group is among the largest, many others comprising 50 or more half siblings are cropping up on Web sites and in chat groups, where sperm donors are tagged with unique identifying numbers.
+>
+> ...No one knows how many children are born in this country each year using sperm donors. Some estimates put the number at 30,000 to 60,000, perhaps more.
+>
+> ...Sperm donors, too, are becoming concerned. “When I asked specifically how many children might result, I was told nobody knows for sure but that five would be a safe estimate,” said a sperm donor in Texas who asked that his name be withheld because of privacy concerns. “I was told that it would be very rare for a donor to have more than 10 children.” He later discovered in the Donor Sibling Registry that some donors had dozens of children listed...Ms. Kramer, the registry’s founder, said that one sperm donor on her site learned that he had 70 children. He now keeps track of them all on an Excel spreadsheet."
+
+The average number of children per donor is likely greater than one, given that it seems unlikely there are 30,000-60,000+ active sperm donors. This leads to a second benefit for the donator: they can rest assured that they have offspring, and offspring that are planned & wanted (as opposed to being the result of a one-night stand). Such a child is not a substitute for raising one's own child, of course, but consider the upside to not raising them: *not raising them*. We have all heard the estimates that to raise one child according to middle-class standards entails direct and indirect costs in the range of hundreds of thousands of dollars. Given that [the research](!Wikipedia "Positive psychology#Parenting") is not encouraging on whether raising children actually makes you happier, one has to ask - are kids really worth that? Why not let someone else raise the kid, someone who has demonstrated that they *really* want a child by not just agreeing to raise one but paying heavily upfront for a mere chance to? Division of labor and Pareto-improving transactions and all that.
+
+There is a third benefit. Surprisingly, sperm donor-assisted pregnancies result in [*1/5th* the number of birth defects](!Wikipedia "Sperm donation#Sperm_donation and reduced birth defects") as pregnancies in general. (The [CDC](http://www.cdc.gov/ncbddd/birthdefects/index.html) tells me that the defect rate is 1 in 33 or ~3%, and that birth defects in 2006 directly killed 5,819 infants.) Much of this significant benefit stems from the [paternal age effect](!Wikipedia) - older fathers' sperm result in more birth defects, lowered IQ, linked to autism, etc. To the extent that a sperm donor donating displaces having future offspring at an elder age, donation directly reduces birth defects and the other mentioned effects.
+
+Technically, there is a fourth benefit: one may be paid. But the sums are nominal compared to the pay for an egg donation (>$5,000) and probably not worth considering.
+
+A final speculative benefit is the storage of sperm itself. It is a rare but existing practice for women to purchase [egg freezing services](!Wikipedia "Oocyte cryopreservation") for their own eggs, to guard against loss of fertility (from age & delaying childbearing, cancer treatment, etc.) [Semen cryopreservation](!Wikipedia) is believed to work for long periods (at least 21 years so far) and presumably could also be used as a hedge.
+
+What are the costs? As far as I can tell, if one does not seek out the children (a connection which could then be construed by a court as assuming the role of father, which has happened), there is no legal exposure to be worried about. The main cost is undergoing the testing sperm banks demand. From [Sperm Bank Directory.com](http://www.spermbankdirectory.com/donating-sperm.htm#involved):
+
+> You may approach a sperm bank directly to see if they are accepting new donors. You will be asked a number of questions over the phone. At that time, you will be asked to come in to the bank (or laboratory) for a meeting. During this first meeting, the laboratory will spend significant time with you, have you fill out a very thorough questionnaire about your own medical history and your family history. At that time they will go through their rules and procedures. Often labs will ask you, during this first visit, to produce an initial semen sample in the collection room. This initial sample is tested by the lab to see how much sperm is in the ejaculate, its quality, and how well it freezes. Most labs have private collection rooms with videos or magazine to help with production.
+>
+> Assuming the sample looks good and you meet the bank's basic criteria, you will be invited back for a full physical and to have blood drawn. At that time, you will probably be asked to produce another sample of semen and urine. These will be thoroughly tested for infectious disease, sexually transmitted diseases or genetic problems. Assuming all of these tests are completed and come back negative you will be able to start regular donations. Most often banks ask you to sign a contract agreeing to produce specimens 1-2/ week for at least 6 months. Again, each laboratory has its own requirements.
+
+[Wikipedia](!Wikipedia "Sperm donation#Medical screening") reads us the riot act:
+
+> "Screening includes:[5]
+>
+> - Taking a medical history of the donor, his children, siblings, parents, and grandparents etc. for three to four generations back. This is often done in conjunction with the patient's family doctor.
+> - HIV risk assessment interview, asking about sexual activity and any past drug use.
+> - Blood tests and urine tests for infectious diseases, such as:
+>     - HIV-1/2 see sections below
+>     - HTLV-1/2
+>     - Hepatitis B
+>     - Hepatitis C
+>     - Syphilis
+>     - Gonorrhea
+>     - Chlamydia
+>     - Cytomegalovirus (CMV) see sections below, although not all clinics test for this.
+> - Blood and urine tests for blood typing and general health indicators: ABO/Rh typing, CBC, liver panel and urinalysis
+> - Complete physical examination including careful examination of the penis, scrotum and testicles.
+> - Genetic testing for carrier traits, for example:
+>     - Cystic Fibrosis
+>     - Sickle-cell disease
+>     - Thalassemia
+>     - Other hemoglobin-related blood disorders.
+>
+> - ...General health
+> - Semen analysis for:
+>       - Sperm count
+>       - Morphology
+>       - Motility
+>       - Acrosome activity may also be tested"
+
+All this is apparently at the sperm bank's expense (aside from one's time and patience). Hence, it may be simultaneously a cost and a benefit - the more they test, the more opportunity you have to learn about yourself.
+
+It's not clear how many people will clear these hurdles. From _ScienceDaily_, ["Sperm Donors Valued Less Than Egg Donors"](http://www.sciencedaily.com/releases/2007/05/070525204143.htm):
+
+> "“Men donors are paid less for a much longer time commitment and a great deal of personal inconvenience,” she said. “They also are much less prepared for the emotional consequences of serving as a donor of reproductive material. Women, meanwhile, are not only paid more for a much shorter time commitment, they are repeatedly thanked for ‘giving the gift of life.’...The inequities persist despite the fact that profiles of hundreds of potential egg donors languish on agency Web sites, far outstripping recipient demand, while suitable sperm donors are quite rare, Almeling found. In fact, only a tiny fraction of the male population possesses a sperm count consistently high enough to be considered donation-worthy, and more than 90 percent of sperm bank applicants are rejected for this and other reasons. As a result, sperm banks routinely resort to finder’s fees to meet the need...In contrast, sperm banks do not pay as well or encourage such displays of gratitude. Male donors make between $50 and $75 per donation, and they are paid only when their samples meet the high fertility standards required for freezing. Over the length of their contracts — generally, an entire year — sperm donors may make as much as their female counterparts do over the course of a single six-week cycle, but only if they donate more than the required one sample per week. Invariably, however, earnings of sperm donors fell short, either because donors missed weekly sessions or their samples failed to meet fertility standards. Women also may donate as many as three times in a year, and their fees increase with each completed cycle."
+
+Worrisomely, it sounds as if the ongoing costs are not simply blood draws (to test for STDs):
+
+> "Moreover, men work much longer for their pay than women, and their activities are much more restricted as a result. In addition to requiring weekly donations for a year, sperm banks instruct men to refrain from sex for two days prior to donation or risk the possibility that their samples will fail to meet fertility standards. Being sick or stressed also has a negative effect on sperm count. “Even the doctors who were working with infertile couples were surprised when they learned just how demanding the process is for men,” Almeling said. “Sperm donors basically have to schedule their sex lives for a year.”"
+
+In addition, some donors may be turned down entirely based on cosmetic features; eg. ["Sperm bank turns down redheads"](http://www.telegraph.co.uk/news/worldnews/europe/denmark/8768598/Sperm-bank-turns-down-redheads.html):
+
+> Ole Schou, Cryos's director, said that there had been a surge in donations in recent years, allowing the facility to become much more picky about its donors. "There are too many redheads in relation to demand," he told told Danish newspaper Ekstra Bladet. "I do not think you chose a redhead, unless the partner - for example, the sterile male - has red hair, or because the lone woman has a preference for redheads. And that's perhaps not so many, especially in the latter case."
+
+All this is suggestive and interesting, but not complete. To make a solid utilitarian case we would need to establish:
+
+1. What *is* the average IQ or general genetic quality of donors? What is the marginal increase in each offspring?
+2. What is the average number of offspring produced?
+3. At what point do diminishing returns set in?
+4. How costly is the testing/application process, and then how burdensome is the actual donating process?
+
 
 <!--
 
