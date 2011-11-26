@@ -26,7 +26,7 @@ But one wonders: what is using it like? Does it have a decent selection? Is it s
 
     To such people, my general reply is - What makes you so sure I want Bitcoin to succeed? It's interesting but that doesn't mean I have bought into the project and all its ideals. If SR coverage hurt Bitcoin, I may not care at all.
 
-    And I would argue the contrary; I believe Silk Road coverage *helps* Bitcoin. Silk Road has not been harmed by its national coverage; the number of accounts and transactions have all increased dramatically, and SR's admin has stated his satisfaction with the new status quo. Not that the admin ever sought secrecy - he announced Silk Road's official opening on the Bitcoin forums! Purchases of Bitcoin noticeably spiked after the Gawker article as already mentioned, and one cannot buy that much publicity. On might say of self-censorship that "_C'est pire qu'un crime, c'est une faute._"
+    And I would argue the contrary; I believe Silk Road coverage *helps* Bitcoin. Silk Road has not been harmed by its national coverage; the number of accounts and transactions have all increased dramatically, and SR's admin has stated his satisfaction with the new status quo. Not that the admin ever sought secrecy - he announced Silk Road's official opening on the Bitcoin forums! Purchases of Bitcoin noticeably spiked after the Gawker article as already mentioned, and one cannot buy that much publicity. One might say of self-censorship that "_C'est pire qu'un crime, c'est une faute._"
 
     And suppose Silk Road coverage did hurt Bitcoin even to the extent that it would be worth devoting one neuron to thinking about it; I would publish *anyway* because that would mean that *the Bitcoin experiment has failed and must be terminated immediately*. If Bitcoin is not safe for the drug dealers, then it is not safe for anyone; if Bitcoin can be hurt by the truth, then it is already doomed - you cannot build on quicksand, and ["that which can be destroyed by the truth should be."](!Wikipedia "P. C. Hodgell") Good game, chaps, let's all meet back here when the next Satoshi figures out how to patch the vulnerabilities.
 
@@ -93,7 +93,7 @@ No big surprise there - it's another one-time address which expired at noon, so 
 
 # Shopping
 
-After some browsing, I personally decided on an offering of the nootropic [selegiline](!Wikipedia). Safe, potentially useful, and not even especially illegal. The price was right:
+It's a good idea to read the documentation like the SR wiki on ["Making a successful purchase"](http://dkn255hz262ypmii.onion/wiki/index.php/Making_a_successful_purchase) and the ["Buyer's guide"](http://dkn255hz262ypmii.onion/wiki/index.php/Buyer%27s_guide) (["Scammed"](http://dkn255hz262ypmii.onion/wiki/index.php/Scammed) is good too) before ordering anything. After some browsing, I personally decided on an offering of the nootropic [selegiline](!Wikipedia). Safe, potentially useful, and not even especially illegal. The price was right:
 
 ![](/images/silkroad/selegiline.png)
 
@@ -117,7 +117,7 @@ Notice the address field. Now, I *could* be a chump and put down my friend's add
 
 ## Encryption
 
-There are a great many guides to GPG; the official [GPG handbook](http://www.gnupg.org/gph/en/manual.html) works well enough. To summarize what I did:
+There are a great many guides to GPG; the official [GPG handbook](http://www.gnupg.org/gph/en/manual.html) works well enough. (The [SR wiki page](http://dkn255hz262ypmii.onion/wiki/index.php/PGP/GPG_Encryption) mostly discusses where to get PGP-like software.) To summarize what I did:
 
 1. I copy the public key into a text file, say, `key.txt`
 2. I tell GPG to memorize it: `gpg --import key.txt`
@@ -138,7 +138,7 @@ Once you have submitted the order, the ball is in the seller's court. The order 
 
 ![](/images/silkroad/selegiline-ordered.png)
 
-Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in escrow[^escrow]. SR holds onto your Bitcoins until you finalize the transaction with a review - one of the protections for the buyers.
+Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in [escrow](http://dkn255hz262ypmii.onion/wiki/index.php/Escrow)[^escrow]. SR holds onto your Bitcoins until you finalize the transaction with a review - one of the protections for the buyers.
 
 It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that[^shipping]. (See the [Silk Road subforum on shipping](http://dkn255hz262ypmii.onion/index.php?board=6.0)^[[Mirror](https://dkn255hz262ypmii.tor2web.org/index.php?board=6.0)].) A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can. Shipping is so safe for the seller that many of them will, without complaint, ship worldwide or across national borders because customs so rarely stops drug shipments.^[For example, I have never had a shipment of anything I have ordered stopped or apparently even looked at hard by a Customs. In the 2 SR orders' cases, this turned out to be irrelevant as both sellers were in-country.]
 
@@ -212,6 +212,7 @@ On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http:
 
 # External links
 
+- SR wiki: ["FAQs"](http://dkn255hz262ypmii.onion/wiki/index.php/FAQ%27s)
 - Reddit discussion: [First submission](http://www.reddit.com/r/Bitcoin/comments/imoc0/using_silk_road/), [resubmission](http://www.reddit.com/r/Drugs/comments/imq8h/how_to_use_the_silk_road_the_cats_out_of_the_bag/)
 - Reddit: [Seller Q&A](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/)
 - ["Traveling Down the Silk road to Buy Drugs With Bitcoins"](http://motherboard.tv/2011/6/24/traveling-down-the-silkroad-to-buy-drugs-with-bitcoins) -(another SR article, by Ryan Broderick; much shorter & incomplete)
