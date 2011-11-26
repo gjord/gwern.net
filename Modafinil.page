@@ -332,7 +332,7 @@ mg    Amt            $             S&H   mg/$[^f]     Provider
 100   20            180      16.5       17            [QHI](http://www.qhi.co.uk/list.asp?r=910)
 100   30            168      15         16            [Biogenesis AntiAging](http://www.biogenesis-antiaging.com/p88/Modafinil-%28Modiodal%29/product_info.html)
 
-[^f]: Calculated the obvious way: $\text{round} \frac{\text{mg} \times \text{Amount}}{\text{\$} + \text{S\&H}}$
+[^f]: Calculated the obvious way: $\text{round} \frac{\text{mg} \times \text{Amount}}{\text{$} + \text{S&H}}$
 
 Alternative price charts:
 
@@ -457,7 +457,7 @@ $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times 
 
 How confusing and intimidating! Where does one start, with all the differing entries?
 
-Let's break it down step by step. If you didn't read either Wikipedia or Yudkowsky, you should have, but remember the pipe is read backwards: $P(foo|bar)$ means 'how likely foo is now that I have observed bar' (you could mentally rewrite it to something like $P(bar \rightarrow foo)$). $b$ represents our observation, whatever it is. In this case, it's the not-modafinil, the fake pills. $a$ represents our new, reduced, belief that A is a good place to order from. So at the beginning we can make a few definitions:
+Let's break it down step by step. If you didn't read either Wikipedia or Yudkowsky, you should have, but remember the pipe is read backwards: $P(foo|bar)$ means 'how likely is *foo* now that I have observed *bar*' (you could mentally rewrite it to something like $P(bar \rightarrow foo)$). $b$ represents our observation, whatever it is. In this case, it's the not-modafinil, the fake pills. $a$ represents our new, reduced, belief that A is a good place to order from. So at the beginning we can make a few definitions:
 
 - $a$ = being a good supplier
 - $b$ = receiving fakes
@@ -488,7 +488,7 @@ To put all these definitions in a list:
 
 We substitute in to the original equation:
 
-$\frac{0.05 \times 0.9}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{(0.045 + 0.095)} = \frac{0.045}{0.14} = 0.32$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.05 \times 0.9}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{(0.045 + 0.095)} = \frac{0.045}{0.14} = 0.32$
 
 32% seems like a reasonable answer. Intuitively, I'd expect my trust to drop considerably below 50%, but still noticeably above 5%, and 32% is well within that range.
 
@@ -510,13 +510,13 @@ We want to compare an infinite stream of small savings against a single large ex
 
 Net present value can be approximated based on knowing one's [discount rate](!Wikipedia) (which is a percentage) and then plugging in the numbers to the following formula:
 
-$\frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)}$
+$\text{NPV} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)}$
 
 What is my discount rate? If I introspect and ask myself, would I prefer $150 in a year to $100 right now; I say yes, so I know my discount rate is less than 0.5/50%; would I prefer $125 to $100 now? Yes, so it's less than 0.25/25%; and so on down to around $107 versus $100. So let's say 7% for me.
 
 What do our two suppliers look like? Maybe one charges me $220 for a year's supply and the other, the one I haven't yet tested, supplies it for $200. So $20 a year is at stake. Let's plug it in:
 
-$\frac{20}{\ln(1+0.07)} = \frac{20}{\ln(1.07)} = \frac{20}{0.06765} = 295.6$
+$\text{NPV} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)} = \frac{20}{\ln(1+0.07)} = \frac{20}{\ln(1.07)} = \frac{20}{0.06765} = 295.6$
 
 But it would cost us $1000 to assay and find out whether there was a savings or not! Clearly it's not a good idea to spend the money for the assay. $20 a year is just not enough.
 
@@ -540,7 +540,7 @@ So the anti-modafinil argument starts off at a disadvantage if it wants to appea
 
 $\text{presentValue} = \frac{\text{futureValue}}{(1 + \text{discountRate})^\text{years}}$
 
-We say a year is worth 100 and will interpret the answer as a percentage; while real people have discount rates much higher^[US Army personnel, considering various large bonus offers, manifested annual discount rates as high as [57.2%](http://www.rau.ro/intranet/Aer/2001/9101/91010033.pdf)], we will generously assume the improbably low discount rate of 2%; and then ask how much a year is worth 50 years from now:
+We say a year is worth 100 and will interpret the answer as a percentage; while real people have discount rates much higher^[US Army personnel, considering various large bonus offers, manifested annual discount rates as high as [57.2%](http://www.rau.ro/intranet/Aer/2001/9101/91010033.pdf).], we will generously assume the improbably low discount rate of 2%; and then ask how much a year is worth 50 years from now:
 
 $\text{presentValue} = \frac{100}{(1+0.02)^50} = \frac{100}{2.692} = \~37$$
 
