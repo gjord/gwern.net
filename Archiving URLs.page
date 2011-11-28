@@ -133,7 +133,7 @@ set -e
 cp --force `find ~/.mozilla/firefox/ -name "places.sqlite"|sort|head -1` ~/
 sqlite3 -batch places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
                        WHERE moz_places.id = moz_historyvisits.place_id and visit_date > strftime('%s','now','-1 day')*1000000 ORDER by \
-                       visit_date;" | filter-urls >> ~/.urls.txt
+                       visit_date;" | filter-urls
 rm ~/places.sqlite
 ~~~
 
@@ -142,7 +142,7 @@ rm ~/places.sqlite
 This is called every hour by `cron`:
 
 ~~~{.bash}
-@hourly firefox-urls
+@hourly firefox-urls >> ~/.urls.txt
 ~~~
 
 This gets all visited URLs in the last time period and prints them out to the file for archiver to process. Hence, everything I browse is backed-up through `archiver`.
@@ -151,7 +151,7 @@ This gets all visited URLs in the last time period and prints them out to the fi
 
 More useful perhaps is a script to extract external links from Markdown files and print them to standard out: [link-extractor.hs](haskell/link-extractor.hs)
 
-So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in my wiki as arguments, and add the thousand or so external links to the archiver queue (eg. `find . -name "*.page" | xargs runhaskell link-extractor.hs >> ~/.urls.txt`); they will eventually be archived/backed up.
+So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in my wiki as arguments, and add the thousand or so external links to the archiver queue (eg. `find . -name "*.page" -type f -print0 | xargs -0 runhaskell haskell/link-extractor.hs | filter-urls >> ~/.urls.txt`); they will eventually be archived/backed up.
 
 #### Website spidering
 
