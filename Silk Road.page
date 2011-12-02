@@ -38,7 +38,7 @@ Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for
 
 As it happened, I already have some bitcoins. Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/projects/torbrowser) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient.
 
-With Tor running and the Torbutton enabled in the browser (along with any [privacy mode](!Wikipedia)), we can easily connect to Silk Road; we simply visit <http://ianxz6zefk72ulzz.onion>[^address]. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
+With Tor running and the Torbutton enabled in the browser (along with any [privacy mode](!Wikipedia)), we can easily connect to Silk Road; we simply visit <	http://silkroadvb5piz3r.onion>[^address]. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
 
 [^address]: Note that this is *not* a normal WWW site; there are no normal WWW sites for the Silk Road. There is <http://silkroadmarket.org/> which is apparently controlled in some fashion by SR (probably to stop domain squatting or scam sites pretending to be SR), but whatever it is, it's not important; it's not even updated regularly - the status descriptions on it are sometimes weeks or months out of date.
 
@@ -58,11 +58,11 @@ Click on the join, and you will be taken to another page for registering your ac
 
 ![](/images/silkroad/silkroad-mainpage.png)
 
-The [stimulants](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/52) category contains much what you'd expect:
+The [stimulants](	http://silkroadvb5piz3r.onion/index.php/silkroad/category/52) category contains much what you'd expect:
 
 ![](/images/silkroad/stimulants.png)
 
-Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or [German pretzels](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25dwkd), or the ['services'](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
+Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](	http://silkroadvb5piz3r.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or [German pretzels](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25dwkd), or the ['services'](http://ianxz6zefk72ulzz.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
 
 ![](/images/silkroad/collectibles.png)
 ![](/images/silkroad/services.png)
@@ -151,7 +151,7 @@ It's worth noting that the buyers bear the real risk on SR. A seller can easily 
     [A Redditor](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25a3ni) comments on the jurisdictional advantages of going through USPS (as is usually recommended in seller discussions); I do not know if he is correct, but the description sounds plausible:
 
     > "Also, once it's in the mailbox, it's property of the US postal service, and they're VERY particular about what happens to it. No one (including other agencies) can carry weapons in a post office except for postal inspectors, nor can they investigate mail on their own; it has to go through the post office itself."
-[^escrow]: I only used the standard Bitcoin escrow. (Needless to say, Paypal is *completely* out of the question.) Silk Road has another escrow scheme where the escrowed amount is tied to the current exchange rate, in order to protect the seller against exchange rate volatility; that escrow is documented in the [announcement](http://dkn255hz262ypmii.onion/index.php?topic=819.0) ([mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=819.0)) and the "Escrow hedge" section of the [Buyer's Guide](http://ianxz6zefk72ulzz.onion/index.php/silkroad/buyers_guide).
+[^escrow]: I only used the standard Bitcoin escrow. (Needless to say, Paypal is *completely* out of the question.) Silk Road has another escrow scheme where the escrowed amount is tied to the current exchange rate, in order to protect the seller against exchange rate volatility; that escrow is documented in the [announcement](http://dkn255hz262ypmii.onion/index.php?topic=819.0) ([mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=819.0)) and the "Escrow hedge" section of the [Buyer's Guide](	http://silkroadvb5piz3r.onion/index.php/silkroad/buyers_guide).
 
 I check in 1 day later: the order still processing. Items apparently aren't public once you've escrowed your dosh. 2 days later: still processing. 3 days later: canceled! My Bitcoins are unlocked, of course, but I'm not keen on ordering again right away. Need to browse more and look for deals. The cancellation message is not very informative:
 
@@ -208,7 +208,7 @@ But looking back, I have been lucky: from reading the forums, it's clear that th
 
 > "Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there."
 
-On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://ianxz6zefk72ulzz.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
+On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](	http://silkroadvb5piz3r.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
 
 # External links
 
