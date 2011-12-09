@@ -324,7 +324,6 @@ One common experience of new users to spaced repetition is to add too much stuff
 
 The most difficult task, beyond that of just persisting until the benefits do become obvious, is deciding what's valuable enough to add in. In a 3 year period, one can expect to spend "30-40 seconds"^[["SuperMemo as a new tool increasing the productivity of a programmer. A case study: programming in Object Windows"](http://www.supermemo.com/articles/programming.htm)] on any given item. The long run [theoretical predictions](http://www.supermemo.com/articles/theory.htm) are a little hairier. Given a single item, the formula for daily time spent on it is $\text{time} = \frac{1}{500} \times \text{nthYear}^{-1.5} + \frac{1}{30000}$. During our 20th year, we would spend $t = \frac{1}{500} \times 20^{-1.5} + \frac{1}{3000}$, or `3.556940131083312e-4` minutes a day. This is the average daily time, so to recover the annual time spent, we simply multiply by 365. Suppose we were interested in how much time a flashcard would cost us over 20 years. The average daily time changes every year (the graph looks like an exponential decay, remember), so we have to run the formula for each year and sum them all; in Haskell:
 
-
 ~~~{.haskell}
 > sum $ map (\year -> ((1/500 * year**(-(1.5))) + 1/30000) * 365.25) [1..20]
 1.8291
@@ -490,6 +489,7 @@ The reader might well be curious by this point what *my* Mnemosyne database look
 - [FlashCardExchange.com](http://www.flashcardexchange.com)
 - [StudyStack.com](http://www.studystack.com/)
 - [AnyMemo](http://anymemo.org/index.php?page=databases) (partially redundant with Mnemosyne & Anki)
+- [Flashcarddb](http://flashcarddb.com/cardsets)
 
 [^splendor]: See [page 7](http://www.wired.com/medtech/health/magazine/16-05/ff_wozniak?currentPage=7), Wolf 2008
 
