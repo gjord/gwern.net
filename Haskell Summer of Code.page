@@ -79,7 +79,7 @@ The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
     **Successful**. The situation is unclear to me, but I know that for some period dynamic linking worked for some platforms. However, it's 2010 and I still have static linking, although GHC 6.12 apparently gets dynamic linking; so I'm going to chalk this one up as a mixed success.
 - ["Libcurl"](http://replay.waybackmachine.org/20080204074446/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=D4DEE221DAC4E810); Mieczysław Bąk, mentored by Bryan O'Sullivan
 
-    **Unknown** The archived homepage [homepage](http://web.archive.org/web/20070706103752/http://varsztat.com/projects/curl/) and [repo](http://web.archive.org/web/20070708071534/varsztat.com/projects/curl/darcs/) indicate that the package name was [curl](!Hackage) and indeed a [curl](!Wikipedia "cURL") binding of that name exists - but none of the metadata points to Bąk as either author or maintainer; if it is the same package, it is pretty successful with [158 reverse dependencies](http://sparky.haskell.org:8080/package/curl/reverse/all)
+    **Unknown** The archived homepage [homepage](http://web.archive.org/web/20070706103752/http://varsztat.com/projects/curl/) and [repository](http://web.archive.org/web/20070708071534/varsztat.com/projects/curl/darcs/) indicate that the package name was [curl](!Hackage) and indeed a [curl](!Wikipedia "cURL") binding of that name exists - but none of the metadata points to Bąk as either author or maintainer; if it is the same package, it is pretty successful with [158 reverse dependencies](http://sparky.haskell.org:8080/package/curl/reverse/all)
 - ["Extending GuiHaskell: An IDE for Haskell Hackers"](http://replay.waybackmachine.org/20070813151006/http://code.google.com/soc/2007/haskell/appinfo.html?csaid=152CF82F48143D59); Asumu Takikawa, mentored by Neil David Mitchell
 
     **Unsuccessful**. GuiHaskell does not exist in any usable form. (The homepage summarizes the situation thusly: ["**Warning**: This project is fragile, unfinished, and I do not recommend that anyone tries using it."](http://www-users.cs.york.ac.uk/~ndm/guihaskell/))
@@ -111,10 +111,10 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
     **Unsuccessful**. ([His code](http://code.haskell.org/~Saizan/cabal/) [wound](http://code.haskell.org/hbuild/) [up](http://webcitation.org/5tC0nRgge) becoming [hbuild](http://hackage.haskell.org/trac/hackage/wiki/HBuild), which is not on Hackage or apparently used by anyone.)
 - ["GHC plugins"](http://replay.waybackmachine.org/20080501130545/http://code.google.com/soc/2008/haskell/appinfo.html?csaid=69C2ABD1E013EE0C); Maximilian Conroy Bolingbroke, mentored by Sean Seefried
 
-    **Unsuccessful**? As of [January 2010](http://webcitation.org/5tC0nSnqc), the patch adding plugins functionality has yet to be accepted & applied; as of February 2011, the [ticket](http://hackage.haskell.org/trac/ghc/ticket/3843) remains open and the code unmerged. The code is apparently not yet bitrotten by the passage of 3 years but how long can its luck last?
+    **Unsuccessful**? As of [January 2010](http://webcitation.org/5tC0nSnqc), the patch adding plugins functionality has yet to be accepted & applied; as of February 2011, the [ticket](http://hackage.haskell.org/trac/ghc/ticket/3843) remains open and the code unmerged. The code is apparently not yet bitrotten by the passage of 3 years but how long can its luck last? The code was finally merged in 4 August 2011; [the docs](I do not know if there are) do not list any users.
 - "Data parallel physics engine"; Roman Cheplyaka, mentored by Manuel M. T. Chakravarty
 
-    **Unsuccessful**. It seems to be finished but no use made of the actual engine that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/). (I would give reverse dependency statiscs, but [Hpysics](!Hawiki) seems to have never been uploaded to Hackage.)
+    **Unsuccessful**. It seems to be finished but no use made of the actual engine that I can see mentioned on the [engine's blog](http://physics-dph.blogspot.com/). (I would give reverse dependency statistics, but [Hpysics](!Hawiki) seems to have never been uploaded to Hackage.)
 - "GHC API"; Thomas Schilling, mentored by Simon Marlow <!-- http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A -->
 
     **Unsuccessful**. Schilling's fixes went in, but they were in general minor changes (like adding the GHC monad) or bug-fixes; the GHC API remains a mess.
@@ -223,15 +223,15 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
 3. ["Interpreter Support for the Cabal-Install Build Tool"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/anklesaria/1); anklesaria, by Duncan Coutts
 
     > "This project aims to provide cabal-install with an 'repl' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
-4. ["Convert the text package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett
+4. ["Convert the `text` package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett ([detailed proposal](http://jaspervdj.be/files/text.html))
 
-    > "For Haskell projects handling unicode text, the Text library offers both speed and simplicity-of-use. When it was written, benchmarks indicated that UTF-16 would be a good choice for the internal encoding in the library. However, these (rather artificial) benchmarks were did not take into account the time taken to
-    > 1. decode the "Real World" data and
+    > "For Haskell projects handling Unicode text, the `text` library offers both speed and simplicity-of-use. When it was written, benchmarks indicated that UTF-16 would be a good choice for the internal encoding in the library. However, these (rather artificial) benchmarks were did not take into account the time taken to
+    > 1. decode the 'Real World' data and
     > 2. encode it to write it back.
     >
     > I propose to
     > 1. benchmark and
-    > 2. convert the library to UTF-8 if it is a faster choice for "Real World"-applications."
+    > 2. convert the library to UTF-8 if it is a faster choice for 'Real World'-applications."
 5. ["Build multiple Cabal packages in parallel"](http://www.google-melange.com/gsoc/project/google/gsoc2011/refold/31001); Mikhail Glushenkov, by Johan Tibell
 
     > "Cabal is a system for building and packaging Haskell libraries and programs. This project's aim is to augment Cabal with support for building packages in parallel. Many developers have multi-core machines, but Cabal runs the build process in a single thread, only making use of one core. If the build process could be parallelized, build times could be cut by perhaps a factor of 2-8, depending on the number of cores and opportunity of parallel execution available."
@@ -248,7 +248,7 @@ Which seem like good selections for SoC, and which seem less appropriate?
 
 1. \#1 is the *second* EclipseFP SoC, after a failed [2009](#2009) attempt; why should we think this one will do better?
 2. With #2, the fear is that the result will not be used; there is an OpenGL binding already, after all, and I haven't heard that there are very many people who want to do OpenGL graphics but were deterred by complexity or danger in it.
-3. `cabal ghci` is a long-request Cabal feature, and it sounds as if all the groundwork and experimentation has been done. I have no problem with this one.
+3. `cabal ghci` is a long-requested Cabal feature, and it sounds as if all the groundwork and experimentation has been done. I have no problem with this one.
 4. Benchmarking sounds quite doable, and `text` is increasingly used; but if I had to criticize it, I would criticize it for *under*ambition, for sounding too modest and not a good use of a slot.
 5. \#5 is a second crack at the parallel compilation problem (building on a [2008](#2008) SoC) and is troubling in the same way the EclipseFP SoC is.
 6. There are multiple existing Darcs->other VCS programs, so the task is quite doable. An escape hatch would be very valuable for users (even if rarely used).
@@ -258,37 +258,53 @@ Which seem like good selections for SoC, and which seem less appropriate?
 
 To summarize my feelings:
 
+- \#1 seems a bit doubtful but is more likely to succeed (because presumably most of the heavy lifting was done previously).
 - I predict #2 & #7 will likely fail
-- I would be mildly surprised if both #3 & #5 succeed^[Since they're challenging and long-outstanding Cabal features], but I expect at least one of them to succeed. Which, I am not sure.
-- \#1 seems a bit doubtful but is more likely to succeed (because presumably most of the heavy lifting was done previously). I expect with confidence that #4 & #6 will succeed.
+- I would be mildly surprised if *both* #3 & #5 succeed - since they're challenging and long-request Cabal features - but I expect at least one of them to succeed. Which, I am not sure.
+- I expect with confidence that #4 & #6 will succeed.
 
-<!--
 #### 2011 results
 
 1. "Improve EclipseFP"; Alejandro Serrano, mentored by Thomas Schilling
 
-   Successful? http://serras-haskell-gsoc.blogspot.com/2011/08/end-of-summer.html
-
-   > "One of the tasks I've also done during the summer is building a new webpage for EclipseFP. You can find it in <http://eclipsefp.github.com/>. In the next days, a new release of EclipseFP with all the changes I've done though the summer will be made available."
+    **Successful**. The [coding](http://serras-haskell-gsoc.blogspot.com/2011/08/end-of-summer.html) was finished, to the author's apparent satisfaction, and the work was included in the [2.1.0](http://jpmoresmau.blogspot.com/2011/09/eclipsefp-210-released.html) release.
 2. "Simplified OpenGL bindings"; Alexander Göransson, mentored by Jason Dagit
+
+    **Unsuccessful**. As far as I can tell, this project never delivered anything. No `OpenGLRawNice` library exists, a post-August 2011 Google search for "Alexander Göransson OpenGL" is dry, nothing on Hackage seems to mention OpenGL 4.0 support, etc.
 3. "Interpreter Support for the Cabal-Install Build Tool"; anklesaria, by Duncan Coutts
 
-    "Ending GSoC" http://lambdasandwich.blogspot.com/2011/08/ending-gsoc.html
-4. "Convert the text package to use UTF-8 internally"; Jasper Van der Jeugt, by Edward Kmett
+    **Unsuccessful**? anklesaria's final post, ["Ending GSoC"](http://lambdasandwich.blogspot.com/2011/08/ending-gsoc.html), says the work is done and provide a repository with patches by `amsay@amsay.net` - but no patches by that email appear in the Cabal repository as of 10 December 2011; nor does there appear to be any discussion in the [cabal-dev ML](http://www.haskell.org/pipermail/cabal-devel/) archives.
+4. "Convert the `text` package to use UTF-8 internally"; Jasper Van der Jeugt, by Edward Kmett
+
+    **Successful**. Jasper published 2 posts on benchmarking the converted `text` against the original (["Text/UTF-8: Initial results"](http://jaspervdj.be/posts/2011-07-10-text-utf8-initial-results.html) & ["Text/UTF-8: Studying memory usage"](http://jaspervdj.be/posts/2011-08-09-text-utf8-memory-usage.html)); discussing the results in ["Text/UTF-8: Aftermath"](http://jaspervdj.be/posts/2011-08-19-text-utf8-the-aftermath.html), the upshot is that the conversion has a real but small advantage, potentially would cause interoperability problems, requires considerable testing, and won't be merged in (the fork will be maintained against hopes of future GHC optimizations). Jaspers says the benefits wound up being a bigger & cleaner test/benchmark suite, and some optimizations made for the UTF-8 version can be applied to the original. Since Edward Kmett [seems pleased](http://jaspervdj.be/posts/2011-08-19-text-utf8-the-aftermath.html#comment-291037007), I have marked it a success (although I remain dubious about whether it was a good SoC).
 5. "Build multiple Cabal packages in parallel"; Mikhail Glushenkov, by Johan Tibell
 
-    Successful? http://dissocial.st/blog/2011-08-22-GSoC-Final
-
-    1. First of all, the parallel patches need to be merged into the mainline repository, which may take some time.
-    2. Next, there are possibilities for improvement. Current version of the code works at the package granularity (a package is always built by a single thread), which doesn’t work so well for giant packages like Agda and Darcs. We can get better speedup by ditching ghc --make and instead compiling each module separately with ghc -c; the dependency graph can be extracted with ghc -M. This should be also integrated with the build command.
-    3. Third, there is the question of other compilers (e.g. Hugs). At the moment, only GHC is supported by the parallel install code, but it should be possible to adapt it to work with other compilers. This is not considered a top priority, though.
-
-    but, not very fast? asked at http://dissocial.st/blog/2011-08-22-GSoC-Final#comment-293233466
+    **Unsuccessful**? Glushenkov reported in ["Parallelising cabal-install: Results"](http://dissocial.st/blog/2011-08-22-GSoC-Final) that the patches were done and people could play with his repository; the comments report that it basically works and does offer speedups. However, as before, no patch by him appears in the mainline Cabal, and the last discussion was 6 November 2011 where [he provides a patch bundle](http://hackage.haskell.org/trac/hackage/ticket/447#comment:5). No one else has commented. Hopefully it will be merged in soon and I can mark it 'Successful'.
 6. "Darcs Bridge"; Owen Stephens, by Ganesh Sittampalam
+
+    **Successful**? Owen's [blog posts](http://blog.owenstephens.co.uk/tag/gsoc) conclude with ["GSoC: Darcs Bridge - Results"](http://blog.owenstephens.co.uk/201109/gsoc-darcs-bridge-%E2%80%93-results) summarizing the final features: he succeeded in most of the functionality. Brent Yorgey tells me that he has successfully used the tool to convert repositories to put onto Github, but says there are "some critical bugs" and use is still "clunky" (eg. currently requiring Darcs HEAD; see the usage guide on the [Darcs wiki](http://wiki.darcs.net/DarcsBridgeUsage)). Whether the bugs will be fixed and the package polished to the point where it will be widely used remains to be seen.
 7. "Darcs: primitive patches version 3"; Petr Ročkai, by Eric Kow
 
-    http://web.mornfall.net/blog/soc_reloaded:_outcomes.html
--->
+    **Unsuccessful**. Ročkai wrote two posts (["soc reloaded: progress 1"](http://web.mornfall.net/blog/soc_reloaded:_progress_1.html) & ["soc reloaded: Outcomes"](http://web.mornfall.net/blog/soc_reloaded:_outcomes.html)). This seems to have turned out as I predicted above:
+
+    > "Since my last report, I have decided to turn somewhat more radical again. The original plan was to stick with the darcs codebase and do most (all) of the work within that, based primarily on writing tests for the testsuite and not exposing anything of the new functionality in a user-visible fashion. I changed my mind about this. The main reason was that the test environment, as it is, makes certain properties hard to express: a typical test-suite works with assertions (HUnit) and invariants (QuickCheck). In this environment, expressing ideas like 'the displayed patches are aesthetically pleasing' or 'the files in the repository have reasonable shape' is impractical at best. An alternative would have been to make myself a playground using the darcs library to expose the new code. But the fact is, our current codebase is entrenched in all kinds of legacy issues, like handling filenames and duplicated code. It makes the experimenter’s life harder than necessary, and it also involves rebuilding a whole lot of code that I never use, over and over. All in all, I made a somewhat bold decision to cut everything that lived under `Darcs.Patch` (plus a few dependencies, as few as possible) into a new library, which I named `patchlib`, in the best tradition of `cmdlib`, `pathlib` and `fslib`. At that point, I also removed custom file path handling from that portion of code, removed the use of a custom `Printer` (a pretty-printer implementation) module and a made few other incompatible changes."
+
+    The remaining work?
+
+    > "The obvious future work lies in the conflict handling. There are two main options in this regard: either re-engineer a patch-level, commute-based representation of conflicts (in the spirit of mergers and conflictors), as V3 'composite' patches, or alternatively, use a non-patch based mechanism for tracking conflicts and resolutions. It’s still somewhat early to decide which is a better choice, and they come with different trade-offs. Nevertheless, the decision, and the implementation, constitute a major step towards darcs 3. The other major piece of work that remains is the repository format: in this area, I have done some research in both the previous and this year’s project, but there are no definitive answers, even less an implementation. I think we now have a number of good ideas on how to approach this. We do need to sort out a few issues though, and the decision on the conflict layer also influences the shape of the repository.
+    >
+    > Each of these two open problems is probably about the size of an ambitious SoC project. On top of that, a lot of integration work needs to happen to actually make real use of the advancements. We shall see how much time and resources can be found for advancing this cause, but I am relatively optimistic: the primitive level has turned out fairly well, and to me it seems that shedding the shackles of legacy code sprawl can boost the project as a whole significantly forward."
+
+    As I wrote before, the Darcs team will surely disagree with my assessment, but I believe marking it 'Unsuccessful' is most consistent with how all previous SoCs have been judged.
+
+So of the 7 2011 SoCs:
+
+- 4 were unsuccessful (3 possibly not)
+- 3 were successful (1 possibly not)
+
+My predictions were in general accurate; I remain hopeful that at least one of the Cabal SoCs will be merged in, which would give me a clean sweep and also render the final 2011 SoC record as good as the 2010 SoC record.
+
+It troubles me that neither Cabal SoC has been merged in yet, in line with the historical trend for big Cabal SoC improvements to be partially done but never go into production. If neither gets merged in before the 2012 SoC starts, the obvious lesson seems to be that Cabal is just too dangerous and uncertain to waste SoCs on.
 
 ### Lessons learned
 
