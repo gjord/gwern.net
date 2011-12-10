@@ -2,7 +2,7 @@
 DefaultType text/html
 DirectoryIndex index
 
-ErrorDocument 404 "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>foo</title></head><body><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><meta name=\"generator\" content=\"pandoc\" /><title></title></head><body><blockquote><p>'Every shrub, every tree - <br />if one has not forgotten <br />where they were planted - <br />has beneath the fallen snow <br />some vestige of its form.'</p></blockquote><p>Try the <a href=\"http://www.gwern.net\">main page</a>.</p></body></html></body></html>"
+ErrorDocument 404 "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>404 Not Found</title></head><body><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><meta name=\"generator\" content=\"pandoc\" /><title></title></head><body><blockquote><p>'Every shrub, every tree - <br />if one has not forgotten <br />where they were planted - <br />has beneath the fallen snow <br />some vestige of its form.'</p></blockquote><p>Try the <a href=\"http://www.gwern.net\">main page</a>.</p></body></html></body></html>"
 
 # cover source files - text/html runs all lines together; ugly & semantics-destroying
 AddType text/x-markdown .page
@@ -57,4 +57,3 @@ RedirectPermanent "/nootropics.html"             "http://www.gwern.net/Nootropic
 RedirectPermanent "/spaced repetition"           "http://www.gwern.net/Spaced repetition"
 RedirectPermanent "/melatonin advocacy"          "http://www.gwern.net/Melatonin"
 RedirectPermanent "/The Value of One Bit"        "http://www.gwern.net/Zen and the Art of Bicycle Maintenance"
-
