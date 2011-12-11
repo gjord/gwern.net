@@ -1,22 +1,53 @@
 ---
-description: A retrospective of 5 years of SoC, w/lessons learned
+description: A retrospective of 6 years of SoC, and lessons learned
 ...
 
-As part of Google's [Summer of code](!Wikipedia "Google Summer of Code") [program](http://code.google.com/soc/), they sponsor 5-10 [projects for Haskell](http://hackage.haskell.org/trac/summer-of-code/).
+As part of Google's [Summer of Code](!Wikipedia "Google Summer of Code") [program](http://code.google.com/soc/), they sponsor 5-10 SoC [projects for Haskell](http://hackage.haskell.org/trac/summer-of-code/).
 
 The Haskell Summer of Codes have often produced excellent results, but how excellent is excellent? Are there any features or commonalities between successful projects or unsuccessful ones?
 
-These questions are particularly important with SoC 2011 just a few months away.^[Students apply in late March.]
-
-## Example retrospective: Debian
+# Example retrospective: Debian
 
 In 2009, a blogger & Debian developer has produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) retrospective series on the Debian Summer of Code projects.
 
 The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. Let's see whether that holds true of Haskell.
 
+# Judging Haskell SoCs
+
+Google describes SoC as
+
+> "...a global program that offers students stipends to write code for open source projects. We have worked with the open source community to identify and fund exciting projects for the upcoming summer."^[<http://www.google-melange.com/gsoc/homepage/google/gsoc2011>]
+
+or
+
+> "...a global program that offers student developers stipends to write code for various open source software projects. We have worked with several open source, free software, and technology-related groups to identify and fund several projects over a three month period. Since its inception in 2005, the program has brought together over 4500 successful student participants and over 3000 mentors from over 100 countries worldwide, all for the love of code. Through _Google Summer of Code_, accepted student applicants are paired with a mentor or mentors from the participating projects, thus gaining exposure to real-world software development scenarios and the opportunity for employment in areas related to their academic pursuits. In turn, the participating projects are able to more easily identify and bring in new developers. Best of all, more source code is created and released for the use and benefit of all."^[<https://code.google.com/soc/>]
+
+It is intended to produce source code for the 'use and benefit of all'; it is not meant to produce academic papers, code curiosities, forgotten blog posts, groundwork for distant projects, but 'exciting' new production code. This is the perspective I take in trying to assess SoC projects: did it ship *anything*? If standalone, are the results in active use by more than a few developers or other codebases? If a modification to an existing codebase, was it merged and now is actively maintained? And so on. Sterling Clover argues that this is far too demanding and does not consider whether an involved student is energized by his contribution to go on and contribute still more[^sclv]; I disagree about the former, and I have not done the latter because it would be too labor-intensive to track down every student and assess their later contributions. (Perhaps in the future I or another Haskeller will do that.)
+
+[^sclv]: From the 11 February 2011 Haskell-cafe thread, ["Haskell Summers of Code retrospective (updated for 2010)"](http://www.haskell.org/pipermail/haskell-cafe/2011-February/089183.html):
+
+    > There was some discussion of this on [Reddit](http://www.reddit.com/r/haskell/comments/fid5w/haskell_summers_of_code_retrospective_updated_for/). Below is a slightly cleaned-up version of my comments there.
+    >
+    > I really appreciate this roundup. But I think the bar is set somewhat too high for success. A success in this framework seems to be a significant and exciting improvement for the entire Haskell community. And there have certainly been a number of those. But there are also projects that are well done, produce results that live on, but which aren't immediately recognizable as awesome new things. Furthermore, GSoc explicitly lists a goal as inspiring young developers towards ongoing community involvement/open source development, and these notes don't really take that into account.
+    >
+    > For example, I don't know of any direct uptake of the code from the HaskellNet project, but the author did go on to write a small textbook on Haskell in Japanese. As another example, Roman (of Hpysics) has, as I understand it, been involved in a Russian language functional programming magazine.
+    >
+    > So I think there needs to be a slightly more granular scale that can capture some of these nuances. Perhaps something like the following:
+    >
+    > - \[ \] Student completed (i.e. got final payment)
+    > - \[ \] Project found use (i.e. as a lib has at least one consumer, or got merged into a broader codebase)
+    > - \[ \] Project had significant impact (i.e. wide use/noticeable impact)
+    > - \[ \] Student continued to participate/make contributions to Haskell community
+    >
+    > A few more detailed comments about projects that weren't necessarily slam dunks, but were at the least, in my estimation, modest successes:
+    >
+    > 1. GHC-plugins -- Not only was the work completed and does it stand a chance of being merged, but it explored the design space in a useful way for future GHC development, and was part of Max becoming more familiar with GHC internals. Since then he's contributed a few very nice and useful patches to GHC, including, as I recall, the magnificent TupleSections extension.
+    > 2. GHC refactoring -- It seems unfair to classify work that was taken into the mainline as unsuccessful. The improvement weren't large, but my understanding is that they were things that we wanted to happen for GHC, and that were quite time consuming because they were cross-cutting. So this wasn't exciting work, but it was yeoman's work helpful in taking the GHC API forward. It's still messy, I'm given to understand, and it still breaks between releases, but it has an increasing number of clients lately, as witnessed by discussions on -cafe.
+    > 3. Darcs performance -- by the account of Eric Kow & other core darcs guys, the hashed-storage stuff led to large improvements (and not only in performance)[[2]](http://blog.darcs.net/2010/11/coming-in-darcs-28-read-only-support.html) -- the fact that there's plenty more to be done shouldn't be counted as a mark against it.
+
 ## Haskell retrospective
 
-Haskell wasn't part of the first Summer of Code in 2005, but it was accepted for 2006. We start there.
+Haskell wasn't part of the first Summer of Code in 2005, but it was accepted for 2006. We start there
 
 ### 2006
 
@@ -175,10 +206,13 @@ In general, these looked good. Most of them will be widely useful -- especially 
 - [Improvements to the GHC LLVM backend](http://webcitation.org/5tC0nYbNw); Alp Mestanogullari, mentored by Maximilian Bolingbroke
 
     **Unsuccessful**. Dan Peebles in #haskell says that Alp's SoC never got off the ground when his computer died at the beginning of the summer; with nothing written or turned in, this can't be considered a successful SoC, exactly. But could it have been?
-    The LLVM backend is still be on track to become the default GHC backend^[A development that surprises me, since I had been under the impression that most GHC work ultimately winds up being scrapped or abandoned like [Liskell](http://www.liskell.org/) or [Mobile Haskell](http://www.haskell.org/haskellwiki/Research_papers/Parallelism_and_concurrency#Mobile_Haskell).], suggesting that it's popular in GHC HQ (and the [DDC](http://disciple.ouroborus.net/) dialect), and it seems to also be popular among [Haskell bloggers](http://www.reddit.com/r/haskell/search?q=LLVM&restrict_sr=on). The scope is restricted to taking a working backend and optimizing it. In general, it seems like a decent SoC proposal, and better than the next one:
-- [Implementing the Immix Garbage Collection Algorithm](http://webcitation.org/5tC0naN8O); Marco Silva, mentored by Simon Marlow
 
-    **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I’m happy with the state it is now. I think it’s a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.) The [GHC wiki](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage/GC/Immix) says that "it's functional, doesn't have known bugs and gets better results than the default GC in the nofib suite. On the other hand, it gets worse results than the default GC for the nofib/gc suite."
+    The LLVM backend is still on track to become the default GHC backend^[A development that surprises me, since I had been under the impression that most GHC work ultimately winds up being scrapped or abandoned like [Liskell](http://www.liskell.org/) or [Mobile Haskell](http://www.haskell.org/haskellwiki/Research_papers/Parallelism_and_concurrency#Mobile_Haskell).], suggesting that it's popular in GHC HQ (and the [DDC](http://disciple.ouroborus.net/) dialect), and it seems to also be popular among [Haskell bloggers](http://www.reddit.com/r/haskell/search?q=LLVM&restrict_sr=on). The scope is restricted to taking a working backend and optimizing it. In general, it seems like a decent SoC proposal, and better than the next one:
+- [Implementing the Immix Garbage Collection Algorithm](http://webcitation.org/5tC0naN8O); Marco Túlio Gontijo e Silva, mentored by Simon Marlow
+
+    **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I’m happy with the state it is now. I think it’s a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.) The [GHC wiki](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage/GC/Immix) says that "it's functional, doesn't have known bugs and gets better results than the default GC in the nofib suite. On the other hand, it gets worse results than the default GC for the nofib/gc suite." Marco said in a [Disqus comment](http://disq.us/13lqay) on this page:
+
+    > "Hi. I wondered about continuing my work on the Immix GC collector, but Simon Marlow, my mentor, thought it was not a good idea to invest more effort on Immix. So I dropped it, and started working on other things. Greetings."
 - ["Improving Darcs Performance"](http://webcitation.org/5wV5g2TP2); Adolfo Builes, mentored by Eric Kow
 
     **Unknown**. This replaced a previous proposal to write a Haskell binding to the [GObject](!Wikipedia) library, which never started. Looking through the Darcs repository history, I see a number of new tests related to the global cache, but no major edits to cache-related modules.
@@ -222,7 +256,7 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
     > "Modernize and simplify OpenGL bindings for Haskell. Focus on safety, shaders and simplicity."
 3. ["Interpreter Support for the Cabal-Install Build Tool"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/anklesaria/1); anklesaria, by Duncan Coutts
 
-    > "This project aims to provide cabal-install with an 'repl' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
+    > "This project aims to provide cabal-install with an '[repl](!Wikipedia "Read–eval–print loop")' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
 4. ["Convert the `text` package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett ([detailed proposal](http://jaspervdj.be/files/text.html))
 
     > "For Haskell projects handling Unicode text, the `text` library offers both speed and simplicity-of-use. When it was written, benchmarks indicated that UTF-16 would be a good choice for the internal encoding in the library. However, these (rather artificial) benchmarks were did not take into account the time taken to
@@ -334,7 +368,9 @@ Let's look at the first 12 and see whether they're good ideas, bad ideas, or ind
 9. ["Using Type Inference to Highlight Code *Properly*"](http://www.reddit.com/r/haskell_proposals/comments/biaew/using_type_inference_to_highlight_code_properly/): The difficult part is accessing the type information of an identifier inside a GHCi sessions - a problem probably already solved by [scion](!Hackage). Colorizing the display of a snippet is trivial. So this would make a bad SoC.
 10. ["Transformation and Optimisation Tool"](http://hackage.haskell.org/trac/summer-of-code/ticket/1536): This initially sounds attractive, but previous refactoring tools have been ignored. The tools that have gotten uptake are things like GHC's `-Wall` (which warns about possible semantic issues) and [hlint](!Hackage) (which warns about style issues and redundancy with standard library functions) - not like Hera.
 11. ["Webkit-based browser written in Haskell, similar in [plugin] architecture to Xmonad"](http://www.reddit.com/r/haskell_proposals/comments/98vxo/webkitbased_browser_written_in_haskell_similar_in/): This is probably the worst single idea in the whole bunch. A web browser these days is an entire operating system, but worse, one in which one must supply and maintain the userland as well; it is a thankless task that will not benefit the Haskell community (except incidentally through supporting libraries), nor a task it is uniquely equipped for. It is an infinite time sink - the only thing worse than this SoC failing would be it succeeding!
-12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): [DPH](!Hawiki "GHC/Data Parallel Haskell") is rarely used; a CUDA backend would be even more rarely utilized; [CUDA](!Wikipedia) has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. (DPH/CUDA use unboxed strict data, but there are interface issues with the rest of the boxed lazy Haskell universe.) All in all, there are many better SoCs.
+12. ["Add NVIDIA CUDA backend for Data Parallel Haskell"](http://hackage.haskell.org/trac/summer-of-code/ticket/1537): [DPH](!Hawiki "GHC/Data Parallel Haskell") is rarely used; a CUDA backend would be even more rarely utilized; [CUDA](!Wikipedia) has a reputation for being difficult to coax performance out of; and difficulties would likely be exacerbated by the usual Haskell issues with space usage & laziness. (DPH/CUDA use unboxed strict data, but there are interface issues with the rest of the boxed lazy Haskell universe.) All in all, there are probably better SoCs[^kamatsu].
+
+[^kamatsu]: Liam O'Connor [begs to differ](http://www.reddit.com/r/haskell/comments/fid5w/haskell_summers_of_code_retrospective_updated_for/c1gutlo) on the value of a DPH or CUDA SoC.
 
 # External links
 
