@@ -8,9 +8,7 @@ The Haskell Summer of Codes have often produced excellent results, but how excel
 
 # Example retrospective: Debian
 
-In 2009, a blogger & Debian developer has produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) retrospective series on the Debian Summer of Code projects.
-
-The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. Let's see whether that holds true of Haskell.
+In 2009, a blogger & Debian developer produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) retrospective series on the Debian Summer of Code projects. The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. I decided to compile my own series of retrospectives on the Haskell Summers of Code.
 
 # Judging Haskell SoCs
 
@@ -22,7 +20,7 @@ or
 
 > "...a global program that offers student developers stipends to write code for various open source software projects. We have worked with several open source, free software, and technology-related groups to identify and fund several projects over a three month period. Since its inception in 2005, the program has brought together over 4500 successful student participants and over 3000 mentors from over 100 countries worldwide, all for the love of code. Through _Google Summer of Code_, accepted student applicants are paired with a mentor or mentors from the participating projects, thus gaining exposure to real-world software development scenarios and the opportunity for employment in areas related to their academic pursuits. In turn, the participating projects are able to more easily identify and bring in new developers. Best of all, more source code is created and released for the use and benefit of all."^[<https://code.google.com/soc/>]
 
-It is intended to produce source code for the 'use and benefit of all'; it is not meant to produce academic papers, code curiosities, forgotten blog posts, groundwork for distant projects, but 'exciting' new production code. This is the perspective I take in trying to assess SoC projects: did it ship *anything*? If standalone, are the results in active use by more than a few developers or other codebases? If a modification to an existing codebase, was it merged and now is actively maintained? And so on. Sterling Clover argues that this is far too demanding and does not consider whether an involved student is energized by his contribution to go on and contribute still more[^sclv]; I disagree about the former, and I have not done the latter because it would be too labor-intensive to track down every student and assess their later contributions. (Perhaps in the future I or another Haskeller will do that.)
+It is intended to produce source code for the 'use and benefit of all'; it is not meant to produce academic papers, code curiosities, forgotten blog posts, groundwork for distant projects, but 'exciting' new production code. This is the perspective I take in trying to assess SoC projects: did it ship *anything*? If standalone, are the results in active use by more than a few developers or other codebases? If a modification to an existing codebase, was it merged and now is actively maintained^[The Haskell ecosystem evolves fast, and strong static typing means that a package can quickly cease to be compilable if not maintained.]? And so on. Sterling Clover argues that this is far too demanding and does not consider whether an involved student is energized by his contribution to go on and contribute still more[^sclv]; I disagree about the former, and I have not done the latter because it would be too labor-intensive to track down every student and assess their later contributions, which would involve still more subjective appraisals^[For example, how long must a student 'continue to participate/make contributions to Haskell community'? Spencer Janssen, a successful 2006 SoC student, went on to be one of the 2 main developers on the popular [Xmonad](!Wikipedia) window manager, but then wound down his Haskell contributions and stopped entirely ~2009 (much to my dismay as an Xmonad developer). Is he a success for SoC?]. (Perhaps in the future I or another Haskeller will do that.)
 
 [^sclv]: From the 11 February 2011 Haskell-cafe thread, ["Haskell Summers of Code retrospective (updated for 2010)"](http://www.haskell.org/pipermail/haskell-cafe/2011-February/089183.html):
 
@@ -224,7 +222,7 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 #### Predicting 2010 results
 
-Borrowing from our [3 cardinal sins](#lessons-learned) of SoCs, what predictions can we make?
+Borrowing from our [3 cardinal sins](#lessons-learned) of SoCs, and per my usual practice of testing my understanding by [making predictions](Prediction markets#calibration), what predictions do I make about the 2010 SoCs?
 
 Most of the 7 SoCs are laudably focused on an existing application. You don't need to justify a speedup of normal Darcs operations because there's an installed base of Darcs users that will benefit; a new GC for GHC or a LLVM backend will benefit every Haskeller; better Cabal support for testing may go unused by many package authors who either have no tests or don't want to bother - but a fair number will bother, and it will get maintained as part of Cabal, and similarly for the Hackage 2.0 project.
 
@@ -304,7 +302,7 @@ To summarize my feelings:
     **Successful**. The [coding](http://serras-haskell-gsoc.blogspot.com/2011/08/end-of-summer.html) was finished, to the author's apparent satisfaction, and the work was included in the [2.1.0](http://jpmoresmau.blogspot.com/2011/09/eclipsefp-210-released.html) release.
 2. "Simplified OpenGL bindings"; Alexander Göransson, mentored by Jason Dagit
 
-    **Unsuccessful**. As far as I can tell, this project never delivered anything. No `OpenGLRawNice` library exists, a post-August 2011 Google search for "Alexander Göransson OpenGL" is dry, nothing on Hackage seems to mention OpenGL 4.0 support, etc.
+    **Unsuccessful**. Jason Dagit says Alexander never started for unknown personal reasons and so no work was ever done (no `OpenGLRawNice` library exists, a post-August 2011 Google search for "Alexander Göransson OpenGL" is dry, nothing on Hackage seems to mention OpenGL 4.0 support, etc.).
 3. "Interpreter Support for the Cabal-Install Build Tool"; anklesaria, by Duncan Coutts
 
     **Unsuccessful**? anklesaria's final post, ["Ending GSoC"](http://lambdasandwich.blogspot.com/2011/08/ending-gsoc.html), says the work is done and provide a repository with patches by `amsay@amsay.net` - but no patches by that email appear in the Cabal repository as of 10 December 2011; nor does there appear to be any discussion in the [cabal-dev ML](http://www.haskell.org/pipermail/cabal-devel/) archives.
@@ -338,7 +336,7 @@ So of the 7 2011 SoCs:
 
 My predictions were in general accurate; I remain hopeful that at least one of the Cabal SoCs will be merged in, which would give me a clean sweep and also render the final 2011 SoC record as good as the 2010 SoC record.
 
-It troubles me that neither Cabal SoC has been merged in yet, in line with the historical trend for big Cabal SoC improvements to be partially done but never go into production. If neither gets merged in before the 2012 SoC starts, the obvious lesson seems to be that Cabal is just too dangerous and uncertain to waste SoCs on.
+It troubles me that neither Cabal SoC has been merged in yet, in line with the historical trend for big Cabal SoC improvements to be partially done but never go into production. Duncan Coutts [says](http://www.reddit.com/r/haskell/comments/n82ln/summer_of_code_2011_retrospective/c377srp#siteTable_t3_n82ln) they are in the queue, but if neither gets merged in before the 2012 SoC starts, the lesson seems to be that Cabal is too dangerous and uncertain to waste SoCs on.
 
 ### Lessons learned
 
@@ -396,6 +394,6 @@ It's difficult to quantify how 'useful' a package is; it's easier to punt and as
     v. [Haskell mailing lists](http://dir.gmane.org/index.php?prefix=gmane.comp.lang.haskell)
 
 [^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. ([Waern's reply](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
-[^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen of Oleg Kiselyov; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in quantity and quality, everyone acknowledges, but how often does anyone actually use any of it?
+[^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen of Oleg Kiselyov; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in both quantity and quality, everyone acknowledges, but how often does anyone actually *use* any of it?
 
     ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratee](!Hackage) has picked up [4 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee#direct), its most popular successor [33](http://sparky.haskell.org:8080/package/enumerator/reverse) and iteratees in general may one day become as widely used as bytestrings.)
