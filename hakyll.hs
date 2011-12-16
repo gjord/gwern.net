@@ -43,11 +43,11 @@ main = do  hakyll $ do
 
 options :: WriterOptions
 options = defaultWriterOptions{ writerSectionDivs = True,
-                                       writerStandalone = True,
-                                       writerTableOfContents = True,
-                                       writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
-                                       writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
-                                       writerEmailObfuscation = NoObfuscation }
+                                writerStandalone = True,
+                                writerTableOfContents = True,
+                                writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
+                                writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
+                                writerEmailObfuscation = NoObfuscation }
 
 rssConfig :: FeedConfig
 rssConfig =  FeedConfig { fcTitle = "Joining Clouds", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
