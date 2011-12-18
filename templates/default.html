@@ -72,6 +72,13 @@
     <!-- floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
     <script type="text/javascript" src="/static/js/footnotes.js"></script>
 
+    <!-- http://tablesorter.com/docs/ -->
+    <script type="text/javascript" src="/static/js/tablesorter.js"></script>
+    <script type="text/javascript" id="tablesorter">
+      $(document).ready(function() {
+      $("table").tablesorter();
+      }); </script>
+
     <!-- Load Google Analytics, because the data is interesting and useful -->
     <script id="googleAnalytics" type="text/javascript">
       var _gaq = _gaq || [];
@@ -88,7 +95,6 @@
     <script type="text/javascript">
       if (document.title != 'index') { <!-- avoid Disqus comments on front page -->
       (function() {
-      var SHORTNAME = 'example'; // Your website's shortname on Disqus
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://disqus.com/forums/gwern/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -100,7 +106,7 @@
       (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
       }());
       }
-      else
+      else <!-- suppress Table of Contents by loading an additional special-purpose CSS file -->
       { var head  = document.getElementsByTagName('head')[0];
       var link  = document.createElement('link');
       link.id   = 'parallelColumns';
