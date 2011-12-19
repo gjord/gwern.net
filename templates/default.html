@@ -61,6 +61,7 @@
       $(function(){
       $(window)
       .sausage({
+      page: '.section',
       content: function (i, $page) {
       return '<span class="sausage-span">' + $page.find(':header').first().text() + '</span>';
       }
