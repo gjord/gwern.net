@@ -161,6 +161,10 @@ As a writer, I desire feedback. I also want to feel that my work has been of use
 4. [Hacker News](!Wikipedia): [Girl Scouts and good governance]() made it to the front page, resulting in 1,727 visits & setting `gwern.net` traffic records (it is that giant spike in the traffic graph), but apparently minimal viewing of other pages. Further, while I seem to get a modest amount of Reddit traffic from even unsuccessful submissions, HN submissions will sink without a trace. Kiba calls Hacker News a 'lottery', but it seems to be one worth playing.
 5. LessWrong is a natural place to post many of my writings: <http://lesswrong.com/user/gwern/submitted/> And perhaps unsurprisingly, LW is my second-largest source of traffic, coming in after SU with 1,857 visits. While few of my submissions get upvoted all that highly, most of them drove a fair amount of traffic even in the Discussion ghetto. (Linking in comments also drives a surprising amount of traffic over long periods to my practical articles like on n-back or melatonin.) At some point I hope to have a good Article and see how much of a disparity there is.
 
+<!--
+incorporate gitstats http://chrisdone.com/posts/2011-12-02-programmer-at-work-statistics.html
+-->
+
 ## Source
 
 The source pages works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
