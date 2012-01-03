@@ -123,7 +123,6 @@ My answer is that one uses such a framework to work on projects that are too big
         A dream unfinished
         And awakening.
 
-
 What is next? So far the pages will persist through time, and they will gradually improve over time. But a truly Long Now approach would be to make them be improved *by* time - make them more valuable the more time passes. ([Stewart Brand](!Wikipedia) remarks in _[The Clock of the Long Now](!Wikipedia)_ that a group of monks carved thousands of scriptures into stone, hoping to preserve them for posterity - but posterity would value far more a carefully preserved collection of monk feces, which would tell us countless valuable things about important phenomenon like global warming.)
 
 One idea I am exploring is adding long-term predictions like the ones I make on [PredictionBook.com](http://predictionbook.com/users/gwern). Many[^fiction] pages explicitly or implicitly make predictions about the future. As time passes, predictions would be validated or falsified, providing feedback on the ideas.^[Thinking of predictions is good mental discipline; we should always be able to [cash out](http://lesswrong.com/lw/i3/making_beliefs_pay_rent_in_anticipated_experiences/) our beliefs in terms of the real world, or know why we cannot. Unfortunately, humans being humans, we need to actually track our predictions - [*all* of them](!Wikipedia "Confirmation bias") - lest our predicting degenerate into [entertainment](http://lesswrong.com/lw/hi/futuristic_predictions_as_consumable_goods/) like political punditry.]
@@ -138,9 +137,7 @@ I personally take the approach that one should think Less Wrong and act Long Now
 
 The Long Now views its proposals like the Clock and the Long Library and [seedbanks](!Wikipedia) as insurance - in case the future turns out to be surprisingly *unsurprising*. I view these writings similarly. If [Ray Kurzweil](!Wikipedia)'s most ambitious predictions turn out right and the [Singularity](!Wikipedia "Technological singularity") happens by 2050 or so, then much of my writings will be moot, but I will have all the benefits of said Singularity; if the Singularity never happens or ultimately pays off in a very disappointing way, then my writings will be very valuable to me. By working on them, I hedge my bets.
 
-
 # Technical aspects
-
 ## Hosting
 
 <http://www.gwern.net> exists as a set of static CSS, HTML, JS, & PDF files served by [NearlyFreeSpeech.net](!Wikipedia) ([NFSN homepage](http://www.nearlyfreespeech.net)). The source is available for download, or if one only wants one page, one can visit a page with the ".page" suffix (eg. you could look at the source of this page at <http://www.gwern.net/About.page> rather than the HTML <http://www.gwern.net/About>).
@@ -153,7 +150,7 @@ NFSN's pricing meant that I paid for usage rather than large flat fees. I put in
 
 ## Size
 
-As of 2 July 2011, the source of `gwern.net` is composed of >121 files with >589,000 words of ~3.6M; this excludes the images, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML the site is approximately 327M^[HTML is not very compact. [7zip](!Wikipedia) can shrink that to ~60M.] The source repository contains >3,215 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
+As of 2 January 2012, the source of `gwern.net` is composed of >137 files with >931,274 words of ~5.9M; this excludes the images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is approximately 72M^[HTML is not very compact. [7zip](!Wikipedia) can shrink that to a tenth the size.] The source repository contains >4,307 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
 
 ## Popularity
 ### October 2010 - February 2011
@@ -226,9 +223,49 @@ As a writer, I desire feedback. I also want to feel that my work has been of use
 4. [Hacker News](!Wikipedia): [Girl Scouts and good governance]() made it to the front page, resulting in 1,727 visits & setting `gwern.net` traffic records (it is that giant spike in the traffic graph), but apparently minimal viewing of other pages. Further, while I seem to get a modest amount of Reddit traffic from even unsuccessful submissions, HN submissions will sink without a trace. Kiba calls Hacker News a 'lottery', but it seems to be one worth playing.
 5. LessWrong is a natural place to post many of my writings: <http://lesswrong.com/user/gwern/submitted/> And perhaps unsurprisingly, LW is my second-largest source of traffic, coming in after SU with 1,857 visits. While few of my submissions get upvoted all that highly, most of them drove a fair amount of traffic even in the Discussion ghetto. (Linking in comments also drives a surprising amount of traffic over long periods to my practical articles like on n-back or melatonin.) At some point I hope to have a good Article and see how much of a disparity there is.
 
-<!--
-incorporate gitstats http://chrisdone.com/posts/2011-12-02-programmer-at-work-statistics.html
--->
+### July 2011 - December 2011
+
+> _Res audita perit, litera scripta manet_.
+
+`darcs-graph` for this period (including 1-2 January 2012): <!-- darcs-graph - - filter=20110701 - - y=20 - - output=darcs-history.png - - name=gwern.net /home/gwern/doc/archive/wiki/ -->
+
+![](/images/2011-december-darcs-history.png "Plot of patch creations (y-axis) versus date (x-axis): July 2011 to 2 January 2012")
+
+I ran into a [cool post by Christopher Done](http://chrisdone.com/posts/2011-12-02-programmer-at-work-statistics.html) on a tool that does detailed analysis of patch patterns on a Git repository, [GitStats](http://gitstats.sourceforge.net/), and this spurred me to create a [Git mirror](https://github.com/gwern/gwern.net) of `gwern.net` using [darcs-to-git](https://github.com/purcell/darcs-to-git). GitStats produces a [whole bundle](/docs/gwern.net-gitstats/index.html) of graphs and figures, some of which I found surprising. (I did not expect to see a large spike on Wednesday and relatively few patches on Saturday, or a spike around 5 PM, as opposed to the early morning.) I think I will update the GitStats output with each output, as a (large) adjunct to the `darcs-graph` plots.
+
+#### Traffic
+
+> "...prompt no more the follies you decry, / As tyrants doom their tools of guilt to die; / 'Tis yours this night to bid the reign commence / Of rescu'd Nature, and reviving Sense; / ...Bid scenic Virtue form the rising age, / And Truth diffuse her radiance from the stage."
+
+Google Analytics [reports](/docs/20110702-20120102-gwern.net-analytics.pdf), that over the 185 days between 2 July 2011 and 2 January 2012, <!-- http://www.timeanddate.com/date/durationresult.html?m1=07&d1=2&y1=2011&m2=1&d2=2&y2=2012&ti=on --> there were 191,015 page-views (average 1,032/day) by 79,346 visitors for a total of 115,585 visits (average 624/day). This is better than I expected and makes me wonder about [my prediction](http://predictionbook.com/predictions/4895) for <2000 average daily visits by 2013 (but it still seems unlikely traffic will triple over the next year).
+
+[](/images/201107-201201-traffic-history.png "Plot of page-hits (y-axis) versus date (x-axis)")
+
+The main change in page popularity did not surprise me; when I was writing [Silk Road](), I knew it would almost certainly be popular given how very popular the Gawker article was but also how lacking in practical details it was, and I also suspected that [Bitcoin is Worse is Better]() would be fairly popular as it argued an interesting and controversial thesis (the original and promoted version is hosted on `BitcoinWeekly.com`, so its hit-count ought to be low). I'm surprised at how much the page `gwern.net` still gets; a surprising number of people must either visit the main page after reading another article or click on my various blog comments.
+
+1. Silk Road: 62,167
+2. DNB FAQ: 25,541
+3. home/main page: 16,967
+3. Modafinil: 10,437
+4. Nootropics: 10,219
+5. Spaced repetition: 6,570
+8. Bitcoin is Worse is Better: 4,297
+9. [Links](): 3,490
+
+More interesting is the other signals of popularity: [Zeo Inc.](!Wikipedia) gave me a free set of headbands (worth ~$50) because they liked my [Zeo self-experiments](Zeo), a software engineer/manager contacted me to see about recruiting me, ThinkGum offered me some of their eponymous product for my Nootropics page, and my request for Bitcoin donations has paid off a little with a few donations ฿0.1-1 and one generous donation of ฿20 (worth a bit upwards of $100 at the time; I spent it on modafinil). (This is all intrinsically helpful but I value it mostly because money speaks louder than words.)
+
+#### Promotion
+
+I've done relatively little in this period compared with the [previous period](#promotion):
+
+1. I abandoned Witcoin not long after my experiment with it; and now Witcoin is dead, pending a possible open-sourcing of the codebase.
+2. My AdWords credit is mostly expired. For some reason, my click-through rates kept dropping.
+3. StumbleUpon remains a good traffic source (1,430 visits). I continue to 'stumble' my new articles when I remember to do so.
+4. Hacker News was responsible for a great deal of my traffic in this period (4,175 visits). Most of it was not my doing, however - whenever I submit links, they do poorly.
+5. LessWrong remains a major traffic driver (6,961 visits); I continue to see a lot of referrals from old posts and comments. Nor do all the links seem to be perceived negatively or as self-promotion by the LW community: I [posted an article](http://lesswrong.com/lw/8kv/recent_updates_to_gwernnet/) describing site updates and the article was received well to my surprise, eliciting very favorable reviews of my writings in general. That was nice.
+6. For this period, I did spend a little more effort submitting stuff to Reddit; and I was handsomely rewarded with the Silk Road submission skyrocketing and become one of the all-time most popular articles in the Bitcoin subreddit. Between that and my nootropics articles, Reddit sent me 20,842 visits.
+
+The largest traffic sources are Google at 36,625 visits and direct/no-referrals at 24,118 visits. As I have no idea how to improve these two figures, I ignore it. I write good content, submit it places, supply metadata, and abide by my hackerly principles; hopefully that is all the SEO I need.
 
 ## Source
 
