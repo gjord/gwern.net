@@ -53,6 +53,8 @@ FileETag MTime
 ### "WP redirect generator" ~> "Wikipedia Redirect Generator"
 ### "Wikipedia and Dark side editing" ~> "Wikipedia and Dark Side Editing"
 ### "Wikipedia and Other Wikis" ~> "Wikipedia and other Wikis"
+RedirectPermanent "/favicon.ico"                    "/static/img/favicon.ico"
+RedirectPermanent "/robots.txt"                     "/static/robots.txt"
 RedirectPermanent "/Culture is not about Esthetics" "http://www.gwern.net/Culture is not about esthetics"
 RedirectPermanent "/In Defense of Inclusionism"  "http://www.gwern.net/In%20Defense%20Of%20Inclusionism"
 RedirectPermanent "/Mnemosyne"                   "http://www.gwern.net/Spaced repetition"
