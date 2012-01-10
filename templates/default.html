@@ -50,12 +50,14 @@
       </div>
     </div>
 
-    <!-- Implement MathML -->
+    <!-- Force MathML rendering -->
     <script type="text/javascript" src="/static/js/MathMLinHTML.js"></script>
 
-    <!-- sidebar showing sections; see http://christophercliff.github.com/sausage/ -->
-    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <!-- Load infrastructure from Google's CDN: http://code.google.com/apis/libraries/devguide.html -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+    <!-- jQuery plugin which adds a sidebar visualizing the page sections; see http://christophercliff.github.com/sausage/ -->
     <script type="text/javascript" src="/static/js/jquery.sausage.js"></script>
     <script type="text/javascript">
       $(function(){
@@ -64,10 +66,7 @@
       page: '.section',
       content: function (i, $page) {
       return '<span class="sausage-span">' + $page.find(':header').first().text() + '</span>';
-      }
-      })
-      ;
-      });
+      } }) ; });
     </script>
 
     <!-- floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
