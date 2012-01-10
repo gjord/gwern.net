@@ -1,0 +1,330 @@
+---
+title: Hypertime in Haskell
+description: Implementing the Hypertime multiverse model of time travel in Haskell
+...
+
+Looking at Sam Hughes's [Hypertime model](http://qntm.org/hypertime) is very confusing and hard to keep straight. One wonders how to program it. An infinite stack of infinite universes, which spawn off more copies, none of which cause paradoxes...? I certainly can't visualize it easily:
+
+> "There is a continuum of parallel universe, offset by months and days and minutes and fractions of a second. There is a reason why all the universes are the same: it is because each particle in each universe is "dragged behind" the particles in the universe above, like curtain rings, or water flowing over some cosmic waterfall. There is a cosmic fireball at the Big Bang, spewing out each universe in turn, and each one precisely follows the path laid out by the previous one. They are separated by, perhaps, a Planck second.
+>
+> When drawn out, this arrangement resembles a two-dimensional continuum. Along the horizontal axis is real time, increasing from left to right. Along the vertical axis is "hypertime", increasing from bottom to top. The top universes are further along in calendar time than the bottom universes. Horizontal lines represent single universes/timelines. Vertical lines represent lines of constant real time, with the past on the left, the future on the right, and the vertical line of "the present" constantly moving from left to right. Notice how a vertical line intersects every universe/timeline at a different calendar time. (Lines of constant calendar time, like "January 1, 2011", are diagonal, running from the upper left to the lower right. But these are less useful.) It is 2011 here, but one year "down" through hypertime it is 2010, and one year "up" through hypertime it is 2012. However, all universes are running in parallel, simultaneous in real time.
+>
+> Time travel: travelling forwards in hypertime is in fact travelling to higher universes in the stack. Travelling backwards in hypertime is in fact travelling to lower universes in the stack. Neither of these strictly constitutes time travel through real time. You cannot visit an earlier point in the same timeline, there are no causal loops, you cannot alter established history, there are no paradoxes. There is a two-dimensional *sheet* of time, and you can dart about from point to point, but you are constantly dragged forwards in real time."
+
+# Sequences
+
+He talks in loosely continuous terms, but of course space and time seem to be quantized, and most computable models would quantize as well, so we'll use a quantized time. States of the universe proceed one after another, each linked to the next, with an order. So the states are a sequence, which we would use [Data.Sequence](!Hoogle) for.
+
+What is in our sequence? Well, we could imagine having some fancy physics model like a video game does, but better to keep it simple. The obvious sequence is the integers. So we could model universe _X_ of 5 states as
+
+~~~{.haskell}
+import Data.Sequence
+
+x = 1 <| 2 <| 3 <| 4 <| 5 <| empty
+~~~
+
+This supports all the usual questions one might want to ask, like how many states are there in _X_ (`S.length x ~> 5`), which states satisfy some property (like oddness, `S.filter odd x ~> 1 <| 3 <| 5 <| empty`), what happened at the fourth instant (`S.index x 3 ~> 4`), etc.
+
+# Infinite lists
+
+On the other hand, there's no real reason to keep our assumption that each universe is *finite* - they could be infinite. So a finite sequence is not the best representation. It would be better to have infinite sequences, or lazy lists. This represents our old finite sequence handily:
+
+~~~{.haskell}
+x = 1 : 2 : 3 : 4 : 5 : []
+-- or
+x = [1,2,3,4,5]
+~~~
+
+And also gives us Haskell's famous infinite lists, like
+
+~~~{.haskell}
+x = 1 : 2 : 3 : 4 : 5 : repeat 6
+-- or
+x = [1,2,3,4,5] ++ repeat 6
+~~~
+
+which looks like `[1,2,3,4,5,6,6,6,6,6,6,6,6...]` and so on. This would be useful if we wanted to model some sort of universal eschatology where the universe reaches a state which persists forever (although it raises the philosophical issue of time as [A-series and B-series](!Wikipedia) - if nothing changes, in what sense is there time?).
+
+# List of Lists
+
+Going back to Hughes's model, we see he specifies not one infinite universe, but rather, a whole set of the same universe. Or rather, not a mathematical set because there is an ordering, but a sequence; or rather, since the number of copies is not limited, an infinite list of the universes. We want something that looks like:
+
+~~~{.haskell}
+[
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ [1,2,3,4,5,6,6,6...],
+ ...
+]
+~~~
+
+With lists marching off to infinity in both directions.
+
+Easy to specify the construction of the top list:
+
+~~~{.haskell}
+y :: a -> [a]
+y x = x : y x
+~~~
+
+Which [Hoogle](!Hoogle "a -> [a]") tells us is our old friend `repeat`.
+
+If we wanted to feed `x` into `y`, we would blanket our screen with infinitely repeating numbers, as expected. So instead we must specify we want only part of the list, and we must do so for both infinities we have incautiously invoked:
+
+~~~{.haskell}
+map (take 5) $ take 5 $ y x
+~>
+[
+ [1,2,3,4,5,6],
+ [1,2,3,4,5,6],
+ [1,2,3,4,5,6],
+ [1,2,3,4,5,6],
+ [1,2,3,4,5,6],
+]
+~~~
+
+# List of Shifting Lists
+
+This is a good start, but Hughes specifies:
+
+> "Each universe is offset in time from the next, but *each universe is exactly identical to the others*. In our universe, it is currently 2011. In the universe "above" ours, however, it is 2012, and 2011 has already happened, just like it's scheduled to happen here. In the universe "below" ours, it's 2010, but 2011 is going to happen there just like it is happening here."
+
+This is problematic. It's easy to 'shift' each universe down the number line by one, we simply modify the definition of `y` to run a desired function like [tail](!Hoogle), which will shift `[1,2,3,...]` to `[2,3,4,...]` etc:
+
+~~~{.haskell}
+y :: a -> [a]
+y x = x : y (tail x)
+~~~
+
+This hardwires the use of `tail`; what if we let `tail` be a parameter so we could use some other function? Looking through the Hypertime post, we will certainly need additional complexity in the future!
+
+Well, we could write
+
+~~~{.haskell}
+y :: a -> (a -> a) -> [a]
+y x f = x : y f (f x)
+~~~
+
+This lets us pass in `tail` or `tail . tail` or whatever we want. As it happens, we've reinvented a common list function in Haskell: if we look at the [type signature](!Hoogle "a -> (a -> a) -> [a]"), we find [iterate](!Hoogle) which is defined almost exactly the same way:
+
+~~~{.haskell}
+iterate :: (a -> a) -> a -> [a]
+iterate f x = x : iterate f (f x)
+~~~
+
+We get:
+
+~~~{.haskell}
+map (take 5) $ take 5 $ iterate tail x
+~>
+[
+ [1,2,3,4,5,6],
+ [2,3,4,5,6,6],
+ [3,4,5,6,6,6],
+ [4,5,6,6,6,6],
+ [5,6,6,6,6,6],
+]
+~~~
+
+# List of Shifting Pairs of Lists
+
+But now each 'universe' is distinct - #5 is clearly distinct from #1 (where are any of the states we have numbered as 1-5?) and each universe is a sublist of the previous universe. Oh well? Maybe we could pretend that each list actually has a paired list going the opposite direction and what we really have is a master list of 2-tuples, each 2-tuple containing a list going backwards to negative infinity and the lists we have been looking at, which march forward:
+
+~~~{.haskell}
+[
+ ([0,-1,-2...],    [1,2,3,4,5,6,...]),
+ ([1, 0,-1...],    [2,3,4,5,6,6,...]),
+ ([2, 1, 0...],    [3,4,5,6,6,6,...]),
+ ([3, 2, 1...],    [4,5,6,6,6,6,...]),
+ ([4, 3, 2...],    [5,6,6,6,6,6,...]),
+]
+~~~
+
+Actually, this is doable - what is one more infinite list? We need to redefine more things this time
+
+First, we need to define our starting pair of lists. The right-hand list remains as before, but we define the left-hand list as going downwards:
+
+~~~{.haskell}
+x :: ([Integer], [Integer])
+x = ([0, -1..], [1,2,3,4,5] ++ repeat 6)
+~~~
+
+Now, each iteration, we want to remove the first entry  the right-hand list and push it to the front of the left-hand list. This isn't as simple as just `tail`, but still fairly straightforward:
+
+~~~{.haskell}
+universes :: [([Integer], [Integer])]
+universes = iterate (\(a,b) -> (head b : a, tail b)) x
+~~~
+
+Unfortunately, our little `map`/`take` viewer has to deal with the tuple as well:
+
+~~~{.haskell}
+extractSome :: [([Integer], [Integer])]
+extractSome = map (\(a,b) -> (take 5 a, take 5 b)) $ take 5 $ universes
+~~~
+
+Which evaluates to
+
+~~~{.haskell}
+[([0,-1,-2,-3,-4],[1,2,3,4,5]),([1,0,-1,-2,-3],[2,3,4,5,6]),([2,1,0,-1,-2],[3,4,5,6,6]),([3,2,1,0,-1],[4,5,6,6,6]),([4,3,2,1,0],[5,6,6,6,6])]
+-- or to reformat it:
+[
+ ([0,-1,-2,-3,-4],[1,2,3,4,5]),
+ ([1,0,-1,-2,-3],[2,3,4,5,6]),
+ ([2,1,0,-1,-2],[3,4,5,6,6]),
+ ([3,2,1,0,-1],[4,5,6,6,6]),
+ ([4,3,2,1,0],[5,6,6,6,6])
+]
+~~~
+
+# List of Shifting Zippers
+
+This looks right if we cock our heads. The nice thing about this is that this pair of lists lets us shift around as we want. Suppose we dropped everything but the first list and wanted to go the other direction, and shift left by, say, 10 entries, and then shift right by 10 entries? We'd be right back where we started as long as we wrote the argument to `iterate` correctly. One could imagine playing the same trick with a tree or array or our old friend `Data.Sequence`.
+
+This is because we have, in a way, reinvented an old concept in programming, the [gap buffer](!Wikipedia) which generalizes as the [Zipper data structure](!Wikipedia "Zipper (data structure)") ([Haskell wiki](http://www.haskell.org/haskellwiki/Zipper); one famous user is [XMonad](https://donsbot.wordpress.com/2007/05/17/roll-your-own-window-manager-tracking-focus-with-a-zipper/)). The idea of the zipper is that one has a 'focus' in between two or more other data structures (lists, in our case) and one moves around by shuffling items from auxiliary data structure to auxiliary data structure in such a way it looks like one has pointers in all the directions one wants. Zippers can be automatically derived for many data structures, but in our case, we can make use of a pleasant wrapper, the [ListZipper](!Hackage) package.
+
+We import `Data.List.Zipper` and start.
+
+~~~{.haskell}
+import Data.List.Zipper
+
+x :: Zipper Integer
+x = Zip [0, -1..] ([1,2,3,4,5] ++ repeat 6)
+
+extract :: Int -> Zipper a -> [a]
+extract n (Zip a b) = reverse (take n a) ++ take n b
+~~~
+
+Does this work? We should be in the middle of the infinite list, and so all three `emptyp`, `beginp`, and `endp` should be False (the naming convention is Scheme's - 'p' for 'predicate'):
+
+~~~{.haskell}
+(emptyp x, beginp x, endp x)
+~>
+(False, False, False)
+~~~
+
+Next, ListZipper doesn't define its Zip class as `data Zipper a = Zip [a] a [a]` but as we did, `data Zipper a = Zip [a] [a]`; if we ask for the 'current' item at focus (`cursor :: Zip a -> a`), what do we get? 0 (left) or 1 (right)?
+
+~~~{.haskell}
+cursor x
+~>
+1
+~~~
+
+We get the head of the right-hand list. Reasonable. Next, what do we get if we call `cursor . right`? (Remember, infinite lists are dangerous to evaluate without some way to shrink them back to finite-ness like `cursor`.)
+
+~~~{.haskell}
+cursor $ right x
+~>
+2
+~~~
+
+And I claimed that we can move back and forth as we please, so let's try out a whole bunch:
+
+~~~{.haskell}
+cursor $ left $ left $ left $ right $ left $ right $ right $ right $ left $ left x
+~>
+-1
+extract 5 $ left $ left $ left $ right $ left $ right $ right $ right $ left $ left x
+~>
+[-6,-5,-4,-3,-2,-1,0,1,2,3]
+~~~
+
+# Updating Zippers
+
+One of the perhaps counterintuitive things about a Zipper is that it layers the 'updates' on top of the original Zippers, since it's [purely functional](!Wikipedia). So `replace :: a -> Zipper a -> Zipper a` may not do quite what one expects. One might expect:
+
+~~~{.haskell}
+extract 5 $ replace 100 x
+~>
+[-4,-3,-2,-1,0,100,101,102,103,104]
+~~~
+
+But one actually gets:
+
+~~~{.haskell}
+[-4,-3,-2,-1,0,100,2,3,4,5]
+~~~
+
+This is a problem for our time-travel scenarios - if we copy an index in one list and move up one list and down to the index + 1, and do `replace`, we don't get the result we want.
+
+We can try to replace `replace` with our own function, in which we destroy the right-hand list and instead return a right-hand list based on whatever our update is:
+
+~~~{.haskell}
+replace' :: Integer -> Zipper Integer -> Zipper Integer
+replace' a (Zip b _) = Zip b [a..]
+
+extract 5 $ replace' 100 x
+~>
+[-4,-3,-2,-1,0,100,101,102,103,104]
+~~~
+
+That's better. But we've only been dealing with a single Zipper here, what happened to `iterate` and our infinite list of infinite lists (now infinite Zippers)? We only need to make minor changes to our old code:
+
+~~~{.haskell}
+import Data.List.Zipper
+
+x :: Zipper Integer
+x = Zip [0, -1..] ([1,2,3,4,5] ++ repeat 6)
+
+universes :: [Zipper Integer]
+universes = iterate (\z -> right z) x
+
+extract :: Integer -> Zipper a -> [a]
+extract n (Zip a b) = reverse (take n a) ++ take n b
+~~~
+
+And then much as before:
+
+~~~{.haskell}
+map  (extract 5) $ take 5 universes
+~>
+[
+ [-4,-3,-2,-1,0,1,2,3,4,5],
+ [-3,-2,-1, 0,1,2,3,4,5,6],
+ [-2,-1,  0,1,2,3,4,5,6,6],
+ [  -1, 0,1,2,3,4,5,6,6,6],
+ [    0,1,2,3,4,5,6,6,6,6]
+]
+~~~
+
+Beautiful! We don't have to pretend, all the preceding values are there as they should be.
+
+<!-- import Data.List.Zipper -->
+
+<!-- x :: Zipper Integer -->
+<!-- x = Zip [0, -1..] ([1,2,3,4,5] ++ repeat 6) -->
+
+<!-- universes :: [Zipper Integer] -->
+<!-- universes = iterate (\z -> right z) x -->
+
+<!-- extract :: Int -> Zipper a -> [a] -->
+<!-- extract n (Zip a b) = reverse (take n a) ++ take n b -->
+
+<!-- replace' :: Integer -> Zipper Integer -> Zipper Integer -->
+<!-- replace' a (Zip b _) = Zip b [a..] -->
+
+
+<!-- -- universes :: [([Integer], [Integer])] -->
+<!-- -- universes = iterate (\(a,b) -> (head b : a, tail b)) x -->
+
+<!-- -- extractSome :: [([Integer], [Integer])] -->
+<!-- -- extractSome = map (\(a,b) -> (take 5 a, take 5 b)) $ take 5 $ universes -->
+
+<!-- -- import Data.List.Zipper -->
+
+<!-- -- universe1 = iterate (+1) 0 -->
+<!-- -- universeSheet succ seed = fromList $ iterate succ seed -->
+<!-- -- u = universeSheet tail universe1 -->
+
+<!-- -- -- list of lists -->
+<!-- -- -- map (take 5) $ take 5 $ start ~> -->
+<!-- --   -- [[0,1,2,3,4],[1,2,3,4,5],[2,3,4,5,6],[3,4,5,6,7],[4,5,6,7,8]] -->
+
+<!-- -- crop :: Zipper a -> Zipper a -->
+<!-- -- crop z = let z' = pop z in if beginp z' then z' else crop z' -->
