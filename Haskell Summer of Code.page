@@ -170,7 +170,7 @@ So we can work from the [code.google.com](http://code.google.com/p/google-summer
 
 In general, these looked good. Most of them will be widely useful -- especially the Darcs and Haddock SoCs -- or address longstanding complaints (many criticisms of laziness revolve around how unpredictable it makes memory consumption). The only one that bothers me is the EclipseFP project. I'm not sure Eclipse is common enough among Haskellers or potential Haskellers to warrant the effort^[In the [2010 survey](http://blog.johantibell.com/2010/08/results-from-state-of-haskell-2010.html) of Haskellers, 3% reported ever using Eclipse for Haskell programming. In the [2011 survey](http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html), 4% did.], but at least the project is focused on improving an existing plugin than writing one _ab initio_. The 5 were:
 
-- ["Optimising Darcs for medium to large repositories"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467805); by Petr Ročkai; mentored by Eric Kow
+- ["Optimising Darcs for medium to large repositories"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467805); by Petr Ročkai; mentored by [Eric Kow](http://erickow.com/)
 
      **Unknown**. [hashed-storage](http://hackage.haskell.org/package/hashed-storage) exists and is used in Darcs, but from watching the bugtracker traffic, it's unclear whether Darcs saw a net gain from it.
 - ["haskell-src-exts -> haskell-src"](http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2009/haskell/t124022467962); by Niklas Broberg; mentored by Neil Mitchell
@@ -327,11 +327,47 @@ To summarize my feelings:
     >
     > Each of these two open problems is probably about the size of an ambitious SoC project. On top of that, a lot of integration work needs to happen to actually make real use of the advancements. We shall see how much time and resources can be found for advancing this cause, but I am relatively optimistic: the primitive level has turned out fairly well, and to me it seems that shedding the shackles of legacy code sprawl can boost the project as a whole significantly forward."
 
-    As I wrote before, the Darcs team will surely disagree with my assessment, but I believe marking it 'Unsuccessful' is most consistent with how all previous SoCs have been judged.
+    As I wrote before, the Darcs team will disagree with my assessment, but I believe marking it 'Unsuccessful' is most consistent with how all previous SoCs have been judged[^IRC].
 
 [^Mikhail]: 11 December 2011, [Google+](https://plus.google.com/u/0/103530621949492999968/posts/J4HYwwmTuk2):
 
     > "Regarding the parallel cabal-install patches - Duncan is concerned that my changes are too invasive. I hope to get them merged in during the next few months after some reworking (we're currently discussing what needs to be done)."
+[^IRC]: From [my conversation in `#darcs`](http://irclog.perlgeek.de/darcs/2011-04-26) with Eric Kow and other Darcs developers:
+
+        < kowey> mornfall [Petr Ročkai] and I did discuss the proposal beforehand... one
+                 thing to clear up first of all is that this is very specifically about the primitive
+                 patch level and not a wider patch theory project
+        < kowey> the difference being that it's easier to do in a SoC project
+        < owst> Also, mornfall has the advantage of being very experienced with the Darcs
+                code-base, and its concepts - he's not going to require time to "get used to it"
+                so I'd argue he's certainly not the average SoC student...
+        < kowey> I think mornfall has also put a good show of effort into thinking about
+                 (A) building off previous thinking on the matter (see his proposal),
+                 (B) fitting into the Darcs agenda -- particularly in aiming for this work to happen in mainline
+                     with the help of recent refactors and also to result in some cleanups and
+                 (C) making the project telescope
+        < gwern> owst: well, in a sense, that's a negative for the project as well as a positive implementation-wise
+                 - SoCs are in part about bringing new people into communities
+        < kowey> by telescope I mean, have a sane ordering of can-do to would-be-awesome
+        < Heffalump> gwern: yeah, though the Haskell mentors didn't see it that way
+        < kowey> (the mental image being that you can collapse a telescope)
+        < gwern> owst: I didn't mention that because I'm trying to not be unrelentingly negative,
+                 and because investigating backgrounds of everyone would require hours of work
+        < kowey> (sorry, I misread and see now that gwern did catch that this was primpatch specific)
+        < owst> gwern: in part, but not in full - they are ultimately also about "getting code written" for a project
+                and that's certainly going to happen for mornfall's project!
+        < gwern> owst: that's the same reason I don't also judge SoCs by whether the student continued on in the community
+                 - because it'd be too damn much work
+        < owst> gwern: sure, I thought as much.
+        < gwern> owst: even though the student's future work would probably flip a number of projects from failure to success and vice-versa
+                 (eg. what has Spencer Janssen been doing lately? how many of the SoC students you see on the page did that and have not
+                 been heard from since like Mun of Frag?)
+        < gwern> so, I just judge on whether the code gets used a lot and whether it did something valuable
+        < kowey> it's a project that has long-term value for Darcs
+        < kowey> I think I agree with the last line of your prediction,
+                 "That might be a success by the Darcs’s team’s lights, but not in the sense I have been using in this history."
+        < kowey> although I'm certainly hoping for something better in the middle bit: code that winds up in darcs mainline
+                 plus specifications on the wiki
 
 So of the 7 2011 SoCs:
 
