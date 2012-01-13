@@ -19,27 +19,25 @@ main = do  hakyll $ do
              mapM_ (`match` static) ["docs/**",
                                      "images/**",
                                      "**.hs",
-                                     "static/**",
+                                     "static/css/**",
+                                     "static/img/**",
+                                     "static/js/**",
                                      "**.page"]
 
              _ <- match "**.css" $ route idRoute >> compile compressCssCompiler
 
-             _ <- group "html" $ match "**.page" $ do
-               route $ setExtension ""
+             _ <- match "static/templates/default.html" $ compile templateCompiler
+
+             group "html" $ match "**.page" $ do
+               route $ setExtension "" -- cool URLs
                compile $ myPageCompiler
-
-                 >>> requireA "templates/sidebar.markdown" (setFieldA "sidebar" $ arr pageBody)
                  >>> renderModificationTime "modified" "%e %b %Y" -- populate $modified$
-                 >>> applyTemplateCompiler "templates/default.html"
+                 >>> applyTemplateCompiler "static/templates/default.html"
 
-             _ <- match "templates/default.html" $ compile templateCompiler
-             match "templates/sidebar.markdown" $ compile pageCompiler
-
-           -- copy over generated RSS feed
+-- copy over generated RSS feed
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
            -- Apache configuration (caching, redirects)
            copyFile ".htaccess" "_site/.htaccess"
-           return ()
 
 options :: WriterOptions
 options = defaultWriterOptions{ writerSectionDivs = True,
