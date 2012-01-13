@@ -513,27 +513,29 @@ How do we extend this procedure to handle situation #3, where we no longer trust
 
 Let's assume it costs $1000 to assay some pills and like in #2, we'll assume the assay is infallible. Then we just repeat the #2 procedure except with the assay replacing our own subjective testing. Fair enough, right?
 
-But a wrinkle comes to mind. $1000 is a lot. Quite a lot, really. You could buy a *lot* of modafinil with $1000; even if we played it safe and bought from Nubrain, $1000 would get us $62 \times 1000$, or 62,000 mg, or at 200mg a day, 310 days' worth^[Which is more than a year's supply because taking it every single day is asking for tolerance to build up.].
+But a wrinkle comes to mind: $1000 is a lot of money. Quite a lot, really. You could buy a *lot* of modafinil with $1000; even if we played it safe and bought from Nubrain, $1000 would get us $62 \times 1000$, or 62,000 mg, or at 200mg a day, 310 days' worth^[Which is more than a year's supply because taking it every single day is asking for tolerance to build up.].
 
-Are we sure we want to spend that? I mean, what if the price difference between the last 2 suppliers is just a few pennies - would we still want to spend $1000 just to be sure? Even if we plan to buy for years, decades, or the rest of our life, that $1000 might not be worth spending to optimize and save a few pennies. We could ask ourselves - is the possible penalty of a few pennies every order over our lifetime *worth* the $1000 right now? As it happens, there's a nifty formula for this.
+Are we sure we want to spend that? I mean, what if the price difference between the last 2 suppliers is just a few pennies - would we still want to spend $1000 just to be sure? Even if we plan to buy for years, decades, or the rest of our life, that $1000 might not be worth spending to optimize and save a few pennies. We could ask ourselves - is the possible penalty of a few pennies every order over our lifetime *worth* the $1000 right now? It's obvious enough if we're saying $1000 on every order that we do want to spend it, and it's equally obvious if we're saving 1 penny on each order, but can you say instantly and with confidence that saving $50 is worth it? Or $55? Our intuitions are not that precise, and in cases like this, we ought to look for a more rigorous and precise way of expressing this trade-off.
 
-We want to compare an infinite stream of small savings against a single large expenditure. The savings would make us slightly wealthier each time period. In fact, you could imagine that we were actually discussing savings bonds or annuities: is the small payoff each year worth the large upfront investment? In economics terminology, the question is whether the '[net present value](!Wikipedia)' of that payoff stream is larger than our investment.
+As it happens, there's a nifty formula for our dilemma. We want to compare an infinite stream of small savings against a single large expenditure. The savings would make us slightly wealthier each time period. In fact, you could imagine that we were actually discussing loans or saving bonds or annuities: is the small expense or payoff each year worth the large upfront payment or investment? In economics terminology, the question is whether the '[net present value](!Wikipedia)' of that payoff stream is larger than our present potential investment.
 
 Net present value can be approximated based on knowing one's [discount rate](!Wikipedia) (which is a percentage) and then plugging in the numbers to the following formula:
 
 $\text{NPV} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)}$
 
-What is my discount rate? If I introspect and ask myself, would I prefer $150 in a year to $100 right now; I say yes, so I know my discount rate is less than 0.5/50%; would I prefer $125 to $100 now? Yes, so it's less than 0.25/25%; and so on down to around $107 versus $100. So let's say 7% for me.
+What is my discount rate? If I introspect and ask myself, would I prefer $150 in a year to $100 right now; I say yes, so I know my discount rate is less than 0.5/50%; would I prefer $125 to $100 now? Yes, so it's less than 0.25/25%; and so on down to around $107 versus $100, where the $7 *feels* a little too little. So let's say my discount rate is 7%.
 
-What do our two suppliers look like? Maybe one charges me $220 for a year's supply and the other, the one I haven't yet tested, supplies it for $200. So $20 a year is at stake. Let's plug it in:
+What do our two suppliers look like? Maybe one charges me $220 for a year's supply and the other - the one I haven't yet tested - supplies it for $200. So $20 a year is at stake. Let's plug it in:
 
 $\text{NPV} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)} = \frac{20}{\ln(1+0.07)} = \frac{20}{\ln(1.07)} = \frac{20}{0.06765} = 295.6$
 
 But it would cost us $1000 to assay and find out whether there was a savings or not! Clearly it's not a good idea to spend the money for the assay. $20 a year is just not enough.
 
-As it happens, at a discount rate of 7%, we would have to potentially save about $68 before the assay became a good idea. (For $20 a year to be worthwhile, your discount rate has to fall down to around 2%, and very few people are *that* patient and self-sacrificing!) If you look back at the supplier chart, it runs the gamut from 222 mg per dollar to 16 mg; so for the first few purchases the assay might well be worthwhile.
+As it happens, at a discount rate of 7%, we would have to potentially save about $68 before the assay became a good idea. (For $20 a year to be worthwhile, your discount rate has to fall down to around 2%, and very few people are *that* patient and self-sacrificing!) If you look back at the [supplier chart](#suppliers-prices), it runs the gamut from 200+ mg per dollar to <16 mg; so for the first few purchases the assay might well be worthwhile.
 
 Thus we solve situation #3. You apply the #1 method to decide at any point which supplier to order from next by their risk-adjusted unit-price; then you update the risk-adjusted unit-price through #2's idea of using Bayes' theorem; then if testing is not free, you decide to stop testing and stop searching suppliers when, as given by #3's present value formula, the testing (assays) start costing more than one can hope to gain.
+
+As it happens, $1000 is a gross exaggeration of how much assaying would cost; [Erowid](#professional) will do a kind of testing for $120, and we can run 2 simple chemistry tests to learn if there's a sulfur group (which is a good proxy for modafinil) in a pill at an amortized cost of <$1 a pill or <$50 to start.
 
 A final thought about modafinil:
 
@@ -585,12 +587,26 @@ One of the canonical solutions to a public good problem like this is called the 
 
 But suppose one has resolved this problem. There are a few options:
 
+##### Professional
+
 1. [Erowid](!Wikipedia)'s [EcstasyData.org](http://www.ecstasydata.org/search.php?substance1=2027) will, for $120, test for the presence or absence of modafinil (but not the concentration; see their [FAQs](http://www.ecstasydata.org/about_data.php))
 2. There are a few laboratories which have been suggested:
 
     - [Analytical Laboratories](http://www.analytical-lab.com/)
     - [American Analytical Chemistry Laboratories](http://www.aaclabs.com/)
     - [San Rafael Chemical Services](http://www.srcslab.com/)
+
+##### Amateur
+
+[Trajork](http://www.pharmacyreviewer.com/forum/discussion-online-pharmacies-featured-general-reviews-section/16335-edandmore-feedbacks-10.html#post139862) advises us on some simple organic chemistry:
+
+> "Modafinil is a sulfa drug, containing a certain chemical group called a [sulfonamide group](!Wikipedia "Sulfonamide (chemistry)"). And lo and behold I stumbled across a simple pair of chemical tests for sulfonamides.
+>
+> I took about a third of a pill and placed it in a test tube, adding a few ml of dilute [NaOH](!Wikipedia). I then mixed it up and heated it over an alcohol burner. This should produce [ammonia](!Wikipedia), which has a really characteristic odor. I got a whiff of my tube and, indeed, it was ammonia! I also tested the fumes with a piece of [litmus paper](!Wikipedia) - it turned blue, as expected [litmus turns red for acids & blue for bases; ammonia is a base]. Then I put another third of a pill in another test tube and added dilute [HCl](!Wikipedia). Upon heating it, sulfur dioxide should be produced - another gas with a characteristic, pungent odor. So I sniffed my tube - it smelled awful! Further, my litmus paper turned red, which is what I'd expect because [SO2](!Wikipedia) is acidic.
+>
+> Finally, one other test - I wanted to make sure this isn't a characteristic of pill binder substances or anything. So I took half a caffeine pill and did the NaOH -> NH3 test on it. No ammonia whatsoever."
+
+Checking, 50+ strips of pH/litmus paper is ~$5; hydrochloric acid is harder to find, but seems to be obtainable at $10-20 online; and sodium hydroxide similarly (and no doubt purchasable cheaper locally), for a worst-case cost of $45. This is roughly a third of `EcstasyData.org`'s  price, and enough to test 50+ samples at a worst-case cost of ~$1 per sample.
 
 # External links
 
