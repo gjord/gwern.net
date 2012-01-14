@@ -201,17 +201,19 @@ Once the lists were compiled and weeded, I wrote [a Haskell program](#analysis-s
 
 The results for my edits when run on the two lists:
 
-- anime: 146 edits, 15 were used, or ~10%
-- non-anime: 102 edits, 4 used, or ~4%
+- anime: 146 edits, 11 were used, or <8%
+- non-anime: 102 edits, 3 used, or <3%
 
 For comparison, we can look at an editor who has devoted much of her time to finding references for anime articles - but made the colossal mistake of believing the EL partisans when they said external links should either be incorporated into article text or listed on the talk page. [User:KrebMarkt](!Wikipedia) has made perhaps thousands of such edits from impeccable RSs; it is possible that my own contributions are skewed downwards, say, by a congenital inability to select good references. Hence, looking at her reference-edits will provide a cross-check.
 
 I compiled her most recent 1000 edits to the article talk space with a quick download: `elinks -dump 'http://en.wikipedia.org/w/index.php?title=Special:Contributions&limit=500&contribs=user&target=KrebMarkt&namespace=1' 'http://en.wikipedia.org/w/index.php?title=Special:Contributions&offset=20110227162151&limit=500&contribs=user&target=KrebMarkt&namespace=1' | grep '&diff='`. Then I manually removed edits which were minor or did not seem to be her usual reference-edits, resulting in the following list of [958 edits](#krebmarkt) from December 2010 to December 2011. (KrebMarkt almost exclusively adds anime-related references, so I did not prepare a non-anime list.) The results:
 
-- Of the 958 edits adding references, 119 were used in the article, or <=12%
-- Combining my anime & non-anime with KrebMarkt's edits, we have 1206 edits adding references, of which less than 138 references were used in the article, or <=11%
+- Of the 958 edits adding references, 36 were used in the article, or <4%
+- Combining my anime & non-anime with KrebMarkt's edits, we have 1206 edits adding references, of which less than 50 were used in the article, or <4.15%
 
-This is shockingly low. This represents a staggering waste of editor-time^[I added a few links to Talk pages to time how long it took for a KrebMarkt-style edit: to go from the ANN page to a saved and reloaded page which I had checked by eye that the edit was correct was upwards of 30 seconds. >30 seconds times 958 edit is >479 minutes or >8 hours; my excerpting edits take at least 5 minutes to do, so those 248 edits represent >21 hours of work.]. This cannot be explained as our faults: we are both experienced editors (I began editing in 2004, and KrebMarkt in 2008), who know what good RSs are. And all of the edits contain good RSs. (The reader is invited to check edits and see for himself whether they are solid and valuable RSs, like reviews by the [Anime News Network](!Wikipedia).) That perhaps $\frac{1}{10}$ of our suggested references are included is due solely to the apathy or nonexistence of other editors. (If such a rate is a 'success', may the Almighty preserve us from a failure!)
+Besides it being surprising that KrebMarkt (not a particularly committed inclusionist, if she be an inclusionist at all) had a success rate half mine, <4.15% is shockingly low.
+
+1156 ignored edits represents a staggering waste of editor-time^[I added a few links to Talk pages to time how long it took for a KrebMarkt-style edit: to go from the ANN page to a saved and reloaded page which I had checked by eye that the edit was correct was upwards of 30 seconds. >30 seconds times 958 edit is >479 minutes or >8 hours; my excerpting edits take at least 5 minutes to do, so those 248 edits represent >21 hours of work.]. This cannot be explained as our faults: we are both experienced editors (I began editing in 2004, and KrebMarkt in 2008), who know what good RSs are. And all of the edits contain good RSs. (The reader is invited to check edits and see for himself whether they are solid and valuable RSs, like reviews by the [Anime News Network](!Wikipedia).) That perhaps $\frac{1}{10}$ of our suggested references are included is due solely to the apathy or nonexistence of other editors. (If such a rate is a 'success', may the Almighty preserve us from a failure!)
 
 Since that will not soon change for the better, this leads to one conclusion: *the idea that references hidden on Talk pages will one day be used is false*.
 
@@ -358,7 +360,7 @@ Like the cooling dwarf star left by a supernova - its lost brilliance traveling 
 # Talk page reference appendices
 ## Analysis script
 
-The following Haskell program requires the Haskell base libraries and the [TagSoup](http://community.haskell.org/~ndm/tagsoup/) library. The script is parallel. One can compile it like `ghc -threaded -rtsopts -O2 script.hs`; to run it one pipes in a list of newline-delimited Talk page edits, like `cat urls.txt | ./script +RTS -N4 -RTS` which will then print out a summary like
+The following Haskell program requires the Haskell base libraries and the [TagSoup](http://community.haskell.org/~ndm/tagsoup/) library. The script is parallel. One can compile it like `ghc -threaded -rtsopts -O2 script.hs`; to run it one pipes in a list of newline-delimited Talk page edits, like `./script +RTS -N4 -RTS < urls.txt`^[One could also avoid compilation and run it much more slowly as `cat urls.txt | runhaskell script`.] which will then print out a summary like
 
     Checked 1024 edits
     112 were used
@@ -368,7 +370,7 @@ The following sections provide 3 lists of selected edits which one could input.
 ~~~{.haskell}
 import Control.Concurrent (forkIO, newEmptyMVar, putMVar, takeMVar, MVar)
 import Control.Monad (liftM, void)
-import Data.List (intersect, isPrefixOf)
+import Data.List (elemIndices, intersect, isPrefixOf, nub, sort)
 import Network.HTTP (getRequest, rspBody, simpleHTTP)
 import Text.HTML.TagSoup (parseTags, Tag(TagOpen, TagText))
 
@@ -389,12 +391,17 @@ parallel s = do m <- newEmptyMVar
 
 comparePages :: String -> IO Bool
 comparePages url = do src <- liftM parseTags $ openURL url
-                      let urls = concatMap urlsExtract $ text $ diff src
+                      let talkUrls = rmDupes $ concatMap urlsExtract $ text $ diff src
 
                       artcl <- liftM parseTags $ openURL (article url)
-                      let urls' = extractURLs artcl
+                      let articleUrls = uniq $ extractURLs artcl
 
-                      return $ 0 == (length $ intersect urls urls')
+                      return $ 0 /= length (talkUrls `intersect` articleUrls)
+                   where uniq = nub . sort -- don't double-count in `intersect`!
+                         -- throw out any URL appearing twice in a diff -
+                         -- must be an old URL in both new and old pages!
+                         -- only unique URLs could have been added.
+                         rmDupes x = filter (\y -> length (elemIndices y x) <= 1) x
 
 openURL :: String -> IO String
 openURL u = do res <- simpleHTTP $ getRequest u
@@ -408,13 +415,16 @@ text src = [x | (TagText x) <- src]
 
 urlsExtract :: String -> [String]
 urlsExtract = filter (not . null) . map trimmer . words
-              where
-                -- crop a string down to the "http://" prefix, or return nothing
-                -- > trimmer "* http://foo.com" ~> "http://foo.com
-                -- > trimmer "# It will break!" ~> ""
-                trimmer :: String -> String
-                trimmer [] = []
-                trimmer y = if "http://" `isPrefixOf` y then y else trimmer (tail y)
+
+{- crop a string down to the "http://" prefix, or return nothing
+    > trimmer "* http://foo.com"       ~> "http://foo.com"
+    > trimmer "* [http://foo.com]"     ~> "http://foo.com"
+    > trimmer "* [http://foo.com Foo]" ~> "http://foo.com"
+    > trimmer "# It will break!"       ~> "" -}
+trimmer :: String -> String
+trimmer [] = []
+trimmer y = fst $ break (\x -> x=='[' || x ==']' || x==' ') $ if "http://" `isPrefixOf` y
+                                                    then y else trimmer (tail y)
 
 -- "http://en.wikipedia.org/w/index.php?title=Talk:Princess_Jellyfish&diff=prev&oldid=403146531"
 --  ~> "http://en.wikipedia.org/wiki/Princess_Jellyfish"
