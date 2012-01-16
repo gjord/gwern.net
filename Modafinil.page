@@ -253,7 +253,7 @@ The [general feeling](http://web.archive.org/web/20081002102943/http://www.drugb
 Vendor notes:
 
 - VisaPharmacy.com is on drugbuyers.com's [blacklist](http://www.drugbuyers.com/freeboard/ubbthreads.php?ubb=showpharm&Number=475) as well as that of [Pharmacy Reviewer](http://www.pharmacyreviewer.com/pharmacy-reviews/blacklisted-pharmacies/visa-pharmacy/); I am considering removing them entirely
-- EDAndMore.com has a great deal of [negative feedback](http://www.drugbuyers.com/freeboard/ubbthreads.php/topics/1018116/EDandMore_Spierx_Modafinil_Fak), few or no other vendors sell the same SpierX modafinil, and [one commenter](http://www.gwern.net/Modafinil#comment-296389445) has pointed out that the `EDAndMore.com` domain is registered to the same Malaysian registrar as `SpierX.com`, suggesting a close relationship behind-the-scenes. ([Pharmacy reviewer](http://www.pharmacyreviewer.com/pharmacy-reviews/all-pharmacy-reviews/ed-and-more/) likes them.) Even [online acquaintances](http://groups.google.com/group/brain-training/browse_thread/thread/2fc047209bd0f0cf) I consider sensible and trustworthy can come to diametric appraisals of the quality of SpierX. My working hypothesis is that EDAndMore has an unreliable supply chain or SpierX has poor quality control (which makes them a good candidate for some of the [later statistics discussion](#ordering-with-learning)).
+- EDAndMore.com has a great deal of [negative feedback](http://www.drugbuyers.com/freeboard/ubbthreads.php/topics/1018116/EDandMore_Spierx_Modafinil_Fak), few or no other vendors sell the same SpierX modafinil, and [one commenter](http://www.gwern.net/Modafinil#comment-296389445) has pointed out that the `EDAndMore.com` domain is registered to the same Malaysian registrar as `SpierX.com`, suggesting a close relationship behind-the-scenes. ([Pharmacy reviewer](http://www.pharmacyreviewer.com/pharmacy-reviews/all-pharmacy-reviews/ed-and-more/) likes them.) Even [online acquaintances](http://groups.google.com/group/brain-training/browse_thread/thread/2fc047209bd0f0cf) I consider sensible and trustworthy can come to diametric appraisals of the quality of SpierX. My working hypothesis is that EDAndMore has an unreliable supply chain or SpierX has poor quality control (which makes them a good candidate for some of the [later statistics discussion](#ordering-with-learning)); one [primitive test](#amateur) reported that there's *some* sort of sulfur content, indicative of modafinil.
 - Nubrain[^reputation]^[Caveat: Nubrain can process and ship orders very slowly; and as of 2011, their *adrafinil* [seems to be](http://www.google.com/search?q=nubrain+adrafinil+-site:nubrain.com&tbs=qdr:y) fake or in some wise deficient even while people (including personal acquaintances of the author) continue to report their *modafinil* copacetic. There are negative reports for Nubrain though, eg. [unsleepable](http://www.longecity.org/forum/topic/29577-experiences-with-modanifil-modalert/page__view__findpost__p__320501) saw no benefit and anxiety from Modalert bought from Nubrain.] seems to have a reputation for honesty
 
 [^reputation]: But Nubrain itself is a cautionary anecdote; it may have a very good reputation, but it's still not hard to find bad reviews. This is a point that should not need to be made, but I still will anyway: everything in this page deals with risky & uncertain probabilities. If you want guarantees and certainty, go read a logic textbook.
@@ -535,13 +535,73 @@ As it happens, at a discount rate of 7%, we would have to potentially save about
 
 Thus we solve situation #3. You apply the #1 method to decide at any point which supplier to order from next by their risk-adjusted unit-price; then you update the risk-adjusted unit-price through #2's idea of using Bayes' theorem; then if testing is not free, you decide to stop testing and stop searching suppliers when, as given by #3's present value formula, the testing (assays) start costing more than one can hope to gain.
 
-As it happens, $1000 is a gross exaggeration of how much assaying would cost; [Erowid](#professional) will do a kind of testing for $120, and we can run 2 simple chemistry tests to learn if there's a sulfur group (which is a good proxy for modafinil) in a pill at an amortized cost of <$1 a pill or <$50 to start.
+As it happens, \$1000 is a gross exaggeration of how much assaying would cost; [Erowid](#professional) will do a kind of testing for \$120, and we can run 2 simple chemistry tests to learn if there's a sulfur group (which is a good proxy for modafinil) in a pill at an amortized cost of <\$1 a pill or <\$50 to start.
+
+It goes without saying that #1-3 are all simplified models which may not apply to every situation; but at some point, the would-be user of nootropics must start thinking for himself.
+
+### Extended present-value example
+
+So let's step through a problem using expected value and net present value.
+
+Starting with the price-chart, our top contenders per unit cost (mg/$) are:
+
+1. 238, 4NRX Pharmacy
+2. 215, United Pharmacies.co.uk
+3. 202, EDAndMore.com
+4. 192, ThePharmacyExpress
+
+If we trust them all implicitly, obviously we should order 4NRX. Let's imagine our trust differs and come up with some hopefully non-random percentages about whether a supplier is honest:
+
+1. 238, 4NRX Pharmacy, 65%
+2. 215, United Pharmacies.co.uk, 90%
+3. 202, EDAndMore.com, 50%
+4. 192, ThePharmacyExpress, 90%
+
+We apply expected value to get our 'expected unit cost', as it were, and we get new rankings:
+
+1. 215, United Pharmacies.co.uk, 90% = 194
+2. 192, ThePharmacyExpress, 90% = 173
+3. 238, 4NRX Pharmacy, 65% = 155
+4. 202, EDAndMore.com, 50% = 101
+
+One can change the ranking arbitrarily, of course, with extreme enough confidences. In this case, it wouldn't be too hard to swap the first and second or restore 4NRX to the top of the heap. We've finished applying expected value.
+
+Let's ask about net present value. We can ask: is it worth our while to assay, based on the difference of 194 expected mg/$ versus 173 expected mg/$? Maybe we should just order forever from UP.co.uk and forget about TPE.
+
+Well, let's make the assumption that we will order 100 doses of 200mg of modafinil every year indefinitely,
+
+That is $\frac{100 \times 200}{194} = 103$ dollars with UP.co.uk and $\frac{100 \times 200}{173} = 116$ dollars with TPE, a difference of \$13 per year. For the cost of our assay, we'll go with the \$50 amateur assay-test, and we'll use my own personal discount-rate of around 5%:
+
+$\text{NPV} \gt \text{testCost} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)} \gt \text{testCost} = \frac{13}{\ln(1+0.05)} \gt 50 = \frac{13}{\ln(1.05)} \gt 50 = \frac{13}{0.048790} \gt 50 = 266.4 \gt 50 = \true$
+
+We turn a profit of around \$210. This little model isn't correct since it covertly implies one of the two suppliers is sending fakes, yet back in expected value we gave 90% for both suppliers sending genuine products - a contradiction.
+
+We can try again with something fairer. Imagine you have the samples from both suppliers sitting at hand waiting to be tested. What do you expect to find? Well, if there's a 90% chance that each of them is shipping genuine products, then there's a 10% for each shipping counterfeits, which is pretty small and so the odds are good that our test will simply tell us that *both* suppliers are honest. Let's look at all 4 possible outcomes:
+
+1. What are the odds that both are honest suppliers? (H H)
+
+    Well, 90% times 90% is 81%.
+2. And that both are dishonest? (D D)
+
+    10% times 10% is just 1%.
+3. That the first one is dishonest and the second is honest? (D H)
+
+    90% times 10% is 9%.
+4. And vice versa? (H D)
+
+   Well, same thing, 9%. (So the probability of either is 9% + 9% or 18%.)
+
+If both suppliers are honest, one gained nothing from the test, so we start with an 81% chance of not benefiting. Then, if the second one (the one you aren't ordering from) is dishonest and the first one is honest, you still gain nothing (you picked correctly, huzzah!) so that's 81% and 9%. If the first one (the one you are ordering from) is dishonest and the second one is honest, *then* you gain (9%), and the final 1% is also useful (you can scrap them both and look at suppliers further down the list). So all in all, there's only a 10% chance of gaining from the assay!
+
+So here's another opportunity to apply expected value: the value of our assay times that 10% chance it'll actually lead to a financial gain:
+
+$(266.4 \times 0.10) \gt 50 = 26.6 \gt 50 = \false$
+
+Oh well!
 
 A final thought about modafinil:
 
 > "I am not interested in talking about my ideas. I am interested in your application of them to your life."^[[Miyamoto Musashi](!Wikipedia), "Book of Water", _[Book of Five Rings](!Wikipedia "The Book of Five Rings#The Book of Water")]
-
-It goes without saying that #1-3 are all simplified models which may not apply to every situation; but at some point, the would-be user of nootropics must start thinking for himself.
 
 ### Discount rate applications: swapping time for time
 
