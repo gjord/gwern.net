@@ -3,12 +3,11 @@ title: Modafinil
 description: Effects, health concerns, suppliers, & rational ordering
 ...
 
-[Adrafinil](!Wikipedia "Adrafinil") was a wakefulness drug developed back in the late 1970s. It worked reasonably well in animals and humans^[See the 1999 Milgram review, ["Adrafinil: A Novel Vigilance Promoting Agent"](http://www.nevapress.com/cnsdr/full/5/3/193.pdf)], and interestingly enough, in a different way from most stimulants.[^amphetamines] Inside the body, adrafinil is metabolized by the liver into [modafinil](!Wikipedia). So using adrafinil is inferior to using a straight dose of modafinil both because it [stresses the liver] and because reportedly you need about 3 times more adrafinil to be metabolized into an equivalent dose of modafinil. Its chief advantages are that all patents on it expired long ago, and it's very rarely proscribed - so it is relatively cheap & easy to get.
+[Adrafinil](!Wikipedia "Adrafinil") was a wakefulness drug developed back in the late 1970s. It worked reasonably well in animals and humans^[See the 1999 Milgram review, ["Adrafinil: A Novel Vigilance Promoting Agent"](http://www.nevapress.com/cnsdr/full/5/3/193.pdf)], and interestingly enough, in a different way from most stimulants.[^amphetamines] Inside the body, adrafinil is metabolized by the liver into [modafinil](!Wikipedia). So using adrafinil is inferior to using a straight dose of modafinil both because it stresses the liver and because reportedly you need about 3 times more adrafinil to be metabolized into an equivalent dose of modafinil. Its chief advantages are that all patents on it expired long ago, and it's very rarely proscribed - so it is relatively cheap & easy to get.
 
 [^amphetamines]: See Minzenberg _et al_:
 
     > "It is currently approved by the United States Food and Drug Administration as a schedule IV agent to treat excessive daytime sleepiness in narcolepsy, shift work sleep disorder, and obstructive sleep apnea/hypopnea syndrome. It has been popularly categorized as a psychostimulant due to its wake-promoting properties. However, it has shown a number of effects on physiology and behavior in both animal models and in humans, which suggest a divergent mechanism of action compared to amphetamine (described in detail below). This includes a lower liability to abuse, and a lower risk of adverse effects on organ systems such as the cardiovascular system."
-
 
 Modafinil is better, but the problem is that a number of forms are patented, and in addition, it's a proscribed drug in the US & Canada[^proscribed]. So you can either try to convince a doctor to give you a prescription or deal with dubious online pharmacies or suppliers in countries where modafinil is available over-the-counter. The former way is annoying and you pay full price, and the latter way is unreliable and *still* expensive - you may be buying at a lower price, but the risks of seizure at the border, shipping, possibly paying for laboratory assays etc. can more than make up for that.
 
@@ -19,7 +18,7 @@ Modafinil costs about $2[^angry]-12 a day[^business]; non-prescription sources a
 [^angry]: One American prescription user said that his prescription was for 200mg pills; each box cost around $50 for 30 pills. He took one in a day, or about $1.70 (120 mg/USD).
 [^business]: from _[Businessweek](!Wikipedia)_'s ["The 10Q Detective: Losing Sleep Over Cephalon"](http://www.businessweek.com/investor/content/sep2009/pi20090928_251573_page_3.htm):
 
-     > "Supplementing the coupon efforts: discounted pricing. The prescription cost to the patient for a 30-day supply of daily recommended dosages of Provigil (200 mg) and Nuvigil (150 mg) is $361 and $295, respectively, a savings to cash-paying patients and health-care payers of 23%, according to pharma information site Destination Rx."
+     > "Supplementing the coupon efforts: discounted pricing. The prescription cost to the patient for a 30-day supply of daily recommended dosages of Provigil (200 mg) and Nuvigil (150 mg) is \$361 and $295, respectively, a savings to cash-paying patients and health-care payers of 23%, according to pharma information site Destination Rx."
 
      $\frac{361}{30} = 12.03$; although it's unclear what of this is the actual price to the consumer.
 [^prices]: This is just conventional wisdom, echoed by many websites. An example:
@@ -234,7 +233,7 @@ But what of the other costs? There's the stinky pee, for example. I don't think 
 
 Well, alright. We'll add it in. Let's consider the worst-case: modafinil is fatal. One human life is usually valued at around 10 million dollars. I personally can expect another 50 years of life. So per day, the expense of a fatal-modafinil habit (we assume the death could any day) would be $\frac{10000000}{50 \times 365.25}, or $548. Ouch. That is noticeably larger than the $26.2 we expected to gain. But this is the worst case; there's no way modafinil is actually 100% lethal.
 
-So the expected value of modafinil is approximately 21 times less than it needs to be. Or, to put it another way, if modafinil had a less than $\frac{1}{21}$ chance of killing you, it could be worth while. Do you think modafinil has a less than $\frac{1}{21} kill rate? I do.
+So the expected value of modafinil is approximately 21 times less than it needs to be. Or, to put it another way, if modafinil had a less than $\frac{1}{21}$ chance of killing you, it could be worth while. Do you think modafinil has a less than $\frac{1}{21}$ kill rate? I do.
 
 (We could complicate the analysis by incorporating a [discount rate](!Wikipedia) and reduce the value of modafinil by assuming that one only uses it occasionally to avoid building up tolerance, but the basic point is made: there needs to be an improbably high risk to modafinil to neutralize its benefits.)
 
@@ -343,7 +342,7 @@ mg/$[^f]      mg    Amt            $             S&H  Provider
 16            100   30            178      15         [Biogenesis AntiAging](http://www.biogenesis-antiaging.com/p88/Modafinil-%28Modiodal%29/product_info.html)
 16            100   30            168      15         [Biogenesis AntiAging](http://www.biogenesis-antiaging.com/p485/Modafinil-%28Alertec%29/product_info.html)
 
-[^f]: Prices in pounds are converted to dollars. Milligrams per dollar is calculated the obvious way: $\text{round} \frac{\text{mg} \times \text{Amount}}{\text{$} + \text{S&H}}$
+[^f]: Prices in pounds are converted to dollars. Milligrams per dollar is calculated the obvious way: $\text{round} \frac{\text{mg} \times \text{Amount}}{\text{\$} + \text{S&H}}$
 
 Alternative price charts:
 
@@ -499,13 +498,13 @@ To put all these definitions in a list:
 
 We substitute in to the original equation:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.05 \times 0.9}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{(0.045 + 0.095)} = \frac{0.045}{0.14} = 0.32$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.05 \times 0.9}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{((0.05 \times 0.9) + (0.95 \times 0.1))} = \frac{0.045}{(0.045 + (0.95 \times 0.1))} = \frac{0.045}{(0.045 + 0.095)} = \frac{0.045}{0.14} = 0.32$
 
-32% seems like a reasonable answer. Intuitively, I'd expect my trust to drop considerably below 50%, but still noticeably above 5%, and 32% is well within that range.
+32% seems like a reasonable answer. Intuitively, I'd expect my trust to drop considerably below 50%, but still well above 5%, and 32% is well within that range.
 
 Phew! So, now we have a full system for situation #2. First, go through the [expected utility](!Wikipedia) calculation for all the prices you've gathered in which you trade off risk versus price. Then order, test for modafinil or not-modafinil, and do a Bayesian update on the supplier. Rinse, and repeat. This procedure terminates if there are any good suppliers (suppose you luck out and the second supplier you test, #4 on the per-unit list, is honest; now you only need to test 3 more suppliers since they are the only ones cheaper - why would you care about a equally reliable but *more expensive* supplier?).
 
-Of course, this does require you to already have beliefs about the reliability of a supplier. If one is willing to order blind, there's a cute frequentist trick for rough estimation when you have a bunch of independent binary experiments: the [rule of three](!Wikipedia "Rule of three (medicine)"), which goes simply that if you haven't observed $x$ despite looking $n$ times, then 95% of the time $x$ has a probability of $\frac{n}{3}$. So if we had ordered 10 times from a seller and we assume the seller isn't doing anything tricky like 'send a new customer 11 real orders and then sell him only fakes' but is randomly sending reals and fakes, we can calculate the seller sends fakes less than $\frac{10}{3} = 3.3%$ of the time. (Related is Laplace's [Rule of succession](!Wikipedia), which says the odds of a fake in the next order, given $n$ real orders, is just $\frac{1}{n}$ - the idea being that we should assume the worse, that we get a fake in the next order; then, if one looked at one of our orders randomly, there'd be only 1 fake and $n$ real orders and so the odds of a fake are that $\frac{1}{n}$.)
+Of course, this does require you to already have beliefs about the reliability of a supplier. If one is willing to order blind, there's a cute frequentist trick for rough estimation when you have a bunch of independent binary experiments: the [rule of three](!Wikipedia "Rule of three (medicine)"), which goes simply that if you haven't observed $x$ despite looking $n$ times, then 95% of the time $x$ has a probability of $\frac{n}{3}$. So if we had ordered 10 times from a seller and we assume the seller isn't doing anything tricky like 'send a new customer 11 real orders and then sell him only fakes' but is randomly sending reals and fakes, we can calculate the seller sends fakes less than $\frac{10}{3} = 3.3\%$ of the time. (Related is Laplace's [Rule of succession](!Wikipedia), which says the odds of a fake in the next order, given $n$ real orders, is just $\frac{1}{n}$ - the idea being that we should assume the worse, that we get a fake in the next order; then, if one looked at one of our orders randomly, there'd be only 1 fake and $n$ real orders and so the odds of a fake are that $\frac{1}{n}$.)
 
 ## Ordering when learning isn't free
 
@@ -572,7 +571,7 @@ Well, let's make the assumption that we will order 100 doses of 200mg of modafin
 
 That is $\frac{100 \times 200}{194} = 103$ dollars with UP.co.uk and $\frac{100 \times 200}{173} = 116$ dollars with TPE, a difference of \$13 per year. For the cost of our assay, we'll go with the \$50 amateur assay-test, and we'll use my own personal discount-rate of around 5%:
 
-$\text{NPV} \gt \text{testCost} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)} \gt \text{testCost} = \frac{13}{\ln(1+0.05)} \gt 50 = \frac{13}{\ln(1.05)} \gt 50 = \frac{13}{0.048790} \gt 50 = 266.4 \gt 50 = \true$
+$\text{NPV} \gt \text{testCost} = \frac{\text{annualPayoff}}{\ln(\text{discountRate}+1)} \gt \text{testCost} = \frac{13}{\ln(1+0.05)} \gt 50 = \frac{13}{\ln(1.05)} \gt 50 = \frac{13}{0.048790} \gt 50 = 266.4 \gt 50$
 
 We turn a profit of around \$210. This little model isn't correct since it covertly implies one of the two suppliers is sending fakes, yet back in expected value we gave 90% for both suppliers sending genuine products - a contradiction.
 
@@ -595,7 +594,7 @@ If both suppliers are honest, one gained nothing from the test, so we start with
 
 So here's another opportunity to apply expected value: the value of our assay times that 10% chance it'll actually lead to a financial gain:
 
-$(266.4 \times 0.10) \gt 50 = 26.6 \gt 50 = \false$
+$(266.4 \times 0.10) \gt 50 = 26.6 \gt 50$
 
 Oh well!
 
@@ -617,11 +616,11 @@ So the anti-modafinil argument starts off at a disadvantage if it wants to appea
 
 $\text{presentValue} = \frac{\text{futureValue}}{(1 + \text{discountRate})^\text{years}}$
 
-We say a year is worth 100 and will interpret the answer as a percentage; while real people have discount rates much higher^[US Army personnel, considering various large bonus offers, manifested annual discount rates as high as [57.2%](http://test.aeaweb.org/aer/archive/9101/91010033.pdf).], we will generously assume the improbably low discount rate of 2%; and then ask how much a year is worth 50 years from now:
+We say a year right now is worth 100% and we are asking what percent of a present year a far distant year would be worth; while real people have discount rates much higher^[US Army personnel, considering various large bonus offers, manifested annual discount rates as high as [57.2%](http://test.aeaweb.org/aer/archive/9101/91010033.pdf).], we will generously assume the improbably low discount rate of 2%^[I say improbably low because at a discount rate of 2%, a person ought to exhibit behaviors like never spending a single penny as they shovel all their money into bonds and stocks, to be spent when they are ancient and about to die - they are extreme misers. Most people discount too much rather than too little, but nevertheless, one *can* damage one's quality of life with too low a discount rate.]; and then ask how much a year is worth 50 years from now:
 
-$\text{presentValue} = \frac{100}{(1+0.02)^50} = \frac{100}{2.692} = \~37$$
+$\text{presentValue} = \frac{100}{(1+0.02)^50} = \frac{100}{2.692} = \~37\%$
 
-Which is interesting as it suggests, on a pure discount-rate basis, that we will benefit from any activity which has a less than 3:1 penalty between then and now; if modafinil gains us 1 hour today and costs us 2 hours in that distant future, we are better off. I earlier said I was willing to trade, based purely on qualitative considerations, future and present at a 2:1 rate, so between that (~2:1) and the discount rate (>3:1), an hour of modafinil use would have to cost me at least 6 hours in the future! A single 8-hour session on modafinil would need to cost me more than a day to be a bad idea.
+Which is interesting as it suggests, on a pure discount-rate basis, that we will benefit from any activity which has a less than 3:1 penalty between then and now; if modafinil gains us 1 hour today and costs us 2 hours in that distant future, we are better off. I earlier said I was willing to trade, based purely on qualitative considerations, future and present at a 2:1 rate, so between the quality of life discounting (~2:1) and the temporal discounting (>3:1), an hour of modafinil use would have to cost me at least 6 hours in the future! A single 8-hour session on modafinil would need to cost me more than a day to be a bad idea.
 
 It's quite a poisonous drug that comes with such a penalty; I don't believe even smoking has that kind of penalty (I cite one calculation in [Nicotine]() that one cigarette costs 11 minutes). So the reader could ask themselves: with everything they know and have heard about modafinil (and have [*not* heard](!Wikipedia "Argument from silence")), how likely is it that modafinil is even worse than smoking?
 
