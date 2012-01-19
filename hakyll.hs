@@ -6,6 +6,7 @@ import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
 import System.Directory (copyFile)
+import System.Process (runCommand)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
@@ -36,7 +37,8 @@ main = do  hakyll $ do
 
 -- copy over generated RSS feed
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-           -- Apache configuration (caching, redirects)
+           -- Apache configuration (caching, compression, redirects)
+           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o -not -name \"*.page\" -not -name \"*.o\" -not -name \"*.hi\" -not -name \"*.hs\" -not -name \"*.png\" -not -name \"*.jpg\" -not -name \"*.pdf\" -not -name \"*.avi\" -not -name \"*.svg\" -exec /bin/sh -c \"gzip --stdout --best --no-name --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
            copyFile ".htaccess" "_site/.htaccess"
 
 options :: WriterOptions
