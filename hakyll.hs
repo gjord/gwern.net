@@ -38,7 +38,13 @@ main = do  hakyll $ do
 -- copy over generated RSS feed
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
            -- Apache configuration (caching, compression, redirects)
-           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o -not -name \"*.page\" -not -name \"*.o\" -not -name \"*.hi\" -not -name \"*.hs\" -not -name \"*.png\" -not -name \"*.jpg\" -not -name \"*.pdf\" -not -name \"*.avi\" -not -name \"*.svg\" -exec /bin/sh -c \"gzip --stdout --best --no-name --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
+           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o -not -name \
+                           \ \"*.page\" -not -name \"*.o\" -not -name \"*.hi\" -not -name \"*.hs\" \
+                           \ -not -name \"*.png\" -not -name \"*.jpg\" -not -name \"*.gif\" \
+                           \ -not -name \"*.pdf\" -not -name \"*.avi\" -not -name \"*.svg\" \
+                           \ -not -name \".htaccess\" -not -name \"*.gz\" -type f \
+                           \ -exec /bin/sh -c \"gzip --stdout --best --no-name \
+                                               \ --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
            copyFile ".htaccess" "_site/.htaccess"
 
 options :: WriterOptions
