@@ -6,9 +6,13 @@ Criticisms of Wikipedia tend to fall into 2 categories - the clueless and the cl
 
 The Wikimedia Commons project tends to attract the former[^criticism]. For example, people criticize it for not supporting Flash, for only supporting Ogg & Theora media files, for using a Java applet for playback, for supporting only Firefox's `<video></video>` tags...
 
+[^criticism]: Which is better than attracting the latter, because you can correct someone who *is* thinking but simply lacks knowledge about all the relevant constraints WikiMedia Commons operates under; but what do you say do the millionth iteration of "Wikipedia shouldn't be used because anyone can edit it and it's unreliable"?
+
 # Commons and videos
 
 But the stupidest I've seen in a long time has to be the criticism that the Foundation is wasting the hard-earned money of donors by not hosting videos on YouTube[^idiot].
+
+[^idiot]: This charge was made by a real person; to protect the guilty, the message will not be linked to.
 
 The levels of failure in this criticism are many and considerable. Wikipedia will never, ever host things on YouTube unless YouTube makes some considerable changes. (Heck, the Wikipedian community views merely linking to YouTube content [with distaste](!Wikipedia "Wikipedia:External links/YouTube").)
 
@@ -35,11 +39,15 @@ From a technical standpoint, YouTube is a *terrible* partner:
     - This view has major consequences. For example, the content will be available and *usable* by everyone: commercial users[^comm], bankrupt users, *everyone*. Flash and the audio/video codecs are not available to everyone (including commercial users). They are encumbered with licensing restrictions and royalty payments, and are illegal to modify or change in any way. Suppose someone wanted to distribute DVDs of Commons videos and music files; if they used MP3s and other such encumbered formats, who will pay the owners[^owners] their pound of flesh?
 7. Commercial hosts are unreliable.
 
-    YouTube may be the most successful video site online, but that's like winning a gold at the Olympics - it's a great achievement which probably won't last. YouTube is not even a decade old. Google does not have a long-term track record, and regularly shuts down services which do not pan out or whose salad days are behind it. Naturally, YouTube hasn't been deleting files yet (other than the files deleted as part of the usual high error rate of a legally-fearful service), but it'd be very stupid to wait a few decades to see how YouTube pans out. We should look at the [outside view](http://wiki.lesswrong.com/wiki/Outside_view) and see how *other* online services have been doing over the span of less than 2 decades; the obvious candidate is Yahoo!, a mammoth Internet company that was once as successful and dominant as Google is now.
+    YouTube may be the most successful video site online, but that's like setting a record at the Olympics or burning a CD - it'll last forever or 5 years, whichever comes first. YouTube is not even a decade old. Google does not have a long-term track record, and regularly shuts down services which do not pan out or whose salad days are behind it. Naturally, YouTube hasn't been deleting files yet (other than the files deleted as part of the usual high error rate of a legally-fearful service), but it'd be very stupid to wait a few decades to see how YouTube pans out. We should look at the [outside view](http://wiki.lesswrong.com/wiki/Outside_view) and see how *other* online services have been doing over the span of less than 2 decades; the obvious candidate is Yahoo!, a mammoth Internet company that was once as successful and dominant as Google is now.
 
     The perspective from Yahoo! is not good. It stagnated for years, and recent management has been aggressively shedding services. First to go were the terabytes of user content at [GeoCities](!Wikipedia). Next on the block was the [del.icio.us](!Wikipedia "Delicious (website)") database, with its hundreds of millions of tags for URLs. Most recently, [Yahoo! Video](!Wikipedia) was scheduled to go down the memory hole on [15 March 2011](http://webcitation.org/5wwZkjm39) (too bad about that roughly [25](http://www.archiveteam.org/archives/media/The%20Spendiferous%20Story%20of%20Archive%20Team%20-%20Jason%20Scott%20-%20PDA2011.txt) [terabytes](http://ascii.textfiles.com/archives/3011) of video).
 
 Further reasons could be adduced. I hope it's clear after 7 points that in order to become an acceptable host, YouTube would have to cease to be YouTube.
+
+[^localization]: For details on i8n & MediaWiki in general, see [Multilingual MediaWiki](https://secure.wikimedia.org/wikipedia/mediawiki/wiki/Multilingual_MediaWiki); for hard numbers, see [Translation Statistics](http://translatewiki.net/wiki/Translating:Statistics)
+[^owners]: Thomson Consumer Electronics & Fraunhofer Institute & Audio MPEG, Inc & Alcatel-Lucent
+[^comm]: One problem with considering commercial users is that everyone instantly thinks of large abusive corporations and feels the urge to use only NC licenses. The problem is that while NC licenses would indeed punish large abusive corporations (assuming they care), there are many 'commercial' users who don't seem commercial at all but would still be banned by such a license. There are other reasons of course; see ["The Case for Free Use: Reasons Not to Use a Creative Commons -NC License"](http://freedomdefined.org/Licenses/NC) for more.
 
 ## YouTube's terms of service suck
 
@@ -47,10 +55,11 @@ But let's say that we've given up on the idea of YouTube as a 'primary' host. Co
 
 Sadly, even this is completely impossible. At least, if you care about things like copyright laws.
 
-You see, YouTube claims legal rights over uploaded content that are incompatible with the GFDL. They are, in fact, incompatible with every copyleft license out there. You can't comply with their Terms of Service (TOS) and also upload a GFDL'd video[^copyright].
+You see, YouTube claims legal rights over uploaded content that are incompatible with the GFDL and the CC-BY-SA. They are, in fact, incompatible with every copyleft license out there. You can't comply with their Terms of Service (TOS) and also upload a GFDL'd video[^copyright].
+
+[^copyright]: There is one way you could get around it - if you own the entire copyright on the uploaded video. Then the law would interpret your upload as an upload not of a copyleft-licensed-video, but of an all-rights-reserved video, since that's the only way the TOS would be satisfiable. The difference is implied in your consent.
 
 Why not? Well, let's look at paragraph 10 of the [YouTube TOS](http://youtube.com/t/terms) (emphasis added):
-
 
 > When you upload or post a User Submission to YouTube, you grant:
 >  1. to YouTube, a *worldwide, non-exclusive, royalty-free, transferable licence (with right to sub-licence) to use, reproduce, distribute, prepare derivative works of*, display, and perform that User Submission in connection with the provision of the Services and otherwise in connection with the provision of the Website and YouTube's business, including without limitation for promoting and redistributing part or all of the Website (and derivative works thereof) in any media formats and through any media channels;
@@ -58,6 +67,8 @@ Why not? Well, let's look at paragraph 10 of the [YouTube TOS](http://youtube.co
 Now, remember the legal judo that makes copyleft possible: every derivative work must be licensed under at least the same license as the original, and be at least as unrestricted as it. So if I have a GFDL video, every derivative of it - and itself - must always be under the GFDL. The waters can get muddy here with multi-licensing changes, but this is the part that matters here.
 
 Now, if I give you a GFDL video, you don't own the copyright. You merely have a license from me which lets you do a lot of things with the video only so long as you give the video away as a GFDL'd video. So, how is it possible for you to grant YouTube any license which is *not* the GFDL? You can't do it! You aren't allowed - if you try to, you break your GFDL contract, and now it's illegal for you to give YouTube the video in any form. The issue isn't that YouTube is making you give them the right to do just about anything[^theft] with your uploads, but rather that they won't accept the GFDL.
+
+[^theft]: They get the rights to use, reproduce, distribute, and make derivatives of the video. That's just about everything!
 
 YouTube will change this paragraph of their Terms of Service when hell freezes over.
 
@@ -67,11 +78,4 @@ So, YouTube is grossly inappropriate technically. It is impossible legally. And 
 
 > A profitable site is not a user-friendly site.
 
-[^comm]: One problem with considering commercial users is that everyone instantly thinks of large abusive corporations and feels the urge to use only NC licenses. The problem is that while NC licenses would indeed punish large abusive corporations (assuming they care), there are many 'commercial' users who don't seem commercial at all but would still be banned by such a license. There are other reasons of course; see ["The Case for Free Use: Reasons Not to Use a Creative Commons -NC License"](http://freedomdefined.org/Licenses/NC) for more.
-[^copyright]: There is one way you could get around it - if you own the entire copyright on the uploaded video. Then the law would interpret your upload as an upload not of a copyleft-licensed-video, but of an all-rights-reserved video, since that's the only way the TOS would be satisfiable. The difference is implied in your consent.
-[^criticism]: Which is better than attracting the former, because at least you can correct people; but what do you say do the millionth iteration of "Wikipedia shouldn't be used because anyone can edit it and it's unreliable"?
-[^idiot]: This charge was made by a real person; to protect the guilty, the message will not be linked to.
 [^it]: As of the [2007](http://wikimediafoundation.org/wiki/Planned_Spending_Distribution_2007-2008) and [2008](http://wikimediafoundation.org/wiki/Planned_Spending_Distribution_2008-2009) budgets - half and falling! ([More information.](http://meta.wikimedia.org/wiki/Wikimedia_budget))
-[^localization]: For details on i8n & MediaWiki in general, see [Multilingual MediaWiki](https://secure.wikimedia.org/wikipedia/mediawiki/wiki/Multilingual_MediaWiki); for hard numbers, see [Translation Statistics](http://translatewiki.net/wiki/Translating:Statistics)
-[^owners]: Thomson Consumer Electronics & Fraunhofer Institute & Audio MPEG, Inc & Alcatel-Lucent
-[^theft]: They get the rights to use, reproduce, distribute, and make derivatives of the video. That's just about everything!
