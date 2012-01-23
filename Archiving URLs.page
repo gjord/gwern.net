@@ -98,6 +98,8 @@ We can ask a third party to keep a cache for us. The only three general [archive
 
 There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which obviously are not publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](http://news.ycombinator.com/item?id=2880427).]
 
+<!-- TODO: develop and cover Pinboard support; Maciej says such usage is acceptable - 'Your current archive size, growing at 20 GB a year, should not be a problem.  I'll put you on the heavy-duty server where my own stuff lives.' -->
+
 (An example would be <http://bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/> being archived at <http://webcitation.org/5ur7ifr12>.)
 
 My first program in this vein of thought was a bot which fired off WebCite and Internet Archive/Alexa requests: [Wikipedia Archiving Bot](haskell/Wikipedia Archive Bot), quickly followed up by a [RSS version](haskell/Wikipedia RSS Archive Bot). (Or you could install the [Alexa Toolbar](!Wikipedia) to get automatic submission to the Internet Archive, if you have ceased to care about privacy.)
@@ -158,7 +160,7 @@ So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in 
 Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
 
 ~~~{.bash}
-nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | filter-urls >> ~/.urls.txt
+nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e '" ]' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | filter-urls >> ~/.urls.txt
 ~~~
 
 # Reacting to broken links
