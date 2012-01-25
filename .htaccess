@@ -26,6 +26,9 @@ FileETag MTime
   ExpiresByType image/x-icon A7592000
   ## the PDFs are likewise usually unchanging
   ExpiresByType application/pdf A4592000
+
+  Header set Cache-Control "public, must-revalidate"
+
 </ifModule>
 
 # https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
