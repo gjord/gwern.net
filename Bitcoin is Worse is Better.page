@@ -18,17 +18,18 @@ Some wonder who is the real man under the Satoshi Nakamoto mask; a hard question
 
 The interesting thing is that by even the most generous accounting, all the pieces were in place for at least 8 years before Satoshi's publication, which was followed more than half a year later^[The first revision in the [Github repository](https://github.com/bitcoin/bitcoin) is dated August 2009 by 'sirius-m'.] by the first public[^private] prototype. If we look at the citations in the whitepaper and others, and then order the relevant technologies by year in descending order:
 
-1. 2001-2005[^bitgold]: Nick Szabo, Bit Gold
+[^private]: Satoshi claims that before he write the whitepaper, he [wrote a prototype](http://www.mail-archive.com/cryptography@metzdowd.com/msg10011.html)
+
+1. 2001-2005[^bit-gold]: Nick Szabo, Bit Gold
 2. 2001: [SHA-256](!Wikipedia) finalized
 3. 1998: Wei Dai, [B-money](http://weidai.com/bmoney.txt)^[In the same vein of 'the network is a third party which keeps a copy of all signed transactions', you could include Ian Grigg's 2005 paper ["Triple Entry Accounting"](http://iang.org/papers/triple_entry.html).]
 4. 1997: [HashCash](!Wikipedia)
-5. 1992-1993: Proof-of-work for spam^["Pricing via Processing, Or, Combating Junk Mail, Advances in Cryptology", Dwork 1993, published in _CRYPTO'92_.]
-6. 1991: cryptographic timestamps
-7. 1980: public key cryptography^[This is Satoshi's citation date; Diffie-Hellman, the [first published system](!Wikipedia "Public key cryptography#History"), was in 1976, not 1980.]
-8. 1979: Hash tree
+5. 1992-1993: Proof-of-work for spam^[["Pricing via Processing, Or, Combating Junk Mail"](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.83.7634&rep=rep1&type=pdf), , Dwork 1993, published in _CRYPTO'92_.]
+6. 1991: [cryptographic timestamps](!Wikipedia "Trusted timestamping")
+7. 1980: [public key cryptography](!Wikipedia)^[This is Satoshi's citation date; Diffie-Hellman, the [first published system](!Wikipedia "Public key cryptography#History"), was in 1976, not 1980.]
+8. 1979: [Hash tree](!Wikipedia)
 
-[^private]: Satoshi claims that before he write the whitepaper, he [wrote a prototype](http://www.mail-archive.com/cryptography@metzdowd.com/msg10011.html)
-[^bitgold]: It's hard to figure out when Szabo devised bit gold; his [post](http://unenumerated.blogspot.com/2005/12/bit-gold.html) claims to be from December 2008 but the URL indicates 2005 and it is linked in November 2008 emails. Szabo has long been interested in proof-of-work systems, writing on them in ~1998. [A paper](http://web.archive.org/web/20101008225926/http://szabo.best.vwh.net/ttps.html) started in 2001 motivates the existence of bit gold and describes, but that may be material from the 2004 or 2005 revisions. [Hal Finney](!Wikipedia "Hal Finney (cypherpunk)") [mentioned](http://www.mail-archive.com/cryptography@metzdowd.com/msg09975.html) bit gold in 2008 (in the context of a bitcoin discussion) describing Szabo's proposal as 'many years ago', and inasmuch as Hal has been active in cryptography circles since the '80s (was a member of the Cypherpunks mailing list etc.), it seems unlikely Hal was speaking of something then just 3 years ago.
+[^bit-gold]: It's hard to figure out when Szabo devised bit gold; his [post](http://unenumerated.blogspot.com/2005/12/bit-gold.html) claims to be from December 2008 but the URL indicates 2005 and it is linked in November 2008 emails. Szabo has long been interested in proof-of-work systems, writing on them in ~1998. [A paper](http://web.archive.org/web/20101008225926/http://szabo.best.vwh.net/ttps.html) started in 2001 motivates the existence of bit gold and describes, but that may be material from the 2004 or 2005 revisions. [Hal Finney](!Wikipedia "Hal Finney (cypherpunk)") [mentioned](http://www.mail-archive.com/cryptography@metzdowd.com/msg09975.html) bit gold in 2008 (in the context of a bitcoin discussion) describing Szabo's proposal as 'many years ago', and inasmuch as Hal has been active in cryptography circles since the '80s (was a member of the Cypherpunks mailing list etc.), it seems unlikely Hal was speaking of something then just 3 years ago.
 
 This lack of novelty is part of the appeal - the fewer new parts of a cryptosystem, the less danger^[In cryptography, new parts are guilty until proven innocent. [Hundreds of past systems](!Wikipedia "Category:Broken cryptography algorithms") have been broken, sometimes after decades of study & use.]. All that was lacking was a Satoshi to start a Bitcoin.
 
@@ -66,7 +67,7 @@ It's worth pointing out that it's generally expected that at some point ordinary
 
 # Contemporary objections
 
-As well, few of the objections to cryptocurrencies seem to have been "computers which can run it are fantastically expensive"^[Or rather, the objections were that cryptocurrencies had to be mobile - usable on the contemporary PDAs and cellphones, with the computing power of a watch.]. In computing, applications and techniques are often invented many decades before Moore's law makes them practically useful^[[Garbage collection](!Wikipedia "Garbage collection (computer science)") and most of artificial intelligence (or machine learning in particular) seem to have waited decades for sufficiently fast hardware. Indeed, I sometimes feel that Alan Kay's entire career has essentially been sketching out what he could do if only he had some decent cheap hardware.], but this does *not* seem to have happened with Bitcoin. A similar objection obtains with patents or published papers; if Bitcoin was a known idea, where are they? I have yet to see anybody point out what patents might have deterred cryptography researchers & implementers; the obvious answer is that there were none. Because there was no investor interest? Not that Satoshi needed investors, but there were a tremendous number of online payment services started in the '90s, each searching for the secret sauce that would let them win 'mindshare' and ride 'network effects' to victory; [DigiCash](!Wikipedia) again comes to mind.
+As well, few of the objections to cryptocurrencies seem to have been "computers which can run it are fantastically expensive"^[Or rather, the objections were that cryptocurrencies had to be mobile - usable on the contemporary PDAs and cellphones, with the computing power of a watch.]. In computing, applications and techniques are often invented many decades before Moore's law makes them practically useful^[[Garbage collection](!Wikipedia "Garbage collection (computer science)") and most of artificial intelligence (or machine learning in particular) seem to have waited decades for sufficiently fast hardware. Indeed, I sometimes feel that [Alan Kay](!Wikipedia)'s entire career has essentially been sketching out what he could do if only he had some decent cheap hardware.], but this does *not* seem to have happened with Bitcoin. A similar objection obtains with patents or published papers; if Bitcoin was a known idea, where are they? I have yet to see anybody point out what patents might have deterred cryptography researchers & implementers; the obvious answer is that there were none. Because there was no investor interest? Not that Satoshi needed investors, but there were a tremendous number of online payment services started in the '90s, each searching for the secret sauce that would let them win 'mindshare' and ride 'network effects' to victory; [DigiCash](!Wikipedia) again comes to mind.
 
 So if the basic idea is accessible, and it's useful on consumer-grade hardware for the last 20 years or so, then what's the problem?
 
@@ -111,7 +112,6 @@ As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [B
 
     > "I think people have missed the more subtle point that Ben Laurie made here. Bitcoin requires the use of an unusual sort of secure consensus protocol to work reliably, and such protocols are not known to exist in this context. In the presence of such a protocol, however, there is no longer any need for mining -- the system can simply elect a member to acquire a new coin every _N_ seconds via a secure election protocol (and those are known given the rest). Thus, Ben's point that if you're going to have a system like bitcoin, one could at least have an efficient system of this sort rather than a stupid one based on an electrical potlatch."
 
-
 What's the common thread? Is there any particular fatal flaw of Bitcoin that explains why no one but Satoshi came up with it?
 
 ### Aesthetics
@@ -136,7 +136,7 @@ No! What's wrong with Bitcoin is that it's *ugly*. It is not [elegant](!Wikipedi
     >
     > ...Even worse, it is clear that arriving at the equilibrium state for Bitcoin is incredibly expensive: half of all the computing power in existence must be burnt, in perpetuity, maintaining agreement about the current state of the currency. It also unknowable: we can never be sure that we actually are burning half of all the power in existence, because we do not know how much power exists."
 
-    Laurie points out that in practice, the Bitcoin community does depend on a centralized authority which periodically passes down 'blessed' block-chains - the Bitcoin developers hardwire known-good states of the block-chain into the clients; which of course is a theoretical weakness.
+    Laurie points out that in practice, the Bitcoin community does *depend* on a centralized authority which periodically passes down 'blessed' block-chains - the Bitcoin developers periodically hardwire known-good states of the block-chain into the clients (which of course is a theoretical weakness).
 
 ### How Worse is Better
 
@@ -144,7 +144,24 @@ In short, Bitcoin is a perfect example of [Worse is Better](!Wikipedia) ([origin
 
 But it *seems to work*. Just like Unix, there were countless ways to destroy your data or crash the system, which didn't exist on more 'proper' OSs like [OpenVMS](!Wikipedia), and there were countless lacking features compared to systems like [ITS](!Wikipedia "Incompatible Timesharing System") or the [Lisp machine](!Wikipedia) OSs. But like the proverbial cockroaches, Unix spread, networked, survived - and the rest did not.[^preface]
 
-A cryptographer would have difficulty coming up with Bitcoin because it is so ugly and there are so many elegant features he wants in it. Programmers and mathematicians often speak of 'taste', and how they lead one to better solutions. A cryptographer's taste is for cryptosystems optimized for efficiency and theorems; it is not for systems optimized for virulence, for their sociological appeal[^ponzi]. Centralized systems are natural solutions because they are easy, like the integers are easy; but like the integers are but a vanishingly small subset of the reals, so too are centralized systems a tiny subset of decentralized ones[^subset]. DigiCash and all the other cryptocurrency startups may have had many nifty features, may have been far more efficient, and all that jazz, but they died anyway. They had no communities, and their centralization meant that they fell with their corporate patrons. They had to win in their compressed timeframe or die out completely. But "that is not dead which can eternal lie".
+[^preface]: _[The UNIX-HATERS Handbook](!Wikipedia)_, which contains many entertaining and often still-applicable descriptions of the fecklessness and sharp edges of Unixes, also contains an extremely funny 'Anti-Foreword' by Dennis Ritchie:
+
+    > "To the contributors to this book: I have succumbed to the temptation you offered in your preface: I *do* write you off as envious malcontents and romantic keepers of memories. The systems you remember so fondly ([TOPS-20](!Wikipedia), [ITS](!Wikipedia "Incompatible Timesharing System"), [Multics](!Wikipedia), [Lisp Machine](!Wikipedia), [Cedar/Mesa](!Wikipedia "Mesa (programming language)"), the Dorado) are not just out to pasture, they are fertilizing it from below...You claim to seek progress, but you succeed mainly in whining. Here is my metaphor: your book is a pudding stuffed with apposite observations, many well-conceived. Like excrement, it contains enough undigested nuggets of nutrition to sustain life for some. But it is not a tasty pie: it reeks too much of contempt and of envy. Bon appetit!"
+
+A cryptographer would have difficulty coming up with Bitcoin because it is so ugly and there are so many elegant features he wants in it. Programmers and mathematicians often speak of 'taste', and how they lead one to better solutions. A cryptographer's taste is for cryptosystems optimized for efficiency and theorems; it is not for systems optimized for virulence, for their sociological appeal[^Ponzi]. Centralized systems are natural solutions because they are easy, like the integers are easy; but like the integers are but a vanishingly small subset of the reals, so too are centralized systems a tiny subset of decentralized ones[^subset]. DigiCash and all the other cryptocurrency startups may have had many nifty features, may have been far more efficient, and all that jazz, but they died anyway. They had no communities, and their centralization meant that they fell with their corporate patrons. They had to win in their compressed timeframe or die out completely. But "that is not dead which can eternal lie".
+
+[^Ponzi]: Many [anonymous commenters](http://www.links.org/?p=1171#comment-415465) point this out because it makes Bitcoin smell like some sort of [Ponzi scheme](!Wikipedia) or [multilevel marketing scheme](!Wikipedia):
+
+    > "Bitcoin, like the recent commercial phenomenon [Groupon](!Wikipedia), tends to turn people into marketers because they feel they have something to gain, however small it might be in the end; I think that partly accounts for its temporary success."
+
+    Or ["The Rise and Fall of Bitcoin"](http://www.wired.com/magazine/2011/11/mf_bitcoin/all/1), _Wired_:
+
+    > "Stefan Brands, a former ecash consultant and digital currency pioneer, calls bitcoin “clever” and is loath to bash it but believes it’s fundamentally structured like “a pyramid scheme” that rewards early adopters."
+
+    [John Robb](!Wikipedia "John Robb (military theorist)"), ["More Thoughts on Bitcoin"](http://globalguerrillas.typepad.com/globalguerrillas/2011/06/more-thoughts-on-bitcoin.html):
+
+    > "Lots of people are saying: "The deflation built into bitcoin was a terrible idea. People are getting rich." In fact, it was a brilliant idea. It brought in speculators (people that are buying/selling it as if in a game). It created a bubble. The bubble put it on the map. The bubble has attracted thousands of developers/participants. Think of how the [Netscape IPO](!Wikipedia) fueled the Web/Internet."
+[^subset]: Decentralized systems are usually convertible into centralized systems easily, while the converse is not true. (Much like [parallel](!Wikipedia "Parallel computing") versus serial programming - to make a parallel program serial, just insert a lot of [blocking](!Wikipedia "Blocking (scheduling)").) For a simple example, consider cases where _n_=2: imagine a [BitTorrent](!Wikipedia) swarm (a decentralized system) with one seed and one leech. Or take [Distributed Revision Control Systems](!Wikipedia) like [Darcs](!Wikipedia) or [Git](!Wikipedia "Git (software)"); it's a commonplace to point out that if a group really wants a 'centralized' workflow, they can just designate one particular repository the 'master' canonical repository and continue onwards with the DVCS as a more capable replacement for [Apache Subversion](!Wikipedia) or [CVS](!Wikipedia "Concurrent Versions System").
 
 <!--
 
@@ -174,24 +191,7 @@ But slowly, word of bitcoin spread beyond the insular world of cryptography. It 
 
 -->
 
-[^ponzi]: Many [anonymous commenters](http://www.links.org/?p=1171#comment-415465) point this out because it makes Bitcoin smell like some sort of Ponzi or multilevel marketing scheme:
-
-    > "Bitcoin, like the recent commercial phenomenon Groupon, tends to turn people into marketers because they feel they have something to gain, however small it might be in the end; I think that partly accounts for its temporary success."
-
-    Or ["The Rise and Fall of Bitcoin"](http://www.wired.com/magazine/2011/11/mf_bitcoin/all/1), _Wired_:
-
-    > "Stefan Brands, a former ecash consultant and digital currency pioneer, calls bitcoin “clever” and is loath to bash it but believes it’s fundamentally structured like “a pyramid scheme” that rewards early adopters."
-
-    [John Robb](!Wikipedia "John Robb (military theorist)"), ["More Thoughts on Bitcoin"](http://globalguerrillas.typepad.com/globalguerrillas/2011/06/more-thoughts-on-bitcoin.html):
-
-    > "Lots of people are saying: "The deflation built into bitcoin was a terrible idea. People are getting rich." In fact, it was a brilliant idea. It brought in speculators (people that are buying/selling it as if in a game). It created a bubble. The bubble put it on the map. The bubble has attracted thousands of developers/participants. Think of how the [Netscape IPO](!Wikipedia) fueled the Web/Internet."
-
 It may be that Bitcoin's greatest virtue is not its deflation, nor its microtransactions, but its viral distributed nature; it can wait for its opportunity. "If you sit by the bank of the river long enough, you can watch the bodies of your enemies float by."
-
-[^subset]: Decentralized systems are usually convertible into centralized systems easily, while the converse is not true. (Much like [parallel](!Wikipedia "Parallel computing") versus serial programing - to make a parallel program serial, just insert a lot of [blocking](!Wikipedia "Blocking (scheduling)").) For a simple example, consider cases where _n_=2: imagine a [BitTorrent](!Wikipedia) swarm (a decentralized system) with one seed and one leech. Or take [Distributed Revision Control Systems](!Wikipedia) like [Darcs](!Wikipedia) or [Git](!Wikipedia "Git (software)"); it's a commonplace to point out that if a group really wants a 'centralized' workflow, they can just designate one particular repository the 'master' canonical repository and continue onwards with the DVCS as a more capable replacement for [Apache Subversion](!Wikipedia) or [CVS](!Wikipedia "Concurrent Versions System").
-[^preface]: _[The UNIX-HATERS Handbook](!Wikipedia)_, which contains many entertaining and often still-applicable descriptions of the fecklessness and sharp edges of Unixes, also contains an extremely funny 'Anti-Foreword' by Dennis Ritchie:
-
-    > "To the contributors to this book: I have succumbed to the temptation you offered in your preface: I *do* write you off as envious malcontents and romantic keepers of memories. The systems you remember so fondly ([TOPS-20](!Wikipedia), [ITS](!Wikipedia "Incompatible Timesharing System"), [Multics](!Wikipedia), [Lisp Machine](!Wikipedia), [Cedar/Mesa](!Wikipedia "Mesa (programming language)"), the Dorado) are not just out to pasture, they are fertilizing it from below...You claim to seek progress, but you succeed mainly in whining. Here is my metaphor: your book is a pudding stuffed with apposite observations, many well-conceived. Like excrement, it contains enough undigested nuggets of nutrition to sustain life for some. But it is not a tasty pie: it reeks too much of contempt and of envy. Bon appetit!"
 
 # External links
 
