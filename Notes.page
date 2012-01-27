@@ -1904,6 +1904,31 @@ What would explain the Danish placing Greenland above other sacred cows in their
 
 Perhaps this is the explanation: Greenland has become *symbolic*. Possession of Greenland has become a symbol of Denmark's status as a modern independent developed nation. The symbolism of sovereignty and the shared history is not threatened by US bases, nor home rule, nor economic failure, and apparently is sufficient repayment for all the money poured down that hole.
 
+# Remote monitoring
+
+Desire: some way to monitor freelancer's activity (if they are billing by time rather than results).
+
+Why? This enables better compliance and turns freelancers into less of a lemon market - allowing for higher salaries due to lower risk (see <http://en.wikipedia.org/wiki/The_Market_for_Lemons>). Reportedly, such monitoring also helps one's own akrasia - one could use it both while 'working' and 'not working', just with someone else (akin to [coffee shops](http://www.theatlantic.com/business/archive/2011/04/working-best-at-coffee-shops/237372/) perhaps). The idea comes from Cousin It and Richard Hollerith's <http://lesswrong.com/lw/2qv/browser_buddies_remote_monitoring_experiment/> (even if it wouldn't go as far as letting one's [life be managed](http://lesswrong.com/lw/dp/fighting_akrasia_incentivising_action/4meu)!).
+
+Potential solutions:
+
+1. remote desktops: screenshots or video. Requirements:
+
+     - cross-platform (Linux, Windows & Mac)
+     - secure (eg. using SSH for transport, especially since we already use SSH for fulltext access)
+     - easily toggleable on and off
+
+     Of the remote desktop protocols, only the VNC protocol is acceptable: has many open source & proprietary cross-platform implementations for both client and server on, and can be tunneled over SSH. ([Nick Tarleton](http://lesswrong.com/lw/2qv/antiakrasia_remote_monitoring_experiment/2pda) says Macs are already compatible with a VNC client user.) TightVNC seems like it would work well. (One difficulty: the natural tool to use once a VNC server is running on the remote desktop is [vncsnapshot](http://vncsnapshot.sourceforge.net/) which does what you think it does, but the Debian summary warns it does *not* work over SSH. [vnccapture](http://search.cpan.org/~lbrocard/Net-VNC-0.36/bin/vnccapture) may or may not work.)
+2. browser URL logging (since much work takes place in browsers). Requirements:
+
+    - cross-browser (Firefox, Chrome, Safari; IE users can die in a fire)
+    - at a minimum, passworded
+
+    [RescueTime](http://www.rescuetime.com) has a paid [group tracking](http://www.rescuetime.com/tour_biz) set of features that seems designed for this sort of task. Other Internet possibilities: <http://en.wikipedia.org/wiki/Comparison_of_time_tracking_software>. (I used to use the Firefox extension PageAddict which worked well for this sort of thing but is unmaintained; the most popular maintained extension, [Leechblock](https://addons.mozilla.org/en-US/firefox/addon/leechblock/), doesn't export statistics. [about:me](https://addons.mozilla.org/en-US/firefox/addon/aboutme/) would probably work, but wouldn't be automated.)
+3. Other
+
+    For example, my [sousveillance](http://lesswrong.com/lw/2qv/antiakrasia_remote_monitoring_experiment/2s3n) script; it would be trivial to set up a folder and then add a call to the script like `scp xwd-?????.png yyylj@euclid.u.washington.edu:/rc12/d16/yyli/screenshots/gwern/`. This should be easily implemented for Macs, but for Windows? I am sure it is doable to write some sort of batch script which integrates with Task Scheduler, but I left Windows before I wrote my first script, so I don't know how hard it would be.
+
 <!--
 
 The real turning point was the philosopher Peter Singer's 1975 book _Animal Liberation_, the so-called bible of the animal rights movement. 273 The sobriquet is doubly ironic because Singer is a secularist and a utilitarian, and utilitarians have been skeptical of natural rights ever since Bentham called the idea "nonsense on stilts." But following Bentham, Singer laid out a razor-sharp argument for a full consideration of the *interests* of animals, while not necessarily granting them "rights." The argument begins with the realization that it is consciousness rather than intelligence or species membership that makes a being worthy of moral consideration. It follows that we should not inflict avoidable pain on animals any more than we should inflict it on young children or the mentally handicapped. And a corollary is that we should all be vegetarians. Humans can thrive on a modern vegetarian diet, and animals' interests in a life free of pain and premature death surely outweigh the marginal increase in pleasure we get from eating their flesh. The fact that humans "naturally" eat meat, whether by cultural tradition, biological evolution, or both, is morally irrelevant.
