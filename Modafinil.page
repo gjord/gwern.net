@@ -395,11 +395,13 @@ Paul Newcomb:
 
 ![10x200 Modapro, ordered from Nubrain](/images/2011-modapro200-front-pn.jpg)
 
-## Margins
+## Margin estimation
 
 One way to evaluate whether something is 'too good to be true' is to figure out what the cost to the seller is. Obviously it is impossible for them to sell it for less in the long run - they would lose money on each purchase. And they have overhead, too, so their price to you must be greater than cost. There are exceptions where you can buy for less than cost and *not* be scammed, but every exception has some exceptional reason driving it. If you can't figure the reason out, you should be suspicious.
 
-So what's the raw cost of modafinil to these online pharmacies? They are almost all sourcing their modafinil (if it's actual modafinil) from Indian sources. We can get a first estimate by looking at affiliate commissions. Commissions are part of the cost structure, so we can subtract the commission from the price and get an upper bound on how much the modafinil cost. (A company might be willing to pay a commission so high it makes a sale unprofitable if it generates a lot of return business, but this seems unlikely in an online pharmacy scenario.)
+### Affiliates
+
+So what's the raw cost of modafinil to these online pharmacies? We can get a first estimate by looking at affiliate commissions. Commissions are part of the cost structure, so we can subtract the commission from the price and get an upper bound on how much the modafinil cost. (A company might be willing to pay a commission so high it makes a sale unprofitable if it generates a lot of return business, but this seems unlikely in an online pharmacy scenario.)
 
 I signed up for 3 affiliate programs between April 2011 and January 2012^[I dropped them when I checked into my accounts and discovered I had been credited with $0 after that time-span. Why bother?]; in order, by price per mg as given in the above chart (cheapest first):
 
@@ -413,17 +415,23 @@ I signed up for 3 affiliate programs between April 2011 and January 2012^[I drop
     1. 200x200 sells for  $197.95, commission of $39.59
     2. 100x200 sells for $131.95, commission of $26.39
 
-Interestingly, there is only a weak pattern of commissions shrinking with prices, which suggests we may be seeing [price discrimination](!Wikipedia) at work[^fronts]; if EDAndMore can offer both the cheapest prices and higher commissions, that suggests there is considerable margin to cut. Further, EDAndMore offers shipping 'for free', but of course, there is no such thing as a free lunch so what that actually means is that the shipping is built into the price. If we assume that shipping costs them $10 a package of 200x200 and exclude it from their modafinil cost, and we cut 20% for commission, that suggests a price of $\frac{200 \times 200}{180 - (180 \times 0.2) - 10}$, or ~300 mg/$ - substantially higher than the 222 mg/$ available to the consumer. More directly, there are scattered reports online about pricing in places like Russia or, most relevant, India:
+Interestingly, there is only a weak pattern of commissions shrinking with prices, which suggests we may be seeing [price discrimination](!Wikipedia) at work[^fronts]; if EDAndMore can offer both the cheapest prices and higher commissions, that suggests there is considerable margin to cut. Further, EDAndMore offers shipping 'for free', but of course, there is no such thing as a free lunch so what that actually means is that the shipping is built into the price. If we assume that shipping costs them $10 a package of 200x200 and exclude it from their modafinil cost, and we cut 20% for commission, that suggests a price of $\frac{200 \times 200}{180 - (180 \times 0.2) - 10}$, or ~300 mg/$ - substantially higher than the 222 mg/$ available to the consumer.
+
+### India
+
+These pharmacies are almost all sourcing their modafinil (if it's actual modafinil) from Indian sources. More directly, there are scattered reports online about pricing in places like Russia or, most relevant, India:
 
 > "the modalert from india, which is sold through both european and indian online pharmacies, costs about 12$ / 10 pills - 200mg
 >
 > now the same stuff in an indian pharmacy costs only $3 / 10 pills - 200mg"^[<http://www.longecity.org/forum/topic/44117-modafinil-sources/page__st__20__p__454877#entry454877>]
 
-Such a pharmacy price would be $\frac{10 \times 200}{3}$ or 667 mg/$. So this sets another bound - it's highly unlikely any online pharmacy would be able to beat an Indian pharmacy. Modalert packaging (see above) comes with retail prices in [rupees](!Wikipedia) stamped on it, presumably for tax purposes; at 81 rupees for 10 pills, and ~50 rupees to the dollar, that's ~$2 per 10 or 20 cents per 100mg pill. The 200mg pills are stamped 129 rupees, or ~$2.5 or 25 cents per 200mg pill. Another reader reports similar Indian prices in January 2012: 85 rupees for 10x100 and 130 rupees for 10x200. (There is another, more pessimistic bound - the cost of *fake* medicines, which aren't as cheap as one might guess, one example being a $59.95 product costing $2.50^[S. Cobb: _The Economics of Spam_. ePrivacy Group, Feb 2003. Cited in ["“Proof-of-Work” Proves Not to Work"](http://www.cl.cam.ac.uk/~rnc1/proofwork.pdf), Laurie, Ben; Clayton, Richard (May 2004)])
+Such a pharmacy price would be $\frac{10 \times 200}{3}$ or 667 mg/$. So this sets another bound - it's highly unlikely any online pharmacy would be able to beat an Indian pharmacy. Modalert packaging (see above) comes with retail prices in [rupees](!Wikipedia) stamped on it, presumably for tax purposes; at 81 rupees for 10 pills, and ~50 rupees to the dollar, that's ~$2 per 10 or 20 cents per 100mg pill. The 200mg pills are stamped 129 rupees, or ~$2.5 or 25 cents per 200mg pill. Another reader reports similar Indian prices in January 2012: 85 rupees for 10x100 and 130 rupees for 10x200. A reader setting up a business tells me he arranged with a UK-India importer for modafinil at $0.35-45 per pill in bulk, which is consistent with the stamp prices plus overhead & profit for the importer.
 
-[^fronts]: For example, if multiple sites/'businesses' were set up, each with different prices, then the true owners may be able to capture more of the [consumer surplus](!Wikipedia). It's impossible to know for sure how many online pharmacies are just independent-looking fronts for one real business; it has been asserted that this is the case, eg. [dontj](http://www.longecity.org/forum/topic/10464-modalert-is-this-what-modafinil-is-like/page__st__40__p__193725#entry193725):
+(There is another, more pessimistic bound - the cost of *fake* medicines, which aren't as cheap as one might guess, one example being a $59.95 product costing $2.50^[S. Cobb: _The Economics of Spam_. ePrivacy Group, Feb 2003. Cited in ["“Proof-of-Work” Proves Not to Work"](http://www.cl.cam.ac.uk/~rnc1/proofwork.pdf), Laurie, Ben; Clayton, Richard (May 2004)])
 
-    > "thepharmacyexpress.com is actually the same source as usadiscreetmeds and a whole bunch of other sites (see my first post in this thread). Monarchpharm just uses different sites (that also look really similar) to sell the same meds at sometimes different prices. I think when I ordered from usadiscreetmeds.com the certificate was also expired - but NP. I'd say go for it! "
+[^fronts]: For example, if multiple sites/'businesses' were set up, each with different prices, then the true owners may be able to engage in [price discrimination](!Wikipedia) and capture more of the [consumer surplus](!Wikipedia). It's impossible to know for sure how many online pharmacies are just independent-looking fronts for one real business; it has been asserted that this is the case, eg. [dontj](http://www.longecity.org/forum/topic/10464-modalert-is-this-what-modafinil-is-like/page__st__40__p__193725#entry193725):
+
+    > "thepharmacyexpress.com is actually the same source as usadiscreetmeds and a whole bunch of other sites (see my first post in this thread). Monarchpharm just uses different sites (that also look really similar) to sell the same meds at sometimes different prices. I think when I ordered from usadiscreetmeds.com the [SSL] certificate was also expired - but NP. I'd say go for it! "
 
 # Ordering behavior
 
@@ -679,7 +687,7 @@ This test is crude and likely produces significant false positives and negatives
 - Online sources of discussion & anecdotes:
 
     - [Modafinil at Erowid](http://www.erowid.org/smarts/modafinil/modafinil.shtml)
-    - [Imminst/Longecity](http://www,google.com/search?q=modafinil%20site%3Alongecity%2Eorg%2Fforum%2F)
+    - [Imminst/Longecity](http://www.google.com/search?q=modafinil%20site%3Alongecity%2Eorg%2Fforum%2F)
     - [Drug-forums.com](http://www.drugs-forum.com/forum/tags.php?tag=modafinil) (which also boasts an extensive collection of documents, and >38 PDFs on modafinil)
     - [Bluelight.ru](http://google.com/search?q=modafinil%20site%3Abluelight.ru)
     - [Reddit submissions](http://www.reddit.com/search?q=modafinil)
