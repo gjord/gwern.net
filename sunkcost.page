@@ -1,3 +1,74 @@
+The [sunk cost fallacy](!Wikipedia) could be defined as when an agent ignores that option X has the highest marginal return, and instead chooses option Y because he chose option Y many times before, or simply as "throwing good money after bad". The single most famous example, and the reason for it also being called the '[Concorde](!Wikipedia) fallacy', would be the British and French government investing hundreds of millions of dollars into the development of a supersonic passenger jet despite knowing that it would never succeed commercially (as it did not, last flight in 2003). To what extent is the 'sunk cost fallacy' a real fallacy?
+
+It obviously is a fallacy in a simple model: 'imagine an agent A who chooses between option X which will return $10 and option Y which will return $6, and agent A in previous rounds chose Y'. Obviously if A chooses X, it will be better off by $4 than if it chooses Y. This is correct and as hard to dispute as 'A implies B; A; therefore B'. We can call both examples *valid*.
+
+But in philosophy, when we discuss modus ponens, we agree that it is always valid, but we do not always agree that it is *sound*: that A does in fact imply B, or that A really is the case, and so B is the case. 'The moon being made of cheese implies the astronauts walked on cheese; the moon is made of cheese; therefore the astronauts walked on cheese' is logically valid, but not sound, since we don't think that the moon is made of cheese. Or we differ with the first line as well, pointing out that only some of the Apollo astronauts walked on the moon. We reject the soundness.
+
+We can and must do the same thing in economics. In simple models, sunk cost is clearly a valid fallacy to be avoided. But is the real world compliant enough to make the fallacy sound? Notice the assumptions we had to make: we wish away issues of risk (and risk aversion), long-delayed consequences, changes in options as a result of past investment, and so on.
+
+One example I found interesting is an attack on exponential discounting; one of the key justifications of exponential discounting is that any other discounting can be money-pumped by an exponential agent investing at each time period at whatever the prevailing return is or loaning at appropriate times. ([George Ainslie](!Wikipedia "George Ainslie (psychologist)") in _The Breakdown of Will_ gives the example of a hyperbolic agent improvidently selling its winter coat every spring and buying it just before the snowstorms every winter, being money-pumped by the consistent exponential agent.) One of the assumptions is that certain rates of investment return will be available; but in the real world, rates can stagger around for long periods. ["Hyperbolic discounting is rational: valuing the far future with uncertain discount rates"](http://cowles.econ.yale.edu/P/cd/d17a/d1719.pdf) (Farmer & Geanakoplos 2009) argues that if returns follow a more geometric random walk, hyperbolic discounting is superior[^farmer]. Are they correct? I don't know, they are not [much-cited](http://scholar.google.com/scholar?cites=15313265516116473249). But even if they are wrong about hyperbolic discounting, I would like reassurance that exponential discounting *does* in fact deal correctly with changing returns (the market over the past few years has not turned in the proverbial 8-9% annual returns, and one wonders if there will ever be a big bull market that makes up for the great stagnation).
+
+[^farmer]: Some quotes from the paper:
+
+    > "Conventional economics supposes that agents value the present vs. the future using an exponential discounting function. In contrast, experiments with animals and humans suggest that agents are better described as hyperbolic discounters, whose discount function decays much more slowly at large times, as a power law. This is generally regarded as being time inconsistent or irrational. We show that when agents cannot be sure of their own future one-period discount rates, then hyperbolic discounting can become rational and exponential discounting irrational. This has important implications for environmental economics, as it implies a much larger weight for the far future.
+    >
+    > ...Why should we discount the future? Bohm-Bawerk (1889,1923) and Fisher (1930) argued that men were naturally impatient, perhaps owing to a failure of the imagination in conjuring the future as vividly as the present. Another justification for declining Ds (τ ) in τ, given by Rae (1834,1905), is that people are mortal, so survival probabilities must enter the calculation of the benefits of future potential consumption. There are many possible reasons for discounting, as reviewed by Dasgupta (2004, 2008). Most economic analysis assumes exponential discounting Ds (τ ) = D(τ ) = exp(−rτ ), as originally posited by Samuelson (1937) and put on an axiomatic foundation by Koopmans (1960). A natural justification for exponential discounting comes from financial economics and the opportunity cost of foregoing an investment. A dollar at time s can be placed in the bank to collect interest at rate r, and if the interest rate is constant, it will generate exp(r(t − s)) dollars at time t. A dollar at time t is therefore equivalent to exp(−r(t − s)) dollars at time s. Letting τ = t − s, this motivates the exponential discount function Ds (τ ) = D(τ ) = exp(−rτ ), independent of s.
+    >
+    > ...For roughly the first eighty years the certainty equivalent discount function for the geometric random walk stays fairly close to the exponential, but afterward the two diverge substantially, with the geometric random walk giving a much larger weight to the future. A comparison using more realistic parameters is given in Table 1. For large times the difference is dramatic.
+    >
+    > year GRW   exponential
+    > ---- ---   -----------
+    > 20   0.462 0.456
+    > 60   0.125 0.095
+    > 100  0.051 0.020
+    > 500  0.008 2 × 10^−9^
+    > 1000 0.005 4 × 10^−18^
+    >
+    > ...What this analysis makes clear, however, is that the long term behavior of valuations depends extremely sensitively on the interest rate model. The fact that the present value of actions that affect the far future can shift from a few percent to infinity when we move from a constant interest rate to a geometric random walk calls seriously into question many well regarded analyses of the economic consequences of global warming. ... no fixed discount rate is really adequate – as our analysis makes abundantly clear, the proper discounting function is not an exponential."
+
+If we look at sunk cost literature, we must keep many things in mind. For example:
+
+1. organization versus individuals
+
+    Wikipedia characterizes the aforementioned Concorde incident as "regarded privately by the British government as a 'commercial disaster' which should never have been started, and was almost cancelled, but political and legal issues had ultimately made it impossible for either government to pull out." So at every point, coalitions of politicians and bureaucrats found it in their self-interest to keep the ball rolling. A sunk cost for the government or nation as a whole is far from the same thing as a sunk cost for those coalitions. (If Kennedy or other US presidents could not withdraw from Vietnam due to perceived sunk costs, perhaps the real problem was why Americans thought Vietnam was so important and why they feared looking weak or provoking another ["who lost China"](!Wikipedia "China_Hands#The men who .22lost.22 China") debate.)
+
+    And why were those coalitions in power in the first place? Perhaps because France and Britain have not found any better systems of government - systems which operate efficiently and are also Nash equilibriums. Debacles like the Concorde may be necessary because the alternatives are even worse. I think of [Goodhart's Law](!Wikipedia) here, particularly because one study recorded how a bank's attempt to eliminate sunk cost bias in its loan officers resulted in backfiring and evasion[^banks]; the overall results seem to still have been an improvement, but it remains a cautionary lesson.
+
+    Whatever pressures and feedback loops cause sunk cost fallacy in organizations may be *completely* different from the causes in individuals.
+2. Non-monetary rewards and penalties
+
+    ["Individual organisms are best thought of as adaptation-executers rather than as fitness-maximizers."](http://lesswrong.com/lw/l0/adaptationexecuters_not_fitnessmaximizers/) What does this mean in a sunk cost context? That we should be aware that perhaps humans cannot treat the model as simply as '$10 versus $6 (and sunk cost)', and perhaps it is more like '$10 (and your - non-existent - tribe's condemnation of you as greedy, insincere, small-minded, and disloyal) versus $6 (and sunk cost)'. If humans really are forced to think like this, then the modeling of payoffs simply doesn't correspond with reality and of course our judgements will be wrong. This is not a trivial issue, providing the correct amount of rewards caused many differences in levels of animal intelligence to simply vanish - the rewards had been unequal (see my excerpts of the essay ["If a Lion Could Talk: Animal Intelligence and the Evolution of Consciousness"](Drug heuristics#fn24)).
+3. Sunk costs versus investments
+
+    Many choices for lower immediate marginal return are investments for greater future return. A single-stage model cannot capture this.
+
+[^banks]: ["Banking on Commitment: Intended and Unintended Consequences of an Organization's Attempt to Attenuate Escalation of Commitment"](/docs/2002-mcnamara.pdf), McNamara et al 2002:
+
+    > "The notion that decision makers tend to incorrectly consider previous expenditures when deliberating current utility-based decisions (Arkes & Blumer, 1985) has been used to explain fiascoes ranging from the prolonged involvement of the United States in the Vietnam War to the disastrous cost overrun during the con-struction of the Shoreham Nuclear Power Plant (Ross & Staw, 1993). In the Shoreham Nuclear Power Plant example, escalation of commitment meant billions of wasted dollars (Ross & Staw, 1993). In the Vietnam War, it may have cost thousands of lives...Kirby and Davis's (1998) experimental study showed that increased monitoring could dampen the escalation of commitment. Staw, Barsade, and Koput's (1997) field data on the banking industry led them to conclude that top manager turnover led to de-escalation of commitment at an aggregate level.
+    >
+    > ...So far, the results support the efficacy of changes in monitoring and decision responsibility as cures for the escalation of commitment bias. We now turn to the side effects of these treatments. Hypotheses 4 and 5 propose that the threat of increased monitoring and change in management responsibility increase the likelihood of a different form of undesirable decision commitment - the persistent underassessment of borrower risk. The results in column 3 of Table 2 support these hypotheses. Both the threat of increased monitoring and the threat of change in decision responsibility increase the likelihood of persistent underassessment of borrower risk (.47, _p_ < .01, and .50, _p_ < .05, respectively). These findings support the view that decision makers are likely to fail to appropriately downgrade a borrower when, by doing so, they avoid an organizational intervention. We examined the change in investment commitment for borrowers whose risk was persistently underassessed and who faced either increased monitoring or change in decision responsibility if the decision makers had admitted that the risk needed downgrading. We found that decision makers did appear to exhibit escalation of commitment to these borrowers. The change in commitment (on average, over 30 percent) is significantly greater than 0 (t = 2.94, _p_ < .01) and greater than the change in commitment to those borrowers who were correctly assessed as remaining at the same risk level (t = 2.58, _p_ = .01). Combined, these findings suggest that although the organizational efforts to minimize undesirable decision commitment appeared successful at first glance, the threat of these interventions increased the likelihood that decision makers would persistently give overfavorable assessments of the risk of borrowers. In turn, the lending officers would then escalate their monetary commitment to these riskier borrowers."
+
+Point 3 leads us to an interesting point about sunk cost: it has only been identified in humans, or primates at the widest.
+
+
+hoeffler http://www.coll.mpg.de/download/Hoeffler/Sunk%20Cost_080331.pdf
+
+
+TODO If sunk cost is such a clear-cut fallacy, why do we see so little correlation with intelligence[^Stanovich]?
+
+[^Stanovich]: Stanovich, K. E., & West, R. F. (2008b). ["On the relative independence of thinking biases and cognitive ability"](http://web.mac.com/kstanovich/Site/Research_on_Reasoning_files/JPSP08.pdf). _Journal of Personality and Social Psychology_, 94, 672–695 (pg 7-8)
+
+    > Both cognitive ability groups displayed sunk-cost effects of roughly equal magnitude. For the high-SAT group, the mean in the no-sunk-cost condition was 6.90 and the mean in the sunk-cost condition was 5.08, whereas for the low-SAT group, the mean in the no-sunk-cost condition was 6.50 and the mean in the sunk-cost condition was 4.19. A 2 (cognitive ability) ϫ 2 (condition) ANOVA indicated a significant main effect of cognitive ability, F(1, 725) ϭ 8.40, MSE ϭ 9.13, p Ͻ .01, and a significant main effect of condition, F(1, 725) ϭ 84.9, MSE ϭ 9.13, p Ͻ .001. There was a slight tendency for the low-SAT participants to show a larger sunk-cost effect, but the Cognitive Ability ϫ Condition interaction did not attain statistical significance, F(1, 725) ϭ 1.21, MSE ϭ 9.13. The interaction was also tested in a regression analyses in which SAT was treated as a continuous variable rather than as a dichotomous variable. The Form ϫ SAT cross product, when entered third in the equation, was not significant, F(1, 725) ϭ 0.32.
+    >
+    > The sunk-cost effect thus represents another cognitive bias that is not strongly attenuated by cognitive ability. However, this is true only when it is assessed in a between-subjects context. Using a similar sunk-cost problem, [Stanovich and West (1999)](/docs/1999-stanovich.pdf) did find an association with cognitive ability when participants responded in a within-subjects design.
+
+    Parker, A. M., & Fischhoff, B. (2005). ["Decision-making competence: External validation through an individual differences approach"](http://sds.hss.cmu.edu/media/pdfs/fischhoff/Parker_FischhoffDMC.pdf). _Journal of Behavioral Decision Making_, 18, 1–27:
+
+    > The first two rows of Table 5 show strong correlations between five of the seven DMC component measures and respondents’ scores on the WISC-R vocabulary test and on Giancola et al.’s (1996) measure of ECF. Consistency in risk perception and resistance to sunk cost show little relationship to either of these general cognitive abilities.^8,9^
+
+
+
+
 > The hypotheses were tested using data from a longitudinal study involving 1112 firms. It was found that entrepreneurs who had started their firms and those who had expressed substantial over-confidence were significantly more likely to make the decision to expand. The hypotheses that those who had partners and those who expected to apply their skills would be more likely to expand were not supported. Furthermore, and consistent with previous research, these psychological escalation predictors seemed to exert a greater influence when feedback from the marketplace was negative. As expected, there was a declining influence in the third year as compared with the second. Consistent with the prior literature and the hypotheses, these psychological predictors did show a small, but systematic influence upon reinvestment decisions.
 >
 > ...Although the hypothesis regarding PARTNR was not supported, as noted, the zero-order correlation between PARTNR and NEWCAP2 is in the predicted direction (r = .06, p < .05, one-tailed). Thus, entrepreneurs with partners may be more likely to expand the asset base of their firms than they would be if they were sole owners. This has significant implications for entrepreneurial teams, in that the presence of partners does not inhibit the tendency to escalate, but in fact increases that tendency. This means that having partners is not insurance against the tendency to escalate. This is consistent with the research on escalation (Bazerman et al. 1984).
@@ -14,7 +85,7 @@ McCarthy did not link apparent sunk cost to any *actual* bad outcomes; one study
 
 But note that this is not a clear negative either: 'all exit routes' includes exit routes like bankruptcy, so an increase in 'all exit routes' might be quite bad! As well, this study is correlational, and the McCarthy excerpts should make us wary about inferring that reinvestment is a bad idea - maybe the firms which were at all *able* to reduce costs were better off to begin with.
 
-Bazerman, M.H., Beekun, RI., and Schoorman, F.D. 1982. ["Performance evaluation in a dynamic context: A laboratory study of the impact of prior commitment to the ratee"](/docs/1982-bazerman.pdf). Journal of Applied Psychology 67(6):873-876
+Bazerman, M.H., Beekun, RI., and Schoorman, F.D. 1982. ["Performance evaluation in a dynamic context: A laboratory study of the impact of prior commitment to the ratee"](/docs/1982-bazerman.pdf). _Journal of Applied Psychology_ 67(6):873-876
 
 > A dynamic view of performance evaluation is proposed that argues that raters who are provided with negative performance data on a previously promoted employee will subsequently evaluate the employee more positively if they, rather than their predecessors, made the earlier promotion decision. A total of 298 business majors participated in the study. The experimental group made a promotion decision by choosing among three candidates, whereas the control group was told that the decision had been made by someone else. Both groups evaluated the promoted employee's performance after reviewing 2 years of data. The hypothesized escalation of commitment effect was observed in that the experimental group consistently evaluated the employee more favorably, provided larger rewards, and made more optimistic projections of future performance than did the control group.
 
@@ -27,7 +98,7 @@ Bazerman, M.H., Beekun, RI., and Schoorman, F.D. 1982. ["Performance evaluation 
 --["Continuing investment under conditions of failure: A laboratory study of the limits to escalation"](/docs/1986-mccain.pdf) McCain, B.E. 1986. , Journal of Applied Psychology 71:280-284
 
 ["Factors Affecting Entrapment in Escalating Conflicts: The Importance of Timing"](/docs/1982-brockner.pdf), Brockner et al 1982
-2
+
 > All subjects were given an initial monetary stake and had the opportunity to win more by taking part in an entrapping investment situation. In Experiment 1, half the subjects were provided with a payoff chart that made salient the costs associated with investing (High-cost salience condition) whereas half were not (Low-cost salience condition). Moreover, for half of the subjects the payoff chart was introduced before they were asked to invest (Early condition) whereas for the other half it was introduced after they had invested a considerable portion of their resources (Late condition). Entrapment was lower in the High salience-Early than in the Low Salience-Early condition. However, there was no difference between groups in the Late condition. In Experiment 2, the perceived presence of an audience interacted with personality variables related to face-saving to effect entrapment. When the audience was described as “experts in decision making,” subjects high in public self-consciousness (or social anxiety) became less entrapped than those low on these dimensions. When the audience consisted of individuals who “wished simply to observe the experimental procedure,” however, high public self-consciousness (or social anxiety) individuals were significantly more entrapped than lows. Moreover, these interaction effects occurred when the audience was introduced late, but not early, into the entrapment situation. Taken together, these (and other) findings suggest that economic factors are more influential determinants of behavior in the earlier stages of an entrapping conflict, whereas face-saving variables are more potent in the later phases.
 >
 > ...For example, individuals may “throw good money after bad” in repairing an old car, remain for an excessively long period of time in unsatisfying jobs or romantic relationships, or decide to escalate the arms race (even in the face of information suggesting the impracticality of all these actions) because of their belief that they have “too much invested to quit” (Teger, 1980).
@@ -53,15 +124,7 @@ Staw 1981, ["The Escalation of Commitment to a Course of Action"](/docs/1981-sta
 >
 > ...Table 2 also shows that draft order was a significant predictor of minutes played over the entire five-year period. This effect was above and beyond any effects of a player's performance, injury, or trade status. The regressions showed that every increment in the draft number decreased playing time by as much as 23 minutes in the second year (I, = -22.77, p < .001, one-tailed test). Likewise, being taken in the second rather than the first round of the draft meant 552 minutes less playing time during a player's second year in the NBA.
 
-Unfortunately, no concrete data on how much the sunk cost affects team performance. Also, ["The econometrics and behavioral economics of escalation of commitment: a re-examination of Staw and Hoang’s NBA data"](http://authors.library.caltech.edu/22085/1/wp1043%5B1%5D.pdf) claims that better analysis of the NBA data weakens apparent escalation
-
-> The notion that decision makers tend to incorrectly consider previous expenditures when deliberating current utility-based decisions (Arkes & Blumer, 1985) has been used to explain fiascoes ranging from the prolonged involvement of the United States in the Vietnam War to the disastrous cost overrun during the con-struction of the Shoreham Nuclear Power Plant (Ross & Staw, 1993). In the Shoreham Nuclear Power Plant example, escalation of commitment meant billions of wasted dollars (Ross & Staw, 1993). In the Vietnam War, it may have cost thousands of lives.
->
-> ...Kirby and Davis's (1998) experimental study showed that increased monitoring could dampen the escalation of commitment. Staw, Barsade, and Koput's (1997) field data on the banking industry led them to conclude that top manager turnover led to de-escalation of commitment at an aggregate level.
->
-> ...So far, the results support the efficacy of changes in monitoring and decision responsibility as cures for the escalation of commitment bias. We now turn to the side effects of these treatments.Hypotheses 4 and 5 propose that the threat of increased monitoring and change in management responsibility increase the likelihood of a different form of undesirable decision commitment-the persistent underassessment of borrower risk. The results in column 3 of Table 2 support these hypotheses. Both the threat of increased monitoring and the threat of change in decision responsibility increase the likelihood of persistent underassessment of borrower risk (.47, p < .01, and .50, p < .05, respectively). These findings support the view that decision makers are likely to fail to appropriately downgrade a borrower when, by doing so, they avoid an organizational intervention. We examined the change in investment commitment for borrowers whose risk was persistently underassessed and who faced either increased monitoring or change in decision responsibility if the decision makers had admitted that the risk needed downgrading. We found that decision makers did appear to exhibit escalation of commitment to these borrowers. The change in commitment (on average, over 30 percent) is significantly greater than 0 (t = 2.94, p < .01) and greater than the change in commitment to those borrowers who were correctly assessed as remaining at the same risk level (t = 2.58, p = .01). Combined, these findings suggest that although the organizational efforts to minimize undesirable decision commitment appeared successful at first glance, the threat of these interventions increased the likelihood that decision makers would persistently give overfavorable assessments of the risk of borrowers. In turn, the lending officers would then escalate their monetary commitment to these riskier borrowers.
-
-cf. Goodhart's law; ["Banking on Commitment: Intended and Unintended Consequences of an Organization's Attempt to Attenuate Escalation of Commitment"](/docs/2002-mcnamara.pdf), McNamara et al 2002
+Unfortunately, no concrete data on how much the sunk cost affects team performance. Also, ["The econometrics and behavioral economics of escalation of commitment: a re-examination of Staw and Hoang's NBA data"](http://authors.library.caltech.edu/22085/1/wp1043%5B1%5D.pdf) claims that better analysis of the NBA data weakens apparent escalation
 
 
 loss aversion in stock picking sunk cost?
@@ -86,6 +149,39 @@ Disagreeing with Brockner 1981; ["Factors Affecting Entrapment: Justification Ne
 > In fact, it may not be a difference in degree, but a difference in kind. There may be types of work that can only be done in long, uninterrupted stretches, when inspiration hits, rather than dutifully in scheduled little slices. Empirically it seems to be so. When I think of the people I know who've done great things, I don't imagine them dutifully crossing items off to-do lists. I imagine them sneaking off to work on some new idea.
 [Good and Bad Procrastination](http://www.paulgraham.com/procrastination.html)
 
+
+18. If the fool would persist in his folly he would become wise.
+46. You never know what is enough unless you know what is more than enough.
+William Blake, "Proverbs of Hell" <http://interglacial.com/~sburke/pub/prose/Blake_-_Proverbs_of_Hell.html>
+
+
+> - 'tactical optimism' : David Bohm's term for the way in which humans overcome the (so far) inescapable assessment that; 'in the long run, we're all dead'. Specifically, within the building industry, rife with non-optimal ingrained conditions, you wouldn't come to work if you weren't an optimist. Builders who cease to have an optimistic outlook go and find other things to do.
+> ...
+> - deadline/sanction fatigue: if the loss incurred for missing deadlines is small, or alternatively if it is purely psychological, then the 'weight' of time pressure is diminished with each failure.
+<http://lesswrong.com/lw/jg/planning_fallacy/2s2y>
+
+
+> A pottery teacher told half his class that their grade will depend on one single piece that they'll produce at the end of the term.
+>
+> He told the other half that their grade will be based on the volume of all the pieces they create.
+>
+> Which half do you think produced better work by the end?
+<http://c2.com/cgi/wiki?PotteryChallenge>
+
+We run on biased untrusted hardware; <http://lesswrong.com/lw/uu/why_does_power_corrupt/> <http://lesswrong.com/lw/uv/ends_dont_justify_means_among_humans/>
+Attempting to counter biases can hurt; <http://lesswrong.com/lw/he/knowing_about_biases_can_hurt_people/>
+<http://lesswrong.com/r/discussion/lw/9jy/sunk_costs_fallacy_fallacy/>
+
+> Sometimes it can be hard to maintain a good balance among multiple activities. For example, it is important to notice new good ideas. However, I tend to spend too much time pursuing novelty, and not enough time working on the best idea that I've found so far.  There is a tradition of browser games (see KingdomOfLoathing) that enforce a kind of balance using a virtual currency of 'turns'. You accumulate turns slowly in real time, and essentially every action within the game uses up turns. This enforces not spending too much time playing the game (and increases the perceived value of the game via forced artificial scarcity, of course). If I gave myself 'explore dollars' for doing non-exploration (so-called exploit) tasks, and charged myself for doing exploration tasks (like reading arXiv or wikipedia), I could enforce a balance. If I were also prone to the opposite problem ("A few months in the lab can often save whole hours in the library."), then I might use two currencies; exploring costs explore points but rewards with exploit points, and exploiting costs exploit points but rewards with explore points. (Virtual currencies are ubiquitous in games, and they can be used for many purposes; I expect to find them able to be placed across from many different failure modes.)
+<http://lesswrong.com/lw/55i/failure_modes_sometimes_correspond_to_game/>
+
+"real artists ship"
+
+> It all started out quite nicely. The brand new company sold a smart card for closed systems which was a cash-cow for years.  It was at this time that the first irritants appeared. Even if you are a brilliant scientist, that doesn't mean you are a good manager. [David Chaum](!Wikipedia) was a control freak, someone who couldn't delegate anything to anyone else, and insisted upon watching over everybody's shoulders.  "That resulted in slowing down research," explains an ex-DigiCash employee who wished to remain anonymous.  "We had a lot of half-finished product.  He continuously changed his mind about where things were headed."
+
+--["How DigiCash Blew Everything"](http://cryptome.org/jya/digicrash.htm), _Next! Magazine_
+
+
 > Studies by psychologists Daniel Kahneman and Amos Tversky's going back to the 1970s show you don't equate loss and gain. Loss is more powerful. When they had subjects gamble in the lab, they noticed people tended to demand the promise of a payoff of at least double what they risked before they agreed to the terms of the game. Loss, they reasoned, was gain times two.
 
 > Hal Arkes and Catehrine Blumer created an experiment in 1985 which demonstrated your tendency to go fuzzy when sunk costs come along. They asked subjects to assume they had spent $100 on a ticket for a ski trip in Michigan, but soon after found a better ski trip in Wisconsin for $50 and bought a ticket for this trip too. They then asked the people in the study to imagine they learned the two trips overlapped and the tickets couldn't be refunded or resold. Which one do you think they chose, the $100 good vacation, or the $50 great one?
@@ -101,11 +197,6 @@ note that they put people in a weird counterfactual situation; why would 'you' b
 
 <http://www.q-group.org/archives_folder/pdf/spring2008/ChenBehavioralBiases.pdf>
 
-> Sometimes it can be hard to maintain a good balance among multiple activities. For example, it is important to notice new good ideas. However, I tend to spend too much time pursuing novelty, and not enough time working on the best idea that I've found so far.  There is a tradition of browser games (see KingdomOfLoathing) that enforce a kind of balance using a virtual currency of 'turns'. You accumulate turns slowly in real time, and essentially every action within the game uses up turns. This enforces not spending too much time playing the game (and increases the perceived value of the game via forced artificial scarcity, of course). If I gave myself 'explore dollars' for doing non-exploration (so-called exploit) tasks, and charged myself for doing exploration tasks (like reading arXiv or wikipedia), I could enforce a balance. If I were also prone to the opposite problem ("A few months in the lab can often save whole hours in the library."), then I might use two currencies; exploring costs explore points but rewards with exploit points, and exploiting costs exploit points but rewards with explore points. (Virtual currencies are ubiquitous in games, and they can be used for many purposes; I expect to find them able to be placed across from many different failure modes.)
-<http://lesswrong.com/lw/55i/failure_modes_sometimes_correspond_to_game/>
-
-
-"real artists ship"
 
 >> "It really is the hardest thing in life for people to decide when to cut their losses.
 >
@@ -113,25 +204,10 @@ note that they put people in a weird counterfactual situation; why would 'you' b
 
 John, in _Overcoming Bias_ <http://lesswrong.com/lw/i9/the_importance_of_saying_oops/ejg>
 
-
-> It all started out quite nicely. The brand new company sold a smart card for closed systems which was a cash-cow for years.  It was at this time that the first irritants appeared. Even if you are a brilliant scientist, that doesn't mean you are a good manager. David Chaum was a control freak, someone who couldn't delegate anything to anyone else, and insisted upon watching over everybody's shoulders.  "That resulted in slowing down research," explains an ex-DigiCash employee who wished to remain anonymous.  "We had a lot of half-finished product.  He continuously changed his mind about where things were headed."
-http://cryptome.org/jya/digicrash.htm
-"How DigiCash Blew Everything", _Next! Magazine_
-
 > Uncertainty is an aversive state (Fiske & Taylor, 1991 [_Social cognition_]; Heider, 1958 [_The psychology of interpersonal relations_]) which people feel a strong motivation to diminish and avoid ([Whitson & Galinsky, 2008](http://rifters.com/real/articles/Science_LackingControlIncreasesIllusoryPatternPerception.pdf)).
 ["The Bias Against Creativity: Why People Desire But Reject Creative Ideas"](http://digitalcommons.ilr.cornell.edu/cgi/viewcontent.cgi?article=1457&context=articles) Mueller
  et al 2011
 
-> A pottery teacher told half his class that their grade will depend on one single piece that they'll produce at the end of the term.
->
-> He told the other half that their grade will be based on the volume of all the pieces they create.
->
-> Which half do you think produced better work by the end?
-<http://c2.com/cgi/wiki?PotteryChallenge>
-
-We run on biased untrusted hardware; <http://lesswrong.com/lw/uu/why_does_power_corrupt/> <http://lesswrong.com/lw/uv/ends_dont_justify_means_among_humans/>
-Attempting to counter biases can hurt; <http://lesswrong.com/lw/he/knowing_about_biases_can_hurt_people/>
-<http://lesswrong.com/r/discussion/lw/9jy/sunk_costs_fallacy_fallacy/>
 
 <http://lesswrong.com/lw/9it/some_potential_dangers_of_rationality_training/>
 
@@ -221,22 +297,6 @@ Two other bits of the article are interesting in the light of sunk cost bias. Su
 http://pipeline.corante.com/archives/2011/08/22/dracos_new_antivirals_against_pretty_much_everything.php
 
 
-18. If the fool would persist in his folly he would become wise.
-46. You never know what is enough unless you know what is more than enough.
-William Blake, "Proverbs of Hell" <http://interglacial.com/~sburke/pub/prose/Blake_-_Proverbs_of_Hell.html>
-
-
-> - 'tactical optimism' : David Bohm's term for the way in which humans overcome the (so far) inescapable assessment that; 'in the long run, we're all dead'. Specifically, within the building industry, rife with non-optimal ingrained conditions, you wouldn't come to work if you weren't an optimist. Builders who cease to have an optimistic outlook go and find other things to do.
-> ...
-> - deadline/sanction fatigue: if the loss incurred for missing deadlines is small, or alternatively if it is purely psychological, then the 'weight' of time pressure is diminished with each failure.
-<http://lesswrong.com/lw/jg/planning_fallacy/2s2y>
-
-
-Stanovich, K. E., & West, R. F. (2008b). On the relative independence of thinking biases and cognitive ability. Journal of Personality and Social Psychology, 94, 672–695
-- http://web.mac.com/kstanovich/Site/Research_on_Reasoning_files/JPSP08.pdf (pg 7-8)
-
-Parker, A. M., & Fischhoff, B. (2005). Decision-making competence: External validation through an individual differences approach. Journal of Behavioral Decision Making, 18, 1–27.
-- http://sds.hss.cmu.edu/media/pdfs/fischhoff/Parker_FischhoffDMC.pdf (pg 13)
 
 Baron, J., Granato, L., Spranca, M., & Teubal, E. (1993). Decision-making biases in children and early adolescents: Exploratory studies. Merrill-Palmer Quarterly, 39, 22–46
 - http://www.sas.upenn.edu/~baron/papers/kdm.pdf
@@ -300,25 +360,7 @@ Levitt, Stephen D., and John A. List. 2007. “What do laboratory experiments me
 Rizzo and Whitman (2007) survey the literature asserting policy consequence of irrational hyperbolic discounting. Note that Rasmusen (2008) and Farmer and Geanakoplos (2009) warn that hyperbolic discounting can be consistent with rationality
 
 
-<http://cowles.econ.yale.edu/P/cd/d17a/d1719.pdf> "Hyperbolic discounting is rational"
 
-> Conventional economics supposes that agents value the present vs. the future using an exponential discounting function. In contrast, experiments with animals and humans suggest that agents are better described as hyperbolic discounters, whose discount function decays much more slowly at large times, as a power law. This is generally regarded as being time inconsistent or irrational. We show that when agents cannot be sure of their own future one-period discount rates, then hyperbolic discounting can become rational and exponential discounting irrational. This has important implications for environmental economics, as it implies a much larger weight for the far future.
->
-> ...Why should we discount the future? Bohm-Bawerk (1889,1923) and Fisher (1930) argued that men were naturally impatient, perhaps owing to a failure of the imagination in conjuring the future as vividly as the present. Another justification for declining Ds (τ ) in τ, given by Rae (1834,1905), is that people are mortal, so survival probabilities must enter the calculation of the benefits of future potential consumption. There are many possible reasons for discounting, as reviewed by Dasgupta (2004, 2008). Most economic analysis assumes exponential discounting Ds (τ ) = D(τ ) = exp(−rτ ), as originally posited by Samuelson (1937) and put on an axiomatic foundation by Koopmans (1960).
->
-> A natural justification for exponential discounting comes from financial economics and the opportunity cost of foregoing an investment. A dollar at time s can be placed in the bank to collect interest at rate r, and if the interest rate is constant, it will generate exp(r(t − s)) dollars at time t. A dollar at time t is therefore equivalent to exp(−r(t − s)) dollars at time s. Letting τ = t − s, this motivates the exponential discount function Ds (τ ) = D(τ ) = exp(−rτ ), independent of s.
->
-> ...For roughly the first eighty years the certainty equivalent discount function for the geometric random walk stays fairly close to the exponential, but afterward the two diverge substantially, with the geometric random walk giving a much larger weight to the future. A comparison using more realistic parameters is given in Table 1. For large times the difference is dramatic.
->
-> year GRW   exponential
-> ---- ---   -----------
-> 20   0.462 0.456
-> 60   0.125 0.095
-> 100  0.051 0.020
-> 500  0.008 2 × 10^−9^
-> 1000 0.005 4 × 10^−18^
->
-> ...What this analysis makes clear, however, is that the long term behavior of valuations depends extremely sensitively on the interest rate model. The fact that the present value of actions that affect the far future can shift from a few percent to infinity when we move from a constant interest rate to a geometric random walk calls seriously into question many well regarded analyses of the economic consequences of global warming. ... no fixed discount rate is really adequate – as our analysis makes abundantly clear, the proper discounting function is not an exponential.
 
 Popularized discussions of above:
 
