@@ -82,13 +82,16 @@ Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin 
 
 ## Melatonin Analysis
 
-The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)); the data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional analysis of p-values[^R-melatonin-analysis] is done by importing the CSV into [R](!Wikipedia "R (programming language)").
+The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)); the data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional analysis of _p_-values[^R-melatonin-analysis] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
 
 [^R-melatonin-analysis]: The analysis session in the `R` interpreter:
 
     ~~~{.r}
-    > mydata <- read.table("~/2011-zeo-melatonin.csv", header=TRUE, sep=",") # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
-    > t.test(ZQ~SSCF.10, data=mydata) # "SSCF 10" is the variable; I edited the CSV to convert all '3' to '1' to make it a binary variable
+    > # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
+    > mydata <- read.table("~/2011-zeo-melatonin.csv", header=TRUE, sep=",")
+    >
+    > # "SSCF 10" is the variable; I edited the CSV to convert all '3' to '1' to make it a binary variable
+    > t.test(ZQ~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -208,6 +211,28 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            254.2174        233.2969
     ~~~
+
+    If we correct for multiple comparisons (see [next footnote](#fn5)) at _q_-value=0.05, of our 10 _p_-values (0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779), none of them survive:
+
+    ~~~{.haskell}
+    let f (i,p) = p < ((i * 0.05) / 10) in map f (zip [1..] [0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779])
+    ~>
+    [False,False,False,False,False,False,False,False,False,False]
+    ~~~
+
+    Oh well.
+
+[^Bonferroni]: The usual way to correct for the issue of multiple comparisons inflating results (a big problem in epidemiology and why their results are so often false) is to use a [Bonferroni correction](!Wikipedia) - if I look at the _p_-values for 7 Zeo metrics, I wouldn't consider any to be significant at '_p_=0.05' unless they were actually significant at $\frac{0.05}{7} = 0.00714 = 0.007$, which is even more stringent than the rarer '_p_=0.01' criterion. With the even stronger criterion '_p_=0.007', it's a safe bet than *none* of my tests give significant results. Which may be the right thing to conclude, since all my data is just _n_=1 and unreliable in many ways, but still, the Bonferroni correction is not being  very helpful here.
+
+    The caveat is that the Bonferroni correction is intended for use on 'independent' data, while the Zeo metrics are all very dependent, some by *definition* (eg. ZQ is defined partly as what the REM sleep length was, AFAIK). So while the Bonferroni correction will still do the job of only letting through *really* significant data, it'll do so by throwing out way more potentially good results than one has to. (It'll avoid some false positives by making many false negatives.) So what should we do?
+
+    [Andy McKenzie](http://lesswrong.com/lw/9ui/ask_for_help_on_your_project_open_thread/5ump#thingrow_t1_5ump) suggested limiting our [false discovery rate](!Wikipedia) by using the method of [Benjamin & Hochberg 1995](http://www.math.tau.ac.il/~ybenja/MyPapers/benjamini_hochberg1995.pdf "Controlling the False Discovery Rate: a Practical and Powerful Approach to Multiple Testing"):
+
+    > "...let's say that you test 6 hypotheses, corresponding to different features of your Zeo data. You could use a t-test for each, as above. Then aggregate and sort all the _p_-values in ascending order. Let's say that they are 0.001, 0.013, 0.021, 0.030, 0.067, and 0.134.
+    >
+    > Assume, arbitrarily, that you want the overall false discovery rate to be 0.05, which is in this context called the _q_-value. You would then sequentially test, from the last value to the first, whether the current _p_-value is less than $\frac{\text{the current index} \times \text{the false discovery rate}}{\text{the overall number of hypotheses}}$. You stop when you get to the first true inequality and call the _p_-values of the rest of the hypotheses significant.
+    >
+    > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant."
 
 As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes):
 
@@ -561,6 +586,16 @@ With the [melatonin analysis](#melatonin-analysis), I had counted it as a succes
            2.871795        2.714286
     ~~~
 
+    If we correct for multiple comparisons (see [previous footnote](#fn5) on the Bonferroni correction) at _q_-value=0.05, of our 6 _p_-values (0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), none of them survive:
+
+    ~~~{.haskell}
+    let bh (index,pvalue) = pvalue < ((index * 0.05) / 6) in map bh (zip [1..] [0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944])
+    ~>
+    [False,False,False,False,False,False]
+    ~~~
+
+    Oh well! Statistics is a harsh mistress indeed.
+
 If I count melatonin a success, then I ought to count one-legged standing as a (weaker, more qualified) success as well. Further, the one-legged standing was not in exclusion to melatonin use, but I had used it most every night; so I think I will go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower.
 
 ## Push-ups
@@ -703,6 +738,7 @@ Date   Pill       Quality[^q]  ZQ      Guess
 3-4    placebo    2            81      [wrong 70%](http://predictionbook.com/predictions/5671)
 5-6    placebo    3            98      [right 65%](http://predictionbook.com/predictions/5698)
 6-7    active     2            88      [50%](http://predictionbook.com/predictions/5707)
+7-8    active     2            94      [right 55% right](http://predictionbook.com/predictions/5737)
 
 [^e]: Headband came loose at some point, data useless
 [^q]: For 'Quality' & 'ZQ': higher = better
