@@ -243,6 +243,12 @@ The numbers look sane - 58,2771 for all talk page hits versus 2,0268,0742 for al
 - If we take the absolutely most favorable ratio, Obama's at 280, and then further assume it was looked at by 0 logged-in users (yeah right), then that implies something posted on its talk page will be seen by <0.35% of interested readers ($(\frac{504827}{1800} \times 1.0) \times 100$).
 - If we use the aggregate statistic and say, generously, that registered users make up only 90% of the page views, then something on the talk page will be seen by <*0.028*% of interested readers ($(\frac{202680742}{582771} \times 0.1) \times 100$).
 
+<!--
+Page views don't tell us the most interesting thing, how many people *would have* clicked on the link if it had been on the article and not the Talk page. It's impossible to answer this question in general, unfortunately, since Wikipedia does not track clicks. However, I have approximated the ratio for at least one article: the [n-back](!Wikipedia) article links to my [DNB FAQ](). There are a few dozen visitors each day from Wikipedia, Google Analytics tells me. What will happen if the link is removed to the Talk page? The article and general interest in n-back haven't changed - those variables are still the same. The same sort of people will be visiting the article and (not) visiting the Talk page. The visitor count will dramatically fall, probably to less than 1 a day. The link was in the article for perhaps half a year; I [shifted](http://en.wikipedia.org/w/index.php?title=N-back&action=historysubmit&diff=475881145&oldid=460758154) [it](http://en.wikipedia.org/w/index.php?title=Talk%3AN-back&action=historysubmit&diff=475881107&oldid=446631582) to the Talk page with a fake message praising the contents, to mimic how an editor might genuinely post the link on the Talk page (asking the forbearance & cooperation of my fellow editors in hidden comments).
+
+TODO: analysis - totals before/after, average per day before/after, export both data segments to CSV and run t-test on difference (how high will the _p_-value be? hopefully <0.01 since I'm sinking in 100 days)
+-->
+
 ##### The Forgotten Reader
 
 More instructive is estimating how many readers have been deprived of the chance to use the references for just the subset of 1206 edits we have already looked at above. We can reuse `stats.grok.se` with [a little more programming](#stats.grok.se-script); we will ask it how many hits/page-views, in total, there were in November 2011 of the 472 unique articles covered by those 1206 edits.
