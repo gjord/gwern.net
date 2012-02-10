@@ -29,7 +29,7 @@ I currently work for the [Singularity Institute for Artificial Intelligence](!Wi
 
 ## Profile
 
-This section covers some of the most important things possible to know about me: my personality and mental description. No doubt some readers expected a carefully airbrushed & potted biography describing where & when I was raised, what my familial & tribal affiliations are, or what famous institutions I am affiliated with; even though this information is almost entirely useless - what can one predict about me if one knows that I was born in Illinois and raised on Long Island, but (perhaps) my accent and a general liberalism? The irony - that people want most the information they will learn from least - will not be lost on those familiar with [signaling](!Wikipedia "Signalling (economics)").
+This section covers some of the most important things possible to know about me: my personality and mental description. No doubt some readers expected a carefully airbrushed & potted biography describing where & when I was raised, what my familial & tribal affiliations are, or what famous institutions I am affiliated with; even though this information is almost entirely useless - what can one predict about me if one knows that I was born in Illinois and raised on Long Island, but (*maybe*) my accent and a general liberalism? The irony - that people want most the information they will learn from least - will not be lost on those familiar with [signaling](!Wikipedia "Signalling (economics)").
 
 (Much of this data comes from [YourMorals.org](http://yourmorals.org/), courtesy of the LessWrong post ["LessWrong group on YourMorals.org"](http://lesswrong.com/lw/8lk/poll_lesswrong_group_on_yourmoralsorg/). I plan to retake the surveys, if possible, every decade; it will be interesting to see what changes.)
 
@@ -169,7 +169,7 @@ I don't think so. I value my contributions, and the Haskell community is better 
 
 I mostly contribute to projects in Haskell, my favorite language; I have contributed to non-Haskell projects such as [StumpWM](!Wikipedia), [Mnemosyne](!Wikipedia "Mnemosyne (software)"), [GNU Emacs](!Wikipedia)[^emacs] etc. but not in major ways, so I do not list them here:
 
-#### Darcs
+## Darcs
 
 #. Switched from FastPackedStrings to ByteStrings
 #. Low-level C optimization
@@ -178,7 +178,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. Initiated switch from [MoinMoin](!Wikipedia) wiki to Gitit
 #. Identified performance issue & instigated addition of `--max-count` option for Filestore
 
-#### XMonad
+## XMonad
 #. Contributed modules:
     i. XMonad.Util.Paste
     ii. XMonad.Actions.Search
@@ -186,7 +186,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
     iv. XMonad.Util.XSelection
 #. Maintain previous[^commit]
 
-#### Yi
+## Yi
 #. Contributed modules:
     i. Yi.IReader
     ii. Yi.Mode.IReader
@@ -197,7 +197,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. Cleanup[^clean]
 #. Comment support to cabal-mode
 
-#### Lambdabot
+## Lambdabot
 #. (Re)Cabalized[^cabalized]
 #. Adapted to use Mueval
 #. Refactored out code in multiple packages:
@@ -209,7 +209,8 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. Cleanup
 #. Maintain it (with Cale Gibbard)
 
-#### Gitit
+## Gitit
+
 - Wrote Darcs backend (which was moved to the filestore package and became Data.FileStore.Darcs)
 - Did some optimization work (images, JavaScript & CSS minification, wrote gzip encoding & initiated expire headers, JS relocation, fewer calls to expensive filestore functions)
 - Wrote RSS support
@@ -222,52 +223,54 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 - Added PDF export functionality
 - Integrated JQuery-based floating footnotes
 
-##### Filestore
+### Filestore
+
 - Instigated its development/use in Gitit & [Orchid](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/orchid)
 - Maintain the Darcs backend (debug & optimize)
 
-#### Mueval
+## Mueval
 - Wrote and maintain it
 
-#### wp-archivebot
+## wp-archivebot
 - Wrote and maintain it (see <http://www.haskell.org/pipermail/haskell/2009-June/021388.html>)
 
-#### archiver
+## archiver
 - Wrote and maintain it (see <http://www.haskell.org/pipermail/haskell-cafe/2010-December/087158.html>)
 
-#### Change-monger
+## Change-monger
 - Wrote and maintain it
 
-#### Base libraries
-##### Base
-- Added [Control.Monad.void](!Hoogle)
-- Helped replace [Data.List.sort](!Hoogle) with YHC's more efficient implementation (see <http://hackage.haskell.org/trac/ghc/ticket/2143>)
+## Base libraries
+#### Base
+- Added [`Control.Monad.void`](!Hoogle "Control.Monad.void")
+- Helped replace [`Data.List.sort`](!Hoogle "Data.List.sort") with YHC's more efficient implementation (see <http://hackage.haskell.org/trac/ghc/ticket/2143>)
+- Improved [`System.Environment` doc](http://www.haskell.org/pipermail/libraries/2012-February/017520.html)
 
-##### Unix
+### Unix
 - fixed a possible runtime crash in `mkstemp`
 - added `mkstemp` docs
 
-#### Autoproc
+## Autoproc
 - Cleanup
 - Improved basic functionality
 - Implemented an XMonad-style reload system to allow actual customization
 - Maintain it
 
-#### Frag
+## Frag
 - Updated for GHC 6.8 & 6.10[^ghc]
 - Cleanup
 - Replaced the non-Free level data and graphics with Free ones
 
-#### HalFS
+## HalFS
 - Updated
 - Improved cabalization
 
-### Shu-thing, Monadius
+## Shu-thing, Monadius
 - Linux portability fixes
 - Cabalized
 - Cleanup
 
-### Hint
+## Hint
 - Improved examples, docs
 - Added UTF8 support
 - Made use ghc-paths library
@@ -277,87 +280,87 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 ## Hlint
 - added GHCi integration
 
-### Pugs
+## Pugs
 - Cleaned up their third-party modules
 - Fixed up various Cabal issues
 - Helped maintain it
 
-### ZFS
+## ZFS
 - Cabalized
 - Cleanup
 
-### Greencard
+## Greencard
 - Updated
 - Cabalized & did the package split
 
-### ArrayRef
+## ArrayRef
 - Cabalized
 - Cleanup
 - Updated
 
-### Hashell
+## Hashell
 - Updated for 6.8's GHC API
 - Cleanup
 - Cabalized
 
-### QuickCheck
+## QuickCheck
 - Prototyped the Data.Complex instance
 
-### GenI
+## GenI
 - Improved Cabalization
 
-### HArchive
+## HArchive
 - Cabalized
 
-### HaLeX
+## HaLeX
 - Cabalized
 
-### HTF
+## HTF
 - Cabalized
 
-### PArrows
+## PArrows
 - Cabalized
 
-### Baskell
+## Baskell
 - Cabalized
 
-### Mage
+## Mage
 - Cabalized
 - Cleanup
 
-### Haskell In Space
+## Haskell In Space
 - Cabalized
 - Cleanup
 - Updated
 
-### Smallcheck
+## Smallcheck
 - Cabalized
 
-### Topkata
+## Topkata
 - Improved Cabalization
 
-### HsSyck
+## HsSyck
 - ByteString updates
 - Improved cabalization
 
-### HList
+## HList
 - Updated
 - Cabalized
 
-### flow2dot
+## flow2dot
 - Updated
 
-### hinvaders
+## hinvaders
 - Cabalized
 - Updated
 
-### Whim
+## Whim
 - Cabalized whim
 
-### Tagsoup
+## Tagsoup
 - replaced old custom HTTP download code with standard library functions
 
-### The others & the rest
+## The others & the rest
 
 I cabalized and/or uploaded (according to the [Hackage upload log](http://hackage.haskell.org/packages/archive/log)):
 
