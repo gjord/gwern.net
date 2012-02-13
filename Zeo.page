@@ -698,7 +698,7 @@ One thing I suspect but cannot confirm - since I do not have a heart rate monito
 
 ## Vitamin D data
 
-The data so far:
+The data ([trimmed CSV](/docs/2012-zeo-vitamind.csv)):
 
 Date   Pill       Quality[^q]  ZQ      Guess
 ----   ----       -------      ---     -----
@@ -739,23 +739,163 @@ Date   Pill       Quality[^q]  ZQ      Guess
 5-6    placebo    3            98      [right 65%](http://predictionbook.com/predictions/5698)
 6-7    active     2            88      [50%](http://predictionbook.com/predictions/5707)
 7-8    active     2            94      [right 55% right](http://predictionbook.com/predictions/5737)
+8-9    active     3            94      [wrong 75%](http://predictionbook.com/predictions/5745)
+9-10   placebo    3            92      [50%](http://predictionbook.com/predictions/5760)
+10-11  placebo    3            95      [right 60%](http://predictionbook.com/predictions/5770)
+11-12  placebo    3            103     [right 75%](http://predictionbook.com/predictions/5775)
+12-13  placebo    3            84      [right 70%](http://predictionbook.com/predictions/5780)
 
 [^e]: Headband came loose at some point, data useless
 [^q]: For 'Quality' & 'ZQ': higher = better
 
-<!--
+(Data input was for 'Other Disruptions 3'; 0 = placebo, 1 = vitamin D.)
+
 ## Vitamin D analysis
-TODO:
 
-tool: http://faculty.vassar.edu/lowry/VassarStats.html
+From a quick look at confidences, I was usually correct but perhaps underconfident.
 
-1. calculate one-tail t-test for
-   ZQ
-   sleep quality rating
-   time to fall asleep
-   total sleep
-   REM sleep
-   deep sleep
-2. calculate underconfidence for predictions
-3. re-look at lagged days
--->
+Looking at the data averages in the Zeo website, it looked like ZQ & total & REM sleep fell, deep increased slightly, time awake & awakenings both increased, and morning feel decreased. The R analysis[^vitamin-D-analysis]:
+
+
+[^vitamin-D-analysis]: The usual session:
+
+    ~~~{.r}
+    $ R
+    > mydata <- read.table("~/2012-zeo-vitamind.csv", header=TRUE, sep=",")
+    > t.test(ZQ~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  ZQ by SSCF.12
+    t = 1.9284, df = 36.417, p-value = 0.06163
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.2107102  8.4258132
+    sample estimates:
+    mean in group 0 mean in group 1
+           93.36842        89.26087
+
+    > t.test(Total.Z~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Total.Z by SSCF.12
+    t = 1.8776, df = 33.985, p-value = 0.06904
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -1.738464 43.953567
+    sample estimates:
+    mean in group 0 mean in group 1
+           533.3684        512.2609
+
+    > t.test(Time.in.REM~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.in.REM by SSCF.12
+    t = 2.4099, df = 31.155, p-value = 0.02205
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+      2.278176 27.332808
+    sample estimates:
+    mean in group 0 mean in group 1
+           175.6316        160.8261
+
+    > t.test(Time.in.Deep~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.in.Deep by SSCF.12
+    t = -0.6214, df = 38.235, p-value = 0.538
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -7.404045  3.925784
+    sample estimates:
+    mean in group 0 mean in group 1
+           55.00000        56.73913
+
+    > t.test(Time.in.Wake~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.in.Wake by SSCF.12
+    t = -0.3332, df = 32.679, p-value = 0.7411
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -12.588395   9.046061
+    sample estimates:
+    mean in group 0 mean in group 1
+           26.31579        28.08696
+
+    > t.test(Awakenings~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Awakenings by SSCF.12
+    t = -0.8485, df = 37.998, p-value = 0.4015
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -2.3089027  0.9450583
+    sample estimates:
+    mean in group 0 mean in group 1
+           7.578947        8.260870
+
+    > t.test(Morning.Feel~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Morning.Feel by SSCF.12
+    t = 2.99, df = 32.596, p-value = 0.005276
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     0.1672538 0.8805931
+    sample estimates:
+    mean in group 0 mean in group 1
+           2.842105        2.318182
+
+    > t.test(Time.to.Z~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.to.Z by SSCF.12
+    t = -0.6687, df = 32.607, p-value = 0.5084
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -12.779474   6.459107
+    sample estimates:
+    mean in group 0 mean in group 1
+           17.57895        20.73913
+    ~~~
+
+    [Correcting for multiple comparisons](#fn5) at _q_-value=0.05, of our 8 _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
+
+    ~~~{.haskell}
+    let bh (index,pvalue) = pvalue < ((index * 0.05) / 8) in map bh (zip [1..] [0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411])
+    ~>
+    [True,False,False,False,False,False,False,False]
+    ~~~
+
+    Remarkable - the first time a _p_-value survived. (That was the 'Morning Feel' one.)
+
+1. 'ZQ' fell, 93.4 vs 89.3 (_p_=0.062)
+2. 'Total Z' fell, 533.4m vs 512.3m (_p_=0.07)
+3. 'Time in REM' fell, 175.6m vs 160.8m (_p_=0.022)
+4. 'Time in Deep' increased, 55m vs 56.74 (but _p_=0.54!)
+5. 'Time in Wake' increased, 26.3m vs 28.1 (but _p_=0.74!)
+6. 'Awakenings' increased, 7.58 vs 8.26 (but _p_=0.4)
+7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053)
+8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
+
+So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction), which look like they'd have pretty decent [effect sizes](!Wikipedia) too (if I could be bothered to figure out how to calculate them).
+
+Going back to my predictions after the first 10 days, they're *sort* of right:
+
+1. sleep latency was increased, but not statistically significantly and only by ~4m, which is less than half the predicted 10 minutes
+2. increased awakenings was less than 1 additional awakening (compared to predicted 1-2) and didn't reach statistical significance
+3. ZQ did decrease, and by roughly 4.1 points (reached statistical significance), but that's a bit under the tentatively predicted range of 5-10 points
+
+Finally, a re-look at lagged days; the final data set yielded 20 lagged nights when the others were deleted, 14 when obvious outliers like ZQ <70 were removed for a total of 6 placebo nights and 8 vitamin D night. The ZQs averaged 92.6 - between the placebo ZQ average of 93.4 and the vitamin D ZQ average of 89.3, but much closer to placebo than vitamin D, despite being more vitamin D than placebo. The _p_-value would be pretty awful, though, for such small differences - just 14 datapoints?
+
+My conclusion?
+
+Vitamin D hurts sleep when taken at night. I know no reason to take vitamin D at that time, so even with anecdotal data, I will avoid it at that time entirely.
