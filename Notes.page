@@ -2005,3 +2005,93 @@ One possibility is that the theory of an escalator of reason is historically inc
 pg 970
 
 -->
+<!--
+
+outstanding:
+
+Luke: That paragraph and its footnote is a rough draft from Anna on the Laplacian approach to thinking about when AI might arrive.
+9:42 PM There is also a link below that paragraph about the 'hope function'.
+ me: yes, that's familiar
+9:43 PM Luke: One project, if you think it's within your particular abilities, would be to find a good reference or two where somebody else uses this Laplacian approach to try to predict something, and to write up a short summary of how one might use the hope function to do the same thing, along with a reference or two. The summary can be arbitrarily long — whatever you write will be mined and summarized to fit within the space constraints of the final chapter.
+9:45 PM Another project would be to handle the sentence far below that which reads "add sentence about how this sort of improvement is not uncommon, with citations" - in the section on algorithm improvement.
+  (If you end up contributing enough to this chapter, we'll list you as a co-author.)
+  ...On "statistical generalization about algorithm improvements", we aren't expecting the work required to write an original research paper on the subject. If there are no papers that achieve something that impressive, so be it, and we aren't going to write it. But perhaps a few more examples or something can be found, or at least somebody in the field who claims certain generalizations about algorithmic improvements, whom we can quote while giving certain qualifications.
+
+  ,,,Luke: And yeah, starting tomorrow on Laplace + Hope function sounds good. Remember that what I want it an arbitrarily long write-up (doesn't have to be optimized for presentation or readability) on the subject, and then I'll worry about how to smash down your findings and my own analysis of it for the paper.
+-->
+
+# Laplace's rule of succession, the Hope function, and Waiting for AI
+
+["Chapter 18: the A_p_ Distribution and the Rule of Succession](http://www-biba.inrialpes.fr/Jaynes/cc18i.pdf), from Jaynes's _Probability Theory: The Logic of Science_ starting pg 9
+
+Poor old Laplace has been ridiculed for over a Century because he illustrated use of this rule
+by calculating the probability that the sun will rise tomorrow, given that it has risen every day for
+the past 5,000 years.y One gets a rather large factor (odds of $5000 \times 365.2426 + 1 = 1826214 : 1$) in
+favor of the sun rising again tomorrow. With no exceptions at all as far as we are aware, modern
+writers on probability have considered this a pure absurdity. Even Keynes (1921) and Jeffreys
+(1939) find fault with the rule of succession.
+We have to confess our inability to see
+
+Here are some famous examples of the kind of objections to the rule of succession which you
+find in the literature:
+(1) Suppose the solidification of hydrogen to have been once accomplished. According to
+the rule of succession, the probability that it will solidify again if the experiment is
+repeated is 2/3. This does not in the least represent the state of belief of any scientist.
+(2) A boy 10 years old today. According to the rule of succession, he has the probability
+11/12 of living one more year. His grandfather is 70; and so according to this rule
+he has the probability 71/72 of living one more year. The rule violates qualitative
+common sense!
+(3) Consider the case N = n = 0. It then says that any conjecture without verification
+has the probability 1/2. Thus there is probability 1/2 that there are exactly 137
+elephants on Mars. Also there is probability 1/2 that there are 138 elephants on
+Mars. Therefore, it is certain that there are at least 137 elephants on Mars. But the
+rule says also that there is probability 1/2 that there are no elephants on Mars. The
+rule is logically self-contradictory!
+
+...The trouble with examples (1) and (2) is obvious in view of our earlier remarks; in each case, highly
+relevant prior information, known to all of us, was simply ignored, producing a agrant misuse of
+the rule of succession. But let's look a little more closely at example (3). Wasn't the rule applied
+correctly here? We certainly can't claim that we had prior information about elephants on Mars
+which was ignored.
+
+...In the case N = 0, we could solve the problem also by direct application
+of the principle of indifference, and this will of course give the same answer P (A|X ) = 1/2, that we
+got from the rule of succession. But just by noting this, we see what is wrong. Merely by admitting
+the possibility of one of three different propositions being true, instead of only one of two, we have
+already specified prior information different from that used in deriving the rule of succession.
+If the robot is told to consider 137 different ways in which A could be false, and only one way in
+which it could be true, and is given no other information, then its prior probability for A is 1/138,
+not 1/2. So, we see that the example of elephants on Mars was, again, a gross misapplication of
+the rule of succession.
+
+
+We give the derivation in full detail, to present a mathematical technique of Laplace that is useful in many other problems. There are $K$ different hypotheses, ${A_1, A_2,...,A_K}$, a belief that the 'causal mechanism' is constant, and no other prior information. We perform a random experiment $N$ times, and observe $A_1$ true $n_1$ times, $A_2$ true $n_2$ times, etc. Of course, $\sum_{i} n_i = N$. On the basis of this evidence, what is the probability that in the next $M = \sum_{i} m_i$ repetitions, $A_i$ will be true exactly $m_i$ times?
+
+...In the case where we want just the probability that $A_1$ will be true on the next trial, we need this
+formula with $M = m_1 = 1$, all other mi = 0. The result is the generalized rule of succession:
+
+> (18-39):    p(A_1|n_1,N,K) = \frac{n_1 + 1}{N + K}
+
+You see that in the case $N = n_1 = 0$, this reduces to the answer provided by the principle of indifference, which it therefore contains as a special case.
+
+...Now, use of the rule of succession in cases where $N$ is very small is rather foolish, of course.
+Not really wrong; just foolish. Because if we have no prior evidence about $A$, and we make such
+a small number of observations that we get practically no evidence; well, that's just not a very
+promising basis on which to do plausible reasoning. We can't expect to get anything useful out of
+it. We do, of course, get definite numerical values for the probabilities, but these values are very
+'soft', i.e., very unstable, because the $A_p$ distribution is still very broad for small $N$. Our common
+sense tells us that the evidence $N_n$ for small $N$ provides no reliable basis for further predictions,
+and we'll see that this conclusion also follows as a consequence of the theory we're developing here.
+
+The real reason for introducing the rule of succession lies in the cases where we do get a
+significant amount of information from the experiment; i.e., when $N$ is a large number. In this
+case, fortunately, we can pretty much forget about these fine points concerning prior evidence.
+The particular initial assignment $(A_p | X)$ will no longer have much influence on the results, for the
+same reason as in the particle-counter problem of Chapter 6. This remains true for the generalized
+case leading to (18-38). You see from (18-39) that as soon as the number of observations $N$ is
+large compared to the number of hypotheses $K$, then the probability assigned to any particular
+hypothesis depends for all practical purposes, only on what we have observed, and not on how
+many prior hypotheses there are. If you contemplate this for ten seconds, your common sense will
+tell you that the criterion $N \gg K$ is exactly the right one for this to be so.
+
+<http://spitswww.uvt.nl/~gkeren/bestanden/teigen&keren2006.pdf>
