@@ -869,6 +869,62 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
            17.57895        20.73913
     ~~~
 
+    Note that our options are a little pessimistic, for example the `R` function does not assume variance is equal, even though I believe they would be, nor does it assume that the effect of Vitamin D is bad on things like ZQ, like I expected. If we were willing to make those assumptions, the strength of the results go up. Let's take ZQ as an example. The straight Welch Two Sample t-test gives us _p_=0.06, as we already saw. But if we were willing to assume equal variance, that buys us -0.01 downwards to _p_=0.0581; a test for either null or negative effect gives us _p_=0.0308; and finally, assuming equal variance *and* testing for null/negative (rather than positive/null/negative) gives us _p_=0.029 (substantially better than the original _p_=0.06):
+
+    ~~~{.r}
+    > t.test(ZQ~SSCF.12, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  ZQ by SSCF.12
+    t = 1.9284, df = 36.417, p-value = 0.06163
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.2107102  8.4258132
+    sample estimates:
+    mean in group 0 mean in group 1
+           93.36842        89.26087
+
+    > t.test(ZQ~SSCF.12, data=mydata, alternative="great")
+
+        Welch Two Sample t-test
+
+    data:  ZQ by SSCF.12
+    t = 1.9284, df = 36.417, p-value = 0.03082
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     0.5124493       Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           93.36842        89.26087
+
+    > t.test(ZQ~SSCF.12, data=mydata, var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  ZQ by SSCF.12
+    t = 1.951, df = 40, p-value = 0.05809
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.1476258  8.3627288
+    sample estimates:
+    mean in group 0 mean in group 1
+           93.36842        89.26087
+
+    > t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  ZQ by SSCF.12
+    t = 1.951, df = 40, p-value = 0.02905
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     0.5623672       Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           93.36842        89.26087
+    ~~~
+
     [Correcting for multiple comparisons](#fn5) at _q_-value=0.05, of our 8 _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
 
     ~~~{.haskell}
@@ -889,7 +945,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053)
 8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
 
-So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction), which look like they'd have pretty decent [effect sizes](!Wikipedia) too if I could figure out how to calculate them[^effect-size].
+So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{std-dev}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
 
 [^effect-size]: A quick and dirty way is to look at the difference in the 2 means and compare it to what is the 'normal range' (intuitively something like a standard deviation or two), which in this case, my ZQ ranges normally from the mid-80s to the very low 100s (a range of ~20 points), and the difference in ZQ means is 4 points. So that's 1/5 the normal variability - that's nothing to sneeze at! (By a strange coincidence, this is almost the same sort of numbers as for grades in class, so we could analogize: not taking vitamin D at night would improve my sleep grades by one letter. When I was in school, I would not have turned my nose up at such an intervention.)
 
