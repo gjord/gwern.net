@@ -194,7 +194,7 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 - [Improvements to Cabal's test support](http://webcitation.org/5tC0nXXN6); Thomas Tuegel, mentored by Johan Tibell
 
-    **Successful**? The functionality is now in a released version of `cabal-install` and a number of packages use the provided test syntax.^[As of 18 March 2011, I have local copies of 8 repositories which seem to make use of the new syntax: `angle, cabal, concurrent-extra, hashable, rrt, safeint, spatialIndex, unordered-containers, wai-app-static`.] <!-- TODO: update using shell command in ~/bin: find . -name "*.cabal" -exec fgrep --files-with-matches --ignore-case 'test-suite ' {} \; | fgrep -v share | fgrep -v 'abal/tests/' | sort -->
+    **Successful**? The functionality is now in a released version of `cabal-install` and a number of packages use the provided test syntax.^[As of 18 March 2011, I have local copies of 8 repositories which seem to make use of the new syntax: `angle, cabal, concurrent-extra, hashable, rrt, safeint, spatialIndex, unordered-containers, wai-app-static`.] <!-- TODO: update using shell command in ~/bin: find . -name "*.cabal" -exec fgrep - - files-with-matches - - ignore-case 'test-suite ' {} \; | fgrep -v share | fgrep -v 'abal/tests/' | sort -->
 - [Infrastructure for a more social Hackage 2.0](http://webcitation.org/5tC0nYPyJ); Matthew Gruen, mentored by Edward Kmett
 
     **Unknown**. [Gruen's blog](http://cogracenotes.wordpress.com/) was last updated October 2010, and Hackage still hasn't switched over and gotten the new features & benefit of the rewrite. But the code exists and there is a running [public demo](http://sparky.haskell.org:8080/), so this may yet be a success.
