@@ -5,7 +5,7 @@ description: EEG recordings of sleep and my experiments with things affecting sl
 
 So on Christmas I finally got a [Zeo](!Wikipedia "Zeo, Inc."). A Zeo is basically an alarm clock with a wireless scaled-down [EEG](!Wikipedia) sensor-headband. The EEG data is processed to estimate whether one is asleep and what [stage](!Wikipedia "Sleep#Sleep stages") of sleep one is in. Zeo breaks sleep down into waking, [REM](!Wikipedia "Rapid eye movement sleep"), [light](!Wikipedia "Non-rapid eye movement sleep"), and [deep](!Wikipedia "Slow-wave sleep"). (The phases aren't necessarily that physiologically distinct.)
 
-The data is much better than what you would get from more popular methods like cellphones with accelerometers, since an accelerometer only knows if you are moving or not, which isn't a very reliable indicator of sleep[^fitbit]. (You could just be lying there staring at the ceiling, wide awake. Or perhaps the cat is kneading you while you are in light sleep.) As well, half the interest is how exactly sleep phases are arranged and how long the cycles are; you could use that information to devise [a custom polyphasic schedule](http://blog.myzeo.com/sleeping-round-the-clock-a-polyphasic-experiment/) or just figure out a better nap length than the rule-of-thumb of 20 minutes. And the price isn't too bad - $150 for the normal Zeo as of October 2011.
+The data is much better than what you would get from more popular methods like cellphones with accelerometers, since an accelerometer only knows if you are moving or not, which isn't a very reliable indicator of sleep[^fitbit]. (You could just be lying there staring at the ceiling, wide awake. Or perhaps the cat is kneading you while you are in light sleep.) As well, half the interest is how exactly sleep phases are arranged and how long the cycles are; you could use that information to devise [a custom polyphasic schedule](http://blog.myzeo.com/sleeping-round-the-clock-a-polyphasic-experiment/) or just figure out a better nap length than the rule-of-thumb of 20 minutes. And the price isn't too bad - $150 for the normal Zeo as of February 2012.
 
 [^fitbit]: The obvious and cheaper alternative to the Zeo would be the [Fitbit](!Wikipedia), one of the accelerometers. There aren't many comparisons; [Diana Sherman](http://www.healthyobsessions.net/2010/11/fitbit-zeo-sleep-cycle-1/) compared one night, and [Joe Betts-LaCroix](http://vimeo.com/28735982) compared ~38 nights of data. In both cases, the Fitbit seemed to be pretty similar to the Zeo at estimating total sleep time (the only thing it can measure). Betts-LaCroix explicitly recommends the Zeo, but I'm not clear on whether that is due to the better data quality or because Fitbit made it hard to impossible for him to extract the detailed Fitbit data while Zeo offers easy exporting. In any case, I already have the Zeo and I've come to like the detailed information.
 
@@ -67,14 +67,11 @@ In the morning, the smart alarm mode seemed to work pretty well. I woke up early
 
 Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for \$35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric); apparently they now [cost $50](http://www.myzeo.com/sleep/shop/zeo-accessories/zeo-bedside-headband-sensor-replacement-kit-x-3.html). A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually \$40, or ~\$13 a piece. I won't say that buying replacement headbands every 4 or 5 months is something that *thrills* me, but \$20 a year for sleep data is a pretty small sum. Certainly it's more cost-effective than most of the [nootropics](Nootropics) I have used. (Full disclosure: 9 months after starting this page, Zeo [offered me](#comment-309924264) a free set of sensors.)
 
-![The old headband, with electrical tape residue](/images/zeo/zeo-headband-original.jpg)
-![The disposable headband with the cloth covering removed](/images/zeo/zeo-headband-deconstructed.jpg)
-![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg)
-![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)
-![The new headband's wrapper](/images/zeo/zeo-wrapper.jpg)
-![The new headband](/images/zeo/zeo-new-headband.jpg)
+![The old headband, with electrical tape residue](/images/zeo/zeo-headband-original.jpg) ![The disposable headband with the cloth covering removed](/images/zeo/zeo-headband-deconstructed.jpg)/
+![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg) ![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)/
+![The new headband's wrapper](/images/zeo/zeo-wrapper.jpg) ![The new headband](/images/zeo/zeo-new-headband.jpg)/
 
-In the future, I might try to make my own; buying the fabric is apparently cheaper than ordering from Zeo, see <http://www.flickr.com/photos/eokgnah/5489407407/>. An alternative suggestion is, since the Zeo headband is a one-electrode EEG headset, to take an approach similar to the EEG people and occasionally add small dabs of conductive paste, since even fairly large quantities are cheap (eg. [50g for $15](http://www.amazon.com/Parker-Labs-Tensive-Conductive-Adhesive/dp/B0011YY9YM/)).
+In the future, I might try to make my own; buying the fabric is apparently cheaper than ordering from Zeo, see <http://www.flickr.com/photos/eokgnah/5489407407/>. An alternative suggestion is, since the Zeo headband is a one-electrode EEG headset, to take an approach similar to the EEG people and occasionally add small dabs of conductive paste, since even fairly large quantities are cheap (eg. [12oz for $30](http://www.amazon.com/Ten20-EEG-Conductive-Paste-Tube/dp/B002R16OUK)).
 
 # Melatonin
 
@@ -90,7 +87,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     > # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
     > mydata <- read.table("~/2011-zeo-melatonin.csv", header=TRUE, sep=",")
     >
-    > # "SSCF 10" is the variable; I edited the CSV to convert all '3' to '1' to make it a binary variable
+    > # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a proper binary variable
     > t.test(ZQ~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
@@ -658,7 +655,7 @@ One thing I suspect but cannot confirm - since I do not have a heart rate monito
 
 ## Vitamin D data
 
-The data ([trimmed CSV](/docs/2012-zeo-vitamind.csv)):
+The data ([trimmed CSV](/docs/2012-zeo-vitamind.csv)), covering January-February 2012:
 
 Date   Pill       Quality[^q]  ZQ      Guess
 ----   ----       -------      ---     -----
