@@ -85,7 +85,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 
     ~~~{.r}
     > # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
-    > mydata <- read.table("~/2011-zeo-melatonin.csv", header=TRUE, sep=",")
+    > mydata <- read.table("2011-zeo-melatonin.csv", header=TRUE, sep=",")
     >
     > # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a proper binary variable
     > t.test(ZQ~SSCF.10, data=mydata)
@@ -711,14 +711,13 @@ Date   Pill       Quality[^q]  ZQ      Guess
 
 From a quick look at confidences, I was usually correct but perhaps underconfident.
 
-Looking at the data averages in the Zeo website, it looked like ZQ & total & REM sleep fell, deep increased slightly, time awake & awakenings both increased, and morning feel decreased. The R analysis[^vitamin-D-analysis]:
+Looking at the data averages in the Zeo website, it looked like ZQ & total & REM sleep fell, deep increased slightly, time awake & awakenings both increased, and morning feel decreased. The R analysis (pessimistic[^vitamin-D-analysis-p], optimistic[^vitamin-D-analysis-o]):
 
-
-[^vitamin-D-analysis]: The usual session:
+[^vitamin-D-analysis-p]: The usual session:
 
     ~~~{.r}
     $ R
-    > mydata <- read.table("~/2012-zeo-vitamind.csv", header=TRUE, sep=",")
+    > mydata <- read.table("2012-zeo-vitamind.csv", header=TRUE, sep=",")
     > t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
@@ -824,7 +823,12 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
            17.57895        20.73913
     ~~~
 
-    Note that our options are a little pessimistic, for example the `R` function does not assume variance is equal, even though I believe they would be, nor does it assume that the effect of Vitamin D is bad on things like ZQ, like I expected. If we were willing to make those assumptions, the strength of the results go up. Let's take ZQ as an example. The straight Welch Two Sample t-test gives us _p_=0.06, as we already saw. But if we were willing to assume equal variance, that buys us -0.01 downwards to _p_=0.0581; a test for either null or negative effect gives us _p_=0.0308; and finally, assuming equal variance *and* testing for null/negative (rather than positive/null/negative) gives us _p_=0.029 (substantially better than the original _p_=0.06):
+[^vitamin-D-analysis-o]: Note that our previous options were a little pessimistic:
+
+    1. the `R` t-test function does not assume variance is equal, even though I believe they would be
+    2. nor does it assume that the effect of Vitamin D is bad on ZQ - decreases ZQ, like I expected.
+
+    If we were willing to make those assumptions, then the tests have fewer possibilities to consider, and can make stronger claims. Let's take ZQ as an example. The straight Welch Two Sample t-test gives us _p_=0.06, as we already saw. But if we were willing to assume equal variance, that buys us -0.01 downwards to _p_=0.0581; a test for either null or negative effect gives us _p_=0.0308; and finally, assuming equal variance *and* testing for null/negative (rather than positive/null/negative) gives us _p_=0.029 - substantially better than the original _p_=0.06:
 
     ~~~{.r}
     > t.test(ZQ~SSCF.12, data=mydata)
@@ -880,7 +884,122 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
            93.36842        89.26087
     ~~~
 
-    [Correcting for multiple comparisons](#fn5) at _q_-value=0.05, of our 8 _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
+    We'll re-run the analysis with appropriate options:
+
+    ~~~{.r}
+    > t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
+      t.test(Total.Z~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  ZQ by SSCF.12
+    t = 1.951, df = 40, p-value = 0.02905
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     0.5623672       Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           93.36842        89.26087
+
+        Two Sample t-test
+
+    data:  Total.Z by SSCF.12
+    t = 1.9204, df = 40, p-value = 0.03098
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     2.599576      Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           533.3684        512.2609
+
+    > t.test(Time.in.REM~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
+      t.test(Time.in.Deep~SSCF.12, data=mydata, var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Time.in.REM by SSCF.12
+    t = 2.4936, df = 40, p-value = 0.00844
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     4.807836      Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           175.6316        160.8261
+
+        Two Sample t-test
+
+    data:  Time.in.Deep by SSCF.12
+    t = -0.6225, df = 40, p-value = 0.5371
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -7.385555  3.907294
+    sample estimates:
+    mean in group 0 mean in group 1
+           55.00000        56.73913
+
+    > t.test(Time.in.Wake~SSCF.12, data=mydata, alternative="less", var.equal=TRUE);
+      t.test(Awakenings~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Time.in.Wake by SSCF.12
+    t = -0.3427, df = 40, p-value = 0.3668
+    alternative hypothesis: true difference in means is less than 0
+    95 percent confidence interval:
+         -Inf 6.931845
+    sample estimates:
+    mean in group 0 mean in group 1
+           26.31579        28.08696
+
+        Two Sample t-test
+
+    data:  Awakenings by SSCF.12
+    t = -0.8513, df = 40, p-value = 0.8002
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     -2.030783       Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           7.578947        8.260870
+
+    > t.test(Morning.Feel~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
+      t.test(Time.to.Z~SSCF.12, data=mydata, alternative="less", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Morning.Feel by SSCF.12
+    t = 2.8647, df = 39, p-value = 0.003344
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     0.2157825       Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           2.842105        2.318182
+
+        Two Sample t-test
+
+    data:  Time.to.Z by SSCF.12
+    t = -0.6878, df = 40, p-value = 0.2478
+    alternative hypothesis: true difference in means is less than 0
+    95 percent confidence interval:
+        -Inf 4.57606
+    sample estimates:
+    mean in group 0 mean in group 1
+           17.57895        20.73913
+    ~~~
+
+1. 'ZQ' fell, 93.4 vs 89.3 (optimistic: _p_=0.062; pessimistic: _p_=0.029)
+2. 'Total Z' fell, 533.4m vs 512.3m (_p_=0.07; _p_=0.031)
+3. 'Time in REM' fell, 175.6m vs 160.8m (_p_=0.022; _p_=0.008)
+4. 'Time in Deep' increased, 55m vs 56.74 (but _p_=0.54!)
+5. 'Time in Wake' increased, 26.3m vs 28.1 (but _p_=0.74!)
+6. 'Awakenings' increased, 7.58 vs 8.26 (but _p_=0.4)
+7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053; _p_=0.0033)
+8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51; _p_=0.25)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
+
+So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{std-dev}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
+
+[^d-multiple]: [Correcting for multiple comparisons](#fn5) at _q_-value=0.05, of our 8 pessimistic _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
 
     ~~~{.haskell}
     let bh (index,pvalue) = pvalue < ((index * 0.05) / 8) in
@@ -890,18 +1009,6 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     ~~~
 
     Remarkable - the first time a _p_-value survived. (That was the 'Morning Feel' one.)
-
-1. 'ZQ' fell, 93.4 vs 89.3 (_p_=0.062)
-2. 'Total Z' fell, 533.4m vs 512.3m (_p_=0.07)
-3. 'Time in REM' fell, 175.6m vs 160.8m (_p_=0.022)
-4. 'Time in Deep' increased, 55m vs 56.74 (but _p_=0.54!)
-5. 'Time in Wake' increased, 26.3m vs 28.1 (but _p_=0.74!)
-6. 'Awakenings' increased, 7.58 vs 8.26 (but _p_=0.4)
-7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053)
-8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
-
-So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{std-dev}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
-
 [^effect-size]: A quick and dirty way is to look at the difference in the 2 means and compare it to what is the 'normal range' (intuitively something like a standard deviation or two), which in this case, my ZQ ranges normally from the mid-80s to the very low 100s (a range of ~20 points), and the difference in ZQ means is 4 points. So that's 1/5 the normal variability - that's nothing to sneeze at! (By a strange coincidence, this is almost the same sort of numbers as for grades in class, so we could analogize: not taking vitamin D at night would improve my sleep grades by one letter. When I was in school, I would not have turned my nose up at such an intervention.)
 
     My previous (unblinded non-randomized) experiment with melatonin over half a year or so, which found a shift in mean ZQs of ~8 points. I was really impressed with melatonin when I first started (as have many people been), so to find vitamin D is half as hurtful as melatonin was helpful... I didn't have any plans to take vitamin D in the evening rather than morning, but I sure as heck don't now!
