@@ -635,13 +635,14 @@ To see what, if any existing research there was, I checked the 49 hits in [PubMe
 
     > "Late midpoint of sleep was significantly negatively associated with the percentage of energy from protein and carbohydrates, and the energy-adjusted intake of cholesterol, potassium, calcium, magnesium, iron, zinc, vitamin A, vitamin D, thiamin, riboflavin, vitamin B(6), folate, rice, vegetables, pulses, eggs, and milk and milk products."
 
-## Setup
+## Vitamin D at night hurts?
+### Setup
 
 I decided to run a small double-blind experiment much like the [Adderall](Nootropics#adderall-blind-testing) and other trials. My Vitamin D is 360 5000IU softgels by 'Healthy Origins', bought on `iHerb.com`. The gel-capsules contain [cholecalciferol](!Wikipedia) dissolved in olive oil. This made preparing placebo pills a little more difficult. I wound up puncturing the capsules, squeezing out the olive oil contents into a new capsule (they were too wide to push in) and then pushing in the empty shell; all 20 were topped off with ordinary white baking flour. (I used up the last of my creatine preparing the placebos for the [Modalert day trial](Nootropics#modalert-blind-day-trial).) For the 20 placebo pills, I spooned in some olive oil to each and topped them off with flour as well. Each set went into its own identical Tupperware container. The process was a little messier than I had hoped, but the pills seem like they will work.
 
 The procedure at night will be: in the dark^[The problem was the original vitamin D3 capsule: I couldn't squeeze out *all* the oil, so I settled for squeezing out most, and then pushing the original capsule into the new capsule. So they contain everything they should, but they have a visible 'bubble' inside them (the original capsule). Hence, the need for literal blinding. Otherwise, they're pretty good: identical shape and weight.] immediately before putting on the Zeo headband and going to bed, I will take my usual melatonin pill; then I will take the two containers blindly; mix them up; select a pill from one to take, and put the selected container on the shelf next to the Zeo. In the morning, I will see which one I took. (The Vitamin D olive oil was distinctly more yellow than the green placebo olive oil.) If I took placebo, I will take my usual daily dose of Vitamin D, and if active, I will skip it. This hopefully will blind me and keep constant my total Vitamin D intake. (This procedure may need to be amended with something more like the modafinil/Adderall procedure: a bag with replacement of the consumed placebos.) If I get a run of one kind of pills, I will re-balance the numbers.
 
-Based on the first 10 days, I predict I'll find in the final data set (I've only looked at ZQs so far):
+Based on the first 10 days' ZQs, I predict I'll find in the final data set:
 
 1. increased sleep latency; probably at least another 10 minutes to fall asleep, as my mind seems to churn away with ideas of things to do
 2. increased awakenings; not that many, maybe 1 or 2 on average
@@ -653,7 +654,7 @@ Roberts theorizes that besides vitamin D damaging sleep, it could actively impro
 
 One thing I suspect but cannot confirm - since I do not have a heart rate monitor - is that ~10 minutes after taking the vitamin D pills, my heart rate increases. Not to any uncomfortable or worrisome degree, but when one expects one's heart rate to go down after going to bed, even a small increase in the opposite direction is noticeable. On the 12th, I finally got around to writing down this impression; then I searched online a bit and found that low vitamin D levels are associated with arrhythmia and other issues, but so are very high levels, and increased heart rates in the studies and anecdotes are associated with higher heart rates^[See the general remarks in [LiveStrong](http://www.livestrong.com/article/448585-vitamin-d-deficiency-heart-rate/), ["Vitamin D warning: Too much can harm your heart"](http://www.msnbc.msn.com/id/45325473/ns/health-diet_and_nutrition/t/vitamin-d-warning-too-much-can-harm-your-heart/), and the 2009 study ["Relation of serum 25-hydroxyvitamin D to heart rate and cardiac work (from the National Health and Nutrition Examination Surveys)"](http://www.ncbi.nlm.nih.gov/pubmed/20102903).]. I'm not worried about the heart rate, but I am concerned that this is defeating the double-blinding: if all I have to do is notice my heart rate (and lying swaddled in bed in complete silence, it would be hard for me *not* to), then I've unblinded myself *before* falling asleep. Other stimulants like caffeine or sulbutiamine might similarly increase my heart rate, but they'd obviously also interfere with sleep, so I can't create any 'active placebo' even if I wanted to start over. (One promising future gadget is the ["Basis" wristwatch](http://mybasis.com/) which measures, among other things, heart-rate; I look forward to the early reviews.)
 
-## Vitamin D data
+### Vitamin D data
 
 The data ([trimmed CSV](/docs/2012-zeo-vitamind.csv)), covering January-February 2012:
 
@@ -707,7 +708,7 @@ Date   Pill       Quality[^q]  ZQ      Guess
 
 (Data input was for 'Other Disruptions 3'; 0 = placebo, 1 = vitamin D.)
 
-## Vitamin D analysis
+### Vitamin D analysis
 
 From a quick look at confidences, I was usually correct but perhaps underconfident.
 
@@ -1024,6 +1025,32 @@ Finally, a re-look at lagged days; the final data set yielded 20 lagged nights w
 My conclusion?
 
 Vitamin D hurts sleep when taken at night. I know no reason to take vitamin D at that time, so even with anecdotal data, I will avoid it at that time entirely.
+
+## Vitamin D at morn helps?
+### Setup
+
+The logical next thing to test is whether there is any benefit to sleep by taking vitamin D in the morning as compared to not taking vitamin D at all, since we have already established that evening is worse than morning. I would expect any benefits in the morning to be attenuated compared to the evening effect: the morning is simply many hours away from going to bed again in the evening, giving time for many events to affect the ultimate sleep. So this experiment will run for more than 40 days of 20/20, but 56 days of 28/28; per Roberts's suggestion, I will not randomize individual days but 8 paired *blocks* of 7 days. (Multiple days to give any slow effects time to manifest; 7 days, so we don't 'cycle around the week' but instead have exactly the same number of eg. active Sundays and placebo Sundays since sleep often varies systematically over the week.)
+
+I prepare 27 placebo pills & 27 actives as before, stored in separate baggies. To randomize blocks of 7-days - I will fill 2 opaque containers with 7 placebo and 7 actives (with a label on the inside of the active container), and pick a container at random to use for the next 7 days. I will take one each morning upon awakening, closing my eyes. On the 8th morning, the first container will be empty, so I set it aside and open the second; when the second is emptied, I will look inside it to see whether it has the label, which lets me infer which one it was, and record whether the 2 weeks were active/placebo or placebo/active. The 2 containers will be refilled as before, and blocks 3-4 will begin. I will do this 4 times, at which point I will analyze the data.
+
+<!--
+### Morning data
+
+1. Blocks:
+    - 17-23F:
+    - 23F-1M:
+2. Blocks:
+    - 1M-8:
+    - 8-15:
+3. Blocks:
+    - 15-22:
+    - 29M-5A:
+4. Blocks:
+    - 5A-12:
+    - 12-19:
+
+### Morning analysis
+-->
 
 # Conclusions
 
