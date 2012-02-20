@@ -14,7 +14,7 @@ The data is much better than what you would get from more popular methods like c
 I personally want the data for a few distinct purposes:
 
 1. quantifying the benefits of [melatonin](Melatonin)
-2. quantifying the benefits of [modafinil](Modafinil)
+2. quantifying the costs of [modafinil](Modafinil)
 3. testing benefits of [huperzine-A](!Wikipedia)[^ferriss]
 4. designing & starting [polyphasic sleep](!Wikipedia)
 5. assisting [lucid dreaming](!Wikipedia)
@@ -75,9 +75,9 @@ In the future, I might try to make my own; buying the fabric is apparently cheap
 
 # Melatonin
 
-Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin regularly for 6+ years, ever since I discovered (somewhen in high school or college) that it was useful for enforcing bedtimes and seemed to improve sleep quality. Now that I had a Zeo, wouldn't it be a good idea to see whether it did anything, lo these many years later?
+Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin regularly for 6+ years, ever since I discovered (somewhen in high school or college) that it was useful for enforcing bedtimes and seemed to improve sleep quality; when I [posted my writeup to LessWrong](http://lesswrong.com/lw/1lt/case_study_melatonin/#comments) people were naturally a little skeptical of my specific claim that it improved the quality of my sleep such that I could reduce scheduled time by an hour or so. Now that I had a Zeo, wouldn't it be a good idea to see whether it did anything, lo these many years later?
 
-## Melatonin Analysis
+## Melatonin analysis
 
 The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)); the data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional analysis of _p_-values[^R-melatonin-analysis] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
 
