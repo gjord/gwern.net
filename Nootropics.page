@@ -247,7 +247,28 @@ On the null and negative sides:
 
 Some suggested that the lithium would turn me into a 'zombie', recalling the complaints of psychiatric patients. But at 5mg for 200 pills, I'd have to eat every one to get up to 1 gram, so I'm not worried about overdosing.) To test this, I took on day 1 & 2 no less than 4 pills or 20mg as a 'attack dose'; I didn't notice any significant change in emotional affect or energy levels. It may've helped my motivation, though I am also trying out the tyrosine.
 
-The effect? 3 or 4 weeks later, I'm not sure. When I began putting all of my nootropic powders into pill-form, I put half a lithium pill in each, and nevertheless ran out of lithium fairly quickly (3kg of piracetam makes for >4000 OO-size pills); those capsules were buried at the bottom of the bucket under lithium-less pills. So I suddenly went cold-turkey on lithium. Reflecting on the past 2 weeks, I *seem* to have been less optimistic and productive, with items now lingering on my TODO list which I didn't expect to. An effect? Possibly. If I ever develop some good metrics for measuring general 'getting things done'-iveness, I should revisit lithium and do some double-blind tests.
+The effect? 3 or 4 weeks later, I'm not sure. When I began putting all of my nootropic powders into pill-form, I put half a lithium pill in each, and nevertheless ran out of lithium fairly quickly (3kg of piracetam makes for >4000 OO-size pills); those capsules were buried at the bottom of the bucket under lithium-less pills. So I suddenly went cold-turkey on lithium. Reflecting on the past 2 weeks, I *seem* to have been less optimistic and productive, with items now lingering on my To-Do list which I didn't expect to. An effect? Possibly.
+
+## Lithium experiment
+
+Most of the reported benefits of lithium are impossible for me to test: rates of suicide and Parkinson's are obviously right out, but so is crime and neurogenesis (the former is too rare & unusual, the latter too subtle & hard to measure), and likewise potential negatives. So we could measure:
+
+1. mood, via daily self-report (entered into Zeo as 'Day Feel' - rating 1-5, at bedtime, of general mood & quality of day); should increase
+2. long-term memory (Mnemosyne 2.0's statistics); could increase (neurogenesis), do nothing (null result), or decrease (metal poisoning)
+3. working memory (dual n-back scores via Brain Workshop^[This metric is a little troubling since working memory is trainable and that's the point of dual n-back - but my own scores have been stagnant for a long time and the blocking should reduce the impact of any very slow linear growth in scores.]); like long-term memory
+4. sleep (Zeo); should increase (via mood improvement)
+5. time procrastinating on computer ([arbtt](http://darcs.nomeata.de/arbtt/doc/users_guide/) daemon every 10 seconds records open & active windows; these statistics can be parsed into categories like work or play. Total time on latter categories could be a useful metric. A second metric would be number of commits to the `gwern.net` source repository.)
+
+Lithium is persistent in the body, and its effects are not acute especially in low doses; this calls for long blocked trials. 30 days is reasonable and corresponds to the time-spans in some experiments. With subtle effects, we need a lot of data, so we want at least half a year (6 blocks) or better yet, a year (12 blocks); this requires 180 actives and 180 placebos. This is easily covered by [$11](http://www.amazon.com/gp/product/B003B6X66U/) for 200x5mg lithium orotate and [$14](http://www.amazon.com/Life-Extension-GELATIN-CAPSULES--BOVINE/dp/B002R3JJ8W/) for 1000x1g empty capsules.
+
+The methodology would be essentially the same as the [vitamin D in the morning](Zeo#l#vitamin-d-at-morn-helps) experiment: put 30 placebos in one container, 30 actives in another identical container, hide & randomly pick one of them, take one for 30 days then the other for 30 days, look inside them for the label to determine which 30-day period was active and which was placebo, refill them, and start again.
+
+TODO:
+
+1. order lithium & capsules (in cart on Amazon; waiting on book order)
+2. get Mnemosyne 2.0 working & debugged
+3. make 360 pills
+4. wait experiment until morning vitamin D experiment finished: both lithium and vitamin D likely affect mood
 
 # Melatonin
 
