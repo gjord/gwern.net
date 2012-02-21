@@ -79,15 +79,15 @@ Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin 
 
 ## Melatonin analysis
 
-The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)); the data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional analysis of _p_-values[^R-melatonin-analysis] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
+The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)); the data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
 
-[^R-melatonin-analysis]: The analysis session in the `R` interpreter:
+[^R-melatonin-analysis-p]: The analysis session in the `R` interpreter:
 
     ~~~{.r}
     > # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
     > mydata <- read.table("2011-zeo-melatonin.csv", header=TRUE, sep=",")
     >
-    > # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a proper binary variable
+    > # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a binary variable
     > t.test(ZQ~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
@@ -166,9 +166,6 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            57.21739        56.57812
 
-    > t.test(Time.in.Awakenings~SSCF.10, data=mydata)
-    Error in eval(expr, envir, enclos) :
-      object 'Time.in.Awakenings' not found
     > t.test(Awakenings~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
@@ -219,6 +216,122 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     ~~~
 
     Oh well.
+[^R-melatonin-analysis-p]: The following `R` re-runs the above analysis but with options that increase the power of the results - but only if some assumptions about melatonin's effects are correct; see later Vitamin D discussion of 'optimistic' and 'pessimistic' assumptions.
+
+    ~~~{.R}
+    > t.test(ZQ~SSCF.10, data=mydata, var.equal=TRUE); t.test(Total.Z~SSCF.10, data=mydata, var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  ZQ by SSCF.10
+    t = 1.5091, df = 85, p-value = 0.135
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -2.749923 20.069217
+    sample estimates:
+    mean in group 0 mean in group 1
+           84.95652        76.29688
+
+
+        Two Sample t-test
+
+    data:  Total.Z by SSCF.10
+    t = 1.5291, df = 85, p-value = 0.13
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -14.69983 112.59385
+    sample estimates:
+    mean in group 0 mean in group 1
+           456.4783        407.5312
+
+    > t.test(Time.to.Z~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Time.in.Wake~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Time.to.Z by SSCF.10
+    t = 1.4588, df = 85, p-value = 0.9258
+    alternative hypothesis: true difference in means is less than 0
+    95 percent confidence interval:
+         -Inf 8.827328
+    sample estimates:
+    mean in group 0 mean in group 1
+             19.000          14.875
+
+
+        Two Sample t-test
+
+    data:  Time.in.Wake by SSCF.10
+    t = 0.5783, df = 85, p-value = 0.7177
+    alternative hypothesis: true difference in means is less than 0
+    95 percent confidence interval:
+        -Inf 3.58344
+    sample estimates:
+    mean in group 0 mean in group 1
+           6.565217        5.640625
+
+    > t.test(Time.in.REM~SSCF.10, data=mydata, var.equal=TRUE); t.test(Time.in.Deep~SSCF.10, data=mydata, var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Time.in.REM by SSCF.10
+    t = 2.1307, df = 85, p-value = 0.036
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+      1.827653 52.847619
+    sample estimates:
+    mean in group 0 mean in group 1
+           145.4783        118.1406
+
+
+        Two Sample t-test
+
+    data:  Time.in.Deep by SSCF.10
+    t = 0.163, df = 85, p-value = 0.8709
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -7.156889  8.435422
+    sample estimates:
+    mean in group 0 mean in group 1
+           57.21739        56.57812
+
+    > t.test(Awakenings~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Morning.Feel~SSCF.10, data=mydata, alternative="great", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Awakenings by SSCF.10
+    t = 0.7756, df = 85, p-value = 0.7799
+    alternative hypothesis: true difference in means is less than 0
+    95 percent confidence interval:
+         -Inf 1.358521
+    sample estimates:
+    mean in group 0 mean in group 1
+           2.869565        2.437500
+
+
+        Two Sample t-test
+
+    data:  Morning.Feel by SSCF.10
+    t = -1.2918, df = 65, p-value = 0.8995
+    alternative hypothesis: true difference in means is greater than 0
+    95 percent confidence interval:
+     -0.5076874        Inf
+    sample estimates:
+    mean in group 0 mean in group 1
+           2.952381        3.173913
+
+    > t.test(Time.in.Light~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
+
+        Two Sample t-test
+
+    data:  Time.in.Light by SSCF.10
+    t = 1.1324, df = 85, p-value = 0.8697
+    alternative hypothesis: true difference in means is less than 0
+    95 percent confidence interval:
+         -Inf 51.64192
+    sample estimates:
+    mean in group 0 mean in group 1
+           254.2174        233.2969
+    ~~~
 
 [^Bonferroni]: The usual way to correct for the issue of multiple comparisons inflating results (a big problem in epidemiology and why their results are so often false) is to use a [Bonferroni correction](!Wikipedia) - if I look at the _p_-values for 7 Zeo metrics, I wouldn't consider any to be significant at '_p_=0.05' unless they were actually significant at $\frac{0.05}{7} = 0.00714 = 0.007$, which is even more stringent than the rarer '_p_=0.01' criterion. With the even stronger criterion '_p_=0.007', it's a safe bet than *none* of my tests give significant results. Which may be the right thing to conclude, since all my data is just _n_=1 and unreliable in many ways, but still, the Bonferroni correction is not being  very helpful here.
 
