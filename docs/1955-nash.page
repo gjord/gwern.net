@@ -42,7 +42,7 @@ An enciphering-deciphering machine (in general outline) of my invention has been
 
 Consider an enciphering process with a finite "key", operating on binary messages. Specifically, we can assume the process described by a function
 
-$Y_i = F(\alpha, \alpha_2, ... \alpha_r; X_i, X_i-1, X_i-2, ... X_i-n)$
+$Y_i = F(\alpha, \alpha_2, ... \alpha_r; X_i, X_{i-1}, X_{i-2}, ... X_{i-n})$
 
 where the $\alpha$'s, $X$'s, and $Y$'s are mod 2 and where if $X_i$ is changed, with the other $X$'s and $\alpha$'s left fixed then $Y_i$ is changed.
 
