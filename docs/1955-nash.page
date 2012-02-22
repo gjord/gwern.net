@@ -22,7 +22,7 @@ I have discussed the machine and general exponential conjecture with R.C. Blanch
 
 discuss my ideas with him. He has developed [minimal redundancy coding methods](!Wikipedia "Huffman coding").
 
-I hope my handwriting, etc. do not give the impression I am just a crank or circle-squarer. My position here is Assist. Prof. of math. My best known work is in game theory (reprint, sent separately). I mention these things only in the interest of securing a most careful consideration of the machine and ideas by your most competent associates.
+I hope my handwriting, etc. do not give the impression I am just a crank or [circle-squarer](!Wikipedia "Squaring the circle"). My position here is Assist. Prof. of math. My best known work is in game theory (reprint, sent separately). I mention these things only in the interest of securing a most careful consideration of the machine and ideas by your most competent associates.
 
 If the machine description does not turn up, I will provide another. Also I shall be happy to provide any additional information or answer any queries to the best of my ability.
 
@@ -339,3 +339,11 @@ Bloggers on the significance of the letter; [Aaron Roth](http://aaronsadventures
 [Philonus Atio](http://agtb.wordpress.com/2012/02/17/john-nashs-letter-to-the-nsa/#comment-5458) comments that (as one might expect for very early work):
 
 > "I broke it in about 1 hour and I’m no expert in cryptanalysis. It is weak."
+
+[Animats](http://it.slashdot.org/comments.pl?sid=2679325&cid=39089165) suggests why the NSA may've rejected the system:
+
+> "What Nash seems to be describing is a [linear feedback shift register](!Wikipedia). This has potential as a cryptosystem, but isn't a very good one. As the NSA pointed out, it "affords only limited security". When Nash wrote this, [Friedman](!Wikipedia "William F. Friedman") had already developed the theory that allowed general cryptanalysis of rotor-type machines. But that was still highly classified. Friedman, of course, was responsible for breaking the Japanese ["Purple" cypher](!Wikipedia "Purple (cipher machine)"), plus many others. Before Friedman, cryptanalysis was about guessing. After Friedman, it was about number crunching.
+>
+> Friedman was the head cryptanalyst at NSA at the time. Within NSA, it would have been known that a linear feedback shift register was a weak key generator. So this idea was, properly, rejected. At least NSA looked at it. Friedman's hard line on that subject was "No new encryption system is worth looking at unless it comes from someone who has already broken a very hard one."
+>
+> The fact that a problem is [NP-hard](!Wikipedia) isn't enough to make it a good key generator. The [Merkle-Hellman knapsack cryptosystem](!Wikipedia), the first public-key cryptosystem published, is based on an NP-hard problem. But, like many NP-hard problems, it's only NP-hard in the worst case. The average case is only [P-hard](!Wikipedia). ([Linear programming](!Wikipedia) problems, and problems which can be converted to a linear programming problem, are like that.) So that public-key system was cracked. We still don't have cryptosystems which are provably NP-hard for all cases. Factoring and elliptic curves are as good as it gets, and there's still the possibility that a breakthrough could make factoring easy.
