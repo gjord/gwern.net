@@ -11,7 +11,7 @@ import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
 import Feed (filestoreToXmlFeed, FeedConfig(..))
-import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
+import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..), ParserState(stateSmart))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 main :: IO ()
@@ -61,7 +61,7 @@ myPageCompiler :: Compiler Resource (Page String)
 myPageCompiler = cached "myPageCompiler" $ readPageCompiler >>> addDefaultFields >>> arr (changeField "description" escapeHtml) >>> arr applySelf >>> myPageRenderPandocWith
 
 myPageRenderPandocWith :: Compiler (Page String) (Page String)
-myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
+myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState{stateSmart=False} >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
 
 pandocTransform :: Pandoc -> Pandoc
 pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
