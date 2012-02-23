@@ -20,7 +20,6 @@ description: Random things of interest which I may do at some point.
 - Petri nets: <http://community.haskell.org/~claus/HCPN/>
 - 'Frob - an Embedded Domain Specific Language for controlling robots. It is built using the principals of Functional Reactive Programming, as developed by Conal Elliott for the Fran animation system. The current incarnation of Frob is part of the Yampa FRP system.'
 - PUre: <http://wiki.di.uminho.pt/twiki/bin/view/Research/PURe/UsingCVS>
-- <http://tothepowerofdisco.com/repo/HaskellLibraries/>
 - <http://community.haskell.org/~claus/FunWorlds/>
 - <http://programatica.cs.pdx.edu/House/>
 - <http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/Haskell2LaTeX/>
@@ -89,17 +88,6 @@ description: Random things of interest which I may do at some point.
 ## Darcs
 - Add --pager option to 'darcs changes' --this is a current [bug report](http://bugs.darcs.net/issue1303)
 - Look into darcswatch - can it be made more memory-efficient and usable on haskell.org?
-
-## Yi
-- Needs more syntax highlighting modes, and modes in general. I particularly need
-     i. Markdown mode
-     ii. Shell mode^[Needed for the many configuration files which use that style]
-     iii. Lisp mode^[If I could switch completely from Emacs, this wouldn't be so important.]
-     iv. Wiki markup (MediaWiki specifically) mode
-- [longlines-mode](http://www.gnu.org/software/emacs/manual/html_node/emacs/Longlines.html) ([EmacsWiki](http://www.emacswiki.org/emacs/LongLines)). Absolutely crucial for editing documents that use long lines (such as Markdown or Wikipedia articles). Yi currently displays longlines by wrapping them at the end of the terminal, which both looks ugly and is very hard to navigate or work with.
-- [Macros](http://code.google.com/p/yi-editor/issues/detail?id=89). Obviously. If you don't understand why this is a must-have, then you don't understand text editing.
-- Spellcheck. See macros - a basic feature. (And ideally a realtime spellcheck, like flyspell; but I could probably live with a manually invoked spellchecker.)
-- Persistent state: Yi should remember my previously-opened files, my killring, the last position of the point in a buffer/file etc. Emacs provides this [session](http://www.phys.ufl.edu/docs/emacs/emacs_423.html), and I find it very convenient.
 
 ## Gitit
 
