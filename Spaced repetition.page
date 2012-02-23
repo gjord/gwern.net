@@ -394,7 +394,9 @@ I find one of the best uses for Mnemosyne is, besides adding questions relating 
 
 On average, when I'm studying a new topic, I'll add 3-20 questions a day. Combined with my particular memory, I usually review about 90 or 100 items a day (out of the total >18,300). This takes under 20 minutes, which is not too bad. (I expect the time is expanded a bit by the fact that early on, my formatting guidelines were still being developed, and I hadn't the full panoply of categories I do now - so every so often I must stop and edit categories.)
 
-If I haven't been studying something recently, the exponential back off of reviews slowly drops the daily review. For example, in March 2011, I wasn't studying very many things, so for 24-26 March 2011, my scheduled daily reviews are 73, 83, and 74; after that, it'll probably drop down into the 60s, and then after another week or two, into the 50s and so on until it hits the minimum plateau which will very slowly shrink over years. (I haven't gone long enough without dumping cards in to know what that might be.)
+If I haven't been studying something recently, the exponential back off of reviews slowly drops the daily review. For example, in March 2011, I wasn't studying very many things, so for 24-26 March 2011, my scheduled daily reviews are 73, 83, and 74; after that, it'll probably drop down into the 60s, and then after another week or two, into the 50s and so on until it hits the minimum plateau which will very slowly shrink over years. (I haven't gone long enough without dumping cards in to know what that might be.) We can see this vividly, and we can even see a sort of analogue of the original forgetting curve, if we ask Mnemosyne 2.0 to graph the number of cards to review per day for the next year (assuming no additions or missed reviews etc.):
+
+![A wildly varying but clearly decreasing graph of predicted cards  per day](/images/spaced-repetition-scheduled-cards.png)
 
 If Mnemosyne weren't using spaced repetition, it would be very hard to keep up with 18,300+ flashcards. But because it is using spaced repetition, keeping up is very easy.
 
