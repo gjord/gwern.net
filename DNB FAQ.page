@@ -30,7 +30,7 @@ Brain Workshop offers many modes, some far more elaborate than simple Dual N-bac
 
 ## The Argument
 
-[Working memory is important stuff](!Wikipedia "Working memory#Working memory and learning") for learning and also just general intelligence.[^jaeggi][^nyt] It's not too hard to see why working memory could be so important. Working memory boils down to 'how much stuff you can think about at the same time'.
+[Working memory is important stuff](!Wikipedia "Working memory#Working memory and learning") for learning and also just general intelligence.[^nyt] It's not too hard to see why working memory could be so important. Working memory boils down to 'how much stuff you can think about at the same time'.
 
 Imagine a poor programmer who has suffered brain damage and has only enough working memory for 1 definition at a time. How could he write anything? To write a correct program, he needs to know simultaneously 2 things - what a variable, say, contains, and what is valid input for a program. But unfortunately, our programmer can know that the variable `foo` contains a string with the input, or he can know that the function `processInput` uses a string, but he can't remember these 2 things simultaneously! He will deadlock forever, unsure either what to do with this `foo`, or unsure what exactly `processInput` was supposed to work on.
 
@@ -974,7 +974,7 @@ It is worth noting that the study used Single N-back (visual). Unlike Jaeggi 200
 
 The IQ results were, specifically, the control group averaged 15.33/16.20 (before/after) correct answers on the SPM and 20.87/22.50 on the TONI; the n-back group averaged 15.44/16.94 SPM and 20.41/22.03 TONI. 1.5 more right questions rather than ~1 may not seem like much, but the split groups look quite different - the 'small training gain' n-backing group actually fell on its second SPM and improved by <0.2 questions on the TONI, while the 'large training gain' increased >3 questions on the SPM and TONI. The difference is not so dramatic in the followup 3 months later: the small group is now 17.43/23.43 (SPM/TONI), and the large group 15.67/24.67. Strangely in the followup, the control group has a higher SPM than the large group (but not the small group), and a higher TONI than either group; the control group has higher IQ scores on *both* TONI & SPM in the followup than the aggregate n-back group. (The splitting of groups is also unorthodox[^graehl].)
 
-[^graehl]: Research programmer [Jonathan Graehl](http://www.isi.edu/~graehl/) [writes on](http://lesswrong.com/lw/68k/nback_news_jaeggi_2011_or_is_there_a/4d34) the [LW discussion](http://lesswrong.com/lw/68k/nback_news_jaeggi_2011_or_is_there_a/?sort=top#comments) of Jaeggi 2011:
+[^graehl]: Research programmer [Jonathan Graehl](http://jonathan.graehl.org/) [writes on](http://lesswrong.com/lw/68k/nback_news_jaeggi_2011_or_is_there_a/4d34) the [LW discussion](http://lesswrong.com/lw/68k/nback_news_jaeggi_2011_or_is_there_a/?sort=top#comments) of Jaeggi 2011:
 
     > "...If you separated the "active control" group into high and low improvers post-hoc just like was done for the n-back group, you might see that the active control "high improvers" are even smarter than the n-back "high improvers". We should expect some 8-9 year olds to improve in intelligence or motivation over the course of a month or two, without any intervention. Basically, this result sucks, because of the artificial post-hoc division into high- and low- responders to n-back training, needed to show a strong "effect". I'm not certain that the effect is artificial; I'd have to spend a lot of time doing some kind of sampling to show how well the data is explained by my alternative hypothesis."
 
@@ -1079,12 +1079,9 @@ Sternberg reviewed Jaeggi 2008
 
 ### Chein 2010
 
-["Expanding the mind's workspace: Training and transfer effects with a
-complex working memory span task"](http://findarticles.com/p/articles/mi_7721/is_201004/ai_n53507996/) ([local copy](docs/chein2010.pdf)); from the introduction:
+["Expanding the mind's workspace: Training and transfer effects with a complex working memory span task"](/docs/chein2010.pdf); from the introduction:
 
-> "In the present study, a novel working memory (WM) training paradigm was used to test the malleability of WM capacity and to determine the extent to which the benefits of this training could be transferred to other cognitive skills. Training involved verbal and spatial versions of a complex WM span task designed to emphasize simultaneous storage and processing requirements. Participants who completed 4 weeks of WM training
-demonstrated significant improvements on measures of temporary memory. These WM training benefits generalized to performance on the Stroop task and, in a novel finding, promoted significant increases in reading
-comprehension. The results are discussed in relation to the hypothesis that WM training affects domain-general attention control mechanisms and can thereby elicit far-reaching cognitive benefits. Implications include the use of WM training as a general tool for enhancing important cognitive skills."
+> "In the present study, a novel working memory (WM) training paradigm was used to test the malleability of WM capacity and to determine the extent to which the benefits of this training could be transferred to other cognitive skills. Training involved verbal and spatial versions of a complex WM span task designed to emphasize simultaneous storage and processing requirements. Participants who completed 4 weeks of WM training demonstrated significant improvements on measures of temporary memory. These WM training benefits generalized to performance on the Stroop task and, in a novel finding, promoted significant increases in reading comprehension. The results are discussed in relation to the hypothesis that WM training affects domain-general attention control mechanisms and can thereby elicit far-reaching cognitive benefits. Implications include the use of WM training as a general tool for enhancing important cognitive skills."
 
 While WM training yielded many valuable benefits such as increased reading comprehension, it did not improve IQ as measured by an unspeeded Advanced Progressive Matrices (APM) IQ test;
 
@@ -1198,7 +1195,7 @@ TODO
 ## Non-IQ gains
 ### Loosli et al 2011
 
-["Working memory training improves reading processes in typically developing children"](http://www.psy.unibe.ch/unibe/philhuman/psy/apn/content/e5616/e5621/e7836/e7942/files7943/Loosli_et_al_2011_ger.pdf), Loosli, Buschkuehl, Perrig, and Jaeggi:
+["Working memory training improves reading processes in typically developing children"](/docs/2011-loosli.pdf), Loosli, Buschkuehl, Perrig, and Jaeggi:
 
 > "The goal of this study was to investigate whether a brief cognitive training intervention results in a specific performance increase in the trained task, and whether there are transfer effects to other nontrained measures. A computerized, adaptive working memory intervention was conducted with 9- to 11-year-old typically developing children. The children considerably improved their performance in the trained working memory task. Additionally, compared to a matched control group, the experimental group significantly enhanced their reading performance after training, providing further evidence for shared processes between working memory and reading."
 
@@ -1206,7 +1203,7 @@ This is included in the 'support' section for showing connection to useful tasks
 
 > "Due to the short training time, we did not expect large effects on _Gf_ (cf. Jaeggi et al., 2008), also since two other studies that trained ADHD children observed transfer effects on _Gf_ only after 5 weeks involving sessions of 40 minutes each (Klingberg et al., 2002, 2005).
 >
-> In addition, the same group failed to show transfer on _Gf_ with a shorter training (Thorell et al., 2008). Thus, considering that our training intervention was merely 10 sessions long, our lack of transfer to _Gf_ is hardly surprising; although there is now recent evidence that transfer to _Gf_ is possible with very little training time ([Karbach & Kray, 2009](http://www.uni-saarland.de/fak5/entwicklung/juniorprofessurkray/Dokumente/Praesentationen/CAC08_Karbach.pdf)). Our results, however, are comparable to those of Chein and Morrison (2010), who also trained their participants on a complex WM task and found no transfer to _Gf_."
+> In addition, the same group failed to show transfer on _Gf_ with a shorter training (Thorell et al., 2008). Thus, considering that our training intervention was merely 10 sessions long, our lack of transfer to _Gf_ is hardly surprising; although there is now recent evidence that transfer to _Gf_ is possible with very little training time ([Karbach & Kray, 2009](http://web.archive.org/web/20100705042933/http://www.uni-saarland.de/fak5/entwicklung/juniorprofessurkray/Dokumente/Praesentationen/CAC08_Karbach.pdf)). Our results, however, are comparable to those of Chein and Morrison (2010), who also trained their participants on a complex WM task and found no transfer to _Gf_."
 
 (Similar studies have also found improvement in reading skills after WM training, eg. [Dahlin 2011](http://www.ingentaconnect.com/content/klu/read/2011/00000024/00000004/00009238) and [Shiran & Breznitz 2011](http://www.sciencedirect.com/science/article/pii/S0911604410001028), but I do not believe others used n-back or looked for possible IQ gains.)
 
@@ -1483,8 +1480,6 @@ However, [Rawson 2008](http://www.ncbi.nlm.nih.gov/pubmed/18579168) ([PDF](/docs
 
     > "Working memory is generally considered to have limited capacity. The earliest quantification of the capacity limit associated with short-term memory was the ["magical number seven"](!Wikipedia "The Magical Number Seven, Plus or Minus Two")
  introduced by Miller (1956). He noticed that the memory span of young adults was around seven elements, called chunks, regardless whether the elements were digits, letters, words, or other units. Later research revealed that span does depend on the category of chunks used (e.g., span is around seven for digits, around six for letters, and around five for words), and even on features of the chunks within a category....Several other factors also affect a person's measured span, and therefore it is difficult to pin down the capacity of short-term or working memory to a number of chunks. Nonetheless, Cowan (2001) has proposed that working memory has a capacity of about four chunks in young adults (and fewer in children and old adults)."
-[^jaeggi]: Jaeggi, S. M., Buschkuehl, M., Jonides, J., Perrig, W. J. (2008),
-["Improving fluid intelligence with training on working memory"](http://www.iapsych.com/articles/jaeggi2008.pdf), _[Proceedings of the National Academy of Sciences](!Wikipedia)_, vol. 105 no. 19
 [^jaeggi2003]: Jaeggi, S. M., Seewer, R., Nirkko, A. C., Eckstein, D., Schroth, G., Groner, R., et al, (2003). ["Does excessive memory load attenuate activation in the prefrontal cortex? Load-dependent processing in single and dual tasks: functional magnetic resonance imaging study"](docs/jaeggi2003.pdf), _Neuroimage_ 19(2) 210-225.
 [^spolsky]: Joel Spolsky, ["Where do These People Get Their (Unoriginal) Ideas?"](http://www.joelonsoftware.com/articles/fog0000000068.html)
 [^atwood]: Jeff Atwood; ["Multiple Monitors and Productivity"](http://www.codinghorror.com/blog/archives/000012.html), ["The Programmer's Bill of Rights"](http://www.codinghorror.com/blog/archives/000666.html), ["Joining the Prestigious Three Monitor Club"](http://www.codinghorror.com/blog/archives/000740.html), ["Does More Than One Monitor Improve Productivity?"](http://www.codinghorror.com/blog/archives/001076.html) etc.
