@@ -1,0 +1,336 @@
+---
+title: Scientific stagnation
+description: Shrinking marginal returns to science and technology
+...
+
+The Long Stagnation thesis can be summarized as: "Western civilization is experiencing a general decline in marginal returns to investment". That is, every $1 or other resource (such as 'trained scientist') buys less in human well-being or technology than before, aggregated over the entire economy.
+
+This does *not* imply any of the following:
+
+1. No exponential curves exist (rather, they are exponential curves which are part of sigmoids which have yet to level off; Moore's law and stagnation can co-exist)
+2. Any metrics in absolute numbers have ceased to increase or have begun to fall (patents can continue growing each year if the amount invested in R&D or number of researchers increases)
+3. We cannot achieve meaningful increases in standards of living or capabilities (the Internet is a major accomplishment)
+4. Specific scientific or technological will not be achieved (eg. AI or nanotech) or be achieved by certain dates
+5. The stagnation will be visible in a dramatic way (eg. barbarians looting New York City)
+
+The stagnation thesis instead suggests that naive forecasts have under-appreciated error-bars, which cannot be reduced without careful consideration. It suggests that we may under-estimate the chance of periods of essentially no progress, like Euclidean geometry or astronomy between the first century BC and the Renaissance, periods where the forces that were able to overcome diminishing returns suddenly hit hard brick walls[^Singapore]. In particular, if the stagnation thesis is true and the overall landscape of science/technology looks like broad slow gradual improvements with occasional sigmoids blasting up exponentials and puttering out, as opposed to a more techno-optimistic Kurzweilian scenario of 'accelerating returns' over much of the science/technology landscape, then we should assign more weight to scenarios in which technologies are 'imbalanced'; for example, a scenario where the Moore's law sigmoid does not flatten out until 2040 but the AI software curve continues to follow a gradual increase poses a serious '[hardware overhang](http://lesswrong.com/lw/wf/hard_takeoff/ "Hard Takeoff")' risk as enormous computing power sits around waiting for the first AI program just barely well-designed enough to make use of it and fix its primitive algorithms to make proper use of said computing power. An imbalance favoring either hardware or software may be disastrous: if the luck of the sigmoid draw favors hardware, then the first primitive program to come along will win all the marbles; if chance instead sends software up on a sigmoid rocket, then this incentivizes an arms race to assemble enough computing power to run one's faithful militarized AI and win all the marbles before another actor can run their slavishly loyal AI. (Whereas in a Kurzweilian scenario of interlocking feedback loops, the AI program would be developed roughly around the same time a computer powerful enough to run it at all is developed, and any overhang potential will be limited compared to the other scenarios.)
+
+[^Singapore]: An example: Singapore's government reportedly expects half the population to hold at least a bachelor's degree by 2020. This is surely doable, just as the US could expect half its population to graduate high school, just like industrializing countries can shift their proletariat to the cities & factories. But this is a trick you can do only once! You can't have half your population join the first half in the cities, leaving 1% to handle the mechanized agriculture - for tremendous economic growth - and then have *another* half move into the cities to keep the growth going, because there is no third half. Similarly for degrees. Bachelor's, perhaps; master's, maybe; but PhD? Not with existing populations or gene pools.
+
+The stagnation thesis is as big as history, and has a long literature of 'declinism', eg. Spengler's 1918 _[The Decline of the West](!Wikipedia)_, and so it is tempting to take the Outside View and mock it as obviously falsified - but this is where the caveats about marginal returns come into play. To give a simple example: world population in 1900 was around ~1.6 billion, and in 2000 ~6 billion, an increase by a factor of 3.75. Plausibly, the populations of educated scientists and other such people increased even more^[One estimate of the increase from Jones 2006 is the factor is 19x.] (the fraction of the American populace going to college in 1900 was, shall we say, smaller than in 2000). So even if the 2000 scientists were shockingly 50%^[We will see later a calculation that the true figure is**0%.] less 'productive' than their 1900 counterparts, because there are >3.75 times as many, we will still witness >1.8x as much productivity. It would be very easy to simply compare 2000 and 1900 and say talk of stagnation is ludicrous. So we see the burden 'marginal returns' puts on us: we need to be constantly adjusting any absolute figures - which are hard enough to come by - for the size of the relevant population.
+
+When we seek to measure stagnation, we have several main areas of interest:
+
+1. pure science
+
+   - cost:
+
+       - persons per breakthrough or paper or other metric
+       - dollars per metric
+       - age at discovery
+   - benefit:
+
+       - judgement of contemporaries: citations & awards
+       - judgement of posterity: [historiometry](!Wikipedia)
+2. commercialization
+
+    - cost:
+
+        - persons per result
+        - R&D budgets per result
+    - benefit:
+
+        - sales
+        - increases in metrics of quality of life (eg. lifespan)
+3. general economics
+
+    - growth rates
+    - productivity changes
+
+With this schematic, we can slot results in nicely. For example, [Charles Murray](!Wikipedia)'s _[Human Accomplishment](!Wikipedia)_ engages in historiometry, finding that on a population-adjusted (per capita) basis, the most productive period for the sciences was the late 1800s; his results would be listed under pure science, benefit, judgement of posterity, since he uses only references written after 1950 about people & results before 1950 (to control for the obvious biases). On the other hand, Tyler Cowen's economic citations in _The Great Stagnation_ would go into general economics, while Tainter's _Collapse of Complex Societies_ will straddle all 3 categories but mostly economics.
+
+# Science
+## Cost
+
+All else equal, the less time it takes a scientist to make a breakthrough, the cheaper the breakthrough is - less opportunity cost to him, the sooner others can build on it, less maintenance & depreciation, less effort required to cover prerequisites and get up to speed, etc. Murray unfortunately does not give us a deep history of 'age of greatest accomplishment', but we can still look at the 20th century's Nobel Prizes; [Jones & Weinberg 2011](http://www.eurekalert.org/jrnls/pnas_pdfs/pnas.201102895.pdf "Age dynamics in scientific creativity") matched winners with their age when they performed the award-winning work, [summary](http://researchnews.osu.edu/archive/nobelage.htm "Breakthrough scientific discoveries no longer dominated by the very young, study finds"):
+
+> "A study of Nobel Laureates from 1901 to 2008 in these three fields examined the age at which scientists did their prize-winning work. Results showed that before 1905, about two-thirds of winners in all three fields did their prize-winning work before age 40, and about 20% did it before age 30. But by 2000, great achievements before age 30 nearly never occurred in any of the three fields. In physics, great achievements by age 40 only occurred in 19% of cases by the year 2000, and in chemistry, it nearly never occurred....Earlier work on creativity in the sciences has emphasized differences in the ages when creativity peaks across various scientific disciplines, assuming that those differences were stable over time, Weinberg said. But this new work suggests that the differences in the age of creativity peaks between fields like chemistry and physics are actually quite small compared to the differences in creativity peaks between time periods within each discipline...For the study, the researchers analyzed the complete set of 525 Nobel Prizes given between 1901 and 2008 in the three fields – 182 in physics, 153 in chemistry and 190 in medicine. Through extensive historical and biographical analysis, they determined the ages at which each Nobel Prize winner produced their prize-winning work. In general, there was an aging pattern over the 20th century as to when scientists made their breakthrough discoveries, although there were differences between the three fields. The most interesting case is physics, Weinberg said. In physics, there was an especially notable increase in the early 20th century in the frequency of young scientists producing prize-winning work. The proportion of physicists who did their prize-winning work by age 30 peaked in 1923 at 31%. Those that did their best work by age 40 peaked in 1934 at 78%. The proportion of physicists under age 30 or 40 producing Nobel Prize-winning work then declined throughout the rest of the century...Another reason that younger scientists may have made more significant contributions early in the 20th century is that they finished their training earlier in life. The majority of Nobel Laureates received their doctoral degrees by age 25 in the early 20th century, the researchers found. However, all three fields showed substantial declines in this tendency, with nearly no physics or chemistry laureates receiving their degrees that early in life by the end of the century. In another analysis, the researchers examined the age of studies referenced in important scientific papers in the three fields through the 20th century. They found that in the early part of the 1900s -- the time when quantum mechanics made its mark -- there was a strong tendency for physics to reference mostly recent work. “The question is, how much old knowledge of the field do you need to know to make important scientific contributions in your field?” Weinberg said. “The fact that physicists in the early 20th century were citing mostly recent work suggests that older scientists didn’t have any advantage -- their more complete knowledge of older work wasn’t necessary to make important contributions to the field. That could be one reason why younger scientists made such a mark.” But now, physicists are more likely to cite older studies in their papers, he said. That means older scientists may have an advantage because of their depth of knowledge."
+
+> Rather, a researcher’s output tends to rise steeply in the 20’s and 30’s peak in the late 30’s or early 40’s and then trail off slowly through later years (Lehman, 1953; Simonton, 1991).
+
+- Lehman HC (1953) _Age and Achievement_ (Princeton University Press, Princeton, NJ)
+- Simonton DK (1991) Career landmarks in science: Individual differences and interdisciplinary contrasts. _Dev Psychol_ 27:119–130
+
+> [Jones 2006](http://businessinnovation.berkeley.edu/WilliamsonSeminar/jones040507.pdf "Age and Great Invention") covered a similar upward shift in age for noted inventors
+
+[Why peak in the early 40s? The age-related decline in intelligence is steady from 20s. There must be some balance between acquiring and exploiting information with one's disappearing intelligence which produces a peak in the 40s before the decline kills productivity; the graph in [DNB FAQ#aging]() curiously shows late 40s is where you hit 0 std-devs, intelligence/memory-wise, vis-a-vis the general population]
+
+> This reasoning is explored in Jones (2005), which studies "ordinary" inventors, looking at all U.S. patents in the 1975-2000 period. is rising at a rate of 6 years/century.
+
+[Jones 2005](http://businessinnovation.berkeley.edu/WilliamsonSeminar/jones040507.pdf):
+
+> The estimates suggest that, on average, the great minds of the 20th Century typically became research active at age 23 at the start of the 20th Century, but only at age 31 at the end - an upward trend of 8 years. Meanwhile, there has been no compensating shift in the productivity of innovators beyond middle age.
+
+> The technological almanacs compile key advances in technology, by year, in several different categories such as electronics, energy, food & agriculture, materials, and tools & devices. The year (and therefore age) of great achievement is the year in which the key research was performed. For the technological almanacs, this is simply the year in which the achievement is listed.
+
+> The largest mass of great innovations in knowledge came in the 30’s (42%), but a substantial amount also came in the 40’s (30%), and some 14% came beyond the age of 50. Second, there are no observations of great achievers before the age of 19. Dirac and Einstein prove quite unusual, as only 7% of the sample produced a great achievement at or before the age of 26. Third, the age distribution for the Nobel Prize winners and the great inventors, which come from independent sources, are extremely similar over the entire distributions. Only 7% of individuals in the data appear in both the Nobel Prize and great inventors data sets.
+
+> While laboratory experiments do suggest that creative thinking becomes more difficult with age (e.g. Reese et al, 2001), the decline in innovative output at later ages may largely be due to declining effort, which a range of sociological, psychological, institutional, and economic theories have been variously proposed to explain (see Simonton 1996 for a review).
+
+- Reese, H,W. Lee, L.J., Cohen, S. H., and Puckett, J.M. "Effects of Intellectual Variables, Age, and Gender on Divergent Thinking in Adulthood", _International Journal of Behavioral Development_, November 2001, 25 (6), 491-500
+- Simonton "Creativity," in The Encyclopedia of Gerontology, San Diego, CA: Academic Press, 1996
+
+> In fact, aggregate data patterns, much debated in the growth literature, have noted long-standing declines in the per-capita output of R&D workers, both in terms of patent counts and productivity growth (Machlup 1962; Evenson, 1991; Jones 1995a; Kortum, 1997). Simple calculations from aggregate data suggest that the typical R&D worker contributes approximately 30% as much to aggregate productivity gains today as she did at the opening of the 20th Century.^29^
+>
+> 29: Combining Machlup’s data on growth in knowledge producing occupations for 1900-1959 (Machlup 1962, Table X-4) with similar NSF data for 1959-1999 (National Science Foundation, 2005), we see that the total number of knowledge-producing workers in the United States has increased by a factor of approximately 19. Meanwhile, the U.S. per-capita income growth rate, which proxies for productivity growth over the long-run, suggests a 6-fold increase in productivity levels (based on a steady growth rate of 1.8%; see Jones 1995b). The average rate at which individual R&D workers contribute to productivity growth is A=LR , or gA=LR , where A is aggregate productivity, g is the productivity growth rate, and LR is the aggregate number of R&D workers. The average contribution of the individual R&D worker in the year 2000 is then a fraction A2000 =A1900 =(L2000 =L1900 ) = 6=19 (32%) of what it was in 1900.
+
+> Figure 5 compares the estimated life-cycle curves for the year 1900 and the year 2000, using specification (3). We see that the peak ability to produce great achievements in knowledge came around age 30 in 1900 but shifted to nearly age 40 by the end of the century. An interesting aspect of this graph is the suggestion that, other things equal, lifetime innovation potential has declined.
+
+> The first analysis looks directly at evidence from Ph.D. age and shows that Ph.D. age increases substantially over the 20th Century. The second analysis harnesses world wars, as exogenous interruptions to the young career, to test the basic idea that training is an important preliminary input to innovation. I show that, while the world wars do not explain the 20th century’s age trend, they do indicate the unavoidable nature of training: lost years of training appear to be "made up" after the war. The final analysis explores cross-field, cross-time variation. I show that variations in training duration predict variations in age at great invention
+
+> Indeed, several studies have documented upward trends in educational attainment among the general population of scientists. For example, the age at which individuals complete their doctorates rose generally across all major fields in a study of the 1967-1986 period, with the increase explained by longer periods in the doctoral program (National Research Council, 1990). The duration of doctorates as well as the frequency and duration of post-doctorates has been rising across the life-sciences since the 1960s (Tilghman et al, 1998). A study of electrical engineering over the course of the 20th century details a long-standing upward trend in educational attainment, from an initial propensity for bachelor degrees as the educational capstone to a world where Ph.D.’s are common (Terman, 1998).
+
+- Terman, F.E. "A Brief History of Electrical Engineering Education", _Proceedings of the IEEE_, August 1998, 86 (8), 1792-1800
+
+> Most strikingly, both achievement and Ph.D. age in Physics experienced a unique decline in the early 20th century. This unusual feature, beyond reinforcing the relationship between training and achievement age, may also serve to inform more basic theories for the underlying dynamics and differences across fields.
+
+[that there was a fall in age for this radical and revolutionary period in physics validates the general approach]
+
+> First, mean life expectancy at age 10 was already greater than 60 in 1900, while it is clear from Sections 2 and 3 that innovation potential is modest beyond 60, so that adding years of life beyond this age would have at most mild effects on the optimization.^25^ Related, even modest discounting would substantially limit the effect of gains felt 35+ years beyond the end of training on the marginal training decision. Next, common life expectancy changes cannot explain the unique cross-field and cross-time variation explored in Section 4, such as the unique behavior of physics. Moreover, Figure 7 suggests, if anything, accelerating age trends after the second world war, which is hard to explain with increased longevity, where post-war gains have slowed.
+
+> One proxy measure is research collaboration in patenting - measured as team size - which is increasing at over 10% per decade.28 A more direct measure of specialization considers the probability that an individual switches technological areas between consecutive patents. Jones (2005) shows that the probability of switching technological areas is substantially declining with time. These analyses indicate that training time, E, is rising, while measures of breadth, b, are simultaneously declining. It is then difficult to escape the conclusion that the distance to the knowledge frontier is rising.28 Large and general upward trends in research collaboration are also found in journal publications (e.g. Adams et al, 2004).
+
+- Adams, James D., Black, Grant C., Clemmons, J.R., and Stephan, Paula E. "Scientific Teams and Institutional Collaborations: Evidence from U.S. Universities, 1981-1999", NBER Working Paper #10640, July 2004
+
+> Analogously, problems that require more experiential training have older peak ages. For instance, Jones (2006) finds that the peak age for natural scientists has drifted higher over the twentieth century. Relative to 100 years ago, more experience now needs to be accumulated to reach the cutting edge of scientific fields.
+
+lifespan increases cannot make up for this: <http://lesswrong.com/lw/7jh/living_forever_is_hard_part_2_adult_longevity/>
+
+Jones, Benjamin F. ["The Burden of Knowledge and the Death of the Renaissance Man: Is Innovation Getting Harder?"](http://www.nber.org/papers/w11360.pdf) NBER Working Paper #11360, 2005
+
+> Upward trends in academic collaboration and lengthening doctorates, which have been noted in other research, can also be explained by the model, as can much-debated trends relating productivity growth and patent output to aggregate inventive effort. The knowledge burden mechanism suggests that the nature of innovation is changing, with negative implications for long-run economic growth.
+
+> Given this increasing educational attainment, innovators will only become more specialized if the burden of knowledge mechanism is sufficiently strong. More subtly, income arbitrage produces the surprising result that educational attainment will not vary across technological fields, regardless of variation in the burden of knowledge or innovative opportunities.
+
+[any relation to [Baumol's cost disease](!Wikipedia)?]
+
+> First, R&D employment in leading economies has been rising dramatically, yet TFP growth has been flat (Jones, 1995b). Second, the average number of patents produced per R&D worker or R&D dollar has been falling over time across countries (Evenson 1984) and U.S. manufacturing industries (Kortum 1993). These aggregate data trends can be seen in the model as an effect of increasingly narrow expertise, where innovators are becoming less productive as individuals and are required to work in ever larger teams.
+
+- Jones “Time Series Tests of Endogenous Growth Models,” _Quarterly Journal of Economics_, 1995b, 110, 495-525
+
+> Essentially, the greater the growth in the burden of knowledge, the greater must be the growth in the value of knowledge to compensate. Articulated views of why innovation may be getting harder in the growth literature (Kortum 1997, Segerstrom 1998) have focused on a "fishing out" idea; that is, on the parameter χ. The innovation literature also tends to focus on "fishing out" themes (e.g. Evenson 1991, Cockburn & Henderson, 1996). This paper offers the burden of knowledge as an alternative mechanism, one that makes innovation harder, acts similarly on the growth rate, and can explain aggregate data trends (see Section 4). Most importantly, the model makes specific predictions about the behavior of individual innovators, allowing one to get underneath the aggregate facts and test for a possible rising burden of knowledge using micro-data
+
+- Kortum, Samuel S. “Equilibrium R&D and the Decline in the Patent-R&D Ratio: U.S. Evidence,” _American Economic Review Papers and Proceedings_, May 1993, 83, 450-457
+- Evenson 1991 "Patent Data by Industry: Evidence for Invention Potential Exhaustion?" _Technology and Productivity: The Challenge for Economic Policy_, 1991, Paris: OECD, 233-248
+
+> This result is consistent with Henderson & Cockburn’s (1996) finding that researchers in the pharmaceutical industry are having a greater difficulty in producing innovations over time.
+
+- Henderson, Rebecca and Cockburn, Iain. “Scale, Scope, and Spillovers: The Determinants of Research Productivity in Drug Discovery,” _Rand Journal of Economics_, Spring 1996, 27, 32-59.
+
+> The age at which individuals complete their doctorates rose generally across all major fields from 1967-1986, with the increase explained by longer periods in the doctoral program (National Research Council, 1990).
+> The duration of doctorates as well as the frequency of post-doctorates has been rising across the life-sciences since the 1960s (Tilghman et al, 1998). An upward age trend has also been noted among the great inventors of the 20th Century at the age of their noted achievement (Jones, 2005), as shown in Table 1. Meanwhile, like the general trends in innovator teamwork documented here, upward trends in academic coauthorship have been documented in many academic literatures, including physics and biology (Zuckerman & Merton, 1973), chemistry (Cronin et al, 2004), mathematics (Grossman, 2002), psychology (Cronin et al, 2003), and economics (McDowell & Melvin, 1983; Hudson, 1996; Laband & Tollison, 2000). These coauthorship studies show consistent and, collectively, general upward trends, with some of the data sets going back as far as 1900.
+
+- National Research Council, _On Time to the Doctorate: A Study of the Lengthening Time to Completion for Doctorates in Science and Engineering_, Washington, DC: National Academy Press, 1990
+- Tilghman, Shirley (chair) et al. _Trends in the Early Careers of Life Sciences_, Washington, DC: National Academy Press, 1998
+- Zuckerman, Harriet and Merton, Robert. “Age, Aging, and Age Structure in Science,” in Merton, Robert, _The Sociology of Science_, Chicago, IL: University of Chicago Press, 1973, 497-559
+- Cronin et al, 2004 "Visible, Less Visible, and Invisible Work: Patterns of Collaboration in 20th Century Chemistry," _Journal of the American Society for Information Science and Technology_, 2004, 55(2), 160-168
+- Grossman, Jerry. "The Evolution of the Mathematical Research Collaboration Graph," _Congressus Numerantium_, 2002, 158, 202-212
+- Cronin, Blaise, Shaw, Debora, and La Barre, Kathryn. "A Cast of Thousands: Coauthorship and Subauthorship Collaboration in the 20th Century as Manifested in the Scholarly Journal Literature of Psychology and Philosophy," _Journal of the American Society for Information Science and Technology_, 2003, 54(9), 855-871
+- McDowell, John, and Melvin, Michael. "The Determinants of Coauthorship: An Analysis of the Economics Literature," _Review of Economics and Statistics_, February 1983, 65, 155-160
+- Hudson, John. "Trends in Multi-Authored Papers in Economics," _Journal of Economic Perspectives_, Summer 1996, 10, 153-158
+- Laband, David and Tollison, Robert. "Intellectual Collaboration," _Journal of Political Economy_, June 2000, 108, 632-662
+
+> Of further interest is the drop in total patent production per total researchers, which has been documented across a range of countries and industries and may go back as far as 1900 and even before (Machlup 1962). Certainly, not all researchers are engaging in patentable activities, and it is possible that much of this trend is explained by relatively rapid growth of research in basic science.^22^
+> However, the results here indicate that among those specific individuals who produce patentable innovations, the ratio of patents to individuals is in fact declining. In particular, the recent drop in patents per U.S. R&D worker, a drop of about 50% since 1975 (see Segerstrom 1998), is roughly consistent in magnitude with the rise in team size over that period.
+
+- Machlup, Fritz. _The Production and Distribution of Knowledge in the United States_, Princeton, NJ: Princeton University Press, 1962, 170-176
+- Segerstrom, Paul. “Endogenous Growth Without Scale Effects,” _American Economic Review_, December 1998, 88, 1290-1310
+
+TODO [Performance Curve Database](http://pcdb.santafe.edu/index.php) - many sigmoids or linear graphs?
+
+
+## Benefit
+
+One warning sign is citation by contemporaries. If the percentage of papers which never get cited increases, this suggests that either the research itself is no good (even a null result is worth citing as information about what we know is *not* the case), or fellow researchers have a reason not to cite them (reasons which range from the malign like researchers are so overloaded that they cannot keep up with the literature, which implies diminishing marginal returns, or professional jealousy, which implies the process of science is being corrupted, to the merely possibly harmful, like length limits). Uncitedness is most famous in the humanities, which are not necessarily of major concern, but I have [collected estimates](Culture is not about esthetics#fn43) that there are multiple hard fields like chemistry where uncitedness may range up to 70+%, and there's a troubling indication that uncitedness may be increasing in even the top scientific journals.
+
+
+demand for math inelastic and collaboration not helpful?
+
+"The Collapse of the Soviet Union and the Productivity of American Mathematicians", by George J. Borjas and Kirk B. Doran, NBER Working Paper No. 17800, February 2012
+
+> We use unique international data on the publications, citations, and affiliations of mathematicians to examine the impact of a large post-1992 influx of Soviet mathematicians on the productivity of their American counterparts. We find a negative productivity effect on those mathematicians whose research overlapped with that  the Soviets. We also document an increased mobility rate (to lower-quality institutions and out of active publishing) and a reduced likelihood of producing “home run” papers. Although the total product of the pre-existing American mathematicians shrank, the Soviet contribution to American mathematics filled in the gap. However, there is no evidence that the Soviets greatly increased the size of the “mathematics pie.”
+
+> Ben Jones, a professor at the Kellogg School of Management, at Northwestern University, has quantified this trend. By analyzing 19.9 million peer-reviewed academic papers and 2.1 million patents from the past fifty years, he has shown that levels of teamwork have increased in more than ninety-five per cent of scientific subfields; the size of the average team has increased by about twenty per cent each decade. The most frequently cited studies in a field used to be the product of a lone genius, like Einstein or Darwin. Today, regardless of whether researchers are studying particle physics or human genetics, science papers by multiple authors receive more than twice as many citations as those by individuals. This trend was even more apparent when it came to so-called “home-run papers”—publications with at least a hundred citations. These were more than six times as likely to come from a team of scientists.
+>
+> ...A few years ago, Isaac Kohane, a researcher at Harvard Medical School, published a study that looked at scientific research conducted by groups in an attempt to determine the effect that physical proximity had on the quality of the research. He analyzed more than thirty-five thousand peer-reviewed papers, mapping the precise location of co-authors. Then he assessed the quality of the research by counting the number of subsequent citations. The task, Kohane says, took a “small army of undergraduates” eighteen months to complete. Once the data was amassed, the correlation became clear: when coauthors were closer together, their papers tended to be of significantly higher quality. The best research was consistently produced when scientists were working within ten metres of each other; the least cited papers tended to emerge from collaborators who were a kilometre or more apart. “If you want people to work together effectively, these findings reinforce the need to create architectures that support frequent, physical, spontaneous interactions,” Kohane says. “Even in the era of big science, when researchers spend so much time on the Internet, it’s still so important to create intimate spaces.”
+
+<http://www.newyorker.com/reporting/2012/01/30/120130fa_fact_lehrer?currentPage=all>
+
+
+# Commercialization
+## Pharmaceuticals
+
+Drugs are perhaps the most spectacular example of a sigmoid suddenly hitting and destroying a lot of expectations. If you read the transhumanist literature from the '80s or '90s, even the [more sober](http://lesswrong.com/lw/8yp/prediction_is_hard_especially_of_medicine/ "Darwin on 'The Future of Medicine' 1988") and well-informed projections, it's striking how much faith is put into ever-new miracle drugs coming out. And why not? [The War On Cancer](!Wikipedia) still didn't seem like it was going too badly - perhaps it would take more than $1 billion, but real progress was being made - and a crop of nootropics came out in the '70s and '80s like [modafinil](Modafinil), followed up with famous blockbusters like Viagra, and then the Human Genome Project would triumphantly finish in a decade or so, whereupon things would *really* get cooking.
+
+What went unnoticed in all this was the diminishing marginal returns. First, it turned out that pharmaceutical companies were doing a pretty good job at searching all the 'small' (lighter weight) chemicals:
+
+["What Do Medicinal Chemists Actually Make? A 50-Year Retrospective"](http://pubs.acs.org/doi/abs/10.1021/jm200504p)
+> The idea is to survey the field from a longer perspective than some of the other papers in this vein, and from a wider perspective than the papers that have looked at marketed drugs or structures reported as being in the clinic. I'm reproducing the plot for the molecular weights of the compounds, since it's an important measure and representative of one of the trends that shows up. The prominent line is the plot of mean values, and a blue square shows that the mean for that period was statistically different than the 5-year period before it (it's red if it wasn't). The lower dashed line is the median. The dotted line, however, is the mean for actual launched drugs in each period with a grey band for the 95% confidence interval around it.
+>
+> ![Increase in average size of drugs 1960-2004](http://pipeline.corante.com/Molecular%20weight.png)
+>
+> As a whole, the mean molecular weight of a J. Med. Chem. has gone up by 25% over the 50-year period, with the steeped increase coming in 1990-1994. "Why, that was the golden age of combichem", some of you might be saying, and so it was. Since that period, though, molecular weights have just increased a small amount, and may now be leveling off. Several other measures show similar trends.
+["Fifty Years of Med-Chem Molecules: What Are They Telling Us?"](http://pipeline.corante.com/archives/2011/09/13/fifty_years_of_medchem_molecules_what_are_they_telling_us.php)
+
+The more atoms in a particular drug, the more possible permutations and arrangements; a logarithmic slowdown in average weight would be expected of a search through an exponentially increasing space of possibilities. Smaller drugs are much more desirable than larger ones: they often are easier & cheaper to synthesize, more often survive passage through the gut or can pass the blood-brain barrier, etc. So there are many more large drugs than small drugs, but the small ones are much more desirable; hence, one would expect a balance between them, with no clear shift - if we were far from exploiting all the low-hanging fruit. Instead, we see a very steady trend upwards, as if there were ever fewer worthwhile small drugs to be found.
+
+(One could make an analogy to oil field exploration: the big oil fields are easiest to find and also the best, while small ones are both hard to find and the worst; if the big ones exist, the oil companies will exploit them as much as possible and neglect the small ones; hence, a chart showing ever decreasing average size of producing oil fields smells like a strong warning sign that there are few big oil fields left.)
+
+Simultaneously with this indication that good drugs are getting harder to find, we find that returns are diminishing to each dollar spent on drug R&D (it takes more dollars to produce one drug):
+
+> "Although modern pharmaceuticals are supposed to represent the practical payoff of basic research, the R&D to discover a promising new compound now costs about 100 times more (in inflation-adjusted dollars) than it did in 1950. (It also takes nearly three times as long.) This trend shows no sign of letting up: Industry forecasts suggest that once failures are taken into account, the average cost per approved molecule will top $3.8 billion by 2015. What’s worse, even these “successful” compounds don’t seem to be worth the investment. According to one internal estimate, approximately 85 percent of new prescription drugs approved by European regulators provide little to no new benefit. We are witnessing Moore’s law in reverse."^[["Trials and Errors: Why Science Is Failing Us"](http://www.wired.com/magazine/2011/12/ff_causation/all/1), _Wired_ 2011]
+
+> "The average drug developed by a major pharmaceutical company costs at least $4 billion, and it can be as much as $11 billion...The drug industry has been tossing around the $1 billion number for years. It is based largely on a study (supported by drug companies) by Joseph DiMasi of Tufts University...But as Bernard Munos of the InnoThink Center for Research In Biomedical Innovation has noted, just adjusting that estimate for current failure rates results in an estimate of $4 billion in research dollars spent for every drug that is approved...Forbes (that would be Scott DeCarlo and me) took Munos' count of drug approvals for the major pharmas and combined it with their research and development spending as reported in annual earnings filings going back fifteen years...The range of money spent is stunning. AstraZeneca has spent $12 billion in research money for every new drug approved, as much as the top-selling medicine ever generated in annual sales; Amgen spent just $3.7 billion."^[["The Truly Staggering Cost Of Inventing New Drugs"](http://www.forbes.com/sites/matthewherper/2012/02/10/the-truly-staggering-cost-of-inventing-new-drugs/), 2012]
+
+> "Kindler's attempts to figure out what to do about research were even more anguished. He was right that the old Pfizer model wasn't working. Bigger wasn't better when it came to producing new drugs. Studies by Bernard Munos, a retired strategist at Eli Lilly (LLY), show that both massive increases in research spending and corporate mergers have failed to increase R&D productivity. Between 2000 and 2008, according to Munos, Pfizer spent $60 billion on research and generated nine drugs that won FDA approval -- an average cost of $6.7 billion per product. At that rate, Munos concluded, the company's internal pipeline simply couldn't sustain its profits."^[["Inside Pfizer's palace coup"](http://features.blogs.fortune.cnn.com/2011/07/28/pfizer-jeff-kindler-shakeup/), _Fortune_]
+
+> "But the very opposite of Moore's Law is happening at the downstream end of the R&D pipeline. The number of new molecules approved per billion dollars of inflation-adjusted R&D has declined inexorably at 9% a year and is now 1/100th of what it was in 1950. The nine biggest drug companies spend more than $60 billion a year on R&D but are finding new therapies at such a slow rate that, as a group, they've little chance of recouping that money. Meanwhile, blockbuster drugs are losing patent protection at an accelerating rate. The next few years will take the industry over a "patent cliff" of $170 billion in global annual revenue. On top of this, natural selection is producing resistant disease strains that undermine the efficacy not only of existing antibiotics and antivirals but (even faster) of anti-cancer drugs. Many people believe that something is terribly wrong with the way the industry works. The problem, some think, is that science—to mix clichés—is scraping the bottom of the biological barrel after plucking the low-hanging fruit."^[["Drugs That Are as Smart as Our Diseases"](http://online.wsj.com/article/SB10001424053111904265504576567070931547618.html), _WSJ_]
+
+# TODO
+
+> Since 2007, real median household income has declined 6.4% and is 7.1 % below the median household income peak prior to the 2001 recession.
+[Justin Wolfers](https://twitter.com/#!/JustinWolfers/status/113614295635472385),
+
+[2010 Census data](http://www.census.gov/newsroom/releases/archives/income_wealth/cb11-157.html):
+> The U.S. Census Bureau announced today that in 2010, median household income declined, the poverty rate increased and the percentage without health insurance coverage was not statistically different from the previous year.
+> Real median household income in the United States in 2010 was $49,445, a 2.3 percent decline from the 2009 median.
+> The nation's official poverty rate in 2010 was 15.1 percent, up from 14.3 percent in 2009 ─ the third consecutive annual increase in the poverty rate. There were 46.2 million people in poverty in 2010, up from 43.6 million in 2009 ─ the fourth consecutive annual increase and the largest number in the 52 years for which poverty estimates have been published.
+> The number of people without health insurance coverage rose from 49.0 million in 2009 to 49.9 million in 2010, while the percentage without coverage −16.3 percent - was not statistically different from the rate in 2009.
+
+> Until this morning, the official data showed that the U.S. productivity growth accelerated during the financial crisis. Nonfarm business productivity growth supposedly went from a 1.2% annual rate in 2005-2007, to a 2.3% annual rate in 2007-2009.  Many commentators suggested that this productivity gain, in the face of great disruptions, showed the flexibility of the U.S. economy.
+>
+> Uh, oh. The latest revision of the national income accounts, released this morning, makes the whole productivity acceleration vanish. Nonfarm business productivity growth in the 2007-09 period has now been cut almost in half, down to only  1.4% per year.
+<https://innovationandgrowth.wordpress.com/2011/07/29/productivity-surge-of-2007-09-melts-away-in-new-data/>
+
+> I would pay up to $500 per year [for a search engine like Google]. It's that valuable to me. What about you?
+>
+> Last year three researchers at University of Michigan performed a small experiment to see if they could ascertain how much ordinary people might pay for search. Their method was to ask students inside a well-stocked university library to answer questions asked on Google, but to find the answers only using the materials in the library. They measured how long it took the students to answer a question in the stacks. On average it took 22 minutes. That's 15 minutes longer that the 7 minutes it took to answer the same question, on average, using Google. Figuring a national average wage of $22/hour, this works out to a savings of $1.37 per search.
+<http://www.kk.org/thetechnium/archives/2011/04/would_you_pay_f.php>
+
+
+'A survey indicated that 46 percent of Americans would be unwilling to give up television for the rest of their lives in return for a million dollars.'
+Cowen on: “Would You Give Up TV for a Million Bucks?” 1992. TV Guide, October 10, pp. 10–15
+
+> How much would someone have to pay you to give up the Internet for the rest of your life? Would a million dollars be enough? Twenty million? How about a billion dollars? "When I ask my students this question, they say you couldn't pay me enough," says Professor Michael Cox, director of the O'Neil Center for Global Markets and Freedom at Southern Methodist University's Cox School of Business.
+http://reason.tv/picks/show/would-you-give-up-the-internet
+
+> An 86-page 2010 FCC study concludes that “a representative household would be willing to pay about $59 per month for a less reliable Internet service with fast speed (“Basic”), about $85 for a reliable Internet service with fast speed and the priority feature (“Premium”), and about $98 for a reliable Internet service with fast speed plus all other activities (“Premium Plus”). An improvement to very fast speed adds about $3 per month to these estimates.”
+<http://siepr.stanford.edu/system/files/shared/Final_Rosston_Savage_Waldman_02_04_10__1_.pdf>
+
+> A study from Japan found that: “The estimated WTP for availability of e-mail and web browsing delivered over personal computers are 2,709 Yen ($35) and 2,914 Yen ($38), on a monthly basis, respectively, while average broadband access service costs approximately 4,000 Yen ($52) in Japan
+<http://www.mediacom.keio.ac.jp/publication/pdf2009/03_Masanori%20KONDO.pdf>
+
+> The Austan Goolsbee paper, based on 2005 data, does a time study to find that the consumer surplus of the internet is about two percent of  income.
+<http://faculty.chicagobooth.edu/austan.goolsbee/research/timeuse.pdf>
+
+> This paper finds a four percent consumer surplus from the personal computer more generally, not just the internet.
+<http://www.immagic.com/eLibrary/ARCHIVES/GENERAL/NBER_US/N071109G.pdf>
+
+
+> The productivity of U.S. workers dropped from April through June for the second consecutive quarter, leading to an increase in labor costs that may restrain gains in profits. The measure of employee output per hour fell at a 0.3 percent annual rate in the second quarter after a revised 0.6 percent drop in the prior three months, figures from the Labor Department showed today in Washington. The median estimate of 60 economists surveyed by Bloomberg News projected a 0.9 percent decrease. Expenses per employee climbed at a 2.2 percent rate.
+>
+> ...From the second quarter of 2010, productivity climbed 0.8 percent compared with a 1.2 percent year-over-year increase in the first quarter. Labor costs rose 1.3 percent from the year- earlier period following a 1.1 percent increase in the 12 months ended in the first quarter. Today’s productivity report incorporated revisions to prior years. Worker efficiency was revised to 4.1 percent in 2010 from a previously reported 3.9 percent. For 2009, it was revised down to 2.3 percent from 3.7 percent. Labor costs fell 2 percent in 2010, the biggest decline since records began in 1948. Gross domestic product expanded at a 1.3 percent annual pace from April through June, after a 0.4 percent rate in the previous three months, the Commerce Department said on July 29. Household spending rose at 0.1 percent pace, the weakest since the same period in 2009.
+
+<http://www.bloomberg.com/news/2011-08-09/productivity-in-u-s-falls-for-second-straight-quarter-as-labor-costs-rise.html>
+
+Canadian manufacturing & goods productivity stagnating 2000-2010; resource extraction *falling* 60% since 1960! <http://marginalrevolution.com/wp-content/uploads/2011/08/canada1.png> notice this is despite increasing total absolute extraction rate: <http://upload.wikimedia.org/wikipedia/commons/b/b8/Canadian_Oil_Production_1960_to_2020.png>
+> You can see that Mining and Extraction TFP takes a long plunge, even though Canada today prospers through selling natural resources.  So what’s up?  One of Gordon's arguments against TFP is his claim that this graph implies earlier mining technologies were better than current mining technologies (unlikely), but that is a misunderstanding of what TFP measures.  Think of TFP as trying to pick “the stuff we get for free through innovation.”  Falling TFP in mining reflects Canada’s move from “suck it up with a straw” oil to complex, high cost extraction tar sands projects and the like.  They have moved down this curve a long, long way.
+>
+> Yet Canada still prospers: someone is willing to pay for all the time and trouble they put into extraction, because the other natural resource options are costlier at the relevant margin.  Another way to make the point is that this graph, and the embedded story of productivity, is very bad news for *someone*, just not Canada, at least not so far.
+<http://marginalrevolution.com/marginalrevolution/2011/08/is-there-a-productivity-crisis-in-canada.html>
+
+Australia mining productivity falling:
+> "Everyone here also knows that it is now just about impossible to avoid the conclusion that productivity growth performance has been quite poor since at least the mid-2000s," he said. Based on the output per hours worked, the best productivity performers over the past five years were information, media and telecommunications (up 6.1 per cent a year on average), followed by agriculture, forestry and fishing (up 3.8 per cent) and financial and insurance services (up 3.7 per cent). In contrast, mining productivity went backwards by 4.9 per cent per year on average, and electricity, gas and waste services by 5.1 per cent.
+<http://www.theaustralian.com.au/business/economics/mining-drags-down-productivity/story-e6frg926-1226107755451>
+
+> Chad Jones (Fig. 1, p. 763, and in his short, readable text _Introduction to Economic Growth_) has reminded economists that the number of scientists and researchers has more than doubled in the G-5 countries since 1950, while the growth rate of living standards hasn’t budged: Twice the researchers, zero effect on growth.
+
+> "...The reasons for retracting 742 English language research papers retracted from the PubMed database between 2000 and 2010 were evaluated. Reasons for retraction were initially dichotomised as fraud or error and then analysed to determine specific reasons for retraction.
+>
+> Results: Error was more common than fraud (73.5% of papers were retracted for error (or an undisclosed reason) vs 26.6% retracted for fraud). Eight reasons for retraction were identified; the most common reason was scientific mistake in 234 papers (31.5%), but 134 papers (18.1%) were retracted for ambiguous reasons. Fabrication (including data plagiarism) was more common than text plagiarism. Total papers retracted per year have increased sharply over the decade (r=0.96; p<0.001), as have retractions specifically for fraud (r=0.89; p<0.001). Journals now reach farther back in time to retract, both for fraud (r=0.87; p<0.001) and for scientific mistakes (r=0.95; p<0.001). Journals often fail to alert the naïve reader; 31.8% of retracted papers were not noted as retracted in any way."
+
+<http://jme.bmj.com/content/37/4/249.abstract?sid=905cb3bc-a961-4710-8544-5f0509a6b599>
+
+<http://pmretract.heroku.com/byyear> seems to follow an exponential increase in retraction percentage from 2000-2010
+
+
+> Below is a figure constructed using the quarterly TFP [total factor productivity] series of John Fernald at the San Francisco Fed.
+<http://3.bp.blogspot.com/-MyzK4IArktU/TVVkhe7bK6I/AAAAAAAACCQ/zDiehWXoCi4/s1600/tfp.jpg>
+(extreme divergence from the exponential growth, around 1970-1973, to something that looks linear - with no acceleration in the '90s or 2000s)
+
+> Using country-level analysis as a base, we estimated that the total gross value of Internet search across the global economy was $780 billion in 2009, equivalent to the GDP of the Netherlands or Turkey. By this estimate, each search is worth about $0.50.
+> Of that value, $540 billion—69 percent of the total and 25 times the annual value added (profits) of search companies—flowed directly to global GDP, chiefly in the form of e-commerce, advertising revenues, and higher corporate productivity. Search accounted for 1.2 percent of US and for 0.5 percent of India’s GDP.
+> The remaining $240 billion (31 percent) does not show up in GDP statistics. It is captured by individuals rather than companies, in the form of consumer surplus, and arises from unmeasured benefits, such as lower prices, convenience, and the time saved by swift access to information. We estimate those benefits at $20 a month for consumers in France, Germany, and the United States and at $2 to $5 a month for their counterparts in Brazil and India.
+<https://www.mckinseyquarterly.com/Marketing/Digital_Marketing/Measuring_the_value_of_search_2848>
+A typical Internet search for academic information takes seven minutes. Relying on physical references takes 22 minutes.44
+ A consumer generally finds time to perform ten searches online but only two searches offline for each purchase.45
+ It takes the same amount of time to do three searches in an online business directory as it does to do one in a physical directory.46
+Analysis for this report suggests that knowledge workers in business each save 30 to 45 hours per year as a result of search.
+When it comes to price transparency, academic research shows that the more visits made to price comparison Web sites, the lower prices fall and the greater the difference between the average and minimum price for a particular good.77 Thus, price transparency has a disciplining effect on the margins retailers can expect, which benefits consumers. Preliminary research shows prices online are, on average, 10 percent lower than those offline as a result of the price transparency afforded by search tools.78
+Better matching is particularly valuable to consumers when they want long-tail items. Research shows that consumers value a hard-to-find, long-tail product anywhere between 1.3 to 1.8 times the actual price of the product.79 Consumers therefore capture significant amounts of surplus when they buy products in the long tail.
+With regard to time saved, various studies taken together suggest that consumers who search online for their purchase can save 10 to 20 hours a year.80 Using data from academic studies, we valued that time at between $0.5 and $7 per hour, based on average, after-tax income per household in each country and the assumption that a consumer’s leisure time was worth 65 percent of this figure.81,82
+
+>     It seems like market forecasts of low real yields 30 years into the future support TGS. How long does it take for long-run money neutrality to win out? If the yield curve showed low yields 100 years out, would that dissuade those looking for a monetary solution?
+http://marginalrevolution.com/marginalrevolution/2011/08/capital-depreciation-as-stimulus.html#comments
+yields: http://www.treasury.gov/resource-center/data-chart-center/interest-rates/Pages/TextView.aspx?data=realyield
+
+> Today, very few teenagers work full time jobs, and the number of teens employed in summer jobs has decreased from ~60% in 1994, to ~40% in 2008.[29]
+[29]: Camarota S, Jensenius, K. : ["A Drought of Summer Jobs: Immigration and the Long-Term Decline in Employment Among U.S.-Born Teenagers"](http://www.cis.org/articles/2010/teen-study.pdf). In: Backgrounder. Center for Immigration Studies; 2010.
+<http://chronopause.com/index.php/2011/08/20/interventive-gerontology-1-0-02-first-try-to-make-it-to-the-mean-diet-as-a-life-extending-tool-part-3/>
+
+> Here, we see that the percentage representation of teens in the U.S. workforce in 2010 is 5.1% less than the level recorded in 2002. That figure confirms that teens are indeed being displaced from the U.S. workforce at the minimum wage level....In practical terms, for the 5.1% percentage decline from 2002 through 2010 in the teen share of American federal minimum wage earners, approximate half were displaced by young adults Age 20-34 (2.7%), while the remainder were displaced by geezers Age 45-59 (2.4%).
+<http://politicalcalculations.blogspot.com/2011/07/how-much-are-geezers-displacing-teens.html> based on "the Bureau of Labor Statistics' annual reports on the Characteristics of Minimum Wage Workers." see also <http://politicalcalculations.blogspot.com/2011/07/disappearing-teen-jobs-and-minimum-wage_14.html>
+
+>     This paper outlines a simple regression-based method to decompose the variance of an aggregate time series into the variance of its components, which is then applied to measure the relative contributions of productivity, hours per worker, and employment to cyclical output growth across a panel of countries. Measured productivity contributes more to the cycle in Europe and Japan than in the United States. Employment contributes the largest proportion of the cycle in Europe and the United States (but not Japan), which is inconsistent with the idea that higher levels of employment protection in Europe dampen cyclical employment fluctuations...In the United States, productivity only contributes about 27% of the cycle and labor input four-fifths. Meanwhile, in France and Germany, productivity contributes 43% and 38% of the cycle, respectively. Japan is more European than Europe in this regard; productivity contributes 59% of the cycle there, while Korea looks more like the United States. <http://www.ifw-members.ifw-kiel.de/publications/a-simple-decomposition-of-the-variance-of-output-growth-across-countries-1/KWP%201703.pdf>
+> I’m the author of that paper. My own interpretation of my paper is that Japan sees a lot more labor hoarding than Europe or the United States, so unemployment is a particularly bad measure of the cycle there. We’d want to look at some measure of the output gap as a cyclical indicator since labor market indicators from Japan don’t carry much information about the macro situation. BUT, Karl has a major point, which is what the second quote was about. If we look at output, our analysis is complicated by the fact that the trends which we saw through 1990 or so–convergence in productivity and unusually high hours worked per worker–have stopped. Without putting words in Tyler’s mouth, Japan picked the low-hanging fruit and now its productivity has been at 70% of that of the United States for some time now. We can’t just naively extrapolate that trend and expect a large amount of growth. Combine that with low population growth and a sharp downward trend in hours worked, and the Japanese growth slowdown since then is not surprising. <http://marginalrevolution.com/marginalrevolution/2011/08/where-does-the-japanese-slowdown-come-from.html#comment-body-157487734>
+
+> The need for further productivity gains doesn’t really make sense to me as an explanation. Japan has low hanging productivity fruit out the wazoo. The stereotypical salaryman stays out late “working” every night. Send the same dude home at 5:00pm and he’d get just as much done and increase productivity by 4 hours a day, easily. Or is the suggestion that Japanese culture is too resistant to this kind of change, hence productivity couldn’t grow, hence it got hit by TGS? <http://marginalrevolution.com/marginalrevolution/2011/08/where-does-the-japanese-slowdown-come-from.html#comment-157487642>
+
+# China
+## Education
+
+Wikileaks diplomatic cable <http://www.zerohedge.com/news/wikileaks-cable-reveals-chinese-warning-domestic-asset-bubbles-overcapacity-early-2010-bashing->
+
+> China will need to restructure its economy so that it has a significantly higher share of knowledge-based services, especially research and development.  However China's "terrible" educational system, which promotes copying and pasting over creative and independent thought, is the largest impediment the country faces on this front, our IFC contact said....
+>
+> \1\1\. (SBU) However, Lai [Consul General, the head of IFC's Chengdu office, Lai Jinchang] identified China's "terrible" educational system as presenting a serious impediment toward achieving a shift to a more knowledge-based economy.  The current system promotes copying and pasting over creative and independent thought.  Lai said that the system rewards students for thinking "within a framework" in order to get the grade.  He described the normal process undertaken by students when writing as essentially collecting sentences from various sources without any original thinking.  He compared the writing ability of a typical Chinese Phd as paling in comparison to his "unskilled" staff during his decade of work with the IFC in Africa.
+
+## R&D
+
+[Publication bias](!Wikipedia) stronger in China? ["Local Literature Bias in Genetic Epidemiology: An Empirical Evaluation of the Chinese Literature"](http://www.plosmedicine.org/article/info:doi/10.1371/journal.pmed.0020334), 2005:
+
+> "We targeted 13 gene-disease associations, each already assessed by meta-analyses, including at least 15 non-Chinese studies. We searched the Chinese Journal Full-Text Database for additional Chinese studies on the same topics. We identified 161 Chinese studies on 12 of these gene-disease associations; only 20 were PubMed-indexed (seven English full-text). Many studies (14–35 per topic) were available for six topics, covering diseases common in China. With one exception, the first Chinese study appeared with a time lag (2–21 y) after the first non-Chinese study on the topic. Chinese studies showed significantly more prominent genetic effects than non-Chinese studies, and 48% were statistically significant per se, despite their smaller sample size (median sample size 146 versus 268, _p_ < 0.001). The largest genetic effects were often seen in PubMed-indexed Chinese studies (65% statistically significant per se). Non-Chinese studies of Asian-descent populations (27% significant per se) also tended to show somewhat more prominent genetic effects than studies of non-Asian descent (17% significant per se)."
+
+["Chinese Innovation Is a Paper Tiger: A closer look at China's patent filings and R&D spending reveals a country that has a long way to go](http://online.wsj.com/article/SB10001424053111904800304576472034085730262.html), WSJ, by Anil K. Gupta and Haiyan Wang:
+
+> "China's R&D expenditure increased to 1.5% of GDP in 2010 from 1.1% in 2002, and should reach 2.5% by 2020. Its share of the world's total R&D expenditure, 12.3% in 2010, was second only to the U.S., whose share remained steady at 34%-35%. According to the World Intellectual Property Organization, Chinese inventors filed 203,481 patent applications in 2008. That would make China the third most innovative country after Japan (502,054 filings) and the U.S. (400,769)...According to the Organization for Economic Cooperation and Development, in 2008, the most recent year for which data are available, there were only 473 triadic patent filings from China versus 14,399 from the U.S., 14,525 from Europe, and 13,446 from Japan. Starkly put, in 2010 China accounted for 20% of the world's population, 9% of the world's GDP, 12% of the world's R&D expenditure, but only 1% of the patent filings with or patents granted by any of the leading patent offices outside China. Further, half of the China-origin patents were granted to subsidiaries of foreign multinationals....A 2009 survey by the China Association for Science and Technology reported that half of the 30,078 respondents knew at least one colleague who had committed academic fraud. Such a culture inhibits serious inquiry and wastes resources."
+
+Insiders agree; a dean at Tsinghua University (first or second best university in China):
+
+> In reality, however, rampant problems in research funding—some attributable to the system and others cultural—are slowing down China’s potential pace of innovation.
+>
+> Although scientific merit may still be the key to the success of smaller research grants, such as those from China’s National Natural Science Foundation, it is much less relevant for the megaproject grants from various government funding agencies...the guidelines are often so narrowly described that they leave little doubt that the “needs” are anything but national; instead, the intended recipients are obvious. Committees appointed by bureaucrats in the funding agencies determine these annual guidelines. For obvious reasons, the chairs of the committees often listen to and usually cooperate with the bureaucrats.
+>
+> “Expert opinions” simply reflect a mutual understanding between a very small group of bureaucrats and their favorite scientists. This top-down approach stifles innovation and makes clear to everyone that the connections with bureaucrats and a few powerful scientists are paramount, dictating the entire process of guideline preparation. To obtain major grants in China, it is an open secret that doing good research is not as important as schmoozing with powerful bureaucrats and their favorite experts.
+>
+> This problematic funding system is frequently ridiculed by the majority of Chinese researchers. And yet it is also, paradoxically, accepted by most of them. Some believe that there is no choice but to accept these conventions. This culture even permeates the minds of those who are new returnees from abroad; they quickly adapt to the local environment and perpetuate the unhealthy culture. A significant proportion of researchers in China spend too much time on building connections and not enough time attending seminars, discussing science, doing research, or training students (instead, using them as laborers in their laboratories). Most are too busy to be found in their own institutions. Some become part of the problem: They use connections to judge grant applicants and undervalue scientific merit.
+editorial, ["China's Research Culture"](http://www.sciencemag.org/content/329/5996/1128), _Science_
+
+> "An investigation by the Chinese Association of Scientists has revealed that only about 40 percent of the funds allocated for scientific research is used on the projects they are meant for. The rest is usually spent on things that have nothing to do with research. Some research project leaders use the money to buy furniture, home appliances and, hold your breath, even apartments. In the most appalling scandal, an accountant in the National Science Foundation of China misappropriated more than 200 million yuan ($3.12 million) in eight years until he was arrested in 2004. Besides, the degree of earnestness most scientists show in their research projects nowadays is questionable. Engaging in scientific research projects funded by the State has turned out to be an opportunity for some scientists to make money. There are examples of some scientists getting research funds because of their connections with officials rather than their innovation capacity. Qian Xuesen, known as the father of China's atomic bomb and satellites, used to say during the last few years before his death in 2009 that the biggest problem is that Chinese universities cannot cultivate top-class scientists."
+["Honest Research Needed"](http://www.chinadaily.com.cn/opinion/2011-09/17/content_13725092.htm), _China Daily_ (government paper)
+
+> Zinch China, a consulting company that advises American colleges and universities about China, published a report last year that found cheating on college applications to be “pervasive in China, driven by hyper-competitive parents and aggressive agents.’’
+>
+> From the survey’s introduction: “Our research indicates that 90 percent of recommendation letters are fake, 70 percent of essays are not written by the applicant, and 50 percent of high school transcripts are falsified.’’
+
+http://rendezvous.blogs.nytimes.com/2012/02/05/sneaking-into-class-from-china/
