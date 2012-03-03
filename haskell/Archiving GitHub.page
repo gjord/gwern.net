@@ -60,7 +60,7 @@ Location: https://github.com/languages/Haskell/created
 
 Oh dear. It seems that the [`HTTP`](!Hackage "HTTP") package just won't handle HTTP*S*; nor does the description mention HTTPS nor any of the module names seem connected. Best to give up entirely on it.
 
-If we google 'Haskell https', one of the first 20 hits happens to be a [Stack Overflow](!Wikipedia) question/page which sounds promising: ["Haskell Network.Browser HTTPS Connection"](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection). The [one answer](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection/3988829#3988829) says to simply use the [Haskell binding](!Hackage "curl") to [curl](!Wikipedia "cURL")). Well, fine. I already had that installed because Darcs uses the binding for downloads. I'll use that package.^[Besides `curl`, there is the [http-wget](!Hackage) wrapper, and the [http-enumerator](!Hackage) package claims to natively support HTTPS. I have not tried them.]
+If we google 'Haskell https', one of the first 20 hits happens to be a [Stack Overflow](!Wikipedia) question/page which sounds promising: ["Haskell Network.Browser HTTPS Connection"](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection). The [one answer](http://stackoverflow.com/questions/3988115/haskell-network-browser-https-connection/3988829#3988829) says to simply use the [Haskell binding](!Hackage "curl") to [curl](!Wikipedia "cURL"). Well, fine. I already had that installed because Darcs uses the binding for downloads. I'll use that package.^[Besides `curl`, there is the [http-wget](!Hackage) wrapper, and the [http-enumerator](!Hackage) package claims to natively support HTTPS. I have not tried them.]
 
 We go to the [top level module](http://hackage.haskell.org/packages/archive/curl/1.3.6/doc/html/Network-Curl.html) hoping for an easy download. Scrolling down, one's eye is caught by a [curlGetString](http://hackage.haskell.org/packages/archive/curl/1.3.6/doc/html/Network-Curl.html#v:curlGetString), which while not necessarily a promising name, does have an interesting type: `URLString -> [CurlOption] -> IO (CurlCode, String)`.
 
@@ -78,7 +78,7 @@ Note especially the return value - from past experience with the HTML package, o
 
     <link href=\"https://d3nwyuy0nl342s.cloudfront.net/b3091bd0632b07457de744de1c8022f33a6a6fbd/stylesheets/bundle_common.css\"
       media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />
-...
+  ...")
 ~~~
 
 Great! As they say, 'try the simplest possible thing that could possibly work', and this seems to. We don't really care about the exit code, since this is a hacky script^[What would we do? Keep retrying? There are going to be tons of errors in this script anyway, from repositories incorrectly identified as Haskell-related to repository duplicates to transient network errors, that we gain a great deal of complexity from retrying and may make the script *less* reliable.]; we'll throw it away and only keep the second part of the tuple with the usual `snd`. It's in IO so we need to use `liftM` or `fmap` before we can apply `snd`. Combined with our previous Tagsoup code, we get:
@@ -168,7 +168,7 @@ listPages = map (\x -> "https://github.com/languages/Haskell/created?page=" ++ s
 
 But what is `x`? We don't know the final, highest, oldest page. We don't know how much of our infinite lazy list to `take`. It's easy enough to [filter](!Hoogle) the list to get only the index: `filter (isPrefixOf "/languages/Haskell/created?page=")`.
 
-Then we call [last](!Hoogle), right? (Or something like `head . reverse` if we didn't know `last` or if we didn't think to check the hits for [[a] -> a](!Hoogle). But if you look back at the original scraping output, you see an example of how a simple approach can go wrong; we read "/languages/Haskell/created?page=209" and then we read "/languages/Haskell/created?page=2"! 2 is less than 209, of course, and is the wrong answer. GitHub is not padding the numbers to look like "created?page=002", so our simple-minded approach doesn't work.
+Then we call [last](!Hoogle), right? (Or something like `head . reverse` if we didn't know `last` or if we didn't think to check the hits for [[a] -> a](!Hoogle)). But if you look back at the original scraping output, you see an example of how a simple approach can go wrong; we read "/languages/Haskell/created?page=209" and then we read "/languages/Haskell/created?page=2"! 2 is less than 209, of course, and is the wrong answer. GitHub is not padding the numbers to look like "created?page=002", so our simple-minded approach doesn't work.
 
 So we need to extract the number. Easy enough: the prefix is statically known and never changes, so we can hardwire some crude parsing using [drop](!Hoogle): `drop 32`. How to turn the remaining String into an Int? Hopefully one knows about [read](!Hoogle), but even here Hoogle will save our bacon if we think to look through the list of hits for [String -> Int](!Hoogle) - `read` turns up as hit #10 or #11. *Then*, now that we have turned our [String] into [Int], we could sort it and take the last entry, or again go to the standard library and use [maximum](!Hoogle) (like `read`, it will turn up for [[Int] -> Int](!Hoogle), if not as highly ranked as one might hope). Tweaking the syntax a little, our final result is:
 
