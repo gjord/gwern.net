@@ -59,14 +59,13 @@ FileETag MTime
 # redirect URLs that people commonly misspell
 ## Article targets for moving:
 ### "Copyright" ~> "Incoherence of Copyright" (?)
-### "Culture is not about esthetics" ~> "Culture is not about Esthetics"
 ### "WP RSS bot" ~> "Wikipedia RSS Bot"
 ### "WP redirect generator" ~> "Wikipedia Redirect Generator"
 ### "Wikipedia and Dark side editing" ~> "Wikipedia and Dark Side Editing"
 ### "Wikipedia and Other Wikis" ~> "Wikipedia and other Wikis"
-RedirectPermanent "/favicon.ico"                    "/static/img/favicon.ico"
-RedirectPermanent "/robots.txt"                     "/static/robots.txt"
-RedirectPermanent "/Culture is not about Esthetics" "http://www.gwern.net/Culture is not about esthetics"
+RedirectPermanent "/favicon.ico"                    "http://www.gwern.net/static/img/favicon.ico"
+RedirectPermanent "/robots.txt"                     "http://www.gwern.net/static/robots.txt"
+RedirectPermanent "/Culture is not about esthetics" "http://www.gwern.net/Culture is not about Esthetics"
 RedirectPermanent "/In Defense of Inclusionism"  "http://www.gwern.net/In%20Defense%20Of%20Inclusionism"
 RedirectPermanent "/Mnemosyne"                   "http://www.gwern.net/Spaced repetition"
 RedirectPermanent "/Mnemosyne.html"              "http://www.gwern.net/Spaced repetition"
