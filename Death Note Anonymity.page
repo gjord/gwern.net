@@ -121,3 +121,37 @@ Let's remember that all this is predicated on anonymity, and on Light using low-
 - [Discussion of this essay](http://lesswrong.com/lw/5ld/death_note_anonymity_and_information_theory/) on LessWrong
 - [Discussion on Hacker News](http://news.ycombinator.com/item?id=3634320)
 - ["Who wrote the _Death Note_ script?"](Notes#who-wrote-the-death-note-script) (my discussion of the American movie's script)
+
+# Appendix: Communicating with a Death Note
+
+One might wonder how much information one could send *intentionally* with a Death Note, as opposed to inadvertently leak bits about one's identity. As deaths are by and large publicly known information, we'll assume the sender and recipient have some sort of pre-arranged key or one-time pad (although one would wonder why they'd use such an immoral and clumsy system as oppose to steganography or messages online).
+
+A death inflicted by a Death has 3 main distinguishing traits which one can control:
+
+1. the person
+
+    The 'who?' is already calculated for us: if it takes 33 bits to specify a unique human, then a particular human can convey 33 bits. Concerns about learnability (how would you learn of an Amazon tribesman's death?) imply that it's really <33 bits.
+
+    If you try some scheme to encode more bits into the choice of assassination, you either wind up with 33 bits or you wind up unable to convey certain combinations of bits and effectively 33 bits anyway - your scheme will tell you that to convey your desperately important message _X_ of 50 bits telling all about L's true identity and how you discovered it, you need to kill an Olafur Jacobs of Tanzania who weighs more than 200 pounds and is from Taiwan, but alas! Jacobs doesn't exist for you to kill.
+2. the time
+
+    The time is handled by similar reasoning. There is a certain granularity to Death Note kills: even if *it* is capable of timing deaths down to the nanosecond, one can't actually witness this or receive records of this. Doctors may note time of death down to the minute, but no finer (and how do you get such precise medical records anyway?). News reports may be even less accurate, noting merely that it happened in the morning or in the late evening. In rare cases like live broadcasts, one may be able to do a little better, but even they tend to be delayed by a few seconds or minutes to allow for buffering, technical glitches be fixed, the stenographers produce the closed captioning, or simply to guard against embarrassing events (like Janet Jackson's nipple-slip). So we'll not assume the timing can be more accurate than the minute. But which minutes does a Death Note user have to choose from? Inasmuch as the Death Note is apparently incapable of influencing the past or causing Pratchettian[^Mort] superluminal effects, the past is off-limits; but messages also have to be sent in time for whatever they are supposed to influence, so one cannot afford to have a window of a century. If the message needs to affect something within the day, then the user has a window of only $60 \times 24 = 1440$ minutes, which is $log_2(1440) = 10.49$ bits; if the user has a window of a year, that's slightly better, as a death's timing down to the minute could embody as much as $log_2(60 \times 24 \times 365) = 19$ bits. (Over a decade then is 22.3 bits, etc.) If we allow timing down to the second, then a year would be 24.9 bits. In any case, it's clear that we're not going to get more than 33 bits from the date. On the plus side, an 'IP over Death' protocol would be superior to [some other protocols](!Wikipedia "IP over Avian Carriers") - here, the worse your latency, the more bits you could extract from the packet's timestamp!
+3. the circumstances (such as the place)
+
+[^Mort]: [Terry Pratchett](!Wikipedia), _[Mort](!Wikipedia)_:
+
+    > "The only things known to go faster than ordinary light is monarchy, according to the philosopher Ly Tin Weedle. He reasoned like this: you can't have more than one king, and tradition demands that there is no gap between kings, so when a king dies the succession must therefore pass to the heir *instantaneously*. Presumably, he said, there must be some elementary particles -- kingons, or possibly queons -- that do this job, but of course succession sometimes fails if, in mid-flight, they strike an anti-particle, or republicon. His ambitious plans to use his discovery to send messages, involving the careful torturing of a small king in order to modulate the signal, were never fully expanded because, at that point, the bar closed."
+
+The circumstances is much more difficult to calculate. We can subdivide it in a lot of ways; here's one:
+
+1. location (eg. latitude/longitude)
+
+    Earth has ~510,072,000,000 square meters of surface area; most of it is entirely useless from our perspective - if someone is in an airplane and dies, how on earth does one figure out the exact square meter he was above? Or on the oceans? Earth has ~148,940,000,000 square meters of *land*, which is more usable: the usual calculations gives us $log_2(148940000000) = 37.12$ bits. (Surprised at how similar to the 'who?' bit calculation this is? But $37.12 - 33 = 4.12$ and $2^{4.12} = 17.4$. The old SF classic _[Stand on Zanzibar](!Wikipedia)_ drew its name from the observation that the 7 billion people alive in 2010 would fit in Zanzibar only if they stood shoulder to shoulder - spread them out, and multiply that area by ~18...) This raises an issue that affects all 3: how much can the Death Note control? Can it move victims to arbitrary points in, say, Siberia? Or is it limited to within driving distance? etc. Any of those issues could shrink the 37 bits by a great deal.
+2. cause of death
+
+    The [International Classification of Diseases](http://www.who.int/classifications/icd/en/index.html) lists upwards of 20,000 diseases, and we can imagine thousands of possible accidental or deliberate deaths. But what matters is what gets communicated: if there are 500 distinct brain cancers but the death is only reported as 'brain cancer', the 500 count as 1 for our purposes. But we'll be generous and go with 20,000 for reported diseases plus accidents, which is $log_2(20000) = 14.3$ bits.
+3. action prior to death
+
+    Actions prior to death overlaps with accidental causes; here the series doesn't help us. Light's early experiments culminating in the "L, do you know death gods love apples?" seem to imply that actions are very limited in entropy as each word took a death (assuming the ordinary English vocabulary of 50,000 words, 16 bits), but other plot events imply that humans can undertake long complex plan at the order of Death Notes (like Mikami bringing the fake Death Note to the final confrontation with Near). Actions before death could be reported in great detail, or they could be hidden under official secrecy like the aforementioned death gods mentioned (Light uniquely privileged in learning it succeeded as part of L testing him). I can't begin to guess how many distinct narratives would survive transmission or what limits the Note would set. We must leave this one undefined: it's almost surely more than 10 bits, but how many?
+
+Summing, we get $\lt33 + \lt19 + 17 + \lt37 + 14 + {?} = 120$ bits per death.
