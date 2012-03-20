@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Control.Arrow (arr, (>>>), (>>^))
 import Data.FileStore (darcsFileStore)
+import Data.Monoid (mempty, mconcat)
 import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString, isUnescapedInURI)
 import Network.URL (encString)
@@ -26,15 +27,26 @@ main = do  hakyll $ do
 
              _ <- match "**.css" $ route idRoute >> compile compressCssCompiler
 
-             _ <- match "static/templates/default.html" $ compile templateCompiler
+             _ <- match "static/templates/*.html" $ compile templateCompiler
 
              group "html" $ match "**.page" $ do
                route $ setExtension "" -- cool URLs
                compile $ myPageCompiler
+                 >>> renderTagsField "prettytags" (fromCapture "tags/*")
                  >>> renderModificationTime "modified" "%e %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "static/templates/default.html"
 
--- copy over generated RSS feed
+
+             -- Tags
+             create "tags" $ requireAll "*.page" (\_ ps -> readTags ps :: Tags String)
+
+             -- Add a tag list compiler for every tag
+             match "tags/*" $ route $ setExtension ""
+             metaCompile $ require_ "tags"
+                 >>> arr tagsMap
+                 >>> arr (map (\(t, p) -> (fromCapture "tags/*" t, makeTagList t p)))
+
+           -- copy over generated RSS feed
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
            -- Apache configuration (caching, compression, redirects)
            _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o \
@@ -45,6 +57,23 @@ main = do  hakyll $ do
                            \ -exec /bin/sh -c \"gzip --stdout --best --no-name \
                                                \ --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
            copyFile ".htaccess" "_site/.htaccess"
+
+addPostList :: Compiler (Page String, [Page String]) (Page String)
+addPostList = setFieldA "posts" $
+    arr (reverse . chronological)
+        >>> require "static/templates/postitem.html" (\p t -> map (applyTemplate t) p)
+        >>> arr mconcat
+        >>> arr pageBody
+
+makeTagList :: String
+            -> [Page String]
+            -> Compiler () (Page String)
+makeTagList tag posts =
+    constA (mempty, posts)
+        >>> addPostList
+        >>> arr (setField "title" ("Posts tagged &#8216;" ++ tag ++ "&#8217;"))
+        >>> applyTemplateCompiler "static/templates/tags.html"
+        >>> relativizeUrlsCompiler
 
 options :: WriterOptions
 options = defaultWriterOptions{ writerSectionDivs = True,
