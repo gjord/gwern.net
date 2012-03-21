@@ -17,6 +17,7 @@ import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 main :: IO ()
 main = do  hakyll $ do
+             -- handle the simple non-.page files
              let static = route idRoute >> compile copyFileCompiler
              mapM_ (`match` static) ["docs/**",
                                      "images/**",
@@ -24,31 +25,27 @@ main = do  hakyll $ do
                                      "static/css/**",
                                      "static/img/**",
                                      "static/js/**"]
-
              _ <- match "**.css" $ route idRoute >> compile compressCssCompiler
-
              _ <- match "static/templates/*.html" $ compile templateCompiler
 
-             group "html" $ match "**.page" $ do
+             -- handle the much more complex content pages, with tags & metadata etc.
+             pages <- group "html" $ match "**.page" $ do
                route $ setExtension "" -- cool URLs
                compile $ myPageCompiler
                  >>> renderTagsField "prettytags" (fromCapture "tags/*")
                  >>> renderModificationTime "modified" "%e %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "static/templates/default.html"
 
-
-             -- Tags
-             create "tags" $ requireAll "*.page" (\_ ps -> readTags ps :: Tags String)
-
              -- Add a tag list compiler for every tag
+             create "tags" $ requireAll pages (\_ ps -> readTags ps :: Tags String)
              match "tags/*" $ route $ setExtension ""
              metaCompile $ require_ "tags"
                  >>> arr tagsMap
                  >>> arr (map (\(t, p) -> (fromCapture "tags/*" t, makeTagList t p)))
 
-           -- copy over generated RSS feed
+           print "generating & copying RSS feed..."
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-           -- Apache configuration (caching, compression, redirects)
+           print "executing Apache configuration (caching, compression, redirects)..."
            _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o \
                            \ -not -name \"*.o\" -not -name \"*.hi\" -not -name \"*.hs\" \
                            \ -not -name \"*.png\" -not -name \"*.jpg\" -not -name \"*.gif\" \
