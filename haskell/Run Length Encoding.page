@@ -1,5 +1,6 @@
 ---
 description: Haskell: step by step refactoring to concision
+tags: Haskell
 ...
 
 Once I was playing with and working on a Haskell clone of the old [_Gradius_](!Wikipedia "Gradius (series)") arcade games, _[Monadius](!Hackage)_. Most of my changes were not particularly interesting (cleaning up, Cabalizing, fixing warnings, switching all `Integer` to `Int` and so on), but in its [Demo.hs](http://code.haskell.org/monadius/Monadius/Demo.hs), I found an interesting solution to a problem, and it seems like a good small example of Haskell abstraction.
