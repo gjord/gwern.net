@@ -1,3 +1,8 @@
+---
+description: Syntax, function definitions
+tags: Haskell, Scheme, computer science
+...
+
 # Chapter 1.1
 
 ## 1.1.1: Syntax & Semantics
@@ -261,11 +266,12 @@ tri x y z
 
 #### 1.4
 
-> "Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:\
->`(define (a-plus-abs-b a b)
+> "Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:
+>
+> `(define (a-plus-abs-b a b)
 >  ((if (> b 0) + -) a b))`"
 
-Well, let's see. `(a-plus-abs-b 5 10)` becomes `(if (> 10 0) + -) 5 10)`, and we evaluate from the inside, so then we get `(if (true) + -) 5 10)`, which then becomes `((+) 5 10)`, and then `(+ 5 10)` and thence to `15`. This obviously doesn't make sense if first-class functions aren't supported - what would it mean for the `if` to return a + or a -? I omit the similar reduction for Haskell; for those Eli's [post](http://eli.thegreenplace.net/2007/06/21/sicp-section-11/) on chapter 1.1, you'll note that there are no shenanigans necessary as for Common Lisp - both Haskell & Scheme have 1 & the same namespace for functions as for data variables (in Haskell, at least, because variables *are* functions).
+Well, let's see. `(a-plus-abs-b 5 10)` becomes `(if (> 10 0) + -) 5 10)`, and we evaluate from the inside, so then we get `((if (true) + -) 5 10)`, which then becomes `((+) 5 10)`, and then `(+ 5 10)` and thence to `15`. This obviously doesn't make sense if first-class functions aren't supported - what would it mean for the `if` to return a + or a -? I omit the similar reduction for Haskell; for those Eli's [post](http://eli.thegreenplace.net/2007/06/21/sicp-section-11/) on chapter 1.1, you'll note that there are no shenanigans necessary as for Common Lisp - both Haskell & Scheme have 1 & the same namespace for functions as for data variables (in Haskell, at least, because variables *are* functions).
 
 #### 1.5
 
@@ -402,7 +408,7 @@ As the summary hints, our code is basically identical - just tweaked slightly:
 (defun improve (guess x)
   (/ (+ (/ x (square guess))
         (* 2 guess))
-     3)))
+     3))
 ~~~~
 
 The Haskell one-liner becomes
