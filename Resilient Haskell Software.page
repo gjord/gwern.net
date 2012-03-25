@@ -1,5 +1,6 @@
 ---
 description: Lessons learned about bitrot in Haskell software
+tags: Haskell
 ...
 
 In 2007, Haskell began to experience some real growth; one of the new users was myself. The old ways of individual distribution with [Autotools](!Wikipedia) configuration & installation weren't state of the distribution art; the shining example was Perl's [CPAN](!Wikipedia). At about that time, Duncan Coutts and a few others proposed something similar called [Cabal](http://www.haskell.org/cabal/).^[Strictly speaking, Cabal was first proposed in [2003](http://www.haskell.org/cabal/old.html) and a paper published in 2005, but 2007 was when there was running code that could credibly be the sole method of installation, and not an experimental alternative which one might use in parallel with Autotools.]
