@@ -1,3 +1,8 @@
+---
+description: Generalizing functions with hardwired values
+tags: Haskell, Scheme, computer science
+...
+
 # Chapter 1.3: Formulating Abstractions with Higher-Order Procedures
 
 ## 1.3.1
@@ -23,11 +28,11 @@ Here's an example. If we called `iterate (^3) 2`, we would get the infinite list
 This will be useful for approximation. But note that it's not useful for straight summing like `sum-cubes`, because `iterate` uses the passed-in function to generate the next target from the old target, while `sum` has the passed-in function doing something else entirely (moving from old to new is hardwired to use the function `(+1)`). So if we wrote the obvious Haskell `summation` and `sumCube` definitions, they would be utterly wrong: `sumCube 1 10` will loop because $1^3=1$, and if we tried `sumCube 2 10`, it'd still be wrong - we'd get `[2,8]` because the test will return false for $8^3<10$.
 
 ~~~~{.haskell}
-summation cond next seed = takeWhile cond $ iterate next seed
+summation cond next seed = takeWhile cond (iterate next seed)
 sumCube start end = summation (< end) (^3) start
 ~~~~
 
-To rewrite `sum`, we need to pay attention to what dependencies are where. Given the parameters `a b`, we can get the targets with just `[a..b]`; then, we take whatever function and `map` it onto the targets: `foo f a b = map f [a..b]`; then we fold the resulting list into a final answer: `foo f a b = sum $ map f [a..b]`, and finally:
+To rewrite `sum`, we need to pay attention to what dependencies are where. Given the parameters `a b`, we can get the targets with just `[a..b]`; then, we take whatever function and `map` it onto the targets: `foo f a b = map f [a..b]`; then we fold the resulting list into a final answer: `foo f a b = sum (map f [a..b])`, and finally:
 
 ~~~~{.haskell}
 sumCube start end = foo (^3) start end
@@ -51,7 +56,7 @@ The tricky part is the middle of the summation. We need to multiply by 2 or 4 *e
 ~~~{.haskell}
 simpson :: (Fractional a, Enum a) => (a -> a) -> a -> a -> a -> a
 simpson f a b n =
-    (h/3) * y 0 * (sum $ zipWith (*) (cycle [2,4]) (map y [1..(n-1)])) * y n
+    (h/3) * y 0 * sum (zipWith (*) (cycle [2,4]) (map y [1..(n-1)])) * y n
  where h = (b - a) / n
        y k = f (a + k * h)
 ~~~
@@ -254,10 +259,10 @@ accumulate term a next b =
    iter a mempty
 
 product :: (Ord a1, Num a) => (Product a1 -> Product a) -> a1 -> (Product a1 -> Product a1) -> a1 -> a
-product a b c d = getProduct $ accumulate a (Product b) c (Product d)
+product a b c d = getProduct (accumulate a (Product b) c (Product d))
 
 sum :: (Ord a1, Num a) => (Sum a1 -> Sum a) -> a1 -> (Sum a1 -> Sum a1) -> a1 -> a
-sum a b c d = getSum $ accumulate a (Sum b) c (Sum d)
+sum a b c d = getSum (accumulate a (Sum b) c (Sum d))
 ~~~
 
 Usage would look like
@@ -306,7 +311,7 @@ We're asked to evaluate `(f f)` given:
   (g 2))
 ~~~
 
-Quickly eyeballing it, I assumed it would turn out to be an infinite loop, as it became something like `(f (f (f (f (f...`. But when I calculate it out by hand, I realize that is not the case!
+Quickly eyeballing it, I assumed it would turn out to be an infinite loop, as it became something like `(f (f (f (f (f...)))))`. But when I calculate it out by hand, I realize that is not the case!
 
 1. `(f f)`
 2. `(lambda (x) (x 2) f)`
@@ -316,5 +321,3 @@ Quickly eyeballing it, I assumed it would turn out to be an infinite loop, as it
 6. Dr. Scheme error: "procedure application: expected procedure, given: '2'; arguments were: '2'"
 
 ## 1.3.3
-
-
