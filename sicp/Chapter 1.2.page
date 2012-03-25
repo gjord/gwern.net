@@ -1,3 +1,8 @@
+---
+description: recursion into iteration; primality testing
+tags: Haskell, Scheme, computer science
+...
+
 # Chapter 1.2
 
 > "A procedure is a pattern for the local evolution of a computational process. It specifies how each stage of the process is built upon the previous stage. We would like to be able to make statements about the overall, or global, behavior of a process whose local evolution has been specified by a procedure. This is very difficult to do in general, but we can at least try to describe some typical patterns of process evolution."
@@ -103,6 +108,7 @@ Speaking of Haskell, I couldn't help but be slightly smug when I read this:
 Or you could, you know, be lazy and get both used-defined iteration and control structures.
 
 ### Exercise 1.9
+
 ~~~{.scheme}
 (define (+ a b)
   (if (zero? a)
@@ -349,6 +355,7 @@ In normal order, we expand out everything first. The full expansion is way too l
 
 ## 1.2.6
 ### 1.2.1
+
 199, 1999, and 199999 are prime. Curiously, the missing number 19999 isn't and yields 7.
 
 ### 1.2.2
