@@ -451,11 +451,11 @@ I cabalized and/or uploaded (according to the [Hackage upload log](http://hackag
 [^emacs]: For example, my clean up and extension of the browse-url module was completely rewritten by [RMS](!Wikipedia "Richard Stallman") - so I can hardly take credit there.
 [^clean]: Henceforth, 'cleanup' should be taken as referring to extensive miscellaneous changes which include (in no particular order):
 
-    - fixing GHC's <tt>-Wall</tt> or hlint warnings
+    - fixing GHC's `-Wall or hlint warnings
     - replacing OPTION pragmas with LANGUAGE pragmas
     - tracking down licensing information
     - switching from Haskell98 imports to the standard hierarchical module imports
-        i. eg. <tt>import Char</tt> -> <tt>import Data.Char</tt>; nontrivial in some cases where Haskell98 modules were dispersed
+        i. eg. `import Char -> `import Data.Char; nontrivial in some cases where Haskell98 modules were dispersed
     - reorganizing the file tree
     - improving the Cabalization
     - whitespace formatting, and so on.
