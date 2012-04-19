@@ -12,7 +12,7 @@ import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
 import Feed (filestoreToXmlFeed, FeedConfig(..))
-import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
+import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Code, Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 main :: IO ()
@@ -110,8 +110,9 @@ inlinesToURL x = let x' = inlinesToString x
 inlinesToString :: [Inline] -> String
 inlinesToString = concatMap go
   where go x = case x of
-               Str s                   -> s
-               _                       -> " "
+               Str s    -> s
+               Code _ s -> s
+               _        -> " "
 
 convertInterwikiLinks :: Inline -> Inline
 convertInterwikiLinks (Link ref (interwiki, article)) =
