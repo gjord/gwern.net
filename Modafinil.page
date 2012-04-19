@@ -327,7 +327,7 @@ Vendor notes:
 
 It's worth noting that shipping can make a major difference. For example, now-defunct Airsealed's $22 modafinil seemed like an excellent deal - but the price was almost doubled by their $15 shipping. The above table assumes that one orders only one unit of whatever it is; if one had been ordering several hundred dollars of modafinil from Airsealed, say, then Airsealed might look much better, and so for that purpose S&H is listed.
 
-With all that in mind, my research into online vendors produced the follow table (last updated 19 December 2011): <!-- let f a b c d = round ((a*b) / (c+d)) -->
+With all that in mind, my research into online vendors produced the follow table (last updated 19 December 2011): <!-- let f a b c d = round ((a*b) / (c+d)) --> <!-- when you change the table, remember to update the CSS! -->
 
 mg/$[^f]      mg    Amt            $             S&H  Provider
 ------------ ----   ----------    ---      ---------  --------
@@ -714,7 +714,7 @@ So the anti-modafinil argument starts off at a disadvantage if it wants to appea
 
 $\text{presentValue} = \frac{\text{futureValue}}{(1 + \text{discountRate})^\text{years}}$
 
-We say a year right now is worth 100% and we are asking what percent of a present year a far distant year would be worth; while real people have discount rates much higher^[US Army personnel, considering various large bonus offers, manifested annual discount rates as high as [57.2%](http://test.aeaweb.org/aer/archive/9101/91010033.pdf).], we will generously assume the improbably low discount rate of 2%^[I say improbably low because at a discount rate of 2%, a person ought to exhibit behaviors like never spending a single penny as they shovel all their money into bonds and stocks, to be spent when they are ancient and about to die - they are extreme misers. Most people discount too much rather than too little, but nevertheless, one *can* damage one's quality of life with too low a discount rate.]; and then ask how much a year is worth 50 years from now:
+We say a year right now is worth 100% and we are asking what percent of a present year a far distant year would be worth; while real people have discount rates much higher^[US Army personnel, considering various large bonus offers, manifested annual discount rates as high as [57.2%](/docs/2001-warner.pdf "'The Personal Discount Rate: Evidence from Military Downsizing Programs', Warner & Pleeter 2001").], we will generously assume the improbably low discount rate of 2%^[I say improbably low because at a discount rate of 2%, a person ought to exhibit behaviors like never spending a single penny as they shovel all their money into bonds and stocks, to be spent when they are ancient and about to die - they are extreme misers. Most people discount too much rather than too little, but nevertheless, one *can* damage one's quality of life with too low a discount rate.]; and then ask how much a year is worth 50 years from now:
 
 $\text{presentValue} = \frac{100}{(1+0.02)^50} = \frac{100}{2.692} = \~37\%$
 
