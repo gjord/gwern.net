@@ -77,6 +77,7 @@ options = defaultWriterOptions{ writerSectionDivs = True,
                                 writerStandalone = True,
                                 writerTableOfContents = True,
                                 writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
+                                writerHtml5 = True,
                                 writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
                                 writerEmailObfuscation = NoObfuscation }
 
@@ -87,7 +88,7 @@ myPageCompiler :: Compiler Resource (Page String)
 myPageCompiler = cached "myPageCompiler" $ readPageCompiler >>> addDefaultFields >>> arr (changeField "description" escapeHtml) >>> arr applySelf >>> myPageRenderPandocWith
 
 myPageRenderPandocWith :: Compiler (Page String) (Page String)
-myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState{stateSmart=False} >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
+myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState{stateSmart=True} >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
 
 pandocTransform :: Pandoc -> Pandoc
 pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
