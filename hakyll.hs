@@ -12,7 +12,7 @@ import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
 import Feed (filestoreToXmlFeed, FeedConfig(..))
-import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..), ParserState(stateSmart))
+import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 main :: IO ()
@@ -37,15 +37,15 @@ main = do  hakyll $ do
                  >>> applyTemplateCompiler "static/templates/default.html"
 
              -- Add a tag list compiler for every tag
-             create "tags" $ requireAll pages (\_ ps -> readTags ps :: Tags String)
+             _ <- create "tags" $ requireAll pages (\_ ps -> readTags ps :: Tags String)
              match "tags/*" $ route $ setExtension ""
              metaCompile $ require_ "tags"
                  >>> arr tagsMap
                  >>> arr (map (\(t, p) -> (fromCapture "tags/*" t, makeTagList t p)))
 
-           print "generating & copying RSS feed..."
+           putStrLn "generating & copying RSS feed..."
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-           print "executing Apache configuration (caching, compression, redirects)..."
+           putStrLn "executing Apache configuration (caching, compression, redirects)..."
            _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o \
                            \ -not -name \"*.o\" -not -name \"*.hi\" -not -name \"*.hs\" \
                            \ -not -name \"*.png\" -not -name \"*.jpg\" -not -name \"*.gif\" \
@@ -88,7 +88,7 @@ myPageCompiler :: Compiler Resource (Page String)
 myPageCompiler = cached "myPageCompiler" $ readPageCompiler >>> addDefaultFields >>> arr (changeField "description" escapeHtml) >>> arr applySelf >>> myPageRenderPandocWith
 
 myPageRenderPandocWith :: Compiler (Page String) (Page String)
-myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState{stateSmart=True} >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
+myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
 
 pandocTransform :: Pandoc -> Pandoc
 pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
@@ -124,7 +124,8 @@ convertInterwikiLinks (Link ref (interwiki, article)) =
                 Nothing -> Link ref (interwiki, article)
             where -- 'http://starwars.wikia.com/wiki/Emperor_Palpatine'
                   -- TODO: `urlEncode` breaks Unicode strings like "Shōtetsu"!
-                  interwikiurl u a = u ++ urlEncode a
+                  interwikiurl u a = u ++ urlEncode (deunicode a)
+                  deunicode b = map (\x -> if x == '’' then '\'' else x) b
                   -- 'Wookieepedia: Emperor Palpatine'
                   summary a = interwiki' ++ ": " ++ a
     _ -> Link ref (interwiki, article)
