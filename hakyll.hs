@@ -33,6 +33,7 @@ main = do  hakyll $ do
                route $ setExtension "" -- cool URLs
                compile $ myPageCompiler
                  >>> renderTagsField "prettytags" (fromCapture "tags/*")
+                 >>> arr (trySetField "author" "gwern") -- only docs/*.page set 'author:'
                  >>> renderModificationTime "modified" "%e %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "static/templates/default.html"
 
