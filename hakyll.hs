@@ -34,7 +34,7 @@ main = do  hakyll $ do
                compile $ myPageCompiler
                  >>> renderTagsField "prettytags" (fromCapture "tags/*")
                  >>> arr (trySetField "author" "gwern") -- only docs/*.page set 'author:'
-                 >>> renderModificationTime "modified" "%e %b %Y" -- populate $modified$
+                 >>> renderModificationTime "modified" "%d %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "static/templates/default.html"
 
              -- Add a tag list compiler for every tag
