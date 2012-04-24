@@ -381,36 +381,77 @@ It troubles me that neither Cabal SoC has been merged in yet, in line with the h
 
 ### 2012
 
-In [2012](https://www.google-melange.com/gsoc/org/google/gsoc2012/haskell), Haskell.org was bumped to 8 slots:
+In [2012](http://www.google-melange.com/gsoc/org/google/gsoc2012/haskell), Haskell.org was bumped to 8 slots:
 
-1. ["Patch Index Optimization for Darcs"](https://www.google-melange.com/gsoc/project/google/gsoc2012/bsrkaditya/28002); BSRK Aditya, mentored by Eric Kow
+1. ["Patch Index Optimization for Darcs"](http://www.google-melange.com/gsoc/project/google/gsoc2012/bsrkaditya/28002) ([proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/bsrkaditya/14002)); BSRK Aditya, mentored by Eric Kow
 
     > The goal of this project is to speed up the darcs changes and darcs annotate commands using a cache called “[patch index](http://wiki.darcs.net/Ideas/PatchIndex)”. The slow speed of these commands is one of the major user grievance in darcs. Patch-Index data structures can quickly identify the patches that modified a given file.
-2. ["Scoutess - a build manager for cabal projects"](https://www.google-melange.com/gsoc/project/google/gsoc2012/dmcgill/18001); DMcGill, mentored by Alp Mestanogullari
+2. ["Scoutess - a build manager for cabal projects"](http://www.google-melange.com/gsoc/project/google/gsoc2012/dmcgill/18001); DMcGill, mentored by Alp Mestanogullari
 
     > Scoutess is a tool for package maintainers and automates a lot of the hassle of dealing with dependencies and multiple versions of libraries. It will create a sandboxed environment simulating a fresh Haskell Platform install, attempt to build your project using Cabal and highlight any problems while also tracking changes or updates to dependencies located in remote repositories so these can be tested against as well.
-3. ["Implement Concurrent Hash-table / Hash map"](https://www.google-melange.com/gsoc/project/google/gsoc2012/lorehead/36001); Loren Davis, mentored by Ryan Newton
+3. ["Implement Concurrent Hash-table / Hash map"](http://www.google-melange.com/gsoc/project/google/gsoc2012/lorehead/36001) ([proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/lorehead/1)); Loren Davis, mentored by Ryan Newton
 
     > Concurrent data structures for Haskell are currently a work in progress, and are necessary for parallel and high-performance computing. A few data structures, such as wait-free lists, already have Haskell implementations. One that does not yet is a thread-safe hash table. I propose to implement one as a library available under the new BSD license.
-4. ["Accelerating Haskell Application Development"](https://www.google-melange.com/gsoc/project/google/gsoc2012/mdittmer/18001); mdittmer, mentored by Michael Snoyman
+4. ["Accelerating Haskell Application Development"](http://www.google-melange.com/gsoc/project/google/gsoc2012/mdittmer/18001); mdittmer, mentored by Michael Snoyman
 
     > A project for improving performance of “lively developer mode” environments that require fast rebuild-and-redeploy routines.
-5. ["Sandboxed builds and isolated environments for Cabal"](https://www.google-melange.com/gsoc/project/google/gsoc2012/refold/64002); Mikhail Glushenkov, mentored by Johan Tibell
+5. ["Sandboxed builds and isolated environments for Cabal"](http://www.google-melange.com/gsoc/project/google/gsoc2012/refold/64002); Mikhail Glushenkov, mentored by Johan Tibell
 
     > The aim of this project is to integrate support for sandboxed builds into Cabal, a system for building Haskell projects. There are several different third-party implementations of this functionality already available, but it would be beneficial (from the points of ease of use and focusing the community efforts) to have a unified and polished solution integrated into Cabal itself. Additionally, this project is a step in the direction of solving the infamous "dependency hell" problem of Cabal.
-6. ["Enable GHC to use multiple instances of a package for compilation"](https://www.google-melange.com/gsoc/project/google/gsoc2012/phischu/19001); Philipp Schuster, mentored by Andres Löh
+6. ["Enable GHC to use multiple instances of a package for compilation"](http://www.google-melange.com/gsoc/project/google/gsoc2012/phischu/19001) ([proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/phischu/1)); Philipp Schuster, mentored by Andres Löh
 
     > People are running into dependency hell when installing Haskell packages. I want to help move in the direction of solving it.
-7. ["multiuser browser-based interactive ghci, hpaste.org meets tryhaskell.org, for improved teaching of those new to Haskell."](https://www.google-melange.com/gsoc/project/google/gsoc2012/shapr/18001); Shae Erisson, mentored by Heinrich Apfelmus
+7. ["multiuser browser-based interactive ghci, hpaste.org meets tryhaskell.org, for improved teaching of those new to Haskell."](http://www.google-melange.com/gsoc/project/google/gsoc2012/shapr/18001) ([proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/shapr/1)); Shae Erisson, mentored by Heinrich Apfelmus
 
     > Many new users learn Haskell from the `#haskell` irc channel. lambdabot's mueval is good for interactive teaching, but only allows short code snippets. hpaste allows large snippets to be shared, but not into an interactive ghci. Chris Done's <http://www.tryhaskell.org> allows larger snippets to be loaded, but is not explicitly multiuser. If tryhaskell allowed multiple users to view the same interpreter state, and allowed users to paste in new code, teaching and debugging would be much easier for people new to Haskell.
-8. ["Haskell-Type-Exts"](https://www.google-melange.com/gsoc/project/google/gsoc2012/shayannajd/18001); Shayan Najd, mentored by Niklas Broberg
+8. ["Haskell-Type-Exts"](http://www.google-melange.com/gsoc/project/google/gsoc2012/shayannajd/18001); Shayan Najd, mentored by Niklas Broberg
 
     > Following the proposal by Niklas Broberg [0], I am highly eager to expand the existing typechecker [1] for Haskell-Src-Exts [2] to support most of the features available in Haskell 2010 with the major extensions like GADTs, RankNTypes and Type-Functions. It is done by following the guidelines of "Typing Haskell in Haskell" [3] as the basis; adding support for RankNTypes [5]; and then introducing GADTs and Type-Functions by local assumptions [4]. [0] http://hackage.haskell.org/trac/summer-of-code/ticket/1620 [1] http://hackage.haskell.org/package/haskell-src-exts [2] http://hackage.haskell.org/package/haskell-type-exts [3] M. P. Jones. Typing Haskell in Haskell [4] D. Vytiniotis, S. Peyton Jones, T. Schrijvers, M. Sulzmann. OutsideIn(X) – Modular type inference with local assumptions
 
-<!--
 #### 2012 predictions
 
+Instead of qualitative predictions this year, I will [record probabilities](Prediction markets) on [PredictionBook.com](http://predictionbook.com/); all predictions assume delivery, but some need different judgment criteria.
+
+1. [80%](http://predictionbook.com/predictions/6682)
+
+    According to the proposal, the core patch index code has already been implemented & benchmarked by the student, who has worked on Darcs before ([flying 9 hours into England](http://blog.darcs.net/2012/04/darcs-hacking-sprint-7-report.html) for a hacking meetup). The rest of the work sounds reasonable, and the project is not overreaching at all. I fully expect this to work out (even if `darcs annotate` is not a command I use every month, much less day). The main risk seems to be life events, but SoCs failing due to personal issues are relatively rare and affect <20% of projects.
+
+    This SoC will be judged successful if it is in Darcs HEAD, or at least scheduled for application, by the deadline: 1 January 2013.
+2. [40%](http://predictionbook.com/predictions/6683)
+
+    No proposal was publicly available. I am not familiar with DMcGill, and Googling for Haskell material related to "McGill", I don't see any past work. It sounds relatively ambitious in the short abstract - replicating `cabal-dev` and adding in considerable other functionality? I've previously noticed that Cabal-related SoCs seem to be unusually blighted. Adding that all up, I am left with dubious feelings.
+
+    Judgment: tools are always hard to judge. This one will be the usual subjective 'is it being used by a good fraction of its userbase?' criteria.
+3. [60%](http://predictionbook.com/predictions/6684)
+
+    The student has completed a SoC before, and is a graduate student in an AI/machine learning program; both of which bode well for him completing another SoC. I'm not actually sure how many Haskell applications need a concurrent hashtable - the existing [hashtables](http://hackage.haskell.org/package/hashtables) package has [3 users](http://packdeps.haskellers.com/reverse/hashtables), and `base`'s "Data.HashTable" module is used by perhaps 10-20 code repositories (judging from grepping through my local archive).
+
+    It is unreasonable to expect it to supersede `base`, which has had something like a decade to gain users, but equaling the obscure `hashtables` package seems reasonable. Judgment will be whether there are >=3 reverse dependencies.
+4. [40%](http://predictionbook.com/predictions/6685)
+
+    As stated, I have no idea what this SoC is about. I don't know the student, although Snoyman seems to write a great deal of code and successful code at that, which is a good sign - if he agreed to mentor it, surely the idea can't be *that* bad?
+
+    Since I don't know what it is, I cannot specify a judgment criteria in advance.
+5. [75%](http://predictionbook.com/predictions/6686)
+
+    Both student & mentor are experienced Haskell hackers, and have worked with the Cabal codebase. As the abstract says, sandboxed builds are not a novel feature. `cabal-dev` is popular among developers, so it stands to reason that a polished version inside Cabal itself would be even more popular. I see little reason this could not be successful, aside from the general challenge of working with Cabal.
+
+    Judgment; sandboxed build functionality in Cabal HEAD or scheduled to be applied soon.
+6. [65%](http://predictionbook.com/predictions/6687)
+
+    Judgment similar to above: patches scheduled for GHC HEAD or already applied.
+7. [80%](http://predictionbook.com/predictions/6688)
+
+    Shae is an experienced Haskeller & professional developer (to the extent I was very surprised to hear that he had applied). The proposal seems like a very reasonable addition, and I do not think it is too difficult to modify the `mueval` codebase^[I wrote `mueval` but tryhaskell.org uses a fork which takes expressions over a pipe as opposed to being a one-shot CLI tool.].
+
+    Judgment: whether multi-user sessions have gone live.
+8. [55%](http://predictionbook.com/predictions/6689)
+
+    Here again I regret the absence of a public proposal. I'm not sure how useful this one is, how hard it is, or how much progress the prototype library [on Hackage]() represents, nor do I know any comparable libraries I could check for a reverse dependency count. I don't know the student, but Broberg is a capable Haskeller.
+
+    Judgment criteria: punting to checking for >=3 reverse-dependencies/users.
+
+<!--
 #### 2012 results
 -->
 
