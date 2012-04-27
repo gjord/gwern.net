@@ -1483,11 +1483,11 @@ How big is this upper bound? Mathematicians have often made errors in proofs. We
 Case 1 is perhaps the most common case, with innumerable examples; this is sometimes due to mistakes in the proof that anyone would accept is a mistake, but many of these cases are due to changing standards of proof. For example, when David Hilbert discovered errors in Euclid's proofs which no one noticed before, the theorems were still true, and the gaps more due to Hilbert being a modern mathematician thinking in terms of formal systems (which of course Euclid did not think in). Similarly, early calculus used 'infinitesimals' which were sometimes treated as being 0 and sometimes treated as an indefinitely small non-zero number; this was incoherent and strictly speaking, practically *all* of the calculus results were wrong because they relied on an incoherent concept - but of course the results were some of the greatest mathematical work ever conducted[^Neumann] and when later mathematicians put calculus on a more rigorous footing, they immediately re-derived those results (sometimes with important qualifications). Other cases are more straightforward, with mathematicians publishing multiple proofs or covertly correcting old papers[^Nathanson].
 
 [^Colton2]: Colton 2007: "For example, Heawood discovered a flaw in Kempe's 1879 proof of the [four colour theorem](!Wikipedia "Four colour theorem#Early proof attempts"),2 which had been accepted for 11 years." It would ultimately be proved with a computer in 1976 - maybe.
-[^Colton1]: ["Computational Discovery in Pure Mathematics"](http://www.doc.ic.ac.uk/~sgc/papers/colton_cdck07.pdf), Simon Colton 2007
+[^Colton1]: ["Computational Discovery in Pure Mathematics"](http://www.doc.ic.ac.uk/~sgc/papers/colton_cdck07.pdf), Simon Colton 2007:
 
     > A more recent example was the discovery that Andrew Wiles' original proof of Fermat's Last Theorem was flawed (but not, as it turned out, fatally flawed, as Wiles managed to fix the problem (Singh, 1997))...More recently, Larry Wos has been using Otter to find smaller proofs of theorems than the current ones. To this end, he uses Otter to find more succinct methods than those originally proposed. This often results in detecting double negations and removing unnecessary lemmas, some of which were thought to be indispensable. (Wos, 1996) presents a methodology using a strategy known as resonance to search for elegant proofs with Otter. He gives examples from mathematics and logic, and also argues that this work also implications for other fields such as circuit design.
     >
-    > (Fleuriot & Paulson, 1998) have studied the geometric proofs in Newton's _Principia_ and investigated ways to prove them automatically with the Isabelle interactive theorem prover (Paulson, 1994). To do this, they formalized the _Principia_ in both Euclidean geometry and non-standard analysis. While working through one of the key results (proposition 11 of book 1, the Kepler problem) they discovered an anomaly in the reasoning. Newton was appealing to a cross-multiplication result which wasn't true for infinitesimals or infinite numbers. Isabelle could therefore not prove the result, but Fleuriot managed to derive an alternative proof of the theorem that the system found acceptable."
+    > (Fleuriot & Paulson, 1998) have studied the geometric proofs in Newton's _Principia_ and investigated ways to prove them automatically with the Isabelle interactive theorem prover (Paulson, 1994). To do this, they formalized the _Principia_ in both Euclidean geometry and non-standard analysis. While working through one of the key results (proposition 11 of book 1, the Kepler problem) they discovered an anomaly in the reasoning. Newton was appealing to a cross-multiplication result which wasn't true for infinitesimals or infinite numbers. Isabelle could therefore not prove the result, but Fleuriot managed to derive an alternative proof of the theorem that the system found acceptable.
 [^Neumann]: John von Neumann, ["The Mathematician"](http://www.math.ubc.ca/~fsl/von%20Neumann.pdf) 1947:
 
     > "That Euclid's axiomatization does at some minor points not meet the modern requirements of absolute axiomatic rigour is of lesser importance in this respect...The first formulations of the calculus were not even mathematically rigorous. An inexact, semi-physical formulation was the only one available for over a hundred and fifty years after Newton! And yet, some of the most important advances of analysis took place during this period, against this inexact, mathematically inadequate background! Some of the leading mathematical spirits of the period were clearly not rigorous, like Euler; but others, in the main, were, like Gauss or Jacobi. The development was as confused and ambiguous as can be, and its relation to empiricism was certainly not according to our present (or Euclid's) ideas of abstraction and rigour. Yet no mathematician would want to exclude it from the fold — that period produced mathematics as first-class as ever existed! And even after the reign of rigour was essentially re-established with Cauchy, a very peculiar relapse into semi-physical methods took place with Riemann."
@@ -1690,6 +1690,10 @@ Sean Berkley in a 2011 _Cracked_ article, ["6 Terrifying Things Nobody Tells You
     > "While in Australia visiting family for the holidays, I heard a story on the radio about how almost all Australian sperm — yes, the human kind — is imported from the U.S. How odd, I thought, I wonder why? When I got back home, I began researching the issue, and it turns out that Australia, like Canada and Great Britain, bars anonymous sperm donations, which has literally dried up local donations over the last decade. This led me to another surprising discovery: the U.S. is by far the largest exporter of human sperm in the world. Every year tens of thousands of vials go to more than 60 countries.
     >
     > ...There are some notable trends in the export business. Generally, fair-haired donors are preferred, even in South America, Africa and Asia."
+
+The various figures suggest that a random male interested in this will have a very small chance of success, perhaps sub-10%; 10 kids on average doesn't seem an implausible guess, for an expected value of 1 kid. This is discouraging.
+
+On the other hand, all this material is specific to the *United States of America*. Some of the previous articles mention American exports - why? Because there are shortages in other countries like England. Due to the shortage, for an Englishman, all the barriers above are far less taxing; [David Gerard](http://lesswrong.com/lw/bvg/a_question_about_eliezer/6f7o) reports that he successfully donated despite being 44 (oldest donators are 45) and having failed his previous fertility check, and the tests or background checks were far less invasive. Further: "the UK typically has ~500 people a year wanting sperm, but only ~300 donors' worth of sperm." This suggests that the English odds are well over 50%, that one's time investment is less than half, and the main drawback (non-anonymous donation) seems minor. If donating would be a good idea in America, than it would be an excellent idea in England.
 
 All this is suggestive and interesting, but not complete. To make a solid utilitarian case we would need to establish:
 
@@ -1994,8 +1998,10 @@ The results:
 7. http://lesswrong.com/lw/aq9/decision_theories_a_less_wrong_primer/ positive; karma: 62
 8. http://lesswrong.com/lw/ase/schelling_fences_on_slippery_slopes/ positive; 120
 9. http://lesswrong.com/r/lesswrong/lw/aq2/fallacies_as_weak_bayesian_evidence/ positive; 49
-10. http://lesswrong.com/lw/axl/decision_theories_a_semiformal_analysis_part_i/ positive;
+10. http://lesswrong.com/lw/axl/decision_theories_a_semiformal_analysis_part_i/ positive; 20
 11. http://lesswrong.com/lw/az6/decision_theories_a_semiformal_analysis_part_ii/ negative;
+12. http://lesswrong.com/lw/by9/to_like_each_other_sing_and_dance_in_synchrony/ negative;
+13. http://lesswrong.com/r/discussion/lw/bl3/living_forever_is_hard_part_3_the_state_of_life/ positive;
 
 List of reasons:
 
@@ -2124,3 +2130,29 @@ What other consequences may there be?
 
 - [Original discussion on Google+](https://plus.google.com/103530621949492999968/posts/aKa3qLatwZ3)
 - [LessWrong request for refs](http://lesswrong.com/lw/ac4/online_education_and_conscientiousness/)
+
+# Birthday game theory
+
+From [Peter Watts](!Wikipedia "Peter Watts (author)")'s _[Blindsight](!Wikipedia "Blindsight (science fiction novel)"), ["Theseus"](http://www.rifters.com/real/Blindsight.htm#Theseus):
+
+> And then, a bit defensive in spite of myself, I added, "I've found it [[game theory](!Wikipedia)] useful, though. In areas you might not expect it to be."
+>
+> "Yeah? Name one."
+>
+> "Birthdays," I said, and immediately wished I hadn't..."Well, according to game theory, you should never tell anyone when your birthday is."
+>
+> "I don't follow."
+>
+> "It's a lose-lose proposition. There's no winning strategy."
+>
+> "What do you mean, strategy? It's a *birthday*."
+>
+> Chelsea had said exactly the same thing when I'd tried to explain it to her. *Look*, I'd said, *say you tell everyone when it is and nothing happens. It's kind of a slap in the face.*
+>
+> *Or suppose they throw you a party*, Chelsea had replied.
+>
+> *Then you don't know whether they're doing it sincerely, or if your earlier interaction just guilted them into observing an occasion they'd rather have ignored. But if you* don't *tell anyone, and nobody commemorates the event, there's no reason to feel badly because after all, nobody* knew. *And if someone* does *buy you a drink then you know it's sincere because nobody would go to all the trouble of finding out when your birthday is—and then celebrating it—if they didn't honestly like you.*
+>
+> Of course, the Gang was more up to speed on such things. I didn't have to explain it verbally: I could just grab a piece of ConSensus and plot out the payoff matrix, _Tell/Don't Tell_ along the columns, _Celebrated/Not Celebrated_ along the rows, the unassailable black-and-white logic of cost and benefit in the squares themselves. The math was irrefutable: the one winning strategy was concealment. Only fools revealed their birthdays.
+
+TODO The implied payoffs are a little odd. And concealment is highly inefficient from an information point of view: at most you gain information about one or two people.
