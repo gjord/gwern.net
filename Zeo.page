@@ -1177,15 +1177,13 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning]
 4. 'Time in Deep' increased, 66.8m vs 64m (_p_=0.45/0.23)
 5. 'Time in Wake' decreased, 23m vs 27 (_p_=0.36/0.18)
 6. 'Awakenings' decreased, 7.53 vs 7.77 (_p_=0.78/0.39)
-7. 'Morning Feel' increased, 3.16 vs 2.62 (_p_=0.005/0.003!)
+7. 'Morning Feel' increased, 2.83 vs 2.9 (_p_=0.68/0.65)
 8. 'Time to Z' did not change, 25.32m vs 25.33 (_p_=0.99/0.5)
 9. 'Mood' did not change (or decreased), 3.02 vs 3.1 (_p_=0.65)
 
-As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect-size of 0.7.[^d-effect-size-morning]
+All the changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!)
 
-All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.)
-
-So, vitamin D seems to improve my mood when I wake up in the morning, which is good, but that's it. Given how cheap it is and its apparent anti-cancer properties (among others), I will keep taking it but definitely in the morning and not at night.
+This is rather unfortunate, since I had hoped that there would be positive changes and not just the absence of negative changes (which one would expect in going from evening to morning). I will still take vitamin D, since it is cheap and seems to have anti-cancer benefits, but sleep is not a benefit I can tout.
 
 [^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
 
@@ -1271,16 +1269,16 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 
     > t.test(Morning.Feel~SSCF.1, data=mydata)
 
-        Welch Two Sample t-test
+    	Welch Two Sample t-test
 
     data:  Morning.Feel by SSCF.1
-    t = -2.8975, df = 58.965, p-value = 0.005272
+    t = -0.413, df = 58.993, p-value = 0.6811
     alternative hypothesis: true difference in means is not equal to 0
     95 percent confidence interval:
-     -0.9054147 -0.1657060
+     -0.4598055  0.3024779
     sample estimates:
     mean in group 0 mean in group 1
-            2.62069         3.15625
+           2.827586        2.906250
 
     > t.test(Time.to.Z~SSCF.1, data=mydata)
 
@@ -1308,15 +1306,6 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
             3.09000         3.01875
     ~~~
-[^d-multiple-morning]: [Correcting for multiple comparisons](#fn5) at _q_-value=0.05, of our 9 pessimistic _p_-values, 1 survives:
-
-    ~~~{.haskell}
-    let bh (index, pvalue) = pvalue < ((index * 0.05) / 9) in
-         map bh (zip [1..] [0.34, 0.44, 0.48, 0.45, 0.36, 0.78, 0.005, 0.99, 0.65])
-    ~>
-    [False,False,False,False,False,False,True,False,False]
-    ~~~
-[^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
 
 <!--
 TODO: when the real results are up:
