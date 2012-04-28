@@ -1142,29 +1142,189 @@ Vitamin D hurts sleep when taken at night. I know no reason to take vitamin D at
 ## Vitamin D at morn helps?
 ### Setup
 
-The logical next thing to test is whether there is any benefit to sleep by taking vitamin D in the morning as compared to not taking vitamin D at all, since we have already established that evening is worse than morning. I would expect any benefits in the morning to be attenuated compared to the evening effect: the morning is simply many hours away from going to bed again in the evening, giving time for many events to affect the ultimate sleep. So this experiment will run for more than 40 days of 20/20, but 56 days of 28/28; per Roberts's suggestion, I will not randomize individual days but 8 paired *blocks* of 7 days. (Multiple days to give any slow effects time to manifest; 7 days, so we don't 'cycle around the week' but instead have exactly the same number of eg. active Sundays and placebo Sundays since sleep often varies systematically over the week.)
+The logical next thing to test is whether there is any benefit to sleep by taking vitamin D in the morning as compared to not taking vitamin D at all, since we have already established that evening is worse than morning. (Besides anecdotes, [Seth Roberts](http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/) reported - after I concluded my experiment - that his own non-blind varying of doses seemed to help his subjective restedness but didn't influence anything else.) I would expect any benefits in the morning to be attenuated compared to the evening effect: the morning is simply many hours away from going to bed again in the evening, giving time for many events to affect the ultimate sleep. So this experiment will run for more than 40 days of 20/20, but 56 days of 28/28; per Roberts's suggestion, I will not randomize individual days but 8 paired *blocks* of 7 days. (Multiple days to give any slow effects time to manifest; 7 days, so we don't 'cycle around the week' but instead have exactly the same number of eg. active Sundays and placebo Sundays since sleep often varies systematically over the week.)
 
 I prepare 27 placebo pills & 27 actives as before, stored in separate baggies. To randomize blocks of 7-days - I will fill 2 opaque containers with 7 placebo and 7 actives (with a label on the inside of the active container), and pick a container at random to use for the next 7 days. I will take one each morning upon awakening, closing my eyes. On the 8th morning, the first container will be empty, so I set it aside and open the second; when the second is emptied, I will look inside it to see whether it has the label, which lets me infer which one it was, and record whether the 2 weeks were active/placebo or placebo/active. The 2 containers will be refilled as before, and blocks 3-4 will begin. I will do this 4 times, at which point I will analyze the data.
 
-<!--
+Analysis will be the same Zeo parameters as before, but this time augmented by a simple mood indicator: 1-5, with 3 being an ordinary mildly productive day and 1 being 'my car caught on fire and was totaled' day (real datapoint), recorded at the end of the day just before bed. (I considered a more complex mood indicator, the BOMS, while setting up my [lithium experiment](Nootropics#lithium), but rejected it as being too heavy-weight for long-term use, and subjectively, my mood doesn't vary that much.)
+
 ### Morning data
 
 1. Blocks:
     - 17-25F: guess: [placebo](http://predictionbook.com/predictions/6026) (last pill used morning 25; swapped jars and consumed pill from second jar the morning of 26); actual: placebo
-    - 26F-8M: skipped multiple days for modafinil; actual: active
+    - 26F-8M: skipped multiple days for modafinil (omit March 1, 2); actual: active
 2. Blocks:
     - 9M-15M: guess: [active](http://predictionbook.com/predictions/6431) actual: placebo
-    - 16-25: active (omit mar 22)
+    - 16-25: active (omit March 21)
 3. Blocks:
-    - 25M-1A: guess: [placebo](http://predictionbook.com/predictions/6432) actual: placebo
+    - 26M-1A: guess: [placebo](http://predictionbook.com/predictions/6432) actual: placebo
     - 2A-8: active
 4. Blocks:
-    - 9A-19: (omit 11, 12) guess: [placebo](http://predictionbook.com/predictions/6720) actual:
-    - 20?-27?: (omit 21, 22)
+    - 9A-19: (omit April 11, 12) guess: [placebo](http://predictionbook.com/predictions/6720) actual: placebo
+    - 20-27: active (omit April 21, 22)
+
+Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefully Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/dos/2012-zeo-vitamind-morning.csv).
+
+Mood was coded as fractional integers as the `Mood` column.
 
 ### Morning analysis
 
-TODO: ping http://www.reddit.com/r/Fitness/comments/svqgo/took_all_caffeinechocolate_and_other_stimulants/c4hecbd with results
+As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning]
+
+1. 'ZQ' increased, 94.3 vs 90.6 (_p_=0.34/0.16^[See previous footnotes about 'optimistic' versus 'pessimistic' assumptions about equal variance & correctly-predicted direction of effect for why these two _p_-values differ.])
+2. 'Total Z' increased, 526.3m vs 510.6m (_p_=0.44/0.21)
+3. 'Time in REM' increased, 163.1m vs 157.2m (_p_=0.48/0.23)
+4. 'Time in Deep' increased, 66.8m vs 64m (_p_=0.45/0.23)
+5. 'Time in Wake' decreased, 23m vs 27 (_p_=0.36/0.18)
+6. 'Awakenings' decreased, 7.53 vs 7.77 (_p_=0.78/0.39)
+7. 'Morning Feel' increased, 3.16 vs 2.62 (_p_=0.005/0.003!)
+8. 'Time to Z' did not change, 25.32m vs 25.33 (_p_=0.99/0.5)
+9. 'Mood' did not change (or decreased), 3.02 vs 3.1 (_p_=0.65)
+
+As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect-size of 0.7.[^d-effect-size-morning]
+
+All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.)
+
+So, vitamin D seems to improve my mood when I wake up in the morning, which is good, but that's it. Given how cheap it is and its apparent anti-cancer properties (among others), I will keep taking it but definitely in the morning and not at night.
+
+[^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
+
+    ~~~{.r}
+    > mydata <- read.table("2012-zeo-vitamind-morning.csv", header=TRUE, sep=",")
+    > t.test(ZQ~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  ZQ by SSCF.1
+    t = -0.9582, df = 49.202, p-value = 0.3427
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -11.394801   4.036468
+    sample estimates:
+    mean in group 0 mean in group 1
+           90.63333        94.31250
+
+    > t.test(Total.Z~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Total.Z by SSCF.1
+    t = -0.7836, df = 44.939, p-value = 0.4374
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -55.87065  24.57482
+    sample estimates:
+    mean in group 0 mean in group 1
+           510.6333        526.2812
+
+    > t.test(Time.in.REM~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.in.REM by SSCF.1
+    t = -0.7204, df = 42.881, p-value = 0.4752
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -22.26792  10.54709
+    sample estimates:
+    mean in group 0 mean in group 1
+           157.2333        163.0938
+
+    > t.test(Time.in.Deep~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.in.Deep by SSCF.1
+    t = -0.7593, df = 59.53, p-value = 0.4507
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -10.10198   4.54365
+    sample estimates:
+    mean in group 0 mean in group 1
+           64.03333        66.81250
+
+    > t.test(Time.in.Wake~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.in.Wake by SSCF.1
+    t = 0.9282, df = 56.632, p-value = 0.3572
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -4.627848 12.623682
+    sample estimates:
+    mean in group 0 mean in group 1
+           26.96667        22.96875
+
+    > t.test(Awakenings~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Awakenings by SSCF.1
+    t = 0.2798, df = 54.725, p-value = 0.7807
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -1.451225  1.922059
+    sample estimates:
+    mean in group 0 mean in group 1
+           7.766667        7.531250
+
+    > t.test(Morning.Feel~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Morning.Feel by SSCF.1
+    t = -2.8975, df = 58.965, p-value = 0.005272
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.9054147 -0.1657060
+    sample estimates:
+    mean in group 0 mean in group 1
+            2.62069         3.15625
+
+    > t.test(Time.to.Z~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Time.to.Z by SSCF.1
+    t = 0.0055, df = 59.368, p-value = 0.9957
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -7.617116  7.658783
+    sample estimates:
+    mean in group 0 mean in group 1
+           25.33333        25.31250
+
+    > t.test(Mood~SSCF.1, data=mydata)
+
+        Welch Two Sample t-test
+
+    data:  Mood by SSCF.1
+    t = 0.4591, df = 48.049, p-value = 0.6482
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.2407499  0.3832499
+    sample estimates:
+    mean in group 0 mean in group 1
+            3.09000         3.01875
+    ~~~
+[^d-multiple-morning]: [Correcting for multiple comparisons](#fn5) at _q_-value=0.05, of our 9 pessimistic _p_-values, 1 survives:
+
+    ~~~{.haskell}
+    let bh (index, pvalue) = pvalue < ((index * 0.05) / 9) in
+         map bh (zip [1..] [0.34, 0.44, 0.48, 0.45, 0.36, 0.78, 0.005, 0.99, 0.65])
+    ~>
+    [False,False,False,False,False,False,True,False,False]
+    ~~~
+[^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
+
+<!--
+TODO: when the real results are up:
+submit to /r/nootropics, OB-NYC, Google+, Alexandra, the previous Reddit & Imminst & HN pages
+ping http://www.reddit.com/r/Fitness/comments/svqgo/took_all_caffeinechocolate_and_other_stimulants/c4hecbd with results
+ping http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/
+ping ben rubin
+update #Conclusions
 -->
 
 # Conclusions
