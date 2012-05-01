@@ -9,7 +9,7 @@ The Haskell Summer of Codes have often produced excellent results, but how excel
 
 # Example retrospective: Debian
 
-In 2009, a blogger & Debian developer produced [a](http://www.milliways.fr/2009/01/20/debian-2008-where-now-1/) [three](http://www.milliways.fr/2009/01/28/debian-2008-where-now-2/) [part](http://www.milliways.fr/2009/02/02/debian-2008-where-now-3/) retrospective series on the Debian Summer of Code projects. The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. I decided to compile my own series of retrospectives on the Haskell Summers of Code.
+In 2009, a blogger & Debian developer wrote [a](http://www.milliways.fr/2009/01/debian-summer-of-code-where-are-they_6856.html "Debian Summer of Code '08: Where are they now (part 1/3) ") [four](http://www.milliways.fr/2009/01/debian-summer-of-code-where-are-they_205.html "Debian Summer of Code '08: Where are they now (part 2/3)") [part](http://www.milliways.fr/2009/02/debian-summer-of-code-where-are-they_8419.html "Debian Summer of Code '08: Where are they now (part 2.5/3)") [retrospective](http://www.milliways.fr/2009/02/debian-summer-of-code-where-are-they_7275.html "Debian Summer of Code '08: Where are they now (part 3/3)") series on the 2008 Debian Summer of Code projects. The results are interesting: some projects were a failure and the relevant student drifted away and had little to do with Debian again; and some were great successes. I don't discern any particular lessons there, except perhaps one against hubris or filling unclear needs. I decided to compile my own series of retrospectives on the Haskell Summers of Code.
 
 # Judging Haskell SoCs
 
@@ -255,7 +255,7 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
     > "Modernize and simplify OpenGL bindings for Haskell. Focus on safety, shaders and simplicity."
 3. ["Interpreter Support for the Cabal-Install Build Tool"](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2011/anklesaria/1); anklesaria, by Duncan Coutts
 
-    > "This project aims to provide cabal-install with an '[repl](!Wikipedia "Read–eval–print loop")' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
+    > "This project aims to provide cabal-install with an '[repl](!Wikipedia "Read-eval-print loop")' [[`cabal ghci`](http://hackage.haskell.org/trac/hackage/ticket/382)?] command by adding to the Cabal API. This would allow package developers to use GHCi and Hugs from within packages requiring options and preprocessing from Cabal. "
 4. ["Convert the `text` package to use UTF-8 internally"](http://www.google-melange.com/gsoc/project/google/gsoc2011/jaspervdj/15001); Jasper Van der Jeugt, by Edward Kmett ([detailed proposal](http://jaspervdj.be/files/text.html))
 
     > "For Haskell projects handling Unicode text, the `text` library offers both speed and simplicity-of-use. When it was written, benchmarks indicated that UTF-16 would be a good choice for the internal encoding in the library. However, these (rather artificial) benchmarks were did not take into account the time taken to
@@ -410,6 +410,8 @@ In [2012](http://www.google-melange.com/gsoc/org/google/gsoc2012/haskell), Haske
 
 #### 2012 predictions
 
+<!-- WARNING: linked in [Prediction markets](); update link there when making '#### 2013 predictions' (thanks to Pandoc's bad unstable headers) -->
+
 Instead of qualitative predictions this year, I will [record probabilities](Prediction markets) on [PredictionBook.com](http://predictionbook.com/); all predictions assume delivery, but some need different judgment criteria.
 
 1. [80%](http://predictionbook.com/predictions/6682)
@@ -447,13 +449,11 @@ Instead of qualitative predictions this year, I will [record probabilities](Pred
     Judgment: whether multi-user sessions have gone live.
 8. [55%](http://predictionbook.com/predictions/6689)
 
-    Here again I regret the absence of a public proposal. I'm not sure how useful this one is, how hard it is, or how much progress the prototype library [on Hackage]() represents, nor do I know any comparable libraries I could check for a reverse dependency count. I don't know the student, but Broberg is a capable Haskeller.
+    Here again I regret the absence of a public proposal. I'm not sure how useful this one is, how hard it is, or how much progress the prototype library [on Hackage](http://hackage.haskell.org/package/haskell-type-exts) represents, nor do I know any comparable libraries I could check for a reverse dependency count. I don't know the student, but Broberg is a capable Haskeller.
 
     Judgment criteria: punting to checking for >=3 reverse-dependencies/users.
 
-<!--
 #### 2012 results
--->
 
 ### Lessons learned
 
