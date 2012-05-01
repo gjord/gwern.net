@@ -152,7 +152,7 @@ The subsequent research has in some respects vindicated my views: some have trie
 
 > "...What we found was encouraging: the quality of new editors has not substantially changed since 2006. Moreover, both in the early days of Wikipedia and now, the majority of new editors are not out to obviously harm the encyclopedia (~80 percent), and many of them are leaving valuable contributions to the project in their first editing session (~40 percent). However, the rate of rejection of all good-faith new editors’ first contributions has been rising steadily, and, accordingly, retention rates have fallen. What this means is that while just as many productive contributors enter the project today as in 2006, they are entering an environment that is increasingly challenging, critical, and/or hostile to their work. These latter findings have also been confirmed through previous research."
 
-(I am struck by the fall in newbie survival rates for the highest-quality - 'golden' - editors in [2006-2007](https://meta.wikimedia.org/wiki/File:Newbie_survival.by_semester.rows.png "File:Newbie survival by semester rows.png"). The Seigenthaler affair was, recollect, November-December 2005.)
+(I am struck by the fall in newbie survival rates for the highest-quality - 'golden' - editors in [2006-2007](http://meta.wikimedia.org/wiki/File:Newbie_survival.by_semester.rows.png "File:Newbie survival by semester rows.png"). The Seigenthaler affair was, recollect, November-December 2005.)
 
 I [suspected](http://predictionbook.com/predictions/3241) that he and the WMF would fail. Remember, most measures are directed against *casual* users. Power users can navigate the endless processes, or call in powerful friends, or simply wait a few years^[The successful recreation of [Mzoli's](!Wikipedia) article and the endless deletion debates about Daniel Brandt (crowned in success for the deletionists) again come to mind.] The most powerful predictor of whether an editor will stop editing is... how much they are editing.[^ML-Contest] [User:Resident Mario](!Wikipedia) (joined 2008) points in his December 2011 essay ["Openness versus quality: why we're doing it wrong, and how to fix it"](!Wikipedia "Wikipedia:Wikipedia Signpost/2011-12-26/Opinion essay")[^Mario] to a dramatic graph of editor counts^[Gardner's [December UK address](http://wikimediafoundation.org/wiki/File:UK_BOARD_MEETING.pdf) contained other graphs worth looking at.]:
 
@@ -231,10 +231,10 @@ Unfortunately, testing this requires destructive editing. (We can't simply sugge
 
 The procedure: remove random links and record whether they are restored to obtain a restoration rate.
 
-- Editors might defer to other editors, so I will remove links as a anonymous user; the restoration rate will naturally be an *under*estimate of what a registered editor would be able to commit, much less a tendentious deletionist.
-- To avoid issues with selecting links, I will remove only the final external link on pages selected by Special:Random which have at least 2 external links in an 'External links' section, and where the final external link is neither an 'official' link nor template-generated. (This avoids issues where pages might have 5 or 10 'official' external links to various versions or localizations, all of which an editor could confidently and blindly revert the removal of; template-generated links also carry imprimaturs of authority.)
+- Editors might defer to other editors, so I will remove links as a anonymous user from multiple proxies; the restoration rate will naturally be an *under*estimate of what a registered editor would be able to commit, much less a tendentious deletionist.
+- To avoid issues with selecting links, I will remove only the final external link on pages selected by <http://en.wikipedia.org/wiki/Special:Random#External_links> which have at least 2 external links in an 'External links' section, and where the final external link is neither an 'official' link nor template-generated. (This avoids issues where pages might have 5 or 10 'official' external links to various versions or localizations, all of which an editor could confidently and blindly revert the removal of; template-generated links also carry imprimaturs of authority.)
 - The edit summary for each edit will be `rm external link per [[WP:EL]]` - which has the nice property of being obviously meaningless to anyone capable of critical thought (by definition a link removal should be per one of WP:EL's criterions - but *which* [criterion](!Wikipedia "Wikipedia:External links#Links normally to be avoided")?) but also official-looking like many deletionist edit-summaries.
-- To avoid flooding issues and be less obvious, no more than 5 links a day will be removed with at least 1 minute between each edit.
+- To avoid flooding issues and be less obvious, no more than 5 or 10 links a day will be removed with at least 1 minute between each edit.
 - To avoid building up credibility, I will attempt to refrain from making any real edits with the anonymous IPs
 
 After the last of the 100 links have been removed, I will wait 1 month (long enough for the edit to drop off all watchlists) and restore all links. I predict [at least half](http://predictionbook.com/predictions/6586) will not be restored and certainly not [more than 90%](http://predictionbook.com/predictions/6585).
@@ -274,41 +274,73 @@ After the last of the 100 links have been removed, I will wait 1 month (long eno
 33. http://en.wikipedia.org/w/index.php?title=ODBC&diff=prev&oldid=488574540
 34. http://en.wikipedia.org/w/index.php?title=Georg_Groscurth&diff=prev&oldid=488575190
 35. http://en.wikipedia.org/w/index.php?title=Hawkman&diff=prev&oldid=488576908
-36. https://en.wikipedia.org/w/index.php?title=Intellipedia&diff=prev&oldid=488671224
-37. https://en.wikipedia.org/w/index.php?title=Sunman_(video_game)&diff=prev&oldid=488671545
-38. https://en.wikipedia.org/w/index.php?title=Chris_Bonington&diff=prev&oldid=488671810
-39. https://en.wikipedia.org/w/index.php?title=Rutu_Modan&diff=prev&oldid=488672122
-40. https://en.wikipedia.org/w/index.php?title=Nursing_in_Japan&diff=prev&oldid=488672369
-41. https://en.wikipedia.org/w/index.php?title=MBC_Action&diff=prev&oldid=488864583
-42. https://en.wikipedia.org/w/index.php?title=Roland_Collombin&diff=prev&oldid=488865235
-43. https://en.wikipedia.org/w/index.php?title=USS_Impervious_(AM-449)&diff=prev&oldid=488865973
-44. https://en.wikipedia.org/w/index.php?title=Paul_Hertzberg&diff=prev&oldid=488866325
-45. https://en.wikipedia.org/w/index.php?title=Fisheries_Act_1981&diff=prev&oldid=488867682
-46. https://en.wikipedia.org/w/index.php?title=Take_My_Hand,_Precious_Lord&diff=prev&oldid=489013697
-47. https://en.wikipedia.org/w/index.php?title=Sandra_Sabatini&diff=prev&oldid=489014308
-48. https://en.wikipedia.org/w/index.php?title=HMS_Marne_(G35)&diff=prev&oldid=489014964
-49. https://en.wikipedia.org/w/index.php?title=Ann_Devroy&diff=prev&oldid=489015693
-50. https://en.wikipedia.org/w/index.php?title=Chouliarades&diff=prev&oldid=489016352
-51. https://en.wikipedia.org/w/index.php?title=Park_Won-Jae&diff=prev&oldid=489165980
-52. https://en.wikipedia.org/w/index.php?title=Alicia_Svigals&diff=prev&oldid=489166416
-53. https://en.wikipedia.org/w/index.php?title=Fort_Croghan&diff=prev&oldid=489168423
-54. https://en.wikipedia.org/w/index.php?title=John_Frederick_Peel_Rawlinson&diff=prev&oldid=489169129
-55. https://en.wikipedia.org/w/index.php?title=The_Lithgow_Plot&diff=prev&oldid=489169778
-56. https://en.wikipedia.org/w/index.php?title=Institute_for_Reference_Materials_and_Measurements&diff=prev&oldid=489337250
-57. https://en.wikipedia.org/w/index.php?title=Dimitris_Dragatakis&diff=prev&oldid=489337638
-58. https://en.wikipedia.org/w/index.php?title=Wouter_Basson&diff=prev&oldid=489339144
-59. https://en.wikipedia.org/w/index.php?title=Belgian_State_Security_Service&diff=prev&oldid=489338443
-60. https://en.wikipedia.org/w/index.php?title=Frank_D._Gilroy&diff=prev&oldid=489340213
-61. https://en.wikipedia.org/w/index.php?title=Fabrica_Argentina_de_Aviones&diff=prev&oldid=489512296
-62. https://en.wikipedia.org/w/index.php?title=Hanko%E2%80%93Hyvink%C3%A4%C3%A4_railway&diff=prev&oldid=489513784
-63. https://en.wikipedia.org/w/index.php?title=MuggleNet&diff=prev&oldid=489514407
-64. https://en.wikipedia.org/w/index.php?title=Kashmiriyat&diff=prev&oldid=489514919
-65. https://en.wikipedia.org/w/index.php?title=Centennial_College&diff=prev&oldid=489515654
-66. https://en.wikipedia.org/w/index.php?title=Love_Songs_(Harry_Watters_album)&diff=prev&oldid=489799165
-67. https://en.wikipedia.org/w/index.php?title=Ken_Irvine&diff=prev&oldid=489800148
-68. https://en.wikipedia.org/w/index.php?title=Scala_(programming_language)&diff=prev&oldid=489800521
-69. https://en.wikipedia.org/w/index.php?title=Lightship_Finngrundet_(1903)&diff=prev&oldid=489800903
-70. https://en.wikipedia.org/w/index.php?title=Tailgating&diff=prev&oldid=489801531
+36. http://en.wikipedia.org/w/index.php?title=Intellipedia&diff=prev&oldid=488671224
+37. http://en.wikipedia.org/w/index.php?title=Sunman_(video_game)&diff=prev&oldid=488671545
+38. http://en.wikipedia.org/w/index.php?title=Chris_Bonington&diff=prev&oldid=488671810
+39. http://en.wikipedia.org/w/index.php?title=Rutu_Modan&diff=prev&oldid=488672122
+40. http://en.wikipedia.org/w/index.php?title=Nursing_in_Japan&diff=prev&oldid=488672369
+41. http://en.wikipedia.org/w/index.php?title=MBC_Action&diff=prev&oldid=488864583
+42. http://en.wikipedia.org/w/index.php?title=Roland_Collombin&diff=prev&oldid=488865235
+43. http://en.wikipedia.org/w/index.php?title=USS_Impervious_(AM-449)&diff=prev&oldid=488865973
+44. http://en.wikipedia.org/w/index.php?title=Paul_Hertzberg&diff=prev&oldid=488866325
+45. http://en.wikipedia.org/w/index.php?title=Fisheries_Act_1981&diff=prev&oldid=488867682
+46. http://en.wikipedia.org/w/index.php?title=Take_My_Hand,_Precious_Lord&diff=prev&oldid=489013697
+47. http://en.wikipedia.org/w/index.php?title=Sandra_Sabatini&diff=prev&oldid=489014308
+48. http://en.wikipedia.org/w/index.php?title=HMS_Marne_(G35)&diff=prev&oldid=489014964
+49. http://en.wikipedia.org/w/index.php?title=Ann_Devroy&diff=prev&oldid=489015693
+50. http://en.wikipedia.org/w/index.php?title=Chouliarades&diff=prev&oldid=489016352
+51. http://en.wikipedia.org/w/index.php?title=Park_Won-Jae&diff=prev&oldid=489165980
+52. http://en.wikipedia.org/w/index.php?title=Alicia_Svigals&diff=prev&oldid=489166416
+53. http://en.wikipedia.org/w/index.php?title=Fort_Croghan&diff=prev&oldid=489168423
+54. http://en.wikipedia.org/w/index.php?title=John_Frederick_Peel_Rawlinson&diff=prev&oldid=489169129
+55. http://en.wikipedia.org/w/index.php?title=The_Lithgow_Plot&diff=prev&oldid=489169778
+56. http://en.wikipedia.org/w/index.php?title=Institute_for_Reference_Materials_and_Measurements&diff=prev&oldid=489337250
+57. http://en.wikipedia.org/w/index.php?title=Dimitris_Dragatakis&diff=prev&oldid=489337638
+58. http://en.wikipedia.org/w/index.php?title=Wouter_Basson&diff=prev&oldid=489339144
+59. http://en.wikipedia.org/w/index.php?title=Belgian_State_Security_Service&diff=prev&oldid=489338443
+60. http://en.wikipedia.org/w/index.php?title=Frank_D._Gilroy&diff=prev&oldid=489340213
+61. http://en.wikipedia.org/w/index.php?title=Fabrica_Argentina_de_Aviones&diff=prev&oldid=489512296
+62. http://en.wikipedia.org/w/index.php?title=Hanko%E2%80%93Hyvink%C3%A4%C3%A4_railway&diff=prev&oldid=489513784
+63. http://en.wikipedia.org/w/index.php?title=MuggleNet&diff=prev&oldid=489514407
+64. http://en.wikipedia.org/w/index.php?title=Kashmiriyat&diff=prev&oldid=489514919
+65. http://en.wikipedia.org/w/index.php?title=Centennial_College&diff=prev&oldid=489515654
+66. http://en.wikipedia.org/w/index.php?title=Love_Songs_(Harry_Watters_album)&diff=prev&oldid=489799165
+67. http://en.wikipedia.org/w/index.php?title=Ken_Irvine&diff=prev&oldid=489800148
+68. http://en.wikipedia.org/w/index.php?title=Scala_(programming_language)&diff=prev&oldid=489800521
+69. http://en.wikipedia.org/w/index.php?title=Lightship_Finngrundet_(1903)&diff=prev&oldid=489800903
+70. http://en.wikipedia.org/w/index.php?title=Tailgating&diff=prev&oldid=489801531
+71. http://en.wikipedia.org/w/index.php?title=MIT_Arab_Students_Organization_SciTech_Awards&diff=prev&oldid=489972650
+72. http://en.wikipedia.org/w/index.php?title=Lionel_Faure&diff=prev&oldid=489973662
+73. http://en.wikipedia.org/w/index.php?title=New_Plymouth,_Idaho&diff=prev&oldid=489974074
+74. http://en.wikipedia.org/w/index.php?title=Dimorphotheca_ecklonis&diff=prev&oldid=489973061
+75. http://en.wikipedia.org/w/index.php?title=Keele_University&diff=prev&oldid=489974880
+76. http://en.wikipedia.org/w/index.php?title=Eddie_Reeves&diff=prev&oldid=489991585
+77. http://en.wikipedia.org/w/index.php?title=Nataungyan&diff=prev&oldid=489992075
+78. http://en.wikipedia.org/w/index.php?title=Robert_F._Furchgott&diff=prev&oldid=489994444
+79. http://en.wikipedia.org/w/index.php?title=Bitola&diff=prev&oldid=489995826
+80. http://en.wikipedia.org/w/index.php?title=The_Holloways&diff=prev&oldid=489996221
+81. http://en.wikipedia.org/w/index.php?title=History_of_fire_safety_legislation_in_the_United_Kingdom&diff=prev&oldid=490161503
+82. http://en.wikipedia.org/w/index.php?title=U.S._National_Dancesport_Champions_(Professional_Rhythm)&diff=prev&oldid=490162122
+83. http://en.wikipedia.org/w/index.php?title=SAIL_(programming_language)&diff=prev&oldid=490162660
+84. http://en.wikipedia.org/w/index.php?title=Pat_Kelly_(outfielder)&diff=prev&oldid=490163278
+85. http://en.wikipedia.org/w/index.php?title=Shahrnush_Parsipur&diff=prev&oldid=490164286
+86. http://en.wikipedia.org/w/index.php?title=Gus_Alex&diff=prev&oldid=490161580
+87. http://en.wikipedia.org/w/index.php?title=Natalia_Mishkutenok&diff=prev&oldid=490162000
+88. http://en.wikipedia.org/w/index.php?title=Rockingham,_Nova_Scotia&diff=prev&oldid=490162595
+89. http://en.wikipedia.org/w/index.php?title=Four-color_deck&diff=prev&oldid=490163316
+90. http://en.wikipedia.org/w/index.php?title=John_Henry_Whitley&diff=prev&oldid=490164252
+91. http://en.wikipedia.org/w/index.php?title=Philomycidae&diff=prev&oldid=490172358
+92. http://en.wikipedia.org/w/index.php?title=Blackhawk_International_Airways&diff=prev&oldid=490173635
+93. http://en.wikipedia.org/w/index.php?title=Hillcrest_Country_Club_(Los_Angeles)&diff=prev&oldid=490174588
+94. http://en.wikipedia.org/w/index.php?title=Pleasanton,_Kansas&diff=prev&oldid=490175322
+95. http://en.wikipedia.org/w/index.php?title=Isca_Augusta&diff=prev&oldid=490176378
+96. http://en.wikipedia.org/w/index.php?title=Never_Ending_Tour_1990&diff=prev&oldid=490172770
+97. http://en.wikipedia.org/w/index.php?title=Israel_Kamakawiwo%CA%BBole&diff=prev&oldid=490173675
+98. http://en.wikipedia.org/w/index.php?title=St._Vincent%27s_Cathedral_School&diff=prev&oldid=490174443
+99. http://en.wikipedia.org/w/index.php?title=Honda_CBR600F4i&diff=prev&oldid=490175410
+100. http://en.wikipedia.org/w/index.php?title=Kettling&diff=prev&oldid=490176067
+
+After finishing the link removals, I briefly looked over the edits contribution pages for `(top)`, which specifies whether an edit is still the latest edit for that page (obviously all reverted removals will not have it, but some non-reverted edits will have unrelated edits stealing the status, so the number gives an upper bound on how many removals were reverted). It looked like <10%. I was also struck during the process of going through `Special:Random` by how many 'External Links' sections have been, in wretched subterfuges, renamed 'Sources', 'References', 'Further reading', or the article has a long References section stuffed with external links which are used once; perhaps editors collectively know that putting a link into a section named 'External Links' is painting a cross-hair on its forehead.
 
 -->
 
