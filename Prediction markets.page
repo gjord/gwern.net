@@ -650,3 +650,81 @@ When we begin deciding what probability to give the prediction, we can employ a 
 - ["Calibrating our Confidence"](http://measureofdoubt.com/2011/08/17/calibrating-our-confidence/) -(on PB.com)
 - ["Amanda Knox: post mortem"](http://lesswrong.com/lw/84j/amanda_knox_post_mortem/) -(even if we cannot infallibly judge our predictions, our beliefs should still change over time)
 - ["PredictionBook: A Short Note"](http://lesswrong.com/r/discussion/lw/8dx/predictionbook_a_short_note/)
+
+# Appendix
+## Case Study: Testing Confirmation Bias
+
+[Confirmation bias](http://en.wikipedia.org/wiki/Confirmation_bias) is one of the most common cognitive biases: it is putting excess weight on evidence that confirms your belief, and even ignoring evidence falsifying your belief. It's particularly dreadful because at no point does one say something that is actually *wrong* - you can build up an immaculate scientific case for a wrong position by cherry-picking evidence. (A funny example: ["Cigarette smoking: an underused tool in high-performance endurance training"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3001541/ "Myers 2010").)
+
+Confirmation bias is an issue in self-experimentation/Quantified Self because one is already at a disadvantage in evaluating the results - humans don't weigh them very well; [satt](http://lesswrong.com/r/discussion/lw/bs0/knowledge_value_knowledge_quality_domain/6dcn?context=1#6dbu) points out that (via the [Bienaymé formula](http://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables_.28Bienaym.C3.A9_formula.29)) "An RCT with a sample size of e.g. 400 would still be 10 times better than 4 self-experiments by this metric." If one encountered 4 immaculately run self-experiments, I suspect they would *feel* like more evidence than 1/10th that RCT. When you toss in any selection effects (due to confirmation bias), the value of those 4 trials plunges even further.
+
+Fortunately, just as there is a somewhat easy way to test for status quo bias, there's also a somewhat easy way to test for confirmation bias: simply present a high-quality result - with the [outcome reversed](http://lesswrong.com/lw/im/hindsight_devalues_science/ "Hindsight Devalues Science"). Or present the initial data about the setup and whatnot, but hide the results. (The savvy will recognize this as similar to Robin Hanson's proposal for [result-blind peer review](http://www.overcomingbias.com/2012/04/who-wants-unbiased-journals.html).) Or better yet, present the same study with both egosyntonic and egodystonic. If the subject rates them differently, well, the only varying factor was the outcome... One of the tests on [YourMorals.org](http://lesswrong.com/lw/8lk/poll_lesswrong_group_on_yourmoralsorg/)
+
+### Seth Roberts
+
+[Seth Roberts](!Wikipedia) is a psychology professor and [blogger](http://blog.sethroberts.net/); I've read his blog for the past 2 years or so, and found it interesting. He has also been mentioned [positively repeatedly on LessWrong](http://www.google.com/search?q=seth%20roberts%20site%3Alesswrong.com), for example in Eliezer Yudkowsky's post ["The Unfinished Mystery of the Shangri-La Diet"](http://lesswrong.com/lw/a6/the_mysteries_of_shangrila_dieting/). Roberts posts much material critical of mainstream psychology & medicine. Fair enough; I'm not a [huge fan](DNB%20FAQ#fn51) either. But he also posts many anecdotes/interviews, most of which are unremittingly positive, and is willing to use sources - apparently not humorously - that I regard as utter cesspools. (For example, [Ayurvedic medicine](http://blog.sethroberts.net/2011/07/02/ancient-wisdom-butter-is-brain-food/ "Ancient Wisdom: Butter is Brain Food"), which you may remember as being keen on [heavy metal poisoning](!Wikipedia "Ayurveda#Safety").) All this began to make me wonder.
+
+#### Vitamin D
+##### The First Experiment
+
+Vitamin D is Roberts's latest theory. If you look through the [vitamin D](http://blog.sethroberts.net/category/sleep/vitamin-d3-and-sleep/) category on his blog, you will see that most/all of the anecdotes are non-randomized retrospective anecdotes over <7 days about generalities like wake-time or mood. I found it interesting enough to drop my modafinil experiments and start setting up some decent self-experiments.
+
+While I was still running my first [vitamin D & sleep experiment](Zeo#vitamin-d), I emailed with Roberts about it beginning 24 January 2012; he seemed interested and asked for help interpreting the Zeo data set (the CSV export). His main reaction was that all I was testing was that vitamin D in the evening was damaging my sleep, and this was not interesting to him since he was suggesting that vitamin D in the *morning* would help sleep. I was randomizing days, which meant there could be multi-day effects that contaminated the results. My blinding was too complicated, specifically my attempt to keep vitamin D consumption constant (so as to not confound levels of vitamin D with timing). He said he had done a t-test on the data I had posted so far, and the effect was there but not significant; he also said in that email that he didn't trust the Zeo summary score (ZQ) of sleep length/awakenings/composition. When I finished and posted my analysis that the damage had indeed reached significance for multiple metrics, Roberts said it was interesting work and he'd link it.
+
+##### The Second Experiment
+
+I had intended to stop there and go back to modafinil, but it got posted to Hacker News and apparently people were *very* interested in it and what vitamin D in the morning would do. So I emailed Roberts again, after re-reading his criticisms, and proposed a design for a morning experiment: 5-day blocks, randomized as before, recorded the morning after, for a full 50 days. After some back and forth, we settled on 7-day paired blocks. He would have preferred that every pair of weeks be blinded, but I didn't have that many Tupperwares on hand; he didn't mention any criticism of Zeo data.
+
+So I created the 50 active & placebo pills, and started the experiment. This time I did not post any data publicly.
+
+Things proceeded reasonably well, and Friday (28 April 2012) was the last day. On Saturday, I uploaded the Zeo data, annotated the days by active/placebo, put in the 1-5 Mood ranking, and ran the same R functions. To my considerable surprise, of the 9 metrics, only *1* reached significance ('Morning Feel' - how I feel when I wake up in the morning, cruddy or refreshed, 1-5), but it was very significant (_p_=0.005, survived multiple correction) and also a strong effect-size too (0.7). By a remarkable coincidence, Roberts posted [his own results](http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/ "Effect of Vitamin D3 on My Sleep") that day, and found little effect but this one:
+
+> When I woke up in the morning I rated how rested I felt on a 0-100 scale, where 0 = not rested at all and 100 = completely rested. I’d been using this scale for years. Here are the results (means and standard errors):
+>
+> ![rested percent versus treatment (IU dose)](http://blog.sethroberts.net/wp-content/uploads/2012/04/2012-01-17-rested-ratings-vs-Vitamin-D-1024x575.jpg)
+>
+> Vitamin D3 had a clear effect, but the necessary dose was more than 2000 IU. If Vitamin D3 acts like sunlight, you might think that taking it in the morning would make me wake up earlier. Here are the results for the time I woke up:...There was no clear effect of dosage on when I got up. Shifting the time from 8 am to 9 am may have had an effect (I wish I had 3 more days at 9 am).
+
+I take 5000 IU. 'rested' seems pretty much identical to 'Morning Feel'. Very promising!
+
+##### The Test
+
+But I had kept my data private for a reason: so I could edit it. I tampered with the high marks in 'Morning Feel', and left it with a non-significant small increase. I published the supposed results to `gwern.net`, and send an email to Seth Roberts, principally reading:
+
+> I was surprised to see http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/ today, but the timing is remarkably apt - yesterday was the last data day for my morning experiment (you remember helping me design it, I hope!), and I was in the middle of processing and then analyzing my results: http://www.gwern.net/Zeo#morning-analysis (If you don't see the analysis, you may need to force-reload.)
+>
+> So not to mince words, the upshot is that none of the metrics showed any significance. The best p-value is like 0.3. Given that it is a pretty good quality data set and the Zeo is a lot more reliable than writing things down or whatever your informants were doing, and I followed your suggestions on experimental design, I'd say this suggests that improvements from vitamin D are just noise/selection effects or alternately, reflect the very genuine improvement caused by *not* taking vitamin D in the evening and messing with your sleep. Anyway, can I assume you will post a link to it on your blog? I'd like to see what the other commentators make of it.
+
+Then, I registered [a prediction of 70% on PredictionBook.com](http://predictionbook.com/predictions/6737) for the next 3 days: "Seth Roberts will not post a blog post on my (supposedly) null result for taking vitamin D in the morning."
+
+Roberts replied within the hour, asking why I trusted Zeo data, when he thought his misreported when he went to sleep and there were negative reviews on Amazon. (I am not quoting him because I asked later whether I could, and he declined, since he didn't want to hurt a struggling company like Zeo Inc.)
+
+I can't say I was surprised (see above), but I was disappointed. There were many possible replies to my report - null results are *expected* in _n_=1 experiments, for example. I mentioned my car being totaled and ruining that week (and the next), which was a plausible reason as well. And so on. But instead, he went after the Zeo. (I suppose I should be glad he didn't resort to _ad hominems_ like 'you must have screwed something up', although ironically, that was actually the right class of explanations for the data!) I replied:
+
+> [why I trust the Zeo data:] Principally the papers comparing the Zeo data to [polysomnography](!Wikipedia), which is of course the gold standard. They give the Zeo something like 75% accuracy in the sense of giving the same state classification per time unit.
+>
+> I've seen the Amazon page, and what I would ask is what are they comparing the Zeo to? "One man's modus ponens is another man's modus tollens"[^tollens], as we philosophy types like to say. The study of sleep is replete with subjective illusions where people are simply flat out wrong about sleep: they forget long intervals before going to sleep, they underestimate number of wakings [[among other things](http://www.myzeo.com/sleep/knowledge-center/articles/sleep-forgetting-remember-forget)], [false awakening](!Wikipedia) is a real phenomenon, sense of time is distorted\*, [hypnogogic](!Wikipedia) illusions abound, etc.
+>
+> (I'd compare it to saying 'well, horoscopes work for *me*', except that's a little unfair to the Zeo critics - as I said, there is a real mistake rate and this is one reason to use datasets like 50 days rather than 1 or 2.)
+>
+> \* lucid dreaming offers the best example. Some of LaBerge's experiments involved the subject when lucid moving his eyes - externally detectable on EEG - and waiting a fixed time and then moving his eyes again. The times were considerably wrong, which makes sense since we've all had dreams where one 'experiences' hours or years, even though dreams/REM intervals only last a few minutes.
+
+[^tollens]: For an explanation of this aphorism, see ["Knowing your argumentative limitations, OR “one [rationalist's] modus ponens is another’s modus tollens.”"](http://www.overcomingbias.com/2008/01/knowing-your-ar.html). In this case, I was pointing out that establishing contradictions between one's memories/subjective impressions and the Zeo merely tells us that *one* or both are wrong; it doesn't tell us that the Zeo is wrong unless you have additional data or arguments which say that the Zeo is less reliable. One could take the Zeo contradicting memories as just proof of the fallibility of memories!
+
+    For example, if someone is caught on camera sleep-walking, and denies strenuously that he was sleep-walking, do you take modus ponens and say his memories prove he was not sleep-walking and reject the camera footage; or modus tollens and say that the claim his sleep memories are reliable imply he could not have been caught on camera, but he was, therefore we can reject the claim his sleep memories imply no walking? Obviously you take modus tollens - because you have priors which say that memories are malleable and untrustworthy, while camera footage is much harder to fake.
+
+Roberts dismissed the papers as upper bounds and designed to produce best possible results (eg. use of new headbands - not that I noticed degradation of data after months of use, and as it happens, I replaced my headband shortly before starting); he would take it seriously only if the ZQ correlated with how he felt on waking or during the day. (ZQ was only one of the 9 metrics, and 2 of the metrics did correspond to those two examples.)
+
+I decided to drop the conversation there: I had heard enough. All I wanted now was permission to quote him, which he denied (see above), and we then discussed sales ranking of Zeo on Amazon for the last 3 emails.
+
+As far as I know, before posting this my fake results were never linked or discussed publicly by Roberts. He has mentioned no links, I have seen nothing relevant in my RSS subscription, and Google Analytics reports no referrals. He has posted fresh blog posts since, such as [another anecdotal interview](http://blog.sethroberts.net/2012/04/29/interview-with-a-shangri-la-dieter/ "Interview with a Shangri-La Dieter") on the Shangri-La Diet.
+
+(One might wonder whether my experiment is itself an example of confirmation bias - had Roberts linked it, would I still be posting it? I hope so; besides the private PredictionBook.com prediction, I gave a hash pre-commitment to AngryParsley, told Carl Shulman about my plan months ago, discussed it in `#lesswrong`, and alluded to it in some of my LW comments. I probably would have posted it to Discussion, though.)
+
+### Final thoughts
+
+So, Roberts is not very good about results contradicting his latest theory. This is useful to keep in mind: he has a lot of ideas, a lot of which will be false, and one should treat them with due caution. This is also interesting because I believe Roberts has acknowledged as much in his papers defending self-experimentation (defending them as acceptable because they can be iterated on quickly and the end results will be valuable) - which is just another demonstration of the old observation that you can know all about a bias, and still succumb anyway.
+
+I doubt I will do many more confirmation tests in the future, if any at all:
+
+This little test has used up a good deal of my time, and delayed me from posting my real results. I suspect Roberts will be offended by this, so I can forget about getting advice on setting up self-experiments from him in the future. (I made sure to get advice on my pending [lithium self-experiment](Nootropics#lithium-experiment) before I finished, but what about future self-experiments?) And testing confirmation bias in this fashion is intrinsically deceptive, so I probably have damaged my online reputation as well.
