@@ -1,13 +1,15 @@
 #!/usr/bin/env runhaskell
 {-# LANGUAGE OverloadedStrings #-}
+import Codec.Binary.UTF8.String (encode)
 import Control.Arrow (arr, (>>>), (>>^))
+import Data.Char (isAlphaNum, isAscii)
 import Data.FileStore (darcsFileStore)
 import Data.Monoid (mempty, mconcat)
 import Network.HTTP (urlEncode)
-import Network.URI (unEscapeString, isUnescapedInURI)
-import Network.URL (encString)
+import Network.URI (unEscapeString)
 import System.Directory (copyFile)
 import System.Process (runCommand)
+import Text.Printf (printf)
 import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
@@ -105,7 +107,14 @@ convertHakyllLinks x = x
 inlinesToURL :: [Inline] -> String
 inlinesToURL x = let x' = inlinesToString x
                      (a,b) = break (=='%') x'
-                 in encString False isUnescapedInURI a ++ b
+                 in escape a ++ b
+   where -- copied from XMonad.Actions.Search
+    escape :: String -> String
+    escape = concatMap escapeURIChar
+    escapeURIChar :: Char -> String
+    escapeURIChar c | isAscii c && isAlphaNum c = [c]
+                    | otherwise                 = concatMap (printf "%%%02X") $ encode [c]
+
 
 -- | Convert a list of inlines into a string.
 inlinesToString :: [Inline] -> String
