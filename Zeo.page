@@ -1163,9 +1163,7 @@ Analysis will be the same Zeo parameters as before, but this time augmented by a
     - 9A-19: (omit April 11, 12) guess: [placebo](http://predictionbook.com/predictions/6720) actual: placebo
     - 20-27: active (omit April 21, 22)
 
-Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefully Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/dos/2012-zeo-vitamind-morning.csv).
-
-Mood was coded as fractional integers as the `Mood` column.
+Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefully Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/dos/2012-zeo-vitamind-morning.csv). Mood was coded as fractional integers as the `Mood` column.
 
 ### Morning analysis
 
@@ -1185,7 +1183,9 @@ As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches
 
 All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.)
 
-So, vitamin D seems to improve my mood when I wake up in the morning, which is good, but that's it. Given how cheap it is and its apparent anti-cancer properties (among others), I will keep taking it but definitely in the morning and not at night.
+So, vitamin D seems to improve my mood when I wake up in the morning, which is good, but that's it. Given how cheap it is and its apparent anti-cancer properties (among others), I will keep taking it but definitely in the morning and not at night. It's still useful.
+
+(This experiment also afforded me a chance to test Seth Roberts's reaction to faked data which contradicted his vitamin D theory; he did not [take it gracefully](Prediction markets#case-study-testing-confirmation-bias), which is useful to know in weighing his future opinions.)
 
 [^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
 
@@ -1320,21 +1320,28 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 
 <!--
 TODO: when the real results are up:
-submit to /r/nootropics, OB-NYC, Google+, Alexandra, the previous Reddit & Imminst & HN pages
+submit to /r/nootropics,
+hacker news,
+OB-NYC,
+http://lesswrong.com/r/all/lw/bs0/knowledge_value_knowledge_quality_domain/
+http://lesswrong.com/lw/9p9/open_thread_february_114_2012/
+Google+,
+Alexandra,
+the previous Reddit & Imminst & HN pages
 ping http://www.reddit.com/r/Fitness/comments/svqgo/took_all_caffeinechocolate_and_other_stimulants/c4hecbd with results
 ping http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/
 ping ben rubin
-update #Conclusions
 -->
 
 # Conclusions
 
 This is what I have learned:
 
-1. the Zeo headband is wearable long-term (after adjustment)
+1. the Zeo headband is wearable long-term
 2. melatonin improves my sleep
-3. one-legged standing helps my sleep little or not at all
+3. one-legged standing does nothing
 4. Vitamin D (at night) damages my sleep
+5. Vitamin D (in morning) improves my morning mood
 
 # External links
 
