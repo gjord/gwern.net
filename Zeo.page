@@ -573,6 +573,8 @@ With the [melatonin analysis](#melatonin-analysis), I had counted it as a succes
 - as did total time awake which is good (12.8 vs 11.7, _p_=0.8)
 -  morning feel improved, also good (2.81 vs 2.71, _p_=0.3)
 
+No _p_-values survived multiple-correction[^leg-multiple-correction]:.
+
 [^R-oneleg-analysis]: The `R` interpreter session, loading a CSV as before:
 
     ~~~{.r}
@@ -654,8 +656,7 @@ With the [melatonin analysis](#melatonin-analysis), I had counted it as a succes
     mean in group 0 mean in group 3
            2.871795        2.714286
     ~~~
-
-    If we correct for multiple comparisons (see [previous footnote](#fn5) on the Bonferroni correction) at _q_-value=0.05, of our 6 _p_-values (0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), none of them survive:
+[^leg-multiple-correction]: If we correct for multiple comparisons (see [previous footnote](#fn5) on the Bonferroni correction) at _q_-value=0.05, of our 6 _p_-values (0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), none of them survive:
 
     ~~~{.haskell}
     let bh (index,pvalue) = pvalue < ((index * 0.05) / 6) in
@@ -666,7 +667,9 @@ With the [melatonin analysis](#melatonin-analysis), I had counted it as a succes
 
     Oh well! Statistics is a harsh mistress indeed.
 
-If I count melatonin a success, then I ought to count one-legged standing as a (weaker, more qualified) success as well. Further, the one-legged standing was not in exclusion to melatonin use, but I had used it most every night; so I think I will go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower.
+While I did not replicate Roberts's setup exactly in the interest of time and ease, and obviously it was not blinded, I tried to compensate with an unusually large sample: 69 nights of data. This was a mixed experiment: there seems to be an effect, but none of the changes seem to have large effect-sizes or strong _p_-values.
+
+The one-legged standing was not in exclusion to melatonin use, but I had used it most every night. I thought I might go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower, but I've abandoned it because it is a lot of work to use and the result looked weak. In the future, I should look into whether walks before bedtime help.
 
 ## Push-ups
 
@@ -1324,7 +1327,7 @@ This is what I have learned:
 
 1. the Zeo headband is wearable long-term
 2. melatonin improves my sleep
-3. one-legged standing does nothing
+3. one-legged standing does little
 4. Vitamin D (at night) damages my sleep
 5. Vitamin D (in morning) improves my morning mood
 
