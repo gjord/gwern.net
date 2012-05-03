@@ -342,6 +342,34 @@ After the last of the 100 links have been removed, I will wait 1 month (long eno
 
 After finishing the link removals, I briefly looked over the edits contribution pages for `(top)`, which specifies whether an edit is still the latest edit for that page (obviously all reverted removals will not have it, but some non-reverted edits will have unrelated edits stealing the status, so the number gives an upper bound on how many removals were reverted). It looked like <10%. I was also struck during the process of going through `Special:Random` by how many 'External Links' sections have been, in wretched subterfuges, renamed 'Sources', 'References', 'Further reading', or the article has a long References section stuffed with external links which are used once; perhaps editors collectively know that putting a link into a section named 'External Links' is painting a cross-hair on its forehead.
 
+How many readers were affected by my experiment over the course of the month of waiting? Feel free to estimate or give a range - 1,000 or 10,000 or maybe 100,000 readers? The articles are randomly picked, so it seems highly unlikely that there is significant overlap, and as I already mentioned, very few removals seem to have been reverted. But my best estimate, based on `stats.grok.se` data for the 100 articles' traffic in March 2012, is that somewhere around >~335,000 readers were affected[^removal-readership].
+
+[^removal-readership]: It's not hard to estimate. Take the list of 100 diffs, and use an editor macro or a shell tool like `sed` to strip it down to a list of URL-encoded article names like so:
+
+        Castell_Dinas_Bran
+        Ron_O%27Neal
+        HUD_(video_gaming)
+        Protector_(2009_film)
+        ...
+
+    Then, loop over the list to download the March 2012 summary page for that article, and filter out the total monthly hit-count (since we don't care about dailies); example code:
+
+    ~~~{.sh}
+    $ for URL in `cat foo`; do elinks -dump "http://stats.grok.se/en/201203/$URL" | fgrep " has been viewed "; done
+       [1]Castell_Dinas_Bran has been viewed 914 times in 201203.
+       [1]Ron_O'Neal has been viewed 7446 times in 201203.
+       [1]HUD_(video_gaming) has been viewed 7579 times in 201203.
+       ...
+    ~~~
+
+    This output is also easy to process with a macro or regexp, and once we have the monthly number for each article, all that remains is totaling them:
+
+    ~~~{.haskell}
+    sum [914,7446,7579,542,3103,91,1665,5291,2452,102,272,3344,16214,32268,863,10307,476,3825,310,205,441,3028,187,94,115,211,207,522,269,182,1324,950,25660,162,14457,3881,200,3510,606,430,2048,164,214,136,77,8075,99,255,278,148,525,192,108,295,61,597,180,3491,753,527,766,113,1405,770,3683,288,873,26811,131,6625,93,212,538,313,7119,212,76,1130,7741,2136,179,263,632,870,714,338,2517,456,90,621,1323,316,1125,413,73223,122,12707,6573]
+    ~> 335445
+    ~~~
+
+    Note that this is probably an underestimate. It took weeks to remove all the links, doing it just 5 or 10 at a time, and the 30 day timer only started when link #100 was removed. So for link #1, something closer to *2* months passed...
 -->
 
 #### Tallying the Damage
