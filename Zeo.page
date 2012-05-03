@@ -1145,7 +1145,7 @@ Vitamin D hurts sleep when taken at night. I know no reason to take vitamin D at
 ## Vitamin D at morn helps?
 ### Setup
 
-The logical next thing to test is whether there is any benefit to sleep by taking vitamin D in the morning as compared to not taking vitamin D at all, since we have already established that evening is worse than morning. (Besides anecdotes, [Seth Roberts](http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/) reported - after I concluded my experiment - that his own non-blind varying of doses seemed to help his subjective restedness but didn't influence anything else.) I would expect any benefits in the morning to be attenuated compared to the evening effect: the morning is simply many hours away from going to bed again in the evening, giving time for many events to affect the ultimate sleep. So this experiment will run for more than 40 days of 20/20, but 56 days of 28/28; per Roberts's suggestion, I will not randomize individual days but 8 paired *blocks* of 7 days. (Multiple days to give any slow effects time to manifest; 7 days, so we don't 'cycle around the week' but instead have exactly the same number of eg. active Sundays and placebo Sundays since sleep often varies systematically over the week.)
+The logical next thing to test is whether there is any benefit to sleep by taking vitamin D in the morning as compared to not taking vitamin D at all, since we have already established that evening is worse than morning. (Besides anecdotes, [Seth Roberts](http://blog.sethroberts.net/2012/04/28/effect-of-vitamin-d3-on-my-sleep/) reported - after I concluded my experiment - that his own non-blind varying of doses seemed to help his subjective restedness but didn't influence anything else.) I would expect any benefits in the morning to be attenuated compared to the evening effect: the morning is simply many hours away from going to bed again in the evening, giving time for many events to affect the ultimate sleep. So this experiment will run for more than 40 days of 20/20, but 56 days of 28/28; per Roberts's suggestion, I will not randomize individual days but 8 paired *blocks* of 7 days. (Multiple days to give any slow effects time to manifest, which seem eminently possible with a [fat-soluble vitamin](!Wikipedia) like vitamin D; 7 days, so we don't 'cycle around the week' but instead have exactly the same number of eg. active Sundays and placebo Sundays since sleep often varies systematically over the week.)
 
 I prepare 27 placebo pills & 27 actives as before, stored in separate baggies. To randomize blocks of 7-days - I will fill 2 opaque containers with 7 placebo and 7 actives (with a label on the inside of the active container), and pick a container at random to use for the next 7 days. I will take one each morning upon awakening, closing my eyes. On the 8th morning, the first container will be empty, so I set it aside and open the second; when the second is emptied, I will look inside it to see whether it has the label, which lets me infer which one it was, and record whether the 2 weeks were active/placebo or placebo/active. The 2 containers will be refilled as before, and blocks 3-4 will begin. I will do this 4 times, at which point I will analyze the data.
 
@@ -1166,11 +1166,74 @@ Analysis will be the same Zeo parameters as before, but this time augmented by a
     - 9A-19: (omit April 11, 12) guess: [placebo](http://predictionbook.com/predictions/6720) actual: placebo
     - 20-27: active (omit April 21, 22)
 
-Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefullmy Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/docs/2012-zeo-vitamind-morning.csv). Mood was coded as fractional integers as the `Mood` column.
+Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefully Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/docs/2012-zeo-vitamind-morning.csv). Mood was coded as fractional integers as the `Mood` column.
 
 ### Morning analysis
 
-As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning]
+As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with the usual assumptions[^morning-independence] about independence of the daily observations:
+
+[^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at previous days:
+
+    ~~~{.r}
+    > data <- read.table("zeodata.csv", header=TRUE, sep=",")
+    > n <- length(data$Morning.Feel); n
+    [1] 448
+    > reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
+    > summary(reg)
+
+    Call:
+    lm(formula = Morning.Feel[2:n] ~ Morning.Feel[1:(n - 1)], data = data)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max
+    -1.8287 -0.6929  0.1713  0.3071  1.4430
+
+    Coefficients:
+                            Estimate Std. Error t value Pr(>|t|)
+    (Intercept)              2.42111    0.15763  15.359   <2e-16 ***
+    Morning.Feel[1:(n - 1)]  0.13587    0.05504   2.469   0.0141 *
+    ---
+    Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+    Residual standard error: 0.667 on 322 degrees of freedom
+      (123 observations deleted due to missingness)
+    Multiple R-squared: 0.01858,    Adjusted R-squared: 0.01553
+    F-statistic: 6.095 on 1 and 322 DF,  p-value: 0.01407
+    >
+    > # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is 0.01 with a residual error of 0.7, that doesn't seem very correlated?
+    > # although p=0.15 does indicate there's a very real (but still small) correlation from day to day, so I guess the p-values may be a little overstated
+    >
+    > cor(data$Morning.Feel[2:n], data$Morning.Feel[1:(n-1)], use = "complete.obs")
+    [1] 0.1363006
+    >
+    > # 123 observations missing? What's going on? Well, what does the data look like?
+    >
+    > data$Morning.Feel
+      [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2
+     [26]  3  2  3 NA  3 NA NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4
+     [51] NA NA  4  4  3  4 NA NA NA NA NA NA NA  4 NA  2  3  3 NA NA  3 NA  3  3 NA
+     [76]  2 NA NA NA NA  3 NA NA NA NA NA NA NA  3  4 NA  4  3  3  3  4  4  3  3  3
+    [101]  2  3  3  2  3  3  3  2 NA  3  3  4  3 NA  3 NA  3 NA  3  3  3 NA  3  3 NA
+    [126] NA NA NA NA  2 NA NA  3  2  3 NA NA NA NA NA NA  3  2  3  2  2  2  2  2  3
+    [151]  3  3  3 NA  3  3  2  2  3  3  2  3  2  3 NA  2 NA NA  4  3  3  3  2  3 NA
+    [176]  4  3  2  3  3  3  3  3  3  4  3  4  3  3  3  3  3  2  3  2  3  3  3 NA  3
+    [201]  1  4 NA  3  2  4  4  2  2  3  3  3  3  3  3  3  3  3  3  4  3  3  2  2  3
+    [226]  3  2  3  3  3  2  2  3  3  3  3  3  4  3  3  2  2  2  1  2  3  3 NA  3  3
+    [251]  3  3  3  3  3  3  2  3  2  3  2  3  3  3  2  3  3  2  3  3  3  3  4  3  3
+    [276]  4  3  4  2  3 NA  3  3  2  2  2  3  3  3  3  2  3  3  2  2  2  3  3  2  2
+    [301]  3  2  3  3  3  3  3  3  2  3  3  2  1  3  4  3  2  3  3  2  2  3  3  3  1
+    [326]  2 NA  2  3  2  2  3  3  2  3  3 NA  3 NA  3  3  2  3  2  2  3  3  3  3  1
+    [351]  3  3  3  2  1  3 NA  2  3  3  3  3  2  1  2  2  3  2  2  3  3  3  3  3  4
+    [376]  3  2  3  3  3  2  2  3 NA  3  2  3  4  4  3  3  2  4  3  2  3  3  4  3  4
+    [401]  3  3 NA  2  2  3  3  3  4  4  3  1  3  3  2  4  3  3  3  2  3  2  4  2  4
+    [426]  3  3  3  4 NA  2  3  3  3  3  2  1  2  2  3  2  3  1  4  3  3  4  3
+    >
+    > # ah, I just wasn't good about recording "Morning Feel" early on, and since then there have been occasional slips (literally, with the headband)
+    ~~~
+
+    Gustavo comments:
+
+    > And by the way, instead of regressing `Morning.Feel[n]` on `Drug[n]` (a discrete variable taking values in {0,1}), it would make more sense to regress on an [Exponentially-Weighted](!Wikipedia "Exponential smoothing") Moving Average of `Drug`, such as $Drug[n-1]+(\frac{1}{2} \times Drug[n-2])+(\frac{1}{4} \times Drug[n-3])+...$ which is modeling how much drug is present on the body. In the above example, I'm assuming a half-life of 1 day, so lambda=$\frac{1}{2}$. You could arguably select the lambda that gives you the best fit; just be wary of multiple testing.
 
 1. 'ZQ' increased, 94.3 vs 90.6 (_p_=0.34/0.16^[See previous footnotes about 'optimistic' versus 'pessimistic' assumptions about equal variance & correctly-predicted direction of effect for why these two _p_-values differ.])
 2. 'Total Z' increased, 526.3m vs 510.6m (_p_=0.44/0.21)
@@ -1185,6 +1248,27 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning]
 As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect-size of 0.7.[^d-effect-size-morning]
 
 All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.) I have no idea how vitamin D could improve *only* my morning mood without affecting any of the other parameters. If it was improving my sleep in general with less awakenings or something, it should have shown up strongly on those parameters; or if vitamin D deficiency was causing depressive symptoms, it should have shown up in the overall Mood metric etc.
+
+If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning Feel', it looks like the effect on 'Morning Feel' is being driven by a greater quantity of '4' mornings, and not so much by a reduction in number of bad '2' mornings. (I also notices that when my car burned, my 'Mood' takes a clearly visible fall for a week, while my sleep looks like it was affected less - it seems that during that period, waking up was literally the best part of the day...)
+
+![Day Mood graphed against date/experimental-status](/images/zeo/2012-vitamind-morning-daymood.png)
+![Morning Feel over the experiment (colors indicate placebo or active)](/images/zeo/2012-vitamind-morning-morningfeel.png)
+
+[^R-morning-graph]: Code written by Ben Wieland:
+
+    ~~~{.r}
+    library("ggplot2")
+    sleep <- read.csv("2012-zeo-vitamind-morning.csv")
+
+    qplot(as.Date(Sleep.Date,format="%m/%d/%y"), weight=Mood, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
+
+    #to save:
+    ggsave("mood.png")
+
+    qplot(as.Date(Sleep.Date,format="%m/%d/%y"), weight=Morning.Feel, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
+
+    ggsave("morning.feel.png")
+    ~~~
 
 So, vitamin D seems to improve my mood when I wake up in the morning, which is good, but that's it. Given how cheap it is and its apparent anti-cancer properties (among others), I will keep taking it but definitely in the morning and not at night. It's still useful.
 
