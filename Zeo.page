@@ -1266,12 +1266,12 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
     library("ggplot2")
     sleep <- read.csv("2012-zeo-vitamind-morning.csv")
 
-    qplot(as.Date(Sleep.Date,format="%m/%d/%y"), weight=Mood, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
+    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
 
     #to save:
     ggsave("mood.png")
 
-    qplot(as.Date(Sleep.Date,format="%m/%d/%y"), weight=Morning.Feel, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
+    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Morning.Feel, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
 
     ggsave("morning.feel.png")
     ~~~
