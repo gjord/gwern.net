@@ -75,7 +75,7 @@ The code is not the prettiest, but it's fairly straightforward:
 
 - the script grabs my Firefox browsing history by extracting it from the history SQL database file^[Much easier than it was in the past; [Jamie Zawinski](!Wikipedia) records his travails with the *previous* Mozilla history format in the aptly-named ["when the database worms eat into your brain"](http://www.jwz.org/blog/2004/03/when-the-database-worms-eat-into-your-brain/).], and feeds the URLs into [wget](!Wikipedia)
 - The script `split`s the long list of URLs into a bunch of files and runs that many `wget`s because `wget` apparently has no way of simultaneously downloading from multiple domains.
-- The `filter-urls` command is another shell script, which removes URLs I don't want archived. This script is a hack which looks like this:
+- The [`filter-urls`](#filter-urls) command is another shell script, which removes URLs I don't want archived. This script is a hack which looks like this:
 
     ~~~{.bash}
     #!/bin/sh
@@ -161,7 +161,7 @@ So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in 
 Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
 
 ~~~{.bash}
-nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e '" ]' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | filter-urls >> ~/.urls.txt
+nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e '" ]' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | filter-urls | sort --unique >> ~/.urls.txt
 ~~~
 
 # Reacting to broken links
@@ -177,3 +177,222 @@ nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://w
     If it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert the dump into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.)
 
     I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
+
+# Appendices
+## `filter-urls`
+
+The following shell script is derived from manually filtering through several years of daily browsing as well as spiders of [dozens of websites](http://lesswrong.com/lw/7kg/rationalist_sites_worth_archiving/ "Rationalist sites worth archiving?") for various people & purposes; it removes many auto-generated pages like tags or comment URLs, as well as the obvious spam, drug, and porn links. This version is updated every 8 months.
+
+~~~{.sh}
+#!/bin/sh
+
+# USAGE: `filter-urls` accepts on standard input a list of newline-delimited URLs or filenames,
+# and emits on standard output a list of newline-delimited URLs or filenames. This list may be shorter and entries altered.
+# It tries to remove all unwanted entries, where 'unwanted' is a highly idiosyncratic list of regexps and fixed-string matches
+# developed over hundreds of thousands of URLs/filenames. You are advised to test output to make sure it does not remove
+# URLs or filenames you want to keep. (An easy way to test what is removed is to use the `comm` utility.)
+#
+# For performance, it does not sort or uniquefy output, which can be done by piping `filter-urls` to `sort --unique`.
+
+set -e
+
+cat /dev/stdin | sed -e "s/#.*//" -e 's/>$//' -e "s/&sid=.*$//" -e "s/\/$//" -e 's/$/\n/' -e 's/\?sort=.*$//' \
+    | grep "\." | fgrep -v "*" | egrep -v -e '\/\.rss$' -e "\.tw$" -e "//%20www\." -e "/file-not-found" \
+    -e "258..\.com/$" -e "3qavdvd" -e "://avdvd" -e "\.avi" -e "\.com\.tw" \
+    -e "\.onion" -e "\?fnid\=" -e "\?replytocom=" -e "^lesswrong.com/r/discussion/comments$" \
+    -e "^lesswrong.com/user/gwern$" -e "^webcitation.org/query$" \
+    -e "ftp.*" -e "6..6\.com" -e "6..9\.com" -e "6??6\.com" -e "7..7\.com" -e "7..8\.com" \
+    -e "7..\.com" -e "78..\.com" -e "7??7\.com" -e "8..8\.com" -e "8??8\.com" -e "9..9\.com" \
+    -e "9??9\.com" -e "aa-tw.com" -e "ca..\.38.*\.com" -e "lx...\.com" -e "www.bulk*" -e dm6.*\.com.cn -e gold.*sell -e vip.*club | \
+    fgrep -v -e  174.143.149.98 -e "#!" -e "Special%3ASearch" -e "Special:Search" -e ".swf" -e "actress-av.com" \
+    -e "alessonislearned.com/phpBB/faq.php?" -e "alessonislearned.com/phpBB/groupcp.php?" -e "alessonislearned.com/phpBB/images/avatars" \
+    -e "alessonislearned.com/phpBB/images/smiles" -e "alessonislearned.com/phpBB/index.php?" -e "alessonislearned.com/phpBB/memberlist.php?" \
+    -e "alessonislearned.com/phpBB/posting.php?" -e "alessonislearned.com/phpBB/profile.php?" -e "alessonislearned.com/phpBB/profilepic.php" \
+    -e "alessonislearned.com/phpBB/rss" -e "alessonislearned.com/phpBB/tags.php" -e "alessonislearned.com/phpBB/templates" \
+    -e "alessonislearned.com/phpBB/thread_lists" -e "alessonislearned.com/phpBB/viewforum.php?" \
+    -e "alessonislearned.com/phpBB/viewonline.php" -e "althouse.blogspot.com" -e "animenewsnetwork.com/bbs/phpBB2/posting.php" \
+    -e "animenewsnetwork.com/bbs/phpBB2/profile.php" -e "bit.ly" -e "digitalmusic" -e "e-cash6" \
+    -e "evangelion-blog.blogspot" -e "experts-exchange" -e "file:/" -e "good.is" -e "haskell.org/haskellwiki" \
+    -e "haskell.org/hoogle/?" -e "href=" -e "dl.dropbox.com/u/5317066/" -e "forum.evageeks.org/faq.php?" \
+    -e "forum.evageeks.org/groupcp.php?" -e "forum.evageeks.org/images/avatars" -e "forum.evageeks.org/images/smiles" \
+    -e "forum.evageeks.org/index.php?" -e "forum.evageeks.org/memberlist.php?" -e "forum.evageeks.org/posting.php?" \
+    -e "forum.evageeks.org/profile.php?" -e "forum.evageeks.org/profilepic.php" -e "forum.evageeks.org/rss" \
+    -e "forum.evageeks.org/tags.php" -e "forum.evageeks.org/templates" -e "forum.evageeks.org/thread_lists" \
+    -e "forum.evageeks.org/viewforum.php?" -e "forum.evageeks.org/viewonline.php" -e "gainax.fr/faq.php?" \
+    -e "gainax.fr/groupcp.php?" -e "gainax.fr/images/avatars" -e "gainax.fr/images/smiles" -e "gainax.fr/index.php?" \
+    -e "gainax.fr/memberlist.php?" -e "gainax.fr/posting.php?" -e "gainax.fr/profile.php?" -e "gainax.fr/profilepic.php" \
+    -e "gainax.fr/rss" -e "gainax.fr/tags.php" -e "gainax.fr/templates" -e "gainax.fr/thread_lists" \
+    -e "gainax.fr/viewforum.php?" -e "gainax.fr/viewonline.php" -e "www.dropbox.com/home" -e "knowyourmeme" \
+    -e "lesswrong.com/comments" -e "listserv.brown.edu" -e "miracle-fruit" -e "news.ycombinator.com/news" \
+    -e "news.ycombinator.com/reply" -e "news.ycombinator.com/threads?id=gwern" -e "onemedstore" \
+    -e "reddit.com/messages" -e "reddit.com/saved" -e "reddit.com/spoiler" -e "rit.edu" -e "seo-king" \
+    -e "seo-pp" -e "starwars.wikia" -e "ups.com" -e "wow.*gold" -e "www.amazon.com" -e "www.blogger.com/comment" \
+    -e "www.oktrans" -e "www.reddit.com/message" -e "www.seo2000" -e "www.show6" -e "www.tv.com" \
+    -e "www.im.tv" -e '/?shared=email' -e '?like=1&_wpnonce' -e '?share=email' -e 'wp.me/' -e .rar \
+    -e /keystamp= -e 080kiss -e 08go -e 0ck0.com/ -e 0ea0.com/ -e 0lv0.com/ -e 127.0 -e 168bank.com/ \
+    -e 192.168 -e 1dollarscan.com/ -e 1x.com/ -e 3388mm -e 38gtv.com/ -e 3banana.com/ -e 420chan \
+    -e 4chan -e 4nrx -e 523b8.com/ -e 533b8.com/ -e 69bits -e .bz2 -e .css -e .js -e .mov -e .mp3 \
+    -e .tar.gz -e .tgz -e .zip -e abbywinters -e absoluteastronomy.com/ -e abughrai.be -e activedatax.com/ \
+    -e actualtraffic -e ad-cdn.technoratimedia.com/ -e addons.mozilla -e adhs-chaoten.net -e adlog.com/ \
+    -e adultnetservers -e airsealed -e aitsafe -e alexa.com/ -e alibaba -e allgametrade.com/ -e allsubs.org \
+    -e allvoices -e alternet -e amateur -e amateurmovies -e amateurmovies -e amazon.co.uk -e amazon.com/ \
+    -e amd.com/ -e americablog.com/ -e americommerce.com/ -e amorphia -e ani-manga -e anidb -e animeboards.com/ \
+    -e animebyt -e animelyrics -e animemusic -e animenewsnetwork.com/survey/ -e animepaper.net \
+    -e animesuki -e antiaging -e anymemo -e apache.com/ -e apnea -e apteka-drugstore -e archlinux \
+    -e armani -e arto.com/ -e asuka-langley-sohryu -e automattic.com/ -e av.url.tw -e avline.tv \
+    -e badongo -e baka -e bbb.org -e beautyzone -e bestbookstand -e bili.tv -e billboard.com/ -e biogenesis \
+    -e bitsnoop -e bitty.com/ -e blinkbits.com/ -e blinklist.com/ -e blogger.com/ -e bloggingheads.tv/ \
+    -e bloglines.com/ -e blogmarks -e blogmarks.com/ -e blogsuki -e blowjobs -e booksearch -e boxofficemojo \
+    -e britannica.com/ -e bro-usa.com/ -e buttersafe -e buy69 -e buyativan -e buyephed -e buylortab \
+    -e buypercocet -e cambridgebrainsciences.com/ -e care2.com/ -e casino -e caughtyou -e cdimage.debian \
+    -e cdrking -e cgrascal -e chat-tw.com/ -e chi-us.com/ -e cmp3.net -e cmpmedica -e cmt.com/ \
+    -e co.mments.com/ -e codeine -e concubine.com/ -e consumerrewards -e coolvibe.com/ -e coressl.jp \
+    -e cornify -e coupon -e coupon -e craigslist -e credit-union.com/ -e crowdcast -e csslint -e current.com/ \
+    -e cwb518.com/ -e cyberunique -e dailymanga -e dailytail -e danbooru -e darcswatch -e debian.org \
+    -e delicious.com/ -e demonoid -e deposit -e designlessbetter -e desiredmeds -e detect.com/ \
+    -e deviantart -e diazepam -e dictionary -e digg -e digg.com/submit -e diggstatic -e digitalpoint \
+    -e diglog.com/ -e diigo.com/ -e discount-office -e discountlinux -e dlsite -e dobrochan.ru \
+    -e docstoc -e domainnotfound -e domainnotfound.optimum -e donmai.us -e danbooru -e doom9 -e doorty.com/ \
+    -e doubleclick -e doujin -e doujin-moe -e download.cnet.com/ -e downloadweb -e dragongoserver.net \
+    -e dresspayless -e drugsaver -e e-mansion.com/ -e easy-share.com/ -e easylinux -e ebay -e ebookee \
+    -e ecchiazu -e eda.com.tw -e egg168.com/ -e electronicsmanufacturer-china -e elegantsuccubus \
+    -e elsevier.com/ -e encyclopediadramatica -e endlessvid -e ens888 -e epson.com/ -e erotic -e eroxia \
+    -e evernote -e explosm -e f1fan -e facebook.com/ -e fakku.net -e fark.com/ -e fastclick -e faves.com/ \
+    -e favicon.ico -e faysale -e fbcdn.net -e feedburner.com/ -e female-credit -e fengshui -e fifa \
+    -e file770.com/ -e filefactory -e fileserve -e fileserve -e fileshare -e filesonic -e filestube \
+    -e filext -e filmcritic -e flavorwire -e fleshlight -e flickr.com/ -e flixxy -e forum.fok.nl \
+    -e forvault -e forvo.com/ -e free-credit -e freealbums -e freedomains4all -e freemusic -e freeones \
+    -e frreeones -e ft.com/ -e furuhon-hiroba -e futuretimeline.net/forum/ -e g2gmart -e gabbr \
+    -e gaia-online -e gamble -e gambling -e game4power -e gamelee -e gateway -e gawker -e gayo \
+    -e gck99 -e gelbooru -e get.adobe.com/ -e getfirebug.com/ -e githits.me -e github.com/ -e gm.com/ \
+    -e gmail -e gocomics -e gold007 -e goldenpalace -e goldmoney.com/ -e goo.gl -e google.com/ \
+    -e google.ie -e googleapis.com/ -e googleusercontent -e grandpalace -e gravatar -e grooveshark \
+    -e groups.google.com/ -e gteamtranslations -e guns.ru -e hackage -e hairshop -e hammurabi.acc. \
+    -e happletea -e hashify.me -e hemidemi.com/ -e hentai -e herbaladvantage -e hilarypagetoys.com/ \
+    -e hillaryclinton.com/ -e hitcounter -e hitsuyo -e hohotrade -e hollywoodreporter -e hongfire \
+    -e hotfile -e hotfilesearch -e hotornot -e howto.com/ -e howtogeek.com/ -e hrblock -e gainax.fr/forum/ \
+    -e newhouse -e www.futuretimeline.net/polls/ -e www.invisionpower.com/products/ -e www.khanacademy.org/video/ \
+    -e www.macromedia.com/go/ -e www.nicovideo.jp/watch/ -e huffingtonpost.com/ -e hugedomains.com/ \
+    -e hulu.com/ -e hustlercash -e i68.cc -e iagals.com/ -e icanhascheezburger.com/ -e icwutudidare \
+    -e idolsgarden -e idv.tw -e ifile -e igarette -e iherb -e ikosubs -e imagebam -e imagemagick \
+    -e imagevenue -e imdb.com/ -e imouto -e in199 -e ing199.net -e ingdirect -e investopedia.com/ \
+    -e iqcomp -e iqdb.org -e irssi -e isfelicity -e isohunt -e itunes -e jamendo -e javjunkies \
+    -e jetdl -e jewelry -e jizz -e joai -e jobs.rackspace.com/ -e jquery.js -e justin.tv -e karger \
+    -e kfbank -e kingarthur -e kledy.de -e konachan -e koreanwiki -e last.fm -e lastpass -e lesswrong.com/search/ \
+    -e levanquin -e lexico -e linkatopia -e linuxforums.org -e littlewhiteb -e liveglobalbid -e livejasmin \
+    -e login -e login.yahoo.com/ -e logsoku -e londonriotmaps -e lorazepam -e lotro -e lovastatin \
+    -e love520 -e lulu.com/ -e luxorcab -e lyrics -e macmillan -e macsales -e mail168 -e mailchimp.com/ \
+    -e makeitmp3 -e mangafox -e mangahelpers -e mangareader -e mangarun -e mangastream -e maple-story \
+    -e mapsofworld -e mcpac -e mediacdn.disqus -e mediafire -e mediaite.com/ -e meetup.com/ -e meetup.com/ \
+    -e megaclick -e megarotic -e megashares -e megaupload -e memory-alpha -e merriam-webster -e mfcdn.net \
+    -e milliways -e mininova -e mister-wong -e mixergy -e mmorpg.com/ -e modpath.com/ -e moekaku \
+    -e moekaku -e monex -e moneygram -e mosha2 -e mozillaca.com/ -e mrtzc -e multiply.com/ -e myanimelist.net \
+    -e myanimeshelf -e myass -e myfigurecollection.net -e mylinkvault -e mymmoshop -e myplasticheart \
+    -e myspace -e myspace.com/ -e mysterysolved -e mywow -e nedroid -e nekomagic.com/ -e netvibes \
+    -e netyouz -e newegg -e news.search.yahoo.com/ -e newsalloy.com/ -e newsgator.com/ -e newsgrounds \
+    -e newstrust.net -e nicoviewer.net -e nicvape.com/ -e notfourchan.net -e nowpublic.com/ -e nubrain \
+    -e nuklearpower.com/ -e nutrain -e nvhforum -e nyaa -e oglaf.com/ -e okciti.com/ -e omejo -e on-disk \
+    -e onemanga.com/ -e opensearch.xml -e oppao.net -e optimum.net -e optimum.net -e oracle.com/ \
+    -e orbitz -e oron.com/ -e osd.xml -e ostan -e otakulinks -e p.sf.net -e palada168 -e pandora.com/ \
+    -e papayaone -e paste -e paypal.com/ -e petfinder -e pharmacy -e pharmland -e pheed -e phonak \
+    -e phoronix -e picswan -e pinoyexchange.com/ -e piratebay -e pixiv -e plastic-mesh.com/ -e play-asia \
+    -e playboy -e plurk.com/ -e pluschan.com/ -e popcon -e porn -e porn -e poseidon -e posting.php?mode=post \
+    -e posting.php?mode=reply -e powel -e premierleague -e premiumgalleries -e primagames.com/ \
+    -e printtix -e privmsg -e proquest -e public-api.wordpress.com/ -e pusha.se -e quality-rx -e quantserve.com/ \
+    -e query.nytimes.com/ -e questmonk -e quickmeme.com/ -e quora -e rackspace.com/ -e raki-suta.com/ \
+    -e rapidshare -e readitlater -e realmagick.com/ -e recipe -e reddit.com/ -e reddit.com/search \
+    -e reddit.com/user/gwern/ -e redtube -e redwing -e reference.com/ -e rei-ayanami.com/ -e rei-ayanami.net \
+    -e reiliberation -e rent-tw.com/ -e replica-live -e retailmenot -e retailmenot -e rich17 -e rightstuf \
+    -e risette-translations -e rockymusic -e rsloads.com/ -e rt-nail-products -e runescape -e rxshop \
+    -e ryuutama -e sagepub -e sahadou.com/ -e saymedia.com/ -e scorecardresearch -e scribd -e search.com/ \
+    -e search.eb.com/ -e search.php -e sendori.com/ -e sendspace -e shadows-of-anubis -e sharebee \
+    -e sharerimg -e sharethis -e shaylaren -e shoplinux -e shopper.cnet.com/ -e simexames.com/ \
+    -e sitemeter.com/ -e siteshuffle.com/ -e skipscreen -e skydrive. -e sleepyfansscans -e smartpowders \
+    -e smartpowders.com/ -e snipmp3.com/ -e soba-scans.com/ -e socialmedia -e socialmention -e socialmention \
+    -e socialmention.com/ -e soeasy -e somethingawful -e sos-dan -e soundcloud.com/ -e sourcewatch \
+    -e southwest -e sparkfun -e sparky.haskell.org -e springerlink.com/ -e stackexchange -e stackoverflow \
+    -e startaid -e starwars -e stevenaitchison.co.uk -e stonybrook.edu -e stores.yahoo.net -e strands.com/ \
+    -e stumble-upon -e stumbleupon -e subscene -e subscribe -e subscribe -e subtitle -e suffolk.lib.ny.us \
+    -e suite101 -e sunysuffolk -e supanova -e surphace.com/ -e surveymon -e surveymonkey -e swingers \
+    -e symbaloo -e tailrank.com/ -e tax.ny.gov -e tcgplayer.com/ -e teamskeet -e technotizie -e teesoft \
+    -e tesuji.org -e thebiz8.com/ -e thecounter.com/ -e timeanddate -e tineye -e tinypic -e tinyurl \
+    -e tjoos -e tk-nation.com/ -e topatoco -e torrent -e torrentz -e tube8 -e tumblr.com/ -e tvtropes \
+    -e tvtropes -e tweetmeme.com/ -e twimg.com/ -e twitchfilm -e twitpic -e twitter.com/ -e twmail.net \
+    -e ubuntuforums -e unitedpharm -e uploaded.to -e uploadstation -e ups.com/ -e usps.com/ -e uspto \
+    -e viagra -e vimeo.com/ -e vk858 -e w3schools.com/ -e wakachan -e warhammer-sale -e webnews \
+    -e webring -e websponsors -e websurvey -e wierdjapan -e wikimedia.org/ -e wikipedia.org/ -e wikiquote.org/ \
+    -e wiktionary.org/ -e windows8center -e witcoin.com -e wn.com/ -e woot -e woot -e wordpress.com/category/ \
+    -e wordpress.com/signup -e wordpress.com/tag/ -e wordsmith -e wow-power -e wp-comments-post.php \
+    -e wp.com/wp-include -e wplogo.png -e wretch.cc -e wupload -e xanga -e xing.com/ -e xixidu.net/me/ \
+    -e xmlrpc.php -e xvid -e yahoo -e yoolink -e youmob.com/ -e youtu.be -e youtube.com/ -e zalex \
+    -e zerochan -e zombo -e zoombits -e blog.buzzflash.com/ -e .blogspot.com/search/ -e givewell.org/forward?path= \
+    -e /image_captcha/ -e www.networkforgood.org/donate/ -e www.givewell.org/print/ -e www.edwardtufte.com/tufte/email?msg_id=  \
+    -e www.adobe.com/products/ -e www.apple.com/ -e calendar.schemax.com/ -e www.edwardtufte.com/ecommerce/shopping-cart \
+    -e gigapan.org/viewGigapanFullscreen.php -e activeanime.com/html/category/ -e sales.domcollect.com/ \
+    -e www.eskimo.com/forbidden.html -e www.download4adollar.com/ -e www.visa.com/cgi-bin -e www.technorati.com/search/ \
+    -e bloghop.com/ -e cvs.sourceforge.net -e lambda-the-ultimate.org/taxonomy/term/ -e technorati.com/search \
+    -e www.bookfinder.com/ -e videobox.com/ -e thenude -e members.nearlyfreespeech.net -e filetram \
+    -e altavistasports.com/ -e accuchiptiming.com/ -e fl.milesplit.com/ -e runningzone.com/ -e steepletiming.com/ \
+    -e trihokie.smugmug.com/ -e www.active.com/ -e www.altavistasports.com/ -e www.coolrunning.com/ \
+    -e www.disneyworldsports.com/ -e www.enduranceplanet.com/ -e www.epicsportsmarketing.com/ -e www.eteamz.com/ \
+    -e www.eventmugshots.co -e www.evergladesultras.com/ -e www.fedsofbrevard.org -e www.fleetfeetorlando.com/ \
+    -e www.icunphotos.com/ -e www.johnholmestrailrun.com/ -e www.johnholmestrailrun.com/ -e www.jtcrunning.com/ \
+    -e www.leadvilletrail100.com/ -e www.multirace.com/ -e www.nyx.net/~mwallace/LT_files/Marathon/ \
+    -e www.racesmith.com/ -e www.runnersdepotvb.com/ -e www.runnersworld.com/ -e www.runningzone.com/ \
+    -e www.runtothesun4jeff.com/ -e www.spacecoastmarathon.com/ -e www.steepletiming.com/ -e www.trackshack.com/ \
+    -e www.trihokie.com/ -e www.ultramarathonrunning.com/ -e www.ultrarunning.com/ -e www.ultrarunningmom.blogspot.com/ \
+    -e www.uprunninginc.com/ -e www.walkjogrun.net -e www.whitedogvideos.com/ -e www.wildsideonline.net \
+    -e www.wildsideonline.smugmug.com/ -e mikuchan -e robotvsbadger.com/ -e statcounter.com/ -e buy.com/ \
+    -e dvdplanet.com/ -e www.jdoqocy.com/ -e cg-cm.blogspot.com/ -e imagehyper.com/ -e filesmore.com/ \
+    -e toyasukaseries -e jennilee.com/ -e fileplanet.com/ -e bidsystem.com/ -e yobt.tv -e "/wiki/Special:Block/" \
+    -e "/wiki/Special:WikiActivity" -e "/mediawiki/index.php?title=" -e animekida.com/ -e crusang.net \
+    -e hellfireangels.com/ -e iiichan.net -e filesmonster.com/ -e dult-empire.com/ -e hootsuite.com/ \
+    -e i.eho.st -e jennileeonline.com/ -e konashion.blogspot.com/ -e library.nu -e minus.com/ -e leagueoflegends.com/ \
+    -e phapit.com/ -e rabbitrevelry.com/ -e 7chan.org -e reversegif.com/ -e kibitou4life.wordpress.com/ \
+    -e teamvanilla.wordpress.com/ -e subimg.net -e outbrain.com/ -e hanyuu.net -e 18kintube.com/ \
+    -e 2shared.com/ -e animekida.com/ -e gifsoup.com/ -e indiegogo.com/ -e twistys.com/ -e zettai-ryouiki.net \
+    -e 66.228.44.62/ -e erogedownload.com/ -e igg.me -e jdownloader.org -e s2.subirimagenes.co \
+    -e xbooru.com/ -e 4shared.com/ -e  memedepot.com/ -e adjuggler.net -e image.kz -e wrgroup.ru \
+    -e wiki.lesswrong.com/wiki/Special: -e ul.to/ -e fb.me -e k.min.us -e ladygagatour.net -e www.askmen.com/sports/ \
+    -e www.archive.org/index.php -e seeker.dice.com/ -e nicosound.anyap.info -e nicovideo.jp/watch \
+    -e www.nicovideo.jp/search -e www.yourmorals.org/surveyresults_graph -e metabooru -e live.niconico.com/ \
+    -e validator.w3.org -e www.etsy.com/ -e www.nicovideo.jp/tag/ -e lesswrong.com/tag/ -e www.overcomingbias.com/tag/ \
+    -e www.makefoil.com/passwordXor.html -e goproblems.com/ -e community.wikia.com/ -e adblockplus.org \
+    -e www.linkedin.com/reg/ -e www.linkedin.com/secure/ -e www.mcpl.lib.ny.us \
+    -e www.smackjeeves.com/ -e www.pelleas.net/aniTOP/index.php?disp=msgform -e "www.pelleas.net/aniTOP/index.php?tempskin=_rss2" \
+    -e www.pelleas.net/dbman/ -e "/search?q=cache:" -e b2evolution.net -e www.crunchyroll.com/user/ \
+    -e www.gametrailers.com/ -e www.colorcombos.com/ -e "www.walla.co.il/" -e akiba-online.com/ \
+    -e "vocaloid.wikia.com/index.php?" -e gamefaqs.com/boards/ -e www.gamefaqs.com/user -e lesswrong.com/edit/ \
+    -e membership.gamefaqs.com/ -e chanarchive.org -e filepost.com/ -e chanarchive.org -e nh.web.id/tag \
+    -e www.dropbox.com/revisions/ -e bugmenot.com/ -e krautchan.net -e bdnet.com/ -e datbtrue.co.uk \
+    -e www.futuretimeline.net/search.htm -e rueducommerce -e 'www.squidge.org/~peja/' -e "mtgox.com" \
+    -e "lnk.co/" -e 198.45.22.27 -e ebscohost.com/ -e sciencedirect.com/ -e psycnet.apa.org -e serialssolutions.com/ \
+    -e webofknowledge.com/ -e 199.91.152.140 -e api.viglink.com/ -e gotupload.com/ -e resolver.lib.washington.edu \
+    -e clipsite.com.ar -e download.ted.com/ -e koohii.com/ -e liargame.net -e yoroshii -e gen.lib.rus.ec \
+    -e gigapedia.info -e mikudb.com/ -e mtgox.com/trade/ -e cablevision.com/ -e www.dropbox.com/account \
+    -e veropedia -e www.goodjudgmentproject.com/ene/ -e "adf.ly/" -e animexx -e centrum-magi -e rediff.com/ \
+    -e whatismyip.com/ -e ataku.tv -e manga.hu -e underarmour.com/ -e rule34.xxx -e .booru.org \
+    -e smmry.com/ -e modalert.co -e goodjudgmentproject.com/ -e ptcmysore.gov.in -e onlinelibrary.wiley.com/ \
+    -e webcitation.org/query -e texify.com/ -e slashdot.org/my/ -e worldcat.org -e lesswrong.com/message/ \
+    -e loislaw.com/ -e test.personality-project.org -e livejournal.com/register -e livejournal.com/misc/ \
+    -e livejournal.com/changeemail -e ".bin" -e linksysbycisco.com/ -e libgen.info -e shoprunner.com/ \
+    -e techtarget.com/ -e camelegg.com/ -e head-fi.org -e eastview.com/ -e detexify -e img.free.fr \
+    -e bandcamp.com/download -e tracfone.com/ -e boukenshin.net -e gptjob.com/ -e fileserving.com/ \
+    -e foro.powers.cl -e mikubook.com/ -e downloadost.com/ -e filecrop.com/ -e lib.washington.edu/ \
+    -e rs25.com/ -e uploadmirrors.com/ -e video.niconico.com/ -e feeds.wired.com/ -e rutracker.org/ \
+    -e megashare.com/ -e nicovideo.jp/ -e omocat-shop.com/
+
+# prevent URLs from piling up at the end of the file
+echo ""
+~~~
+
+`filter-urls` can be used on one's local archive to save space by deleting files which may be downloaded by `wget` as dependencies. For example:
+
+~~~{.sh}
+find ~/www | sort --unique >> full.txt && \
+    find ~/www | filter-urls | sort --unique >> trimmed.txt
+comm -23 full.txt trimmed.txt | xargs -d "\n" rm
+rm full.txt trimmed.txt
+~~~
+
+This shrunk my archive by 9GB from 65GB to 56GB, although at the cost of some archiving fidelity by removing many filetypes like CSS or JavaScript or GIF images.
