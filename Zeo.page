@@ -33,6 +33,7 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
     - quantifying meditation (eg. length of gamma frequencies)
     - rank music by distractibility?
     - measure focus over the day and during specific activities (eg. correlate frequencies against n-backing performance)
+12. testing benefit of using [Redshift](http://jonls.dk/redshift/)/f.lux to adjust monitor color temperature
 
 [^QS]: Note that one can use a Zeo and not be doing anything really recognizable as 'Quantified self'. For example, one could just collect data. An example here would be Stephen Wolfram's post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/); Wolfram has collected an astonishing amount of information on his typing, emails, phone calls, calendars and walking over <20 years. Only in 2012 has he actually graphed any of it or attempted to analyze it.
 
@@ -344,7 +345,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     >
     > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant."
 
-As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes):
+As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes, effect size 0.37^[`(456.4783 -  407.5312) / sd(mydata$Total.Z, TRUE)` = 0.3723188]):
 
 ![](/images/zeo/melatonin-totalz.png)
 ![](/images/zeo/melatonin-timeswoken.png)
@@ -361,7 +362,7 @@ Given that the ZQ metric seems to be primarily determined by total sleep and REM
 
 ![](/images/zeo/melatonin-zq.png)
 
-REM's average fell by 29 minutes, deep sleep fell by 1 minute, but total sleep fell by 54 minutes; this implies that light sleep fell by 24 minutes. (The averages were 254.2 & 233.3; _p_=0.2229.) I am not sure what to make of this. While my original heuristic of a one hour reduction turns out to be surprisingly accurate, I had expected light and deep sleep to take most of the time hit. Do I get enough REM sleep? I don't know how I would answer that.
+REM's average fell by 29 minutes, deep sleep fell by 1 minute, but total sleep fell by 54 minutes; this implies that light sleep fell by 24 minutes. (The averages were 254.2 & 233.3; _p_=0.22) I am not sure what to make of this. While my original heuristic of a one hour reduction turns out to be surprisingly accurate, I had expected light and deep sleep to take most of the time hit. Do I get enough REM sleep? I don't know how I would answer that.
 
 I did feel fine on the days after melatonin use, but I didn't track it very systematically. The best I have is the 'morning feel' parameter, which the Zeo asks you on waking up; in practice I entered the values as: a '2' means I woke feeling poor or unrested, '3' was fine or mediocre, and '4' was feeling good. When we graph the average of morning feel against melatonin use or non-use, we find that melatonin was noticeably better (2.95 vs 3.17, _p_=0.18):
 
@@ -670,7 +671,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
 
     Oh well! Statistics is a harsh mistress indeed.
 
-While I did not replicate Roberts's setup exactly in the interest of time and ease, and obviously it was not blinded, I tried to compensate with an unusually large sample: 69 nights of data. This was a mixed experiment: there seems to be an effect, but none of the changes seem to have large effect-sizes or strong _p_-values.
+While I did not replicate Roberts's setup exactly in the interest of time and ease, and obviously it was not blinded, I tried to compensate with an unusually large sample: 69 nights of data. This was a mixed experiment: there seems to be an effect, but none of the changes seem to have large effect sizes or strong _p_-values.
 
 The one-legged standing was not in exclusion to melatonin use, but I had used it most every night. I thought I might go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower, but I've abandoned it because it is a lot of work to use and the result looked weak. In the future, I should look into whether walks before bedtime help.
 
@@ -734,6 +735,7 @@ December 2011
 30: off
 May 2012
 8: off
+9: off
 -->
 
 # Vitamin D
@@ -1251,7 +1253,7 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
 8. 'Time to Z' did not change, 25.32m vs 25.33 (_p_=0.99/0.5)
 9. 'Mood' did not change (or decreased), 3.02 vs 3.1 (_p_=0.65)
 
-As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect-size of 0.7.[^d-effect-size-morning]
+As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect size of 0.7.[^d-effect-size-morning]
 
 All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.) I have no idea how vitamin D could improve *only* my morning mood without affecting any of the other parameters. If it was improving my sleep in general with less awakenings or something, it should have shown up strongly on those parameters; or if vitamin D deficiency was causing depressive symptoms, it should have shown up in the overall Mood metric etc.
 
@@ -1410,6 +1412,125 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     [False,False,False,False,False,False,True,False,False]
     ~~~
 [^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
+
+<!--
+# Redshift/f.lux
+
+My earlier [melatonin experiment](#melatonin) found it helped me sleep. Melatonin secretion is also influenced by the color of light (some references can be found in my [melatonin article](Melatonin)), specifically blue light tends to suppress melatonin secretion while redder light does not affect it. (This makes sense: blue/white light is associated with the brightest part of the day, while reddish light is the color of sunsets.) Electronics and computer monitors frequently emit white or blue light. (The recent trend of bright blue LEDs is particularly deplorable in this regard.) Besides the plausible suggestion about melatonin, reddish light impairs night vision less and is easier to see under dim conditions: you may want a blazing white screen at noon so you can see *something*, but in a night setting, that is like staring for hours straight into a fluorescent light.
+
+Hence, you would like to both dim your monitor and also shift the color temperature towards the cooler redder end of the spectrum with a utility like [Redshift](http://jonls.dk/redshift/).
+
+But does it actually *work*? An experiment is called for!
+
+The suggested mechanism is through melatonin secretion. So we'd look at all the usual sleep metrics plus mood plus an additional one: what time I go to bed.. One of the reasons I became interested in melatonin was as a way of getting myself to go to bed rather than stay up until 3 AM - a chemically enforced bedtime - and it seems plausible that if Redshift is reducing the interference of the computer monitor, it will make me stay up later ("but I don't feel sleepy yet").
+
+The earlier melatonin experiment found somewhat weak effects with >100 days of data, and one would expect that actually consuming 1.5mg of melatonin would be a stronger intervention than simply shifting my laptop screen color. (What if I don't use my laptop that night? What if I'm surrounded by white lights?) 30 days is probably too small, judging from the other experiments; 60 is more reasonable, but 90 feels more plausible.
+
+It may be time to learn some more statistics, specifically how to do [statistical power calculation](!Wikipedia)s for [sample size determination](!Wikipedia). As I understand it, a power calculation is an equation balancing your sample size, the effect size, and the significance level (eg the old _p_<0.05); if you have 2, you can deduce the third. So if you already knew your sample size and your effect size, you could predict what significance your results would have. In this specific case, we can specify our significance at the usual level, and we can guess at the effect size, but we want to know what sample size we *should* have.
+
+Let's pin down the effect size: we expect any Redshift effect to be weaker than melatonin supplementation, and the most striking change in melatonin (the reduction in total sleep time by ~50 minutes) had an effect size of 0.37. As usual, R has a bunch of functions we can use. Stealing shamelessly from an [R guide](http://www.ats.ucla.edu/stat/R/dae/t_test_power3.htm), and reusing the means and standard deviations from the melatonin experiment, we can begin asking questions like: "suppose I wanted a 90% chance of my experiment producing a solid result of _p_>0.01 (not 0.05, so I can do multiple correction) if the Redshift data looks like the melatonin data and acts the same way?"
+
+~~~{.R}
+> install.packages("pwr", depend = TRUE)
+...
+> library(pwr)
+> pwr.t.test(d=(456.4783-407.5312)/131.4656,power=0.9,sig.level=0.01,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 96.63232
+              d = 0.3723187
+      sig.level = 0.01
+          power = 0.9
+    alternative = greater
+
+ NOTE: n is number of *pairs*
+~~~
+
+Ouch, but OK, that was making some assumptions. What if we say the effect size was halved?
+
+~~~{.R}
+> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.9,sig.level=0.01,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 378.3237
+...
+~~~
+
+That's much worse. What if we weaken the power and significance level to 0.5 and 0.05 respectively?
+
+~~~{.R}
+> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.5,sig.level=0.05,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 79.43655
+              d = 0.1861593
+...
+~~~
+
+This is more reasonable, but look at what it cost us: it's now a coin-flip that the results will show anything, and they may not pass multiple correction either. But it's also very expensive to gain more certainty - if we halve that 50% chance of finding nothing, it basically doubles the number of days we need from 79 to 157:
+
+~~~{.R}
+> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.75,sig.level=0.05,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 156.5859
+              d = 0.1861593
+...
+~~~
+
+Statistics is a harsh master. What if we solve the equation for a different variable, power or significance? Maybe I can handle 100 days, what would 100 buy me in terms of power?
+
+~~~{.R}
+> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=100,sig.level=0.05,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 100
+              d = 0.1861593
+      sig.level = 0.05
+          power = 0.5808219
+...
+~~~
+
+Just 58%. (But at _p_=0.01, _n_=100 only buys me 31% power, so it could be worse!) At 120 days, I get 65% power, so that may be doable. I guess it'll depend on circumstances: ideally, a Redshift trial will involve no work on my part, so the real question becomes what quicker sleep experiments does it stop me from running and how long can I afford to run it? Would it painfully overlap with things like the lithium trial?
+
+Speaking of the lithium trial, the plan is to run it for a year. What would a year of Redshift data buy me even at _p_=0.01?
+
+~~~{.R}
+> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=365,sig.level=0.01,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 365
+              d = 0.1861593
+      sig.level = 0.01
+          power = 0.8881948
+...
+~~~
+
+Nice!
+
+OK, power calculations aside, how exactly to run it? I don't expect any bleed-over from day to day, so we randomize on a per-day basis. Each day must either have Redshift running or not. Redshift is run from cron every 15 minutes: `*/15  * * * * redshift -o`. (This is to deal with logouts, shutdowns, freezes, etc., that might kill Redshift as a persistent daemon.) We'll change the code to at the beginning of each day run:
+
+~~~{.sh}
+@daily redshift -x; if ((RANDOM % 2 < 1)); then touch ~/.redshift; echo `date +"%d %b %Y"`: on >>~/redshift.log; else rm ~/.redshift; echo `date +"%d %b %Y"`: off >> ~/redshift.log; fi
+~~~
+
+Then the Redshift call simply includes a check for the file's existence:
+
+~~~{.sh}
+*/15  * * * * if [ -f ~/.redshift ]; then redshift -o; fi
+~~~
+
+Now we have completely automatic randomization and logging of the experiment. As long as I don't screw things up by deleting either file or uninstalling Redshift, and I keep using my Zeo, all the data is gathered and labeled nicely until I finish the experiment and do the analysis.
+
+So to recap: the experiment is 100+ days with Redshift randomized on or off by a shell script, affecting the usual sleep metrics plus time of bed. The expectation is that lack of Redshift will produce a weak negative effect: increasing awakenings & time awake & light sleep, increasing overall sleep time, and also pushing back bedtime.
+
+-->
 
 # Conclusions
 
