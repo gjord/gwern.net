@@ -12,6 +12,8 @@ The data is much better than what you would get from more popular methods like c
 
 # Tests
 
+> "A thinker sees his own actions as experiments & questions - as attempts to find out something. Success and failure are for him *answers* above all." --Friedrich Nietzsche, _The Gay Science_ #41
+
 I personally want the data for a few distinct purposes, but in the best Quantified Self vein[^QS], mostly experimenting:
 
 1. quantifying the benefits of [melatonin](Melatonin)
@@ -26,8 +28,8 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
     - do n-backing after waking up, to look for correlation between good/bad sleeps and performance (one would expect good sleep ~> good scores).
     - test the costs of polyphasic sleep on memory^[My own suspicion is that given the existence of [neuron-level sleep in mice](http://www.cosmosmagazine.com/news/4264/can-we-be-awake-and-asleep-same-time), [poor self-monitoring in humans](http://www.nytimes.com/2011/04/17/magazine/mag-17Sleep-t.html), and [anecdotal reports](http://lesswrong.com/lw/5n0/optimizing_sleep/44zu) about polyphasic sleep, is that polyphasic sleep is a real & workable phenomenon but that it comes at the price of a significant chunk of mental performance.]
 8. (positive) effect of [Seth Roberts](!Wikipedia)'s [one-legged standing](http://www.blog.sethroberts.net/2011/03/22/effect-of-one-legged-standing-on-sleep/) on sleep depth/efficiency
-9. (negative) effect of [vitamin D on sleep](#vitamin-d)
-10. possible sleep reductions due to [meditation](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2919439/)
+9. effect of [vitamin D on sleep](#vitamin-d) (positive & negative)
+10. possible sleep reductions due to meditation
 11. serial cable uses:
 
     - quantifying meditation (eg. length of gamma frequencies)
@@ -38,6 +40,10 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
 [^QS]: Note that one can use a Zeo and not be doing anything really recognizable as 'Quantified self'. For example, one could just collect data. An example here would be Stephen Wolfram's post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/); Wolfram has collected an astonishing amount of information on his typing, emails, phone calls, calendars and walking over <20 years. Only in 2012 has he actually graphed any of it or attempted to analyze it.
 
     In particular, he has never once changed his behavior in response to his gathered data nor has he ever experimented with different tools or strategies for, say, more efficient typing. (He mentions that 7% of his keystrokes are the Backspace key, which is remarkably high and probably indicates he could either benefit from learning better his favorite text editor or just basic typing training: at 7% backspacing, he is almost surely nowhere near a reasonable 80-100 WPM, which is costing him a great deal of time & effort given that he sends or receives hundreds of emails a day!)
+
+    One thinks of [a saying](http://deming.org/index.cfm?content=653 "Four Days with W. Edwards Deming") of [W. Edwards Demming](!Wikipedia):
+
+    > Experience by itself teaches nothing.
 [^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his _The Four-hour Body_ claims:
 
     > "Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20 –30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using."
@@ -675,69 +681,6 @@ While I did not replicate Roberts's setup exactly in the interest of time and ea
 
 The one-legged standing was not in exclusion to melatonin use, but I had used it most every night. I thought I might go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower, but I've abandoned it because it is a lot of work to use and the result looked weak. In the future, I should look into whether walks before bedtime help.
 
-## Push-ups
-
-Rather than dumbbells (might be hard to find in the dark), I decided to try out push-ups since I routinely do 25 push-ups after showering and it ought to be mentally easy to shift those push-ups to before/after bedtime. As before, alternate-day, but with a twist: on-days, I do the push-ups immediately before going to bed, but off-days entail immediately upon awakening. (I don't exercise enough in general.) I began 21 September 2011.
-
-I interrupted the experiment for a long period to run the vitamin D experiments; when I resumed on 8 May 2012, I decided to avoid the alternate-day procedure and instead randomize morning vs evening push ups with a coin.
-
-<!--
-coding: on=evening, off=morning
-September 2011
-21: on
-22: off
-23; on
-24: off
-25: on
-26: off
-27: on
-28: off
-29: on
-30: off
-October 2011
-1: on
-2: off
-3: on
-4: off
-5: on
-6: off
-7: on
-8: off
-9: on
-10: off
-11: on
-12: off
-13: on
-14: off
-15: on
-16: off
-17: on
-...
-November 2011
-5: off
-23: off
-25: off
-30: on
-December 2011
-1: off
-2: on
-5: off
-6: on?
-12: on
-13: off
-15: on
-16: off
-17: on
-18: off
-23: on
-24: off
-29: on
-30: off
-May 2012
-8: off
-9: off
--->
-
 # Vitamin D
 
 ## Background
@@ -1268,12 +1211,14 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
     library("ggplot2")
     sleep <- read.csv("2012-zeo-vitamind-morning.csv")
 
-    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
+    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")),
+                ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
 
-    #to save:
+    # to save:
     ggsave("mood.png")
 
-    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Morning.Feel, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")), ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
+    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Morning.Feel, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1,
+                 labels=c("placebo","active")), ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
 
     ggsave("morning.feel.png")
     ~~~
@@ -1413,8 +1358,19 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     ~~~
 [^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
 
-<!--
-# Redshift/f.lux
+# In progress
+
+Someone suggested that instead of running experiments serially, with limited sample sizes (because I am impatient to try the next interesting suggestion), I could instead take a step up in statistical sophistication and use a *[factorial experiment](!Wikipedia)* design: use multiple experimental interventions simultaneously for a much larger sample size, and then run [ANOVA](!Wikipedia) analyses rather than simpler two-sample t-tests. No less than [R.A. Fisher](!Wikipedia) praises multifactorial experiments as being more efficient: squeezing more data out of a given sample. Hence, I thought a crazy thought: my lithium experiment was going to run for ~360 days, and so I kept putting it off. But what if I ran multiple experiments for 360 days? If I had 4 or 5, then by the end of the year, I would have 5 results to show, and I would have the statistical equivalent of *more* than _n_=72  ($\frac{360}{5}$) for each experiment. Win-win.
+
+Classic multifactorial designs arrange to have every possible combination of the _n_ experiments happen on some day or other (such an arrangement is called a [Latin square](!Wikipedia)). However, with 5 experiments, each of which has 2 states (on and off), that means I only have 2^5^=32 possible arrangements, all of which ought to be covered over 360 days. So I will be lazy and will independently randomize each experiment.
+
+I don't actually know how to use ANOVA in R, but I can figure that out in a year. In the mean time, what are my 5 chosen interventions?
+
+## Lithium
+
+Rationale & procedure in the [Nootropics page](Nootropics#lithium).
+
+## Redshift/f.lux
 
 My earlier [melatonin experiment](#melatonin) found it helped me sleep. Melatonin secretion is also influenced by the color of light (some references can be found in my [melatonin article](Melatonin)), specifically blue light tends to suppress melatonin secretion while redder light does not affect it. (This makes sense: blue/white light is associated with the brightest part of the day, while reddish light is the color of sunsets.) Electronics and computer monitors frequently emit white or blue light. (The recent trend of bright blue LEDs is particularly deplorable in this regard.) Besides the plausible suggestion about melatonin, reddish light impairs night vision less and is easier to see under dim conditions: you may want a blazing white screen at noon so you can see *something*, but in a night setting, that is like staring for hours straight into a fluorescent light.
 
@@ -1423,6 +1379,8 @@ Hence, you would like to both dim your monitor and also shift the color temperat
 But does it actually *work*? An experiment is called for!
 
 The suggested mechanism is through melatonin secretion. So we'd look at all the usual sleep metrics plus mood plus an additional one: what time I go to bed.. One of the reasons I became interested in melatonin was as a way of getting myself to go to bed rather than stay up until 3 AM - a chemically enforced bedtime - and it seems plausible that if Redshift is reducing the interference of the computer monitor, it will make me stay up later ("but I don't feel sleepy yet").
+
+### Power calculation
 
 The earlier melatonin experiment found somewhat weak effects with >100 days of data, and one would expect that actually consuming 1.5mg of melatonin would be a stronger intervention than simply shifting my laptop screen color. (What if I don't use my laptop that night? What if I'm surrounded by white lights?) 30 days is probably too small, judging from the other experiments; 60 is more reasonable, but 90 feels more plausible.
 
@@ -1497,7 +1455,7 @@ Statistics is a harsh master. What if we solve the equation for a different vari
 ~~~
 
 Just 58%. (But at _p_=0.01, _n_=100 only buys me 31% power, so it could be worse!) At 120 days, I get 65% power, so that may be doable. I guess it'll depend on circumstances: ideally, a Redshift trial will involve no work on my part, so the real question becomes what quicker sleep experiments does it stop me from running and how long can I afford to run it? Would it painfully overlap with things like the lithium trial?
-
+2
 Speaking of the lithium trial, the plan is to run it for a year. What would a year of Redshift data buy me even at _p_=0.01?
 
 ~~~{.R}
@@ -1512,12 +1470,15 @@ Speaking of the lithium trial, the plan is to run it for a year. What would a ye
 ...
 ~~~
 
-Nice!
+Nice! Of course, we have to expect to lose a good deal of statistical power due to interference/uncertainty from the other simultaneous experiments that will be fed into the ANOVA, but I don't know how to calculate that.
+
+### Experiment
 
 OK, power calculations aside, how exactly to run it? I don't expect any bleed-over from day to day, so we randomize on a per-day basis. Each day must either have Redshift running or not. Redshift is run from cron every 15 minutes: `*/15  * * * * redshift -o`. (This is to deal with logouts, shutdowns, freezes, etc., that might kill Redshift as a persistent daemon.) We'll change the code to at the beginning of each day run:
 
 ~~~{.sh}
-@daily redshift -x; if ((RANDOM % 2 < 1)); then touch ~/.redshift; echo `date +"%d %b %Y"`: on >>~/redshift.log; else rm ~/.redshift; echo `date +"%d %b %Y"`: off >> ~/redshift.log; fi
+@daily redshift -x; if ((RANDOM % 2 < 1)); then touch ~/.redshift; echo `date +"%d %b %Y"`: on >> ~/redshift.log;
+          else rm ~/.redshift; echo `date +"%d %b %Y"`: off >> ~/redshift.log; fi
 ~~~
 
 Then the Redshift call simply includes a check for the file's existence:
@@ -1530,6 +1491,95 @@ Now we have completely automatic randomization and logging of the experiment. As
 
 So to recap: the experiment is 100+ days with Redshift randomized on or off by a shell script, affecting the usual sleep metrics plus time of bed. The expectation is that lack of Redshift will produce a weak negative effect: increasing awakenings & time awake & light sleep, increasing overall sleep time, and also pushing back bedtime.
 
+## Push-ups
+
+Rather than dumbbells (might be hard to find in the dark), I decided to try out push-ups since I routinely do 25 push-ups after showering and it ought to be mentally easy to shift those push-ups to before/after bedtime. As before, alternate-day, but with a twist: on-days, I do the push-ups immediately before going to bed, but off-days entail immediately upon awakening. (I don't exercise enough in general.) I began 21 September 2011.
+
+I interrupted the experiment for a long period to run the vitamin D experiments; when I resumed on 8 May 2012, I decided to avoid the alternate-day procedure and instead randomize morning vs evening push ups with a coin.
+
+<!--
+coding: on=evening, off=morning/afternoon
+September 2011
+21: on
+22: off
+23; on
+24: off
+25: on
+26: off
+27: on
+28: off
+29: on
+30: off
+October 2011
+1: on
+2: off
+3: on
+4: off
+5: on
+6: off
+7: on
+8: off
+9: on
+10: off
+11: on
+12: off
+13: on
+14: off
+15: on
+16: off
+17: on
+...
+November 2011
+5: off
+23: off
+25: off
+30: on
+December 2011
+1: off
+2: on
+5: off
+6: on?
+12: on
+13: off
+15: on
+16: off
+17: on
+18: off
+23: on
+24: off
+29: on
+30: off
+May 2012
+8: off
+9: off
+10: on
+11: on
+-->
+
+## Meditation
+
+The practice of meditation can be time-intensive; a claimed anecdotal benefit is that one sleeps less and so the time requirement isn't as bad as it may seem.
+
+["Meditation acutely improves psychomotor vigilance, and may decrease sleep need"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2919439/ "Kaul et al 2010") found a correlation between long meditation and reduced sleep need. The general link seems plausible - that deliberate relaxation may reduce the need for another kind of relaxation (although I doubt meditation is going as far as reducing synaptic weights as the "synaptic homeostasis" hypothesis predicts which I discuss in [Drug heuristics]()) - but I can think of at least 2 plausible ways the correlation would not be causation (1. those with less sleep need can afford to spend time on meditation; 2. meditation *is* partially sleep so there's no correlation or causation to explain).
+
+Randomized on a daily basis: either 20 minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.)
+
+Plausibly, any decrease in sleep need could be due to long-term changes in the brain itself, as meditation is [known to affect](!Wikipedia "Research on meditation") areas like the [prefrontal cortex](!Wikipedia). Kaul et al 2010 above did not randomize the long-term meditators' use of meditation or apparently investigate whether sleep time averages correlated with meditation. If the changes are long-term, then there will be relatively little variation during the 360 days and instead a gradual trend of less sleep. If no clear effect shows up in the analysis, I'll try a before-after comparison: compare _n_ days before the experiment started to _n_ days after the experiment and see if there is a difference in the averages.
+
+<!--
+May 2012
+11: off
+-->
+
+## Masturbation
+
+Orgasm has been linked occasionally with changes in sleep latency, although [one 1985 experimental study](/docs/1985-brissette.pdf "'Sexual Activity and Sleep in Humans', Brissette et al 1985") found no changes. [Schenck et al 2007](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1978350/ "Sleep and Sex: What Can Go Wrong? A Review of the Literature on Sleep Related Disorders and Abnormal Sexual Behaviors and Experiences") covers some inconclusive followup studies on related matters like whether arousal or brief viewing of porn interferes with sleep (no).
+
+Randomized on a daily basis before going to bed; no placebo, but abstinence.
+
+<!--
+May 2012
+11: on
 -->
 
 # Conclusions
@@ -1550,3 +1600,5 @@ This is what I have learned:
     - Reddit: [1](http://www.reddit.com/r/Nootropics/comments/po3zk/psa_dont_take_vitamin_d_at_bedtime/), [2](http://www.reddit.com/r/fitnesscirclejerk/comments/po47w/so_i_heard_you_guys_like_vitamin_d_hopefully_not/)
     - [Imminst](http://www.longecity.org/forum/topic/54364-vitamin-d-sleep-experiment/)
     - [_Business Insider_ blog](http://www.businessinsider.com/this-is-what-happens-when-you-track-your-sleep-obsessively-2012-2)
+
+<!-- Redshift: 11 May 2012: off -->
