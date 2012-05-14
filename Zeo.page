@@ -37,6 +37,8 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
     - measure focus over the day and during specific activities (eg. correlate frequencies against n-backing performance)
 12. testing benefit of using [Redshift](http://jonls.dk/redshift/)/f.lux to adjust monitor color temperature
 
+I have tried to do my little self-experiments as well as I know how to, and hopefully my results are less bogus than the usual anecdotes one runs into online. What I would really like is for other people (especially Zeo owners) to *replicate* my results. To that end I have made pains to describe my setup completely so others can use it, along with the data and complete R or Haskell programs for analysis. If anyone replicates my results in any fashion, please contact me and I would be happy to link your self-experiment here!
+
 [^QS]: Note that one can use a Zeo and not be doing anything really recognizable as 'Quantified self'. For example, one could just collect data. An example here would be Stephen Wolfram's post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/); Wolfram has collected an astonishing amount of information on his typing, emails, phone calls, calendars and walking over <20 years. Only in 2012 has he actually graphed any of it or attempted to analyze it.
 
     In particular, he has never once changed his behavior in response to his gathered data nor has he ever experimented with different tools or strategies for, say, more efficient typing. (He mentions that 7% of his keystrokes are the Backspace key, which is remarkably high and probably indicates he could either benefit from learning better his favorite text editor or just basic typing training: at 7% backspacing, he is almost surely nowhere near a reasonable 80-100 WPM, which is costing him a great deal of time & effort given that he sends or receives hundreds of emails a day!)
@@ -1368,7 +1370,7 @@ I don't actually know how to use ANOVA in R, but I can figure that out in a year
 
 ## Lithium
 
-Rationale & procedure in the [Nootropics page](Nootropics#lithium).
+Rationale & procedure in the [Nootropics page](Nootropics#lithium). Randomized in 7-day blocks. Blinded.
 
 ## Redshift/f.lux
 
@@ -1487,7 +1489,7 @@ Then the Redshift call simply includes a check for the file's existence:
 */15  * * * * if [ -f ~/.redshift ]; then redshift -o; fi
 ~~~
 
-Now we have completely automatic randomization and logging of the experiment. As long as I don't screw things up by deleting either file or uninstalling Redshift, and I keep using my Zeo, all the data is gathered and labeled nicely until I finish the experiment and do the analysis.
+Now we have completely automatic randomization and logging of the experiment. As long as I don't screw things up by deleting either file or uninstalling Redshift, and I keep using my Zeo, all the data is gathered and labeled nicely until I finish the experiment and do the analysis. Non-blinded, or perhaps I should say quasi-blinded - I initially don't know, but I *can* check the logs or file to see what that day was, and obviously I will at some point in the night notice whether the monitor is reddened or not.
 
 So to recap: the experiment is 100+ days with Redshift randomized on or off by a shell script, affecting the usual sleep metrics plus time of bed. The expectation is that lack of Redshift will produce a weak negative effect: increasing awakenings & time awake & light sleep, increasing overall sleep time, and also pushing back bedtime.
 
@@ -1495,7 +1497,7 @@ So to recap: the experiment is 100+ days with Redshift randomized on or off by a
 
 Rather than dumbbells (might be hard to find in the dark), I decided to try out push-ups since I routinely do 25 push-ups after showering and it ought to be mentally easy to shift those push-ups to before/after bedtime. As before, alternate-day, but with a twist: on-days, I do the push-ups immediately before going to bed, but off-days entail immediately upon awakening. (I don't exercise enough in general.) I began 21 September 2011.
 
-I interrupted the experiment for a long period to run the vitamin D experiments; when I resumed on 8 May 2012, I decided to avoid the alternate-day procedure and instead randomize morning vs evening push ups with a coin.
+I interrupted the experiment for a long period to run the vitamin D experiments; when I resumed on 8 May 2012, I decided to avoid the alternate-day procedure and instead randomize morning vs evening push ups with a coin. Non-blinded.
 
 <!--
 coding: on=evening, off=morning/afternoon
@@ -1554,6 +1556,8 @@ May 2012
 9: off
 10: on
 11: on
+12: off
+13: off
 -->
 
 ## Meditation
@@ -1562,24 +1566,28 @@ The practice of meditation can be time-intensive; a claimed anecdotal benefit is
 
 ["Meditation acutely improves psychomotor vigilance, and may decrease sleep need"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2919439/ "Kaul et al 2010") found a correlation between long meditation and reduced sleep need. The general link seems plausible - that deliberate relaxation may reduce the need for another kind of relaxation (although I doubt meditation is going as far as reducing synaptic weights as the "synaptic homeostasis" hypothesis predicts which I discuss in [Drug heuristics]()) - but I can think of at least 2 plausible ways the correlation would not be causation (1. those with less sleep need can afford to spend time on meditation; 2. meditation *is* partially sleep so there's no correlation or causation to explain).
 
-Randomized on a daily basis: either 20 minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.)
+Randomized on a daily basis: either 20 minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.) Non-blinded. My meditation is nothing fancy: simple breath-following (based on early chapters of [_Mindfulness in Plain English_](http://www.urbandharma.org/udharma4/mpe.html)).
 
 Plausibly, any decrease in sleep need could be due to long-term changes in the brain itself, as meditation is [known to affect](!Wikipedia "Research on meditation") areas like the [prefrontal cortex](!Wikipedia). Kaul et al 2010 above did not randomize the long-term meditators' use of meditation or apparently investigate whether sleep time averages correlated with meditation. If the changes are long-term, then there will be relatively little variation during the 360 days and instead a gradual trend of less sleep. If no clear effect shows up in the analysis, I'll try a before-after comparison: compare _n_ days before the experiment started to _n_ days after the experiment and see if there is a difference in the averages.
 
 <!--
 May 2012
 11: off
+12: off
+13: on
 -->
 
 ## Masturbation
 
 Orgasm has been linked occasionally with changes in sleep latency, although [one 1985 experimental study](/docs/1985-brissette.pdf "'Sexual Activity and Sleep in Humans', Brissette et al 1985") found no changes. [Schenck et al 2007](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1978350/ "Sleep and Sex: What Can Go Wrong? A Review of the Literature on Sleep Related Disorders and Abnormal Sexual Behaviors and Experiences") covers some inconclusive followup studies on related matters like whether arousal or brief viewing of porn interferes with sleep (no).
 
-Randomized on a daily basis before going to bed; no placebo, but abstinence.
+Randomized on a daily basis before going to bed; no placebo, but abstinence. Non-blinded. Since the theory has always been about a very short-term effect, there's no need to worry about daytime activities. (This would only matter if I were testing something like the folk wisdom that masturbation reduces testosterone levels, where the timing is not as important as the quantity.)
 
 <!--
 May 2012
 11: on
+12: off
+13:
 -->
 
 # Conclusions
@@ -1602,3 +1610,5 @@ This is what I have learned:
     - [_Business Insider_ blog](http://www.businessinsider.com/this-is-what-happens-when-you-track-your-sleep-obsessively-2012-2)
 
 <!-- Redshift: 11 May 2012: off -->
+<!-- Redshift: 12 May 2012: off -->
+<!-- Redshift: 13 May 2012: off -->
