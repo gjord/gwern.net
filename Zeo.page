@@ -1572,6 +1572,38 @@ Randomized on a daily basis: either 20 minutes of meditation or none. (I am not 
 
 Plausibly, any decrease in sleep need could be due to long-term changes in the brain itself, as meditation is [known to affect](!Wikipedia "Research on meditation") areas like the [prefrontal cortex](!Wikipedia). Kaul et al 2010 above did not randomize the long-term meditators' use of meditation or apparently investigate whether sleep time averages correlated with meditation. If the changes are long-term, then there will be relatively little variation during the 360 days and instead a gradual trend of less sleep. If no clear effect shows up in the analysis, I'll try a before-after comparison: compare _n_ days before the experiment started to _n_ days after the experiment and see if there is a difference in the averages.
 
+### Power calculation
+
+Kaul et al 2010 describes the long-term meditators as spending "2-3 hrs/day" in meditation. (Their experiment used novices who meditated for 1 hour.) If meditation indeed reduces sleep time, but I am meditating for only $\frac{1}{3}$ an hour, can I detect any effect?
+
+The difference between the long-term meditators and their normal Indian counterparts was 5.2 hours of sleep per day versus 7.8. Assume the worst case of 3 hours, this implies that meditation is indeed a net cost in time (8.2 > 7.8), but also that each hour of meditation is equivalent to almost an hour of sleep ($\frac{7.8 - 5.2}{3} = 0.866...$). So at that conversion rate, 20 minutes of meditation translates to 17.32 minutes less sleep. We will steal code and data from the previous [Redshift power calculation](#power-calculation): assume the same control sleep, same standard deviation, and subtract 17.32 from the control to get the true mean of the intervention
+
+~~~{.R}
+> install.packages("pwr", depend = TRUE)
+...
+> library(pwr)
+> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,sig.level=0.05,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 157.237
+...
+> # we're getting 360 samples; let's ask for more reliable chance than 50-50 of getting a useful result
+> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,sig.level=0.01,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 521.5252
+...
+> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.56,sig.level=0.01,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 356.2923
+~~~
+
+There's no point in being too precise: I'm not going to be doing a paired t-test, after all, but some sort of ANOVA, and I'm not sure how much power the interfering experiments cost me. The first calculation is the most important: to satisfy somewhat reasonable criteria, I need less than half the data I will get, which ought to be an adequate margin of safety.
+
 <!--
 May 2012
 11: off
