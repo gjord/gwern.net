@@ -1560,6 +1560,7 @@ May 2012
 13: off
 14: on
 15: on
+16: on
 -->
 
 ## Meditation
@@ -1568,7 +1569,7 @@ The practice of meditation can be time-intensive; a claimed anecdotal benefit is
 
 ["Meditation acutely improves psychomotor vigilance, and may decrease sleep need"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2919439/ "Kaul et al 2010") found a correlation between long meditation and reduced sleep need. The general link seems plausible - that deliberate relaxation may reduce the need for another kind of relaxation (although I doubt meditation is going as far as reducing synaptic weights as the "synaptic homeostasis" hypothesis predicts which I discuss in [Drug heuristics]()) - but I can think of at least 2 plausible ways the correlation would not be causation (1. those with less sleep need can afford to spend time on meditation; 2. meditation *is* partially sleep so there's no correlation or causation to explain).
 
-Randomized on a daily basis: either 20 minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.) Non-blinded. My meditation is nothing fancy: simple breath-following (based on early chapters of [_Mindfulness in Plain English_](http://www.urbandharma.org/udharma4/mpe.html)).
+Randomized on a daily basis: either 20-30^[I don't use a timer, but instead count 400 full breaths. Depending on how fast and shallowly I breathe, this runs from 20-35 minutes (eg. 16 May 2012's meditation ran 33 minutes long). To be conservative, I will assume the meditation is only 20 minutes.] minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.) Non-blinded. My meditation is nothing fancy: simple breath-following (based on early chapters of [_Mindfulness in Plain English_](http://www.urbandharma.org/udharma4/mpe.html)).
 
 Plausibly, any decrease in sleep need could be due to long-term changes in the brain itself, as meditation is [known to affect](!Wikipedia "Research on meditation") areas like the [prefrontal cortex](!Wikipedia). Kaul et al 2010 above did not randomize the long-term meditators' use of meditation or apparently investigate whether sleep time averages correlated with meditation. If the changes are long-term, then there will be relatively little variation during the 360 days and instead a gradual trend of less sleep. If no clear effect shows up in the analysis, I'll try a before-after comparison: compare _n_ days before the experiment started to _n_ days after the experiment and see if there is a difference in the averages.
 
@@ -1585,20 +1586,17 @@ The difference between the long-term meditators and their normal Indian counterp
 > pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
-
               n = 157.237
 ...
 > # we're getting 360 samples; let's ask for more reliable chance than 50-50 of getting a useful result
 > pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
-
               n = 521.5252
 ...
 > pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.56,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
-
               n = 356.2923
 ~~~
 
@@ -1611,6 +1609,7 @@ May 2012
 13: on
 14: off
 15: on
+16: on
 -->
 
 ## Masturbation
@@ -1625,7 +1624,8 @@ May 2012
 12: off
 13: off
 14: off
-15:
+15: off
+16: on
 -->
 
 # Conclusions
@@ -1652,3 +1652,5 @@ This is what I have learned:
 <!-- Redshift: 13 May 2012: off -->
 <!-- Redshift: 14 May 2012: on -->
 <!-- Redshift: 15 May 2012: on -->
+<!-- Redshift: 16 May 2012: on -->
+
