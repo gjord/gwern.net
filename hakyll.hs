@@ -34,7 +34,7 @@ main = do  hakyll $ do
              pages <- group "html" $ match "**.page" $ do
                route $ setExtension "" -- cool URLs
                compile $ myPageCompiler
-                 >>> renderTagsField "prettytags" (fromCapture "tags/*")
+                 >>> renderTagsField "prettytags" (fromCapture "tags/*" . escape)
                  >>> arr (trySetField "author" "gwern") -- only docs/*.page set 'author:'
                  >>> renderModificationTime "modified" "%d %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "static/templates/default.html"
@@ -108,12 +108,13 @@ inlinesToURL :: [Inline] -> String
 inlinesToURL x = let x' = inlinesToString x
                      (a,b) = break (=='%') x'
                  in escape a ++ b
-   where -- copied from XMonad.Actions.Search
-    escape :: String -> String
-    escape = concatMap escapeURIChar
-    escapeURIChar :: Char -> String
-    escapeURIChar c | isAscii c && isAlphaNum c = [c]
-                    | otherwise                 = concatMap (printf "%%%02X") $ encode [c]
+
+-- copied from "XMonad.Actions.Search"
+escape :: String -> String
+escape = concatMap escapeURIChar
+         where escapeURIChar :: Char -> String
+               escapeURIChar c | isAscii c && isAlphaNum c = [c]
+                               | otherwise                 = concatMap (printf "%%%02X") $ encode [c]
 
 
 -- | Convert a list of inlines into a string.
@@ -134,7 +135,6 @@ convertInterwikiLinks (Link ref (interwiki, article)) =
                                   _  -> Link ref (url `interwikiurl` article, summary article)
                 Nothing -> Link ref (interwiki, article)
             where -- 'http://starwars.wikia.com/wiki/Emperor_Palpatine'
-                  -- TODO: `urlEncode` breaks Unicode strings like "Shōtetsu"!
                   interwikiurl u a = u ++ urlEncode (deunicode a)
                   deunicode b = map (\x -> if x == '’' then '\'' else x) b
                   -- 'Wookieepedia: Emperor Palpatine'
