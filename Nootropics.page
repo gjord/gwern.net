@@ -82,6 +82,14 @@ My predictions seem to have been better than random chance, so my default belief
 
 [^capn]: Much better than I had expected. One of the best superhero movies so far, better than _Thor_ or _Watchmen_ (and especially better than the _Iron Man_ movies). I especially appreciated how it didn't launch right into the usual hackneyed creation of the hero plot-line but made Captain America cool his heels performing & selling war bonds for 10 or 20 minutes. The ending left me a little nonplussed, although I sort of knew it was envisioned as a franchise and I would have to admit that showing Captain America wondering at Times Square is much better an ending than something as cliche as a close-up of his suddenly-opened eyes and then a fade out. (The movie continued the lamentable trend in superhero movies of having a strong female love interest... who only gets the hots for the hero *after* they get muscles or powers. It was particularly bad in _CA_ because she knows him and his heart of gold beforehand! What is the point of a feminist character who is immediately forced to do that?)
 
+### Value of Information (VoI)
+
+> See also the discussion as applied to [ordering modafinil](Modafinil#ordering-when-learning-isnt-free) & evaluating [sleep experiments](Zeo#value-of-information-voi).
+
+The amphetamine mix branded "Adderall" is terribly expensive to obtain even compared to modafinil, due to its tight regulation (a lower schedule than modafinil), popularity in college as a study drug, and reportedly moves by its manufacture to exploit its privileged position as a licensed amphetamine maker to extract more consumer surplus. I paid roughly $4 a pill but could have paid up to $10. Good stimulant hygiene involves recovery periods to avoid one's body adapting to eliminate the stimulating effects, so even if Adderall was the answer to all my woes, I would not be using it more than 2 or 3 times a week. Assuming 50 uses a year (for specific projects, let's say, and not ordinary aimless usage), that's a cool \$200 a year. My general belief was that Adderall would be too much of a stimulant for me, as I am amphetamine-naive and Adderall has a bad reputation for letting one waste time on unimportant things. We could say my prediction was 50% that Adderall would be useful and worth investigating further. The experiment was pretty simple: blind randomized pills, 10 placebo & 10 active. I took notes on how productive I was and the next day guessed whether it was placebo or Adderall before breaking the seal and finding out. I didn't do any formal statistics for it, much less a power calculation, so let's try to be conservative by penalizing the information quality heavily and assume it had 25%. So $\frac{200 - 0}{\ln 1.05} \times 0.50 \times 0.25 = 512$! The experiment probably used up no more than an hour or two total.
+
+This example demonstrates that anything you are doing *expensively* is worth testing *extensively*.
+
 # Adrafinil
 
 The [adrafinil](!Wikipedia)/Olmifon (bought simultaneously with the [hydergine](#hydergine) from Anti-Aging Systems, now [Antiaging Central](http://antiagingcentral.com/store/catalog/index.php?cPath=32)) was a disappointment. Almost as expensive as actual modafinil, with the risk of liver problems, but did nothing whatsoever that I noticed. It is supposed to be subtler than modafinil, but that's a little ridiculous.
@@ -301,6 +309,12 @@ The principal metric would be 'mood', however defined. Zeo's web interface & dat
 
 In the original 1987 paper 'A brief POMS measure of distress for cancer patients', patients answering this questionnaire had a mean total mean of 10.43 (standard deviation 8.87). Is this the best way to measure mood? I've asked Seth Roberts; he suggested using a 0-100 scale, but personally, there's no way I can assess my mood on 0-100. My mood is sufficiently stable (to me) that 0-5 is asking a bit much, even.
 
+### VoI
+
+> For background on "value of information" calculations, see the [Adderall calculation](#value-of-information-voi).
+
+Low-dose lithium orotate is extremely cheap, ~\$10 a year. There is some research literature on it improving mood and impulse control in regular people, but some of it is epidemiological (which implies considerable unreliability); my current belief is that there is probably *some* effect size, but at just 10mg, it may be too tiny to matter. I have ~40% belief that there will be a large effect size, but I'm doing a long experiment and I should be able to detect a large effect size with >75% chance. So, the formula is NPV of the difference between taking and not taking, times quality of information, times expectation: $\frac{10 - 0}{\ln 1.05} \times 0.75 \times 0.40 = 61.4$, which justifies a time investment of less than 9 hours. As it happens, it took less than an hour to make the pills & placebos, and taking them is a matter of seconds per week, so the analysis will be the time-consuming part. This one may actually turn a profit.
+
 # Melatonin
 
 See [Melatonin]() for information on effects & cost; I regularly use melatonin to sleep, and investigating with my Zeo, it [does seem](Zeo#melatonin) to improve & shorten my sleep.
@@ -355,8 +369,6 @@ In 2011, as part of the Silk Road research, I ordered 10x100mg Modalert (5btc) f
 
 ### Modalert blind day trial
 
-<!-- TODO: link in the Prediction page -->
-
 Most people I talk to about modafinil seem to use it for daytime usage; for me that has not ever worked out well, but I had nothing in particular to show against it. So, as I was capping the last of my piracetam-caffeine mix and clearing off my desk, I put the 4 remaining Modalerts pills into capsules with the last of my creatine powder and then mixed them with 4 of the theanine-creatine pills. Like the previous [Adderall trial](#adderall-blind-testing), I will pick one pill blindly each day and guess at the end which it was. If it was active (modafinil-creatine), take a break the next day; if placebo (theanine-creatine), replace the placebo and try again the next day. We'll see if I notice anything on DNB or possibly `gwern.net` edits.
 
 1. Take at 10 AM; seem a bit more active but that could just be the pressure of the holiday season combined with my nice clean desk. I do the chores without too much issue and make progress on other things, but nothing major; I survive going to _The Sitter_ without too much tiredness, so ultimately I decide to give the palm to it being active, but only with [60%](http://predictionbook.com/predictions/4790) confidence. I check the next day, and it was placebo. Oops.
@@ -371,6 +383,14 @@ Most people I talk to about modafinil seem to use it for daytime usage; for me t
 So with these 8 results in hand, what do I think? Roughly, I was right 5 of the days and wrong 3 of them. If not for the sleep effect on #4, which is - in a way - cheating (one hopes to detect modafinil due to *good* effects), the ratio would be 5:4 which is awfully close to a coin-flip (and also roughly in line with my expressed confidences - yay calibration!).
 
 I can't call this much of a success; there may be an effect on my productivity but it's certainly not very clear subjectively. I'll chalk this up as a failure for modafinil and evidence for what I believed - day-time modafinil use does not work for me (even if it works for others).
+
+#### VoI
+
+> For background on "value of information" calculations, see the [Adderall calculation](#value-of-information-voi).
+
+I had tried 8 randomized days like the Adderall experiment to see whether I was one of the people whom modafinil energizes during the day. (The other way to use it is to skip sleep, which is my preferred use.) I rarely use it during the day since my initial uses did not impress me subjectively. The experiment was not my best - while it was double-blind randomized, the measurements were subjective, and not a good measure of mental functioning like dual n-back (DNB) scores which I could statistically compare from day to day or against my many previous days of dual n-back scores. Between my high expectation of finding the null result, the poor experiment quality, and the minimal effect it had (eliminating an already rare use), it's obvious without guesstimating any numbers that the value of this information was very small.
+
+I mostly did it so I could tell people that "no, day usage isn't particularly great for me; why don't you run an experiment on yourself and see whether it was just a placebo effect (or whether you genuinely are sleep-deprived and it is indeed compensating)?"
 
 ## Armodafinil
 
