@@ -228,7 +228,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     ~~~
 
     Oh well.
-[^R-melatonin-analysis-p]: The following `R` re-runs the above analysis but with options that increase the power of the results - but only if some assumptions about melatonin's effects are correct; see later Vitamin D discussion of 'optimistic' and 'pessimistic' assumptions.
+[^R-melatonin-analysis-o]: The following `R` re-runs the above analysis but with options that increase the power of the results - but only if some assumptions about melatonin's effects are correct; see later Vitamin D discussion of 'optimistic' and 'pessimistic' assumptions.
 
     ~~~{.R}
     > t.test(ZQ~SSCF.10, data=mydata, var.equal=TRUE); t.test(Total.Z~SSCF.10, data=mydata, var.equal=TRUE)
@@ -357,6 +357,36 @@ As expected, when using melatonin, total sleep and 'times awoken' were both redu
 
 ![](/images/zeo/melatonin-totalz.png)
 ![](/images/zeo/melatonin-timeswoken.png)
+
+The calculated effect size is a little worrisome; at a somewhat subtle _d_=0.37, power calculations indicate that we're close to the limit of what the data can reliably tell us[^R-melatonin-power]. Part of the problem is that too many days wound up being useless, and each day costs us information and reduces our *true* sample size.
+
+[^R-melatonin-power]: One weakness is that I didn't randomize selection of melatonin or no-melatonin, instead doing an alternating days design and not always following that But if we were to wave that away, the power seems.. OK. I have something like 141 days of data, of which around 90-100 is usable, giving me maybe <50 pairs? If I fire up R and load in the two means and the standard deviation (which we know from calculating the effect size), and then play with the numbers, then to get an 85% chance I could find an effect at _p_=0.01:
+
+    ~~~{.R}
+    > pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.01,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 84.3067
+              d = 0.3723187
+      sig.level = 0.01
+          power = 0.85
+     alternative = greater
+
+    NOTE: n is number of *pairs*
+    ~~~
+
+    84 pairs is more than 50 pairs. If I weaken the _p_=0.01 for 0.05, it looks like I should have had an 85% shot at detecting the effect:
+
+    ~~~{.R}
+    > pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.05,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 53.24355
+    ~~~
+
+    So, it's not great, but it's at least not *terribly* underpowered.
 
 Deep sleep and 'time in wake' were both apparently unaffected (_p_=0.88 & _p_=0.53); 'time in wake' apparently had too small a sample to draw much conclusion:
 
@@ -1450,7 +1480,7 @@ Let's pin down the effect size: we expect any Redshift effect to be weaker than 
  NOTE: n is number of *pairs*
 ~~~
 
-Ouch, but OK, that was making some assumptions. What if we say the effect size was halved?
+_n_ is pairs of days, so each _n_ is one day on, one day off; so it requires 194 days! Ouch, but OK, that was making some assumptions. What if we say the effect size was halved?
 
 ~~~{.R}
 > pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.9,sig.level=0.01,type="paired",alternative="greater")
@@ -1461,7 +1491,7 @@ Ouch, but OK, that was making some assumptions. What if we say the effect size w
 ...
 ~~~
 
-That's much worse. What if we weaken the power and significance level to 0.5 and 0.05 respectively?
+That's much worse (as one should expect - the smaller an effect or desired _p_-value or chance you don't have the power to observe it, the more data you need to see it). What if we weaken the power and significance level to 0.5 and 0.05 respectively?
 
 ~~~{.R}
 > pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.5,sig.level=0.05,type="paired",alternative="greater")
@@ -1473,7 +1503,7 @@ That's much worse. What if we weaken the power and significance level to 0.5 and
 ...
 ~~~
 
-This is more reasonable, but look at what it cost us: it's now a coin-flip that the results will show anything, and they may not pass multiple correction either. But it's also very expensive to gain more certainty - if we halve that 50% chance of finding nothing, it basically doubles the number of days we need from 79 to 157:
+This is more reasonable, since _n_=80 or 160 days will fit within the experiment but look at what it cost us: it's now a coin-flip that the results will show anything, and they may not pass multiple correction either. But it's also very expensive to gain more certainty - if we halve that 50% chance of finding nothing, it basically doubles the number of pairs of days we need from 79 to 157:
 
 ~~~{.R}
 > pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.75,sig.level=0.05,type="paired",alternative="greater")
@@ -1485,7 +1515,7 @@ This is more reasonable, but look at what it cost us: it's now a coin-flip that 
 ...
 ~~~
 
-Statistics is a harsh master. What if we solve the equation for a different variable, power or significance? Maybe I can handle 100 days, what would 100 buy me in terms of power?
+Statistics is a harsh master. What if we solve the equation for a different variable, power or significance? Maybe I can handle 200 days, what would 100 pairs buy me in terms of power?
 
 ~~~{.R}
 > pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=100,sig.level=0.05,type="paired",alternative="greater")
@@ -1499,9 +1529,9 @@ Statistics is a harsh master. What if we solve the equation for a different vari
 ...
 ~~~
 
-Just 58%. (But at _p_=0.01, _n_=100 only buys me 31% power, so it could be worse!) At 120 days, I get 65% power, so that may be doable. I guess it'll depend on circumstances: ideally, a Redshift trial will involve no work on my part, so the real question becomes what quicker sleep experiments does it stop me from running and how long can I afford to run it? Would it painfully overlap with things like the lithium trial?
-2
-Speaking of the lithium trial, the plan is to run it for a year. What would a year of Redshift data buy me even at _p_=0.01?
+Just 58%. (But at _p_=0.01, _n_=100 only buys me 31% power, so it could be worse!) At 120 pairs/240 days, I get 65% power, so it may all be doable. I guess it'll depend on circumstances: ideally, a Redshift trial will involve no work on my part, so the real question becomes what quicker sleep experiments does it stop me from running and how long can I afford to run it? Would it painfully overlap with things like the lithium trial?
+
+Speaking of the lithium trial, the plan is to run it for a year. What would *2* years of Redshift data buy me even at _p_=0.01?
 
 ~~~{.R}
 > pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=365,sig.level=0.01,type="paired",alternative="greater")
@@ -1610,6 +1640,7 @@ May 2012
 14: on
 15: on
 16: on
+19: on
 -->
 
 ## Meditation
@@ -1637,7 +1668,14 @@ The difference between the long-term meditators and their normal Indian counterp
      Paired t test power calculation
               n = 157.237
 ...
-> # we're getting 360 samples; let's ask for more reliable chance than 50-50 of getting a useful result
+> # we're getting 360 days or 180 pairs; let's ask for more reliable chance than 50-50 of getting a useful result; what does n = 180 buy us? Not much!
+> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.55,sig.level=0.05,type="paired",alternative="greater")
+
+     Paired t test power calculation
+
+              n = 181.9631
+...
+> # how many pairs *do* we need for good results?
 > pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
@@ -1649,13 +1687,13 @@ The difference between the long-term meditators and their normal Indian counterp
               n = 356.2923
 ~~~
 
-There's no point in being too precise: I'm not going to be doing a paired t-test, after all, but some sort of ANOVA, and I'm not sure how much power the interfering experiments cost me. The first calculation is the most important: to satisfy somewhat reasonable criteria, I need less than half the data I will get, which ought to be an adequate margin of safety.
+This is discouraging. With 180 pairs, we only have a 55% chance of seeing anything at _p_=0.05? That's *awful*! But there's no point in looking further into this power calculation: I'm not going to be doing a paired t-test, after all, but some sort of ANOVA, and I'm not sure how much power the interfering experiments cost me. The first calculation is the most important: to satisfy somewhat reasonable criteria, I need less than half the data I will get, which ought to be an adequate margin of safety.
 
 ### VoI
 
 > For background on "value of information" calculations, see the [first calculation](#value-of-information-voi).
 
-I find meditation useful when I am screwing around and can't focus on anything, but I don't meditate as much as I might because I lose half an hour. Hence, I am interested in the suggestion that meditation may not be as expensive as it seems because it reduces sleep need to some degree: if for every two minutes I meditate, I need one less minute of sleep, that halves the time cost - I spend 30 minutes meditating, gain back 15 minutes from sleep, for a net time loss of 15 minutes. So if I meditate regularly but there is no substitution, I lose out on 15 minutes a day. Figure I skip every 2 days, that's a total lost time of $\frac{15 \times \frac{2}{3} \times 365.25}{60} = 61$ hours a year or \$427 at minimum wage. I find the theory somewhat plausible (60%), and my year-long experiment has roughly a 60% chance of detecting the effect size (estimated based on the sleep reduction in a Indian sample of meditators). So $\frac{427 - 0}{\ln 1.05} \times 0.60 \times 0.60 = 3150$. The experiment itself is unusually time-intensive, since it involve ~180 sessions of meditation, which if I am "overpaying" translates to 45 hours ($\frac{180 \times 15}{60}$) of wasted time or \$315. But even including the design and analysis, that's less than the calculated value of information.
+I find meditation useful when I am screwing around and can't focus on anything, but I don't meditate as much as I might because I lose half an hour. Hence, I am interested in the suggestion that meditation may not be as expensive as it seems because it reduces sleep need to some degree: if for every two minutes I meditate, I need one less minute of sleep, that halves the time cost - I spend 30 minutes meditating, gain back 15 minutes from sleep, for a net time loss of 15 minutes. So if I meditate regularly but there is no substitution, I lose out on 15 minutes a day. Figure I skip every 2 days, that's a total lost time of $\frac{15 \times \frac{2}{3} \times 365.25}{60} = 61$ hours a year or \$427 at minimum wage. I find the theory somewhat plausible (60%), and my year-long experiment has roughly a 55% chance of detecting the effect size (estimated based on the sleep reduction in a Indian sample of meditators). So $\frac{427 - 0}{\ln 1.05} \times 0.60 \times 0.55 = 2888$. The experiment itself is unusually time-intensive, since it involve ~180 sessions of meditation, which if I am "overpaying" translates to 45 hours ($\frac{180 \times 15}{60}$) of wasted time or \$315. But even including the design and analysis, that's less than the calculated value of information.
 
 This example demonstrates that drugs aren't the only expensive things for which you should do extensive testing.
 
@@ -1667,6 +1705,7 @@ May 2012
 14: off
 15: on
 16: on
+19: off
 -->
 
 ## Masturbation
@@ -1683,6 +1722,7 @@ May 2012
 14: off
 15: off
 16: on
+19:
 -->
 
 # Conclusions
