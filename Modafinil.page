@@ -540,7 +540,7 @@ A rearrangement of Bayes' theorem from the end of Eliezer Yudkowsky's "Intuitive
 
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))}$
 
-How confusing and intimidating! Where does one start, with all the differing entries?
+How confusing and intimidating! Where does one start, with all the different symbols?
 
 Let's break it down step by step. If you didn't read either Wikipedia or Yudkowsky, you should have, but remember the pipe is read backwards: $P(foo|bar)$ means 'how likely is *foo* now that I have observed *bar*' (you could mentally rewrite it to something like $P(bar \rightarrow foo)$). $b$ represents our observation, whatever it is. In this case, it's the not-modafinil, the fake pills. $a$ represents our new, reduced, belief that A is a good place to order from. So at the beginning we can make a few definitions:
 
@@ -584,6 +584,8 @@ Of course, this does require you to already have beliefs about the reliability o
 We could also try applying the rule of three and Laplace's rule of succession to estimating seizures by customs: I personally have ordered modafinil perhaps 5 times, none of which were seized, so I would obtain $\frac{3}{5} = 0.6 = 60\%$ by the rule of three or $\frac{1}{5+1} = 0.1\bar{6} = 16.6\%$. One supplier told me of 20-30 shipments without seizure, which would be $\frac{3}{20} = 15\%$ or $\frac{1}{20+1} = 4.8\%$, and specifically claims a 3% rate; this seems plausible given how rarely I hear of *actual* seizures. (People ask what the odds of seizure are far more often than seizures actually happen, it seems.)
 
 ## Ordering when learning isn't free
+
+> See also the discussion as applied to evaluating [sleep experiments](Zeo#value-of-information-voi) and [nootropics experiments](Nootropics#value-of-information-voi).
 
 How do we extend this procedure to handle situation #3, where we no longer trust ourselves to test the supposed modafinil (for free)? This is a question on the [value of information](!Wikipedia) ([4 examples](http://lesswrong.com/lw/85x/value_of_information_four_examples/)).
 
@@ -679,7 +681,7 @@ A final thought about modafinil:
 
 > "I am not interested in talking about my ideas. I am interested in your application of them to your life."^[[Miyamoto Musashi](!Wikipedia), "Book of Water", _[Book of Five Rings](!Wikipedia "The Book of Five Rings#The Book of Water")]
 
-### Discount rate applications: swapping time for time
+## Discount rate applications: swapping time for time
 
 Here is a fun thought experiment for you (which could be formulated as a [sleep problem](http://econstudentlog.wordpress.com/2012/03/17/random-thoughts-2/) instead): a genie offers to tinker with your lifespan in the following manner, he will take away your scheduled year as an 85-year-old but give you an additional year as a 25-year-old. I think many people would take such a deal - more youth is good; even if you don't get any *more* life, you are getting *better* life. Slightly stickier would be if the genie changed the deal slightly: you lose the same year as a sickly old man, but you only get 11 months in the prime of your life. I would still take this deal, and I think so would many people. It's a hard problem to decide where I would finally decide I would prefer to live the year as a sickly old man than a virile young self with no health problems at all, but I'd trade off quite a bit of time; I think I would definitely accept anywhere down to 6 months or 50%. (I haven't been impressed by the quality of old folk's lives, and I've been told that it is overall like having a permanent cold in terms of energy and capability - which is pretty miserable!) Deciding the exact [QALY](!Wikipedia) is a much-debated problem. But whether you like it or not, you [are making](!Wikipedia "Revealed preference") this sort of tradeoff every time you decide not to exercise or eat right, and it is a tradeoff many make at the [end of their lives](http://zocalopublicsquare.org/thepublicsquare/2011/11/30/how-doctors-die/read/nexus/) by avoiding heroically painful and expensive medical interventions, or simply face the prospect of living with diminished capacities[^ALS].
 
@@ -701,7 +703,7 @@ Which is interesting as it suggests, on a pure discount-rate basis, that we will
 
 It's quite a poisonous drug that comes with such a penalty; I don't believe even smoking has that kind of penalty (I cite one calculation in [Nicotine]() that one cigarette costs 11 minutes). So the reader could ask themselves: with everything they know and have heard about modafinil (and have [*not* heard](!Wikipedia "Argument from silence")), how likely is it that modafinil is even worse than smoking?
 
-### Coordination problems: assaying
+## Coordination problems: assaying
 
 > "On the one hand, information wants to be expensive because it's so valuable. The right information in the right place just changes your life. On the other hand, information wants to be free, because the cost of getting it out is lower and lower all the time. So you have these 2 things fighting against each other."^[[Stewart Brand to Steve Wozniak](http://www.edge.org/documents/archive/edge338.html) (1984; first [The Hackers Conference](!Wikipedia))]
 
