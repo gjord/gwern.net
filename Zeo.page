@@ -384,6 +384,20 @@ And also unfortunately, this dataseries doesn't distinguish between addition to 
 
 If I were to run further experiments, I would definitely run it double-blind, and maybe even test <1.5mg doses as well to see if I've been taking too much; 3mg turned out to be excessive, and there are one or two studies indicating that <1mg doses are best for normal people. (There could be 3 conditions: placebo, 0.75mg, and 1.5mg. For looking at melatonin effect in general, the data on 2 dosages could be combined. Melatonin has a short half-life, so probably there would be no point in random blocks of more than 2-3 days.)
 
+## Value of Information (VoI)
+
+> See also the discussion as applied to [ordering modafinil](Modafinil#ordering-when-learning-isnt-free).
+
+The value of an experiment is the information it produces. What is the value of information? Well, we can take the economic tack and say value of information is the value of the decisions it changes. (Would you pay for a weather forecast about somewhere you are not going to? No. Or a weather forecast about your trip where you *have* to make that trip, come hell or high water? Only to the extent you can make preparations like bringing an umbrella.)
+
+[Wikipedia](!Wikipedia "Value of information") says that for a risk-neutral person, value of perfect information is "value of decision situation with perfect information" - "value of current decision situation". (Imperfect information is just weakened perfect information: if your information was not 100% reliable but 99% reliable, well, that's worth 99% as much.)
+
+The decision is the binary take or not take. Melatonin costs ~\$10 a year (if you buy in bulk during sales, as I did). Suppose I had perfect information it worked; I would not change anything, so the value is \$0. Suppose I had perfect information it did not work; then I would stop using it, saving me \$10 a year in perpetuity, which has a net present value[^NPV] (at 5% discounting) of \$205. So the value of perfect information is \$205, because it would save me from blowing \$10 every year for the rest of my life. My melatonin experiment is not perfect since I didn't randomize or double-blind it, but I had a lot of data and it was well powered, with something like a >90% chance of detecting the decent effect size I expected, so the imperfection is just a loss of 10%, down to \$184. From my previous research and personal use over years, I am highly confident it works - say, 80%. If it works, the information is useless to me, and if it doesn't, I save \$184; what's the expected value of obtaining the information, giving these two outcomes? $(80% \times 0) + (20% * 184) = 36.8$. Or to express it in a more general form: $\frac{10 - 0}{\ln 1.05} \times 0.9 \times 0.2$ At minimum wage opportunity cost of \$7 an hour, \$36.8 is worth 5.25 hours of my time. I spent much time on screenshots, summarizing, and analysis, and I'd guess I spent closer to 10-15 hours all told.
+
+[^NPV]: The net present value formula is the annual savings divided by the natural log of the discount rate, out to eternity. Exponential discounting means that a bond that expires in 50 years is worth a surprisingly similar amount to one that continues paying out forever. For example, a 50 year bond paying \$10 a year at a discount rate of 5% is worth `sum (map (\t -> 10 / (1 + 0.05)^t) [1..50]) ~> 182.5` but if that same bond never expires, it's worth `10 / log 1.05 = 204.9` or just \$22.4 more! My own expected longevity is ~50 more years, but I prefer to use the simple natural log formula rather than the more accurate summation. All the numbers here are questionable anyway.
+
+This worked out example demonstrates that when a substance is cheap and you are highly confident it works, a long costly experiment may not be worth it. (Of course, I would have done it anyway due to factors not included in the calculation: to try out my Zeo, learn a bit about sleep experimentation, do something cool, and have something neat to show everyone.)
+
 ## Melatonin data
 
 The data looked much better than the first night, except for a big 2-hour gap where I vaguely recall the sensor headband having slipped off. (I don't think it was because it was uncomfortable but due to shifting positions or something.) Judging from the cycle of sleep phases, I think I lost data on a REM peak. The REM peaks interest me because it's a standard theory of polyphasic sleeping that thriving on 2 or 3 hours of sleep a day is possible because REM (and deep sleep) is the only phase that truly matters, and REM can dominate sleep time through [REM rebound](!Wikipedia) and training.
@@ -1092,6 +1106,12 @@ My conclusion?
 
 Vitamin D hurts sleep when taken at night. I know no reason to take vitamin D at that time, so even with anecdotal data, I will avoid it at that time entirely.
 
+### VoI
+
+> For background on "value of information" calculations, see the [first calculation](#value-of-information-voi).
+
+The first experiment I had no opinion on. I actually did sometimes take vitamin D in the evening when I hadn't gotten around to it earlier (I take it for its anti-cancer and SAD effects). There was no research background, and the anecdotal evidence was of very poor quality. Still, it was plausible since vitamin D *is* involved in circadian rhythms, so I gave it 50% and decided to run an experiment. What effect would perfect information that it did negatively affect my sleep have? Well, I'd definitely switch to taking it in the morning and would never take it in the evening again, which would change maybe 20% of my future doses, and what was the negative effect? It couldn't be *that* bad or I would have noticed it already (like I noticed sulbutiamine made it hard to get to sleep). I'm not willing to change my routines very much to improve my sleep, so I would be lying if I estimated that the value of eliminating any vitamin D-related disturbance was more than, say, 10 cents per night; so the total value of affected nights would be $0.10 \times 0.20 \times 365.25 = 7.3$. On the plus side, my experiment design was high quality and ran for a fair number of days, so it would surely detect any sleep disturbance from the randomized vitamin D, so say 90% quality of information. This gives $\frac{7.3 - 0}{\ln 1.05} \times 0.90 \times 0.50 = 67.3$, justifying <9.6 hours. Making the pills took perhaps an hour, recording used up some time, and the analysis took several hours to label & process all the data, play with it in R, and write it all up in a clean form for readers. Still, I don't think it took almost 10 hours of work, so I think this experiment ran at a profit.
+
 ## Vitamin D at morn helps?
 ### Setup
 
@@ -1360,6 +1380,18 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     ~~~
 [^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
 
+### VoI
+
+With the vitamin D theory partially vindicated by the previous experiment, I became fairly sure that vitamin D in the morning would benefit my sleep somehow: 70%. Benefit how? I had no idea, it might be large or small. I didn't expect it to be a second melatonin, improving my sleep and trimming it by 50 minutes, but I hoped maybe it would help me get to sleep faster or wake up less. The actual experiment turned out to show, with very high confidence, absolutely no change except in my mood upon awakening in the morning.
+
+What is the "value of information" for this experiment? Essentially - nothing! Zero!
+
+1. If the experiment had shown any benefit, I obviously would have continued taking it in the morning
+2. if the experiment had shown no effect, I would have continued taking it in the morning to avoid incurring the evening penalty discovered in the previous experiment
+3. if the experiment had shown the unthinkable, a negative effect, it would have to be substantial to convince me to stop taking vitamin D altogether and forfeit its other health benefits, and it's not worth bothering to analyze an outcome I would have given <=5% chance to.
+
+Of course, I did it anyway because it was cool and interesting! (Estimated time cost: perhaps half the evening experiment, since I manually recorded less data and had the analysis worked out from before.)
+
 # In progress
 
 Someone suggested that instead of running experiments serially, with limited sample sizes (because I am impatient to try the next interesting suggestion), I could instead take a step up in statistical sophistication and use a *[factorial experiment](!Wikipedia)* design: use multiple experimental interventions simultaneously for a much larger sample size, and then run [ANOVA](!Wikipedia) analyses rather than simpler two-sample t-tests. No less than [R.A. Fisher](!Wikipedia) praises multifactorial experiments as being more efficient: squeezing more data out of a given sample. Hence, I thought a crazy thought: my lithium experiment was going to run for ~360 days, and so I kept putting it off. But what if I ran multiple experiments for 360 days? If I had 4 or 5, then by the end of the year, I would have 5 results to show, and I would have the statistical equivalent of *more* than _n_=72  ($\frac{360}{5}$) for each experiment. Win-win.
@@ -1493,6 +1525,10 @@ Now we have completely automatic randomization and logging of the experiment. As
 
 So to recap: the experiment is 100+ days with Redshift randomized on or off by a shell script, affecting the usual sleep metrics plus time of bed. The expectation is that lack of Redshift will produce a weak negative effect: increasing awakenings & time awake & light sleep, increasing overall sleep time, and also pushing back bedtime.
 
+### VoI
+
+Like the modafinil day trial, this is another value-less experiment justified by its intrinsic interest. I expect the results will confirm what I believe: that red-tinting my laptop screen will result in less damage to my sleep by not forcing lower melatonin levels with blue light. The only outcome that might change my decisions is if the use of Redshift actually worsens my sleep, but I regard this as highly unlikely. It is cheap to run as it is piggybacking on other experiments, and all the randomizing & data recording is being handled by 2 simple shell scripts.
+
 ## Push-ups
 
 Rather than dumbbells (might be hard to find in the dark), I decided to try out push-ups since I routinely do 25 push-ups after showering and it ought to be mentally easy to shift those push-ups to before/after bedtime. As before, alternate-day, but with a twist: on-days, I do the push-ups immediately before going to bed, but off-days entail immediately upon awakening. (I don't exercise enough in general.) I began 21 September 2011.
@@ -1601,6 +1637,12 @@ The difference between the long-term meditators and their normal Indian counterp
 ~~~
 
 There's no point in being too precise: I'm not going to be doing a paired t-test, after all, but some sort of ANOVA, and I'm not sure how much power the interfering experiments cost me. The first calculation is the most important: to satisfy somewhat reasonable criteria, I need less than half the data I will get, which ought to be an adequate margin of safety.
+
+### VoI
+
+I find meditation useful when I am screwing around and can't focus on anything, but I don't meditate as much as I might because I lose half an hour. Hence, I am interested in the suggestion that meditation may not be as expensive as it seems because it reduces sleep need to some degree: if for every two minutes I meditate, I need one less minute of sleep, that halves the time cost - I spend 30 minutes meditating, gain back 15 minutes from sleep, for a net time loss of 15 minutes. So if I meditate regularly but there is no substitution, I lose out on 15 minutes a day. Figure I skip every 2 days, that's a total lost time of $\frac{15 \times \frac{2}{3} \times 365.25}{60} = 61$ hours a year or \$427 at minimum wage. I find the theory somewhat plausible (60%), and my year-long experiment has roughly a 60% chance of detecting the effect size (estimated based on the sleep reduction in a Indian sample of meditators). So $\frac{427 - 0}{\ln 1.05} \times 0.60 \times 0.60 = 3150$. The experiment itself is unusually time-intensive, since it involve ~180 sessions of meditation, which if I am "overpaying" translates to 45 hours ($\frac{180 \times 15}{60}$) of wasted time or \$315. But even including the design and analysis, that's less than the calculated value of information.
+
+This example demonstrates that drugs aren't the only expensive things for which you should do extensive testing.
 
 <!--
 May 2012
