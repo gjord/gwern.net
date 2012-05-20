@@ -1260,6 +1260,110 @@ TODO
 "Improved fluid intelligence limited to working memory capacity using intensive n-back tasks with a visuospatial component"
 -->
 
+## Meta-analysis
+
+What to make of these studies? When one has multiple quantitative studies going in both directions, one resorts to a [meta-analysis](!Wikipedia): we want to pool the studies with their various sample sizes and effect sizes and get some overall answer - do a bunch of small positive studies outweigh a few big negative ones? Or vice versa? Or any mix thereof? Unfortunately, no one has done one for dual n-back & IQ already.
+
+So I decided to do one. The hard part of a meta-analysis is doing a thorough literature search, but the above 2 sections represent a literature search. (I started the DNB FAQ in 2009 after following discussions closely, and have carefully kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts.)
+
+I will use the [`meta` package](http://cran.r-project.org/web/packages/meta/index.html) for R, which would like its data in the form of a table:
+
+~~~{.R}
+"study"     "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c"
+"Jaeggi1"    2008   34   11.81     3.42   35    10.52   0.373
+"polar"      2009   13   32.76     1.83   8     25.12   9.37
+"Jaeggi2"    2010   46   12.975    3.13   43    11.44   2.58
+"Jaeggi3"    2011   32   16.94     4.75   30    16.2    5.1
+"Schweizer"  2011   29   27.07     2.16   16    26.5    4.5
+"Roughan"    2011   7    5.36      6.52   8     -6.35   7.21
+"Jaušovec"   2012   14   32.43     5.65   15    29.2    6.34
+"Chein"      2010   21   12.2      0.65   21    12.4    0.72
+"Stephenson" 2010   76   16.06     0.83   24    14.08   0.65
+"Brehmer"    2012   55   8.215     2.81   45    8.325   2.675
+~~~
+
+- Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated.
+- polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
+- Jaeggi 2010: used BOMAT scores; should I somehow pool RAPM with BOMAT?
+- Jaeggi 2011: used SPM (a Raven's); should I somehow pool the TONI?
+- Schweizer 2011 used the adjusted final scores as suggested by the authors due to potential pre-existing differences in their control & experimental groups:
+
+    > ...This raises the possibility that the relative gains in Gf in the training versus control groups may be to some extent an artefact of baseline differences. However, the interactive effect of transfer as a function of group remained significant even after more closely matching the training and control groups for pre-training RPM scores (by removing the highest scoring controls) F(1, 30) = 3.66, P = 0.032, gp2 = 0.10. The adjusted means (standard deviations) for the control and training groups were now 27.20 (1.93), 26.63 (2.60) at pre-training (t(43) = 1.29, P.0.05) and 26.50 (4.50), 27.07 (2.16) at post-training, respectively.
+- I have qualms about including Roughan & Hadwin 2011 given the means & standard deviations; these are some *very* troubled young people
+- Stephenson data from pg79/95; means are Raven's, simple arithemetical averaging of all 3 n-back groups (since their sample sizes and standard errors were so similar) and addition of sample sizes
+- Brehmer et al data: means & stddevs are the average of the young and old interventions since sample size was roughly equal (29/26 and 26/19)
+
+- Colom 2010 omitted for not using DNB
+- Jonasson 2011 omitted for lacking any measure of IQ
+- Qiu 2009 did not report standard deviations in any form
+- Kundu et al 2011 was ignored in favor of using Kundu et al 2012's data
+- Kundu 2012 omitted for not reporting means or deviations
+- Seidler 2010 omits any means or standard deviations
+- Chooi 2011 omitted for not reporting means & stddevs (or at least not in a form I understood)
+
+Current results:
+
+~~~{.R}
+> library(meta)
+> dnb <- read.table("dnb-meta-analysis.txt", header=TRUE)
+> metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD")
+       SMD             95%-CI %W(fixed) %W(random)
+1   2.1423  [ 1.5438; 2.7408]      9.08      10.30
+2   1.2494  [ 0.2740; 2.2248]      3.42       8.82
+3   0.5288  [ 0.1055; 0.9521]     18.15      10.85
+4   0.1484  [-0.3504; 0.6473]     13.07      10.63
+5   0.1762  [-0.4354; 0.7878]      8.70      10.25
+6   1.5972  [ 0.3840; 2.8105]      2.21       7.83
+7   0.5217  [-0.2208; 1.2642]      5.90       9.76
+8  -0.2861  [-0.8944; 0.3222]      8.79      10.26
+9   2.4826  [ 1.9048; 3.0604]      9.74      10.37
+10 -0.0397  [-0.4337; 0.3543]     20.95      10.93
+
+Number of studies combined: k=10
+
+                        SMD            95%-CI      z  p.value
+Fixed effect model   0.6423  [0.4620; 0.8227] 6.9812 < 0.0001
+Random effects model 0.8218  [0.2184; 1.4252] 2.6693   0.0076
+
+Quantifying heterogeneity:
+tau^2 = 0.8271; H = 3.23 [2.54; 4.1]; I^2 = 90.4% [84.5%; 94.1%]
+
+Test of heterogeneity:
+    Q d.f.  p.value
+ 93.8    9 < 0.0001
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+~~~
+
+TODO:
+
+1. asked ML for (followup with original authors if necessary)
+
+    - Jaeggi numbers
+    - Chooi numbers
+2. emailed Qiu, Seidler, & Kundu - followup if necessary at some point
+3. email all authors (except Qiu, Seidler, & Kundu) with the literature list & requests for additional suggestions
+4. when meta-analysis is done, generate a funnel plot graph in R
+
+Current literature list:
+
+Brehmer     2012
+Chein       2010
+Chooi       2011
+Jaeggi      2008
+Jaeggi      2010
+Jaeggi      2011
+Jaušovec    2012
+Kundu et al 2012
+Qiu         2009
+Roughan     2011
+Schweizer   2011
+Seidler     2010
+Stephenson  2010
+polar       2009
+
 ## Non-IQ gains
 
 ### Colom 2010
