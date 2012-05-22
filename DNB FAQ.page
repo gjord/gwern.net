@@ -1220,7 +1220,6 @@ Caveats for this study:
 
 75 subjects; RAPM was speeded.
 
-
 <!--
 TODO
 ### Stephenson & Halpern 2012?
@@ -1270,16 +1269,65 @@ Going through them, I must note:
 
     > ...This raises the possibility that the relative gains in Gf in the training versus control groups may be to some extent an artefact of baseline differences. However, the interactive effect of transfer as a function of group remained significant even after more closely matching the training and control groups for pre-training RPM scores (by removing the highest scoring controls) F(1, 30) = 3.66, P = 0.032, gp2 = 0.10. The adjusted means (standard deviations) for the control and training groups were now 27.20 (1.93), 26.63 (2.60) at pre-training (t(43) = 1.29, P.0.05) and 26.50 (4.50), 27.07 (2.16) at post-training, respectively.
 - I have qualms about including Roughan & Hadwin 2011 given the means & standard deviations; these are some *very* troubled young people
-- Stephenson data from pg79/95; means are Raven's, simple arithemetical averaging of all 3 n-back groups (since their sample sizes and standard errors were so similar) and addition of sample sizes
-- Brehmer et al data: means & stddevs are the average of the young and old interventions since sample size was roughly equal (29/26 and 26/19)
-- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; the two experimental and 4 control groups were arithmetically averaged <!-- 9+13, 15+11+22+23 / 12.7(2)+12.1(2.81), 13.3(1.91)+13.4(2.7)+11.3(2.59)+11.9(2.64) -->
-- Jaeggi 2012: as-yet unpublished study; poster with table of scores provided privately, arithmetical average of dual and single n-back groups' second scores on the APM (not BOMAT or the BOMAT followup) <!-- 25+26, 27 / 14.96 (2.7), 15.23 (2.44); 14.74 (2.8) -->
+- Stephenson data from pg79/95; means are post-scores on Raven's, pooling of 3 n-back groups and the 2 control groups[^Stephenson-2010-pool]
+
+[^Stephenson-2010-pool]: The n-back pooling: <!-- dual: 17.54 0.76 n=28 / visual: 15.34 0.90 n=29 / auditory: 15.32 0.83 n=25 / 15.50 0.99 n=28 / 14.08 0.65 n=26 -->
+
+    1. sample size: $28+29+25=82$
+    2. mean: $\frac{(28 \times 17.54) + (29 \times 15.34) + (25 \times 15.32)}{28+29+25} = 16.085$
+    3. [pooled variance](!Wikipedia): $\frac{((28-1) * 0.76) + ((29-1) * 0.9) + ((25-1) * 0.83)}{28 + 29 + 25 - 3} = 0.83$
+
+    The controls:
+
+    1. sample size: $28+26=54$
+    2. mean:  $\frac{(28 \times 15.5) + (26 \times 14.08)}{28+26} = 14.816$
+    3. pooled variance: $\frac{((28-1) \times 0.99) + ((26-1) \times 0.65)} {28 + 26 - 2} = 0.826$
+
+- Brehmer et al data: pooled young and old scores on the Raven[^Brehmer-pooled]
+
+[^Brehmer-pooled]: Experimental: <!-- young adaptive: 29 9.93 2.2 old adaptive: 26 6.5 3.42 young none: 26 9.81 2.1 old none: 19 6.84 3.25 -->
+
+    1. sample size: $29+26=55$
+    2. mean: $\frac{(29 \times 9.93) + (26 \times 6.5)}{29+26} = 8.3$
+    3. pooled variance: $\frac{((29-1) \times 2.2) + ((26-1) \times 3.42)}{29 + 26 - 2} = 2.775$
+
+    Control:
+
+    1. sample size: $26+19=45$
+    2. mean: $\frac[(26 \times 9.81) + (19 \times 6.84)}{26+19} = 8.556$
+    3. pooled variance: $\frac{((26-1) \times 2.1) + ((19-1) \times 3.25)}{26 + 19 - 2} = 2.581$
+
+- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; the two experimental and 4 control groups were pooled[^Chooi-2010-pool]
+- Jaeggi 2012: as-yet unpublished study; poster with table of scores provided privately, used scores on the APM (not BOMAT or the BOMAT followup); pooled the 2 experimental groups[^Jaeggi-2012-pool]
+
+[^Jaeggi-2012-pool]: Jaeggi 2012: 2 experimental groups need pooling:  <!-- 25+26, 27 / 14.96 (2.7), 15.23 (2.44); 14.74 (2.8) -->
+
+    1. sample size: $25+26=51$
+    2. mean = $\frac{(25 \times 14.96) + (26 \times 15.23)}{25+26} = 15.097$
+    3. pooled variance: $((25-1)*2.7 + (26-1)*2.44) / (25 + 26 - 2) = 2.56$
+[^Chooi-2010-pool]: There were 2 n-back groups and 4 control groups. For n-back: <!-- 9+13, 15+11+22+23 / 12.7(2)+12.1(2.81), 13.3(1.91)+13.4(2.7)+11.3(2.59)+11.9(2.64) -->
+
+    1. sample size: $9+13=22$
+    2. mean = $\frac{(13 \times 12.1) + (9 \times 12.7)}{9+13} = 12.235$
+    3. pooled variance: $\frac{((9-1) \times 2) + ((13-1) \times 2.81)}{9 + 13 - 2} = 2.486$
+
+    For the control groups:
+
+    1. sample size: $15+11+22+23 = 71$
+    2. mean: $\frac{(15 \times 13.3) + (11 \times 13.4) + (22 \times 11.3) + (23 \times 11.9)}{15+11+22+23} = 12.24$
+    3. pooled variance: $\frac{((15-1) \times 1.91) + ((11-1) \times 2.7) + ((22-1) \times 2.59) + ((23-1) \times 2.64)}{15 + 11 + 22 + 23 - 4} = 2.481$
 
 - Jonasson 2011 omitted for lacking any measure of IQ
 - Kundu et al 2011 was ignored in favor of using Kundu et al 2012's data
 - Chein: uses a similar task to n-back but not identical; it may need removing from the final dataset
 - Brehmer and Roughan: both studies used Cogmed, which may or may not be n-back (if not, like Chein, may need removing)
-- Redick et al: control & visual RAPM post scores arithmetically averaged <!-- control: 20 6 (3); search: 29  6.24 (3.34); n-back: 24  6.25 (3.08) -->
+- Redick et al: control & active control (visual search) RAPM post scores pooled[^Redick-2012-pool]
+
+[^Redick-2012-pool]: There were 2 control groups to pool: <!-- control: 20 6 (3); search: 29  6.24 (3.34); n-back: 24  6.25 (3.08) -->
+
+    1. sample size: $20+29=49$
+    2. mean: $\frac{(20 \times 6) + (29 \times 6.24)}{20+29} = 6.14$
+    3. pooled variance: $\frac{((20-1) \times 3) + ((29-1) \times 3.34)} {20 + 29 - 2} = 3.202$
 
 The following authors had their studies omitted and have been contacted for clarification:
 
@@ -1295,15 +1343,15 @@ The data from the surviving studies:
 "polar"      2009   13   32.76     1.83   8     25.12   9.37
 "Jaeggi2"    2010   46   12.975    3.13   43    11.44   2.58
 "Jaeggi3"    2011   32   16.94     4.75   30    16.2    5.1
-"Jaeggi4"    2012   51   15.095    2.57   27    14.74   2.8
+"Jaeggi4"    2012   51   15.097    2.56   27    14.74   2.8
 "Schweizer"  2011   29   27.07     2.16   16    26.5    4.5
 "Roughan"    2011   7    5.36      6.52   8     -6.35   7.21
 "Jaušovec"   2012   14   32.43     5.65   15    29.2    6.34
 "Chein"      2010   21   12.2      0.65   21    12.4    0.72
-"Stephenson" 2010   76   16.06     0.83   24    14.08   0.65
-"Brehmer"    2012   55   8.215     2.81   45    8.325   2.675
-"Chooi"      2011   22   12.39     2.405  71    12.475  2.46
-"Redick"     2012   24   6.25      3.08   49    6.12    3.17
+"Stephenson" 2010   82   16.085    0.83   54    14.816  0.826
+"Brehmer"    2012   55   8.3       2.775  25    8.556   2.581
+"Chooi"      2011   22   12.235    2.486  71    12.24   2.481
+"Redick"     2012   24   6.25      3.08   49    6.14    3.202
 ~~~
 
 The result of the meta-analysis:
@@ -1349,8 +1397,8 @@ Details on meta-analytical method:
 TODO:
 
 1. followup on emails (*especially* the 3 clarifications)
-2. do some form of [sensitivity analysis](!Wikipedia) for study selection1 - remove the most questionable studies?
-2. when meta-analysis is done, generate a funnel plot graph in R
+2. do some form of [sensitivity analysis](!Wikipedia) for study selection - remove the most questionable studies?
+2. when meta-analysis is done, generate forest & funnel plot graphs
 
 ## Non-IQ or non-DNB gains
 
