@@ -1212,22 +1212,15 @@ Caveats for this study:
 
 > Working memory (WM), a key determinant of many higher-order cognitive functions, declines in old age. Current research attempts to develop process-specific WM training procedures, which may lead to general cognitive improvement. Adaptivity of the training as well as the comparison of training gains to performance changes of an active control group are key factors in evaluating the effectiveness of a specific training program. In the present study, 55 younger adults (20-30 years of age) and 45 older adults (60-70 years of age) received 5 weeks of computerized training on various spatial and verbal WM tasks. Half of the sample received adaptive training (i.e., individually adjusted task difficulty), whereas the other half-worked on the same task material but on a low task difficulty level (active controls). Performance was assessed using criterion, near-transfer, and far-transfer tasks before training, after 5 weeks of intervention, as well as after a 3-month follow-up interval. Results indicate that (a) adaptive training generally led to larger training gains t/han low-level practice, (b) training and transfer gains were somewhat greater for younger than for older adults in some tasks, but comparable across age groups in other tasks, (c) far-transfer was observed to a test on sustained attention and for a self-rating scale on cognitive functioning in daily life for both young and old, and (d) training gains and transfer effects were maintained across the 3-month follow-up interval across age.
 
-<!--
-TODO
-
 ### Redick 2012
 
-From [an October talk](http://psychology.nd.edu/events/2011/10/03/8160-cognitive-studies-group/):
+"No evidence of transfer after working memory training: A controlled, randomized study" Redick et al; abstract:
 
-> I will briefly review this literature, then describe a working memory training study we conducted using the adaptive dual n-back training method. The results indicated that despite improvements on both the dual n-back and active control tasks, there was no indication of transfer to any of the ability tests administered. The results are discussed relative to previous research and for future studies of working memory training.
+> Numerous recent studies seem to provide evidence for the general intellectual benefits of working memory training. In reviews of the training literature, Shipstead, Redick, and Engle (2010, in press) argued that the field should treat recent results with a critical eye. Many published working memory training studies suffer from design limitations (no-contact control groups, single measures of cognitive constructs), mixed results (transfer of training gains to some tasks but not others, inconsistent transfer to the same tasks across studies), and lack of theoretical grounding (identifying the mechanisms responsible for observed transfer). The current study compared young adults who received 20 sessions of practice on an adaptive dual n-back program (working memory training group) or an adaptive visual search program (active placebo-control group) with a no-contact control group that received no practice. In addition, all subjects completed pre-test, mid-test, and post-test sessions, comprising multiple measures of fluid intelligence, multitasking, working memory capacity, crystallized intelligence, and perceptual speed. Despite improvements on both the dual n-back and visual search tasks with practice, and despite a high level of statistical power, there was no positive transfer to any of the cognitive ability tests. We discuss these results in the context of previous working memory training research, and address issues for future working memory training studies.
 
-I emailed him 27 January 2012: "When I spoke at Notre Dame, the publication was under review. I recently resubmitted the revised manuscript and it is still being reviewed." Followup scheduled for June 2012. Is it this one?
+75 subjects; RAPM was speeded.
 
-"No evidence of transfer after working memory training: A controlled, randomized study" Redick, T. S., Shipstead, Z., Harrison, T. L., Hicks, K. L., Fried, D. E., Hambrick, D. Z., Kane, M. J., Engle, R. W., (2011).
 
-Kane says Redick may send me a copy.
-
--->
 <!--
 TODO
 ### Stephenson & Halpern 2012?
@@ -1239,9 +1232,11 @@ I've emailed him.
 
 ## Meta-analysis
 
-What to make of these studies? When one has multiple quantitative studies going in both directions, one resorts to a [meta-analysis](!Wikipedia): we want to pool the studies with their various sample sizes and effect sizes and get some overall answer - do a bunch of small positive studies outweigh a few big negative ones? Or vice versa? Or any mix thereof? Unfortunately, no one has done one for dual n-back & IQ already.
+What to make of these studies? When one has multiple quantitative studies going in both directions, one resorts to a [meta-analysis](!Wikipedia): we want to pool the studies with their various sample sizes and effect sizes and get some overall answer - do a bunch of small positive studies outweigh a few big negative ones? Or vice versa? Or any mix thereof? Unfortunately, no one has done one for dual n-back & IQ already; the existing study, "Is Working Memory Training Effective? A Meta-Analytic Review", covers working memory in general:
 
-So I decided to do one. The hard part of a meta-analysis is doing a thorough literature search, but the above 2 sections represent a literature search. (I started the DNB FAQ in 2009 after following discussions closely, and have carefully kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts.) The corresponding authors of all the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions.
+> However, a recent meta-analysis by Melby-Lervåg and Hulme (in press) indicates that even when considering published studies, few appropriately-powered empirical studies have found evidence for transfer from various WM training programs to fluid intelligence. Melby-Lervåg and Hulme reported that WM training showed evidence of transfer to verbal and spatial WM tasks (d = .79 and .52, respectively). When examining the effect of WM training on transfer to nonverbal abilities tests in 22 comparisons across 20 studies, they found an effect of d = .19. Critically, a moderator analysis showed that there was no effect (d = .00) in the 10 comparisons that used a treated control group, and there was a medium effect (d = .38) in the 12 comparisons that used an untreated control group.
+
+I'm not as interested in WM transfer from n-back - as the meta-analysis confirms, it surely does - but in the transfer with many more ramifications, transfer to *IQ*. So I decided to do a meta-analysis of my own. The hard part of a meta-analysis is doing a thorough literature search, but the above 2 sections of material listing conflicting studies on n-back represent a _de facto_ literature search. (I started the DNB FAQ in 2009 after following discussions closely, and have carefully kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts.) The corresponding authors of all the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions.
 
 For background on conducting meta-analyses, I am using [chapter 9](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_9/9_analysing_data_and_undertaking_meta_analyses.htm) of [part 2](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/index.htm#chapter_9/9_2_types_of_data_and_effect_measures.htm) of the [Cochrane Collaboration](!Wikipedia)'s [_Cochrane Handbook for Systematic Reviews of Interventions_](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/front_page.htm). For the actual statistical analysis, I am using the [`meta` package](http://cran.r-project.org/web/packages/meta/index.html) for the R language.
 
@@ -1261,7 +1256,7 @@ The candidate studies:
 - Seidler     2010
 - Stephenson  2010
 - polar       2009
-- Redick et al 2012?
+- Redick et al 2012
 - Stephenson & Halpern 2012?
 - Jaeggi 2012?
 
@@ -1277,13 +1272,14 @@ Going through them, I must note:
 - I have qualms about including Roughan & Hadwin 2011 given the means & standard deviations; these are some *very* troubled young people
 - Stephenson data from pg79/95; means are Raven's, simple arithemetical averaging of all 3 n-back groups (since their sample sizes and standard errors were so similar) and addition of sample sizes
 - Brehmer et al data: means & stddevs are the average of the young and old interventions since sample size was roughly equal (29/26 and 26/19)
-- Chooi: table provided in private communication; the two experimental and 4 control groups were arithmetically averaged <!-- 9+13, 15+11+22+23 / 12.7(2)+12.1(2.81), 13.3(1.91)+13.4(2.7)+11.3(2.59)+11.9(2.64) -->
+- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; the two experimental and 4 control groups were arithmetically averaged <!-- 9+13, 15+11+22+23 / 12.7(2)+12.1(2.81), 13.3(1.91)+13.4(2.7)+11.3(2.59)+11.9(2.64) -->
 - Jaeggi 2012: as-yet unpublished study; poster with table of scores provided privately, arithmetical average of dual and single n-back groups' second scores on the APM (not BOMAT or the BOMAT followup) <!-- 25+26, 27 / 14.96 (2.7), 15.23 (2.44); 14.74 (2.8) -->
 
 - Jonasson 2011 omitted for lacking any measure of IQ
 - Kundu et al 2011 was ignored in favor of using Kundu et al 2012's data
 - Chein: uses a similar task to n-back but not identical; it may need removing from the final dataset
 - Brehmer and Roughan: both studies used Cogmed, which may or may not be n-back (if not, like Chein, may need removing)
+- Redick et al: control & visual RAPM post scores arithmetically averaged <!-- control: 20 6 (3); search: 29  6.24 (3.34); n-back: 24  6.25 (3.08) -->
 
 The following authors had their studies omitted and have been contacted for clarification:
 
@@ -1307,6 +1303,7 @@ The data from the surviving studies:
 "Stephenson" 2010   76   16.06     0.83   24    14.08   0.65
 "Brehmer"    2012   55   8.215     2.81   45    8.325   2.675
 "Chooi"      2011   22   12.39     2.405  71    12.475  2.46
+"Redick"     2012   24   6.25      3.08   49    6.12    3.17
 ~~~
 
 The result of the meta-analysis:
@@ -1314,35 +1311,35 @@ The result of the meta-analysis:
 ~~~{.R}
 > install.packages("meta", depend = TRUE)
 > library(meta)
-> dnb <- read.table("dnb-meta-analysis.txt", header=TRUE)
+> dnb <- read.table("dnb.txt", header=TRUE)
 > metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD")
-
        SMD             95%-CI %W(fixed) %W(random)
-1   0.3633  [-0.1128; 0.8393]     10.68       9.06
-2   1.2494  [ 0.2740; 2.2248]      2.54       6.55
-3   0.5288  [ 0.1055; 0.9521]     13.51       9.29
-4   0.1484  [-0.3504; 0.6473]      9.72       8.95
-5   0.1326  [-0.3344; 0.5996]     11.10       9.10
-6   0.1762  [-0.4354; 0.7878]      6.47       8.40
-7   1.5972  [ 0.3840; 2.8105]      1.64       5.46
-8   0.5217  [-0.2208; 1.2642]      4.39       7.73
-9  -0.2861  [-0.8944; 0.3222]      6.54       8.42
-10  2.4826  [ 1.9048; 3.0604]      7.25       8.57
-11 -0.0397  [-0.4337; 0.3543]     15.59       9.41
-12 -0.0344  [-0.5127; 0.4438]     10.58       9.05
+1   0.3633  [-0.1128; 0.8393]      9.69       8.35
+2   1.2494  [ 0.2740; 2.2248]      2.31       5.89
+3   0.5288  [ 0.1055; 0.9521]     12.26       8.59
+4   0.1484  [-0.3504; 0.6473]      8.83       8.25
+5   0.1326  [-0.3344; 0.5996]     10.07       8.39
+6   0.1762  [-0.4354; 0.7878]      5.87       7.70
+7   1.5972  [ 0.3840; 2.8105]      1.49       4.86
+8   0.5217  [-0.2208; 1.2642]      3.98       7.04
+9  -0.2861  [-0.8944; 0.3222]      5.94       7.72
+10  2.4826  [ 1.9048; 3.0604]      6.58       7.87
+11 -0.0397  [-0.4337; 0.3543]     14.15       8.71
+12 -0.0344  [-0.5127; 0.4438]      9.60       8.34
+13  0.0409  [-0.4474; 0.5293]      9.21       8.30
 
-Number of studies combined: k=12
+Number of studies combined: k=13
 
                         SMD            95%-CI      z  p.value
-Fixed effect model   0.3831  [0.2275; 0.5386] 4.8267 < 0.0001
-Random effects model 0.5134  [0.0998; 0.9271] 2.4326   0.015
+Fixed effect model   0.3516  [0.2033; 0.4998] 4.6489 < 0.0001
+Random effects model 0.4710  [0.0901; 0.8519] 2.4238   0.0154
 
 Quantifying heterogeneity:
-tau^2 = 0.4327; H = 2.57 [2.01; 3.29]; I^2 = 84.8% [75.1%; 90.8%]
+tau^2 = 0.3931; H = 2.49 [1.95; 3.17]; I^2 = 83.8% [73.8%; 90%]
 
 Test of heterogeneity:
-     Q d.f.  p.value
- 72.59   11 < 0.0001
+    Q d.f.  p.value
+ 74.3   12 < 0.0001
 
 Details on meta-analytical method:
 - Inverse variance method
@@ -1352,11 +1349,33 @@ Details on meta-analytical method:
 TODO:
 
 1. followup on emails (*especially* the 3 clarifications)
-4. when meta-analysis is done, generate a funnel plot graph in R
+2. do some form of [sensitivity analysis](!Wikipedia) for study selection1 - remove the most questionable studies?
+2. when meta-analysis is done, generate a funnel plot graph in R
 
 ## Non-IQ or non-DNB gains
 
 This section is for studies that tested non-DNB WM interventions on IQ, or DNB interventions on non-IQ properties, and miscellaneous.
+
+<!--
+A recent review (Morrison & Chein, 2011) of the broader WM training literature
+with young adult subjects detailed: (a) four studies reporting significant transfer to
+reasoning and intelligence measures (Klingberg, Forssberg, & Westerberg, 2002; JBJP
+2008; Olesen, Westerberg, & Klingberg, 2004; Westerberg & Klingberg, 2007); (b) three
+published studies reporting no significant transfer to reasoning and intelligence measures
+(Chein & Morrison, 2010; Dahlin et al., 2008; Owen et al., 2010); and (c) one study
+reporting significant transfer to some intelligence measures but not others (Schmiedek,
+Lovden, & Lindenberger, 2010). Two of the significant transfer studies in the review
+(Klingberg et al., 2002; Olesen et al., 2004) had training group samples of n = 4 and 3,
+respectively. The subjects in Olesen et al. (2004) were the same as those in Westerberg
+and Klingberg (2007; T. Klingberg, personal communication, February 14, 2010). Note
+that the positive intelligence transfer observed in JSBSJP (2010), and the lack of transfer
+observed in Seidler et al. (2010), were not included in Morrison and Chein’s review. In
+addition, Morrison and Chein’s (2011) assessment of training benefits may also have
+been unwittingly biased because of the file-drawer problem (Rosenthal, 1979), in which
+non-significant transfer results such as those described in the current research are less
+likely to be published.
+
+-->
 
 ### Colom 2010
 
@@ -1534,6 +1553,27 @@ There are a number of results indicating that the elderly, perhaps because they 
     > ...First, the participants involved in our study were young-old (mean age of 69 years), whereas in Buschkuehl et al.'s (2008) study as well as that of Li et al. (2008), they were old-old adults (mean age of 80.1 and 74.5 years, respectively). In the context of episodic memory, the meta-analysis by Verhaeghen et al. (1992) has pointed out that the benefit of interventions is negatively related to participant age (see also Singer, Lindenberger, & Baltes, 2003). It has been shown that cognitive plasticity is reduced over the adult life span (Jones et al., 2006), with young-old exhibiting larger training-related gains than old-old (Singer et al., 2003). The importance of participant age is evident from considering the results of training focused on executive control tasks-for example, task-switching (Buchler, Hoyer, & Cerella, 2008; Karbach & Kray, 2009; Kramer, Hahn, & Gopher, 1999), dual tasks (Bherer et al., 2005, 2008), or general executive functions (Basak et al., 2008)—for which transfer effects emerged with a sample comprising young-old (age range between 60 and 75 years, mean age between 65 and 71 years; Basak et al., 2008; Bherer et al., 2005, 2008; Karbach & Kray, 2009; Kramer et al., 1995). The question of whether transfer effects of WM training can also be determined by participant age range is of interest and should be addressed in further research.
     >
     > Second, as is mentioned at the beginning of this section, the task and the procedure used to train participants can be considered an important source of difference. For example, Buschkuehl et al. (2008) reported that trained participants claimed to have generated task-specific strategies in one of the variants of the WM task in which they were trained, leading to greater training gains (62%) with respect to the other two variants (44% and 15%, respectively). The difficulty of transferring the gains obtained in a specific task to other tasks suggests that the WM training by Buschkuehl et al. did not foster an increase in flexibility, but simply the tendency to find a strategy to recall as many items as possible but in the context of each WM task. In the case of Li et al. (2008), the modest transfer effects to the WM task can be explained by reflecting on the nature of the trained task: n-back task, which involves the manipulation and maintenance of information as well as updating of temporal order and contextual information and binding processes between stimuli and certain representation (Oberauer, 2005). Although the n-back shares common processing mechanisms with complex span tasks, the underlying mechanisms of the n-back are not completely understood (Schmiedek, Hildebrandt, Lövden, Wilhelm, & Lindenberger, 2009). Moreover, the few studies that used it with other WM tasks— complex span tasks— have shown variable correlations (from very low or null-Kane, Conway, Miura, & Colflesh, 2007; Roberts & Gibson, 2002-to large-Schmiedek et al., 2009; Shamosh et al., 2008).
+
+<!--
+    For example,
+Borella, Carretti, Riboldi, and De Bini (2010) trained older adults on a WM-span-like
+task, and compared them to a control group of older adults that completed questionnaires
+instead. They reported positive transfer to several tasks, including the Cattell Culture-Fair
+Test. However, other studies have been less optimistic. For example, three other recent
+studies reported no transfer to different versions of the Raven Progressive Matrices after
+WM-span training in older adults (Brehmer, Westerberg, & Bäckman, 2012; Richmond,
+Morrison, Chein, & Olson, 2011; Zinke, Zeintl, Eschen, Herzog, & Kliegel, 2012).
+Likewise, a recent review (Shipstead et al., in press) found that the majority of published
+studies using developmental and patient samples have not observed transfer to fluid
+intelligence after WM training. The Melby-Lervåg and Hulme (in press) meta-analysis
+confirmed that age was not a significant moderator of transfer to nonverbal abilities after
+WM training. In fact, young children (d = .03) and adolescent children (d = -.05) showed
+no evidence of transfer to nonverbal intelligence, inconsistent with the idea that younger
+children may be more susceptible to WM training and improvements in intelligence
+because of their increased brain plasticity relative to adults. Again, our findings do not
+appear to be an aberration – there is little evidence for transfer from WM training to fluid
+intelligence.
+-->
 
 For more on aging and the brain, [Mike Darwin](!Wikipedia) [recommends reading](http://chronopause.com/index.php/2011/05/31/going-going-gone%E2%80%A6-part-2/)
 
