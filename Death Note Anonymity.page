@@ -117,12 +117,13 @@ Let's remember that all this is predicated on anonymity, and on Light using low-
 
 # External links
 
-- ["On Murder Considered as one of the Fine Arts"](!Wikipedia "On Murder Considered as one of the Fine Arts"), Thomas De Quincey
+- ["On Murder Considered as one of the Fine Arts"](!Wikipedia "On Murder Considered as one of the Fine Arts"), [Thomas De Quincey](!Wikipedia)
 - [Discussion of this essay](http://lesswrong.com/lw/5ld/death_note_anonymity_and_information_theory/) on LessWrong
 - [Discussion on Hacker News](http://news.ycombinator.com/item?id=3634320)
 - ["Who wrote the _Death Note_ script?"](Notes#who-wrote-the-death-note-script) (my discussion of the American movie's script)
 
-# Appendix: Communicating with a Death Note
+# Appendices
+## Communicating with a Death Note
 
 One might wonder how much information one could send *intentionally* with a Death Note, as opposed to inadvertently leak bits about one's identity. As deaths are by and large publicly known information, we'll assume the sender and recipient have some sort of pre-arranged key or one-time pad (although one would wonder why they'd use such an immoral and clumsy system as oppose to steganography or messages online).
 
@@ -155,3 +156,43 @@ The circumstances is much more difficult to calculate. We can subdivide it in a 
     Actions prior to death overlaps with accidental causes; here the series doesn't help us. Light's early experiments culminating in the "L, do you know death gods love apples?" seem to imply that actions are very limited in entropy as each word took a death (assuming the ordinary English vocabulary of 50,000 words, 16 bits), but other plot events imply that humans can undertake long complex plans at the order of Death Notes (like Mikami bringing the fake Death Note to the final confrontation with Near). Actions before death could be reported in great detail, or they could be hidden under official secrecy like the aforementioned death gods mentioned (Light uniquely privileged in learning it succeeded as part of L testing him). I can't begin to guess how many distinct narratives would survive transmission or what limits the Note would set. We must leave this one undefined: it's almost surely more than 10 bits, but how many?
 
 Summing, we get $\lt33 + \lt19 + 17 + \lt37 + 14 + {?} = 120{?}$ bits per death.
+
+## "Bayesian Jurisprudence"
+
+[E.T. Jaynes](!Wikipedia) in his posthumous [_Probability Theory: The Logic of Science_](http://omega.albany.edu:8008/JaynesBook.html) (on [Bayesian statistics](!Wikipedia)) includes a chapter 5 on ["Queer Uses For Probability Theory"](http://omega.albany.edu:8008/ETJ-PS/cc5d.ps), discussing such topics as ESP; miracles; heuristics & [biases](!Wikipedia "Cognitive bias"); how visual perception is theory-laden; philosophy of science with regard to Newtonian mechanics and the famed [discovery of Neptune](!Wikipedia); horse-racing & weather forecasting; and finally - section 5.8, "Bayesian jurisprudence". Jaynes's analysis is somewhat similar in spirit to my above analysis, although mine is not explicitly Bayesian except perhaps in the discussion of gender as eliminating one necessary bit.
+
+The following is an excerpt; see also ["Bayesian Justice"](http://lesswrong.com/r/discussion/lw/6u0/bayesian_justice/).
+
+> It is interesting to apply probability theory in various situations in which we can't always reduce it to numbers very well, but still it shows automatically what kind of information would be relevant to help us do plausible reasoning. Suppose someone in New York City has committed a murder, and you don't know at first who it is, but you know that there are 10 million people in New York City. On the basis of no knowledge but this, $e(\text{Guilty}|X ) = -70 db$ is the plausibility that any particular person is the guilty one.
+>
+> How much positive evidence for guilt is necessary before we decide that some man should be put away? Perhaps +40 _db_, although your reaction may be that this is not safe enough, and the number ought to be higher. If we raise this number we give increased protection to the innocent, but at the cost of making it more difficult to convict the guilty; and at some point the interests of society as a whole cannot be ignored.
+>
+> For example, if 1000 guilty men are set free, we know from only too much experience that 200 or 300 of them will proceed immediately to inflict still more crimes upon society, and their escaping justice will encourage 100 more to take up crime. So it is clear that the damage to society as a whole caused by allowing 1000 guilty men to go free, is far greater than that caused by falsely convicting one innocent man.
+>
+> If you have an emotional reaction against this statement, I ask you to think: if you were a judge, would you rather face one man whom you had convicted falsely; or 100 victims of crimes that you could have prevented? Setting the threshold at +40 _db_ will mean, crudely, that on the average not more than one conviction in 10,000 will be in error; a judge who required juries to follow this rule would probably not make one false conviction in a working lifetime on the bench.
+>
+> In any event, if we took +40 db starting out from -70 db, this means that in order to ensure a conviction you would have to produce about 110 db of evidence for the guilt of this particular person. Suppose now we learn that this person had a motive. What does that do to the plausibility for his guilt? Probability theory says
+>
+> $e(\text{Guilty}|\text{Motive}) = e(\text{Guilty}|X) + 10 log_{10} \frac{P(\text{Motive}|\text{Guilty})}{P(\text{Motive}|\text{Not Guilty})}$ (5-38)
+>
+> $\simeq -70 - 10log_{10} P(\text{Motive}|\text{Not Guilty})$
+>
+> since $P(\text{Motive}|\text{Guilty}) \simeq 1$, i.e. we consider it quite unlikely that the crime had no motive at all. Thus, the significance of learning that the person had a motive depends almost entirely on the probability $P(\text{Motive}|\text{Not Guilty})$ that an innocent person would also have a motive.
+>
+> This evidently agrees with our common sense, if we ponder it for a moment. If the deceased were kind and loved by all, hardly anyone would have a motive to do him in. Learning that, nevertheless, our suspect *did* have a motive, would then be very significant information. If the victim had been an unsavory character, who took great delight in all sorts of foul deeds, then a great many people would have a motive, and learning that our suspect was one of them is not so significant. The point of this is that we don't know what to make of the information that our suspect had a motive, unless we also know something about the character of the deceased. But how many members of juries would realize that, unless it was pointed out to them?
+>
+> Suppose that a very enlightened judge, with powers not given to judges under present law, had perceived this fact and, when testimony about the motive was introduced, he directed his assistants to determine for the jury the *number* of people in New York City who had a motive. If this number is $N_m$ then
+>
+> $P(\text{Motive}|\text{Not Guilty}) = \frac{N_m - 1}{(\text{Number of people in New York}) - 1} \simeq 10^{-7} (N_m - 1)$
+>
+> and equation (5-38) reduces, for all practical purposes, to
+>
+> $e(\text{Guilty}|\text{Motive}) \simeq -10 log(N_m - 1)$ (5-39)
+>
+> You see that the population of New York has cancelled out of the equation; as soon as we know the number of people who had a motive, then it doesn't matter any more how large the city was. Note that (5-39) continues to say the right thing even when $N_m$ is only 1 or 2.
+>
+> You can go on this way for a long time, and we think you will find it both enlightening and entertaining to do so. For example, we now learn that the suspect was seen near the scene of the crime shortly before. From Bayes' theorem, the significance of this depends almost entirely on how many innocent persons were also in the vicinity. If you have ever been told not to trust Bayes' theorem, you should follow a few examples like this a good deal further, and see how infallibly it tells you what information would be relevant, what irrelevant, in plausible reasoning.^["Note that in these cases we are trying to decide, from scraps of incomplete information, on the truth of an Aristotelian proposition; whether the defendant did or did not commit some well-defined action. This is the situation  an issue of fact  for which probability theory as logic is designed. But there are other legal situations quite different; for example, in a medical malpractice suit it may be that all parties are agreed on the facts as to what the defendant actually did; the issue is whether he did or did not exercise reasonable judgment. Since there is no official, precise definition of `reasonable judgment', the issue is not the truth of an Aristotelian proposition (however, if it were established that he willfully violated one of our Chapter 1 desiderata of rationality, we think that most juries would convict him). It has been claimed that probability theory is basically inapplicable to such situations, and we are concerned with the partial truth of a non-Aristotelian proposition. We suggest, however, that in such cases we are not concerned with an issue of truth at all; rather, what is wanted is a value judgment. We shall return to this topic later (Chapters 13, 18)."]
+>
+> In recent years there has grown up a considerable literature on Bayesian jurisprudence; for a review with many references, see Vignaux and Robertson (1996) [This is apparently _Interpreting Evidence: Evaluating Forensic Science in the Courtroom_ --Editor].
+>
+> Even in situations where we would be quite unable to say that numerical values should be used, Bayes' theorem still reproduces qualitatively just what your common sense (after perhaps some meditation) tells you. This is the fact that George Polya demonstrated in such o exhaustive detail that the present writer was convinced that the connection must be more than qualitative.
