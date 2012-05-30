@@ -195,20 +195,24 @@ Having discussed the broad trend of deletionism and problems with editors, let's
 
 The reason for my interest in this minor deletionist practice is that I no longer edit as much as I used to, and so frequently when I find an excellent citation (article, review, interview etc.) I will often just copy it into the External Links section or (if I am feeling especially energetic) I will excerpt the important bits onto the article's Talk page. I realized that this constitutes what one might call a "[natural experiment](!Wikipedia)": I could go back and see how often the excerpts were copied by another editor into the article. This is better than just looking at "how often anime editors edit" or "how often anime articles are edited" because it is less related to outside events - perhaps anime news was simply boring over that period or perhaps some new bots or scripts were rolled out. Whereas if there are no anime editors who will edit *even when presented with gift-wrapped RSs* (links & excerpts specifically called out for their attention, and trivially copy-pasted into the article), then that's pretty convincing evidence that there is no longer a 'there' there - that the editors are no longer active.
 
+#### Sins of Omission: experiment 1
+
 On at least two articles ([Talk:Gurren Lagann#Interviews](!Wikipedia) & [Talk:Royal Space Force: The Wings of Honnêamise#Sources](!Wikipedia)), I have been strenuously opposed by editors who object to having more than a handful of links in the designated External Links section; they acknowledged the links were (mostly) all undoubted RSs and relevant to the article - but they refused to incorporate the links into the article. This is bad from every angle, yet few other editors were interested in helping me.
 
 So I've begun going through my old mainspace Talk edits using `Special:Contributions`, starting all the way back in [April 2007](http://en.wikipedia.org/w/index.php?limit=500&tagFilter=&title=Special%3AContributions&contribs=user&target=Gwern&namespace=1&tagfilter=&year=2008&month=1) (>4 years ago, more than enough time for editors to have made use of my gifts!), looking for cases where I've dumped such references. I compiled two lists, of [146 anime-related edits](#anime-edits), and [102 non-anime-related edits](#non-anime-edits).
 
-Before going any further, it's worth asking - to avoid [hindsight bias](!Wikipedia) and post hoc rationalization - what you expect my results to be.
+Before going any further, it's worth asking - to avoid [hindsight bias](!Wikipedia) and _post hoc_ rationalization - what you expect my results to be.
 
 When asking yourself, remember that these edits, and a larger set of edit we'll soon examine, are *selected* edits; they are high-quality edits, ones where I thought the relevant article *must* cover it. They are not low-quality dumps of text or links by a passing anonymous editor or done out of idle amusement. What percentage would you expect to have been used after a week, enough time that most article-watchlisting editors will have seen the diff and had leisure to deal with task more complex than reverting vandalism?
 50% doesn't seem like a bad starting point. How about after a year? Or two? Maybe 70% or 90%? After that, if it hasn't been dealt with, it's probably not ever going to be dealt with (even assuming the section hasn't been stuffed in an archive page). Hold onto your estimate.
 
 Once the lists were compiled and weeded, I wrote [a Haskell program](#analysis-script) to do the analysis. The program loads the specified Talk page URLs and extracts all URLs from the Talk diff so it can check whether any of them were linked in the Article (which, incidentally, leads to false positives and an *over*estimation^[It was too hard to extract only the URL(s) being *added* by a diff, so the script simply extracts all URLs it can find in the diff part of the HTML; so if an editor made 4 edits adding URLs A, B, C, and D, and only A were added to the article, then the script would 4 times extract A-D, spot A in the article, and declare victory. This may account for KrebMarkt's increased success rate compared to my edits, because she is accustomed to piling up her suggested links in one tidy section.]).
 
+##### Results
+
 The results for my edits when run on the two lists:
 
-- anime: 146 edits, 11 were used, or <8%
+- anime: of 146 edits, 11 were used, or <8%
 - non-anime: 102 edits, 3 used, or <3%
 
 For comparison, we can look at an editor who has devoted much of her time to finding references for anime articles - but made the colossal mistake of believing the EL partisans when they said external links should either be incorporated into article text or listed on the talk page. [User:KrebMarkt](!Wikipedia) has made perhaps thousands of such edits from impeccable RSs; it is possible that my own contributions are skewed downwards, say, by a congenital inability to select good references. Hence, looking at her reference-edits will provide a cross-check.
@@ -224,11 +228,11 @@ Besides it being surprising that KrebMarkt (not a particularly committed inclusi
 
 Since that will not soon change for the better, this leads to one conclusion: *the idea that references hidden on Talk pages will one day be used is false*.
 
-<!--
+#### Sins of Omission: experiment 2
 
 > Somebody remarked: 'I can tell by my own reaction to it that this book is harmful.' But let him only wait and perhaps one day he will admit to himself that this same book has done him a great service by bringing out the hidden sickness of his heart and making it visible.^[[Friedrich Nietzsche](!Wikipedia), #58 of [_Assorted Opinions and Maxims_](http://www.davemckay.co.uk/philosophy/nietzsche/nietzsche.php?name=nietzsche.1878.humanalltoohuman.zimmern.11)]
 
-We have looked at what suggesting additions results in: abject failure. The Wikipedia community is failing at incorporating new links. But how is it at the flip side of the coin - retaining old links? If inclusionists' suggestions are being ignored, is this at least fairly applied, with deletionists' edits also futile?
+We have looked at what suggesting additions results in: abject failure. The Wikipedia community is failing at incorporating new links. Some attempted to justify my experiment above: it's OK because at least the existing External Links sections are quality sections. This is desperate special pleading, but we should test it. How is the editing community at the flip side of the coin - retaining old links? If inclusionists' suggestions are being ignored, is this at least fairly applied, with deletionists' edits also futile?
 
 Unfortunately, testing this requires destructive editing. (We can't simply suggest on talk pages that external links be removed because that is both not how deletionists operate and likely will result in no changes, per the previous experiment demonstrating inaction on the part of editors.)
 
@@ -236,124 +240,24 @@ The procedure: remove random links and record whether they are restored to obtai
 
 - Editors might defer to other editors, so I will remove links as a anonymous user from multiple proxies; the restoration rate will naturally be an *under*estimate of what a registered editor would be able to commit, much less a tendentious deletionist.
 - To avoid issues with cherrypicking or biased selection of links[^random], I will remove only the final external link on pages selected by <http://en.wikipedia.org/wiki/Special:Random#External_links> which have at least 2 external links in an 'External links' section, and where the final external link is neither an 'official' link nor template-generated. (This avoids issues where pages might have 5 or 10 'official' external links to various versions or localizations, all of which an editor could confidently and blindly revert the removal of; template-generated links also carry imprimaturs of authority.)
-- The edit summary for each edit will be `rm external link per [[WP:EL]]` - which has the nice property of being obviously meaningless to anyone capable of critical thought (by definition a link removal should be per one of WP:EL's criterions - but *which* [criterion](!Wikipedia "Wikipedia:External links#Links normally to be avoided")?) but also official-looking like many deletionist edit-summaries.
+- The edit summary for each edit will be `rm external link per [[WP:EL]]` - which has the nice property of being obviously meaningless to anyone capable of critical thought (by definition, a link removal should be per one of WP:EL's criterions - but *which* [criterion](!Wikipedia "Wikipedia:External links#Links normally to be avoided")?) but also official-looking like many deletionist edit-summaries.
 - To avoid flooding issues and be less obvious, no more than 5 or 10 links a day will be removed with at least 1 minute between each edit.
 - To avoid building up credibility, I will not make any real edits with the anonymous IPs
+- After the last of the 100 links have been removed, I will wait 1 month (long enough for the edit to drop off all watchlists) and restore all links. I predict [at least half](http://predictionbook.com/predictions/6586) will not be restored and certainly not [more than 90%](http://predictionbook.com/predictions/6585).
 
-[^rand]: Someone might object that picking the last link in an External Link section is not random at all. I am reminded of an anecdote describing a court case involving the draft back in Vietnam, where the plaintiff's lawyer argued that the little cage and balls method was not random and was unfair because the balls on top were much more likely to be selected. The judge asked, "Unfair to *whom*?" Indeed.
+[^random]: Someone might object that picking the last link in an External Link section is not random at all. I am reminded of an anecdote describing a court case involving the draft back in Vietnam, where the plaintiff's lawyer argued that the little cage and balls method was not random and was unfair because the balls on top were much more likely to be selected. The judge asked, "Unfair to *whom*?"
 
     As well, this methodology, while being quite as random as most methods, carries the usual advantages of determinism: anyone will be able to check whether I did in fact remove only last links which are not official or template-generated in External Link sections. This is evidence that I did not simply [cherry pick](!Wikipedia "Cherry picking (fallacy)") the links that I thought were worst and so least likely to be restored.
 
-        (If I were going to cherry pick under this procedure, I would have had to invest a great deal more effort: for each removal, I would have to find *multiple* candidates each of which satisfied the criteria and only then could I pick the worst final link; and then I would have to start over for the *next* removal, and since I had to check ~10 random articles for a possible final link, this implies for every removal, I'd be looking at something like 40+ random articles to do one removal or 200+ random articles a day! And this deception would have to be deliberate & planned - while most cases of bias are unconscious.)
+    (If I were going to cherry pick under this procedure, I would have had to invest a great deal more effort: for each removal, I would have to find *multiple* candidates each of which satisfied the criteria and only then could I pick the worst final link; and then I would have to start over for the *next* removal, and since I had to check ~10 random articles for a possible final link, this implies for every removal, I'd be looking at something like 40+ random articles to do one removal or 200+ random articles a day! And this deception would have to be deliberate & planned - while most cases of bias are unconscious.)
 
-After the last of the 100 links have been removed, I will wait 1 month (long enough for the edit to drop off all watchlists) and restore all links. I predict [at least half](http://predictionbook.com/predictions/6586) will not be restored and certainly not [more than 90%](http://predictionbook.com/predictions/6585).
-
-1. http://en.wikipedia.org/w/index.php?title=Castell_Dinas_Bran&diff=prev&oldid=487558689
-2. http://en.wikipedia.org/w/index.php?title=Ron_O%27Neal&diff=prev&oldid=487558990
-3. http://en.wikipedia.org/w/index.php?title=HUD_(video_gaming)&diff=prev&oldid=487559372
-4. http://en.wikipedia.org/w/index.php?title=Protector_(2009_film)&diff=prev&oldid=487560774
-5. http://en.wikipedia.org/w/index.php?title=Haluk_Bilginer&diff=prev&oldid=487561564
-6. http://en.wikipedia.org/w/index.php?title=Gernot_Pfl%C3%BCger&diff=prev&oldid=487733032
-7. http://en.wikipedia.org/w/index.php?title=Osprey_Publishing&diff=prev&oldid=487733629
-8. http://en.wikipedia.org/w/index.php?title=Tales_of_the_City&diff=prev&oldid=487734391
-9. http://en.wikipedia.org/w/index.php?title=Icemaiden&diff=prev&oldid=487735113
-10. http://en.wikipedia.org/w/index.php?title=Conus_compressus&diff=prev&oldid=487737532
-11. http://en.wikipedia.org/w/index.php?title=Jessica_Fisher&diff=prev&oldid=487855737
-12. http://en.wikipedia.org/w/index.php?title=Mario_Botta&diff=prev&oldid=487856576
-13. http://en.wikipedia.org/w/index.php?title=Faye_Wong&diff=prev&oldid=487859138
-14. http://en.wikipedia.org/w/index.php?title=Marilyn_vos_Savant&diff=prev&oldid=487861781
-15. http://en.wikipedia.org/w/index.php?title=Scrappers&diff=prev&oldid=487863972
-16. http://en.wikipedia.org/w/index.php?title=Carrier_Dome&diff=prev&oldid=488008888
-17. http://en.wikipedia.org/w/index.php?title=Godaikin&diff=prev&oldid=488010036
-18. http://en.wikipedia.org/w/index.php?title=Cos%C3%AC&diff=prev&oldid=488010874
-19. http://en.wikipedia.org/w/index.php?title=Hakan_Aslanta%C5%9F&diff=prev&oldid=488011491
-20. http://en.wikipedia.org/w/index.php?title=WVAF&diff=prev&oldid=488012281
-21. http://en.wikipedia.org/w/index.php?title=Cecilia_Wikstr%C3%B6m&diff=prev&oldid=488178314
-22. http://en.wikipedia.org/w/index.php?title=Lori_Stokes&diff=prev&oldid=488181443
-23. http://en.wikipedia.org/w/index.php?title=Drakesbad_Guest_Ranch&diff=prev&oldid=488182080
-24. http://en.wikipedia.org/w/index.php?title=Bzovsk%C3%A1_Leh%C3%B4tka&diff=prev&oldid=488182866
-25. http://en.wikipedia.org/w/index.php?title=Ellen_Pinsent&diff=prev&oldid=488184815
-26. http://en.wikipedia.org/w/index.php?title=Kochas&diff=prev&oldid=488383396
-27. http://en.wikipedia.org/w/index.php?title=Cephalanthera_rubra&diff=prev&oldid=488384197
-28. http://en.wikipedia.org/w/index.php?title=Minor_planet_designation&diff=prev&oldid=488385449
-29. http://en.wikipedia.org/w/index.php?title=AFR_(film)&diff=prev&oldid=488386205
-30. http://en.wikipedia.org/w/index.php?title=South_County_Airport&diff=prev&oldid=488386759
-31. http://en.wikipedia.org/w/index.php?title=Be_Inc.&diff=prev&oldid=488573465
-32. http://en.wikipedia.org/w/index.php?title=Alan_Embree&diff=prev&oldid=488573927
-33. http://en.wikipedia.org/w/index.php?title=ODBC&diff=prev&oldid=488574540
-34. http://en.wikipedia.org/w/index.php?title=Georg_Groscurth&diff=prev&oldid=488575190
-35. http://en.wikipedia.org/w/index.php?title=Hawkman&diff=prev&oldid=488576908
-36. http://en.wikipedia.org/w/index.php?title=Intellipedia&diff=prev&oldid=488671224
-37. http://en.wikipedia.org/w/index.php?title=Sunman_(video_game)&diff=prev&oldid=488671545
-38. http://en.wikipedia.org/w/index.php?title=Chris_Bonington&diff=prev&oldid=488671810
-39. http://en.wikipedia.org/w/index.php?title=Rutu_Modan&diff=prev&oldid=488672122
-40. http://en.wikipedia.org/w/index.php?title=Nursing_in_Japan&diff=prev&oldid=488672369
-41. http://en.wikipedia.org/w/index.php?title=MBC_Action&diff=prev&oldid=488864583
-42. http://en.wikipedia.org/w/index.php?title=Roland_Collombin&diff=prev&oldid=488865235
-43. http://en.wikipedia.org/w/index.php?title=USS_Impervious_(AM-449)&diff=prev&oldid=488865973
-44. http://en.wikipedia.org/w/index.php?title=Paul_Hertzberg&diff=prev&oldid=488866325
-45. http://en.wikipedia.org/w/index.php?title=Fisheries_Act_1981&diff=prev&oldid=488867682
-46. http://en.wikipedia.org/w/index.php?title=Take_My_Hand,_Precious_Lord&diff=prev&oldid=489013697
-47. http://en.wikipedia.org/w/index.php?title=Sandra_Sabatini&diff=prev&oldid=489014308
-48. http://en.wikipedia.org/w/index.php?title=HMS_Marne_(G35)&diff=prev&oldid=489014964
-49. http://en.wikipedia.org/w/index.php?title=Ann_Devroy&diff=prev&oldid=489015693
-50. http://en.wikipedia.org/w/index.php?title=Chouliarades&diff=prev&oldid=489016352
-51. http://en.wikipedia.org/w/index.php?title=Park_Won-Jae&diff=prev&oldid=489165980
-52. http://en.wikipedia.org/w/index.php?title=Alicia_Svigals&diff=prev&oldid=489166416
-53. http://en.wikipedia.org/w/index.php?title=Fort_Croghan&diff=prev&oldid=489168423
-54. http://en.wikipedia.org/w/index.php?title=John_Frederick_Peel_Rawlinson&diff=prev&oldid=489169129
-55. http://en.wikipedia.org/w/index.php?title=The_Lithgow_Plot&diff=prev&oldid=489169778
-56. http://en.wikipedia.org/w/index.php?title=Institute_for_Reference_Materials_and_Measurements&diff=prev&oldid=489337250
-57. http://en.wikipedia.org/w/index.php?title=Dimitris_Dragatakis&diff=prev&oldid=489337638
-58. http://en.wikipedia.org/w/index.php?title=Wouter_Basson&diff=prev&oldid=489339144
-59. http://en.wikipedia.org/w/index.php?title=Belgian_State_Security_Service&diff=prev&oldid=489338443
-60. http://en.wikipedia.org/w/index.php?title=Frank_D._Gilroy&diff=prev&oldid=489340213
-61. http://en.wikipedia.org/w/index.php?title=Fabrica_Argentina_de_Aviones&diff=prev&oldid=489512296
-62. http://en.wikipedia.org/w/index.php?title=Hanko%E2%80%93Hyvink%C3%A4%C3%A4_railway&diff=prev&oldid=489513784
-63. http://en.wikipedia.org/w/index.php?title=MuggleNet&diff=prev&oldid=489514407
-64. http://en.wikipedia.org/w/index.php?title=Kashmiriyat&diff=prev&oldid=489514919
-65. http://en.wikipedia.org/w/index.php?title=Centennial_College&diff=prev&oldid=489515654
-66. http://en.wikipedia.org/w/index.php?title=Love_Songs_(Harry_Watters_album)&diff=prev&oldid=489799165
-67. http://en.wikipedia.org/w/index.php?title=Ken_Irvine&diff=prev&oldid=489800148
-68. http://en.wikipedia.org/w/index.php?title=Scala_(programming_language)&diff=prev&oldid=489800521
-69. http://en.wikipedia.org/w/index.php?title=Lightship_Finngrundet_(1903)&diff=prev&oldid=489800903
-70. http://en.wikipedia.org/w/index.php?title=Tailgating&diff=prev&oldid=489801531
-71. http://en.wikipedia.org/w/index.php?title=MIT_Arab_Students_Organization_SciTech_Awards&diff=prev&oldid=489972650
-72. http://en.wikipedia.org/w/index.php?title=Lionel_Faure&diff=prev&oldid=489973662
-73. http://en.wikipedia.org/w/index.php?title=New_Plymouth,_Idaho&diff=prev&oldid=489974074
-74. http://en.wikipedia.org/w/index.php?title=Dimorphotheca_ecklonis&diff=prev&oldid=489973061
-75. http://en.wikipedia.org/w/index.php?title=Keele_University&diff=prev&oldid=489974880
-76. http://en.wikipedia.org/w/index.php?title=Eddie_Reeves&diff=prev&oldid=489991585
-77. http://en.wikipedia.org/w/index.php?title=Nataungyan&diff=prev&oldid=489992075
-78. http://en.wikipedia.org/w/index.php?title=Robert_F._Furchgott&diff=prev&oldid=489994444
-79. http://en.wikipedia.org/w/index.php?title=Bitola&diff=prev&oldid=489995826
-80. http://en.wikipedia.org/w/index.php?title=The_Holloways&diff=prev&oldid=489996221
-81. http://en.wikipedia.org/w/index.php?title=History_of_fire_safety_legislation_in_the_United_Kingdom&diff=prev&oldid=490161503
-82. http://en.wikipedia.org/w/index.php?title=U.S._National_Dancesport_Champions_(Professional_Rhythm)&diff=prev&oldid=490162122
-83. http://en.wikipedia.org/w/index.php?title=SAIL_(programming_language)&diff=prev&oldid=490162660
-84. http://en.wikipedia.org/w/index.php?title=Pat_Kelly_(outfielder)&diff=prev&oldid=490163278
-85. http://en.wikipedia.org/w/index.php?title=Shahrnush_Parsipur&diff=prev&oldid=490164286
-86. http://en.wikipedia.org/w/index.php?title=Gus_Alex&diff=prev&oldid=490161580
-87. http://en.wikipedia.org/w/index.php?title=Natalia_Mishkutenok&diff=prev&oldid=490162000
-88. http://en.wikipedia.org/w/index.php?title=Rockingham,_Nova_Scotia&diff=prev&oldid=490162595
-89. http://en.wikipedia.org/w/index.php?title=Four-color_deck&diff=prev&oldid=490163316
-90. http://en.wikipedia.org/w/index.php?title=John_Henry_Whitley&diff=prev&oldid=490164252
-91. http://en.wikipedia.org/w/index.php?title=Philomycidae&diff=prev&oldid=490172358
-92. http://en.wikipedia.org/w/index.php?title=Blackhawk_International_Airways&diff=prev&oldid=490173635
-93. http://en.wikipedia.org/w/index.php?title=Hillcrest_Country_Club_(Los_Angeles)&diff=prev&oldid=490174588
-94. http://en.wikipedia.org/w/index.php?title=Pleasanton,_Kansas&diff=prev&oldid=490175322
-95. http://en.wikipedia.org/w/index.php?title=Isca_Augusta&diff=prev&oldid=490176378
-96. http://en.wikipedia.org/w/index.php?title=Never_Ending_Tour_1990&diff=prev&oldid=490172770
-97. http://en.wikipedia.org/w/index.php?title=Israel_Kamakawiwo%CA%BBole&diff=prev&oldid=490173675
-98. http://en.wikipedia.org/w/index.php?title=St._Vincent%27s_Cathedral_School&diff=prev&oldid=490174443
-99. http://en.wikipedia.org/w/index.php?title=Honda_CBR600F4i&diff=prev&oldid=490175410
-100. http://en.wikipedia.org/w/index.php?title=Kettling&diff=prev&oldid=490176067
+The full list of URL diffs is [available as an appendix](#link-removals).
 
 After finishing the link removals, I briefly looked over the edits contribution pages for `(top)`, which specifies whether an edit is still the latest edit for that page (obviously all reverted removals will not have it, but some non-reverted edits will have unrelated edits stealing the status, so the number gives an upper bound on how many removals were reverted). It looked like <10%.
 
 I was also struck during the process of going through `Special:Random` by how many 'External Links' sections have been, in wretched subterfuges, renamed 'Sources', 'References', 'Further reading', or the article has a long References section stuffed with external links which are used once; perhaps editors collectively know that putting a link into a section named 'External Links' is painting a cross-hair on its forehead. Too, I was struck by the general quality of the links: of the 100, I would have assented to the removal of no more than 5 (10 at the most). In general, articles err far on the side of including too few external links rather than too many.
 
-How many readers were affected by my experiment over the course of the month of waiting? Feel free to estimate or give a range - 1,000 or 10,000 or maybe 100,000 readers? The articles are randomly picked, so it seems highly unlikely that there is significant overlap, and as I already mentioned, very few removals seem to have been reverted. But my best estimate, based on `stats.grok.se` data for the 100 articles' traffic in March 2012, is that somewhere around >~335,000 readers were affected[^removal-readership].
+How many readers were affected by my experiment over the course of the month of waiting? Feel free to estimate or give a range - 1,000 or 10,000 or maybe 100,000 readers? The articles are randomly picked, so it seems highly unlikely that there is significant overlap. But my best estimate, based on `stats.grok.se` data for the 100 articles' traffic in March 2012, is that somewhere around >~335,000 readers were affected[^removal-readership].
 
 [^removal-readership]: It's not hard to estimate. Take the list of 100 diffs, and use an editor macro or a shell tool like `sed` to strip it down to a list of URL-encoded article names like so:
 
@@ -376,7 +280,12 @@ How many readers were affected by my experiment over the course of the month of 
     This output is also easy to process with a macro or regexp, and once we have the monthly number for each article, all that remains is totaling them:
 
     ~~~{.haskell}
-    sum [914,7446,7579,542,3103,91,1665,5291,2452,102,272,3344,16214,32268,863,10307,476,3825,310,205,441,3028,187,94,115,211,207,522,269,182,1324,950,25660,162,14457,3881,200,3510,606,430,2048,164,214,136,77,8075,99,255,278,148,525,192,108,295,61,597,180,3491,753,527,766,113,1405,770,3683,288,873,26811,131,6625,93,212,538,313,7119,212,76,1130,7741,2136,179,263,632,870,714,338,2517,456,90,621,1323,316,1125,413,73223,122,12707,6573]
+    sum [914,7446,7579,542,3103,91,1665,5291,2452,102,272,3344,16214,32268,863,10307,476,
+        3825,310,205,441,3028,187,94,115,211,207,522,269,182,1324,950,25660,162,14457
+        3881,200,3510,606,430,2048,164,214,136,77,8075,99,255,278,148,525,192,108,295
+        61,597,180,3491,753,527,766,113,1405,770,3683,288,873,26811,131,6625,93,212
+        538,313,7119,212,76,1130,7741,2136,179,263,632,870,714,338,2517,456,90,621
+        1323,316,1125,413,73223,122,12707,6573]
     ~> 335445
     ~~~
 
@@ -400,7 +309,17 @@ None of the commenters rose to my bait of estimating what the revision rate *sho
 
     > ...My Wikipedia philosophy is quite complex, and defies easy categorization. My ideal for a more perfect Wikipedia would be to create many wikis for pop culture topics and [transwiki](http://en.wikipedia.org/wiki/transwikism) many of the related articles on Wikipedia to them. (Some of these already exist in a fairly substantial format, such as [Memory Alpha](!Wikipedia) and [Wookiepedia](!Wikipedia)). I see no reason why all 703 episodes of the live-action _[Star Trek](!Wikipedia)_ (and 17 of the 22 animated episodes) should have articles on Wikipedia, when Memory Alpha exists. (Before you go hating on me for that, note that I own all 720 episodes on DVD, as well as all but three of the movies.) This does not make me a [deletionist](http://meta.wikimedia.org/wiki/deletionism), however. I also believe in [structurism](http://meta.wikimedia.org/wiki/structurism), and a combination of two opposing philosophies [mergism](http://meta.wikimedia.org/wiki/mergism) and [seperatism](http://meta.wikimedia.org/wiki/seperatism); merging in small articles rather than deleting them and separating large articles rather than deleting content. I also agree with the tenets of [exclusionism](http://meta.wikimedia.org/wiki/exclusionism), although that also leads back to transwikism again.
 
--->
+##### Results
+
+1. neither IP address was contacted at any point in the experiment, blocked, or banned
+2. [One article](http://en.wikipedia.org/w/index.php?title=Special%3ALog&type=delete&user=&page=Gernot+Pfl%C3%BCger&year=&month=-1&tagfilter=) was deleted, so I do not know if my edit was reverted
+3. Of the 100 edits, *3* were reverted:
+
+    - <http://en.wikipedia.org/w/index.php?title=Faye_Wong&diff=next&oldid=487859138>
+    - <http://en.wikipedia.org/w/index.php?title=Ann_Devroy&diff=next&oldid=489015693>
+    - <http://en.wikipedia.org/w/index.php?title=John_Frederick_Peel_Rawlinson&diff=next&oldid=489169129>
+
+3% is far worse than I had predicted. This leads to one conclusion: *external links are highly vulnerable to deletionism*.
 
 #### Tallying the Damage
 ##### _Ignoti, sed non occulti_
@@ -617,7 +536,7 @@ Like the cooling dwarf star left by a supernova - its lost brilliance traveling 
 
 - [Wikipedia:Wikipedia is failing](!Wikipedia)
 
-# Talk page reference appendices
+# Appendices
 ## Analysis script
 
 The following Haskell program requires the Haskell base libraries and the [TagSoup](http://community.haskell.org/~ndm/tagsoup/) library. The script is parallel. One can compile it like `ghc -threaded -rtsopts -O2 script.hs`; to run it one pipes in a list of newline-delimited Talk page edits, like `./script +RTS -N4 -RTS < urls.txt`^[One could also avoid compilation and run it much more slowly as `cat urls.txt | runhaskell script`.] which will then print out a summary like
@@ -2119,3 +2038,106 @@ Recent edits:
     http://en.wikipedia.org/w/index.php?title=Talk:Tantei_Opera_Milky_Holmes&diff=prev&oldid=403146076
     http://en.wikipedia.org/w/index.php?title=Talk:Cross_Game&diff=prev&oldid=403146038
     http://en.wikipedia.org/w/index.php?title=Talk:KimiKiss&diff=prev&oldid=403145989
+
+## Link removals
+
+    http://en.wikipedia.org/w/index.php?title=Castell_Dinas_Bran&diff=prev&oldid=487558689
+    http://en.wikipedia.org/w/index.php?title=Ron_O%27Neal&diff=prev&oldid=487558990
+    http://en.wikipedia.org/w/index.php?title=HUD_(video_gaming)&diff=prev&oldid=487559372
+    http://en.wikipedia.org/w/index.php?title=Protector_(2009_film)&diff=prev&oldid=487560774
+    http://en.wikipedia.org/w/index.php?title=Haluk_Bilginer&diff=prev&oldid=487561564
+    http://en.wikipedia.org/w/index.php?title=Gernot_Pfl%C3%BCger&diff=prev&oldid=487733032
+    http://en.wikipedia.org/w/index.php?title=Osprey_Publishing&diff=prev&oldid=487733629
+    http://en.wikipedia.org/w/index.php?title=Tales_of_the_City&diff=prev&oldid=487734391
+    http://en.wikipedia.org/w/index.php?title=Icemaiden&diff=prev&oldid=487735113
+    http://en.wikipedia.org/w/index.php?title=Conus_compressus&diff=prev&oldid=487737532
+    http://en.wikipedia.org/w/index.php?title=Jessica_Fisher&diff=prev&oldid=487855737
+    http://en.wikipedia.org/w/index.php?title=Mario_Botta&diff=prev&oldid=487856576
+    http://en.wikipedia.org/w/index.php?title=Faye_Wong&diff=prev&oldid=487859138
+    http://en.wikipedia.org/w/index.php?title=Marilyn_vos_Savant&diff=prev&oldid=487861781
+    http://en.wikipedia.org/w/index.php?title=Scrappers&diff=prev&oldid=487863972
+    http://en.wikipedia.org/w/index.php?title=Carrier_Dome&diff=prev&oldid=488008888
+    http://en.wikipedia.org/w/index.php?title=Godaikin&diff=prev&oldid=488010036
+    http://en.wikipedia.org/w/index.php?title=Cos%C3%AC&diff=prev&oldid=488010874
+    http://en.wikipedia.org/w/index.php?title=Hakan_Aslanta%C5%9F&diff=prev&oldid=488011491
+    http://en.wikipedia.org/w/index.php?title=WVAF&diff=prev&oldid=488012281
+    http://en.wikipedia.org/w/index.php?title=Cecilia_Wikstr%C3%B6m&diff=prev&oldid=488178314
+    http://en.wikipedia.org/w/index.php?title=Lori_Stokes&diff=prev&oldid=488181443
+    http://en.wikipedia.org/w/index.php?title=Drakesbad_Guest_Ranch&diff=prev&oldid=488182080
+    http://en.wikipedia.org/w/index.php?title=Bzovsk%C3%A1_Leh%C3%B4tka&diff=prev&oldid=488182866
+    http://en.wikipedia.org/w/index.php?title=Ellen_Pinsent&diff=prev&oldid=488184815
+    http://en.wikipedia.org/w/index.php?title=Kochas&diff=prev&oldid=488383396
+    http://en.wikipedia.org/w/index.php?title=Cephalanthera_rubra&diff=prev&oldid=488384197
+    http://en.wikipedia.org/w/index.php?title=Minor_planet_designation&diff=prev&oldid=488385449
+    http://en.wikipedia.org/w/index.php?title=AFR_(film)&diff=prev&oldid=488386205
+    http://en.wikipedia.org/w/index.php?title=South_County_Airport&diff=prev&oldid=488386759
+    http://en.wikipedia.org/w/index.php?title=Be_Inc.&diff=prev&oldid=488573465
+    http://en.wikipedia.org/w/index.php?title=Alan_Embree&diff=prev&oldid=488573927
+    http://en.wikipedia.org/w/index.php?title=ODBC&diff=prev&oldid=488574540
+    http://en.wikipedia.org/w/index.php?title=Georg_Groscurth&diff=prev&oldid=488575190
+    http://en.wikipedia.org/w/index.php?title=Hawkman&diff=prev&oldid=488576908
+    http://en.wikipedia.org/w/index.php?title=Intellipedia&diff=prev&oldid=488671224
+    http://en.wikipedia.org/w/index.php?title=Sunman_(video_game)&diff=prev&oldid=488671545
+    http://en.wikipedia.org/w/index.php?title=Chris_Bonington&diff=prev&oldid=488671810
+    http://en.wikipedia.org/w/index.php?title=Rutu_Modan&diff=prev&oldid=488672122
+    http://en.wikipedia.org/w/index.php?title=Nursing_in_Japan&diff=prev&oldid=488672369
+    http://en.wikipedia.org/w/index.php?title=MBC_Action&diff=prev&oldid=488864583
+    http://en.wikipedia.org/w/index.php?title=Roland_Collombin&diff=prev&oldid=488865235
+    http://en.wikipedia.org/w/index.php?title=USS_Impervious_(AM-449)&diff=prev&oldid=488865973
+    http://en.wikipedia.org/w/index.php?title=Paul_Hertzberg&diff=prev&oldid=488866325
+    http://en.wikipedia.org/w/index.php?title=Fisheries_Act_1981&diff=prev&oldid=488867682
+    http://en.wikipedia.org/w/index.php?title=Take_My_Hand,_Precious_Lord&diff=prev&oldid=489013697
+    http://en.wikipedia.org/w/index.php?title=Sandra_Sabatini&diff=prev&oldid=489014308
+    http://en.wikipedia.org/w/index.php?title=HMS_Marne_(G35)&diff=prev&oldid=489014964
+    http://en.wikipedia.org/w/index.php?title=Ann_Devroy&diff=prev&oldid=489015693
+    http://en.wikipedia.org/w/index.php?title=Chouliarades&diff=prev&oldid=489016352
+    http://en.wikipedia.org/w/index.php?title=Park_Won-Jae&diff=prev&oldid=489165980
+    http://en.wikipedia.org/w/index.php?title=Alicia_Svigals&diff=prev&oldid=489166416
+    http://en.wikipedia.org/w/index.php?title=Fort_Croghan&diff=prev&oldid=489168423
+    http://en.wikipedia.org/w/index.php?title=John_Frederick_Peel_Rawlinson&diff=prev&oldid=489169129
+    http://en.wikipedia.org/w/index.php?title=The_Lithgow_Plot&diff=prev&oldid=489169778
+    http://en.wikipedia.org/w/index.php?title=Institute_for_Reference_Materials_and_Measurements&diff=prev&oldid=489337250
+    http://en.wikipedia.org/w/index.php?title=Dimitris_Dragatakis&diff=prev&oldid=489337638
+    http://en.wikipedia.org/w/index.php?title=Wouter_Basson&diff=prev&oldid=489339144
+    http://en.wikipedia.org/w/index.php?title=Belgian_State_Security_Service&diff=prev&oldid=489338443
+    http://en.wikipedia.org/w/index.php?title=Frank_D._Gilroy&diff=prev&oldid=489340213
+    http://en.wikipedia.org/w/index.php?title=Fabrica_Argentina_de_Aviones&diff=prev&oldid=489512296
+    http://en.wikipedia.org/w/index.php?title=Hanko%E2%80%93Hyvink%C3%A4%C3%A4_railway&diff=prev&oldid=489513784
+    http://en.wikipedia.org/w/index.php?title=MuggleNet&diff=prev&oldid=489514407
+    http://en.wikipedia.org/w/index.php?title=Kashmiriyat&diff=prev&oldid=489514919
+    http://en.wikipedia.org/w/index.php?title=Centennial_College&diff=prev&oldid=489515654
+    http://en.wikipedia.org/w/index.php?title=Love_Songs_(Harry_Watters_album)&diff=prev&oldid=489799165
+    http://en.wikipedia.org/w/index.php?title=Ken_Irvine&diff=prev&oldid=489800148
+    http://en.wikipedia.org/w/index.php?title=Scala_(programming_language)&diff=prev&oldid=489800521
+    http://en.wikipedia.org/w/index.php?title=Lightship_Finngrundet_(1903)&diff=prev&oldid=489800903
+    http://en.wikipedia.org/w/index.php?title=Tailgating&diff=prev&oldid=489801531
+    http://en.wikipedia.org/w/index.php?title=MIT_Arab_Students_Organization_SciTech_Awards&diff=prev&oldid=489972650
+    http://en.wikipedia.org/w/index.php?title=Lionel_Faure&diff=prev&oldid=489973662
+    http://en.wikipedia.org/w/index.php?title=New_Plymouth,_Idaho&diff=prev&oldid=489974074
+    http://en.wikipedia.org/w/index.php?title=Dimorphotheca_ecklonis&diff=prev&oldid=489973061
+    http://en.wikipedia.org/w/index.php?title=Keele_University&diff=prev&oldid=489974880
+    http://en.wikipedia.org/w/index.php?title=Eddie_Reeves&diff=prev&oldid=489991585
+    http://en.wikipedia.org/w/index.php?title=Nataungyan&diff=prev&oldid=489992075
+    http://en.wikipedia.org/w/index.php?title=Robert_F._Furchgott&diff=prev&oldid=489994444
+    http://en.wikipedia.org/w/index.php?title=Bitola&diff=prev&oldid=489995826
+    http://en.wikipedia.org/w/index.php?title=The_Holloways&diff=prev&oldid=489996221
+    http://en.wikipedia.org/w/index.php?title=History_of_fire_safety_legislation_in_the_United_Kingdom&diff=prev&oldid=490161503
+    http://en.wikipedia.org/w/index.php?title=U.S._National_Dancesport_Champions_(Professional_Rhythm)&diff=prev&oldid=490162122
+    http://en.wikipedia.org/w/index.php?title=SAIL_(programming_language)&diff=prev&oldid=490162660
+    http://en.wikipedia.org/w/index.php?title=Pat_Kelly_(outfielder)&diff=prev&oldid=490163278
+    http://en.wikipedia.org/w/index.php?title=Shahrnush_Parsipur&diff=prev&oldid=490164286
+    http://en.wikipedia.org/w/index.php?title=Gus_Alex&diff=prev&oldid=490161580
+    http://en.wikipedia.org/w/index.php?title=Natalia_Mishkutenok&diff=prev&oldid=490162000
+    http://en.wikipedia.org/w/index.php?title=Rockingham,_Nova_Scotia&diff=prev&oldid=490162595
+    http://en.wikipedia.org/w/index.php?title=Four-color_deck&diff=prev&oldid=490163316
+    http://en.wikipedia.org/w/index.php?title=John_Henry_Whitley&diff=prev&oldid=490164252
+    http://en.wikipedia.org/w/index.php?title=Philomycidae&diff=prev&oldid=490172358
+    http://en.wikipedia.org/w/index.php?title=Blackhawk_International_Airways&diff=prev&oldid=490173635
+    http://en.wikipedia.org/w/index.php?title=Hillcrest_Country_Club_(Los_Angeles)&diff=prev&oldid=490174588
+    http://en.wikipedia.org/w/index.php?title=Pleasanton,_Kansas&diff=prev&oldid=490175322
+    http://en.wikipedia.org/w/index.php?title=Isca_Augusta&diff=prev&oldid=490176378
+    http://en.wikipedia.org/w/index.php?title=Never_Ending_Tour_1990&diff=prev&oldid=490172770
+    http://en.wikipedia.org/w/index.php?title=Israel_Kamakawiwo%CA%BBole&diff=prev&oldid=490173675
+    http://en.wikipedia.org/w/index.php?title=St._Vincent%27s_Cathedral_School&diff=prev&oldid=490174443
+    http://en.wikipedia.org/w/index.php?title=Honda_CBR600F4i&diff=prev&oldid=490175410
+    http://en.wikipedia.org/w/index.php?title=Kettling&diff=prev&oldid=490176067
