@@ -303,12 +303,15 @@ Given all this, one naturally wonders what the effect might be in older humans. 
 
 1. ["Dietary intake and micronutrient status of adolescents: effect of vitamin and trace element supplementation on indices of status and performance in tests of verbal and non-verbal intelligence"](http://www.idpas.org/pdf/084DietaryIntakeAndMicronutrientStatus.pdf), Southon et al 1994: 13-15 year olds with a multivitamin of things including iodine (0.15mg); no effect on IQ test
 2. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years") 0.15mg daily with apparent null result
+3. ["Supplementary iodine fails to reverse hypothyroidism in adolescents and adults with endemic cretinism"](http://www.ncbi.nlm.nih.gov/pubmed/2153694), Boyages et al 1990; 28 Chinese aged 14-52, severely deficient, with no effect on the "Hiskey Nebraska Test of Learning Aptitude" or the "Griffiths Mental Development Scales"
 
-What implications do these 2 have?
+What implications do these 3 have?
+
+<!-- TODO: when have full text of 2 & 3, maybe do a meta-analysis to nail down how small the effect size would have to be -->
 
 ## Power analysis
 
-Starting from the 2 useful studies in older kids & adults, we can try to estimate an upper bound on how big any effect would be, if it actually existed but neither study was powerful enough to pick it up. Southon et al 1994 turns out to be not very informative: if we punch in the number of kids with some more details, we find that they needed a large effect size (_d_=0.81) before they could see anything:
+Starting from them, we can try to estimate an upper bound on how big any effect would be, if it actually existed but neither study was powerful enough to pick it up. Southon et al 1994 turns out to be not very informative: if we punch in the number of kids with some more details, we find that they needed a large effect size (_d_=0.81) before they could see anything:
 
 ~~~{.R}
 > pwr.t.test(power=0.75, sig.level=0.05, n=22)
@@ -388,8 +391,8 @@ We'd want 53 pairs, but Fitzgerald 2012's experimental design called for 32 week
 
 So the overall picture is that I should:
 
-1. start taking a moderate dose of iodine at some point
-2. look into cheap tests for iodine deficiency^[Home urine test kits of unknown accuracy are available online (Google "iodine urine test kit") but run $70-$100+.]
+1. start taking a moderate dose of iodine at some point (and take [photos of my eyes](http://www.longecity.org/forum/topic/44985-eye-color-change-with-iodine-supplementation/ "Eye Color Change with Iodine Supplementation") for kicks)
+2. look into cheap tests for iodine deficiency^[One self-test [suggested online](http://altmedangel.com/iodine.htm) involves dripping iodine onto one's skin and seeing how long it takes to be absorbed. This seems plausible, but according to [Derry](http://thyroid.about.com/library/derry/bl2a.htm) and [Abraham](http://www.optimox.com/pics/Iodine/updates/UNIOD-02/UNIOD_02.htm), it is unreliable.]^[Home urine test kits of unknown accuracy are available online (Google "iodine urine test kit") but run $70-$100+.]
 3. try to think of cheaper experiments I could run for benefits from iodine
 
 # Kratom
