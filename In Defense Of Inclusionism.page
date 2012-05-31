@@ -238,18 +238,30 @@ Unfortunately, testing this requires destructive editing. (We can't simply sugge
 
 The procedure: remove random links and record whether they are restored to obtain a restoration rate.
 
-- Editors might defer to other editors, so I will remove links as a anonymous user from multiple proxies; the restoration rate will naturally be an *under*estimate of what a registered editor would be able to commit, much less a tendentious deletionist.
+- Editors might defer to other editors, so I will remove links as a anonymous IP user from multiple proxies; the restoration rate will naturally be an *under*estimate of what a registered editor would be able to commit, much less a tendentious deletionist.
 - To avoid issues with cherrypicking or biased selection of links[^random], I will remove only the final external link on pages selected by <http://en.wikipedia.org/wiki/Special:Random#External_links> which have at least 2 external links in an 'External links' section, and where the final external link is neither an 'official' link nor template-generated. (This avoids issues where pages might have 5 or 10 'official' external links to various versions or localizations, all of which an editor could confidently and blindly revert the removal of; template-generated links also carry imprimaturs of authority.)
 - The edit summary for each edit will be `rm external link per [[WP:EL]]` - which has the nice property of being obviously meaningless to anyone capable of critical thought (by definition, a link removal should be per one of WP:EL's criterions - but *which* [criterion](!Wikipedia "Wikipedia:External links#Links normally to be avoided")?) but also official-looking like many deletionist edit-summaries.
+
+    This point is very important. We are not interested in "vandalism in general", nor "all possible forms of external link vandalism" (like adding spam links, inserting gibberish, breaking syntax), but in bad edits which mimic how a deletionist would edit. A deletionist would avoid certain links, and would be sure to make some allusion to policy. (Shades of [Poe's law](!Wikipedia): it is impossible to distinguish an actual deletionist's edits from random deletions accompanied by repetitive jargon.) If our experiment does not mimic these traits, our final measurement of bad-edit reversion rate will simply not be measuring what we hoped to measure.
 - To avoid flooding issues and be less obvious, no more than 5 or 10 links a day will be removed with at least 1 minute between each edit.
 - To avoid building up credibility, I will not make any real edits with the anonymous IPs
-- After the last of the 100 links have been removed, I will wait 1 month (long enough for the edit to drop off all watchlists) and restore all links. I predict [at least half](http://predictionbook.com/predictions/6586) will not be restored and certainly not [more than 90%](http://predictionbook.com/predictions/6585).
+- After the last of the 100 links have been removed, I will wait 1 month (long enough for the edit to drop off all watchlists and reversion rates become close to nonexistent[^month]) and restore all links. I predict [at least half](http://predictionbook.com/predictions/6586) will not be restored and certainly not [more than 90%](http://predictionbook.com/predictions/6585).
 
 [^random]: Someone might object that picking the last link in an External Link section is not random at all. I am reminded of an anecdote describing a court case involving the draft back in Vietnam, where the plaintiff's lawyer argued that the little cage and balls method was not random and was unfair because the balls on top were much more likely to be selected. The judge asked, "Unfair to *whom*?"
 
     As well, this methodology, while being quite as random as most methods, carries the usual advantages of determinism: anyone will be able to check whether I did in fact remove only last links which are not official or template-generated in External Link sections. This is evidence that I did not simply [cherry pick](!Wikipedia "Cherry picking (fallacy)") the links that I thought were worst and so least likely to be restored.
 
     (If I were going to cherry pick under this procedure, I would have had to invest a great deal more effort: for each removal, I would have to find *multiple* candidates each of which satisfied the criteria and only then could I pick the worst final link; and then I would have to start over for the *next* removal, and since I had to check ~10 random articles for a possible final link, this implies for every removal, I'd be looking at something like 40+ random articles to do one removal or 200+ random articles a day! And this deception would have to be deliberate & planned - while most cases of bias are unconscious.)
+[^month]: Some editors pride themselves on detecting vandalism weeks or months after creation; they are highly unusual. When I was spending time reading academic publications on Wikipedia a few years ago, a number of them dealt with quantifying vandalism and reversions; almost all vandalism was reverted within days, and reversions which took longer than a month were very rare (0-10%, to be very generous). This was why I chose to wait a month, because waiting longer added nothing. A week would have been adequate.
+
+    Relevant research on quantify reversion rates over time:
+
+    - ["Creating, Destroying, and Restoring Value in Wikipedia"](ftp://193.206.140.34/mirrors/epics-at-lnl/WikiDumps/localhost/group282-priedhorsky.pdf), Priedhorsky et al 2007
+    - ["Measuring Wikipedia"](http://eprints.rclis.org/bitstream/10760/6207/1/MeasuringWikipedia2005.pdf), Voss 2005
+    - ["Studying Cooperation and Conflict between Authors with history flow Visualizations"](http://alumni.media.mit.edu/~fviegas/papers/history_flow.pdf), Viégas et al 2003
+    - ["Detecting Wikipedia vandalism via spatio-temporal analysis of revision metadata?"](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1963&context=cis_reports), West 2010
+    - ["User Contribution and Trust in Wikipedia"](http://www.ics.uci.edu/~sjavanma/CollabCom), Javanmardi et al
+    - ["He says, she says: conflict and coordination in Wikipedia"](http://nguyendangbinh.org/Proceedings/CHI/2007/docs/p453.pdf), Kittur et al 2007
 
 The full list of URL diffs is [available as an appendix](#link-removals).
 
@@ -258,6 +270,8 @@ After finishing the link removals, I briefly looked over the edits contribution 
 I was also struck during the process of going through `Special:Random` by how many 'External Links' sections have been, in wretched subterfuges, renamed 'Sources', 'References', 'Further reading', or the article has a long References section stuffed with external links which are used once; perhaps editors collectively know that putting a link into a section named 'External Links' is painting a cross-hair on its forehead. Too, I was struck by the general quality of the links: of the 100, I would have assented to the removal of no more than 5 (10 at the most). In general, articles err far on the side of including too few external links rather than too many.
 
 How many readers were affected by my experiment over the course of the month of waiting? Feel free to estimate or give a range - 1,000 or 10,000 or maybe 100,000 readers? The articles are randomly picked, so it seems highly unlikely that there is significant overlap. But my best estimate, based on `stats.grok.se` data for the 100 articles' traffic in March 2012, is that somewhere around >~335,000 readers were affected[^removal-readership].
+
+How many editors were affected? The 100 articles edited were watchlisted by a median of [5 editors](http://lists.wikimedia.org/pipermail/wikien-l/2012-May/110269.html) each; unfortunately, in lieu of technologies like Patrolled Revisions, we cannot estimate how many times each edit was checked by a human (as many of those editors no doubt are inactive or do not monitor their watchlist closely).
 
 [^removal-readership]: It's not hard to estimate. Take the list of 100 diffs, and use an editor macro or a shell tool like `sed` to strip it down to a list of URL-encoded article names like so:
 
