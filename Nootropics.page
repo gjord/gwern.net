@@ -299,15 +299,19 @@ More worrisome is recent trends in the developed world. Uniodized salt or low-io
 
     See also Caldwell KL, Jones R, Hollowell JG. [Urinary iodine concentration: United States National Health And Nutrition Examination Survey 2001-2002](http://www.ncbi.nlm.nih.gov/pubmed/16053386). Thyroid. 2005 Jul;15(7):692-9.
 
-Given all this, one naturally wonders what the effect might be in older humans. I currently know of 2 relevant studies:
+Given all this, one naturally wonders what the effect might be in older humans: elementary school age and above. I currently know of these relevant studies:
 
-1. ["Dietary intake and micronutrient status of adolescents: effect of vitamin and trace element supplementation on indices of status and performance in tests of verbal and non-verbal intelligence"](http://www.idpas.org/pdf/084DietaryIntakeAndMicronutrientStatus.pdf), Southon et al 1994: 13-15 year olds with a multivitamin of things including iodine (0.15mg); no effect on IQ test
-2. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years") 0.15mg daily with apparent null result
-3. ["Supplementary iodine fails to reverse hypothyroidism in adolescents and adults with endemic cretinism"](http://www.ncbi.nlm.nih.gov/pubmed/2153694), Boyages et al 1990; 28 Chinese aged 14-52, severely deficient, with no effect on the "Hiskey Nebraska Test of Learning Aptitude" or the "Griffiths Mental Development Scales"
+1. ["Supplementary iodine fails to reverse hypothyroidism in adolescents and adults with endemic cretinism"](http://www.ncbi.nlm.nih.gov/pubmed/2153694), Boyages et al 1990; 28 Chinese aged 14-52, severely deficient, with no effect on the "Hiskey Nebraska Test of Learning Aptitude" or the "Griffiths Mental Development Scales"
+2. ["Controlled trial of vitamin-mineral supplementation: Effects of intelligence and performance "](/docs/1991-schoenthaler.pdf), Schoenthaler et al 1991; multivitamin with 0.075mg iodine, IQ gain in the 8th and 10th graders
+3. ["Dietary intake and micronutrient status of adolescents: effect of vitamin and trace element supplementation on indices of status and performance in tests of verbal and non-verbal intelligence"](http://www.idpas.org/pdf/084DietaryIntakeAndMicronutrientStatus.pdf), Southon et al 1994: 13-15 year olds with a multivitamin of things including iodine (0.15mg); no effect on IQ test
+4. ["Cognitive and motor functions of iodine-deficient but euthyroid children in Bangladesh do not benefit from iodized poppy seed oil (Lipiodol)"](http://jn.nutrition.org/content/131/1/72.full.pdf), Huda et al 2001: 1st and 2nd grade children, ~1mg?
+5. ["Influence of supplementary vitamins, minerals and essential fatty acids on the antisocial behaviour of young adult prisoners"](http://bjp.rcpsych.org/content/181/1/22.long), Gesch et al 2002: over 18 prisoners, 0.14mg
+6. ["Effect of multivitamin and multimineral supplementation on cognitive function in men and women aged 65 years and over: a randomised controlled trial"](http://www.nutritionj.com/content/pdf/1475-2891-6-10.pdf), McNeill et al 2007; old adults, 0.15mg
+7. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years"), 0.15mg
 
-What implications do these 3 have?
+Unfortunately, some of these studies test a variety of substances, so any estimate of iodine's effect size (such as it is) would be an overestimate: the iodine might be synergizing with one of the other ingredients (eg. [selenium](!Wikipedia)) or the iodine might not be the responsible agent at all! But what implications can we draw out?
 
-<!-- TODO: when have full text of 2 & 3, maybe do a meta-analysis to nail down how small the effect size would have to be -->
+<!-- TODO: when have full text of Fitzgerald 2012 & Boyages 1990, maybe do a meta-analysis to nail down how small the effect size would have to be -->
 
 ## Power analysis
 
@@ -326,7 +330,7 @@ But Fitzgerald 2012 is better, and gives a number of useful details on her adult
 
 > Participants (_n_=205) [young adults aged 18-30 years] were recruited between July 2010 and January 2011, and were randomized to receive either a daily 150 µg (0.15mg) iodine supplement or daily placebo supplement for 32 weeks...After adjusting for baseline cognitive test score, examiner, age, sex, income, and ethnicity, iodine supplementation did not significantly predict 32 week cognitive test scores for Block Design (_p_=0.385), Digit Span Backward (_p_=0.474), Matrix Reasoning (_p_=0.885), Symbol Search (_p_=0.844), Visual Puzzles (_p_=0.675), Coding (_p_=0.858), and Letter-Number Sequencing (_p_=0.408).
 
-Full text isn't available although some of the _p_-values suggest that there might be differences which didn't reach significance<!-- TODO: check whether this is true with the means of the iodine group being higher, or whether the control group was winning -->, so to estimate an upper bound on what sort of effect-size we're dealing with:
+Full text isn't available although some of the _p_-values suggest that there might be differences which didn't reach significance<!-- TODO: with full text, check whether this is true with the means of the iodine group being higher, or whether the control group was winning -->, so to estimate an upper bound on what sort of effect-size we're dealing with:
 
 ~~~{.R}
 > pwr.t.test(type="two.sample",power=0.75,alternative="greater",n=102)
