@@ -333,7 +333,11 @@ None of the commenters rose to my bait of estimating what the revision rate *sho
     - <http://en.wikipedia.org/w/index.php?title=Ann_Devroy&diff=next&oldid=489015693>
     - <http://en.wikipedia.org/w/index.php?title=John_Frederick_Peel_Rawlinson&diff=next&oldid=489169129>
 
-3% is far worse than I had predicted. This leads to one conclusion: *external links are highly vulnerable to deletionism*.
+3% is far worse than I had predicted, and statistically suggests that the true rate is no higher than 7%[^removal-analysis]. This leads to one conclusion: *external links are highly vulnerable to deletionism*.
+
+[^removal-analysis]: Since no one noticed the 100 removals were connected, we can assume each removal was statistically independent; this lets us calculate a [binomial proportion confidence interval](!Wikipedia). Specifically, with 3 successes and 100 samples, the 99% [confidence interval](!Wikipedia) is 0-7%. We can derive this from [Wolfram Alpha](http://www.wolframalpha.com/input/?i=binomial+distribution+confidence+interval&f1=0.99&f=BinomialInterval.c_0.99&f2=100&f=BinomialInterval.n_100&f3=0.03&x=2&y=3&f=BinomialInterval.phat_0.03&a=*FVarOpt.1-_***BinomialInterval.phat--.***BinomialInterval.x---.*--) or one's favorite statistical package if one doesn't want to crunch the formula oneself.
+
+    (Incidentally, Wikipedia has 3,960,143 as of 1 June 2012 according to [Special:Statistics](!Wikipedia), and I went through perhaps 10 pages for each removal, so the total possible sample size is ~396,014. That 100 samples can give such a good estimate - as long as they are independent - is the same magic that makes things like [opinion poll](!Wikipedia)s work; at least, as a child I found it magical that a sample of just 1000 voters could predict so accurately the election results in a population of 300 million people.)
 
 #### Tallying the Damage
 ##### _Ignoti, sed non occulti_
