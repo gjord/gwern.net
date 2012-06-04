@@ -1247,7 +1247,7 @@ Going through them, I must note:
     > ...This raises the possibility that the relative gains in Gf in the training versus control groups may be to some extent an artefact of baseline differences. However, the interactive effect of transfer as a function of group remained significant even after more closely matching the training and control groups for pre-training RPM scores (by removing the highest scoring controls) F(1, 30) = 3.66, P = 0.032, gp2 = 0.10. The adjusted means (standard deviations) for the control and training groups were now 27.20 (1.93), 26.63 (2.60) at pre-training (t(43) = 1.29, P.0.05) and 26.50 (4.50), 27.07 (2.16) at post-training, respectively.
 - Stephenson data from pg79/95; means are post-scores on Raven's, pooling of 3 n-back groups[^Stephenson-2010-pool] and split, control groups kept separate
 
-    The splitting is worth discussion. Some of these studies have multiple experimental groups, control groups, or both. A criticism of early studies was the use of no-contact control groups - the control groups did nothing except be tested twice, and it was suggested that the experimental group gains might be in part solely because they are doing a task, any task, and the control group should be doing some non-WM task as well. The WM meta-analysis Melby-Lervåg & Hulme 2012 checked for this and found that use of no-contact control groups led to a much larger estimate of effect size than studies which did use an active control. When trying to incorporate such a multi-part experiment, one cannot just copy controls as the [Cochrane Handbook](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_16/16_5_4_how_to_include_multiple_groups_from_one_study.htm) points out:
+    The splitting is worth discussion. Some of these studies have multiple experimental groups, control groups, or both. A criticism of early studies was the use of no-contact control groups - the control groups did nothing except be tested twice, and it was suggested that the experimental group gains might be in part solely because they are doing a task, any task, and the control group should be doing some non-WM task as well. The WM meta-analysis Melby-Lervåg & Hulme 2012 checked for this and found that use of no-contact control groups led to a much larger estimate of effect size than studies which did use an active control. When trying to incorporate such a multi-part experiment, one cannot just copy controls as the [Cochrane Handbook](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_16/16_5_4_how_to_include_multiple_groups_from_one_study.htm "16.5.4  How to include multiple groups from one study") points out:
 
     > One approach that must be avoided is simply to enter several comparisons into the meta-analysis when these have one or more intervention groups in common. This ‘double-counts’ the participants in the ‘shared’ intervention group(s), and creates a unit-of-analysis error due to the unaddressed correlation between the estimated intervention effects from multiple comparisons (see Chapter 9, Section 9.3).
 
@@ -1323,13 +1323,13 @@ The data from the surviving studies:
 "Chooi.2"      2011   5.5  12.235    2.486  11    13.4    2.7    1
 "Chooi.3"      2011   5.5  12.235    2.486  22    11.3    2.59   0
 "Chooi.4"      2011   5.5  12.235    2.486  23    11.9    2.64   0
-"Schweizer"    2011   29   27.07     2.16   16    26.5    4.5    1
-"Kundu1"       2011   3    31        1.73   3     30.3    4.51   1
 "Jaeggi4"      2012   51   15.097    2.56   27    14.74   2.8    1
+"Kundu1"       2011   3    31        1.73   3     30.3    4.51   1
+"Schweizer"    2011   29   27.07     2.16   16    26.5    4.5    1
 "Jaušovec"     2012   14   32.43     5.65   15    29.2    6.34   1
+"Kundu2"       2012   11   10.81     2.32   12    9.5     2.02   1
 "Redick.1"     2012   12   6.25      3.08   20    6       3      0
 "Redick.2"     2012   12   6.25      3.08   29    6.24    3.34   1
-"Kundu2"       2012   11   10.81     2.32   12    9.5     2.02   1
 ~~~
 
 The result of the meta-analysis:
@@ -1338,7 +1338,7 @@ The result of the meta-analysis:
 install.packages("meta", depend = TRUE)
 library(meta)
 dnb <- read.table("dnb.txt", header=TRUE)
-> metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control)
+metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control)
        SMD             95%-CI %W(fixed) %W(random)
 1   0.3633  [-0.1128; 0.8393]     10.84       7.38
 2   1.2494  [ 0.2740; 2.2248]      2.58       4.75
@@ -1390,6 +1390,8 @@ Test for subgroup differences (random effects model):
                     Q d.f.  p.value
 Between groups   2.33    1   0.1272
 ~~~
+
+The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect. The studies are quite different. This heterogeneity also shows up as a high τ^2^ and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 72%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.58 (!) and some instances of _d_<=0.
 
 ### Biases
 
