@@ -303,8 +303,8 @@ Given all this, one naturally wonders what the effect might be in older humans: 
 
 1. ["Supplementary iodine fails to reverse hypothyroidism in adolescents and adults with endemic cretinism"](/docs/1990-boyages.pdf), Boyages et al 1990; 28 Chinese aged 14-52, severely deficient, with no gains on the "Hiskey Nebraska Test of Learning Aptitude" or the "Griffiths Mental Development Scales" - no effect
 2. ["Controlled trial of vitamin-mineral supplementation: Effects of intelligence and performance "](/docs/1991-schoenthaler.pdf), Schoenthaler et al 1991; multivitamin with 0.075mg iodine, IQ gain in the 8th and 10th graders - beneficial effect
-3. ["Neurological damage to the fetus resulting from severe iodine deficiency during pregnancy"](/docs/1971-pharoah.pdf), Pharoah et al 1971; ["Fetal iodine deficiency and motor performance during childhood"](/docs/1979-connolly.pdf), Connolly et al 1979; 1966 Papua New Guinea trial which in 1972 began supplementing the control group as well (who were now 0-6 years old); at the 1982 followup, the control group still suffered cretinism and deficits compared to the experimental - no effect
-4. Pharoah 1993: a 1966 Peru trial; females (<45 years old) and males (<18 years old); experimental infants did not outperform control infants - no effect
+3. ["The effect of iodine prophylaxis on the incidence of endemic cretinism"](/docs/1972-pharoah.pdf), Pharoah et al 1972; ["Neurological damage to the fetus resulting from severe iodine deficiency during pregnancy"](/docs/1971-pharoah.pdf), Pharoah et al 1971; ["Fetal iodine deficiency and motor performance during childhood"](/docs/1979-connolly.pdf), Connolly et al 1979; ["A controlled trial of iodinated oil for the prevention of endemic cretinism: a long-term follow-up"](/docs/1987-pharoah.pdf), Pharoah & Connolly 1987; a 1966 Papua New Guinea trial which in 1972 began supplementing the control group as well (who were now 0-6 years old); at the 1982 followup, the control group still suffered cretinism and deficits compared to the experimental - no effect
+4. ["Prophylaxis of endemic goiter with iodized oil in rural Peru"](/docs/1972-pretell.pdf), Pretell et al 1972: a 1966 Peru trial; females (<45 years old) and males (<18 years old); experimental infants did not outperform control infants - no effect
 5. ["The effects of oral iodized oil on intelligence, thyroid status, and somatic growth in school-age children from an area of endemic goiter"](http://www.ajcn.org/content/35/1/127.full.pdf), Bautista et al. A 1982 Bolivia trial; 200 schoolchildren measuring IQ - no effect
 6. ["Dietary intake and micronutrient status of adolescents: effect of vitamin and trace element supplementation on indices of status and performance in tests of verbal and non-verbal intelligence"](http://www.idpas.org/pdf/084DietaryIntakeAndMicronutrientStatus.pdf), Southon et al 1994: 13-15 year olds with a multivitamin of things including iodine (0.15mg); no effect on IQ test
 7. ["Cognitive and motor functions of iodine-deficient but euthyroid children in Bangladesh do not benefit from iodized poppy seed oil (Lipiodol)"](http://jn.nutrition.org/content/131/1/72.full.pdf), Huda et al 2001: 1st and 2nd grade children, ~1mg? no effect
@@ -355,7 +355,7 @@ This is a much tighter upper bound than Southon et al 1994 gave us, and also kin
               n = 52.03677
 ~~~
 
-We'd want 53 pairs, but Fitzgerald 2012's experimental design called for 32 weeks of supplementation for a single pair of before-after tests - so that'd be 1664 weeks or ~54 months or *~4.5 years*!
+We'd want 53 pairs, but Fitzgerald 2012's experimental design called for 32 weeks of supplementation for a single pair of before-after tests - so that'd be 1664 weeks or ~54 months or *~4.5 years*! We can try to adjust it downwards with shorter blocks allowing more frequent testing; but problematically, iodine is stored in the thyroid and can apparently linger elsewhere - many of the cited studies used injections of iodized oil (as opposed to iodized salt or kelp supplements) because this ensured an adequate supply for months or years with no further compliance by the subjects. If the effects are that long-lasting, it may be worthless to try shorter blocks than ~32 weeks.
 
 ## VoI
 
@@ -498,8 +498,12 @@ The methodology would be essentially the same as the [vitamin D in the morning](
    2. 20 May - 27: placebo
 2. second pair
 
-    1. first block started and pill taken: 29 May - 4 June?
-    2. 5 June? - 12 June?
+    1. first block started and pill taken: 29 May - 4 June
+    2. second block: 5 June - 12 June?
+3. third pair
+
+    1. first block: 13 June? - 20 June?
+    2. second block: 21 June? - 28 June?
 -->
 
 The principal metric would be 'mood', however defined. Zeo's web interface & data export includes a field for 'Day Feel', which is a rating 1-5 of general mood & quality of day. I could record this at the end of the day. 1-5 might be a little crude even with a year of data, so a more sophisticated measure might be in order. The first mood study is paywalled so I'm not sure what they used, but Shiotsuki 2008 used [State-Trait of Anxiety Inventory](!Wikipedia) (STAI) and [Profiles of Mood States](!Wikipedia) Test (POMS). The [full POMS](http://www.cyberpediatria.com/profile_moodStates.pdf) sounds too long to use daily, but the [Brief POMS](/docs/1987-cella.pdf "A brief POMS measure of distress for cancer patients") might work: items are ranked 0-4 and it's just a few items drawn from the full POMS:
