@@ -353,12 +353,12 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     >
     > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant."
 
-As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes, effect size 0.37^[`(456.4783 -  407.5312) / sd(mydata$Total.Z, TRUE)` = 0.3723188]):
+As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes, [effect size](!Wikipedia) 0.37^[`(456.4783 -  407.5312) / sd(mydata$Total.Z, TRUE)` = 0.3723188]):
 
 ![](/images/zeo/melatonin-totalz.png)
 ![](/images/zeo/melatonin-timeswoken.png)
 
-The calculated effect size is a little worrisome; at a somewhat subtle _d_=0.37, power calculations indicate that we're close to the limit of what the data can reliably tell us[^R-melatonin-power]. Part of the problem is that too many days wound up being useless, and each day costs us information and reduces our *true* sample size.
+The calculated effect size is a little worrisome; at a somewhat subtle _d_=0.37, power calculations indicate that we're close to the limit of what the data can reliably tell us[^R-melatonin-power]. (Effect size is as important as significance values and in many contexts, more important, as it measures how strong the phenomenon is. A mnemonic: _p_-values are about whether the effect exists, and _d_-values are whether we care. For a visualization of effect sizes, see ["Windowpane as a Jar of Marbles"](http://healthyinfluence.com/wordpress/steves-primer-of-practical-persuasion-3-0/intro/windowpane/).) Part of the problem is that too many days wound up being useless, and each day costs us information and reduces our *true* sample size.
 
 [^R-melatonin-power]: One weakness is that I didn't randomize selection of melatonin or no-melatonin, instead doing an alternating days design and not always following that But if we were to wave that away, the power seems.. OK. I have something like 141 days of data, of which around 90-100 is usable, giving me maybe <50 pairs? If I fire up R and load in the two means and the standard deviation (which we know from calculating the effect size), and then play with the numbers, then to get an 85% chance I could find an effect at _p_=0.01:
 
@@ -1664,7 +1664,10 @@ May 2012
 31: on
 June 2012
 1: on
-2:
+2: on
+3: off
+4: off
+5: off
 -->
 
 ## Meditation
@@ -1742,7 +1745,10 @@ May 2012
 31: off
 June 2012
 1: off
-2:
+2: off
+3: on
+4: on
+5: off
 -->
 
 ## Masturbation
@@ -1772,7 +1778,10 @@ May 2012
 31: on
 June 2012
 1: off
-2:
+2: off
+3: on
+4: off
+5: on?
 -->
 
 # Conclusions
@@ -1814,3 +1823,6 @@ This is what I have learned:
 <!-- Redshift: 31 May 2012: off -->
 <!-- Redshift: 01 Jun 2012: on -->
 <!-- Redshift: 02 Jun 2012: off -->
+<!-- Redshift: 03 Jun 2012: on -->
+<!-- Redshift: 04 Jun 2012: on -->
+<!-- Redshift: 05 Jun 2012: off -->
