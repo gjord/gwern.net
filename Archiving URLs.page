@@ -164,6 +164,8 @@ Sometimes a particular website is of long-term interest to one even if one has n
 nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org | fgrep http | fgrep -v -e "label=" -e "->" -e '" [' -e '" ]' -e "/ " | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //" | filter-urls | sort --unique >> ~/.urls.txt
 ~~~
 
+When `linkchecker` does not work, one alternative is to do a `wget --mirror` and extract the URLs from the filenames - list all the files and prefix with a "http://" etc.
+
 # Reacting to broken links
 
 `archiver` combined with a tool like `link-checker` means that there will rarely be any broken links on `gwern.net` since one can either find a live link or use the archived version. In theory, one has multiple options now:
@@ -177,6 +179,15 @@ nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://w
     If it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert the dump into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.)
 
     I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
+
+# External links
+
+- [Archive-It](http://www.archive-it.org/), Internet Archive
+- [Pinboard](http://pinboard.in/)
+
+    - ["Bookmark Archives That Don't"](http://blog.pinboard.in/2010/11/bookmark_archives_that_don_t/)
+- ["Testing 3 million hyperlinks, lessons learned"](http://samsaffron.com/archive/2012/06/07/testing-3-million-hyperlinks-lessons-learned#comment-31366), Stack Exchange
+- ["Backup All The Things"](http://muflax.com/software/backup/), muflax
 
 # Appendices
 ## `filter-urls`
