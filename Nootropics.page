@@ -299,34 +299,134 @@ More worrisome is recent trends in the developed world. Uniodized salt or low-io
 
     See also Caldwell KL, Jones R, Hollowell JG. [Urinary iodine concentration: United States National Health And Nutrition Examination Survey 2001-2002](http://www.ncbi.nlm.nih.gov/pubmed/16053386). Thyroid. 2005 Jul;15(7):692-9.
 
+## Meta-analysis
+
 Given all this, one naturally wonders what the effect might be in older humans: elementary school age and above. I currently know of these studies involving post-birth effects:
 
-1. ["Neurological damage to the fetus resulting from severe iodine deficiency during pregnancy"](/docs/1971-pharoah.pdf), Pharoah et al 1971; ["The effect of iodine prophylaxis on the incidence of endemic cretinism"](/docs/1972-pharoah.pdf), Pharoah et al 1972; ["Fetal iodine deficiency and motor performance during childhood"](/docs/1979-connolly.pdf), Connolly et al 1979; ["A controlled trial of iodinated oil for the prevention of endemic cretinism: a long-term follow-up"](/docs/1987-pharoah.pdf), Pharoah & Connolly 1987; a 1966 Papua New Guinea trial which in 1972 began supplementing the control group as well (who were now 0-6 years old); at the 1982 followup, the control group still suffered cretinism and deficits compared to the experimental - no effect
-2. ["Prophylaxis of endemic goiter with iodized oil in rural Peru"](/docs/1972-pretell.pdf), Pretell et al 1972; ["Iodine deficiency and the maternal-fetal relationship"](/docs/1974-pretell.pdf), Pretell et al 1974: a 1966 Peru trial; females (<45 years old) and males (<18 years old); experimental infants did not outperform control infants - no effect
+1. ["Neurological damage to the fetus resulting from severe iodine deficiency during pregnancy"](/docs/1971-pharoah.pdf), Pharoah et al 1971; ["The effect of iodine prophylaxis on the incidence of endemic cretinism"](/docs/1972-pharoah.pdf), Pharoah et al 1972; ["Fetal iodine deficiency and motor performance during childhood"](/docs/1979-connolly.pdf), Connolly et al 1979; ["A controlled trial of iodinated oil for the prevention of endemic cretinism: a long-term follow-up"](/docs/1987-pharoah.pdf), Pharoah & Connolly 1987; a 1966 Papua New Guinea trial which in 1972 began supplementing the control group as well (who were now 0-6 years old); at the 1982 followup, the control group still suffered cretinism and deficits compared to the experimental - no effect. These studies turn out to not test the adults or children born before iodization and so are not useful for our purpose.
+2. ["Prophylaxis of endemic goiter with iodized oil in rural Peru"](/docs/1972-pretell.pdf), Pretell et al 1972; ["Iodine deficiency and the maternal-fetal relationship"](/docs/1974-pretell.pdf), Pretell et al 1974: a 1966 Peru trial; females (<45 years old) and males (<18 years old); experimental infants did not outperform control infants - no effect. These studies turn out to not test the adults or children born before iodization and so are not useful for our purpose.
 3. ["The effects of oral iodized oil on intelligence, thyroid status, and somatic growth in school-age children from an area of endemic goiter"](http://www.ajcn.org/content/35/1/127.full.pdf), Bautista et al. A 1982 Bolivia trial; 200 schoolchildren measuring IQ - no effect
 4. ["Supplementary iodine fails to reverse hypothyroidism in adolescents and adults with endemic cretinism"](/docs/1990-boyages.pdf), Boyages et al 1990; 28 Chinese aged 14-52, severely deficient, with no gains on the "Hiskey Nebraska Test of Learning Aptitude" or the "Griffiths Mental Development Scales" - no effect
 5. ["Controlled trial of vitamin-mineral supplementation: Effects of intelligence and performance "](/docs/1991-schoenthaler.pdf), Schoenthaler et al 1991; multivitamin with 0.075mg iodine, IQ gain in the 8th and 10th graders - beneficial effect
 6. ["Timing of Vulnerability of the Brain to Iodine Deficiency in Endemic Cretinism"](http://www.nejm.org/doi/pdf/10.1056/NEJM199412293312603), Cao et al 1994: 689 children 0-3 years of age, minimal effect in the children
 7. ["Dietary intake and micronutrient status of adolescents: effect of vitamin and trace element supplementation on indices of status and performance in tests of verbal and non-verbal intelligence"](http://www.idpas.org/pdf/084DietaryIntakeAndMicronutrientStatus.pdf), Southon et al 1994: 13-15 year olds with a multivitamin of things including iodine (0.15mg); no effect on IQ test
 8. ["Cognitive and motor functions of iodine-deficient but euthyroid children in Bangladesh do not benefit from iodized poppy seed oil (Lipiodol)"](http://jn.nutrition.org/content/131/1/72.full.pdf), Huda et al 2001: 1st and 2nd grade children, ~1mg? no effect
-9. ["Influence of supplementary vitamins, minerals and essential fatty acids on the antisocial behaviour of young adult prisoners"](http://bjp.rcpsych.org/content/181/1/22.long), Gesch et al 2002: over 18 prisoners, 0.14mg; beneficial effect
+9. ["Influence of supplementary vitamins, minerals and essential fatty acids on the antisocial behaviour of young adult prisoners"](http://bjp.rcpsych.org/content/181/1/22.long), Gesch et al 2002: over 18 prisoners, 0.14mg; beneficial effect on measures of violence, but they did not do an intelligence retest and so are not useful for our purpose.
 10. ["Effect of multivitamin and multimineral supplementation on cognitive function in men and women aged 65 years and over: a randomised controlled trial"](http://www.nutritionj.com/content/pdf/1475-2891-6-10.pdf), McNeill et al 2007; old adults, 0.15mg; no effect
-11. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years"), 0.15mg; no effect <!-- TODO: full text!-->
+11. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years"), 0.15mg; no effect. I have not obtained the relevant data yet. <!-- TODO emailed Fitzgerald -->
 
 Unfortunately, some of these studies test a variety of substances, so any estimate of iodine's effect size (such as it is) would be an overestimate: the iodine might be synergizing with one of the other ingredients (eg. [selenium](!Wikipedia)) or the iodine might not be the responsible agent at all! But what implications can we draw out via a [meta-analysis](!Wikipedia)?
 
 The data from the surviving studies:
 
 ~~~{.R}
-"study"       "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c"
-"Pharoah1"     1972
-
+"study"        "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "age"
+"Bautista"     1982   100   69.43    10.96  100   70.31    10.96  0
+"Boyages"      1990   28    34.4     15.4   24    29.5     8.5    1
+"Schoenthaler" 1991   310   11.05    8.12   100   8.9      7.3    1
+"Cao"          1994   183   79.5     8.98   37    75       18     0
+"Southon"      1994   22    63.94    2.6    29    64.1     1.87   1
+"Huda"         2001   145   14.88    3.28   142   14.60    3.19   0
+"McNeill"      2007   398   11.5     2.3    374   11.7     2.1    1
 ~~~
+
+0. "age" variable is coded as:
+
+    - 0: age 0-12
+    - 1: age 13+
+1. Bautista notes: Stanford-Binet IQ, some data re-derived[^Bautista-reverse-engineering]
+2. Boyages: the two groups were not randomly chosen and may have pre-existing differences in IQ
+3. Schoenthaler: RAPM IQ; experimental scores pooled[^Schoenthaler-pooling]
+4. Cao: "developmental quotient" used, not an IQ; post-birth scores pooled[^Cao-pooling]
+5. Southon: Non-verbal IQ scores pooled[^Southon-pooling]
+6. McNeill: [Digit span](!Wikipedia)
+
+[^Bautista-reverse-engineering]: Bautista did not report standard deviations, but did report _n_s, means, and _p_-values, which permits the standard deviation to be derived, following the _Cochrane Handbook_ (["7.7.3.3 Obtaining standard deviations from standard errors, confidence intervals, t values and P values for differences in means"](http://www.cochrane.org/handbook/7733-obtaining-standard-deviations-standard-errors-confidence-intervals-t-values-and-p-valu)): the degrees of freedom = 198, so with a reported _p_=0.57, _t_=0.569; then the standard error is the means divided by the t value ($\frac{70.31 - 69.43}{0.569}$); and finally the standard deviation: $\frac{1.55}{sqrt(\frac{1}{100} + \frac{1}{100})} = 10.96$.
+[^Schoenthaler-pooling]: Schoenthaler reported the experimental group as 3 groups, by dose level
+
+    1. $n = 100 + 105 + 105 = 310$
+    2. mean: $\frac{10.1 \times 100 + 12.6 \times 105 + 10.4 \times 105}{310} = 11.05$
+    3. standard deviation: $\frac{((100-1) \times 8.9) + ((105-1) \times 7.9) + ((105-1) \times 7.6)}{100 + 105 + 105 - 3} = 8.12$
+[^Cao-pooling]: Cao reported experimental scores split into 2 groups, "birth to 3 months" & "3 months to 12 months":
+
+    1. $n = 90 + 93 = 183$
+    2. mean: $\frac{90 \times 79 + 93 \times 80}{90 + 93} = 79.5$
+    3. standard deviation: $\frac{((90-1) \times 10) + ((93-1) \times 8)}{90 + 93 - 2} = 8.98$
+[^Southon-pooling]: Southon reported control & experimental scores split by gender, which need to be re-pooled:
+
+    - control
+
+        1. $n = 9 + 20 = 29$
+        2. mean = $\frac{(60.6 \times 9) + (65.6 \times 20)}{9 + 20} = 64.1$
+        3. standard deviation = $\frac{((9-1) \times 2.3) + ((20-1) \times 1.7)}{9 + 20 - 2} =  1.87$
+
+    - active
+
+        1. $n = 10 + 12 = 22$
+        2. mean = $\frac{(10 \times 63.4) + (12 \times 64.4)}{10 + 12} = 63.94$
+        3. standard deviation = $\frac{((10-1) \times 2.6) + ((12-1) \times 2.6)}{10 + 12 - 2} = 2.6$
 
 The result of the meta-analysis:
 
-Unfortunately, some of these studies test a variety of substances, so any estimate of iodine's effect size (such as it is) would be an overestimate: the iodine might be synergizing with one of the other ingredients (eg. [selenium](!Wikipedia)) or the iodine might not be the responsible agent at all! But what implications can we draw out?
+~~~{.R}
+install.packages("meta", depend=TRUE)
+library(meta)
+dnb <- read.table("iodine.txt", header=TRUE)
+metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD", byvar=age)
+      SMD             95%-CI %W(fixed) %W(random)
+1 -0.0800  [-0.3573; 0.1973]     11.23      15.45
+2  0.3800  [-0.1705; 0.9305]      2.85       6.60
+3  0.2707  [ 0.0445; 0.4968]     16.88      18.23
+4  0.4080  [ 0.0526; 0.7634]      6.84      11.95
+5 -0.0712  [-0.6255; 0.4831]      2.81       6.53
+6  0.0863  [-0.1452; 0.3178]     16.11      17.92
+7 -0.0906  [-0.2318; 0.0506]     43.29      23.32
 
+Number of studies combined: k=7
+
+                        SMD            95%-CI      z  p.value
+Fixed effect model   0.0481  [-0.0448; 0.141] 1.0146   0.3103
+Random effects model 0.1005  [-0.0609; 0.262] 1.2202   0.2224
+
+Quantifying heterogeneity:
+tau^2 = 0.0239; H = 1.52 [1; 2.32]; I^2 = 56.7% [0%; 81.4%]
+
+Results for subgroups (fixed effect model):
+          k    SMD             95%-CI    Q    tau^2   I^2
+age = 0   3 0.0960  [-0.0629; 0.2550] 4.51   0.0263 55.7%
+age = 1   4 0.0232  [-0.0913; 0.1377] 8.82   0.0399   66%
+
+Test for subgroup differences (fixed effect model):
+                   Q d.f.  p.value
+Between groups  0.53    1   0.4666
+Within groups  13.33    5   0.0205
+~~~
+
+So the effect size is, as expected, very small: _d_=0.04 or _d_=0.1. (The age variable suggests some weakening of the effect in older subjects, as one would predict.)
+
+A pretty [forest plot](!Wikipedia) summary:
+
+![A forest plot of iodine studies](/images/nootropics-iodine-forest.png)
+
+### Bias checks
+
+7 studies is too few to reliably check for biases like [publication bias](!Wikipedia), but we can still try. The [funnel plot](!Wikipedia) doesn't look terribly unbalanced, perhaps a bit too positive overall:
+
+![A funnel plot of effect size versus sample size, checking for bias in publishing only good-looking results on iodine](/images/nootropics-iodine-funnel.png)
+
+A trim and fill check tries to correct for this over positiveness by suggesting 2 studies with *negative* findings, which shrink the effect size even further to _d_=0.01:
+
+~~~{.R}
+> trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
+...
+Filled: 2 -0.3592  [-0.9097;  0.1913]      2.60       6.24
+Filled: 4 -0.3872  [-0.7426; -0.0318]      6.23      10.51
+Number of studies combined: k=9
+
+                        SMD             95%-CI      z  p.value
+Fixed effect model   0.0104  [-0.0783; 0.0991] 0.2295   0.8185
+Random effects model 0.0252  [-0.1394; 0.1899] 0.3005   0.7638
+~~~
 
 ## Power analysis
 
@@ -366,7 +466,19 @@ This is a much tighter upper bound than Southon et al 1994 gave us, and also kin
               n = 52.03677
 ~~~
 
-We'd want 53 pairs, but Fitzgerald 2012's experimental design called for 32 weeks of supplementation for a single pair of before-after tests - so that'd be 1664 weeks or ~54 months or *~4.5 years*! We can try to adjust it downwards with shorter blocks allowing more frequent testing; but problematically, iodine is stored in the thyroid and can apparently linger elsewhere - many of the cited studies used injections of iodized oil (as opposed to iodized salt or kelp supplements) because this ensured an adequate supply for months or years with no further compliance by the subjects. If the effects are that long-lasting, it may be worthless to try shorter blocks than ~32 weeks.
+We'd want 53 pairs, but Fitzgerald 2012's experimental design called for 32 weeks of supplementation for a single pair of before-after tests - so that'd be 1664 weeks or ~54 months or *~4.5 years*! We can try to adjust it downwards with shorter blocks allowing more frequent testing; but problematically, iodine is stored in the thyroid and can apparently linger elsewhere - many of the cited studies used intramuscular injections of iodized oil (as opposed to iodized salt or kelp supplements) because this ensured an adequate supply for months or years with no further compliance by the subjects. If the effects are that long-lasting, it may be worthless to try shorter blocks than ~32 weeks.
+
+We've looked at estimating based on individual studies. But we aggregated them into a meta-analysis more powerful than any of them, and it gave us a final estimate of _d_=~0.1. What does *that* imply?
+
+~~~{.R}
+> pwr.t.test(type="paired",d=0.1,power=0.75,alternative="greater")
+
+     Paired t test power calculation
+
+              n = 539.2906
+~~~
+
+540 pairs of tests or 1080 blocks... This game is not worth the candle!
 
 ## VoI
 
