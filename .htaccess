@@ -27,8 +27,6 @@ FileETag MTime
   ## the PDFs are likewise usually unchanging
   ExpiresByType application/pdf A4592000
 
-  Header set Cache-Control "public, must-revalidate"
-
 </ifModule>
 
 # https://members.nearlyfreespeech.net/forums/viewtopic.php?p=21798#21798
@@ -55,60 +53,3 @@ FileETag MTime
     RewriteCond   %{ENV:WasHTML}            ^yes$
     RewriteRule   ^(.*)$ $1.html
 </ifModule>
-
-# redirect URLs that people commonly misspell or outdated URLs
-RedirectPermanent "/2011 san francisco"                           "http://www.gwern.net/2011 San Francisco"
-RedirectPermanent "/Culture is not about esthetics"               "http://www.gwern.net/Culture is not about Esthetics"
-RedirectPermanent "/DeathNoteAnonymity"                           "http://www.gwern.net/Death Note Anonymity"
-RedirectPermanent "/Drug%2520heuristics"                          "http://www.gwern.net/Drug heuristics"
-RedirectPermanent "/In Defense of Inclusionism"                   "http://www.gwern.net/In%20Defense%20Of%20Inclusionism"
-RedirectPermanent "/Mnemosyne"                                    "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "/Mnemosyne.html"                               "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "/N-back FAQ"                                   "http://www.gwern.net/DNB FAQ"
-RedirectPermanent "/N-back FAQ.html"                              "http://www.gwern.net/DNB FAQ"
-RedirectPermanent "/N-back%20FAQ.html"                            "http://www.gwern.net/DNB%20FAQ"
-RedirectPermanent "/Silk ROad"                                    "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Silk Road]"                                   "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Silk%20Road"                                  "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Silk%20Road"                                  "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Silk%2520Road"                                "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Silk%2520Road"                                "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Silk+Road"                                    "http://www.gwern.net/Silk Road"
-RedirectPermanent "/SilkRoad"                                     "http://www.gwern.net/Silk Road"
-RedirectPermanent "/Slowing Moore&"                               "http://www.gwern.net/Slowing%20Moore%27s%20Law"
-RedirectPermanent "/Slowing%20Moore%E2%80%99s%20Law"              "http://www.gwern.net/Slowing%20Moore%27s%20Law"
-RedirectPermanent "/Slowing_Moore_s_Law"                          "http://www.gwern.net/Slowing%20Moore%27s%20Law"
-RedirectPermanent "/Spacedrepetition"                             "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "/The Value of One Bit"                         "http://www.gwern.net/Zen and the Art of Bicycle Maintenance"
-RedirectPermanent "/The%20Melancholy%20of%20Subculture%20Society" "http://www.gwern.net/The Melancholy of Subculture Society"
-RedirectPermanent "/Wikipedia and Dark side editing"              "http://www.gwern.net/Wikipedia and Dark Side Editing"
-RedirectPermanent "/about.html"                                   "http://www.gwern.net/About"
-RedirectPermanent "/cse"                                          "http://www.google.com/cse/home?cx=009114923999563836576:1eorkzz2gp4"
-RedirectPermanent "/dnb faq"                                      "http://www.gwern.net/DNB FAQ"
-RedirectPermanent "/docs/resume-info"                             "http://www.gwern.net"
-RedirectPermanent "/favicon.ico"                                  "http://www.gwern.net/static/img/favicon.ico"
-RedirectPermanent "/fiction/TheOnesWhoWalkTowardsAcre"            "http://www.gwern.net/fiction/The Ones Who Walk Towards Acre"
-RedirectPermanent "/haskell summer of code.html"                  "http://www.gwern.net/Haskell Summer of Code"
-RedirectPermanent "/haskell/Archiving%20GitHub.html"              "http://www.gwern.net/haskell/Archiving GitHub"
-RedirectPermanent "/haskell/WikipediaArchiveBot"                  "http://www.gwern.net/haskell/Wikipedia Archive Bot"
-RedirectPermanent "/homelessness"                                 "http://www.gwern.net"
-RedirectPermanent "/images/favicon.ico"                           "http://www.gwern.net/static/img/favicon.ico"
-RedirectPermanent "/log.txt"                                      "http://www.gwern.net"
-RedirectPermanent "/melatonin advocacy"                           "http://www.gwern.net/Melatonin"
-RedirectPermanent "/melatonin"                                    "http://www.gwern.net/Melatonin"
-RedirectPermanent "/melatonin.html"                               "http://www.gwern.net/Melatonin"
-RedirectPermanent "/mnemosyne"                                    "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "/mnemosyne.html"                               "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "/modafinil"                                    "http://www.gwern.net/Modafinil"
-RedirectPermanent "/modafinil.html"                               "http://www.gwern.net/Modafinil"
-RedirectPermanent "/n-back faq"                                   "http://www.gwern.net/DNB FAQ"
-RedirectPermanent "/n-back faq.html"                              "http://www.gwern.net/DNB FAQ"
-RedirectPermanent "/nootropics"                                   "http://www.gwern.net/Nootropics"
-RedirectPermanent "/nootropics.html"                              "http://www.gwern.net/Nootropics"
-RedirectPermanent "/robots.txt"                                   "http://www.gwern.net/static/robots.txt"
-RedirectPermanent "/sicp/About"                                   "http://www.gwern.net/sicp/Introduction"
-RedirectPermanent "/sicp/Chapter%25201.2"                         "http://www.gwern.net/sicp/Chapter 1.2"
-RedirectPermanent "/silk road"                                    "http://www.gwern.net/Silk Road"
-RedirectPermanent "/spaced repetition"                            "http://www.gwern.net/Spaced repetition"
-RedirectPermanent "/sunk cost"                                    "http://www.gwern.net/Sunk cost"
-RedirectPermanent "/sunkcost"                                     "http://www.gwern.net/Sunk cost"
