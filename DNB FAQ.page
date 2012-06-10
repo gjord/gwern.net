@@ -420,7 +420,7 @@ Finally, you must read skeptically because this is about psychology. Psychology 
 
 ## Should I do multiple daily sessions, or just one?
 
-[Most users](http://groups.google.com/group/brain-training/browse_thread/thread/5e989058544ad122) seem to go for one long N-back session, pointing out that exercises one's focus. Others do one session in the morning and one in the evening so they can focus better on each one. There is some scientific support for the idea that evening sessions are better than morning sessions, though; see the [section](#sleep) on the sleep research.
+[Most users](http://groups.google.com/group/brain-training/browse_thread/thread/5e989058544ad122) seem to go for one long N-back session, pointing out that exercises one's focus. Others do one session in the morning and one in the evening so they can focus better on each one. There is some scientific support for the idea that evening sessions are better than morning sessions, though; see [Kuriyama 2008](#sleep) on how practice before bedtime was more effective than after waking up.
 
 If you break up sessions into more than 2, you're probably wasting time due to overhead, and may not be getting enough exercise in each session to really strain yourself like you need to.
 
@@ -484,11 +484,19 @@ A matter of preference, although those in favor of disabling the visual feedback
 
 ## How can I do better on N-back?
 
-Focus harder. Play more. Sleep well, and eat healthily. Use natural lighting[^lighting]. The less stressed you are, the better you can do.
+Focus harder. Play more. Sleep well, and eat healthily. Use natural lighting[^lighting]. Space out practice. The less stressed you are, the better you can do.
 
 [^lighting]: See ["Effects of prior light exposure on early evening performance, subjective sleepiness, and hormonal secretion"](http://content.apa.org/pubmed/bne/126/1/196) ([coverage](http://www.goodtherapy.org/blog/natural-lighting-increases-productivity-0104112/)), Münch et al 2011:
 
     > ...For cognitive performance we found a significant interaction between light conditions, mental load (2- or 3-back task) and the order of light administration. On their first evening, subjects performed with similar accuracy after both light conditions, but on their second evening, subjects performed significantly more accurately after the DL in both n-back versions and committed fewer false alarms in the 2-back task compared to the AL group. Lower sleepiness in the evening was significantly correlated with better cognitive performance (p < .05).
+
+### Spacing
+
+[Penner et al 2012](/docs/2012-penner.pdf "Computerised working memory training in healthy adults: A comparison of two different training schedules")
+
+> This study compared a high intensity working memory training (45 minutes, 4 times per week for 4 weeks) with a distributed training (45 minutes, 2 times per week for 8 weeks) in middle-aged, healthy adults...Our results indicate that the distributed training led to increased performance in all cognitive domains when compared to the high intensity training and the control group without training. The most significant differences revealed by interaction contrasts were found for verbal and visual working memory, verbal short-term memory and mental speed.
+
+This is reminiscent of sleep's involvement in other forms of memory and cognitive change, and [Kuriyama 2008](#sleep).
 
 ### Hardcore
 
@@ -1631,7 +1639,7 @@ Used Cogmed, which Jaeggi says is not dual n-back.
 
 - Brehmer et al data: pooled young and old scores on the Raven[^Brehmer-pooled]
 
-[^Brehmer-pooled]: Experimental: <!-- young adaptive: 29 9.93 2.2 old adaptive: 26 6.5 3.42 young none: 26 9.81 2.1 old none: 19 6.84 3.25 -->
+[^Brehmer-pooled]: Experimental: young adaptive: 29 9.93 2.2 old adaptive: 26 6.5 3.42 young none: 26 9.81 2.1 old none: 19 6.84 3.25
 
     1. sample size: $29+26=55$
     2. mean: $\frac{(29 \times 9.93) + (26 \times 6.5)}{29+26} = 8.3$
@@ -1660,9 +1668,9 @@ The most recent study on this effect seems to be ["Eye movements enhance memory 
 
 ## Sleep
 
-["Sleep Accelerates the Improvement in Working Memory Performance"](/docs/2008-kuriyama.pdf), Kuriyama, _The Journal of Neuroscience_, October 1, 2008 • 28(40):10145-10150:
+["Sleep Accelerates the Improvement in Working Memory Performance"](/docs/2008-kuriyama.pdf), Kuriyama 2008:
 
-> "Working memory (WM) performance, which is an important factor for determining problem-solving and reasoning ability, has been firmly believed to be constant. However, recent findings have demonstrated that WM performance has the potential to be improved by repetitive training. Although various skills are reported to be improved by sleep, the beneficial effect of sleep on WM performance has not been clarified. Here, we show that improvement in WM performance is facilitated by posttraining naturalistic sleep. A spatial variant of the _n_-back WM task was performed by 29 healthy young adults who were assigned randomly to three different experimental groups that had different time schedules of repetitive _n_-back WM task sessions, with or without intervening sleep. Intergroup and intersession comparisons of WM performance (accuracy and response time) profiles showed that n-back accuracy after posttraining sleep was significantly improved compared with that after the same period of wakefulness, independent of sleep timing, subject's vigilance level, or circadian influences. On the other hand, response time was not influenced by sleep or repetitive training schedules. The present study indicates that improvement in _n_-back accuracy, which could reflect WM capacity, essentially benefits from posttraining sleep."
+> Working memory (WM) performance, which is an important factor for determining problem-solving and reasoning ability, has been firmly believed to be constant. However, recent findings have demonstrated that WM performance has the potential to be improved by repetitive training. Although various skills are reported to be improved by sleep, the beneficial effect of sleep on WM performance has not been clarified. Here, we show that improvement in WM performance is facilitated by posttraining naturalistic sleep. A spatial variant of the _n_-back WM task was performed by 29 healthy young adults who were assigned randomly to three different experimental groups that had different time schedules of repetitive _n_-back WM task sessions, with or without intervening sleep. Intergroup and intersession comparisons of WM performance (accuracy and response time) profiles showed that n-back accuracy after posttraining sleep was significantly improved compared with that after the same period of wakefulness, independent of sleep timing, subject's vigilance level, or circadian influences. On the other hand, response time was not influenced by sleep or repetitive training schedules. The present study indicates that improvement in _n_-back accuracy, which could reflect WM capacity, essentially benefits from posttraining sleep.
 
 (In this test, the baseline/unpracticed performance of the two groups was the same; but the schedule in which subjects trained at 10 PM and went to bed resulted in greater improvements in performance than schedules in which subjects trained when they got up at 8 AM and went to bed ~10 PM.)
 
@@ -1907,8 +1915,7 @@ He further compared their effects:
 
 (Reece did not take the oxiracetam with any choline supplements, which is usually recommended.)
 
-### Miscellaneous
-#### Creatine
+### Creatine
 
 In the realm of unusual supplements to n-backing, we can include [creatine](!Wikipedia "Creatine#Cognitive ability").
 
