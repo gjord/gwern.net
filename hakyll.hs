@@ -7,8 +7,7 @@ import Data.FileStore (darcsFileStore)
 import Data.Monoid (mempty, mconcat)
 import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString)
-import System.Directory (copyFile)
-import System.Process (runCommand)
+import System.Directory (removeFile)
 import Text.Printf (printf)
 import qualified Data.Map as M (fromList, lookup, Map)
 
@@ -24,7 +23,7 @@ main = do  hakyll $ do
              mapM_ (`match` static) ["docs/**",
                                      "images/**",
                                      "**.hs",
-                                     "static/css/**",
+                                     "static/*",
                                      "static/img/**",
                                      "static/js/**"]
              _ <- match "**.css" $ route idRoute >> compile compressCssCompiler
@@ -46,17 +45,10 @@ main = do  hakyll $ do
                  >>> arr tagsMap
                  >>> arr (map (\(t, p) -> (fromCapture "tags/*" t, makeTagList t p)))
 
+           mapM_ removeFile ["_site/homelessness", "_site/docs/resume-info", "_site/docs/resume-info.page"]
+
            putStrLn "generating & copying RSS feed..."
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
-           putStrLn "executing Apache configuration (caching, compression, redirects)..."
-           _ <- runCommand "find _site/ -type d \\( -name _darcs \\) -prune -type f -o \
-                           \ -not -name \"*.o\" -not -name \"*.hi\" -not -name \"*.hs\" \
-                           \ -not -name \"*.png\" -not -name \"*.jpg\" -not -name \"*.gif\" \
-                           \ -not -name \"*.pdf\" -not -name \"*.avi\" -not -name \"*.svg\" \
-                           \ -not -name \".htaccess\" -not -name \"*.gz\" -type f \
-                           \ -exec /bin/sh -c \"gzip --stdout --best --no-name \
-                                               \ --rsyncable \\\"{}\\\" > \\\"{}.gz\\\"\" \\;"
-           copyFile ".htaccess" "_site/.htaccess"
 
 addPostList :: Compiler (Page String, [Page String]) (Page String)
 addPostList = setFieldA "posts" $
