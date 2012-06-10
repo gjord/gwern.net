@@ -4,7 +4,6 @@ import Codec.Binary.UTF8.String (encode)
 import Control.Arrow (arr, (>>>), (>>^))
 import Data.Char (isAlphaNum, isAscii)
 import Data.FileStore (darcsFileStore)
-import Data.List (isPrefixOf, isSuffixOf)
 import Data.Monoid (mempty, mconcat)
 import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString)
@@ -14,7 +13,7 @@ import qualified Data.Map as M (fromList, lookup, Map)
 
 import Hakyll
 import Feed (filestoreToXmlFeed, FeedConfig(..))
-import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Code, Image, Link, Str), Pandoc, WriterOptions(..))
+import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Code, Link, Str), Pandoc, WriterOptions(..))
 import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
 
 main :: IO ()
@@ -87,17 +86,7 @@ myPageRenderPandocWith :: Compiler (Page String) (Page String)
 myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options)
 
 pandocTransform :: Pandoc -> Pandoc
-pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks . convertCoralLinks))
-
--- | Convert local relative image or doc links to Coralized cached links for bandwidth savings
-convertCoralLinks :: Inline -> Inline
-convertCoralLinks x@(Image xs (target, title)) = if "/images/" `isPrefixOf` target then
-                                             Image xs ("http://www.gwern.net.nyud.net" ++ target, title)
-                                             else x
-convertCoralLinks x@(Link xs (target, title)) = if "/docs/" `isPrefixOf` target && ".pdf" `isSuffixOf` target then
-                                             Link xs ("http://www.gwern.net.nyud.net" ++ target, title)
-                                             else x
-convertCoralLinks x = x
+pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
 
 -- GITIT -> HAKYLL LINKS PLUGIN
 -- | Convert links with no URL to wikilinks.
