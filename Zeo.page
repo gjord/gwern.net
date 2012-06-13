@@ -17,6 +17,8 @@ The data is much better than what you would get from more popular methods like c
 I personally want the data for a few distinct purposes, but in the best Quantified Self vein[^QS], mostly experimenting:
 
 1. quantifying the benefits of [melatonin](Melatonin)
+
+    - and dose levels <!-- 1.5mg is too much. I should experiment with a variety of levels: 0.1, 0.5, 1.0, 1.5, and 3mg, maybe? -->
 2. quantifying the costs of [modafinil](Modafinil)
 3. testing benefits of [huperzine-A](!Wikipedia)[^Ferriss]
 4. designing & starting [polyphasic sleep](!Wikipedia)
@@ -1430,6 +1432,16 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     ~~~
 [^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
 
+### Control quality control
+
+Like with melatonin, we might wonder: is taking vitamin D causing effects on the control days as well? With melatonin, the concern I often hear voiced is whether melatonin might in some way be 'addictive' or suppress normal melatonin secretion, in which case the observed difference between control and experimental days - which we interpreted as improvement - may actually be the opposite, a negative effect caused by a sort of 'withdrawal' (lowered melatonin secretion levels, since the body has not yet adapted to the absence of melatonin supplements and will not when supplementation resumes the next day).
+
+In the case of vitamin D, I find the results (no effect on anything *except* 'Morning Feel') sufficiently surprising that I wonder if this fat-soluble vitamin was causing effects over periods even longer than a week; and that the true results were that both control and experimental weeks were better than unsupplemented weeks, but that 'Morning Feel' was the only variable which reacted to placebo fast enough to show up as a difference.
+
+The solution most obvious to me, although I don't know if it's statistically correct, is to drop the vitamin D or melatonin for a long enough period that any long-term effects should have disappeared, and then compare this abstention period to the supposed "control" weeks. If the abstention weeks are worse than the control weeks, then this supports the long-term interpretation; if the abstention weeks are similar to the control weeks, then we can eliminate the long-term interpretation; and if the abstention weeks are better than the control weeks, then we ought to be puzzled and start thinking about other possibilities. (Not enough data/power? Misinterpreted results? Or, the original morning experiment was in spring, while the abstention periods were summer/autumn - does sleep get worse in summer, perhaps due to heat?)
+
+I won't bother with blinding this one since it's just a double-check of a possibility I don't seriously expect to be true. (If one wanted to, the procedure would be the same as before, but with *big* blocks: say, 2 blocks of 62 days, first pick randomized, or blocks of 31 days, with 4 blocks randomized in 2 pairs.) This 'experiment' is easy enough to run: simply stop taking vitamin D. To avoid the temptation to cheat on days I am feeling down, it's easiest to just wait until I run out of vitamin D and procrastinate on ordering a fresh supply until 50 days have passed.
+
 ### VoI
 
 > For background on "value of information" calculations, see the [first calculation](#value-of-information-voi).
@@ -1789,12 +1801,12 @@ June 2012
 <!--
 date pushups meditation masturbation
 June 2012
-7: off off on
-8: off off on
-9: off on off
-10:
-11:
-12:
+07: 0 0 1
+08: 0 0 1
+09: 0 1 0
+10: 1 0 1
+11: 1 0 0
+12: 1 1 1
 13:
 14:
 15:
@@ -1862,3 +1874,6 @@ This is what I have learned:
 <!-- Redshift: 07 Jun 2012: off -->
 <!-- Redshift: 08 Jun 2012: off -->
 <!-- Redshift: 09 Jun 2012: off -->
+<!-- Redshift: 10 Jun 2012: off -->
+<!-- Redshift: 11 Jun 2012: off -->
+<!-- Redshift: 12 Jun 2012: off -->
