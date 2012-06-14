@@ -168,6 +168,12 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
     1. [Google Alerts](http://www.google.com/alerts)
     2. [Google Scholar Alerts](http://googlescholar.blogspot.com/2010/06/google-scholar-alerts.html)
     3. [PubMed](!Wikipedia) alerts
+- after publication, publicize; currently:
+
+    1. StumbleUpon
+    2. Google+
+    3. Reddit
+    4. LessWrong (and further sites as appropriate)
 
 [^lint]: I've noticed that when I make Markdown syntax errors, they tend to be predictable and show up either in the original Markdown source, or in the rendered HTML. Two common source errors:
 
@@ -208,7 +214,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 # Technical aspects
 ## Hosting
 
-<http://www.gwern.net> exists as a set of static CSS, HTML, JS, & PDF files served by [Amazon S3](!Wikipedia) through the [CloudFlare](!Wikipedia) [CDN](!Wikipedia "Content delivery network"). (Amazon charges less for bandwidth and disk space than NFSN, although one loses all the capabilities offered by Apache's [.htaccess](!Wikipedia), and Gzip compression is difficult so must be handled by CloudFlare; total costs may turn out to be a wash and I will consider the switch to Amazon S3 a success if it can bring my monthly bill to <\$10 or <\$120 a year.) The source is available for download on [Github](https://github.com/gwern/gwern.net).
+<http://www.gwern.net> exists as a set of static CSS, HTML, JS, & PDF files served by [Amazon S3](!Wikipedia) through the [CloudFlare](!Wikipedia) [CDN](!Wikipedia "Content delivery network"). (Amazon charges less for bandwidth and disk space than NFSN, although one loses all the capabilities offered by Apache's [.htaccess](!Wikipedia), and Gzip compression is difficult so must be handled by CloudFlare; total costs may turn out to be a wash and I will consider the switch to Amazon S3 a success if it can bring my monthly bill to <\$10 or <\$120 a year.) The source repository is available for download on [Patch-tag](https://patch-tag.com/r/gwern/Gwern/home). (It used to be on Github, but Darcs-to-git tools choke on >gigabyte repositories.)
 
 From October 2010 to June 2012, the site was hosted on [NearlyFreeSpeech.net](!Wikipedia) ([NFSN homepage](http://www.nearlyfreespeech.net)), an old hosting company; its specific niche is controversial material and activist-friendly pricing. Its libertarian owners cast a jaundiced eye on [takedown request](!Wikipedia)s, and pricing is [pay-as-you-go](!Wikipedia). I like the former aspect, but the latter sold me on NFSN. Before I stumbled on NFSN (someone mentioned it in [#lesswrong](irc://freenode.net#lesswrong)), I was getting ready to pay \$10-15 a month (\$120 yearly) to [Linode](!Wikipedia). Linode's offerings are overkill since I do not run dynamic websites or something like [Haskell.org](http://www.haskell.org) (with wikis and mailing lists and [darcs](!Wikipedia) repositories), but I didn't know a good alternative. NFSN's pricing meant that I paid for usage rather than large flat fees. I put in \$32 to cover registering `gwern.net` until 2014, and then another \$10 to cover bandwidth & storage price. DNS aside, I was billed \$8.27 for October-December 2010; DNS included, January-April 2011 cost \$10.09. \$10 covered months of `gwern.net` for what I would have paid Linode in 1 month! In total, my 2010 costs were \$39.44; my 2011 costs were \$118.32 (\$9.86 a month); and my 2012 costs through June were \$112.54 (\$21 a month); sum total: $270.3.
 
