@@ -1,0 +1,136 @@
+# background
+
+https://www.google.com/analytics/siteopt/exptlist?account=18912926
+http://www.pqinternet.com/196.htm
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=61203 "Experiment with site-wide changes"
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=117911 "Working with global headers"
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-AU&answer=74345 "Time on page as a conversion goal" - every page converts, by using a timeout (mine is 40 seconds)
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-GB&answer=61427
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "Varying page and element styles" - testing with inline CSS overriding the defaults
+http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
+http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
+http://stackoverflow.com/tags/google-website-optimizer/hot
+
+# ideas for testing
+
+        JS:
+                disqus
+                google+
+                floating footnotes
+        CSS
+                differences from readability
+                                                narrower columns
+                                                floating left css quotes for blockquotes
+                                                href link color - not text black?
+                basically, every declaration in default.css!
+        Donation
+                placement - left, right, bottom
+                donation text
+                         help pay for hosting
+                         help sponsor fish oil experiment
+                         Xah's text - did you find this article useful?
+
+- test the suggestions in https://code.google.com/p/better-web-readability-project/ http://www.vcarrer.com/2009/05/how-we-read-on-web-and-how-can-we.html
+- notes: choose high significance levels! I can afford them and I want long-term results
+
+# Testing
+## Max-width
+
+max-width experiment;
+https://www.google.com/analytics/siteopt/exptreports?experiment=EAAAACWAwHv59qsi3M1wUDgH7hM&account=18912926&stok=ALzSWod4AZgkgjQ3gaWVy8X7N3Ndtzl1rQ:1339734274583
+
+~~{.Html}
+<!-- Google Website Optimizer Control Script -->
+<script>
+function utmx_section(){}function utmx(){}
+(function(){var k='0520977997',d=document,l=d.location,c=d.cookie;function f(n){
+if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return escape(c.substring(i+n.
+length+1,j<0?c.length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
+d.write('<sc'+'ript src="'+
+'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'
++'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
++new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
+</script>
+<!-- End of Google Website Optimizer Control Script -->
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['gwo._setAccount', 'UA-18912926-2']);
+  _gaq.push(['gwo._trackPageview', '/0520977997/test']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End of Google Website Optimizer Tracking Script -->
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['gwo._setAccount', 'UA-18912926-2']);
+      setTimeout(function() {
+  _gaq.push(['gwo._trackPageview', '/0520977997/goal']);
+      }, 40000);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End of Google Website Optimizer Tracking Script -->
+
+    <script>utmx_section("max width")</script>
+    <style type="text/css">
+      body { max-width: 800px; }
+    </style>
+    </noscript>
+~~~
+
+## Readability blockquotes
+
+1. blockquote before quote from readability
+
+blockquote: : before {
+    content: "\201C";
+    filter: alpha(opacity=20);
+    font-family: "Constantia", Georgia, 'Hoefler Text', 'Times New Roman', serif;
+    font-size: 4em;
+    left: -0.5em;
+    opacity: .2;
+    position: absolute;
+    top: .25em }
+
+## TODO
+
+2. blockquote striping
+
+blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(240, 240, 240); }
+blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(250, 250, 250); }
+
+3. white on black vs variants
+
+html { padding: 0px; margin: 0px; background-color: white; color: black; font-family: sans-serif;}
+body { font:1em/1.625em "lucida grande","lucida sans unicode", sans-serif; background-color:#FFFEF0; font-size-adjust:none;font-style:normal;font-variant:normal;font-weight:normal;}
+
+4. max-widths
+
+body { max-width: 1400px;} /* important to test all max-width values!! */*
+
+5. table striping
+
+tbody tr:hover td { background-color: #f5f5f5;}
+tbody tr:nth-child(odd) td { background-color: #f9f9f9;}
+
+6. line height
+
+div#content { line-height: 130%;}
+
+7. number size
+
+.num { font-size: 85%; }
+
+8. link decoration
+
+a { color: black; text-decoration: underline;}
+a { color:#005AF2; text-decoration:none; }
