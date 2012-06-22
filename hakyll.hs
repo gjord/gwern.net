@@ -35,6 +35,8 @@ main = do  hakyll $ do
                compile $ myPageCompiler
                  >>> renderTagsField "prettytags" (fromCapture "tags/*" . escape)
                  >>> arr (trySetField "author" "gwern") -- only docs/*.page set 'author:'
+                 >>> arr (trySetField "status" "N/A")
+                 >>> arr (trySetField "belief" "N/A")
                  >>> renderModificationTime "modified" "%d %b %Y" -- populate $modified$
                  >>> applyTemplateCompiler "static/templates/default.html"
 
