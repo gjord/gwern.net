@@ -2,22 +2,27 @@
 title: Using Silk Road
 description: Visiting, ordering, and using the anonymous drug market Silk Road
 tags: cryptography, nootropics, politics
+status: finished
+belief: log
 ...
 
 > This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it[^hamlet]; it is based on my experiences May-June 2011, and may be out-dated. "Trust, but verify."
 
 [^hamlet]: While BW held up its end of the deal and I understand why they might fear the legal consequences, I am a little disappointed that they chose after reflection not to publish it; I was reminded of _[Hamlet](!Wikipedia "To be, or not to be")_:
 
-        "Thus conscience does make cowards of us all,
-        And thus the native hue of resolution
-        Is sicklied o'er with the pale cast of thought,
-        And enterprises of great pith and moment,
-        With this regard their currents turn awry,
-        And lose the name of action."
+    > Thus conscience does make cowards of us all, \
+    > And thus the native hue of resolution \
+    > Is sicklied o'er with the pale cast of thought, \
+    > And enterprises of great pith and moment, \
+    > With this regard their currents turn awry, \
+    > And lose the name of action.
 
-The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise[^blackmarket] using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend.
+The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise[^blackmarket] using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend. It has since flourished[^size].
 
 [^blackmarket]: I know of one competing marketplace using Bitcoin+Tor, named BlackMarket which apparently lives at <http://5onwnspjvuk7cwvk.onion/> ([non-Tor mirror](https://5onwnspjvuk7cwvk.tor2web.org/)); [informed opinion](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25bb3s) seems to be that it is very low-volume and stagnant.
+[^size]: Estimates of Silk Road's size can be done several ways: most purchases entail a review at the end, and reviews are displayed on the front page, so one can monitor the front page and extrapolate to estimate average number of transactions per day or week, and from there estimate turnover and what Silk Road's commissions total to: eg. ~100 transactions a day over 2 years and averaging ~$150 is $200 \times 365 \times 2 \times 150 = 10,950,000$.
+
+    Another way is to look in the blockchain for Silk Road-related addresses or transactions; one [possible address](http://bitcointalk.org/index.php?topic=82952.0;all "Very Rich Address?") has a 23 June 2012 balance of 450,825btc or $2,885,280. Since it is unlikely there are ~$3m of transactions active or sitting in wallets that day on Silk Road when the largest previous Silk Road scammer - pulling out all the stops - got away with an order of magnitude less money, this is highly likely to represent Silk Road's profits or profits plus balances & escrows; which at a commission of 5-10% implies a total Silk Road turnover of >$28m.
 
 But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")? Shouldn't we keep quiet about it like Fight Club?[^fightclub]
 
