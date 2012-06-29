@@ -1,6 +1,8 @@
 ---
 description: The downwards deletionism spiral discourages contribution and is how Wikipedia will die.
 tags: Wikipedia, experiments, sociology, Haskell
+status: finished
+belief: highly likely
 ...
 
 A perennial lure of technology is its promise to let us do things that we couldn't do before, and in ways we wouldn't before.
@@ -230,7 +232,7 @@ Since that will not soon change for the better, this leads to one conclusion: *t
 
 #### Sins of Omission: experiment 2
 
-> Somebody remarked: 'I can tell by my own reaction to it that this book is harmful.' But let him only wait and perhaps one day he will admit to himself that this same book has done him a great service by bringing out the hidden sickness of his heart and making it visible.^[[Friedrich Nietzsche](!Wikipedia), #58 of [_Assorted Opinions and Maxims_](http://www.davemckay.co.uk/philosophy/nietzsche/nietzsche.php?name=nietzsche.1878.humanalltoohuman.zimmern.11)]
+> Somebody remarked: "I can tell by my own reaction to it that this book is harmful." But let him only wait and perhaps one day he will admit to himself that this same book has done him a great service by bringing out the hidden sickness of his heart and making it visible.^[[Friedrich Nietzsche](!Wikipedia), #58 of [_Assorted Opinions and Maxims_](http://www.davemckay.co.uk/philosophy/nietzsche/nietzsche.php?name=nietzsche.1878.humanalltoohuman.zimmern.11)]
 
 We have looked at what suggesting additions results in: abject failure. The Wikipedia community is failing at incorporating new links. Some attempted to justify my experiment above: it's OK because at least the existing External Links sections are quality sections. This is desperate special pleading, but we should test it. How is the editing community at the flip side of the coin - retaining old links? If inclusionists' suggestions are being ignored, is this at least fairly applied, with deletionists' edits also futile?
 
@@ -239,7 +241,7 @@ Unfortunately, testing this requires destructive editing. (We can't simply sugge
 The procedure: remove random links and record whether they are restored to obtain a restoration rate.
 
 - Editors might defer to other editors, so I will remove links as a anonymous IP user from multiple proxies; the restoration rate will naturally be an *under*estimate of what a registered editor would be able to commit, much less a tendentious deletionist.
-- To avoid issues with cherrypicking or biased selection of links[^random], I will remove only the final external link on pages selected by <http://en.wikipedia.org/wiki/Special:Random#External_links> which have at least 2 external links in an 'External links' section, and where the final external link is neither an 'official' link nor template-generated. (This avoids issues where pages might have 5 or 10 'official' external links to various versions or localizations, all of which an editor could confidently and blindly revert the removal of; template-generated links also carry imprimaturs of authority.)
+- To avoid issues with cherry-picking or biased selection of links[^random], I will remove only the final external link on pages selected by <http://en.wikipedia.org/wiki/Special:Random#External_links> which have at least 2 external links in an 'External links' section, and where the final external link is neither an 'official' link nor template-generated. (This avoids issues where pages might have 5 or 10 'official' external links to various versions or localizations, all of which an editor could confidently and blindly revert the removal of; template-generated links also carry imprimaturs of authority.)
 - The edit summary for each edit will be `rm external link per [[WP:EL]]` - which has the nice property of being obviously meaningless to anyone capable of critical thought (by definition, a link removal should be per one of WP:EL's criterions - but *which* [criterion](!Wikipedia "Wikipedia:External links#Links normally to be avoided")?) but also official-looking like many deletionist edit-summaries.
 
     This point is very important. We are not interested in "vandalism in general", nor "all possible forms of external link vandalism" (like adding spam links, inserting gibberish, breaking syntax), but in bad edits which mimic how a deletionist would edit. A deletionist would avoid certain links, and would be sure to make some allusion to policy. (Shades of [Poe's law](!Wikipedia): it is impossible to distinguish an actual deletionist's edits from random deletions accompanied by repetitive jargon.) If our experiment does not mimic these traits, our final measurement of bad-edit reversion rate will simply not be measuring what we hoped to measure.
@@ -254,7 +256,7 @@ The procedure: remove random links and record whether they are restored to obtai
     (If I were going to cherry pick under this procedure, I would have had to invest a great deal more effort: for each removal, I would have to find *multiple* candidates each of which satisfied the criteria and only then could I pick the worst final link; and then I would have to start over for the *next* removal, and since I had to check ~10 random articles for a possible final link, this implies for every removal, I'd be looking at something like 40+ random articles to do one removal or 200+ random articles a day! And this deception would have to be deliberate & planned - while most cases of bias are unconscious.)
 [^month]: Some editors pride themselves on detecting vandalism weeks or months after creation; they are highly unusual. When I was spending time reading academic publications on Wikipedia a few years ago, a number of them dealt with quantifying vandalism and reversions; almost all vandalism was reverted within days, and reversions which took longer than a month were very rare (0-10%, to be very generous). This was why I chose to wait a month, because waiting longer added nothing. A week would have been adequate.
 
-    Relevant research on quantify reversion rates over time:
+    Relevant research on quantifying reversion rates over time:
 
     - ["Creating, Destroying, and Restoring Value in Wikipedia"](ftp://193.206.140.34/mirrors/epics-at-lnl/WikiDumps/localhost/group282-priedhorsky.pdf), Priedhorsky et al 2007
     - ["Measuring Wikipedia"](http://eprints.rclis.org/bitstream/10760/6207/1/MeasuringWikipedia2005.pdf), Voss 2005
@@ -321,7 +323,7 @@ None of the commenters rose to my bait of estimating what the revision rate *sho
 
 [^Horologium]: His user page states as of 19 May 2012 under "My activities on Wikipedia" that
 
-    > ...My Wikipedia philosophy is quite complex, and defies easy categorization. My ideal for a more perfect Wikipedia would be to create many wikis for pop culture topics and transwiki many of the related articles on Wikipedia to them. (Some of these already exist in a fairly substantial format, such as [Memory Alpha](!Wikipedia) and [Wookiepedia](!Wikipedia)). I see no reason why all 703 episodes of the live-action _[Star Trek](!Wikipedia)_ (and 17 of the 22 animated episodes) should have articles on Wikipedia, when Memory Alpha exists. (Before you go hating on me for that, note that I own all 720 episodes on DVD, as well as all but three of the movies.) This does not make me a [deletionist](http://meta.wikimedia.org/wiki/deletionism), however. I also believe in [structurism](http://meta.wikimedia.org/wiki/structurism), and a combination of two opposing philosophies [mergism](http://meta.wikimedia.org/wiki/mergism) and seperatism; merging in small articles rather than deleting them and separating large articles rather than deleting content. I also agree with the tenets of [exclusionism](http://meta.wikimedia.org/wiki/exclusionism), although that also leads back to transwikism again.
+    > ...My Wikipedia philosophy is quite complex, and defies easy categorization. My ideal for a more perfect Wikipedia would be to create many wikis for pop culture topics and transwiki many of the related articles on Wikipedia to them. (Some of these already exist in a fairly substantial format, such as [Memory Alpha](!Wikipedia) and [Wookieepedia](!Wikipedia)). I see no reason why all 703 episodes of the live-action _[Star Trek](!Wikipedia)_ (and 17 of the 22 animated episodes) should have articles on Wikipedia, when Memory Alpha exists. (Before you go hating on me for that, note that I own all 720 episodes on DVD, as well as all but three of the movies.) This does not make me a [deletionist](http://meta.wikimedia.org/wiki/deletionism), however. I also believe in [structurism](http://meta.wikimedia.org/wiki/structurism), and a combination of two opposing philosophies [mergism](http://meta.wikimedia.org/wiki/mergism) and seperatism; merging in small articles rather than deleting them and separating large articles rather than deleting content. I also agree with the tenets of [exclusionism](http://meta.wikimedia.org/wiki/exclusionism), although that also leads back to transwikism again.
 
 ##### Results
 
@@ -337,7 +339,18 @@ None of the commenters rose to my bait of estimating what the revision rate *sho
 
 [^removal-analysis]: Since no one noticed the 100 removals were connected, we can assume each removal was statistically independent; this lets us calculate a [binomial proportion confidence interval](!Wikipedia). Specifically, with 3 successes and 100 samples, the 99% [confidence interval](!Wikipedia) is 0-7%. We can derive this from [Wolfram Alpha](http://www.wolframalpha.com/input/?i=binomial+distribution+confidence+interval&f1=0.99&f=BinomialInterval.c_0.99&f2=100&f=BinomialInterval.n_100&f3=0.03&x=2&y=3&f=BinomialInterval.phat_0.03&a=*FVarOpt.1-_***BinomialInterval.phat--.***BinomialInterval.x---.*--) or one's favorite statistical package if one doesn't want to crunch the formula oneself.
 
-    (Incidentally, Wikipedia has 3,960,143 as of 1 June 2012 according to [Special:Statistics](!Wikipedia), and I went through perhaps 10 pages for each removal, so the total possible sample size is ~396,014. That 100 samples can give such a good estimate - as long as they are independent - is the same magic that makes things like [opinion poll](!Wikipedia)s work; at least, as a child I found it magical that a sample of just 1000 voters could predict so accurately the election results in a population of 300 million people.)
+    (Incidentally, Wikipedia has 3,960,143 as of 1 June 2012 according to [Special:Statistics](!Wikipedia), and I went through perhaps 10 pages for each removal, so the total possible sample size is ~396,014. That 100 samples can give such a good estimate - as long as they are independent - is the same magic that makes things like [opinion poll](!Wikipedia)s work; at least, as a child I found it magical that a sample of <1000 voters could predict so accurately the election results in a population of >300 million people.)
+
+##### Followup
+
+A month after this experiment, I resurveyed the 100 edits to see how many restorations had been reverted. 4 had been reverted:
+
+1. [Castell Dinas Bran](http://en.wikipedia.org/w/index.php?title=Castell_Dinas_Bran&diff=495191330&oldid=495167821)
+2. [Protector (2009 film)](http://en.wikipedia.org/w/index.php?title=Protector_%282009_film%29&diff=next&oldid=498072054) (no explanation)
+3. [Osprey Publishing](http://en.wikipedia.org/w/index.php?title=Osprey_Publishing&diff=next&oldid=495167933) (part of a wholesale deletion of links)
+4. [Marilyn vos Savant](http://en.wikipedia.org/w/index.php?title=Marilyn_vos_Savant&diff=next&oldid=495167982) (this one is questionable as well; linking to the _Parade_ homepage seems distinctly less useful to the reader than linking to _Parade_'s back-archives where vos Savant's columns are...)
+
+Those who think that 3% was the correct reversion rate for the removals are invited to explain how 4% could be the correct reversion rate for the re-adding of the same links - if it was acceptable for 97% to be removed in the first place, how could it also be acceptable for 94% to then be restored?
 
 #### Tallying the Damage
 ##### _Ignoti, sed non occulti_
