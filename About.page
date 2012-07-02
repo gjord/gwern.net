@@ -13,7 +13,7 @@ This page is about `gwern.net`; for information about me, see [Links]().
 
 The content here varies from [philosophy](Culture is not about Esthetics) to [poetry](fiction/Brave poem) to [programming](haskell/Wikipedia RSS Archive Bot) to prosaic FAQ. It is everything I felt worth writing for the past few years that didn't fit somewhere like Wikipedia or was already written - "...I realised that I wanted to read about them what I myself knew. More than this - what only I knew. Deprived of this possibility, I decided to write about them. Hence this book."^[[Gennadi Sosonko](!Wikipedia), pg 19 of _Russian Silhouettes_, on why he wrote his book of biographical sketches of great Soviet chess players.] I never expected to write so much, but I discovered that once I had a hammer, nails were everywhere, and that [supply creates its own demand](!Wikipedia "Say's Law")^["It is only the attempt to write down your ideas that enables them to develop." --Wittgenstein (pg 109, _Recollections of Wittgenstein_); "I thought a little [while in the isolation tank], and then I stopped thinking altogether...incredible how idleness of body leads to idleness of mind. After 2 days, I'd turned into an idiot. That's the reason why, during a flight, astronauts are always kept busy." --Oriana Fallaci, [quoted](http://www.johndcook.com/blog/2010/12/11/after-two-days-id-turned-into-an-idiot/ ) in _Rocket Men: The Epic Story of the First Men on the Moon_ by Craig Nelson.]. I believe that someone who has been well-educated will think of something worth writing at least once a week; to a surprising extent, this has been true. (I have added ~130 documents to this repository over the past 3 years.) There are many benefits to keeping notes as they allow one to accumulate confirming and especially contradictory evidence[^Darwin], and even drafts can be useful so you [Don't Repeat Yourself](!Wikipedia) or simply decently respect the opinions of mankind:
 
-> Special knowledge can be a terrible disadvantage if it leads you too far along a path you cannot explain anymore.^[Brian Herbert, _House Harkonnen_]
+> Special knowledge can be a terrible disadvantage if it leads you too far along a path you cannot explain anymore.^[[Brian Herbert](!Wikipedia), _[Dune: House Harkonnen](!Wikipedia)_]
 
 [^Darwin]: One danger of such an approach is that you will simply engage in [confirmation bias](!Wikipedia), and build up an impressive-looking wall of citations that is completely wrong but effective in brainwashing yourself. The only solution is to bend over backwards to include criticism - so even if you do not escape brainwashing, at least your readers have a chance.  _[The Autobiography of Charles Darwin](!Wikipedia)_, 1902:
 
@@ -84,7 +84,7 @@ One could continue in this vein, devising ever more powerful & robust storage me
     >
     > As a start I recommend engaging in a project that will not be complete in your lifetime. Another way is to require that your current projects exhibit some payoff that is not immediate; perhaps some small portion of it pays off in the future. A third way is to create things that get better, or run up in time, rather than one that decays and runs down in time. For instance a seedling grows into a tree, which has seedlings of its own. A program like [Heifer Project](!Wikipedia) which gives breeding pairs of animals to poor farmers, who in turn must give one breeding pair away themselves, is an exotropic scheme, growing up over time.
 
-> "It's shocking to find how many people do not believe they can learn, and how many more believe learning to be difficult. Muad'Dib knew that every experience carries its lesson."^[Frank Herbert, _Dune_]
+> It's shocking to find how many people do not believe they can learn, and how many more believe learning to be difficult. Muad'Dib knew that every experience carries its lesson.^['Princess Irulan', [Frank Herbert](!Wikipedia), [_Dune_](!Wikipedia "Dune (novel)")]
 
 My answer is that one uses such a framework to work on projects that are too big to work on normally or too tedious. (Conscientiousness is often lacking online or in volunteer communities^[[GiveWell](!Wikipedia) reports in ["A good volunteer is hard to find"](http://blog.givewell.org/2011/07/13/a-good-volunteer-is-hard-to-find/) that of volunteers motivated enough to email them asking to help, something like <20% will complete the GiveWell test assignment and render meaningful help. Such persons would have been well-advised to have simply donated some money. I have long noted that many of the most popular pages on `gwern.net` could have been written by anyone and drew on no unique talents of mine; I have on several occasions received offers to help with the DNB FAQ - none of which have resulted in help.] and many useful things go undone.) Knowing your site *will* survive for decades to come gives you the mental wherewithal to tackle long-term tasks like gathering information for years, and such persistence can be useful^[An old sentiment; consider "A drop hollows out the stone" (Ovid, _Epistles_) or Thomas Carlyle's "The weakest living creature, by concentrating his powers on a single object, can accomplish something. The strongest, by dispensing his over many, may fail to accomplish anything. The drop, by continually falling, bores its passage through the hardest rock. The hasty torrent rushes over it with hideous uproar, and leaves no trace behind." (_The life of Friedrich Schiller_, 1825)] - if one holds onto every glimmer of genius for years, then even the dullest person may look a bit like a genius himself[^Feynman]. (Even experienced professionals can only write at their peak for a few hours a day[^Ericsson].) Half the challenge of fighting procrastination is the [pain of starting](http://lesswrong.com/lw/3kv/working_hurts_less_than_procrastinating_we_fear/) - I find when I actually get [into the swing](http://lesswrong.com/lw/3kv/working_hurts_less_than_procrastinating_we_fear/) of working on even dull tasks, it's not so bad. So this suggests an obvious solution: never start. Merely have perpetual drafts, which one tweaks from time to time. And the rest takes care of itself. I have a few examples of this:
 
@@ -237,16 +237,18 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
 From October 2010 to June 2012, the site was hosted on [NearlyFreeSpeech.net](!Wikipedia) ([NFSN homepage](http://www.nearlyfreespeech.net)), an old hosting company; its specific niche is controversial material and activist-friendly pricing. Its libertarian owners cast a jaundiced eye on [takedown request](!Wikipedia)s, and pricing is [pay-as-you-go](!Wikipedia). I like the former aspect, but the latter sold me on NFSN. Before I stumbled on NFSN (someone mentioned it in [#lesswrong](irc://freenode.net#lesswrong)), I was getting ready to pay \$10-15 a month (\$120 yearly) to [Linode](!Wikipedia). Linode's offerings are overkill since I do not run dynamic websites or something like [Haskell.org](http://www.haskell.org) (with wikis and mailing lists and [darcs](!Wikipedia) repositories), but I didn't know a good alternative. NFSN's pricing meant that I paid for usage rather than large flat fees. I put in \$32 to cover registering `gwern.net` until 2014, and then another \$10 to cover bandwidth & storage price. DNS aside, I was billed \$8.27 for October-December 2010; DNS included, January-April 2011 cost \$10.09. \$10 covered months of `gwern.net` for what I would have paid Linode in 1 month! In total, my 2010 costs were \$39.44; my 2011 costs were \$118.32 (\$9.86 a month); and my 2012 costs through June were \$112.54 (\$21 a month); sum total: $270.3.
 
+The switch to Amazon S3 hosting is complicated by my simultaneous addition of CloudFlare as a CDN; my total June 2012 Amazon bill is $1.62, with $0.19 for storage. CloudFlare claims it covered 17.5GB of 24.9GB total bandwidth, so the $1.41 represents 30% of my total bandwidth; multiply 1.41 by 3 is 4.30, and my hypothetical non-CloudFlare S3 bill is ~$4.5. Even at $10, this is well below the \$21 monthly cost at NFSN. (The traffic graph indicates that June 2012 was a relatively quiet period, but I don't think this eliminates the factor of 5.)
+
 ## Size
 
-As of 2 January 2012, the source of `gwern.net` is composed of >137 files with >931,274 words of ~5.9M; this excludes the images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is approximately 72M^[HTML is not very compact. [7zip](!Wikipedia) can shrink that to a tenth the size.] The source repository contains >4,307 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
+As of 2 January 2012, the source of `gwern.net` is composed of >137 files with >1,237,428 words or 8.14M; this includes documents transcribed into Markdown but excludes the images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is approximately 272M. The source repository contains >5,498 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
 
 ## Popularity
 ### October 2010 - February 2011
 
 My editing activity, as generated by [darcs-graph](!Hackage): <!-- darcs-graph - - y=20 - - output=darcs-history.png - - name=gwern.net /home/gwern/doc/archive/wiki/ -->
 
-![](/images/2011-february-darcs-history.png "Plot of patch creations (y-axis) versus date (x-axis): October to February")
+![Plot of patch creations (y-axis) versus date (x-axis): October to February](/images/2011-february-darcs-history.png)
 
 #### Traffic
 
@@ -254,7 +256,7 @@ My editing activity, as generated by [darcs-graph](!Hackage): <!-- darcs-graph -
 
 Popularity-wise, [Google Analytics](!Wikipedia) [reports that](/docs/201010-201102-gwern.net-analytics.pdf) over the 150 days between 1 October 2010 and 28 February 2011, <!-- http://www.convertunits.com/dates/from/Oct+1,+2010/to/Feb+28,+2011 --> there were 4,346 page-views (average 30/day):
 
-![](/images/201010-201102-traffic-history.png "Plot of page-hits (y-axis) versus date (x-axis)")
+![Plot of page-hits (y-axis) versus date (x-axis)](/images/201010-201102-traffic-history.png)
 
 The most popular pages were^[Anecdotally, the rankings seem correct. When I went to a [LessWrong](http://lesswrong.com/) meetup in California, many knew of or had read the DNB FAQ, some had read or used my modafinil price-chart, and very few remembered reading anything else.]:
 
@@ -272,7 +274,7 @@ The rankings are not as I would *prefer* (I imagine Internet archivist [Jason Sc
 
 `darcs-graph` for this period:
 
-![](/images/2011-july-darcs-history.png "Plot of patch creations (y-axis) versus date (x-axis): Repository creation to July")
+![Plot of patch creations (y-axis) versus date (x-axis): Repository creation to July](/images/2011-july-darcs-history.png)
 
 #### Traffic
 
@@ -280,7 +282,7 @@ The rankings are not as I would *prefer* (I imagine Internet archivist [Jason Sc
 
 Google Analytics [reports that](/docs/20110228-20110702-gwern.net-analytics.pdf) over the 124 days between 28 February 2011 and 2 July 2011, <!-- http://www.convertunits.com/dates/from/Feb+28,+2011/to/Jul+2,+2011 --> there were 42,410 page-views (average 342/day):
 
-![](/images/201102-201107-traffic-history.png "Plot of page-hits (y-axis) versus date (x-axis)")
+![Plot of page-hits (y-axis) versus date (x-axis)](/images/201102-201107-traffic-history.png)
 
 The most popular pages ranking changed considerably; while the DNB FAQ maintained its pre-eminent popularity, 3 new pages bumped out 'Links', 'Spaced repetition', 'The Melancholy of Kyon', and 'Haskell Summer of Code'. I am a little surprised that my 2 _Death Note_ essays seemed to've struck a chord, and even more surprised that my sloppy & random & un-rigorous notes about nootropics would be consistently popular:
 
@@ -318,17 +320,17 @@ As a writer, I desire feedback. I also want to feel that my work has been of use
 
 `darcs-graph` for this period (including 1-2 January 2012): <!-- darcs-graph - - filter=20110701 - - y=20 - - output=darcs-history.png - - name=gwern.net /home/gwern/doc/archive/wiki/ -->
 
-![](/images/2011-december-darcs-history.png "Plot of patch creations (y-axis) versus date (x-axis): July 2011 to 2 January 2012")
+![Plot of patch creations (y-axis) versus date (x-axis): July 2011 to 2 January 2012](/images/2011-december-darcs-history.png)
 
 I ran into a [cool post by Christopher Done](http://chrisdone.com/posts/2011-12-02-programmer-at-work-statistics.html) on a tool that does detailed analysis of patch patterns on a Git repository, [GitStats](http://gitstats.sourceforge.net/), and this spurred me to create a [Git mirror](https://github.com/gwern/gwern.net) of `gwern.net` using [darcs-to-git](https://github.com/purcell/darcs-to-git). GitStats produces a [whole bundle](/docs/gwern.net-gitstats/index.html) of graphs and figures, some of which I found surprising. (I did not expect to see a large spike on Wednesday and relatively few patches on Saturday, or a spike around 5 PM, as opposed to the early morning.) I think I will update the GitStats output with each output, as a (large) adjunct to the `darcs-graph` plots.
 
 #### Traffic
 
-> "...prompt no more the follies you decry, / As tyrants doom their tools of guilt to die; / 'Tis yours this night to bid the reign commence / Of rescu'd Nature, and reviving Sense; / ...Bid scenic Virtue form the rising age, / And Truth diffuse her radiance from the stage."
+> ...prompt no more the follies you decry, / As tyrants doom their tools of guilt to die; / 'Tis yours this night to bid the reign commence / Of rescu'd Nature, and reviving Sense; / ...Bid scenic Virtue form the rising age, / And Truth diffuse her radiance from the stage.
 
 Google Analytics [reports](/docs/20110702-20120102-gwern.net-analytics.pdf), that over the 185 days between 2 July 2011 and 2 January 2012, <!-- http://www.timeanddate.com/date/durationresult.html?m1=07&d1=2&y1=2011&m2=1&d2=2&y2=2012&ti=on --> there were 191,015 page-views (average 1,032/day) by 79,346 visitors for a total of 115,585 visits (average 624/day). This is better than I expected and makes me wonder about [my prediction](http://predictionbook.com/predictions/4895 "gwern.net total traffic will average <2000 daily visits in the week a year from now") for <2000 average daily visits by 2013 (but it still seems unlikely traffic will triple over the next year).
 
-![](/images/201107-201201-traffic-history.png "Plot of page-hits (y-axis) versus date (x-axis)")
+![Plot of page-hits (y-axis) versus date (x-axis)](/images/201107-201201-traffic-history.png)
 
 The main change in page popularity did not surprise me; when I was writing [Silk Road](), I knew it would almost certainly be popular given how very popular the Gawker article was but also how lacking in practical details it was, and I also suspected that [Bitcoin is Worse is Better]() would be fairly popular as it argued an interesting and controversial thesis (the original and promoted version is hosted on `BitcoinWeekly.com`, so its hit-count ought to be low). I'm surprised at how much the page `gwern.net` still gets; a surprising number of people must either visit the main page after reading another article or click on my various blog comments.
 
@@ -341,7 +343,7 @@ The main change in page popularity did not surprise me; when I was writing [Silk
 8. Bitcoin is Worse is Better: 4,297
 9. [Links](): 3,490
 
-More interesting is the other signals of popularity: [Zeo Inc.](!Wikipedia) gave me a free set of headbands (worth ~$50) because they liked my [Zeo self-experiments](Zeo), a software engineer/manager contacted me to see about recruiting me, ThinkGum offered me some of their eponymous product for my Nootropics page, and my request for Bitcoin donations has paid off a little with a few donations ฿0.1-1 and one generous donation of ฿20 (worth a bit upwards of $100 at the time; I spent it on modafinil). (This is all intrinsically helpful but I value it mostly because money speaks louder than words.)
+More interesting is the other signals of popularity: [Zeo Inc.](!Wikipedia) gave me a free set of headbands (worth ~\$50) because they liked my [Zeo self-experiments](Zeo), a software engineer/manager contacted me to see about recruiting me, ThinkGum offered me some of their eponymous product for my Nootropics page, and my request for Bitcoin donations has paid off a little with a few donations ฿0.1-1 and one generous donation of ฿20 (worth a bit upwards of $100 at the time; I spent it on modafinil). (This is all intrinsically helpful but I value it mostly because money speaks louder than words.)
 
 #### Promotion
 
@@ -356,11 +358,45 @@ I've done relatively little in this period compared with the [previous period](#
 
 The largest traffic sources are Google at 36,625 visits and direct/no-referrals at 24,118 visits. As I have no idea how to improve these two figures, I ignore it. I write good content, submit it places, supply metadata, and abide by my hackerly principles; hopefully that is all the SEO I need.
 
+### January 2012 -  July 2012
+
+> Uproot your questions from their ground and the dangling roots will be seen. More questions!^['Mentat Zensufi admonition', _[Chapterhouse Dune](!Wikipedia)_; Frank Herbert]
+
+`darcs-graph` for this period (3 January 2012-2 July 2012): <!-- darcs-graph - - filter=20120103 - - y=30 - - output=darcs-history.png - - name=gwern.net /home/gwern/wiki/ -->
+
+![Plot of patch creations (y-axis) versus date (x-axis): January 2012 to 2 July 2012](/images/2012-january-darcs-history.png)
+
+#### Traffic
+
+> If it were not for the intellectual snobs who pay - in solid cash - the tribute which philistinism owes to culture, the arts would perish with their starving practitioners. Let us thank heaven for hypocrisy.^[[Aldous Huxley](!Wikipedia)]
+
+The [Analytics report](/docs/20120103-20120702-gwern.net-analytics.pdf) records traffic over those 182 days as being substantially increased: to 570,997 page-views (average 3,137/day) - almost 5 times the previous six month period - by 268,031 unique visitors in 366,301 visits (average 2012/day). If this rate continues, I will likely lose my traffic prediction (which doesn't bother me very much). In particular, the lifetime total page-views is now at 809,000, which would seem to imply that I will [break the million page-view](http://predictionbook.com/predictions/7457) mark by the next update! I would be very pleased by that milestone.
+
+![Plot of page-hits (y-axis) versus date (x-axis)](/images/201201-201207-traffic-history.png)
+
+The popularity ranking remains mainly the same. 2 differences from the past stand out: the sudden popularity of the Zeo and "Death Note Anonymity" articles. Both owe their inclusion to 2 successful front-page appearances on Hacker News. DNA was submitted by someone I don't know, but I submitted the Zeo page at the conclusion of my first [Vitamin D experiment](Zeo#vitamin-d) where I concluded that that Vitamin D consumed in the evening did indeed damage my sleep (I then followed up with [a second experiment](Zeo#vitamin-d-at-morn-helps) which confirmed that Vitamin D consumed in the morning helped one aspect of sleep.) I am proud of these two experiments and so I was gratified that Hacker News found them worthwhile too.
+
+1. Silk Road: 308,895
+2. DNB FAQ: 36,488
+3. home/main page: 32,259
+4. Modafinil: 23,801
+5. Nootropics: 21,970
+6. [Death Note Anonymity](): 15,860
+7. [Zeo](): 15,841
+8. Spaced repetition: 8,628
+9. Links: 7,431
+
+Donation-wise, I received ~฿2, and a number of Paypal donations: $5, $4, $5, and $100 from a particularly generous LessWronger who wished me to backup my files more securely & remotely. Alexandra Carmichael was impressed by my Zeo experiments and asked me to write an ebook on sleep for an upcoming Quantified Self series of O'Reilly ebooks; we will see how that goes.
+
+#### Promotion
+
+Hacker News, Reddit, and LessWrong remain major referral drivers. For recent new pages, I've been trying a checklist which includes submission to SU, Google+, Hacker News, Reddit, and LessWrong as appropriate; I am not sure how well it is working since popularity seems very random.
+
 ## Source
 
 The source pages works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
 
-The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/), and math is written in [LaTeX](!Wikipedia) compiled to [MathML](!Wikipedia). Comments are outsourced to [Disqus](!Wikipedia)^[Since I am not interested in writing a dynamic system to do it, and their anti-spam techniques are much better than mine.]. (These tools encourage a minimalist site; I believe that [minimalism](!Wikipedia) helps one focus on the content. Anything besides the content is [distraction and not design](http://www.jwz.org/gruntle/design.html). 'Attention!', as [Ikkyu](!Wikipedia) would say[^attention].) The revision history is controlled under [Darcs](!Wikipedia), but I periodically mirror it to a [GitHub repo](https://github.com/gwern/gwern.net).
+The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/) Markdown, and math is written in [LaTeX](!Wikipedia) compiled to [MathML](!Wikipedia). Comments are outsourced to [Disqus](!Wikipedia)^[Since I am not interested in writing a dynamic system to do it, and their anti-spam techniques are much better than mine.]. (These tools encourage a minimalist site; I believe that [minimalism](!Wikipedia) helps one focus on the content. Anything besides the content is [distraction and not design](http://www.jwz.org/gruntle/design.html). 'Attention!', as [Ikkyu](!Wikipedia) would say[^attention].) The revision history is controlled under [Darcs](!Wikipedia), but I periodically mirror it to a [GitHub repo](https://github.com/gwern/gwern.net).
 
 [^attention]: Paraphrased from _Dialogues of the Zen Masters_ as quoted in pg 11 of the Editor's Introduction to _Three Pillars of Zen_:
 
