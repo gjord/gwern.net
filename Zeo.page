@@ -1632,7 +1632,8 @@ The difference between the long-term meditators and their normal Indian counterp
      Paired t test power calculation
               n = 157.237
 ...
-> # we're getting 360 days or 180 pairs; let's ask for more reliable chance than 50-50 of getting a useful result; what does n = 180 buy us? Not much!
+> # we're getting 360 days or 180 pairs; let's ask for more reliable chance than 50-50 of getting a useful result;
+> # what does n = 180 buy us? Not much!
 > pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.55,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
@@ -1671,9 +1672,94 @@ Randomized on a daily basis before going to bed; no placebo, but abstinence. Non
 
 <!-- TODO: at the end of this experiment, ping Seth Roberts and the blogs listed in http://www.nytimes.com/2008/09/18/health/nutrition/18fitness.html?_r=1 -->
 
-In June 2012, early in the experiment, my neighbors threw out a treadmill that turned out to be easily repaired and so I set up an improvised [treadmill desk](!Wikipedia) with my laptop and a spare board. I had read about them before, had since seen a number of negative reports about being sedentary or sitting, and my physical fitness had declined markedly since leaving university (with ready access to the gym, fencing club, and Taekwondo class), so it seemed like the obvious thing to do. The lowest setting on the treadmill (no incline, 1MPH) was initially fairly exhausting but I improved. I started with one mile a day and moved up in a few days to 3-4 miles a day (putting me at the high end of my daily steps as recorded by my pedometer, which annoyingly I lost just 2 days before finding the treadmill); for some reason, this seemed to affect my weight, which went from 218 pounds to 214 a week later and 213 the next day. I finetuned the treadmill desk for typing on my laptop by increasing the height of the board with book supports. My productivity suffered drastically the first days, and I was concerned it would rendered typing difficult, but my scores in my typing practice program (Amphetype) did not seem to change very much when I tested them on all subsequent days that I used the treadmill. I suspect that my average WPM went down somewhat, though. TODO do a t-test for before/after; don't assume equal variance. The gear on the treadmill itself began to loosen, which led to the rubber band slipping off the motor or the gear, and I had to stop for a few days while I figured out solutions. (The epoxy was a mistake as it required a 'hardener' I didn't have; a thin nail couldn't be hammered between the gear and treadmill bar as a shim; and I had to let the Gorilla Glue harden for a day before it performed admirably during the test run.) A few days later, the mat began slipping and just stopping, and I discovered that the gear was rotating freely on the treadmill bar - the friction and glue had apparently lost! I lost several days hoping it would dry. It did and seemed to work again, but to help deal with it, I lubricated the underside of the mat with WD-40. It seemed to work
+In June 2012, early in the experiment, my neighbors threw out a treadmill that turned out to be easily repaired and so I set up an improvised [treadmill desk](!Wikipedia) with my laptop and a spare board. I had read about them before, had since seen a number of negative reports about being sedentary or sitting, and my physical fitness had declined markedly since leaving university (with ready access to the gym, fencing club, and Taekwondo class), so it seemed like the obvious thing to do. The lowest setting on the treadmill (no incline, 1MPH) was initially fairly exhausting but I improved. I started with one mile a day and moved up in a few days to 3-4 miles a day (putting me at the high end of my daily steps as recorded by my pedometer, which annoyingly I lost just 2 days before finding the treadmill); for some reason, this seemed to affect my weight, which went from 218 pounds to 214 a week later and 213 the next day. I finetuned the treadmill desk for typing on my laptop by increasing the height of the board with book supports. My productivity suffered drastically the first days, and I was concerned it would rendered typing difficult, but my scores in my typing practice program ([Amphetype](https://code.google.com/p/amphetype/)) did not seem to change very much when I tested them on all subsequent days that I used the treadmill. I suspect that my average WPM went down somewhat, though my statistical analysis indicated it fell only slightly if at all[^Amphetype]. The gear on the treadmill itself began to loosen, which led to the rubber band slipping off the motor or the gear, and I had to stop for a few days while I figured out solutions. (The epoxy was a mistake as it required a 'hardener' I didn't have; a thin nail couldn't be hammered between the gear and treadmill bar as a shim; and I had to let the Gorilla Glue harden for a day before it performed admirably during the test run.) A few days later, the mat began slipping and just stopping, and I discovered that the gear was rotating freely on the treadmill bar - the friction and glue had apparently lost! I lost several days hoping it would dry. It did and seemed to work again, but to help deal with it, I lubricated the underside of the mat with WD-40. It seemed to work
 
 My expectations are that the treadmill will increase how much I sleep, decrease sleep latency, and possibly have a small negative effect on productivity (which may be offset by an improvement in mood and less need to get a daily walk). If it were intense aerobic fitness, I might expect an increase in cognitive abilities or various sorts, but it's not, so I don't expect any effect on Mnemosyne scores.
+
+[^Amphetype]: Fortunately, I had used Amphetype for typing practice for 3 years prior to finding the treadmill, so I could compare my daily treadmill typing sessions to a very long dataseries.
+
+    ![WPM (top) and accuracy scores (bottom) plotted over time on a time-scaled X-axis with undampened values. The tight group at the far right is the week or two of typing practice while using a treadmill.](/images/zeo/2012-amphetype.png)
+
+    The graph looks like WPM (but not Accuracy) may have been damaged, but it's not clear at all: we should do statistics. Amphetype stores the graphed data in a [SQLite](!Wikipedia) database, which after a little tinkering I figured out how to extract the WPM & Accuracy scores:
+
+    ~~~{.sh}
+    sqlite3 -batch gwern.db 'SELECT w real, wpm real, accuracy real FROM result;' > ~/stats.txt
+    ~~~
+
+    Which gives a file like
+
+    ~~~
+    1233502576.01172|70.2471151325281|0.981412639405205
+    1233502634.48339|80.9762013034008|0.989159891598916
+    1233502677.26434|74.0623733171948|0.988326848249027
+    ...
+    ~~~
+
+    The pipes are delimiters, which I replaced with commas. The first field is a date-stamp as expressed in seconds since the [Unix epoch](!Wikipedia); they can be converted to more readable dates like so:
+
+    ~~~{.sh}
+    $ date --date '@1308320681.44771'
+    Fri Jun 17 10:24:41 EDT 2011
+    ~~~
+
+    I went through the 2870 lines until I found the first treadmill session I did on June 16. After splitting, deleting the date-stamps, and adding a CSV header like `WPM,Accuracy`, I had had 2285 entries for [2012-gwern-amphetype-before.csv](/docs/2012-gwern-amphetype-before.csv) and 585 for [2012-gwern-amphetype-after.csv](/docs/2012-gwern-amphetype-after.csv). Then it is easy to load the CSVs into R and test:
+
+    ~~~{.R}
+    > before <- read.table("2012-gwern-amphetype-before.csv", header=TRUE, sep=",")
+    > after <- read.table("2012-gwern-amphetype-after.csv", header=TRUE, sep=",")
+    > t.test(before$WPM, after$WPM); t.test(before$Accuracy, after$Accuracy)
+
+        Welch Two Sample t-test
+
+    data:  before$WPM and after$WPM
+    t = -12.0053, df = 899.744, p-value < 2.2e-16
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -6.068614 -4.363238
+    sample estimates:
+    mean of x mean of y
+     82.34342  87.55935
+
+        Welch Two Sample t-test
+
+    data:  before$Accuracy and after$Accuracy
+    t = -4.4027, df = 940.588, p-value = 1.192e-05
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.0023275753 -0.0008923092
+    sample estimates:
+    mean of x mean of y
+    0.9875169 0.9891269
+    ~~~
+
+    What? Using a treadmill made my average WPM go *up* 5 WPM? And my average accuracy increased 0.002%? And both are highly significant (not a surprise, given how many entries there were)? What's going on - this is the exact opposite of expected! The key is the low mean of the `before` data: I type much faster than 82 WPM now. What happened was that I spent 3 years practicing. Given that I was improving, it is wrong to compare the treadmill typing data against a long-run average. What would be better would be to lop off the first half of the `before` data to get a fairer comparison with `after`, since I began to plateau around then. Redoing the tests:
+
+    ~~~{.R}
+    > t.test(before$WPM[1144:2285], after$WPM); t.test(before$Accuracy[1144:2285], after$Accuracy)
+        Welch Two Sample t-test
+
+    data:  before$WPM[1144:2285] and after$WPM
+    t = -5.3227, df = 1132.508, p-value = 1.232e-07
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -3.429192 -1.581982
+    sample estimates:
+    mean of x mean of y
+     85.05376  87.55935
+
+        Welch Two Sample t-test
+
+    data:  before$Accuracy[1144:2285] and after$Accuracy
+    t = -1.3091, df = 1156.249, p-value = 0.1908
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.0012902667  0.0002575397
+    sample estimates:
+    mean of x mean of y
+    0.9886105 0.9891269
+    ~~~
+
+    This is more reasonable: only a 2 WPM gain from the treadmill. 2 WPM could be explicable as just a placebo effect: me wanting to justify the time I've sunk into the treadmill and typing practice every day. It's still a little surprising, but the result seems solid. (If we drop every score before 2000 instead of 1144, the difference continues to shrink but still favors the treadmill. We have to go to scores 2100-2285 before the treadmill starts to lose, but with 2200-2285 the treadmill wins!) Accuracy seems largely unaffected.
 
 ### Power
 
@@ -1848,7 +1934,9 @@ July
 5: 3
 6: 2
 7: 4
+8: 4
 -->
+
 <!--
 Treadmill data
 31 inches per step, so 1 mile = 2040 steps
@@ -2066,3 +2154,7 @@ This is what I have learned:
 <!-- Redshift: 06 Jul 2012: on -->
 <!-- Redshift: 07 Jul 2012: on -->
 <!-- Redshift: 08 Jul 2012: off -->
+<!-- Redshift: 09 Jul 2012: on -->
+<!-- Redshift: 10 Jul 2012: on -->
+<!-- Redshift: 12 Jul 2012: on -->
+<!-- Redshift: 13 Jul 2012: off -->
