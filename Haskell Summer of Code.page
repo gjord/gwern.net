@@ -1,6 +1,8 @@
 ---
 description: A retrospective of 6 years of SoC, and lessons learned
 tags: Haskell
+status: in progress
+belief: highly likely
 ...
 
 As part of Google's [Summer of Code](!Wikipedia "Google Summer of Code") [program](http://code.google.com/soc/), they sponsor 5-10 SoC [projects for Haskell](http://hackage.haskell.org/trac/summer-of-code/).
@@ -79,6 +81,8 @@ The 2006 [homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2006)
 - "Storable a => ByteString a"; Spencer Janssen, mentored by Don Stewart
 
     **Successful**? (Again, per Don.) Currently exists as [storablevector](!Hackage), with [20 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/storablevector-0.2.7#indirect).
+
+[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. ([Waern's reply](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
 
 4 successful; 2 unsuccessful; and 2 failures.
 
@@ -463,6 +467,10 @@ So, what lessons can we learn from the past years of SoCs? It seems to me like t
 2. _Unclear use_. HsJudy is my example here. There are already so many arrays and array types in Haskell! What does HsJudy bring to the table that justifies a FFI dependency? Who's going to use it? Pugs initially did apparently, but perhaps that's just because it was there - when I looked at Pugs/HsJudy in 2007, certainly Pugs had no need of it. (The data parallel physics engine is probably another good example. Is it just a benchmark for the GHC developers? Is it intended for actual games? If the former, why is it a SoC project, and if the latter, isn't that a little hubristic?)
 3. _Lack of propaganda_. One of the reasons Don Stewart's bytestring library is so great is his relentless evangelizing, which convinces people to actually take the effort to learn and use Bytestrings; eventually by network effects, the whole Haskell community is affected & improved[^academic]. Some of these SoC projects suffer from a distinct lack of community buy-in - who used HaskellNet? Who used Hat when it was updated? Indifference can be fatal, and can defeat the point of a project. What good is a library that no one uses? These aren't academic research projects which accomplish their task just by existing, after all. They're supposed to be useful to real Haskellers.
 
+[^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen of Oleg Kiselyov; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in both quantity and quality, everyone acknowledges, but how often does anyone actually *use* any of it?
+
+    ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratee](!Hackage) has picked up [4 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee#direct), its most popular successor [33](http://sparky.haskell.org:8080/package/enumerator/reverse) and iteratees in general may one day become as widely used as bytestrings.)
+
 ### Future SoC proposals
 
 There are 2 major collections of ideas for future SoC projects, aside from the general frustrations expressed in the [annual survey](http://nickknowlson.com/blog/2011/09/12/haskell-survey-categorized-weaknesses/):
@@ -487,7 +495,7 @@ Let's look at the first 12 and see whether they're good ideas, bad ideas, or ind
 
 [^kamatsu]: Liam O'Connor [begs to differ](http://www.reddit.com/r/haskell/comments/fid5w/haskell_summers_of_code_retrospective_updated_for/c1gutlo) on the value of a DPH or CUDA SoC.
 
-# External links
+# See Also
 
 It's difficult to quantify how 'useful' a package is; it's easier to punt and ask instead how 'popular' it is. There are a few different sources we can appeal to:
 
@@ -510,7 +518,6 @@ It's difficult to quantify how 'useful' a package is; it's easier to punt and as
     iv. the [Haskell wiki](http://haskell.org/haskellwiki/index.php?title=&search=&fulltext=Search)
     v. [Haskell mailing lists](http://dir.gmane.org/index.php?prefix=gmane.comp.lang.haskell)
 
-[^complaints]: I can hear the wankers in the peanut gallery - "Yeah, and it's been buggy ever since!" Hush you. ([Waern's reply](http://www.haskell.org/pipermail/haskell-cafe/2009-February/055500.html).)
-[^academic]: Many good and worthwhile projects suffer this fate because of their academic origins. There's no reward for someone who creates a great technique or library and gets the wider community to adopt it as standard. As far as the Haskell community is concerned, one Don Stewart is worth more than a dozen of Oleg Kiselyov; [Oleg's work](http://okmij.org/ftp/) is mindblowingly awesome in both quantity and quality, everyone acknowledges, but how often does anyone actually *use* any of it?
+# External links
 
-    ([Iteratees](http://okmij.org/ftp/Streams.html) may be the exception; although there are somewhere upwards of [5 implementations](http://john-millikin.com/articles/understanding-iteratees/) by Oleg and others, the original [iteratee](!Hackage) has picked up [4 reverse dependencies](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/iteratee#direct), its most popular successor [33](http://sparky.haskell.org:8080/package/enumerator/reverse) and iteratees in general may one day become as widely used as bytestrings.)
+- ["How to recruit open-source contributors"](http://redmonk.com/dberkholz/2012/07/10/how-to-recruit-open-source-contributors/) -(Gentoo developer Donnie Berkholz on increasing GSoC->regular developer yields)
