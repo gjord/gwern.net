@@ -1,5 +1,7 @@
 ---
 description: Haskell: archive Wikipedia with TagSoup and WebCite
+status: finished
+belief: likely
 ...
 
 One of the best ways to learn something like [Haskell](!Wikipedia "Haskell (programming language)") is to simply dive in and make it do something useful. In my case, I've wanted to learn Haskell for a long time: the syntax was gorgeous compared to [Common Lisp](!Wikipedia), [Bash](!Wikipedia), or Java (the only other languages I had experience with); various ideas such as [monads](!Wikipedia "Monad (functional programming)"), [lazy evaluation](!Wikipedia), and [functional purity](!Wikipedia) struck me as fascinating and exciting; and the community was excellent.
@@ -8,12 +10,12 @@ But I didn't have any practical use for it, and I'm too lazy to learn it unless 
 
 2 in particular struck me as fixable without requiring modifications to the MediaWiki codebase (a messy yet featureful pile of PHP):
 
-1) the "feature" of MediaWiki that by default, `Fujiwara no Teika` is a pagename distinct from `Fujiwara no teika`. Going to the latter does not automatically redirect to the former. One must either create redirects to the right pagename^[$n^2-1$, where $n$ is how many spaces there are in the pagename.] , or simply accept that mis-capitalizations will result in broken links and needless searches.
-2) Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the [Internet Archive](!Wikipedia) doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from [Alexa](!Wikipedia) & its [toolbar](!Wikipedia "Alexa Toolbar"), which are provided an eternity (6 months or more) after the original spidering of the external link. An external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
+1. the "feature" of MediaWiki that by default, `Fujiwara no Teika` is a pagename distinct from `Fujiwara no teika`. Going to the latter does not automatically redirect to the former. One must either create redirects to the right pagename^[$n^2-1$, where $n$ is how many spaces there are in the pagename.] , or simply accept that mis-capitalizations will result in broken links and needless searches.
+2. Links to other non-Wikipedia websites, "external links", often break. Because articles can evolve so fast, the [Internet Archive](!Wikipedia) doesn't necessarily manage to archive all external links; worse, the Internet Archive is dependent for its data on data dumps from [Alexa](!Wikipedia) & its [toolbar](!Wikipedia "Alexa Toolbar"), which are provided an eternity (6 months or more) after the original spidering of the external link. An external link could be added to an article, used as a reference, fall victim to the infamous 404 error, be noticed to be a dead link and removed on that basis within a few weeks much less 9 months!
 
 # Archiving
-
 ## How to?
+
 Let's talk about Problem 2.
 
 The beginning of a solution is to realize that the Internet Archive is not usable here. Their [FAQ](http://www.archive.org/about/faqs.php#1) specifically says that archiving is done only through Alexa, and Alexa only does it through their spiders, the Alexa toolbar (proprietary and MS Windows/IE-only), and some web form which doesn't appear to do anything^[It is possible, though difficult, to script the forms in Haskell.]. Their [Archive-It](http://www.archive-it.org/) service does do on-demand archiving, but at steep institution-targeted fees; not something for individual users.
@@ -228,7 +230,7 @@ rq%3D3%26wid%3D7005%26ttl%3D2241
 
 What is this gibberish? `ttl` looks like a field name ('[time to live](!Wikipedia)', perhaps?); it's URL-encoded gunk, so let's [decode](http://meyerweb.com/eric/tools/dencoder/) it:
 
-~~~~{.has
+~~~~
 rq=0&wid=7005
 rq=1&wid=7005&ttl=1400
 rq=2&wid=7005&ttl=989
@@ -532,13 +534,13 @@ It performs acceptably for small values of $n$, but if we try 100 or more, we qu
 
 ~~~~{.haskell}
 import Data.Set (toList, fromList)
-~~~~~
+~~~~
 
 And replace the last line of main with:
 
 ~~~~{.haskell}
           mapM_ archiveURL $ liftM (toList . fromList) urllist
-~~~~~
+~~~~
 
 But we must continue our quest for it is still not fast enough.
 
@@ -549,7 +551,7 @@ The conventional wisdom is whenever you are using String and it isn't fast enoug
 ~~~~{.haskell}
 import qualified Data.ByteString.Lazy.Char8 as B
             (ByteString(), getContents, lines, unlines, pack, unpack, words)
-~~~~~
+~~~~
 
 To convert to ByteString, we first convert to ByteString equivalents wherever possible - `B.words $ B.getContents`, for example. Unfortunately for our main function, ByteString introduces some weirdness, so we de-sugar the do notation to use the good old [=<<](!Hoogle) operator to make sure everything fits together. But take heart, it's shorter than before:
 
