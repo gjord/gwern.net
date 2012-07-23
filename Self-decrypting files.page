@@ -2,9 +2,9 @@
 title: Time-lock encryption
 description: How do you encrypt a file such that it can be broken after a date but not *before*?
 tags: computer science, cryptography
+status: finished
+belief: highly likely
 ...
-
-# Delayed self-decrypting files
 
 Julian Assange/Wikileaks made some [headlines](http://www.wired.com/threatlevel/2010/07/wikileaks-insurance-file/) in 2010 when they released an 'insurance file', an 1.4GB [AES-256](!Wikipedia)-encrypted file available through BitTorrent. It's generally assumed that copies of the encryption key have been left with Wikileaks supporters who will, in the appropriate contingency like Assange being assassinated, leak the key online to the thousands of downloaders of the insurance file, who will then read and publicize whatever contents as in it (speculated to be additional US documents Manning gave Wikileaks).
 
@@ -24,7 +24,7 @@ Now, it's hard to imagine how some abstract math could observe an assassination 
 
 One could encrypt the file against information that will be known in the future, like stock prices - except wait, how can you find out what stock prices will be a year from now? You can't use anything that is public knowledge *now* because that'd let the file be decrypted immediately, and by definition you don't have access to information currently unknown but which will be known in the future, and if you generate the information yourself planning to release it, now you have problems - you can't even trust yourself (what if you are abruptly assassinated like [Gerald Bull](!Wikipedia)?) much less your confederates.
 
-## No trusted third-parties
+# No trusted third-parties
 
 Note that this bars a lot of the [usual suggestions](http://www.halfbakery.com/idea/Do_20not_20decrypt_20until_20_2e_2e_2e) for cryptography schemes. For example the general approach of [key escrow](!Wikipedia) (eg. [Bellare & Goldwasser](http://groups.csail.mit.edu/cis/pubs/shafi/1997-ccs.pdf) 1996) if you trust some people, you can just adopt a [secret sharing](!Wikipedia) protocol where they XOR together their keys to get the master key for the publicly distributed encrypted file. Or if you only trust some of those people (but are unsure which will try to betray you and either release early or late), you can adopt where _k_ of the _n_ people suffice to reconstruct the master key like [Rabin & Thorpe](ftp://ftp.deas.harvard.edu/techreports/tr-22-06.pdf) 2006. (And you can connect multiple groups, so each decrypts some necessary keys for the next group; but this gives each group a consecutive veto on release...) Or perhaps something could be devised based on [trusted timestamping](!Wikipedia) like [Crescenzo et al](http://www.cs.ucla.edu/~rafail/PUBLIC/42.pdf) 1999 or [Blake & Chan](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.2.3030&rep=rep1&type=ps) 2004; but then don't you need the [trusted third party](!Wikipedia) to survive on the network? Or [secure multi-party computation](!Wikipedia) (but don't *you* need to be on the network, or risk all the parties saying 'screw it, we're too impatient, let's just pool our secrets and decrypt the file *now*'?) or you could exploit physics and use the speed of light to communicate with [a remote computer on a spacecraft](http://www.reddit.com/r/crypto/comments/r4q2q/reliable_timelock_crypto_step_one_obtain_a/ "Reliable time-lock crypto. Step one: obtain a deep-space probe...") (except now we're trusting the spacecraft as our third party, hoping no one stole its onboard private key & is able to decrypt our transmissions instantaneously)...
 
@@ -36,7 +36,7 @@ One approach is to focus on creating problems which can be solved with a large b
 
     On the other hand, a similar criticism could and has been made about [Bitcoin](Bitcoin is Worse is Better) (supporters/users must expend massive computing power constantly just to keep it working, with no computational advantage over attackers), and that system has worked pretty well in practice.
 
-## Hashing
+# Hashing
 
 For example, one could take a [hash](!Wikipedia "Cryptographic hash function") like [bcrypt](!Wikipedia), give it a random input, and hash it for a month. Each hash depends on the previous hash, and there's no way to skip from the first hash to the trillionth hash. After a month, you use the final hash as the encryption key, and then release the encrypted file and the random input to all the world. The first person who wants to decrypt the file has no choice but to redo the trillion hashes in order to get the same encryption key you used.
 
@@ -48,7 +48,7 @@ This is pretty clever. If one has a thousand CPUs handy, one can store up 3 year
 
 It's hard to see. At least, I haven't thought of anything clever. [Homomorphic encryption](!Wikipedia) promises to let us encode arbitrary computations into an encrypted file, so one could imagine implementing the above hash chains *inside* the homomorphic computation, or perhaps just encoding a simple loop counting up to a very large number; but it's not clear how one would let the public decrypt the result of the homomorphic encryption without also letting them tamper with the loop or whatever, and in any case, homomorphic encryption is currently a net-loss - it takes as much or more CPU time to create such a program as it would take to run the program, and in that case, one might as well use the previous hash schemes.
 
-### Vulnerability of one-way functions
+## Vulnerability of one-way functions
 
 As it turns out, ["Time-Lock Puzzles in the Random Oracle Model"](http://people.seas.harvard.edu/~salil/research/timelock.pdf) (Mahmoody, Moran, and Vadhan 2011; [slides](http://www.iacr.org/conferences/crypto2011/slides/01-3-Mahmoody.pdf)) directly & formally analyzes the general power of one-way functions used for time-lock puzzles assuming a [random oracle](!Wikipedia). Unfortunately, they find an opponent can exploit the oracle to gain speedups. Fortunately, the cruder scheme where one 'stores up' computation (repeatedly asking the oracle at inputs based on its previous output) still works under their assumptions:
 
@@ -56,7 +56,7 @@ As it turns out, ["Time-Lock Puzzles in the Random Oracle Model"](http://people.
 
 That is, the puzzle constructor can construct the puzzle in parallel, and the solver has to solve it serially.
 
-## Successive squaring
+# Successive squaring
 
 At this point, let's see what the crypto experts have to say. Googling to see what the existing literature was (after I'd thought of the above schemes), I found that the relevant term is "time-lock puzzles" (from analogy with the bank vault [time lock](!Wikipedia)). In particular, [Rivest](!Wikipedia "Ron Rivest")/[Shamir](!Wikipedia "Adi Shamir")/[Wagner](!Wikipedia "David A. Wagner") have published a 1996 paper on the topic, ["Time-lock puzzles and timed-release crypto"](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.110.5709). The very first paragraph is interesting; apparently the question was first raised by [Timothy C. May](!Wikipedia) on the [Cypherpunks mailing list](!Wikipedia). Unfortunately, there seem to be no archives online of the cypherpunk mailing list (the provided URL is long dead); fortunately, May discusses the topic briefly in his _[Cyphernomicon](!Wikipedia)_, [ch14.5](http://www.cypherpunks.to/faq/cyphernomicron/chapter14.html); unfortunately, May's solution (14.5.1) is essentially to punt to the legal system and rely on legal privilege and economic incentives to keep keys private.
 
@@ -85,7 +85,7 @@ Rivest [has actually used](http://people.csail.mit.edu/rivest/lcs35-puzzle-descr
 
 > "An interesting question is how to protect such a computation from errors. If you have an error in year 3 that goes undetected, you may waste the next 32 years of computing. Adi Shamir has proposed a slick means of checking your computation as you go, as follows. Pick a small (50-bit) prime _c_, and perform the computation modulo _cn_ rather than just modulo _n_. You can check the result modulo _c_ whenever you like; this should be a extremely effective check on the computation modulo _n_ as well."
 
-### Constant factors
+## Constant factors
 
 How well does this work? The complexity seems correct, but I worry about the constant factors. Back in 1996, computers were fairly homogeneous, and Rivest et al could reasonably write
 
@@ -97,7 +97,7 @@ But that doesn't seem very true any more. Devices can differ dramatically now ev
 
 And then there are more exotic technologies like [field-programmable gate array](!Wikipedia)s which may be specialized for successive squaring; if problems like the [n-body problem](!Wikipedia) can be [handled with custom chips](!Wikipedia "Gravity Pipe"), why not multiplication? Offhand, I don't know of any compelling argument to the effect that there are no large constant-factor speedups possible for multiplication/successive-squaring. Indeed, the general approach of exponentiation and factoring has to worry about the fact that the complexity of factoring has never been proven (and could still be very fast) and that there are speedups with quantum techniques like [Shor's algorithm](!Wikipedia).
 
-## Memory-bound hashes
+# Memory-bound hashes
 
 Of course, one could ask the same question of my original proposal - what makes you think that hashing can't be sped up? You already supplied an example where cryptographic hashes were sped up astonishingly by a GPU, Bitcoin mining.
 
