@@ -1220,6 +1220,14 @@ Caveats for this study:
 
 ["Behavioral and EEG Effects of Working Memory Training"](http://psych.wisc.edu/postlab/posters/bornali_cns_2012.pdf); 13 controls and 13 experimentals trained for 1000 minutes on dual n-back (Brain Workshop) or Tetris. "Training does not appear to transfer to _gf_ [RAPM] or complex span [OSPAN]." This is not a published study but a conference poster, so details such as RAPM scores are not included. It may be related to [Kundu et al 2011](#kundu-et-al-2011).
 
+### Salminen 2012
+
+["On the impacts of working memory training on executive functioning"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3368385/), Salminen & Strobach & Schubert, _Frontiers in Human Neuroscience_:
+
+> Recent studies have reported improvements in a variety of cognitive functions following sole working memory (WM) training. In spite of the emergence of several successful training paradigms, the scope of transfer effects has remained mixed. This is most likely due to the heterogeneity of cognitive functions that have been measured and tasks that have been applied. In the present study, we approached this issue systematically by investigating transfer effects from WM training to different aspects of executive functioning. Our training task was a demanding WM task that requires simultaneous performance of a visual and an auditory n-back task, while the transfer tasks tapped WM updating, coordination of the performance of multiple simultaneous tasks (i.e., dual-tasks) and sequential tasks (i.e., task switching), and the temporal distribution of attentional processing. Additionally, we examined whether WM training improves reasoning abilities; a hypothesis that has so far gained mixed support. Following training, participants showed improvements in the trained task as well as in the transfer WM updating task. As for the other executive functions, trained participants improved in a task switching situation and in attentional processing. There was no transfer to the dual-task situation or to reasoning skills. These results, therefore, confirm previous findings that WM can be trained, and additionally, they show that the training effects can generalize to various other tasks tapping on executive functions.
+
+Passive control group; unspeeded RAPM test.
+
 ### Redick 2012
 
 ["No evidence of transfer after working memory training: A controlled, randomized study"](http://scottbarrykaufman.com/wp-content/uploads/2012/05/Redick-et-al-final-JEPG.pdf), Redick et al; abstract:
@@ -1275,6 +1283,7 @@ The candidate studies:
 - [Schweizer    2011](#schweizer-2011)
 - [Jaušovec     2012](#jaušovec-2012)
 - [Kundu et al  2012](#kundu-et-al-2012)
+- [Salminen et al 2012](#salminen-2012)
 - [Redick et al 2012](#redick-2012)
 - Stephenson & Halpern 2012?
 - Jaeggi 2012?
@@ -1370,6 +1379,7 @@ The data from the surviving studies:
 "Schweizer"    2011   29   27.07     2.16   16    26.5    4.5    1
 "Jaušovec"     2012   14   32.43     5.65   15    29.2    6.34   1
 "Kundu2"       2012   11   10.81     2.32   12    9.5     2.02   1
+"Salminen"     2012   13   13.7      2.2    9     10.9    4.3    0
 "Redick.1"     2012   12   6.25      3.08   20    6       3      0
 "Redick.2"     2012   12   6.25      3.08   29    6.24    3.34   1
 ~~~
@@ -1435,60 +1445,58 @@ Test for subgroup differences (random effects model):
 Between groups   2.33    1   0.1272
 ~~~
 
-The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect. The studies are quite different. This heterogeneity also shows up as a high τ^2^ and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 72%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.58 (!) and some instances of _d_<=0.
+The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect. The studies are quite different. This heterogeneity also shows up as a high τ^2^ and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 62%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<=0.
 
 ### Biases
 
-10-12 studies is considered weak for a meta-analysis and barely permits us to generate [funnel](!Wikipedia "Funnel plot") and [forest plots](!Wikipedia), or check for possible [publication bias](!Wikipedia) via the [trim and fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless.
+~15 studies (some quite small) is considered weak for a meta-analysis but it does permit us to generate [funnel](!Wikipedia "Funnel plot") and [forest plots](!Wikipedia), or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless.
 
 ![Funnel plot of DNB and IQ meta-analysis, generated by R](/images/dnb-funnel.png)
 ![Forest plot of DNB and IQ meta-analysis, generated by R](/images/dnb-forest.png)
 
-The trim and fill estimate:
+The trim-and-fill estimate:
 
 ~~~{.R}
 > trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control))
 ...
-Filled: 10  0.9669  [ 0.0359; 1.8978]      2.41       3.93
-Filled: 15  1.0109  [ 0.2949; 1.7269]      4.07       4.79
-Filled: 16  1.0883  [ 0.4156; 1.7611]      4.61       4.97
-Filled: 8   1.5101  [ 0.4735; 2.5467]      1.94       3.56
-Filled: 7   1.5855  [ 0.5941; 2.5769]      2.12       3.71
+Filled: 17  1.0043  [ 0.2883; 1.7203]      4.06       4.78
+Filled: 18  1.0818  [ 0.4090; 1.7545]      4.60       4.97
+Filled: 8   1.5035  [ 0.4670; 2.5401]      1.94       3.54
+Filled: 7   1.5790  [ 0.5876; 2.5704]      2.12       3.70
 
 Number of studies combined: k=22
 
                         SMD            95%-CI      z  p.value
-Fixed effect model   0.5457  [0.4013; 0.6901] 7.4065 < 0.0001
-Random effects model 0.5870  [0.3082; 0.8657] 4.1271 < 0.0001
+Fixed effect model   0.5424  [0.3981; 0.6866] 7.3696 < 0.0001
+Random effects model 0.5812  [0.3039; 0.8584] 4.1084 < 0.0001
 
 Quantifying heterogeneity:
-tau^2 = 0.2891; H = 1.84 [1.48; 2.28]; I^2 = 70.4% [54.3%; 80.8%]
+tau^2 = 0.2851; H = 1.83 [1.47; 2.27]; I^2 = 70.1% [53.9%; 80.6%]
 
 Test of heterogeneity:
      Q d.f.  p.value
- 70.83   21 < 0.0001
+ 70.25   21 < 0.0001
 ~~~
 
-The trim and fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while most of the entries average around _d_=0.3, there must be 5 missing (sub)studies around _d_=1, and hence it estimates a stronger effect size under both the fixed and random effects models.
+The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while most of the entries average around _d_=0.3, there must be 4 missing (sub)studies around _d_=1-1.5, and hence it estimates a stronger effect size under both the fixed and random effects models.
 
-If the visible outlier on the funnel & forest plots (Stephenson 2010) is deleted, the trim and fill changes:
+If the visible outlier on the funnel & forest plots (Stephenson 2010) is deleted, the trim-and-fill changes:
 
 ~~~{.R}
-Filled: 6  1.0419  [ 0.0054; 2.0785]      2.56       2.69
-Filled: 5  1.1174  [ 0.1260; 2.1088]      2.80       2.94
+Filled: 5  1.1163  [ 0.1249; 2.1077]      2.78       2.81
 
 Number of studies combined: k=17
 
                         SMD            95%-CI      z  p.value
-Fixed effect model   0.3116  [0.1456; 0.4776] 3.6786   0.0002
-Random effects model 0.3116  [0.1397; 0.4836] 3.5518   0.0004
+Fixed effect model   0.3111  [0.1458; 0.4763] 3.6889   0.0002
+Random effects model 0.3110  [0.1442; 0.4778] 3.6546   0.0003
 
 Quantifying heterogeneity:
-tau^2 = 0.0060; H = 1.02 [1; 1.46]; I^2 = 4.6% [0%; 53.3%]
+tau^2 = 0.0015; H = 1.01 [1; 1.44]; I^2 = 1.2% [0%; 51.7%]
 
 Test of heterogeneity:
      Q d.f.  p.value
- 16.77   16   0.4009
+ 16.19   16   0.4395
 ~~~
 
 <!--
@@ -1597,14 +1605,6 @@ The WM training was done using [Cogmed](http://www.cogmed.com/); it's unclear wh
 Note the means as compared with the standard deviation; these are very troubled young people.
 
 <!-- meta-analysis data: "Roughan"    2011   7    5.36      6.52   8     -6.35   7.21 -->
-
-### Salminen 2012
-
-["On the impacts of working memory training on executive functioning"](http://www.psy.lmu.de/exp/people/former/strobach/publications/salminenetal2011abs.pdf), Salminen & Strobach & Schubert, _Frontiers in Human Neuroscience_:
-
-> Recent studies have reported improvements in a variety of cognitive functions following sole working memory (WM) training. In spite of the emergence of several successful training paradigms, the prerequisites to transfer have remained obscure. This is most likely due to the heterogeneity of cognitive functions that have been measured and tasks that have been applied. In the present study, we approached this issue systematically by investigating transfer effects from WM training to different aspects of executive functioning. Our training task was a demanding WM task that requires simultaneous performance of a visual and an auditory n-back task, while the transfer tasks tapped WM updating, coordination of the performance of multiple simultaneous tasks (i.e., dual-tasks) and sequential tasks (i.e., task switching), and temporal distribution of attentional processing. Additionally, we examined whether WM training improves reasoning abilities; a hypothesis that has so far gained mixed support. Compared to an untrained control group, it was found that training led to improvements in the trained task as well as in the transfer WM updating task. As for the other executive functions, trained participants improved in a task switching situation and in attentional processing. There was no transfer to the dual-task situation or to reasoning skills. These results therefore confirm previous findings that WM can be trained, and additionally, they show that the training effects can generalize to various other tasks tapping on executive functions.
-
-No IQ tests.
 
 ### Brehmer et al 2012
 
