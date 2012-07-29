@@ -50,9 +50,15 @@ I have tried to do my little self-experiments as well as I know how to, and hope
     One thinks of [a saying](http://deming.org/index.cfm?content=653 "Four Days with W. Edwards Deming") of [W. Edwards Deming](!Wikipedia):
 
     > Experience by itself teaches nothing.
+
+    ["It's Hard to Stay Friends With a Digital Exercise Monitor"](http://www.nytimes.com/2012/07/29/technology/nike-fuelband-tracks-physical-activity-inconsistently.html), Jenna Wortham, on her [Nike+ FuelBand](!Wikipedia) motion sensor:
+
+    > The forgetfulness and guilt I experienced as my FuelBand honeymoon wore off is not uncommon, according to people who study behavioral science. The collected data is often interesting, but it is hard to analyze and use in a way that spurs change. "It doesn't trigger you to do anything habitually," said Michael Kim, who runs Kairos Labs, a Seattle-based company specializing in designing social software to influence behavior. "Habits are based on cues that happen every day, which leads to a routine and then a reward or achievement, which could just be something as general as an endorphin rush." Of the FuelBand, he said, "You just see a pretty number that isn't always enough to be a trigger." The FuelBand connects with smartphones and a Web-based interface, which shows users a cute animation of a dancing alien as a reward for reaching a goal. But Mr. Kim, whose résumé includes a stint as director of Xbox Live, the online gaming system created by Microsoft, said the gamelike mechanisms of the Nike device and others like it were "not enough" for the average user. "Points and badges do not lead to behavior change," he said.
+    >
+    > The FuelBand and its counterparts also allow users to announce their achievements on various social networks. But frequent updates could annoy the friends who see them. "Does anyone really want to see how many miles you ran, what you weigh, along with what the weather is where you are and the songs you're listening to?" said B. J. Fogg, who directs the Persuasive Technology Lab at Stanford and has conducted research tests with the FuelBand and other forms of wearable technology. But Mr. Fogg said he believed that the FuelBand might be useful in another way. Simply donning it can work as a fancier version of a string tied around your finger: a reminder to complete a task or errand, he said. It could be the nudge you need, for example, to get off the subway a few stops early and walk the rest of the way home, or to jog a few extra laps around the track.
 [^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his _The Four-hour Body_ claims:
 
-    > "Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20 –30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using."
+    > Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20-30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using.
 
 # First impressions
 ## First night
@@ -1219,7 +1225,7 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
     (Intercept)              2.42111    0.15763  15.359   <2e-16 ***
     Morning.Feel[1:(n - 1)]  0.13587    0.05504   2.469   0.0141 *
     ---
-    Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
     Residual standard error: 0.667 on 322 degrees of freedom
       (123 observations deleted due to missingness)
@@ -1475,6 +1481,9 @@ I don't actually know how to use ANOVA in R, but I can figure that out in a year
 Rationale & procedure in the [Nootropics page](Nootropics#lithium). Randomized in 7-day blocks. Blinded.
 
 ## Redshift/f.lux
+
+<!-- TODO: alert redshift & f.lux devs; ping http://www.bayesianinvestor.com/blog/index.php/2012/07/22/sleep-improvements/
+http://www.reddit.com/r/psychology/comments/x53jw/too_much_light_at_night_may_lead_to_depression/c5jarmv -->
 
 My earlier [melatonin experiment](#melatonin) found it helped me sleep. Melatonin secretion is also influenced by the color of light (some references can be found in my [melatonin article](Melatonin)), specifically blue light tends to suppress melatonin secretion while redder light does not affect it. (This makes sense: blue/white light is associated with the brightest part of the day, while reddish light is the color of sunsets.) Electronics and computer monitors frequently emit white or blue light. (The recent trend of bright blue LEDs is particularly deplorable in this regard.) Besides the plausible suggestion about melatonin, reddish light impairs night vision less and is easier to see under dim conditions: you may want a blazing white screen at noon so you can see *something*, but in a night setting, that is like staring for hours straight into a fluorescent light.
 
@@ -2078,6 +2087,18 @@ July 2012
 6: 1 1 0 0
 7: 0 0 1 1
 8: 1 1 0 1
+date pushups meditation masturbation
+19: 1 1 0
+20: 0 0 1
+21: 1 1 1
+22: 1 0 0
+23: 1 0 1
+24: 0 0 0
+25: 0 0 1
+26: 0 1 0
+27: 0 0 1
+28: 1 0 0
+29: 1 1 1
 -->
 
 # Conclusions
@@ -2158,3 +2179,19 @@ This is what I have learned:
 <!-- Redshift: 10 Jul 2012: on -->
 <!-- Redshift: 12 Jul 2012: on -->
 <!-- Redshift: 13 Jul 2012: off -->
+<!-- Redshift: 14 Jul 2012: on -->
+<!-- Redshift: 15 Jul 2012: on -->
+<!-- Redshift: 16 Jul 2012: on -->
+<!-- Redshift: 17 Jul 2012: on -->
+<!-- Redshift: 18 Jul 2012: off -->
+<!-- Redshift: 19 Jul 2012: off -->
+<!-- Redshift: 20 Jul 2012: on -->
+<!-- Redshift: 21 Jul 2012: off -->
+<!-- Redshift: 22 Jul 2012: off -->
+<!-- Redshift: 23 Jul 2012: on -->
+<!-- Redshift: 24 Jul 2012: off -->
+<!-- Redshift: 25 Jul 2012: off -->
+<!-- Redshift: 26 Jul 2012: off -->
+<!-- Redshift: 27 Jul 2012: off -->
+<!-- Redshift: 28 Jul 2012: on -->
+<!-- Redshift: 29 Jul 2012: on -->
