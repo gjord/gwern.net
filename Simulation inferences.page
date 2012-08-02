@@ -1,6 +1,8 @@
 ---
 description: How small must be the computer simulating the universe?
 tags: philosophy, transhumanism, computer science
+status: finished
+belief: unlikely
 ...
 
 Nick Bostrom's [Simulation Argument](!Wikipedia) (SA) goes basically that either:
@@ -31,7 +33,7 @@ And if we accept #1, we're saying that no one will ever attain the heights of po
 
 What does this presuppose? Well, maybe there are physical limits that bar such simulations. It may be possible, but just not feasible^[An example of something possible but not feasible might be factoring classically a composite number with a quadrillion digits; we know there is a factorization of it, and exactly how to go about getting it, but that doesn't mean we could do it in less than the lifetime of the universe.]. Unfortunately, physical limits allow world simulating. [Seth Lloyd](!Wikipedia) in ["Ultimate physical limits to computation"](http://arxiv.org/abs/quant-ph/9908043) concludes that:
 
-> "The ‘ultimate laptop’ is a computer with a mass of one kilogram and a volume of one liter, operating at the fundamental limits of speed and memory capacity fixed by physics. The ultimate laptop performs $\frac{2mc2}{πℏ} = 5.4258 \times 10^{50}$ logical operations per second on ≈10^31^ bits."
+> The "ultimate laptop" is a computer with a mass of one kilogram and a volume of one liter, operating at the fundamental limits of speed and memory capacity fixed by physics. The ultimate laptop performs $\frac{2mc2}{πℏ} = 5.4258 \times 10^{50}$ logical operations per second on ≈10^31^ bits.
 
 ### The cost of simulation
 
@@ -43,7 +45,7 @@ It seems unrealistic to expect humanity in any incarnation to reach the exact li
 
 10^26^ ops isn't too bad, actually. That's 100 yottaflops (10^24^). [IBM Roadrunner](!Wikipedia), in 2009, clocks in at [1.4](http://www.top500.org/system/performance/9707) petaflops ($1.4 \times 10^{15}$). So our hypothetical low-powered laptop is equal to 350 billion Roadrunners ($\frac{5.009001024732046 \times 10^{26}}{1.4 \times 10^{15}} = 3.577857874808605 \times 10^{11}$).
 
-OK, but how many turns of [Moore's law](!Wikipedia) would that represent? Quite a few[^eval]: 38 doublings are necessary. Or, at the canonical 18 months, exactly 57 years. Remarkable! If Moore's Law keeps holding (a dubious assumption), such simulations could begin within my lifetime.
+OK, but how many turns of [Moore's law](!Wikipedia) would that represent? Quite a few[^eval]: 38 doublings are necessary. Or, at the canonical 18 months, exactly 57 years. Remarkable! If Moore's Law keeps holding (a dubious assumption, see [Moore's Second Law](Slowing Moore's Law)), such simulations could begin within my lifetime.
 
 We can probably expect Moore's Law to hang on for a while. There are powerful economic inducements to keep developing computing technology - processor cycles are never cheap enough. And there are several plausible paths forward:
 
