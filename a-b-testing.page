@@ -44,10 +44,9 @@ http://stackoverflow.com/tags/google-website-optimizer/hot
 # Testing
 ## Max-width
 
-max-width experiment;
-https://www.google.com/analytics/siteopt/exptreports?experiment=EAAAACWAwHv59qsi3M1wUDgH7hM&account=18912926&stok=ALzSWod4AZgkgjQ3gaWVy8X7N3Ndtzl1rQ:1339734274583
+CSS-3 property: set how wide the page will be in pixels if unlimited screen real estate is available. I noticed some people complained that pages were 'too wide' and this made it hard to read, which apparently is a real thing since lines are supposed to fit in eye saccades. So I tossed in 800px, 900px, 1300px, and 1400px to the first A/B test.
 
-~~{.Html}
+~~{.Javascript}
 <!-- Google Website Optimizer Control Script -->
 <script>
 function utmx_section(){}function utmx(){}
@@ -87,7 +86,6 @@ d.write('<sc'+'ript src="'+
   })();
 </script>
 <!-- End of Google Website Optimizer Tracking Script -->
-
     <script>utmx_section("max width")</script>
     <style type="text/css">
       body { max-width: 800px; }
@@ -95,10 +93,21 @@ d.write('<sc'+'ript src="'+
     </noscript>
 ~~~
 
+It ran from mid-June to 1 August 2012. Unfortunately, I cannot be more specific: on 1 August, Google deleted Website Optimizer and told everyone to use 'Experiments' in Google Analytics - and *deleted all my information*. The graph over time, the exact numbers - all gone. So this is from memory.
+
+The results were initially very promising: 'conversion' was defined as staying on a page for 40 seconds (I reasoned that this meant someone was actually reading the page), and had a base of around 70% of readers converting. With a few hundred hits, 900px converted at 10-20% more than the default! I was ecstatic. So when it began falling, I was only a little bothered (one had to expect some regression to the mean since the results were too good to be true). But as the hits increased into the low thousands, the effect kept shrinking all the way down to 0.4% improved conversion. At some points, 1300px actually exceeded 900px.
+
+The second distressing thing was that Google's estimated chance of a particular intervention beating the default (which I believe is a Bonferroni-corrected _p_-value), did not increase! Even as each version received 20,000 hits, the chance stubbornly bounced around the 70-90% range for 900px and 1300px. This remained true all the way to the bitter end. At the end, each version had racked up 93,000 hits *and still was in the 80% decile*. Wow.
+
+Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain).
+
+Oy vey! When I discovered Google had deleted my results, I decided to simply switch to 900px. Running a new test would not provide any better answers.
+
 ## Readability blockquotes
 
-1. blockquote before quote from readability
+Blockquote before quote, stolen from Readability:
 
+~~~{.CSS}
 blockquote: : before {
     content: "\201C";
     filter: alpha(opacity=20);
@@ -108,6 +117,7 @@ blockquote: : before {
     opacity: .2;
     position: absolute;
     top: .25em }
+~~~
 
 ## TODO
 
