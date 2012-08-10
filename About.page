@@ -322,7 +322,7 @@ As a writer, I desire feedback. I also want to feel that my work has been of use
 
 ![Plot of patch creations (y-axis) versus date (x-axis): July 2011 to 2 January 2012](/images/2011-december-darcs-history.png)
 
-I ran into a [cool post by Christopher Done](http://chrisdone.com/posts/2011-12-02-programmer-at-work-statistics.html) on a tool that does detailed analysis of patch patterns on a Git repository, [GitStats](http://gitstats.sourceforge.net/), and this spurred me to create a [Git mirror](https://github.com/gwern/gwern.net) of `gwern.net` using [darcs-to-git](https://github.com/purcell/darcs-to-git). GitStats produces a [whole bundle](/docs/gwern.net-gitstats/index.html) of graphs and figures, some of which I found surprising. (I did not expect to see a large spike on Wednesday and relatively few patches on Saturday, or a spike around 5 PM, as opposed to the early morning.) I think I will update the GitStats output with each output, as a (large) adjunct to the `darcs-graph` plots.
+I ran into a [cool post by Christopher Done](http://chrisdone.com/posts/2011-12-02-programmer-at-work-statistics.html) on a tool that does detailed analysis of patch patterns on a Git repository, [GitStats](http://gitstats.sourceforge.net/), and this spurred me to create a Git mirror of `gwern.net` using [darcs-to-git](https://github.com/purcell/darcs-to-git). GitStats produces a [whole bundle](/docs/gwern.net-gitstats/index.html) of graphs and figures, some of which I found surprising. (I did not expect to see a large spike on Wednesday and relatively few patches on Saturday, or a spike around 5 PM, as opposed to the early morning.) I think I will update the GitStats output with each output, as a (large) adjunct to the `darcs-graph` plots.
 
 #### Traffic
 
@@ -392,19 +392,20 @@ Donation-wise, I received ~฿2, and a number of Paypal donations: $5, $4, $5, a
 
 Hacker News, Reddit, and LessWrong remain major referral drivers. For recent new pages, I've been trying a checklist which includes submission to SU, Google+, Hacker News, Reddit, and LessWrong as appropriate; I am not sure how well it is working since popularity seems very random.
 
-## Source
+## Colophon
+### Source
+
+The revision history is controlled under [Darcs](!Wikipedia), but I periodically mirror it to a  [Patch-tag](https://patch-tag.com/r/gwern/Gwern/home) repository.
+
+### Tools
 
 The source pages works both with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate <http://www.gwern.net>, and with [Gitit](http://gitit.johnmacfarlane.net/), a featureful interactive wiki; both are written in [Haskell](!Wikipedia "Haskell (programming language)"). My preferred method of use is browse & edit locally using Gitit, and then distribute using Hakyll. This combines the speed, portability, and security of Hakyll with the user-friendliness of Gitit.
 
-The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/) Markdown, and math is written in [LaTeX](!Wikipedia) compiled to [MathML](!Wikipedia). Comments are outsourced to [Disqus](!Wikipedia)^[Since I am not interested in writing a dynamic system to do it, and their anti-spam techniques are much better than mine.]. (These tools encourage a minimalist site; I believe that [minimalism](!Wikipedia) helps one focus on the content. Anything besides the content is [distraction and not design](http://www.jwz.org/gruntle/design.html). 'Attention!', as [Ikkyu](!Wikipedia) would say[^attention].) The revision history is controlled under [Darcs](!Wikipedia), but I periodically mirror it to a [GitHub repo](https://github.com/gwern/gwern.net).
+The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/) Markdown, and math is written in [LaTeX](!Wikipedia) compiled to [MathML](!Wikipedia). Comments are outsourced to [Disqus](!Wikipedia)^[Since I am not interested in writing a dynamic system to do it, and their anti-spam techniques are much better than mine.]. (These tools encourage a minimalist site; I believe that [minimalism](!Wikipedia) helps one focus on the content. Anything besides the content is [distraction and not design](http://www.jwz.org/gruntle/design.html). 'Attention!', as [Ikkyu](!Wikipedia) would say[^attention].)
 
 [^attention]: Paraphrased from _Dialogues of the Zen Masters_ as quoted in pg 11 of the Editor's Introduction to _Three Pillars of Zen_:
 
-     > "One day a man of the people said to Master Ikkyu: "Master, will you please write for me maxims of the highest wisdom?" Ikkyu immediately brushed out the word 'Attention'. "Is that all? Will you not write some more?"
-     >
-     > Ikkyu then brushed out twice: 'Attention. Attention.' The man remarked irritably that there wasn't much depth or subtlety to that. Then Ikkyu wrote the same word 3 times running: 'Attention. Attention. Attention.'
-     >
-     > Half-angered, the man demanded: 'What does "Attention" mean anyway?' And Ikkyu answered gently: 'Attention means attention.'"
+     > One day a man of the people said to Master Ikkyu: "Master, will you please write for me maxims of the highest wisdom?" Ikkyu immediately brushed out the word 'Attention'. "Is that all? Will you not write some more?" Ikkyu then brushed out twice: 'Attention. Attention.' The man remarked irritably that there wasn't much depth or subtlety to that. Then Ikkyu wrote the same word 3 times running: 'Attention. Attention. Attention.' Half-angered, the man demanded: "What does 'Attention' mean anyway?" And Ikkyu answered gently: "Attention means attention."
 
 - To use Hakyll, you `cd` into your repository and `runhaskell hakyll.hs build` (with `hakyll.hs` having whatever options you like). Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index`.
 - To use Gitit, you likewise `cd` but run `gitit -f static/gwern.conf`. You then would do something like `firefox http://127.0.0.1:5001/`.
