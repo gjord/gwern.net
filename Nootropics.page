@@ -282,6 +282,12 @@ A 20-40% chance of detecting the effect.
 
     Power times prior times benefit minus cost of experimentation: $(0.20 \times 0.30 \times 540) - 41 = -9$. So the VoI is negative: because my default is that fish oil works and I am taking it, weak information that it doesn't work isn't enough. If the power calculation were giving us 40% reliable information, then the chance of learning I should drop fish oil is improved enough to make the experiment worthwhile (going from 20% to 40% switches the value from -$9 to +$23.8).
 
+## Flaxseed
+
+The general cost of fish oil made me interested in possible substitutes. Seth Roberts uses exclusively flaxseed oil or flaxseed meal, and this seems to work well for him with subjective effects (eg. noticing his Chinese brands seemed to not work, possibly because they were unrefrigerated and slightly rancid). It's been studied much less than fish oil, but omega acids are confusing enough in general (is there a right ratio? [McCluskey's roundup](http://www.bayesianinvestor.com/blog/index.php/2012/08/18/omega-6-revisited/) gives the impression claims about ratios may have been overstated) that I'm not convinced ALA is a much inferior replacement for fish oil's mixes of EPA & DHA.
+
+Flaxseed oil is, ounce for ounce, about as expensive as fish oil, and also must be refrigerated and goes bad within months anyway. Flaxseeds on the other hand, do not go bad within months, and cost dollars per pound. Various resources I found online estimated that the ALA component of human-edible flaxseed to be around 20% So [Amazon's 6lbs for $14](http://www.amazon.com/Bobs-Red-Mill-Flaxseed-24-Ounce/dp/B00282W8F8/ "Bob's Red Mill Golden Flaxseed, 24-Ounce Bags (Pack of 4)") is ~1.2lbs of ALA, compared to 16floz of fish oil weighing ~1lb and costing ~$17, while also keeping better and being a calorically useful part of my diet. The flaxseeds can be ground in an ordinary food processor or coffee grinder. It's not a hugely impressive cost-savings, but I think it's worth trying when I run out of fish oil.
+
 # Huperzine-A
 
 My [experience report](http://groups.google.com/group/brain-training/browse_thread/thread/6e35c60f904c2417):
@@ -679,6 +685,10 @@ A real experiment is called for.
 Most of the reported benefits of lithium are impossible for me to test: rates of suicide and Parkinson's are obviously right out, but so is crime and neurogenesis (the former is too rare & unusual, the latter too subtle & hard to measure), and likewise potential negatives. So we could measure:
 
 1. mood, via daily self-report; should increase
+
+    The principal metric would be 'mood', however defined. Zeo's web interface & data export includes a field for 'Day Feel', which is a rating 1-5 of general mood & quality of day. I can record a similar metric at the end of each day. 1-5 might be a little crude even with a year of data, so a more sophisticated measure might be in order. The first mood study is paywalled so I'm not sure what they used, but Shiotsuki 2008 used [State-Trait of Anxiety Inventory](!Wikipedia) (STAI) and [Profiles of Mood States](!Wikipedia) Test (POMS). The [full POMS](http://www.cyberpediatria.com/profile_moodStates.pdf) sounds too long to use daily, but the [Brief POMS](/docs/1987-cella.pdf "A brief POMS measure of distress for cancer patients") might work. In the original 1987 paper 'A brief POMS measure of distress for cancer patients', patients answering this questionnaire had a mean total mean of 10.43 (standard deviation 8.87). Is this the best way to measure mood? I've asked Seth Roberts; he suggested using a 0-100 scale, but personally, there's no way I can assess my mood on 0-100. My mood is sufficiently stable (to me) that 0-5 is asking a bit much, even.
+
+    I ultimately decided to just go with the simple 0-5 scale, although it seems to have turned out to be more of a 2-4 scale!
 2. long-term memory (Mnemosyne 2.0's statistics); could increase (neurogenesis), do nothing (null result), or decrease (metal poisoning)
 3. working memory (dual n-back scores via Brain Workshop^[This metric is a little troubling since working memory is trainable and that's the point of dual n-back - but my own scores have been stagnant for a long time and the blocking should reduce the impact of any very slow linear growth in scores.]); like long-term memory
 4. sleep (Zeo); should increase (via mood improvement)
@@ -688,7 +698,6 @@ Lithium is somewhat persistent in the body, and its effects are not acute especi
 
 The methodology would be essentially the same as the [vitamin D in the morning](Zeo#vitamin-d-at-morn-helps) experiment: put a multiple of 7 placebos in one container, the same number of actives in another identical container, hide & randomly pick one of them, use container for 7 days then the other for 7 days, look inside them for the label to determine which period was active and which was placebo, refill them, and start again.
 
-<!--
 1. first pair
 
    1. first block started and pill taken: 11 May 2012 - 19 May: active
@@ -711,25 +720,12 @@ The methodology would be essentially the same as the [vitamin D in the morning](
     2. second block: 21 July - 27 July: placebo
 6. sixth pair
 
-    1. first block: 28 July - 3 August
-    2. second block: 4? August - 10? August
--->
+    1. first block: 28 July - 3 August: placebo
+    2. second block: 4 August - 10 August: active
+7. seventh pair
 
-The principal metric would be 'mood', however defined. Zeo's web interface & data export includes a field for 'Day Feel', which is a rating 1-5 of general mood & quality of day. I could record this at the end of the day. 1-5 might be a little crude even with a year of data, so a more sophisticated measure might be in order. The first mood study is paywalled so I'm not sure what they used, but Shiotsuki 2008 used [State-Trait of Anxiety Inventory](!Wikipedia) (STAI) and [Profiles of Mood States](!Wikipedia) Test (POMS). The [full POMS](http://www.cyberpediatria.com/profile_moodStates.pdf) sounds too long to use daily, but the [Brief POMS](/docs/1987-cella.pdf "A brief POMS measure of distress for cancer patients") might work: items are ranked 0-4 and it's just a few items drawn from the full POMS:
-
-18. Blue
-32. Discouraged
-14. Sad
-50. Bewildered
-36. Miserable
-44. Gloomy
-49. Weary
-16. On Edge
-37. Muddled
-26. Uneasy
-5. Unhappy
-
-In the original 1987 paper 'A brief POMS measure of distress for cancer patients', patients answering this questionnaire had a mean total mean of 10.43 (standard deviation 8.87). Is this the best way to measure mood? I've asked Seth Roberts; he suggested using a 0-100 scale, but personally, there's no way I can assess my mood on 0-100. My mood is sufficiently stable (to me) that 0-5 is asking a bit much, even.
+    1. first block: 11 August - 17 August:
+    2. second block: 18 August - 24? August:
 
 ### VoI
 
@@ -1017,13 +1013,13 @@ It looks like the overall picture is that nicotine is absorbed well in the intes
 
 So I eventually got around to ordering another thing of nicotine gum, ["Habitrol Nicotine Gum, 4mg MINT flavor COATED gum. 96 pieces per box"](http://www.amazon.com/gp/product/B000UD7P1E/). Gum should be easier to double-blind myself with than nicotine patches - just buy some mint gum. If 4mg is too much, cut the gum in half or whatever. When it arrived, my hopes were borne out: the gum was rectangular and soft, which made it easy to cut into fourths.
 
-Remembering what Wedrifid told me, I decided to start with a quarter of a piece (~1mg). The gum was pretty tasteless, which ought to make blinding easier. The effects were noticeable around 10 minutes - greater energy verging on jitteriness, much faster typing, and apparent general quickening of thought. Like a more pleasant caffeine. While testing my typing speed in [Amphetype](https://code.google.com/p/amphetype/), my speed seemed to go up >=5 WPM, even after the time penalties for correcting the increased mistakes; I also did twice the usual number without feeling especially tired. A second dose was similar, and the third dose was at 10 PM before playing _[Ninja Gaiden II](!Wikipedia)_ seemed to stop the usual exhaustion I feel after playing through a level or so. (It's a tough game, which I have yet to master like _[Ninja Gaiden Black](!Wikipedia)_.) Returning to the previous concern about sleep problems, though I went to bed at 11:45 PM, it still took 28 minutes to fall sleep (compared to my more usual 10-20 minute range); the next day I use 2mg from 7-8PM while driving, going to bed at midnight, where my sleep latency is a more reasonable 14 minutes. I then skipped for 3 days to see whether any cravings would pop up (they didn't). I subsequently used 1mg every few days for driving or _Ninja Gaiden II_, and while there were no cravings or other side-effects, the stimulation definitely seemed to get weaker - benefits seemed to still exist, but I could no longer describe any considerable energy or jitteriness. May try using 2mg next.
+Remembering what Wedrifid told me, I decided to start with a quarter of a piece (~1mg). The gum was pretty tasteless, which ought to make blinding easier. The effects were noticeable around 10 minutes - greater energy verging on jitteriness, much faster typing, and apparent general quickening of thought. Like a more pleasant caffeine. While testing my typing speed in [Amphetype](https://code.google.com/p/amphetype/), my speed seemed to go up >=5 WPM, even after the time penalties for correcting the increased mistakes; I also did twice the usual number without feeling especially tired. A second dose was similar, and the third dose was at 10 PM before playing _[Ninja Gaiden II](!Wikipedia)_ seemed to stop the usual exhaustion I feel after playing through a level or so. (It's a tough game, which I have yet to master like _[Ninja Gaiden Black](!Wikipedia)_.) Returning to the previous concern about sleep problems, though I went to bed at 11:45 PM, it still took 28 minutes to fall sleep (compared to my more usual 10-20 minute range); the next day I use 2mg from 7-8PM while driving, going to bed at midnight, where my sleep latency is a more reasonable 14 minutes. I then skipped for 3 days to see whether any cravings would pop up (they didn't). I subsequently used 1mg every few days for driving or _Ninja Gaiden II_, and while there were no cravings or other side-effects, the stimulation definitely seemed to get weaker - benefits seemed to still exist, but I could no longer describe any considerable energy or jitteriness.
 
-The easiest way to use 2mg was to use half a gum; I tried not chewing it but just holding it in my cheek. The first night I tried, this seemed to work well for motivation; I knocked off a few long-standing to-do items. Subsequently, I began using it for writing, where it has been similarly useful.
+The easiest way to use 2mg was to use half a gum; I tried not chewing it but just holding it in my cheek. The first night I tried, this seemed to work well for motivation; I knocked off a few long-standing to-do items. Subsequently, I began using it for writing, where it has been similarly useful. One difficult night, I wound up using the other half (for a total of 4mg over ~5 hours), and it worked but gave me a fairly mild headache and a faint sensation of nausea; these may have been due to forgetting to eat dinner, but this still indicates 3mg should probably be my personal ceiling.
 
 ### Experiment
 
-Experimenting stymied me for a few months since the nasty taste was unmistakable and I couldn't think of any gums with a similar flavor to serve as placebo. I almost resigned myself to buying patches to cut (and let the nicotine evaporate) and hope they stuck on well afterwards, when late one sleepless night I realized that a piece of nicotine gum hanging around on my desktop for a week was the answer: if nicotine evaporates from patches, then it almost surely evaporates from *gum* as well, and if gum does evaporate, then to make a perfect placebo all I had to do was cut some gum into proper sizes and let the pieces set out for a while. I tried the gum, and it did nothing; Google searches led to nothing indicating I might be fooling myself.
+Experimenting stymied me for a few months since the nasty taste was unmistakable and I couldn't think of any gums with a similar flavor to serve as placebo. I almost resigned myself to buying patches to cut (and let the nicotine evaporate) and hope they stuck on well afterwards, when late one sleepless night I realized that a piece of nicotine gum hanging around on my desktop for a week was the answer: if nicotine evaporates from patches, then it almost surely evaporates from *gum* as well, and if gum does evaporate, then to make a perfect placebo all I had to do was cut some gum into proper sizes and let the pieces set out for a while. I tried the gum, and it did nothing; Google searches led to nothing indicating I might be fooling myself. A while later, I lost a piece of gum overnight and consumed the full 4mg to little or no subjective effect. (The nasty taste does not seem to be due to the nicotine despite what one might expect; Vaniver plausibly suggested the bad taste might be intended to prevent over-consumption, but nothing in the Habitrol ingredient list seemed to be noted for its bad taste and a number of ingredients were sweetening sugars of various sorts.)
 
 So the experiment seems simple enough: cut up a fresh piece of gum, randomly select from it and an equivalent 'dry' piece of gum, and do 5 rounds of dual n-back to test attention/energy & WM. (If it turns out to be placebo, I'll immediately use the remaining active dose: no sense in wasting gum, and this will test whether daily use renders nicotine gum useless, similar to how caffeine may be useless if taken daily.) The dose will be 1mg or 1/4 a gum. I cut up a dozen pieces into 4 pieces for 48 doses and set them out to dry. Per the previous power analyses, 48 groups of DNB rounds likely will be enough for detecting small-medium effects (partly since we will be only looking at one metric - average % right per 5 rounds - with no need for multiple correction). Analysis will be one-tailed, since we're looking for whether there is a clear performance improvement and hence a reason to keep using nicotine gum (rather than whether nicotine gum might be harmful).
 
