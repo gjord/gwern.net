@@ -1,6 +1,8 @@
 ---
 description: Bitcoin's long gestation indicates it is an example of the 'Worse is Better' paradigm
 tags: computer science, cryptography
+status: finished
+belief: likely
 ...
 
 Some wonder who is the real man under the Satoshi Nakamoto mask; a hard question - how many libertarian cryptographers are there? But the interesting thing is, Satoshi could be *anybody*. Bitcoin involves no major intellectual breakthroughs, so Satoshi need have no credentials in cryptography or be anything but a self-taught programmer! Satoshi published his [whitepaper](http://www.bitcoin.org/bitcoin.pdf) May 2009^[`bitcoin.org` was registered 18 August 2008, so presumably Satoshi had been developing the bitcoin idea at least as early as 2008.], but if you look at the cryptography that makes up Bitcoin, they can basically be divided into:
@@ -115,7 +117,7 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
 
     The most widely known, popular, and secure communications mix is probably [Tor](!Wikipedia "Tor (anonymity network)#Weaknesses"); a number of flaws have been [found in it](http://freehaven.net/anonbib/topic.html) over time, and Tor will never be very secure - it's fundamentally difficult to impossible to have a anonymizing communications mix which is also near real-time. Some flaws *can't* be removed by the Tor network, like the ability of exit nodes to snoop on traffic (as has been done many times, most memorably during the startup of [Wikileaks](!Wikipedia)). Communications mixes are usually expensive in resources, so typically only make up a part of an overall network - and the rest of the network leaks considerable information, including [in Bitcoin](http://arxiv.org/abs/1107.4524).
 
-As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [Ben Laurie](!Wikipedia) and Victor Grischchenko; Laurie particularly criticizes[^Laurie] the hash-contest which guarantees heavy resource consumption:
+As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [Ben Laurie](!Wikipedia) and Victor Grischchenko; Laurie particularly criticizes[^Laurie-Metzger] the hash-contest which guarantees heavy resource consumption:
 
 1. ["Bitcoin"](http://www.links.org/?p=1164)
 2. ["Bitcoin 2"](http://www.links.org/?p=1171)
@@ -123,9 +125,9 @@ As well, let's toss in some recent blog posts on Bitcoin by the cryptographer [B
 3. ["Decentralised Currencies Are Probably Impossible: But Let’s At Least Make Them Efficient"](http://www.links.org/files/decentralised-currencies.pdf)
 4. ["Bitcoin?"](http://www.pds.ewi.tudelft.nl/~victor/bitcoin.html)
 
-[^Laurie]: [Perry Metzger](https://plus.google.com/110295650700104208522/posts/FiLnEia46qM) summarizes Laurie's approach:
+[^Laurie-Metzger]: [Perry Metzger](https://plus.google.com/110295650700104208522/posts/FiLnEia46qM) summarizes Laurie's approach:
 
-    > "I think people have missed the more subtle point that Ben Laurie made here. Bitcoin requires the use of an unusual sort of secure consensus protocol to work reliably, and such protocols are not known to exist in this context. In the presence of such a protocol, however, there is no longer any need for mining -- the system can simply elect a member to acquire a new coin every _N_ seconds via a secure election protocol (and those are known given the rest). Thus, Ben's point that if you're going to have a system like bitcoin, one could at least have an efficient system of this sort rather than a stupid one based on an electrical potlatch."
+    > I think people have missed the more subtle point that Ben Laurie made here. Bitcoin requires the use of an unusual sort of secure consensus protocol to work reliably, and such protocols are not known to exist in this context. In the presence of such a protocol, however, there is no longer any need for mining -- the system can simply elect a member to acquire a new coin every _N_ seconds via a secure election protocol (and those are known given the rest). Thus, Ben's point that if you're going to have a system like bitcoin, one could at least have an efficient system of this sort rather than a stupid one based on an electrical potlatch.
 
 What's the common thread? Is there any particular fatal flaw of Bitcoin that explains why no one but Satoshi came up with it?
 
@@ -254,4 +256,3 @@ My own belief is that #1 is probably a significant factor, #2 may be irrelevant 
 
     - [Reddit discussion](http://www.reddit.com/r/Bitcoin/comments/hlu9l/bitcoin_is_worse_is_better/)
     - [Hacker News discussion](http://news.ycombinator.com/item?id=2934879)
-
