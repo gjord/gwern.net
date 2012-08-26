@@ -40,10 +40,11 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
     - rank music by distractibility?
     - measure focus over the day and during specific activities (eg. correlate frequencies against n-backing performance)
 12. testing benefit of using [Redshift](http://jonls.dk/redshift/)/f.lux to adjust monitor color temperature
+13. Measure negative effect of nicotine on sleep & determine appropriate buffer
 
 I have tried to do my little self-experiments as well as I know how to, and hopefully my results are less bogus than the usual anecdotes one runs into online. What I would really like is for other people (especially Zeo owners) to *replicate* my results. To that end I have made pains to describe my setup completely so others can use it, along with the data and complete R or Haskell programs for analysis. If anyone replicates my results in any fashion, please contact me and I would be happy to link your self-experiment here!
 
-[^QS]: Note that one can use a Zeo and not be doing anything really recognizable as 'Quantified self'. For example, one could just collect data. An example here would be Stephen Wolfram's post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/); Wolfram has collected an astonishing amount of information on his typing, emails, phone calls, calendars and walking over <20 years. Only in 2012 has he actually graphed any of it or attempted to analyze it.
+[^QS]: Note that one can use a Zeo and not be doing anything really recognizable as "Quantified Self". For example, one could just collect data. An example here would be Stephen Wolfram's post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/); Wolfram has collected an astonishing amount of information on his typing, emails, phone calls, calendars and walking over <20 years. Only in 2012 has he actually graphed any of it or attempted to analyze it.
 
     In particular, he has never once changed his behavior in response to his gathered data nor has he ever experimented with different tools or strategies for, say, more efficient typing. (He mentions that 7% of his keystrokes are the Backspace key, which is remarkably high and probably indicates he could either benefit from learning better his favorite text editor or just basic typing training: at 7% backspacing, he is almost surely nowhere near a reasonable 80-100 WPM, which is costing him a great deal of time & effort given that he sends or receives hundreds of emails a day!)
 
@@ -357,13 +358,51 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 
     [Andy McKenzie](http://lesswrong.com/lw/9ui/ask_for_help_on_your_project_open_thread/5ump#thingrow_t1_5ump) suggested limiting our [false discovery rate](!Wikipedia) by using the method of [Benjamin & Hochberg 1995](http://www.math.tau.ac.il/~ybenja/MyPapers/benjamini_hochberg1995.pdf "Controlling the False Discovery Rate: a Practical and Powerful Approach to Multiple Testing"):
 
-    > "...let's say that you test 6 hypotheses, corresponding to different features of your Zeo data. You could use a t-test for each, as above. Then aggregate and sort all the _p_-values in ascending order. Let's say that they are 0.001, 0.013, 0.021, 0.030, 0.067, and 0.134.
+    > ...let's say that you test 6 hypotheses, corresponding to different features of your Zeo data. You could use a t-test for each, as above. Then aggregate and sort all the _p_-values in ascending order. Let's say that they are 0.001, 0.013, 0.021, 0.030, 0.067, and 0.134.
     >
     > Assume, arbitrarily, that you want the overall false discovery rate to be 0.05, which is in this context called the _q_-value. You would then sequentially test, from the last value to the first, whether the current _p_-value is less than $\frac{\text{the current index} \times \text{the false discovery rate}}{\text{the overall number of hypotheses}}$. You stop when you get to the first true inequality and call the _p_-values of the rest of the hypotheses significant.
     >
-    > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant."
+    > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant.
 
 As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes, [effect size](!Wikipedia) 0.37^[`(456.4783 -  407.5312) / sd(mydata$Total.Z, TRUE)` = 0.3723188]):
+
+<!-- Book links
+http://lesswrong.com/lw/dms/open_thread_july_1631_2012/74eg?context=3
+http://www.sebastianmarshall.com/what-gets-measured-gets-managed
+Roberts 2004, "Self-experimentation as a source of new ideas: Ten examples about sleep, mood, health, and weight" http://www.stat.columbia.edu/~gelman/stuff_for_blog/selfexp.pdf
+citations of above http://scholar.google.com/scholar?cites=1711925790230211471&as_sdt=20005&sciodt=0,9&hl=en
+http://pubmedcentralcanada.ca/pmcc/articles/PMC3298919/?lang=en-ca
+Ebbinghaus's discovery of spaced repetition as self-experiment
+http://www.theatlantic.com/magazine/archive/2012/07/the-measured-man/309018/?single_page=truein inflammation
+http://www.sleepfoundation.org/article/press-release/annual-sleep-america-poll-exploring-connections-communications-technology-use-
+-->
+<!-- Book organization
+- Intro with examples: Emphasize the importance of the topic (relevant population stats.) Conviction (or some evidence) that tracking will help with the subject addressed. Each book should open with a story or a few stories as examples.
+- Chapter One: Background on the tracking area. This will be a summary of what's involved in tracking things within this area, a bit of easily understood background (for instance, explanation of phases of sleep, or different food components that are often tracked, or pain scales, or mood measurement.) This can be brief! But it helps orient readers.
+- Chapter Two, Three?, Four?: Tools and options. An explanation of the tools available, the options for tracking, their pros and cons.
+- Chapter Five: Project examples and instructions. Some advice on good projects to try, ways to use the tools. This can be pretty technical, depending on the author/subject.
+- Chapter Six: Master class. Expert ideas, or speculative, future oriented suggestions, to inspire people to go further.
+- Chapter Seven: Conclusion/summary.
+-->
+<!-- Effect size/against NHST
+http://effectsizefaq.com/ _The Essential Guide to Effect Sizes_, Ellis
+
+Although the primary emphasis in psychology is to publish results on the basis of NHST (Cumming et al., 2007; Rosenthal, 1979), the use of NHST has long been controversial. Numerous researchers have argued that reliance on NHST is counterproductive, due in large part because p values fail to convey such useful information as effect size and likelihood of replication (Clark, 1963; Cumming, 2008; Killeen, 2005; Kline, 2009; Rozeboom, 1960). Indeed, some have argued that NHST has severely impeded scientific progress (Cohen, 1994; Schmidt, 1996) and has confused interpretations of clinical trials (Cicchetti et al., 2011; Ocana & Tannock, 2011). Some researchers have stated that it is important to use multiple, converging tests alongside NHST, including effect sizes and confidence intervals (Hubbard & Lindsay, 2008; Schmidt, 1996). Others still have called for NHST to be completely abandoned (e.g., Carver, 1978).
+
+- Cumming, G., Fidler, F., Leonard, M., Kalinowski, P., Christiansen, A., Kleinig, A., et al. (2007). Statistical reform in psychology: Is anything changing? Psychological Science, 18, 230–232.
+- Rosenthal, R. (1979). The file drawer problem and tolerance for null results. Psychological Bulletin, 86, 638–641.
+- Clark, C. A. (1963). Hypothesis testing in relation to statistical methodology. Review of Educational Research, 33, 455–473.
+- Cumming, G. (2008). Replication and p intervals: p values predict the future only vaguely, but confidence intervals do much better. Perspectives on Psychological Science, 3, 286–300
+- Killeen, P. R. (2005). An alternative to null hypothesis significance tests. Psychological Science, 16, 345–353.
+- Kline, R. B. (2009). _Becoming a behavioral science researcher: A guide to producing research that matters_. New York, NY: The Guilford Press.
+- Rozeboom, W. W. (1960). The fallacy of the null-hypothesis significance test. Psychological Bulletin, 57, 416–428
+- Cohen, J. (1994). The earth is round (p,.05). American Psychologist, 49, 997–1003
+- Schmidt, F. L. (1996). Statistical significance testing and cumulative knowledge in psychology: Implications for training of researchers. Psychological Methods, 1, 115–129
+- Cicchetti, D. V., Koenig, K., Klin, A., Volkmar, F. R., Paul, R., & Sparrow, S. (2011). From Bayes through marginal utility to effect sizes: A guide  understanding the clinical and statistical significance of the results of autism research findings. Journal of Autism and Developmental Disorders, 41(2), 168–174
+- Ocana, A., & Tannock, I. F. (2011). When are “clinical trials in oncology truly positive? Journal of the National Cancer Institute, 103, 16–20
+- Hubbard, R., & Lindsay, R. M. (2008). Why p values are not a useful measure of evidence in statistical significance testing. Theory & Psychology, 18, 69–88.
+- Carver, R. P. (1978). The case against statistical significance testing. Harvard Educational Review, 48, 378–399
+-->
 
 ![](/images/zeo/melatonin-totalz.png)
 ![](/images/zeo/melatonin-timeswoken.png)
@@ -1983,15 +2022,15 @@ September 2011
 29: 1
 30: 0
 October 2011
-1: 1
-2: 0
-3: 1
-4: 0
-5: 1
-6: 0
-7: 1
-8: 0
-9: 1
+01: 1
+02: 0
+03: 1
+04: 0
+05: 1
+06: 0
+07: 1
+08: 0
+09: 1
 10: 0
 11: 1
 12: 0
@@ -2001,15 +2040,15 @@ October 2011
 16: 0
 17: 1
 November 2011
-5: 0
+05: 0
 23: 0
 25: 0
 30: 1
 December 2011
-1: 0
-2: 1
-5: 0
-6: 1?
+01: 0
+02: 1
+05: 0
+06: 1?
 12: 1
 13: 0
 15: 1
@@ -2021,8 +2060,8 @@ December 2011
 29: 1
 30: 0
 May 2012
-8: 0
-9: 0
+08: 0
+09: 0
 10: 1
 
 date pushups meditation masturbation
@@ -2045,12 +2084,12 @@ May 2012
 30: 1 1 1
 31: 1 0 1
 June 2012
-1: 1 0 0
-2: 1 0 0
-3: 0 1 1
-4: 0 1 0
-5: 0 0 0
-6: 1 1 0
+01: 1 0 0
+02: 1 0 0
+03: 0 1 1
+04: 0 1 0
+05: 0 0 0
+06: 1 1 0
 
 date pushups meditation masturbation treadmill
 June 2012
@@ -2079,14 +2118,15 @@ June 2012
 29: 0 0 1 0
 30: 0 0 1 0
 July 2012
-1: 0 0 1 0
-2: 0 0 0 0
-3: 0 0 1 0
-4: 0 0 0 1
-5: 0 1 1 1
-6: 1 1 0 0
-7: 0 0 1 1
-8: 1 1 0 1
+01: 0 0 1 0
+02: 0 0 0 0
+03: 0 0 1 0
+04: 0 0 0 1
+05: 0 1 1 1
+06: 1 1 0 0
+07: 0 0 1 1
+08: 1 1 0 1
+
 date pushups meditation masturbation
 19: 1 1 0
 20: 0 0 1
@@ -2099,6 +2139,43 @@ date pushups meditation masturbation
 27: 0 0 1
 28: 1 0 0
 29: 1 1 1
+30: 0 0 0
+31: 0 1 1
+August 2012
+01: 0 0 0
+02: 1 1 1
+03: 1 1 1
+04: 0 1 1
+05: 1 0 0
+06: 0 0 1
+07: 0 1 0
+08: 1 0 1
+09: 1 1 1
+10: 1 0 1
+11: 0 1 0
+12: 0 0 1
+13: 1 1 1
+14: 1 1 1
+15: 0 0 1
+16: 1 0 0
+17: 0 0 1
+18: 1 1 1
+19: 0 0 1
+20: 0 1 1
+21: 1 0 0
+22: 1 1 0
+23: 0 1 1
+24: 0 0 1
+25: 0 1 0?
+
+Underpopulated data cells:
+9: 1 1 0
+9: 0 1 0
+9: 1 0 1
+10: 0 1 1
+10: 1 0 0
+10: 1 1 1
+(should be 15)
 -->
 
 # Conclusions
@@ -2195,3 +2272,29 @@ This is what I have learned:
 <!-- Redshift: 27 Jul 2012: off -->
 <!-- Redshift: 28 Jul 2012: on -->
 <!-- Redshift: 29 Jul 2012: on -->
+<!-- Redshift: 30 Jul 2012: on -->
+<!-- Redshift: 31 Jul 2012: on -->
+<!-- Redshift: 02 Aug 2012: off -->
+<!-- Redshift: 03 Aug 2012: off -->
+<!-- Redshift: 04 Aug 2012: off -->
+<!-- Redshift: 05 Aug 2012: on -->
+<!-- Redshift: 06 Aug 2012: off -->
+<!-- Redshift: 07 Aug 2012: off -->
+<!-- Redshift: 08 Aug 2012: off -->
+<!-- Redshift: 09 Aug 2012: on -->
+<!-- Redshift: 10 Aug 2012: off -->
+<!-- Redshift: 11 Aug 2012: off -->
+<!-- Redshift: 12 Aug 2012: off -->
+<!-- Redshift: 13 Aug 2012: on -->
+<!-- Redshift: 14 Aug 2012: off -->
+<!-- Redshift: 15 Aug 2012: on -->
+<!-- Redshift: 16 Aug 2012: off -->
+<!-- Redshift: 17 Aug 2012: on -->
+<!-- Redshift: 18 Aug 2012: off -->
+<!-- Redshift: 19 Aug 2012: on -->
+<!-- Redshift: 20 Aug 2012: on -->
+<!-- Redshift: 21 Aug 2012: on -->
+<!-- Redshift: 22 Aug 2012: on -->
+<!-- Redshift: 23 Aug 2012: on -->
+<!-- Redshift: 24 Aug 2012: on -->
+<!-- Redshift: 25 Aug 2012: off -->
