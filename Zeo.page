@@ -375,6 +375,7 @@ http://pubmedcentralcanada.ca/pmcc/articles/PMC3298919/?lang=en-ca
 Ebbinghaus's discovery of spaced repetition as self-experiment
 http://www.theatlantic.com/magazine/archive/2012/07/the-measured-man/309018/?single_page=truein inflammation
 http://www.sleepfoundation.org/article/press-release/annual-sleep-america-poll-exploring-connections-communications-technology-use-
+http://quantifiedself.com/2012/08/vahe-kassardjian-and-rafi-haladjian-on-crossing-the-data-desert/ Only one task at a time!
 -->
 <!-- Book organization
 - Intro with examples: Emphasize the importance of the topic (relevant population stats.) Conviction (or some evidence) that tracking will help with the subject addressed. Each book should open with a story or a few stories as examples.
@@ -815,6 +816,8 @@ Comments:
 - the methodology section is non-existent; how were these 1500 patients picked? how long did each use vitamin D? Unfortunately, I nor Roberts has taken vitamin D blood tests (as far as I know) and so we cannot verify that the authors' 60-80ng/ml range is what we fell into, but it's plausible. how is sleep quality being measured? are these results consistent or inconsistent with our two cases of morning mood/restedness improvement but little else? Although even if they were inconsistent, that could be explained by neither of us being sleep disorder sufferers and the effect being weaker in us
 
 In July 2012, preprints of [Huang et al 2012](/docs/2012-huang.pdf "Improvement of Pain, Sleep, and Quality of Life in Chronic Pain Patients With Vitamin D Supplementation") became available; it is a [case series](!Wikipedia) - the authors followed a group of veterans with chronic pain who received vitamin D supplements, finding improvements to pain but also reduction in sleep latency and increase in sleep duration. While I did not observe any effect on latency or duration in my following experiments, this would still be a promising datapoint but unfortunately, the sample had substantial dropout, and had no control group (hence no randomizing or blinding). This renders the study not very useful - the improvements being perhaps just [regression toward the mean](!Wikipedia) or a [selection bias](!Wikipedia).
+
+Blogger Chris L [looked back in August 2012](http://evenbetterchris.blogspot.com/2012/08/vitamin-d-destroyed-my-deep-sleep.html "Vitamin D destroyed my deep sleep") on ~1 year of Zeo data and a quasi-experiment in which he started with 4000IU of vitamin D supplementation, then 5000IU, then none; he took them at night, then switched to morning; the results were that the length of his deep sleep started high, dropped, and then recovered. He interprets this as evidence that too much vitamin D hurts sleep.
 
 ## Vitamin D at night hurts?
 ### Setup
@@ -1485,11 +1488,11 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 
 Like with melatonin, we might wonder: is taking vitamin D causing effects on the control days as well? With melatonin, the concern I often hear voiced is whether melatonin might in some way be 'addictive' or suppress normal melatonin secretion, in which case the observed difference between control and experimental days - which we interpreted as improvement - may actually be the opposite, a negative effect caused by a sort of 'withdrawal' (lowered melatonin secretion levels, since the body has not yet adapted to the absence of melatonin supplements and will not when supplementation resumes the next day).
 
-In the case of vitamin D, I find the results (no effect on anything *except* 'Morning Feel') sufficiently surprising that I wonder if this fat-soluble vitamin was causing effects over periods even longer than a week; and that the true results were that both control and experimental weeks were better than unsupplemented weeks, but that 'Morning Feel' was the only variable which reacted to placebo fast enough to show up as a difference.
+In the case of vitamin D, I find the results (no effect on anything *except* 'Morning Feel') sufficiently surprising that I wonder if this fat-soluble vitamin was causing effects over periods even longer than a week; and that the true results were that both control and experimental weeks were better than unsupplemented weeks, but that 'Morning Feel' was the only variable which reacted to placebo fast enough to show up as a difference. The previously-mentioned August 2012 report of Chris L that an increase of 1k IU in his vitamin D supplementation reduced his deep sleep with month-long lags reinforces my suspicion: with such a long lag, any reduction in my deep sleep would go unnoticed. A completely "dry" multi-month long control group is necessary.
 
 The solution most obvious to me, although I don't know if it's statistically correct, is to drop the vitamin D or melatonin for a long enough period that any long-term effects should have disappeared, and then compare this abstention period to the supposed "control" weeks. If the abstention weeks are worse than the control weeks, then this supports the long-term interpretation; if the abstention weeks are similar to the control weeks, then we can eliminate the long-term interpretation; and if the abstention weeks are better than the control weeks, then we ought to be puzzled and start thinking about other possibilities. (Not enough data/power? Misinterpreted results? Or, the original morning experiment was in spring, while the abstention periods were summer/autumn - does sleep get worse in summer, perhaps due to heat?)
 
-I won't bother with blinding this one since it's just a double-check of a highly unlikely possibility. (If one wanted to blind it, the procedure would be the same as before, but with *big* blocks: say, 2 blocks of 62 days, first pick randomized, or blocks of 31 days, with 4 blocks randomized in 2 pairs.) This 'experiment' is easy enough to run: simply stop taking vitamin D. To avoid the temptation to cheat on days I am feeling down, it's easiest to just wait until I run out of vitamin D and procrastinate on ordering a fresh supply until 50 days have passed.
+I won't bother with blinding this one since it's just a double-check of an unlikely possibility. (If one wanted to blind it, the procedure would be the same as before, but with *big* blocks: say, 2 blocks of 62 days, first pick randomized, or blocks of 31 days, with 4 blocks randomized in 2 pairs.) This 'experiment' is easy enough to run: simply stop taking vitamin D. To avoid the temptation to cheat on days I am feeling down, it's easiest to just wait until I run out of vitamin D and procrastinate on ordering a fresh supply until 50 days have passed.
 
 <!-- last day: 2 July 2012 -->
 
@@ -2166,12 +2169,15 @@ August 2012
 22: 1 1 0
 23: 0 1 1
 24: 0 0 1
-25: 0 1 0?
+25: 0 1 0
+26: 1 0 1
+27: 1 1 0
+28: 0 1 0?
 
 Underpopulated data cells:
-9: 1 1 0
-9: 0 1 0
-9: 1 0 1
+10: 1 1 0
+10: 1 0 1
+10: 0 1 0
 10: 0 1 1
 10: 1 0 0
 10: 1 1 1
@@ -2298,3 +2304,6 @@ This is what I have learned:
 <!-- Redshift: 23 Aug 2012: on -->
 <!-- Redshift: 24 Aug 2012: on -->
 <!-- Redshift: 25 Aug 2012: off -->
+<!-- Redshift: 26 Aug 2012: on -->
+<!-- Redshift: 27 Aug 2012: on -->
+<!-- Redshift: 28 Aug 2012: off -->
