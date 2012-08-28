@@ -408,9 +408,9 @@ Although the primary emphasis in psychology is to publish results on the basis o
 ![](/images/zeo/melatonin-totalz.png)
 ![](/images/zeo/melatonin-timeswoken.png)
 
-The calculated effect size is a little worrisome; at a somewhat subtle _d_=0.37, power calculations indicate that we're close to the limit of what the data can reliably tell us[^R-melatonin-power]. (Effect size is as important as significance values and in many contexts, more important, as it measures how strong the phenomenon is. A mnemonic: _p_-values are about whether the effect exists, and _d_-values are whether we care. For a visualization of effect sizes, see ["Windowpane as a Jar of Marbles"](http://healthyinfluence.com/wordpress/steves-primer-of-practical-persuasion-3-0/intro/windowpane/).) Part of the problem is that too many days wound up being useless, and each day costs us information and reduces our *true* sample size.
+The calculated effect size is a little worrisome; at a medium-small _d_=0.37, power calculations indicate that we're close to the limit of what the data can reliably tell us[^R-melatonin-power]. (Effect size is as important as significance values and in many contexts, more important, as it measures how strong the phenomenon is. A mnemonic: _p_-values are about whether the effect exists, and _d_-values are whether we care. For a visualization of effect sizes, see ["Windowpane as a Jar of Marbles"](http://healthyinfluence.com/wordpress/steves-primer-of-practical-persuasion-3-0/intro/windowpane/).) Part of the problem is that too many days wound up being useless, and each day costs us information and reduces our *true* sample size.
 
-[^R-melatonin-power]: One weakness is that I didn't randomize selection of melatonin or no-melatonin, instead doing an alternating days design and not always following that But if we were to wave that away, the power seems.. OK. I have something like 141 days of data, of which around 90-100 is usable, giving me maybe <50 pairs? If I fire up R and load in the two means and the standard deviation (which we know from calculating the effect size), and then play with the numbers, then to get an 85% chance I could find an effect at _p_=0.01:
+[^R-melatonin-power]: One weakness is that I didn't randomize selection of melatonin or no-melatonin, instead doing an alternating days design at my convenience. But if we were to wave that away, the power seems... OK. I have ~141 days of data, of which 90-100 are usable, giving me maybe <50 pairs? If I fire up R and load in the two means and the standard deviation (which we know from calculating the effect size), and then play with the numbers, then to get an 85% chance I could find an effect at _p_=0.01:
 
     ~~~{.R}
     > pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.01,type="paired",alternative="greater")
@@ -462,7 +462,11 @@ And also unfortunately, this dataseries doesn't distinguish between addition to 
 
 ![Days versus # of edits versus melatonin on/off](/images/zeo/melatonin-usage-versus-darcs.png)
 
-If I were to run further experiments, I would definitely run it double-blind, and maybe even test <1.5mg doses as well to see if I've been taking too much; 3mg turned out to be excessive, and there are one or two studies indicating that <1mg doses are best for normal people. (There could be 3 conditions: placebo, 0.75mg, and 1.5mg. For looking at melatonin effect in general, the data on 2 dosages could be combined. Melatonin has a short half-life, so probably there would be no point in random blocks of more than 2-3 days.)
+If I were to run further experiments, I would definitely run it double-blind, and maybe even test <1.5mg doses as well to see if I've been taking too much; 3mg turned out to be excessive, and there are one or two studies indicating that <1mg doses are best for normal people. I wound up using 1.5mg doses. (There could be 3 conditions: placebo, 0.75mg, and 1.5mg. For looking at melatonin effect in general, the data on 2 dosages could be combined. Melatonin has a short half-life, so probably there would be no point in random blocks of more than 2-3 days.)
+
+Worth comparing are [Jayson Virissimo's preliminary results](http://jayquantified.blogspot.com/2012/08/melatonin-preliminary-results.html "Melatonin: Preliminary Results"):
+
+> According to the preliminary [Zeo] data, while on melatonin, I seemed to get more total sleep, more REM sleep, less deep sleep, and wake up about the same number of times each night. Because this isn't enough data to be very confident in the results, I plan on continuing this experiment for at least another 4 months (2 on and 2 off of melatonin) and will analyze the results for the significance and magnitude of the effects (if there really are any) while throwing out the outliers (since my sleep schedule is so erratic).
 
 ## Value of Information (VoI)
 
