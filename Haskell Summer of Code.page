@@ -1,6 +1,7 @@
 ---
 description: A retrospective of 6 years of SoC, and lessons learned
 tags: Haskell
+created: 11 Feb 2009
 status: in progress
 belief: highly likely
 ...
@@ -480,7 +481,7 @@ There are 2 major collections of ideas for future SoC projects, aside from the g
 
 Let's look at the first 12 and see whether they're good ideas, bad ideas, or indifferent.
 
-1. [port GHC to the ARM architecture](http://www.reddit.com/r/haskell_proposals/comments/7ihso/an_arm_port_of_ghc_that_works_so_we_can_program/): It would be a good thing if we could easily compile our Haskell programs for ARM, which is used in many cellphones, but an even better idea would [using the LLVM backend](http://www.reddit.com/r/haskell_proposals/comments/b7ol7/use_the_llvm_backend_to_turn_ghc_into_a/) to [crosscompile](!Wikipedia). It would be somewhat tricky, but LLVM already has fairly solid [cross-compilation support](http://wiki.llvm.org/HowTo:_LLVM-based_cross_compiler), and making GHC capable of using it seems like a reasonable project for a student to tackle.
+1. [port GHC to the ARM architecture](http://www.reddit.com/r/haskell_proposals/comments/7ihso/an_arm_port_of_ghc_that_works_so_we_can_program/): It would be a good thing if we could easily compile our Haskell programs for ARM, which is used in many cellphones, but an even better idea would [using the LLVM backend](http://www.reddit.com/r/haskell_proposals/comments/b7ol7/use_the_llvm_backend_to_turn_ghc_into_a/) to [crosscompile](!Wikipedia). It would be somewhat tricky, but LLVM already has fairly solid [cross-compilation support](http://web.archive.org/web/20100412152035/http://wiki.llvm.org/HowTo:_LLVM-based_cross_compiler), and making GHC capable of using it seems like a reasonable project for a student to tackle.
 2. ["Implement overlap and exhaustiveness checking for pattern matching"](http://hackage.haskell.org/trac/summer-of-code/ticket/1579): this seems both quite challenging and also a specialized use. I use [GADTs](http://haskell.org/haskellwiki/Generalised_algebraic_datatype) rarely, but I suspect that those writing GADT code rarely make overlap or omission errors.
 3. [Incremental garbage collection](http://www.reddit.com/r/haskell_proposals/comments/d1ksj/incremental_garbage_collection_so_i_can_make_some/): this *may* be a good idea depending on how much of the code was already written. But I fear that this would go the way of the Immix GC SoC and would be a bad idea.
 4. ["ThreadScope with custom probes"](http://hackage.haskell.org/trac/summer-of-code/ticket/1584): I don't understand the description and can't judge it.
