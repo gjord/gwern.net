@@ -1,6 +1,7 @@
 ---
 description: Bitcoin's long gestation indicates it is an example of the 'Worse is Better' paradigm
 tags: computer science, cryptography
+created: 27 May 2011
 status: finished
 belief: likely
 ...
@@ -111,9 +112,9 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
     > "'When I first looked at the code, I was sure I was going to be able to break it', Kaminsky said, noting that the programming style was dense and inscrutable. 'The way the whole thing was formatted was insane. Only the most paranoid, painstaking coder in the world could avoid making mistakes.'...He quickly identified nine ways to compromise the system...when he found the right spot, there was a message waiting for him. 'Attack Removed', it said. The same thing happened over and over, infuriating Kaminsky. 'I came up with beautiful bugs', he said. 'But every time I went after the code there was a line that addressed the problem.'...'I've never seen anything like it', Kaminsky said, still in awe...'Either there's a team of people who worked on this', Kaminsky said, 'or this guy is a genius.'"
 
     On a technical basis, he dislikes the use of SHA-256 as opposed to slower [time-lock crypto](Self-decrypting files) functions like [bcrypt](!Wikipedia), because SHA-256 "can be accelerated massively with GPUs" leading to GPU shortages and massive hashing disparities between peers, and his slides conclude "BitCoin is actually well designed, if you accept that anonymity and scaling forces the entire present model to be shifted into something that effectively looks like banking"
-[^Szabo]: Nick Szabo, discussing [Chaumian ecash](http://web.archive.org/web/20110724123419/http://szabo.best.vwh.net/bearer_contracts.html) ("the greatest simple equation since $e=mc^2$"), comments with almost palpable distaste of a hypothetical system akin to Bitcoin in this respect:
+[^Szabo]: Nick Szabo, discussing [Chaumian ecash](http://web.archive.org/web/20110724123419/szabo.best.vwh.net/bearer_contracts.html) ("the greatest simple equation since $e=mc^2$"), comments with almost palpable distaste of a hypothetical system akin to Bitcoin in this respect:
 
-    > "A use-once-address communications mix plus forswearing any reputation gain from keeping accounts, in theory also buys us unlinkability, but a communications mix [BTC: ["mixing service"](https://en.bitcoin.it/wiki/Mixing_service); not necessarily [easy](http://andrewbadr.com/log/11/anonymizing-bitcoin/)] is weak and very expensive."
+    > A use-once-address communications mix plus forswearing any reputation gain from keeping accounts, in theory also buys us unlinkability, but a communications mix [BTC: ["mixing service"](https://en.bitcoin.it/wiki/Mixing_service); not necessarily [easy](http://andrewbadr.com/log/11/anonymizing-bitcoin/)] is weak and very expensive.
 
     The most widely known, popular, and secure communications mix is probably [Tor](!Wikipedia "Tor (anonymity network)#Weaknesses"); a number of flaws have been [found in it](http://freehaven.net/anonbib/topic.html) over time, and Tor will never be very secure - it's fundamentally difficult to impossible to have a anonymizing communications mix which is also near real-time. Some flaws *can't* be removed by the Tor network, like the ability of exit nodes to snoop on traffic (as has been done many times, most memorably during the startup of [Wikileaks](!Wikipedia)). Communications mixes are usually expensive in resources, so typically only make up a part of an overall network - and the rest of the network leaks considerable information, including [in Bitcoin](http://arxiv.org/abs/1107.4524).
 
