@@ -1,6 +1,7 @@
 ---
 description: Archiving the Web, because nothing lasts forever - pulling together all the previous archive tools.
 tags: Haskell, archiving
+created: 10 Mar 2011
 status: finished
 belief: highly likely
 ...
@@ -180,7 +181,7 @@ When `linkchecker` does not work, one alternative is to do a `wget --mirror` and
 
     If it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert the dump into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.)
 
-    I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf]().
+    I use [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [/docs/1999-bradbury-matrioshkabrains.pdf](), or Sternberg et al's 2001 review ["The Predictive Value of IQ"](http://dl.dropbox.com/u/85192141/2001-sternberg.pdf).
 
 # External links
 
