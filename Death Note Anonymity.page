@@ -1,7 +1,10 @@
 ---
 title: Death Note: L, Anonymity & Eluding Entropy
 description: Applied Computer Science: On Murder Considered as one of the Hard Sciences
+created: 04 May 2011
 tags: anime, criticism, computer science, cryptography
+status: finished
+belief: highly likely
 ...
 
 > This essay assumes a familiarity with the early plot of _[Death Note](!Wikipedia)_ and [Light Yagami](!Wikipedia); if you are unfamiliar with it, see my [_Death Note_ Ending](Death Note Ending) essay or consult [Wikipedia](!Wikipedia "Death Note#Plot").
@@ -70,9 +73,9 @@ To summarize: [differential privacy](!Wikipedia) is [almost](http://radar.oreill
     In general, there's no clear distinction between 'useful' and 'useless' information from the perspective of identifying/breaking privacy/reversing anonymization ([emphasis added](http://33bits.org/2009/10/14/de-anonymization-is-not-x-the-need-for-re-identification-science/)):
 
     > ‘Quasi-identifier’ is a notion that arises from attempting to see some attributes (such as ZIP code) but not others (such as tastes and behavior) as contributing to re-identifiability. However, the major lesson from the re-identification papers of the last few years has been that *any information at all about a person* can be potentially used to aid re-identification.
-[^bubbles]: See ["Bubble Trouble: Off-Line De-Anonymization of Bubble Forms"](http://www.cs.princeton.edu/~wclarkso/bubble-trouble.pdf), USENIX 2011S Security Symposium; from ["New Research Result: Bubble Forms Not So Anonymous"](http://www.freedom-to-tinker.com/blog/wclarkso/new-research-result-bubble-forms-not-so-anonymous):
+[^bubbles]: See ["Bubble Trouble: Off-Line De-Anonymization of Bubble Forms"](http://web.archive.org/web/20110703183356/www.cs.princeton.edu/~wclarkso/bubble-trouble.pdf), USENIX 2011S Security Symposium; from ["New Research Result: Bubble Forms Not So Anonymous"](http://www.freedom-to-tinker.com/blog/wclarkso/new-research-result-bubble-forms-not-so-anonymous):
 
-    > "If bubble marking patterns were completely random, a classifier could do no better than randomly guessing a test set’s creator, with an expected accuracy of 1/92 ≈ 1%. Our classifier achieves over 51% accuracy. The classifier is rarely far off: the correct answer falls in the classifier’s top three guesses 75% of the time (vs. 3% for random guessing) and its top ten guesses more than 92% of the time (vs. 11% for random guessing)."
+    > If bubble marking patterns were completely random, a classifier could do no better than randomly guessing a test set’s creator, with an expected accuracy of 1/92 ≈ 1%. Our classifier achieves over 51% accuracy. The classifier is rarely far off: the correct answer falls in the classifier’s top three guesses 75% of the time (vs. 3% for random guessing) and its top ten guesses more than 92% of the time (vs. 11% for random guessing).
 [^Brin]: But hey, at least the lack of privacy is two-way and the public can [keep an eye on](!Wikipedia "Transparency (social)") malefactors like the government, as [David Brin](!Wikipedia)'s _[The Transparent Society](!Wikipedia)_ argues is the best outcome. But wait, Wikileaks has revealed the massive expansion of American government secrecy due to the War on Terror and even the [supposed friend](http://www.washingtonpost.com/wp-dyn/content/article/2008/12/10/AR2008121003364.html) of transparency, President Obama, [has](http://www.nytimes.com/2009/03/17/us/politics/17signing.html) [presided](http://www.nytimes.com/2010/06/12/us/politics/12leak.html) [over](http://www.salon.com/news/opinion/glenn_greenwald/2010/05/25/whistleblowers) [an](http://harpers.org/archive/2010/08/hbc-90007562) [expansion](http://www.dailykos.com/story/2011/03/01/951432/-War-on-Whistleblowers-Escalating) of President George W. Bush's secrecy programs and crackdowns on [whistle-blowers](!Wikipedia) of all stripes? Oh. Too bad about that, I guess.
 
 ## Mistake 3
