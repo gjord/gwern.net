@@ -1582,10 +1582,8 @@ The real reason for introducing the rule of succession lies in the cases where w
 
 <http://spitswww.uvt.nl/~gkeren/bestanden/teigen&keren2006.pdf>
 
-
-
-<!--
 # LW anchoring experiment
+## Problem
 
 27 February 2012 in `#lesswrong`:
 
@@ -1615,14 +1613,12 @@ The real reason for introducing the rule of succession lies in the cases where w
     Grognor> Boxo: I'm not suggesting it's entirely that simple, no, but I do think it's obvious now that a first comment that says "upvoted for reasons x, y, and z"
              will cause more people to upvote than otherwise would have, and vice versa
     Boxo> (ie. you saw X and Y and though X caused Y, but I think there's a Z that causes both X and Y)
-
     ksotala> Every now and then, I catch myself wanting to upvote something because others have upvoted it already. It sounds reasonable that having an explicit comment
              declaring "I upvoted" might have an even stronger effect.
     ksotala> On the other hand, I usually decide to up/downvote before reading the comments.
     gwern> ksotala: you should turn on anti-kibitzing then
     ksotala> gwern: Probably.
     rmmh> gwern: maybe karma blinding like HN would help
-
     Boxo> I guess any comment about voting could remind people to vote, in whatever direction. Could test this if you had the total number of votes per post.
     Grognor> that too
     Grognor> the effect here is multifarious and complicated and the intricate details could not possibly be worked out, which is exactly why this proportion of first
@@ -1630,6 +1626,8 @@ The real reason for introducing the rule of succession lies in the cases where w
     gwern> Boxo: I don't think that's exposed to us, no
 
 Such an [anchoring](!Wikipedia) or [social proof](!Wikipedia) effect resulting in a [first-mover advantage](!Wikipedia) seems quite plausible to me.
+
+## Design
 
 So on the 27th, I registered the account ["Rhwawn"](http://lesswrong.com/user/Rhwawn/)^[If you were wondering about the account name: both 'Rhwawn' and 'Gwern' are character names from the Welsh collection _[Mabinogion](!Wikipedia)_. They share the distinctions of being short, nearly unique, and obviously pseudonymous to anyone who Googles them, which is why I also used that name as an alternate account [on Wikipedia](!Wikipedia "User:Rhwawn").]. I made some quality comments and upvotes to seed the account as a legitimate active account.
 
@@ -1639,6 +1637,30 @@ To enlarge the sample, I passed <http://lesswrong.com/recentposts> through `xcli
 
 For those who replied, I sent a copy of this writeup and explained their procedure would be as follows: every time they posted they would flip a coin and post likewise (the Rhwawn account password having been shared with them); however, as a convenience to them, I would take care of recording the karma a month later. (I subscribed to participants' post RSS feeds; this would not guarantee that I would learn of their posts in time to add a randomized sock comment - hence the need for their active participation - but I could at least handle the scheduling & karma-checking for them.)
 
+
+To avoid issues with some criticisms being accurate and others poor, a fixed list of reasons was used with minor variation to make them fit in:
+
+1. Negative; "Downvoted; ..."
+
+    - "too much weight on _n_ studies"
+    - "too many studies cited"
+    - "too reliant on personal anecdote"
+    - "too heavy on math"
+    - "not enough math"
+    - "rather obvious"
+    - "not very interesting"
+2. Positive; "Upvoted; ..."
+
+    - "good use of _n_ studies"
+    - "thorough citation of claims"
+    - "enjoyable anecdotes"
+    - "rigorous use of math"
+    - "just enough math"
+    - "not at all obvious"
+    - "very interesting"
+
+## Questions
+
 > I will have to do some contemplation of values before I accept or reject. I like getting honest feedback on my posts, I like accumulating karma, and I also like performing experiments.
 
 Randomization suggests that your expected-karma-value would be 0, unless you expect asymmetry between positive and negative.
@@ -1647,50 +1669,55 @@ Randomization suggests that your expected-karma-value would be 0, unless you exp
 
 Oh, it'd be simple enough. Sort articles into one group of karma scores for the positive anchors, the other group for the negative anchors; feed into a two-sample t-test to see if the means differ and if the difference is significant. I can probably copy the R code straight from my [Zeo#vitamin-d-analysis]() sessions.
 
-If I can hit p<0.10 or p<0.05 or so, post an Article triumphantly announcing the finding of bias and an object lesson of why one shouldn't take karma too seriously; if I don't, post a Discussion article discussing it and why I thought the results didn't reach significance. (Not enough articles? Too weak assumptions in my t-test?)
+If I can hit _p_<0.10 or _p_<0.05 or so, post an Article triumphantly announcing the finding of bias and an object lesson of why one shouldn't take karma too seriously; if I don't, post a Discussion article discussing it and why I thought the results didn't reach significance. (Not enough articles? Too weak assumptions in my t-test?)
+
+## Data
 
 The results:
 
-1. http://lesswrong.com/r/discussion/lw/ahz/cashing_out_cognitive_biases_as_behavior/ negative; karma: 11
-2. http://lesswrong.com/lw/aid/heuristics_and_biases_in_charity/5y2v negative; karma: 19
-3. http://lesswrong.com/lw/akr/i_was_not_almost_wrong_but_i_was_almost_right/5yxz positive; karma: 50
-4. http://lesswrong.com/lw/aks/emotional_regulation_part_i_a_problem_summary/ negative; karma: 9
-5. http://lesswrong.com/r/discussion/lw/apm/how_would_you_stop_moores_law/ positive; karma: 19
-6. http://lesswrong.com/r/discussion/lw/aq6/on_the_etiology_of_religious_belief/ negative; karma: 11
-7. http://lesswrong.com/lw/aq9/decision_theories_a_less_wrong_primer/ positive; karma: 62
-8. http://lesswrong.com/lw/ase/schelling_fences_on_slippery_slopes/ positive; 120
-9. http://lesswrong.com/r/lesswrong/lw/aq2/fallacies_as_weak_bayesian_evidence/ positive; 49
-10. http://lesswrong.com/lw/axl/decision_theories_a_semiformal_analysis_part_i/ positive; 20
-11. http://lesswrong.com/lw/az6/decision_theories_a_semiformal_analysis_part_ii/ negative; 16
-12. http://lesswrong.com/lw/by9/to_like_each_other_sing_and_dance_in_synchrony/ negative; 20
-13. http://lesswrong.com/r/discussion/lw/bl3/living_forever_is_hard_part_3_the_state_of_life/ positive; 10
-14. http://lesswrong.com/r/discussion/lw/cih/value_of_information_8_examples/ negative; 45
-15. http://lesswrong.com/r/discussion/lw/dds/hope_function/ positive; 22
-16. http://lesswrong.com/lw/dhe/to_learn_critical_thinking_study_critical_thinking/ negative; 23
+Post                                                                     Author             Date              Comment  Post karma Comment karma
+--------------------------------------------------------------------     ------------------ ----------------  -------- ---------- -------------
+[Cashing Out Cognitive Biases as Behavior][]                             [gwern][]          02 March 2012     -        11         -4
+[Heuristics and Biases in Charity][]                                     [Kaj_Sotala][]     02 March 2012     -        19         -6
+[I Was Not Almost Wrong But I Was Almost Right][]                        Kaj_Sotala         08 March 2012     +        50         0
+[Emotional regulation, Part I: a problem summary][]                      [Swimmer963][]     05 March 2012     -        9          -2
+[How would you stop Moore's Law?][]                                      gwern              10 March 2012     +        19         -3
+[On the etiology of religious belief][]                                  gwern              11 March 2012     -        11         -7
+[Decision Theories: A Less Wrong Primer][]                               [orthonormal][]    13 March 2012     +        62         0
+[Schelling fences on slippery slopes][]                                  [Yvain][]          16 March 2012     +        120        1
+[Fallacies as weak Bayesian evidence][]                                  Kaj_Sotala         18 March 2012     +        49         0
+[Decision Theories: A Semi-Formal Analysis, Part I][]                    orthonormal        24 March 2012     +        20         -1
+[Decision Theories: A Semi-Formal Analysis, Part II][]                   orthonormal        06 April 2012     -        16         -13
+[To like each other, sing and dance in synchrony][]                      Kaj_Sotala         23 April 2012     -        20         4
+[Living Forever is Hard, part 3: the state of life extension research][] gwern              23 April 2012     +        10         0
+[Value of Information: 8 examples][]                                     gwern              18 May 2012       -        45         -8
+[Hope Function][]                                                        gwern              01 July 2012      +        22         0
+[To Learn Critical Thinking, Study Critical Thinking][]                  gwern              07 July 2012      -        23         -11
+[Dragon Ball's Hyperbolic Time Chamber][]                                gwern              02 September 2012 -        ?          -9
 
-List of reasons:
+[Dragon Ball's Hyperbolic Time Chamber]: http://lesswrong.com/r/discussion/lw/ecp/dragon_balls_hyperbolic_time_chamber/
+[To Learn Critical Thinking, Study Critical Thinking]: http://lesswrong.com/lw/dhe/to_learn_critical_thinking_study_critical_thinking/
+[Hope Function]: http://lesswrong.com/r/discussion/lw/dds/hope_function/
+[Value of Information: 8 examples]: http://lesswrong.com/r/discussion/lw/cih/value_of_information_8_examples/
+[Living Forever is Hard, part 3: the state of life extension research]: http://lesswrong.com/r/discussion/lw/bl3/living_forever_is_hard_part_3_the_state_of_life/
+[To like each other, sing and dance in synchrony]: http://lesswrong.com/lw/by9/to_like_each_other_sing_and_dance_in_synchrony/
+[Decision Theories: A Semi-Formal Analysis, Part II]: http://lesswrong.com/lw/az6/decision_theories_a_semiformal_analysis_part_ii/
+[Decision Theories: A Semi-Formal Analysis, Part I]: http://lesswrong.com/lw/axl/decision_theories_a_semiformal_analysis_part_i/
+[Fallacies as weak Bayesian evidence]: http://lesswrong.com/r/lesswrong/lw/aq2/fallacies_as_weak_bayesian_evidence/
+[Yvain]: http://lesswrong.com/user/Yvain/
+[Schelling fences on slippery slopes]: http://lesswrong.com/lw/ase/schelling_fences_on_slippery_slopes/
+[orthonormal]: http://lesswrong.com/user/orthonormal/
+[Decision Theories: A Less Wrong Primer]: http://lesswrong.com/lw/aq9/decision_theories_a_less_wrong_primer/
+[On the etiology of religious belief]: http://lesswrong.com/r/discussion/lw/aq6/on_the_etiology_of_religious_belief/
+[How would you stop Moore's Law?]: http://lesswrong.com/r/discussion/lw/apm/how_would_you_stop_moores_law/
+[Swimmer963]: http://lesswrong.com/user/Swimmer963/
+[Emotional regulation, Part I: a problem summary]: http://lesswrong.com/lw/aks/emotional_regulation_part_i_a_problem_summary/
+[I Was Not Almost Wrong But I Was Almost Right]: http://lesswrong.com/lw/akr/i_was_not_almost_wrong_but_i_was_almost_right/
+[Kaj_Sotala]: http://lesswrong.com/user/Kaj_Sotala/
+[Heuristics and Biases in Charity]: http://lesswrong.com/lw/aid/heuristics_and_biases_in_charity/
+[gwern]: http://lesswrong.com/user/gwern
+[Cashing Out Cognitive Biases as Behavior]: http://lesswrong.com/r/discussion/lw/ahz/cashing_out_cognitive_biases_as_behavior/
 
-negative; "Downvoted; ..."
-
-- "too much weight on _n_ studies"
-- "too many studies cited"
-- "too reliant on personal anecdote"
-- "too heavy on math"
-- "not enough math"
-- "rather obvious"
-- "not very interesting"
-
-positive; "Upvoted; ..."
-
-- "good use of _n_ studies"
-- "thorough citation of claims"
-- "enjoyable anecdotes"
-- "rigorous use of math"
-- "just enough math"
-- "not at all obvious"
-- "very interesting"
-
--->
 
 # Ending Moore's law
 
@@ -1805,3 +1832,4 @@ See also:
 
 - ["That Alien Message"](http://lesswrong.com/lw/qk/that_alien_message/)
 - [Slowing Moore's Law]()
+- [Discussion of this essay on LessWrong](http://lesswrong.com/lw/ecp/dragon_balls_hyperbolic_time_chamber/#comments)
