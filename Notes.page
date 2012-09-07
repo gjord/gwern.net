@@ -1637,7 +1637,6 @@ To enlarge the sample, I passed <http://lesswrong.com/recentposts> through `xcli
 
 For those who replied, I sent a copy of this writeup and explained their procedure would be as follows: every time they posted they would flip a coin and post likewise (the Rhwawn account password having been shared with them); however, as a convenience to them, I would take care of recording the karma a month later. (I subscribed to participants' post RSS feeds; this would not guarantee that I would learn of their posts in time to add a randomized sock comment - hence the need for their active participation - but I could at least handle the scheduling & karma-checking for them.)
 
-
 To avoid issues with some criticisms being accurate and others poor, a fixed list of reasons was used with minor variation to make them fit in:
 
 1. Negative; "Downvoted; ..."
@@ -1670,6 +1669,12 @@ Randomization suggests that your expected-karma-value would be 0, unless you exp
 Oh, it'd be simple enough. Sort articles into one group of karma scores for the positive anchors, the other group for the negative anchors; feed into a two-sample t-test to see if the means differ and if the difference is significant. I can probably copy the R code straight from my [Zeo#vitamin-d-analysis]() sessions.
 
 If I can hit _p_<0.10 or _p_<0.05 or so, post an Article triumphantly announcing the finding of bias and an object lesson of why one shouldn't take karma too seriously; if I don't, post a Discussion article discussing it and why I thought the results didn't reach significance. (Not enough articles? Too weak assumptions in my t-test?)
+
+> And the ethics?
+
+The post authors are volunteers, and as already pointed out, the expected karma benefit is 0. So no one is harmed, and as for the deception, it does not seem to me to be a big deal. We are already nudged by countless primes and stimuli and biases.
+
+> "What comes before determines what comes after...The thoughts of all men arise from the darkness. If you are the movement of your soul, and the cause of that movement precedes you, then how could you ever call your thoughts your own? How could you be anything other than a slave to the darkness that comes before?...History. Language. Passion. Custom. All these things determine what men say, think, and do. These are the hidden puppet-strings from which all men hang...all men are deceived....So long as what comes before remains shrouded, so long as men are already deceived, what does [deceiving men] matter?" --Kelhus, [R. Scott Bakker](!Wikipedia)'s _[The Darkness That Comes Before](!Wikipedia)_
 
 ## Data
 
