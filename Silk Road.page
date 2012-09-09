@@ -143,7 +143,7 @@ Now, you will notice that for most sellers, there is no '(99)' or '(100)' after 
 
 This is due to the simple fact that when I joined, the post-_Gawker_ rush had resulted in membership jumping from the high-hundreds/low-thousands range to north of 10,000 accounts, and while many transactions had been entered into, the reviews and closures of transactions had only started. So I was not *too* bothered by the lack of feedback on this seller profile. I also used the handy SR forums and found no bad mentions of the seller. The user number was not terribly high, the description was detailed enough that it looked like he took selling seriously, there are no bad reviews, they posted a public key, etc. So, I was willing to take a chance on him.
 
-Both the seller and the example above had standard [PGP](!Wikipedia "Pretty Good Privacy")-compliant [*public keys*](!Wikipedia "Public-key cryptography") posted (the long string of gibberish under that odd header - quite unmistakable), which one will need to encrypt the personal information one sends the seller[^address]. (It is a given on Silk Road that sellers have public keys; you instantly fail at security if you send the seller the address unencrypted.) Public-key cryptography is an old and vital concept to understand, and there are a great many descriptions or introductions online so I will not explain it further here.
+Both the seller and the example above had standard [PGP](!Wikipedia "Pretty Good Privacy")-compliant [*public keys*](!Wikipedia "Public-key cryptography") posted (the long string of gibberish under that odd header - quite unmistakable), which one will need to encrypt the personal information one sends the seller[^address]. (It is a given on Silk Road that sellers have public keys; any sellers who does not provide public keys should be shunned no matter how good they seem, and you instantly fail at security if you send the seller the address unencrypted. You are also making Silk Road a bigger target by doing stuff in the clear, because the site is holding more valuable information.) Public-key cryptography is an old and vital concept to understand, and there are a great many descriptions or introductions online so I will not explain it further here.
 
 [^address]: Addresses ought always to be encrypted, and further, one must do the encryption oneself. If a single person, tool, or site is doing the encryption for your Silk Road ordering, and only Silk Road encryption, then they are an obvious target for attackers like law enforcement.
 
@@ -278,9 +278,172 @@ There is no proof of all of the above - anything here could have been faked with
 
 But looking back, I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road^[Looking at the reviews posted to the front page and sentiment on the forum, I would hazard a guesstimate that scammers are 0-10% of the marketplace, and probably to the low end of that spectrum. In the January 2012 one-year anniversary message, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0)), the administrator claimed that "over 99% of all transactions conducted within the escrow system are completed to the satisfaction of both both buyer and seller, or a mutually agreed upon resolution is found." Christin 2012's analysis found 97.8% of feedbacks giving 4-5 stars (similar to eBay rankings) but notes that this cannot pick up scams done out of escrow (as one might expect many scams to be done).], and shipments do get lost in the mail or seized or otherwise not delivered. ([I do not expect](http://predictionbook.com/predictions/2911) any legal problems; law enforcement always go after the sellers, to achieve maximum impact, and Silk Road presents both technical and jurisdictional problems for law enforcement.) This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
 
-> "Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there."
+> Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there.
 
 On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://silkroadvb5piz3r.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
+
+<!--
+# LSD ordering
+
+With Adderall & modafinil, the vendor choices were restricted enough and scams rare enough that I did not need to think hard about the process. With LSD, this ease vanished: there was a bewildering array of options and scammer were an acknowledged plague. A more systematic approach was necessary, starting with compiling data about what my options were.
+
+## Vendor table
+
+Background reading: ["Official discussion thread of current LSD vendors"](http://dkn255hz262ypmii.onion/index.php?topic=7077.0) & ["Collective Acid Database"](http://dkn255hz262ypmii.onion/index.php?topic=10774.0). Table compiled 3 September 2012 from [SR search results for "LSD"](http://silkroadvb5piz3r.onion/index.php/silkroad/search_results/LSD/0) (VitaCat added 4 September), including blotter listings <฿12 which ship to USA:
+
+Listing                   #    μg     ฿     S&H    μg/฿    Transit            User                  Age (days)    FE      Feedback     Weighted μg/฿       Threads                      LSD reviews    Forum hits
+-------------------      ---  ---- ------- ------ ------   ----------    -------------------------- --------     -----   ------------ ------------------- ------------------            ------------ -----------
+"[Matrix™][]"              5  250  11.67    1.75   93      international  [EnterTheMatrix][]        360          yes?      300(98.7%)   90[^j]             [EnterTheMatrix reviews][]    many             many
+"[Alice in Wonderland][]"  5  120  6.99     0.42   81      international  [aakoven][]               360           no?[^e]  300(93.7%)   74                 [aakoven reviews][]           >6               180[^f]
+"[Hoffman Now][]"          2  110  2.96     0.34   70[^i]  international  [PremiumDutch][]          360           yes      300(97.3%)   67                 N/A                           2                60[^g]
+                                                                          Synaptic[^d]
+"[5LSD Blotter][]"         5  200  7.45     0.58   125     international  [juergen2001][]           360           yes      300(95.1%)   115                [juergen2001 reviews][]       >18              90
+"[Trip][]"                 5  150  8.02     0      94       domestic      [lonely kamel][]          120           no       173(93.4%)   84                 [LK 1][] [LK 2][]             0                20[^c]
+[2 pcs Maya][]             2  250  4.12     1.42   104     international  [VitaCat][]               120           no?      300(99.9%)   103                [VitaCat reviews][]           many             many[^k]
+[5 pcs Maya][]             5  250  10.21    1.42   107     international  [VitaCat][]               120           no?      300(99.9%)   106                [VitaCat reviews][]           many             many
+"[Premium LSD tabs][]"     5  ?    6.99     0      72       domestic      [No FE ever][]            60            no       68(99.1%)    67                 [NFE 1][], [NFE 2][]           2                22[^b]
+[Mayan 1][]                1  125  0.83     0.32   143     international  [nipplesuckcanuck][]      60            yes?     127(97.6%)   134                [nipplesuckcanuck reviews][]  ?                11
+[Mayan 2][]                10 125  7.19     0.49   163     international  nipplesuckcanuck          60            yes?     127(97.6%)   153                [nipplesuckcanuck reviews][]  3                11
+"[Shiva][]"                2  100  2.18     0.18   85       domestic      [graffenburg][]           30            no       76(100%)     82                 N/A                           0                9[^h]
+"[Hoffmann bike rides][]"  5  150  7.53     0      100     international  [Machine Maid][]          30            no       10(100%)     74                 N/A                           0                1
+"[3Jane Latest][]"         5  100  7.36     0.59   63       domestic      [Molly Want a Cracker][]  24            no       28(100%)     57                 [Molly reviews][]             0                9
+"[Beetles Stamps][]"       5  150  4.28     0      175      domestic      [USAReshipper][]          10            no       0(?%)        88                 N/A                           0                3[^a]
+"[5 strip Real Love][]"    5  150? 6.41     0.29   112      domestic      [Ladylucy][]              4             ?        0(?%)        56                 [Ladylucy reviews][]          0                3
+"[Koi Fish][]"             1  250  2.51     0.6    80      international  [aciddotcom][]            7             yes      0(0%)        40                 N/A                           0                0
+
+[5 pcs Maya]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/f8cc7e5c64
+[VitaCat reviews]: http://dkn255hz262ypmii.onion/index.php?topic=19469.0
+[VitaCat]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/1bfd7523ad
+[2 pcs Maya]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/4de32adfbb
+[graffenburg]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/af8f7b03ff
+[Shiva]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/025af62b7a
+[nipplesuckcanuck reviews]: http://dkn255hz262ypmii.onion/index.php?topic=28638.0
+[Mayan 2]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/2f318044ea
+[nipplesuckcanuck]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/1675dcb422
+[Mayan 1]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/db5556491b
+[PremiumDutch]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/da8e0d2abf
+[Hoffman Now]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/f3df3e9842
+[aakoven reviews]: http://dkn255hz262ypmii.onion/index.php?topic=339.0
+[aakoven]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/2732fef1ae
+[Alice in Wonderland]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/d6aa0bc8b8
+[aciddotcom]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/45b8f448bf
+[Koi Fish]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/693a8c4f59
+[juergen2001 reviews]: http://dkn255hz262ypmii.onion/index.php?topic=6177.0
+[juergen2001]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/69a6bec290
+[5LSD Blotter]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/e6ae923979
+[LK 2]: http://dkn255hz262ypmii.onion/index.php?topic=32300.msg366733#msg366733
+[LK 1]: http://dkn255hz262ypmii.onion/index.php?topic=39268.0
+[lonely kamel]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/db71c13ee1
+[Trip]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/cb63dfdf78
+[Synaptic]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/f9a7bbe59f
+[Kool Aid Blotter]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/b46aa07816
+[EnterTheMatrix reviews]: http://dkn255hz262ypmii.onion/index.php?topic=4633.0
+[EnterTheMatrix]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/351ee799c9
+[Matrix™]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/b3e0fa2ad2
+[Machine Maid]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/e0a7dba26a
+[Hoffmann bike rides]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/d7d9542ee9
+[NFE 2]: http://dkn255hz262ypmii.onion/index.php?topic=30862.msg346233#msg346233
+[NFE 1]: http://dkn255hz262ypmii.onion/index.php?topic=37827.0
+[No FE ever]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/4f3f1e8eab
+[Premium LSD tabs]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/ce9ab3fa0f
+[USAReshipper]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/c684aad387
+[Beetles Stamps]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/b69500e71e
+[Ladylucy reviews]: http://dkn255hz262ypmii.onion/index.php?topic=39495.msg439471#msg439471
+[Ladylucy]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/9f1de0f388
+[5 strip Real Love]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/34e836fe31
+[Molly reviews]: http://dkn255hz262ypmii.onion/index.php?topic=35353
+[Molly Want a Cracker]: http://silkroadvb5piz3r.onion/index.php/silkroad/user/96b11d47ca
+[3Jane Latest]: http://silkroadvb5piz3r.onion/index.php/silkroad/item/3856ebd21c
+
+[^a]: [USAReshipper forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=31885)
+[^b]: ["No FE ever" forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=25600)
+[^c]: ["lonely kamel" forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=21457)
+[^d]: The prolific vendor `Synaptic` was excluded for failing to provide a public key; public keys are not optional.
+[^e]: See the threads ["AAKOVEN SELECTIVE SCAMMER!"](http://dkn255hz262ypmii.onion/index.php?topic=29909.msg332997#msg332997) & ["AAkoven - US Buyers Beware"](http://dkn255hz262ypmii.onion/index.php?topic=20682.0)
+[^f]: [aakoven forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=1028)
+[^g]: [PremiumDutchUK forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=13200)
+[^h]: [graffenburg forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=26810)
+[^k]: [VitaCat forum account's posts](http://dkn255hz262ypmii.onion/index.php?action=profile;area=showposts;u=17847)
+[^i]: For unit prices <฿3, I increase the unit count until it fits within ฿7.5; otherwise, μg/฿ is calculated the obvious way: dose times quantity divided by price plus shipping.
+[^j]: This metric is the per-unit cost weighted by an expected-value interpretation of what feedback implies about the risk; see the later Quantitative section for the full explanation.
+
+## Description
+
+Some general observations on this table of a subset of LSD vendors:
+
+1. There's a striking number of new sellers: listings from 'young' accounts (<=2 months old) make up more than half the table. I've seen many complaints about a lack of US sellers but it seems the market is responding.
+2. There are dismayingly few LSD reviews on the forums for any vendor except `EnterTheMatrix`; this seems to be partially due to the presence of many vendors not specializing in LSD.
+3. Long-term feedback below 95% is a warning sign. Of the 3 'old' vendors with ~95% or less feedback (`aakoven`, `juergen2001`, & `lonely kamel`), all 3 have plenty of bad feedback on the forums. If it were just one that had both bad feedback and bad forum comments, it might be some sort of astroturfing or 'hating' (as `aakoven` pre-emptively accuses his bad feedback rating), but when *all 3* have both bad forums and feedback ratings? Makes one wonder... Nor is that the 'cost of doing business' for very old vendor accounts, since we see that the similarly old `EnterTheMatrix` & `PremiumDutch` ratings are solidly better.
+
+    Since their μg/฿ are not stellar (save `juergen2001`'s), it's not clear why one would buy from them.
+4. Some of the new sellers seem to have a lot of feedback (eg. `No FE ever` or `nipplesuckcanuck`), but looking at their feedback, we see a great deal of early finalization! This renders them pretty suspect. And of course, the 3 youngest sellers have no feedback at all. This is a problem because scammers are a serious problem with LSD vendors; a quick read of forum threads lists 5 scammers over the past 3 months: `Kat`, `Gar`, `Bloomingcolor`, `Fractaldelic`, & `DiMensionalTraveler`.
+5. The range of μg/฿ is interesting: a full order of magnitude is represented, from the low of 63μg/฿ to 175μg/฿.
+
+    Perhaps surprisingly, this range doesn't go away when I try to adjust for risk based on reviews: now the full range is 40μg/฿ (`aciddotcom`) to 153μg/฿ (`nipplesuckcanuck`).
+
+## Analysis
+### Quantitative
+
+In my [modafinil article](Modafinil) I discussed [some basic statistical techniques](Modafinil#ordering-behavior) for optimizing orders under uncertainty: one-shot ordering, repeated ordering with free learning, & repeated ordering with expensive learning.
+
+In this case, we're only ordering one, so one-short ordering it is. One-shot ordering simply counsels ordering from a mix of the cheapest and the safest vendor - what maximizes one's [expected value](!Wikipedia) (EV), which is just $\text{risk} \times \text{reward} = \text{EV}$. The reward is easy: total dose divided by total cost. The risk is harder: the vendors do not conveniently volunteer how likely you are to be scammed.
+
+The obvious way to quantify risk is to just take the feedback at face-value: a 97% rating says I am taking a 3% chance I will be screwed over. Multiply that by the reward, sort to find the largest EV, and we're done.
+
+An objection: "Are you seriously saying that a vendor with 1 bad review out of 100 is *equally* trustworthy as a vendor with 3 bad reviews out of 300, and that both of them are *less* trustworthy than a vendor with 0 bad reviews out of 10?" It does seem intuitive that the 300 guy's 99% is more reliable than the 100 guy's 99%; the 10 guy may have a perfect 100% now, but could easily wind up with something much lower after he's sold 100 or 300 things, and we would rather not be one of the buyers who causes those shifts downward.
+
+So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](!Wikipedia). We're not interested in the optimistic question of "how *good* could these vendors turn out to be?", but rather we are interested in finding out how *bad* these vendors might truly be. What's the worst plausible vendor future rating given their existing ratings? We can ask for a [confidence interval](!Wikipedia) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](/docs/1994-falk), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul). This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". What are the results? The numbers were calculated as follows:
+
+~~~~{.R}
+> y <- function(ugbtc,n,percent) { ((binom.test(round((percent/100)*n),n,conf.level=0.90))$conf.int):1 * ugbtc }
+> # Binomial doesn't work on 0 data; what do we? Punt with the age-old 50%/coin-flip/equal-indifference-rule-of-thumb
+> # Why 90% CIs, not 95%? Fake feedback skews the stats up and down, so we might as well get narrower intervals...
+> c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
+    y(94, 173, 93.4), y(100, 10, 100), 112*0.5, y(125, 300, 95.1), y(143, 127, 97.6), y(163, 127, 97.6), 175*0.5)
+ [1]  56.60766  66.66799  67.11326  45.00000  73.58456  81.71468  90.18671
+ [8]  84.31314  74.11344  56.00000 115.50641 134.43170 153.23333  87.50000
+~~~~
+
+<!-- $ -->
+
+(This demonstrates, incidentally, that feedback ratings don't start yielding very high assurance until a surprisingly large amount is in.)
+
+Now we have risk factored in from just the quantitative data of the feedback amount & percentage. But we must be more subjective with the other factors.
+
+### Qualitative
+
+We have to look at more qualitative information and start comparing & ranking possibilities. There are a few criteria that I value; in descending order of importance:
+
+1. old > new
+2. high weighted-μg/฿
+3. many reviews on SR & forums
+4. no FE > FE
+5. domestic > international
+6. has feedback thread
+
+For a first cut, we look at all items meeting #2, where a good cut off seems to be weighted-μg/฿>90; this is just `EnterTheMatrix`, `juergen2001`, `VitaCat`, and `nipplesuckcanuck`. A second cut is #1, which deletes `nipplesuckcanuck` for being too new. #3 is useless, but #4 is helpful: we can scrap `juergen2001` for requiring FE; #5 is now useless as both are international, as is #6 since both have feedback threads.
+
+So we're down to `VitaCat` and `EnterTheMatrix`. On most of the listed metrics, they are about equal - `EnterTheMatrix` seems to have an edge in feedback due to greater volume, but it's hard to say for sure. Going with `VitaCat` promises to save a little bit of money since his weighted-μg/฿ is ~10 greater. So, `VitaCat` it was. I bought the 2-dose item since I couldn't afford the 5-dose one. (It would've been useful but I wasn't sure I wanted to sink in that much money, 2 doses *should* suffice, and it was highly likely that he would sell out before I had converted money into Bitcoin, as indeed he did.) So instead I paid extra for tracking.
+
+### VoI: Ehrlich test
+
+We have one last question about ordering: should we buy an "Ehrlich test"?
+
+An [Ehrlich test](!Wikipedia) is a reagant for [indole](!Wikipedia) [alkaloids](!Wikipedia), a category which includes psychedelics like LSD & psilocybin. As such, it can be used as a kind of quality check. However, while any LSD product will probably trigger a positive, so will *other* chemicals; and the test itself may simply be wrong.
+
+Is an Ehrlich test worth buying? This sounds like a classic [Value of Information problem](Nootropics#value-of-information-voi)
+
+The only SR listing for an Ehrlich test is a [`Synaptic` listing](http://silkroadvb5piz3r.onion/index.php/silkroad/item/0337b24a54) (a vendor who I have already criticized for shoddy security practice) which both costs >$40 and has a highly negative review! Googling on the open web leads quickly to [eztestkits](http://www.eztestkits.com/en/ehrlich-ez-testing-kit) selling for £4.99, which with S&H is probably $10-15, and [Avalon Magic Plants](http://www.avalonmagicplants.com/cool-stuff/ez-drug-test-lsd.html) for a similar price. The former is clearly a fool's buy, but the latter may not be.
+
+The fundamental question of a VoI analysis is: how would this information change your actions? If the test being positive rather than negative would not lead you to do anything differently, then the information has no (direct) value.
+
+This leads to a quick answer: if I tested a `VitaCat` dose (destroying >$20 of LSD) and it was negative, would I throw the rest out? No. I would be too curious, and I would have spent too much to tranquilly chuck it based on one test which I do not trust as compared against a very reputable seller. (I would be too curious since I do not plan to order again.) Therefore, the VoI is zero; and a value of zero does not justify spending the money on buying a kit and wasting LSD and time. I would just find out the hard way.
+-->
+
+# See also
+
+- [Nootropics]()
+- [Algernon's Law](Drug heuristics)
 
 # External links
 
