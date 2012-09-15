@@ -1,13 +1,16 @@
 ---
 title: John Nash on cryptography
 author: John Nash
+created: 22 Feb 2012
 description: 1955 letters of John Nash and the NSA on a cryptosystem and Nash's belief that near-perfect cryptography could exploit exponential difficulties
 tags: cryptography
+status: finished
+belief: log
 ...
 
 # Primary
 
-The following transcript was prepared from a PDF of [correspondence with the NSA](http://www.nsa.gov/public_info/_files/nash_letters/nash_letters1.pdf) declassified in 2012; I have attempted to reproduce the math as exactly as possible, and the language, correcting only the most obvious spelling errors. [John Nash](!Wikipedia)'s diagrams are edited screenshots from the PDF. Editorial notes, such as pages, are in brackets. All hyperlinks are my own insertion. (The ordering of sections is roughly the same as the PDF but with a more logical order.)
+The following transcript was prepared from a [PDF of correspondence](http://www.nsa.gov/public_info/_files/nash_letters/nash_letters1.pdf) with the [NSA](!Wikipedia "National Security Agency") declassified in 2012; I have attempted to reproduce the math as exactly as possible, and the language, correcting only the most obvious spelling errors. [John Nash](!Wikipedia)'s diagrams are edited screenshots from the PDF. Editorial notes, such as pages, are in brackets. All hyperlinks are my own insertion. (The ordering of sections is roughly the same as the PDF but with a more logical order.) --Editor
 
 ## Nash
 ### To Major Grosjean
@@ -16,7 +19,7 @@ The following transcript was prepared from a PDF of [correspondence with the NSA
 
 Dear Major Grosjean,
 
-I have written [RAND](!Wikipedia "RAND Corporation") concerning the machine description. This was handwritten and was sent to [NSA](!Wikipedia "National Security Agency") late last spring, I believe, or sent to someone there. Essentially the same machine description was once sent to a Navy Communication Center in Washington, I think.
+I have written [RAND](!Wikipedia "RAND Corporation") concerning the machine description. This was handwritten and was sent to NSA late last spring, I believe, or sent to someone there. Essentially the same machine description was once sent to a Navy Communication Center in Washington, I think.
 
 I have discussed the machine and general exponential conjecture with R.C. Blanchfield and A.M. Gleason who have worked for NSA. Recently a conversation with Prof. [Huffman](!Wikipedia "David A. Huffman") here indicated that he has recently been working on a machine with similar objectives. Since he will be consulting for NSA I shall
 
@@ -24,7 +27,7 @@ I have discussed the machine and general exponential conjecture with R.C. Blanch
 
 discuss my ideas with him. He has developed [minimal redundancy coding methods](!Wikipedia "Huffman coding").
 
-I hope my handwriting, etc. do not give the impression I am just a crank or [circle-squarer](!Wikipedia "Squaring the circle"). My position here is Assist. Prof. of math. My best known work is in game theory (reprint, sent separately). I mention these things only in the interest of securing a most careful consideration of the machine and ideas by your most competent associates.
+I hope my handwriting, etc. do not give the impression I am just a crank or [circle-squarer](!Wikipedia "Squaring the circle"). My position here is Assist. Prof. of math. My best known work is in [game theory](!Wikipedia) (reprint, sent separately). I mention these things only in the interest of securing a most careful consideration of the machine and ideas by your most competent associates.
 
 If the machine description does not turn up, I will provide another. Also I shall be happy to provide any additional information or answer any queries to the best of my ability.
 
@@ -46,7 +49,7 @@ Consider an enciphering process with a finite "key", operating on binary message
 
 $Y_i = F(\alpha, \alpha_2, ... \alpha_r; X_i, X_{i-1}, X_{i-2}, ... X_{i-n})$
 
-where the $\alpha$'s, $X$'s, and $Y$'s are mod 2 and where if $X_i$ is changed, with the other $X$'s and $\alpha$'s left fixed then $Y_i$ is changed.
+where the $\alpha$'s, $X$'s, and $Y$'s are $mod{2}$ and where if $X_i$ is changed, with the other $X$'s and $\alpha$'s left fixed then $Y_i$ is changed.
 
 [pg5]
 
@@ -116,7 +119,7 @@ Here is a description of my enciphering-deciphering machine.
 
 ![The deciphering arrangement](/images/nash/decipheringarrangement.png)
 
-In the receiving arrangement the same components are used except for the addition of the retarder, which is a one-unit delay. The messages are to be sequences of binary digits (numbers mod 2). The machines work on a cycling basis, performing certain operations
+In the receiving arrangement the same components are used except for the addition of the retarder, which is a one-unit delay. The messages are to be sequences of binary digits (numbers $\mod{2}$). The machines work on a cycling basis, performing certain operations
 
 [pg13]
 
@@ -130,7 +133,7 @@ In operation the input of the receiver is the output of the transmitter. So the 
 
 [pg14]
 
-So the adder A in the receiver gets: (1) the out-put of A in the transmitter, and (2) the *previous* input from P(trans.) to A(trans). Now since binary addition is the same as binary subtraction (i.e. + & - mod 2 are the same) the output of A(receiv.) will be the previous input to A(trans.) From the input to the transmitter, i.e., it will be the clear or unciphered message.
+So the adder A in the receiver gets: (1) the out-put of A in the transmitter, and (2) the *previous* input from P(trans.) to A(trans). Now since binary addition is the same as binary subtraction (i.e. + & - $\mod{2}$ are the same) the output of A(receiv.) will be the previous input to A(trans.) From the input to the transmitter, i.e., it will be the clear or unciphered message.
 
 The permuter, P, and "decider", D, work as follows, illustrated by example:
 
@@ -308,44 +311,44 @@ M.A. Lyons, 4128/60372/rwb
 
 ["National Cryptologic Museum Opens New Exhibit on Dr. John Nash"](http://www.nsa.gov/public_info/press_room/2012/nash_exhibit.shtml), NSA:
 
-> "When people hear the name "John Nash," many recall the movie _A Beautiful Mind_, in which actor Russell Crowe portrays the mathematical genius whose game-theory research as a graduate student at Princeton University earned him the Nobel Memorial Prize in Economic Sciences in 1994.
+> When people hear the name "John Nash", many recall the movie _[A Beautiful Mind](!Wikipedia)_, in which actor [Russell Crowe](!Wikipedia) portrays the mathematical genius whose game-theory research as a graduate student at Princeton University earned him the [Nobel Memorial Prize in Economic Sciences](!Wikipedia) in 1994.
 >
 > The National Cryptologic Museum's newest exhibit, "An Inquisitive Mind: John Nash Letters," features copies of correspondence between Dr. Nash and the National Security Agency (NSA) from the 1950s when he was developing his ideas on an encryption-decryption machine.
 >
-> At the height of his career in mathematics, Dr. Nash wrote a series of letters to NSA, proposing ideas for such a machine. While the agency acknowledged his ideas, they were never adopted. The letters were preserved with NSA's analysis in a collection of unsolicited correspondence received in 1955...."
+> At the height of his career in mathematics, Dr. Nash wrote a series of letters to NSA, proposing ideas for such a machine. While the agency acknowledged his ideas, they were never adopted. The letters were preserved with NSA's analysis in a collection of unsolicited correspondence received in 1955.
 
 Cryptographer [Ron Rivest](!Wikipedia) implemented Nash's cryptosystem [in Python](http://courses.csail.mit.edu/6.857/2012/files/nash.py) and assigned an examination [to his class](http://courses.csail.mit.edu/6.857/2012/files/H02-ps1.pdf):
 
-> "Problem 1-2. Cryptosystem proposal by Nash
+> Problem 1-2. Cryptosystem proposal by Nash
 >
 > In the 1950’s the mathematician John Nash (now famous for his work on game theory, and also the subject the movie _A Beautiful Mind_), privately proposed to the National Security Agency (NSA) an idea for a cryptosystem. This proposal was just declassified (*two weeks ago!*); a copy of it is available on the class website as Handout # 3, together with some relevant correspondence with the NSA. Note that this proposal was not accepted by the NSA, who said that it didn’t meet their security requirements.
 >
-> What reasons, if any, can you figure out for this rejection? (Note that this assignment is a bit of an open problem! Do the best you can, and write up what you can figure out. We don’t know the answer to this question ourselves...)"
+> What reasons, if any, can you figure out for this rejection? (Note that this assignment is a bit of an open problem! Do the best you can, and write up what you can figure out. We don’t know the answer to this question ourselves...)
 
 Bloggers on the significance of the letter; [Aaron Roth](http://aaronsadventures.blogspot.com/2012/02/amazing-new-declassified-document.html):
 
-> "...In it, John Nash makes the distinction between polynomial time and exponential time, conjectures that there are problems that -cannot- be solved faster than in exponential time, and uses this conjecture as the basis on which  the security of a cryptosystem (of his own design) relies. He also anticipates that proving complexity lower bounds is a difficult mathematical problem...These letters predate even [Godel's letter to Von Neumann](http://rjlipton.wordpress.com/the-gdel-letter/), which goes into much less detail about complexity, and yet has also been taken to anticipate complexity theory and the P vs. NP problem."
+> In it, John Nash makes the distinction between polynomial time and exponential time, conjectures that there are problems that -cannot- be solved faster than in exponential time, and uses this conjecture as the basis on which  the security of a cryptosystem (of his own design) relies. He also anticipates that proving complexity lower bounds is a difficult mathematical problem...These letters predate even [Godel's letter to Von Neumann](http://rjlipton.wordpress.com/the-gdel-letter/), which goes into much less detail about complexity, and yet has also been taken to anticipate complexity theory and the P vs. NP problem.
 
 [Noam Nisan](http://agtb.wordpress.com/2012/02/17/john-nashs-letter-to-the-nsa/):
 
-> "He then goes on to put forward an amazingly prescient analysis anticipating computational complexity theory as well as modern cryptography.  In the letter, Nash takes a step beyond [Shannon's information-theoretic formalization of cryptography](!Wikipedia "Communication Theory of Secrecy Systems") (without mentioning it) and proposes that security of encryption be based on computational hardness — this is exactly the transformation to [modern cryptography](!Wikipedia "History of cryptography#Modern cryptography") made two decades later by the rest of the world (at least publicly…). He then goes on to explicitly focus on the distinction between polynomial time and exponential time computation, a crucial distinction which is the basis of [computational complexity theory](!Wikipedia), but made only about [a decade later](http://people.cs.uchicago.edu/~fortnow/papers/history.pdf) by the rest of the world...He is very well aware of the importance of this “conjecture” and that it implies an end to the game played between code-designers and code-breakers throughout history.  Indeed, this is exactly the point of view of modern cryptography...Surprisingly, for a mathematician, he does not even expect it to be solved.  Even more surprisingly he seems quite comfortable designing his encryption system based on this unproven conjecture.  This is quite eerily what modern cryptography does to this day: conjecture that some problem is computationally hard; not expect anyone to prove it; and yet base their cryptography on this unproven assumption."
+> He then goes on to put forward an amazingly prescient analysis anticipating computational complexity theory as well as modern cryptography.  In the letter, Nash takes a step beyond [Shannon's information-theoretic formalization of cryptography](!Wikipedia "Communication Theory of Secrecy Systems") (without mentioning it) and proposes that security of encryption be based on computational hardness — this is exactly the transformation to [modern cryptography](!Wikipedia "History of cryptography#Modern cryptography") made two decades later by the rest of the world (at least publicly…). He then goes on to explicitly focus on the distinction between polynomial time and exponential time computation, a crucial distinction which is the basis of [computational complexity theory](!Wikipedia), but made only about [a decade later](http://people.cs.uchicago.edu/~fortnow/papers/history.pdf) by the rest of the world...He is very well aware of the importance of this “conjecture” and that it implies an end to the game played between code-designers and code-breakers throughout history. Indeed, this is exactly the point of view of modern cryptography...Surprisingly, for a mathematician, he does not even expect it to be solved.  Even more surprisingly he seems quite comfortable designing his encryption system based on this unproven conjecture.  This is quite eerily what modern cryptography does to this day: conjecture that some problem is computationally hard; not expect anyone to prove it; and yet base their cryptography on this unproven assumption.
 
 [Markus Kroetzsch](http://agtb.wordpress.com/2012/02/17/john-nashs-letter-to-the-nsa/#comment-5455):
 
-> "Some caution is needed here...it seems clear to me that Nash *did* foresee important ideas of modern cryptography. This is great and deserves recognition. However, it seems also very clear that he did not foresee (in fact: could not even imagine) modern complexity theory. Why else would he say that he does not think that the exponential hardness of the problem could ever be proven? It is true that the computational hardness of key tasks in modern cryptography is an unsolved problem, but we have powerful tools to prove hardness results in many other cases. So if Nash had anticipated complexity theory as such, then his remark would mean that he would also have foreseen these difficulties...Overall, it seems clear that a prediction of complexity theory or its current incapacity with respect to cryptographic problems cannot be found in this text, which does by no means diminish the originality of the remarks on cryptography. One could also grant him a certain mathematical intuition that some computational problems could be inherently hard to solve, although I don’t see any hint that he believes that such hardness could ever become a precise mathematical property."
+> Some caution is needed here...it seems clear to me that Nash *did* foresee important ideas of modern cryptography. This is great and deserves recognition. However, it seems also very clear that he did not foresee (in fact: could not even imagine) modern complexity theory. Why else would he say that he does not think that the exponential hardness of the problem could ever be proven? It is true that the computational hardness of key tasks in modern cryptography is an unsolved problem, but we have powerful tools to prove hardness results in many other cases. So if Nash had anticipated complexity theory as such, then his remark would mean that he would also have foreseen these difficulties...Overall, it seems clear that a prediction of complexity theory or its current incapacity with respect to cryptographic problems cannot be found in this text, which does by no means diminish the originality of the remarks on cryptography. One could also grant him a certain mathematical intuition that some computational problems could be inherently hard to solve, although I don’t see any hint that he believes that such hardness could ever become a precise mathematical property.
 
 [Geoffrey Watson](http://agtb.wordpress.com/2012/02/17/john-nashs-letter-to-the-nsa/#comment-5465) agrees:
 
-> "This is very interesting as a historical document, but not sure that it supports the interpretations being put on it...a reasonable historical conclusion is that these ideas were just going around in the usual way. The “conjecture” is a pretty muddled bit of thinking. It presumably means that Nash thinks that there are such exponentially hard ciphers, but to convert “almost all sufficiently complex types of enciphering, especially where the instructions given by different portions of the key interact complexly with each other in the determination of their ultimate effects on the enciphering” into a prescient anticipation of complexity theory is a big ask."
+> This is very interesting as a historical document, but not sure that it supports the interpretations being put on it...a reasonable historical conclusion is that these ideas were just going around in the usual way. The “conjecture” is a pretty muddled bit of thinking. It presumably means that Nash thinks that there are such exponentially hard ciphers, but to convert “almost all sufficiently complex types of enciphering, especially where the instructions given by different portions of the key interact complexly with each other in the determination of their ultimate effects on the enciphering” into a prescient anticipation of complexity theory is a big ask.
 
 [Philonus Atio](http://agtb.wordpress.com/2012/02/17/john-nashs-letter-to-the-nsa/#comment-5458) comments that (as one might expect for very early work):
 
-> "I broke it in about 1 hour and I’m no expert in cryptanalysis. It is weak."
+> I broke it in about 1 hour and I’m no expert in cryptanalysis. It is weak.
 
 [Animats](http://it.slashdot.org/comments.pl?sid=2679325&cid=39089165) suggests why the NSA may've rejected the system:
 
-> "What Nash seems to be describing is a [linear feedback shift register](!Wikipedia). This has potential as a cryptosystem, but isn't a very good one. As the NSA pointed out, it "affords only limited security". When Nash wrote this, [Friedman](!Wikipedia "William F. Friedman") had already developed the theory that allowed general cryptanalysis of rotor-type machines. But that was still highly classified. Friedman, of course, was responsible for breaking the Japanese ["Purple" cipher](!Wikipedia "Purple (cipher machine)"), plus many others. Before Friedman, cryptanalysis was about guessing. After Friedman, it was about number crunching.
+> What Nash seems to be describing is a [linear feedback shift register](!Wikipedia). This has potential as a cryptosystem, but isn't a very good one. As the NSA pointed out, it "affords only limited security". When Nash wrote this, [Friedman](!Wikipedia "William F. Friedman") had already developed the theory that allowed general cryptanalysis of rotor-type machines. But that was still highly classified. Friedman, of course, was responsible for breaking the Japanese ["Purple" cipher](!Wikipedia "Purple (cipher machine)"), plus many others. Before Friedman, cryptanalysis was about guessing. After Friedman, it was about number crunching.
 >
 > Friedman was the head cryptanalyst at NSA at the time. Within NSA, it would have been known that a linear feedback shift register was a weak key generator. So this idea was, properly, rejected. At least NSA looked at it. Friedman's hard line on that subject was "No new encryption system is worth looking at unless it comes from someone who has already broken a very hard one."
 >
-> The fact that a problem is [NP-hard](!Wikipedia) isn't enough to make it a good key generator. The [Merkle-Hellman knapsack cryptosystem](!Wikipedia), the first public-key cryptosystem published, is based on an NP-hard problem. But, like many NP-hard problems, it's only NP-hard in the worst case. The average case is only [P-hard](!Wikipedia). ([Linear programming](!Wikipedia) problems, and problems which can be converted to a linear programming problem, are like that.) So that public-key system was cracked. We still don't have cryptosystems which are provably NP-hard for all cases. Factoring and elliptic curves are as good as it gets, and there's still the possibility that a breakthrough could make factoring easy."
+> The fact that a problem is [NP-hard](!Wikipedia) isn't enough to make it a good key generator. The [Merkle-Hellman knapsack cryptosystem](!Wikipedia), the first public-key cryptosystem published, is based on an NP-hard problem. But, like many NP-hard problems, it's only NP-hard in the worst case. The average case is only [P-hard](!Wikipedia). ([Linear programming](!Wikipedia) problems, and problems which can be converted to a linear programming problem, are like that.) So that public-key system was cracked. We still don't have cryptosystems which are provably NP-hard for all cases. Factoring and elliptic curves are as good as it gets, and there's still the possibility that a breakthrough could make factoring easy.
