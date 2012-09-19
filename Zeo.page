@@ -378,6 +378,11 @@ http://www.theatlantic.com/magazine/archive/2012/07/the-measured-man/309018/?sin
 http://www.sleepfoundation.org/article/press-release/annual-sleep-america-poll-exploring-connections-communications-technology-use-
 http://quantifiedself.com/2012/08/vahe-kassardjian-and-rafi-haladjian-on-crossing-the-data-desert/ Only one task at a time!
 meta-analysis: http://lesswrong.com/lw/e3a/open_thread_august_1631_2012/7azp?context=3
+http://lesswrong.com/r/discussion/lw/eck/how_to_tell_apart_science_from_pseudoscience_in_a/7c2y
+http://blog.givewell.org/2012/08/23/how-we-evaluate-a-study/
+http://blog.givewell.org/2012/09/06/surveying-the-research-on-a-topic/
+http://norvig.com/experiment-design.html
+https://www.nytimes.com/2010/05/02/magazine/02self-measurement-t.html?_r=1&ref=magazine&pagewanted=all
 -->
 <!-- Book organization
 - Intro with examples: Emphasize the importance of the topic (relevant population stats.) Conviction (or some evidence) that tracking will help with the subject addressed. Each book should open with a story or a few stories as examples.
@@ -405,6 +410,8 @@ Although the primary emphasis in psychology is to publish results on the basis o
 - Ocana, A., & Tannock, I. F. (2011). When are “clinical trials in oncology truly positive? Journal of the National Cancer Institute, 103, 16–20
 - Hubbard, R., & Lindsay, R. M. (2008). Why p values are not a useful measure of evidence in statistical significance testing. Theory & Psychology, 18, 69–88.
 - Carver, R. P. (1978). The case against statistical significance testing. Harvard Educational Review, 48, 378–399
+
+http://maximum-entropy-blog.blogspot.nl/2012/07/higgs-boson-at-5-sigmas.html
 -->
 
 ![](/images/zeo/melatonin-totalz.png)
@@ -1500,7 +1507,7 @@ The solution most obvious to me, although I don't know if it's statistically cor
 
 I won't bother with blinding this one since it's just a double-check of an unlikely possibility. (If one wanted to blind it, the procedure would be the same as before, but with *big* blocks: say, 2 blocks of 62 days, first pick randomized, or blocks of 31 days, with 4 blocks randomized in 2 pairs.) This 'experiment' is easy enough to run: simply stop taking vitamin D. To avoid the temptation to cheat on days I am feeling down, it's easiest to just wait until I run out of vitamin D and procrastinate on ordering a fresh supply until 50 days have passed.
 
-<!-- last day: 2 July 2012 -->
+<!-- last day: 2 July 2012; resumed: 6 September 2012 -->
 
 ### VoI
 
@@ -1523,6 +1530,8 @@ Someone suggested that instead of running experiments serially, with limited sam
 Classic multifactorial designs arrange to have every possible combination of the _n_ experiments happen on some day or other (such an arrangement is called a [Latin square](!Wikipedia)). However, with 5 experiments, each of which has 2 states (on and off), that means I only have 2^5^=32 possible arrangements, all of which ought to be covered over 360 days. So I will be lazy and will independently randomize each experiment.
 
 I don't actually know how to use ANOVA in R, but I can figure that out in a year. In the mean time, what are my 5 chosen interventions?
+
+<!-- TODO: handle the TODO in each section; ping Wozniak/Supermemo for overall results -->
 
 ## Lithium
 
@@ -1840,7 +1849,7 @@ The VoI calculation for this investigation is very difficult: it may improve sle
 If it turns out the treadmill is not helpful, I can probably sell it for ~$100 based on prices listed in Craigslist. If it's helpful, I gain considerable exercise (1-2MPH implies an 8-hour day could be 8-16 miles of exercise a day!) with the related benefits. I strongly suspect that this much exercise would influence my sleep for the better, but I'm not sure the treadmill desk really does allow for productivity like regular sitting does. If it does reduce productivity somewhat but I otherwise can adapt, it's probably still a net gain because of the extra exercise. However, a small-to-medium decrease - let's say an effect size of _d_<=-0.4 - would be enough to cause me to scrap the treadmill. This is highly unlikely. The large sample gives a very good shot at detecting it. Running the experiment is relatively easy since the treadmill desk can be set up and put away in ~5 minutes. Without running numbers on this one, my best guess is that the VoI is negative; so this is another experiment I am doing because it is interesting and other people may find it interesting, rather than because running the experiment makes economic sense.
 
 <!--
-Mood & pedometer data
+Mood & productivity & pedometer data
 February 2012
 16: 1.5
 17: 3.0
@@ -1857,15 +1866,15 @@ February 2012
 28: 2.5
 29: 3
 March
-1: 2.5
-2: 3
-3: 3
-4: 2.5
-5: 2.7
-6: 2
-7: 3
-8: 3.5
-9: 3
+01: 2.5
+02: 3
+03: 3
+04: 2.5
+05: 2.7
+06: 2
+07: 3
+08: 3.5
+09: 3
 10: 2.5
 11: 3
 12: 2.5
@@ -1880,7 +1889,7 @@ March
 22: 2.8
 23: 3
 March
-date: mood / steps
+date: mood-productivity / steps
 24: 2.5 / 3862
 25: 3.1 / 7879
 26: 3.5 / 1532
@@ -1890,15 +1899,15 @@ date: mood / steps
 30: 4 / 9090
 31: 4 / 4376
 April
-1: 4 / 10909
-2: 2 / 10131
-3: 3 / 7489
-4: 3.5 / 15077
-5: 2.5 / 6310
-6: 3 / 7093
-7: 2.7 / 2697
-8: 3.5 / 4569
-9: 3 / 1079
+01: 4 / 10909
+02: 2 / 10131
+03: 3 / 7489
+04: 3.5 / 15077
+05: 2.5 / 6310
+06: 3 / 7093
+07: 2.7 / 2697
+08: 3.5 / 4569
+09: 3 / 1079
 10: 2.7 / 2112
 11: 1 / 5251
 12: 3 / 2572
@@ -1921,15 +1930,15 @@ April
 29: 3.5 / 3338
 30: 3 / 4522
 May
-1: 2.5 / 2026
-2: 2 / 3229
-3: 3 / 2642
-4: 3 / 3717
-5: 2 / 5202
-6: 2 / 6671
-7: 4 / 2508
-8: 3 / 5315
-9: 2 / 4463
+01: 2.5 / 2026
+02: 2 / 3229
+03: 3 / 2642
+04: 3 / 3717
+05: 2 / 5202
+06: 2 / 6671
+07: 4 / 2508
+08: 3 / 5315
+09: 2 / 4463
 10: 4 / 2570
 11: 4 / 6690
 12: 4 / 5132
@@ -1953,15 +1962,15 @@ May
 30: 31 / 5378
 31: 3 / 1528
 June
-1: 2 / 3831
-2: 2 / 1366
-3: 2 / 3475
-4: 2 / 1768
-5: 3 / 3924
-6: 4 / 3957
-7: 2 / 3116
-8: 4 / 1529
-9: 4 / 3968
+01: 2 / 3831
+02: 2 / 1366
+03: 2 / 3475
+04: 2 / 1768
+05: 3 / 3924
+06: 4 / 3957
+07: 2 / 3116
+08: 4 / 1529
+09: 4 / 3968
 10: 3 / 1931
 11: 3 / 8360
 12: 3 / 2710
@@ -1984,14 +1993,84 @@ June
 29: 3
 30: 4
 July
-1: 2
-2: 3
-3: 2
-4: 3
-5: 3
-6: 2
-7: 4
-8: 4
+01: 2
+02: 3
+03: 2
+04: 3
+05: 3
+06: 2
+07: 4
+08: 4
+11: 2
+12: 4
+13: 3.5
+14: 3.5
+15: 3
+16: 4
+17: 3
+18: 3
+19: 3.5
+20: 3
+21: 2
+22: 3
+23: 4
+24: 4
+25: 4
+26: 3
+27: 2
+28: 2.5
+29: 3
+30: 2
+31: 3
+August
+01: 3
+02: 3
+03: 2.5
+04: 2
+05: 2
+06: 2
+07: 2
+08: 3
+09: 4
+10: 3
+11: 4
+12: 2
+13: 4
+14: 3
+15: 3
+16: 2
+17: 2
+18: 2
+19: 3
+20: 3
+21: 3
+22: 3
+23: 4
+24: 3
+25: 3
+26: 3
+27: 4
+28: 3
+29: 3
+30: 3
+31: 2
+September
+01: 4
+02: 2
+03: 3
+04: 3
+05: 4
+06: 4
+07: 3/456
+08: 3/278
+09: 3/900
+10: 4/600
+11: 3/255
+12: 3/3696
+13: 4/612
+14: 3/3526
+15: 4/1340
+16: 2/1500
 -->
 
 <!--
@@ -2183,15 +2262,32 @@ August 2012
 30: 1 0 1
 31: 1 1 1
 September
-01: 0 1 1?
+01: 0 0 1
+02: 1 0 0
+03: 1 0 0
+04: 0 1 1
+05: 1 0 1
+06: 1 1 1
+07: 1 0 0
+08: 1 1 0
+09: 0 0 0
+10: 1 1 0
+11: 0 1 1
+12: 0 1 0
+13: 0 0 1
+14: 1 0 1
+15: 0 1 0
+16: 0 0 0
+17: 0 1 1
+18: 1 1 0?
 
 Underpopulated data cells:
-10: 0 1 1
-10: 1 0 0
-10: 1 1 0
-11: 1 1 1
-11: 0 1 0
-11: 1 0 1
+12: 1 1 0
+12: 1 1 1
+13: 0 1 1
+13: 0 1 0
+13: 1 0 1
+13: 1 0 0
 (should be 15)
 -->
 
@@ -2322,3 +2418,20 @@ This is what I have learned:
 <!-- Redshift: 30 Aug 2012: off -->
 <!-- Redshift: 31 Aug 2012: on -->
 <!-- Redshift: 01 Sep 2012: off -->
+<!-- Redshift: 02 Sep 2012: off -->
+<!-- Redshift: 03 Sep 2012: on -->
+<!-- Redshift: 04 Sep 2012: off -->
+<!-- Redshift: 05 Sep 2012: off -->
+<!-- Redshift: 06 Sep 2012: on -->
+<!-- Redshift: 07 Sep 2012: on -->
+<!-- Redshift: 08 Sep 2012: off -->
+<!-- Redshift: 09 Sep 2012: off -->
+<!-- Redshift: 10 Sep 2012: off -->
+<!-- Redshift: 11 Sep 2012: off -->
+<!-- Redshift: 12 Sep 2012: on -->
+<!-- Redshift: 13 Sep 2012: off -->
+<!-- Redshift: 14 Sep 2012: off -->
+<!-- Redshift: 15 Sep 2012: off -->
+<!-- Redshift: 16 Sep 2012: off -->
+<!-- Redshift: 17 Sep 2012: off -->
+<!-- Redshift: 18 Sep 2012: on -->
