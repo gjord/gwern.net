@@ -183,6 +183,8 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 - for any papers cited: either link full text, provide a local full text, or submit [a request](http://lesswrong.com/lw/7hi/free_research_help_editing_and_article_downloads/ "Free research help, editing and article downloads for LessWrong"); for books, insert an Amazon link (one day I will be able to dare to host ebooks...)
 - check readability level (eg. [Flesch-Kincaid](!Wikipedia))
 - [probability word checklist](http://lesswrong.com/lw/9jv/thinking_bayesianically_with_lojban/6p53)
+- mention any use of PredictionBook in [Prediction markets]()
+- mention any use of Fermi estimates in [Fermi calculations](Notes#fermi-calculations)
 - do a Pandoc/Firefox preview for visible major formatting problems
 - Markdown lint-checker[^lint]
 - arrange for notifications of future results (when relevant, eg. for following dual n-back research):
@@ -224,13 +226,18 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         "$tags$"
         "$category$"
 
-    A crude shell script for my repository which checks the page source and then the rendered HTML
+    A crude shell script for an individual file which checks the page source and then the rendered HTML:
 
     ~~~{.sh}
-    for PAGE in *.page; do (fgrep -e "(www" -e ")www" "$PAGE"; cat "$PAGE" | tail -n +2 | pandoc --mathml --standalone - |
-        elinks -dump --force-html | fgrep -e '\frac' -e '\times' -e '(http' -e ')http' -e '[http' -e ']http' -e ' _ '
-        -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<—' -e '—>' -e '$title$' -e '$description$' -e '$author$'
-        -e '$tags$' -e '$category$'); done
+    function markdown-lint () {
+        fgrep -e "(www" -e ")www" "$@";
+        cat "$@" \
+        | tail -n +3 \
+        | pandoc --mathml --standalone - \
+        | elinks -dump --force-html \
+        | fgrep -e '\frac' -e '\times' -e '(http' -e ')http' -e '[http' -e ']http' -e ' _ ' \
+                -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<—' -e '—>' -e '$title$' \
+                -e '$description$' -e '$author$' -e '$tags$' -e '$category$'; }
     ~~~
 
 # Technical aspects
