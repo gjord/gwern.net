@@ -104,8 +104,13 @@ Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin 
 
 ## Melatonin analysis
 
-The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)). My basic dosage was 1.5mg of melatonin taken 0-30 minutes before going to sleep. The data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
+The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)). My basic dosage was 1.5mg of melatonin taken 0-30 minutes before going to sleep. The data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional [NHST](!Wikipedia "Null hypothesis significance testing")-style[^Bayes] analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
 
+[^Bayes]: [Kruschke 2012](http://www.indiana.edu/~kruschke/BEST/BEST.pdf "Bayesian estimation supersedes the _t_ test") argues that there is no need for people to use the old framework of _p_-values and null hypotheses etc, with their many well-known philosophical difficulties and misleading interpretations - interpretations I, alas, perpetuate in my analyses with my use of statistical significance:
+
+    > Nevertheless, some people have the impression that conclusions from NHST and Bayesian methods tend to agree in simple situations such as comparison of two groups: "Thus, if your primary question of interest can be simply expressed in a form amenable to a t-test, say, there really is no need to try and apply the full Bayesian machinery to so simple a problem." ([Brooks, 2003](http://rsta.royalsocietypublishing.org/content/361/1813/2681.full.pdf "Bayesian computation: a statistical revolution"), p. 2694) This article shows, to the contrary, that Bayesian parameter estimation provides much richer information than the NHST t-test, and that its conclusions can differ from those of the NHST t-test. Decisions based on Bayesian parameter estimation are better founded than NHST, whether the decisions of the two methods agree or not. The conclusion is bold but simple: Bayesian parameter estimation supersedes the NHST t-test.
+
+    Unfortunately, while I have no love for NHST, I *did* find it much easier to use the NHST concepts & code when learning how to do these analyses. In the future, hopefully I can switch to Bayesian techniques.
 [^R-melatonin-analysis-p]: The analysis session in the `R` interpreter:
 
     ~~~{.r}
@@ -412,6 +417,17 @@ Although the primary emphasis in psychology is to publish results on the basis o
 - Carver, R. P. (1978). The case against statistical significance testing. Harvard Educational Review, 48, 378–399
 
 http://maximum-entropy-blog.blogspot.nl/2012/07/higgs-boson-at-5-sigmas.html
+
+["Bayesian estimation supersedes the _t_ test"](http://www.indiana.edu/~kruschke/BEST/BEST.pdf), Kruschke 2012
+
+The perils of NHST, and the merits of Bayesian data analysis, have been expounded with increasing force in recent years (e.g., W. Edwards, Lindman, & Savage, 1963; Kruschke, 2010b, 2010a, 2011c; Lee & Wagenmakers, 2005; Wagenmakers, 2007).
+
+- Edwards, W., Lindman, H., & Savage, L. J. (1963). Bayesian statistical inference for psychological research. Psychological Review, 70, 193-242
+- Kruschke, J. K. (2010a). Bayesian data analysis. Wiley Interdisciplinary Reviews: Cognitive Science, 1(5), 658-676.
+Kruschke, J. K. (2010b). What to believe: Bayesian methods for data analysis. Trends in Cognitive Sciences, 14(7), 293-300.
+Kruschke, J. K. (2011c). Introduction to special section on Bayesian data analysis. Perspectives on Psychological Science, 6(3), 272-273
+- Lee, M. D., & Wagenmakers, E.-J. (2005). Bayesian statistical inference in psychology: Comment on Trafimow (2003). Psychological Review, 112(3), 662-668
+- Wagenmakers, E.-J. (2007). A practical solution to the pervasive problems of p values. Psychonomic Bulletin & Review, 14(5), 779-804
 -->
 
 ![](/images/zeo/melatonin-totalz.png)
@@ -475,7 +491,7 @@ If I were to run further experiments, I would definitely run it double-blind, an
 
 Worth comparing are [Jayson Virissimo's preliminary results](http://jayquantified.blogspot.com/2012/08/melatonin-preliminary-results.html "Melatonin: Preliminary Results"):
 
-> According to the preliminary [Zeo] data, while on melatonin, I seemed to get more total sleep, more REM sleep, less deep sleep, and wake up about the same number of times each night. Because this isn't enough data to be very confident in the results, I plan on continuing this experiment for at least another 4 months (2 on and 2 off of melatonin) and will analyze the results for the significance and magnitude of the effects (if there really are any) while throwing out the outliers (since my sleep schedule is so erratic).
+> According to the preliminary [Zeo] data, while on melatonin, I seemed to get more total sleep, more REM sleep, less deep sleep, and wake up about the same number of times each night. Because this isn't enough data to be very confident in the results, I plan on continuing this experiment for at least another 4 months (2 on and 2 off of melatonin) and will analyze the results for the [statistical] significance and magnitude of the effects (if there really are any) while throwing out the outliers (since my sleep schedule is so erratic).
 
 ## Value of Information (VoI)
 
@@ -809,13 +825,13 @@ To see what, if any existing research there was, I checked the 49 hits in [PubMe
 
 [^Taiwan]: ["Sleep Behavior Disorders in a Large Cohort of Chinese (Taiwanese) Patients Maintained by Long-Term Hemodialysis"](http://www.realfoodnutrients.com/Sleep/Studies/SleepBehaviorDisordersandVitaminD.pdf) (Chen et al 2006):
 
-    > "...The increased odds of high PSQI score for greater hemoglobin level and for high ESS score for use of vitamin D analogues were unexpected results for which we cannot speculate about the cause or association and that may simply be spurious findings arising from statistical analysis."
+    > ...The increased odds of high PSQI score for greater hemoglobin level and for high ESS score for use of vitamin D analogues were unexpected results for which we cannot speculate about the cause or association and that may simply be spurious findings arising from statistical analysis.
 [^America]: ["Relationships among dietary nutrients and subjective sleep, objective sleep, and napping in women"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819566/) (Grandner et al 2010):
 
-    > "This study found a significant relationship between circadian phase of sleep and dietary Vitamin D intake. Later sleep acrophase, an indicator of sleep timing, was associated with more dietary Vitamin D. For most people, most Vitamin D is obtained through sunlight(44), though dietary Vitamin D is usually obtained through supplementation, usually in pills or in dairy products(44). It is currently unknown why those who consumed more Vitamin D would demonstrate a sleep phase delay, especially since in this same subject group, those exposed to more light had earlier circadian acrophases(45)."
+    > This study found a significant relationship between circadian phase of sleep and dietary Vitamin D intake. Later sleep acrophase, an indicator of sleep timing, was associated with more dietary Vitamin D. For most people, most Vitamin D is obtained through sunlight(44), though dietary Vitamin D is usually obtained through supplementation, usually in pills or in dairy products(44). It is currently unknown why those who consumed more Vitamin D would demonstrate a sleep phase delay, especially since in this same subject group, those exposed to more light had earlier circadian acrophases(45).
 [^Japan]: ["The midpoint of sleep is associated with dietary intake and dietary behavior among young Japanese women"](http://www.ncbi.nlm.nih.gov/pubmed/21296614) (Sato-Mito et al 2011):
 
-    > "Late midpoint of sleep was significantly negatively associated with the percentage of energy from protein and carbohydrates, and the energy-adjusted intake of cholesterol, potassium, calcium, magnesium, iron, zinc, vitamin A, vitamin D, thiamin, riboflavin, vitamin B(6), folate, rice, vegetables, pulses, eggs, and milk and milk products."
+    > Late midpoint of sleep was significantly negatively associated with the percentage of energy from protein and carbohydrates, and the energy-adjusted intake of cholesterol, potassium, calcium, magnesium, iron, zinc, vitamin A, vitamin D, thiamin, riboflavin, vitamin B(6), folate, rice, vegetables, pulses, eggs, and milk and milk products.
 
 In June 2012, after I finished my 2 experiments, a preprint appeared for _Medical Hypotheses_: ["The world epidemic of sleep disorders is linked to vitamin D deficiency"](/docs/2012-gominak.pdf), Gominak & Stumpf 2012; the lead author, unfortunately, had little to tell me when I emailed her, indicating that the use of vitamin D was not systematic or recorded:
 
@@ -845,7 +861,7 @@ Based on the first 10 days' ZQs, I predict I'll find in the final data set:
 2. increased awakenings; not that many, maybe 1 or 2 on average
 3. decreased ZQ; by around 5-10 points (a large effect, on par with melatonin)
 
-    My best guess is that the ZQ hit is coming from reduced deep sleep, or maybe reduced deep & REM sleep. I don't think the total amount of sleep has significantly changed.
+    My best guess is that the ZQ hit is coming from reduced deep sleep, or maybe reduced deep & REM sleep. I don't think the total amount of sleep has changed.
 
 Roberts theorizes that besides vitamin D damaging sleep, it could actively improve your sleep if taken in the morning. As it happens, in this setup, on 'placebo' days I do take vitamin D in the morning - so wouldn't one expect to see scores improve on the nights following a placebo night (a vitamin D morning), regardless of whether *that* night was vitamin D or placebo? A quick analysis of the first 24 nights showed the lagged nights to average a ZQ of 94.5. My monthly averages for October and November were 96, so there is no obvious improvement here.
 
@@ -1195,7 +1211,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053; _p_=0.0033)
 8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51; _p_=0.25)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
 
-So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{std-dev}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
+So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly statistically significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{std-dev}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
 
 [^d-multiple]: [Correcting for multiple comparisons](#fn7) at _q_-value=0.05, of our 8 pessimistic _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
 
@@ -2279,15 +2295,27 @@ September
 15: 0 1 0
 16: 0 0 0
 17: 0 1 1
-18: 1 1 0?
+18: 1 1 0
+19: 1 1 1
+22: 0 0 0
+23: 0 0 1
+24: 0 1 0
+25: 0 1 1
+26: 1 1 1
+27: 1 0 0
+28: 0 0 0
+29: 1 0 1
+October
+01: 0 1 0
+02: 1 1 0?
 
 Underpopulated data cells:
-12: 1 1 0
-12: 1 1 1
-13: 0 1 1
-13: 0 1 0
-13: 1 0 1
-13: 1 0 0
+13: 1 1 0
+14: 1 0 1
+14: 1 0 0
+14: 1 1 1
+14: 0 1 1
+15: 0 1 0
 (should be 15)
 -->
 
@@ -2435,3 +2463,17 @@ This is what I have learned:
 <!-- Redshift: 16 Sep 2012: off -->
 <!-- Redshift: 17 Sep 2012: off -->
 <!-- Redshift: 18 Sep 2012: on -->
+<!-- Redshift: 19 Sep 2012: on -->
+<!-- Redshift: 20 Sep 2012: off -->
+<!-- Redshift: 21 Sep 2012: off -->
+<!-- Redshift: 22 Sep 2012: on -->
+<!-- Redshift: 23 Sep 2012: off -->
+<!-- Redshift: 24 Sep 2012: off -->
+<!-- Redshift: 25 Sep 2012: off -->
+<!-- Redshift: 26 Sep 2012: off -->
+<!-- Redshift: 27 Sep 2012: off -->
+<!-- Redshift: 28 Sep 2012: on -->
+<!-- Redshift: 29 Sep 2012: off -->
+<!-- Redshift: 30 Sep 2012: on -->
+<!-- Redshift: 01 Oct 2012: on -->
+<!-- Redshift: 02 Oct 2012: on -->
