@@ -909,7 +909,7 @@ Date   Pill       Quality[^q]  ZQ      Guess
 3-4    placebo    2            81      [wrong 70%](http://predictionbook.com/predictions/5671)
 5-6    placebo    3            98      [right 65%](http://predictionbook.com/predictions/5698)
 6-7    active     2            88      [50%](http://predictionbook.com/predictions/5707)
-7-8    active     2            94      [right 55% right](http://predictionbook.com/predictions/5737)
+7-8    active     2            94      [right 55%](http://predictionbook.com/predictions/5737)
 8-9    active     3            94      [wrong 75%](http://predictionbook.com/predictions/5745)
 9-10   placebo    3            92      [50%](http://predictionbook.com/predictions/5760)
 10-11  placebo    3            95      [right 60%](http://predictionbook.com/predictions/5770)
@@ -923,7 +923,20 @@ Date   Pill       Quality[^q]  ZQ      Guess
 
 ### Vitamin D analysis
 
-From a quick look at confidences, I was usually correct but perhaps underconfident.
+From a quick look at the prediction confidences, I was usually correct but perhaps underconfident: my [proper scoring](!Wikipedia) log score compared to a random guesser is 5.4[^D-evening-predictions], which is even better than my guesses in my [Adderall experiment](Nootropics#results).
+
+[^D-evening-predictions]: The preponderance of `True` is because while recording the scores, I normalized them; in retrospect, I shouldn't've bothered:
+
+    ~~~{.haskell}
+    logBinaryScore = sum . map (\(result,p) -> if result then 1 + logBase 2 p else 1 + logBase 2 (1-p))
+    logBinaryScore [(True,0.50),(True,0.50),(True,0.50),(True,0.50),(True,0.50),(True,0.50),(True,0.50),
+                    (True,0.50),(True,0.50),(True,0.50),(True,0.50),(True,0.55),(True,0.55),(True,0.55),
+                    (True,0.60),(True,0.60),(True,0.60),(True,0.60),(True,0.60),(True,0.60),(True,0.60),
+                    (True,0.60),(True,0.65),(True,0.65),(True,0.65),(True,0.65),(True,0.65),(True,0.65),
+                    (True,0.65),(True,0.65),(True,0.70),(True,0.70),(True,0.70),(True,0.70),(True,0.75),
+                    (True,0.75),(False,0.55),(False,0.6),(False,0.6),(False,0.7),(False,0.7),(False,0.75)]
+    ~> 5.4
+    ~~~
 
 Looking at the data averages in the Zeo website, it looked like ZQ & total & REM sleep fell, deep increased slightly, time awake & awakenings both increased, and morning feel decreased. The R analysis (pessimistic[^vitamin-D-analysis-p], optimistic[^vitamin-D-analysis-o]):
 
@@ -2307,14 +2320,16 @@ September
 29: 1 0 1
 October
 01: 0 1 0
-02: 1 1 0?
+02: 1 1 0
+03: 0 0 1
+04: 0 1 1?
 
 Underpopulated data cells:
-13: 1 1 0
-14: 1 0 1
-14: 1 0 0
-14: 1 1 1
 14: 0 1 1
+14: 1 0 0
+14: 1 0 1
+14: 1 1 0
+14: 1 1 1
 15: 0 1 0
 (should be 15)
 -->
@@ -2477,3 +2492,5 @@ This is what I have learned:
 <!-- Redshift: 30 Sep 2012: on -->
 <!-- Redshift: 01 Oct 2012: on -->
 <!-- Redshift: 02 Oct 2012: on -->
+<!-- Redshift: 03 Oct 2012: on -->
+<!-- Redshift: 04 Oct 2012: on -->
