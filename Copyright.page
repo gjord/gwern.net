@@ -1,7 +1,10 @@
 ---
 title: Against Copyright
 description: Copyright considered paradoxical, incoherent, and harmful
+created: 26 Sep 2008
 tags: philosophy, law, computer science
+status: finished
+belief: possible
 ...
 
 One of the most troublesome aspects of copyright law as applied to technology is how the latter makes it possible - and even *encourages* - doing things that expose the intellectual incoherence of the former; copyright is merely an ad hoc set of rules and custom evolved for bygone economic conditions to accomplish certain socially-desirable ends (and can be criticized or abolished for its failures). If we cannot get the correct [ontology](!Wikipedia) of copyright, then the discussion is foredoomed^[For example, if you grant that copyright exists as a moral right, then you have immediately accepted the abrogation of *another* moral right, to free speech; this is intrinsically built into the concept of copyright, which is nothing but imposing restrictions on other people's speech.]. Many people suffer from the delusion that it is something more than that, that copyright is somehow objective, or even some sort of actual moral human right (consider the French "_[droit d'auteur](!Wikipedia)_", one of the ["*moral* rights"](!Wikipedia "Moral rights (copyright law)"))[^moral] with the same properties as other rights such as being perpetual[^Halperin]. This is quite wrong. Information has a history, but it carries with it no intrinsic copyright.
@@ -53,7 +56,13 @@ What makes lossless compression any more than a mathematical curiosity is that w
 
 TANSTAAFL is king, but the universe will often accept payment in trash. We humans do not actually want to compress all possible strings but only ones we actually make. This is analogous to static typing in programming languages; type checking may result in rejecting many correct programs, but we do not really care as those are not programs we actually want to run. Or, high level programming languages insulate us from the machine and make it impossible to do various tricks one could do if one were programming in assembler; but most of us do not actually want to do those tricks, and are happy to sell that ability for conveniences like portability. Or we happily barter away manual memory management (with all the power indued) to gain convenience and correctness.
 
-This is a powerful concept which is applicable to many tradeoffs in computer science and engineering, but we can view the matter in a different way - one which casts doubt on simplistic views of knowledge and creativity such as we see in copyright law.
+This is a powerful concept which is applicable to many tradeoffs in computer science and engineering, but we can view the matter in a different way - one which casts doubt on simplistic views of knowledge and creativity such as we see in copyright law. For starters, we can look at the [space-time tradeoff](!Wikipedia): a fast algorithm simply treats the input data (eg. WAV) as essentially the output, while a smaller input with basic redundancy eliminated will take additional processing and require more time to run. A common phenomenon, with some extreme examples[^size], but we can look at a more meaningful tradeoff.
+
+[^size]: The most extreme space-time tradeoff I have ever run into, far beyond any examples of [memoization](!Wikipedia) or [dynamic programming](!Wikipedia), is a purely theoretical one; from [Bennett 1988](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.70.4331&rep=rep1&type=pdf "Logical Depth and Physical Complexity"):
+
+    > The tradeoff between conciseness of representation and ease of decoding is illustrated in an extreme form by the information required to solve the [halting problem](!Wikipedia). One standard representation of this information is as an [infinite binary sequence K0](!Wikipedia "Chaitin's constant") (the characteristic sequence of the halting set) whose i’th bit is 0 or 1 according to whether the i’th program halts. This sequence is clearly redundant, because many instances of the halting problem are easily solvable or reducible to other instances. Indeed, K0 is far more redundant than this superficial evidence might indicate. Barzdin [2] showed that this information can be compressed to the logarithm of its original bulk, but *no concisely encoded representation of it can be decoded in recursively bounded time*.
+
+    [Complexity classes](!Wikipedia) like [NP-hard](!Wikipedia), which are fairly high up the complexity hierarchy, are bywords for intractability & futility among programmers. But this decoding of an extremely space-efficient representation of K0 is a process *so* slow that it doesn't even fit in any normal complexity class!
 
 Cast your mind back to a lossless algorithm. It is somehow choosing to compress 'interesting' strings and letting uninteresting strings bite the bullet. How is it doing so? It can't be doing it at random, and doing 'obvious' things like cutting down on repetition certainly won't let you write a [FLAC](!Wikipedia) algorithm that can cut 30 megabyte [WAV](!Wikipedia) files down to 5 megabytes.
 
