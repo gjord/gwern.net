@@ -173,26 +173,36 @@ These are used to express my feeling about how well-supported the essay is, or h
 
 It turns out that writing essays (technical or philosophical) is a lot like writing code - there are so many ways to err that you need a process with as much automation as possible. My current checklist for finishing an essay:
 
-- [spellcheck](!Wikipedia "Ispell")
-- [balanced brackets & quotes check](http://www.emacswiki.org/emacs/MarkdownMode#toc1)
-- [`linkchecker`](http://linkchecker.sourceforge.net/) for
+- syntax:
 
-    1. dead links
-    2. inserting into [archive queue](Archiving URLs)
-- for academic hyperlinks,  include a [tooltip](!Wikipedia) with the title & author metadata
-- for any papers cited: either link full text, provide a local full text, or submit [a request](http://lesswrong.com/lw/7hi/free_research_help_editing_and_article_downloads/ "Free research help, editing and article downloads for LessWrong"); for books, insert an Amazon link (one day I will be able to dare to host ebooks...)
-- check readability level (eg. [Flesch-Kincaid](!Wikipedia))
-- [probability word checklist](http://lesswrong.com/lw/9jv/thinking_bayesianically_with_lojban/6p53)
-- check for use of the word "significant"/"significance" and insert "[statistically]" as appropriate (to disambiguate between [effect sizes](!Wikipedia) and [statistical significance](!Wikipedia))
-- mention any use of PredictionBook in [Prediction markets]()
-- mention any use of Fermi estimates in [Fermi calculations](Notes#fermi-calculations)
-- do a Pandoc/Firefox preview for visible major formatting problems
-- Markdown lint-checker[^lint]
-- arrange for notifications of future results (when relevant, eg. for following dual n-back research):
+    - [balanced brackets & quotes check](http://www.emacswiki.org/emacs/MarkdownMode#toc1)
+    - [`linkchecker`](http://linkchecker.sourceforge.net/) for
 
-    1. [Google Alerts](http://www.google.com/alerts)
-    2. [Google Scholar Alerts](http://googlescholar.blogspot.com/2010/06/google-scholar-alerts.html)
-    3. [PubMed](!Wikipedia) alerts
+        1. dead links
+        2. inserting into [archive queue](Archiving URLs)
+
+    - do a Pandoc/Firefox preview for visible major formatting problems
+    - Markdown lint-checker[^lint]
+- references:
+
+    - for academic hyperlinks,  include a [tooltip](!Wikipedia) with the title & author metadata
+    - for any papers cited: either link full text, provide a local full text, or submit [a request](http://lesswrong.com/lw/7hi/free_research_help_editing_and_article_downloads/ "Free research help, editing and article downloads for LessWrong"); for books, insert an Amazon link (one day I will be able to dare to host ebooks...)
+- language:
+
+    - [spellcheck](!Wikipedia "Ispell")
+    - check readability level (eg. [Flesch-Kincaid](!Wikipedia))
+    - [probability word checklist](http://lesswrong.com/lw/9jv/thinking_bayesianically_with_lojban/6p53)
+    - check for use of the word "significant"/"significance" and insert "[statistically]" as appropriate (to disambiguate between [effect sizes](!Wikipedia) and [statistical significance](!Wikipedia))
+    - convert English units to metric <!-- g -e " feet" -e " foot " -e pound -e mile -e inch -->
+- content:
+
+    - mention any use of PredictionBook in [Prediction markets]()
+    - mention any use of Fermi estimates in [Fermi calculations](Notes#fermi-calculations)
+    - arrange for notifications of future results (when relevant, eg. for following dual n-back research):
+
+        1. [Google Alerts](http://www.google.com/alerts)
+        2. [Google Scholar Alerts](http://googlescholar.blogspot.com/2010/06/google-scholar-alerts.html)
+        3. [PubMed](!Wikipedia) alerts
 - after publication, publicize; currently:
 
     1. StumbleUpon
