@@ -261,11 +261,12 @@ I noticed what may have been an effect on [my dual n-back scores](http://groups.
 [^fish-oil-analysis]: If we assume the variance of the daily scores are equal and we exclude the hypothesis that fish oil might make scores *worse*, then we get a smaller _p_-value:
 
     ~~~{.R}
-    > before <- c(54,69,42,54,44,62,44,35,85,50,44,42,57,65,51,56,42,53,40,47,
+    before <- c(54,69,42,54,44,62,44,35,85,50,44,42,57,65,51,56,42,53,40,47,
                   45,51,57,57,56,76,66,60,46,52,59,48,28,45,43,47,50,40,57,46,33,19,43,58,36,52,44,64)
-    > after <- c(55,76,56,55,44,41,44,45,65,70,46,65,46,52,68,52,57,50,64,43,
+    after <- c(55,76,56,55,44,41,44,45,65,70,46,65,46,52,68,52,57,50,64,43,
                   41,50,69,44,47,63,34,57)
-    > t.test(before,after,alternative="less",var.equal=TRUE)
+
+    t.test(before,after,alternative="less",var.equal=TRUE)
 
         Two Sample t-test
 
@@ -277,8 +278,8 @@ I noticed what may have been an effect on [my dual n-back scores](http://groups.
     sample estimates:
     mean of x mean of y
      50.29167  53.53571
-    > (mean(after) - mean(before)) / sd(append(before,after)) # the effect size
 
+    (mean(after) - mean(before)) / sd(append(before,after)) # the effect size
     0.28
     ~~~
 
@@ -287,15 +288,14 @@ I noticed what may have been an effect on [my dual n-back scores](http://groups.
     ~~~{.R}
     $ sudo apt-get install  jags r-cran-rjags
     $ R
-    > install.packages("rjags")
-    > source("BEST.R") # assumed downloaded & unzipped BEST to ./
-    > before <- c(54,69,42,54,44,62,44,35,85,50,44,42,57,65,51,56,42,53,40,47,
+    install.packages("rjags")
+    source("BEST.R") # assumed downloaded & unzipped BEST to ./
+    before <- c(54,69,42,54,44,62,44,35,85,50,44,42,57,65,51,56,42,53,40,47,
                        45,51,57,57,56,76,66,60,46,52,59,48,28,45,43,47,50,40,57,46,33,19,43,58,36,52,44,64)
-    > after <- c(55,76,56,55,44,41,44,45,65,70,46,65,46,52,68,52,57,50,64,43,41,50,69,44,47,63,34,57)
-    > mcmcChain = BESTmcmc(before, after)
-    ...
-    > postInfo = BESTplot(before, after, mcmcChain, pairsPlot=TRUE) # the generated image
-    > show( postInfo )
+    after <- c(55,76,56,55,44,41,44,45,65,70,46,65,46,52,68,52,57,50,64,43,41,50,69,44,47,63,34,57)
+    mcmcChain = BESTmcmc(before, after)
+    postInfo = BESTplot(before, after, mcmcChain, pairsPlot=TRUE) # the generated image
+    show(postInfo)
                SUMMARY.INFO
     PARAMETER         mean     median       mode     HDIlow    HDIhigh pcgtZero
       mu1       50.1419390 50.1377127 50.1913377 46.8630997 53.6056828       NA
@@ -316,7 +316,7 @@ I noticed what may have been an effect on [my dual n-back scores](http://groups.
 We have clear hypotheses here, so we can be a little optimistic: the fish oil will either improve mood or scores or it will do nothing; it will not worsen either. First, the large anxiety effect:
 
 ~~~{.R}
-> pwr.t.test(d=3.55,type="paired",power=0.75,alternative="greater",sig.level=0.05)
+pwr.t.test(d=3.55,type="paired",power=0.75,alternative="greater",sig.level=0.05)
 
      Paired t test power calculation
 
@@ -328,7 +328,7 @@ We have clear hypotheses here, so we can be a little optimistic: the fish oil wi
 Suspiciously easy. 2.25 pairs or 6 blocks? Let's be pessimistic and use the smaller effect size estimate from my quasi-trial:
 
 ~~~{.R}
-> pwr.t.test(d=0.28,type="paired",power=0.75,alternative="greater",sig.level=0.05)
+pwr.t.test(d=0.28,type="paired",power=0.75,alternative="greater",sig.level=0.05)
 
      Paired t test power calculation
 
@@ -338,7 +338,7 @@ Suspiciously easy. 2.25 pairs or 6 blocks? Let's be pessimistic and use the smal
 70 pairs is 140 blocks; we can drop to 36 pairs or 72 blocks if we accept a power of 0.5/50% chance of reaching significance. (Or we could economize by hoping that the effect size is not 3.5 but maybe twice the pessimistic guess; a _d_=0.5 at 50% power requires only 12 pairs of 24 blocks.) 70 pairs of blocks of 2 weeks, with 2 pills a day requires $(70 \times 2) \times (2 \times 7) \times 2 = 3920$ pills. I don't even have that many empty pills! I have <500; 500 would supply 250 days, which would yield 18 2-week blocks which could give 9 pairs. 9 pairs would give me a power of:
 
 ~~~{.R}
-> pwr.t.test(d=0.28,type="paired",alternative="greater",sig.level=0.05,n=9)
+pwr.t.test(d=0.28,type="paired",alternative="greater",sig.level=0.05,n=9)
 
           power = 0.1908962
 > pwr.t.test(d=0.5,type="paired",alternative="greater",sig.level=0.05,n=9)
@@ -487,6 +487,7 @@ Unfortunately, some of these studies test a variety of substances, so any estima
 The data from the surviving studies:
 
 ~~~{.R}
+iodine <-read.table(stdin(),header=TRUE)
 "study"        "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "age"
 "Bautista"     1982   100   69.43    10.96  100   70.31    10.96  0
 "Boyages"      1990   28    34.4     15.4   24    29.5     8.5    1
@@ -501,7 +502,10 @@ The data from the surviving studies:
 "McNeill"      2007   398   11.5     2.3    374   11.7     2.1    1
 "Menger"       2008   254   3.2      1.56   253   3.3      1.53   0
 "Gordon"       2009   84    10.2     3      82    9.6      2.4    0
+
 ~~~
+
+Comments:
 
 0. "age" variable is based on majority of subjects:
 
@@ -545,15 +549,16 @@ The data from the surviving studies:
 [^Isa]: See Table 7; 12 month followup scores are reported grouped in IQ deciles, and if one assumes scores in each decile average to around the median (since they should be following a bell curve, this will overstate standard deviations), one can calculate out the figures in R as follows:
 
     ~~~{.R}
-    > # experimental
-    > sd(c(rep(65,12), rep(75,10), rep(85,17), rep(100,19), rep(115,1), rep(125,1), rep(135,0)))
+    # experimental
+    sd(c(rep(65,12), rep(75,10), rep(85,17), rep(100,19), rep(115,1), rep(125,1), rep(135,0)))
     [1] 14.59699
-    > mean(c(rep(65,12), rep(75,10), rep(85,17), rep(100,19), rep(115,1), rep(125,1), rep(135,0)))
+    mean(c(rep(65,12), rep(75,10), rep(85,17), rep(100,19), rep(115,1), rep(125,1), rep(135,0)))
     [1] 85.25
-    > # control
-    > sd(c(rep(65,30), rep(75,13), rep(85,25), rep(100,26), rep(115,5), rep(125,0), rep(135,1)))
+
+    # control
+    sd(c(rep(65,30), rep(75,13), rep(85,25), rep(100,26), rep(115,5), rep(125,0), rep(135,1)))
     [1] 16.19141
-    > mean(c(rep(65,30), rep(75,13), rep(85,25), rep(100,26), rep(115,5), rep(125,0), rep(135,1)))
+    mean(c(rep(65,30), rep(75,13), rep(85,25), rep(100,26), rep(115,5), rep(125,0), rep(135,1)))
     [1] 83.6
     ~~~
 
@@ -562,8 +567,7 @@ The result of the meta-analysis:
 ~~~{.R}
 install.packages("meta", depend=TRUE)
 library(meta)
-dnb <- read.table("iodine.txt", header=TRUE)
-metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD", byvar=age)
+metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=iodine, sm="SMD", byvar=age)
        SMD             95%-CI %W(fixed) %W(random)
 1  -0.0800  [-0.3573; 0.1973]      6.73       7.99
 2   0.3800  [-0.1705; 0.9305]      1.71       7.06
@@ -623,8 +627,8 @@ A pretty [forest plot](!Wikipedia) summary:
 A trim and fill check tries to correct for this over-positiveness by suggesting 4 studies with *negative* findings, which shrink the effect size to _d_=0.02/0.05; we also notice that the τ^2^ & _i_^2^ are extremely high, which is just telling us what we know - Shrestha 1994 is different from the other studies:
 
 ~~~{.R}
-> trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
-...
+trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
+
 Filled: 4  -0.3635  [-0.7188; -0.0081]      3.52       5.96
 Filled: 10 -0.7075  [-0.9380; -0.4770]      8.35       6.11
 Filled: 6  -3.1045  [-3.6903; -2.5188]      1.29       5.57
@@ -645,8 +649,8 @@ tau^2 = 0.7654; H = 6.15 [5.44; 6.95]; I^2 = 97.4% [96.6%; 97.9%]
 Starting from them, we can try to estimate an upper bound on how big any effect would be, if it actually existed but neither study was powerful enough to pick it up. Southon et al 1994 turns out to be not very informative: if we punch in the number of kids with some more details, we find that they needed a large effect size (_d_=0.81) before they could see anything:
 
 ~~~{.R}
-> library(pwr)
-> pwr.t.test(power=0.75, sig.level=0.05, n=22)
+library(pwr)
+pwr.t.test(power=0.75, sig.level=0.05, n=22)
 
      Two-sample t test power calculation
 
@@ -661,7 +665,7 @@ But Fitzgerald 2012 is better, and gives a number of useful details on her adult
 Full text isn't available although some of the _p_-values suggest that there might be differences which didn't reach significance<!-- TODO: with full text, check whether this is true with the means of the iodine group being higher, or whether the control group was winning -->, so to estimate an upper bound on what sort of effect-size we're dealing with:
 
 ~~~{.R}
-> pwr.t.test(type="two.sample",power=0.75,alternative="greater",n=102)
+pwr.t.test(type="two.sample",power=0.75,alternative="greater",n=102)
 
      Two-sample t test power calculation
 
@@ -672,7 +676,7 @@ Full text isn't available although some of the _p_-values suggest that there mig
 This is a much tighter upper bound than Southon et al 1994 gave us, and also kind of discouraging: remember, the smaller the effect size, the more data you will need to see it, and data is always expensive. If I were to try to do any experiment, how many pairs would I need if we optimistically assume that _d_=0.32?
 
 ~~~{.R}
-> pwr.t.test(type="paired",d=0.325867,power=0.75,alternative="greater")
+pwr.t.test(type="paired",d=0.325867,power=0.75,alternative="greater")
 
      Paired t test power calculation
 
@@ -684,7 +688,7 @@ We'd want 53 pairs, but Fitzgerald 2012's experimental design called for 32 week
 We've looked at estimating based on individual studies. But we aggregated them into a meta-analysis more powerful than any of them, and it gave us a final estimate of _d_=~0.1. What does *that* imply?
 
 ~~~{.R}
-> pwr.t.test(type="paired",d=0.1,power=0.75,alternative="greater")
+pwr.t.test(type="paired",d=0.1,power=0.75,alternative="greater")
 
      Paired t test power calculation
 
@@ -939,8 +943,8 @@ The listed benefits are to mood, productivity, and creativity. We might also wan
 The descriptions are that the effects are strong & noticeable, so a large [effect size](!Wikipedia) suggests a small experiment; but with 6 metrics, we will want to correct for [multiple comparisons](!Wikipedia) (which need will lower the required _p_-value in our one-tailed tests). We'll assume a large effect size, _p_=0.01, and paired/within-subject experimental design:
 
 ~~~{.R}
-> library(pwr)
-> pwr.t.test(d=0.8,type="paired",power=0.80,alternative="greater",sig.level=0.01)
+library(pwr)
+pwr.t.test(d=0.8,type="paired",power=0.80,alternative="greater",sig.level=0.01)
 
      Paired t test power calculation
 
@@ -1273,13 +1277,23 @@ Cost-wise, the gum itself (~$5) is a sunk cost and the DNB something I ought to 
 - 02: 0 ([50%](http://predictionbook.com/predictions/8530))
 - 08: 0 ([60%](http://predictionbook.com/predictions/8598))
 - 09: 1 ([40%](http://predictionbook.com/predictions/8605))
+- 12: 0 ([50%](http://predictionbook.com/predictions/8649))
+- 13: 0 ([50%](http://predictionbook.com/predictions/8679))
 
-<!-- complete as of 02 October:
-on <- c(36,36,25,27,38,50,34,62,33,22,40,28,37,50,25,42,44,58,47,55,38,35,43,60,47,44,40,33,44,19,58,38,41,52,41,33,47,45,45,55,45,27,35,45,30)
-off <- c(25,34,30,40,57,34,41,51,36,26,37,42,40,45,31,24,38,40,47,35,31,27,66,25,17,43,46,50,36,38,58,50,23,50,31,38,33,66,30,68,42,40,29,69,45,60,37,22,28,40,41,45,37,18,50,20,41,42,47,44,60,31,46,46,55,47,42,35,40,29,47,56,37,50,20,31,42,53,27)
+<!-- complete as of 12 October
+individual rounds:
+on <- c(36,36,25,27,38,50,34,62,33,22,40,28,37,50,25,42,44,58,47,55,38,35,43,60,47,44,40,33,44,
+        19,58,38,41,52,41,33,47,45,45,55,45,27,35,45,30,30,52,36,28,43)
+off <- c(25,34,30,40,57,34,41,51,36,26,37,42,40,45,31,24,38,40,47,35,31,27,66,25,17,43,46,50,36,
+         38,58,50,23,50,31,38,33,66,30,68,42,40,29,69,45,60,37,22,28,40,41,45,37,18,50,20,41,42,
+         47,44,60,31,46,46,55,47,42,35,40,29,47,56,37,50,20,31,42,53,27,45,50,65,33,33,33,40,47,41,25,
+         55,40,31,30,45)
 5-day averages:
-on <- c(32.4,40.2,36.0,49.2,44.6,36.0,46.0,45.0,36.4)
-off <- c(37.2,37.6,39.0,36.8,33.2,42.6,42.4,47.0,45.0,37.4,38.2,38.8,47.6,38.6,42.0,30.6)
+on <- c(32.4,40.2,36.0,49.2,44.6,36.0,46.0,45.0,36.4,37.8)
+off <- c(37.2,37.6,39.0,36.8,33.2,42.6,42.4,47.0,45.0,37.4,38.2,38.8,47.6,38.6,42.0,30.6,45.2,37.2,40.2)
+source("BEST.R")
+mcmc = BESTmcmc(on,off)
+BESTplot(on,off,mcmcChain=mcmc,ROPEeff=c(-0.1,0.1))
 -->
 
 # Oxiracetam
