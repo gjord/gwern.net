@@ -416,39 +416,39 @@ An objection: "Are you seriously saying that a vendor with 1 bad review out of 1
 
 So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](!Wikipedia). We're not interested in the optimistic question of "how *good* could these vendors turn out to be?", but rather we are interested in finding out how *bad* these vendors might truly be. What's the worst plausible vendor future rating given their existing ratings? We can ask for a [confidence interval](!Wikipedia) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](/docs/1994-falk), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul). This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". What are the results? The numbers were calculated as follows:
 
-~~~~{.R}
-> # Frequentist analysis:
-> # http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper-Pearson_interval
-> y <- function(ugbtc,n,percent) { ((binom.test(round((percent/100)*n),n,conf.level=0.90))$conf.int):1 * ugbtc }
-> # Binomial CI doesn't work on 0 data; what do we do? Punt with the age-old 50%/coin-flip/equal-indifference
-> # Why 90% CIs, not 95%? Fake feedback skews the stats up and down, so we might as well get narrower intervals...
-> c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
+~~~{.R}
+# Frequentist analysis:
+# http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper-Pearson_interval
+y <- function(ugbtc,n,percent) { ((binom.test(round((percent/100)*n),n,conf.level=0.90))$conf.int):1 * ugbtc }
+# Binomial CI doesn't work on 0 data; what do we do? Punt with the age-old 50%/coin-flip/equal-indifference
+# Why 90% CIs, not 95%? Fake feedback skews the stats up and down, so we might as well get narrower intervals...
+c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
     y(94, 173, 93.4), y(100, 10, 100), 112*0.5, y(125, 300, 95.1), y(143, 127, 97.6), y(163, 127, 97.6), 175*0.5)
  [1]  56.60766  66.66799  67.11326  45.00000  73.58456  81.71468  90.18671
  [8]  84.31314  74.11344  56.00000 115.50641 134.43170 153.23333  87.50000
->
-> # Question: what if we use a Bayesian Jeffreys interval?
-> # http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Jeffreys_interval
-> install.packages("MKmisc")
-> library(MKmisc)
-> y <- function(ugbtc,n,percent) {binomCI(x=round((percent/100)*n),n=n,conf.level=0.90,method ="jeffreys")$CI:1 * ugbtc }
-> c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
+
+# Question: what if we use a Bayesian Jeffreys interval?
+# http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Jeffreys_interval
+install.packages("MKmisc")
+library(MKmisc)
+y <- function(ugbtc,n,percent) {binomCI(x=round((percent/100)*n),n=n,conf.level=0.90,method ="jeffreys")$CI:1 * ugbtc }
+c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
      y(94, 173, 93.4), y(100, 10, 100), 112*0.5, y(125, 300, 95.1), y(143, 127, 97.6), y(163, 127, 97.6), 175*0.5)
  [1]  58.85933  66.81522  67.96488  45.00000  73.74114  82.88563  90.39917
  [8]  84.64024  82.92269  56.00000 115.75319 135.22059 154.13256  87.50000
-> # Answer: it's almost identical.
->
-> # If Bayesian and frequentist methods differed much, one would be obviously wrong and no one would use it!
-> # let's look in further, how *exactly* do the ug/btc ratings differ?
-> binom <- c(56.60766, 66.66799, 67.11326, 45.00000, 73.58456, 81.71468, 90.18671, 84.31314, 74.11344,
+# Answer: it's almost identical.
+
+# If Bayesian and frequentist methods differed much, one would be obviously wrong and no one would use it!
+# let's look in further, how *exactly* do the ug/btc ratings differ?
+binom <- c(56.60766, 66.66799, 67.11326, 45.00000, 73.58456, 81.71468, 90.18671, 84.31314, 74.11344,
                        56.00000, 115.50641, 134.43170, 153.23333, 87.50000)
-> jeffreys <- c(58.85933, 66.81522, 67.96488, 45.00000, 73.74114, 82.88563, 90.39917, 84.64024,
+jeffreys <- c(58.85933, 66.81522, 67.96488, 45.00000, 73.74114, 82.88563, 90.39917, 84.64024,
                 82.92269, 56.00000, 115.75319, 135.22059, 154.13256, 87.50000)
-> mapply(function(x,y) round((x-y)/y * 100,digits=2), binom, jeffreys)
+mapply(function(x,y) round((x-y)/y * 100,digits=2), binom, jeffreys)
  [1]  -3.83  -0.22  -1.25   0.00  -0.21  -1.41  -0.24  -0.39 -10.62   0.00
 [11]  -0.21  -0.58  -0.58   0.00
 # in 1 case, for Machine Maid, the ug/btc estimates differ by 10.62%, which is interesting
-~~~~
+~~~
 
 (This demonstrates, incidentally, that feedback ratings don't start yielding very high assurance until a surprisingly large amount is in.)
 
