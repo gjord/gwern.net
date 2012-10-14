@@ -1400,6 +1400,7 @@ The "active.control" moderator variable is whether a control group was no-contac
 The data from the surviving studies:
 
 ~~~{.R}
+dnb <-read.table(stdin(),header=TRUE)
 "study"       "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "active.control"
 "Jaeggi1"      2008   34   11.82     3.398  35    10.51   3.721  0
 "polar"        2009   13   32.76     1.83   8     25.12   9.37   0
@@ -1419,6 +1420,7 @@ The data from the surviving studies:
 "Salminen"     2012   13   13.7      2.2    9     10.9    4.3    0
 "Redick.1"     2012   12   6.25      3.08   20    6       3      0
 "Redick.2"     2012   12   6.25      3.08   29    6.24    3.34   1
+
 ~~~
 
 ### Analysis
@@ -1428,7 +1430,6 @@ The result of the meta-analysis:
 ~~~{.R}
 install.packages("meta", depend = TRUE)
 library(meta)
-dnb <- read.table("dnb.txt", header=TRUE)
 metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control)
        SMD             95%-CI %W(fixed) %W(random)
 1   0.3633  [-0.1128; 0.8393]     10.84       7.38
@@ -1494,8 +1495,8 @@ The overall effect is reasonably strong. But the moderator variable confirms the
 The trim-and-fill estimate:
 
 ~~~{.R}
-> trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control))
-...
+trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control))
+
 Filled: 17  1.0043  [ 0.2883; 1.7203]      4.06       4.78
 Filled: 18  1.0818  [ 0.4090; 1.7545]      4.60       4.97
 Filled: 8   1.5035  [ 0.4670; 2.5401]      1.94       3.54
