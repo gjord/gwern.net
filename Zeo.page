@@ -123,12 +123,12 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     Unfortunately, while I have no love for NHST, I *did* find it much easier to use the NHST concepts & code when learning how to do these analyses. In the future, hopefully I can switch to Bayesian techniques.
 [^R-melatonin-analysis-p]: The analysis session in the `R` interpreter:
 
-    ~~~{.r}
-    > # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
-    > mydata <- read.table("2011-zeo-melatonin.csv", header=TRUE, sep=",")
-    >
-    > # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a binary variable
-    > t.test(ZQ~SSCF.10, data=mydata)
+    ~~~{.R}
+    # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
+    mydata <- read.table("http://www.gwern.net/docs/2011-zeo-melatonin.csv", header=TRUE, sep=",")
+
+    # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a binary variable
+    t.test(ZQ~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -141,7 +141,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            84.95652        76.29688
 
-    > t.test(Total.Z~SSCF.10, data=mydata)
+    t.test(Total.Z~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -154,7 +154,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            456.4783        407.5312
 
-    > t.test(Time.to.Z~SSCF.10, data=mydata)
+    t.test(Time.to.Z~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -167,7 +167,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
              19.000          14.875
 
-    > t.test(Time.in.Wake~SSCF.10, data=mydata)
+    t.test(Time.in.Wake~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -180,7 +180,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            6.565217        5.640625
 
-    > t.test(Time.in.REM~SSCF.10, data=mydata)
+    t.test(Time.in.REM~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -193,7 +193,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            145.4783        118.1406
 
-    > t.test(Time.in.Deep~SSCF.10, data=mydata)
+    t.test(Time.in.Deep~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -206,7 +206,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            57.21739        56.57812
 
-    > t.test(Awakenings~SSCF.10, data=mydata)
+    t.test(Awakenings~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -219,7 +219,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            2.869565        2.437500
 
-    > t.test(Morning.Feel~SSCF.10, data=mydata)
+    t.test(Morning.Feel~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -232,7 +232,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            2.952381        3.173913
 
-    > t.test(Time.in.Light~SSCF.10, data=mydata)
+    t.test(Time.in.Light~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
 
@@ -245,6 +245,9 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            254.2174        233.2969
     ~~~
+
+<!-- source("BEST.R"); mydata <- read.table("http://www.gwern.net/docs/2011-zeo-melatonin.csv", header=TRUE, sep=","); on <- subset(mydata, SSCF.10==1); off <- subset(mydata, SSCF.10==0); mcmc = BESTmcmc(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)], numSavedSteps=1000000); BESTplot(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)],mcmc,TRUE, ROPEeff=c(-0.1,0.1)) -->
+
 [^melatonin-multiple]: If we correct for multiple comparisons (see [previous footnote](#fn7)) at _q_-value=0.05, of our 10 _p_-values (0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779), none of them survive:
 
     ~~~{.haskell}
@@ -258,7 +261,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 [^R-melatonin-analysis-o]: The following `R` re-runs the above analysis but with options that increase the power of the results - but only if some assumptions about melatonin's effects are correct; see later Vitamin D discussion of 'optimistic' and 'pessimistic' assumptions.
 
     ~~~{.R}
-    > t.test(ZQ~SSCF.10, data=mydata, var.equal=TRUE); t.test(Total.Z~SSCF.10, data=mydata, var.equal=TRUE)
+    t.test(ZQ~SSCF.10, data=mydata, var.equal=TRUE); t.test(Total.Z~SSCF.10, data=mydata, var.equal=TRUE)
 
         Two Sample t-test
 
@@ -282,7 +285,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            456.4783        407.5312
 
-    > t.test(Time.to.Z~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Time.in.Wake~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
+    t.test(Time.to.Z~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Time.in.Wake~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
 
         Two Sample t-test
 
@@ -306,7 +309,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            6.565217        5.640625
 
-    > t.test(Time.in.REM~SSCF.10, data=mydata, var.equal=TRUE); t.test(Time.in.Deep~SSCF.10, data=mydata, var.equal=TRUE)
+    t.test(Time.in.REM~SSCF.10, data=mydata, var.equal=TRUE); t.test(Time.in.Deep~SSCF.10, data=mydata, var.equal=TRUE)
 
         Two Sample t-test
 
@@ -330,7 +333,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            57.21739        56.57812
 
-    > t.test(Awakenings~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Morning.Feel~SSCF.10, data=mydata, alternative="great", var.equal=TRUE)
+    t.test(Awakenings~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Morning.Feel~SSCF.10, data=mydata, alternative="great", var.equal=TRUE)
 
         Two Sample t-test
 
@@ -354,7 +357,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            2.952381        3.173913
 
-    > t.test(Time.in.Light~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
+    t.test(Time.in.Light~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
 
         Two Sample t-test
 
@@ -454,7 +457,7 @@ The calculated effect size is a little worrisome; at a medium-small _d_=0.37, po
 [^R-melatonin-power]: One weakness is that I didn't randomize selection of melatonin or no-melatonin, instead doing an alternating days design at my convenience. But if we were to wave that away, the power seems... OK. I have ~141 days of data, of which 90-100 are usable, giving me maybe <50 pairs? If I fire up R and load in the two means and the standard deviation (which we know from calculating the effect size), and then play with the numbers, then to get an 85% chance I could find an effect at _p_=0.01:
 
     ~~~{.R}
-    > pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.01,type="paired",alternative="greater")
+    pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
 
@@ -470,7 +473,7 @@ The calculated effect size is a little worrisome; at a medium-small _d_=0.37, po
     84 pairs is more than 50 pairs. If I weaken the _p_=0.01 for 0.05, it looks like I should have had an 85% shot at detecting the effect:
 
     ~~~{.R}
-    > pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.05,type="paired",alternative="greater")
+    pwr.t.test(d=(456.4783 -  407.5312) / 131.4656,power=0.85,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
 
@@ -737,7 +740,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
 
 [^R-oneleg-analysis]: The `R` interpreter session, loading a CSV as before:
 
-    ~~~{.r}
+    ~~~{.R}
     > t.test(Total.Z~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
@@ -958,9 +961,8 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 
 [^vitamin-D-analysis-p]: The usual session:
 
-    ~~~{.r}
-    $ R
-    > mydata <- read.table("2012-zeo-vitamind.csv", header=TRUE, sep=",")
+    ~~~{.R}
+    > mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind.csv", header=TRUE, sep=",")
     > t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
@@ -1073,7 +1075,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 
     If we were willing to make those assumptions, then the tests have fewer possibilities to consider, and can make stronger claims. Let's take ZQ as an example. The straight Welch Two Sample t-test gives us _p_=0.06, as we already saw. But if we were willing to assume equal variance, that buys us -0.01 downwards to _p_=0.0581; a test for either null or negative effect gives us _p_=0.0308; and finally, assuming equal variance *and* testing for null/negative (rather than positive/null/negative) gives us _p_=0.029 - substantially better than the original _p_=0.06:
 
-    ~~~{.r}
+    ~~~{.R}
     > t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
@@ -1129,7 +1131,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 
     We'll re-run the analysis with appropriate options:
 
-    ~~~{.r}
+    ~~~{.R}
     > t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
       t.test(Total.Z~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
 
@@ -1304,10 +1306,11 @@ Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other D
 
 As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with the usual assumptions[^morning-independence] about independence of the daily observations:
 
-[^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at previous days:
+[^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
-    ~~~{.r}
-    > data <- read.table("zeodata.csv", header=TRUE, sep=",")
+    ~~~{.R}
+    > data <- read.table("http://www.gwern.net/docs/gwern-zeodata.csv", header=TRUE, sep=",")
+    > # Master Zeo export file is periodically updated; your results may not be identical
     > n <- length(data$Morning.Feel); n
     [1] 448
     > reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
@@ -1391,7 +1394,7 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
 
 [^R-morning-graph]: Code written by Ben Wieland:
 
-    ~~~{.r}
+    ~~~{.R}
     library("ggplot2")
     sleep <- read.csv("2012-zeo-vitamind-morning.csv")
 
@@ -1413,8 +1416,8 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 
 [^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
 
-    ~~~{.r}
-    > mydata <- read.table("2012-zeo-vitamind-morning.csv", header=TRUE, sep=",")
+    ~~~{.R}
+    > mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv", header=TRUE, sep=",")
     > t.test(ZQ~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
@@ -1604,10 +1607,9 @@ It may be time to learn some more statistics, specifically how to do [statistica
 Let's pin down the effect size: we expect any Redshift effect to be weaker than melatonin supplementation, and the most striking change in melatonin (the reduction in total sleep time by ~50 minutes) had an effect size of 0.37. As usual, R has a bunch of functions we can use. Stealing shamelessly from an [R guide](http://www.ats.ucla.edu/stat/R/dae/t_test_power3.htm), and reusing the means and standard deviations from the melatonin experiment, we can begin asking questions like: "suppose I wanted a 90% chance of my experiment producing a solid result of _p_>0.01 (not 0.05, so I can do multiple correction) if the Redshift data looks like the melatonin data and acts the same way?"
 
 ~~~{.R}
-> install.packages("pwr", depend = TRUE)
-...
-> library(pwr)
-> pwr.t.test(d=(456.4783-407.5312)/131.4656,power=0.9,sig.level=0.01,type="paired",alternative="greater")
+install.packages("pwr", depend = TRUE)
+library(pwr)
+pwr.t.test(d=(456.4783-407.5312)/131.4656,power=0.9,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
 
@@ -1623,42 +1625,39 @@ Let's pin down the effect size: we expect any Redshift effect to be weaker than 
 _n_ is pairs of days, so each _n_ is one day on, one day off; so it requires 194 days! Ouch, but OK, that was making some assumptions. What if we say the effect size was halved?
 
 ~~~{.R}
-> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.9,sig.level=0.01,type="paired",alternative="greater")
+pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.9,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
 
               n = 378.3237
-...
 ~~~
 
 That's much worse (as one should expect - the smaller an effect or desired _p_-value or chance you don't have the power to observe it, the more data you need to see it). What if we weaken the power and significance level to 0.5 and 0.05 respectively?
 
 ~~~{.R}
-> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.5,sig.level=0.05,type="paired",alternative="greater")
+pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.5,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
 
               n = 79.43655
               d = 0.1861593
-...
 ~~~
 
 This is more reasonable, since _n_=80 or 160 days will fit within the experiment but look at what it cost us: it's now a coin-flip that the results will show anything, and they may not pass multiple correction either. But it's also very expensive to gain more certainty - if we halve that 50% chance of finding nothing, it basically doubles the number of pairs of days we need from 79 to 157:
 
 ~~~{.R}
-> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.75,sig.level=0.05,type="paired",alternative="greater")
+pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,power=0.75,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
 
               n = 156.5859
               d = 0.1861593
-...
 ~~~
 
 Statistics is a harsh master. What if we solve the equation for a different variable, power or significance? Maybe I can handle 200 days, what would 100 pairs buy me in terms of power?
 
 ~~~{.R}
-> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=100,sig.level=0.05,type="paired",alternative="greater")
+pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=100,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
 
@@ -1666,7 +1665,6 @@ Statistics is a harsh master. What if we solve the equation for a different vari
               d = 0.1861593
       sig.level = 0.05
           power = 0.5808219
-...
 ~~~
 
 Just 58%. (But at _p_=0.01, _n_=100 only buys me 31% power, so it could be worse!) At 120 pairs/240 days, I get 65% power, so it may all be doable. I guess it'll depend on circumstances: ideally, a Redshift trial will involve no work on my part, so the real question becomes what quicker sleep experiments does it stop me from running and how long can I afford to run it? Would it painfully overlap with things like the lithium trial?
@@ -1674,7 +1672,7 @@ Just 58%. (But at _p_=0.01, _n_=100 only buys me 31% power, so it could be worse
 Speaking of the lithium trial, the plan is to run it for a year. What would *2* years of Redshift data buy me even at _p_=0.01?
 
 ~~~{.R}
-> pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=365,sig.level=0.01,type="paired",alternative="greater")
+pwr.t.test(d=((456.4783-407.5312)/131.4656)/2,n=365,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
 
@@ -1682,7 +1680,6 @@ Speaking of the lithium trial, the plan is to run it for a year. What would *2* 
               d = 0.1861593
       sig.level = 0.01
           power = 0.8881948
-...
 ~~~
 
 Nice! Of course, we have to expect to lose a good deal of statistical power due to interference/uncertainty from the other simultaneous experiments that will be fed into the ANOVA, but I don't know how to calculate that.
@@ -1735,29 +1732,28 @@ Kaul et al 2010 describes the long-term meditators as spending "2-3 hrs/day" in 
 The difference between the long-term meditators and their normal Indian counterparts was 5.2 hours of sleep per day versus 7.8. Assume the worst case of 3 hours, this implies that meditation is indeed a net cost in time (8.2 > 7.8), but also that each hour of meditation is equivalent to almost an hour of sleep ($\frac{7.8 - 5.2}{3} = 0.866...$). So at that conversion rate, 20 minutes of meditation translates to 17.32 minutes less sleep. We will steal code and data from the previous [Redshift power calculation](#power-calculation): assume the same control sleep, same standard deviation, and subtract 17.32 from the control to get the true mean of the intervention
 
 ~~~{.R}
-> install.packages("pwr", depend = TRUE)
-...
-> library(pwr)
-> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,sig.level=0.05,type="paired",alternative="greater")
+install.packages("pwr", depend = TRUE)
+library(pwr)
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
               n = 157.237
-...
-> # we're getting 360 days or 180 pairs; let's ask for more reliable chance than 50-50 of getting a useful result;
-> # what does n = 180 buy us? Not much!
-> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.55,sig.level=0.05,type="paired",alternative="greater")
+
+# we're getting 360 days or 180 pairs; let's ask for more reliable chance than 50-50 of getting a useful result;
+# what does n = 180 buy us? Not much!
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.55,sig.level=0.05,type="paired",alternative="greater")
 
      Paired t test power calculation
 
               n = 181.9631
-...
-> # how many pairs *do* we need for good results?
-> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,sig.level=0.01,type="paired",alternative="greater")
+
+# how many pairs *do* we need for good results?
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
               n = 521.5252
-...
-> pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.56,sig.level=0.01,type="paired",alternative="greater")
+
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.56,sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
               n = 356.2923
@@ -1816,9 +1812,9 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     I went through the 2870 lines until I found the first treadmill session I did on June 16. After splitting, deleting the date-stamps, and adding a CSV header like `WPM,Accuracy`, I had had 2285 entries for [2012-gwern-amphetype-before.csv](/docs/2012-gwern-amphetype-before.csv) and 585 for [2012-gwern-amphetype-after.csv](/docs/2012-gwern-amphetype-after.csv). Then it is easy to load the CSVs into R and test:
 
     ~~~{.R}
-    > before <- read.table("2012-gwern-amphetype-before.csv", header=TRUE, sep=",")
-    > after <- read.table("2012-gwern-amphetype-after.csv", header=TRUE, sep=",")
-    > t.test(before$WPM, after$WPM); t.test(before$Accuracy, after$Accuracy)
+    before <- read.table("http://www.gwern.net/docs/2012-gwern-amphetype-before.csv", header=TRUE, sep=",")
+    after <- read.table("http://www.gwern.net/docs/2012-gwern-amphetype-after.csv", header=TRUE, sep=",")
+    t.test(before$WPM, after$WPM); t.test(before$Accuracy, after$Accuracy)
 
         Welch Two Sample t-test
 
@@ -1846,7 +1842,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     What? Using a treadmill made my average WPM go *up* 5 WPM? And my average accuracy increased 0.002%? And both are highly significant (not a surprise, given how many entries there were)? What's going on - this is the exact opposite of expected! The key is the low mean of the `before` data: I type much faster than 82 WPM now. What happened was that I spent 3 years practicing. Given that I was improving, it is wrong to compare the treadmill typing data against a long-run average. What would be better would be to lop off the first half of the `before` data to get a fairer comparison with `after`, since I began to plateau around then. Redoing the tests:
 
     ~~~{.R}
-    > t.test(before$WPM[1144:2285], after$WPM); t.test(before$Accuracy[1144:2285], after$Accuracy)
+    t.test(before$WPM[1144:2285], after$WPM); t.test(before$Accuracy[1144:2285], after$Accuracy)
         Welch Two Sample t-test
 
     data:  before$WPM[1144:2285] and after$WPM
@@ -1877,7 +1873,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
 Starting it part way, I lose potential power: there are only ~330 days left. The effect of most interest is productivity, where I expect a negative effect, but we also need a more stringent _p_-value since we're looking at so many variables; so 330 samples gives a floor on detectable effect size of
 
 ~~~{.R}
-> pwr.t.test(n=(330/2),power=0.75,sig.level=0.01,type="paired",alternative="less")
+pwr.t.test(n=(330/2),power=0.75,sig.level=0.01,type="paired",alternative="less")
 
      Paired t test power calculation
 
@@ -2432,16 +2428,18 @@ October
 10: 1 0 1
 11: 1 0 0
 12: 1 1 0
-13: 0 1 1?
+13: 0 1 1
+14: 0 1 1?
 
 Underpopulated data cells:
-15: 0 1 0
 15: 0 1 1
+15: 0 1 0
 15: 1 0 1
 15: 1 1 0
 15: 1 1 1
 16: 1 0 0
-(should be 15)
+21: 0 0 0
+27: 0 0 1
 -->
 
 # External links
@@ -2603,3 +2601,4 @@ Underpopulated data cells:
 <!-- Redshift: 11 Oct 2012: on -->
 <!-- Redshift: 12 Oct 2012: off -->
 <!-- Redshift: 13 Oct 2012: off -->
+<!-- Redshift: 14 Oct 2012: off -->
