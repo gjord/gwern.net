@@ -96,7 +96,9 @@ My predictions were substantially better than random chance[^proper-scoring-rule
 
     ~~~{.haskell}
     logScore ps = sum $ map (\(result,p) -> if result then log p else log (1-p)) ps
-    logScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),(False,0.25),(False,0.60),(True,0.70),(True,0.65),(True,0.60),(False,0.30),(True,0.50),(True,0.90),(True,0.40)]
+    logScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),(False,0.25),
+              (False,0.60),(True,0.70),(True,0.65),(True,0.60),(False,0.30),(True,0.50),
+              (True,0.90),(True,0.40)]
     ~> -6.125
     ~~~
 
@@ -105,7 +107,9 @@ My predictions were substantially better than random chance[^proper-scoring-rule
     ~~~{.haskell}
     (15 * log 0.5)
     ~> -10.397
-    (15 * log 0.5) > logScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),(False,0.25),(False,0.60),(True,0.70),(True,0.65),(True,0.60),(False,0.30),(True,0.50),(True,0.90),(True,0.40)]
+    (15 * log 0.5) > logScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),
+                               (False,0.25),(False,0.60),(True,0.70),(True,0.65),(True,0.60),
+                               (False,0.30),(True,0.50),(True,0.90),(True,0.40)]
     ~> False
     ~~~
 
@@ -113,7 +117,9 @@ My predictions were substantially better than random chance[^proper-scoring-rule
 
     ~~~{.haskell}
     logBinaryScore = sum . map (\(result,p) -> if result then 1 + logBase 2 p else 1 + logBase 2 (1-p))
-    logBinaryScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),(False,0.25),(False,0.60),(True,0.70),(True,0.65),(True,0.60),(False,0.30),(True,0.50),(True,0.90),(True,0.40)]
+    logBinaryScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),(False,0.25),
+                    (False,0.60),(True,0.70),(True,0.65),(True,0.60),(False,0.30),(True,0.50),
+                    (True,0.90),(True,0.40)]
     ~> 5.16
     ~~~
 
@@ -1323,7 +1329,11 @@ Subjectively, I didn't notice drastic changes. Here's what I did notice:
 - I'm not so easy to tire - I went through a month's worth of my Wikipedia watchlist with less fatigue than usual, and n-backing doesn't seem so tiring.
 - [DNB](DNB FAQ)-wise, eyeballing my stats file seems to indicate a small increase: when I compare peak scores D4B scores, I see mostly 50s and a few 60s before piracetam, and after starting piracetam, a few 70s mixed into the 50s and 60s. Natural increase from training? Dunno - I've been stuck on D4B since June, so 5 or 10% in a week or 3 seems a little suspicious. A graph of the score series[^raw-scores]:
 
-    ▁▅▂▁▅▅▂▄▁▂▁▄▄▁▄▂▁▃▃▂▂▂▁▆▁▂▁▄▃▁▃▄▁▄▁▂▅▅▂▃▁▃▃▂▄▂▄▇▄▄▄▅▃▄▂▄▅▅▁▅▃▃▄▅▅▃▃▂▄▄▃▄▆▃▅▃▄▅▃▅▄▄▄▂▄▂▄▃▄▄▃▄▄▂▃▆▂▁
+    ▁▅▂▁▅▅▂▄▁▂▁▄▄▁▄▂▁▃▃▂▂▂▁▆▁▂▁▄▃▁▃▄▁▄▁▂▅▅▂▃▁▃▃▂▄▂▄▇▄▄▄▅▃▄▂▄▅▅▁▅▃▃▄▅▅▃▃▂▄▄▃▄▆▃▅▃▄▅
+    ▃▅▄▄▄▂▄▂▄▃▄▄▃▄▄▂▃▆▂▁
+
+   vs
+
     ▆▅▆▄▄▅▃▅▁▁▃▄▅▃▁▅▃▅▂▃▄▃▁▄▅▅▂▃▁▁▆▃▁▄▄▃▁▅▄▄▃▃▄▂▅▃▁▄▂▅▃▆▆▂▃▃▆▄▃▃▂▂▂▁▄▃▃▄▄▂
 - The other day, I also noticed I was fidgeting less
 - After a week or two, I *think* I noticed better reflexes - both in catching falling cups and the [saccading](!Wikipedia "Saccade") in BW seems slightly easier. But I could be imagining this since I just saw an Erowid report mentioning better reflexes & I may've read that one before I started. (Darn those subconscious impressions and memories! :)
@@ -1367,7 +1377,7 @@ Potassium is not the safest supplement ever, but it's reasonably safe (kidneys c
 
 Potassium citrate powder is neither expensive nor cheap: I purchased [453g for $21](http://www.amazon.com/Potassium-Citrate-TriPotassium-Dihydrate-Powder/dp/B00729L4NO/ "Potassium Citrate - 100% Pure TriPotassium Citrate Dihydrate Powder - 1 lb Bulk Pack"). The powder is crystalline white, dissolves instantly in water, and largely tasteless.
 
-My first impression of ~1g was that while I do not feel like running around, within an hour I did feel like the 'brain fog' was lighter than before. The effect wasn't dramatic, so I can't be very confident. Operationalizing 'brain fog' for an experiment might be hard: it doesn't necessarily feel like I would do better on dual n-back.
+My first impression of ~1g around 12:30PM was that while I do not feel like running around, within an hour I did feel like the 'brain fog' was lighter than before. The effect wasn't dramatic, so I can't be very confident. Operationalizing 'brain fog' for an experiment might be hard: it doesn't necessarily feel like I would do better on dual n-back. I took 2 smaller doses 3 and 6 hours later. That night, I had severe trouble sleeping, falling asleep in 30 minutes rather than my usual 19.6±11.9, waking up 12 times (5.9±3.4), and spending ~90 minutes awake (18.1±16.2), and naturally I felt unrested the next day; I initially assumed it was because I had left a fan on (moving air keeps me awake) but the potassium is also an obvious culprit. The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame.
 
 # Selegiline / Deprenyl
 
