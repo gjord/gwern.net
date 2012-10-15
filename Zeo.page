@@ -253,7 +253,6 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     ~~~{.haskell}
     let bh (i,p) = p < ((i * 0.05) / 10) in map bh
                          (zip [1..] [0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779])
-    ~>
     [False,False,False,False,False,False,False,False,False,False]
     ~~~
 
@@ -741,7 +740,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
 [^R-oneleg-analysis]: The `R` interpreter session, loading a CSV as before:
 
     ~~~{.R}
-    > t.test(Total.Z~SSCF.11, data=mydata)
+    t.test(Total.Z~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
 
@@ -754,7 +753,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     mean in group 0 mean in group 3
            513.7750        502.3929
 
-    > t.test(Time.in.REM~SSCF.11, data=mydata)
+    t.test(Time.in.REM~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
 
@@ -767,7 +766,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     mean in group 0 mean in group 3
            168.8000        152.7143
 
-    > t.test(ZQ~SSCF.11, data=mydata)
+    t.test(ZQ~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
 
@@ -780,7 +779,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     mean in group 0 mean in group 3
               96.05           92.50
 
-    > t.test(Awakenings~SSCF.11, data=mydata)
+    t.test(Awakenings~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
 
@@ -793,7 +792,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     mean in group 0 mean in group 3
               4.175           4.000
 
-    > t.test(Time.in.Wake~SSCF.11, data=mydata)
+    t.test(Time.in.Wake~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
 
@@ -806,7 +805,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     mean in group 0 mean in group 3
            12.77500        11.71429
 
-    > t.test(Morning.Feel~SSCF.11, data=mydata)
+    t.test(Morning.Feel~SSCF.11, data=mydata)
 
         Welch Two Sample t-test
 
@@ -824,7 +823,6 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     ~~~{.haskell}
     let bh (index,pvalue) = pvalue < ((index * 0.05) / 6) in
                               map bh (zip [1..] [0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944])
-    ~>
     [False,False,False,False,False,False]
     ~~~
 
@@ -954,7 +952,7 @@ From a quick look at the prediction confidences, I was usually correct but perha
                     (True,0.60),(True,0.65),(True,0.65),(True,0.65),(True,0.65),(True,0.65),(True,0.65),
                     (True,0.65),(True,0.65),(True,0.70),(True,0.70),(True,0.70),(True,0.70),(True,0.75),
                     (True,0.75),(False,0.55),(False,0.6),(False,0.6),(False,0.7),(False,0.7),(False,0.75)]
-    ~> 5.4
+    5.4
     ~~~
 
 Looking at the data averages in the Zeo website, it looked like ZQ & total & REM sleep fell, deep increased slightly, time awake & awakenings both increased, and morning feel decreased. The R analysis (pessimistic[^vitamin-D-analysis-p], optimistic[^vitamin-D-analysis-o]):
@@ -962,8 +960,8 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 [^vitamin-D-analysis-p]: The usual session:
 
     ~~~{.R}
-    > mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind.csv", header=TRUE, sep=",")
-    > t.test(ZQ~SSCF.12, data=mydata)
+    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind.csv", header=TRUE, sep=",")
+    t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -976,7 +974,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            93.36842        89.26087
 
-    > t.test(Total.Z~SSCF.12, data=mydata)
+    t.test(Total.Z~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -989,7 +987,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            533.3684        512.2609
 
-    > t.test(Time.in.REM~SSCF.12, data=mydata)
+    t.test(Time.in.REM~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1002,7 +1000,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            175.6316        160.8261
 
-    > t.test(Time.in.Deep~SSCF.12, data=mydata)
+    t.test(Time.in.Deep~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1015,7 +1013,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            55.00000        56.73913
 
-    > t.test(Time.in.Wake~SSCF.12, data=mydata)
+    t.test(Time.in.Wake~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1028,7 +1026,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            26.31579        28.08696
 
-    > t.test(Awakenings~SSCF.12, data=mydata)
+    t.test(Awakenings~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1041,7 +1039,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            7.578947        8.260870
 
-    > t.test(Morning.Feel~SSCF.12, data=mydata)
+    t.test(Morning.Feel~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1054,7 +1052,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            2.842105        2.318182
 
-    > t.test(Time.to.Z~SSCF.12, data=mydata)
+    t.test(Time.to.Z~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1076,7 +1074,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     If we were willing to make those assumptions, then the tests have fewer possibilities to consider, and can make stronger claims. Let's take ZQ as an example. The straight Welch Two Sample t-test gives us _p_=0.06, as we already saw. But if we were willing to assume equal variance, that buys us -0.01 downwards to _p_=0.0581; a test for either null or negative effect gives us _p_=0.0308; and finally, assuming equal variance *and* testing for null/negative (rather than positive/null/negative) gives us _p_=0.029 - substantially better than the original _p_=0.06:
 
     ~~~{.R}
-    > t.test(ZQ~SSCF.12, data=mydata)
+    t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1089,7 +1087,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            93.36842        89.26087
 
-    > t.test(ZQ~SSCF.12, data=mydata, alternative="great")
+    t.test(ZQ~SSCF.12, data=mydata, alternative="great")
 
         Welch Two Sample t-test
 
@@ -1102,7 +1100,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            93.36842        89.26087
 
-    > t.test(ZQ~SSCF.12, data=mydata, var.equal=TRUE)
+    t.test(ZQ~SSCF.12, data=mydata, var.equal=TRUE)
 
         Two Sample t-test
 
@@ -1115,7 +1113,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            93.36842        89.26087
 
-    > t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
+    t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
 
         Two Sample t-test
 
@@ -1132,7 +1130,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     We'll re-run the analysis with appropriate options:
 
     ~~~{.R}
-    > t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
+    t.test(ZQ~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
       t.test(Total.Z~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
 
         Two Sample t-test
@@ -1157,7 +1155,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            533.3684        512.2609
 
-    > t.test(Time.in.REM~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
+    t.test(Time.in.REM~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
       t.test(Time.in.Deep~SSCF.12, data=mydata, var.equal=TRUE)
 
         Two Sample t-test
@@ -1182,7 +1180,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            55.00000        56.73913
 
-    > t.test(Time.in.Wake~SSCF.12, data=mydata, alternative="less", var.equal=TRUE);
+    t.test(Time.in.Wake~SSCF.12, data=mydata, alternative="less", var.equal=TRUE);
       t.test(Awakenings~SSCF.12, data=mydata, alternative="great", var.equal=TRUE)
 
         Two Sample t-test
@@ -1207,7 +1205,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     mean in group 0 mean in group 1
            7.578947        8.260870
 
-    > t.test(Morning.Feel~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
+    t.test(Morning.Feel~SSCF.12, data=mydata, alternative="great", var.equal=TRUE);
       t.test(Time.to.Z~SSCF.12, data=mydata, alternative="less", var.equal=TRUE)
 
         Two Sample t-test
@@ -1249,7 +1247,6 @@ So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on
     ~~~{.haskell}
     let bh (index,pvalue) = pvalue < ((index * 0.05) / 8) in
                               map bh (zip [1..] [0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411])
-    ~>
     [True,False,False,False,False,False,False,False]
     ~~~
 
@@ -1309,12 +1306,12 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
 [^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
     ~~~{.R}
-    > data <- read.table("http://www.gwern.net/docs/gwern-zeodata.csv", header=TRUE, sep=",")
-    > # Master Zeo export file is periodically updated; your results may not be identical
-    > n <- length(data$Morning.Feel); n
+    data <- read.table("http://www.gwern.net/docs/gwern-zeodata.csv", header=TRUE, sep=",")
+    # Master Zeo export file is periodically updated; your results may not be identical
+    n <- length(data$Morning.Feel); n
     [1] 448
-    > reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
-    > summary(reg)
+    reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
+    summary(reg)
 
     Call:
     lm(formula = Morning.Feel[2:n] ~ Morning.Feel[1:(n - 1)], data = data)
@@ -1334,18 +1331,18 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
       (123 observations deleted due to missingness)
     Multiple R-squared: 0.01858,    Adjusted R-squared: 0.01553
     F-statistic: 6.095 on 1 and 322 DF,  p-value: 0.01407
-    >
-    > # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is 0.01
-    > # with a residual error of 0.7, that doesn't seem very correlated?
-    > # although p=0.15 does indicate there's a very real (but still small) correlation from
-    > # day to day, so I guess the p-values may be a little overstated
-    >
-    > cor(data$Morning.Feel[2:n], data$Morning.Feel[1:(n-1)], use = "complete.obs")
+
+    # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is 0.01
+    # with a residual error of 0.7, that doesn't seem very correlated?
+    # although p=0.15 does indicate there's a very real (but still small) correlation from
+    # day to day, so I guess the p-values may be a little overstated
+
+    cor(data$Morning.Feel[2:n], data$Morning.Feel[1:(n-1)], use = "complete.obs")
     [1] 0.1363006
-    >
-    > # 123 observations missing? What's going on? Well, what does the data look like?
-    >
-    > data$Morning.Feel
+
+    # 123 observations missing? What's going on? Well, what does the data look like?
+
+    data$Morning.Feel
       [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2
      [26]  3  2  3 NA  3 NA NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4
      [51] NA NA  4  4  3  4 NA NA NA NA NA NA NA  4 NA  2  3  3 NA NA  3 NA  3  3 NA
@@ -1364,9 +1361,9 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
     [376]  3  2  3  3  3  2  2  3 NA  3  2  3  4  4  3  3  2  4  3  2  3  3  4  3  4
     [401]  3  3 NA  2  2  3  3  3  4  4  3  1  3  3  2  4  3  3  3  2  3  2  4  2  4
     [426]  3  3  3  4 NA  2  3  3  3  3  2  1  2  2  3  2  3  1  4  3  3  4  3
-    >
-    > # ah, I just wasn't good about recording "Morning Feel" early on, and since then
-    > # there have been occasional slips (literally, with the headband)
+
+    # ah, I just wasn't good about recording "Morning Feel" early on, and since then
+    # there have been occasional slips (literally, with the headband)
     ~~~
 
     Gustavo comments:
@@ -1417,8 +1414,8 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 [^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
 
     ~~~{.R}
-    > mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv", header=TRUE, sep=",")
-    > t.test(ZQ~SSCF.1, data=mydata)
+    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv", header=TRUE, sep=",")
+    t.test(ZQ~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1431,7 +1428,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            90.63333        94.31250
 
-    > t.test(Total.Z~SSCF.1, data=mydata)
+    t.test(Total.Z~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1444,7 +1441,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            510.6333        526.2812
 
-    > t.test(Time.in.REM~SSCF.1, data=mydata)
+    t.test(Time.in.REM~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1457,7 +1454,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            157.2333        163.0938
 
-    > t.test(Time.in.Deep~SSCF.1, data=mydata)
+    t.test(Time.in.Deep~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1470,7 +1467,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            64.03333        66.81250
 
-    > t.test(Time.in.Wake~SSCF.1, data=mydata)
+    t.test(Time.in.Wake~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1483,7 +1480,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            26.96667        22.96875
 
-    > t.test(Awakenings~SSCF.1, data=mydata)
+    t.test(Awakenings~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1496,7 +1493,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            7.766667        7.531250
 
-    > t.test(Morning.Feel~SSCF.1, data=mydata)
+    t.test(Morning.Feel~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1509,7 +1506,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
             2.62069         3.15625
 
-    > t.test(Time.to.Z~SSCF.1, data=mydata)
+    t.test(Time.to.Z~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1522,7 +1519,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     mean in group 0 mean in group 1
            25.33333        25.31250
 
-    > t.test(Mood~SSCF.1, data=mydata)
+    t.test(Mood~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
 
@@ -1540,7 +1537,6 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     ~~~{.haskell}
     let bh (index, pvalue) = pvalue < ((index * 0.05) / 9) in
          map bh (zip [1..] [0.34, 0.44, 0.48, 0.45, 0.36, 0.78, 0.005, 0.99, 0.65])
-    ~>
     [False,False,False,False,False,False,True,False,False]
     ~~~
 [^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
