@@ -2425,15 +2425,17 @@ October
 11: 1 0 0
 12: 1 1 0
 13: 0 1 1
-14: 0 1 1?
+14: 1 0 1
+15: 0 1 0
+16: 0 1 1?
 
 Underpopulated data cells:
 15: 0 1 1
-15: 0 1 0
-15: 1 0 1
 15: 1 1 0
 15: 1 1 1
+16: 0 1 0
 16: 1 0 0
+16: 1 0 1
 21: 0 0 0
 27: 0 0 1
 -->
@@ -2446,6 +2448,115 @@ Underpopulated data cells:
     - Reddit: [1](http://www.reddit.com/r/Nootropics/comments/po3zk/psa_dont_take_vitamin_d_at_bedtime/), [2](http://www.reddit.com/r/fitnesscirclejerk/comments/po47w/so_i_heard_you_guys_like_vitamin_d_hopefully_not/)
     - [Imminst](http://www.longecity.org/forum/topic/54364-vitamin-d-sleep-experiment/)
     - [_Business Insider_ blog](http://www.businessinsider.com/this-is-what-happens-when-you-track-your-sleep-obsessively-2012-2)
+
+# Appendix
+## SDr lucid dreaming: exploratory data analysis
+
+In October 2012, an acquaintance offered me an extract from his free-form data on [lucid dreaming](!Wikipedia) which he had been compiling since 2004; it was a serious mess, and I put several hours into cleaning it up and organizing it into something [more sensible](/docs/2012-sdr-dream.txt). This wasn't enough, so I wrote an ugly Haskell program to clean it up:
+
+~~~{.Haskell}
+import Data.List (isInfixOf, isPrefixOf, intercalate)
+import Data.List.Split (splitOn) -- http://hackage.haskell.org/package/split
+
+main :: IO ()
+main = do txt <- readFile "2012-sdr-dream.txt"
+          let txt' = filter (not . isPrefixOf "#") $ lines txt
+          let header = drop 2 $ head $ filter (isPrefixOf "# Sleep Date,") $ lines txt
+          let fields = map (splitOn ",") txt'
+          let csvs = map convert fields
+          putStrLn $ unlines (header : map show csvs)
+
+data CSVEntry = CSVEntry { sleepDate :: String, totalZ :: Int, wakeTime :: String, intensity :: String, recall :: String,
+                           emotion :: String, interrupted :: Bool, melatonin :: Bool, lucid :: String }
+instance Show CSVEntry where
+         show a = intercalate "," [sleepDate a, if totalZ a == 0 then "" else show (totalZ a), wakeTime a, intensity a,
+                                  recall a, emotion a,
+                                   if interrupted a then "1" else "0", if melatonin a then "1" else "0", lucid a]
+
+convert :: [String] -> CSVEntry
+convert xs = CSVEntry { sleepDate = safeHead $ filter (\x -> isInfixOf "." x || isInfixOf "20" x) xs,
+                        totalZ = timeToMinutes $ drop 12 $ safeHead $ filter (isInfixOf "dreamtime: ") xs,
+                        wakeTime = drop 7 $ safeHead $ filter (isInfixOf "wake: ") xs,
+                        intensity = drop 6 $ safeHead $ filter (isInfixOf "int: ") xs,
+                        recall = drop 9 $ safeHead $ filter (isInfixOf "recall: ") xs,
+                        emotion = drop 6 $ safeHead $ filter (isInfixOf "emo: ") xs,
+                        lucid =  drop 8 $ safeHead $ filter (isInfixOf "lucid: ") xs,
+                        interrupted = any (isInfixOf "interrupted") xs,
+                        melatonin = any (isInfixOf "melatonin") xs }
+                        where
+                                safeHead :: [String] -> String
+                                safeHead ys = if null ys then "" else head ys
+
+                                -- clock hour:minute to total minutes: timeToMinutes "4:30" ~> 270
+                                timeToMinutes :: String -> Int
+                                timeToMinutes a = if null a then 0 else let (x,y) = break (==':') a
+                                                     in read x * 60 + read (tail y)
+~~~
+
+This was usable. My next question was: since none of his routines were randomized and correlations were all that one could extract, what correlations *were* in his data?
+
+~~~{.R}
+table <- read.table("http://www.gwern.net/docs/2012-sdr-dream.csv",header=TRUE,sep=",")
+summary(table)
+      Sleep.Date     Total.Z       Wake.Time     Intensity
+ 2011.10.02:  2   Min.   : 120          :216   Min.   :0.1000
+ 2011.11.26:  2   1st Qu.: 480   16:00  :  3   1st Qu.:0.3000
+ 2012.02.28:  2   Median : 600   11:00  :  2   Median :0.4000
+ 2012.04.15:  2   Mean   : 621   01:30  :  1   Mean   :0.4417
+ 2012.06.21:  2   3rd Qu.: 720   01:42  :  1   3rd Qu.:0.5000
+ 2004.03.05:  1   Max.   :1320   02:25  :  1   Max.   :7.0000
+ (Other)   :241   NA's   :7      (Other): 28   NA's   :18
+     Recall          Emotion         Interrupted        Melatonin
+ Min.   :0.1000   Min.   :-0.5000   Min.   :0.00000   Min.   :0.00000
+ 1st Qu.:0.2000   1st Qu.: 0.0000   1st Qu.:0.00000   1st Qu.:0.00000
+ Median :0.3000   Median : 0.2000   Median :0.00000   Median :0.00000
+ Mean   :0.3159   Mean   : 0.1781   Mean   :0.06746   Mean   :0.02381
+ 3rd Qu.:0.4000   3rd Qu.: 0.4000   3rd Qu.:0.00000   3rd Qu.:0.00000
+ Max.   :0.8000   Max.   : 0.7000   Max.   :1.00000   Max.   :1.00000
+ NA's   :25       NA's   :220
+     Lucid
+ Min.   :0.0000
+ 1st Qu.:0.1000
+ Median :0.2000
+ Mean   :0.1889
+ 3rd Qu.:0.2000
+ Max.   :0.6000
+ NA's   :243
+
+# These 2 date fields haven't been turned into anything useful, so we'll just delete them:
+table$Wake.Time <- NULL; table$Sleep.Date <- NULL
+
+# Warning: 'Lucid' has just 9 datapoints, and 'Melatonin' just 6!
+# Table cleaned up heavily by hand from default R output; deleted duplicates, censored any correlation -0.1<x<0.1.
+cor(table,use="pairwise.complete.obs")
+            Total.Z        Intensity    Recall       Emotion    Interrupted     Melatonin      Lucid
+Total.Z                                                                         -0.124        -0.439
+Intensity                               0.356        0.375                                     0.798
+Recall                                               0.164      -0.165                        -0.158
+Emotion                                                          0.284          -0.148
+Interrupted                                                                                    0.911
+~~~
+
+Much of the data is too impoverished to draw any suggestions from; the 'Melatonin' and 'Lucid' correlations can be disregarded entirely until they are at least 4x larger. The remaining correlations are:
+
+- 'Intensity'/'Recall': _r_=0.356
+
+    The causality is likely 'Intensity'->'Recall'; either one is probably impossible to experimentally manipulate.
+- 'Intensity'/'Emotion': _r_=0.375
+
+    Causality could go either way or to a third factor; 'Emotion' *might* be manipulable by intending to dream of disturbing topics, but might not.
+- 'Interrupted'/'Recall': _r_=-0.165
+- 'Interrupted'/'Emotion': _r_=0.284
+
+    'Interruption' is experimentally manipulable by eg. an alarm clock or roommate. 'Recall' might be improved by some change in journaling, for example doing at your bed instead of waiting until you're on your computer. The positive correlation with 'Emotion' suggests that, per the [WILD](http://lucid.wikia.com/wiki/Wake_Initiated_Lucid_Dream) methodology of lucid dreaming (see [LaBerge](!Wikipedia "Stephen LaBerge") & [Rheingold](!Wikipedia "Howard Rheingold"), _Exploring the World of Lucid Dreaming_), a temporary awakening does increase the chance of a lucid dream (laden with emotion).
+
+(One observation that came to mind working on cleaning the data was that collection was very sparse, sporadic, and accidental-looking.)
+
+So these general points suggest 3 future overlapping approaches:
+
+1. deliberate use of interruptions (maybe randomized), to investigate effect on lucid dreaming
+2. more systematic usage (perhaps randomized or blinded) of melatonin, to allow correlations or causal inferences to other variables
+3. attacking the unsystematic data collection (perhaps it's too much trouble to do all those variables each day?) by getting a Zeo to handle part of the data collection for you.
 
 <!-- Redshift: 11 May 2012: off -->
 <!-- Redshift: 12 May 2012: off -->
@@ -2598,3 +2709,5 @@ Underpopulated data cells:
 <!-- Redshift: 12 Oct 2012: off -->
 <!-- Redshift: 13 Oct 2012: off -->
 <!-- Redshift: 14 Oct 2012: off -->
+<!-- Redshift: 15 Oct 2012: on -->
+<!-- Redshift: 16 Oct 2012: on -->
