@@ -505,7 +505,14 @@ And also unfortunately, this dataseries doesn't distinguish between addition to 
 
 ![Days versus # of edits versus melatonin on/off](/images/zeo/melatonin-usage-versus-darcs.png)
 
-If I were to run further experiments, I would definitely run it double-blind, and maybe even test <1.5mg doses as well to see if I've been taking too much; 3mg turned out to be excessive, and there are one or two studies indicating that <1mg doses are best for normal people. I wound up using 1.5mg doses. (There could be 3 conditions: placebo, 0.75mg, and 1.5mg. For looking at melatonin effect in general, the data on 2 dosages could be combined. Melatonin has a short half-life, so probably there would be no point in random blocks of more than 2-3 days.)
+If I were to run further experiments, I would definitely run it double-blind, and maybe even test <1.5mg doses as well to see if I've been taking too much; 3mg turned out to be excessive, and there are one or two studies indicating that <1mg doses are best for normal people. I wound up using 1.5mg doses. (There could be 3 conditions: placebo, 0.75mg, and 1.5mg. For looking at melatonin effect in general, the data on 2 dosages could be combined. Melatonin has a short half-life, so probably there would be no point in random [blocks](!Wikipedia "Blocking (statistics)") of more than 2-3 days[^blocking]: we can randomize each day separately and assume that days are independent of each other.)
+
+[^blocking]: "Blocking" is a style of variation on a simple randomized design where instead of considering each day separate and randomizing a single day, we instead randomize pairs of days, or more; so instead of flipping our coin to decide whether 'this week' is placebo, we flip our coin to decide whether 'this week will be placebo & next active' or 'this week active & next placebo'. This has 2 big advantages which justify the complexity:
+
+    1. Often, I'm worried about simple randomization leading to an imbalance in sample vs experimental; if I'm only getting 20 total datapoints on something, then randomization could easily lead to something like 14 control and 6 experimental datapoints - throwing out a lot of statistical power compared to 10 control and 10 experimental! Why am I losing power? Because data is subject to [diminishing returns](!Wikipedia): each new point reduces the standard error of your estimates less than the previous one did (since the total error shrinks as, roughly, inverse of the square root of the total sample size; the difference between √1 and √2 is bigger and shrinks error more than √2 vs √3, etc) . So the extra 4 control datapoints reduce the error less than the lost 4 experimental datapoints would have, and this leaves me with a final answer less precise than if it had been exactly 10:10. (If diminishing returns isn't intuitive, imagine taking it to an extreme: is 10:10 just as good as 5:15? As good as 2:18? How about *0*:20?)
+
+    But if I pair days like this, then I *know* I will get exactly 10:10.
+    2. Blocking is the natural way to handle multiple-day effects or trends: if I think lithium operates slowly, I will pair entire weeks or months, rather than days and hoping enough experimental and control days form runs which will reveal any trend rather than wash it out in averaging.
 
 Worth comparing are [Jayson Virissimo's preliminary results](http://jayquantified.blogspot.com/2012/08/melatonin-preliminary-results.html "Melatonin: Preliminary Results"):
 
@@ -2427,15 +2434,17 @@ October
 13: 0 1 1
 14: 1 0 1
 15: 0 1 0
-16: 0 1 1?
+16: 0 1 1
+17: 1 0 1
+18: 1 1 0?
 
 Underpopulated data cells:
-15: 0 1 1
 15: 1 1 0
 15: 1 1 1
 16: 0 1 0
+16: 0 1 1
 16: 1 0 0
-16: 1 0 1
+17: 1 0 1
 21: 0 0 0
 27: 0 0 1
 -->
@@ -2711,3 +2720,5 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 14 Oct 2012: off -->
 <!-- Redshift: 15 Oct 2012: on -->
 <!-- Redshift: 16 Oct 2012: on -->
+<!-- Redshift: 17 Oct 2012: on -->
+<!-- Redshift: 18 Oct 2012: off -->
