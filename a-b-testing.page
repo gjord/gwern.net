@@ -1,6 +1,7 @@
 ---
 title: A/B testing Gwern.net
 description: a log of experiments done on the site design
+created: 16 Jun 2012
 tags: experiments, statistics, computer science
 status: notes
 belief: possible
@@ -18,6 +19,7 @@ https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "V
 http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
 http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
 http://stackoverflow.com/tags/google-website-optimizer/hot
+https://github.com/danmaz74/ABalytics
 
 # ideas for testing
 
@@ -99,7 +101,7 @@ The results were initially very promising: 'conversion' was defined as staying o
 
 The second distressing thing was that Google's estimated chance of a particular intervention beating the default (which I believe is a Bonferroni-corrected _p_-value), did not increase! Even as each version received 20,000 hits, the chance stubbornly bounced around the 70-90% range for 900px and 1300px. This remained true all the way to the bitter end. At the end, each version had racked up 93,000 hits *and still was in the 80% decile*. Wow.
 
-Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain).
+Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf and http://www.exp-platform.com/Documents/controlledExperimentDMKD.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain).
 
 Oy vey! When I discovered Google had deleted my results, I decided to simply switch to 900px. Running a new test would not provide any better answers.
 
