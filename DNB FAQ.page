@@ -324,7 +324,7 @@ The next step up is a doozy: 2-back. In 2-back, you do the same thing as 1-back 
 
 > Working memory is generally considered to have limited capacity. The earliest quantification of the capacity limit associated with short-term memory was the ["magical number seven"](!Wikipedia "The Magical Number Seven, Plus or Minus Two") introduced by Miller (1956). He noticed that the memory span of young adults was around seven elements, called chunks, regardless whether the elements were digits, letters, words, or other units. Later research revealed that span does depend on the category of chunks used (e.g., span is around seven for digits, around six for letters, and around five for words), and even on features of the chunks within a category....Several other factors also affect a person's measured span, and therefore it is difficult to pin down the capacity of short-term or working memory to a number of chunks. Nonetheless, Cowan (2001) has proposed that working memory has a capacity of about four chunks in young adults (and fewer in children and old adults).
 
-And even if there are only a few things to remember, the number of responses you have to choose between go up exponentially with how many 'modes' there are, so Triple N-back has not $\frac{1}{3}$ more possible responses than Dual N-back, but more than twice as many: if _m_ is the number of modes, then the number of possible responses is $2^m - 1$^[The $-1$ is there because one can nothing in every mode, but that's boring and requires no choice or thought.], so DNB has 3 possible responses[^math], while TNB has 7^[or 2^3^ - 1], Quadruple N-back 15^[or 2^4^ - 1], and Quintuple N-back 31^[or 2^5^ - 1]!
+And even if there are only a few things to remember, the number of responses you have to choose between go up exponentially with how many 'modes' there are, so Triple N-back has not ⅓ more possible responses than Dual N-back, but more than twice as many: if _m_ is the number of modes, then the number of possible responses is 2^m^-1 (the -1 is there because one can nothing in every mode, but that's boring and requires no choice or thought), so DNB has 3 possible responses[^math], while TNB has 7^[or 2^3^ - 1], Quadruple N-back 15^[or 2^4^ - 1], and Quintuple N-back 31^[or 2^5^ - 1]!
 
 [^math]: 2^2^ = 4; 4-1 = 3. For DNB, the 3 responses are:
 
@@ -1350,29 +1350,29 @@ Going through them, I must note:
 
 [^Stephenson-2010-pool]: The n-back pooling: <!-- dual: 17.54 0.76 n=28 / visual: 15.34 0.90 n=29 / auditory: 15.32 0.83 n=25 / 15.50 0.99 n=28 / 14.08 0.65 n=26 -->
 
-    1. sample size: $28+29+25=82$
+    1. sample size: 28+29+25=82
     2. mean: $\frac{(28 \times 17.54) + (29 \times 15.34) + (25 \times 15.32)}{28+29+25} = 16.085$
     3. [pooled variance](!Wikipedia): $\frac{((28-1) * 0.76) + ((29-1) * 0.9) + ((25-1) * 0.83)}{28 + 29 + 25 - 3} = 0.83$
 
     The controls:
 
-    1. sample size: $28+26=54$
+    1. sample size: 28+26=54
     2. mean:  $\frac{(28 \times 15.5) + (26 \times 14.08)}{28+26} = 14.816$
     3. pooled variance: $\frac{((28-1) \times 0.99) + ((26-1) \times 0.65)} {28 + 26 - 2} = 0.826$
 [^Chooi-2010-pool]: There were 2 n-back groups and 4 control groups. For n-back: <!-- 9+13, 15+11+22+23 / 12.7(2)+12.1(2.81), 13.3(1.91)+13.4(2.7)+11.3(2.59)+11.9(2.64) -->
 
-    1. sample size: $9+13=22$
+    1. sample size: 9+13=22
     2. mean = $\frac{(13 \times 12.1) + (9 \times 12.7)}{9+13} = 12.235$
     3. pooled variance: $\frac{((9-1) \times 2) + ((13-1) \times 2.81)}{9 + 13 - 2} = 2.486$
 
     For the control groups:
 
-    1. sample size: $15+11+22+23 = 71$
+    1. sample size: 15+11+22+23 = 71
     2. mean: $\frac{(15 \times 13.3) + (11 \times 13.4) + (22 \times 11.3) + (23 \times 11.9)}{15+11+22+23} = 12.24$
     3. pooled variance: $\frac{((15-1) \times 1.91) + ((11-1) \times 2.7) + ((22-1) \times 2.59) + ((23-1) \times 2.64)}{15 + 11 + 22 + 23 - 4} = 2.481$
 [^Jaeggi-2012-pool]: Jaeggi 2012: 2 experimental groups need pooling:  <!-- 25+26, 27 / 14.96 (2.7), 15.23 (2.44); 14.74 (2.8) -->
 
-    1. sample size: $25+26=51$
+    1. sample size: 25+26=51
     2. mean = $\frac{(25 \times 14.96) + (26 \times 15.23)}{25+26} = 15.097$
     3. pooled variance: $((25-1)*2.7 + (26-1)*2.44) / (25 + 26 - 2) = 2.56$
 
@@ -1382,7 +1382,7 @@ Going through them, I must note:
 
 [^Redick-2012-pool]: There were 2 control groups to pool: <!-- control: 20 6 (3); search: 29  6.24 (3.34); n-back: 24  6.25 (3.08) -->
 
-    1. sample size: $20+29=49$
+    1. sample size: 20+29=49
     2. mean: $\frac{(20 \times 6) + (29 \times 6.24)}{20+29} = 6.14$
     3. pooled variance: $\frac{((20-1) \times 3) + ((29-1) \times 3.34)} {20 + 29 - 2} = 3.202$
 
@@ -1398,6 +1398,8 @@ The "active.control" moderator variable is whether a control group was no-contac
     > An issue of great concern is that observed test score improvements may be achieved through various influences on the expectations or level of investment of participants, rather than on the intentionally targeted cognitive processes. One form of expectancy bias relates to the placebo effects observed in clinical drug studies. Simply the belief that training should have a positive influence on cognition may produce a measurable improvement on post-training performance. Participants may also be affected by the demand characteristics of the training study. Namely, in anticipation of the goals of the experiment, participants may put forth a greater effort in their performance during the post-training assessment. Finally, apparent training-related improvements may reflect differences in participants' level of cognitive investment during the period of training. Since participants in the experimental group often engage in more mentally taxing activities, they may work harder during post-training assessments to assure the value of their earlier efforts.
     >
     > Even seemingly small differences between control and training groups may yield measurable differences in effort, expectancy, and investment, but these confounds are most problematic in studies that use no control group (Holmes et al., 2010; Mezzacappa & Buckner, 2010), or only a no-contact control group; a cohort of participants that completes the pre and post training assessments but has no contact with the lab in the interval between assessments. Comparison to a no-contact control group is a prevalent practice among studies reporting positive far transfer (Chein & Morrison, 2010; Jaeggi et al., 2008; Olesen et al., 2004; Schmiedek et al., 2010; Vogt et al., 2009). This approach allows experimenters to rule out simple test-retest improvements, but is potentially vulnerable to confounding due to expectancy effects. An alternative approach is to use a "control training" group, which matches the treatment group on time and effort invested, but is not expected to benefit from training (groups receiving control training are sometimes referred to as "active control" groups). For instance, in Persson and Reuter-Lorenz (2008), both trained and control subjects practiced a common set of memory tasks, but difficulty and level of interference were higher in the experimental group's training. Similarly, control train- ing groups completing a non-adaptive form of training (Holmes et al., 2009; Klingberg et al., 2005) or receiving a smaller dose of training (one-third of the training trials as the experimental group, e.g., Klingberg et al., 2002) have been used as comparison groups in assessments of Cogmed variants. One recent study conducted in young children found no differences in performance gains demonstrated by a no-contact control group and a control group that completed a non-adaptive version of training, suggesting that the former approach may be adequate (Thorell et al., 2009). We note, however, that regardless of the control procedures used, not a single study conducted to date has simultaneously controlled motivation, commitment, and difficulty, nor has any study attempted to demonstrate *explicitly* (for instance through subject self-report) that the control subjects experienced a comparable degree of motivation or commitment, or had similar expectancies about the benefits of training
+
+<!-- TODO: look at all studies to see which used both BOMAT & RAPM, and use as moderator to compare the effect sizes? -->
 
 The data from the surviving studies:
 
@@ -1490,19 +1492,25 @@ Between groups   4.32    1   0.0376
 
 The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect. The studies are quite different. This heterogeneity also shows up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 71.1%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<=0.
 
-### Biases
-
-~19 groups (some from quite small studies) is considered small-medium for a meta-analysis but it does permit us to generate [funnel](!Wikipedia "Funnel plot") and [forest plots](!Wikipedia), or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless:
+To depict all the of above in a more graphic form, we use the "[forest plot](!Wikipedia)":
 
 ~~~{.R}
-funnel(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
 forest(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, study,data=dnb, sm="SMD",byvar=active.control,print.byvar=FALSE))
 ~~~
 
+![Forest plot of DNB and IQ meta-analysis, generated by R](/images/dnb-forest.png)
+
 <!-- optipng xwd-*.png && gimp xwd-*.png; mogrify -scale 70% xwd-*.png -->
 
+### Biases
+
+~19 groups (some from quite small studies) is considered small-medium for a meta-analysis but it does permit us to generate [funnel](!Wikipedia "Funnel plot") , or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless:
+
+~~~{.R}
+funnel(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
+~~~
+
 ![Funnel plot of DNB and IQ meta-analysis, generated by R](/images/dnb-funnel.png)
-![Forest plot of DNB and IQ meta-analysis, generated by R](/images/dnb-forest.png)
 
 The trim-and-fill estimate:
 
@@ -1688,13 +1696,13 @@ Brehmer et al data: pooled young and old scores on the Raven[^Brehmer-pooled]
 
 ^Brehmerpooled: Experimental: young adaptive: 29 9.93 2.2 old adaptive: 26 6.5 3.42 young none: 26 9.81 2.1 old none: 19 6.84 3.25
 
-    1. sample size: $29+26=55$
+    1. sample size: 29+26=55
     2. mean: $\frac{(29 \times 9.93) + (26 \times 6.5)}{29+26} = 8.3$
     3. pooled variance: $\frac{((29-1) \times 2.2) + ((26-1) \times 3.42)}{29 + 26 - 2} = 2.775$
 
     Control:
 
-    1. sample size: $26+19=45$
+    1. sample size: 26+19=45
     2. mean: $\frac{(26 \times 9.81) + (19 \times 6.84)}{26+19} = 8.556$
     3. pooled variance: $\frac{((26-1) \times 2.1) + ((19-1) \times 3.25)}{26 + 19 - 2} = 2.581$
 -->
@@ -2030,7 +2038,7 @@ Psychology is far from being perfect either; look at the examples in _The New Yo
 
 Particularly troubling is the [slowdown](http://innovationandgrowth.wordpress.com/2010/06/13/the-debt-crisis-and-the-human-genome/) in [drug discovery](http://www.nytimes.com/2011/03/07/business/07drug.html) & medical technology during the 2000s, even as genetics in particular was expected to produce earth-shaking new treatments. One biotech [venture capitalist](!Wikipedia) [writes](http://lifescivc.com/2011/03/academic-bias-biotech-failures/):
 
-> The company spent $5M or so trying to validate a platform that didn't exist.  When they tried to directly repeat the academic founder's data, it never worked.  Upon re-examination of the lab notebooks, it was clear the founder's lab had at the very least massaged the data and shaped it to fit their hypothesis.  Essentially, they systematically ignored every piece of negative data. Sadly this "failure to repeat" happens more often than we'd like to believe.  It has happened to us at Atlas [Venture] several times in the past decade...The unspoken rule is that at least 50% of the studies published even in top tier academic journals - Science, Nature, Cell, PNAS, etc… - can't be repeated with the same conclusions by an industrial lab. In particular, key animal models often don't reproduce.  This 50% failure rate isn't a data free assertion: it's backed up by dozens of experienced R&D professionals who've participated in the (re)testing of academic findings. This is a huge problem for translational research and one that won't go away until we address it head on.
+> The company spent $5M or so trying to validate a platform that didn't exist. When they tried to directly repeat the academic founder's data, it never worked. Upon re-examination of the lab notebooks, it was clear the founder's lab had at the very least massaged the data and shaped it to fit their hypothesis. Essentially, they systematically ignored every piece of negative data. Sadly this "failure to repeat" happens more often than we'd like to believe. It has happened to us at Atlas [Venture] several times in the past decade...The unspoken rule is that at least 50% of the studies published even in top tier academic journals - _Science_, _Nature_, _Cell_, _PNAS_, etc… - can't be repeated with the same conclusions by an industrial lab. In particular, key animal models often don't reproduce.  This 50% failure rate isn't a data free assertion: it's backed up by dozens of experienced R&D professionals who've participated in the (re)testing of academic findings. This is a huge problem for translational research and one that won't go away until we address it head on.
 
 An internal [Bayer](!Wikipedia) [survey of 67 projects](http://www.nature.com/nrd/journal/v10/n9/full/nrd3439-c1.html) found that "only in ~20-25% of the projects were the relevant published data completely in line with our in-house findings", and as far as assessing the projects went:
 
