@@ -9,13 +9,22 @@ belief: likely
 
 In October 2009, [there appeared online](http://www.animevice.com/news/rumor-alert-death-note-movie-script-leaked/2653/ "Rumor Alert: Death Note Movie Script Leaked?") a [PDF file](http://www.mediafire.com/?ce13d3xdazwxj09) claiming to be a script for the Hollywood remake of the _[Death Note](!Wikipedia)_ anime (see Wikipedia, or my own little [Death Note Ending]() essay, for a description). Such a leak inevitably raises the question: is it genuine? Of course the studio had "no comment".
 
-I was skeptical at first - how many unproduced screenplays get leaked? it's rare even in this Internet age - so I downloaded a copy and read it. My copy has the SHA-512 hash `954082c8cde2ccee1383196fe7c420bd444b5b9e5d676b01b3eb9676fa40427983fb27ad8458a784ea765d66be93567bac97aa173ab561cd7231d8c017a4fa70`.
+I was skeptical at first - how many unproduced screenplays get leaked? it's rare even in this Internet age - so I downloaded a copy and read it. The question of authenticity falls under the honorable rubric of [textual criticism](!Wikipedia), which offers the handy distinction of [internal evidence](!Wikipedia) vs [external evidence](!Wikipedia).
 
-The first thing I noticed was that the 2 claimed authors, "Charley and Vlas Parlapanides", were correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html) in April 2009 that they were hired to write it. ("Charley"? He was born "Charles", and much coverage uses that name. On the other hand, there *are* some media pieces using the diminutive, most prominently an [IMDb](http://www.imdb.com/name/nm0663048/) entry.)
+# Evidence
+## Internal
+
+The first thing I noticed was that the 2 authors claimed on the PDF, "Charley and Vlas Parlapanides", was correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html) in April 2009 that they were hired to write it. ("Charley"? He was born "Charles", and much coverage uses that name. On the other hand, there *are* some media pieces using the diminutive, most prominently an [IMDb](http://www.imdb.com/name/nm0663048/) entry.)
+
+Another interesting detail is the corporate address quietly listed at the bottom of the page: "WARNER BROS. / 4000 Warner Boulevard / Burbank, California 91522". That address is widely available on Google if you want to search for it, but one has to know about it in the first place and so it is much easier to just leave it out.
+
+### PDF Metadata
+
+For the benefit of anyone attempting to replicate, the copy I used has the SHA-512 hash: `954082c8cde2ccee1383196fe7c420bd444b5b9e5d676b01b3eb9676fa40427983fb27ad8458a784ea765d66be93567bac97aa173ab561cd7231d8c017a4fa70`.
 
 The second thing I did was take a look at the metadata[^death-note-metadata]:
 
--The creator tool checks out: "DynamicPDF v5.0.2 for .NET" is part of a commercial suite, and it was pirated well before July 2009, although I could not figure out when the commercial release was.
+- The creator tool checks out: "DynamicPDF v5.0.2 for .NET" is part of a commercial suite, and it was pirated well before July 2009, although I could not figure out when the commercial release was.
 - The date, though, is "Thu 09 Apr 2009 09:32:47 PM EDT". Keep in mind, this leak was October, and the original announcement was 30 April or so.
 
     If one were faking such a script, wouldn't one through either sheer carelessness & omission or by natural assumption (the Parlapanides signed a contract, the press release went out, and they started work) set the date well *after* the announcement? Why would you set it close to a month before? Wouldn't you take pains to show everything is exactly as an outsider would expect it to be? As [Jorge Luis Borges](!Wikipedia) writes in "The Argentine Writer and Tradition":
@@ -34,11 +43,13 @@ The second thing I did was take a look at the metadata[^death-note-metadata]:
         PdfID1: 9234e3f3316974458188a09a7ad849e3
         NumberOfPages: 112
 
-Another interesting detail is the corporate address quietly listed at the bottom of the page: "WARNER BROS. / 4000 Warner Boulevard / Burbank, California 91522". That address is widely available on Google if you want to search for it, but one has to know about it in the first place and so it is much easier to just leave it out.
+### Writing/formatting
 
 What of the actual play? Well, it is written like a screenplay, properly formatted, and the scene descriptions are brief but occasionally detailed like the other screenplays I've read (such as the _Star Wars_ trilogy's scripts). It is quite long and detailed. I could easily see a 2 hour movie being filmed from it. There are no obvious red flags: the spelling is uniformly correct, the grammar without issue, there are few or no common amateur errors like confusing "it's"/"its", and in general I see nothing in it - speaking as someone who has been paid on occasion to write - which would suggest to me that the author(s) were not professionals.
 
-The plot is curious. Ryuk and other [shinigami](!Wikipedia) are entirely omitted. Light is renamed 'Luke', and now lives in New York City, already in college. (Again, an appropriate setting for 2 screenwriters who grew up in New Jersey.) The plot is generally simplified.
+### Plot
+
+The plot is curious. Ryuk and other [shinigami](!Wikipedia) are entirely omitted. Light is renamed "Luke" (as expected of Greek writers like the Parlapanides?), and now lives in New York City, already in college. (Again, an appropriate setting for 2 screenwriters who grew up in New Jersey.) The plot is generally simplified.
 
 What is more interesting is the changed emphases. Luke has been given a murdered mother, and much of his efforts go to tracking down the murderer (who, of course, escaped conviction for that murder). The Death Note is unambiguously depicted as a tool for evil, and a malign influence in its own right. There is minimal interest in the idea that Kira might be good. The Japanese aspects are minimized and treated as exotic curios, in the worst Hollywood tradition (Luke goes to a Japanese acquaintance for a translation of the kanji for 'shinigami', who, of course, being a primitive native, shudders in fear and flees the memsahib... oh, sorry, wrong era. But the description is still accurate.)
 
@@ -48,23 +59,17 @@ The ending indicates someone who doesn't love DN for its shades of gray mentalit
 
 In general, the dialogue is short and hackneyed. There are no excellent megalomaniac speeches about creating a new world; one can expect a dearth of ominous choral chanting in the movie. Even the veriest tyro of fanfiction could write more DN-like dialogue than this script did.
 
-Further, the complexities of ratiocination are largely absent, remaining only in the TV trick of L and the famous chips scene by Light. The tricks are even written incompetently - as written, on the bus, the crucial ID is seen by accident, whereas in DN, Light had written in the revelation of the ID quite specifically. The moral subtlety of DN is gone; you cannot argue that Luke is a new god like Light. He is only an angry boy with a good heart lashing out, but by the end he has returned to the straight and narrow of conventional morality.
+Further, the complexities of ratiocination are largely absent, remaining only in the Lind L. Taylor TV trick of L and the famous eating-chips scene of Light. The tricks are even written incompetently - as written, on the bus, the crucial ID is seen by *accident*, whereas in DN, Light had written in the revelation of the ID quite specifically. The moral subtlety of DN is gone; you cannot argue that Luke is a new god like Light. He is only an angry boy with a good heart lashing out, but by the end he has returned to the straight and narrow of conventional morality.
 
-So much for the inside evidence; all suggestive, none damning. A forger *could* have randomly changed Charles to "Charley", looked up an appropriate address, edited the metadata, come up with all the Hollywood touches, wrote the whole damn thing (quite an endeavour since relatively little material is borrowed from DN), and put it online.
+So much for the internal evidence: all suggestive, none damning. A forger *could* have randomly changed Charles to "Charley", looked up an appropriate address, edited the metadata, come up with all the Hollywood touches, wrote the whole damn thing (quite an endeavour since relatively little material is borrowed from DN), and put it online.
 
-But is there any external evidence? Well, the timeline is right. Figure about 2 months for both brothers to read through the DN manga or watch the anime twice, clear up their other commitments, a month to brainstorm, 3 months to write the first draft, a month to edit it up and run it by the studio, and we're at 7 months or around February 2009. That leave a good 6 months for it to float around offices and get leaked, and then come to the wider attention of the Internet.
+### Stylometrics
 
-And then there is the fact that Warner Brothers has filed multiple take-down notices for hosts of the script. Not the 2 brothers, who would have a legal right to order the take-down of material falsely attributed to them, but the commissioning studio. Needless to say, they do not have a standing RIAA-style war against DN fanfiction or fan-art or even torrents of the anime or scanlations of the manga; just this script. Arguably, if the script were not the studio's property, it wouldn't have any legal ground to demand take-downs - their license likely covers just the movie rights, and so fanfiction in the form of a script (for example) would infringe on the Japanese rights-holder, not the studio.
-
-I find this external legal evidence compelling, and in conjunction with the internal evidence and oddities best explained by the leaked script being authentically by said Hollywood scriptwriters, I believe the script real. Perhaps an early draft to be discarded or rewritten, but still genuine. I suppose an American DN movie could be much worse: just consider _[Dragon Ball Evolution](!Wikipedia)_ or _[The Last Airbender](!Wikipedia)_!
-
-# Stylometrics
-
-The next step is to start running [stylometry](!Wikipedia) tools on the writing to see whether the style nails the Parlapanides as authors. The PDF is 112 images with no text provided; I do not care to transcribe it by hand. So I split the PDF with `pdftk` to upload both halves to [Google Docs](http://googledocs.blogspot.com/2010/06/optical-character-recognition-ocr-in.html) (which has an [upload size limit](http://support.google.com/drive/bin/answer.py?hl=en&answer=176692)) to download its [OCRed](!Wikipedia "Optical character recognition") text; and then ran the PDF through [GOCR](!Wikipedia) to compare - the Google Docs transcript was clearly superior. (In a nasty surprise halfway through the process, I found that for some reason, Google Docs would only OCR the first 10 pages or so of an upload - so I would up actually uploading *12* split PDFs and recombining them!)
+The next step in assessing internal evidence is hardcore: we start running [stylometry](!Wikipedia) tools on the leaked script to see whether the style is consistent with the Parlapanides as authors. The PDF is 112 images with no text provided; I do not care to transcribe it by hand. So I split the PDF with `pdftk` to upload both halves to [Google Docs](http://googledocs.blogspot.com/2010/06/optical-character-recognition-ocr-in.html) (which has an [upload size limit](http://support.google.com/drive/bin/answer.py?hl=en&answer=176692)) to download its [OCR'ed](!Wikipedia "Optical character recognition") text; and then ran the PDF through [GOCR](!Wikipedia) to compare - the Google Docs transcript was clearly superior even before I spellchecked it. (In a nasty surprise halfway through the process, I found that for some reason, Google Docs would only OCR the first 10 pages or so of an upload - so I would up actually uploading *12* split PDFs and recombining them!)
 
 Samples of the Parlapanides' writing is hard to obtain; the only produced movie with their script is the 2000 _Everything For A Reason_ and the 2011 [_Immortals_](!Wikipedia "Immortals (2011 film)") (so any analysis in 2009 would've been difficult). I could not find the script for either available anywhere for download, so I settled for `OpenSubtitles.org`'s subtitles in [.srt](!Wikipedia) format and stripped the timings: `grep -v [0-9] Immortals.2011.DVDscr.Xvid-SceneLovers.srt  > 2011-parlapanides-immortals.txt` (There are no subtitles available for the other movie, it seems.)
 
-Samples of fanfiction are easy to acquire. [Fanfiction.net's _Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison.
+Samples of fanfiction are easy to acquire. [Fanfiction.net's _Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison. I also submitted a [Reddit request](http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/). The final selection:
 
 - http://www.fanfiction.net/s/5482398/1/Death-Note-Movie-Spoof-Script
 - http://www.fanfiction.net/s/7074737/1/School-Crack-Death-Note
@@ -86,8 +91,6 @@ As a control-control, I selected some fanfictions that I knew to be of high qual
 - http://www.fanfiction.net/s/5731071/1/Peggy-Susie
 - http://www.fanfiction.net/s/7864670/1/
 - http://www.fanfiction.net/s/7406866/1/To-the-Stars
-
-Request for suggestions on Reddit: http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/
 
 The fanfictions were converted to text using [Web version FanFictionDownloader](http://www.fanfictiondownloader.net/webversion.php).
 
@@ -163,21 +166,40 @@ The graphed results are unsurprising:
 
     This is important because it's evidence for 2 different questions: whether the known Parlapanides work is similar to the leaked script, and whether the leaked script is similar to any fanfictions rather than movies. We can answer the latter question by noting that it is grouped far away from any fanfiction (the only fanfiction in the cluster, the "Three Characters" fanfiction, is very short and formalized), even though Eliezer Yudkowsky (a published author) wrote several of the fanfictions and one of them (_Harry Potter and the Methods of Rationality_) is intended for publication and perhaps [even a Hugo award](http://predictionbook.com/predictions/6556 "HP MoR: MoR will win a Hugo for Best Novel 2013-2017").
 
-That the analysis spat out the files together is evidence: there were 30 files in the corpus, so if we generated 15 pairs of files at random, there's just a $\frac{1}{15}=6.6%$ chance of those two winding up together.
+That the analysis spat out the files together is evidence: there were 30 files in the corpus, so if we generated 15 pairs of files at random, there's just a $\frac{1}{15}=6.6\%$ chance of those two winding up together.
 
-# Post-script
+## External
+### Dating
 
-In January 2011, Warner Bros [announced](http://www.deadline.com/2011/01/warner-bros-taps-shane-black-for-japanese-manga-death-note/ "Warner Bros Taps Shane Black For Japanese Manga 'Death Note'") that the new director was one [Shane Black](!Wikipedia), and the script was now being written by Anthony Bagarozzi and Charles Mondry (with presumably the previous script tossed):
+But is there any external evidence? Well, the timeline is right. Figure about 2 months for both brothers to read through the DN manga or watch the anime twice, clear up their other commitments, a month to brainstorm, 3 months to write the first draft, a month to edit it up and run it by the studio, and we're at 7 months or around February 2009. That leave a good 6 months for it to float around offices and get leaked, and then come to the wider attention of the Internet.
+
+The time commitment for a forger is substantial: the script is ~22,000 words, well-edited and formatted, and reasonably polished. For comparison, [NaNoWriMo](!Wikipedia) tasks writers with producing 50,000 words of pre-planned, unedited, low-quality content in one month, with a second month ([NaNoEdMo](http://www.nanoedmo.net/)) devoted to editing. So the script represents at a minimum a month's work - and then there's the editing, reviewing, and formatting (and most amateur writers are not familiar with screenwriting conventions in the first place).
+
+Given this effort and the mild news coverage of it, one might expect a forger to take considerable pride in his work and want to claim credit at some point for a successful hoax. But as of October 2012, I am unaware of anyone even alluding or hinting that they did it.
+
+### Official statements
+
+Additional evidence comes from the January 2011 [announcement by Warner Bros](http://www.deadline.com/2011/01/warner-bros-taps-shane-black-for-japanese-manga-death-note/ "Warner Bros Taps Shane Black For Japanese Manga 'Death Note'") that the new director was one [Shane Black](!Wikipedia), and the script was now being written by Anthony Bagarozzi and Charles Mondry (with presumably the previous script tossed):
 
 > "It's my favorite manga, I was just struck by its unique and brilliant sensibility," Black said. "What we want to do is take it back to that manga, and make it closer to what is so complex and truthful about the spirituality of the story, versus taking the concept and trying to copy it as an American thriller. Jeff Robinov and Greg Silverman liked that." Black's repped by WME and GreenLit Creative.
 
 [ANN](http://www.animenewsnetwork.com/news/2011-10-31/director/warner-death-note-is-still-in-the-works "Director: Warner's Death Note Is Still in the Works") [quoted Black](http://www.animenewsnetwork.com/interest/2011-11-02/shane-black-describes-changes-he-opposed-to-warner-death-note "Shane Black Describes Changes He Opposed to Warner's Death Note") at a convention panel:
 
-> However, Black added that the project was in jeopardy because the studio initially wanted to lose "the demon [Ryuk]. [They] don't want the kid to be evil… They just kept qualifying it until it ceased to exist." Black said that "the creation of a villain, the downward spiral" of the main character Light has been restored in the script, and added that this is what the film should be about.'
+> However, Black added that the project was in jeopardy because the studio initially wanted to lose "the demon [Ryuk]. [They] don't want the kid to be evil... They just kept qualifying it until it ceased to exist." Black said that "the creation of a villain, the downward spiral" of the main character Light has been restored in the script, and added that this is what the film should be about.'
 >
-> ...According to the director of _Kiss Kiss Bang Bang_ and the upcoming _Iron Man 3_ film, the studios initially wanted to give the main character Light Yagami a new background story to explain his "downward spiral" as a villain. The new background would have had a friend of Light murdered when he was young. When Light obtains the Death Note - a notebook with which he can put people to death by writing their names - he uses it to seek vengeance. However, Black emphasized that he opposed this background change and the suggested removal of the Shinigami (Gods of Death), and added that neither change is in his planned version.
+> ...According to the director of _[Kiss Kiss Bang Bang](!Wikipedia)_ and the upcoming _[Iron Man 3](!Wikipedia)_ film, the studios initially wanted to give the main character Light Yagami a new background story to explain his "downward spiral" as a villain. The new background would have had a friend of Light murdered when he was young. When Light obtains the Death Note - a notebook with which he can put people to death by writing their names - he uses it to seek vengeance. However, Black emphasized that he opposed this background change and the suggested removal of the Shinigami (Gods of Death), and added that neither change is in his planned version.
 
 Black's comments line up well with the leaked script: Ryuk is indeed omitted entirely, Light is indeed mostly good and redeemed, Light does have a backstory justifying his vengeance, and so on. The only discordant detail is that in the leaked script, it was his mother murdered and not "a friend".
+
+### Legal take-downs
+
+And then there is the fact that Warner Brothers has filed multiple take-down notices for hosts of the script. Not the 2 brothers, who would have a legal right to order the take-down of material falsely attributed to them, but the commissioning studio. Needless to say, they do not have a standing RIAA-style war against DN fanfiction or fan-art or even torrents of the anime or scanlations of the manga; just this script. Possibly if the script were not the studio's property, it wouldn't have any legal ground to demand take-downs - their license likely covers just the movie rights, and so fanfiction in the form of a script (for example) would infringe on the Japanese rights-holder, not the studio.
+
+I find this external legal evidence compelling, and in conjunction with the internal evidence and oddities best explained by the leaked script being authentically by said Hollywood scriptwriters, I believe the script real. Perhaps an early draft to be discarded or rewritten, but still genuine. I suppose an American DN movie could be much worse: just consider _[Dragon Ball Evolution](!Wikipedia)_ or _[The Last Airbender](!Wikipedia)_!
+
+# Analysis
+
+
 
 <!--
 
