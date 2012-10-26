@@ -8,6 +8,7 @@ belief: likely
 ...
 
 <!--
+TODO: length as Bayesian input
 TODO: when finished with analysis, record final prediction (predictions: authorship, whether reply, and whether confirm/deny)
 ping https://twitter.com/Cparlapanides
 add 'experiment' to tags
@@ -40,7 +41,6 @@ The second thing I did was take a look at the metadata[^death-note-metadata]:
     > Gibbon observes [in the _[Decline and Fall of the Roman Empire](!Wikipedia)_] that in the Arab book _par excellence_, the Koran, there are no camels; I believe that if there were ever any doubt as to the authenticity of the Koran, this lack of camels would suffice to prove it Arab. It was written by Mohammed, and Mohammed as an Arab had no reason to know that camels were particularly Arab; they were for him a part of reality, and he had no reason to single them out, while the first thing a forger or tourist or Arab nationalist would do is to bring on the camels - whole caravans of camels on every page; but Mohammed, as an Arab, was unconcerned. He knew he could be Arab without camels.
 
     Another small point is that the date is in the "EDT" timezone, or Eastern Daylight-savings Time: the Parlapanides have long been [based out of New Jersey](http://lacey.patch.com/articles/local-boys-make-good-in-tinseltown-with-immortals-75674a48), which is indeed in EDT. Would a counterfeiter have looked this up and set the timezone exactly right?
-
 [^death-note-metadata]: The raw metadata can be extracted using [`pdftk`](http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/) like thus: `pdftk 2009-parlapanides-deathnotemovie.pdf dump_data`:
 
         InfoKey: Producer
@@ -316,3 +316,43 @@ Substitute:
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.16 \times 0.49}{(0.16 \times 0.49) + (0.16 \times 0.51)} = \frac{0.0784}{0.0784 + 0.0816} = \frac{0.0784}{0.16} = 0.49$
 
 0.49? But that was what we started with! It turns out that we are working with such a small sample that when we correct with Laplace's law, we learn that there are so few instances of screenplays floating around with corporate addresses in them, we actually can't infer anything from it.
+
+#### PDF date
+
+We noted the curious fact that while the Parlapanides' work on _Death Note_ was announced on 30 April, the PDF claims a date of *9* April.
+
+I did not expect this inversion, but thinking about it in retrospect, this seems consistent with the script being real: the studio commissioned them to write a script, they turned in material, the studio liked it, and the official word went out. (Presumably had the studio disliked it, they would've been quietly paid a small sum and a new writer tried.) An ordinary person like me, however, would date any forgery to after the announcement, reasoning that it would be "safe" to date any script to after the announcement.
+
+So we want to express that this inversion is evidence for the script being real, and that frauds would be dated as one would normally expect. If I were to set out to make a fraud, I don't think I would tinker that way with the PDF date even once out of 20 times, but let's be very conservative and say a mere 75% of fake scripts would have a normal date; and let's say there was merely a 50% chance that the real script would be inverted. We know how to run the numbers now:
+
+1. $a$ = is real
+2. $b$ = is normal (and not inverted)
+3. $P(a)$ = probability of being real = 0.49
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.49 = 0.51
+5. $P(b|a)$ = probability a real script will be normal = 50% = 0.5
+6. $P(b|\lnot a)$ = probability a fake script will be normal = 75% = 0.75
+
+Substitute:
+
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.5 \times 0.49}{(0.5 \times 0.49) + (0.75 \times 0.51)} = \frac{0.245}{0.245 + 0.3825} = \frac{0.245}{0.6275} = 0.39$
+
+So if the PDF had a normal date, our probability would've dropped to 0.39; but it has a non-normal date. What's the negation? 1 - 0.39 or 0.61. This passes the usual sanity checks (roughly halfway between 50% and 75%).
+
+#### PDF creator tool
+
+The creator tool was released and pirated before the creation date. It may not seem informative - how could the PDF be created *before* the PDF generator was written? - but it actually is: it tells us that this was not a careless fraud where the person installed the latest & greatest PDF generator, wrote a script, edited the date, and didn't realize that the creating generator & version number was included as well. If the version number had been of a program released anywhere between April and October 2009, then this would be a glaring red flag warning that the PDF was fake! In all real PDFs, the generator tool would be *before* the file creation date; but in many fake PDFs, this would be inverted. The case of interest is where the fake author installs a new program between April and October, and then fails to notice the revealing metadata (a conjunction).
+
+1. $a$ = is real
+2. $b$ = date is not inverted
+3. $P(a)$ = probability of being real = 0.61
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.61 = 0.39
+5. $P(b|a)$ = probability a real script will include non-inverted date = 0.99 (why not 100%? Well, shit happens.)
+6. $P(b|\lnot a)$ = probability a fake script will include a non-inverted date = 1 - 0.0415 = 0.9585
+
+    This is a hard estimate. Let's think about the opposite: what is the chance that a faker *will* invert date? What leads to that happening? Suppose everyone replaces their computer every 5 years; what is the chance this replacement (and ensuring upgrade of all software) happens in the 5 month window between April and October 2009? Well, it's 5 / 5*12 = 1/12. What's the chance they then fail to notice? Unless they're really skilled I'd expect them to usually miss it, but let's be conservative and say they usually notice it and fix it, and have only a 40% chance of missing it. An inversion requires both the upgrade (8.3%) and then a miss (40%) for a final chance of 4.15%! This is so small that we know in advance that it's not going to make a big difference and may not have been worth thinking about.
+
+$\frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.61}{(0.99 \times 0.61) + (0.9585 \times 0.39)} = 0.6177$
+
+And indeed, 0.6177 is not very much larger than 0.61.
+
+#### PDF timezone
