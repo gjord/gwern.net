@@ -9,11 +9,10 @@ belief: likely
 
 <!--
 TODO:
-length as Bayesian input
 table of all tests, parameters, likelihood ratios etc
 conclusion section: what tests were surprisingly useful, which were opposite of expected, what future lines of enquiry this suggests etc
 add titles to all movie & fanfiction links
-host or find a copy of "The Argentine Writer and Tradition"
+link each free-form section to its statistical section and vice-versa
 -->
 <!--
 TODO: when finished with analysis, record final prediction (predictions: authorship, whether reply, and whether confirm/deny)
@@ -37,9 +36,9 @@ The ending shows Luke using the memory-wiping gambit to elude L (who from the sc
 
 The ending indicates someone who doesn't love _DN_ for its shades of gray mentality, its constant ambiguity and complexity. Any _DN_ fan feels deep sympathy for Light, even if they root for L and co. I suspect that if they were to pen a script, the ending would be of the 'Light wins everything' variety, and not this hackneyed sop. I know I couldn't bring myself to write such a thing, even as a parody of Hollywood.
 
-In general, the dialogue is short and hackneyed. There are no excellent megalomaniac speeches about creating a new world; one can expect a dearth of ominous choral chanting in the movie. Even the veriest tyro of fanfiction could write more DN-like dialogue than this script did.
+In general, the dialogue is short and hackneyed. There are no excellent megalomaniac speeches about creating a new world; one can expect a dearth of ominous choral chanting in the movie. Even the veriest tyro of fanfiction could write more _DN_-like dialogue than this script did. (I should note that I have recanted of this assessment after looking through many _DN_ fanfictions for the stylometric analysis.)
 
-Further, the complexities of ratiocination are largely absent, remaining only in the Lind L. Taylor TV trick of L and the famous eating-chips scene of Light. The tricks are even written incompetently - as written, on the bus, the crucial ID is seen by *accident*, whereas in DN, Light had written in the revelation of the ID quite specifically. The moral subtlety of _DN_ is gone; you cannot argue that Luke is a new god like Light. He is only an angry boy with a good heart lashing out, but by the end he has returned to the straight and narrow of conventional morality.
+Further, the complexities of ratiocination are largely absent, remaining only in the Lind L. Taylor TV trick of L and the famous eating-chips scene of Light. The tricks are even written incompetently - as written, on the bus, the crucial ID is seen by *accident*, whereas in _DN_, Light had written in the revelation of the ID quite specifically. The moral subtlety of _DN_ is gone; you cannot argue that Luke is a new god like Light. He is only an angry boy with a good heart lashing out, but by the end he has returned to the straight and narrow of conventional morality.
 
 # Evidence
 
@@ -60,7 +59,7 @@ The second thing I did was take a look at the metadata[^death-note-metadata]:
 - The creator tool checks out: "DynamicPDF v5.0.2 for .NET" is part of a commercial suite, and it was pirated well before July 2009, although I could not figure out when the commercial release was.
 - The date, though, is "Thu 09 Apr 2009 09:32:47 PM EDT". Keep in mind, this leak was October, and the original announcement was 30 April or so.
 
-    If one were faking such a script, wouldn't one through either sheer carelessness & omission or by natural assumption (the Parlapanides signed a contract, the press release went out, and they started work) set the date well *after* the announcement? Why would you set it close to a month before? Wouldn't you take pains to show everything is exactly as an outsider would expect it to be? As [Jorge Luis Borges](!Wikipedia) writes in "The Argentine Writer and Tradition":
+    If one were faking such a script, wouldn't one through either sheer carelessness & omission or by natural assumption (the Parlapanides signed a contract, the press release went out, and they started work) set the date well *after* the announcement? Why would you set it close to a month before? Wouldn't you take pains to show everything is exactly as an outsider would expect it to be? As [Jorge Luis Borges](!Wikipedia) writes in ["The Argentine Writer and Tradition"](http://dl.dropbox.com/u/85192141/1951-borges-argentinewriter.pdf):
 
     > Gibbon observes [in the _[Decline and Fall of the Roman Empire](!Wikipedia)_] that in the Arab book _par excellence_, the Koran, there are no camels; I believe that if there were ever any doubt as to the authenticity of the Koran, this lack of camels would suffice to prove it Arab. It was written by Mohammed, and Mohammed as an Arab had no reason to know that camels were particularly Arab; they were for him a part of reality, and he had no reason to single them out, while the first thing a forger or tourist or Arab nationalist would do is to bring on the camels - whole caravans of camels on every page; but Mohammed, as an Arab, was unconcerned. He knew he could be Arab without camels.
 
@@ -82,7 +81,7 @@ What of the actual play? Well, it is written like a screenplay, properly formatt
 
 The time commitment for a forger is substantial: the script is ~22,000 words, well-edited and formatted, and reasonably polished. For comparison, [NaNoWriMo](!Wikipedia) tasks writers with producing 50,000 words of pre-planned, unedited, low-quality content in one month, with a second month ([NaNoEdMo](http://www.nanoedmo.net/)) devoted to editing. So the script represents at a minimum a month's work - and then there's the editing, reviewing, and formatting (and most amateur writers are not familiar with screenwriting conventions in the first place).
 
-So much for the internal evidence: all suggestive, none damning. A forger *could* have randomly changed Charles to "Charley", looked up an appropriate address, edited the metadata, come up with all the Hollywood touches, wrote the whole damn thing (quite an endeavour since relatively little material is borrowed from DN), and put it online.
+So much for the low-hanging fruit of internal evidence: all suggestive, none damning. A forger *could* have randomly changed Charles to "Charley", looked up an appropriate address, edited the metadata, come up with all the Hollywood touches, wrote the whole damn thing (quite an endeavour since relatively little material is borrowed from _DN_), and put it online.
 
 ### Stylometrics
 
@@ -458,3 +457,24 @@ $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times 
 Likelihood ratio:
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.66} = 1.5$
+
+#### Stylometrics
+
+This is straightforward: if a fake script gets paired up randomly, then it had just a 1/15 chance of pairing up with _Immortals_. Even if we restrict the matches to the other movie scripts, there were 10 movie scripts and 2 oddballs for 12 total or 6 pairings, giving 1/6 chance of randomly pairing up with _Immortals_. The real question is: if the script is real, what chance does it have of pairing up with something else by the same authors? I included 4 fanfictions by the same author (Eliezer Yudkowsky), and 2 wound up pairing (with the other 2 in the same overall cluster but more distant from the pair and each other), giving a rough guess of 50%; this is convenient since our default "I have no idea at all" guess for any binary question is 50%, and even if we apply Laplace, we still get 50% (2+1/4+2 = 3/6 = 50%). So as usual, we will make the most conservative assumption for the fake, and keep our pessimistic assumption about the real.
+
+1. _a_ = is real
+2. _b_ = is paired with _Immortals_
+3. $P(a)$ = probability of being real = 0.7668
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.7668 = 0.2332
+5. $P(b|a)$ = probability a real script will be paired with _Immortals_ = 50% = 0.50
+6. $P(b|\lnot a)$ = probability a fake script will paired with _Immortals_ = 1/6 = 0.1667
+
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.50 \times 0.7668}{(0.50 \times 0.7668) + (0.1667 \times 0.2332)} = 0.9079$
+
+$\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.50}{0.1667} = 2.999$
+
+As expected, the stylometrics was powerful evidence.
+
+## External evidence
+
+### Dating
