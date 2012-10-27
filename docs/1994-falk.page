@@ -1,6 +1,7 @@
 ---
 title: The Ups and Downs of the Hope Function In a Fruitless Search
 author: Ruma Falk, Abigail Lipson, Clifford Konold
+created: 01 Jul 2012
 description: Changing beliefs with failure in searching a set of possibilities.
 tags: psychology, statistics
 status: finished
@@ -84,7 +85,7 @@ You do know that 60% of the bus routes in the city operate this late, and 40% do
 
 Since you have no idea about the bus's exact schedule, you figure that the bus is *equally likely* to arrive in any of the six five-minute intervals during the coming half-hour (if indeed it is still running).
 
-1. The bus *does not arrive* in the first five minutes. It is not 11:35.
+1. The bus *does not arrive* in the first five minutes. It is now 11:35.
 
     How would you *now* evaluate the probability that the bus will arrive *sometime before midnight*?
 2. Another ten minutes elapse. The time is now 11:45, and the bus *has not arrived*.
@@ -110,7 +111,7 @@ Since you have no idea about the bus's exact schedule, you figure that the bus i
 
 ### 15.1.1 The Mathematical Long- and Short-run Functions
 
-We solve the Standard Search Problem (Problem 1) for the *general case* of _n_ equally likely drawers and [prior probability](!Wikipedia) _L~0~_ that the letter is in the desk. The solution applies as well to the isomorphic Wait Problem (Problem 2). If the letter *is in* the desk, the conditional probability of *not* finding it when searching the first _i_ drawers is $\frac{n - 1}{n}$; if the letter *is out* of the desk, *not* finding it in the first _i_ drawers is a certainty. Let's denote the respective long- and short-term [posterior probabilities](!Wikipedia) we wish to find by _L~i~ = P_ (letter is in desk | letter was not in first _i_ drawers), _S~i~ = P_ (letter is in next drawer | letter was not in first _i_ drawers). Clearly, $S_0 = \frac{L_0}{n}$, and $S_i = \frac{L_i}{n - i}$. By [Bayes' rule](!Wikipedia):
+We solve the Standard Search Problem (Problem 1) for the *general case* of _n_ equally likely drawers and [prior probability](!Wikipedia) _L~0~_ that the letter is in the desk. The solution applies as well to the isomorphic Wait Problem (Problem 2). If the letter *is in* the desk, the conditional probability of *not* finding it when searching the first _i_ drawers is $\frac{n - i}{n}$; if the letter *is out* of the desk, *not* finding it in the first _i_ drawers is a certainty. Let's denote the respective long- and short-term [posterior probabilities](!Wikipedia) we wish to find by _L~i~ = P_ (letter is in desk | letter was not in first _i_ drawers), _S~i~ = P_ (letter is in next drawer | letter was not in first _i_ drawers). Clearly, $S_0 = \frac{L_0}{n}$, and $S_i = \frac{L_i}{n - i}$. By [Bayes' rule](!Wikipedia):
 
 $L_i = \frac{\frac{n - i}{n} \times L_0}{\frac{n - i}{n} \times L_0 + (1 - L_0)}$
 
@@ -125,7 +126,7 @@ A few algebraic manipulations yield:
 
 Formulas (15.1) and (15.2) describe the *hope functions* for the long run (_L~i~_) and the short run (_S~i~_), given _i_ initial failures.
 
-Table 15.1 presents the specific forms which _L~i~_ and _S~i~_ assume in the case of Problems 1 and 2, along with the answers to the questions posed in the Problems. The numbers in Table 15.1, as well as formulas (15.1) and (15.2), indicate the the long-term hope function, _L~i~_, decreases as _i_ grows, whereas the short-term hope function, _S~i~_, increases with _i_, until $L_{n-1} = S_{n-1}$.
+Table 15.1 presents the specific forms which _L~i~_ and _S~i~_ assume in the case of Problems 1 and 2, along with the answers to the questions posed in the Problems. The numbers in Table 15.1, as well as formulas (15.1) and (15.2), indicate the long-term hope function, _L~i~_, decreases as _i_ grows, whereas the short-term hope function, _S~i~_, increases with _i_, until $L_{n-1} = S_{n-1}$.
 
 [pg359]
 
@@ -321,7 +322,7 @@ No single correct triplet of answers was given to any of the 109 bus problems. T
 
 ## 15.4 Discussion
 
-On the whole, subjects were unable to solve the numerical long- and short-term hope problems the way they were originally presented. To summarize our findings, we list several solution methods that subjects employed and beliefs they expressed. To be sure. this list is not exhaustive.
+On the whole, subjects were unable to solve the numerical long- and short-term hope problems the way they were originally presented. To summarize our findings, we list several solution methods that subjects employed and beliefs they expressed. To be sure, this list is not exhaustive.
 
 The load of processing the various details given in Problems 1 and 2 is eased if one of the givens (either _L~0~_ or _S~0~_, which is inferred from _L~0~_) is held constant. Many subjects indeed based their answers on one of these constancy assumptions, solving the problem by reducing the number of variables involved. In so doing, they ignored one type of evidence, namely the search results, and considered only the _a priori_ success probability and sometimes also the number of units.
 
