@@ -87,11 +87,11 @@ So much for the low-hanging fruit of internal evidence: all suggestive, none dam
 
 ### Stylometrics
 
-The next step in assessing internal evidence is hardcore: we start running [stylometry](!Wikipedia) tools on the leaked script to see whether the style is consistent with the Parlapanides as authors. The PDF is 112 images with no text provided; I do not care to transcribe it by hand. So I split the PDF with `pdftk` to upload both halves to [Google Docs](http://googledocs.blogspot.com/2010/06/optical-character-recognition-ocr-in.html) (which has an [upload size limit](http://support.google.com/drive/bin/answer.py?hl=en&answer=176692)) to download its [OCR'ed](!Wikipedia "Optical character recognition") text; and then ran the PDF through [GOCR](!Wikipedia) to compare - the Google Docs transcript was clearly superior even before I spellchecked it. (In a nasty surprise halfway through the process, I found that for some reason, Google Docs would only OCR the first 10 pages or so of an upload - so I would up actually uploading *12* split PDFs and recombining them!)
+The next step in assessing internal evidence is hardcore: we start running [stylometry](!Wikipedia) tools on the leaked script to see whether the style is consistent with the Parlapanides as authors. The PDF is 112 images with no text provided; I do not care to transcribe it by hand. So I split the PDF with `pdftk` to upload both halves to [Google Docs](http://googledocs.blogspot.com/2010/06/optical-character-recognition-ocr-in.html) (which has an [upload size limit](http://support.google.com/drive/bin/answer.py?hl=en&answer=176692)) to download its [OCR'ed](!Wikipedia "Optical character recognition") text; and then ran the PDF through [GOCR](!Wikipedia) to compare - the Google Docs transcript was clearly superior even before I spellchecked it. (In a nasty surprise halfway through the process, I found that for some reason, Google Docs would only OCR the first 10 pages or so of an upload - so I wound up actually uploading *12* split PDFs and recombining them!)
 
 Samples of the Parlapanides' writing is hard to obtain; the only produced movie with their script is the 2000 _Everything For A Reason_ and the 2011 [_Immortals_](!Wikipedia "Immortals (2011 film)") (so any analysis in 2009 would've been difficult). I could not find the script for either available anywhere for download, so I settled for `OpenSubtitles.org`'s subtitles in [.srt](!Wikipedia) format and stripped the timings: `grep -v [0-9] Immortals.2011.DVDscr.Xvid-SceneLovers.srt  > 2011-parlapanides-immortals.txt` (There are no subtitles available for the other movie, it seems.)
 
-Samples of fanfiction are easy to acquire. [Fanfiction.net's _Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison. I also submitted a [Reddit request](http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/). The final selection:
+Samples of fanfiction are easy to acquire. [Fanfiction.net's _Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison. (I also submitted a [Reddit request](http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/), which yielded no suggestions.) The final selection:
 
 - http://www.fanfiction.net/s/5482398/1/Death-Note-Movie-Spoof-Script
 - http://www.fanfiction.net/s/7074737/1/School-Crack-Death-Note
@@ -143,7 +143,7 @@ For the actual analysis, we use the [computational stylistics](http://sites.goog
 > source("stylo_0-4-6_utf.r")
 ~~~
 
-The settings[^R-stylo-settings] are to: run a [cluster analysis](!Wikipedia) which uses the entire corpus, assumes English, and looks at the difference between files in their use of "most popular words" (starting at 1 word & maxing out at 1000 different words, because the entire _Immortals_ subs are only ~4000 words of dialogue), where difference is a simple Euclidean distance.
+The settings[^R-stylo-settings] are to: run a [cluster analysis](!Wikipedia) which uses the entire corpus, assumes English, and looks at the difference between files in their use of "most popular words" (starting at 1 word & maxing out at 1000 different words, because the entire _Immortals_ subs is only ~4000 words of dialogue), where difference is a simple Euclidean distance.
 
 [^R-stylo-settings]: Specifically, `config.txt` reads:
 
@@ -472,6 +472,22 @@ $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times 
 Likelihood ratio:
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.66} = 1.5$
+
+#### Plot
+
+The earlier plot summary conveyed the "Hollywood" feel of the plot but unfortunately it's hard to judge from localization: a _DN_ fan attempting to imitate a Hollywood-targeted script might rename Light to "Luke", might simplify the plot considerably (there is precedent in the Japanese live-actions movies [_Death Note_](!Wikipedia "Death Note (film)#Death Note"), [_Death Note: The Last Name_](!Wikipedia "Death Note (film)#Death_Note: The Last_Name") & _[L: Change the World](!Wikipedia)_), might set it in NYC (Tokyo is obviously out of the question, and NYC seems to be a default location of crime-related movies), and so on.
+
+More importantly, the plot includes several [idiot-ball](http://tvtropes.org/pmwiki/pmwiki.php/Main/IdiotBall)-related changes that I think any _DN_ fan competent enough to write this fake would never have made, even in the name of localization and Hollywoodization: the incompetent bus ID trick comes to mind.
+
+Unfortunately, in both respects, I can't assign defensible numbers to my interpretation for the simple reason that any reasonable differences in probabilities leads to a ridiculously strong conclusion!
+
+For example, if I gave 90% (fakes) vs 95% (real) for the individual localization points (for each of name, simplification, location), and then 10% (fakes) vs 50% (real) for 2 instances of incompetence, this gives us a likelihood ratio of:
+
+$\frac{0.95}{0.90} + \frac{0.95}{0.90} + \frac{0.95}{0.90} + \frac{0.10}{0.50} + \frac{0.10}{0.50} = 3.5667$
+
+(Here we see an advantage of likelihood ratios: they're easy to calculate and give us an indicator of argument strength *without* having to run through 5 different iterations of Bayes's theorem.)
+
+A likelihood ratio of 3.6 would be the single strongest set of arguments we have seen yet, and even stronger than the stylometric likelihood ratio in the next section. If we used this result, it would be solely responsible for a very large amount of the conclusion. A critic of the final conclusion would be right to wonder if the conclusion rested solely on this dubious and unusually subjective section, so we will omit it (with the understanding that as usual, we are being conservative and essentially trying to calculate a lower bound).
 
 #### Stylometrics
 
