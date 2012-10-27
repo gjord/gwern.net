@@ -288,7 +288,16 @@ We substitute in to the original equation:
 
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.9 \times 0.5}{(0.9 \times 0.5) + (0.5 \times 0.5)} = \frac{0.45}{0.45 + 0.25} = \frac{0.45}{0.7} = 0.643$
 
-Sanity checks: 64% is between the fake scripts' 50% and the real scripts' 90%; further, the inclusion of authorship does not seem like tremendous evidence so it should be closer to our original guess of 50% than to the best-case scenario of 90%, as indeed 64% is.
+Sanity checks:
+
+1. Authorship is evidence *for* it being real; did we increase our confidence that the script is real?
+
+    Yes, because 64.3% > 50%. So we moved the right direction.
+2. Did we move the right amount?
+
+    Well, the fake scripts have a 50% rate and the real scripts have 90%; since this is the only evidence we've taken into account so far, our first calculation shouldn't move us "very far", whatever that means, since not all real scripts have authorship and plenty of fake ones are careful to include them. (Imagine a world where 80% of fakes include authorship: authorship would become even weaker evidence; and when fakes hit 90% inclusion, authorship would be so weak as to be no evidence at all since the fakes and reals look exactly the same.) The inclusion of authorship does not seem like tremendous evidence so after taking authorship into account, we should be close to our original prior of 50% than to any extreme certainty like 90%.
+
+    Are we? Our posterior of 64% doesn't strike me as a *big* shift from 50%, so we conclude that this second sanity check is satisfied. Good!
 
 A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "likelihood ratio" of that test. A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be useful later TODO, so we'll calculate them too as we go along. So:
 
@@ -357,24 +366,22 @@ We noted the curious fact that while the Parlapanides' work on the script was an
 
 I did not expect this inversion, but thinking about it in retrospect, this seems consistent with the script being real: the studio commissioned them to write a script, they turned in material, the studio liked it, and the official word went out. (Presumably had the studio disliked it, they would've been quietly paid a small sum and a new writer tried.) An ordinary person like me, however, would date any forgery to after the announcement, reasoning that it would be "safe" to date any script to after the announcement.
 
-So we want to express that this inversion is evidence for the script being real, and that frauds would be dated as one would normally expect. If I were to set out to make a fraud, I don't think I would tinker that way with the PDF date even once out of 20 times, but let's be very conservative and say a mere 75% of fake scripts would have a normal date (or 25% of the time, the faker would be clever enough to invert the dates); and let's say there was merely a 50% chance that the real script would be inverted. We know how to run the numbers now:
+So we want to express that this inversion is evidence for the script being real, and that frauds would be dated as one would normally expect. If I were to set out to make a fraud, I don't think I would tinker that way with the PDF date even once out of 20 times, but let's be very conservative and say a mere 75% of fake scripts would have a normal date (that is: 25% of the time, the faker would be clever enough to invert the dates); and let's say there was a 50% chance that the real script would be inverted (since we don't know the real frequency of inversion). The core assumption here is that inversion is more likely for real scripts than fake scripts, an assumption I feel is highly likely (what faker would dare such a blatant inconsistency? It's Gibbon & the camels again but in a stronger form.) We know how to run the numbers now:
 
 1. _a_ = is real
-2. _b_ = is normal (and not inverted)
+2. _b_ = the date is inverted
 3. $P(a)$ = probability of being real = 0.49
 4. $P(\lnot a)$ = probability of being not real = 1 - 0.49 = 0.51
-5. $P(b|a)$ = probability a real script will be normal = 50% = 0.5
-6. $P(b|\lnot a)$ = probability a fake script will be normal = 75% = 0.75
+5. $P(b|a)$ = probability a real script will be inverted = 50% = 0.5
+6. $P(b|\lnot a)$ = probability a fake script will be inverted = 25% = 0.25
 
 Substitute:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.5 \times 0.49}{(0.5 \times 0.49) + (0.75 \times 0.51)} = \frac{0.245}{0.245 + 0.3825} = \frac{0.245}{0.6275} = 0.39$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.5 \times 0.49}{(0.5 \times 0.49) + (0.25 \times 0.51)} = 0.65772$
 
-So if the PDF had a normal date, our probability would've dropped to 0.39; but it has a non-normal date. What's the negation? 1 - 0.39 or 0.61. This passes the usual sanity checks (roughly halfway between 50% and 75%).
+A jump from 49% to 65.8% is a respectable jump for such a weird date. Then the likelihood ratio is:
 
-Likelihood ratio (remember we reversed this test to make it easier to calculate!):
-
-$1 + (1 - \frac{P(b|a)}{P(b|\lnot a)}) = 1 + (1 - \frac{0.5}{0.75}) = 1 + (1 - 0.666) = 1 + 0.444 = 1.444$
+$\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.5}{0.25} = 2$
 
 #### PDF creator tool
 
@@ -382,16 +389,16 @@ The creator tool was released and pirated before the creation date. It may not s
 
 1. _a_ = is real
 2. _b_ = date is not inverted
-3. $P(a)$ = probability of being real = 0.61
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.61 = 0.39
+3. $P(a)$ = probability of being real = 0.658
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.658 = 0.342
 5. $P(b|a)$ = probability a real script will include non-inverted date = 0.99 (why not 100%? Well, shit happens.)
 6. $P(b|\lnot a)$ = probability a fake script will include a non-inverted date = 1 - 0.0415 = 0.9585
 
     This is a hard estimate. Let's think about the opposite: what is the chance that a faker *will* invert date? What leads to that happening? Suppose everyone replaces their computer every 5 years; what is the chance this replacement (and ensuring upgrade of all software) happens in the 5 month window between April and October 2009? Well, it's 5 / 5*12 = 1/12. What's the chance they then fail to notice? Unless they're really skilled I'd expect them to usually miss it, but let's be conservative and say they usually notice it and fix it, and have only a 40% chance of missing it. An inversion requires both the upgrade (8.3%) and then a miss (40%) for a final chance of 4.15%! This is so small that we know in advance that it's not going to make a big difference and may not have been worth thinking about.
 
-$\frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.61}{(0.99 \times 0.61) + (0.9585 \times 0.39)} = 0.6177$
+$\frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.658}{(0.99 \times 0.658) + (0.9585 \times 0.342)} = 0.66524$
 
-And indeed, 0.6177 is not very much larger than 0.61.
+And indeed, 0.665 is not very much larger than 0.658.
 
 Likelihood ratio:
 
@@ -408,28 +415,28 @@ How to estimate the chance that the fake author would live in a different timezo
 1. CST: 85385031
 2. MST: 18715536
 3. PST: 48739504
-4. thus, non-EST: 48739504
+4. thus, non-EST: 152840071
 5. EST: 141631478
-6. thus, total population: 48739504+141631478=190370982
+6. thus, total population: 152840071+141631478=294471549
 
-    This is obviously too low to be the total US population, but we'll roll with it: the proportion is what matters
+    The US population is more like 312 million than 294 million but the difference isn't important: what is important is the size of EST compared to the rest of the population.
 
 So, the problem setup becomes:
 
 1. _a_ = is real
 2. _b_ = is EDT
-3. $P(a)$ = probability of being real = 0.6177
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.6177 = 0.3823
+3. $P(a)$ = probability of being real = 0.665
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.665 = 0.3349
 5. $P(b|a)$ = probability a real script will be in EDT = 99% (shit happens) = 0.99
-6. $P(b|\lnot a)$ = probability a fake script will be in EDT *or* the faker will remember to edit the timezone = $\frac{141631478}{141631478 + 48739504} + 0.6$ (we assumed 0.6 because we used it last time for the PDF creator tool)  = 0.1299 + 0.6 = 0.7299
+6. $P(b|\lnot a)$ = probability a fake script will be in EDT *xor* the faker will remember to edit the timezone = $\frac{141631478}{294471549}$ xor 0.4 (we assume 0.4 because we used it last time for the PDF creator tool) = 0.481 + 0.4  = 0.881
 
 Substitute:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.6177}{(0.99 \times 0.6177) + (0.7299 \times 0.3823)} = \frac{0.611523}{0.611523 + 0.27904077} = 0.6867$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.665}{(0.99 \times 0.665) + (0.881 \times 0.3349)} = 0.691$
 
-This would have been a bigger update than 7% (from 61.7% to 68.7%) if the evidence of the timezone hadn't been neutered by our assumption that most fakers would be clever enough to edit it. But anyway, the likelihood ratio:
+This would have been a much bigger update than 2.6% (from 66.5% to 69.1%) if the evidence of the timezone hadn't been neutered by our assumption that most fakers would be clever enough to edit it. But anyway, the likelihood ratio:
 
-$\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.7299} = 1.356$
+$\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.881} = 1.1237$
 
 #### Writing/formatting
 
@@ -453,14 +460,14 @@ This leaves just length as a test:
 
 1. _a_ = is real
 2. _b_ = is full-length
-3. $P(a)$ = probability of being real = 0.6867
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.6867 = 0.3133
+3. $P(a)$ = probability of being real = 0.691
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.691 = 0.309
 5. $P(b|a)$ = probability a real script will be full-length = 99% (well, obviously, but shit happens) = 0.99
 6. $P(b|\lnot a)$ = probability a fake script will be full-length = 3/4, by Laplace, 3+1/4+2 = 4/6 = 0.66
 
 Substitute:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.6867}{0.99 \times 0.6867 + 0.66 \times 0.3133} = 0.7668$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.691}{0.99 \times 0.691 + 0.66 \times 0.309} = 0.7703$
 
 Likelihood ratio:
 
@@ -472,17 +479,16 @@ This is straightforward: if a fake script gets paired up randomly, then it had j
 
 1. _a_ = is real
 2. _b_ = is paired with _Immortals_
-3. $P(a)$ = probability of being real = 0.7668
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.7668 = 0.2332
+3. $P(a)$ = probability of being real = 0.7703
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.7703 = 0.2297
 5. $P(b|a)$ = probability a real script will be paired with _Immortals_ = 50% = 0.50
 6. $P(b|\lnot a)$ = probability a fake script will paired with _Immortals_ = 1/6 = 0.1667
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.50 \times 0.7668}{(0.50 \times 0.7668) + (0.1667 \times 0.2332)} = 0.9079$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.50 \times 0.7703}{(0.50 \times 0.7703) + (0.1667 \times 0.2297)} = 0.9096$
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.50}{0.1667} = 2.999$
 
 As expected, the stylometrics was powerful evidence.
 
 ## External evidence
-
 ### Dating
