@@ -9,8 +9,7 @@ belief: likely
 
 <!--
 TODO:
-table of all tests, parameters, likelihood ratios etc
-conclusion section: what tests were surprisingly useful, which were opposite of expected, what future lines of enquiry this suggests etc
+look up existing coverage of death note script
 add titles to all movie & fanfiction links
 link each free-form section to its statistical section and vice-versa
 give where I got the derivation from - link Modafinil & vice-versa?
@@ -48,7 +47,7 @@ The question of authenticity falls under the honorable rubric of [textual critic
 
 ## Internal
 
-The first thing I noticed was that the 2 authors claimed on the PDF, "Charley and Vlas Parlapanides", was correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html) in April 2009 that they were hired to write it. ("Charley"? He was born "Charles", and much coverage uses that name. On the other hand, there *are* some media pieces using the diminutive, most prominently an [IMDb](http://www.imdb.com/name/nm0663048/) entry.)
+The first thing I noticed was that the 2 authors claimed on the PDF, "Charley and Vlas Parlapanides", was correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html "Warner brings 'Death' to bigscreen: Studio acquires rights to Japanese manga series") in 30 April 2009 that they were hired to write it, confirming [the](http://hollywood.greekreporter.com/2008/07/12/the-brothers-parlapanides/ "The Brothers Parlapanides") [rumors](http://bloody-disgusting.com/news/12459/ "Vertigo Hires Scribes for 'Death Note' Remake") of their June 2008 hiring. (And "Charley"? He was born "Charles", and much coverage uses that name. On the other hand, there *are* some media pieces using the diminutive, most prominently an [IMDb](http://www.imdb.com/name/nm0663048/) entry.)
 
 Another interesting detail is the corporate address quietly listed at the bottom of the page: "WARNER BROS. / 4000 Warner Boulevard / Burbank, California 91522". That address is widely available on Google if you want to search for it, but one has to know about it in the first place and so it is much easier to just leave it out.
 
@@ -59,7 +58,7 @@ Another interesting detail is the corporate address quietly listed at the bottom
 The second thing I did was take a look at the metadata[^death-note-metadata]:
 
 - The creator tool checks out: "DynamicPDF v5.0.2 for .NET" is part of a commercial suite, and it was pirated well before July 2009, although I could not figure out when the commercial release was.
-- The date, though, is "Thu 09 Apr 2009 09:32:47 PM EDT". Keep in mind, this leak was October, and the original announcement was 30 April or so.
+- The date, though, is "Thu 09 Apr 2009 09:32:47 PM EDT". Keep in mind, this leak was in October 2009, and the original _Variety_ announcement was dated 30 April 2009.
 
     If one were faking such a script, wouldn't one through either sheer carelessness & omission or by natural assumption (the Parlapanides signed a contract, the press release went out, and they started work) set the date well *after* the announcement? Why would you set it close to a month before? Wouldn't you take pains to show everything is exactly as an outsider would expect it to be? As [Jorge Luis Borges](!Wikipedia) writes in ["The Argentine Writer and Tradition"](http://dl.dropbox.com/u/85192141/1951-borges-argentinewriter.pdf):
 
@@ -199,7 +198,9 @@ That the analysis spat out the files together is evidence: there were 30 files i
 ## External
 ### Dating
 
-But is there any external evidence? Well, the timeline is right. Figure about 2 months for both brothers to read through the _DN_ manga or watch the anime twice, clear up their other commitments, a month to brainstorm, 3 months to write the first draft, a month to edit it up and run it by the studio, and we're at 7 months or around February 2009. That leave a good 6 months for it to float around offices and get leaked, and then come to the wider attention of the Internet.
+But is there any external evidence? Well, the timeline is right: hired around June 2008, delivered a script in early April 2009, official announcement in late April 2009. How long *should* delivery take? The interval seems plausible: Figure about 2 months for both brothers to read through the _DN_ manga or watch the anime twice, clear up their other commitments, a month to brainstorm, 3 months to write the first draft, a month to edit it up and run it by the studio, and we're at 7 months or around February 2009. That leave a good 6 months for it to float around offices and get leaked, and then come to the wider attention of the Internet.
+
+### Credit
 
 Given this effort and the mild news coverage of it, one might expect a forger to take considerable pride in his work and want to claim credit at some point for a successful hoax. But as of October 2012, I am unaware of anyone even alluding or hinting that they did it.
 
@@ -508,3 +509,53 @@ As expected, the stylometrics was powerful evidence.
 
 ## External evidence
 ### Dating
+
+The argument here seems to be of the form that a PDF dated April 2009 is consistent with the estimated timeline for the true script. But what would be inconsistent? Well, a PDF dated *after* April 2009: such a PDF would raise the question "what exactly the brothers were doing from June 2008 all the way to this counterfactual post-April 2009 date?"
+
+But it turns out we already used this argument! TODO:link We used it as the PDF date inversion test. Can we use the April date as evidence again and double-count it? I don't think we should since it's just another way of saying "April and earlier is evidence for it being real, post-April is evidence against", regardless of whether we justify pre-April dates as being during the writing period or as being something a forger wouldn't dare do. This argument turns out to be redundant with the previous internal evidence (which in hindsight, starts to sound like we ought to have classified it as external evidence).
+
+What we *might* be justified in doing is going back to the PDF date inversion test and strengthening it since now we have 2 reasons to expect pre-April dates. But as usual, we will be conservative and leave out this strengthening.
+
+### Credit
+
+This is an interesting external argument as it's the only one dependent purely on the passage of time. It's a sort of [argument from silence](!Wikipedia), or more specifically, a [hope function](/docs/1994-falk "The Ups and Downs of the Hope Function In a Fruitless Search")
+
+#### Hope function
+
+The hope function is simple but exhibits some deeply counterintuitive properties (the focus of the psychologists writing the previously linked paper). Our case is the straightforward part, though. We can best visualize the hope function as a person searching a set of _n_ boxes or drawers or books for something which may not even be there (_p_). Obviously, if he finds the item, he now knows _p_=1 (it *was* there after all), and once he has searched all _n_ boxes without finding the thing, he knows _p_=0 (it wasn't there after all). Logically, the more boxes he searches without finding it, the more pessimistic he becomes (_p_ shrinks towards 0). How much, exactly?  Falk et al 1994  give a general formula for _n_ boxes of which you've searched _i_ boxes when your prior probability of the thing being there is _L~0~_:
+
+$L_i = \frac{\frac{n - i}{n} \times L_0}{\frac{n - i}{n} \times L_0 + (1 - L_0)}$
+
+So for example: if there's _n_=10 boxes, we searched _i_=5 without finding the thing, and we were only _L~0~_=50% sure the thing was there in the first place, our new guess about whether the thing was there:
+
+$\frac{(10 - 5) \times 0.5}{10 - 5 \times 0.5} = \frac{2.5}{7.5} = 0.33$
+
+33% seems reasonable (and interestingly, it's not simply $50\% \times \frac{5}{10} = 25\%$).
+
+### Credit & hope function
+
+In the case of "taking credit", we can imagine the boxes as years, and each year passed is a box opened. As of October 2012, we have opened 3 boxes since the October 2009 leak. How many boxes total should there be? I think 20 boxes is more than generous: after 2 decades, the _DN_ franchise probably won't even be active^[Quick, of the anime aired 20 years ago [in](!Wikipedia "Category:1992 anime") [1992](http://www.anime-planet.com/anime/years/1992), how many are active franchises? Of the 48 on the first page, maybe 3 or 4 seem active.] - if anyone was going to claim credit, they probably would've done so by then. What's our prior probability that they will do so at all? Well, of the 4 faked scripts, the author of the _Mr. Peepers_ script took credit but the other 3 seem to be unknown - but it's early days yet, so we'll punt with a 50%. And of course, if the script is real, very few people are going to falsely claim authorship (thereby claiming it's fake?). So our setup looks like this:
+
+1. _a_ = is real
+2. _b_ = no one has claimed authorship
+3. $P(a)$ = probability of being real = 0.9096
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.9096 = 0.0904
+5. $P(b|a)$ = probability a real script will have no ownership claim = 99% (shit happens^[Or more precisely, sometimes people do falsely claim authorship and even sue studios over it; but if you picked 100 random scripts, would you expect to find more than 1 such instances? Keeping in mind most scripts never turn into movies but die in [development hell](!Wikipedia)!]) = 0.99
+6. $P(b|\lnot a)$ = probability a fake script will have no ownership claim = probability someone *will* claim it is the hope function with _n_=20, _i_=3, _L~0~_=50% = $\frac{\frac{20 - 3}{20} \times 0.5}{\frac{20 - 3}{20} \times 0.5 + (1 - 0.5)} = 0.45945$, so the probability someone will *not* is $1 - 0.45945 = 0.54055$.
+
+Then Bayes:
+
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.9096}{(0.99 \times 0.9096) + (0.54055 \times 0.0904)} = 0.9485$
+
+Likelihood ratio:
+
+$\frac{0.99}{0.54055} = 1.831$
+
+### Official statements
+
+### Legal take-downs
+
+## Results
+<!-- table of all tests, parameters, likelihood ratios etc -->
+## Benefits
+<!-- conclusion section: what tests were surprisingly useful, which were opposite of expected, which were useless, which were double-counting what future lines of enquiry this suggests etc -->
