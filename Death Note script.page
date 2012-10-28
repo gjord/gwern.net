@@ -252,7 +252,7 @@ Extraordinary claims require extraordinary evidence, but ordinary claims require
 
 How many leaked scripts end up being hoaxes or fakes? What is the [base rate](!Wikipedia)?
 
-Leaks seem to be common in general. Just googling "leaked script", I see recent incidents for _Robocop_, _Teenage Mutant Turtles_, _Mass Effect 3_ (confirmed by Bioware to have been real), _Les Misérables_, _Jurassic Park IV_ (concept art), _Batman_[^Nolan], and _Halo 4_. A [blog post](http://www.mandatory.com/2012/07/13/the-final-verdict-on-10-famously-leaked-scripts/) makes itself useful by rounding up 10 old leaks and assessing how they panned out: 4 turned out to be fakes, 5 real, and 1 (for _The Master_) unsure. Assuming the worst, this gives us 5/10 are real or 50% odds that a randomly selected leak would be real. Given the number of "draft" scripts on [IMSDb](http://www.imsdb.com/), 50% may be low. But we will go with it.
+Leaks seem to be common in general. Just googling "leaked script", I see recent incidents for _Robocop_, _Teenage Mutant Turtles_, _Mass Effect 3_ (confirmed by Bioware to have been real), _Les Misérables_, _Jurassic Park IV_ (concept art), _Batman_[^Nolan], and _Halo 4_. A [blog post](http://www.mandatory.com/2012/07/13/the-final-verdict-on-10-famously-leaked-scripts/) makes itself useful by rounding up 10 old leaks and assessing how they panned out: 4 turned out to be fakes, 5 real, and 1 (for _The Master_) unsure. Assuming the worst, this gives us $\frac{5}{10}$ are real or 50% odds that a randomly selected leak would be real. Given the number of "draft" scripts on [IMSDb](http://www.imsdb.com/), 50% may be low. But we will go with it.
 
 [^Nolan]: The fake _Batman_ script is pretty weird; it starts off interesting and has many good parts, but then flounders in opaqueness and concludes even more weirdly with far too much material in it for a single film to plausibly include. If it were supposed to be by anyone but Christopher Nolan, you'd comment "this can't be real - the plot is too flabby and confusing, and the dialogue veers into non sequiturs and half-baked philosophy" (which of course it is). But one expects that of Nolan, almost, and for the filmed movie to be better than the script, so paradoxically, the worsening quality may have lent it some credibility.
 
@@ -266,7 +266,7 @@ How would we estimate the evidence of "Charley Parlapanides"? The names of the w
     Very strong evidence it is fake: who puts their own name down wrong? This would be overwhelming evidence, but we don't have it so we will drop this possibility from consideration and consider the remaining possibilities:
 2. present and right
 
-     Evidence it is real. Of the 10 scripts used in the stylometric, 9/10 included right authorship information.
+     Evidence it is real. Of the 10 scripts used in the stylometric, $\frac{9}{10}$ included right authorship information.
 3. not present
 
     Of the 4 known fake scripts mentioned previously, only 2 included authorship information.
@@ -287,7 +287,7 @@ If you look, the right-hand side of that equation has exactly 4 pieces in its pu
     This is the negation of the previous. What is the negation of 50%, its contrary? 50%.
 3. $P(b|a)$
 
-    Remember, we read the pipe notation *backwards*, so this is 'the probability that a real script (_a_) will include authorship' (_b_)'. We said that 9/10 of good scripts include authorship, so this is 90% or 0.9. (One way to compensate for the small sample size of 10 scripts would be to use [Laplace's rule of succession](!Wikipedia), $\frac{n+1}{m+2}$, which would yield $\frac{9+1}{10+2}= 0.83$.)
+    Remember, we read the pipe notation *backwards*, so this is 'the probability that a real script (_a_) will include authorship' (_b_)'. We said that $\frac{9}{10}$ of good scripts include authorship, so this is 90% or 0.9. (One way to compensate for the small sample size of 10 scripts would be to use [Laplace's rule of succession](!Wikipedia), $\frac{n+1}{m+2}$, which would yield $\frac{9+1}{10+2}= 0.83$.)
 4. $P(b|\lnot a)$
 
     Finally, we have 'the probability that a fake script will include authorship". We looked at 4 fake scripts and 2 included authorship, which is another 50% or 0.5.
@@ -316,7 +316,7 @@ Sanity checks:
 
     Are we? Our posterior of 64% doesn't strike me as a *big* shift from 50%, so we conclude that this second sanity check is satisfied. Good!
 
-A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "likelihood ratio" of that test. A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be useful later TODO, so we'll calculate them too as we go along. So:
+A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "[likelihood ratio](!Wikipedia)" of that test. A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be useful later TODO, so we'll calculate them too as we go along. So:
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.9}{0.5} = 1.8$
 
@@ -358,14 +358,14 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.5}{0.93} = 0.538$
 #### Corporate address
 
 Googling "Warner Brothers address" turns up the address used in the PDF as the second hit (it seems to be the official address of all Warner Bros. operations), so we can assume that any faker can find it - *if* they thought to include it. This question is simply: is a corporate address included? Checking, we see addresses are rare:
-of the real, 1/10; of the fakes, fakes: 0/4.
+of the real, $\frac{1}{10}$; of the fakes, fakes: $\frac{0}{4}$.
 
 1. _a_ = is real
 2. _b_ = has address
 3. $P(a)$ = probability of being real = 0.49
 4. $P(\lnot a)$ = probability of being not real = 1 - 0.49 = 0.51
-5. $P(b|a)$ = probability a real script will include an address = 1/10; we apply Laplace's Rule of Succession to get 1+1/10+2 = 2/12 = 0.16
-6. $P(b|\lnot a)$ = probability a fake script will include address = 0/4; we apply Laplace (as before) to get 0+1/4+2 = 1/6 = 0.16
+5. $P(b|a)$ = probability a real script will include an address = $\frac{1}{10}$; we apply Laplace's Rule of Succession to get $\frac{1+1}{10+2} = \frac{2}{12} = 0.16$
+6. $P(b|\lnot a)$ = probability a fake script will include address = $\frac{0}{4}$; we apply Laplace (as before) to get $\frac{0+1}{4+2}$ = $\frac{1}{6}$ = 0.16
 
 Substitute:
 
@@ -461,7 +461,7 @@ We could isolate multiple tests here:
 
 1. length
 
-    Some of the fake scripts are very long and complete; I remarked in an earlier footnote that the fake _Batman_ script is actually *too* long for a movie. One of the fake scripts was a single leaked page, making for a 3/4 rate.
+    Some of the fake scripts are very long and complete; I remarked in an earlier footnote that the fake _Batman_ script is actually *too* long for a movie. One of the fake scripts was a single leaked page, making for a $\frac{3}{4}$ rate.
 2. formatting
 
     The sample of real scripts has been reformatted for Internet distribution and doesn't include the "original" PDFs or representations thereof; worse, the 4 or 5 fake scripts are all properly formatted. With the existing corpus, this test turns out to be useless!
@@ -480,7 +480,7 @@ This leaves just length as a test:
 3. $P(a)$ = probability of being real = 0.691
 4. $P(\lnot a)$ = probability of being not real = 1 - 0.691 = 0.309
 5. $P(b|a)$ = probability a real script will be full-length = 99% (not 100%: shit happens) = 0.99
-6. $P(b|\lnot a)$ = probability a fake script will be full-length = 3/4, by Laplace, 3+1/4+2 = 4/6 = 0.66
+6. $P(b|\lnot a)$ = probability a fake script will be full-length = $\frac{3}{4}$, by Laplace, $\frac{3+1}{4+2} = \frac{4}{6}$ = 0.66
 
 Substitute:
 
@@ -508,14 +508,14 @@ A likelihood ratio of 3.6 would be the single strongest set of arguments we have
 
 #### Stylometrics
 
-This is straightforward: if a fake script gets paired up randomly, then it had just a 1/15 chance of pairing up with _Immortals_. Even if we restrict the matches to the other movie scripts, there were 10 movie scripts and 2 oddballs for 12 total or 6 pairings, giving 1/6 chance of randomly pairing up with _Immortals_. The real question is: if the script is real, what chance does it have of pairing up with something else by the same authors? I included 4 fanfictions by the same author (Eliezer Yudkowsky), and 2 wound up pairing (with the other 2 in the same overall cluster but more distant from the pair and each other), giving a rough guess of 50%; this is convenient since our default "I have no idea at all" guess for any binary question is 50%, and even if we apply Laplace, we still get 50% (2+1/4+2 = 3/6 = 50%). So as usual, we will make the most conservative assumption for the fake, and keep our pessimistic assumption about the real.
+This is straightforward: if a fake script gets paired up randomly, then it had just a $\frac{1}{15}$ chance of pairing up with _Immortals_. Even if we restrict the matches to the other movie scripts, there were 10 movie scripts and 2 oddballs for 12 total or 6 pairings, giving $\frac{1}{6}$ chance of randomly pairing up with _Immortals_. The real question is: if the script is real, what chance does it have of pairing up with something else by the same authors? I included 4 fanfictions by the same author (Eliezer Yudkowsky), and 2 wound up pairing (with the other 2 in the same overall cluster but more distant from the pair and each other), giving a rough guess of 50%; this is convenient since our default "I have no idea at all" guess for any binary question is 50%, and even if we apply Laplace, we still get 50% ($\frac{2+1}{4+2} = \frac{3}{6}$ = 50%). So as usual, we will make the most conservative assumption for the fake, and keep our pessimistic assumption about the real.
 
 1. _a_ = is real
 2. _b_ = is paired with _Immortals_
 3. $P(a)$ = probability of being real = 0.7703
 4. $P(\lnot a)$ = probability of being not real = 1 - 0.7703 = 0.2297
 5. $P(b|a)$ = probability a real script will be paired with _Immortals_ = 50% = 0.50
-6. $P(b|\lnot a)$ = probability a fake script will paired with _Immortals_ = 1/6 = 0.1667
+6. $P(b|\lnot a)$ = probability a fake script will paired with _Immortals_ = $\frac{1}{6}$ = 0.1667
 
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.50 \times 0.7703}{(0.50 \times 0.7703) + (0.1667 \times 0.2297)} = 0.9096$
 
@@ -592,7 +592,7 @@ We could assume that a fake script has 50% chance of making each change and item
 
 ### Legal takedowns
 
-Our observation here is that the two `sendspace` links hosting the PDF went dead within days of the _Anime Vice_ post. We don't know for sure that the links went dead due to takedown, and we don't know for sure that a takedown would be sent only if the script was real. These uncertainties transform what seems like a slamdunk proof of authenticity ("a takedown would be done only if the studio complained, and the studio would complain only if it was real! A takedown was down, therefore it was real!") into just another probabilistic question for us.
+Our observation here is that the two `sendspace` links hosting the PDF went dead within days of the _Anime Vice_ post. We don't know for sure that the links went dead due to takedown, and we don't know for sure that a takedown would be sent only if the script was real. These uncertainties transform what seems like a slam dunk proof of authenticity ("a takedown would be done only if the studio complained, and the studio would complain only if it was real! A takedown was down, therefore it was real!") into just another probabilistic question for us.
 
 Do people send fake takedowns to file hosts? In my experience, a few people (based on watching people upload music and manga etc.) attract trolls dedicated to sending complaints about anything they post, and sometimes entire sites lose their file hosting (eg. in May 2012, [MikuDB](http://mikudb.com/12582/mediafire/) lost hosting for >1000 [Vocaloid](!Wikipedia) & [doujin music](!Wikipedia) albums) but in general downloads work for years afterwards. An instructive sample is to look at the most recent [MediaFire](!Wikipedia)[-related submissions to Reddit](http://www.reddit.com/domain/mediafire.com/) (from the last 8 days when I checked) and see how many of the first 25 are dead for copyright-related reasons; when I tried, only 1 was blocked over copyright^[1 link was dead because "File Belongs to Non-Validated Account" and another link was dead because "The file you attempted to download is an archive that is part of a set of archives. MediaFire does not support unlimited downloads of split archives and the limit for this file has been reached. MediaFire understands the need for users to transfer very large or split archives, up to 10GB per file, and we offer this service starting at $1.50 per month." Neither reason would necessarily be applicable to a 3MB PDF script.], giving a 4% takedown rate. I regard a fake takedown within days as a remote chance, but let's call it 5%.
 
@@ -643,13 +643,13 @@ Is 98% *the* correct posterior? Well, that depends both on whether one accepts e
 
 To update using a likelihood ratio, we express our $P(a)$ as instead $\frac{P(a)}{1 - P(a)}$, multiply by the likelihood ratio, and convert back! So for our table: we start with $\frac{0.5}{1 - 0.5} = 1$, multiply by 1.8, 0.538...5:
 
-$\frac{0.5}{1 - 0.5} \times 1.8 \times 0.538 \times 1 \times 2 \times 1.033 \times 1.1237 \times 1.5 \times 2.999 \times 1.831 \times 5 = 92.5895
+$\frac{0.5}{1 - 0.5} \times 1.8 \times 0.538 \times 1 \times 2 \times 1.033 \times 1.1237 \times 1.5 \times 2.999 \times 1.831 \times 5 = 92.5895$
 
 And we convert back as $\frac{92.5895}{1+92.5895} = 0.9893$ - like magic, our final posterior reappears. Knowing 89.664 is the factor to multiply by, we can easily run other examples. What of the 10% person? Well:
 
 $\frac{0.10}{1 - 0.10} \times 92.589 = 10.288$ and $\frac{10.288}{1+10.288}=0.9114$
 
-And a 1% person is $\frac{0.01}{1 - 0.01} \times 92.589 = 0.935 and $\frac{0.935}{1+0.935}=0.483$ Ooh, *almost* to 50%, so we know anyone with a prior of 2% who accepts the analysis will be moved all the way to thinking the script more likely to be true than not (specifically, 0.654).
+And a 1% person is $\frac{0.01}{1 - 0.01} \times 92.589 = 0.935$ and $\frac{0.935}{1+0.935}=0.483$ Ooh, *almost* to 50%, so we know anyone with a prior of 2% who accepts the analysis will be moved all the way to thinking the script more likely to be true than not (specifically, 0.654).
 
 What if we thought we had the right prior of 50% but we terribly messed up each analysis and each likelihood factor was twice as large/small as it should be? If we cut each likelihood factor's difference from 1 by half[^Haskell-likelihood-factor], then we get a new total likelihood factor of 17.998, and our new posterior is:
 
@@ -676,7 +676,8 @@ $\frac{0.5}{1 - 0.5} \times 3.087 = 3.087$; $\frac{3.087}{1+3.087} = 0.7553$
 [^Haskell-filtered]: Easy enough:
 
     ~~~{.Haskell}
-    product $ filter (<2) [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5]
+    product (filter (<2)
+        [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5])
     3.0873444556602596
     ~~~
 
