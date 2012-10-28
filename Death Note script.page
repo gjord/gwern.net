@@ -9,7 +9,7 @@ belief: likely
 
 <!--
 TODO:
-question https://twitter.com/Cparlapanides
+question http://twitter.com/Cparlapanides
 when answered, add this essay to Prediction essay
 ping the fanfiction authors with a link
 ping the `stylo` people with a link
@@ -310,7 +310,7 @@ Sanity checks:
 
     Are we? Our posterior of 64% doesn't strike me as a *big* shift from 50%, so we conclude that this second sanity check is satisfied. Good!
 
-A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "[likelihood ratio](!Wikipedia)" of that test. A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be [useful later](#results), so we'll calculate them too as we go along. So:
+A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "[likelihood ratio](!Wikipedia)" of that test (see also [odds ratio](http://wiki.lesswrong.com/wiki/Odds_ratio)). A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be [useful later](#results), so we'll calculate them too as we go along. So:
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.9}{0.5} = 1.8$
 
@@ -635,7 +635,7 @@ The final posterior speaks for itself: 98.9%. By taking into account 9 different
 
 Is 98% *the* correct posterior? Well, that depends both on whether one accepts each individual analysis and also the original prior of 50%. Suppose one accepted the analysis as presented but believes that actually only 10% of leaked scripts are real? Would such a person wind up believing that the leak is real >50%? How can we answer this question without redoing 9 chained applications of Bayes's theorem? At last we will see the benefit of computing likelihood ratios all along: since likelihood ratios omit the prior $P(a)$, they are expressing something independent, and that turns out to be how much we should increase our prior (whatever it is).
 
-To update using a likelihood ratio, we express our $P(a)$ as instead $\frac{P(a)}{1 - P(a)}$, multiply by the likelihood ratio, and convert back! So for our table: we start with $\frac{0.5}{1 - 0.5} = 1$, multiply by 1.8, 0.538...5:
+To update using a likelihood ratio (some more reading material: ["Simplifying Likelihood Ratios"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1495095/ "McGee 2002")), we express our $P(a)$ as instead $\frac{P(a)}{1 - P(a)}$, multiply by the likelihood ratio, and convert back! So for our table: we start with $\frac{0.5}{1 - 0.5} = 1$, multiply by 1.8, 0.538...5:
 
 $\frac{0.5}{1 - 0.5} \times 1.8 \times 0.538 \times 1 \times 2 \times 1.033 \times 1.1237 \times 1.5 \times 2.999 \times 1.831 \times 5 = 92.5895$
 
