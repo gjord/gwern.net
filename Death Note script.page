@@ -7,18 +7,10 @@ status: in progress
 belief: likely
 ...
 
-<!-- REMINDER: if I have to redo all the Bayes calculations, use Laplace's correction in the first test! -->
 <!--
 TODO:
-add titles to all movie & fanfiction links
-link each free-form section to its statistical section and vice-versa
-give where I got the derivation from - link Modafinil & vice-versa?
-add link in index.page
--->
-<!--
-TODO: when finished with analysis, record final prediction (predictions: authorship, whether reply, and whether confirm/deny)
-ping https://twitter.com/Cparlapanides
-add 'experiment' to tags
+question https://twitter.com/Cparlapanides
+when answered, add this essay to Prediction essay
 ping the fanfiction authors with a link
 ping the `stylo` people with a link
 -->
@@ -92,26 +84,26 @@ Samples of the Parlapanides' writing is hard to obtain; the only produced movie 
 
 Samples of fanfiction are easy to acquire. [Fanfiction.net's _Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison. (I also submitted a [Reddit request](http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/), which yielded no suggestions.) The final selection:
 
-- http://www.fanfiction.net/s/5482398/1/Death-Note-Movie-Spoof-Script
-- http://www.fanfiction.net/s/7074737/1/School-Crack-Death-Note
-- http://www.fanfiction.net/s/4684092/1/The-Sweet-Tooth-Show
-- http://www.fanfiction.net/s/7429942/1/Death-Note-Behind-the-Scenes
-- http://www.fanfiction.net/s/5163381/1/L-s-Pregnancy
-- http://www.fanfiction.net/s/3790246/24/Death-Note-the-Abridged-Series
-- http://www.fanfiction.net/s/5550717/1/Polly-Wants-A-Rosary
-- http://www.fanfiction.net/s/8270904/1/Three-Characters
-- http://www.fanfiction.net/s/5454328/9/The-Mansion
-- http://www.fanfiction.net/s/4628655/1/The-Most-Wonderful-Time-Of-The-Year
-- http://www.fanfiction.net/s/5779913/1/Whammy-Boy-s-Gone-Wild
+- ["Death Note Movie Spoof Script"](http://www.fanfiction.net/s/5482398/1/Death-Note-Movie-Spoof-Script), by ipoked-KiraandEdward-andlived
+- ["School Crack: Death Note"](http://www.fanfiction.net/s/7074737/1/School-Crack-Death-Note), by AbyssQueen
+- ["The Sweet Tooth Show"](http://www.fanfiction.net/s/4684092/1/The-Sweet-Tooth-Show), by StrawberriBlood
+- ["Death Note: Behind The Sciences"](http://www.fanfiction.net/s/7429942/1/Death-Note-Behind-the-Scenes), by Adeline-Eveline
+- ["L's Pregnancy"](http://www.fanfiction.net/s/5163381/1/L-s-Pregnancy), by UltraVioletSpectrum
+- ["Death Note: the Abridged Series"](http://www.fanfiction.net/s/3790246/24/Death-Note-the-Abridged-Series), by Jaded Ninja
+- ["Polly Wants A Rosary?"](http://www.fanfiction.net/s/5550717/1/Polly-Wants-A-Rosary), by xXGoody Not-So-Great MeXx
+- ["Three Characters"](http://www.fanfiction.net/s/8270904/1/Three-Characters), by reminiscent-afterthought
+- ["The Mansion"](http://www.fanfiction.net/s/5454328/9/The-Mansion), by doncelladelalunanegra
+- ["The Most Wonderful Time Of The Year"](http://www.fanfiction.net/s/4628655/1/The-Most-Wonderful-Time-Of-The-Year), by Eternal Retrospect
+- ["Whammy Boy's Gone Wild!"](http://www.fanfiction.net/s/5779913/1/Whammy-Boy-s-Gone-Wild), by ScarlettShinigami
 
-As a control-control, I selected some fanfictions that I knew to be of high quality:
+As a control-control, I selected some fanfictions that I knew to be of higher quality:
 
-- http://www.fanfiction.net/s/5782108/1/Harry-Potter-and-the-Methods-of-Rationality
-- http://www.fanfiction.net/s/5588986/1/
-- http://www.fanfiction.net/s/5389450/1/The-Finale-of-the-Ultimate-Meta-Mega-Crossover
-- http://www.fanfiction.net/s/5731071/1/Peggy-Susie
-- http://www.fanfiction.net/s/7864670/1/
-- http://www.fanfiction.net/s/7406866/1/To-the-Stars
+- ["Harry Potter and the Methods of Rationality"](http://www.fanfiction.net/s/5782108/1/Harry-Potter-and-the-Methods-of-Rationality), by Eliezer Yudkowsky
+- ["Trust in God, or, The Riddle of Kyon"](http://www.fanfiction.net/s/5588986/1/), by Yudkowsky
+- ["The Finale of the Ultimate Meta Mega Crossover"](http://www.fanfiction.net/s/5389450/1/The-Finale-of-the-Ultimate-Meta-Mega-Crossover), by Yudkowsky
+- ["Peggy Susie"](http://www.fanfiction.net/s/5731071/1/Peggy-Susie), by Yudkowsky
+- ["Mandragora"](http://www.fanfiction.net/s/7864670/1/), by NothingPretentious
+- ["To The Stars"](http://www.fanfiction.net/s/7406866/1/To-the-Stars), by Hieronym
 
 The fanfictions were converted to text using [Web version FanFictionDownloader](http://www.fanfictiondownloader.net/webversion.php).
 
@@ -121,19 +113,19 @@ With 10 fanfictions, it makes sense to compare with 10 real movie scripts; if we
 2. the use of 10 fanfictions resembling movie scripts to various degrees (previous)
 3. the known Parlapanides work (the _Immortals_ subtitles) being pure dialogue and including no action or scene description which the stylometrics could "pick up on"
 
-The scripts http://www.script-o-rama.com/table.shtml :
+The scripts, drawn from [a collection](http://www.script-o-rama.com/table.shtml):
 
-- http://www.dailyscript.com/scripts/fearandloathing.html
-- http://www.angelfire.com/tx2/leeloo/5thelement.txt
-- http://www.kokos.cz/bradkoun/movies/8mm.txt
-- http://www.vietnamwar.net/84charliemopicscript.htm
-- http://scifiscripts.com/scripts/twelvemonkeys.txt
-- http://www.moviemalls.com/papers/13days.txt
-- http://www.angelfire.com/movies/ridleyscott/script/1492-ConquestOfParadise.txt
-- http://www.scifiscripts.com/scripts/2001.txt
-- http://web.archive.org/web/20060517152008/http://www.wordsurge.com/The_Abyss.txt
-- http://www.aellea.com/script/adventure.txt
-- http://www.scifiscripts.com/scripts/banzai_script.txt
+- [_Fear and Loathing in Las Vegas_](http://www.dailyscript.com/scripts/fearandloathing.html)
+- [_5th Element_](http://www.angelfire.com/tx2/leeloo/5thelement.txt)
+- [_8mm_](http://www.kokos.cz/bradkoun/movies/8mm.txt)
+- [_84C MoPic_](http://www.vietnamwar.net/84charliemopicscript.htm)
+- [_Twelve Monkeys_](http://scifiscripts.com/scripts/twelvemonkeys.txt)
+- [_13 Days_](http://www.moviemalls.com/papers/13days.txt)
+- [_1492: Conquest of Paradise_](http://www.angelfire.com/movies/ridleyscott/script/1492-ConquestOfParadise.txt)
+- [_2001_](http://www.scifiscripts.com/scripts/2001.txt)
+- [_The Abyss_](http://web.archive.org/web/20060517152008/http://www.wordsurge.com/The_Abyss.txt)
+- [_L'avventura_](http://www.aellea.com/script/adventure.txt)
+- [_The Adventures of Buckaroo Banzai Across the 8th Dimension_](http://www.scifiscripts.com/scripts/banzai_script.txt)
 
 For the actual analysis, we use the [computational stylistics](http://sites.google.com/site/computationalstylistics/home) package of [R](!Wikipedia "R (programming language)") code; after downloading [`stylo`](http://sites.google.com/site/computationalstylistics/scripts), the analysis is pretty easy:
 
@@ -259,7 +251,7 @@ Leaks seem to be common in general. Just googling "leaked script", I see recent 
 ## Internal evidence
 ### Authorship
 
-How would we estimate the evidence of "Charley Parlapanides"? The names of the writers could either be:
+How would we estimate the evidence of ["Charley Parlapanides"](#internal)? The names of the writers could either be:
 
 1. present and wrong
 
@@ -273,9 +265,11 @@ How would we estimate the evidence of "Charley Parlapanides"? The names of the w
 
 Given this information, how does the presence of right authorship influence our prior belief of 50%?
 
-Let _a_ be "is real" and _b_ be "has correct authorship". We want to know the probability of _a_ given the observation "correct authorship". Bayes' theorem:
+Let _a_ be "is real" and _b_ be "has correct authorship". We want to know the probability of _a_ given the observation "correct authorship". A version of [Bayes's theorem](!Wikipedia) (stolen from ["An Intuitive Explanation of Bayes's Theorem"](http://yudkowsky.net/rational/bayes); you can see other applications in my [modafinil essay](Modafinil#ordering-with-learning)) goes:
 
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))}$
+
+<!-- REMINDER: if I have to redo all the Bayes calculations, use Laplace's correction in the first test! -->
 
 If you look, the right-hand side of that equation has exactly 4 pieces in its puzzle:
 
@@ -316,7 +310,7 @@ Sanity checks:
 
     Are we? Our posterior of 64% doesn't strike me as a *big* shift from 50%, so we conclude that this second sanity check is satisfied. Good!
 
-A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "[likelihood ratio](!Wikipedia)" of that test. A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be useful later TODO, so we'll calculate them too as we go along. So:
+A final calculation: the probability that "a test gives a true positive" divided by "the probability that a test gives a false positive" ($\frac{P(b|a)}{P(b|\lnot a)}$) is the "[likelihood ratio](!Wikipedia)" of that test. A likelihood ratio of 1 indicates that our test is useless as it is equally likely for real scripts and fake scripts alike; <1 indicates it is evidence *against* being real, and >1 evidence *for* being real. Likelihood ratios will be [useful later](#results), so we'll calculate them too as we go along. So:
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.9}{0.5} = 1.8$
 
@@ -324,7 +318,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.9}{0.5} = 1.8$
 
 #### Author spelling
 
-I remarked that the use of "Charley" was interesting since there were multiple ways to spell his name. Does this spelling serve as evidence for authenticity? It turns out: no! It is either irrelevant or evidence against.
+I also remarked that the [use of "Charley"](#internal) was interesting since there were multiple ways to spell his name. Does this spelling serve as evidence for authenticity? It turns out: no! It is either irrelevant or evidence against.
 
 To use "Charley" as evidence, we need to know what the real man would be more or less likely to write, and what fakes would be more or less likely to write. I have been unable to find out the "ground truth" here; all 3 variants are used in Google:
 
@@ -357,7 +351,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.5}{0.93} = 0.538$
 
 #### Corporate address
 
-Googling "Warner Brothers address" turns up the address used in the PDF as the second hit (it seems to be the official address of all Warner Bros. operations), so we can assume that any faker can find it - *if* they thought to include it. This question is simply: is a corporate address included? Checking, we see addresses are rare:
+Googling "Warner Brothers address" turns up the [address used in the PDF](#internal) as the second hit (it seems to be the official address of all Warner Bros. operations), so we can assume that any faker can find it - *if* they thought to include it. This question is simply: is a corporate address included? Checking, we see addresses are rare:
 of the real, $\frac{1}{10}$; of the fakes, fakes: $\frac{0}{4}$.
 
 1. _a_ = is real
@@ -379,7 +373,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.16}{0.16} = 1$
 
 #### PDF date
 
-We noted the curious fact that while the Parlapanides' work on the script was announced on *30* April, the PDF claims a date of *9* April.
+We noted the [curious fact](#pdf-metadata) that while the Parlapanides' work on the script was announced on *30* April, the PDF claims a date of *9* April.
 
 I did not expect this inversion, but thinking about it in retrospect, this seems consistent with the script being real: the studio commissioned them to write a script, they turned in material, the studio liked it, and the official word went out. (Presumably had the studio disliked it, they would've been quietly paid a small sum and a new writer tried.) An ordinary person like me, however, would date any forgery to after the announcement, reasoning that it would be "safe" to date any script to after the announcement.
 
@@ -402,7 +396,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.5}{0.25} = 2$
 
 #### PDF creator tool
 
-The creator tool was released and pirated before the creation date. It may not seem informative - how could the PDF be created *before* the PDF generator was written? - but it actually is: it tells us that this was not a careless fraud where the person installed the latest & greatest PDF generator, wrote a script, edited the date, and didn't realize that the creating generator & version number was included as well. If the version number had been of a program released anywhere between April and October^[Modulo the previously discussed issue that the leaked script seems to have been circulating in *May* 2009, which would drastically cut down the window to a month or less.] 2009, then this would be a glaring red flag warning that the PDF was fake! In all real PDFs, the generator tool would be *before* the file creation date; but in many fake PDFs, this would be inverted. The case of interest is where the fake author installs a new program between April and October, and then fails to notice the revealing metadata (a conjunction).
+The creator tool listed in [the metadata](#pdf-metadata) was released and pirated before the creation date. It may not seem informative - how could the PDF be created *before* the PDF generator was written? - but it actually is: it tells us that this was not a careless fraud where the person installed the latest & greatest PDF generator, wrote a script, edited the date, and didn't realize that the creating generator & version number was included as well. If the version number had been of a program released anywhere between April and October^[Modulo the previously discussed issue that the leaked script seems to have been circulating in *May* 2009, which would drastically cut down the window to a month or less.] 2009, then this would be a glaring red flag warning that the PDF was fake! In all real PDFs, the generator tool would be *before* the file creation date; but in many fake PDFs, this would be inverted. The case of interest is where the fake author installs a new program between April and October, and then fails to notice the revealing metadata (a conjunction).
 
 1. _a_ = is real
 2. _b_ = date is not inverted
@@ -425,7 +419,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.9585} = 1.033$
 
 #### PDF timezone
 
-The date being set in the right timezone is another piece of evidence: a fraud could live pretty much anywhere in the world and his computer will set the PDF to the wrong timezone and he'd have to remember to manually set it to the "right" timezone, while the Parlapanides live in New Jersey and will likely have their PDF timezone set appropriately (even if they travel, as they must, their computers may not go with them, or if the computers go with them, may not change their timezone settings, or if the computers go with them and change their timezone, they may not create the PDF during the trip). So this definitely seems like at least weak evidence.
+The [metadata date](#pdf-metadata) being set in the right timezone is another piece of evidence: a fraud could live pretty much anywhere in the world and his computer will set the PDF to the wrong timezone and he'd have to remember to manually set it to the "right" timezone, while the Parlapanides live in New Jersey and will likely have their PDF timezone set appropriately (even if they travel, as they must, their computers may not go with them, or if the computers go with them, may not change their timezone settings, or if the computers go with them and change their timezone, they may not create the PDF during the trip). So this definitely seems like at least weak evidence.
 
 How to estimate the chance that the fake author would live in a different timezone? If the fraud lived in the US (as is overwhelmingly likely and I'll assume for the sake of conservatism), the US spans something like 6 distinct timezones. Timezones split up roughly by states so people can estimate the population per timezone; stealing [one such estimate](http://answers.google.com/answers/threadview?id=714986 "Q: Population statistics by time zone"):
 
@@ -457,7 +451,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.881} = 1.1237$
 
 #### Writing/formatting
 
-We could isolate multiple tests here:
+We could isolate multiple tests here from my [freeform observations](#writingformatting):
 
 1. length
 
@@ -492,7 +486,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.66} = 1.5$
 
 #### Plot
 
-The earlier plot summary conveyed the "Hollywood" feel of the plot but unfortunately it's hard to judge from localization: a _DN_ fan attempting to imitate a Hollywood-targeted script might rename Light to "Luke", might simplify the plot considerably (there is precedent in the Japanese live-actions movies [_Death Note_](!Wikipedia "Death Note (film)#Death Note"), [_Death Note: The Last Name_](!Wikipedia "Death Note (film)#Death_Note: The Last_Name") & _[L: Change the World](!Wikipedia)_), might set it in NYC (Tokyo is obviously out of the question, and NYC seems to be a default location of crime-related movies), and so on.
+The earlier [plot summary](#plot-summary) conveyed the "Hollywood" feel of the plot but unfortunately it's hard to judge from localization: a _DN_ fan attempting to imitate a Hollywood-targeted script might rename Light to "Luke", might simplify the plot considerably (there is precedent in the Japanese live-actions movies [_Death Note_](!Wikipedia "Death Note (film)#Death Note"), [_Death Note: The Last Name_](!Wikipedia "Death Note (film)#Death_Note: The Last_Name") & _[L: Change the World](!Wikipedia)_), might set it in NYC (Tokyo is obviously out of the question, and NYC seems to be a default location of crime-related movies), and so on.
 
 More importantly, the plot includes several [idiot-ball](http://tvtropes.org/pmwiki/pmwiki.php/Main/IdiotBall)-related changes that I think any _DN_ fan competent enough to write this fake would never have made, even in the name of localization and Hollywoodization: the incompetent bus ID trick comes to mind.
 
@@ -508,7 +502,7 @@ A likelihood ratio of 3.6 would be the single strongest set of arguments we have
 
 #### Stylometrics
 
-This is straightforward: if a fake script gets paired up randomly, then it had just a $\frac{1}{15}$ chance of pairing up with _Immortals_. Even if we restrict the matches to the other movie scripts, there were 10 movie scripts and 2 oddballs for 12 total or 6 pairings, giving $\frac{1}{6}$ chance of randomly pairing up with _Immortals_. The real question is: if the script is real, what chance does it have of pairing up with something else by the same authors? I included 4 fanfictions by the same author (Eliezer Yudkowsky), and 2 wound up pairing (with the other 2 in the same overall cluster but more distant from the pair and each other), giving a rough guess of 50%; this is convenient since our default "I have no idea at all" guess for any binary question is 50%, and even if we apply Laplace, we still get 50% ($\frac{2+1}{4+2} = \frac{3}{6}$ = 50%). So as usual, we will make the most conservative assumption for the fake, and keep our pessimistic assumption about the real.
+The [stylometric result](#stylometrics) is straightforward: if a fake script gets paired up randomly, then it had just a $\frac{1}{15}$ chance of pairing up with _Immortals_. Even if we restrict the matches to the other movie scripts, there were 10 movie scripts and 2 oddballs for 12 total or 6 pairings, giving $\frac{1}{6}$ chance of randomly pairing up with _Immortals_. The real question is: if the script is real, what chance does it have of pairing up with something else by the same authors? I included 4 fanfictions by the same author (Eliezer Yudkowsky), and 2 wound up pairing (with the other 2 in the same overall cluster but more distant from the pair and each other), giving a rough guess of 50%; this is convenient since our default "I have no idea at all" guess for any binary question is 50%, and even if we apply Laplace, we still get 50% ($\frac{2+1}{4+2} = \frac{3}{6}$ = 50%). So as usual, we will make the most conservative assumption for the fake, and keep our pessimistic assumption about the real.
 
 1. _a_ = is real
 2. _b_ = is paired with _Immortals_
@@ -526,15 +520,15 @@ As expected, the stylometrics was powerful evidence.
 ## External evidence
 ### Dating
 
-The argument here seems to be of the form that a PDF dated April 2009 is consistent with the estimated timeline for the true script. But what would be inconsistent? Well, a PDF dated *after* April 2009: such a PDF would raise the question "what exactly the brothers were doing from June 2008 all the way to this counterfactual post-April 2009 date?"
+The [argument there](#dating) seems to be of the form that a PDF dated April 2009 is consistent with the estimated timeline for the true script. But what would be inconsistent? Well, a PDF dated *after* April 2009: such a PDF would raise the question "what exactly the brothers were doing from June 2008 all the way to this counterfactual post-April 2009 date?"
 
-But it turns out we already used this argument! TODO:link We used it as the PDF date inversion test. Can we use the April date as evidence again and double-count it? I don't think we should since it's just another way of saying "April and earlier is evidence for it being real, post-April is evidence against", regardless of whether we justify pre-April dates as being during the writing period or as being something a forger wouldn't dare do. This argument turns out to be redundant with the previous internal evidence (which in hindsight, starts to sound like we ought to have classified it as external evidence).
+But it turns out we already used this argument! We used it as the [PDF date inversion](#pdf-date) test. Can we use the April date as evidence again and double-count it? I don't think we should since it's just another way of saying "April and earlier is evidence for it being real, post-April is evidence against", regardless of whether we justify pre-April dates as being during the writing period or as being something a forger wouldn't dare do. This argument turns out to be redundant with the previous internal evidence (which in hindsight, starts to sound like we ought to have classified it as external evidence).
 
 What we *might* be justified in doing is going back to the PDF date inversion test and strengthening it since now we have 2 reasons to expect pre-April dates. But as usual, we will be conservative and leave out this strengthening.
 
 ### Credit
 
-This is an interesting external argument as it's the only one dependent purely on the passage of time. It's a sort of [argument from silence](!Wikipedia), or more specifically, a [hope function](/docs/1994-falk "'The Ups and Downs of the Hope Function In a Fruitless Search', Falk et al 1994")
+[This](#credit) is an interesting external argument as it's the only one dependent purely on the passage of time. It's a sort of [argument from silence](!Wikipedia), or more specifically, a [hope function](/docs/1994-falk "'The Ups and Downs of the Hope Function In a Fruitless Search', Falk et al 1994").
 
 #### Hope function
 
@@ -569,7 +563,7 @@ $\frac{0.99}{0.54055} = 1.831$
 
 ### Official statements
 
-The 2011 descriptions of the plot of the real script match the leaked script in several ways:
+The [2011 descriptions](#official-statements) of the plot of the real script match the leaked script in several ways:
 
 1. no Ryuk or shinigamis
 
@@ -592,7 +586,7 @@ We could assume that a fake script has 50% chance of making each change and item
 
 ### Legal takedowns
 
-Our observation here is that the two `sendspace` links hosting the PDF went dead within days of the _Anime Vice_ post. We don't know for sure that the links went dead due to takedown, and we don't know for sure that a takedown would be sent only if the script was real. These uncertainties transform what seems like a slam dunk proof of authenticity ("a takedown would be done only if the studio complained, and the studio would complain only if it was real! A takedown was down, therefore it was real!") into just another probabilistic question for us.
+[Our observation](#legal-takedowns) here is that the two `sendspace` links hosting the PDF went dead within days of the _Anime Vice_ post. We don't know for sure that the links went dead due to takedown, and we don't know for sure that a takedown would be sent only if the script was real. These uncertainties transform what seems like a slam dunk proof of authenticity ("a takedown would be done only if the studio complained, and the studio would complain only if it was real! A takedown was down, therefore it was real!") into just another probabilistic question for us.
 
 Do people send fake takedowns to file hosts? In my experience, a few people (based on watching people upload music and manga etc.) attract trolls dedicated to sending complaints about anything they post, and sometimes entire sites lose their file hosting (eg. in May 2012, [MikuDB](http://mikudb.com/12582/mediafire/) lost hosting for >1000 [Vocaloid](!Wikipedia) & [doujin music](!Wikipedia) albums) but in general downloads work for years afterwards. An instructive sample is to look at the most recent [MediaFire](!Wikipedia)[-related submissions to Reddit](http://www.reddit.com/domain/mediafire.com/) (from the last 8 days when I checked) and see how many of the first 25 are dead for copyright-related reasons; when I tried, only 1 was blocked over copyright^[1 link was dead because "File Belongs to Non-Validated Account" and another link was dead because "The file you attempted to download is an archive that is part of a set of archives. MediaFire does not support unlimited downloads of split archives and the limit for this file has been reached. MediaFire understands the need for users to transfer very large or split archives, up to 10GB per file, and we offer this service starting at $1.50 per month." Neither reason would necessarily be applicable to a 3MB PDF script.], giving a 4% takedown rate. I regard a fake takedown within days as a remote chance, but let's call it 5%.
 
@@ -630,7 +624,7 @@ PDF date        0.49     0.51             0.5           0.25               0.658
 PDF creator     0.658    0.342            0.99          0.9585             0.6652      1.033
 PDF timezone    0.6652   0.3349           0.99          0.881              0.691       1.1237
 script length   0.691    0.309            0.99          0.66               0.7703      1.5
-Hollywood plot  0.7703   0.2297           ?             ?                  ?           ? (>1)
+Hollywood plot  0.7703   0.2297           ~1.0          ?                  ?           ? (>1)
 stylometrics    0.7703   0.2297           0.5           0.1667             0.9096      2.999
 dating          0.9096   0.0904           ?             ?                  ?           ? (>1)
 credit          0.9096   0.0904           0.99          0.54055            0.9485      1.831
@@ -707,9 +701,9 @@ This would be the sort of discussion even bitter foes could engage in productive
 
 Having done all this, the final task is obvious: ask one of the Parlapanides. A Twitter account was already linked, so asking is easy. Will they reply? 2009 was a long time ago, but 2011 (when they were replaced) was not so long ago. Since the script was scrapped, one would hope they would feel free to reply or reply honestly, but we can't know.
 
-I [suspect](TODO) he will, but I'm not so [sanguine](TODO) he will give a clear yes or no.
-
+I [suspect](http://predictionbook.com/predictions/8989 "Charles Parlapanides will reply to my message on Twitter within 1 month: 60%") he will, but I'm not so [sanguine](http://predictionbook.com/predictions/8990 "Charles Parlapanides will reply to my message on Twitter within 1 month and will clearly confirm or deny authorship: 40%") he will give a clear yes or no. [If he does](http://predictionbook.com/predictions/8991 "Conditional on a reply and clear answer, Charles Parlapanides will claim Parlapanides' authorship: 85%"), I have ~85% confidence that he will confirm they did write it. Why 85%? I haven't been able to come up with good arguments why the script is a fake, which suggests I am now personally invested in it being real and so my final 98% calculation is an overestimate. (One shouldn't be foolishly confident in one's statistics.)
 -->
+
 <!--
 # External links
 
