@@ -242,7 +242,7 @@ I find this external legal evidence compelling, and in conjunction with the inte
 
 # Analysis
 
-We could leave matters there with a bald statement that the evidence is "compelling", but [Richard Carrier](!Wikipedia) recently offered in _Proving History: Bayes's Theorem and the Quest for the Historical Jesus_ (2012; [2008 handout](http://www.richardcarrier.info/CarrierDec08.pdf "Bayes Theorem for Beginners: Formal Logic and Its Relevance to Historical Method")) an inspiring example of how matters of history and authorship could be more rigorously investigated with some simple statistical thinking, and there's no reason we cannot try to give some rough numbers to each previous piece of evidence. Even if we can only agree on whether a piece of evidence is for or against the hypothesis of the Parlapanides' authorship, and not how strong a piece of evidence it is, the analysis will be useful in demonstrating how converging weak lines of reasoning can yield a strong conclusion.
+We could leave matters there with a bald statement that the evidence is "compelling", but [Richard Carrier](!Wikipedia) recently offered in _Proving History: Bayes's Theorem and the Quest for the Historical Jesus_ (2012; [2008 handout](http://www.richardcarrier.info/CarrierDec08.pdf "Bayes's Theorem for Beginners: Formal Logic and Its Relevance to Historical Method")) an inspiring example of how matters of history and authorship could be more rigorously investigated with some simple statistical thinking, and there's no reason we cannot try to give some rough numbers to each previous piece of evidence. Even if we can only agree on whether a piece of evidence is for or against the hypothesis of the Parlapanides' authorship, and not how strong a piece of evidence it is, the analysis will be useful in demonstrating how converging weak lines of reasoning can yield a strong conclusion.
 
 ## Priors
 
@@ -287,7 +287,7 @@ If you look, the right-hand side of that equation has exactly 4 pieces in its pu
     This is the negation of the previous. What is the negation of 50%, its contrary? 50%.
 3. $P(b|a)$
 
-    Remember, we read the pipe notation *backwards*, so this is 'the probability that a real script (_a_) will include authorship' (_b_)'. We said that 9/10 of good scripts include authorship, so this is 90% or 0.9. (One way to compensate for the small sample size of 10 scripts would be to use [Laplace's rule of succession](!Wikipedia), $\frac{n+1}{m+2}$, which would yield $\frac{9+1}{10+2}= 0.83.)
+    Remember, we read the pipe notation *backwards*, so this is 'the probability that a real script (_a_) will include authorship' (_b_)'. We said that 9/10 of good scripts include authorship, so this is 90% or 0.9. (One way to compensate for the small sample size of 10 scripts would be to use [Laplace's rule of succession](!Wikipedia), $\frac{n+1}{m+2}$, which would yield $\frac{9+1}{10+2}= 0.83$.)
 4. $P(b|\lnot a)$
 
     Finally, we have 'the probability that a fake script will include authorship". We looked at 4 fake scripts and 2 included authorship, which is another 50% or 0.5.
@@ -402,7 +402,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.5}{0.25} = 2$
 
 #### PDF creator tool
 
-The creator tool was released and pirated before the creation date. It may not seem informative - how could the PDF be created *before* the PDF generator was written? - but it actually is: it tells us that this was not a careless fraud where the person installed the latest & greatest PDF generator, wrote a script, edited the date, and didn't realize that the creating generator & version number was included as well. If the version number had been of a program released anywhere between April and October 2009, then this would be a glaring red flag warning that the PDF was fake! In all real PDFs, the generator tool would be *before* the file creation date; but in many fake PDFs, this would be inverted. The case of interest is where the fake author installs a new program between April and October, and then fails to notice the revealing metadata (a conjunction).
+The creator tool was released and pirated before the creation date. It may not seem informative - how could the PDF be created *before* the PDF generator was written? - but it actually is: it tells us that this was not a careless fraud where the person installed the latest & greatest PDF generator, wrote a script, edited the date, and didn't realize that the creating generator & version number was included as well. If the version number had been of a program released anywhere between April and October^[Modulo the previously discussed issue that the leaked script seems to have been circulating in *May* 2009, which would drastically cut down the window to a month or less.] 2009, then this would be a glaring red flag warning that the PDF was fake! In all real PDFs, the generator tool would be *before* the file creation date; but in many fake PDFs, this would be inverted. The case of interest is where the fake author installs a new program between April and October, and then fails to notice the revealing metadata (a conjunction).
 
 1. _a_ = is real
 2. _b_ = date is not inverted
@@ -411,7 +411,7 @@ The creator tool was released and pirated before the creation date. It may not s
 5. $P(b|a)$ = probability a real script will include non-inverted date = 0.99 (why not 100%? Well, shit happens.)
 6. $P(b|\lnot a)$ = probability a fake script will include a non-inverted date = 1 - 0.0415 = 0.9585
 
-    This is a hard estimate. Let's think about the opposite: what is the chance that a faker *will* invert date? What leads to that happening? Suppose everyone replaces their computer every 5 years; what is the chance this replacement (and ensuring upgrade of all software) happens in the 5 month window between April and October 2009? Well, it's 5 / 5*12 = 1/12. What's the chance they then fail to notice? Unless they're really skilled I'd expect them to usually miss it, but let's be conservative and say they usually notice it and fix it, and have only a 40% chance of missing it. An inversion requires both the upgrade (8.3%) and then a miss (40%) for a final chance of 4.15%! This is so small that we know in advance that it's not going to make a big difference and may not have been worth thinking about.
+    This is a hard estimate. Let's think about the opposite: what is the chance that a faker *will* invert date? What leads to that happening? Suppose everyone replaces their computer every 5 years; what is the chance this replacement (and ensuring upgrade of all software) happens in the 5 month window between April and October 2009? Well, it's $\frac{5}{5 \times 12} = \frac{1}{12}$. What's the chance they then fail to notice? Unless they're really skilled I'd expect them to usually miss it, but let's be conservative and say they usually notice it and fix it, and have only a 40% chance of missing it. An inversion requires both the upgrade (8.3%) and then a miss (40%) for a final chance of 4.15%! This is so small that we know in advance that it's not going to make a big difference and may not have been worth thinking about.
 
 $\frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.658}{(0.99 \times 0.658) + (0.9585 \times 0.342)} = 0.66524$
 
@@ -479,7 +479,7 @@ This leaves just length as a test:
 2. _b_ = is full-length
 3. $P(a)$ = probability of being real = 0.691
 4. $P(\lnot a)$ = probability of being not real = 1 - 0.691 = 0.309
-5. $P(b|a)$ = probability a real script will be full-length = 99% (well, obviously, but shit happens) = 0.99
+5. $P(b|a)$ = probability a real script will be full-length = 99% (not 100%: shit happens) = 0.99
 6. $P(b|\lnot a)$ = probability a fake script will be full-length = 3/4, by Laplace, 3+1/4+2 = 4/6 = 0.66
 
 Substitute:
@@ -534,7 +534,7 @@ What we *might* be justified in doing is going back to the PDF date inversion te
 
 ### Credit
 
-This is an interesting external argument as it's the only one dependent purely on the passage of time. It's a sort of [argument from silence](!Wikipedia), or more specifically, a [hope function](/docs/1994-falk "The Ups and Downs of the Hope Function In a Fruitless Search")
+This is an interesting external argument as it's the only one dependent purely on the passage of time. It's a sort of [argument from silence](!Wikipedia), or more specifically, a [hope function](/docs/1994-falk "'The Ups and Downs of the Hope Function In a Fruitless Search', Falk et al 1994")
 
 #### Hope function
 
@@ -544,20 +544,20 @@ $L_i = \frac{\frac{n - i}{n} \times L_0}{\frac{n - i}{n} \times L_0 + (1 - L_0)}
 
 So for example: if there's _n_=10 boxes, we searched _i_=5 without finding the thing, and we were only _L~0~_=50% sure the thing was there in the first place, our new guess about whether the thing was there:
 
-$\frac{(10 - 5) \times 0.5}{10 - 5 \times 0.5} = \frac{2.5}{7.5} = 0.33$
+$\frac{\frac{10 - 5}{10} \times 0.5}{\frac{10 - 5}{10} \times 0.5 + (1 - 0.5)} = \frac{0.5 \times 0.5}{0.5 \times 0.5 + 0.5} = \frac{0.25}{0.25 + 0.5} = \frac{0.25}{0.75} = \frac{1}{3} = 0.33$
 
-33% seems reasonable (and interestingly, it's not simply $50\% \times \frac{5}{10} = 25\%$).
+In this example, 33% seems like a reasonable answer (and interestingly, it's not simply $50\% \times \frac{5}{10} = 25\%$).
 
 ### Credit & hope function
 
-In the case of "taking credit", we can imagine the boxes as years, and each year passed is a box opened. As of October 2012, we have opened 3 boxes since the October 2009 leak. How many boxes total should there be? I think 20 boxes is more than generous: after 2 decades, the _DN_ franchise probably won't even be active^[Quick, of the anime aired 20 years ago [in](!Wikipedia "Category:1992 anime") [1992](http://www.anime-planet.com/anime/years/1992), how many are active franchises? Of the 48 on the first page, maybe 3 or 4 seem active.] - if anyone was going to claim credit, they probably would've done so by then. What's our prior probability that they will do so at all? Well, of the 4 faked scripts, the author of the _Mr. Peepers_ script took credit but the other 3 seem to be unknown - but it's early days yet, so we'll punt with a 50%. And of course, if the script is real, very few people are going to falsely claim authorship (thereby claiming it's fake?). So our setup looks like this:
+In the case of "taking credit", we can imagine the boxes as years, and each year passed is a box opened. As of October 2012, we have opened 3 boxes since the May/October 2009 leak. How many boxes total should there be? I think 20 boxes is more than generous: after 2 decades, the _DN_ franchise probably won't even be active^[Quick, of the anime aired 20 years ago [in](!Wikipedia "Category:1992 anime") [1992](http://www.anime-planet.com/anime/years/1992), how many are active franchises? Of the 48 on the first page, maybe 3 or 4 seem active.] - if anyone was going to claim credit, they probably would've done so by then. What's our prior probability that they will do so at all? Well, of the 4 faked scripts, the author of the _Mr. Peepers_ script took credit but the other 3 seem to be unknown - but it's early days yet, so we'll punt with a 50%. And of course, if the script is real, very few people are going to falsely claim authorship (thereby claiming it's fake?). So our setup looks like this:
 
 1. _a_ = is real
 2. _b_ = no one has claimed authorship
 3. $P(a)$ = probability of being real = 0.9096
 4. $P(\lnot a)$ = probability of being not real = 1 - 0.9096 = 0.0904
 5. $P(b|a)$ = probability a real script will have no ownership claim = 99% (shit happens^[Or more precisely, sometimes people do falsely claim authorship and even sue studios over it; but if you picked 100 random scripts, would you expect to find more than 1 such instances? Keeping in mind most scripts never turn into movies but die in [development hell](!Wikipedia)!]) = 0.99
-6. $P(b|\lnot a)$ = probability a fake script will have no ownership claim = probability someone *will* claim it is the hope function with _n_=20, _i_=3, _L~0~_=50% = $\frac{\frac{20 - 3}{20} \times 0.5}{\frac{20 - 3}{20} \times 0.5 + (1 - 0.5)} = 0.45945$, so the probability someone will *not* is $1 - 0.45945 = 0.54055$.
+6. $P(b|\lnot a)$ = probability a fake script will have no ownership claim = probability someone *will* claim it is the hope function with _n_=20, _i_=3, _L~0~_=50% = $\frac{\frac{20 - 3}{20} \times 0.5}{\frac{20 - 3}{20} \times 0.5 + (1 - 0.5)} = 0.45945$, so the probability someone will *not* is $1 - 0.45945 = 0.54055$
 
 Then Bayes:
 
@@ -569,7 +569,53 @@ $\frac{0.99}{0.54055} = 1.831$
 
 ### Official statements
 
-### Legal take-downs
+The 2011 descriptions of the plot of the real script match the leaked script in several ways:
+
+1. no Ryuk or shinigamis
+
+    This is an interesting change. I don't think it's likely a faker would remove them: without them, there's no explanation of how a Death Note can exist, there's no comic relief, some plot mechanics change (like dealing with the hidden cameras), etc. Certainly there's no reason to remove them because they're hard to film - that's what CGI is for, and who in the world does SFX or CGI better than Hollywood?
+2. Light ends the story good and not evil
+3. Light seeks vengeance
+
+    Items 2 & 3 seem like they would often be connected: if Light is to be a good character, what reason does he have to use a Death Note? Vengeance is one of the few socially permissible uses. Of course, Light could start as a good character using the Death Note for vengeance and slide down to an evil ending, but it's not as likely.
+4. Light seeking vengeance for a *friend* rather than his *mother*
+
+    This item is contradictory, but only weakly so: a switch between mother and friend is an easy change to make, one which doesn't much affect the rest of the plot.
+
+On net, these 4 items clearly favor the hypothesis of the script being real. But how much? How much would we expect the fan or faker to avoid Hollywood-style changes compared to actual Hollywood screenwriters like the Parlapanides?
+
+This is the exact same question we already considered in the plot section of internal evidence! Now that we have external attestation that some of the plot changes I identified back in 2009 as being Hollywood-style are in the real script, can we do calculations?
+
+I don't think we can. The external attestation proves I was right in fingering those plot changes as Hollywood-style, but this is essentially a massive increase in $P(b|a)$ (the chance a real script will have Hollywood-style changes is now ~100%)... but what we didn't know before, and still do not know now, is the other half of the problem, $P(b|\lnot a)$ (the chance a *fake* script will have similar Hollywood-style changes).
+
+We could assume that a fake script has 50% chance of making each change and item 4 negates one of the others (even though it's really weaker), for a total likelihood ratio of $\frac{1.0}{0.5} + \frac{1.0}{0.5} + \frac{1.0}{0.5} - \frac{0.5}{1.0} = 5.5$, but like before, we have no real ground to defend the 50% guess and so we will be conservative and drop this argument like its sibling argument.
+
+### Legal takedowns
+
+Our observation here is that the two `sendspace` links hosting the PDF went dead within days of the _Anime Vice_ post. We don't know for sure that the links went dead due to takedown, and we don't know for sure that a takedown would be sent only if the script was real. These uncertainties transform what seems like a slamdunk proof of authenticity ("a takedown would be done only if the studio complained, and the studio would complain only if it was real! A takedown was down, therefore it was real!") into just another probabilistic question for us.
+
+Do people send fake takedowns to file hosts? In my experience, a few people (based on watching people upload music and manga etc.) attract trolls dedicated to sending complaints about anything they post, and sometimes entire sites lose their file hosting (eg. in May 2012, [MikuDB](http://mikudb.com/12582/mediafire/) lost hosting for >1000 [Vocaloid](!Wikipedia) & [doujin music](!Wikipedia) albums) but in general downloads work for years afterwards. An instructive sample is to look at the most recent [MediaFire](!Wikipedia)[-related submissions to Reddit](http://www.reddit.com/domain/mediafire.com/) (from the last 8 days when I checked) and see how many of the first 25 are dead for copyright-related reasons; when I tried, only 1 was blocked over copyright^[1 link was dead because "File Belongs to Non-Validated Account" and another link was dead because "The file you attempted to download is an archive that is part of a set of archives. MediaFire does not support unlimited downloads of split archives and the limit for this file has been reached. MediaFire understands the need for users to transfer very large or split archives, up to 10GB per file, and we offer this service starting at $1.50 per month." Neither reason would necessarily be applicable to a 3MB PDF script.], giving a 4% takedown rate. I regard a fake takedown within days as a remote chance, but let's call it 5%.
+
+Do studios send takedowns for fanfiction? No, essentially never: it's a big thing when an author like Anne Rice chooses to crack on fanfiction, or when J.K. Rowling sues the publisher of a fan-work. The 24,246 _DN_ fanfics on `FanFiction.net` stand testimony to the disinclination of studios and publishers to crack down. This chance might as well be zero, but we'll call it 5% anyway for symmetry.
+
+Do studios send takedowns for real scripts? Yes, frequently (much to the [disgust](http://www.mypdfscripts.com/concerning-mediafire-and-the-current-lack-of-scripts/ "Concerning MediaFire and the Current Lack of Scripts...") of script collectors). The previously-mentioned _TMNT_ script leak seems to have been partially suppressed with DMCA takedowns. Isn't it quite plausible that this is what happened? But let's call it just 50% as usual. Maybe plenty of real scripts get posted to news sites and the big studio like Warner Brothers does absolutely nothing about it.
+
+Once we have settled on 5%/5%/50%, it's as routine as usual to work out the new posterior:
+
+1. _a_ = is real
+2. _b_ = copies get taken down
+3. $P(a)$ = probability of being real = 0.9485
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.9485 = 0.05149
+5. $P(b|a)$ = probability a real script will have copies taken down = 50% = 0.50
+6. $P(b|\lnot a)$ = probability a fake script will have copies taken down = 5%+5% = 0.10
+
+Then Bayes:
+
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} =  \frac{0.5 \times 0.9485}{(0.5 \times 0.9485) + (0.1 \times 0.05149)} = 0.9893$
+
+Likelihood ratio:
+
+$\frac{0.50}{0.10} = 5$
 
 ## Results
 <!-- table of all tests, parameters, likelihood ratios etc -->
