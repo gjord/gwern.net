@@ -9,11 +9,14 @@ belief: likely
 
 <!--
 TODO:
-question http://twitter.com/Cparlapanides
-when answered, add this essay to Prediction essay
+when answered by Charles Parlapanides, add this essay to Prediction essay
 ping the fanfiction authors with a link
 ping the `stylo` people with a link
+ping Anime Vice and other DN script-related forums
+share to Google+, r/JapaneseAnimation, LessWrong, StumbleUpon
 -->
+
+> We give a history of the leaked script, discuss internal & external evidence for its authenticity including stylometrics; and then give a simple step-by-step Bayesian analysis of each point. We finish with high confidence in the script's authenticity, discussion of how this analysis was surprisingly enlightening, and what followup work the analysis suggests would be most valuable.
 
 Beginning in May 2009^[The earliest mention I've been able to find is a French site which [posted on 17 May 2009](http://web.archive.org/web/20090525025525/http://www.death-note.fr/home.php?page=news3) a translation of the beginning of the leaked script; no source is given, and it's not clear who did the translation, what script was used, or where the script was obtained. So while the script was clearly circulating by mid-May, I can't date the leak any earlier than date.] and up to October 2009, [there appeared online](http://www.animevice.com/news/rumor-alert-death-note-movie-script-leaked/2653/ "Rumor Alert: Death Note Movie Script Leaked?") a [PDF file](http://www.mediafire.com/?ce13d3xdazwxj09) ([mirror](http://dl.getdropbox.com/u/74617/Death%20Note%20Script.pdf)) claiming to be a script for the [Hollywood remake](!Wikipedia "Death Note (film)#Remake") of the _[Death Note](!Wikipedia)_ anime (see Wikipedia or my own little [Death Note Ending]() essay for a general description). Such a leak inevitably raises the question: is it genuine? Of course the studio had "no comment".
 
@@ -21,7 +24,7 @@ I was skeptical at first - how many unproduced screenplays get leaked? I thought
 
 # Plot summary
 
-The plot is curious. Ryuk and other [shinigami](!Wikipedia) are entirely omitted. Light Yagami is renamed "Luke Murray" (as expected of Greek writers like the Parlapanides?), and now lives in New York City, already in college. (Again, an appropriate setting for 2 screenwriters who grew up in New Jersey.) The plot is generally simplified.
+The plot is curious. Ryuk and other [shinigami](!Wikipedia) are entirely omitted, as is Misa Amane (the latter might be expected: it's just one movie). Light Yagami is renamed "Luke Murray" (as expected of Greek writers like the Parlapanides? "Luke" is a nice touch), and now lives in New York City, already in college. (Again, an appropriate setting for 2 screenwriters who grew up in New Jersey.) The plot is generally simplified.
 
 What is more interesting is the changed emphases. Luke has been given a murdered mother, and much of his efforts go to tracking down the murderer (who, of course, escaped conviction for that murder). The Death Note is unambiguously depicted as a tool for evil, and a malign influence in its own right. There is minimal interest in the idea that Kira might be good. The Japanese aspects are minimized and treated as exotic curios, in the worst Hollywood tradition (Luke goes to a Japanese acquaintance for a translation of the kanji for 'shinigami', who, of course, being a primitive native, shudders in fear and flees the memsahib... oh, sorry, wrong era. But the description is still accurate.) [T-Mobile Sidekick](!Wikipedia) cellphones are mentioned and used a lot (6 times by my count).
 
@@ -82,7 +85,7 @@ The next step in assessing internal evidence is hardcore: we start running [styl
 
 Samples of the Parlapanides' writing is hard to obtain; the only produced movie with their script is the 2000 _Everything For A Reason_ and the 2011 [_Immortals_](!Wikipedia "Immortals (2011 film)") (so any analysis in 2009 would've been difficult). I could not find the script for either available anywhere for download, so I settled for `OpenSubtitles.org`'s subtitles in [.srt](!Wikipedia) format and stripped the timings: `grep -v [0-9] Immortals.2011.DVDscr.Xvid-SceneLovers.srt  > 2011-parlapanides-immortals.txt` (There are no subtitles available for the other movie, it seems.)
 
-Samples of fanfiction are easy to acquire. [Fanfiction.net's _Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison. (I also submitted a [Reddit request](http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/), which yielded no suggestions.) The final selection:
+Samples of fanfiction are easy to acquire. [FanFiction.Net's](!Wikipedia "FanFiction.Net") [_Death Note_ section](http://www.fanfiction.net/anime/Death-Note/) (24,246 fanfics), sort by: number of favoriting users, completed, in English, and >5000 words. This yields 2,028 results but offers no way to filter by fanfictions written in a screenplay or script style, and no entry in the first 5 pages mentions "script" or "screenplay" so it is a dead end. The dedicated [play/musical section](http://www.fanfiction.net/play/) lists nothing for "Death Note". Googling `"Death Note" (script OR screenplay OR teleplay) -skit site:fanfiction.net/s/` offers 8,990 hits, unfortunately, the overwhelming majority are either irrelevant (eg. using "script" in the sense of cursive writing) or too short or too low quality to make a plausible comparison. (I also submitted a [Reddit request](http://www.reddit.com/r/FanFiction/comments/122qeg/request_death_note_scripts_or_telescreenplays/), which yielded no suggestions.) The final selection:
 
 - ["Death Note Movie Spoof Script"](http://www.fanfiction.net/s/5482398/1/Death-Note-Movie-Spoof-Script), by ipoked-KiraandEdward-andlived
 - ["School Crack: Death Note"](http://www.fanfiction.net/s/7074737/1/School-Crack-Death-Note), by AbyssQueen
@@ -225,7 +228,7 @@ The original _Anime Vice_ author wrote
 > Rather than run with the story then, I called Lin Pictures to see if they could confirm or deny whether the script was actually theirs or a fan-written phony. I was told I would get a call back, but never did. I tried calling back a second time earlier this week, this time passing on considerably more information, and still no call back. As such, I have come to the conclusion that the company isn't overly concerned with the script, which suggests several possibilities to me:
 >
 > 1. It's not a legitimate script at all, so they're not worried about it.
-> 2. It's an old draft, significantly different from the current version, so they're not worried about it.
+> 2. It's an old draft...different from the current version, so they're not worried about it.
 > 3. The script was intentionally leaked for promotional purposes or to gauge fan reaction.
 
 I don't buy it. If it is a fake script, why not simply deny it - either time? It is not as if companies usually have any trouble denying things. A "no comment" is more consistent with it being real and them also sending takedowns.
@@ -234,7 +237,9 @@ I find this external legal evidence compelling, and in conjunction with the inte
 
 # Analysis
 
-We could leave matters there with a bald statement that the evidence is "compelling", but [Richard Carrier](!Wikipedia) recently offered in _Proving History: Bayes's Theorem and the Quest for the Historical Jesus_ (2012; [2008 handout](http://www.richardcarrier.info/CarrierDec08.pdf "Bayes's Theorem for Beginners: Formal Logic and Its Relevance to Historical Method")) an inspiring example of how matters of history and authorship could be more rigorously investigated with some simple statistical thinking, and there's no reason we cannot try to give some rough numbers to each previous piece of evidence. Even if we can only agree on whether a piece of evidence is for or against the hypothesis of the Parlapanides' authorship, and not how strong a piece of evidence it is, the analysis will be useful in demonstrating how converging weak lines of reasoning can yield a strong conclusion.
+We could leave matters there with a bald statement that the evidence is "compelling", but [Richard Carrier](!Wikipedia) recently offered in [_Proving History: Bayes's Theorem and the Quest for the Historical Jesus_](http://www.amazon.com/Proving-History-Bayess-Theorem-Historical/dp/1616145595) (2012; [2008 handout](http://www.richardcarrier.info/CarrierDec08.pdf "Bayes's Theorem for Beginners: Formal Logic and Its Relevance to Historical Method")) an inspiring example of how matters of history and authorship could be more rigorously investigated with some simple statistical thinking, and there's no reason we cannot try to give some rough numbers to each previous piece of evidence. Even if we can only agree on whether a piece of evidence is for or against the hypothesis of the Parlapanides' authorship, and not how strong a piece of evidence it is, the analysis will be useful in demonstrating how converging weak lines of reasoning can yield a strong conclusion.
+
+We'll principally use Bayes's theorem, no math more advanced than multiplication or division, common sense/[Fermi estimaes](Notes#fermi-calculations), and the Internet. Despite these severe restrictions (what, no [integrals](!Wikipedia), [probability distributions](!Wikipedia), [credible intervals](!Wikipedia), [Bayes factors](!Wikipedia) or anything? You call this *statistics*‽), we'll get some answers anyway.
 
 ## Priors
 
@@ -265,7 +270,7 @@ How would we estimate the evidence of ["Charley Parlapanides"](#internal)? The n
 
 Given this information, how does the presence of right authorship influence our prior belief of 50%?
 
-Let _a_ be "is real" and _b_ be "has correct authorship". We want to know the probability of _a_ given the observation "correct authorship". A version of [Bayes's theorem](!Wikipedia) (stolen from ["An Intuitive Explanation of Bayes's Theorem"](http://yudkowsky.net/rational/bayes); you can see other applications in my [modafinil essay](Modafinil#ordering-with-learning)) goes:
+Let _a_ be "is real" and _b_ be "has correct authorship". We want to know the probability of _a_ given the observation "correct authorship". A version of [Bayes's theorem](!Wikipedia) (stolen from ["An Intuitive Explanation of Bayes's Theorem"](http://yudkowsky.net/rational/bayes); you can see other applications in my [modafinil essay](Modafinil#ordering-with-learning); a nice visualization is given by [Oscar Bonilla](http://oscarbonilla.com/2009/05/visualizing-bayes-theorem/ "Visualizing Bayes' theorem") or one could watch [distributions be updated](http://bayesianbiologist.com/2012/08/17/an-update-on-visualizing-bayesian-updating/)):
 
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))}$
 
@@ -326,7 +331,7 @@ To use "Charley" as evidence, we need to know what the real man would be more or
 - "Charley": 182,000 hits
 - "Charlie": 1,440 hits
 
-I suspect the truth is probably "Charles" since his [Twitter account](http://twitter.com/Cparlapanides) uses "Charles"; his [IMDb](http://www.imdb.com/name/nm0663048/) page lists 5 credits "as Charles Parlapanides" (but nevertheless calls him "Charley").
+I suspect the truth is likely "Charles" since his [Twitter account](http://twitter.com/Cparlapanides) uses "Charles"; his [IMDb](http://www.imdb.com/name/nm0663048/) page lists 5 credits "as Charles Parlapanides" (but nevertheless calls him "Charley").
 
 What question would we ask here? We could put it as: if we make the assumption that the real man has an even chance of using either "Charles" or "Charlie"/"Charley", while a fake would choose based on the Google hits (unaware of the variants), how would we change our belief upon observing the script's use of "Charley"?
 
@@ -465,7 +470,7 @@ We could isolate multiple tests here from my [freeform observations](#writingfor
 
     In addition, the fake scripts are well-written. Like formatting, this turns out to be a bad indicator; someone writing a movie-length script seems to also be the sort of person who can write well. The description of one of the fakes is interesting in this regard:
 
-    > This is probably one of the most elaborate ruses on the list. The script was written by 27-year-old Los Angeles writer Justin Becker, and as far as we can tell, he did it for laughs. Becker traveled across the West Coast, planting his scripts all over bookstores, hoping they would get discovered. He basically thought, "it would be funny to find out that a _Mr. Peepers_ movie had been written, and it was very serious and pretentious and political, and it had been shelved because of 9/11" (_SF Weekly_), which is explained in the preface of the script and by the fact that the screenplay was supposedly written one day before September 11th, 2001 and contained George W. Bush in the story.
+    > This is probably one of the most elaborate ruses on the list. The script was written by 27-year-old Los Angeles writer Justin Becker, and as far as we can tell, he did it for laughs. Becker traveled across the West Coast, planting his scripts all over bookstores, hoping they would get discovered. He basically thought, "it would be funny to find out that a _[Mr. Peepers](!Wikipedia)_ movie had been written, and it was very serious and pretentious and political, and it had been shelved because of 9/11" (_SF Weekly_), which is explained in the preface of the script and by the fact that the screenplay was supposedly written one day before September 11th, 2001 and contained George W. Bush in the story.
 
 This leaves just length as a test:
 
@@ -544,7 +549,7 @@ In this example, 33% seems like a reasonable answer (and interestingly, it's not
 
 ### Credit & hope function
 
-In the case of "taking credit", we can imagine the boxes as years, and each year passed is a box opened. As of October 2012, we have opened 3 boxes since the May/October 2009 leak. How many boxes total should there be? I think 20 boxes is more than generous: after 2 decades, the _DN_ franchise probably won't even be active^[Quick, of the anime aired 20 years ago [in](!Wikipedia "Category:1992 anime") [1992](http://www.anime-planet.com/anime/years/1992), how many are active franchises? Of the 48 on the first page, maybe 3 or 4 seem active.] - if anyone was going to claim credit, they probably would've done so by then. What's our prior probability that they will do so at all? Well, of the 4 faked scripts, the author of the _Mr. Peepers_ script took credit but the other 3 seem to be unknown - but it's early days yet, so we'll punt with a 50%. And of course, if the script is real, very few people are going to falsely claim authorship (thereby claiming it's fake?). So our setup looks like this:
+In the case of "taking credit", we can imagine the boxes as years, and each year passed is a box opened. As of October 2012, we have opened 3 boxes since the May/October 2009 leak. How many boxes total should there be? I think 20 boxes is more than generous: after 2 decades, the _DN_ franchise highly likely won't even be active^[Quick, of the anime aired 20 years ago [in](!Wikipedia "Category:1992 anime") [1992](http://www.anime-planet.com/anime/years/1992), how many are active franchises? Of the 48 on the first page, maybe 3 or 4 seem active.] - if anyone was going to claim credit, they likely would've done so by then. What's our prior probability that they will do so at all? Well, of the 4 faked scripts, the author of the _Mr. Peepers_ script took credit but the other 3 seem to be unknown - but it's early days yet, so we'll punt with a 50%. And of course, if the script is real, very few people are going to falsely claim authorship (thereby claiming it's fake?). So our setup looks like this:
 
 1. _a_ = is real
 2. _b_ = no one has claimed authorship
@@ -677,7 +682,7 @@ $\frac{0.5}{1 - 0.5} \times 3.087 = 3.087$; $\frac{3.087}{1+3.087} = 0.7553$
 
 ## Benefits
 
-With the final result in hand, and some consideration of how strong the result is, it's worth discussing just what all that work bought us. (However long it took you to read it, it took much longer to write it!) I don't know about you, but I found it fascinating going through my old informal arguments and seeing how they stood up to the challenge:
+With the final result in hand - and as promised, no math beyond arithmetic was necessary - and after the consideration of how strong the result is, it's worth discussing just what all that work bought us. (However long it took you to read it, it took much longer to write it!) I don't know about you, but I found it fascinating going through my old informal arguments and seeing how they stood up to the challenge:
 
 1. I was surprised to realize that the "Charley" observation was evidence against
 2. the corporate address seemed like good evidence for
@@ -699,10 +704,15 @@ This would be the sort of discussion even bitter foes could engage in productive
 <!--
 # The truth
 
-Having done all this, the final task is obvious: ask one of the Parlapanides. A Twitter account was already linked, so asking is easy. Will they reply? 2009 was a long time ago, but 2011 (when they were replaced) was not so long ago. Since the script was scrapped, one would hope they would feel free to reply or reply honestly, but we can't know.
+Having done all this, the final task is obvious: ask one of the Parlapanides. A [Twitter account](http://twitter.com/Cparlapanides) was already linked, so asking is easy. Will they reply? 2009 was a long time ago, but 2011 (when they were replaced) was not so long ago. Since the script was scrapped, one would hope they would feel free to reply or reply honestly, but we can't know.
 
 I [suspect](http://predictionbook.com/predictions/8989 "Charles Parlapanides will reply to my message on Twitter within 1 month: 60%") he will, but I'm not so [sanguine](http://predictionbook.com/predictions/8990 "Charles Parlapanides will reply to my message on Twitter within 1 month and will clearly confirm or deny authorship: 40%") he will give a clear yes or no. [If he does](http://predictionbook.com/predictions/8991 "Conditional on a reply and clear answer, Charles Parlapanides will claim Parlapanides' authorship: 85%"), I have ~85% confidence that he will confirm they did write it. Why 85%? I haven't been able to come up with good arguments why the script is a fake, which suggests I am now personally invested in it being real and so my final 98% calculation is an overestimate. (One shouldn't be foolishly confident in one's statistics.)
 -->
+
+# See also
+
+- [_Death Note_: L, Anonymity & Eluding Entropy](Death Note Anonymity "Applied Computer Science: On Murder Considered as one of the Hard Sciences")
+- [_Death Note_ Ending](Death Note Ending "Ambiguous ending means even the victor is unclear; who was right?")
 
 <!--
 # External links
