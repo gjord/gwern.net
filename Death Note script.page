@@ -618,6 +618,67 @@ Likelihood ratio:
 $\frac{0.50}{0.10} = 5$
 
 ## Results
-<!-- table of all tests, parameters, likelihood ratios etc -->
+
+To review and summarize each factor we considered:
+
+Argument/test   $P(a)$   $P(\lnot a)$     $P(b|a)$      $P(b|\lnot a)$     $P(a|b)$    $\frac{P(b|a)}{P(b|\lnot a)}$
+--------------- -------- ---------------- ------------- ------------------ ----------- -------------------------------
+authorship      0.5      0.5              0.83          0.5                0.643       1.8
+name spelling   0.64     0.36             0.5           0.93               0.49        0.538
+address         0.49     0.51             0.16          0.16               0.49        1
+PDF date        0.49     0.51             0.5           0.25               0.658       2
+PDF creator     0.658    0.342            0.99          0.9585             0.6652      1.033
+PDF timezone    0.6652   0.3349           0.99          0.881              0.691       1.1237
+script length   0.691    0.309            0.99          0.66               0.7703      1.5
+Hollywood plot  0.7703   0.2297           ?             ?                  ?           ? (>1)
+stylometrics    0.7703   0.2297           0.5           0.1667             0.9096      2.999
+dating          0.9096   0.0904           ?             ?                  ?           ? (>1)
+credit          0.9096   0.0904           0.99          0.54055            0.9485      1.831
+official plot   0.9485   0.05149          ~1.0          ?                  ?           ? (>1)
+legal takedown  0.9485   0.05149          0.5           0.10               0.9893      5
+
+The final posterior speaks for itself: 98.9%. By taking into account 9 different factors and thinking about how consistent each factor is with the script being real, we've gone from considerable uncertainty to a surprisingly high value, even after bending over backwards to omit 3 particularly disputable factors.
+
+Is 98% *the* correct posterior? Well, that depends both on whether one accepts each individual analysis and also the original prior of 50%. Suppose one accepted the analysis as presented but believes that actually only 10% of leaked scripts are real? Would such a person wind up believing that the leak is real >50%? How can we answer this question without redoing 9 chained applications of Bayes's theorem? At last we will see the benefit of computing likelihood ratios all along: since likelihood ratios omit the prior $P(a)$, they are expressing something independent, and that turns out to be how much we should increase our prior (whatever it is).
+
+To update using a likelihood ratio, we express our $P(a)$ as instead $\frac{P(a)}{1 - P(a)}$, multiply by the likelihood ratio, and convert back! So for our table: we start with $\frac{0.5}{1 - 0.5} = 1$, multiply by 1.8, 0.538...5:
+
+$\frac{0.5}{1 - 0.5} \times 1.8 \times 0.538 \times 1 \times 2 \times 1.033 \times 1.1237 \times 1.5 \times 2.999 \times 1.831 \times 5 = 92.5895
+
+And we convert back as $\frac{92.5895}{1+92.5895} = 0.9893$ - like magic, our final posterior reappears. Knowing 89.664 is the factor to multiply by, we can easily run other examples. What of the 10% person? Well:
+
+$\frac{0.10}{1 - 0.10} \times 92.589 = 10.288$ and $\frac{10.288}{1+10.288}=0.9114$
+
+And a 1% person is $\frac{0.01}{1 - 0.01} \times 92.589 = 0.935 and $\frac{0.935}{1+0.935}=0.483$ Ooh, *almost* to 50%, so we know anyone with a prior of 2% who accepts the analysis will be moved all the way to thinking the script more likely to be true than not (specifically, 0.654).
+
+What if we thought we had the right prior of 50% but we terribly messed up each analysis and each likelihood factor was twice as large/small as it should be? If we cut each likelihood factor's difference from 1 by half[^Haskell-likelihood-factor], then we get a new total likelihood factor of 17.998, and our new posterior is:
+
+$\frac{0.5}{1 - 0.5} \times 17.58 = 17.58$; $\frac{17.58}{1+17.58} = 0.9461$
+
+Oh, that's not so bad.
+
+[^Haskell-likelihood-factor]: The gory details:
+
+    ~~~{.Haskell}
+    map (\x -> if x==1 then 1 else (if x>1 then 1+((x-1)/2) else 1-(x/2)))
+        [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5]
+    [1.4,0.731,1.0,1.5,1.0165,1.06185,1.25,1.9995,1.4155,3.0]
+
+    product (map (\x -> if x==1 then 1 else (if x>1 then 1+((x-1)/2) else 1-(x/2)))
+        [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5])
+    17.58
+    ~~~
+
+What if instead we ignored the 2 arguments with a likelihood ratio greater than 2? Then we get a multiplied likelihood ratio of 3.087[^Haskell-filtered] and from 50% we will go to:
+
+$\frac{0.5}{1 - 0.5} \times 3.087 = 3.087$; $\frac{3.087}{1+3.087} = 0.7553$
+
+[^Haskell-filtered]: Easy enough:
+
+    ~~~{.Haskell}
+    product $ filter (<2) [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5]
+    3.0873444556602596
+    ~~~
+
 ## Benefits
 <!-- conclusion section: what tests were surprisingly useful, which were opposite of expected, which were useless, which were double-counting what future lines of enquiry this suggests etc -->
