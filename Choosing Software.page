@@ -1,6 +1,9 @@
 ---
 description: Criteria making software useful long-term & worth learning in detail
 tags: Haskell
+created: 26 Sep 2008
+status: in progress
+belief: possible
 ...
 
 It's not always clear what software to pick in the open source world.
@@ -28,6 +31,7 @@ Even better, it has the institutional support of being the GNU Project's officia
 Being maintained is just the most basic criterion though, and many tools will meet that basic level. Unmaintained projects tend to be forgotten, and you usually won't see them discussed in lists of projects, so in a sense you can just assume tools are maintained. The second, more difficult feature is:
 
 # Extensible
+
 - It should be **extensible**.
 
 There are very few tools which you will want to use, now and forever, exactly the way they come. Even a command as humble as 'cat' nevertheless has >9 options! For something as complex as a browser or text editor, you _will_ want to customize and most probably extend it. Rather than using nasty hacks to get around this fact, just use a tool which can at least be scripted.
@@ -38,9 +42,12 @@ There are very few tools which you will want to use, now and forever, exactly th
     iii. Portability. The small core is all that needs to be ported, sometimes. Portability is always a good thing.
     iv. Features. Emacs contains the proverbial kitchen sink; Irssi has more extensions and skins than I can count; and Firefox has precisely 2.89 million add-ons. If users can add features without waiting for the official developers and release cycles, they will. And odds are pretty good they may have already done exactly what you needed, or solved a need you didn't even realize you had.
 
+[^xmonad]: For my purposes, the many variants such as the XMonad model are immaterial. Yes, it is a very interesting model (the program compiles a fresh binary with the user's new config hardwired in, serializes out the current global state, and restarts itself with the new binary and passes it the serialized state) - but the details of how the extensibility is accomplished are only important if the method is crappy and unreliable.
+
 It's lovely to be able to make use of other people's extensions in your shiny new toy, but do you know what to do with it now? Obviously:
 
 # Comprehensibility
+
 - You should be able to **understand** it.
 
 This is a valuable property for a number of reasons also. An example I like to use is the XMonad tiled windowing manager for X. Before, I had used Ratpoison and StumpWM, but I was never really satisfied because I didn't understand C or Common Lisp so many things were and remained a mystery to me. This made extending them, debugging them, even just reading the documentation to use them - it made them all more difficult than they had to be.
@@ -50,6 +57,7 @@ With XMonad, I understand most of it. I see how the extensions work, and have wr
 This goes back to the first point; you should never need to maintain it, but given your investment in it, you may want to and it's better to be able to maintain it to the degree you need it to function - sometimes maintenance is just a matter of updating a few files or the packaging system.
 
 # Popularity
+
 - Try to use **standard** stuff.
 
 For example, Bash is by all the former criterion a good choice for one's shell. It is maintained by the GNU Project, it is certainly extensible and powerful, and it's relatively understandable. But the really nice thing about Bash is how very standard it is: every Linux distribution includes Bash, and even set it as the default shell.
@@ -65,6 +73,8 @@ The final major consideration was left to last. It should come as no surprise to
 This is the final concern because applications spend little time doing inefficient things. The rationale here is that, perhaps Emacs may be somewhat slower than a less capable or portable editor - but you will not save _so_ much time on quicker screen updates &etc. as to make up for real hours lost in porting the other editor or working around its lack of features (see [Amdahl's Law](!Wikipedia)).
 
 There are other concerns here: it is easier to make an extensible/powerful/portable editor more efficient in the bottlenecks than it is to hack in those features to an efficient editor never intended for those features[^vim]. But if you are truly faced with two choices - each of whom seems equally solidly maintained, extensible, standard, etc. - then go with the more efficient one. After all, efficiency is a virtue and does make the experience more pleasant and gives you the option of using it on slower computers.
+
+[^vim]: As a bigoted Emacs user, I of course see Vim as the classic example of attempting to shoehorn in a feature like a first-class extension language - with humorous results!
 
 Alas, just marking down these features doesn't solve every problem. For example, choosing between Vim and Emacs was easy for me - Vim's supposed efficiency didn't (in my reckoning) outweigh the increased standardness and comprehensibility of Emacs. Or take Bash compared with Zsh. Bash is clearly more standard and is clearly better maintained, being even older than Zsh and the official shell of the GNU Project, and it is probably marginally more efficient. But I nevertheless chose to switch to Zsh.
 
@@ -90,8 +100,21 @@ This is a good rule to follow with all possessions. If you buy a new pair of sho
 
 Redundancy wastes resources, it imposes mental burdens, it increases inertia and resistance to change. The more stuff you have that you do not need, the [stupider your possessions get](http://www.ribbonfarm.com/2011/06/16/the-las-vegas-rules-ii-stuff-science/). If you have a room bursting at the gills: you cannot freely travel. You cannot easily change your place of residence. You are no longer sure what do you and do not have, you are increasingly mentally stressed. You literally can no longer freely move about. In extreme cases, people have been known to die because they refused to let go of things[^hoarding].
 
+[^hoarding]: Often due to mental disease; see [Pathological hoarding](!Wikipedia "Compulsive hoarding")
+
 Try to keep matters elegant and uncluttered. There is a difference between elegance and competence - and this difference makes all the difference in the world.
 
-[^xmonad]: For my purposes, the many variants such as the XMonad model are immaterial. Yes, it is a very interesting model (the program compiles a fresh binary with the user's new config hardwired in, serializes out the current global state, and restarts itself with the new binary and passes it the serialized state) - but the details of how the extensibility is accomplished are only important if the method is crappy and unreliable.
-[^vim]: As a bigoted Emacs user, I of course see Vim as the classic example of attempting to shoehorn in a feature like a first-class extension language - with humorous results!
-[^hoarding]: Often due to mental disease; see [Pathological hoarding](!Wikipedia "Compulsive hoarding")
+<!--
+
+I will be using Bash in 10 years http://predictionbook.com/predictions/7417
+I will be using Bash in 20 years http://predictionbook.com/predictions/7418
+
+I will be using Firefox in 10 years http://predictionbook.com/predictions/7419
+I will be using Firefox in 20 years http://predictionbook.com/predictions/7420
+
+I will be using Emacs in 10 years http://predictionbook.com/predictions/7421
+I will be using Emacs in 20 years http://predictionbook.com/predictions/7422
+
+I will be using Linux in 10 years http://predictionbook.com/predictions/7423
+I will be using Linux in 20 years http://predictionbook.com/predictions/7424
+-->
