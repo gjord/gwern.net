@@ -456,7 +456,7 @@ Alternative price charts:
 
 There are other sources; the [Silk Road]() black market usually has generic modafinil, and sporadically armodafinil^[I once ordered [armodafinil](Nootropics#armodafinil) off Silk Road.], at reasonable prices; but given the anonymizing measures, use of [Bitcoin](!Wikipedia) rather than dollars, and the inherent flux of an online marketplace, I cannot possibly incorporate it into the chart.
 
-Another fascinating possibility for obtaining modafinil is to not order pills, but order powder or one's own synthesis of modafinil. A Korean company offered in 2006 to synthesize modafinil at [$550/kg](http://www.longecity.org/forum/topic/10464-modalert-is-this-what-modafinil-is-like/page__p__108566#entry108566); an old [Chinese supplier](http://pharm-marketing.com/bulk_drug_other_eng.htm#modafinil) offers it for an unknown price,  "Drugs Power Store", a Chinese-Thai producer, offers [1kg](http://drugspowerstore.com/product_info.php/products_id/76) for ~\$3,000 (~$0.6 per 200mg, competitive with the ~\$0.9 of the cheapest online stores). I have never heard of anyone actually doing this. If you have or know of a write-up, please contact me.
+Another fascinating possibility for obtaining modafinil is to not order pills, but order powder or one's own synthesis of modafinil. A Korean company offered in 2006 to synthesize modafinil at [$550/kg](http://www.longecity.org/forum/topic/10464-modalert-is-this-what-modafinil-is-like/page__p__108566#entry108566); an old [Chinese supplier](http://pharm-marketing.com/bulk_drug_other_eng.htm#modafinil) offers it for an unknown price,  a Chinese-Thai producer "Drugs Power Store" offers [1kg](http://drugspowerstore.com/product_info.php/products_id/76) for ~\$3,000 (~$0.6 per 200mg, competitive with the ~\$0.9 of the cheapest online stores), and ["Sun Nootropic"](http://www.sunnootropic.com/lang-en/68-modafinil-cas-68693-11-8.html) offers 1kg for >\$1,057. I have never heard of anyone actually doing this. If you have, or know of a write-up, please contact me.
 
 A final note: reputations are not a perfect defense as one often hears of sellers that start off good but degenerate. There are many compelling economic or statistical reasons for this to happen:
 
@@ -605,10 +605,10 @@ $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times 
 
 How confusing and intimidating! Where does one start, with all the different symbols?
 
-Let's break it down step by step. If you didn't read either Wikipedia or Yudkowsky, you should have, but remember the pipe is read backwards: $P(foo|bar)$ means 'how likely is *foo* now that I have observed *bar*' (you could mentally rewrite it to something like $P(bar \rightarrow foo)$). $b$ represents our observation, whatever it is. In this case, it's the not-modafinil, the fake pills. $a$ represents our new, reduced, belief that A is a good place to order from. So at the beginning we can make a few definitions:
+Let's break it down step by step. If you didn't read either Wikipedia or Yudkowsky, you should have, but remember the pipe is read backwards: $P(foo|bar)$ means 'how likely is *foo* now that I have observed *bar*' (you could mentally rewrite it to something like $P(bar \rightarrow foo)$). _b_ represents our observation, whatever it is. In this case, it's the not-modafinil, the fake pills. _a_ represents our new, reduced, belief that A is a good place to order from. So at the beginning we can make a few definitions:
 
-- $a$ = being a good supplier
-- $b$ = receiving fakes
+- _a_ = being a good supplier
+- _b_ = receiving fakes
 
 If you look, the right-hand side of that equation has exactly 4 pieces in its puzzle:
 
@@ -620,15 +620,15 @@ If you look, the right-hand side of that equation has exactly 4 pieces in its pu
     This is the opposite of the previous. Now logically, if something has a 90% chance of being true, then obviously it has a 10% chance of *not* being true. Either one or the other. So this is simply equal to 10%.
 3. $P(b|a)$
 
-    Remember, we read the pipe notation *backwards*, so this is 'the probability that a good supplier ($a$) will send us fakes ($b$)'. We also said that good suppliers send 95% good orders; by the same logic as above, that's another way of saying they send 5% fakes. So this is simply 5%.
+    Remember, we read the pipe notation *backwards*, so this is 'the probability that a good supplier (_a_) will send us fakes (_b_)'. We also said that good suppliers send 95% good orders; by the same logic as above, that's another way of saying they send 5% fakes. So this is simply 5%.
 4. $P(b|\lnot a)$
 
     Finally, we have 'the probability that a bad supplier will send us fakes'. We said bad suppliers send 5% good orders, so again, subtracting from 100 and we know they must send 95% fakes. So this is simply 95%.
 
 To put all these definitions in a list:
 
-1. $a$ = good supplier
-2. $b$ = fakes
+1. _a_ = good supplier
+2. _b_ = fakes
 3. $P(a)$ = probability of being a good supplier = 90% = 0.90
 4. $P(\lnot a)$ = probability of being a bad supplier = 10% = 0.10
 5. $P(b|a)$ = probability a good supplier will send fakes = 5% = 0.05
