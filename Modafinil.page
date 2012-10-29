@@ -352,6 +352,7 @@ So the expected value of modafinil is approximately 21 times less than it needs 
 (We could complicate the analysis by incorporating a [discount rate](!Wikipedia) and reduce the value of modafinil by assuming that one only uses it occasionally to avoid building up tolerance, but the basic point is made: there needs to be an improbably high risk to modafinil to neutralize its benefits.)
 
 # Suppliers & Prices
+## Brands
 
 Generally, armodafinil > modafinil > adrafinil, brand-name > generic, but how do the generics go? The [general scuttlebutt](http://web.archive.org/web/20081002102943/drugbuyers.com/freeboard/ubbthreads.php?ubb=showflat&Number=703659#Post703659) seems to be that the generics in descending order of desirability go:
 
@@ -359,6 +360,8 @@ Generally, armodafinil > modafinil > adrafinil, brand-name > generic, but how do
 2. Modalert
 3. Alertec
 4. SpierX
+
+## Vendors
 
 Fine, but how are we going to get any modafinil? (We'll ignore getting a legitimate prescription or having a friend [buy you some](http://www.longecity.org/forum/topic/44117-modafinil-sources/page__pid__454877__st__20#entry454877) in India.) Buying modafinil is very much a grey-market. And it's a black-market if one wants genuine Cephalon-manufactured Provigil/Nuvigil^[The real deal runs upwards of [$10 per pill](http://canada-edrugs.com/drugs/Modapro/200mg); so we won't even bother to include it in the price table].
 
@@ -447,8 +450,8 @@ mg/$[^f]      mg    Amt            $             S&H  Provider
     4NRX Pharmacy
     Pharmacy Geoff
     UnitedPharmacies.co.uk
+-->
 
-More off-topic, Pharmacy express has been listed in http://spamtrackers.eu/wiki/index.php/Pharmacy_Express -->
 [^f]: Prices in pounds are converted to dollars. Milligrams per dollar is calculated the obvious way: $\text{round} (\frac{\text{mg} \times \text{Amount}}{\text{\$} + \text{S&H}})$
 
 Alternative price charts:
@@ -555,7 +558,7 @@ Interestingly, there is only a weak pattern of commissions shrinking with prices
 
 These pharmacies are almost all sourcing their modafinil (if it's actual modafinil) from Indian sources. More directly, there are scattered reports online about pricing in places like Russia or, most relevant, India:
 
-> "the modalert from india, which is sold through both european and indian online pharmacies, costs about 12$ / 10 pills - 200mg. now the same stuff in an indian pharmacy costs only $3 / 10 pills - 200mg"^[<http://www.longecity.org/forum/topic/44117-modafinil-sources/page__st__20__p__454877#entry454877>]
+> the modalert from india, which is sold through both european and indian online pharmacies, costs about 12$ / 10 pills - 200mg. now the same stuff in an indian pharmacy costs only $3 / 10 pills - 200mg^[<http://www.longecity.org/forum/topic/44117-modafinil-sources/page__st__20__p__454877#entry454877>]
 
 Such a pharmacy price would be $\frac{10 \times 200}{3}$ or 667 mg/$. So this sets another bound - it's highly unlikely any online pharmacy would be able to beat an Indian pharmacy. Modalert packaging (see above) comes with retail prices in [rupees](!Wikipedia) stamped on it, presumably for tax purposes; at 81 rupees for 10 pills, and ~50 rupees to the dollar, that's ~$2 per 10 or 20 cents per 100mg pill. The 200mg pills are stamped 129 rupees, or ~$2.5 or 25 cents per 200mg pill. Another reader reports similar Indian prices in January 2012: 85 rupees for 10x100 and 130 rupees for 10x200. A reader setting up a business told me in January 2012 that he had arranged with a UK-India importer for modafinil at $0.35-45 per pill in bulk, which is consistent with the stamp prices plus overhead & profit for the importer. A similar reader said, when I asked in February 2012, that the going price was 131 rupees for 10x200 and my February 200mg Modalert arrived with stamps for 131 rupees. My armodafinil (Waklert generic brand) bought on Silk Road are stamped 150 rupees (per 10x150mg) or ~\$3, which is less of a premium than I would have guessed.
 
@@ -563,11 +566,13 @@ Such a pharmacy price would be $\frac{10 \times 200}{3}$ or 667 mg/$. So this se
 
 [^fronts]: For example, if multiple sites/'businesses' were set up, each with different prices, then the true owners may be able to engage in [price discrimination](!Wikipedia) and capture more of the [consumer surplus](!Wikipedia). It's impossible to know for sure how many online pharmacies are just independent-looking fronts for one real business; it has been asserted that this is the case, eg. [dontj](http://www.longecity.org/forum/topic/10464-modalert-is-this-what-modafinil-is-like/page__st__40__p__193725#entry193725):
 
-    > "thepharmacyexpress.com is actually the same source as usadiscreetmeds and a whole bunch of other sites (see my first post in this thread). Monarchpharm just uses different sites (that also look really similar) to sell the same meds at sometimes different prices. I think when I ordered from usadiscreetmeds.com the [SSL] certificate was also expired - but NP. I'd say go for it! "
+    > thepharmacyexpress.com is actually the same source as usadiscreetmeds and a whole bunch of other sites (see my first post in this thread). Monarchpharm just uses different sites (that also look really similar) to sell the same meds at sometimes different prices. I think when I ordered from usadiscreetmeds.com the [SSL] certificate was also expired - but NP [no problem]. I'd say go for it!
 
 # Ordering behavior
 
-Internet suppliers are not known for their transparency or reliability, and on top of the [technical difficulties](http://web.archive.org/web/20060322040019/http://www.nutraceuticalsworld.com/articles/2000/09/how-to-get-your-supplement-right-and-avoid-disaste.php) it is [well-known](http://www.plosmedicine.org/article/info:doi/10.1371/journal.pmed.0020100) that suppliers can be untrustworthy and [actively deceptive](http://www.lef.org/protocols/prtcls-txt/t-prtcl-158.html); and the few retailers online of modafinil which are trustworthy tend to be more expensive (as a look at the above chart shows) or they require prescriptions for US buyers (like the Canadian online pharmacies). So we are faced with a classic problem of risk: given that any supplier may shaft us, how should we rationally order products to reduce our risk?
+Internet suppliers are not known for their transparency or reliability, and on top of the [technical difficulties](http://web.archive.org/web/20060322040019/http://www.nutraceuticalsworld.com/articles/2000/09/how-to-get-your-supplement-right-and-avoid-disaste.php) it is [well-known](http://www.plosmedicine.org/article/info:doi/10.1371/journal.pmed.0020100) that suppliers can be untrustworthy and [actively deceptive](http://www.lef.org/protocols/prtcls-txt/t-prtcl-158.html); and the few retailers online of modafinil which are trustworthy tend to be more expensive (as a look at the above chart shows) or they require prescriptions for US buyers (like the Canadian online pharmacies). It's obviously hard to get any hard numbers on how likely a particular supplier is to be a scam, or how many customers of a particular site are happy. A [BBC online poll](http://www.bbc.co.uk/news/health-15600900 "Do cognitive-enhancing drugs work?")^[Note, incidentally, that the BBC writer took a modafinil and a placebo blinded - and guessed wrong which day was modafinil, but saw some computer test scores improve.] (for what that's worth) about "cognitive-enhancing drugs" (eg. modafinil, Adderall, and Ritalin) got 761 responses, of which 38% were users at any point (~289), of which "nearly 40% said they had bought the drug online, and 92% said they would try it again." In the worst case scenario that the 8% who wouldn't try it again were all online buyers, that'd implies be a $\frac{8}{39}=0.2051$ or 21% unsatisfied rate or 79% satisfaction rate.
+
+So we are faced with a classic problem of risk: given that any supplier may shaft us, how should we rationally order products to reduce our risk?
 
 For modafinil we can come up with a few distinct ordering scenarios:
 
@@ -577,7 +582,7 @@ For modafinil we can come up with a few distinct ordering scenarios:
 
 ## One-shot ordering
 
-For #1, the simple answer is best. You decide roughly how much you trust each supplier based on factors like how their website looks, what descriptions of them you found online, whether they seem 'too good to be true', etc - what is the percentage that they will pay? An obvious scam is 0%, a totally trusted source is 100% and everyone else is a shade of gray. Then you multiply their trustworthiness against their modafinil/mg price. Whomever comes out on top, you order from.
+For #1, the simple answer is best. You decide roughly how much you trust each supplier based on factors like how their website looks, what descriptions of them you found online, whether they seem 'too good to be true', etc - what is the percentage that they will pay? An obvious scam is 0%, a totally trusted source is 100% and everyone else is a shade of gray. Then you multiply their trustworthiness against their unit price (milligrams per dollar) price. Whomever comes out on top, you order from.
 
 So, if I thought EDAndMore had only a 60% chance of delivering real modafinil rather than caffeine pills, I would multiply their unit-price 222 against the trust-penalty of 0.6 and get 133.2 ($222 \times 0.6$). And then I might decide United Pharmacies smells a bit better and give them a 70% chance, for a total of 145.6 ($208 \times 0.7$); and perhaps Airsealed gets a whopping 95% trust from me, for a total of 71.25 ($75 \times 0.95$). In this scenario, Airsealed is highly trustworthy compared to the other two, but because Airsealed costs nearly 3 times its competitors, it comes out poorly against United Pharmacies; UP is only a little more expensive than EDAndMore, but has a noticeable edge over EDAndMore in trust and so wins. For Airsealed to win, I would have to trust both EDAndMore and United Pharmacies somewhere less than 33%.
 
