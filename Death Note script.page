@@ -109,6 +109,7 @@ As a control-control, I selected some fanfictions that I knew to be of higher qu
 - ["Peggy Susie"](http://www.fanfiction.net/s/5731071/1/Peggy-Susie), by Yudkowsky
 - ["Mandragora"](http://www.fanfiction.net/s/7864670/1/), by NothingPretentious
 - ["To The Stars"](http://www.fanfiction.net/s/7406866/1/To-the-Stars), by Hieronym
+- ["Harry Potter and the Natural 20"](http://www.fanfiction.net/s/8096183/1/Harry-Potter-and-the-Natural-20), by Sir Poley
 
 The fanfictions were converted to text using [Web version FanFictionDownloader](http://www.fanfictiondownloader.net/webversion.php).
 
@@ -135,8 +136,8 @@ The scripts, drawn from [a collection](http://www.script-o-rama.com/table.shtml)
 For the actual analysis, we use the [computational stylistics](http://sites.google.com/site/computationalstylistics/home) package of [R](!Wikipedia "R (programming language)") code; after downloading [`stylo`](http://sites.google.com/site/computationalstylistics/scripts), the analysis is pretty easy:
 
 ~~~{.R}
-> install.packages("tcltk2")
-> source("stylo_0-4-6_utf.r")
+install.packages("tcltk2")
+source("stylo_0-4-6_utf.r")
 ~~~
 
 The settings[^R-stylo-settings] are to: run a [cluster analysis](!Wikipedia) which uses the entire corpus, assumes English, and looks at the difference between files in their use of "most popular words" (starting at 1 word & maxing out at 1000 different words, because the entire _Immortals_ subs is only ~4000 words of dialogue), where difference is a simple Euclidean distance.
