@@ -10,10 +10,10 @@ belief: likely
 <!--
 TODO:
 when answered by Charles Parlapanides, add this essay to Prediction essay
-ping the fanfiction authors with a link
+ping the fanfiction authors with a link (omit EY)
 ping the `stylo` people with a link
 ping Anime Vice and other DN script-related forums
-share to Google+, r/JapaneseAnimation, LessWrong, StumbleUpon
+share to Google+, r/JapaneseAnimation, LessWrong http://lesswrong.com/lw/f63/case_study_the_death_note_script_and_bayes/
 -->
 
 > I give a history of the leaked script, discuss internal & external evidence for its authenticity including stylometrics; and then give a simple step-by-step Bayesian analysis of each point. We finish with high confidence in the script's authenticity, discussion of how this analysis was surprisingly enlightening, and what followup work the analysis suggests would be most valuable.
@@ -44,7 +44,7 @@ The question of authenticity falls under the honorable rubric of [textual critic
 
 ## Internal
 
-The first thing I noticed was that the 2 authors claimed on the PDF, "Charley and Vlas Parlapanides", was correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html "Warner brings 'Death' to big screen: Studio acquires rights to Japanese manga series") in 30 April 2009 that they were hired to write it, confirming [the](http://hollywood.greekreporter.com/2008/07/12/the-brothers-parlapanides/ "The Brothers Parlapanides") [rumors](http://bloody-disgusting.com/news/12459/ "Vertigo Hires Scribes for 'Death Note' Remake") [of](http://blog.newsarama.com/2008/06/03/screen-bites-61/ "Vertigo Entertainment developing U.S. remake of Death Note") their June 2008 hiring. (And "Charley"? He was born "Charles", and much coverage uses that name. On the other hand, there *are* some media pieces using the diminutive, most prominently an [IMDb](http://www.imdb.com/name/nm0663048/) entry.)
+The first thing I noticed was that the 2 authors claimed on the PDF, "Charley and Vlas Parlapanides", was correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html "Warner brings 'Death' to big screen: Studio acquires rights to Japanese manga series") in 30 April 2009 that they were hired to write it, confirming [the](http://hollywood.greekreporter.com/2008/07/12/the-brothers-parlapanides/ "The Brothers Parlapanides") [rumors](http://bloody-disgusting.com/news/12459/ "Vertigo Hires Scribes for 'Death Note' Remake") [of](http://blog.newsarama.com/2008/06/03/screen-bites-61/ "Vertigo Entertainment developing U.S. remake of Death Note") their June 2008 hiring. (And "Charley"? He was born "Charles", and much coverage uses that name; similarly for "Vlas" vs "Vlasis". On the other hand, there *are* some media pieces using the diminutive, most prominently their [IMDb](http://www.imdb.com/name/nm0663048/) [entries](http://www.imdb.com/name/nm0663050/bio).)
 
 Another interesting detail is the corporate address quietly listed at the bottom of the page: "WARNER BROS. / 4000 Warner Boulevard / Burbank, California 91522". That address is widely available on Google if you want to search for it, but one has to know about it in the first place and so it is much easier to just leave it out.
 
@@ -334,7 +334,7 @@ To use "Charley" as evidence, we need to know what the real man would be more or
 - "Charley": 182,000 hits
 - "Charlie": 1,440 hits
 
-I suspect the truth is likely "Charles" since his [Twitter account](http://twitter.com/Cparlapanides) uses "Charles"; his [IMDb](http://www.imdb.com/name/nm0663048/) page lists 5 credits "as Charles Parlapanides" (but nevertheless calls him "Charley").
+I suspect the truth is likely "Charles" since his [Twitter account](http://twitter.com/Cparlapanides) uses "Charles" (and likewise, Vlas is under [Vlasis](http://twitter.com/Vlas12345)); his [IMDb](http://www.imdb.com/name/nm0663048/) page lists 5 credits "as Charles Parlapanides" (but nevertheless calls him "Charley").
 
 What question would we ask here? We could put it as: if we make the assumption that the real man has an even chance of using either "Charles" or "Charlie"/"Charley", while a fake would choose based on the Google hits (unaware of the variants), how would we change our belief upon observing the script's use of "Charley"?
 
@@ -373,11 +373,11 @@ Substitute:
 
 $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.16 \times 0.49}{(0.16 \times 0.49) + (0.16 \times 0.51)} = \frac{0.0784}{0.0784 + 0.0816} = \frac{0.0784}{0.16} = 0.49$
 
-0.49? But that was what we started with! It turns out that we are working with such a small sample that when we correct with Laplace's law, we learn that there are so few instances of screenplays floating around with corporate addresses in them, we actually can't infer anything from it. Does the likelihood ratio agree?
+0.49? But that was what we started with! It turns out that we are working with such a small sample that when we correct with Laplace's law, we learn that there are so few instances of screenplays floating around with corporate addresses in them, we can't actually infer much of anything from it. Does the likelihood ratio agree?
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.16}{0.16} = 1$
 
-(Here we see the final category of likelihood ratios: neither greater than nor less than 1, but equal to 1 - and thus not evidence for nor against.)
+(Here we see the final category of likelihood ratios: neither greater than nor less than 1, but equal to 1 - thus neither evidence for nor against.)
 
 #### PDF date
 
@@ -457,6 +457,10 @@ This would have been a much bigger update than 2.6% (from 66.5% to 69.1%) if the
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.881} = 1.1237$
 
+One complicating factor I noticed after writing this section is that Charley Parlapanides's Twitter page states he lives in Los Angeles, California - not New Jersey. Could they have been living in Los Angeles 2008-2009, and the PDF timezone actually be strong evidence *against* authenticity? The earliest Tweet I can find using [SnapBird](http://snapbird.org/) tying him to LA is [10 June 2011](https://twitter.com/LAGFF/status/79223226525429761) (other searches like "moving", "move", "relocating", "California", "CA", "New Jersey", "NJ" etc do not turn up anything useful). This is probably because his tweets do not go further back than April 2011, where there is mention of some sort of hacking of his account. The next step is a Google search for `Charley Parlapanides ("New Jersey" OR "Los Angeles" OR California)` with a date range of 6/1/2009-6/9/2011 (to pick up any locations given from when they started on the script to just before that 10 June 2011 tweet). Results were equivocal: a [12 February 2011](http://www.deadline.com/2011/02/scott-rudin-closes-la-office-is-sony-move-imminent/#comment-709877) blog comment about "this town" might indicate residence in LA/Hollywood; a [19 December 2010](http://hollywood.greekreporter.com/2010/12/19/inside-the-minds-of-the-parlapanides-brothers/) mention of walking into a director's production office of sets & costumes might indicate residence as well. Beyond that, I can't find anything.
+
+If the effect of a <2009 move to Los Angeles were simply to render this argument useless - a likelihood factor equal to 0 - it would not bother me too much because the likelihood factor is 'just' 1.12, and an error here small compared to errors elsewhere like in the stylometrics analysis. But more realistically, if this argument were wrong, the right argument would likely flip the likelihood factor to something more like 0.5, and the difference between 1.12 and 0.5 is worth worrying about.
+
 #### Writing/formatting
 
 We could isolate multiple tests here from my [freeform observations](#writingformatting):
@@ -496,7 +500,7 @@ $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.66} = 1.5$
 
 The earlier [plot summary](#plot-summary) conveyed the "Hollywood" feel of the plot but unfortunately it's hard to judge from localization: a _DN_ fan attempting to imitate a Hollywood-targeted script might rename Light to "Luke", might simplify the plot considerably (there is precedent in the Japanese live-actions movies [_Death Note_](!Wikipedia "Death Note (film)#Death Note"), [_Death Note: The Last Name_](!Wikipedia "Death Note (film)#Death_Note: The Last_Name") & _[L: Change the World](!Wikipedia)_), might set it in NYC (Tokyo is obviously out of the question, and NYC seems to be a default location of crime-related movies), and so on.
 
-Some of the plot changes make more sense after reading the biography of the Parlapanides brothers: they are Greek and live in New Jersey. Changing "Light" to "[Luke](!Wikipedia)" is a very clever touch in localizing the character: besides the visual resemblance of being short one-syllable names starting with "L", apparently "Luke" in the ancient Greek was literally "light"! (And indeed, Luke seems to still be a common Greek name, perhaps thanks to the Gospel of Luke). NYC is an obvious location, but it's even more obvious when you are 2 screenwriters who grew up and live in New Jersey.
+Some of the plot changes make more sense after reading the biography of the Parlapanides brothers: they are Greek and live in New Jersey. Changing "Light" to "[Luke](!Wikipedia)" is a very clever touch in localizing the character: besides the visual resemblance of being short one-syllable names starting with "L", apparently "Luke" in the ancient Greek was literally "light"! (And indeed, Luke seems to still be a common Greek name, perhaps thanks to the Gospel of Luke). NYC is an obvious location, but it's even more obvious when you are 2 screenwriters who grew up and live in New Jersey. (I grew up on Long Island, and for me too, NYC is simply "the city".)
 
 More importantly, the plot includes several [idiot-ball](http://tvtropes.org/pmwiki/pmwiki.php/Main/IdiotBall)-related changes that I think any _DN_ fan competent enough to write this fake would never have made, even in the name of localization and Hollywoodization: the incompetent bus ID trick comes to mind.
 
