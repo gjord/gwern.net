@@ -689,6 +689,13 @@ $\frac{0.5}{1 - 0.5} \times 3.087 = 3.087$; $\frac{3.087}{1+3.087} = 0.7553$
     3.0873444556602596
     ~~~
 
+*Challenges for advanced readers*:
+
+1. Redo the calculations, but instead of being restricted to point estimates, work on intervals: give what you feel are the endpoints of 95% credence intervals for $P(b|a)$ & $P(b|\lnot a)$ and run Bayes on the endpoints to get worst-case and best-case posteriors, to feed into the next argument evaluation
+2. Starting with a uniform prior over 0-1, treat each argument as input to a Bernoulli (beta) distribution: a likelihood ratio of >1 counts as "success" while a likelihood ratio <=1 counts as a "failure". How does the posterior probability distribution change after each argument?
+3. Start with the uniform prior, but now treat each argument as a sample from a new normal distribution with a known mean (the best-guess likelihood factor) but unknown variance (how likely each best-guess is to be overturned by unknown information). Update on each argument, show the posterior probability distributions as of each argument, and list the final 95% credible interval.
+4. Do the above, but with an unknown *mean* as well as unknown variance.
+
 ## Benefits
 
 With the final result in hand - and as promised, no math beyond arithmetic was necessary - and after the consideration of how strong the result is, it's worth discussing just what all that work bought us. (However long it took you to read it, it took much longer to write it!) I don't know about you, but I found it fascinating going through my old informal arguments and seeing how they stood up to the challenge:
