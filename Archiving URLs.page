@@ -27,17 +27,17 @@ The statistics are dismal. To quote [Wikipedia](!Wikipedia "Link rot#Prevalence"
 
     > Bits and pieces of the web disappear all the time. It's called 'link rot', and we're all used to it. A friend saved 65 links in 1999 when he planned a trip to Tuscany; only half of them still work today. In my own blog, essays and news articles and websites that I link to regularly disappear -- sometimes within a few days of my linking to them.
 
-My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites). Even at the very lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.17$ or just 17%, or to put it another way, an 83% chance any given link *will* die. The 95% [confidence interval](!Wikipedia) for the [Poisson distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~338-409 will survive to 2070. If we try to predict using a more reasonable estimate of 50% linkrot, then approximately 0 links will survive ($0.50^{2070-2011} = 1.73472348 \times 10^{-16} = \~0$). It would be a good idea to simply assume that *no* link will survive.
+My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites). Even at the very lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.17$ or just 17%, or to put it another way, an 83% chance any given link *will* die. The 95% [confidence interval](!Wikipedia) for the [Poisson distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~338-409 will survive to 2070. If we try to predict using a more reasonable estimate of 50% linkrot, then approximately 0 links will survive ($0.50^{2070-2011} = 1.73472348 \times 10^{-16} \simeq 0$). It would be a good idea to simply assume that *no* link will survive.
 
 With that in mind, one can consider remedies. (If we lie to ourselves and say it won't be a problem in the future, then we guarantee that it *will* be a problem. ["People can stand what is true, for they are already enduring it."](http://wiki.lesswrong.com/wiki/Litany_of_Gendlin))
 
 # Detection
 
-> "With every new spring \
+> With every new spring \
 > the blossoms speak not a word \
 > yet expound the Law -- \
 > knowing what is at its heart \
-> by the scattering storm winds."^[Shōtetsu; 101, 'Buddhism related to Blossoms'; _Unforgotten Dreams: Poems by the Zen monk Shōtetsu_; trans. Steven D. Carter, ISBN 0-231-10576-2]
+> by the scattering storm winds.^[Shōtetsu; 101, 'Buddhism related to Blossoms'; _Unforgotten Dreams: Poems by the Zen monk Shōtetsu_; trans. Steven D. Carter, ISBN 0-231-10576-2]
 
 The first and most obvious remedy is to learn about broken links as soon as they happen, which allows one to react quickly and scrape archives or search engine caches (['lazy preservation'](http://www.cs.odu.edu/~fmccown/research/lazy/)). I currently use [`linkchecker`](http://linkchecker.sourceforge.net/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
 
