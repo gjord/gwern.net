@@ -1556,9 +1556,72 @@ In the case of vitamin D, I find the results (no effect on anything *except* 'Mo
 
 The solution most obvious to me, although I don't know if it's statistically correct, is to drop the vitamin D or melatonin for a long enough period that any long-term effects should have disappeared, and then compare this abstention period to the supposed "control" weeks. If the abstention weeks are worse than the control weeks, then this supports the long-term interpretation; if the abstention weeks are similar to the control weeks, then we can eliminate the long-term interpretation; and if the abstention weeks are better than the control weeks, then we ought to be puzzled and start thinking about other possibilities. (Not enough data/power? Misinterpreted results? Or, the original morning experiment was in spring, while the abstention periods were summer/autumn - does sleep get worse in summer, perhaps due to heat?)
 
-I won't bother with blinding this one since it's just a double-check of an unlikely possibility. (If one wanted to blind it, the procedure would be the same as before, but with *big* blocks: say, 2 blocks of 62 days, first pick randomized, or blocks of 31 days, with 4 blocks randomized in 2 pairs.) This 'experiment' is easy enough to run: simply stop taking vitamin D. To avoid the temptation to cheat on days I am feeling down, it's easiest to just wait until I run out of vitamin D and procrastinate on ordering a fresh supply until 50 days have passed.
+I won't bother with blinding this one since it's just a double-check of an unlikely possibility. (If one wanted to blind it, the procedure would be the same as before, but with *big* blocks: say, 2 blocks of 62 days, first pick randomized, or blocks of 31 days, with 4 blocks randomized in 2 pairs.) This 'experiment' is easy enough to run: simply stop taking vitamin D. To avoid the temptation to cheat on days I am feeling down, it's easiest to just wait until I run out of vitamin D and procrastinate on ordering a fresh supply until a bunch of days have passed.
 
-<!-- last day: 2 July 2012; resumed: 6 September 2012 -->
+The vitamin D experiment terminated in April; the last day of vitamin D was 2 July 2012; and I resumed 6 September 2012 with the end of the dataset being 31 October 2012.
+
+#### Analysis
+
+The question is simple: does the 'Morning Feel' differ between the control days in the original Vitamin D morning experiment and between vitamin-less days as part of a long later sustained period? Was there something funky about the original control days, was there some sort of vitamin D bleed-over or maybe some sort of long-term effect which we could describe as 'contamination' or 'dependency'?
+
+The short answer is: no. When we compare the two groups of days, the 'Morning Feel' ratings have identical means, as we expected.
+
+A Bayesian MCMC analysis[^vitamin-d-control-Bayesian] (using the [BEST library](http://www.indiana.edu/~kruschke/BEST/)) produces the following graphical summary, which shows the two groups almost completely overlapping on means, with the key graph in the lower-right corner: there is no visible effect size at all (centered on 0), much less an effect size of _d_>=0.1 which we might take seriously as indicating a real difference:
+
+![](/images/zeo/2012-vitamind-morning-control.png)
+
+More precisely, the summary statistics indicate that the difference in means & medians is usually -0.03 (negligibly small), the full range of effect size estimates is -0.4678744  to 0.4142259, and 44.4% of the possibilities were simply zero effect size.
+
+(I did the old frequentist t-test as well: _p_=0.9975[^vitamin-d-control-frequentist].)
+
+
+[^vitamin-d-control-Bayesian]: The BEST analysis is powerful and provides much more information than a simple t-test would, but the various parameters in the table or the image are not self-explanatory; the curious should read ["Bayesian estimation supersedes the _t_ test"](http://www.indiana.edu/~kruschke/articles/Kruschke2012JEPG.pdf) (Kruschke 2012).
+
+    In the CSV, an SSCF.1 of 0 indicates membership in the original experiment, 1 indicates the dry period July-September, 2 indicates the vitamin D resumption post-original-experiment, and 3 indicates the vitamin D resumption post-September. So:
+
+    ~~~{.R}
+    # set up data
+    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv", header=TRUE, sep=",")
+    originalcontrol <- subset(mydata, SSCF.1==0)
+    newcontrol <- subset(mydata, SSCF.1==1)
+    # clean missing data
+    originalcontrol <- originalcontrol$Morning.Feel[!is.na(originalcontrol$Morning.Feel)]
+    newcontrol <- newcontrol$Morning.Feel[!is.na(newcontrol$Morning.Feel)]
+    # run BEST MCMC group estimations
+    source("BEST.R")
+    mcmc = BESTmcmc(originalcontrol, newcontrol)
+    BESTplot(originalcontrol, newcontrol, mcmc, TRUE, ROPEeff=c(-0.1,0.1))
+               SUMMARY.INFO
+    PARAMETER          mean      median        mode     HDIlow     HDIhigh pcgtZero
+      mu1        2.82199912  2.82184675  2.82109419  2.5425634   3.1008251       NA
+      mu2        2.84712376  2.84744246  2.84233569  2.6205415   3.0777439       NA
+      muDiff    -0.02512464 -0.02542602 -0.03361140 -0.3874754   0.3339228 44.43593
+      sigma1     0.72900731  0.71760315  0.69447083  0.5330477   0.9474278       NA
+      sigma2     0.88825472  0.88350888  0.87346099  0.7192899   1.0690516       NA
+      sigmaDiff -0.15924742 -0.16410108 -0.17383105 -0.4269052   0.1171290 12.08159
+      nu        41.98417254 33.62743916 17.74077514  3.2649758 104.0648983       NA
+      nuLog10    1.51048794  1.52669380  1.57284008  0.8699835   2.1138309       NA
+      effSz     -0.03198943 -0.03143175 -0.04438195 -0.4678744   0.4142259 44.43593
+    ~~~
+[^vitamin-d-control-frequentist]: As usual:
+
+    ~~~{.R}
+    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv", header=TRUE, sep=",")
+    originalcontrol <- subset(mydata, SSCF.1==0)
+    newcontrol <- subset(mydata, SSCF.1==1)
+    t.test(originalcontrol$Morning.Feel, newcontrol$Morning.Feel)
+
+        Welch Two Sample t-test
+
+    data:  originalcontrol$Morning.Feel and newcontrol$Morning.Feel
+    t = -0.0031, df = 67.67, p-value = 0.9975
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -0.3466966  0.3456190
+    sample estimates:
+    mean of x mean of y
+    2.827586  2.828125
+    ~~~
 
 ### VoI
 
@@ -1724,7 +1787,7 @@ The practice of meditation can be time-intensive; a claimed anecdotal benefit is
 
 ["Meditation acutely improves psychomotor vigilance, and may decrease sleep need"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2919439/ "Kaul et al 2010") found a correlation between long meditation and reduced sleep need. The general link seems plausible - that deliberate relaxation may reduce the need for another kind of relaxation (although I doubt meditation is going as far as reducing synaptic weights as the "synaptic homeostasis" hypothesis predicts which I discuss in [Drug heuristics]()) - but I can think of at least 2 plausible ways the correlation would not be causation (1. those with less sleep need can afford to spend time on meditation; 2. meditation *is* partially sleep so there's no correlation or causation to explain).
 
-Randomized on a daily basis: either 20-30^[I don't use a timer, but instead count 400 full breaths. Depending on how fast and shallowly I breathe, this runs from 20-35 minutes (eg. 16 May 2012's meditation ran 33 minutes long). To be conservative, I will assume the meditation is only 20 minutes.] minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.) Non-blinded. My meditation is nothing fancy: simple breath-following (based on early chapters of [_Mindfulness in Plain English_](http://www.urbandharma.org/udharma4/mpe.html)).
+Randomized on a daily basis: either 20-30^[I don't use a timer, but instead count 400 full breaths. Depending on how fast and shallowly I breathe, this runs from 20-35 minutes (eg. 16 May 2012's meditation ran 33 minutes long). To be conservative, I will assume the meditation is only 20 minutes. In mid-October, I bought and began using instead a timer which could be set to 15 minutes.] minutes of meditation or none. (I am not sure what a good placebo would be so I will omit it.) Non-blinded. My meditation is nothing fancy: simple breath-following (based on early chapters of [_Mindfulness in Plain English_](http://www.urbandharma.org/udharma4/mpe.html)).
 
 Plausibly, any decrease in sleep need could be due to long-term changes in the brain itself, as meditation is [known to affect](!Wikipedia "Research on meditation") areas like the [prefrontal cortex](!Wikipedia). Kaul et al 2010 above did not randomize the long-term meditators' use of meditation or apparently investigate whether sleep time averages correlated with meditation. If the changes are long-term, then there will be relatively little variation during the 360 days and instead a gradual trend of less sleep. If no clear effect shows up in the analysis, I'll try a before-after comparison: compare _n_ days before the experiment started to _n_ days after the experiment and see if there is a difference in the averages.
 
@@ -2442,17 +2505,25 @@ October
 21: 1 1 1
 22: 1 1 0
 23: 1 1 1
-24: 0 0 0
-25: 1 0 0?
+24: 1 0 0
+25: 0 0 0
+26: 0 0 1
+27: 0 0 0
+28: 0 1 1
+29: 1 1 0
+30: 1 0 0
+31: 1 1 1
+November
+01: 0 1 0?
 
 Underpopulated data cells:
-16: 0 1 1
-16: 1 1 0
-17: 1 1 1
 17: 0 1 0
-17: 1 0 0
+17: 0 1 1
 17: 1 0 1
-23: 0 0 0
+17: 1 1 0
+18: 1 1 1
+18: 1 0 0
+24: 0 0 0
 27: 0 0 1
 -->
 
@@ -2737,3 +2808,9 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 24 Oct 2012: on -->
 <!-- Redshift: 25 Oct 2012: off -->
 <!-- Redshift: 26 Oct 2012: on -->
+<!-- Redshift: 27 Oct 2012: on -->
+<!-- Redshift: 28 Oct 2012: off -->
+<!-- Redshift: 29 Oct 2012: on -->
+<!-- Redshift: 30 Oct 2012: on -->
+<!-- Redshift: 31 Oct 2012: on -->
+<!-- Redshift: 01 Nov 2012: on -->
