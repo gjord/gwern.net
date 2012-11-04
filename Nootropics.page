@@ -924,6 +924,8 @@ So when I read ["The Heretic"](http://www.themorningnews.org/article/the-heretic
 
 > "Micro-dosing turns out to be a totally different world," Fadiman extolled. "As someone said, the rocks don't glow, even a little bit. But what many people are reporting is, at the end of the day, they say, 'That was a really good day.' You know, that kind of day when things kind of work. You're doing a task you normally couldn't stand for two hours, but you do it for three or four. You eat properly. Maybe you do one more set of reps. Just a good day. That seems to be what we're discovering." Elsewhere Fadiman has been more specific about the logbooks he's received. One physician reported that micro-dosing got him "in touch with a deep place of ease and beauty." A vocalist said she could better hear and channel music. In general, study participants functioned normally in their work and relationships, Fadiman has said, but with increased focus, creativity, and emotional clarity. Until he releases his data archive in a comprehensive manner, it is, of course, not possible to scrutinize the validity of his claim..."I just got a report from someone who did this for six weeks," Fadiman said. "And his question to me was, 'Is there any reason to stop?'" More laughter throughout the hall, another adjustment of bifocals...it also allows him to follow the recommendation of a longtime, now-deceased friend, [Albert Hofmann](!Wikipedia), who, according to Fadiman, called micro-dosing "the most under-researched area of psychedelics."
 
+Fadiman was part of the team which ran the [Psychedelics in problem-solving experiment](!Wikipedia), administering 50μg doses of LSD - close to microdosing levels - to people working on unsolved technical problems, while they tried thinking about the problems again; they apparently often solved them. Further, LSD used to be popular in Silicon Valley and used by many computing pioneers (see _[What the Dormouse Said](!Wikipedia)_, Markoff 2005).
+
 ## Design
 
 LSD is an acute water-soluble drug. This makes dosing easy: take a known dose of, say, 100μg, dissolve it in some water (refrigerated), and then consume 1/10th for a dose of 10μg. Some online anecdotes microdose daily, while others microdose every 2 or 3 days. I added 25ml of distilled water into an airtight mason jar, dropped the blotter in, refrigerated overnight, and removed the blotter the next afternoon.
@@ -1009,7 +1011,7 @@ From first trip, we get data excluding the trip day: off:17,18,19 on:20,21,22
 2. First block: 20,21,22 October: 1
 
     Second block: 24,25,26: 0 http://predictionbook.com/predictions/8958
-3. First block: 27,28?,29?:
+3. First block: 27,28,29:
 
     Second block: 30?,31?,1 November?:
 
@@ -1311,21 +1313,38 @@ Cost-wise, the gum itself (~$5) is a sunk cost and the DNB something I ought to 
 - 21: 0 ([50%](http://predictionbook.com/predictions/8853))
 - 22: 0 ([55%](http://predictionbook.com/predictions/8890))
 - 24: 0 ([45%](http://predictionbook.com/predictions/8930))
+- 29: 1 ([55%](http://predictionbook.com/predictions/9059))
+- 31: 1 ([50%](http://predictionbook.com/predictions/9095))
+- November 01: 1 ([50%](http://predictionbook.com/predictions/9143))
+- 02: 0 ([55%](http://predictionbook.com/predictions/9220))
 
-<!-- complete as of 20 October
+<!--
+nicotine data complete as of 20 October
 individual rounds:
 on <- c(36,36,25,27,38,50,34,62,33,22,40,28,37,50,25,42,44,58,47,55,38,35,43,60,47,44,40,33,44,
-        19,58,38,41,52,41,33,47,45,45,55,45,27,35,45,30,30,52,36,28,43,50,27,29,55,45)
+        19,58,38,41,52,41,33,47,45,45,55,45,27,35,45,30,30,52,36,28,43,50,27,29,55,45,31,15,47,
+        64,35,33,60,38,28,60,45,64,50,44,38)
 off <- c(25,34,30,40,57,34,41,51,36,26,37,42,40,45,31,24,38,40,47,35,31,27,66,25,17,43,46,50,36,
          38,58,50,23,50,31,38,33,66,30,68,42,40,29,69,45,60,37,22,28,40,41,45,37,18,50,20,41,42,
-         47,44,60,31,46,46,55,47,42,35,40,29,47,56,37,50,20,31,42,53,27,45,50,65,33,33,33,40,47,41,25,
-         55,40,31,30,45,50,20,25,30,70)
-5-day averages:
-on <- c(32.4,40.2,36.0,49.2,44.6,36.0,46.0,45.0,36.4,37.8,41.2)
-off <- c(37.2,37.6,39.0,36.8,33.2,42.6,42.4,47.0,45.0,37.4,38.2,38.8,47.6,38.6,42.0,30.6,45.2,37.2,40.2,39)
+         47,44,60,31,46,46,55,47,42,35,40,29,47,56,37,50,20,31,42,53,27,45,50,65,33,33,33,40,47,
+         41,25,55,40,31,30,45,50,20,25,30,70,47,47,42,40,35,45,60,37,22,38,36,54,64,25,28,50,42,
+         31,50,30)
+5-session daily averages:
+on <- c(32.4,40.2,36.0,49.2,44.6,36.0,46.0,45.0,36.4,37.8,41.2,38.4,43.8,48.2)
+off <- c(37.2,37.6,39.0,36.8,33.2,42.6,42.4,47.0,45.0,37.4,38.2,38.8,47.6,38.6,42.0,30.6,45.2,37.2,40.2,39,42.2,40.4,41.4,40.6)
 source("BEST.R")
-mcmc = BESTmcmc(on,off)
-BESTplot(on,off,mcmcChain=mcmc,ROPEeff=c(-0.1,0.1))
+mcmc = BESTmcmc(on,off,numSavedSteps=1000000)
+BESTplot(on,off,mcmcChain=mcmc,ROPEeff=c(0.1,2))
+-->
+<!--
+> var.test(on,off,alternative="greater")
+
+    F test to compare two variances
+
+data:  on and off
+F = 1.6683, num df = 13, denom df = 23, p-value = 0.1372
+
+but for unaveraged, 0.6892!
 -->
 
 # Oxiracetam
@@ -1405,7 +1424,7 @@ My first impression of ~1g around 12:30PM was that while I do not feel like runn
 
 ## Potassium sleep
 
-That night, I had severe trouble sleeping, falling asleep in 30 minutes rather than my usual 19.6±11.9, waking up 12 times (5.9±3.4), and spending ~90 minutes awake (18.1±16.2), and naturally I felt unrested the next day; I initially assumed it was because I had left a fan on (moving air keeps me awake) but the potassium is also an obvious culprit. The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off:.
+That night, I had severe trouble sleeping, falling asleep in 30 minutes rather than my usual 19.6±11.9, waking up 12 times (5.9±3.4), and spending ~90 minutes awake (18.1±16.2), and naturally I felt unrested the next day; I initially assumed it was because I had left a fan on (moving air keeps me awake) but the potassium is also an obvious culprit. The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16.
 
 Partway through, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](http://dl.dropbox.com/u/85192141/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger improvement in "WASO" (time awake during sleep time; this probably drove the sleep efficiency). That isn't consistent with my own observations of increasing sleep latency, awakenings, and time awake.
 
@@ -1507,9 +1526,9 @@ Either prescription or illegal, daily use of testosterone would not be cheap. On
 
 # Theanine
 
-[Theanine](!Wikipedia) is occasionally mentioned on Reddit or Imminst or LessWrong[^lwtheanine] but is rarely a top-level post or article; this is probably because theanine was discovered a very long time ago (>61 years ago), and it's a pretty straightforward substance. It's a weak relaxant/[anxiolytic](!Wikipedia)^[If you don't like Wikipedia's citations on this, see also [Google Scholar](http://scholar.google.com/scholar?q=theanine+anxiety).] which is probably responsible for a number of the [health benefits](!Wikipedia "Health effects of tea") of tea, and [which](http://www.ncbi.nlm.nih.gov/pubmed/20079786) [works](http://www.ncbi.nlm.nih.gov/pubmed/21040626) [synergistically](http://www.ncbi.nlm.nih.gov/pubmed/18681988) with [caffeine](#caffeine) (and is probably why caffeine delivered through coffee feels different from the same amount consumed in tea - in one study, separate caffeine and theanine were a mixed bag, but the combination [beat placebo on all measurements](http://www.ncbi.nlm.nih.gov/pubmed/18006208) ([PDF](http://www.scicompdf.se/cooldown/haskell_2008.pdf))).
+[Theanine](!Wikipedia) is occasionally mentioned on Reddit or Imminst or LessWrong[^LW-theanine] but is rarely a top-level post or article; this is probably because theanine was discovered a very long time ago (>61 years ago), and it's a pretty straightforward substance. It's a weak relaxant/[anxiolytic](!Wikipedia)^[If you don't like Wikipedia's citations on this, see also [Google Scholar](http://scholar.google.com/scholar?q=theanine+anxiety).] which is probably responsible for a number of the [health benefits](!Wikipedia "Health effects of tea") of tea, and [which](http://www.ncbi.nlm.nih.gov/pubmed/20079786) [works](http://www.ncbi.nlm.nih.gov/pubmed/21040626) [synergistically](http://www.ncbi.nlm.nih.gov/pubmed/18681988) with [caffeine](#caffeine) (and is probably why caffeine delivered through coffee feels different from the same amount consumed in tea - in one study, separate caffeine and theanine were a mixed bag, but the combination [beat placebo on all measurements](http://www.ncbi.nlm.nih.gov/pubmed/18006208) ([PDF](http://www.scicompdf.se/cooldown/haskell_2008.pdf))). The half-life in humans seems to be pretty short, with [van der Pijl 2010](http://hydh.hbstl.org.cn/uploadfiles/T8W372ZE1300349825365.pdf "Human disposition of L-theanine in tea or aqueous solution") putting it ~60 minutes (suggesting regular tea consumption over a day is best, or at least that one should lower caffeine use - combining caffeine and theanine into a single-dose pill has the problem of caffeine's half-life being much longer so the caffeine will be acting after the theanine has been largely eliminated).
 
-[^lwtheanine]: See for example the mentions in ["A rationalist's guide to psychoactive drugs"](http://lesswrong.com/lw/45u/a_rationalists_guide_to_psychoactive_drugs/) or the discussion in the post ["Coffee: When it helps, when it hurts"](http://lesswrong.com/lw/1w1/coffee_when_it_helps_when_it_hurts/1qiu); see also the description of a rare [*bad* experience](http://lesswrong.com/lw/20w/open_thread_april_2010/1ubp) with theanine.
+[^LW-theanine]: See for example the mentions in ["A rationalist's guide to psychoactive drugs"](http://lesswrong.com/lw/45u/a_rationalists_guide_to_psychoactive_drugs/) or the discussion in the post ["Coffee: When it helps, when it hurts"](http://lesswrong.com/lw/1w1/coffee_when_it_helps_when_it_hurts/1qiu); see also the description of a rare [*bad* experience](http://lesswrong.com/lw/20w/open_thread_april_2010/1ubp) with theanine.
 
 I purchased from Smart Powders ([20g for $7](http://www.smartpowders.com/p-5327-l-theanine-powder-20-grams.aspx)); as before, some light searching seemed to turn up SP as the best seller given shipping overhead. ([Pure Bulk](http://purebulk.com/l-theanine) is apparently another cheap seller.) It was on sale and I planned to cap it so I got 80g. This may seem like a lot, but I was highly confident that theanine and I would get along since I already drink so much tea and was a tad annoyed at the edge I got with straight caffeine. So far I'm pretty happy with it. My goal was to eliminate the physical & mental 'twitchiness' of caffeine, which it seems to do.
 
@@ -1581,6 +1600,7 @@ I have [elsewhere remarked](Melatonin#fn44) on the apparent lack of benefit to t
 - [Bacopa](!Wikipedia "Bacopa monnieri#Medicine") - The research looks interesting and it's [cheap](http://www.smartpowders.com/p-5255-bacopa-monnieri-20-powder-75-grams.aspx); but I am suspicious of anything [Ayurvedic](!Wikipedia "Ayurveda#Safety") because of heavy metals, and _Bacopa monnieri_ is a [hyperaccumulator](!Wikipedia "Bacopa monnieri#Phytoremediation") of heavy metals.
 - [Naringenin](!Wikipedia) - Timothy Ferriss in excerpt from _Four-hour Body_ claims it extends effectiveness of caffeine (how to buy - capsule? grape fruit concentrate?)
 - [Memantine](!Wikipedia) - linked with depression alleviation
+- Ginseng (cf. the [Cochrane Review](https://onlinelibrarystatic.wiley.com/store/10.1002/14651858.CD007769.pub2/asset/CD007769.pdf?v=1&t=h92xu1us&s=f16f5541aaf917e3a54b81bcf8533bb8cf4f89e1))
 
 # 3 years supply in pill form
 
