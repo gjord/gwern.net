@@ -197,7 +197,7 @@ When `linkchecker` does not work, one alternative is to do a `wget --mirror` and
 
 The following shell script is derived from manually filtering through several years of daily browsing as well as spiders of [dozens of websites](http://lesswrong.com/lw/7kg/rationalist_sites_worth_archiving/ "Rationalist sites worth archiving?") for various people & purposes; it removes many auto-generated pages like tags or comment URLs, as well as the obvious spam, drug, and porn links. This version is updated every 8 months.
 
-~~~{.sh}
+~~~{.Bash}
 #!/bin/sh
 
 # USAGE: `filter-urls` accepts on standard input a list of newline-delimited URLs or filenames,
@@ -402,7 +402,7 @@ echo ""
 
 `filter-urls` can be used on one's local archive to save space by deleting files which may be downloaded by `wget` as dependencies. For example:
 
-~~~{.sh}
+~~~{.Bash}
 find ~/www | sort --unique >> full.txt && \
     find ~/www | filter-urls | sort --unique >> trimmed.txt
 comm -23 full.txt trimmed.txt | xargs -d "\n" rm
