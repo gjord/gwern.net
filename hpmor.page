@@ -1,9 +1,9 @@
 ---
 title: Methods of Rationality predictions
-description: Recording fan speculation for later review
+description: Recording fan speculation for retrospectives; analyzing and projecting reviews
 created: 25 Mar 2012
-status: draft
-belief: log
+status: in progress
+belief: likely
 tags: statistics, predictions, computer science, transhumanism
 ...
 
@@ -427,7 +427,7 @@ I decided to take a stab at it.
 
 ## Data
 
-FF.net does not provide published dates for each chapter, so we'll be working off solely the posted reviews. FF.net reviews for _MoR_ are provided on 1256 pages (as of 3 November 2012), numbering from 1. If we go from 1-1256, starting with `http://www.fanfiction.net/r/5782108/85/1/`, we can download them with a script enumerating the URLs & using string interpolation. Eyeballing a textual dump of the HTML (courtesy of `elinks`), it's easy to extract with `grep` the line with user, chapter number, and date with a HTML string embedded as a link with each review, leading to this script:
+[FanFiction.Net](!Wikipedia) does not provide published dates for each chapter, so we'll be working off solely the posted reviews. FF.net reviews for _MoR_ are provided on 1256 pages (as of 3 November 2012), numbering from 1. If we go from 1-1256, starting with `http://www.fanfiction.net/r/5782108/85/1/`, we can download them with a script enumerating the URLs & using string interpolation. Eyeballing a textual dump of the HTML (courtesy of `elinks`), it's easy to extract with `grep` the line with user, chapter number, and date with a HTML string embedded as a link with each review, leading to this script:
 
 ~~~{.Bash}
 for i in {1..1256}
@@ -488,10 +488,10 @@ unsplit xs = let chapter = last xs
 
 ## R
 
-A `runhaskell mor.hs` later and [reviews.csv](/docs/2012-hpmor-reviews.csv) is ready for analysis in the R interpreter:
+A `runhaskell mor.hs` later and our [CSV of 18,852 reviews](/docs/2012-hpmor-reviews.csv) is ready for analysis in the R interpreter:
 
 ~~~{.R}
-data <- read.table("reviews.csv",header=TRUE, sep=",",quote="")
+data <- read.table("http://www.gwern.net/docs/2012-hpmor-reviews.csv",header=TRUE, sep=",",quote="")
 data
 ...
 18840                                        cheekylildevil  2/28/10       1
@@ -541,10 +541,10 @@ The next question is: if we plot only the subset of reviews which were made with
 # extract each chapter's reviews into its own vector - one vector of dates for ch1, one vector of dates for ch2 etc.
 myList <- list()
 for(i in 1:85) {
-myList[[i]] <- rev(x$Date[x$Chapter==i])
+myList[[i]] <- rev(data$Date[data$Chapter==i])
 }
 # take a look at the first entry in each vector as a sanity check
-unlist(lapply(myList, function(a) a[1]))
+lapply(myList, function(a) a[1])
 [[1]]
 [1] "10-02-28"
 
@@ -589,10 +589,7 @@ plot(filtered$Chapter, filtered$Reviews)
 
 # run a linear model: is there any clear trend?
 lm(filtered$Reviews ~ filtered$Chapter)
-
-Call:
-lm(formula = filtered$Reviews ~ filtered$Chapter)
-
+...
 Coefficients:
      (Intercept)  filtered$Chapter
         128.3773           -0.0966
@@ -615,10 +612,7 @@ filtered2=data.frame(Chapter=c(1:85),Reviews=totalreviews)
 plot(filtered2$Chapter, filtered2$Reviews)
 model2 = lm(filtered2$Reviews ~ filtered2$Chapter)
 summary(model2)
-
-Call:
-lm(formula = filtered2$Reviews ~ filtered2$Chapter)
-
+...
 Residuals:
     Min      1Q  Median      3Q     Max
 -215.47  -98.81  -24.02   58.08  834.21
@@ -647,10 +641,7 @@ Looking at the line, the fit seems quite poor at the beginning and end - doesn't
 plot(filtered$Chapter, filtered$Reviews)
 model <- lm(filtered$Reviews ~ filtered$Chapter + I(filtered$Chapter^2))
 summary(model)
-
-Call:
-lm(formula = filtered$Reviews ~ filtered$Chapter + I(filtered$Chapter^2))
-
+...
 Residuals:
      Min       1Q   Median       3Q      Max
 -160.478  -42.795   -3.364   40.813  179.321
@@ -674,16 +665,13 @@ lines(xx,yy,lwd=2,col=3)
 
 ![Fit a quadratic (U-curve) to the filtered review-count for each chapter](/images/hpmor/filteredreviews-quadratic.png)
 
-The quadratic seems to fit quite nicely. And for total reviews, we observe a very similar curve:
+The quadratic fits nicely. And for total reviews, we observe a similar curve:
 
 ~~~{.R}
 plot(filtered2$Chapter, filtered2$Reviews)
 model2 <- lm(filtered2$Reviews ~ filtered2$Chapter + I(filtered2$Chapter^2))
 summary(model2)
-
-Call:
-lm(formula = filtered2$Reviews ~ filtered2$Chapter + I(filtered2$Chapter^2))
-
+...
 Residuals:
     Min      1Q  Median      3Q     Max
 -289.68  -56.83  -17.59   36.67  695.45
@@ -725,7 +713,7 @@ predict(model2, newdata = data.frame(x = c(86:100)))
 412.9616 427.2244 441.8168 456.7387 471.9903 487.5714 503.4821
 ~~~
 
-So for example, the fitted quadratic model predicts ~503 total reviews for chapter 100. Making further assumptions (the error in estimating is independent of time, normally distributed, has zero mean, and constant variance), we [predict](http://predictionbook.com/predictions/9270) that our 95% confidence interval 215-792 total reviews of chapter 100:
+So for example, the fitted quadratic model predicts ~503 total reviews for chapter 100. Making further assumptions (the error in estimating is independent of time, normally distributed, has zero mean, and constant variance), we [predict](http://predictionbook.com/predictions/9270 "HP MoR: chapter 100 will, after 1 month, have 215-792 reviews posted on FF.net") that our 95% confidence interval 215-792 total reviews of chapter 100:
 
 ~~~{.R}
 predict(model2, newdata = data.frame(x = 100), interval="predict")
@@ -733,7 +721,25 @@ predict(model2, newdata = data.frame(x = 100), interval="predict")
   503.4821 215.05 791.9141
 ~~~
 
-Clearly the model isn't making very strong predictions because the standard error is so high.
+Clearly the model isn't making very strong predictions because the standard error is so high. We get a similar result asking just for the 7-day reviews:
+
+~~~{.R}
+filtered=data.frame(Chapter=c(1:85),Reviews=earlyreviews)
+y=filtered$Reviews; x=filtered$Chapter
+
+model = lm(y ~ x + I(x^2))
+model
+...
+Coefficients:
+(Intercept)            x       I(x^2)
+  178.41168     -3.54725      0.04012
+
+redict(model, newdata = data.frame(x = 100), interval="predict")
+      fit      lwr      upr
+1 224.925 66.83383 383.0162
+~~~
+
+This seems like a fairly reasonable [prediction](http://predictionbook.com/predictions/9343 "HP MoR: chapter 100 will, after 7 days, have 66-383 reviews posted on FF.net"): 66-383 reviews posted within 7 days.
 
 ## External links
 
