@@ -540,9 +540,7 @@ The next question is: if we plot only the subset of reviews which were made with
 ~~~{.R}
 # extract each chapter's reviews into its own vector - one vector of dates for ch1, one vector of dates for ch2 etc.
 myList <- list()
-for(i in 1:85) {
-myList[[i]] <- rev(data$Date[data$Chapter==i])
-}
+for (i in 1:85) { myList[[i]] <- rev(data$Date[data$Chapter==i]) }
 # take a look at the first entry in each vector as a sanity check
 lapply(myList, function(a) a[1])
 [[1]]
@@ -581,6 +579,8 @@ earlyreviews <- unlist(lapply(lapply(myList,
 ~~~
 
 How did chapter 5 get *341* reviews within 7 days and have *1159* in total, you ask - might my data not be wrong? But if you check the [chapter 5 reviews](http://www.fanfiction.net/r/5782108/5/1/) and scroll all the way down, you'll find that people back in 2010 were *very* chuffed by the Draco scenes.
+
+Moving onward, we want to graph the date and then fit a [linear model](!Wikipedia) (a line which minimizes the deviation of all of the points from it; I drew on a [handout for R programming](http://www.montefiore.ulg.ac.be/~kvansteen/GBIO0009-1/ac20092010/Class8/Using%20R%20for%20linear%20regression.pdf)):
 
 ~~~{.R}
 # turn vector into a plottable table & plot it
@@ -635,7 +635,7 @@ abline(model2)
 
 ### Fitting quadratics
 
-Looking at the line, the fit seems quite poor at the beginning and end - doesn't it look like a big U? That sounds like a quadratic, so more Googling for R code and an hour or two later, I fit some quadratics to the 7-day reviews and the total reviews:
+Looking at the line, the fit seems poor over all (large [residuals](!Wikipedia "Errors and residuals in statistics")) quite poor at the beginning and end - doesn't it look like a big U? That sounds like a quadratic, so more Googling for R code and an hour or two later, I fit some quadratics to the 7-day reviews and the total reviews:
 
 ~~~{.R}
 plot(filtered$Chapter, filtered$Reviews)
@@ -695,18 +695,14 @@ lines(xx,yy,lwd=2,col=3)
 
 ![Fit a quadratic (U-curve) to the final 3 November 2012 review-count for each chapter](/images/hpmor/allreviews-quadratic.png)
 
-### Conclusion & predictions
+### Predictions / confidence intervals
 
-Sadly, neither the quadratic nor the linear fits lend any support to the basic notion that we could estimate how much readership _MoR_ is being cost by the exponentially-slowing updates for the simple reason that the observed reviews per chapter do not match any simple increasing model of readership but a stranger U-curve (why do reviews decline so much in the middle when updates were quite regular?).
-
-We could argue that the sluggishness of the recent upturn in the U-curve (in the 80s) is due to there only being a few humongous chapters, but those chapters are quantitatively and qualitatively different from the early chapters (especially chapter 5) so it's not clear that any of them "should" have say, 341 reviews within a week.
-
-The U-curve is fairly testable: it predicts that # of reviews should increase over the coming chapters dramatically. For total reviews:
+The U-curve is fairly testable: it predicts that the number of reviews should increase over the coming chapters. For total reviews:
 
 ~~~{.R}
 x = filtered2$Chapter; y = filtered2$Reviews
 model2 <- lm(y ~ x + I(x^2))
-predict(model2, newdata = data.frame(x = c(86:100)))
+predict.lm(model2, newdata = data.frame(x = c(86:100)))
        1        2        3        4        5        6        7        8
 310.7242 322.3504 334.3061 346.5914 359.2063 372.1507 385.4248 399.0284
        9       10       11       12       13       14       15
@@ -716,7 +712,7 @@ predict(model2, newdata = data.frame(x = c(86:100)))
 So for example, the fitted quadratic model predicts ~503 total reviews for chapter 100. Making further assumptions (the error in estimating is independent of time, normally distributed, has zero mean, and constant variance), we [predict](http://predictionbook.com/predictions/9270 "HP MoR: chapter 100 will, after 1 month, have 215-792 reviews posted on FF.net") that our 95% confidence interval 215-792 total reviews of chapter 100:
 
 ~~~{.R}
-predict(model2, newdata = data.frame(x = 100), interval="predict")
+predict.lm(model2, newdata = data.frame(x = 100), interval="predict")
        fit    lwr      upr
   503.4821 215.05 791.9141
 ~~~
@@ -734,13 +730,41 @@ Coefficients:
 (Intercept)            x       I(x^2)
   178.41168     -3.54725      0.04012
 
-redict(model, newdata = data.frame(x = 100), interval="predict")
+predict.lm(model, newdata = data.frame(x = 100), interval="predict")
       fit      lwr      upr
 1 224.925 66.83383 383.0162
 ~~~
 
-This seems like a fairly reasonable [prediction](http://predictionbook.com/predictions/9343 "HP MoR: chapter 100 will, after 7 days, have 66-383 reviews posted on FF.net"): 66-383 reviews posted within 7 days.
+This *seems* like a fairly reasonable [prediction](http://predictionbook.com/predictions/9343 "HP MoR: chapter 100 will, after 7 days, have 66-383 reviews posted on FF.net"): 66-383 reviews posted within 7 days. But this is based purely off the model, is it taking into account that even the quadratic model has some pretty large residuals? Let's plot an entire [confidence band](!Wikipedia):
+
+~~~{.R}
+filtered = data.frame(Chapter=c(1:85),Reviews=earlyreviews)
+y = filtered$Reviews; x = filtered$Chapter
+plot(x, xlab="Chapter",
+     y, ylab="Reviews posted within week",
+     main="7-Day Reviews per Chapter with Quadratic Fit and 95% Confidence Intervals")
+
+model = lm(y ~ x + I(x^2))
+xx <- seq(min(x),max(x),len=200)
+yy <- model$coef %*% rbind(1,xx,xx^2)
+lines(xx,yy,lwd=2,col=3)
+
+prd <- predict(model, newdata = data.frame(x = c(1:85)), interval="confidence",type="response")
+lines(c(1:85),prd[,2],col="red",lty=2)
+lines(c(1:85),prd[,3],col="red",lty=2)
+~~~
+
+![7-Day Reviews per Chapter with Quadratic Fit and 95% Confidence Intervals](/images/hpmor/filteredreviews-quadratic-ci.png)
+
+Obviously far more than 5% of the datapoints are falling outside the confidence band which was calculated from the quadratic model. So the predicted confidence intervals are too narrow - the large residuals bounce datapoints around a lot, both beneath and above the confidence band. This should temper our forecasting enthusiasm. What might predict the residuals better? Day of week? Length of chapter update? Interval between updates? Hard to know.
+
+### Conclusions
+
+Sadly, neither the quadratic nor the linear fits lend any support to the original notion that we could estimate how much readership _MoR_ is being cost by the exponentially-slowing updates for the simple reason that the observed reviews per chapter do not match any simple increasing model of readership but a stranger U-curve (why do reviews decline so much in the middle when updates were quite regular?).
+
+We could argue that the sluggishness of the recent upturn in the U-curve (in the 80s) is due to there only being a few humongous chapters, but those chapters are quantitatively and qualitatively different from the early chapters (especially chapter 5) so it's not clear that any of them "should" have say, 341 reviews within a week.
 
 ## External links
 
-- [LW discussion](http://lesswrong.com/r/discussion/lw/fag/analyzing_ffnet_reviews_of_harry_potter_and_the/)
+- [LW discussion](http://lesswrong.com/r/discussion/lw/fag/analyzing_ffnet_reviews_of_harry_potter_and_the/#comments)
+- [Reddit discussion](http://www.reddit.com/r/HPMOR/comments/12l6g6/ffnet_reviews_of_hpmor_statistics/)
