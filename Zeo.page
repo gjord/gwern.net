@@ -1754,14 +1754,14 @@ Nice! Of course, we have to expect to lose a good deal of statistical power due 
 
 OK, power calculations aside, how exactly to run it? I don't expect any bleed-over from day to day, so we randomize on a per-day basis. Each day must either have Redshift running or not. Redshift is run from cron every 15 minutes: `*/15  * * * * redshift -o`. (This is to deal with logouts, shutdowns, freezes, etc., that might kill Redshift as a persistent daemon.) We'll change the code to at the beginning of each day run:
 
-~~~{.sh}
+~~~{.Bash}
 @daily redshift -x; if ((RANDOM \% 2 < 1)); then touch ~/.redshift; echo `date +"\%d \%b \%Y"`: on >> ~/redshift.log;
           else rm ~/.redshift; echo `date +"\%d \%b \%Y"`: off >> ~/redshift.log; fi
 ~~~
 
 Then the Redshift call simply includes a check for the file's existence:
 
-~~~{.sh}
+~~~{.Bash}
 */15  * * * * if [ -f ~/.redshift ]; then redshift -o; fi
 ~~~
 
@@ -1855,7 +1855,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
 
     The graph looks like WPM (but not Accuracy) may have been damaged, but it's not clear at all: we should do statistics. Amphetype stores the graphed data in a [SQLite](!Wikipedia) database, which after a little tinkering I figured out how to extract the WPM & Accuracy scores:
 
-    ~~~{.sh}
+    ~~~{.Bash}
     sqlite3 -batch gwern.db 'SELECT w real, wpm real, accuracy real FROM result;' > ~/stats.txt
     ~~~
 
@@ -1870,7 +1870,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
 
     The pipes are delimiters, which I replaced with commas. The first field is a date-stamp as expressed in seconds since the [Unix epoch](!Wikipedia); they can be converted to more readable dates like so:
 
-    ~~~{.sh}
+    ~~~{.Bash}
     $ date --date '@1308320681.44771'
     Fri Jun 17 10:24:41 EDT 2011
     ~~~
@@ -2514,15 +2514,18 @@ October
 30: 1 0 0
 31: 1 1 1
 November
-01: 0 1 0?
+01: 0 1 0
+02: 1 0 1
+03: 1 1 0
+04: 0 1 1?
 
 Underpopulated data cells:
-17: 0 1 0
 17: 0 1 1
-17: 1 0 1
-17: 1 1 0
-18: 1 1 1
+18: 1 1 0
+18: 0 1 0
 18: 1 0 0
+18: 1 0 1
+18: 1 1 1
 24: 0 0 0
 27: 0 0 1
 -->
@@ -2814,3 +2817,6 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 30 Oct 2012: on -->
 <!-- Redshift: 31 Oct 2012: on -->
 <!-- Redshift: 01 Nov 2012: on -->
+<!-- Redshift: 02 Nov 2012: off -->
+<!-- Redshift: 03 Nov 2012: off -->
+<!-- Redshift: 04 Nov 2012: on -->
