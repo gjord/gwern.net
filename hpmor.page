@@ -32,6 +32,8 @@ In universe, complete during Harry's:
 - [third year](http://predictionbook.com/predictions/6351)
 - [fourth year or later](http://predictionbook.com/predictions/6352)
 
+[Chapter 100 will, after 1 month, have 215-792 reviews posted on FF.net](http://predictionbook.com/predictions/9270)
+
 ## 2012
 
 Eliezer will publish:
@@ -401,3 +403,333 @@ will be...
 ### Sybil Trelawney
 
 [will prophesy](http://predictionbook.com/predictions/6372) the unspoken ch63 prophecy within earshot of Harry
+
+# Analysis
+
+> The unprecedented gap in _Methods of Rationality_ updates prompts musing about whether readership is increasing enough & what statistics one would use; I write code to download FF.net reviews, clean it, parse it, load into R, summarize the data & depict it graphically, run linear regression on a subset & all reviews, note the poor fit, develop a quadratic fit instead, and use it to predict future review quantities.
+
+## Statistical
+
+In a [LW comment](http://lesswrong.com/lw/f8y/open_thread_november_115_2012/7qs9), I asked:
+
+> I noticed in Eliezer's latest [1 November 2012] MoR update that he now has [*18,000 words written*](http://hpmor.com/notes/progress-12-11-01/) [of chapter 86], and even when that "chapter" is finished, he still doesn't plan to post anything, on top of a drought that has now lasted more than half a year. This doesn't seem very optimal from the point of view of gaining readers.
+>
+> But I was wondering how one would quantify that - how one would estimate how many readers Eliezer's MoR strategy of very rare huge dumps is costing him. Maybe survivorship curves, where survivorship is defined as "posting a review on FF.net"? So if say during the weekly MoR updates, a reader who posted a review of chapter X posted a review anywhere in X to X+n, that counts as  survival of that reader. One problem here is that new readers are constantly arriving... You can't simply say "X readers did not return from chapter 25 to chapter 30, while X+N did not return from chapter 85 to 86, therefore frequent updates are better" since you would expect the latter to be bigger simply because more people are reading. And even if you had data on unfavoriting or unfollowing, the important part is the opportunity cost - how many readers would have subscribed with regular updates
+>
+> If you had total page views, that'd be another thing; you could look at conversions: what percentage of page views resulted in conversions to subscribers for the regular update period versus the feast/fame periods. But I don't think FF.net provides it and while [HP:MoR.com](http://www.hpmor.com/) has Google Analytics, I don't have access. Maybe one could look at each chapter pair-wise, and seeing what fraction of reviewers return? The growth might average out since we're doing so many comparisons... But the delay is now so extreme this would fail: we'd expect a huge growth in reviewers from chapter 85 to chapter 86, for example, simply because it's been like 8 months now - here too the problem is that the growth in reviewers will be less than what it "should be". But how do we figure out "should be"?
+>
+> After some additional discussion with clone\_of\_saturn, I've rejected the idea of survivorship curves; we thought correlations between duration and total review count might work, but interpretation was not clear. So the best current idea is: gather duration between each chapter, the # of reviews posted within X days (where X is something like 2 or 3), plot the points, and then see whether a line fits it better or a logarithm/logistic curve - to see whether growth slowed  as the updates were spaced further apart.
+>
+> Getting the data is the problem. It's easy to get total reviews for each chapter since FF.net provides them. I don't know of any way to get total reviews after X days posted, though! A script or program could probably do it, but I'm not sure I want to bother with all this work (especially since I don't know how to do Bayesian line or logistic-fitting) if it's not of interest to anyone or Eliezer would simply ignore any results.
+
+I decided to take a stab at it.
+
+## Data
+
+FF.net does not provide published dates for each chapter, so we'll be working off solely the posted reviews. FF.net reviews for _MoR_ are provided on 1256 pages (as of 3 November 2012), numbering from 1. If we go from 1-1256, starting with `http://www.fanfiction.net/r/5782108/85/1/`, we can download them with a script enumerating the URLs & using string interpolation. Eyeballing a textual dump of the HTML (courtesy of `elinks`), it's easy to extract with `grep` the line with user, chapter number, and date with a HTML string embedded as a link with each review, leading to this script:
+
+~~~{.Bash}
+for i in {1..1256}
+do elinks -dump-width 1000 -no-numbering -no-references -dump http://www.fanfiction.net/r/5782108/0/$i/
+     | grep "report review for abuse " >> reviews.txt
+done
+~~~
+
+Since page #1 is for the most recent URLs and we started with 1, the reviews were dumped newest to oldest:
+
+eg.
+
+    [IMG] report review for abuse Faerie of Tara 4/1/12 . chapter 3
+    [IMG] report review for abuse Faerie of Tara 4/1/12 . chapter 2
+    report review for abuse Aww 4/1/12 . chapter 81
+    report review for abuse bella-farfallina 4/1/12 . chapter 81
+    [IMG] report review for abuse Isis Aurora Tomoe 4/1/12 . chapter 2
+    [IMG] report review for abuse bosk 4/1/12 . chapter 1
+    [IMG] report review for abuse yamiishot 4/1/12 . chapter 81
+    report review for abuse Joe in Australia 4/1/12 . chapter 81
+    report review for abuse of course 3/31/12 . chapter 45
+    report review for abuse RickJs 3/31/12 . chapter 22
+
+We can clean this up with more shell scripting:
+
+~~~{.Bash}
+sed -e 's/\[IMG\] //' -e 's/.*report review for abuse //' -e 's/ \. chapter / /' reviews.txt  > filtered-reviews.txt
+~~~
+
+This gives us better looking data like:
+
+    NATWEST 3/4/10 4
+    hemotem 3/4/10 4
+    Isabelle Eir 3/4/10 4
+    Orc Shaman 3/3/10 1
+    Mariann's 3/3/10 4
+    cheekylildevil 3/3/10 4
+    Star Bear 3/3/10 4
+
+The spaces in names means we can't simply do a search-and-replace to turn spaces into commas and call that a CSV which can easily be read in R; so more scripting, in Haskell this time (though I'm sure `awk` or something could do the job, I don't know it):
+
+~~~{.Haskell}
+import Data.List (intercalate)
+
+main :: IO ()
+main = do f <- readFile "filtered-reviews.txt"
+          let parsed = map words (lines f)
+          let unparsed = "User,Date,Chapter\n" ++ unlines (map unsplit parsed)
+          writeFile "reviews.csv" unparsed
+
+-- eg "Star Bear 3/3/10 4" ~> ["Star", "Bear", "3/3/10", "4") ~> "Star Bear,3/3/10,4"
+unsplit :: [String] -> String
+unsplit xs = let chapter = last xs
+                 date = last (init xs)
+                 user = unwords (init (init xs))
+             in intercalate "," [user, date, chapter]
+~~~
+
+## R
+
+A `runhaskell mor.hs` later and [reviews.csv](/docs/2012-hpmor-reviews.csv) is ready for analysis in the R interpreter:
+
+~~~{.R}
+data <- read.table("reviews.csv",header=TRUE, sep=",",quote="")
+data
+...
+18840                                        cheekylildevil  2/28/10       1
+18841                                       scarletalphabet  2/28/10       1
+18842                                           StoryTagger  2/28/10       1
+18843                                                HJP265  2/28/10       1
+18844                                              dougal74  2/28/10       1
+18845                                                baceba  2/28/10       1
+18846                                               Cibbler  2/28/10       1
+18847                                               Davek86  2/28/10       1
+18848                                        omegahurricane  2/28/10       1
+18849                                         hhrforeverhhr  2/28/10       1
+18850                                    anonnatymousMARTIN  2/28/10       1
+18851                                            wetterwaxs  2/28/10       1
+18852                                                Errrrr  2/28/10       1
+# Convert the date strings to R dates
+data=data.frame(Chapter=data$Chapter, Date=as.Date(data$Date,"%m/%d/%Y"), User=data$User)
+summary(data)
+
+    Chapter           Date                      User
+ Min.   : 1.00   Min.   :10-02-28   Guest         :  310
+ 1st Qu.:10.00   1st Qu.:10-06-16   anon          :  106
+ Median :27.00   Median :10-11-26   voodooqueen126:   85
+ Mean   :35.64   Mean   :11-02-10   Kutta         :   77
+ 3rd Qu.:63.00   3rd Qu.:11-09-02   badkidoh      :   73
+ Max.   :85.00   Max.   :12-11-02   AR            :   72
+                                    (Other)       :18129
+~~~
+
+Surprisingly, it looks like only one user ('voodooqueen126') has reviewed every chapter. The dates also clearly indicate the slowdown in _MoR_ posting, with the median chapter being posted all the way back in 2010.
+
+When we plot each review by the chapter it was reviewing and the date it was posted, we see many clear patterns:
+
+~~~{.R}
+plot(data$Chapter,data$Date)
+~~~
+
+![Scatterplot of all reviews, date posted versus chapter](/images/hpmor/allreviews.png)
+
+Obviously no one can review a chapter before it was posted, which is the thick black line along the bottom. We can also see how the delays between chapters: originally very small, the gaps increase tremendously in the 70s (remember the whole y-axis is ~3 years) - just 2 of the delays look like they cover something like $\frac{1}{3}-\frac{1}{2}$ the entire lifespan of _MoR_! Other interesting observations is that chapter 1 and chapter 5 are extremely popular for reviewers, with hardly a day passing without review even as vast wastelands open up in 2012 in chapters 40-60. A final curious observation is the presence of distinct horizontal lines; I am guessing that these are people prone to reviewing who are binging their way through _MoR_.
+
+### Filtered reviews
+
+The next question is: if we plot only the subset of reviews which were made within 7 days of the first review, what does that look like?
+
+~~~{.R}
+# extract each chapter's reviews into its own vector - one vector of dates for ch1, one vector of dates for ch2 etc.
+myList <- list()
+for(i in 1:85) {
+myList[[i]] <- rev(x$Date[x$Chapter==i])
+}
+# take a look at the first entry in each vector as a sanity check
+unlist(lapply(myList, function(a) a[1]))
+[[1]]
+[1] "10-02-28"
+
+[[2]]
+[1] "10-02-28"
+
+[[3]]
+[1] "10-03-01"
+
+[[4]]
+[1] "10-03-03"
+
+[[5]]
+[1] "10-03-08"
+...
+# looks reasonable
+# what's the total by each chapter?
+totalreviews <- unlist(lapply(myList, length))
+totalreviews
+ [1]  823  391  205  293 1159  499  419  375  423  498  332  215  270  283  222
+[16]  291  385  302  270  311  248  199  215  211  141  243  283  138  136  143
+[31]  160  204  148  119   28   77  106   48  130  101  117  183   52   33  139
+[46]  246  334  120  148  104  181   69   47  183   38  143   74  202   80  131
+[61]  127  164  303  175  146   42  147  130  253  296  217  398  136  249  187
+[76]  231  525  185  153  308  235  113   74  154  236
+# Now the hard part: map over the list of vectors, and filter out anything dated 7 days after the first date
+earlyreviews <- unlist(lapply(lapply(myList,
+    function(a) Filter(function(b) {if (b > a[1]+7) return(FALSE) else return(TRUE)}, a)), length))
+ [1]  17  11  13  42 341 191 204 210 296 282 117 136 162 144 126 155 199 199 159
+[20] 209 133 125 142 111  92 145 193  96  92  43 115 170  78  88   5  34  77  17
+[39]  48  71  88 129  18  10  40 164 246 100 124  82 150  51  32 168  32 129  62
+[58] 167  66 116 109 140 155  55 114  19 111 104 175 187 110 175 127 212 164 181
+[77] 117 169 139 299 211 106  69 143 106
+~~~
+
+How did chapter 5 get *341* reviews within 7 days and have *1159* in total, you ask - might my data not be wrong? But if you check the [chapter 5 reviews](http://www.fanfiction.net/r/5782108/5/1/) and scroll all the way down, you'll find that people back in 2010 were *very* chuffed by the Draco scenes.
+
+~~~{.R}
+# turn vector into a plottable table & plot it
+filtered=data.frame(Chapter=c(1:85),Reviews=earlyreviews)
+plot(filtered$Chapter, filtered$Reviews)
+
+# run a linear model: is there any clear trend?
+lm(filtered$Reviews ~ filtered$Chapter)
+
+Call:
+lm(formula = filtered$Reviews ~ filtered$Chapter)
+
+Coefficients:
+     (Intercept)  filtered$Chapter
+        128.3773           -0.0966
+
+# the slope doesn't look very interesting...
+# let's plot the regression line too:
+abline(lm(filtered$Reviews ~ filtered$Chapter))
+~~~
+
+![Graph reviews posted within a week, per chapter.](/images/hpmor/filteredreviews.png)
+
+Look at the noise. We have some huge spikes in the early chapters, some sort of dip in the 40s-70s, and then a similar spread of highly and lowly reviewed chapters at the end. The linear model is basically just the average (`mean(filtered$Reviews)` = 124.2); it's actually predicting slight declines in reviews posted within 7 days, interestingly.
+
+### All reviews
+
+Same thing if we look at *total* reviews for each chapter:
+
+~~~{.R}
+filtered2=data.frame(Chapter=c(1:85),Reviews=totalreviews)
+plot(filtered2$Chapter, filtered2$Reviews)
+model2 = lm(filtered2$Reviews ~ filtered2$Chapter)
+summary(model2)
+
+Call:
+lm(formula = filtered2$Reviews ~ filtered2$Chapter)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-215.47  -98.81  -24.02   58.08  834.21
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)       338.3462    33.4318  10.120 3.79e-16 ***
+filtered2$Chapter  -2.7107     0.6753  -4.014  0.00013 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 152.8 on 83 degrees of freedom
+Multiple R-squared: 0.1626, Adjusted R-squared: 0.1525
+F-statistic: 16.11 on 1 and 83 DF,  p-value: 0.0001302
+
+abline(model2)
+~~~
+
+![Graph all reviews by posted time and chapter](/images/hpmor/allreviewsbychapter.png)
+
+### Fitting quadratics
+
+Looking at the line, the fit seems quite poor at the beginning and end - doesn't it look like a big U? That sounds like a quadratic, so more Googling for R code and an hour or two later, I fit some quadratics to the 7-day reviews and the total reviews:
+
+~~~{.R}
+plot(filtered$Chapter, filtered$Reviews)
+model <- lm(filtered$Reviews ~ filtered$Chapter + I(filtered$Chapter^2))
+summary(model)
+
+Call:
+lm(formula = filtered$Reviews ~ filtered$Chapter + I(filtered$Chapter^2))
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-160.478  -42.795   -3.364   40.813  179.321
+
+Coefficients:
+                       Estimate Std. Error t value Pr(>|t|)
+(Intercept)           178.41168   22.70879   7.857 1.34e-11 ***
+filtered$Chapter       -3.54725    1.21875  -2.911  0.00464 **
+I(filtered$Chapter^2)   0.04012    0.01373   2.922  0.00449 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 68.15 on 82 degrees of freedom
+Multiple R-squared: 0.09533,    Adjusted R-squared: 0.07327
+F-statistic:  4.32 on 2 and 82 DF,  p-value: 0.01645
+
+xx <- seq(min(filtered$Chapter),max(filtered$Chapter),len=200)
+yy <- model$coef %*% rbind(1,xx,xx^2)
+lines(xx,yy,lwd=2,col=3)
+~~~
+
+![Fit a quadratic (U-curve) to the filtered review-count for each chapter](/images/hpmor/filteredreviews-quadratic.png)
+
+The quadratic seems to fit quite nicely. And for total reviews, we observe a very similar curve:
+
+~~~{.R}
+plot(filtered2$Chapter, filtered2$Reviews)
+model2 <- lm(filtered2$Reviews ~ filtered2$Chapter + I(filtered2$Chapter^2))
+summary(model2)
+
+Call:
+lm(formula = filtered2$Reviews ~ filtered2$Chapter + I(filtered2$Chapter^2))
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-289.68  -56.83  -17.59   36.67  695.45
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)
+(Intercept)            543.84019   41.43142  13.126  < 2e-16 ***
+filtered2$Chapter      -16.88265    2.22356  -7.593 4.45e-11 ***
+I(filtered2$Chapter^2)   0.16479    0.02505   6.578 4.17e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 124.3 on 82 degrees of freedom
+Multiple R-squared: 0.4518, Adjusted R-squared: 0.4384
+F-statistic: 33.79 on 2 and 82 DF,  p-value: 1.977e-11
+
+xx <- seq(min(filtered2$Chapter),max(filtered2$Chapter),len=200)
+yy <- model2$coef %*% rbind(1,xx,xx^2)
+lines(xx,yy,lwd=2,col=3)
+~~~
+
+![Fit a quadratic (U-curve) to the final 3 November 2012 review-count for each chapter](/images/hpmor/allreviews-quadratic.png)
+
+### Conclusion & predictions
+
+Sadly, neither the quadratic nor the linear fits lend any support to the basic notion that we could estimate how much readership _MoR_ is being cost by the exponentially-slowing updates for the simple reason that the observed reviews per chapter do not match any simple increasing model of readership but a stranger U-curve (why do reviews decline so much in the middle when updates were quite regular?).
+
+We could argue that the sluggishness of the recent upturn in the U-curve (in the 80s) is due to there only being a few humongous chapters, but those chapters are quantitatively and qualitatively different from the early chapters (especially chapter 5) so it's not clear that any of them "should" have say, 341 reviews within a week.
+
+The U-curve is fairly testable: it predicts that # of reviews should increase over the coming chapters dramatically. For total reviews:
+
+~~~{.R}
+x = filtered2$Chapter; y = filtered2$Reviews
+model2 <- lm(y ~ x + I(x^2))
+predict(model2, newdata = data.frame(x = c(86:100)))
+       1        2        3        4        5        6        7        8
+310.7242 322.3504 334.3061 346.5914 359.2063 372.1507 385.4248 399.0284
+       9       10       11       12       13       14       15
+412.9616 427.2244 441.8168 456.7387 471.9903 487.5714 503.4821
+~~~
+
+So for example, the fitted quadratic model predicts ~503 total reviews for chapter 100. Making further assumptions (the error in estimating is independent of time, normally distributed, has zero mean, and constant variance), we [predict](http://predictionbook.com/predictions/9270) that our 95% confidence interval 215-792 total reviews of chapter 100:
+
+~~~{.R}
+predict(model2, newdata = data.frame(x = 100), interval="predict")
+       fit    lwr      upr
+  503.4821 215.05 791.9141
+~~~
+
+Clearly the model isn't making very strong predictions because the standard error is so high.
