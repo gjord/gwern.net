@@ -239,7 +239,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
     A crude shell script for an individual file which checks the page source and then the rendered HTML:
 
-    ~~~{.sh}
+    ~~~{.Bash}
     function markdown-lint () {
         fgrep -e "(www" -e ")www" "$@";
         cat "$@" \
