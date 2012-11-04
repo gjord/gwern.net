@@ -292,7 +292,7 @@ How many editors were affected? The 100 articles edited were watchlisted by a me
 
     Then, loop over the list to download the March 2012 summary page for that article, and filter out the total monthly hit-count (since we don't care about dailies); example code:
 
-    ~~~{.sh}
+    ~~~{.Bash}
     $ for URL in `cat foo`; do elinks -dump "http://stats.grok.se/en/201203/$URL" | fgrep " has been viewed "; done
        [1]Castell_Dinas_Bran has been viewed 914 times in 201203.
        [1]Ron_O'Neal has been viewed 7446 times in 201203.
@@ -368,14 +368,14 @@ It might be enough simply to know how much traffic to talk pages there is period
 
 The raw stats used by `stats.grok.se` are [available](http://dumps.wikimedia.org/other/pagecounts-raw/2011/2011-09/) for download, so we can look at *all* page hits, sum all article and all Talk hits and see what the ratio is for the entire English Wikipedia is on one day. (each file seems to be an hour of the day so I downloaded 24 and `gunzip`ped them all.) We do some quick shell scripting. To find the aggregate hits for just talk pages:
 
-~~~~{.sh}
+~~~~{.Bash}
 grep -e '^en Talk:' -e '^en talk:' pagecounts-* | cut -d ' ' -f 3 | paste -sd + | bc
 582771
 ~~~~
 
 To find aggregate hits for non-talk pages:
 
-~~~~{.sh}
+~~~~{.Bash}
 grep -e '^en ' pagecounts-* | grep -v -e '^en Talk:' -e '^en talk:' | cut -d ' ' -f 3 | paste -sd + | bc
 202680742
 ~~~~
