@@ -1,6 +1,9 @@
 ---
 description: Archiving using Wikipedia Recent Changes RSS feed
 tags: Haskell, archiving, Wikipedia
+created: 02 Nov 2009
+status: finished
+belief: highly likely
 ...
 
 We left [Wikipedia Archive Bot]() at the point where it could take its stdin (newline-delimited article names), download the English Wikipedia article, parse the HTML for hyperlinks, and fire off an archive request to [WebCitation.org](!Wikipedia).
@@ -51,7 +54,9 @@ Now we can solve #5. Given `extractURLs`, we fire off the request using `openURL
 ~~~{.haskell}
 archiveURL :: String -> String -> IO ()
 archiveURL email url = openURL url' >> return ()
-              where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
+              where url' = "http://www.webcitation.org/archive?url=" ++
+                            escapeURIString isAllowedInURI url ++
+                            "&email=" ++ email
 ~~~
 
 ## RSS
@@ -93,7 +98,8 @@ So #2 is done. Now for #1, interfacing with the user. We'll just be quick & lazy
 ~~~{.haskell}
 main :: IO ()
 main = do (email:website) <- getArgs
-          if (null website) then archiveBot email "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
+          if (null website)
+           then archiveBot email "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
            else archiveBot email website
 ~~~
 
@@ -129,7 +135,8 @@ import Text.RSS.Syntax (rssChannel, rssItems, RSSItem(..))
 
 main :: IO ()
 main = do (email:website:_) <- getArgs
-          if (null website) then archiveBot email "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
+          if (null website)
+           then archiveBot email "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
            else archiveBot email website
 
 archiveBot :: String -> String -> IO ()
@@ -157,7 +164,9 @@ parseRSSIO str = fmap parseRSS $ openURL str
 
 archiveURL :: String -> String -> IO ()
 archiveURL email url = openURL url' >> return ()
-              where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
+              where url' = "http://www.webcitation.org/archive?url=" ++
+                            escapeURIString isAllowedInURI url ++
+                            "&email=" ++ email
 ~~~
 
 Now we have our finished prototype. We can compile it and run it like:
@@ -275,7 +284,8 @@ main = do args <- getArgs
           let email = head args
           -- This is largely intended for the English Wikipedia, so we default to En's NewPages
           -- but we let the user override; any second argument is assumed to be a MediaWiki RSS
-          let url = if length args > 1 then args !! 1
+          let url = if length args > 1
+                     then args !! 1
                      else "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
           reader email url
 
@@ -313,7 +323,8 @@ archiveBot email ls = liftM uniq (fetchArticleURLs ls) >>= mapM_ (archiveURL ema
         uniq = filter (\x ->not $ any (flip isInfixOf x) exceptions)
 
         exceptions :: [String]
-        exceptions = ["wikimediafoundation", "http://www.mediawiki.org/", "wikipedia", "&curid=", "index.php?title=", "&action="]
+        exceptions = ["wikimediafoundation", "http://www.mediawiki.org/", "wikipedia",
+                      "&curid=", "index.php?title=", "&action="]
 
 -- | Run 'extractURLs' on some page's raw HTML
 fetchArticleURLs ::  String -> IO [String]
@@ -324,14 +335,18 @@ fetchArticleURLs = fmap extractURLs . get'
 extractURLs :: String -> [String]
 extractURLs arg = [x | TagOpen "a" atts <- parseTags arg, (_,x) <- atts, "http://" `isPrefixOf` x]
 
--- | WebCitation.org is set up so one can archive a url just by doing a request for 'webcitation.org/archive?url=url&email=email'
--- So it's very easy, given a URL and an email, to archive a page. You don't even need to see what the response was.
+-- | WebCitation.org is set up so one can archive a url just by doing a request
+-- for 'webcitation.org/archive?url=url&email=email'
+-- So it's very easy, given a URL and an email, to archive a page. No need to see what the response was.
 archiveURL :: String -> String -> IO ()
 archiveURL email url = print url' >> ignore (get' url')
-              where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
+              where url' = "http://www.webcitation.org/archive?url=" ++
+                            escapeURIString isAllowedInURI url ++
+                            "&email=" ++ email
 
--- | Convenient wrapper over the complexity of Network.HTTP. Given a URL, we get the raw HTML. No fuss, no muss.
--- Of course, this means we paper over a bunch of possible errors and issues, but we've no time for them! There are links to archive!
+-- | Convenient wrapper over the complexity of Network.HTTP. Given a URL, we get the raw HTML.
+-- This means we paper over a bunch of possible errors and issues, but we've no time for them!
+-- There are links to archive!
 get' :: String -> IO String
 get' = get . fromJust . parseURI
  where get :: URI -> IO String
@@ -421,16 +436,6 @@ Our rewrite of `get'` simplifies our imports:
 < import Text.HTML.Download (openURL)
 ~~~~
 
-And then, because the exception list was annoying me by being needlessly long to filter out the repeated links:
-
-~~~~{.diff}
-63c59,60
-<         exceptions = ["wikimediafoundation", "http://www.mediawiki.org/", "wikipedia", "&curid=", "index.php?title=", "&action="]
----
->         exceptions = ["wikimediafoundation", "http://www.mediawiki.org/", "wikipedia", "creativecommons.org",
->                       "&curid=", "index.php?title=", "&action="]
-~~~~
-
 The final version after those changes:
 
 ~~~~{.haskell}
@@ -455,7 +460,8 @@ main = do args <- getArgs
           let email = head args
           -- This is largely intended for the English Wikipedia, so we default to En's NewPages
           -- but we let the user override; any second argument is assumed to be a MediaWiki RSS
-          let url = if length args > 1 then args !! 1
+          let url = if length args > 1
+                     then args !! 1
                      else "http://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss"
           reader email url
 
@@ -504,14 +510,18 @@ fetchArticleURLs = fmap extractURLs . openURL
 extractURLs :: String -> [String]
 extractURLs arg = [x | TagOpen "a" atts <- parseTags arg, (_,x) <- atts, "http://" `isPrefixOf` x]
 
--- | WebCitation.org is set up so one can archive a url just by doing a request for 'webcitation.org/archive?url=url&email=email'
--- So it's very easy, given a URL and an email, to archive a page. You don't even need to see what the response was.
+-- | WebCitation.org is set up so one can archive a url just by doing a request
+-- for 'webcitation.org/archive?url=url&email=email'
+-- So it's very easy, given a URL and an email, to archive a page. No need to see what the response was.
 archiveURL :: String -> String -> IO ()
 archiveURL email url = putStrLn url' >> ignore (openURL url')
-              where url' = "http://www.webcitation.org/archive?url=" ++ escapeURIString isAllowedInURI url ++ "&email=" ++ email
+              where url' = "http://www.webcitation.org/archive?url=" ++
+                             escapeURIString isAllowedInURI url ++
+                             "&email=" ++ email
 
--- | Convenient wrapper over the complexity of Network.HTTP. Given a URL, we get the raw HTML. No fuss, no muss.
--- Of course, this means we paper over a bunch of possible errors and issues, but we've no time for them! There are links to archive!
+-- | Convenient wrapper over the complexity of Network.HTTP. Given a URL, we get the raw HTML.
+-- This means we paper over a bunch of possible errors and issues, but we've no time for them!
+-- There are links to archive!
 openURL :: String -> IO String
 openURL u = do res <- simpleHTTP $ getRequest u
                case res of
@@ -519,7 +529,8 @@ openURL u = do res <- simpleHTTP $ getRequest u
                 Right y -> return $ rspBody y
 
 -- | Convenience function. 'forkIO' and 'forM_' demand return types of 'IO ()', but most interesting
--- IO functions don't return void. So one adds a call to 'return ()'; this just factors it out. Redundant with GHC 7's 'Control.Monad.void'.
+-- IO functions don't return void. So one adds a call to 'return ()'; this just factors it out.
+-- Redundant with GHC 7's 'Control.Monad.void'.
 ignore :: Functor f => f a -> f ()
 ignore = fmap $ const ()
 ~~~~
