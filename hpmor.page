@@ -697,7 +697,15 @@ lines(xx,yy,lwd=2,col=3)
 
 ### Predictions / confidence intervals
 
-The U-curve is fairly testable: it predicts that the number of reviews should increase over the coming chapters. For total reviews:
+Linear models, even as a quadratic, are pretty simple. They don't have to be a black box, and they're interpretable the moment you are given the coefficients: 'this' times 'that' equals 'that other thing'. We learned these things in middle school by hand-graphing functions. So it's not hard to figure out what function our fitted lines represent, or to extend them rightwards to uncharted waters.
+
+Our very first linear model for `filtered$Reviews ~ filtered$Chapter` told us that the coefficients were Intercept: 128.3773, `filtered$Chapter`: -0.0966. Going back to middle school math, the intercept is the _y_-intercept, the value of _y_ when _x_=0; then the other number must be how much we multiply _x_ by.
+
+So the linear model is simply this: $y = -0.0966x + 128.3773$. To make predictions, we substitute in for _x_ as we please; so chapter 1 is $-0.0966 \times 1 + 128.3773 = 128.28$, chapter 85 is $-0.0966 \times 85 + 128.3773 = 120.16$ (well, what did you expect of a nearly-flat line?) and so on.
+
+We can do this for the quadratic too; your ordinary quadratic looked like $y = x^2 + x + 1$, so it's easy to guess what the filled-in equivalent will be. We'll look at total reviews this time (`filtered2$Reviews ~ filtered2$Chapter + I(filtered2$Chapter^2)`). The intercept was 543.84019, the first coefficient was -16.88265, and the third mystery number was 0.16479, so the new equation is $y = 0.16479x^2 + -16.88265x + 543.84019$. What's the prediction for chapter 86? $0.16479\times(86^2) + (-16.88265)\times86 + 543.8401 = 310.719$. And for chapter 100, it'd go $0.16479\times(100^2) + (-16.88265)\times100 + 543.8401 = 503.475$.
+
+Can we automate this? Yes. Continuing with total reviews:
 
 ~~~{.R}
 x = filtered2$Chapter; y = filtered2$Reviews
@@ -708,6 +716,8 @@ predict.lm(model2, newdata = data.frame(x = c(86:100)))
        9       10       11       12       13       14       15
 412.9616 427.2244 441.8168 456.7387 471.9903 487.5714 503.4821
 ~~~
+
+(Notice that this use of `predict` spits out the same answers we calculated for chapter 86 and chapter 100.)
 
 So for example, the fitted quadratic model predicts ~503 total reviews for chapter 100. Making further assumptions (the error in estimating is independent of time, normally distributed, has zero mean, and constant variance), we [predict](http://predictionbook.com/predictions/9270 "HP MoR: chapter 100 will, after 1 month, have 215-792 reviews posted on FF.net") that our 95% confidence interval 215-792 total reviews of chapter 100:
 
