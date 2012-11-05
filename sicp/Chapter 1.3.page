@@ -1,6 +1,9 @@
 ---
 description: Generalizing functions with hardwired values
 tags: Haskell, Scheme, computer science
+created: 09 Jan 2010
+status: in progress
+belief: log
 ...
 
 # Chapter 1.3: Formulating Abstractions with Higher-Order Procedures
@@ -149,7 +152,7 @@ The `(lambda (a) a)` is bound to the variable `f`, which gets called on the firs
 
 #### Monoids
 
-A worldly Haskeller will look at this and immediately think, 'an initial seed value, and some way of combining values... could this idea be a *[monoid](!Wikipedia)*?!'
+A worldly Haskeller will look at this and immediately think, 'an initial seed value, and some way of combining values... could this idea be a *[monoid](!Wikipedia)*‽'
 
 As [sigfpe's](http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html) excellent tutorial or [_Learn You A Haskell_](http://learnyouahaskell.com/functors-applicative-functors-and-monoids#monoids) or [_Real World Haskell_](http://book.realworldhaskell.org/read/data-structures.html#id637702) will tell us, yes - this is a monoid. In fact, integers (our topic) form two different monoids, one for addition ([Sum](!Hoogle)) and one for multiplication ([Product](!Hoogle)).
 
