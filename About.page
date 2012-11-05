@@ -237,11 +237,14 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         "$tags$"
         "$category$"
 
-    A crude shell script for an individual file which checks the page source and then the rendered HTML:
+    Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](http://groups.google.com/d/topic/pandoc-discuss/2C5p5pp6ReM/discussion).
+
+    A shell script for an individual file which checks the page source and then the rendered HTML:
 
     ~~~{.Bash}
     function markdown-lint () {
         fgrep -e "(www" -e ")www" "$@";
+        markdown-length-checker "$@";
         cat "$@" \
         | tail -n +3 \
         | pandoc --mathml --standalone - \
