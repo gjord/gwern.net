@@ -127,7 +127,8 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
     mydata <- read.table("http://www.gwern.net/docs/2011-zeo-melatonin.csv", header=TRUE, sep=",")
 
-    # "SSCF 10" is the variable ('sleep stealer custom factor'); I hand-edited the CSV to convert all '3' to '1' to make it a binary variable
+    # "SSCF 10" is the variable ('sleep stealer custom factor')
+    # I edited the CSV to convert all '3' to '1' (& so a binary)
     t.test(ZQ~SSCF.10, data=mydata)
 
         Welch Two Sample t-test
@@ -260,7 +261,8 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 [^R-melatonin-analysis-o]: The following `R` re-runs the above analysis but with options that increase the power of the results - but only if some assumptions about melatonin's effects are correct; see later Vitamin D discussion of 'optimistic' and 'pessimistic' assumptions.
 
     ~~~{.R}
-    t.test(ZQ~SSCF.10, data=mydata, var.equal=TRUE); t.test(Total.Z~SSCF.10, data=mydata, var.equal=TRUE)
+    t.test(ZQ~SSCF.10, data=mydata, var.equal=TRUE);
+     t.test(Total.Z~SSCF.10, data=mydata, var.equal=TRUE)
 
         Two Sample t-test
 
@@ -284,7 +286,8 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            456.4783        407.5312
 
-    t.test(Time.to.Z~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Time.in.Wake~SSCF.10, data=mydata, alternative="less", var.equal=TRUE)
+    t.test(Time.to.Z~SSCF.10, data=mydata, alternative="less", var.equal=TRUE);
+     t.test(Time.in.Wake~SSCF.10, data=mydata, alternative="less", var.equal=TRUE);
 
         Two Sample t-test
 
@@ -308,7 +311,8 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            6.565217        5.640625
 
-    t.test(Time.in.REM~SSCF.10, data=mydata, var.equal=TRUE); t.test(Time.in.Deep~SSCF.10, data=mydata, var.equal=TRUE)
+    t.test(Time.in.REM~SSCF.10, data=mydata, var.equal=TRUE);
+     t.test(Time.in.Deep~SSCF.10, data=mydata, var.equal=TRUE)
 
         Two Sample t-test
 
@@ -332,7 +336,8 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     mean in group 0 mean in group 1
            57.21739        56.57812
 
-    t.test(Awakenings~SSCF.10, data=mydata, alternative="less", var.equal=TRUE); t.test(Morning.Feel~SSCF.10, data=mydata, alternative="great", var.equal=TRUE)
+    t.test(Awakenings~SSCF.10, data=mydata, alternative="less", var.equal=TRUE);
+     t.test(Morning.Feel~SSCF.10, data=mydata, alternative="great", var.equal=TRUE)
 
         Two Sample t-test
 
@@ -1255,7 +1260,8 @@ So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on
 
     ~~~{.haskell}
     let bh (index,pvalue) = pvalue < ((index * 0.05) / 8) in
-                              map bh (zip [1..] [0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411])
+                              map bh (zip [1..] [0.005276, 0.02205, 0.06163, 0.06904,
+                                                 0.4015, 0.5084, 0.538, 0.7411])
     [True,False,False,False,False,False,False,False]
     ~~~
 
@@ -1759,7 +1765,8 @@ Nice! Of course, we have to expect to lose a good deal of statistical power due 
 OK, power calculations aside, how exactly to run it? I don't expect any bleed-over from day to day, so we randomize on a per-day basis. Each day must either have Redshift running or not. Redshift is run from cron every 15 minutes: `*/15  * * * * redshift -o`. (This is to deal with logouts, shutdowns, freezes, etc., that might kill Redshift as a persistent daemon.) We'll change the code to at the beginning of each day run:
 
 ~~~{.Bash}
-@daily redshift -x; if ((RANDOM \% 2 < 1)); then touch ~/.redshift; echo `date +"\%d \%b \%Y"`: on >> ~/redshift.log;
+@daily redshift -x; if ((RANDOM \% 2 < 1));
+          then touch ~/.redshift; echo `date +"\%d \%b \%Y"`: on >> ~/redshift.log;
           else rm ~/.redshift; echo `date +"\%d \%b \%Y"`: off >> ~/redshift.log; fi
 ~~~
 
@@ -1804,26 +1811,28 @@ The difference between the long-term meditators and their normal Indian counterp
 ~~~{.R}
 install.packages("pwr", depend = TRUE)
 library(pwr)
-pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,sig.level=0.05,type="paired",alternative="greater")
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,type="paired",alternative="greater")
 
      Paired t test power calculation
               n = 157.237
 
-# we're getting 360 days or 180 pairs; let's ask for more reliable chance than 50-50 of getting a useful result;
+# we're getting 360 days or 180 pairs; let's ask for more than 50-50 power;
 # what does n = 180 buy us? Not much!
-pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.55,sig.level=0.05,type="paired",alternative="greater")
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.55,type="paired",alternative="greater")
 
      Paired t test power calculation
 
               n = 181.9631
 
 # how many pairs *do* we need for good results?
-pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,sig.level=0.01,type="paired",alternative="greater")
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.75,
+  sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
               n = 521.5252
 
-pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.56,sig.level=0.01,type="paired",alternative="greater")
+pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.56
+ sig.level=0.01,type="paired",alternative="greater")
 
      Paired t test power calculation
               n = 356.2923
@@ -2521,10 +2530,11 @@ November
 01: 0 1 0
 02: 1 0 1
 03: 1 1 0
-04: 0 1 1?
+04: 0 1 1
+05: 1 1 1?
 
 Underpopulated data cells:
-17: 0 1 1
+18: 0 1 1
 18: 1 1 0
 18: 0 1 0
 18: 1 0 0
@@ -2560,12 +2570,13 @@ main = do txt <- readFile "2012-sdr-dream.txt"
           let csvs = map convert fields
           putStrLn $ unlines (header : map show csvs)
 
-data CSVEntry = CSVEntry { sleepDate :: String, totalZ :: Int, wakeTime :: String, intensity :: String, recall :: String,
+data CSVEntry = CSVEntry { sleepDate :: String, totalZ :: Int,
+                           wakeTime :: String, intensity :: String, recall :: String,
                            emotion :: String, interrupted :: Bool, melatonin :: Bool, lucid :: String }
 instance Show CSVEntry where
-         show a = intercalate "," [sleepDate a, if totalZ a == 0 then "" else show (totalZ a), wakeTime a, intensity a,
-                                  recall a, emotion a,
-                                   if interrupted a then "1" else "0", if melatonin a then "1" else "0", lucid a]
+ show a = intercalate "," [sleepDate a, if totalZ a == 0 then "" else show (totalZ a),
+                           wakeTime a, intensity a, recall a, emotion a,
+                           if interrupted a then "1" else "0", if melatonin a then "1" else "0", lucid a]
 
 convert :: [String] -> CSVEntry
 convert xs = CSVEntry { sleepDate = safeHead $ filter (\x -> isInfixOf "." x || isInfixOf "20" x) xs,
@@ -2621,7 +2632,8 @@ summary(table)
 table$Wake.Time <- NULL; table$Sleep.Date <- NULL
 
 # Warning: 'Lucid' has just 9 datapoints, and 'Melatonin' just 6!
-# Table cleaned up heavily by hand from default R output; deleted duplicates, censored any correlation -0.1<x<0.1.
+# Table cleaned up heavily by hand from default R output:
+# deleted duplicates, censored any correlation -0.1<x<0.1 etc.
 cor(table,use="pairwise.complete.obs")
             Total.Z        Intensity    Recall       Emotion    Interrupted     Melatonin      Lucid
 Total.Z                                                                         -0.124        -0.439
@@ -2824,3 +2836,4 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 02 Nov 2012: off -->
 <!-- Redshift: 03 Nov 2012: off -->
 <!-- Redshift: 04 Nov 2012: on -->
+<!-- Redshift: 05 Nov 2012: on -->
