@@ -454,7 +454,7 @@ eg.
 We can clean this up with more shell scripting:
 
 ~~~{.Bash}
-sed -e 's/\[IMG\] //' -e 's/.*report review for abuse //' -e 's/ \. chapter / /' reviews.txt  > filtered-reviews.txt
+sed -e 's/\[IMG\] //' -e 's/.*for abuse //' -e 's/ \. chapter / /' reviews.txt >> filtered.txt
 ~~~
 
 This gives us better looking data like:
@@ -473,7 +473,7 @@ The spaces in names means we can't simply do a search-and-replace to turn spaces
 import Data.List (intercalate)
 
 main :: IO ()
-main = do f <- readFile "filtered-reviews.txt"
+main = do f <- readFile "filtered.txt"
           let parsed = map words (lines f)
           let unparsed = "User,Date,Chapter\n" ++ unlines (map unsplit parsed)
           writeFile "reviews.csv" unparsed
@@ -538,7 +538,8 @@ Obviously no one can review a chapter before it was posted, which is the thick b
 The next question is: if we plot only the subset of reviews which were made within 7 days of the first review, what does that look like?
 
 ~~~{.R}
-# extract each chapter's reviews into its own vector - one vector of dates for ch1, one vector of dates for ch2 etc.
+# extract each chapter's reviews into its own vector:
+# one vector of dates for ch1, one vector of dates for ch2, for ch3 etc.
 myList <- list()
 for (i in 1:85) { myList[[i]] <- rev(data$Date[data$Chapter==i]) }
 # take a look at the first entry in each vector as a sanity check
