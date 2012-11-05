@@ -1,7 +1,10 @@
 ---
 title: Hypertime in Haskell
 description: Implementing the Hypertime multiverse model of time travel in Haskell
+created: 10 Jan 2012
 tags: Haskell, philosophy, computer science
+status: notes
+belief: likely
 ...
 
 Looking at Sam Hughes's [Hypertime model](http://qntm.org/hypertime) is very confusing and hard to keep straight. One wonders how to program it. An infinite stack of infinite universes, which spawn off more copies, none of which cause paradoxes...? I certainly can't visualize it easily:
@@ -172,7 +175,8 @@ extractSome = map (\(a,b) -> (take 5 a, take 5 b)) $ take 5 $ universes
 Which evaluates to
 
 ~~~{.haskell}
-[([0,-1,-2,-3,-4],[1,2,3,4,5]),([1,0,-1,-2,-3],[2,3,4,5,6]),([2,1,0,-1,-2],[3,4,5,6,6]),([3,2,1,0,-1],[4,5,6,6,6]),([4,3,2,1,0],[5,6,6,6,6])]
+[([0,-1,-2,-3,-4],[1,2,3,4,5]),([1,0,-1,-2,-3],[2,3,4,5,6]),([2,1,0,-1,-2],[3,4,5,6,6]),
+    ([3,2,1,0,-1],[4,5,6,6,6]),([4,3,2,1,0],[5,6,6,6,6])]
 -- or to reformat it:
 [
  ([0,-1,-2,-3,-4],[1,2,3,4,5]),
@@ -295,6 +299,8 @@ map  (extract 5) $ take 5 universes
 ~~~
 
 Beautiful! We don't have to pretend, all the preceding values are there as they should be.
+
+- http://blog.sigfpe.com/2006/12/evaluating-cellular-automata-is.html
 
 <!-- import Data.List.Zipper -->
 
