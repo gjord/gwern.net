@@ -617,13 +617,15 @@ Were there things I disliked? Yes, the whole god thing struck me as strange and 
 
 # Fake explanation of cats
 
-    21:47:59 < gwern> I often think that cat psychology is harder than dog psychology
-    21:48:14 < gwern> then I reflect that dogs have co-evolved with us for much longer than cats, and dogs have bigger brains as well
-    21:48:15 < cwillu> no, the dominance hierarchy is firmly established
-    21:48:25 < gwern> so maybe I only think I understand dogs
-    21:49:08 < gwern> perhaps under the evolved tricks like eye-following or pointing-understand lies a psychology as or more alien than cats
-    21:49:23 < gwern> *pointing-understanding
-    21:49:36 < AngryParsley> cat psychology is that they do whatever the hell they want
+    gwern> I often think that cat psychology is harder than dog psychology
+    gwern> then I reflect that dogs have co-evolved with us for much longer than cats,
+           and dogs have bigger brains as well
+    cwillu> no, the dominance hierarchy is firmly established
+    gwern> so maybe I only think I understand dogs
+    gwern> perhaps under the evolved tricks like eye-following or pointing-understand lies
+           a psychology as or more alien than cats
+    gwern> *pointing-understanding
+    AngryParsley> cat psychology is that they do whatever the hell they want
     fake explanation ^ <http://lesswrong.com/lw/ip/fake_explanations/>
 
 Cats mimic children: <http://news.discovery.com/animals/cats-humans-pets-relationships-110224.html> <http://www.cell.com/current-biology/retrieve/pii/S0960982209011683>
@@ -761,9 +763,7 @@ Random links that may be of interest:
 >
 > It's tragic, amazing, and extraordinary, to think that there was a small window, in 1956, 1957, when it wasn't clear yet that Venus was a strong microwave emitter and thus was inhospitably hot.
 >
-> The scientific opinion was already going against Venus having a clement surface, but in those years you could still credibly imagine that Venus was a habitable environment, and you had authors like Ray Bradbury writing great stories about it. At the same time, the ability to travel to Venus was completely within our grasp in a way that, shockingly, it may not be now. Think what would have happened, how history would've changed, if Venus had been a quadrillion-dollar world, we'd have had a virgin planet sitting right next door. Things would have unfolded in an extremely different way. we'd be living in a very different time."
-
-    --Greg Laughlin, interviewed in ["Cosmic Commodities: How much is a new planet worth? "](http://www.boingboing.net/2011/02/03/cosmic-commodities-h.html)
+> The scientific opinion was already going against Venus having a clement surface, but in those years you could still credibly imagine that Venus was a habitable environment, and you had authors like Ray Bradbury writing great stories about it. At the same time, the ability to travel to Venus was completely within our grasp in a way that, shockingly, it may not be now. Think what would have happened, how history would've changed, if Venus had been a quadrillion-dollar world, we'd have had a virgin planet sitting right next door. Things would have unfolded in an extremely different way. we'd be living in a very different time." --Greg Laughlin, interviewed in ["Cosmic Commodities: How much is a new planet worth?"](http://www.boingboing.net/2011/02/03/cosmic-commodities-h.html)
 
 Sounds like a good alternate history novel. The space race heats up in the 1950s, with a new planet at stake. Of course, along the lines of [Peter Thiel's reasoning](http://www.hoover.org/publications/policy-review/article/5646) about France & John Law & the Louisiana Territory, the 'winner' of such a race would probably suffer the [winner's curse](!Wikipedia). (Don't go mine for gold yourself; sell pick-axes to the miners instead.)
 
@@ -872,66 +872,67 @@ Does this magical way of estimating difficulty exist? I don't know. (I've [asked
 
 Obviously you *could* measure difficulty by ignoring the solution and trying to solve the problem yourself: if it takes 1000 seconds, you know it's no harder than 1000 seconds. But what good would this do you? You could broadcast a message to all your peers saying "these problems are supposed to take at least 20000 seconds to compute, but this only took 1000 seconds!" but you have no *proof* of this; they could do the check themselves so as to reject trivial solutions & their linked sets of transactions, but if peers rechecked work just because some stranger on the Internet cried foul, they'd spend all their time rechecking work and the system would fail.
 
-    < foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into Bitcoin style hashes, which are only  assemble-able by the server; if the
-               creator=server, then we just invented a way to turn downloads  into nanopayments with zero mental transaction costs
+<!--
+foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into Bitcoin style hashes, which are only  assemble-able by the server; if the
+         creator=server, then we just invented a way to turn downloads  into nanopayments with zero mental transaction costs
 
-    < gwern> sipa: well, let's call this Artcoin. suppose there were a Artcoin-based economy but there were no upper limit but a built-in steady inflation. if downloads
-             solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing ...
-    < gwern> ... creators' livelihoods!'
-    < foucist> it might be entirely possible to do that with the current Bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
-    < gwern> sipa: I thought about the Bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new
-             Bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
-    < foucist> gwern: well the argument is that bitcoins isn't about mining
-    < gwern> 'even if I release my awesome new movie, I probably won't get this year's Bitcoin. so why bother?'
+gwern> sipa: well, let's call this Artcoin. suppose there were a Artcoin-based economy but there were no upper limit but a built-in steady inflation. if downloads
+       solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing ...
+gwern> ... creators' livelihoods!'
+foucist> it might be entirely possible to do that with the current Bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
+gwern> sipa: I thought about the Bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new
+       Bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
+foucist> gwern: well the argument is that bitcoins isn't about mining
+gwern> 'even if I release my awesome new movie, I probably won't get this year's Bitcoin. so why bother?'
 
-    < gwern> sipa: paying creators using inflation isn't that bad an idea. inflation is invisible and doesn't require assent. assent is why microtransaction schemes have
-             failed in their thousands
-    < foucist> i think the base idea is to find a way to tie bitcoins into BitTorrent such that it's an automatic micropayment for creators of that content
-    < sipa> but you're describing two ideas
-    < gwern> (or at least, hundreds. micropayments seems like the sort of thing Internet folks have been trying for ages and failing miserably every time.)
-    < sipa> 1. using bitcoins to pay for downloads
-    < sipa> you mean content creators
-    < sipa> 2. reusing the hashing done by BitTorrent for Bitcoin
-    < gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover
-             advantage)
-    < sipa> furthermore, i don't see how you are going to reuse the hashing power... BitTorrent uses it in a deterministic way to verify whether data is identical, while
-            Bitcoin uses it as a pseudorandom function to look for a lot of zeroes
-    < gwern> sipa: #1 is boring. it's the same damn failed idea that has been tried hundreds of times. #2 is more interesting. is there any variant which does both?
-    < gwern> that's where I fail because I don't know the math
-    < gwern> (is there any way to force mining as part of the download? of course the users/downloaders could volunteer some hashing, but then someone will write a client
-             which does no hashing because 'it was making my computer slow' and the scheme collapses)
+gwern> sipa: paying creators using inflation isn't that bad an idea. inflation is invisible and doesn't require assent. assent is why microtransaction schemes have
+       failed in their thousands
+foucist> i think the base idea is to find a way to tie bitcoins into BitTorrent such that it's an automatic micropayment for creators of that content
+sipa> but you're describing two ideas
+gwern> (or at least, hundreds. micropayments seems like the sort of thing Internet folks have been trying for ages and failing miserably every time.)
+sipa> 1. using bitcoins to pay for downloads
+sipa> you mean content creators
+sipa> 2. reusing the hashing done by BitTorrent for Bitcoin
+gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover
+       advantage)
+sipa> furthermore, i don't see how you are going to reuse the hashing power... BitTorrent uses it in a deterministic way to verify whether data is identical, while
+      Bitcoin uses it as a pseudorandom function to look for a lot of zeroes
+gwern> sipa: #1 is boring. it's the same damn failed idea that has been tried hundreds of times. #2 is more interesting. is there any variant which does both?
+gwern> that's where I fail because I don't know the math
+gwern> (is there any way to force mining as part of the download? of course the users/downloaders could volunteer some hashing, but then someone will write a client
+       which does no hashing because 'it was making my computer slow' and the scheme collapses)
 
-    < gwern> foucist: I don't think that'd work, because suppose you have no bitcoins? you have an incentive to find a plaintext torrent
+gwern> foucist: I don't think that'd work, because suppose you have no bitcoins? you have an incentive to find a plaintext torrent
 
-    < sipa> and that you pay with Bitcoin hashes to get the data
-    < gwern> foucist: 'oh, but my backup server doesn't have access to my Bitcoin account'
-    < gwern> sipa: hm, that sounds more sensible. what measures could be put in place to prevent colluding clients?
-    < sipa> but that's little more than a using-bitcoins-to-pay-for-data system
-    < foucist> gwern: OK so you think only a purely generative way would work ?  hmm
-    < sipa> and it's very wasteful
-    < sipa> since the profitability of CPU mining is already long gone
-    < gwern> sipa: in the current Bitcoin system, yeah, not some new Bitcoin system
-    < sipa> explain me why people would value your Artcoin's?
-    < gwern> foucist: well, you need to keep the Bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
-             download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
-    < foucist> gwern: Bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc
-    < sipa> indeed, do that as payment in your paying-for-creators BitTorrent system
-    < gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular Bitcoin, it'd give you access to the new stuff, you'd not feel
-             guilty about piracy, that sort of thing. (again, why does anyone download from iTunes?)
-    < sipa> pay with folding@home work units or some
-    < sipa> gwern: but it wouldn't have limited total supply
+sipa> and that you pay with Bitcoin hashes to get the data
+gwern> foucist: 'oh, but my backup server doesn't have access to my Bitcoin account'
+gwern> sipa: hm, that sounds more sensible. what measures could be put in place to prevent colluding clients?
+sipa> but that's little more than a using-bitcoins-to-pay-for-data system
+foucist> gwern: OK so you think only a purely generative way would work ?  hmm
+sipa> and it's very wasteful
+sipa> since the profitability of CPU mining is already long gone
+gwern> sipa: in the current Bitcoin system, yeah, not some new Bitcoin system
+sipa> explain me why people would value your Artcoin's?
+gwern> foucist: well, you need to keep the Bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
+       download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
+foucist> gwern: Bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc
+sipa> indeed, do that as payment in your paying-for-creators BitTorrent system
+gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular Bitcoin, it'd give you access to the new stuff, you'd not feel
+       guilty about piracy, that sort of thing. (again, why does anyone download from iTunes?)
+sipa> pay with folding@home work units or some
+sipa> gwern: but it wouldn't have limited total supply
 
-    < gwern> sipa: would people suddenly stop being interested in Bitcoin if the guarantee weren't 0% inflation but, say, 0.1% inflation?
-    < sipa> some, certainly
-    < gwern> (US GDP is 14.6 trillion, so 0.1% inflation would be a lot.)
+gwern> sipa: would people suddenly stop being interested in Bitcoin if the guarantee weren't 0% inflation but, say, 0.1% inflation?
+sipa> some, certainly
+gwern> (US GDP is 14.6 trillion, so 0.1% inflation would be a lot.)
 
-    < gwern> foucist: wouldn't surprise me if the research has already been done, actually; this is starting to remind me of the 'proof of work' subfield of crypto
-    < Necr0s> I need to understand a bit more about crypto.
-    < foucist> a quick google on 'micropayment hash' reveals a variety of research papers on micropayments with hash-chains
-    < Necr0s> Particularly asymmetric public/private key systems.
-    < foucist> "Micro-payment Protocol Based on Multiple Hash Chains" 'A Study of Micro-payment Based on One-Way Hash Chain'
-    < Necr0s> And their use in signing content.
-
+gwern> foucist: wouldn't surprise me if the research has already been done, actually; this is starting to remind me of the 'proof of work' subfield of crypto
+Necr0s> I need to understand a bit more about crypto.
+foucist> a quick google on 'micropayment hash' reveals a variety of research papers on micropayments with hash-chains
+Necr0s> Particularly asymmetric public/private key systems.
+foucist> "Micro-payment Protocol Based on Multiple Hash Chains" 'A Study of Micro-payment Based on One-Way Hash Chain'
+Necr0s> And their use in signing content.
+-->
 
 # Good governance & Girl Scouts
 
@@ -1564,41 +1565,53 @@ cf. [hope function](/docs/1994-falk), bus <http://dl.dropbox.com/u/85192141/2007
 27 February 2012 in `#lesswrong`:
 
     Grognor> I've been reading the highest-scoring articles, and I have noticed a pattern
-    Grognor> a MUCH HIGHER PROPORTION of top-scoring articles have "upvoted" in the first two words in the first comment
+    Grognor> a MUCH HIGHER PROPORTION of top-scoring articles have "upvoted" in the first two words in the
+             first comment
     Grognor> (standard disclaimer: correlation is not causation blah blah blah blah blah)
-    Grognor> http://lesswrong.com/r/lesswrong/lw/6r6/tendencies_in_reflective_equilibrium/ then I see this, one of the follow-ups to one of the top-scoring articles like
-             this. the first comment says "not upvoted"
+    Grognor> http://lesswrong.com/r/lesswrong/lw/6r6/tendencies_in_reflective_equilibrium/ then I see this,
+             one of the follow-ups to one of the top-scoring articles like this. the first comment
+             says "not upvoted"
     Grognor> and it has a much lower score
-    Grognor> while reading it, I was wondering "why is this at only 23? this is one of the best articles I've ever oh look at that comment"
-    Grognor> I'm definitely hitting on a real phenomenon here, probably some social thing that says "hey if he upvoted, I should too" and it seems to be incredibly
+    Grognor> while reading it, I was wondering "why is this at only 23? this is one of the best articles
+                                               I've ever oh look at that comment"
+    Grognor> I'm definitely hitting on a real phenomenon here, probably some social thing that says
+             "hey if he upvoted, I should too" and it seems to be incredibly
              strongly related to the first comment
     Grognor> the proportion is really quite astounding
-    Grognor> http://lesswrong.com/lw/5n6/i_know_im_biased_but/ compare this to the Tendencies in Reflective Equilibrium post. Compared to that, it's awful, but it has
+    Grognor> http://lesswrong.com/lw/5n6/i_know_im_biased_but/ compare this to the
+             Tendencies in Reflective Equilibrium post. Compared to that, it's awful, but it has
              nearly the same score. Note the distinct lack of a first comment saying "not upvoted"
-    Grognor> (side note: I thought my article, "on saying the obvious", would have a much lower score than it did. note the first comment: "good points, all of them.")
+    Grognor> (side note: I thought my article, "on saying the obvious", would have a much lower score than
+             it did. note the first comment: "good points, all of them.")
     Grognor> it seems like it's having more of an effect than I would naively predict
 
-    gwern> Grognor: hm. maybe I should register a sockpuppet and on every future article I write flip a coin and write either upvoted or downvoted
+    gwern> Grognor: hm. maybe I should register a sockpuppet and on every future article I write flip a coin
+                    and write either upvoted or downvoted
     quanticle> gwern: Aren't you afraid you'll incur Goodhart's wrath?
     gwern> quanticle: no, that would be if I only put in 'upvoted' comments
     gwern> Grognor: do these comments tend to include any reasons?
     Grognor> gwern: yes
 
-    Boxo> you suggesting that the comments cause the upvotes? I'd rather say that the post is just the kind of post that makes lots people think as their first reaction
-          "hell yeah imma upvote this", makes upvoting salient to them, and then some of that bubbles up to the comments
-    Grognor> Boxo: I'm not suggesting it's entirely that simple, no, but I do think it's obvious now that a first comment that says "upvoted for reasons x, y, and z"
-             will cause more people to upvote than otherwise would have, and vice versa
+    Boxo> you suggesting that the comments cause the upvotes? I'd rather say that the post is just the kind
+          of post that makes lots people think as their first reaction
+          "hell yeah imma upvote this", makes upvoting salient to them, and then some of that bubbles up to
+          the comments
+    Grognor> Boxo: I'm not suggesting it's entirely that simple, no, but I do think it's obvious now that a
+                  first comment that says "upvoted for reasons x, y, and z"
+                  will cause more people to upvote than otherwise would have, and vice versa
     Boxo> (ie. you saw X and Y and though X caused Y, but I think there's a Z that causes both X and Y)
-    ksotala> Every now and then, I catch myself wanting to upvote something because others have upvoted it already. It sounds reasonable that having an explicit comment
+    ksotala> Every now and then, I catch myself wanting to upvote something because others have upvoted it
+             already. It sounds reasonable that having an explicit comment
              declaring "I upvoted" might have an even stronger effect.
     ksotala> On the other hand, I usually decide to up/downvote before reading the comments.
     gwern> ksotala: you should turn on anti-kibitzing then
     ksotala> gwern: Probably.
     rmmh> gwern: maybe karma blinding like HN would help
-    Boxo> I guess any comment about voting could remind people to vote, in whatever direction. Could test this if you had the total number of votes per post.
-    Grognor> that too
-    Grognor> the effect here is multifarious and complicated and the intricate details could not possibly be worked out, which is exactly why this proportion of first
-             comments with an 'upvoted' note surprises me
+    Boxo> I guess any comment about voting could remind people to vote, in whatever direction. Could test this
+          if you had the total number of votes per post.
+    Grognor> that too. the effect here is multifarious and complicated and the intricate details could not
+             possibly be worked out, which is exactly why this proportion of first comments with an 'upvoted'
+             note surprises me
     gwern> Boxo: I don't think that's exposed to us, no
 
 Such an [anchoring](!Wikipedia) or [social proof](!Wikipedia) effect resulting in a [first-mover advantage](!Wikipedia) seems quite plausible to me.
