@@ -1,6 +1,7 @@
 ---
 description: Haskell: archive Wikipedia with TagSoup and WebCite
 status: finished
+created: 26 Sep 2008
 belief: likely
 ...
 
@@ -189,24 +190,32 @@ We *could* also throw in a speculative request to Alexa, which handles archiving
 With the handy Firefox extension [Live HTTP Headers](https://addons.mozilla.org/en-US/firefox/addon/live-http-headers/), we can easily snoop on the toolbar's traffic. I turned it on, visited a few domains with short names, saved the traffic to a file, and grepped for 'alexa.com' and 'http://':
 
 ~~~~
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D0%26wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
 http://widgets.alexa.com/traffic/sparky/?v=1&url=cnn.com
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D1%26wid%3D7005%26ttl%3D1400&ref=&url=http%3A%2F%2Fwww.iana.org%2Fdomains%2Fexample%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D1%26wid%3D7005%26ttl%3D1400&ref=&url=http%3A%2F%2Fwww.iana.org%2Fdomains%2Fexample%2F
 http://widgets.alexa.com/traffic/sparky/?v=1&url=iana.org
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D2%26wid%3D7005%26ttl%3D989&ref=&url=http%3A%2F%2Fwebcitation.org%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D2%26wid%3D7005%26ttl%3D989&ref=&url=http%3A%2F%2Fwebcitation.org%2F
 http://widgets.alexa.com/traffic/sparky/?v=1&url=webcitation.org
 http://widgets.alexa.com/traffic/rankr/?ref=http%3A%2F%2Fwebcitation.org%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D3%26wid%3D7005%26ttl%3D2241&ref=&url=http%3A%2F%2Fwww.archive.org%2Findex.php
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D3%26wid%3D7005%26ttl%3D2241&ref=&url=http%3A%2F%2Fwww.archive.org%2Findex.php
 http://widgets.alexa.com/traffic/sparky/?v=1&url=archive.org
 ~~~~
 
 We can rule out `widgets.alexa.com` - the URL structure and the name indicates that these requests are being made by the part of the toolbar that is showing the little traffic-vs-time graph in the Firefox GUI. So:
 
 ~~~~
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D1%26wid%3D7005%26ttl%3D1400&ref=&url=http%3A%2F%2Fwww.iana.org%2Fdomains%2Fexample%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D2%26wid%3D7005%26ttl%3D989&ref=&url=http%3A%2F%2Fwebcitation.org%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D3%26wid%3D7005%26ttl%3D2241&ref=&url=http%3A%2F%2Fwww.archive.org%2Findex.php
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26 /
+    wid%3D7005&ref=&url=http%3A%2F%2Fwww.cnn.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D1%26 /
+    wid%3D7005%26ttl%3D1400&ref=&url=http%3A%2F%2Fwww.iana.org%2Fdomains%2Fexample%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D2%26 /
+    wid%3D7005%26ttl%3D989&ref=&url=http%3A%2F%2Fwebcitation.org%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D3%26 /
+    wid%3D7005%26ttl%3D2241&ref=&url=http%3A%2F%2Fwww.archive.org%2Findex.php
 ~~~~
 
 To split the last URL:
@@ -244,14 +253,23 @@ rq=3&wid=7005&ttl=2241
 We need more information on `ttl` and `wid`. So let's visit a bunch more URLs and see whether more data says anything:
 
 ~~~
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D4%26wid%3D15698%26ttl%3D1830&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D5%26wid%3D15698%26ttl%3D425&ref=&url=http%3A%2F%2Fwww.gwern.net%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D6%26wid%3D15698%26ttl%3D1614&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D7%26wid%3D15698%26ttl%3D376&ref=&url=http%3A%2F%2Fwww.gwern.net%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D8%26wid%3D15698%26ttl%3D1468&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D9%26wid%3D15698%26ttl%3D2092&ref=&url=http%3A%2F%2Flesswrong.com%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D10%26wid%3D15698%26ttl%3D1717&ref=&url=http%3A%2F%2Fwww.overcomingbias.com%2F
-http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D11%26wid%3D15698%26ttl%3D2010&ref=http%3A%2F%2Fwww.overcomingbias.com%2F&url=http%3A%2F%2Fwww.overcomingbias.com%2F2011%2F06%2Frevised-growth-claim.html%23comments
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D4%26wid%3D15698%26ttl%3D1830&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D5%26wid%3D15698%26ttl%3D425&ref=&url=http%3A%2F%2Fwww.gwern.net%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D6%26wid%3D15698%26ttl%3D1614&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D7%26wid%3D15698%26ttl%3D376&ref=&url=http%3A%2F%2Fwww.gwern.net%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D8%26wid%3D15698%26ttl%3D1468&ref=&url=http%3A%2F%2Fwww.reddit.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D9%26wid%3D15698%26ttl%3D2092&ref=&url=http%3A%2F%2Flesswrong.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D10%26wid%3D15698%26ttl%3D1717&ref=&url=http%3A%2F%2Fwww.overcomingbias.com%2F
+http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D11%26wid%3D15698%26ttl%3D2010&ref=http%3A%2F%2Fwww.overcomingbias.com%2F
+    &url=http%3A%2F%2Fwww.overcomingbias.com%2F2011%2F06%2Frevised-growth-claim.html%23comments
 ~~~
 
 Filter and URL-decode the `ttl` field:
@@ -272,7 +290,8 @@ The smallest in any `ttl` is 376, the largest is 2241. This is a range which sme
 And `wid`? We speculated it's some kind of user ID. In this second batch, the field is `wid%3D15698` or `wid=15698`. So the `wid` is not consistent across Firefox sessions, but it is consistent across multiple page loads. This suggests to me that Alexa is only aggregating URLs by a 'browser session' ID (maybe it originally tracked individual 'windows', hence the 'w' part of the ID). We can probably just generate a random number between 1000 and 20000 every time we archive a URL. So, all told our pseudocode goes like this:
 
 ~~~{.haskell}
-"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=" ++ escape ("rq=0&wid=" ++ show randomint ++ "&ref=&url=" ++ url)
+"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=" ++
+    escape ("rq=0&wid=" ++ show randomint ++ "&ref=&url=" ++ url)
 ~~~
 
 How do we get our `randomint` and `urlEncode`? I have had to URL-encode strings in the past, for XMonad's [XMonad.Actions.Search](!Hoogle) module:
@@ -293,11 +312,12 @@ import Text.HTML.Download (openURL)
 import Data.Char (isAlphaNum, isAscii)
 import Text.Printf (printf)
 
-alexaToolbar :: String -> IO ()
-alexaToolbar url = do gen <- getStdGen
-                      let rint = fst $ randomR (1000::Int,20000) gen
-                      let payload = escape ("wid=" ++ show rint ++ "&ref=&url=" ++ url)
-                      print $ "http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&" ++ payload
+a :: String -> IO ()
+a url = do gen <- getStdGen
+           let rint = fst $ randomR (1000::Int,20000) gen
+           let payload = escape ("wid=" ++ show rint ++ "&ref=&url=" ++ url)
+           print$"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&"
+                     ++ payload
 
              where escape :: String -> String
                    escape = concatMap escapeURIChar
@@ -307,10 +327,11 @@ alexaToolbar url = do gen <- getStdGen
 
 ~~~
 
-We'll test it first. `alexaToolbar "http://www.google.com"` evaluates to:
+A better name would be `alexaToolbar`. We'll test it: `alexaToolbar "http://www.google.com"` evaluates to:
 
 ~~~
-"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq%3D0%26wid%3D%2819413%2C218941083%2040692%29%26ref%3D%26url%3Dhttp%3A%2F%2Fwww%2Egoogle%2Ecom%2F"
+"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns
+    &cdt=rq%3D0%26wid%3D%2819413%2C218941083%2040692%29%26ref%3D%26url%3Dhttp%3A%2F%2Fwww%2Egoogle%2Ecom%2F"
 ~~~
 
 We run it in `curl`, and we get:
@@ -361,7 +382,8 @@ Is that right? Let's see what the very first URL example said, since as far as w
 <KEYWORD VAL="Cable"/>
 <KEYWORD VAL="CNN News Group"/>
 </KEYWORDS><DMOZ>
-<SITE BASE="cnn.com/" TITLE="CNN Interactive" DESC="News, weather, sports, and services including e-mail news alerts and downloadable audio/video reports.">
+<SITE BASE="cnn.com/" TITLE="CNN Interactive" DESC="News, weather, sports, and services including
+    e-mail news alerts and downloadable audio/video reports.">
 <CATS>
 <CAT ID="Top/News" TITLE="English/News" CID="998601"/>
 <CAT ID="Top/Arts/Television/News" TITLE="Television/News" CID="395700"/>
@@ -393,7 +415,8 @@ let payload = "rq=0&wid=" ++ show rint ++ "&ref=&url=" ++ escape url
 and now `alexaToolbar "http://www.cnn.com"` evaluates to:
 
 ~~~{.haskell}
-"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&wid=8100&ref=&url=http%3A%2F%2Fwww%2Ecnn%2Ecom"
+"http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&
+    dat=ns&cdt=rq=0&wid=8100&ref=&url=http%3A%2F%2Fwww%2Ecnn%2Ecom"
 ~~~
 
 Which seems to work:
@@ -436,7 +459,8 @@ Which seems to work:
 <KEYWORD VAL="Cable"/>
 <KEYWORD VAL="CNN News Group"/>
 </KEYWORDS><DMOZ>
-<SITE BASE="cnn.com/" TITLE="CNN Interactive" DESC="News, weather, sports, and services including e-mail news alerts and downloadable audio/video reports.">
+<SITE BASE="cnn.com/" TITLE="CNN Interactive" DESC="News, weather, sports, and services including
+    e-mail news alerts and downloadable audio/video reports.">
 <CATS>
 <CAT ID="Top/News" TITLE="English/News" CID="998601"/>
 <CAT ID="Top/Arts/Television/News" TITLE="Television/News" CID="395700"/>
@@ -464,8 +488,9 @@ alexaToolbar :: String -> IO ()
 alexaToolbar url = do gen <- getStdGen
                       let rint = fst $ randomR (1000::Int,20000) gen
                       let payload = "wid=" ++ show rint ++ "&ref=&url=" ++ escape url
-                      _ <- openURL $ "http://data.alexa.com/data/SbADd155Tq0000?cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&" ++ payload
-                      return ()
+                      _ <- openURL $ "http://data.alexa.com/data/SbADd155Tq0000?\
+                                     \cli=10&ver=spkyf-1.5.0&dat=ns&cdt=rq=0&" ++ payload
+                      returnf ()
              where escape :: String -> String
                    escape = concatMap escapeURIChar
                    escapeURIChar :: Char -> String
