@@ -446,6 +446,8 @@ Kruschke, J. K. (2010b). What to believe: Bayesian methods for data analysis. Tr
 Kruschke, J. K. (2011c). Introduction to special section on Bayesian data analysis. Perspectives on Psychological Science, 6(3), 272-273
 - Lee, M. D., & Wagenmakers, E.-J. (2005). Bayesian statistical inference in psychology: Comment on Trafimow (2003). Psychological Review, 112(3), 662-668
 - Wagenmakers, E.-J. (2007). A practical solution to the pervasive problems of p values. Psychonomic Bulletin & Review, 14(5), 779-804
+
+the right approach: http://lesswrong.com/r/discussion/lw/ezd/open_thread_october_1631_2012/7r6z
 -->
 
 ![](/images/zeo/melatonin-totalz.png)
@@ -1400,16 +1402,18 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
 
     ~~~{.R}
     library("ggplot2")
-    sleep <- read.csv("2012-zeo-vitamind-morning.csv")
+    sleep <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv")
 
-    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")),
-                ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
+    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar",
+        binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")),
+        ylab="Mood", xlab="Date")+scale_fill_discrete(name="treatment")
 
     # to save:
     ggsave("mood.png")
 
-    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Morning.Feel, data=sleep, geom="bar", binwidth=1, fill=factor(sleep$SSCF.1,
-                 labels=c("placebo","active")), ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
+    qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Morning.Feel, data=sleep,
+        geom="bar", binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")),
+        ylab="Morning Feel", xlab="Date")+scale_fill_discrete(name="treatment")
 
     ggsave("morning.feel.png")
     ~~~
