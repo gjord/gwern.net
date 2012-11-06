@@ -1277,12 +1277,15 @@ Remembering what Wedrifid told me, I decided to start with a quarter of a piece 
 The easiest way to use 2mg was to use half a gum; I tried not chewing it but just holding it in my cheek. The first night I tried, this seemed to work well for motivation; I knocked off a few long-standing to-do items. Subsequently, I began using it for writing, where it has been similarly useful. One difficult night, I wound up using the other half (for a total of 4mg over ~5 hours), and it worked but gave me a fairly mild headache and a faint sensation of nausea; these may have been due to forgetting to eat dinner, but this still indicates 3mg should probably be my personal ceiling.
 
 ### Experiment
+#### Design
 
 Experimenting stymied me for a few months since the nasty taste was unmistakable and I couldn't think of any gums with a similar flavor to serve as placebo. I almost resigned myself to buying patches to cut (and let the nicotine evaporate) and hope they stuck on well afterwards, when late one sleepless night I realized that a piece of nicotine gum hanging around on my desktop for a week was the answer: if nicotine evaporates from patches, then it almost surely evaporates from *gum* as well, and if gum does evaporate, then to make a perfect placebo all I had to do was cut some gum into proper sizes and let the pieces set out for a while. I tried the gum, and it did nothing; Google searches led to nothing indicating I might be fooling myself. A while later, I lost a piece of gum overnight and consumed the full 4mg to little or no subjective effect. (The nasty taste does not seem to be due to the nicotine despite what one might expect; Vaniver plausibly suggested the bad taste might be intended to prevent over-consumption, but nothing in the Habitrol ingredient list seemed to be noted for its bad taste and a number of ingredients were sweetening sugars of various sorts.)
 
-So the experiment seems simple enough: cut up a fresh piece of gum, randomly select from it and an equivalent 'dry' piece of gum, and do 5 rounds of dual n-back to test attention/energy & WM. (If it turns out to be placebo, I'll immediately use the remaining active dose: no sense in wasting gum, and this will test whether daily use renders nicotine gum useless, similar to how caffeine may be useless if taken daily.) The dose will be 1mg or 1/4 a gum. I cut up a dozen pieces into 4 pieces for 48 doses and set them out to dry. Per the previous power analyses, 48 groups of DNB rounds likely will be enough for detecting small-medium effects (partly since we will be only looking at one metric - average % right per 5 rounds - with no need for multiple correction). Analysis will be one-tailed, since we're looking for whether there is a clear performance improvement and hence a reason to keep using nicotine gum (rather than whether nicotine gum might be harmful).
+So the experiment seems simple enough: cut up a fresh piece of gum, randomly select from it and an equivalent 'dry' piece of gum, and do 5 rounds of dual n-back to test attention/energy & WM. (If it turns out to be placebo, I'll immediately use the remaining active dose: no sense in wasting gum, and this will test whether nigh-daily use renders nicotine gum useless, similar to how caffeine may be useless if taken daily. If there's 3 pieces of active gum left, then I wrap it very tightly in Saran wrap which is sticky and air-tight.) The dose will be 1mg or 1/4 a gum. I cut up a dozen pieces into 4 pieces for 48 doses and set them out to dry. Per the previous power analyses, 48 groups of DNB rounds likely will be enough for detecting small-medium effects (partly since we will be only looking at one metric - average % right per 5 rounds - with no need for multiple correction). Analysis will be one-tailed, since we're looking for whether there is a clear performance improvement and hence a reason to keep using nicotine gum (rather than whether nicotine gum might be harmful).
 
-Cost-wise, the gum itself (~$5) is a sunk cost and the DNB something I ought to be doing anyway. If the results are negative (which I'll define as _d_<0.2 at _p_<0.05), I may well drop nicotine entirely since I have no reason to expect other forms (patches) or higher doses (2mg+) to create new benefits. This would save me an annual expense of ~$40 with a net present value of <$820 ($\frac{40}{log 1.05}$); even if we count the time-value of the 20 minutes for the 5 DNB rounds over 48 days ($0.2 \times 48 \times 7.25 = 70$), it's still a clear profit to run a convincing experiment.
+Cost-wise, the gum itself (~$5) is a sunk cost and the DNB something I ought to be doing anyway. If the results are negative (which I'll define as _d_<0.2), I may well drop nicotine entirely since I have no reason to expect other forms (patches) or higher doses (2mg+) to create new benefits. This would save me an annual expense of ~$40 with a net present value of <$820 ($\frac{40}{log 1.05}$); even if we count the time-value of the 20 minutes for the 5 DNB rounds over 48 days ($0.2 \times 48 \times 7.25 = 70$), it's still a clear profit to run a convincing experiment.
+
+#### Data
 
 - August 24: 1 ([35%](http://predictionbook.com/predictions/7934))
 - 27: 0 ([40%](http://predictionbook.com/predictions/7985))
@@ -1323,34 +1326,132 @@ Cost-wise, the gum itself (~$5) is a sunk cost and the DNB something I ought to 
 - 02: 0 ([55%](http://predictionbook.com/predictions/9220))
 - 03: 1 ([50%](http://predictionbook.com/predictions/9299))
 
-<!--
-nicotine data complete as of 02 November
-individual rounds:
+#### Analysis
+
+First, we'll check the prediction score (versus a random guesser scoring 0; higher is better):
+
+~~~{.Haskell}
+logBinaryScore = sum . map (\(result,p) -> if result then 1 + logBase 2 p else 1 + logBase 2 (1-p))
+logBinaryScore [(True,0.35),(False,0.40),(False,0.40),(True,0.60),(True,0.35),(False,0.45),(False,0.50),
+                (True,0.60),(False,0.30),(True,0.50),(False,0.40),(False,0.30),(False,0.25),(False,0.75),
+                (False,0.40),(False,0.40),(False,0.65),(False,0.45),(True,0.50),(False,0.65),(True,0.40),
+                (True,0.55),(True,0.40),(False,0.50),(False,0.60),(True,0.40),(False,0.50),(False,0.50),
+                (False,0.55),(True,0.55),(False,0.50),(False,0.55),(False,0.45),(True,0.55),(True,0.50),
+                (True,0.50),(False,0.55),(True,0.50)]
+~> -0.58
+~~~
+
+Ouch, so my guesses were actually *worse* than random; this isn't encouraging (if nicotine was helpful, why didn't I notice?) but it does indicate the blinding was successful.
+
+Now we will examine the actual performance. Extracting the individual rounds scores from my [Brain Workshop log file](/docs/gwern-bw-stats.txt), we can average them in groups of 5 to get a daily average; then feed them into [BEST](http://www.indiana.edu/~kruschke/BEST/) (Bayesian equivalent of _t_-test; see [Kruschke 2012](http://www.indiana.edu/~kruschke/articles/Kruschke2012JEPG.pdf "Bayesian estimation supersedes the t-test")):
+
+~~~{.R}
+# individual rounds; the imbalance is unfortunate but the experiment design means nothing can be done
 on <- c(36,36,25,27,38,50,34,62,33,22,40,28,37,50,25,42,44,58,47,55,38,35,43,60,47,44,40,33,44,
         19,58,38,41,52,41,33,47,45,45,55,45,27,35,45,30,30,52,36,28,43,50,27,29,55,45,31,15,47,
-        64,35,33,60,38,28,60,45,64,50,44,38)
+        64,35,33,60,38,28,60,45,64,50,44,38,35,61,56,30,44,41,37,41,43,38)
 off <- c(25,34,30,40,57,34,41,51,36,26,37,42,40,45,31,24,38,40,47,35,31,27,66,25,17,43,46,50,36,
          38,58,50,23,50,31,38,33,66,30,68,42,40,29,69,45,60,37,22,28,40,41,45,37,18,50,20,41,42,
          47,44,60,31,46,46,55,47,42,35,40,29,47,56,37,50,20,31,42,53,27,45,50,65,33,33,33,40,47,
          41,25,55,40,31,30,45,50,20,25,30,70,47,47,42,40,35,45,60,37,22,38,36,54,64,25,28,50,42,
-         31,50,30)
-5-session daily averages:
-on <- c(32.4,40.2,36.0,49.2,44.6,36.0,46.0,45.0,36.4,37.8,41.2,38.4,43.8,48.2)
-off <- c(37.2,37.6,39.0,36.8,33.2,42.6,42.4,47.0,45.0,37.4,38.2,38.8,47.6,38.6,42.0,30.6,45.2,37.2,40.2,39,42.2,40.4,41.4,40.6)
+         31,50,30,30)
+on2 <- rowMeans(as.data.frame(matrix(on,ncol=5,byrow=TRUE)))
+off2 <- rowMeans(as.data.frame(matrix(off,ncol=5,byrow=TRUE)))
+on2
+ [1] 32.4 40.2 36.0 49.2 44.6 36.0 46.0 45.0 36.4 37.8 41.2 38.4 43.8 48.2 45.2
+[16] 40.0
+off2
+ [1] 37.2 37.6 39.0 36.8 33.2 42.6 42.4 47.0 45.0 37.4 38.2 38.8 47.6 38.6 42.0
+[16] 39.6 42.8 41.6 39.2 38.4 41.8 38.6 44.2 36.6
+
 source("BEST.R")
-mcmc = BESTmcmc(on,off,numSavedSteps=1000000)
-BESTplot(on,off,mcmcChain=mcmc,ROPEeff=c(0.1,2))
--->
-<!--
-> var.test(on,off,alternative="greater")
+mcmc = BESTmcmc(on2, off2)
+BESTplot(on2, off2, mcmcChain=mcmc, ROPEeff=c(0.1,1.5))
+           SUMMARY.INFO
+PARAMETER         mean     median       mode     HDIlow   HDIhigh pcgtZero
+  mu1       41.2808129 41.2819208 41.2272636 38.5078129 44.032699       NA
+  mu2       40.1981087 40.1955543 40.1777039 38.6810806 41.706469       NA
+  muDiff     1.0827042  1.0837831  1.1279921 -2.0292432  4.244909 75.87121
+  sigma1     5.2563674  5.0898354  4.7768681  3.3307493  7.511054       NA
+  sigma2     3.5513796  3.4850902  3.3453379  2.4655024  4.782887       NA
+  sigmaDiff  1.7049879  1.5917839  1.3816030 -0.6523817  4.300692 93.36015
+  nu        37.7948193 29.3217989 13.0664336  2.2755711 98.116623       NA
+  nuLog10    1.4472479  1.4671906  1.5204474  0.7604963  2.101837       NA
+  effSz      0.2460061  0.2450074  0.2361248 -0.4399959  0.936570 75.87121
+~~~
+
+The results graphed:
+
+![Analyzing daily data: graphing means, differences of inferred standard deviations & effect sizes](/images/nootropics-nicotine-dnb.png)
+
+We can read off the results from the table or graph: the nicotine days average 1.1% higher, for an effect size of 0.24; however, the 95% [credible interval](!Wikipedia) (equivalent of confidence interval) goes all the way from 0.93 to -0.44, so we cannot exclude 0 effect and certainly not claim confidence the effect size must be >0.1. Specifically, the analysis gives a 66% chance that the effect size is >0.1.
+
+This is disappointing.
+
+One curious thing that leaps out looking at the graphs is that the standard deviations differ: the nicotine days have a strikingly large standard deviation, indicating greater variability in scores - both higher and lower. The difference in standard deviations is just 6.6% below 0, so the difference almost reaches our usual frequentist levels of confidence too, which we can verify by testing:
+
+~~~{.R}
+var.test(on2,off2,alternative="greater")
+
+    F test to compare two variances
+
+data:  on2 and off2
+F = 1.9823, num df = 15, denom df = 23, p-value = 0.06775
+alternative hypothesis: true ratio of variances is greater than 1
+95 percent confidence interval:
+ 0.9314525       Inf
+sample estimates:
+ratio of variances
+          1.982333
+~~~
+
+We can double-check this by seeing what the variance is for the *un*averaged scores: we know the means are only 1.1% different, so the additional standard deviation must be coming from how individual days are good or bad, and if that is so, then unaveraging them out to eliminate most of the observed difference. We re-run BEST:
+
+~~~{.R}
+mcmc = BESTmcmc(on,off,numSavedSteps=2000000); BESTplot(on, off, mcmcChain=mcmc, ROPEeff=c(0.1,1.5))
+           SUMMARY.INFO
+PARAMETER          mean      median        mode     HDIlow     HDIhigh pcgtZero
+  mu1       41.22703657 41.22582276 41.11576792 38.7591670  43.7209215       NA
+  mu2       40.12386083 40.12235449 40.04585340 37.9655703  42.3037602       NA
+  muDiff     1.10317574  1.10302023  1.13446641 -2.1520680   4.4246013 74.52276
+  sigma1    10.91966242 10.86603052 10.74158135  9.1335897  12.7962565       NA
+  sigma2    11.69484205 11.66111990 11.57560017 10.1050885  13.3605913       NA
+  sigmaDiff -0.77517964 -0.79214849 -0.85774274 -3.1789680   1.6252535 25.70744
+  nu        46.86258782 38.65278685 22.91066668  5.8159908 109.9850644       NA
+  nuLog10    1.57972151  1.58718081  1.60810992  1.0214182   2.1234248       NA
+  effSz      0.09778545  0.09763823  0.09931263 -0.1895882   0.3907156 74.52276
+~~~
+
+![Analyzing all data: graphing means, differences of inferred standard deviations & effect sizes](/images/nootropics-nicotine-dnb-full.png)
+
+We see the standard deviation difference go away - now the difference estimate is almost centered on zero with a just 75% estimate the standard deviation differs in the observed direction. And to repeat the frequentist test:
+
+~~~{.R}
+var.test(on,off,alternative="greater")
 
     F test to compare two variances
 
 data:  on and off
-F = 1.6683, num df = 13, denom df = 23, p-value = 0.1372
+F = 0.8564, num df = 79, denom df = 119, p-value = 0.7689
+alternative hypothesis: true ratio of variances is greater than 1
+95 percent confidence interval:
+ 0.6140736       Inf
+sample estimates:
+ratio of variances
+          0.856387
+~~~
 
-but for unaveraged, 0.6892!
--->
+(So our _p_-value there went from 0.06 to 0.769 when we disaggregated the days, consistent with the Bayesian results.)
+
+What should I make of all these results?
+
+- The poor prediction performance, while confirming my belief that my novel strategy for blinding nicotine gum worked well, undermines confidence in the value of nicotine.
+- I specified at the beginning that I wanted an effect size of >0.2; I got it, but with it came a very wide credible interval, undermining confidence in the effect size.
+- The difference in standard deviations is not, from a theoretical perspective, all that strange a phenomenon: at the very beginning of this page, I covered some basic principles of nootropics and mentioned how many stimulants or supplements follow a inverted U-curve where too much or too little lead to poorer performance (ironically, one of the examples in Kruschke 2012 was a smart drug which did not affect means but increased standard deviations).
+
+    If this is the case, this suggests some thoughtfulness about my use of nicotine: there are times when use of nicotine will not be helpful, but times where it will be helpful. I don't know what makes the difference, but I can guess it relates to over-stimulation: on some nights during the experiment, I had difficult concentrating on n-backing because it was boring and I was thinking about the other things I was interested in or working on - in retrospect, I wonder if those instances were nicotine nights.
+
+All things considered, I will probably continue using nicotine gum sparingly.
 
 # Oxiracetam
 
@@ -1433,7 +1534,7 @@ That night, I had severe trouble sleeping, falling asleep in 30 minutes rather t
 
 > I think a general high water high electrolyte diet has benefited my sleep. I haven't noticed potassium immediately before bed decreasing sleep quality.
 
-The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off:.
+The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17.
 
 Partway through, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](http://dl.dropbox.com/u/85192141/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger improvement in "WASO" (time awake during sleep time; this probably drove the sleep efficiency). That isn't consistent with my own observations of increasing sleep latency, awakenings, and time awake.
 
