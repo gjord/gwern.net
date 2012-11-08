@@ -1388,8 +1388,7 @@ Going through them, I must note:
 
 The following authors had their studies omitted and have been contacted for clarification:
 
-- Qiu 2009 did not report standard deviations in any form; emails to the 4 authors in May, June, July & September 2012 received no response
-- Seidler 2010 (experimental: _n_=47; control: _n_=45) did not report means or standard deviations
+- Seidler, Jaeggi et al 2010 (experimental: _n_=47; control: _n_=45) did not report means or standard deviations
 
 The "active.control" moderator variable is whether a control group was no-contact or trained on some other task. The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact control groups limited the validity of such studies, a criticism that was echoed with greater force by Shipstead, Redick, & Engle 2012; the Melby-Lervåg & Hulme 2012 meta-analysis then confirmed that use of no-contact controls inflated the effect size estimates. So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2012, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.)
 
@@ -1408,6 +1407,7 @@ dnb <-read.table(stdin(),header=TRUE)
 "study"       "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "active.control"
 "Jaeggi1"      2008   34   11.82     3.398  35    10.51   3.721  0
 "polar"        2009   13   32.76     1.83   8     25.12   9.37   0
+"Qiu"          2009   9    132.1     3.2    10    130     5.3    0
 "Stephenson.1" 2010   41   16.085    0.83   28    15.50   0.99   1
 "Stephenson.2" 2010   41   16.085    0.83   26    14.08   0.65   0
 "Jaeggi2"      2010   46   12.975    3.13   43    11.44   2.58   0
@@ -1437,60 +1437,63 @@ install.packages("meta", depend = TRUE)
 library(meta)
 metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control)
        SMD             95%-CI %W(fixed) %W(random)
-1   0.3633  [-0.1128; 0.8393]      9.81       6.60
-2   1.2494  [ 0.2740; 2.2248]      2.34       4.23
-3   0.6442  [ 0.1511; 1.1373]      9.14       6.52
-4   2.5879  [ 1.9205; 3.2553]      4.99       5.65
-5   0.5288  [ 0.1055; 0.9521]     12.41       6.85
-6   0.1484  [-0.3504; 0.6473]      8.93       6.49
-7  -0.4942  [-1.4856; 0.4972]      2.26       4.16
-8  -0.4188  [-1.4554; 0.6178]      2.07       3.98
-9   0.3527  [-0.5870; 1.2925]      2.52       4.38
-10  0.1245  [-0.8065; 1.0554]      2.56       4.41
-11  0.1337  [-0.3333; 0.6006]     10.19       6.65
-12  0.1640  [-1.4442; 1.7721]      0.86       2.33
-13  0.1762  [-0.4354; 0.7878]      5.94       5.93
-14  0.5217  [-0.2208; 1.2642]      4.03       5.28
-15  0.5824  [-0.2564; 1.4212]      3.16       4.82
-16  0.8393  [-0.0536; 1.7322]      2.79       4.58
-17  0.0804  [-0.6355; 0.7964]      4.34       5.40
-18  0.0030  [-0.6697; 0.6757]      4.91       5.62
-19  1.1371  [ 0.5633; 1.7110]      6.75       6.12
+1   0.3633  [-0.1128; 0.8393]      9.55       6.37
+2   1.2494  [ 0.2740; 2.2248]      2.28       4.01
+3   0.4521  [-0.4628; 1.3670]      2.59       4.26
+4   0.6442  [ 0.1511; 1.1373]      8.91       6.28
+5   2.5879  [ 1.9205; 3.2553]      4.86       5.41
+6   0.5288  [ 0.1055; 0.9521]     12.09       6.62
+7   0.1484  [-0.3504; 0.6473]      8.70       6.25
+8  -0.4942  [-1.4856; 0.4972]      2.20       3.95
+9  -0.4188  [-1.4554; 0.6178]      2.02       3.78
+10  0.3527  [-0.5870; 1.2925]      2.45       4.16
+11  0.1245  [-0.8065; 1.0554]      2.50       4.19
+12  0.1337  [-0.3333; 0.6006]      9.93       6.41
+13  0.1640  [-1.4442; 1.7721]      0.84       2.19
+14  0.1762  [-0.4354; 0.7878]      5.79       5.69
+15  0.5217  [-0.2208; 1.2642]      3.93       5.04
+16  0.5824  [-0.2564; 1.4212]      3.08       4.59
+17  0.8393  [-0.0536; 1.7322]      2.72       4.36
+18  0.0804  [-0.6355; 0.7964]      4.22       5.17
+19  0.0030  [-0.6697; 0.6757]      4.78       5.38
+20  1.1371  [ 0.5633; 1.7110]      6.58       5.88
 
-Number of studies combined: k=19
+Number of studies combined: k=20
 
                         SMD            95%-CI      z  p.value
-Fixed effect model   0.4927  [0.3436; 0.6418] 6.4769 < 0.0001
-Random effects model 0.4857  [0.1938; 0.7776] 3.2611   0.0011
+Fixed effect model   0.4916  [0.3445; 0.6388] 6.5483 < 0.0001
+Random effects model 0.4848  [0.2042; 0.7654] 3.3866   0.0007
 
 Quantifying heterogeneity:
-tau^2 = 0.2770; H = 1.86 [1.48; 2.35]; I^2 = 71.1% [54.1%; 81.9%]
+tau^2 = 0.2629; H = 1.81 [1.44; 2.28]; I^2 = 69.5% [51.9%; 80.7%]
 
 Test of heterogeneity:
      Q d.f.  p.value
- 62.38   18 < 0.0001
+ 62.39   19 < 0.0001
 
 Results for subgroups (fixed effect model):
                      k    SMD            95%-CI     Q    tau^2   I^2
-active.control = 0   9 0.7738  [0.5597; 0.9879] 41.24   0.4696 80.6%
+active.control = 0  10 0.7571  [0.5487; 0.9656] 41.69   0.4312 78.4%
 active.control = 1  10 0.2279  [0.0202; 0.4357]  8.28 < 0.0001    0%
 
 Test for subgroup differences (fixed effect model):
                    Q d.f.  p.value
-Between groups 12.86    1   0.0003
-Within groups  49.52   17 < 0.0001
+Between groups 12.42    1   0.0004
+Within groups  49.97   18 < 0.0001
 
 Results for subgroups (random effects model):
                      k    SMD            95%-CI     Q    tau^2   I^2
-active.control = 0   9 0.8128  [0.3022; 1.3234] 41.24   0.4696 80.6%
+active.control = 0  10 0.7809  [0.3094; 1.2524] 41.69   0.4312 78.4%
 active.control = 1  10 0.2279  [0.0202; 0.4357]  8.28 < 0.0001    0%
 
 Test for subgroup differences (random effects model):
                     Q d.f.  p.value
-Between groups   4.32    1   0.0376
+Between groups   4.42    1   0.0354
 ~~~
 
-The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect. The studies are quite different. This heterogeneity also shows up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 71.1%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<=0.
+The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals not even overlapping. The studies are quite different.
+
+This heterogeneity may also be what is showing up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 78.4%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<=0.
 
 To depict all the of above in a more graphic form, we use the "[forest plot](!Wikipedia)":
 
@@ -1505,7 +1508,7 @@ forest(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, study, data=dnb,
 
 ### Biases
 
-~19 groups (some from quite small studies) is considered small-medium for a meta-analysis but it does permit us to generate [funnel](!Wikipedia "Funnel plot") , or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless:
+~20 groups (some from quite small studies) is considered medium for a meta-analysis but it does permit us to generate [funnel](!Wikipedia "Funnel plot") , or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless:
 
 ~~~{.R}
 funnel(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
@@ -1517,27 +1520,27 @@ The trim-and-fill estimate:
 
 ~~~{.R}
 trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control))
+...
+Filled: 18  1.0891  [ 0.3731; 1.8051]      3.73       4.37
+Filled: 19  1.1665  [ 0.4938; 1.8393]      4.23       4.54
+Filled: 9   1.5883  [ 0.5517; 2.6249]      1.78       3.24
+Filled: 8   1.6637  [ 0.6723; 2.6551]      1.95       3.38
 
-Filled: 17  1.0972  [ 0.3812; 1.8132]      3.82       4.54
-Filled: 18  1.1747  [ 0.5019; 1.8474]      4.32       4.71
-Filled: 8   1.5965  [ 0.5599; 2.6330]      1.82       3.39
-Filled: 7   1.6719  [ 0.6805; 2.6633]      1.99       3.53
+Number of studies combined: k=24
 
-Number of studies combined: k=23
-
-                        SMD            95%-CI      z  p.value
-Fixed effect model   0.5888  [0.4489; 0.7287] 8.2497 < 0.0001
-Random effects model 0.6247  [0.3504; 0.8990] 4.4634 < 0.0001
+                        SMD           95%-CI      z  p.value
+Fixed effect model   0.5848  [0.4465; 0.723] 8.2878 < 0.0001
+Random effects model 0.6170  [0.3521; 0.882] 4.5643 < 0.0001
 
 Quantifying heterogeneity:
-tau^2 = 0.2985; H = 1.87 [1.52; 2.31]; I^2 = 71.4% [56.6%; 81.2%]
+tau^2 = 0.2847; H = 1.83 [1.49; 2.25]; I^2 = 70.1% [54.7%; 80.2%]
 
 Test of heterogeneity:
      Q d.f.  p.value
- 77.04   22 < 0.0001
+ 76.86   23 < 0.0001
 ~~~
 
-The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while many of the entries average around _d_=0.3, there must be 4 missing (sub)studies around _d_=1-1.5, and hence it estimates a stronger effect size.
+The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while many of the entries average around _d_=0.3, there must be 4 missing (sub)studies around _d_=1-1.7, and hence it estimates a stronger effect size.
 
 If the visible outlier on the funnel & forest plots (Stephenson 2010) is deleted, the trim-and-fill changes:
 
@@ -1546,32 +1549,33 @@ trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb[-3-4,], sm="SMD
        SMD             95%-CI %W(fixed) %W(random)
 1   0.3633  [-0.1128; 0.8393]     10.03       6.93
 ...
-18  1.1371  [ 0.5633; 1.7110]      6.91       6.40
+Filled: 7  1.2181  [ 0.1815; 2.2547]      2.23       2.94
+Filled: 6  1.2936  [ 0.3022; 2.2850]      2.44       3.17
 
-Number of studies combined: k=18
+Number of studies combined: k=20
 
                         SMD            95%-CI      z  p.value
-Fixed effect model   0.5155  [0.3647; 0.6663] 6.7000 < 0.0001
-Random effects model 0.5284  [0.2345; 0.8224] 3.5235   0.0004
+Fixed effect model   0.3997  [0.2449; 0.5544] 5.0629 < 0.0001
+Random effects model 0.4080  [0.2135; 0.6025] 4.1118 < 0.0001
 
 Quantifying heterogeneity:
-tau^2 = 0.2657; H = 1.85 [1.46; 2.36]; I^2 = 70.9% [53.1%; 82%]
+tau^2 = 0.0549; H = 1.2 [1; 1.57]; I^2 = 30.1% [0%; 59.4%]
 
 Test of heterogeneity:
      Q d.f.  p.value
- 58.49   17 < 0.0001
+ 27.17   19   0.1008
 ~~~
 
-That is, without Stephenson 2010, the trim-and-fill will fill in 0 hypothetical studies.
+That is, without Stephenson 2010, the trim-and-fill will fill in 2 weaker hypothetical studies.
 
-Overall, the results suggest that this particular comprehensive collection of DNB studies does not suffer from any obvious publication bias.
+Overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from any obvious publication bias.
 
 <!--
 TODO:
 
-1. followup on emails (*especially* the 2 clarifications)
+1. followup on Seidler/Jaeggi emails
 2. do some form of [sensitivity analysis](!Wikipedia) for study selection - remove or include the most questionable studies? Polar, perhaps
-3. ping Kenny Hicks for meta-analysis review once Stephenson & Seidler are in (no point waiting for Qiu)
+3. ping Kenny Hicks for meta-analysis review once Stephenson and Seidler are in
 -->
 <!--
 I think I need to start keeping some sort
