@@ -27,13 +27,13 @@ The point of these calculations is to extract [Brier scores](!Wikipedia) (for ca
 
 ~~~{.R}
 presidential <- read.csv("http://www.gwern.net/docs/2012-election-presidential.csv", row.names=1)
-# Reality=final 2012 result; 2008=final 2008 results
+# Reality=2012 result; 2008=2008 results
 presidential
                 probability electoral popular
 Reality              1.0000       303   51.10
 2008                 1.0000       365   53.00
 Nate Silver          0.9090       313   50.80
-Drew Linzer          0.9140       332   50.80
+Drew Linzer          0.9900       332   NA
 Simon Jackman        0.9140       332   50.80
 DeSart               0.8862       303   51.37
 Margin of Error      0.6800       303   51.50
@@ -58,14 +58,14 @@ lapply(rownames(presidential)[1:9], brp)
 
 - Reality: 0
 - 2008: 0
-- Silver: 0.008281
-- Linzer: 0.007396
-- Jackman: 0.007396
-- DeSart: 0.01295044
-- Margin: 0.1024
 - Wang: 0
+- Linzer:  0.0001
+- Jackman: 0.007396
+- Silver:  0.008281
+- DeSart:  0.01295044
+- Margin:  0.1024
 - Intrade: 0.116964
-- Random: 0.25 (50% guess is always 0.25)
+- Random:  0.25 (50% guess is always 0.25)
 
 ~~~{.R}
 # To score electorals and populars, we use RMSE
@@ -92,15 +92,14 @@ lapply(rownames(presidential)[c(1:9,11)], rpp)
 ~~~
 
 - Reality: 0
-- 2008: 1.9
-- Silver: 0.3
-- Linzer: 0.3
-- Margin: 0.4
-- Unskewed: 2.22
-- Jackman: 0.3
-- DeSart: 0.27
 - Wang: 0
+- DeSart: 0.27
+- Jackman: 0.3
+- Silver: 0.3
 - Intrade: 0.35
+- Margin: 0.4
+- 2008: 1.9
+- Unskewed: 2.22
 
 # State
 ## State Win Probabilities
@@ -395,7 +394,7 @@ lapply(rownames(statemargin), r)
 - Nate Silver: 2.250325
 - Margin of Error: 2.473101
 - Wang & Ferguson: 2.725015
-- Drew Linzer: 4.693797
+- Drew Linzer: 4.739405
 - Simon Jackman: 4.725661
 - Josh Putnam: 5.437705
 - Unskewed Polls: 8.946571
@@ -439,7 +438,7 @@ lapply(rownames(presidential), lsp)
 - Reality: 0
 - 2008: 0
 - Jackman: -0.08992471
-- Linzer: -0.08992471
+- Linzer: -0.01005034
 - Silver: -0.09541018
 - DeSart: -0.1208126
 - Intrade: -0.4185503
@@ -494,7 +493,7 @@ lapply(c("Wang & Ferguson", "Nate Silver", "Intrade"), lssp)
 Predictor  Presidential electoral  Presidential popular  State margins  S+Pp+Sm      Senate margins
 ---------- ----------------------- --------------------- -------------- ------------ --------------
 Silver     10                      0                     1.81659        2.250325     3.324473
-Linzer     29                      0.3                   2.468036       4.693797
+Linzer     29                                            2.468036       4.739405
 Wang       0                       0                     2.777933       2.725015
 Jackman    29                      0.3                   2.240148       4.725661
 DeSart     0                       0.27                  2.17918        2.137989
@@ -511,7 +510,7 @@ Unskewed   40                      2.22                  7.191023       8.946571
 Predictor  Presidential win State win  Senate win  St+Sn+P
 ---------- ---------------- ---------- ----------- ----------
 Silver     0.008281         0.00911372 0.04484545  0.02297625
-Linzer     0.007396         0.00384326
+Linzer     0.0001           0.00384326
 Wang       0                0.00761569 0.01246376  0.009408282
 Jackman    0.007396         0.00971369
 DeSart     0.012950         0.01605542
@@ -544,7 +543,7 @@ Reality            0
 2008               0
 Wang & Ferguson    0
 Jackman            -0.08992471
-Linzer             -0.08992471
+Linzer             -0.01005034
 Silver             -0.09541018
 DeSart             -0.1208126
 Intrade            -0.4185503
