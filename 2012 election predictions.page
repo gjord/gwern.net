@@ -15,8 +15,8 @@ The essay itself lives at ["Was Nate Silver the Most Accurate 2012 Election Pund
 
 This election prediction judgment divided up into several sections dealing with different categories of predictions:
 
-1. the overall Presidential race predictions: percentage of Obama victory, final electoral vote count, and percentage of popular vote
-2. the Presidential state-by-state predictions: the percentage Obama will take (vote share/margin/edge), as well as the percentage he will win that state at all
+1. the overall Presidential race predictions: probability of Obama victory, final electoral vote count, and percentage of popular vote
+2. the Presidential state-by-state predictions: the percentage Obama will take (vote share/margin/edge), as well as the probability he will win that state at all
 3. the Senate state-by-state predictions: similar, but normalized for the Democratic candidate
 
 Few forecasters made predictions in all categories, the ones who did make predictions did not always make their full predictions public, etc. Note that all percentages are normalized in terms of that going to Obama, Democrats, or in some cases, Independents/Greens. The "Reality" 'forecaster' is the ground truth; these were all extracted from the _New York Times_ website on 7-8 November 2012; some of these are estimates in flux, and in some cases, like Florida, I simply made my own best informed guess or assumption.
@@ -30,27 +30,29 @@ presidential <- read.csv("http://www.gwern.net/docs/2012-election-presidential.c
 # Reality=final 2012 result; 2008=final 2008 results
 presidential
                 probability electoral popular
-Reality              100.00       303   51.10
-2008                 100.00       365   53.00
-Nate Silver           90.90       313   50.80
-Drew Linzer           91.40       332   50.80
-Simon Jackman         91.40       332   50.80
-DeSart                88.62       303   51.37
-Margin of Error       68.00       303   51.50
-Wang & Ferguson      100.00       303   51.10
-Intrade               65.80       291   50.75
+Reality              1.0000       303   51.10
+2008                 1.0000       365   53.00
+Nate Silver          0.9090       313   50.80
+Drew Linzer          0.9140       332   50.80
+Simon Jackman        0.9140       332   50.80
+DeSart               0.8862       303   51.37
+Margin of Error      0.6800       303   51.50
+Wang & Ferguson      1.0000       303   51.10
+Intrade              0.6580       291   50.75
 Josh Putnam              NA       332      NA
 Unskewed Polls           NA       263   48.88
 
 # probability can be scored as a Brier score; available in 'verification' library
 install.packages("verification")
 library(verification)
-# to turn our percentages into 0-1 interval decimals
-convert <- function(p) p/100
+# handle lists & vectors for later
+br <- function(obs, pred) brier(unlist(obs),
+                                unlist(pred),
+                                bins=FALSE)$bs # bins=FALSE avoids rounding
 # convenience function
-brp <- function(p) brier(convert(presidential["Reality",]$probability),
-                         convert(presidential[p,]$probability),
-                         bins=FALSE)$bs  # bins=FALSE is more accurate
+brp <- function(p) brier(presidential["Reality",]$probability,
+                         presidential[p,]$probability,
+                         bins=FALSE)$bs
 lapply(rownames(presidential)[1:9], brp)
 ~~~
 
@@ -108,93 +110,93 @@ lapply(rownames(presidential)[c(1:9,11)], rpp)
 # 2008=2008 state results (=Reality, negated for Obama loss of Indiana & North Carolina)
 statewin <- read.csv("http://www.gwern.net/docs/2012-election-statewin.csv", row.names=1)
 statewin
-                  al     ak    az   ar     ca      co     ct      de    dc
-Reality         0.00 0.0000  0.00 0.00 100.00 100.000 100.00 100.000 100.0
-2008            0.00 0.0000  0.00 0.00 100.00 100.000 100.00 100.000 100.0
-Nate Silver     0.00 0.0000  2.00 0.00 100.00  80.000 100.00 100.000 100.0
-Drew Linzer     0.00 0.0086  0.00 0.00 100.00  98.333 100.00  98.333    NA
-Margin of Error 2.69 9.9800 43.88 4.51  94.43  64.710  91.25  93.770 100.0
-Intrade         0.00 0.0000  6.00 0.00  95.00  55.600  99.00  96.000  97.5
-DeSart          0.00 9.0000  3.90 0.00 100.00  52.300  99.90 100.000 100.0
-Simon Jackman   0.52 0.0000  0.50 0.00 100.00  76.520 100.00 100.000 100.0
-Wang & Ferguson 0.00 0.0000  0.00 0.00 100.00  84.000 100.00 100.000 100.0
-Josh Putnam       NA     NA    NA   NA     NA      NA     NA      NA    NA
-Unskewed Polls    NA     NA    NA   NA     NA      NA     NA      NA    NA
-                    fl    ga     hi   id     il indiana     ia    ks     ky
-Reality         100.00  0.00 100.00 0.00 100.00    0.00 100.00 0.000 0.0000
-2008            100.00  0.00 100.00 0.00 100.00  100.00 100.00 0.000 0.0000
-Nate Silver      50.00  0.00 100.00 0.00 100.00    0.00  84.00 0.000 0.0000
-Drew Linzer      60.40  0.00 100.00 0.00 100.00    0.00  99.66 3.866 0.0000
-Margin of Error  45.75 19.72  99.87 0.86  95.69   32.73  64.67 9.710 1.9100
-Intrade          33.00  3.00  97.50 0.00  98.90    2.00  66.30 0.000 0.0000
-DeSart           49.10  3.00 100.00 0.00 100.00    0.20  77.00 0.000 0.0000
-Simon Jackman    52.16  0.14 100.00 0.00 100.00    0.00  83.76 0.000 0.0004
-Wang & Ferguson  50.00  0.00 100.00 0.00 100.00    0.00  84.00 0.000 0.0000
-Josh Putnam         NA    NA     NA   NA     NA      NA     NA    NA     NA
-Unskewed Polls      NA    NA     NA   NA     NA      NA     NA    NA     NA
-                  la     me      md     ma     mi     mn        ms      mo
-Reality         0.00 100.00 100.000 100.00 100.00 100.00  0.000000  0.0000
-2008            0.00 100.00 100.000 100.00 100.00 100.00  0.000000  0.0000
-Nate Silver     0.00 100.00 100.000 100.00  99.00 100.00  0.000000  0.0000
-Drew Linzer     0.00 100.00 100.000 100.00 100.00 100.00  7.866667  0.0000
-Margin of Error 4.42  84.03  96.837  89.88  68.37  71.49 13.470000 44.7300
-Intrade         0.00  93.00  94.000  99.50  88.40  84.90  0.000000  5.0000
-DeSart          0.00  99.30 100.000 100.00  93.50  96.10  0.000000  5.2000
-Simon Jackman   0.00 100.00 100.000 100.00  99.98  99.92  0.000000  0.0004
-Wang & Ferguson 2.00 100.00 100.000 100.00 100.00 100.00  0.000000  0.0000
-Josh Putnam       NA     NA      NA     NA     NA     NA        NA      NA
-Unskewed Polls    NA     NA      NA     NA     NA     NA        NA      NA
-                   mt   ne        nv     nh     nj     nm     ny         nc
-Reality          0.00 0.00 100.00000 100.00 100.00 100.00 100.00   0.000000
-2008             0.00 0.00 100.00000 100.00 100.00 100.00 100.00 100.000000
-Nate Silver      2.00 0.00  93.00000  85.00 100.00  99.00 100.00  26.000000
-Drew Linzer      0.00 0.00  99.93333  99.80 100.00 100.00 100.00   8.533333
-Margin of Error 24.36 5.62  77.10000  68.86  86.47  85.79  96.97  50.030000
-Intrade          5.00 0.00  83.70000  64.90  97.90  93.90  95.00  23.000000
-DeSart           0.80 0.00  76.80000  75.60  99.80  97.40 100.00   6.600000
-Simon Jackman    0.32 0.00  91.20000  83.24  99.98  99.68 100.00  28.120000
-Wang & Ferguson  0.00 0.00  99.00000  84.00 100.00 100.00 100.00  16.000000
-Josh Putnam        NA   NA        NA     NA     NA     NA     NA         NA
-Unskewed Polls     NA   NA        NA     NA     NA     NA     NA         NA
-                   nd        oh   ok        or     pa     ri       sc    sd
-Reality          0.00 100.00000 0.00 100.00000 100.00 100.00  0.00000  0.00
-2008             0.00 100.00000 0.00 100.00000 100.00 100.00  0.00000  0.00
-Nate Silver      0.00  91.00000 0.00 100.00000  99.00 100.00  0.00000  0.00
-Drew Linzer      0.00  99.86667 0.00  99.86667 100.00 100.00 13.86667  0.00
-Margin of Error 12.84  60.38000 0.29  78.86000  75.62  96.84 13.45000 16.65
-Intrade          0.30  65.50000 0.10  95.90000  82.00  95.00  4.00000  5.00
-DeSart           0.00  70.40000 0.00  94.30000  88.10 100.00  0.30000  0.10
-Simon Jackman    0.00  92.98000 0.00  97.26000  99.10 100.00 12.90000  0.68
-Wang & Ferguson  0.00  93.00000 0.00 100.00000  93.00 100.00  0.00000  0.00
-Josh Putnam        NA        NA   NA        NA     NA     NA       NA    NA
-Unskewed Polls     NA        NA   NA        NA     NA     NA       NA    NA
-                    tn   tx   ut     vt     va     wa        wv     wi
-Reality         0.0000 0.00 0.00 100.00 100.00 100.00 0.0000000 100.00
-2008            0.0000 0.00 0.00 100.00 100.00 100.00 0.0000000 100.00
-Nate Silver     0.0000 0.00 0.00 100.00  79.00 100.00 0.0000000  97.00
-Drew Linzer     0.0000 0.00 0.00 100.00  97.60 100.00 0.1333333 100.00
-Margin of Error 5.3100 5.45 0.35  98.46  50.46  84.73 4.2700000  64.48
-Intrade         2.0000 2.00 4.50  98.00  58.00  97.50 2.0000000  74.60
-DeSart          0.0000 0.00 0.00 100.00 100.00  99.80 0.0000000  85.60
-Simon Jackman   0.0004 0.00 0.00 100.00  78.40 100.00 0.5400000  96.98
-Wang & Ferguson 0.0000 0.00 0.00 100.00  84.00 100.00 0.0000000  99.00
-Josh Putnam         NA   NA   NA     NA     NA     NA        NA     NA
-Unskewed Polls      NA   NA   NA     NA     NA     NA        NA     NA
-                       wy
-Reality         0.0000000
-2008            0.0000000
-Nate Silver     0.0000000
-Drew Linzer     0.0666667
-Margin of Error 0.6900000
-Intrade         0.0000000
-DeSart          0.0000000
-Simon Jackman   0.0000000
-Wang & Ferguson 0.0000000
-Josh Putnam            NA
-Unskewed Polls         NA
-convert <- function(p) unlist(lapply(p, function(x) x/100))
-br <- function(p) brier(convert(statewin["Reality",]), convert(statewin[p,]), bins=FALSE)$bs
-lapply(rownames(statewin)[1:9], br)
+                    al       ak     az     ar     ca      co     ct      de
+Reality         0.0000 0.000000 0.0000 0.0000 1.0000 1.00000 1.0000 1.00000
+2008            0.0000 0.000000 0.0000 0.0000 1.0000 1.00000 1.0000 1.00000
+Nate Silver     0.0000 0.000000 0.0200 0.0000 1.0000 0.80000 1.0000 1.00000
+Drew Linzer     0.0000 0.000086 0.0000 0.0000 1.0000 0.98333 1.0000 0.98333
+Margin of Error 0.0269 0.099800 0.4388 0.0451 0.9443 0.64710 0.9125 0.93770
+Intrade         0.0000 0.000000 0.0600 0.0000 0.9500 0.55600 0.9900 0.96000
+DeSart          0.0000 0.090000 0.0390 0.0000 1.0000 0.52300 0.9990 1.00000
+Simon Jackman   0.0052 0.000000 0.0050 0.0000 1.0000 0.76520 1.0000 1.00000
+Wang & Ferguson 0.0000 0.000000 0.0000 0.0000 1.0000 0.84000 1.0000 1.00000
+Josh Putnam         NA       NA     NA     NA     NA      NA     NA      NA
+Unskewed Polls      NA       NA     NA     NA     NA      NA     NA      NA
+                   dc     fl     ga     hi     id     il indiana     ia      ks
+Reality         1.000 1.0000 0.0000 1.0000 0.0000 1.0000  0.0000 1.0000 0.00000
+2008            1.000 1.0000 0.0000 1.0000 0.0000 1.0000  1.0000 1.0000 0.00000
+Nate Silver     1.000 0.5000 0.0000 1.0000 0.0000 1.0000  0.0000 0.8400 0.00000
+Drew Linzer        NA 0.6040 0.0000 1.0000 0.0000 1.0000  0.0000 0.9966 0.03866
+Margin of Error 1.000 0.4575 0.1972 0.9987 0.0086 0.9569  0.3273 0.6467 0.09710
+Intrade         0.975 0.3300 0.0300 0.9750 0.0000 0.9890  0.0200 0.6630 0.00000
+DeSart          1.000 0.4910 0.0300 1.0000 0.0000 1.0000  0.0020 0.7700 0.00000
+Simon Jackman   1.000 0.5216 0.0014 1.0000 0.0000 1.0000  0.0000 0.8376 0.00000
+Wang & Ferguson 1.000 0.5000 0.0000 1.0000 0.0000 1.0000  0.0000 0.8400 0.00000
+Josh Putnam        NA     NA     NA     NA     NA     NA      NA     NA      NA
+Unskewed Polls     NA     NA     NA     NA     NA     NA      NA     NA      NA
+                      ky     la     me      md     ma     mi     mn         ms
+Reality         0.000000 0.0000 1.0000 1.00000 1.0000 1.0000 1.0000 0.00000000
+2008            0.000000 0.0000 1.0000 1.00000 1.0000 1.0000 1.0000 0.00000000
+Nate Silver     0.000000 0.0000 1.0000 1.00000 1.0000 0.9900 1.0000 0.00000000
+Drew Linzer     0.000000 0.0000 1.0000 1.00000 1.0000 1.0000 1.0000 0.07866667
+Margin of Error 0.019100 0.0442 0.8403 0.96837 0.8988 0.6837 0.7149 0.13470000
+Intrade         0.000000 0.0000 0.9300 0.94000 0.9950 0.8840 0.8490 0.00000000
+DeSart          0.000000 0.0000 0.9930 1.00000 1.0000 0.9350 0.9610 0.00000000
+Simon Jackman   0.000004 0.0000 1.0000 1.00000 1.0000 0.9998 0.9992 0.00000000
+Wang & Ferguson 0.000000 0.0200 1.0000 1.00000 1.0000 1.0000 1.0000 0.00000000
+Josh Putnam           NA     NA     NA      NA     NA     NA     NA         NA
+Unskewed Polls        NA     NA     NA      NA     NA     NA     NA         NA
+                      mo     mt     ne        nv     nh     nj     nm     ny
+Reality         0.000000 0.0000 0.0000 1.0000000 1.0000 1.0000 1.0000 1.0000
+2008            0.000000 0.0000 0.0000 1.0000000 1.0000 1.0000 1.0000 1.0000
+Nate Silver     0.000000 0.0200 0.0000 0.9300000 0.8500 1.0000 0.9900 1.0000
+Drew Linzer     0.000000 0.0000 0.0000 0.9993333 0.9980 1.0000 1.0000 1.0000
+Margin of Error 0.447300 0.2436 0.0562 0.7710000 0.6886 0.8647 0.8579 0.9697
+Intrade         0.050000 0.0500 0.0000 0.8370000 0.6490 0.9790 0.9390 0.9500
+DeSart          0.052000 0.0080 0.0000 0.7680000 0.7560 0.9980 0.9740 1.0000
+Simon Jackman   0.000004 0.0032 0.0000 0.9120000 0.8324 0.9998 0.9968 1.0000
+Wang & Ferguson 0.000000 0.0000 0.0000 0.9900000 0.8400 1.0000 1.0000 1.0000
+Josh Putnam           NA     NA     NA        NA     NA     NA     NA     NA
+Unskewed Polls        NA     NA     NA        NA     NA     NA     NA     NA
+                        nc     nd        oh     ok        or     pa     ri
+Reality         0.00000000 0.0000 1.0000000 0.0000 1.0000000 1.0000 1.0000
+2008            1.00000000 0.0000 1.0000000 0.0000 1.0000000 1.0000 1.0000
+Nate Silver     0.26000000 0.0000 0.9100000 0.0000 1.0000000 0.9900 1.0000
+Drew Linzer     0.08533333 0.0000 0.9986667 0.0000 0.9986667 1.0000 1.0000
+Margin of Error 0.50030000 0.1284 0.6038000 0.0029 0.7886000 0.7562 0.9684
+Intrade         0.23000000 0.0030 0.6550000 0.0010 0.9590000 0.8200 0.9500
+DeSart          0.06600000 0.0000 0.7040000 0.0000 0.9430000 0.8810 1.0000
+Simon Jackman   0.28120000 0.0000 0.9298000 0.0000 0.9726000 0.9910 1.0000
+Wang & Ferguson 0.16000000 0.0000 0.9300000 0.0000 1.0000000 0.9300 1.0000
+Josh Putnam             NA     NA        NA     NA        NA     NA     NA
+Unskewed Polls          NA     NA        NA     NA        NA     NA     NA
+                       sc     sd       tn     tx     ut     vt     va     wa
+Reality         0.0000000 0.0000 0.000000 0.0000 0.0000 1.0000 1.0000 1.0000
+2008            0.0000000 0.0000 0.000000 0.0000 0.0000 1.0000 1.0000 1.0000
+Nate Silver     0.0000000 0.0000 0.000000 0.0000 0.0000 1.0000 0.7900 1.0000
+Drew Linzer     0.1386667 0.0000 0.000000 0.0000 0.0000 1.0000 0.9760 1.0000
+Margin of Error 0.1345000 0.1665 0.053100 0.0545 0.0035 0.9846 0.5046 0.8473
+Intrade         0.0400000 0.0500 0.020000 0.0200 0.0450 0.9800 0.5800 0.9750
+DeSart          0.0030000 0.0010 0.000000 0.0000 0.0000 1.0000 1.0000 0.9980
+Simon Jackman   0.1290000 0.0068 0.000004 0.0000 0.0000 1.0000 0.7840 1.0000
+Wang & Ferguson 0.0000000 0.0000 0.000000 0.0000 0.0000 1.0000 0.8400 1.0000
+Josh Putnam            NA     NA       NA     NA     NA     NA     NA     NA
+Unskewed Polls         NA     NA       NA     NA     NA     NA     NA     NA
+                         wv     wi          wy
+Reality         0.000000000 1.0000 0.000000000
+2008            0.000000000 1.0000 0.000000000
+Nate Silver     0.000000000 0.9700 0.000000000
+Drew Linzer     0.001333333 1.0000 0.000666667
+Margin of Error 0.042700000 0.6448 0.006900000
+Intrade         0.020000000 0.7460 0.000000000
+DeSart          0.000000000 0.8560 0.000000000
+Simon Jackman   0.005400000 0.9698 0.000000000
+Wang & Ferguson 0.000000000 0.9900 0.000000000
+Josh Putnam              NA     NA          NA
+Unskewed Polls           NA     NA          NA
+
+brstate <- function(p) br(statewin["Reality",], statewin[p,])
+lapply(rownames(statewin)[1:9], brstate)
 ~~~
 
 - Reality:             0
@@ -208,7 +210,7 @@ lapply(rownames(statewin)[1:9], br)
 - Margin of Error:     0.05075311
 - random (50%) guesser 0.25000000
 
-## State win margins/vote-shares
+## State win vote-shares
 
 ~~~{.R}
 # 2008 vote-share: http://www.infoplease.com/us/government/presidential-election-vote-summary.html
@@ -311,27 +313,27 @@ lapply(rownames(statemargin), rmsesm)
 
 ~~~{.R}
 senatewin <- read.csv("http://www.gwern.net/docs/2012-election-senatewin.csv", row.names=1)
-                  az    ca    ct  de    fl  hi indiana    me  md    ma  mi  mn
-Reality          0.0 100.0 100.0 100 100.0 100     100 100.0 100 100.0 100 100
-Nate Silver      4.0 100.0  96.0 100 100.0 100      70  93.0 100  94.0 100 100
-Intrade         22.5  99.8  88.8  99  85.9  96      85  95.7  96  78.6  95  95
-Wang & Ferguson 12.0  95.0  99.8  95  95.0  95      84  95.0  95  96.0  96  95
-                ms    mo    mt ne nv  nj  nm  ny    nd  oh  pa  ri tn  tx ut vt
-Reality          0 100.0 100.0  0  0 100 100 100 100.0 100 100 100  0 0.0  0  0
-Nate Silver      0  98.0  34.0  1 17 100  97 100   8.0  97  99 100  0 0.0  0  0
-Intrade          0  70.3  37.1  6  6  96  95 100  15.5  84  86  99  0 2.5  0  5
-Wang & Ferguson  5  96.0  69.0  5 27  95  95  95  75.0  95  95  95  5 5.0  5  5
-                 va  wa    wv    wi wy
-Reality         100 100 100.0 100.0  0
-Nate Silver      88 100  92.0  79.0  0
-Intrade          78  96  95.1  62.6  0
-Wang & Ferguson  96  95  95.0  72.0  5
+                   az    ca    ct   de    fl   hi indiana    me   md    ma   mi
+Reality         0.000 1.000 1.000 1.00 1.000 1.00    1.00 1.000 1.00 1.000 1.00
+Nate Silver     0.040 1.000 0.960 1.00 1.000 1.00    0.70 0.930 1.00 0.940 1.00
+Intrade         0.225 0.998 0.888 0.99 0.859 0.96    0.85 0.957 0.96 0.786 0.95
+Wang & Ferguson 0.120 0.950 0.998 0.95 0.950 0.95    0.84 0.950 0.95 0.960 0.96
+                  mn   ms    mo    mt   ne   nv   nj   nm   ny    nd   oh   pa
+Reality         1.00 0.00 1.000 1.000 0.00 0.00 1.00 1.00 1.00 1.000 1.00 1.00
+Nate Silver     1.00 0.00 0.980 0.340 0.01 0.17 1.00 0.97 1.00 0.080 0.97 0.99
+Intrade         0.95 0.00 0.703 0.371 0.06 0.06 0.96 0.95 1.00 0.155 0.84 0.86
+Wang & Ferguson 0.95 0.05 0.960 0.690 0.05 0.27 0.95 0.95 0.95 0.750 0.95 0.95
+                  ri   tn    tx   ut   vt   va   wa    wv    wi   wy
+Reality         1.00 0.00 0.000 0.00 0.00 1.00 1.00 1.000 1.000 0.00
+Nate Silver     1.00 0.00 0.000 0.00 0.00 0.88 1.00 0.920 0.790 0.00
+Intrade         0.99 0.00 0.025 0.00 0.05 0.78 0.96 0.951 0.626 0.00
+Wang & Ferguson 0.95 0.05 0.050 0.05 0.05 0.96 0.95 0.950 0.720 0.05
 ~~~
 
 The Senate win predictions (done only by Wang, Silver, & Intrade in this dataset):
 
 ~~~{.R}
-brsw <- function (pundit) brier(convert(senatewin["Reality",]), convert(senatewin[pundit,]), bins=FALSE)$bs
+brsw <- function (pundit) br(senatewin["Reality",], senatewin[pundit,])
 lapply(rownames(senatewin), brsw)
 ~~~
 
@@ -342,18 +344,18 @@ lapply(rownames(senatewin), brsw)
 To combine the state win predictions with the presidency win prediction and also the Senate race win predictions requires data on all 3, so still Wang vs Silver vs Intrade:
 
 ~~~{.R}
-combineBinaryForecasts <- function(p) c(convert(statewin[p,]),
-                                        convert(senatewin[p,]),
-                                        presidential[p,]$probability/100)
-brpssw <- function(pundit) brier(combineBinaryForecasts("Reality"), combineBinaryForecasts(pundit))$bs
+combineBinaryForecasts <- function(p) c(statewin[p,],
+                                        senatewin[p,],
+                                        presidential[p,]$probability)
+brpssw <- function(pundit) br(combineBinaryForecasts("Reality"), combineBinaryForecasts(pundit))
 lapply(rownames(senatewin), brpssw)
 ~~~
 
-- Wang: 0.01120588
-- Silver: 0.02673529
-- Intrade: 0.03897059
+- Wang: 0.009408282
+- Silver: 0.02297625
+- Intrade: 0.03720485
 
-## Senate win margins/vote-shares
+## Senate win vote-shares
 
 ~~~{.R}
 senatemargin <- read.csv("http://www.gwern.net/docs/2012-election-senatemargin.csv", row.names=1)
@@ -404,10 +406,9 @@ lapply(rownames(statemargin), r)
 ## Log scores of win predictions
 
 ~~~{.R}
-convert <- function(a) unlist(lapply(a, function(x) x/100))
 logScore <- function (obs, pred) {Reduce("+", na.omit(unlist(Map(function (o,p) {
                                                                   if (o) {log(p)} else {log(1-p)} },
-                                                                 convert(obs), convert(pred)))))}
+                                                                 obs, pred))))}
 ~~~
 
 Example of the difference between Brier and log score:
@@ -509,12 +510,12 @@ Unskewed   40                      2.22                  7.191023       8.946571
 
 Predictor  Presidential win State win  Senate win  St+Sn+P
 ---------- ---------------- ---------- ----------- ----------
-Silver     0.008281         0.00911372 0.04484545  0.02673529
+Silver     0.008281         0.00911372 0.04484545  0.02297625
 Linzer     0.007396         0.00384326
-Wang       0                0.00761569 0.01246376  0.01120588
+Wang       0                0.00761569 0.01246376  0.009408282
 Jackman    0.007396         0.00971369
 DeSart     0.012950         0.01605542
-Intrade    0.116964         0.02811906 0.04882958  0.03897059
+Intrade    0.116964         0.02811906 0.04882958  0.03720485
 2008       0                0.03921569
 Margin     0.1024           0.05075311
 Random     0.2500           0.25000000 0.25000000  0.25000000
