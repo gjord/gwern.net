@@ -1,0 +1,1004 @@
+The following is a roughly sectionized collection of notes, copied predictions, and links pertaining to my dataset of 2012 election predictions; this can be helpful in figuring out exactly where I sourced a particular number or simply how I screwed up something.
+
+------------------------------------------
+
+[Brier score](http://en.wikipedia.org/wiki/Brier_score) is for probabilistic predictions about a *binary* outcome: eg. 75% Obama will win. But [RMSE](http://en.wikipedia.org/wiki/Root-mean-square_deviation) is for continuous predictions about a *continuous* outcome: eg. he will win by an average of 3.1 electoral votes. These predictions are different but both useful for ranking predictors.
+
+So for Presidential predictions, I want
+
+1. predicted probability Obama will win
+
+    Brier score. He wins or loses.
+2. predicted electoral share
+
+    RMSE. The predicted quantity can differ from the true quantity.
+3. predicted popular vote
+
+    RMSE.
+
+For state shares, I want:
+
+1. predicted probability Obama will take it.
+
+    Brier score.
+2. predicted margin of victory
+
+    RMSE.
+
+For Senate races, same thing, I want:
+
+1. predicted probability victor wins
+
+    Brier score.
+2. predicted % margin of victory
+
+    RMSE.
+
+# R data design
+
+if I made each frame correspond to every prediction by a predictor, I'll have ~161 columns!
+3 overall presidential variables, 50 state win estimates, 50 state margins, 30 state Senate win estimates, 30 state Senate margins
+better to make a set of 3 president variables, then a separate 50 state win %, a seprate 50 state margin, etc
+then if I want Nate's brier score, I can select $Nate.Silver from the first, second, and fourth frames
+if I want his RMSE, I select instead from the third and fifth objects
+
+# Selection
+
+Pundit & modeler roundup: http://www.washingtonpost.com/blogs/ezra-klein/wp/2012/11/05/pundit-accountability-the-official-2012-election-prediction-thread/
+
+Graph of 4 predictors state shares: http://marginoferror.org/results.png
+    Nate Silver
+    Simon Jackman
+    Drew Linzer
+    DeSart
+
+Nate Silver http://fivethirtyeight.blogs.nytimes.com/2012/11/06/nov-5-late-poll-gains-for-obama-leave-romney-with-longer-odds/
+President & state shares, Senate races
+
+Simon Jackman http://www.huffingtonpost.com/simon-jackman/pollster-predictive-perfo_b_2087862.html (self-calculated Brier score: 0.0091)
+President & state shares
+
+Drew Linzer http://votamatic.org/forecast-detail/ (RMSE 2.23 https://twitter.com/DrewLinzer/status/266241680305446912/photo/1 )
+President & state shares
+
+Jay DeSart & Holbrook http://research.uvu.edu/DeSart/forecasting/november.html
+President & state shares
+
+Margin of Error http://marginoferror.org/blog/summary.table.Nov05.csv
+President & state shares
+
+Sam Wang & Andrew Ferguson http://election.princeton.edu/ (specifically http://election.princeton.edu/2012/11/06/presidential-prediction-2012-final/ http://election.princeton.edu/2012/11/06/senate-prediction-final-election-eve/ & http://election.princeton.edu/2012/11/07/after-the-storm/ )
+President & state shares, Senate races, House races
+
+Josh Putnam http://frontloading.blogspot.com/2012/11/the-electoral-college-map-11612.html
+President & state shares
+
+Unskewed Polls http://unskewedpolls.com/unskewed_projection_2012%20president_03.cfm (admission of error: http://www.businessinsider.com/unskewed-pollster-dean-chambers-nate-silver-election-dick-morris-michael-barone-2012-11 http://unskewedpolls.com/unskewed_projection_2012%20president_03.cfm contrast with Rasmussen's excuses: http://www.slate.com/blogs/weigel/2012/11/07/scott_rasmussen_explains_why_his_polls_didn_t_forsee_an_obama_win.html )
+President & state shares
+
+Intrade (Caveats: http://election.princeton.edu/2012/07/11/weaknesses-of-intrade-and-opportunities/ )
+Presidential: http://www.intrade.com/v4/misc/scoreboard/
+states: http://www.intrade.com/v4/misc/electoral-map/ / http://www.intrade.com/v4/misc/key-races/states/
+Senate: http://www.intrade.com/v4/misc/key-races/senate/
+
+
+# Nate Silver
+
+presidential
+    probability: 90.9%
+    electoral vote-share: 313
+    popular vote: 50.8%
+
+state chance of victory:
+
+Alabama: 0
+Alaska: 0
+Arizona: 2
+Arkansas: 0
+California: 100
+Colorado: 80
+Connecticut: 100
+Delaware: 100
+DC 100
+Florida: 50
+Georgia: 0
+Hawaii: 100
+Idaho: 0
+Illinois: 100
+Indiana: 0
+Iowa: 84
+Kansas: 0
+Kentucky: 0
+Louisiana: 0
+Maine: 100
+Maryland: 100
+Massachusetts: 100
+Michigan: 99
+Minnesota: 100
+Mississippi: 0
+Missouri: 0
+Montana: 2
+Nebraska: 0
+Nevada: 93
+New 85
+New 100
+New 99
+New 100
+North 26
+North 0
+Ohio: 91
+Oklahoma: 0
+Oregon: 100
+Pennsylvania: 99
+Rhode 100
+South 0
+South 0
+Tennessee: 0
+Texas: 0
+Utah: 0
+Vermont: 100
+Virginia: 79
+Washington: 100
+West 0
+Wisconsin: 97
+Wyoming: 0
+
+state vote-share:
+
+Alabama: 36.7
+Alaska: 38.7
+Arizona: 46.2
+Arkansas: 38.6
+California: 58.1
+Colorado: 50.8
+Connecticut: 56.6
+DC: 93.0
+Delaware: 59.6
+Florida: 49.8
+Georgia: 45.5
+Hawaii: 66.5
+Idaho: 32.1
+Illinois: 59.8
+Indiana: 45.3
+Iowa: 51.1
+Kansas: 37.9
+Kentucky: 40.3
+Louisiana: 39.3
+Maine: 55.9
+Maryland: 60.9
+Massachusetts: 59.0
+Michigan: 53.0
+Minnesota: 53.7
+Mississippi: 39.4
+Missouri: 45.6
+Montana: 45.2
+Nebraska: 40.4
+Nevada: 51.8
+New Hampshire: 51.4
+New Jersey: 55.5
+New Mexico: 54.1
+New York: 62.4
+North Carolina: 48.9
+North Dakota: 42.0
+Ohio: 51.3
+Oklahoma: 33.8
+Oregon: 53.6
+Pennsylvania: 52.5
+Rhode Island: 61.8
+South Carolina: 43.2
+South Dakota: 42.5
+Tennessee: 41.4
+Texas: 41.2
+Utah: 27.8
+Vermont: 66.2
+Virginia: 50.7
+Washington: 56.2
+West Virginia: 41.3
+Wisconsin: 52.4
+Wyoming: 30.9
+
+
+State win percentage for Senate:
+Arizona: 4
+California: 100
+Connecticut: 96
+Delaware: 100
+Florida: 100
+Hawaii: 100
+Indiana: 70
+Maine: 93
+Maryland: 100
+Massachusetts: 94
+Michigan: 100
+Minnesota: 100
+Mississippi: 0
+Missouri: 98
+Montana: 34
+Nebraska: 1 99
+Nevada: 17
+New Jersey: 100
+New Mexico: 97
+New York: 100
+North Dakota: 8
+Ohio: 97
+Pennsylvania: 99
+Rhode Island: 100
+Tennessee: 0
+Texas: 0
+Utah: 0
+Vermont: 100
+Virginia: 88
+Washington: 100
+West Virginia: 92
+Wisconsin: 79
+Wyoming: 0
+
+State vote-share for Senate:
+Arizona:  46.6
+California: 59.6
+Connecticut: 52.6
+Delaware: 66.5
+Florida: 53.2
+Hawaii: 56.6
+Indiana: 50.0
+Maine: 53.0
+Maryland: 60.8
+Massachusetts: 51.7
+Michigan: 56.0
+Minnesota: 63.7
+Mississippi: 32.3
+Missouri: 52.2
+Montana: 48.4
+Nebraska: 45.6
+Nevada: 47.5
+New Jersey: 56.1
+New Mexico: 53.4
+New York: 67.5
+North Dakota: 47.2
+Ohio: 51.9
+Pennsylvania: 52.9
+Rhode Island: 59.1
+Tennessee: 35.5
+Texas: 41.5
+Utah: 32.4
+Vermont: 63.8
+Virginia: 51.0
+Washington: 59.3
+West Virginia: 56.0
+Wisconsin: 51.1
+Wyoming: 27.7
+
+
+# Simon Jackman
+
+presidential
+    probability: 91.4% http://www.huffingtonpost.com/simon-jackman/pollster-predictions_b_2081013.html
+    electoral vote-share: 332 (median)
+    popular vote: 50.8%
+
+for each state, margin of victory:
+sourced from https://docs.google.com/spreadsheet/ccc?key=0Ak59VfRjHcmAdEVxeE1PenJCRW1uYTg4LWN2WDI2Z3c#gid=0
+Jackman Obama two-party vote share
+38.7
+NA
+46.1
+36.4
+58.6
+51.0
+56.8
+NA
+91.6
+50.1
+45.5
+65.0
+32.0
+59.6
+44.8
+51.4
+NA
+40.9
+38.9
+56.0
+61.0
+59.7
+53.6
+54.0
+NA
+45.3
+46.0
+42.8
+51.9
+51.3
+56.0
+54.4
+62.7
+49.2
+43.0
+51.9
+34.5
+53.1
+53.1
+62.8
+44.8
+44.9
+44.0
+40.8
+26.9
+68.8
+51.0
+56.5
+41.5
+52.5
+NA
+11/6/2012
+15:00:00
+
+Each state chance of victory: http://jackman.stanford.edu/Election2012/downloads/obamaProbForPenn.csv
+
+Alabama 0.52
+Alaska NA
+Arizona 0.5
+Arkansas 0
+California 100
+Colorado 76.52
+Connecticut 100
+Delaware NA
+DC 100
+Florida 52.16
+Georgia 0.14
+Hawaii 100
+Idaho 0
+Illinois 100
+Indiana 0
+Iowa 83.76
+Kansas NA
+Kentucky 4e-04
+Louisiana 0
+Maine 100
+Maryland 100
+Massachusetts 100
+Michigan 99.88
+Minnesota 99.92
+Mississipi NA
+Missouri 4e-04
+Montana 0.32
+Nebraska 0
+Nevada 91.2
+New Hampshire 83.24
+New Jersey 99.98
+New Mexico 99.68
+New York 100
+North Carolina 28.12
+North Dakota 0
+Ohio 92.98
+Oklahoma 0
+Oregon 97.26
+Pennsylvania 99.1
+Rhode Island 100
+South Carolina 12.9
+South Dakota 0.68
+Tennessee 4e-04
+Texas 0
+Utah 0
+Vermont 100
+Virginia 78.4
+Washington 100
+West Virginia 0.54
+Wisconsin 96.98
+Wyoming NA
+
+Jackman says NAs are 'gimmes' where one doesn't have to explicitly list them https://twitter.com/SimonJackman/status/266974833617825792 - taking him at face-value and replacing the NAs with 1/0 in my dataset.
+
+# Drew Linzer
+
+presidential
+    probability: 91.4%
+    electoral vote-share: 332
+    popular vote: 50.8%
+
+(Obama shares)
+Alabama 40.3
+Alaska 37.5
+Arizona 46.2
+Arkansas 37.1
+California 59.8
+Colorado 51.2
+Connecticut 56.8
+DC NA
+Delaware 61
+Florida 50.2
+Georgia 46
+Hawaii 65.6
+Idaho 31.2
+Illinois 60.2
+Indiana 44.3
+Iowa 51.6
+Kansas 41.1
+Kentucky 45.1
+Louisiana 39.7
+Maine 56.4
+Maryland 61.3
+Massachusetts 60
+Michigan 52.7
+Minnesota 54.2
+Mississippi 41.8
+Missouri 45.3
+Montana 45.3
+Nebraska 42.5
+Nevada 52.2
+New Hampshire 51.6
+New Jersey 56.6
+New Mexico 54.4
+New York 63.2
+North Carolina 49.1
+North Dakota 41.7
+Ohio 51.6
+Oklahoma 33.5
+Oregon 53.6
+Pennsylvania 52.7
+Rhode Island 63.1
+South Carolina 44.3
+South Dakota 44.8
+Tennessee 43.3
+Texas 41.4
+Utah 26.7
+Vermont 70.5
+Virginia 51.1
+Washington 57.1
+West Virginia 42.8
+Wisconsin 52.5
+Wyoming 32
+
+Win percentage: http://www.gwern.net/docs/2012-election-linzer-statewinprob.csv
+Alabama 0
+Alaska 0.008666667
+Arizona 0
+Arkansas 0
+California 100
+Colorado 98.3333333
+Connecticut 100
+Delaware 98.3333333
+Florida 60.4
+Georgia 0
+Hawaii 100
+Idaho 0
+Illinois 100
+Indiana 0
+Iowa 99.6666667
+Kansas 3.8666667
+Kentucky 0
+Louisiana 0
+Maine 100
+Maryland 100
+Massachusetts 100
+Michigan 100
+Minnesota 100
+Mississippi 0 07.8666667
+Missouri 0
+Montana 0
+Nebraska 0
+Nevada 99.9333333
+New Hampshire 99.8
+New Jersey 100
+New Mexico 100
+New York 100
+North Carolina 8.5333333
+North Dakota 0
+Ohio 99.8666667
+Oklahoma 0
+Oregon 99.8666667
+Pennsylvania 100
+Rhode Island 100
+South Carolina 13.8666667
+South Dakota 0
+Tennessee 0
+Texas 0
+Utah 0
+Vermont 100
+Virginia 97.6
+Washington 100
+West Virginia 0.1333333
+Wisconsin 100
+Wyoming 0.0666667
+
+# DeSart
+
+presidential
+    probability: 88.62
+    electoral vote-share: 303
+    popular vote: 51.37
+
+state win probabilities http://research.uvu.edu/DeSart/forecasting/november/1106.html :
+Alabama 0
+Alaska 0
+Arizona 3.9
+Arkansas 0
+California 100
+Colorado 52.3
+Connecticut 99.9
+DC 100
+Delaware 100
+Florida 49.1
+Georgia 3
+Hawaii 100
+Idaho 0
+Illinois 100
+Indiana 0.2
+Iowa 77.0
+Kansas 0
+Kentucky 0
+Louisiana 0
+Maine 99.3
+Maryland 100
+Massachusetts 100
+Michigan 93.5
+Minnesota 96.1
+Mississippi 0
+Missouri 5.2
+Montana 0.8
+Nebraska 0
+Nevada 76.8
+New Hampshire 75.6
+New Jersey 99.8
+New Mexico 97.4
+New York 100
+North Carolina 6.6
+North Dakota 0
+Ohio 70.4
+Oklahoma 0
+Oregon 94.3
+Pennsylvania 88.1
+Rhode Island 100
+South Carolina 0.3
+South Dakota 0.1
+Tennessee 0
+Texas 0
+Utah 0
+Vermont 100
+Virginia 50.9
+Washington 99.8
+West Virginia 0
+Wisconsin 85.6
+Wyoming 0
+
+Vote-share estimates derived from: https://docs.google.com/spreadsheet/ccc?key=0Ak59VfRjHcmAdEVxeE1PenJCRW1uYTg4LWN2WDI2Z3c#gid=0
+
+DeSart & Holbrook Obama two-party vote share
+35.2
+32.2
+46.4
+38.7
+59.2
+50.1
+57.7
+60.5
+95.8
+49.9
+45.5
+66.6
+29.1
+60.8
+43.1
+51.8
+39.4
+41.9
+39.3
+55.9
+61.9
+62.8
+53.7
+54.3
+40
+46.1
+44.2
+39.8
+51.8
+51.7
+57.1
+54.7
+64.6
+47.7
+40.1
+51.3
+35.4
+53.8
+52.9
+65.2
+43.3
+42.7
+41.3
+40.7
+25.9
+70.7
+50.1
+57.1
+39.8
+52.6
+30.1
+
+11/6/2012
+11:30:00
+
+
+# Margin of Error
+
+presidential
+
+    probability: 68%
+    electoral vote-share: 303
+    national vote: 51.5%
+
+state vote-share: http://marginoferror.org/blog/summary.table.Nov05.csv ("Point Pred")
+state probability: http://marginoferror.org/blog/summary.table.Nov05.csv (1 - "P(Rep Win)")
+
+# Sam Wang & Andrew Ferguson
+
+presidential:
+
+    probability: 100% (yes; he specifically says in http://election.princeton.edu/2012/10/27/landfall/ that he thinks the 'Bayesian' prediction is the best one, and that's what the header specifies the prediction was as of 6 November).
+    electoral vote-share: 303
+    national vote: 51.1%
+
+State win %: http://election.princeton.edu/code/matlab/stateprobs.csv (columns: https://twitter.com/SamWangPhD/status/267032397235757056 ); Claimed Briers: https://twitter.com/SamWangPhD/statuses/266713597193900034
+state vote-shares: http://election.princeton.edu/code/matlab/stateprobs.csv
+
+wang <- read.table("http://election.princeton.edu/code/matlab/stateprobs.csv",sep=",")
+shares <- wang[,2] + 50
+shares <- unlist(lapply(wang[,2], function(margin) {50 + (margin/2)}))
+wang2[1:2]
+     %
+AL   0
+AK   0
+AZ   0
+AR   0
+CA 100
+CO  84
+CT 100
+DC 100
+DE 100
+FL  50
+GA   0
+HI 100
+ID   0
+IL 100
+IN   0
+IA  84
+KS   0
+KY   0
+LA   2
+ME 100
+MD 100
+MA 100
+MI 100
+MN 100
+MS   0
+MO   0
+MT   0
+NE   0
+NV  99
+NH  84
+NJ 100
+NM 100
+NY 100
+NC  16
+ND   0
+OH  93
+OK   0
+OR 100
+PA  93
+RI 100
+SC   0
+SD   0
+TN   0
+TX   0
+UT   0
+VT 100
+VA  84
+WA 100
+WV   0
+WI  99
+WY   0
+
+wang2[,c(1,3)]
+    shares
+AL  42.50
+AK  39.00
+AZ  46.00
+AR  38.00
+CA  57.50
+CO  51.00
+CT  56.50
+DC  90.00
+DE  62.50
+FL  50.00
+GA  46.00
+HI  63.50
+ID  32.00
+IL  59.50
+IN  43.50
+IA  51.00
+KS  41.50
+KY  44.50
+LA  43.50
+ME  55.50
+MD  61.00
+MA  59.50
+MI  52.75
+MN  53.75
+MS  44.00
+MO  45.25
+MT  45.75
+NE  43.00
+NV  52.50
+NH  51.00
+NJ  56.00
+NM  53.00
+NY  62.00
+NC  49.00
+ND  43.00
+OH  51.50
+OK  35.50
+OR  53.00
+PA  51.50
+RI  62.00
+SC  47.00
+SD  44.50
+TN  44.50
+TX  42.00
+UT  27.50
+VT  65.50
+VA  51.00
+WA  57.00
+WV  41.50
+WI  52.25
+WY  34.00
+
+Wang hasn't provided Senate state margins, but did provide win probabilities http://election.princeton.edu/2012/11/09/karl-rove-eats-a-bug/
+
+State           PEC Dem win %
+Arizona         12%
+Connecticut     99.8%
+Indiana         84%
+Massachusetts   96%
+Missouri        96%
+*Montana        69% [Nate got wrong]
+Nevada          27%
+*North Dakota   75% [Nate got wrong]
+Virginia        96%
+Wisconsin       72%
+
+Non-listed Senate races are listed as 95%/5% predictions per Wang's comment:
+
+> For all nonlisted races my implicit statement was that they were certain. I direct activist interest (on both sides) based on knife-edginess. I regarded them as 95% bets. This may not be enough for your purposes.
+
+# Josh Putnam
+
+Putnam's model turns out to be a weighted average of polls; it can predict shares and electoral vote-share, but not really anything else.
+
+presidential:
+
+    electoral vote-share: 332
+
+> The final FHQ weighted averages in the 32 states with late-entry data are below. The remainder were already in the clubhouse so to speak or were never, in the case of states like Delaware and Mississippi -- polled in 2012.
+
+state shares:
+
+# putnam.csv handcreated from http://frontloading.blogspot.com/2012/11/the-electoral-college-map-11612.html
+# w/Romney entries flipped the + to -
+> putnam <- read.table("putnam.csv",sep=",")
+> unlist(lapply(putnam[,2], function(margin) {50 + (margin/2)}))
+ [1] 46.595 58.395 50.875 55.920 50.080 45.380 59.580 44.365 51.275 43.065
+[11] 56.170 60.645 59.800 52.785 53.765 45.925 45.465 52.025 51.515 56.180
+[21] 54.565 62.510 49.220 51.470 52.845 44.790 43.935 42.220 27.310 50.895
+[31] 56.680 52.305
+> putnam2 <- data.frame(putnam[1], unlist(lapply(putnam[,2], function(margin) {50 + (margin/2)})))
+> putnam2
+
+1         Arizona                                        46.595
+2      California                                        58.395
+3        Colorado                                        50.875
+4     Connecticut                                        55.920
+5         Florida                                        50.080
+6         Georgia                                        45.380
+7        Illinois                                        59.580
+8         Indiana                                        44.365
+9            Iowa                                        51.275
+10      Louisiana                                        43.065
+11          Maine                                        56.170
+12       Maryland                                        60.645
+13  Massachusetts                                        59.800
+14       Michigan                                        52.785
+15      Minnesota                                        53.765
+16       Missouri                                        45.925
+17        Montana                                        45.465
+18         Nevada                                        52.025
+19  New Hampshire                                        51.515
+20     New Jersey                                        56.180
+21     New Mexico                                        54.565
+22       New York                                        62.510
+23 North Carolina                                        49.220
+24           Ohio                                        51.470
+25   Pennsylvania                                        52.845
+26   South Dakota                                        44.790
+27      Tennessee                                        43.935
+28          Texas                                        42.220
+29           Utah                                        27.310
+30       Virginia                                        50.895
+31     Washington                                        56.680
+32      Wisconsin                                        52.305
+
+
+
+# Unskewed Polls
+
+presidential
+
+    electoral vote-share: 263
+    national vote: 48.88
+
+vote-share by state:
+
+Alabama 37.78
+Alaska 36.40
+Arizona 43.95
+Arkansas 44.68
+California 57.65
+Colorado 49.48
+Connecticut 54.55
+DC 86.88
+Delaware 57.40
+Florida 47.60
+Georgia 43.20
+Hawaii 58.55
+Idaho 30.95
+Illinois 55.25
+Indiana 41.90
+Iowa 49.88
+Kansas 36.60
+Kentucky 40.80
+Louisiana 43.63
+Maine 51.90
+Maryland 55.83
+Massachusetts 60.10
+Michigan 51.75
+Minnesota 51.03
+Mississippi 39.83
+Missouri 46.20
+Montana 38.80
+Nebraska 34.40
+Nevada 52.15
+New Hampshire 50.03
+New Jersey 53.80
+New Mexico 53.53
+New York 58.75
+North Carolina 44.98
+North Dakota 37.15
+Ohio 47.75
+Oklahoma 35.55
+Oregon 50.53
+Pennsylvania 50.28
+Rhode Island 59.73
+South Carolina 41.58
+South Dakota 39.88
+Tennessee 43.70
+Texas 39.85
+Utah 28.75
+Vermont 56.53
+Virginia 48.88
+Washington 51.43
+West Virginia 44.55
+Wisconsin 49.98
+Wyoming 30.55
+
+# Intrade
+
+Used opening price on 6 November
+
+Presidential: http://www.intrade.com/v4/misc/scoreboard/
+states: http://www.intrade.com/v4/misc/electoral-map/ / http://www.intrade.com/v4/misc/key-races/states/
+Senate: http://www.intrade.com/v4/misc/key-races/senate/ (must select "expired")
+
+Presidential
+
+    probability: 65.8
+    electoral share: 291 ('Number of Electoral College votes won by Democratic nominee in 2012 ($0.01 per vote)')
+    popular vote: 50.75
+
+Intrade split its contracts piece-wise (Nov 6 opening price) Obama to win the popular vote by:
+
+- 0.5%: 56.2
+- 1.0%: 46
+- 2.0%: 37
+- 3.0%: 22.6
+
+I interpret this as Intrade saying he is 56.2% likely to win at least 50.5% (50+0.5) but not likely to win 51% or more. So to split the difference, he will win an average of 50.5 & 51% or 50.75% of the vote. I don't think a more precise estimate can be made from the public info,
+
+State win %:
+
+Alabama 0
+Alaska 0
+Arizona 6
+Arkansas 0
+California 95
+Colorado 55.6
+Connecticut 99
+DC 97.5
+Delaware 96
+Florida 33%
+Georgia 3
+Hawaii 97.5
+Idaho 0
+Illinois 98.9
+Indiana 2
+Iowa 66.3
+Kansas 0
+Kentucky 0
+Louisiana 0
+Maine 93
+Maryland 94
+Massachusetts 99.5
+Michigan 88.4
+Minnesota 84.9
+Mississippi 0
+Missouri 5
+Montana 5
+Nebraska 0
+Nevada 83.7
+New Hampshire 64.9
+New Jersey 97.9
+New Mexico 93.9
+New York 95
+North Carolina 23
+North Dakota 0.3
+Ohio 65.5
+Oklahoma 0.1
+Oregon 95.9
+Pennsylvania 82
+Rhode Island 95
+South Carolina 4
+South Dakota 5
+Tennessee 2
+Texas 2
+Utah 4.5
+Vermont 98
+Virginia 58
+Washington 97.5
+West Virginia 2
+Wisconsin 74.6
+Wyoming 0
+
+Senate races:
+
+Arizona 22.5
+California 99.8
+Connecticut 88.8
+Delaware 99
+Florida 85.9
+Hawaii 96
+Indiana 85
+Maine 4.3
+Maryland 96
+Massachusetts 78.6
+Michigan 95
+Minnesota 95
+Mississippi 0
+Missouri 70.3
+Montana 37.1
+Nebraska 6
+Nevada 6
+New Jersey 96
+New Mexico 95
+New York 100
+North Dakota 15.5
+Ohio 84
+Pennsylvania 86
+Rhode Island 99
+Tennessee 0
+Texas 2.5
+Utah 0
+Vermont 5
+Virginia 78
+Washington 96
+West Virginia 95.1
+Wisconsin 62.6
+Wyoming 0
