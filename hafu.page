@@ -181,7 +181,7 @@ Additional sources:
 - [Lu 2009](http://www.researchgate.net/publication/215595102_What_race_do_they_represent_and_does_mine_have_anything_to_do_with_it_Perceived_racialethnic_categories_of_anime_characters/file/9a0d7722df0f2a09718d0634642b0ce2.pdf "What Race Do They Represent and Does Mine Have Anything to Do with It? Perceived Racial Categories of Anime Characters")'s character list
 - Forum discussions; eg. <http://answers.yahoo.com/question/index?qid=20120316132943AAQQcq4>
 - Google & Google Scholar hits for the query `(anime OR manga) (half-Japanese OR hāfu OR half-American)`; followed by Google Alert & Google Scholar Alert for the same query <!-- TODO: do targeted Google searches for each nationality, eg. '(manga OR anime) half-korean character' -->
-- Personal knowledge
+- Personal knowledge ([>307](http://myanimelist.net/animelist/gwern) anime, [>17](http://myanimelist.net/mangalist/gwern) manga)
 
 # List
 
@@ -308,6 +308,7 @@ Year    Series                            Character                     Gender  
 2007    _Gundam 00_                       Saji Crossroad                M        American?    Japanese?^[TVTropes claims these 3 characters are all Japanese-Americans; the Crossroads' father, "Mr. Crossroad", is briefly mentioned, whose surname suggests he is American and hence the mother would be Japanese.]
 2007    _Gundam 00_                       Sumeragi Lee Noriega          F        Japanese?    Spanish?^[Online sources do not specify parentage beyond 'Eurasian' Spanish-Japanese, but do mention her 'real name' is "Leesa Kujō" (Japanese surname).]
 2007    _K-On!_                           Tsumugi Kotobuki              F        Japanese?    Finnish??^[["The speculation is that Mugi is half-Finnish, half-Japanese and raised as Japanese."](http://forums.animesuki.com/showpost.php?p=3596985&postcount=1035) I've asked at <http://k-on.wikia.com/wiki/Talk:Tsumugi_Kotobuki#Parentage>]
+2007    _Kids on the Slope_               Sentarō Kawabuchi             M        American     Japanese
 2007    _Oyasumi Punpun_                  Sachi                         F        Japanese     ?^[[Ch84, v08/pg15](http://www.mangafox.com/manga/oyasumi_punpun/v08/c084/15.html): "...Then again, since my mom was a foreigner, she might've bought all that manga so she could study Japanese."]
 2007    _Sakura Gari_                     Souma Saiki                   M        Japanese     English
 2007    _Yes! PreCure 5_                  Urara Kasugano                F        French       Japanese
@@ -404,6 +405,26 @@ visualizing: run 2-part (ratio) bar-graph per decade?
 and plot binomial confidences for the underlying ratio given the sample size?
 
 basic test for gender imbalance in parentage: chi-squared
+-->
+<!--
+gwern> so I've been compiling a list of fictional (anime/manga) characters which meet a certain criteria (http://www.gwern.net/hafu#list) from a universe of anime/manga since 1963 (of unknown total size but very large!), and I've been wondering how I could estimate how complete my list is at any point. what sort of keywords would I look for in looking for useful techniques? so far I have the phrase 'corpus estimation', and ecology 'capture-recapture'. is there anything better applicable? (I asked in #statistics but no reply in 7 hours, figured I'd try here)
+dvd> in ecology we have things like area/size to limit our final size
+gwern> dvd: I was thinking that I could treat my existing data collection as the captures in capture-recapture. each time I get a google alert for a new character but it's already on my list, this counts as a recapture. if I run a search in google books and I find 15 characters and 14 are already on the list, that's 14 recaptures and 1 capture. etc so my question is whether this works and whether there might be better approaches
+dvd> you can work on 'probability of getting a new record'
+gwern> (as far as I know no one has done anything like this for anime/manga characters so I have no idea what terms of art I'd look for)
+dvd> _p_ will grow fast at start of work. but when the final size is approaching you should have a small _p_
+gwern> so what would _p_ be supposed to mean when it gets small? estimate some sort of limit being approached?
+dvd> you can graph your _p_ changes over Google Alerts coming. the curve will start to look like a horizontal line someday and your number of anime should be almost complete
+gwern> dvd: yeah that sounds plausible, but what's the rigorous statistical form of that plausible reasoning?
+
+https://en.wikipedia.org/wiki/Mark_and_recapture
+http://stats.stackexchange.com/questions/16317/predicting-total-number-of-bugs-based-on-number-of-bugs-revealed-by-each-tester
+http://cran.r-project.org/web/packages/Rcapture/vignettes/RcaptureJSS.pdf
+http://stats.stackexchange.com/questions/43707/capture-recapture-sampling-valid-in-literary-analysis ?
+-->
+
+<!-- Capture/recapture:
+IRC Khoth _Sakamichi no Apollyon_: capture
 -->
 
 # External links
