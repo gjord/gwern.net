@@ -1,13 +1,15 @@
 ---
 title: 2012 election predictions
 created: 5 Nov 2012
-description: Compiling academic and media forecaster's 2012 American presidential election predictions and statistically judging correctness; Nate Silver was not the best
+description: Compiling academic and media forecaster's 2012 American Presidential election predictions and statistically judging correctness; Nate Silver was not the best
 tags: statistics, politics
 status: in progress
 belief: highly likely
 ...
 
-In November 2012, I was hired by CFAR to compile an extensive dataset of pundits, modelers, hobbyists, and academics who had attempted to statistically forecast the 2012 American presidential race and other minor races; the results were interesting in that they contradicted the lionization of [Nate Silver](!Wikipedia)'s forecasts in _The New York Times_. This page is a full listing of the R source code I used to produce my analysis for the CFAR essay; notes on the derivation of each dataset are stored at [`2012-election-gwern-notes.txt`](/docs/2012-election-gwern-notes.txt).
+> Statistically analyzing in `R` hundreds of predictions compiled for ~10 forecasters of the 2012 American Presidential election, and ranking them by Brier, RMSE, & log scores; the best overall performance seems to be by Drew Linzer and Wang & Holbrook, while Nate Silver appears as somewhat over-rated and the famous Intrade prediction market turning in a disappointing overall performance.
+
+In November 2012, I was hired by CFAR to compile an extensive dataset of pundits, modelers, hobbyists, and academics who had attempted to statistically forecast the 2012 American presidential race and other minor races; the results were interesting in that they contradicted the lionization of [Nate Silver](!Wikipedia)'s forecasts in _The New York Times_. This page is a full listing of the `R` source code I used to produce my analysis for the CFAR essay; notes on the derivation of each dataset are stored at [`2012-election-gwern-notes.txt`](/docs/2012-election-gwern-notes.txt).
 
 The essay itself lives at ["Was Nate Silver the Most Accurate 2012 Election Pundit?"](http://appliedrationality.org/2012/11/09/was-nate-silver-the-most-accurate-2012-election-pundit/).
 
@@ -557,3 +559,7 @@ Reality     0
 Wang        -2.89789
 Silver      -4.911792
 Intrade     -5.813129
+
+# See also
+
+- [On Predicting](Prediction markets "My prediction/betting strategies and track record, reflections on rationality, prediction judgments")
