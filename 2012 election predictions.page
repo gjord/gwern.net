@@ -407,9 +407,7 @@ lapply(rownames(statemargin), r)
 ## Log scores of win predictions
 
 ~~~{.R}
-logScore <- function (obs, pred) {Reduce("+", na.omit(unlist(Map(function (o,p) {
-                                                                  if (o) {log(p)} else {log(1-p)} },
-                                                                 obs, pred))))}
+logScore <- function(obs, pred) sum(ifelse(obs, log(pred), log(1-pred)), na.rm=TRUE)
 ~~~
 
 Example of the difference between Brier and log score:
@@ -426,7 +424,7 @@ brier(c(0,1),c(1,1),bins=FALSE)$bs
 logScore(1, 0)
 -Inf
 # Can we recover? ...we're screwed
-logScore(c(1,1), c(0,100))
+logScore(c(1,1), c(0,1))
 -Inf
 ~~~
 
