@@ -10,7 +10,6 @@ tags: statistics, predictions, computer science, transhumanism
 Sources for predictions: [PredictionBook.com](http://predictionbook.com), [LessWrong](http://lesswrong.com/r/discussion/lw/7jd/harry_potter_and_the_methods_of_rationality/), & [TvTropes](http://tvtropes.org/pmwiki/pmwiki.php/WMG/HarryPotterAndTheMethodsOfRationality)
 
 # Publication
-
 ## Awards
 
 Hugo:
@@ -412,6 +411,8 @@ will be...
 # Analysis
 
 > The unprecedented gap in _Methods of Rationality_ updates prompts musing about whether readership is increasing enough & what statistics one would use; I write code to download FF.net reviews, clean it, parse it, load into R, summarize the data & depict it graphically, run linear regression on a subset & all reviews, note the poor fit, develop a quadratic fit instead, and use it to predict future review quantities.
+>
+> Then, I run a similar analysis on a competing fanfiction to find out when they will have equal total review-counts. A try at logarithmic fits fails; fitting a linear model to the previous 100 days of _MoR_ and the competitor works much better, and they predict a convergence in <5 years.
 
 ## Statistical
 
@@ -525,9 +526,23 @@ summary(data)
                                     (Other)       :18129
 ~~~
 
-Surprisingly, it looks like only one user ('voodooqueen126') has reviewed every chapter. The dates also clearly indicate the slowdown in _MoR_ posting, with the median chapter being posted all the way back in 2010.
+Surprisingly, it looks like only one user ('voodooqueen126') has reviewed every chapter. The dates also clearly indicate the slowdown in _MoR_ posting, with the median chapter being posted all the way back in 2010. What does the per-day review pattern look like?
 
-When we plot each review by the chapter it was reviewing and the date it was posted, we see many clear patterns:
+~~~{.R}
+plot(table(data$Date))
+~~~
+
+![Reviews posted, by day](/images/hpmor/perday.png)
+
+Quite spiky. At a guess, the days with huge spikes are new chapters, while a low-level average of what looks like ~10 reviews a day holds steady over time. What's the cumulative total of all reviews over time?
+
+~~~{.R}
+plot(cumsum(table(data$Date)))
+~~~
+
+![All (total cumulative) reviews posted, by day](/images/hpmor/runningtotal.png)
+
+When we plot each review by the chapter it was reviewing and the date it was posted, we see more clear patterns:
 
 ~~~{.R}
 plot(data$Chapter,data$Date)
@@ -710,7 +725,7 @@ So the linear model is simply this: $y = -0.0966x + 128.3773$. To make predictio
 
 We can do this for the quadratic too; your ordinary quadratic looked like $y = x^2 + x + 1$, so it's easy to guess what the filled-in equivalent will be. We'll look at total reviews this time (`filtered2$Reviews ~ filtered2$Chapter + I(filtered2$Chapter^2)`). The intercept was 543.84019, the first coefficient was -16.88265, and the third mystery number was 0.16479, so the new equation is $y = 0.16479x^2 + -16.88265x + 543.84019$. What's the prediction for chapter 86? $0.16479\times(86^2) + (-16.88265)\times86 + 543.8401 = 310.719$. And for chapter 100, it'd go $0.16479\times(100^2) + (-16.88265)\times100 + 543.8401 = 503.475$.
 
-Can we automate this? Yes. Continuing with total reviews:
+Can we automate this? Yes. Continuing with total reviews per chapter:
 
 ~~~{.R}
 x = filtered2$Chapter; y = filtered2$Reviews
@@ -778,6 +793,228 @@ Obviously far more than 5% of the datapoints are falling outside the confidence 
 Sadly, neither the quadratic nor the linear fits lend any support to the original notion that we could estimate how much readership _MoR_ is being cost by the exponentially-slowing updates for the simple reason that the observed reviews per chapter do not match any simple increasing model of readership but a stranger U-curve (why do reviews decline so much in the middle when updates were quite regular?).
 
 We could argue that the sluggishness of the recent upturn in the U-curve (in the 80s) is due to there only being a few humongous chapters, but those chapters are quantitatively and qualitatively different from the early chapters (especially chapter 5) so it's not clear that any of them "should" have say, 341 reviews within a week.
+
+### Additional graphs
+
+![Total cumulative MoR reviews as a function of time, with linear fit](/images/hpmor/runningtotal-linear.png)
+![Total MoR reviews vs time, quadratic fit](/images/hpmor/runningtotal-quadratic.png)
+![Total cumulative MoR reviews, 100 days prior to 17 November 2012, linear fit](/images/hpmor/runningtotal-linear-100.png)
+
+## The Review Race: _Unexpected Circumstances_ versus _MoR_
+
+An interesting question is whether and when _MoR_ will become the most-reviewed fanfiction on FFN (and by extension, one of the most-reviewed fanfictions of all time). It has already passed such hits as ["Parachute"](http://www.fanfiction.net/s/6036478/1/Parachute) & ["Fridays at Noon"](http://www.fanfiction.net/s/6453369/1/Fridays_at_Noon), but the next competitor is [_Unexpected Circumstances_](http://www.fanfiction.net/s/6496709/1/Unexpected_Circumstances) at 24,163 reviews to _MoR_'s 18,917.
+
+### Averaging
+
+24.2k vs 19k is a large gap to cover. Some quick and dirty reasoning:
+
+- _MoR_: 18911 reviews, begun 02-28-10 or 992 days ago, so $\frac{18911}{992}=19.1$ reviews per day (Status: in progress)
+- _UC_: 24163 reviews, begun 11-22-10 or 725 days ago, so $\frac{24163}{725}=33.3$ reviews per day (Status: complete)
+
+Obviously if _UC_ doesn't see its average review rate decline, it'll never be passed by _MoR_! But let's assume the review rate has gone to zero (not *too* unrealistic a starting assumption, since _UC_ is finished and _MoR_ is not), how many days will it take _MoR_ to catch up? $\frac{24163-18911}{\frac{18911}{992}} = 275.5$ or under a year.
+
+### Modeling
+#### Descriptive Data and Graphs
+
+We can take into account the existing review rates with the same techniques we used previously for investigating _MoR_ review patterns. First, we can download & parse _UC_'s reviews the same way as before: make the obvious tweaks to the shell script, run the `sed` command, re-run the Haskell, then load into R & format:
+
+~~~{.Bash}
+for i in {1..1611};
+do elinks -dump-width 1000 -no-numbering -no-references -dump http://www.fanfiction.net/r/6496709/0/$i/
+    | grep "report review for abuse " >> reviews.txt;
+done
+sed -e 's/\[IMG\] //' -e 's/.*for abuse //' -e 's/ \. chapter / /' reviews.txt >> filtered.txt
+runhaskell mor.hs
+~~~
+
+~~~{.R}
+data <- read.table("http://www.gwern.net/docs/2012-uc-reviews.csv",header=TRUE, sep=",",quote="")
+# Convert the date strings to R dates
+data=data.frame(Chapter=data$Chapter, Date=as.Date(data$Date,"%m/%d/%Y"), User=data$User)
+data
+   Chapter     Date                     User
+1       39 12-11-14                    REL57
+2       27 12-11-13                    Guest
+3       26 12-11-13                  Melanie
+4       24 12-11-13                  Melanie
+5       39 12-11-13    Dream-with-your-heart
+6       39 12-11-12          ebdarcy.qt4good
+7       19 12-11-10                    Guest
+8       15 12-11-10                 JD Thorn
+9       39 12-11-09                 shollyRK
+10       9 12-11-08 of-Snowfall-and-Seagulls
+...
+summary(data)
+    Chapter           Date                          User
+ Min.   : 1.00   Min.   :10-11-22   Guest             :   54
+ 1st Qu.:12.00   1st Qu.:11-02-26   AbruptlyChagrined :   39
+ Median :22.00   Median :11-06-20   AlexaBrandonCullen:   39
+ Mean   :20.62   Mean   :11-06-10   Angeldolphin01    :   39
+ 3rd Qu.:29.00   3rd Qu.:11-09-09   AnjieNet          :   39
+ Max.   :39.00   Max.   :12-11-14   beachblonde2244   :   39
+                                    (Other)           :23915
+~~~
+
+Unlike _MoR_, multiple people have reviewed all (39) chapters. Let's look at reviews posted each calendar day:
+
+~~~{.R}
+plot(cumsum(table(data$Date)))
+~~~
+
+![A graph of each day UC has existed against reviews left that day](/images/hpmor/uc-perday.png)
+
+We also get a similar graph to _MoR_ if we graph by chapter instead, with thick bars indicating reviews left at the "latest" chapter while the series was updating, and many reviews left at the final chapter as people binge through _UC_:
+
+~~~{.R}
+plot(data$Chapter,data$Date)
+~~~
+
+![Total reviews on each chapter of UC](/images/hpmor/uc-perchapter.png)
+
+Finally, we'd like to see what a running or cumulative review total looks like: how fast is _UC_ growing these days?
+
+~~~{.R}
+plot(cumsum(table(data$Date)))
+~~~
+
+![Total reviews as a function of time](/images/hpmor/uc-runningtotal.png)
+
+Visually, it's not quite a straight line, not quite a quadratic... Let's start modeling.
+
+#### Linear model
+
+The linear doesn't match well since it clearly is massively overpredicting future growth!
+
+~~~{.R}
+totals <- cumsum(table(data$Date))
+days <- c(1:(length(totals)))
+plot(days, totals)
+
+model <- lm(totals ~ days)
+abline(model)
+~~~
+
+![A graph of total reviews vs time with a (bad) linear fit overlaid](/images/uc-linear.png)
+
+#### Quadratic model
+
+Well, the graph does look more like a quadratic, but this has another problem:
+
+~~~{.R}
+model <- lm(totals ~ days  + I(days^2))
+xx <- seq(min(days),max(days),len=200)
+yy <- model$coef %*% rbind(1,xx,xx^2)
+plot(days, totals)
+lines(xx,yy,lwd=2,col=3)
+~~~
+
+![Same graph, better (but still bad) quadratic fit overlaid](/images/u-quadratic.png)
+
+It fits much better overall, but for our purposes it is still rubbish: it is now predicting *negative* growth in total review count (a parabola must come down, after all), which of course cannot happen since reviews are not deleted.
+
+#### Logarithmic model
+
+We need a logarithmic function to try to model this "leveling-off" behavior:
+
+~~~{.R}
+logEstimate = lm(totals ~ log(days))
+plot(days,predict(logEstimate),type='l',col='blue')
+points(days,totals)
+~~~
+
+![I'm a logarithm, and I'm OK...](/images/hpmor/uc-logarithmic.png)
+
+The fit is very bad at the start, but the part we care about, recent reviews, seems better modeled than before. Progress! With a working model, let's ask the original question: with these models predicting growth for _UC_ and _MoR_, when do they finally have an equal number of reviews? We can use the `predict.lm` function to help us
+
+~~~{.R}
+# for MoR
+predict.lm(logEstimate, newdata = data.frame(days = c(10000:20000)))
+...
+    9993     9994     9995     9996     9997     9998     9999    10000
+31781.54 31781.78 31782.03 31782.27 31782.52 31782.76 31783.01 31783.25
+   10001
+31783.50
+# for UC
+predict.lm(logEstimate, newdata = data.frame(days = c(10000:20000)))
+...
+    9993     9994     9995     9996     9997     9998     9999    10000
+50129.51 50129.88 50130.26 50130.64 50131.02 50131.39 50131.77 50132.15
+   10001
+50132.53
+~~~
+
+Growth in reviews has asymptoted for each way out at 10,000 days or 27 years, but still _UC_ > _MoR_! This feels a little unlikely: the log function grows very slowly, but are the reviews really slowing down *that* much?
+
+#### Linear model revisited
+
+Let's ask a more restricted question - instead of trying to model the entire set of reviews, why not look at just the most recent chunk, the one sans any updates (for both, sadly), say the last 100 days?
+
+~~~{.R}
+totals <- cumsum(table(data$Date))
+totals <- totals[(length(totals)-100):length(totals)]
+days <- c(1:(length(totals)))
+days <- days[(length(days)-100):length(days)]
+plot(days, totals)
+model <- lm(totals ~ days)
+summary(model)
+Call:
+lm(formula = totals ~ days)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-18.4305  -4.4631   0.2601   7.4555  16.0125
+
+Coefficients:
+             Estimate Std. Error  t value Pr(>|t|)
+(Intercept) 2.392e+04  1.769e+00 13517.26   <2e-16 ***
+days        2.472e+00  3.012e-02    82.08   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.826 on 99 degrees of freedom
+Multiple R-squared: 0.9855, Adjusted R-squared: 0.9854
+F-statistic:  6737 on 1 and 99 DF,  p-value: < 2.2e-16
+
+abline(model)
+~~~
+
+![A linear fit to the last 100 days of UC reviews](/images/hpmor/uc-runningtotal-linear-100.png)
+
+That's an impressive fit: visually a great match, relatively small residuals, extreme statistical significance. (We saw a similar graph for _MoR_ too.) So clearly the linear model is accurately describing recent reviews.
+
+##### Predicting
+
+Let's use 2 models like that to make our predictions. We'll extract the 2 coefficients which define a $y = ax + c$ linear model, and solve for the equality:
+
+~~~{.R}
+# UC:
+coefficients(model)
+ (Intercept)         days
+23918.704158     2.472312
+# MoR:
+coefficients(model)
+ (Intercept)         days
+18323.275842     5.285603
+~~~
+
+The important thing here is 2.4723 vs 5.2856: that's how many reviews _UC_ is getting per day versus _MoR_ over the last 100 days according to the linear models which fit very well in that time period. Where do they intercept each other, or to put it in our middle-school math class terms, where do they equal the same _y_ and thus equal each other?
+
+1. _UC_: $y = 2.472312x + 23918.704158$
+2. _MoR_: $y = 5.285603x + 18323.275842$
+
+We solve for _x_:
+
+1. $5.285603x + 18323.275842 = 2.472312x + 23918.704158$
+2. $5.285603x = 2.472312x + (23918.704158 - 18323.275842)$
+3. $5.285603x = 2.472312x + 5595.428$
+4. $\frac{5.285603}{2.472312}x = x + \frac{5595.428}{2.472312}$
+5. $2.137919x = x + 2263.237$
+6. $2.137919x - 1x = 2263.237$
+7. $1.137919x = 2263.237$
+8. $x = \frac{2263.237}{1.137919}$
+9. $x = 1988.926$ days, or $\frac{1988.926}{365.25} = 5.445383$ years
+
+Phew! That's a long time. But it's not "never" (as it is in the logarithmic fits). With that in mind, I don't predict that _MoR_ will surpass _UC_ [within a year](http://predictionbook.com/predictions/10022), but bearing in mind that 5.4 years isn't too far off and I expect additional bursts of reviews as _MoR_ updates, I consider it [possible within 2 years](http://predictionbook.com/predictions/10023).
 
 <!-- Further work TODO:
 conversion to LW: http://lesswrong.com/r/discussion/lw/fag/analyzing_ffnet_reviews_of_harry_potter_and_the/7rpy
