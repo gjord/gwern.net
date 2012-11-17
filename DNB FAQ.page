@@ -1087,7 +1087,7 @@ The lack of n-back score correlation with WM score seems in line with an earlier
 
 Jaeggi, Buschkuehl, Jonides & Shah 2011 ["Short- and long-term benefits of cognitive training"](http://www.pnas.org/content/early/2011/06/03/1103228108.full.pdf); the abstract:
 
-> "We trained elementary and middle school children by means of a videogame-like working memory task. We found that only children who considerably improved on the training task showed a performance increase on untrained fluid intelligence tasks. This improvement was larger than the improvement of a control group who trained on a knowledge-based task that did not engage working memory; further, this differential pattern remained intact even after a 3-mo hiatus from training. We conclude that cognitive training can be effective and long-lasting, but that there are limiting factors that must be considered to evaluate the effects of this training, one of which is individual differences in training performance. We propose that future research should not investigate whether cognitive training works, but rather should determine what training regimens and what training conditions result in the best transfer effects, investigate the underlying neural and cognitive mechanisms, and finally, investigate for whom cognitive training is most useful."
+> We trained elementary and middle school children by means of a videogame-like working memory task. We found that only children who considerably improved on the training task showed a performance increase on untrained fluid intelligence tasks. This improvement was larger than the improvement of a control group who trained on a knowledge-based task that did not engage working memory; further, this differential pattern remained intact even after a 3-mo hiatus from training. We conclude that cognitive training can be effective and long-lasting, but that there are limiting factors that must be considered to evaluate the effects of this training, one of which is individual differences in training performance. We propose that future research should not investigate whether cognitive training works, but rather should determine what training regimens and what training conditions result in the best transfer effects, investigate the underlying neural and cognitive mechanisms, and finally, investigate for whom cognitive training is most useful.
 
 It is worth noting that the study used Single N-back (visual). Unlike Jaeggi 2008, "despite the experimental group's clear training effect, we observed no significant group × test session interaction on transfer to the measures of Gf" (so perhaps the training was long enough for subjects to hit their ceilings). The group which did n-back could be split, based on final IQ & n-back scores, into 2 groups; interestingly "Inspection of n-back training performance revealed that there were no group differences in the first 3 wk of training; thus, it seems that group differences emerge more clearly over time [first 3 wk: t(30) < 1; P = ns; last week: t(16) = 3.00; P < 0.01] (Fig. 3)." 3 weeks is ~21 days, or >19 days (the longest period in Jaeggi 2008). It's also worth noting that Jaeggi 2011 seems to avoid Moody's most cogent criticism, the speeding of the IQ tests; from the paper's 'Material and Methods' section;
 
@@ -1117,7 +1117,7 @@ From _Discover_'s blogs, ["Can intelligence be boosted by a simple task? For som
 
 ["Extending Brain-Training to the Affective Domain: Increasing Cognitive and Affective Executive Control through Emotional Working Memory Training"](http://www.plosone.org/article/fetchObjectAttachment.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0024372&representation=PDF):
 
-> "This study investigated whether brain-training (working memory [WM] training) improves cognitive functions beyond the training task (transfer effects), especially regarding the control of emotional material since it constitutes much of the information we process daily. Forty-five participants received WM training using either emotional or neutral material, or an undemanding control task. WM training, regardless of training material, led to transfer gains on another WM task and in fluid intelligence. However, only brain-training with emotional material yielded transferable gains to improved control over affective information on an emotional Stroop task. The data support the reality of transferable benefits of demanding WM training and suggest that transferable gains across to affective contexts require training with material congruent to those contexts. These findings constitute preliminary evidence that intensive cognitively demanding brain-training can improve not only our abstract problem-solving capacity, but also ameliorate cognitive control processes (e.g. decision-making) in our daily emotive environments."
+> This study investigated whether brain-training (working memory [WM] training) improves cognitive functions beyond the training task (transfer effects), especially regarding the control of emotional material since it constitutes much of the information we process daily. Forty-five participants received WM training using either emotional or neutral material, or an undemanding control task. WM training, regardless of training material, led to transfer gains on another WM task and in fluid intelligence. However, only brain-training with emotional material yielded transferable gains to improved control over affective information on an emotional Stroop task. The data support the reality of transferable benefits of demanding WM training and suggest that transferable gains across to affective contexts require training with material congruent to those contexts. These findings constitute preliminary evidence that intensive cognitively demanding brain-training can improve not only our abstract problem-solving capacity, but also ameliorate cognitive control processes (e.g. decision-making) in our daily emotive environments.
 
 Notes:
 
@@ -1398,33 +1398,78 @@ The "active.control" moderator variable is whether a control group was no-contac
     >
     > Even seemingly small differences between control and training groups may yield measurable differences in effort, expectancy, and investment, but these confounds are most problematic in studies that use no control group (Holmes et al., 2010; Mezzacappa & Buckner, 2010), or only a no-contact control group; a cohort of participants that completes the pre and post training assessments but has no contact with the lab in the interval between assessments. Comparison to a no-contact control group is a prevalent practice among studies reporting positive far transfer (Chein & Morrison, 2010; Jaeggi et al., 2008; Olesen et al., 2004; Schmiedek et al., 2010; Vogt et al., 2009). This approach allows experimenters to rule out simple test-retest improvements, but is potentially vulnerable to confounding due to expectancy effects. An alternative approach is to use a "control training" group, which matches the treatment group on time and effort invested, but is not expected to benefit from training (groups receiving control training are sometimes referred to as "active control" groups). For instance, in Persson and Reuter-Lorenz (2008), both trained and control subjects practiced a common set of memory tasks, but difficulty and level of interference were higher in the experimental group's training. Similarly, control train- ing groups completing a non-adaptive form of training (Holmes et al., 2009; Klingberg et al., 2005) or receiving a smaller dose of training (one-third of the training trials as the experimental group, e.g., Klingberg et al., 2002) have been used as comparison groups in assessments of Cogmed variants. One recent study conducted in young children found no differences in performance gains demonstrated by a no-contact control group and a control group that completed a non-adaptive version of training, suggesting that the former approach may be adequate (Thorell et al., 2009). We note, however, that regardless of the control procedures used, not a single study conducted to date has simultaneously controlled motivation, commitment, and difficulty, nor has any study attempted to demonstrate *explicitly* (for instance through subject self-report) that the control subjects experienced a comparable degree of motivation or commitment, or had similar expectancies about the benefits of training
 
-<!-- TODO: look at all studies to see which used both BOMAT & RAPM, and use as moderator to compare the effect sizes? -->
+<!-- TODO:
+1. look at all studies to see which used both BOMAT & RAPM, and use as moderator to compare the effect sizes?
+2. run a meta-analytic regression on duration of training (requires more advanced code: metafor package)  -->
+<!-- training:
+TODO: unsplit Jaeggi 2008?
+Jaeggi 2008: mean of 8/12/17/19 days, 25 minutes each, so 14.5*23=334 minutes
+Polar: from spreadsheet, 6 hours
+Qiu: 10 days 25 minutes
+Stephenson 2010: 20 days x 20 minutes pg39-40
+Jaeggi 2010: 4*5*18.5=370
+Jaeggi 2011: 15min * 19.09 =
+Chooi: 30*8=240; 30*20=600; pooled! TODO see docs/chooi-table
+Jaeggi4: replicating 2008 in part, 20 days/sessions, so 20*25=500??? TODO
+Kundu: 25 * 40 = 1000
+Schweizer: 25 * 18.5=463 (rough midpoint of 18.67, 19, 18)
+Jausovec:  "On average each of the participants completed 30 h of training." 30*60=1800
+Kundu2: ditto previous
+Salminen: 14 days, resulting in a stimulus presentation rate of 3 s...Altogether, 20 runs were completed in each session, and one run consisted of 20 + n trials (e.g., a 2-back task contained 22 trials). ...final mean DNB level was 3.63 from a start of 2
+so: ((((((2+3.63)/2 + 20) * 3) / 60) * 20) * 14) = 319 TODO
+Redick 2012: Subjects in the two training groups completed an additional 20 practice sessions, each of which took between 30-40 min
+Takeuchi: 'The WMT program consisted of computerized, in-house developed Borland Cþþ programs comprising four computerized tasks. Subjects undertook approximately 4 weeks (27 days) of training (each day, 20e60 min in most cases).'; DNB was 1 task, so 27 * (((20+60)/2)/4)=270
+-->
+<!--
+escalc(measure, ai, bi, ci, di, n1i, n2i, m1i, m2i, sd1i, sd2i, xi, mi, ri,
+       ni, data = NULL, add = 1/2, to = "only0", vtype = "LS", append = FALSE)
+For these outcome measures, m1i and m2i are used to specify the means of the two
+groups, sd1i and sd2i the standard deviations of the scores in the two groups, and n1i and
+n2i the sample sizes of the two groups
+
+dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg, append = TRUE)
+R> print(dat[,-c(4:7)], row.names = FALSE)
+
+dat <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb)
+dat
+res <- rma(yi, vi, data = dat)
+res; forest(res)
+rma(yi, vi, mods = ~ factor(dnb$active.control) - 1, data = dat)
+
+# moderators
+rma(yi, vi, mods = ~ factor(dnb$active.control) - 1, data = dat)
+
+# plot training time against gains
+plot(dnb$training, dat$yi)
+
+rma(yi, vi, mods = dnb$training, data = dat) # right?
+-->
 
 The data from the surviving studies:
 
 ~~~{.R}
 dnb <-read.table(stdin(),header=TRUE)
-"study"       "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "active.control"
-"Jaeggi1"      2008   34   11.82     3.398  35    10.51   3.721  0
-"polar"        2009   13   32.76     1.83   8     25.12   9.37   0
-"Qiu"          2009   9    132.1     3.2    10    130     5.3    0
-"Stephenson.1" 2010   41   16.085    0.83   28    15.50   0.99   1
-"Stephenson.2" 2010   41   16.085    0.83   26    14.08   0.65   0
-"Jaeggi2"      2010   46   12.975    3.13   43    11.44   2.58   0
-"Jaeggi3"      2011   32   16.94     4.75   30    16.2    5.1    1
-"Chooi.1"      2011   5.5  12.235    2.486  15    13.3    1.912  1
-"Chooi.2"      2011   5.5  12.235    2.486  11    13.4    2.7    1
-"Chooi.3"      2011   5.5  12.235    2.486  22    11.3    2.59   0
-"Chooi.4"      2011   5.5  12.235    2.486  23    11.9    2.64   0
-"Jaeggi4"      2012   51   15.097    2.56   27    14.74   2.8    1
-"Kundu1"       2011   3    31        1.73   3     30.3    4.51   1
-"Schweizer"    2011   29   27.07     2.16   16    26.5    4.5    1
-"Jaušovec"     2012   14   32.43     5.65   15    29.2    6.34   1
-"Kundu2"       2012   11   10.81     2.32   12    9.5     2.02   1
-"Salminen"     2012   13   13.7      2.2    9     10.9    4.3    0
-"Redick.1"     2012   12   6.25      3.08   20    6       3      0
-"Redick.2"     2012   12   6.25      3.08   29    6.24    3.34   1
-"Takeuchi"     2012   41   31.9      0.4    20    31.2    0.9    0
+"study"       "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "active.control" "training"
+"Jaeggi1"      2008   34   11.82     3.398  35    10.51   3.721  0                 334
+"polar"        2009   13   32.76     1.83   8     25.12   9.37   0                 360
+"Qiu"          2009   9    132.1     3.2    10    130     5.3    0                 250
+"Stephenson.1" 2010   41   16.085    0.83   28    15.50   0.99   1                 400
+"Stephenson.2" 2010   41   16.085    0.83   26    14.08   0.65   0                 400
+"Jaeggi2"      2010   46   12.975    3.13   43    11.44   2.58   0                 370
+"Jaeggi3"      2011   32   16.94     4.75   30    16.2    5.1    1                 287
+"Chooi.1"      2011   5.5  12.235    2.486  15    13.3    1.912  1                 NA
+"Chooi.2"      2011   5.5  12.235    2.486  11    13.4    2.7    1                 NA
+"Chooi.3"      2011   5.5  12.235    2.486  22    11.3    2.59   0                 NA
+"Chooi.4"      2011   5.5  12.235    2.486  23    11.9    2.64   0                 NA
+"Jaeggi4"      2011   51   15.097    2.56   27    14.74   2.8    1                 NA
+"Kundu1"       2011   3    31        1.73   3     30.3    4.51   1                 1000
+"Schweizer"    2011   29   27.07     2.16   16    26.5    4.5    1                 463
+"Jaušovec"     2012   14   32.43     5.65   15    29.2    6.34   1                 1800
+"Kundu2"       2012   11   10.81     2.32   12    9.5     2.02   1                 1000
+"Salminen"     2012   13   13.7      2.2    9     10.9    4.3    0                 319
+"Redick.1"     2012   12   6.25      3.08   20    6       3      0                 700
+"Redick.2"     2012   12   6.25      3.08   29    6.24    3.34   1                 700
+"Takeuchi"     2012   41   31.9      0.4    20    31.2    0.9    0                 270
 
 ~~~
 
