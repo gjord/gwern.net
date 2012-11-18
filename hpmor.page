@@ -894,7 +894,7 @@ model <- lm(totals ~ days)
 abline(model)
 ~~~
 
-![A graph of total reviews vs time with a (bad) linear fit overlaid](/images/uc-linear.png)
+![A graph of total reviews vs time with a (bad) linear fit overlaid](/images/hpmor/uc-linear.png)
 
 #### Quadratic model
 
@@ -908,7 +908,7 @@ plot(days, totals)
 lines(xx,yy,lwd=2,col=3)
 ~~~
 
-![Same graph, better (but still bad) quadratic fit overlaid](/images/u-quadratic.png)
+![Same graph, better (but still bad) quadratic fit overlaid](/images/hpmor/uc-quadratic.png)
 
 It fits much better overall, but for our purposes it is still rubbish: it is now predicting *negative* growth in total review count (a parabola must come down, after all), which of course cannot happen since reviews are not deleted.
 
