@@ -1328,7 +1328,7 @@ The candidate studies:
 
 Going through them, I must note:
 
-- Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated.
+- Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated, and I used his approach in estimating values for each training group
 - polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
 - Jaeggi 2010: used BOMAT scores; should I somehow pool RAPM with BOMAT?
 - Jaeggi 2011: used SPM (a Raven's); should I somehow pool the TONI?
@@ -1344,8 +1344,8 @@ Going through them, I must note:
     Just dropping one control or experimental group weakens the meta-analysis, and may bias it as well if not done systematically. I have used one of its suggested approaches which accepts some additional error in exchange for greater power in checking this possible active versus no-contact distinction, in which we instead *split* the shared group:
 
     > A further possibility is to include each pair-wise comparison separately, but with shared intervention groups divided out approximately evenly among the comparisons. For example, if a trial compares 121 patients receiving acupuncture with 124 patients receiving sham acupuncture and 117 patients receiving no acupuncture, then two comparisons (of, say, 61 'acupuncture' against 124 'sham acupuncture', and of 60 'acupuncture' against 117 'no intervention') might be entered into the meta-analysis. For dichotomous outcomes, both the number of events and the total number of patients would be divided up. For continuous outcomes, only the total number of participants would be divided up and the means and standard deviations left unchanged. This method only partially overcomes the unit-of-analysis error (because the resulting comparisons remain correlated) so is not generally recommended. A potential advantage of this approach, however, would be that approximate investigations of heterogeneity across intervention arms are possible (for example, in the case of the example here, the difference between using sham acupuncture and no intervention as a control group).
-- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; the two experimental groups were pooled and split over the 4 control groups[^Chooi-2010-pool]
-- Jaeggi 2012: as-yet unpublished study; poster with table of scores provided privately, used scores on the APM (not BOMAT or the BOMAT followup); pooled the 2 experimental groups[^Jaeggi-2012-pool]
+- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; I split each experimental group in half to pair it up with the active and passive control groups which trained the same number of days
+- Jaeggi 2011 Psychonomics poster: as-yet unpublished study; poster with table of scores provided privately, used scores on the APM (not BOMAT or the BOMAT followup); pooled the 2 experimental groups (one was single audio n-back, the other dual n-back)[^Jaeggi-2012-pool]
 - [Takeuchi et al 2012](http://dl.dropbox.com/u/85192141/2012-takeuchi.pdf "Effects of working memory training on functional connectivity and cerebral blood flow during rest"): subjects were trained on 3 WM tasks in addition to DNB for 27 days, 30-60 minutes
 
 [^Stephenson-2010-pool]: The n-back pooling: <!-- dual: 17.54 0.76 n=28 / visual: 15.34 0.90 n=29 / auditory: 15.32 0.83 n=25 / 15.50 0.99 n=28 / 14.08 0.65 n=26 -->
@@ -1402,47 +1402,51 @@ The "active.control" moderator variable is whether a control group was no-contac
 1. look at all studies to see which used both BOMAT & RAPM, and use as moderator to compare the effect sizes?
 2. run a meta-analytic regression on duration of training (requires more advanced code: metafor package)  -->
 <!-- training:
-TODO: unsplit Jaeggi 2008?
-Jaeggi 2008: mean of 8/12/17/19 days, 25 minutes each, so 14.5*23=334 minutes
+Jaeggi 2008: see later for extracting numbers for each group
 Polar: from spreadsheet, 6 hours
 Qiu: 10 days 25 minutes
 Stephenson 2010: 20 days x 20 minutes pg39-40
 Jaeggi 2010: 4*5*18.5=370
 Jaeggi 2011: 15min * 19.09 =
-Chooi: 30*8=240; 30*20=600; pooled! TODO see docs/chooi-table
-Jaeggi4: replicating 2008 in part, 20 days/sessions, so 20*25=500??? TODO
+Chooi: 30*8=240; 30*20=600
+Jaeggi4: replicating 2008 in part, 20 days/sessions, so 20*25=500??? TODO ask Jaeggi
 Kundu: 25 * 40 = 1000
 Schweizer: 25 * 18.5=463 (rough midpoint of 18.67, 19, 18)
 Jausovec:  "On average each of the participants completed 30 h of training." 30*60=1800
 Kundu2: ditto previous
 Salminen: 14 days, resulting in a stimulus presentation rate of 3 s...Altogether, 20 runs were completed in each session, and one run consisted of 20 + n trials (e.g., a 2-back task contained 22 trials). ...final mean DNB level was 3.63 from a start of 2
-so: ((((((2+3.63)/2 + 20) * 3) / 60) * 20) * 14) = 319 TODO
+so: ((((((2+3.63)/2 + 20) * 3) / 60) * 20) * 14) = 319
 Redick 2012: Subjects in the two training groups completed an additional 20 practice sessions, each of which took between 30-40 min
 Takeuchi: 'The WMT program consisted of computerized, in-house developed Borland Cþþ programs comprising four computerized tasks. Subjects undertook approximately 4 weeks (27 days) of training (each day, 20e60 min in most cases).'; DNB was 1 task, so 27 * (((20+60)/2)/4)=270
 -->
-<!--
-escalc(measure, ai, bi, ci, di, n1i, n2i, m1i, m2i, sd1i, sd2i, xi, mi, ri,
-       ni, data = NULL, add = 1/2, to = "only0", vtype = "LS", append = FALSE)
-For these outcome measures, m1i and m2i are used to specify the means of the two
-groups, sd1i and sd2i the standard deviations of the scores in the two groups, and n1i and
-n2i the sample sizes of the two groups
+<!-- Jaeggi 2008: extract by counting pixels! Training gain:
 
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg, append = TRUE)
-R> print(dat[,-c(4:7)], row.names = FALSE)
+0: 661
+1: 554
+2: 446
+3: 340
+4: 232
+5: 125
 
-dat <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb)
-dat
-res <- rma(yi, vi, data = dat)
-res; forest(res)
-rma(yi, vi, mods = ~ factor(dnb$active.control) - 1, data = dat)
+pre-test (experimentals): 9.59(3.465)
 
-# moderators
-rma(yi, vi, mods = ~ factor(dnb$active.control) - 1, data = dat)
+Differentials based on fig.3 in Jaeggi 2008:
 
-# plot training time against gains
-plot(dnb$training, dat$yi)
+#8: 634; 571-698 | mean: 661-554 661-634 27/107 = 0.25; stddev: ((634-571) + (698-634))/2=63.5px=0.593
+0.25(0.59)
+#12: 514; 464-566 | mean=1+(512-446)/107=1+0.61=1.61; stddev: (566-514)/107=0.48
+1.61(0.48)
+#17: 299; 224-375 | mean=3+(375-299)/107=3+0.71=3.71; stddev: (299-224)/107=0.7
+3.7(0.7)
+#19: 171; 90-252 |mean=4+(232-171)/107=4.57; stddev: (171-90) / 107=0.76
+4.57(0.76)
 
-rma(yi, vi, mods = dnb$training, data = dat) # right?
+#8 9.84(0.59)
+#12 11.2(0.48)
+#17 13.29(0.7)
+#19 14.16(0.76)
+
+(25 minutes per day)
 -->
 
 The data from the surviving studies:
@@ -1450,18 +1454,21 @@ The data from the surviving studies:
 ~~~{.R}
 dnb <-read.table(stdin(),header=TRUE)
 "study"       "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "active.control" "training"
-"Jaeggi1"      2008   34   11.82     3.398  35    10.51   3.721  0                 334
+"Jaeggi1.1"    2008   16   9.84      0.59   8.75  10.51   3.721  0                 200
+"Jaeggi1.2"    2008   22   11.2      0.48   8.75  10.51   3.721  0                 300
+"Jaeggi1.3"    2008   16   13.29     0.7    8.75  10.51   3.721  0                 425
+"Jaeggi1.4"    2008   15   14.16     0.76   8.75  10.51   3.721  0                 475
 "polar"        2009   13   32.76     1.83   8     25.12   9.37   0                 360
 "Qiu"          2009   9    132.1     3.2    10    130     5.3    0                 250
 "Stephenson.1" 2010   41   16.085    0.83   28    15.50   0.99   1                 400
 "Stephenson.2" 2010   41   16.085    0.83   26    14.08   0.65   0                 400
 "Jaeggi2"      2010   46   12.975    3.13   43    11.44   2.58   0                 370
 "Jaeggi3"      2011   32   16.94     4.75   30    16.2    5.1    1                 287
-"Chooi.1"      2011   5.5  12.235    2.486  15    13.3    1.912  1                 NA
-"Chooi.2"      2011   5.5  12.235    2.486  11    13.4    2.7    1                 NA
-"Chooi.3"      2011   5.5  12.235    2.486  22    11.3    2.59   0                 NA
-"Chooi.4"      2011   5.5  12.235    2.486  23    11.9    2.64   0                 NA
-"Jaeggi4"      2011   51   15.097    2.56   27    14.74   2.8    1                 NA
+"Chooi.1"      2011   4.5  12.7      2      22    11.3    2.59   0                 240
+"Chooi.2"      2011   4.5  12.7      2      15    13.3    1.91   1                 240
+"Chooi.3"      2011   6.5  12.1      2.81   23    11.9    2.64   0                 600
+"Chooi.4"      2011   6.5  12.1      2.81   11    13.4    2.70   1                 600
+"Jaeggi4"      2011   51   15.097    2.56   27    14.74   2.8    1                 500
 "Kundu1"       2011   3    31        1.73   3     30.3    4.51   1                 1000
 "Schweizer"    2011   29   27.07     2.16   16    26.5    4.5    1                 463
 "Jaušovec"     2012   14   32.43     5.65   15    29.2    6.34   1                 1800
@@ -1478,85 +1485,124 @@ dnb <-read.table(stdin(),header=TRUE)
 The result of the meta-analysis:
 
 ~~~{.R}
-install.packages("meta", depend = TRUE)
-library(meta)
-metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control)
-       SMD             95%-CI %W(fixed) %W(random)
-1   0.3633  [-0.1128; 0.8393]      9.55       6.37
-2   1.2494  [ 0.2740; 2.2248]      2.28       4.01
-3   0.4521  [-0.4628; 1.3670]      2.59       4.26
-4   0.6442  [ 0.1511; 1.1373]      8.91       6.28
-5   2.5879  [ 1.9205; 3.2553]      4.86       5.41
-6   0.5288  [ 0.1055; 0.9521]     12.09       6.62
-7   0.1484  [-0.3504; 0.6473]      8.70       6.25
-8  -0.4942  [-1.4856; 0.4972]      2.20       3.95
-9  -0.4188  [-1.4554; 0.6178]      2.02       3.78
-10  0.3527  [-0.5870; 1.2925]      2.45       4.16
-11  0.1245  [-0.8065; 1.0554]      2.50       4.19
-12  0.1337  [-0.3333; 0.6006]      9.93       6.41
-13  0.1640  [-1.4442; 1.7721]      0.84       2.19
-14  0.1762  [-0.4354; 0.7878]      5.79       5.69
-15  0.5217  [-0.2208; 1.2642]      3.93       5.04
-16  0.5824  [-0.2564; 1.4212]      3.08       4.59
-17  0.8393  [-0.0536; 1.7322]      2.72       4.36
-18  0.0804  [-0.6355; 0.7964]      4.22       5.17
-19  0.0030  [-0.6697; 0.6757]      4.78       5.38
-20  1.1371  [ 0.5633; 1.7110]      6.58       5.88
+install.packages("metafor")
+library(metafor)
+effects <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+                  data = dnb)
+res1 <- rma(yi, vi, data = effects); res1 # random-effects meta-analysis
 
-Number of studies combined: k=20
+Random-Effects Model (k = 23; tau^2 estimator: REML)
 
-                        SMD            95%-CI      z  p.value
-Fixed effect model   0.4916  [0.3445; 0.6388] 6.5483 < 0.0001
-Random effects model 0.4848  [0.2042; 0.7654] 3.3866   0.0007
+tau^2 (estimate of total amount of heterogeneity): 0.3206 (SE = 0.1431)
+tau (sqrt of the estimate of total heterogeneity): 0.5662
+I^2 (% of total variability due to heterogeneity): 71.36%
+H^2 (total variability / sampling variability):    3.49
 
-Quantifying heterogeneity:
-tau^2 = 0.2629; H = 1.81 [1.44; 2.28]; I^2 = 69.5% [51.9%; 80.7%]
+Test for Heterogeneity:
+Q(df = 22) = 72.8802, p-val < .0001
 
-Test of heterogeneity:
-     Q d.f.  p.value
- 62.39   19 < 0.0001
+Model Results:
 
-Results for subgroups (fixed effect model):
-                     k    SMD            95%-CI     Q    tau^2   I^2
-active.control = 0  10 0.7571  [0.5487; 0.9656] 41.69   0.4312 78.4%
-active.control = 1  10 0.2279  [0.0202; 0.4357]  8.28 < 0.0001    0%
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.5302   0.1447   3.6630   0.0002   0.2465   0.8139      ***
 
-Test for subgroup differences (fixed effect model):
-                   Q d.f.  p.value
-Between groups 12.42    1   0.0004
-Within groups  49.97   18 < 0.0001
+res2 <- rma(yi, vi, data = effects, method="FE"); res2 # fixed-effects meta-analysis
 
-Results for subgroups (random effects model):
-                     k    SMD            95%-CI     Q    tau^2   I^2
-active.control = 0  10 0.7809  [0.3094; 1.2524] 41.69   0.4312 78.4%
-active.control = 1  10 0.2279  [0.0202; 0.4357]  8.28 < 0.0001    0%
+Fixed-Effects Model (k = 23)
 
-Test for subgroup differences (random effects model):
-                    Q d.f.  p.value
-Between groups   4.42    1   0.0354
+Test for Heterogeneity:
+Q(df = 22) = 72.8802, p-val < .0001
+
+Model Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.5269   0.0741   7.1101   <.0001   0.3816   0.6721      ***
 ~~~
 
-The overall effect is reasonably strong. But the moderator variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals not even overlapping. The studies are quite different.
-
-This heterogeneity may also be what is showing up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003") of 78.4%; and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<=0.
+The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<=0.
 
 To depict all the of above in a more graphic form, we use the "[forest plot](!Wikipedia)":
 
 ~~~{.R}
-forest(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, study, data=dnb,
-                 sm="SMD", byvar=active.control, print.byvar=FALSE))
+forest(res1, slab = paste(dnb$study, dnb$year, sep = ", "))
 ~~~
 
 ![Forest plot of DNB and IQ meta-analysis, generated by R](/images/dnb-forest.png)
 
-<!-- optipng xwd-*.png && gimp xwd-*.png; mogrify -scale 70% xwd-*.png -->
+### Moderators
+#### Control groups
+
+A major criticism of n-back studies is some using a no-contact or passive control group rather than an active control group. Each study has been coded appropriately, and we can ask whether it matters:
+
+~~~{.R}
+rma(yi, vi, mods = ~ factor(dnb$active.control) - 1, data = effects)
+
+Mixed-Effects Model (k = 23; tau^2 estimator: REML)
+
+tau^2 (estimate of residual amount of heterogeneity): 0.2497 (SE = 0.1239)
+tau (sqrt of the estimate of residual heterogeneity): 0.4997
+
+Test for Residual Heterogeneity:
+QE(df = 21) = 58.0602, p-val < .0001
+
+Test of Moderators (coefficient(s) 1,2):
+QM(df = 2) = 21.0061, p-val < .0001
+
+Model Results:
+
+                             estimate      se    zval    pval    ci.lb   ci.ub
+factor(dnb$active.control)0    0.8002  0.1787  4.4779  <.0001   0.4499  1.1504
+factor(dnb$active.control)1    0.1952  0.1998  0.9768  0.3287  -0.1965  0.5869
+~~~
+
+The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals barely overlapping. The effect with passive control groups is a dramatic _d_=0.8 while with active control groups, the IQ gains shrink to _d_=0.2.
+
+#### Training time
+
+Jaeggi et al 2008 observed a dose-response to training, where those who trained the longest apparently improved the most. Ever since, this has been cited as a factor in what studies will observe gains or as an explanation why some studies did not see improvements - perhaps they just didn't do enough training. `metafor` is able to look at the number of minutes subjects in each study trained for to see if there's any obvious linear relationship:
+
+~~~{.R}
+rma(yi, vi, mods = dnb$training, data = effects)
+Mixed-Effects Model (k = 23; tau^2 estimator: REML)
+
+tau^2 (estimate of residual amount of heterogeneity): 0.3390 (SE = 0.1524)
+tau (sqrt of the estimate of residual heterogeneity): 0.5823
+
+Test for Residual Heterogeneity:
+QE(df = 21) = 72.2855, p-val < .0001
+
+Test of Moderators (coefficient(s) 2):
+QM(df = 1) = 0.1472, p-val = 0.7012
+
+Model Results:
+
+         estimate      se     zval    pval    ci.lb   ci.ub
+intrcpt    0.6134  0.2629   2.3334  0.0196   0.0982  1.1287  *
+mods      -0.0002  0.0004  -0.3837  0.7012  -0.0010  0.0007
+~~~
+
+The estimate of the relationship is that there probably is none at all: the estimated coefficient has a _p_-value of 0.4991, and further, that coefficient is negative. This may seem initially implausible but if we graph the time spent training per study with the final (unweighted) effect size, we see why:
+
+~~~{.R}
+plot(dnb$training, effects$yi)
+~~~
+
+![](/images/dnb-effectsizevstrainingtime.png)
 
 ### Biases
 
-~20 groups (some from quite small studies) is considered medium for a meta-analysis but it does permit us to generate [funnel](!Wikipedia "Funnel plot") , or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless:
+~20 groups (some from quite small studies) is considered medium for a meta-analysis but it does permit us to generate [funnel plots](!Wikipedia "Funnel plot") , or check for possible [publication bias](!Wikipedia) via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000"). But nevertheless:
 
 ~~~{.R}
-funnel(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
+regtest(res1, model = "rma", predictor = "sei", ni = NULL)
+Regression Test for Funnel Plot Asymmetry
+
+model:     mixed-effects meta-regression model
+predictor: standard error
+
+z = -0.3259, p = 0.7445
+# so, nothing; let's visualize it:
+funnel(res1)
 ~~~
 
 ![Funnel plot of DNB and IQ meta-analysis, generated by R](/images/dnb-funnel.png)
@@ -1564,56 +1610,53 @@ funnel(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
 The trim-and-fill estimate:
 
 ~~~{.R}
-trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD",byvar=active.control))
-...
-Filled: 18  1.0891  [ 0.3731; 1.8051]      3.73       4.37
-Filled: 19  1.1665  [ 0.4938; 1.8393]      4.23       4.54
-Filled: 9   1.5883  [ 0.5517; 2.6249]      1.78       3.24
-Filled: 8   1.6637  [ 0.6723; 2.6551]      1.95       3.38
+tf <- trimfill(res1); tf
+Estimated number of missing studies on the right side: 6
 
-Number of studies combined: k=24
+Random-Effects Model (k = 29; tau^2 estimator: REML)
 
-                        SMD           95%-CI      z  p.value
-Fixed effect model   0.5848  [0.4465; 0.723] 8.2878 < 0.0001
-Random effects model 0.6170  [0.3521; 0.882] 4.5643 < 0.0001
+tau^2 (estimate of total amount of heterogeneity): 0.4124 (SE = 0.1538)
+tau (sqrt of the estimate of total heterogeneity): 0.6422
+I^2 (% of total variability due to heterogeneity): 75.19%
+H^2 (total variability / sampling variability):    4.03
 
-Quantifying heterogeneity:
-tau^2 = 0.2847; H = 1.83 [1.49; 2.25]; I^2 = 70.1% [54.7%; 80.2%]
+Test for Heterogeneity:
+Q(df = 28) = 106.8727, p-val < .0001
 
-Test of heterogeneity:
-     Q d.f.  p.value
- 76.86   23 < 0.0001
+Model Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.7483   0.1416   5.2843   <.0001   0.4707   1.0258      ***
 ~~~
 
-The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while many of the entries average around _d_=0.3, there must be 4 missing (sub)studies around _d_=1-1.7, and hence it estimates a stronger effect size.
+The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while many of the entries average around _d_=0.3, there must be 6 missing (sub)studies _d_>1, and hence it estimates a stronger effect size; graphing it (`funnel(tf)`):
+
+![](/images/dnb-funnel-trimfill.png)
 
 If the visible outlier on the funnel & forest plots (Stephenson 2010) is deleted, the trim-and-fill changes:
 
 ~~~{.R}
-trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb[-3-4,], sm="SMD",byvar=active.control))
-       SMD             95%-CI %W(fixed) %W(random)
-1   0.3633  [-0.1128; 0.8393]     10.03       6.93
-...
-Filled: 7  1.2181  [ 0.1815; 2.2547]      2.23       2.94
-Filled: 6  1.2936  [ 0.3022; 2.2850]      2.44       3.17
+trimfill(rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e,
+                                    n2i = n.c, data = dnb[c(1:6,9:20),])))
+Estimated number of missing studies on the left side is zero.
 
-Number of studies combined: k=20
+Random-Effects Model (k = 18; tau^2 estimator: REML)
 
-                        SMD            95%-CI      z  p.value
-Fixed effect model   0.3997  [0.2449; 0.5544] 5.0629 < 0.0001
-Random effects model 0.4080  [0.2135; 0.6025] 4.1118 < 0.0001
+tau^2 (estimate of total amount of heterogeneity): 0.0347 (SE = 0.0581)
+tau (sqrt of the estimate of total heterogeneity): 0.1862
+I^2 (% of total variability due to heterogeneity): 19.47%
+H^2 (total variability / sampling variability):    1.24
 
-Quantifying heterogeneity:
-tau^2 = 0.0549; H = 1.2 [1; 1.57]; I^2 = 30.1% [0%; 59.4%]
+Test for Heterogeneity:
+Q(df = 17) = 23.8733, p-val = 0.1229
 
-Test of heterogeneity:
-     Q d.f.  p.value
- 27.17   19   0.1008
+Model Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.3869   0.1019   3.7955   0.0001   0.1871   0.5867      ***
 ~~~
 
-That is, without Stephenson 2010, the trim-and-fill will fill in 2 weaker hypothetical studies.
-
-Overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from any obvious publication bias.
+That is, without Stephenson 2010, the trim-and-fill will fill in no hypothetical studies. So, overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from any obvious publication bias.
 
 <!--
 TODO:
