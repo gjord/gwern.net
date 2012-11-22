@@ -1581,11 +1581,7 @@ mods      -0.0002  0.0004  -0.3837  0.7012  -0.0010  0.0007
 
 The estimate of the relationship is that there probably is none at all: the estimated coefficient has a _p_-value of 0.4991, and further, that coefficient is negative. This may seem initially implausible but if we graph the time spent training per study with the final (unweighted) effect size, we see why:
 
-~~~{.R}
-plot(dnb$training, effects$yi)
-~~~
-
-![](/images/dnb-effectsizevstrainingtime.png)
+![`plot(dnb$training, effects$yi)`](/images/dnb-effectsizevstrainingtime.png)
 
 ### Biases
 
