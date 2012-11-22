@@ -463,9 +463,9 @@ More worrisome is recent trends in the developed world such as the War on Salt. 
 
     See also Caldwell KL, Jones R, Hollowell JG. [Urinary iodine concentration: United States National Health And Nutrition Examination Survey 2001-2002](http://www.ncbi.nlm.nih.gov/pubmed/16053386). Thyroid. 2005 Jul;15(7):692-9.
 
-## Meta-analysis
+## Iodine Meta-analysis
 
-Given all this, one naturally wonders what the effect might be in older humans: elementary school age and above. While iodine has been extensively studied, this is a narrow question which many studies do not consider; we are interested in cases only where someone is mentally tested before and after iodine supplementation, or where 1 cohort receives supplementation after birth when compared against a similar cohort who receive no supplementation. Most studies turn out to be either correlational (eg. stratifying by blood levels of thyroid hormone) or comparing fetal supplementation against a non-supplemented control group.
+Given all this, one naturally wonders what the effect might be in older humans: elementary school age and above. If iodine before birth can be responsible for increasing IQ by a full standard deviation or more (_d_>1), what about iodine post-birth? While iodine has been extensively studied, this is a narrow question which many studies do not consider; we are interested in cases only where someone is mentally tested before and after iodine supplementation, or where 1 cohort receives supplementation after birth when compared against a similar cohort who receive no supplementation. Most studies turn out to be either correlational (eg. stratifying by blood levels of thyroid hormone) or comparing fetal supplementation against a non-supplemented control group.
 
 I currently know of these studies involving post-birth effects which I considered for use:
 
@@ -486,9 +486,9 @@ I currently know of these studies involving post-birth effects which I considere
 14. ["Effect of multivitamin and multimineral supplementation on cognitive function in men and women aged 65 years and over: a randomised controlled trial"](http://www.nutritionj.com/content/pdf/1475-2891-6-10.pdf), McNeill et al 2007; old adults, 0.15mg; no effect
 15. ["A micronutrient-fortified seasoning powder reduces morbidity and improves short-term cognitive function, but has no effect on anthropometric measures in primary school children in northeast Thailand"](http://www.ajcn.org/content/87/6/1715.long), Menger et al 2008
 16. ["Delayed Neurobehavioral Development in Children Born to Pregnant Women with Mild Hypothyroxinemia During the First Month of Gestation: The Importance of Early Iodine Supplementation"](http://dl.dropbox.com/u/85192141/2009-berbel.pdf), Berbel et al 2009; turns out that supplementation was administered to all women during their pregnancy, so the development scores are not useful here.
-16. ["Iodine supplementation improves cognition in mildly iodine-deficient children"](http://www.ajcn.org/content/90/5/1264.full), Gordon et al 2009
-17. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years"), 0.15mg; no effect. (The paper should be available in "late" 2012, according to Fitzgerald.)
-18. ["Iodine and Cognition in Young Adults: A Randomised, Placebo-Controlled Trial"](http://otago.ourarchive.ac.nz/handle/10523/2341), Redman 2012; this may be a re-reporting of Fitzgerald 2012 or a replication. <!-- Followup once Fitzgerald is available -->
+17. ["Iodine supplementation improves cognition in mildly iodine-deficient children"](http://www.ajcn.org/content/90/5/1264.full), Gordon et al 2009
+18. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years"), 0.15mg; no effect. (The paper should be available in "late" 2012, according to Fitzgerald.)
+19. ["Iodine and Cognition in Young Adults: A Randomised, Placebo-Controlled Trial"](http://otago.ourarchive.ac.nz/handle/10523/2341), Redman 2012; this may be a re-reporting of Fitzgerald 2012 or a replication. <!-- Followup once Fitzgerald is available -->
 
 (My above searches & review turned out to be partially redundant with a review that was published online a few months afterwards, in June 2012: Zimmerman's ["The Effects of Iodine Deficiency in Pregnancy and Infancy"](http://dl.dropbox.com/u/85192141/2012-zimmerman.pdf). Regardless, the above was still useful because Zimmerman's focus was not on any childhood or adult effects but the pregnancy & infancy effects. I have also benefited from ["Iodine intake in human nutrition: a systematic literature review"](http://www.foodandnutritionresearch.net/index.php/fnr/article/view/19731/24399 "Gunnarsdottir & Dahl 2012"))
 
@@ -496,51 +496,41 @@ Unfortunately, a few of the useful studies also tested a variety of substances, 
 
 ~~~{.R}
 iodine <-read.table(stdin(),header=TRUE)
-"study"        "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "age"
-"Bautista"     1982   100   69.43    10.96  100   70.31    10.96  0
-"Boyages"      1990   28    34.4     15.4   24    29.5     8.5    1
-"Schoenthaler" 1991   310   11.05    8.12   100   8.9      7.3    1
-"Cao"          1994   183   79.5     8.98   37    75       18     0
-"Southon"      1994   22    63.94    2.6    29    64.1     1.87   1
-"Shrestha.1"   1994   72    17.1     1.8    36    10.7     2.4    0
-"Shrestha.2"   1994   80    18.2     1.5    36    10.7     2.4    0
-"Isa"          2000   60    85.25    14.6   100   83.6     16.2   1
-"Huda"         2001   145   14.88    3.28   142   14.60    3.19   0
-"Zimmerman"    2006   159   25       6.3    151   20.5     5.6    0
-"McNeill"      2007   398   11.5     2.3    374   11.7     2.1    1
-"Menger"       2008   254   3.2      1.56   253   3.3      1.53   0
-"Gordon"       2009   84    10.2     3      82    9.6      2.4    0
+"study"          "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "age" "dose"
+"Bautista"       1982   100   69.43    10.96  100   70.31    10.96  8.75  475
+"Boyages"        1990   28    34.4     15.4   24    29.5     8.5    29.5  720
+"Schoenthaler.1" 1991   100   10.1     8.9    33.3  8.9      7.3    14    12.675
+"Schoenthaler.2" 1991   105   12.6     7.9    33.3  8.9      7.3    14    25.350
+"Schoenthaler.3" 1991   105   10.4     7.6    33.3  8.9      7.3    14    25.350
+"Cao.1"          1994   90    79       10     18.5  75       18     0.125 50
+"Cao.2"          1994   93    80       8      18.5  75       18     0.625 50
+"Southon"        1994   22    63.94    2.6    29    64.1     1.87   13.5  16.8
+"Shrestha.1"     1994   72    17.1     1.8    36    10.7     2.4    7.1   490
+"Shrestha.2"     1994   80    18.2     1.5    36    10.7     2.4    7.1   490
+"Isa"            2000   60    85.25    14.6   100   83.6     16.2   11.39 480
+"Huda"           2001   145   14.88    3.28   142   14.60    3.19   9.8   400
+"Zimmerman"      2006   159   25       6.3    151   20.5     5.6    11    400
+"McNeill"        2007   398   11.5     2.3    374   11.7     2.1    72    54.75
+"Menger"         2008   254   3.2      1.56   253   3.3      1.53   9.45  7.75
+"Gordon"         2009   84    10.2     3      82    9.6      2.4    11.5  29.4
 
 ~~~
 
 Comments:
 
-0. "age" variable is based on majority of subjects:
-
-    - 0: age 0-12
-    - 1: age 13+
+0. "age" variable is based on a simple average age of subjects (unweighted) or the reported mean; "dose" is total administered iodine in milligrams
 1. Bautista notes: Stanford-Binet IQ, some data re-derived[^Bautista-reverse-engineering]
 2. Boyages: the two groups were not randomly chosen and may have pre-existing differences in IQ
-3. Schoenthaler: RAPM IQ; experimental scores pooled[^Schoenthaler-pooling]
-4. Cao: "developmental quotient" used, not an IQ; post-birth scores pooled[^Cao-pooling]
+3. Schoenthaler: RAPM IQ
+4. Cao: "developmental quotient" used, not an IQ; I exclude the pregnant women's offspring
 5. Southon: Non-verbal IQ scores pooled[^Southon-pooling]
 6. McNeill: [Digit span](!Wikipedia) used in place of IQ scores (WM correlates highly with IQ)
 7. Gordon: score from matrix subtest (1 of 4 subtest scores; 2 showed positive trend but not significance)
 8. Menger: score from backwards digit span, not forwards (backwards loads higher on _g_; WM test)
-9. Isa: IQ scores reported in unhelpful format; means & deviations reverse-engineered from percentile distribution[^Isa]
+9. Isa: IQ scores reported in unhelpful format; means & deviations reverse-engineered from percentile distribution[^Isa]; as usual, pregnancy-related scores are omitted
 10. Shrestha: 'Fluid intelligence' scores reported, omitting 'Crystallized intelligence' & 'Perceptual skill'; the control group is split across the iodine intervention ("Shrestha.1") and the iodine+iron intervention ("Shrestha.2")
 
 [^Bautista-reverse-engineering]: Bautista did not report standard deviations, but did report _n_s, means, and _p_-values, which permits the standard deviation to be derived, following the _Cochrane Handbook_ (["7.7.3.3 Obtaining standard deviations from standard errors, confidence intervals, t values and P values for differences in means"](http://www.cochrane.org/handbook/7733-obtaining-standard-deviations-standard-errors-confidence-intervals-t-values-and-p-valu)): the degrees of freedom = 198, so with a reported _p_=0.57, _t_=0.569; then the standard error is the means divided by the t value ($\frac{70.31 - 69.43}{0.569}$); and finally the standard deviation: $\frac{1.55}{sqrt(\frac{1}{100} + \frac{1}{100})} = 10.96$.
-[^Schoenthaler-pooling]: Schoenthaler reported the experimental group as 3 groups, by dose level
-
-    1. $n = 100 + 105 + 105 = 310$
-    2. mean: $\frac{10.1 \times 100 + 12.6 \times 105 + 10.4 \times 105}{310} = 11.05$
-    3. standard deviation: $\frac{((100-1) \times 8.9) + ((105-1) \times 7.9) + ((105-1) \times 7.6)}{100 + 105 + 105 - 3} = 8.12$
-[^Cao-pooling]: Cao reported experimental scores split into 2 groups, "birth to 3 months" & "3 months to 12 months":
-
-    1. $n = 90 + 93 = 183$
-    2. mean: $\frac{90 \times 79 + 93 \times 80}{90 + 93} = 79.5$
-    3. standard deviation: $\frac{((90-1) \times 10) + ((93-1) \times 8)}{90 + 93 - 2} = 8.98$
 [^Southon-pooling]: Southon reported control & experimental scores split by gender, which need to be re-pooled:
 
     - control
@@ -573,83 +563,147 @@ Comments:
 The result of the meta-analysis:
 
 ~~~{.R}
-install.packages("meta", depend=TRUE)
-library(meta)
-metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=iodine, sm="SMD", byvar=age)
-       SMD             95%-CI %W(fixed) %W(random)
-1  -0.0800  [-0.3573; 0.1973]      6.73       7.99
-2   0.3800  [-0.1705; 0.9305]      1.71       7.06
-3   0.2707  [ 0.0445; 0.4968]     10.11       8.12
-4   0.4080  [ 0.0526; 0.7634]      4.10       7.77
-5  -0.0712  [-0.6255; 0.4831]      1.68       7.05
-6   3.1491  [ 2.5633; 3.7348]      1.51       6.92
-7   4.0843  [ 3.4205; 4.7481]      1.17       6.59
-8   0.1051  [-0.2152; 0.4254]      5.04       7.88
-9   0.0863  [-0.1452; 0.3178]      9.65       8.11
-10  0.7520  [ 0.5215; 0.9826]      9.73       8.11
-11 -0.0906  [-0.2318; 0.0506]     25.94       8.27
-12 -0.0646  [-0.2388; 0.1095]     17.06       8.22
-13  0.2196  [-0.0856; 0.5248]      5.55       7.92
+install.packages("metafor")
+library(metafor)
+effects <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+                  data = iodine)
+res1 <- rma(yi, vi, data = effects); res1 # random-effects meta-analysis
+Random-Effects Model (k = 16; tau^2 estimator: REML)
 
-Number of studies combined: k=13
+tau^2 (estimate of total amount of heterogeneity): 1.3028 (SE = 0.4918)
+tau (sqrt of the estimate of total heterogeneity): 1.1414
+I^2 (% of total variability due to heterogeneity): 98.25%
+H^2 (total variability / sampling variability):    57.10
 
-                        SMD            95%-CI      z  p.value
-Fixed effect model   0.2039  [0.1320; 0.2759] 5.5570 < 0.0001
-Random effects model 0.6371  [0.2672; 1.0070] 3.3757   0.0007
+Test for Heterogeneity:
+Q(df = 15) = 290.9491, p-val < .0001
 
-Quantifying heterogeneity:
-tau^2 = 0.4255; H = 4.87 [4.14; 5.73]; I^2 = 95.8% [94.2%; 97%]
+Model Results:
 
-Test of heterogeneity:
-      Q d.f.  p.value
- 284.27   12 < 0.0001
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.6132   0.2902   2.1133   0.0346   0.0445   1.1820        *
 
-Results for subgroups (fixed effect model):
-          k    SMD             95%-CI      Q    tau^2   I^2
-age = 0   8 0.3413  [ 0.2448; 0.4379] 257.74   0.7481 97.3%
-age = 1   5 0.0325  [-0.0753; 0.1403]   9.04   0.0258 55.8%
+res2 <- rma(yi, vi, data = effects, method="FE"); res2 # fixed-effects meta-analysis
+Fixed-Effects Model (k = 16)
 
-Test for subgroup differences (fixed effect model):
-                    Q d.f.  p.value
-Between groups  17.49    1 < 0.0001
-Within groups  266.78   11 < 0.0001
+Test for Heterogeneity:
+Q(df = 15) = 290.9491, p-val < .0001
 
-Results for subgroups (random effects model):
-          k    SMD             95%-CI      Q    tau^2   I^2
-age = 0   8 1.0033  [ 0.3890; 1.6177] 257.74   0.7481 97.3%
-age = 1   5 0.0934  [-0.1067; 0.2934]   9.04   0.0258 55.8%
+Model Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.2059   0.0367   5.6127   <.0001   0.1340   0.2779      ***
 ~~~
 
-So the effect size is, as expected, small: _d_=0.34 in the young subjects or _d_=0.03 in the older subjects (which can't rule out *negative* effects!) This suggests the pessimistic interpretation is correct: the older you are, the less fixing an iodine deficiency matters.
+So the effect size is, as expected, small: _d_=0.2. (A far cry from the _d_>1 which we estimated from the prenatal studies.)
 
 A pretty [forest plot](!Wikipedia) summary:
 
+~~~{.R}
+forest(res1, slab = paste(iodine$study, iodine$year, sep = ", "))
+~~~
+
 ![A forest plot of iodine studies](/images/nootropics-iodine-forest.png)
+
+### Moderators: age & dose
+
+We suspected, based on the equivocal results in post-birth studies and the large decline in effect over the duration of a pregnancy in the Chinese studies, that if there was any benefit, it would be in the young; on the same reasoning, we might expect large doses to do more good than smaller ones. The necessary data is encoded into the table already, so we run a meta-analytic regression on them as independent predictors:
+
+~~~{.R}
+rma(yi, vi, mods = ~ iodine$age + iodine$dose, data = effects)
+
+Mixed-Effects Model (k = 16; tau^2 estimator: REML)
+
+tau^2 (estimate of residual amount of heterogeneity): 1.1791 (SE = 0.4803)
+tau (sqrt of the estimate of residual heterogeneity): 1.0859
+
+Test for Residual Heterogeneity:
+QE(df = 13) = 240.6870, p-val < .0001
+
+Test of Moderators (coefficient(s) 2,3):
+QM(df = 2) = 3.6629, p-val = 0.1602
+
+Model Results:
+
+             estimate      se     zval    pval    ci.lb   ci.ub
+intrcpt        0.3801  0.4676   0.8127  0.4164  -0.5365  1.2966
+iodine$age    -0.0146  0.0170  -0.8590  0.3903  -0.0479  0.0187
+iodine$dose    0.0019  0.0012   1.6620  0.0965  -0.0003  0.0042  .
+~~~
+
+Some graphs to help us visualize. Graphing by age, we see what might be a slight negative relationship, as the regression suggests (driven by Shrestha 1994):
+
+![`plot(iodine$age, effects$yi)`](/images/nootropics-iodine-age.png)
+
+Graphing by dose, we see no relationship at all to my eyes (outliers are Shrestha 1994, again):
+
+![`plot(iodine$dose, effects$yi)`](/images/nootropics-iodine-dose.png)
+
+The `estimate` is the important part: neither of the moderators seem to have a strong relationship with the cognitive benefits (nor are they at least statistically significant). It would seem that any effectiveness of iodine is unrelated to age and dose. Whether the effectiveness is being driven by a few studies is what we'll look at next.
 
 ### Bias checks
 
-13 studies is not enough to reliably check for biases like [publication bias](!Wikipedia), but we can still try. The [funnel plot](!Wikipedia) looks pretty bizarre, with almost all studies tightly bunched around the null effect but 2 outliers (the 2 Shrestha 1994 groups) showing shockingly high effect sizes of _d_=3.1/4.1. (Why did Shrestha 1994 observe such large IQ effects? I don't know, although the Malawi region was chosen for its iodine deficiency.)
+16 groups from fewer studies is not enough to reliably check for biases like [publication bias](!Wikipedia), but we can still try. The [funnel plot](!Wikipedia) looks pretty bizarre, with almost all studies tightly bunched around the null effect but 2 outliers - the 2 Shrestha 1994 groups we just saw - showing shockingly high effect sizes of _d_=3.1/4.1. Why did Shrestha 1994 observe such large IQ effects? I don't know, although the Malawi region *was* chosen for its iodine deficiency.
+
+A test & graph:
+
+~~~{.R}
+regtest(res1, model = "rma", predictor = "sei", ni = NULL)
+Regression Test for Funnel Plot Asymmetry
+
+model:     mixed-effects meta-regression model
+predictor: standard error
+
+z = 2.9560, p = 0.0031
+# hm, there may be something there... visualize:
+funnel(res1)
+~~~
 
 ![A funnel plot of effect size versus sample size, checking for bias in publishing only good-looking results on iodine](/images/nootropics-iodine-funnel.png)
 
-A trim and fill check tries to correct for this over-positiveness by suggesting 4 studies with *negative* findings, which shrink the effect size to _d_=0.02/0.05; we also notice that the τ^2^ & _i_^2^ are extremely high, which is just telling us what we know - Shrestha 1994 is different from the other studies:
+So Shrestha 1994 is driving most of the effect! (Not a surprise at this point.)
+
+A trim-and-fill check agrees with us and not the test, by deciding not to add in any new studies between Shrestha and the rest; we also notice that the τ^2^ & _i_^2^ are extremely high, which is just telling us what we know - Shrestha 1994 is different from the other studies:
 
 ~~~{.R}
-trimfill(metacont(n.e, mean.e, sd.e, n.c, mean.c, sd.c, data=dnb, sm="SMD"))
+tf <- trimfill(res1); tf
+Estimated number of missing studies on the left side is zero.
 
-Filled: 4  -0.3635  [-0.7188; -0.0081]      3.52       5.96
-Filled: 10 -0.7075  [-0.9380; -0.4770]      8.35       6.11
-Filled: 6  -3.1045  [-3.6903; -2.5188]      1.29       5.57
-Filled: 7  -4.0398  [-4.7036; -3.3760]      1.01       5.41
+Random-Effects Model (k = 16; tau^2 estimator: REML)
 
-Number of studies combined: k=17
+tau^2 (estimate of total amount of heterogeneity): 1.3028 (SE = 0.4918)
+tau (sqrt of the estimate of total heterogeneity): 1.1414
+I^2 (% of total variability due to heterogeneity): 98.25%
+H^2 (total variability / sampling variability):    57.10
 
-                        SMD             95%-CI      z  p.value
-Fixed effect model   0.0223  [-0.0444; 0.0889] 0.6546   0.5127
-Random effects model 0.0546  [-0.3730; 0.4822] 0.2503   0.8023
+Test for Heterogeneity:
+Q(df = 15) = 290.9491, p-val < .0001
 
-Quantifying heterogeneity:
-tau^2 = 0.7654; H = 6.15 [5.44; 6.95]; I^2 = 97.4% [96.6%; 97.9%]
+Model Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.6132   0.2902   2.1133   0.0346   0.0445   1.1820        *
+~~~
+
+If we were to redo the analysis but omitting Shrestha 1994, we see a much smaller effect-size:
+
+~~~{.R}
+rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+                  data = iodine[c(1:8,11:17),]))
+Random-Effects Model (k = 14; tau^2 estimator: REML)
+
+tau^2 (estimate of total amount of heterogeneity): 0.0520 (SE = 0.0316)
+tau (sqrt of the estimate of total heterogeneity): 0.2280
+I^2 (% of total variability due to heterogeneity): 71.35%
+H^2 (total variability / sampling variability):    3.49
+
+Test for Heterogeneity:
+Q(df = 13) = 51.5235, p-val < .0001
+
+Model Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.1854   0.0769   2.4108   0.0159   0.0347   0.3361        *
 ~~~
 
 ## Power analysis
@@ -749,7 +803,7 @@ pwr.t.test(type="paired",d=0.1,power=0.75,alternative="greater")
 
 So the overall picture is that I should:
 
-1. start taking a moderate dose of iodine at some point (and take [photos of my eyes](http://www.longecity.org/forum/topic/44985-eye-color-change-with-iodine-supplementation/ "Eye Color Change with Iodine Supplementation") for kicks)
+1. start taking a moderate dose of iodine at some point (and taking [photos of my eyes](http://www.longecity.org/forum/topic/44985-eye-color-change-with-iodine-supplementation/ "Eye Color Change with Iodine Supplementation") for kicks)
 2. look into cheap tests for iodine deficiency^[One self-test [suggested online](http://altmedangel.com/iodine.htm) involves dripping iodine onto one's skin and seeing how long it takes to be absorbed. This seems plausible, but according to [Derry](http://thyroid.about.com/library/derry/bl2a.htm) and [Abraham](http://www.optimox.com/pics/Iodine/updates/UNIOD-02/UNIOD_02.htm), it is unreliable.]^[Home urine test kits of unknown accuracy are available online (Google "iodine urine test kit") but run $70-$100+.]
 3. try to think of cheaper experiments I could run for benefits from iodine
 
@@ -757,9 +811,10 @@ So the overall picture is that I should:
 background: http://www.gwern.net/Nootropics#voi-1 http://www.longecity.org/forum/topic/44985-eye-color-change-with-iodine-supplementation/
 iodine product: http://www.amazon.com/dp/B002NLUBA8/
 arrived: 10 September; began supplementing every other day
-'before' photographs in ~/photos/iodine-eye-tmp
-start taking 'after' photographs: every morning on awakening close ups of pupil/iris!
+'before' photographs done; took 'after' photographs: every morning on awakening close ups of pupil/iris!
+/docs/2012-gwern-iodine-eye.zip
 don't expect any change: http://predictionbook.com/predictions/8352
+survey: http://tolu.na/Q6tMAqe
 -->
 
 # Kratom
@@ -1011,12 +1066,15 @@ From first trip, we get data excluding the trip day: off:17,18,19 on:20,21,22
 2. First block: 20,21,22 October: 1
 
     Second block: 24,25,26: 0 http://predictionbook.com/predictions/8958
-3. First block: 27,28,29: 0 http://predictionbook.com/predictions/9553
+3. First block: 27,28,29: 0
 
-    Second block: 4,5,6 November: 1
-4. First block: 7,8,9 November:
+    Second block: 4,5,6 November: 1 http://predictionbook.com/predictions/9553
+4. First block: 7,8,9 November: 1
 
-   Second block: 15,16,17 November:
+   Second block: 15,16,17 November: 0 http://predictionbook.com/predictions/10119
+5. First block: 19,20,21 November:
+
+    Second block: 22,23,24:
 
 TODO:
 outstanding predictions:
@@ -1588,7 +1646,7 @@ That night, I had severe trouble sleeping, falling asleep in 30 minutes rather t
 
 > I think a general high water high electrolyte diet has benefited my sleep. I haven't noticed potassium immediately before bed decreasing sleep quality.
 
-The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on:.
+The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on: 30/8/16. 16 Nov, off: 20/7/12. 17 Nov, on: 34/8/20. 18 Nov, on: 12/8/22. 19 Nov, off: 24/8/14. 20 Nov, on: 26/4/39. 21 Nov, off: 15/6/14.
 
 Partway through, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](http://dl.dropbox.com/u/85192141/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger improvement in "WASO" (time awake during sleep time; this probably drove the sleep efficiency). That isn't consistent with my own observations of increasing sleep latency, awakenings, and time awake.
 
