@@ -1401,7 +1401,7 @@ logBinaryScore [(True,0.35),(False,0.40),(False,0.40),(True,0.60),(True,0.35),(F
 ~> -0.58
 ~~~
 
-Ouch, so my guesses were actually *worse* than random; this isn't encouraging (if nicotine was helpful, why didn't I notice?) but it does indicate the blinding was successful.
+Ouch, so my guesses were actually *worse* than random; this isn't encouraging (if nicotine was helpful, why didn't I notice? Has 1mg tolerated?) but it does indicate the blinding was successful.
 
 Now we will examine the actual performance. Extracting the individual rounds scores from my [Brain Workshop log file](/docs/gwern-bw-stats.txt), we can average them in groups of 5 to get a daily average; then feed them into [BEST](http://www.indiana.edu/~kruschke/BEST/) (Bayesian equivalent of _t_-test; see [Kruschke 2012](http://www.indiana.edu/~kruschke/articles/Kruschke2012JEPG.pdf "Bayesian estimation supersedes the t-test")):
 
@@ -1500,7 +1500,7 @@ We can read off the results from the table or graph: the nicotine days average 1
 
 This is disappointing.
 
-One curious thing that leaps out looking at the graphs is that the standard deviations differ: the nicotine days have a strikingly large standard deviation, indicating greater variability in scores - both higher and lower. The difference in standard deviations is just 6.6% below 0, so the difference almost reaches our usual frequentist levels of confidence too, which we can verify by testing:
+One curious thing that leaps out looking at the graphs is that the estimated underlying standard deviations differ: the nicotine days have a strikingly large standard deviation, indicating greater variability in scores - both higher and lower, since the means weren't very different. The difference in standard deviations is just 6.6% below 0, so the difference *almost* reaches our usual frequentist levels of confidence too, which we can verify by testing:
 
 ~~~{.R}
 var.test(on2,off2,alternative="greater")
@@ -1554,6 +1554,78 @@ ratio of variances
 ~~~
 
 (So our _p_-value there went from 0.06 to 0.769 when we disaggregated the days, consistent with the Bayesian results.)
+
+##### Good days and bad days?
+
+The greatly increased variance, but only somewhat increased mean, is consistent with nicotine operating on me with an inverted U-curve for dosage/performance (or the Yerkes-Dodson law): on good days, 1mg nicotine is too much and degrades performance (perhaps I am overstimulated and find it hard to focus on something as boring as n-back) while on bad days, nicotine is just right and improves n-back performance.
+
+This would be easy to test if I had done something before taking the nicotine gum; then I would simply see if pre-gum scores were higher than post-gum scores on nicotine days, but equal on placebo days. Unfortunately, I didn't.
+
+The closest data I have is my daily log of productivity/mood (1-5). If nicotine scores are higher than placebo scores on bad days (1-2) and lower on good days (3-4), then I think that would be consistent with an inverted U-curve.
+
+~~~{.R}
+nicotine <- read.table(stdin(),header=TRUE)
+day      active mp score
+20120824 1      3  35.2
+20120827 0      5  37.2
+20120828 0      3  37.6
+20120830 1      3  37.75
+20120831 1      2  37.75
+20120902 0      2  36.0
+20120905 0      5  36.0
+20120906 1      5  37.25
+20120910 0      5  49.2
+20120911 1      3  36.8
+20120912 0      3  44.6
+20120913 0      5  38.4
+20120915 0      5  43.8
+20120916 0      2  39.6
+20120918 0      3  49.6
+20120919 0      4  38.4
+20120923 0      5  36.2
+20120924 0      5  45.4
+20120925 1      3  43.8
+20120926 0      4  36.4
+20120929 1      3  43.8
+20120930 1      3  36.0
+20121001 1      3  46.0
+20121002 0      4  45.0
+20121008 0      2  34.6
+20121009 1      3  45.2
+20121012 0      5  37.8
+20121013 0      4  37.2
+20121016 0      4  40.2
+20121020 1      3  39.0
+20121021 0      3  41.2
+20121022 0      3  42.2
+20121024 0      5  40.4
+20121029 1      2  41.4
+20121031 1      3  38.4
+20121101 1      5  43.8
+20121102 0      3  48.2
+20121103 1      5  40.6
+summary(nicotine)
+      day               active             mp            score
+ Min.   :20120824   Min.   :0.0000   Min.   :2.000   Min.   :34.60
+ 1st Qu.:20120911   1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:37.21
+ Median :20120926   Median :0.0000   Median :3.000   Median :39.30
+ Mean   :20120954   Mean   :0.3947   Mean   :3.632   Mean   :40.47
+ 3rd Qu.:20121015   3rd Qu.:1.0000   3rd Qu.:5.000   3rd Qu.:43.80
+ Max.   :20121103   Max.   :1.0000   Max.   :5.000   Max.   :49.60
+cor(nicotine)
+              day      active          mp       score
+day                0.05331968  0.07437166  0.32021554
+active                        -0.27754064 -0.05727501
+mp                                         0.05238032
+# plot the scores for each mood/productivity level, split between placebo & nicotine
+boxplot(nicotine$score ~ (nicotine$active + nicotine$mp)^2)
+~~~
+
+![](/images/nootropics-nicotine-dnb-bymp.png)
+
+Interesting. On days ranked '2' (below-average mood/productivity), nicotine seems to have boosted scores; on days ranked '3', nicotine hurts scores; there aren't enough '4's to tell, but even '5' days seem to see a boost from nicotine, which is not predicted by the theory. But I don't think much of a conclusion can be drawn: not enough data to make out any simple relationship. So  although the '2' days are striking, the theory may not be right.
+
+#### Conclusion
 
 What should I make of all these results?
 
@@ -1646,7 +1718,7 @@ That night, I had severe trouble sleeping, falling asleep in 30 minutes rather t
 
 > I think a general high water high electrolyte diet has benefited my sleep. I haven't noticed potassium immediately before bed decreasing sleep quality.
 
-The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on: 30/8/16. 16 Nov, off: 20/7/12. 17 Nov, on: 34/8/20. 18 Nov, on: 12/8/22. 19 Nov, off: 24/8/14. 20 Nov, on: 26/4/39. 21 Nov, off: 15/6/14.
+The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on: 30/8/16. 16 Nov, off: 20/7/12. 17 Nov, on: 34/8/20. 18 Nov, on: 12/8/22. 19 Nov, off: 24/8/14. 20 Nov, on: 26/4/39. 21 Nov, off: 15/6/14. 22 Nov, on: 26/8/29. 23 Nov, on:
 
 Partway through, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](http://dl.dropbox.com/u/85192141/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger improvement in "WASO" (time awake during sleep time; this probably drove the sleep efficiency). That isn't consistent with my own observations of increasing sleep latency, awakenings, and time awake.
 
