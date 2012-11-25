@@ -243,7 +243,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
     ~~~{.Bash}
     function markdown-lint () {
-        fgrep -e "(www" -e ")www" "$@";
+        fgrep -e "(www" -e ")www" -e "![](" "$@";
         markdown-length-checker "$@";
         cat "$@" \
         | tail -n +3 \
