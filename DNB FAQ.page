@@ -1485,9 +1485,8 @@ The result of the meta-analysis:
 ~~~{.R}
 install.packages("metafor")
 library(metafor)
-effects <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
-                  data = dnb)
-res1 <- rma(yi, vi, data = effects); res1 # random-effects meta-analysis
+res1 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+            data = dnb); res1
 
 Random-Effects Model (k = 23; tau^2 estimator: REML)
 
@@ -1628,6 +1627,8 @@ The trim-and-fill method thinks that because of Stephenson 2010 being such an ou
 ![The trim-and-fill of the random-effects meta-analysis](/images/dnb-funnel-trimfill.png)
 
 If the visible outlier on the funnel & forest plots (Stephenson 2010) is deleted, the trim-and-fill changes:
+
+<!-- TODO: exploit the 'subset' argument to rma instead of rerunning the full calculation -->
 
 ~~~{.R}
 trimfill(rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e,
@@ -1800,13 +1801,15 @@ Brehmer et al data: pooled young and old scores on the Raven[^Brehmer-pooled]
 
 Version 4.5 of Brain Workshop includes a saccading feature: a dot alternates sides of the screen and one is to follow it with one's eyes. (You activate it by pressing 'e'. It's not a bad idea to alternate rounds of N-back with rounds of saccading.)
 
-Ashirgo [writes](http://groups.google.com/group/brain-training/browse_thread/thread/3e9b194bd55401d6) that her previous advice encompasses this eye-movement result; Pheonexia reports that after trying the saccading before a BW session, he 'performed better than I ever have before'.
+Ashirgo [writes](http://groups.google.com/group/brain-training/browse_thread/thread/3e9b194bd55401d6) that her previous advice encompasses this eye-movement result; Pheonexia reports that after trying the saccading before a BW session, he "performed better than I ever have before".
 
 The most recent study on this effect seems to be ["Eye movements enhance memory for individuals who are strongly right-handed and harm it for individuals who are not"](http://louisville.edu/psychology/lyle/LyleLogan-RoedigerPB-R2008.pdf). It says:
 
 > Subjects who make repetitive saccadic eye movements before a memory test subsequently exhibit superior retrieval in comparison with subjects who do not move their eyes. It has been proposed that eye movements enhance retrieval by increasing interaction of the left and right cerebral hemispheres. To test this, we compared the effect of eye movements on subsequent recall (Experiment1) and recognition (Experiment2) in two groups thought to differ in baseline degree of hemispheric interaction-individuals who are strongly right-handed (SR) and individuals who are not (nSR). For SR subjects, who naturally may experience less hemispheric interaction than nSR subjects, eye movements enhanced retrieval. In contrast, depending on the measure, eye movements were either inconsequential or even detrimental for nSR subjects. These results partially support the hemispheric interaction account, but demand an amendment to explain the harmful effects of eye movements for nSR individuals.
 
 (Note that very important caveat: this is a useful technique *only* for strongly right-handed people; weak righties and lefties are outright harmed by this technique.)
+
+See also ["Interhemispheric Interaction and Saccadic Horizontal Eye Movements: Implications for Episodic Memory, EMDR, and PTSD"](http://www.sandernieuwenhuis.nl/pdfs/PropperChristman.pdf "Propper & Christman 2008"); ["The efficacy and psychophysiological correlates of dual-attention tasks in eye movement desensitization and reprocessing (EMDR)"](http://dl.dropbox.com/u/85192141/2011-schubert.pdf "Schubert et al 2011"); ["Horizontal saccadic eye movements enhance the retrieval of landmark shape and location information"](http://dl.dropbox.com/u/85192141/2009-brunye.pdf "Brunyé et al 2009"); ["Reduced misinformation effects following saccadic bilateral eye movements"](http://dl.dropbox.com/u/85192141/2009-parker.pdf "Parker et al 2009"); ["Is saccade-induced retrieval enhancement a potential means of improving eyewitness evidence?"](http://dl.dropbox.com/u/85192141/2010-lyle.pdf "Lyle & Jacob 2010")
 
 ## Sleep
 
