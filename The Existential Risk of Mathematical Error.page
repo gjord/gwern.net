@@ -38,7 +38,7 @@ This upper bound on our certainty may force us to disregard certain rare risks b
 
     > A *skeptical* solution of a philosophical problem begins... by conceding that the skeptic's negative assertions are unanswerable. Nevertheless our ordinary practice or belief is justified because-contrary appearances notwithstanding-it need not require the justification the sceptic has shown to be untenable. And much of the value of the sceptical argument consists precisely in the fact that he has shown that an ordinary practice, if it is to be defended at all, cannot be defended in a certain way.
 
-How big is this upper bound? Mathematicians have *often* made errors in proofs. But it's [rarer](!Wikipedia "List of disproved mathematical ideas") for ideas to be accepted for a long time and then rejected. But we can divide errors into 2 basic cases corresponding to [type I and type II errors](!Wikipedia):
+How big is this upper bound? Mathematicians have *often* made errors in proofs. But [it's](http://mathoverflow.net/questions/35468/widely-accepted-mathematical-results-that-were-later-shown-wrong) [rarer](!Wikipedia "List of disproved mathematical ideas") for ideas to be accepted for a long time and then rejected. But we can divide errors into 2 basic cases corresponding to [type I and type II errors](!Wikipedia):
 
 1. Mistakes where the theorem is still true, but the proof was incorrect (type I)
 2. Mistakes where the theorem was *false*, and the proof was also necessarily incorrect (type II)
@@ -61,12 +61,16 @@ Before someone comes up with a final answer, a mathematician may have [many leve
     > [Poincaré](!Wikipedia "Henri Poincare") was awarded a prize from King Oscar II of Sweden and Norway for a paper on the [three-body problem](!Wikipedia), and his paper was published in _Acta Mathematica_ in 1890. But the published paper was not the prize-winning paper. The paper that won the prize contained serious mistakes, and Poincare and other mathematicians, most importantly, [Mittag-Leffler](!Wikipedia "Gösta Mittag-Leffler"), engaged in a conspiracy to suppress the truth and to replace the erroneous paper with an extensively altered and corrected one.
 
     (["The Solution of the _n_-body Problem"](http://www.math.uvic.ca/faculty/diacu/diacuNbody.pdf "Diacu 1996") gives a summary of the eventual exact solution to the three-body problem.)
-[^Hilbert]: [Lipton](http://rjlipton.wordpress.com/2010/06/19/guessing-the-truth/) lists several:
+[^Hilbert]: [Lipton](http://rjlipton.wordpress.com/2010/06/19/guessing-the-truth/) [lists](http://rjlipton.wordpress.com/2009/09/27/surprises-in-mathematics-and-theory/) several:
 
     1. the transcendality of $2^{\sqrt{2}}$ and $e^\pi$: resolved as predicted, but >78 years faster than he predicted.
     2. proof of the consistency of arithmetic: prediction that arithmetic was consistent and this was provable was falsified (Goedel showing it is unprovable)
 
-    One could add to this Hilbert list: the continuum hypothesis (independent); and the algorithm for solving Diophantines (impossible to give, similar to consistency of arithmetic). Lipton also provides as examples:
+    One could add to this Hilbert list: the continuum hypothesis (independent); and the algorithm for solving Diophantines (impossible to give, to the surprise of [Georg Kreisel](!Wikipedia) who said reviewing one of the papers "Well, that’s not the way it’s gonna go."). From [MathOverflow](http://mathoverflow.net/questions/35468/widely-accepted-mathematical-results-that-were-later-shown-wrong/35554#35554):
+
+    > Hilbert's 21st problem, on the existence of linear DEs with prescribed monodromy group, was for a long time thought to have been solved by Plemelj in 1908. In fact, Plemelj died in 1967 still believing he had solved the problem. However, in 1989, Bolibruch discovered a counterexample. Details are in the book _The Riemann-Hilbert Problem_ by Anosov and Bolibruch (Vieweg-Teubner 1994), and a nice popular recounting of the story is in Ben Yandell's _The Honors Class_ (A K Peters 2002).
+
+    Lipton also provides as examples:
 
     - Warren Hirsch's polytope conjecture
     - Subhash Khot's conjecture that his Unique Games problem is NP-hard (not falsified but substantially weakened)
@@ -80,6 +84,8 @@ Before someone comes up with a final answer, a mathematician may have [many leve
     - a von Neumann topological conjecture
     - conventional wisdom in complexity theory "that bounded-width programs could not compute the majority function, and many other functions"
     - ditto, "Most believed that nondeterministic logspace (_NLOG_) is not closed under complement."
+    - Béla Julesz's human vision statistics conjecture
+    - [Burnside's conjecture](!Wikipedia "Burnside's problem")
 
 ## Type I > Type II?
 
@@ -102,6 +108,13 @@ A mathematician of my acquaintance referred me to [pg118](http://www.maths.gla.a
 > 3. A contradicting result was announced and later withdrawn by Truss [1970].
 > 4. The example in Problem 22 is a counterexample to another condition of Mostowski, who conjectured its sufficiency and singled out this example as a test case.
 > 5. The independence result contradicts the claim of Felgner [1969] that the Cofinality Principle implies the Axiom of Choice. An error has been found by Morris (see Felgner's corrections to [1969]).
+
+Some problems are notorious for provoking repeated false proofs. P=NP attracts countless cranks and [serious attempts](http://www.win.tue.nl/~gwoegi/P-versus-NP.htm "This page collects links around papers that try to settle the 'P versus NP' question (in either way)."), of course, but also amusing is [apparently the Jacobian Conjecture](http://mathoverflow.net/questions/35468/widely-accepted-mathematical-results-that-were-later-shown-wrong/36020#36020):
+
+> The (in)famous Jacobian Conjecture was considered a theorem since a 1939 publication by Keller (who claimed to prove it). Then Shafarevich found a new proof and published it in some conference proceedings paper (in early 1950-ies). This conjecture states that any polynomial map from C^2 to C^2 is invertible if its Jacobian is nowhere zero. In 1960-ies, Vitushkin found a counterexample to all the proofs known to date, by constructing a complex analytic map, not invertible and with nowhere vanishing Jacobian. It is still a main source of embarrassment for arxiv.org contributors, who publish about 3-5 false proofs yearly. Here is a funny refutation for one of the proofs: ["Comment on a Paper by Yucai Su On Jacobian Conjecture (Dec 30, 2005)"](http://arxiv.org/abs/math/0604049 "Moh 2006")
+>
+>> The problem of Jacobian Conjecture is very hard. Perhaps it will take human being another 100 years to solve it. Your attempt is noble, Maybe the Gods of Olympus will smile on you one day. Do not be too disappointed. B. Sagre has the honor of publishing three wrong proofs and C. Chevalley mistakes a wrong proof for a correct one in the 1950's in his Math Review comments, and I.R. Shafarevich uses Jacobian Conjecture (to him it is a theorem) as a fact...
+
 
 This look into the proverbial sausage factory should not come as a surprise to anyone taking an Outside View: why wouldn't we expect any area of intellectual endeavour to have error rates within a few orders of magnitude as any other area? How absurd to think that the rate might be ~0%; but it's also a little questionable to be as optimistic as [Anders Sandberg's mathematician friend](http://www.aleph.se/andart/archives/2012/09/flaws_in_the_perfection.html "Flaws in the Perfection"): "he responded that he thought a far smaller number of papers in math were this [1%] flawed."
 
@@ -222,7 +235,21 @@ We could look upon Type II errors as having a benevolent aspect: they show both 
 
 # Future implications
 
-Should such widely-believed conjectures as [P≠NP](!Wikipedia "P=NP") or the [Riemann hypothesis](!Wikipedia) turn out be false, then because they are assumed by so many existing proofs, a far larger math holocaust would ensue - and our previous estimates of error rates will turn out to have been significant underestimates. But it may be a cloud with a silver lining, if it doesn't come at a time of danger.
+Should such widely-believed conjectures as [P≠NP](!Wikipedia "P=NP") or the [Riemann hypothesis](!Wikipedia) turn out be false, then because they are assumed by so many existing proofs, a far larger math holocaust would ensue[^Lipton-2] - and our previous estimates of error rates will turn out to have been significant underestimates. But it may be a cloud with a silver lining, if it doesn't come at a time of danger.
+
+[^Lipton-2]: [Supposing P=NP](http://rjlipton.wordpress.com/2012/09/29/why-we-lose-sleep-some-nights/ "Why We Lose Sleep Some Nights"):
+
+    > Much of CS theory would disappear. In my own research some of Ken's and my "best" results would survive, but many would be destroyed. The Karp-Lipton Theorem is gone in this world. Ditto all "dichotomy" results between P and NP-complete, and for P = #P, Jin-Yi's similar work. Many barrier results, such as oracle theorems and natural proofs, lose their main motivation, while much fine structure in hardness-versus-randomness tradeoffs would be blown up. The PCP Theorem and all the related work is gone. Modern cryptography could survive if the the algorithm were galactic, but otherwise would be in trouble. I am currently teaching Complexity Theory at Tech using the textbook by Sanjeev Arora and Boaz Barak...Most of the 573 pages of Arora-Barak would be gone:
+    >
+    > - Delete all of chapter 3 on NP.
+    > - Delete all of chapter 5 on the polynomial hierarchy.
+    > - Delete most of chapter 6 on circuits.
+    > - Delete all of chapter 7 on probabilistic computation.
+    > - Mark as dangerous chapter 9 on cryptography.
+    > - Delete most of chapter 10 on quantum computation-who would care about Shor's algorithm then?
+    > - Delete all of chapter 11 on the PCP theorem.
+    >
+    > I will stop here. Most of the initial part of the book is gone. The same for much of Homer-Selman, and basically all of the "Reducibility and Completensss" CRC chapter.
 
 # External links
 
