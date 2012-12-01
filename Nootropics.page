@@ -562,6 +562,10 @@ Comments:
 
 The result of the meta-analysis:
 
+<!-- TODO: express like res1 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+            data = dnb); res1
+-->
+
 ~~~{.R}
 install.packages("metafor")
 library(metafor)
@@ -686,6 +690,8 @@ estimate       se     zval     pval    ci.lb    ci.ub
 ~~~
 
 If we were to redo the analysis but omitting Shrestha 1994, we see a much smaller effect-size:
+
+<!-- TODO: exploit the 'subset' argument to rma instead of rerunning the full calculation -->
 
 ~~~{.R}
 rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
@@ -1640,6 +1646,17 @@ What should I make of all these results?
 
 All things considered, I will probably continue using nicotine gum sparingly.
 
+# Noopept
+
+Reportedly a better -racetam, [Noopept](!Wikipedia) is one of the many obscure Russian nootropics. (Further reading: [Google Scholar](http://scholar.google.com/scholar?q=noopept), [Reddit](http://www.reddit.com/r/Nootropics/search?q=noopept&sort=relevance&restrict_sr=on), [Longecity](http://www.longecity.org/forum/tags/forums/noopept/), [Bluelight.ru](http://www.google.com/cse?cx=009513296995230692334%3Afaadujg162k&q=noopept).)
+
+A Redditor ordered some Russian brand Noopept, but finding it was unpleasant & not working for him, gave the left-over half to me:
+
+![Russian Noopept box, front & back](/images/nootropics-noopept-box.jpg)
+![Russian Noopept blister-pack, front & back](/images/nootropics-noopept-pills.jpg)
+
+It appears in reasonably good shape, and closely matches the photographs in the Wikipedia article. I have not taken any or designed any experiments yet.
+
 # Oxiracetam
 
 [Oxiracetam](!Wikipedia) is one of the 3 most popular -racetams; less popular than piracetam but seems to be more popular than aniracetam. Prices have come down significantly since the early 2000s, and stand at around [1.2g/$](http://www.smartpowders.com/p-5342-oxiracetam-powder.aspx) or roughly 50 cents a dose, which was low enough to experiment with; key question, does it stack with piracetam or is it redundant for me? (Oxiracetam can't compete on price with my piracetam pile stockpile: the latter is a sunk cost and hence free.)
@@ -1721,7 +1738,7 @@ That night, I had severe trouble sleeping, falling asleep in 30 minutes rather t
 
 > I think a general high water high electrolyte diet has benefited my sleep. I haven't noticed potassium immediately before bed decreasing sleep quality.
 
-The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on: 30/8/16. 16 Nov, off: 20/7/12. 17 Nov, on: 34/8/20. 18 Nov, on: 12/8/22. 19 Nov, off: 24/8/14. 20 Nov, on: 26/4/39. 21 Nov, off: 15/6/14. 22 Nov, on: 26/8/29. 23 Nov, on: 23/4/8. 24 Nov, off: 24/3/5. 25 Nov, on: 27/7/15.
+The next day I took a similar dose spaced over the day to little subjective effect, and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on: 30/8/16. 16 Nov, off: 20/7/12. 17 Nov, on: 34/8/20. 18 Nov, on: 12/8/22. 19 Nov, off: 24/8/14. 20 Nov, on: 26/4/39. 21 Nov, off: 15/6/14. 22 Nov, on: 26/8/29. 23 Nov, on: 23/4/8. 24 Nov, off: 24/3/5. 25 Nov, on: 27/7/15. 26 Nov, on: 30/10/17. 27 Nov, off: 42/12/13. 28 Nov, off: 40/11/42. 29 Nov, off: 19/14/50. 30 Nov, off: 32/8/39.
 
 Partway through, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](http://dl.dropbox.com/u/85192141/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger improvement in "WASO" (time awake during sleep time; this probably drove the sleep efficiency). That isn't consistent with my own observations of increasing sleep latency, awakenings, and time awake.
 
@@ -1729,6 +1746,8 @@ Partway through, I searched Google Scholar and Pubmed (human trials) for "potass
 zeo <- read.table("http://www.gwern.net/docs/gwern-zeodata.csv", header=TRUE, sep=",")
 
 zscore <- function(x,y) mapply(function(a) (a - mean(y, na.rm=TRUE))/sd(y, na.rm=TRUE), x)
+
+TODO: omits 26 and later
 
 # normalize, combine, all the non-potassium days
 offlatency <- zscore(c(11,15,16,16,17,18,20,21,21,24,24,26,29,33,36),zeo$Time.to.Z)
@@ -1752,7 +1771,7 @@ postInfo
 
 t.test(off, on, alternative="less")
 
-	Welch Two Sample t-test
+    Welch Two Sample t-test
 
 data:  off and on
 t = -1.45, df = 36.83, p-value = 0.07772
