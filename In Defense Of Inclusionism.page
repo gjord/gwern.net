@@ -399,7 +399,7 @@ As promised, on 20 May 2012 I [restored my FAQ link](http://en.wikipedia.org/w/i
 
 1. Before:
 
-    Between 14 July 2011 and 8 February 2012 (a longer period), the totals were 31,454/23,538 (pageview/unique pageview), with 1,910/1,412 from the English Wikipedia and as one would expect, a lesser 740/618 from the German Wikipedia. _n_=209, so the daily average click from the English Wikipedia is $\frac{1910}{209} = 9.14$
+    Between 14 July 2011 and 8 February 2012 (a longer period), the totals were 31,454/23,538 (pageview/unique pageview), with 1,910/1,412 from the English Wikipedia and as one would expect, a lesser 740/618 from the German Wikipedia[^German]. _n_=209, so the daily average click from the English Wikipedia is $\frac{1910}{209} = 9.14$
 
     [PDF overview](/docs/2012-gwern-dnb-wikipedia-before.pdf), [English hits CSV](/docs/2012-gwern-dnb-wikipedia-before.csv)
 2. After:
@@ -407,6 +407,8 @@ As promised, on 20 May 2012 I [restored my FAQ link](http://en.wikipedia.org/w/i
     Between 10 February and 12:50 PM 20 May 2012, my DNB FAQ received from all sources 21,803/16,899 page views (raw/unique). 327/164 page views were from the *German* Wikipedia, and there were 161/155page views from the English Wikipedia. _n_=100, so the daily average is $\frac{161}{100} = 1.61$.
 
     [PDF overview](/docs/2012-gwern-dnb-wikipedia-after.pdf), [English hits CSV](/docs/2012-gwern-dnb-wikipedia-after.csv)
+
+[^German]: One might wonder why I had so much traffic to an English page; do just that many Germans know English? No, it turns out my link in their page didn't come with an "English" warning. I added this warning on 20 May 2012, and while there was a major traffic spike after that and then a long outage June-September 2012 where the link was broken due to my own carelessness, the warning seems to have substantially reduced click-throughs according to my [analytics](http://dl.dropbox.com/u/85192141/Analytics%20www.gwern.net%20User%20Defined%2020120131-20121130.pdf).
 
 Dividing the two averages shows that the average clicks in this period were ~17.6%, not <5% as I had predicted. This difference between the two groups is statistically significant at _p_<0.001, needless to say[^R-analysis].
 
