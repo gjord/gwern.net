@@ -1648,6 +1648,109 @@ What is the "value of information" for this experiment? Essentially - nothing! Z
 
 Of course, I did it anyway because it was cool and interesting! (Estimated time cost: perhaps half the evening experiment, since I manually recorded less data and had the analysis worked out from before.)
 
+# Potassium
+
+In October 2012, [I bought some potassium citrate](Nootropics#potassium) on a lark after noting that the daily RDA and my diet suggested that I was massively deficient. The first night I slept terribly, taking what felt like hours to fall asleep and then waking up frequently - due to either the potassium or a fan left on; the second night with potassium, I turned off the fan but slept poorly again. My suspicions were aroused. I began recording sleep data.
+
+## Background
+
+Partway through the process, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](http://dl.dropbox.com/u/85192141/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger benefit in "WASO" (time awake during sleep time; this probably drove the sleep efficiency).
+
+## Data
+
+The first night involved falling asleep in 30 minutes rather than my usual 19.6±11.9, waking up 12 times (5.9±3.4), and spending ~90 minutes awake (18.1±16.2) The next day I took a similar dose and double-checked the fan before bed: 25 minutes to fall asleep, 10 awakenings, 35 minutes awake, but I woke fairly rested. So it seems like the fan was only partly to blame. The third day I omitted any potassium: 21/8/29. Fourth on again with an evening dose: 54/7/24. Fifth, off: 16/2/6. Sixth, on with a halved dose: 33/3/6. Seventh, off: 17/6/7. Eighth, half: 33/6/15. (At this point I began randomizing consumption between on and off; since this is preliminary, I didn't bother with blinding potassium consumption.) Ninth, on: 25/7/9. Tenth, on: 18/8/10. 11th, off: 26/4/10. 12th, off: 33/7/16. 13th, on: 32/7/13. 14th, on: 21/5/8. 15th, on: 34/2/1. 16th, off: 16/7/15. 17th, on: 29/8/20. 18th, on: 17/10/17. 19th, off: 36/9/24. 20th, on: 21/4/19. 21st, off: 29/7/16. 22nd, on: 26/7/10. 23rd, on: 16/4/11. 24th, off: 21/4/17. 25th, on: 19/9/24. 11 Nov, on: 15/3/08. 13 Nov, off: 11/8/21. 14 Nov, off: 18/8/22. 15 Nov, on: 30/8/16. 16 Nov, off: 20/7/12. 17 Nov, on: 34/8/20. 18 Nov, on: 12/8/22. 19 Nov, off: 24/8/14. 20 Nov, on: 26/4/39. 21 Nov, off: 15/6/14. 22 Nov, on: 26/8/29. 23 Nov, on: 23/4/8. 24 Nov, off: 24/3/5. 25 Nov, on: 27/7/15. 26 Nov, on: 30/10/17. 27 Nov, off: 42/12/13. 28 Nov, off: 40/11/42. 29 Nov, off: 19/14/50. 30 Nov, off: 32/8/39. (Here I counted the sample-sizes and realized the off days were drastically under-represented, reducing statistical power; so I have eliminated randomization and gone off potassium.) 1 Dec, off: 28/10/15. 2 Dec, off: 37/8/20. 3 Dec, off: 36/6/18. 4 Dec, off: 19/9/33. 5 Dec, off: 25/8/27. 6 Dec, off: 30/13/45. (Now balanced, resuming randomization.) 7 Dec, on: 31/9/60. 8 Dec, off: 22/9/23. 9 Dec, off: 11/5/21. 10 Dec, on: 30/4/10. 11 Dec, on: 22/9/50. 13 Dec, off: 20/5/6. 14 Dec, off: 33/13/25. 15 Dec, on: 26/11/22. 16 Dec, off: 33/12/28. 17 Dec, off: 42/9/31. 18 Dec, off: 31/9/61. 19 Dec, on: 23/8/18.
+
+## Analysis
+
+If potassium was disturbing my sleep, I didn't necessarily want to wait for any one metric of wakefulness to reach significance; rather, I wanted to combine them into a single metric of sleep problems: time to fall asleep (latency), number of awakenings, and time spent awake. (With all 3, higher is worse.) Number of awakenings tends to vary over a smaller range than time to fall asleep or time spent awake - a normal value for the former might be 5, rather than 30 for the latter; to compensate for that, we convert each metric into a standard deviation indicating how unusual eg. 10 awakenings is and whether it is more unusual than it taking 15 minutes to fall asleep. Then we can do a standard test.
+
+A Bayesian two-group test reports that there is ~0 chance that the true effect size is 0, and the most likely effect size is a dismaying _d_=-1.1[^BEST-potassium]:
+
+![Comparison of sleep disturbances in nights on and off potassium citrate](/images/zeo/potassium-latencyawakeningsawake.png)
+
+Given the strength of the effect, a t-test agrees:[^frequentist-potassium] _p_=0.0000037. (There is no need for multiple correction in this instance.) This confirms my subjective impression.
+
+[^BEST-potassium]: The previously described composite measure and BEST test:
+
+    ~~~{.R}
+    # all the non-potassium days
+    offlatency <- c(11,15,16,16,17,18,20,21,21,24,24,26,29,33,36,42,40,19,32,28,37,36,19,25,30,22,11,20,33,33,42,31)
+    offawakenings <- c(8,6,2,7,6,8,7,4,8,3,8,4,7,7,9,12,11,14,8,10,8,6,9,8,13,9,5,5,13,12,9,9)
+    offtimeawake <- c(21,14,6,15,7,22,12,17,29,5,14,10,16,16,24,13,42,50,39,15,20,18,33,27,45,23,21,6,25,28,31,61)
+
+    # all the potassium days
+    onlatency <- c(12,15,16,17,18,19,21,21,23,25,25,26,26,26,27,29,30,30,32,33,33,34,34,54,30,31,30,22,26,23)
+    onawakenings <- c(8,3,4,10,8,9,4,5,4,10,7,4,7,8,7,8,12,8,7,3,6,2,8,7,10,9,4,9,11,8)
+    ontimeawake <- c(22,08,11,17,10,24,19,8,8,35,9,39,10,29,15,20,90,16,13,6,15,1,20,24,17,60,10,50,22,18)
+
+    # normalize
+    zscore <- function(x,y) mapply(function(a) (a - mean(y))/sd(y), x)
+    offlatency <- zscore(offlatency, c(offlatency, onlatency))
+    onlatency  <- zscore(onlatency,  c(offlatency, onlatency))
+    offawakenings <- zscore(offawakenings, c(offawakenings, onawakenings))
+    onawakenings  <- zscore(onawakenings,  c(offawakenings, onawakenings))
+    offtimeawake <- zscore(offtimeawake, c(offtimeawake, ontimeawake))
+    ontimeawake <- zscore(ontimeawake, c(offtimeawake, ontimeawake))
+
+    # zip together with sum to get a single measure of how deviate a night was
+    off <- offlatency + offawakenings + offtimeawake
+    on <- onlatency + onawakenings + ontimeawake
+
+    # usual Bayesian two-group test
+    source("BEST.R")
+    mcmcChain = BESTmcmc(off, on)
+    postInfo = BESTplot(off, on, mcmcChain) # graph
+    postInfo
+             SUMMARY.INFO
+    PARAMETER      mean  median    mode  HDIlow HDIhigh pcgtZero
+      mu1        0.1664  0.1655  0.1421 -0.71894  1.0555       NA
+      mu2        2.4256  2.4210  2.4035  1.81175  3.0478       NA
+      muDiff    -2.2592 -2.2592 -2.2318 -3.34666 -1.1853    0.006
+      sigma1     2.3939  2.3607  2.2695  1.78291  3.0915       NA
+      sigma2     1.6189  1.5988  1.5786  1.11009  2.1614       NA
+      sigmaDiff  0.7750  0.7606  0.7341 -0.03236  1.6317   97.205
+      nu        32.0045 23.2730  9.6599  2.33645 88.0997       NA
+      nuLog10    1.3607  1.3669  1.4214  0.67234  2.0337       NA
+      effSz     -1.1141 -1.1107 -1.0959 -1.69481 -0.5433    0.006
+    ~~~
+[^frequentist-potassium]: Reusing the standardized data from before:
+
+    ~~~{.R}
+    R> t.test(off, on)
+
+        Welch Two Sample t-test
+
+    data:  off and on
+    t = -4.479, df = 56.49, p-value = 3.702e-05
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -3.368 -1.287
+    sample estimates:
+    mean of x mean of y
+       0.1785    2.5059
+    ~~~
+
+## Conclusion
+
+This experiment was hastily done and has several weaknesses, some I mentioned before; in ascending order of importance:
+
+1.. dosage was not uniform
+
+    Number of dosages varied from day to day as was convenient and doses were measured approximately with a spoon (since 4 grams is a pretty substantial amount, after all). Here is another objection I don't think matters: lower than average doses may contribute to an underestimate of the effect size... but that implies that the effect size is even more extreme than -1.1! We are interested in problems that would shrink the effect size back to 0, not imply that it's even worse than -1.1.
+2. the randomization was incomplete
+
+    As covered in the data section, there was a severe imbalance in sample size for each condition, so I stopped randomization for about a week. Intuitively, I don't think there was anything special about that week in regard to getting very good sleep (as would be necessary to contribute to an overestimated effect size), but if anyone disagreed, it would not be hard to exclude those days and use the rest.
+3. no blinding was done
+
+    I am not sure how much this matters. I had no expectation that potassium would affect my sleep at all, one user specifically denied any effect, the only study suggested I'd find improvements, I did not want to find a negative effect much less such a severe effect, and the sheer strength of the effect over a multi-month period is a bit more than I would expect from any expectancy or placebo effect.
+4. *timing* was not uniform
+
+    Of the issues, this is the most important. If potassium has some stimulatory effects as anecdotes claim, then timing may be causing all the sleep disturbances and not potassium _per se_. It might be exactly like vitamin D in this respect: taken in the evening, it badly damages sleep but taken in the morning, it does nothing or it improves sleep.
+
+If I were to do a followup experiment, it would be blinded & randomized as usual, with consistent doses (eliminating objections 1-3), but more importantly, the dose would be consumed upon awakening.
+
+It is highly unlikely I will bother with a followup experiment. Potassium is not of particular interest to me, my existing supply is low after months of consumption, I observed no subjective improvements on consumption, and so I am not inclined to run the risk of damaging *more* months of sleep. Other people can do that.
+
 # In progress
 
 Someone suggested that instead of running experiments serially, with limited sample sizes (because I am impatient to try the next interesting suggestion), I could instead take a step up in statistical sophistication and use a *[factorial experiment](!Wikipedia)* design: use multiple experimental interventions simultaneously for a much larger sample size, and then run [ANOVA](!Wikipedia) analyses rather than simpler two-sample t-tests. No less than [R.A. Fisher](!Wikipedia) praises multifactorial experiments as being more efficient: squeezing more data out of a given sample. Hence, I thought a crazy thought: my lithium experiment was going to run for ~360 days, and so I kept putting it off. But what if I ran multiple experiments for 360 days? If I had 4 or 5, then by the end of the year, I would have 5 results to show, and I would have the statistical equivalent of *more* than _n_=72  ($\frac{360}{5}$) for each experiment. Win-win.
@@ -2677,13 +2780,25 @@ December
 03: 1 0
 04: 1 0
 05: 0 0
-06: 1 1?
+06: 1 1
+07: 0 1
+08: 1 1
+09: 0 1
+10: 0 0
+11: 1 0
+13: 0 1
+14: 0 1
+15: 1 1
+16: 1 1
+17: 0 0
+18: 1 0
+19: 1 1?
 
 Underpopulated data cells:
-44: 1 1
-47: 1 0
-48: 0 1
-50: 0 0
+48: 1 1
+49: 1 0
+52: 0 0
+52: 0 1
 -->
 
 # External links
@@ -3010,3 +3125,16 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 04 Dec 2012: off -->
 <!-- Redshift: 05 Dec 2012: off -->
 <!-- Redshift: 06 Dec 2012: on -->
+<!-- Redshift: 07 Dec 2012: off -->
+<!-- Redshift: 08 Dec 2012: off -->
+<!-- Redshift: 09 Dec 2012: off -->
+<!-- Redshift: 10 Dec 2012: on -->
+<!-- Redshift: 11 Dec 2012: off -->
+<!-- Redshift: 12 Dec 2012: off -->
+<!-- Redshift: 14 Dec 2012: on -->
+<!-- Redshift: 15 Dec 2012: on -->
+<!-- Redshift: 16 Dec 2012: off -->
+<!-- Redshift: 17 Dec 2012: on -->
+<!-- Redshift: 18 Dec 2012: on -->
+<!-- Redshift: 19 Dec 2012: off -->
+<!-- Redshift: 20 Dec 2012: on -->
