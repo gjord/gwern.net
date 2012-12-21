@@ -72,6 +72,7 @@ This is what I have learned so far:
 3. one-legged standing does little
 4. Vitamin D (at night) damages my sleep
 5. Vitamin D (in morning) improves my morning mood
+6. potassium (over the day) damages my sleep
 
 # First impressions
 ## First night
@@ -1628,13 +1629,43 @@ The first night involved falling asleep in 30 minutes rather than my usual 19.6Â
 
 ## Analysis
 
-If potassium was disturbing my sleep, I didn't necessarily want to wait for any one metric of wakefulness to reach significance; rather, I wanted to combine them into a single metric of sleep problems: time to fall asleep (latency), number of awakenings, and time spent awake. (With all 3, higher is worse.) Number of awakenings tends to vary over a smaller range than time to fall asleep or time spent awake - a normal value for the former might be 5, rather than 30 for the latter; to compensate for that, we convert each metric into a standard deviation indicating how unusual eg. 10 awakenings is and whether it is more unusual than it taking 15 minutes to fall asleep. Then we can do a standard test.
+If potassium was disturbing my sleep, I didn't necessarily want to wait for any one metric of wakefulness to reach significance; rather, I wanted to combine them into a single metric of sleep problems: time to fall asleep (latency), number of awakenings, and time spent awake. (With all 3, higher is worse.) Number of awakenings tends to vary over a smaller range than time to fall asleep or time spent awake - a normal value for the former might be 5, rather than 30 for the latter; to compensate for that, we convert each metric into a standard deviation indicating how unusual eg. 10 awakenings is and whether it is more unusual than it taking 15 minutes to fall asleep. Then we can do a standard test. To graph the data at each step, starting with graphing all the data on an overlapping chart[^potassium-graph-1] (this is not per day):
 
-A Bayesian two-group test reports that there is ~0 chance that the true effect size is 0, and the most likely effect size is a dismaying _d_=-1.1[^BEST-potassium]:
+![Plotting raw data of on and off-potassium nights, in a loosely chronological order](/images/zeo/potassium-data-raw.png)
+
+[^potassium-graph-1]: The generating R code (see later analysis footnote for definitions of data variables like `offtimeawake` etc):
+
+    ~~~{.R}
+    plot(c(1:32), offtimeawake, col="blue", xlab="nth", ylab="latency/awakenings/awake (raw)")
+    points(c(1:32), offlatency, col="blue")
+    points(c(1:32), offawakenings, col="blue")
+    points(c(1:30), ontimeawake, col="red")
+    points(c(1:30), onlatency, col="red")
+    points(c(1:30), onawakenings, col="red")
+    ~~~
+
+Nights off potassium are colored blue and nights on potassium are red; it looks like red dots are higher than blues, overall, but the trend is not clear. So we convert each individual datapoint to its respective standard deviation[^potassium-graph-2]:
+
+![Plotting data of on and off-potassium nights, standardized into standard deviations](/images/zeo/potassium-data-standardizedscores.png)
+
+[^potassium-graph-2]: After running `zscore` on each data variable, we repeat the previous code but with `ylab="latency/awakenings/awake (standardized)"` in the call to `plot`.
+
+The trend has become much clearer, but the final step is to add each day's scores to get an overall measure[^potassium-graph-3]:
+
+![Final score per night](/images/zeo/potassium-data-finalscore.png)
+
+[^potassium-graph-3]: Assuming the `zscore` conversion has been done:
+
+    ~~~{.R}
+    plot(c(1:32), offtimeawake+offlatency+offawakenings, col="blue", xlab="nth", ylab="standardized sleep disturbance score")
+    points(c(1:30), ontimeawake+onlatency+onawakenings, col="red")
+    ~~~
+
+Now the different has become dramatic: one can almost draw a line separating both groups without any errors. As one would expect given this graphical evidence, a Bayesian two-group test reports that there is ~0 chance that the true effect size is 0, and the most likely effect size is a dismaying _d_=-1.1[^BEST-potassium]:
 
 ![Comparison of sleep disturbances in nights on and off potassium citrate](/images/zeo/potassium-latencyawakeningsawake.png)
 
-Given the strength of the effect, a t-test agrees:[^frequentist-potassium] _p_=0.0000037. (There is no need for multiple correction in this instance.) This confirms my subjective impression.
+A t-test agrees:[^frequentist-potassium] _p_=0.0000037. (There is no need for multiple correction in this instance.) This confirms my subjective impression.
 
 [^BEST-potassium]: The previously described composite measure and BEST test:
 
@@ -1700,7 +1731,7 @@ Given the strength of the effect, a t-test agrees:[^frequentist-potassium] _p_=0
 
 This experiment was hastily done and has several weaknesses, some I mentioned before; in ascending order of importance:
 
-1.. dosage was not uniform
+1. dosage was not uniform
 
     Number of dosages varied from day to day as was convenient and doses were measured approximately with a spoon (since 4 grams is a pretty substantial amount, after all). Here is another objection I don't think matters: lower than average doses may contribute to an underestimate of the effect size... but that implies that the effect size is even more extreme than -1.1! We are interested in problems that would shrink the effect size back to 0, not imply that it's even worse than -1.1.
 2. the randomization was incomplete
@@ -2758,13 +2789,15 @@ December
 16: 1 1
 17: 0 0
 18: 1 0
-19: 1 1?
+19: 1 1
+20: 0 1
+21: 1 1?
 
 Underpopulated data cells:
-48: 1 1
+49: 1 1
 49: 1 0
 52: 0 0
-52: 0 1
+53: 0 1
 -->
 
 # External links
@@ -3104,3 +3137,4 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 18 Dec 2012: on -->
 <!-- Redshift: 19 Dec 2012: off -->
 <!-- Redshift: 20 Dec 2012: on -->
+<!-- Redshift: 21 Dec 2012: on -->
