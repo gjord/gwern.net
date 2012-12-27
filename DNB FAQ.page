@@ -1534,22 +1534,9 @@ Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
   0.5420   0.1378   3.9327   <.0001   0.2719   0.8122      ***
-
-res2 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
-            data = dnb, method="FE"); res2 # fixed-effects meta-analysis
-
-Fixed-Effects Model (k = 24)
-
-Test for Heterogeneity:
-Q(df = 23) = 73.5266, p-val < .0001
-
-Model Results:
-
-estimate       se     zval     pval    ci.lb    ci.ub
-  0.5421   0.0716   7.5694   <.0001   0.4018   0.6825      ***
 ~~~
 
-The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<0.
+The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<0. We use a random-effects model: high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect (although in this case, the fixed effects estimate is almost the same as the random effects model).
 
 To depict the random-effects model in a more graphic form, we use the "[forest plot](!Wikipedia)":
 
