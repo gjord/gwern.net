@@ -129,7 +129,7 @@ My answer is that one uses such a framework to work on projects that are too big
     >
     > [Sorting Hat:] "Ahem. 'Smart kids in Ravenclaw, evil kids in Slytherin, wannabe heroes in Gryffindor, and everyone who does the actual work in Hufflepuff.' This indicates a certain amount of respect. You are well aware that Conscientiousness is just about as important as raw intelligence in determining life outcomes, you think you will be extremely loyal to your friends if you ever have some, you are not frightened by the expectation that your chosen scientific problems may take decades to solve..."
 [^increase]: And America has tried pretty hard over the past 60 years to affect IQ. The whole nature/nurture [black-white IQ debate](!Wikipedia "Race and intelligence") would be moot if there were some nutrient or educational system which could add even 10 points on average, because then we would use it on all the blacks. But it seems that I'm constantly reading about programs like [Headstart](!Wikipedia) which boost IQ for a little while... and do nothing in the long run.
-[^fragile]: IQ is sometimes used as a proxy for health, like height, because it sometimes seems like any health problem will damage IQ. Didn't get much protein as a kid? Congratulations, your nerves will lack [myelination](!Wikipedia) and you will literally think slower. Missing some [iodine](!Wikipedia)? Say good bye to 10 points! Have tapeworms? There go some more points, and maybe an inch or two off your adult height, thanks to the worms stealing nutrients from you. Have a rough birth and suffer a spot of [hypoxia](!Wikipedia) before you began breathing on your own? Tough luck, old bean. It is very easy to *lower* IQ; you can do it with a baseball bat. It's the other way around that's nearly impossible.
+[^fragile]: IQ is sometimes used as a proxy for health, like height, because it sometimes seems like any health problem will damage IQ. Didn't get much protein as a kid? Congratulations, your nerves will lack [myelination](!Wikipedia) and you will literally think slower. Missing some [iodine](Iodine)? Say good bye to 10 points! Have tapeworms? There go some more points, and maybe an inch or two off your adult height, thanks to the worms stealing nutrients from you. Have a rough birth and suffer a spot of [hypoxia](!Wikipedia) before you began breathing on your own? Tough luck, old bean. It is very easy to *lower* IQ; you can do it with a baseball bat. It's the other way around that's nearly impossible.
 [^Tadamine]: [Mibu no Tadamine](!Wikipedia), [_KKS_ XII: 609](http://www.temcauley.staff.shef.ac.uk/waka0627.shtml):
 
         More than my life
@@ -182,7 +182,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         2. inserting into [archive queue](Archiving URLs)
 
     - do a Pandoc/Firefox preview for visible major formatting problems
-    - Markdown lint-checker[^lint]
+    - Markdown [lint](!Wikipedia "lint (software)")-checker[^lint]
 - references:
 
     - for academic hyperlinks,  include a [tooltip](!Wikipedia) with the title & author metadata
@@ -243,7 +243,8 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
     ~~~{.Bash}
     function markdown-lint () {
-        fgrep -e "(www" -e ")www" -e "![](" "$@";
+        file "$@" | grep -v "text"; # warn if not text, perhaps due to bad copy-paste
+        fgrep -e "(www" -e ")www" -e "![](" -e " percent " "$@";
         markdown-length-checker "$@";
         cat "$@" \
         | tail -n +3 \
