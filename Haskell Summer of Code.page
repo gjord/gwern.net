@@ -32,7 +32,7 @@ It is intended to produce source code for the 'use and benefit of all'; it is no
     >
     > I really appreciate this roundup. But I think the bar is set somewhat too high for success. A success in this framework seems to be a significant and exciting improvement for the entire Haskell community. And there have certainly been a number of those. But there are also projects that are well done, produce results that live on, but which aren't immediately recognizable as awesome new things. Furthermore, GSoc explicitly lists a goal as inspiring young developers towards ongoing community involvement/open source development, and these notes don't really take that into account.
     >
-    > For example, I don't know of any direct uptake of the code from the HaskellNet project, but the author did go on to write a small textbook on Haskell in Japanese. As another example, Roman (of Hpysics) has, as I understand it, been involved in a Russian language functional programming magazine.
+    > For example, I don't know of any direct uptake of the code from the HaskellNet project, but the author did go on to write a small textbook on Haskell in Japanese. As another example, Roman (of Hpysics [sic]) has, as I understand it, been involved in a Russian language functional programming magazine.
     >
     > So I think there needs to be a slightly more granular scale that can capture some of these nuances. Perhaps something like the following:
     >
@@ -46,6 +46,14 @@ It is intended to produce source code for the 'use and benefit of all'; it is no
     > 1. GHC-plugins -- Not only was the work completed and does it stand a chance of being merged, but it explored the design space in a useful way for future GHC development, and was part of Max becoming more familiar with GHC internals. Since then he's contributed a few very nice and useful patches to GHC, including, as I recall, the magnificent TupleSections extension.
     > 2. GHC refactoring -- It seems unfair to classify work that was taken into the mainline as unsuccessful. The improvement weren't large, but my understanding is that they were things that we wanted to happen for GHC, and that were quite time consuming because they were cross-cutting. So this wasn't exciting work, but it was yeoman's work helpful in taking the GHC API forward. It's still messy, I'm given to understand, and it still breaks between releases, but it has an increasing number of clients lately, as witnessed by discussions on -cafe.
     > 3. Darcs performance -- by the account of Eric Kow & other core darcs guys, the hashed-storage stuff led to large improvements (and not only in performance)[[2]](http://blog.darcs.net/2010/11/coming-in-darcs-28-read-only-support.html) -- the fact that there's plenty more to be done shouldn't be counted as a mark against it.
+
+    Further criticisms by [sclv from 2013](http://www.reddit.com/r/haskell/comments/15sjur/summer_of_code_2012_retrospective/c7pfrro):
+
+    > I no longer think these summaries are even modestly useful, because the judgement criteria are too harsh and too arbitrary. They reflect a bias towards "success" of a gsoc project as something measurable directly measurable in uptake and users within a relatively short span of time.
+    >
+    > GSoC projects are chosen, on the other hand, with an eye towards long-term payoff in Haskell infrastructure.
+    >
+    > The criteria that would yield us "high success" projects in the sense judged here would also yield us projects that weren't very interesting, useful, or important.
 
 ## Haskell retrospective
 
@@ -241,7 +249,7 @@ The Immix GC strikes me as a very challenging summer project; a GC is one of the
 
 #### 2010 results
 
-As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 2 unknown, and 2 unsuccessful. (One unknown, Hackage 2.0, will probably turn out to be a success once it goes live as the main Hackage site.) As one would hope, the results seem to be better than the results for 2008 or 2009.
+As of February 2010, I grade the 7 SoC for 2010 as follows: 3 successes, 2 unknown, and 2 unsuccessful. (One unknown, Hackage 2.0, will probably turn out to be a success if it ever goes live as the main Hackage site; as of 1 January 2013, it has not.) As one would hope, the results seem to be better than the results for 2008 or 2009.
 
 Of my original predictions, I think I was right about the Immix GC & GObject & Darcs network optimization, semi-right about Hackage 2.0 & Cabal testing support, somewhat wrong about the LLVM work, and completely wrong about the HTML/`blaze` SoC. (I am not sure why I was wrong about the last, and don't judge myself harshly for not predicting the [exogenous](!Wikipedia) failure of the LLVM SoC.)
 
@@ -497,11 +505,11 @@ To summarize:
 
 1. unclear: 1
 2. successful: 2
-3: unsuccessful: 5
+3. unsuccessful: 5
 
 2 of the 5 unsuccessful projects were due to problems on the student's end (hashtable, "accelerating"); 2 were too ambitious in general (scoutess, multiple-packages); and the last 1 was not too ambitious but in my opinion was left somewhat incomplete (ghcLiVE).
 
-How successful were my predictions? Employing a proper [scoring rule](!Wikipedia) (log scoring; for additional discussion of scoring rules, see [2012 election predictions]()) and comparing against a 50-50 random guesser where >0 means I outperformed the random guesser:
+How successful were my predictions? Employing a proper [scoring rule](!Wikipedia) (log scoring; for additional discussion of scoring rules, see [2012 election predictions]()) and comparing against a 50-50 random guesser where >0 means I outperformed the random guesser^[Guessing 50% simplifies the calculation, and isn't too far off: Doing a quick sum of all the non-2012 successful/unsuccessful ratings, I get a chance of being successful at `(4+6+2+3+3+4) / ((4+2+5+1+2+4) + (4+6+2+3+3+4)) = 0.55`, which isn't terribly different from a guess of 0.5.]:
 
 ~~~{.haskell}
 logBinaryScore = sum . map (\(p,result) -> if result then 1 + logBase 2 p else 1 + logBase 2 (1-p))
