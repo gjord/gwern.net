@@ -50,7 +50,37 @@ Just this command would turn up many false positives. For example, there would b
 The quicker you know about a dead link, the sooner you can look for replacements or its new home.
 
 # Prevention
+## Remote caching
+
+We can ask a third party to keep a cache for us. The only three general [archive site](!Wikipedia) I know of are
+
+1. the [Internet Archive](!Wikipedia)
+2. [WebCite](!Wikipedia)
+3. Linterweb's WikiWix^[Which I suspect is only accidentally 'general' and would shut down access if there were some other way to ensure that Wikipedia external links still got archived.].
+
+There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which obviously are not publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](http://news.ycombinator.com/item?id=2880427).]
+
+<!-- TODO: develop and cover Pinboard support; Maciej says such usage is acceptable - 'Your current archive size, growing at 20 GB a year, should not be a problem. I'll put you on the heavy-duty server where my own stuff lives.' -->
+
+(An example would be <http://bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/> being archived at <http://webcitation.org/5ur7ifr12>.)
+
+My first program in this vein of thought was a bot which fired off WebCite and Internet Archive/Alexa requests: [Wikipedia Archiving Bot](haskell/Wikipedia Archive Bot), quickly followed up by a [RSS version](haskell/Wikipedia RSS Archive Bot). (Or you could install the [Alexa Toolbar](!Wikipedia) to get automatic submission to the Internet Archive, if you have ceased to care about privacy.)
+
+The core code was quickly adapted into a [gitit](!Hackage) wiki plugin which hooked into the save-page functionality and tried to archive every link in the newly-modified page, [Interwiki.hs](https://github.com/jgm/gitit/blob/master/plugins/Interwiki.hs)
+
+Finally, I wrote [archiver](!Hackage), a daemon which watches[^watch]/reads a text file. (Source is available via `darcs get http://community.haskell.org/~gwern/archiver/`.)
+
+[^watch]: Version [0.1](http://hackage.haskell.org/package/archiver-0.1) of my `archiver` daemon didn't simply read the file until it was empty and exit, but actually watched it for modifications with [inotify](!Wikipedia). I removed this functionality when I realized that the required WebCite choking (just one URL every ~25 seconds) meant that `archiver` would *never* finish any reasonable workload.
+
+The library half of `archiver` is a simple wrapper around the appropriate HTTP requests; the executable half reads a specified text file and loops as it (slowly) fires off requests and deletes the appropriate URL.
+
+That is, `archiver` is a daemon which will process a specified text file, each line of which is a URL, and will one by one request that the URLs be archived or spidered
+
+Usage of `archiver` might look like `archiver ~/.urls.txt gwern0@gmail.com`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern0@gmail.com; done`. If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com; done'`.
+
 ## Local caching
+
+Remote archiving, while convenient, has a major flaw: the archive services cannot keep up with the growth of the Internet and are woefully incomplete. I experience this regularly, where a link on `gwern.net` goes dead and I cannot find it in the Internet Archive or WebCite, and it is a general phenomenon: [Ainsworth et al 2012](http://arxiv.org/pdf/1212.6177v1.pdf "How Much of the Web Is Archived?") find <35% of common Web pages ever copied into an archive service, and typically only one copy exists.
 
 On a roughly monthly basis, I run a shell script named, imaginatively enough, `local-archiver`:
 
@@ -89,43 +119,15 @@ The code is not the prettiest, but it's fairly straightforward:
 
 A local copy is not the best resource - what if a link goes dead in a way your tool cannot detect so you don't *know* to put up your copy somewhere? But it solves the problem pretty decisively.
 
-The space consumed by such a backup is not that bad; only 30-50 gigabytes for a year of browsing, and less depending on how hard you prune the downloads. (More, of course, if you use `linkchecker` to archive entire sites and not just the pages you visit.) Storing this is quite viable in the long term; while page sizes have [increased 7x](http://www.websiteoptimization.com/speed/tweak/average-web-page/) between 2003 and 2011 and pages average around 400kb^[An older [2010 Google article](https://code.google.com/speed/articles/web-metrics.html) put the average at 320kb, but that was an average over the entire Web, including all the old content.], [Kryder's law](!Wikipedia) has also been operating and has increased disk capacity by ~128x - in 2011, \$80 will buy you at least [2 terabytes](http://forre.st/storage#hdd), that works out to 4 cents a gigabyte or 80 cents for the low estimate for downloads; that is much better than the $25 annual fee that somewhere like [Pinboard](http://pinboard.in/upgrade/) charges. Of course, you need to back this up yourself. We're relatively fortunate here - most Internet documents are 'born digital' and easy to migrate to new formats or inspect in the future. We can basically just download them and worry about how to view them only when we need a particular document, and Web browser backwards-compatibility already stretches back to files written in the early 1990s. (Of course, we're probably screwed if we discover the content we wanted was presented only in Adobe Flash or as an inaccessible 'cloud' service.) In contrast, if we were trying to preserve programs or software libraries instead, we would face a much more formidable task in keeping a working ladder of binary-compatible virtual machines or interpreters^[Already one runs classic [LucasArts adventure games](!Wikipedia) and whatnot in emulators like [DOSBox](!Wikipedia); but those emulators will not always be maintained. Who will emulate the emulators? Well, presumably one will in 2050 instead emulate on one's laptop some ancient but compatible OS - Windows 7 or Debian 6.0, perhaps - and inside *that* run DOSBox (to run the game).]. The situation with [digital movie preservation](http://www.davidbordwell.net/blog/2012/02/13/pandoras-digital-box-pix-and-pixels/ "Pandora's digital box: Pix and pixels") hardly bears thinking on.
-
-There are ways to cut down on the size; if you tar it all up and run [7-Zip](!Wikipedia) with maximum compression options, you could probably compact it to 1/5th the size. I found that the uncompressed files could be reduced by around 10% by using [fdupes](!Wikipedia) ([homepage](http://netdial.caribe.net/~adrian2/fdupes.html)) to, like [`freedup`](!Wikipedia "freedup"), look for duplicate files and turning the duplicates into a space-saving [hard link](!Wikipedia) to the original with a command like `fdupes --recurse --hardlink ~/www/`. (Apparently there are a *lot* of bit-identical JavaScript (eg. [JQuery](!Wikipedia)) and images out there.)
-
-## Remote caching
-
-We can ask a third party to keep a cache for us. The only three general [archive site](!Wikipedia) I know of are
-
-1. the [Internet Archive](!Wikipedia)
-2. [WebCite](!Wikipedia)
-3. Linterweb's WikiWix^[Which I suspect is only accidentally 'general' and would shut down access if there were some other way to ensure that Wikipedia external links still got archived.].
-
-There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which obviously are not publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](http://news.ycombinator.com/item?id=2880427).]
-
-<!-- TODO: develop and cover Pinboard support; Maciej says such usage is acceptable - 'Your current archive size, growing at 20 GB a year, should not be a problem.  I'll put you on the heavy-duty server where my own stuff lives.' -->
-
-(An example would be <http://bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/> being archived at <http://webcitation.org/5ur7ifr12>.)
-
-My first program in this vein of thought was a bot which fired off WebCite and Internet Archive/Alexa requests: [Wikipedia Archiving Bot](haskell/Wikipedia Archive Bot), quickly followed up by a [RSS version](haskell/Wikipedia RSS Archive Bot). (Or you could install the [Alexa Toolbar](!Wikipedia) to get automatic submission to the Internet Archive, if you have ceased to care about privacy.)
-
-The core code was quickly adapted into a [gitit](!Hackage) wiki plugin which hooked into the save-page functionality and tried to archive every link in the newly-modified page, [Interwiki.hs](https://github.com/jgm/gitit/blob/master/plugins/Interwiki.hs)
-
-Finally, I wrote [archiver](!Hackage), a daemon which watches[^watch]/reads a text file. (Source is available via `darcs get http://community.haskell.org/~gwern/archiver/`.)
-
-[^watch]: Version [0.1](http://hackage.haskell.org/package/archiver-0.1) of my `archiver` daemon didn't simply read the file until it was empty and exit, but actually watched it for modifications with [inotify](!Wikipedia). I removed this functionality when I realized that the required WebCite choking (just one URL every ~25 seconds) meant that `archiver` would *never* finish any reasonable workload.
-
-The library half of `archiver` is a simple wrapper around the appropriate HTTP requests; the executable half reads a specified text file and loops as it (slowly) fires off requests and deletes the appropriate URL.
-
-That is, `archiver` is a daemon which will process a specified text file, each line of which is a URL, and will one by one request that the URLs be archived or spidered
-
-Usage of `archiver` might look like `archiver ~/.urls.txt gwern0@gmail.com`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern0@gmail.com; done`. If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com; done'`.
-
 `archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way.
 
 For example, in conjunction with the big _en masse_ `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern0@gmail.com "cd ~/www && wget --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm --user-agent='Firefox/3.5' 120"; done'`.
 
 Alternately, you might use `curl` or a specialized archive downloader like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
+
+The space consumed by such a backup is not that bad; only 30-50 gigabytes for a year of browsing, and less depending on how hard you prune the downloads. (More, of course, if you use `linkchecker` to archive entire sites and not just the pages you visit.) Storing this is quite viable in the long term; while page sizes have [increased 7x](http://www.websiteoptimization.com/speed/tweak/average-web-page/) between 2003 and 2011 and pages average around 400kb^[An older [2010 Google article](https://code.google.com/speed/articles/web-metrics.html) put the average at 320kb, but that was an average over the entire Web, including all the old content.], [Kryder's law](!Wikipedia) has also been operating and has increased disk capacity by ~128x - in 2011, \$80 will buy you at least [2 terabytes](http://forre.st/storage#hdd), that works out to 4 cents a gigabyte or 80 cents for the low estimate for downloads; that is much better than the $25 annual fee that somewhere like [Pinboard](http://pinboard.in/upgrade/) charges. Of course, you need to back this up yourself. We're relatively fortunate here - most Internet documents are 'born digital' and easy to migrate to new formats or inspect in the future. We can basically just download them and worry about how to view them only when we need a particular document, and Web browser backwards-compatibility already stretches back to files written in the early 1990s. (Of course, we're probably screwed if we discover the content we wanted was presented only in Adobe Flash or as an inaccessible 'cloud' service.) In contrast, if we were trying to preserve programs or software libraries instead, we would face a much more formidable task in keeping a working ladder of binary-compatible virtual machines or interpreters^[Already one runs classic [LucasArts adventure games](!Wikipedia) and whatnot in emulators like [DOSBox](!Wikipedia); but those emulators will not always be maintained. Who will emulate the emulators? Well, presumably one will in 2050 instead emulate on one's laptop some ancient but compatible OS - Windows 7 or Debian 6.0, perhaps - and inside *that* run DOSBox (to run the game).]. The situation with [digital movie preservation](http://www.davidbordwell.net/blog/2012/02/13/pandoras-digital-box-pix-and-pixels/ "Pandora's digital box: Pix and pixels") hardly bears thinking on.
+
+There are ways to cut down on the size; if you tar it all up and run [7-Zip](!Wikipedia) with maximum compression options, you could probably compact it to 1/5th the size. I found that the uncompressed files could be reduced by around 10% by using [fdupes](!Wikipedia) ([homepage](http://netdial.caribe.net/~adrian2/fdupes.html)) to, like [`freedup`](!Wikipedia "freedup"), look for duplicate files and turning the duplicates into a space-saving [hard link](!Wikipedia) to the original with a command like `fdupes --recurse --hardlink ~/www/`. (Apparently there are a *lot* of bit-identical JavaScript (eg. [JQuery](!Wikipedia)) and images out there.)
 
 ### URL sources
 
