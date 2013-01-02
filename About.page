@@ -239,12 +239,13 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
     Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](http://groups.google.com/d/topic/pandoc-discuss/2C5p5pp6ReM/discussion).
 
-    A shell script for an individual file which checks the page source and then the rendered HTML:
+    A shell script for an individual file which checks the page source and then the rendered HTML in various ways:
 
     ~~~{.Bash}
     function markdown-lint () {
-        file "$@" | grep -v "text"; # warn if not text, perhaps due to bad copy-paste
+        file "$@" | grep --invert-match "text"; # warn if not text, perhaps due to bad copy-paste
         fgrep -e "(www" -e ")www" -e "![](" -e " percent " "$@";
+        grep --only-matching '^\[\^.*\]: ' "$@" | sort | uniq --count | fgrep --invert-match "      1 [^";
         markdown-length-checker "$@";
         cat "$@" \
         | tail -n +3 \
