@@ -398,7 +398,7 @@ The largest traffic sources are Google at 36,625 visits and direct/no-referrals 
 
 The [Analytics report](/docs/20120103-20120702-gwern.net-analytics.pdf) records traffic over those 182 days as being substantially increased: to 570,997 page-views (average 3,137/day) - almost 5 times the previous six month period - by 268,031 unique visitors in 366,301 visits (average 2012/day). If this rate continues, I will likely lose my traffic prediction (which doesn't bother me very much). In particular, the lifetime total page-views is now at 809,000, which would seem to imply that I will [break the million page-view](http://predictionbook.com/predictions/7457) mark by the next update! I would be very pleased by that milestone.
 
-![Plot of page-hits (y-axis) versus date (x-axis)](/images/201201-201207-traffic-history.png)
+![Plot of page-hits (y-axis) versus date (x-axis), early 2012](/images/201201-201207-traffic-history.png)
 
 The popularity ranking remains mainly the same. 2 differences from the past stand out: the sudden popularity of the Zeo and "Death Note Anonymity" articles. Both owe their inclusion to 2 successful front-page appearances on Hacker News. DNA was submitted by someone I don't know, but I submitted the Zeo page at the conclusion of my first [Vitamin D experiment](Zeo#vitamin-d) where I concluded that that Vitamin D consumed in the evening did indeed damage my sleep (I then followed up with [a second experiment](Zeo#vitamin-d-at-morn-helps) which confirmed that Vitamin D consumed in the morning helped one aspect of sleep.) I am proud of these two experiments and so I was gratified that Hacker News found them worthwhile too.
 
@@ -418,10 +418,58 @@ Donation-wise, I received ~฿2, and a number of Paypal donations: $5, $4, $5, a
 
 Hacker News, Reddit, and LessWrong remain major referral drivers. For recent new pages, I've been trying a checklist which includes submission to SU, Google+, Hacker News, Reddit, and LessWrong as appropriate; I am not sure how well it is working since popularity seems very random.
 
+### July 2012 -  January 2013
+
+> All I say is by way of discourse, and nothing by way of advice. I should not speak so boldly if it were my due to be believed.^[[Michel de Montaigne](!Wikipedia), ["Of Cripples"](http://oll.libertyfund.org/title/1750/91301) (_Essays_)]
+
+`darcs-graph` for this period (3 July 2012-2 January 2013): <!-- darcs-graph - - filter=20120603 - - y=30 - - output=darcs-history.png - - name=gwern.net /home/gwern/wiki/ -->
+
+![Plot of patch creations (y-axis) versus date (x-axis): July 2012 to 2 January 2013](/images/2012-july-darcs-history.png)
+
+#### Traffic
+
+[Analytics traffic](/docs/20120703-20130102-gwern.net-analytics.pdf) records 758,843 page views by 366,028 unique visitors over the 184 days for a daily average of 4,124.1 page-views, which is double the previous half-year average of 2,012 daily page-views; traffic growth is clearly slowing, though, since the previous half-year had quadruple the traffic compared to *its* predecessor. My prediction of breaking the million page-view mark came true, by a very large margin: the lifetime total page-views is now 1,568,957 page-views.
+
+![Plot of page-hits (y-axis) versus date (x-axis), late 2012](/images/20120703-20130102-traffic-history.png)
+
+Popularity rankings have changed a bit: the _Death Note_ essay and my sleep experiments have fallen out of the top 10 (the former because not many people are still linking it, and the latter probably because my latest experiments were relatively boring), replaced by a sidebar link and one of my terrorism-related essays:
+
+1. Silk Road: 491,934
+2. home/main page: 37,853
+3. Modafinil: 31,047
+4. DNB FAQ: 27,433
+5. Nootropics: 22,015
+6. Drug heuristics/Algernon's Law: 18,991
+7. Spaced repetition: 11,693
+8. Links: 8,123
+9. About: 8,075
+10. [Terrorism is not about Terror](): 7,369
+
+I am quite surprised that my [Slowing Moore's Law]() essay does not even make the top *50* pages, given that it deals with an novel thesis on which there's many interesting things to think and which is easily misunderstood.
+
+Donations: the ebook fell through when O'Reilly decided to cancel the entire series, which was a disappointment; Carmichael had finished her book on mood and is self-publishing, but I haven't seen tremendous interest in sleep and will probably just roll my draft material into the existing Zeo page. Paypal donations performed outstandingly: I received $10, $25, $10, $15, $200, & $10 ($270). Bitcoiners were not so generous: ฿0.25, ฿0.32, & ฿1 (฿1.57, or $21 at the 2 January 2013 Mt.Gox exchange rate).
+
+#### Promotion
+
+To Hacker News, Reddit, and LessWrong, I can add as a major referrer Wikipedia - primarily to the Silk Road article, but also to a few _Evangelion_-related pages. StumbleUpon has declined to the 10th largest referrer:
+
+1. `news.ycombinator.com`: 16,886
+2. `reddit.com`: 15,219
+3. `en.wikipedia.org`: 7,531
+4. `lesswrong.com`: 6,332
+5. `facebook.com`: 3,952
+6. `brainworkshop.sourceforge.net`: 3,733
+7. `google.com`: 2,649
+8. `youtube.com`: 1,798
+9. `mainstreamlos.tumblr.com`: 1,694
+10. `stumbleupon.com`: 1,239
+
+I haven't spent much time promoting my content, but improving the site with metadata & writing new content: for example, I tripled the size of my [hafu]() anime/manga character database.
+
 ## Colophon
 ### Source
 
-The revision history is controlled under [Darcs](!Wikipedia), but I periodically mirror it to a  [Patch-tag](https://patch-tag.com/r/gwern/Gwern/home) repository.
+The revision history is kept in [Darcs](!Wikipedia), but I periodically mirror it to a  [Patch-tag](https://patch-tag.com/r/gwern/Gwern/home) repository.
 
 ### Tools
 
