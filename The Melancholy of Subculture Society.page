@@ -150,7 +150,7 @@ Think of the people you know. How many of them can 'compete' on purely financial
 
     Imagine our 100 people again, and imagine they have 1 or 2 kinds of status to choose from. We could call them 'scientific' or 'artistic' status - the scientists don't care if they are ranked 50 out of the artists or if they are ranked al the way at the top at 100, but they do care if they are the 10 rather than 1 scientist, and vice-versa. Further, let's say it's possible for a person to change their mind. Given this set up, it's pretty clear that none of them is worse off for their being a second kind of status, since they can pick whichever one they have higher status in. If a person discovers he's the artist ranked 5 but scientist ranked 6, he can switch and be better off; if the reverse or he is equal, well, he's no worse off than before. Since he is as well off or more well off under the scenario with 2 kinds of status, he would prefer a system in which there are 2 kinds of status. If you ask him whether he would favor *three* kinds of status, the same logic applies: if he's higher on that third one than either of the two, he will switch and be better off, else he will not switch and not be any worse off. And so on. This works nicely with logarithmic discounting: we split our original 1-100 ranking into 50-100 and a second 50-100, and the sums improve: `sum (map log ([50..100] ++ [50..100])) ~> 438.35`, which is larger than `sum (map log [1..100]) ~> 363.74`.
 
-    One might object that this argument stacks the deck by covertly introducing entirely new bookcases and then exclaiming 'now there's more room to shift books leftwards, because I can put half my books in the left half of the original bookcase and the other half in the left half of this new bookcase! Amazing!' One is saying the *right* calculation is `sum (map log ([1..50] ++ [1..50])) ~> 297`.
+    One might object that this argument cooks the books by covertly introducing entirely new bookcases and then exclaiming "now there's more room to shift books leftwards, because I can put half my books in the left half of the original bookcase and the other half in the left half of this new bookcase! Amazing!" One is saying the *right* calculation is `sum (map log ([1..50] ++ [1..50])) ~> 297`.
 
     In a way, we are arguing about something pretty profound: how do status hierarchies interact in the real world? If a subculture splits off, do they create their own hierarchy where the top dog is as important as the top dog in the other hierarchy? Does Hayao Miyazaki derive as much utility from being the greatest living anime director as, say, Steven Spielberg or Martin Scorsese derives from his own directing status?
 
@@ -307,9 +307,9 @@ If someone really prefers their subculture, which gives them mental ease and phy
 
 # External links
 
-- ["The Missing Folkways of Globalization"](http://www.ribbonfarm.com/2010/06/16/the-missing-folkways-of-globalization/) -(Venkatesh Rao)
-- [Third culture kid](!Wikipedia)
 - [Reddit discussions](http://www.reddit.com/r/minimalism/duplicates/rry68/the_average_person_is_going_to_be_miserable_if/)
+- ["The Missing Folkways of Globalization"](http://www.ribbonfarm.com/2010/06/16/the-missing-folkways-of-globalization/) -(Venkatesh Rao) ([Third culture kid](!Wikipedia))
+- ["The Lying Disease: Why Would Someone Want to Fake a Serious Illness on the Internet?"](http://www.thestranger.com/seattle/the-lying-disease/Content?oid=15337239) ([Munchausen syndrome](!Wikipedia) & [Munchausen syndrome by proxy](!Wikipedia) online)
 
 # Appendix
 ## Japan and the Internet
