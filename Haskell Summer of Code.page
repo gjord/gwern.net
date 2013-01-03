@@ -387,10 +387,10 @@ To summarize my feelings:
 
 So of the 7 2011 SoCs:
 
-- 4 were unsuccessful (2 possibly not)
+- 3 were unsuccessful (2 possibly not)
 - 4 were successful (1 possibly not)
 
-My predictions were in general accurate; I remain hopeful that at least one of the Cabal SoCs will be merged in, which would give me a clean sweep and also render the final 2011 SoC record as good as the 2010 SoC record.
+My predictions were in general accurate; I remained hopeful that at least one of the Cabal SoCs would be merged in, which would give me a clean sweep and also render the final 2011 SoC record as good as the 2010 SoC record. (The parallel build was eventually merged in during 2012.)
 
 It troubles me that the Cabal SoCs took so long to be merged in (if at all), in line with the historical trend for big Cabal SoC improvements to be partially done but never go into production. Duncan Coutts [says](http://www.reddit.com/r/haskell/comments/n82ln/summer_of_code_2011_retrospective/c377srp#siteTable_t3_n82ln) they are in the queue, but if neither gets merged in before the 2012 SoC starts, the lesson seems to be that Cabal is too dangerous and uncertain to waste SoCs on.
 
@@ -438,7 +438,7 @@ Instead of qualitative predictions this year, I will [record probabilities](Pred
 
     No proposal was publicly available. I am not familiar with DMcGill, and Googling for Haskell material related to "McGill", I don't see any past work. It sounds relatively ambitious in the short abstract - replicating `cabal-dev` and adding in considerable other functionality? I've previously noticed that Cabal-related SoCs seem to be unusually blighted. Adding that all up, I am left with dubious feelings.
 
-    Judgment: tools are always hard to judge. This one will be the usual subjective "is it being used by a good fraction of its userbase?" criteria.
+    Judgment: tools are always hard to judge. This one will be the usual subjective "is it being used by a good fraction of its potential userbase?" criteria.
 3. [60%](http://predictionbook.com/predictions/6684)
 
     The student has completed a SoC before, and is a graduate student in an AI/machine learning program; both of which bode well for him completing another SoC. I'm not actually sure how many Haskell applications need a concurrent hashtable - the existing [hashtables](http://hackage.haskell.org/package/hashtables) package has [3 users](http://packdeps.haskellers.com/reverse/hashtables), and `base`'s "Data.HashTable" module is used by perhaps 10-20 code repositories (judging from grepping through my local archive).
@@ -477,13 +477,13 @@ As of 1 January 2013:
     Merged into Darcs HEAD without apparent issue ([documentation](http://darcs.net/Ideas/PatchIndex)). Project was **successful**.
 2. scoutess: As of [August 15](http://projectscoutess.blogspot.com/2012/08/mission-report.html), McGillicuddy was reporting that scoutess was complete ([repository](http://hub.darcs.net/alp/scoutess/changes)). In Haskell-cafe, there is one off-hand mention of scoutess by someone using a different continuous integration program; there are a few discussions on Reddit of progress but the most [recent post](http://www.reddit.com/r/haskell/comments/12lyr3/overveiw_of_current_scoutess_architecture_and/) is a theoretical discussion of scoutess's architecture. There are no tools or libraries depending on it in Hackage because scoutess has never been uploaded to Hackage. Indeed, as far as I can tell, no one is actually using it, and stepcut agreed with this assessment when I asked him.
 
-    I specified in April 2012  that my judgment criterion would be "is scoutess being used by a good fraction of its userbase?"; in this light, scoutess was **unsuccessful**.
+    I specified in April 2012  that my judgment criterion would be "is scoutess being used by a good fraction of its potential userbase?"; in this light, scoutess was **unsuccessful**.
 3. concurrent hashtable/hashmap
 
     Edward Kmett tells me that Loren ran into personal issues and was removed from SoC by the midpoint with no delivered library. **Unsuccessful**.
 4. "Accelerating Haskell Application Development"
 
-    Edward Kmett tells me that the student left for a job around the midpoint and was removed from SoC at the end. **Unsuccessful**.
+    Edward Kmett tells me that the student left for a job around the midpoint and was removed from SoC at the last milestone. **Unsuccessful**. [eegreg](http://www.reddit.com/r/haskell/comments/15sjur/summer_of_code_2012_retrospective/c7pheka) argues that while incomplete, the first goal of the SoC (a file-watching library) has since been fulfilled and the library been put to use by the [Yesod ecosystem of Web libraries & applications](http://www.yesodweb.com/).
 5. Sandboxed builds
 
     Completed and in Cabal HEAD; per my criteria, this is **successful**.
