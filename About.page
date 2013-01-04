@@ -469,7 +469,7 @@ The revision history is kept in [Darcs](!Wikipedia), but I periodically mirror i
 
 #### Size
 
-As of 3 January 2013, the source of `gwern.net` is composed of >166 files with >1,404,179 words or 9.2MB; this includes documents transcribed into Markdown but excludes images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is >280M. The source repository contains >6,378 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
+As of 3 January 2013, the source of `gwern.net` is composed of >166 files with >1,404,179 words or 9.2MB; this includes documents transcribed into Markdown but excludes images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is >304M. The source repository contains >6,378 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
 
 ### Tools
 
