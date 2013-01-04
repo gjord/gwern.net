@@ -454,7 +454,7 @@ This would have been a much bigger update than 2.6% (from 66.5% to 69.1%) if the
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.99}{0.881} = 1.1237$
 
-One complicating factor I noticed after writing this section is that Charley Parlapanides's Twitter page states he lives in Los Angeles, California - not New Jersey. Could they have been living in Los Angeles 2008-2009, and the PDF timezone actually be strong evidence *against* authenticity? Maybe. My best evidence indicates the move didn't happen after 2011.^[The earliest Tweet I can find using [SnapBird](http://snapbird.org/) tying him to LA is [10 June 2011](https://twitter.com/LAGFF/status/79223226525429761) (other searches like "moving", "move", "relocating", "California", "CA", "New Jersey", "NJ" etc do not turn up anything useful). This is probably because his tweets do not go further back than April 2011, where there is mention of some sort of hacking of his account. The next step is a Google search for `Charley Parlapanides ("New Jersey" OR "Los Angeles" OR California)` with a date range of 6/1/2009-6/9/2011 (to pick up any locations given from when they started on the script to just before that 10 June 2011 tweet). Results were equivocal: a [12 February 2011](http://www.deadline.com/2011/02/scott-rudin-closes-la-office-is-sony-move-imminent/#comment-709877) blog comment about "this town" might indicate residence in LA/Hollywood; a [19 December 2010](http://hollywood.greekreporter.com/2010/12/19/inside-the-minds-of-the-parlapanides-brothers/) mention of walking into a director's production office of sets & costumes might indicate residence as well. Beyond that, I can't find anything.] If the effect of a <2009 move to Los Angeles were simply to render this argument useless - a likelihood factor equal to 0 - it would not bother me too much because the likelihood factor is 'just' 1.12, and an error here small compared to errors elsewhere like in the stylometrics analysis. But more realistically, if this argument were wrong, the right argument would likely flip the likelihood factor to something more like 0.5, and the difference between 1.12 and 0.5 is worth worrying about.
+One complicating factor I noticed after writing this section is that Charley Parlapanides's Twitter page states he lives in Los Angeles, California - not New Jersey. Could they have been living in Los Angeles 2008-2009, and the PDF timezone actually be strong evidence *against* authenticity? Maybe. My best evidence indicates the move didn't happen after 2011.^[The earliest Tweet I can find using [SnapBird](http://snapbird.org/) tying him to LA is [10 June 2011](https://twitter.com/LAGFF/status/79223226525429761) (other searches like "moving", "move", "relocating", "California", "CA", "New Jersey", "NJ" etc do not turn up anything useful). This is probably because his tweets do not go further back than April 2011, where there is mention of some sort of hacking of his account. The next step is a Google search for `Charley Parlapanides ("New Jersey" OR "Los Angeles" OR California)` with a date range of 6/1/2009-6/9/2011 (to pick up any locations given from when they started on the script to just before that 10 June 2011 tweet). Results were equivocal: a [12 February 2011](http://www.deadline.com/2011/02/scott-rudin-closes-la-office-is-sony-move-imminent/#comment-709877) blog comment about "this town" might indicate residence in LA/Hollywood; a [19 December 2010](http://hollywood.greekreporter.com/2010/12/19/inside-the-minds-of-the-parlapanides-brothers/) mention of walking into a director's production office of sets & costumes might indicate residence as well. Beyond that, I can't find anything.] If the effect of a <2009 move to Los Angeles were simply to render this argument useless - a likelihood ratio equal to 1 - it would not bother me too much because the likelihood ratio is 'just' 1.12, and an error here small compared to errors elsewhere like in the stylometrics analysis. But more realistically, if this argument were wrong, the right argument would likely flip the likelihood ratio to something more like 0.5, and the difference between 1.12 and 0.5 is worth worrying about.
 
 So far so good? *No!* [Vincent Yu](http://lesswrong.com/lw/f8y/open_thread_november_115_2012/7rol?context=3) points out something interesting: my PDF viewer, Evince, may display timezones as the *user's* timezone, not the actual timezone of creation. Is this true? Is Evince misleading me when it gives the timezone as EDT (the timezone I live in)? We appeal to `pdftk` again: the exact raw date was "D:20090409213247Z". [PHP](http://framework.zend.com/manual/1.6/en/zend.pdf.info.html) docs explain the datestamp, particularly the puzzling final character 'Z':
 
@@ -630,7 +630,7 @@ $\frac{0.50}{0.10} = 5$
 
 ## Results
 
-To review and summarize each factor we considered:
+To review and summarize each argument we considered:
 
 Argument/test   $P(a)$   $P(\lnot a)$     $P(b|a)$      $P(b|\lnot a)$     $P(a|b)$    $\frac{P(b|a)}{P(b|\lnot a)}$
 --------------- -------- ---------------- ------------- ------------------ ----------- -------------------------------
@@ -648,7 +648,7 @@ credit          0.899    0.101            0.99          0.541              0.949
 official plot   0.942    0.058            ~1.0          ?                  ?           ? (>1)
 legal takedown  0.942    0.058            0.5           0.10               0.988       5
 
-The final posterior speaks for itself: 98%. By taking into account 9 different factors and thinking about how consistent each factor is with the script being real, we've gone from considerable uncertainty to a surprisingly high value, even after bending over backwards to omit 3 particularly disputable factors.
+The final posterior speaks for itself: 98%. By taking into account 9 different argument and thinking about how consistent each one is with the script being real, we've gone from considerable uncertainty to a surprisingly high value, even after bending over backwards to omit 3 particularly disputable arguments.
 
 ## Likelihood ratio tweaking
 
@@ -664,13 +664,13 @@ $\frac{0.10}{1 - 0.10} \times 82.3 = 9.1$ and $\frac{9.1}{1+9.1}=0.90$
 
 And a 1% person is $\frac{0.01}{1 - 0.01} \times 82.3 = 0.83$ and $\frac{0.83}{1+0.83}=0.45$ Ooh, *almost* to 50%, so we know anyone with a prior of 2% who accepts the analysis may be moved all the way to thinking the script more likely to be true than not (specifically, 0.62).
 
-What if we thought we had the right prior of 50% but we terribly messed up each analysis and each likelihood factor was twice as large/small as it should be? If we cut each likelihood factor's strength by half[^Haskell-likelihood-factor], then we get a new total likelihood factor of 3.9, and our new posterior is:
+What if we thought we had the right prior of 50% but we terribly messed up each analysis and each likelihood ratio was twice as large/small as it should be? If we cut each likelihood ratio's strength by half[^Haskell-likelihood-ratio], then we get a new total likelihood ratio of 3.9, and our new posterior is:
 
 $\frac{0.5}{1 - 0.5} \times 3.9 = 3.9$; $\frac{3.9}{1+3.9} = 0.79$
 
 A little worrisome.
 
-[^Haskell-likelihood-factor]: The gory details; since the strength of a ratio in either direction is the difference from 1, we need to subtract or add 1 depending on the direction:
+[^Haskell-likelihood-ratio]: The gory details; since the strength of a ratio in either direction is the difference from 1, we need to subtract or add 1 depending on the direction:
 
     ~~~{.Haskell}
     map (\x -> if x==1 then 1 else (if x>1 then 1+((x-1)/2) else 1-(x/2)))
@@ -700,7 +700,7 @@ $\frac{0.5}{1 - 0.5} \times 2.74 = 3.087$; $\frac{2.74}{1+2.74} = 0.73$
 
 1. Redo the calculations, but instead of being restricted to point estimates, work on intervals: give what you feel are the endpoints of 95% credence intervals for $P(b|a)$ & $P(b|\lnot a)$ and run Bayes on the endpoints to get worst-case and best-case posteriors, to feed into the next argument evaluation
 2. Starting with a uniform prior over 0-1, treat each argument as input to a Bernoulli (beta) distribution: a likelihood ratio of >1 counts as "success" while a likelihood ratio <=1 counts as a "failure". How does the posterior probability distribution change after each argument?
-3. Start with the uniform prior, but now treat each argument as a sample from a new normal distribution with a known mean (the best-guess likelihood factor) but unknown variance (how likely each best-guess is to be overturned by unknown information). Update on each argument, show the posterior probability distributions as of each argument, and list the final 95% credible interval.
+3. Start with the uniform prior, but now treat each argument as a sample from a new normal distribution with a known mean (the best-guess likelihood ratio) but unknown variance (how likely each best-guess is to be overturned by unknown information). Update on each argument, show the posterior probability distributions as of each argument, and list the final 95% credible interval.
 4. Do the above, but with an unknown *mean* as well as unknown variance.
 
 ## Benefits
@@ -714,7 +714,7 @@ With the final result in hand - and as promised, no math beyond arithmetic was n
 5. Hence, I didn't appreciate that the 2011 descriptions of the plot were not the conclusive breakthrough I took them for, but closer to a minor footnote corroborating my view of the plot changes as being Hollywood
 6. Since I hadn't looked into the details, I didn't realize the filesharing links going dead was more dubious than they initially seemed
 
-If anyone else were interested in the issue, the framework of the 12 tests provides a fantastic way of structuring disagreement. By putting numbers on each item, we can focus disagreement to the exact issue of contention, and the formal structure lets us target any future research by focusing on the largest (or smallest) likelihood factors:
+If anyone else were interested in the issue, the framework of the 12 tests provides a fantastic way of structuring disagreement. By putting numbers on each item, we can focus disagreement to the exact issue of contention, and the formal structure lets us target any future research by focusing on the largest (or smallest) likelihood ratios:
 
 - What data could we find on legal takedowns of scripts or files in general to firm up our
 - How accurate is stylometrics exactly? Could I just have gotten lucky? If we get a script for _Everything For A Reason_ or _Immortals_, are the results reinforced or does the clustering go haywire and the leaked script no longer resemble their known writing?
