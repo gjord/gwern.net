@@ -9,64 +9,18 @@ belief: likely
 
 <!--
 TODO:
-when answered by Charles Parlapanides, add this essay to Prediction essay
+when answered by Charles Parlapanides, add this essay to Prediction markets essay
 ping the fanfiction authors with a link (omit EY)
 ping the `stylo` people with a link
 ping Anime Vice and other DN script-related forums
 share to Google+, r/JapaneseAnimation,
-    LessWrong http://lesswrong.com/lw/f63/case_study_the_death_note_script_and_bayes/ (include poll comments!)
+    LessWrong http://lesswrong.com/lw/f63/case_study_the_death_note_script_and_bayes/
 ping Carrier - as an explanation why reading _Proving History_
 -->
-<!--
-polls: ask prior probability in article body before reading & link to comment:
 
-1.
-What prior probability would you give that reports of a leaked full-length script for a Hollywood movie would be true and the script genuine? In deciles:
+> I give a history of the 2009 leaked script, discuss internal & external evidence for its authenticity including stylometrics; and then give a simple step-by-step Bayesian analysis of each point. We finish with high confidence in the script's authenticity, discussion of how this analysis was surprisingly enlightening, and what followup work the analysis suggests would be most valuable.
 
-[poll]{0-10%}{11-20%}{21-30%}{31-40%}{41-50%}{51-60%}{61-70%}{71-80%}{81-90%}{91-100%}
-
-(Deciles, since I doubt anyone really has such a prior accurate down to single percentage points...)
-
-2.
-Having read or skimmed the essay's arguments & conclusion, what probability do you assign that this specific leaked script is genuine?
-
-[poll:probability]
-
-Having read or skimmed the essay, which of the 12 distinct arguments did you find weakest?
-
-[poll]{inclusion of authorship}{name spelling}{corporate address}{PDF date}{PDF creator}{PDF timezone}{script length}{Hollywood plot}{stylometrics}{leak dating}{absence of people taking credit}{official discussion of plot details}{possible legal takedown}
-
-And strongest?
-
-[poll]{inclusion of authorship}{name spelling}{corporate address}{PDF date}{PDF creator}{PDF timezone}{script length}{Hollywood plot}{stylometrics}{leak dating}{absence of people taking credit}{official discussion of plot details}{possible legal takedown}
-
-3.
-
-Was the essay:
-
-[poll]{Too long}{OK}{Too short}
-
-Did the chosen topic (anime & movies) make the essay more or less interesting for you?
-
-[poll:More....Less]
-
-Which topic was least well explained or employed:
-
-[poll]{leak history}{leaked script (plot & format)}{internal evidence}{external evidence}{stylometry}{Bayes's theorem}{likelihood ratios}
-
-4.
-
-Do you prefer polls on an article to be broken up over multiple comments to make some optional, or all in a single comment?
-
-[poll]{Multiple}{Don't care}{Single}
-
-Once posted polls, schedule a calendar followup in 1 year: include analysis as appendix here.
-schedule 3 years followup: expose publicly full Parlapanides conversation
--->
-
-> I give a history of the leaked script, discuss internal & external evidence for its authenticity including stylometrics; and then give a simple step-by-step Bayesian analysis of each point. We finish with high confidence in the script's authenticity, discussion of how this analysis was surprisingly enlightening, and what followup work the analysis suggests would be most valuable.
-
-Beginning in May 2009^[The earliest mention I've been able to find is a French site which [posted on 17 May 2009](http://web.archive.org/web/20090525025525/http://www.death-note.fr/home.php?page=news3) a translation of the beginning of the leaked script; no source is given, and it's not clear who did the translation, what script was used, or where the script was obtained. So while the script was clearly circulating by mid-May, I can't date the leak any earlier than date.] and up to October 2009, [there appeared online](http://www.animevice.com/news/rumor-alert-death-note-movie-script-leaked/2653/ "Rumor Alert: Death Note Movie Script Leaked?") a [PDF file](http://www.mediafire.com/?ce13d3xdazwxj09) ([mirror](http://dl.getdropbox.com/u/74617/Death%20Note%20Script.pdf)) claiming to be a script for the [Hollywood remake](!Wikipedia "Death Note (film)#Remake") of the _[Death Note](!Wikipedia)_ anime (see Wikipedia or my own little [Death Note Ending]() essay for a general description). Such a leak inevitably raises the question: is it genuine? Of course the studio had "no comment".
+Beginning in May 2009^[The earliest mention I've been able to find is a French site which [posted on 17 May 2009](http://web.archive.org/web/20090525025525/http://www.death-note.fr/home.php?page=news3) a translation of the beginning of the leaked script; no source is given, and it's not clear who did the translation, what script was used, or where the script was obtained. So while the script was clearly circulating by mid-May, I can't date the leak any earlier than that date.] and up to October 2009, [there appeared online](http://www.animevice.com/news/rumor-alert-death-note-movie-script-leaked/2653/ "Rumor Alert: Death Note Movie Script Leaked?") a [PDF file](http://www.mediafire.com/?ce13d3xdazwxj09) ([mirror](http://dl.getdropbox.com/u/74617/Death%20Note%20Script.pdf)) claiming to be a script for the [Hollywood remake](!Wikipedia "Death Note (film)#Remake") of the _[Death Note](!Wikipedia)_ anime (see Wikipedia or my own little [Death Note Ending]() essay for a general description). Such a leak inevitably raises the question: is it genuine? Of course the studio had "no comment".
 
 I was skeptical at first - how many unproduced screenplays get leaked? I thought it rare even in this Internet age - so I downloaded a copy and read it.
 
@@ -88,7 +42,7 @@ The ending shows Luke using the memory-wiping gambit to elude L (who from the sc
 
 The ending indicates someone who doesn't love _DN_ for its shades of gray mentality, its constant ambiguity and complexity. Any _DN_ fan feels deep sympathy for Light, even if they root for L and company. I suspect that if they were to pen a script, the ending would be of the "Light wins everything" variety, and not this hackneyed sop. I know I couldn't bring myself to write such a thing, even as a parody of Hollywood.
 
-In general, the dialogue is short and hackneyed. There are no excellent megalomaniac speeches about creating a new world; one can expect a dearth of ominous choral chanting in the movie. Even the veriest tyro of fanfiction could write more _DN_-like dialogue than this script did. (After looking through many _DN_ fanfictions for the [stylometric analysis](#stylometrics), I've realized this claim is unfair to the script.)
+In general, the dialogue is short and cliche. There are no excellent megalomaniac speeches about creating a new world; one can expect a dearth of ominous choral chanting in the movie. Even the veriest tyro of fanfiction could write more _DN_-like dialogue than this script did. (After looking through many _DN_ fanfictions for the [stylometric analysis](#stylometrics), I've realized this claim is unfair to the script.)
 
 Further, the complexities of ratiocination are largely absent, remaining only in the Lind L. Taylor TV trick of L and the famous eating-chips scene of Light. The tricks are even written incompetently - as written, on the bus, the crucial ID is seen by *accident*, whereas in _DN_, Light had specifically written in the revelation of the ID. The moral subtlety of _DN_ is gone; you cannot argue that Luke is a new god like Light. He is only an angry boy with a good heart lashing out, but by the end he has returned to the straight and narrow of conventional morality.
 
@@ -100,11 +54,11 @@ The question of authenticity falls under the honorable rubric of [textual critic
 
 The first thing I noticed was that the 2 authors claimed on the PDF, "Charley and Vlas Parlapanides", was correct: they were the 2 brothers of whom it had been quietly [announced](http://www.variety.com/article/VR1118003063.html "Warner brings 'Death' to big screen: Studio acquires rights to Japanese manga series") in 30 April 2009 that they were hired to write it, confirming [the](http://hollywood.greekreporter.com/2008/07/12/the-brothers-parlapanides/ "The Brothers Parlapanides") [rumors](http://bloody-disgusting.com/news/12459/ "Vertigo Hires Scribes for 'Death Note' Remake") [of](http://blog.newsarama.com/2008/06/03/screen-bites-61/ "Vertigo Entertainment developing U.S. remake of Death Note") their June 2008 hiring. (And "Charley"? He was born "Charles", and much coverage uses that name; similarly for "Vlas" vs "Vlasis". On the other hand, there *are* some media pieces using the diminutive, most prominently their [IMDb](http://www.imdb.com/name/nm0663048/) [entries](http://www.imdb.com/name/nm0663050/bio).)
 
-Another interesting detail is the corporate address quietly listed at the bottom of the page: "WARNER BROS. / 4000 Warner Boulevard / Burbank, California 91522". That address is widely available on Google if you want to search for it, but one has to know about it in the first place and so it is much easier to just leave it out.
+Another interesting detail is the corporate address quietly listed at the bottom of the page: "WARNER BROS. / 4000 Warner Boulevard / Burbank, California 91522". That address is widely available on Google if you want to search for it, but one has to know about it in the first place and so it is easier to leave it out.
 
 ### PDF Metadata
 
-(For the benefit of anyone attempting to replicate, the exact PDF I used has the [SHA-256](!Wikipedia) [hash](!Wikipedia "Cryptographic hash function"): `3d0d66be9587018082b41f8a676c90041fa2ee0455571551d266e4ef8613b08a`^[SHA-512: 954082c8cde2ccee1383196fe7c420bd444b5b9e5d676b01b3eb9676fa40427983fb27&#8203;ad8458a784ea765d66be93567bac97aa173ab561cd7231d8c017a4fa70].)
+(The exact PDF I used has the [SHA-256](!Wikipedia) [hash](!Wikipedia "Cryptographic hash function"): `3d0d66be9587018082b41f8a676c90041fa2ee0455571551d266e4ef8613b08a`^[SHA-512: `954082c8cde2ccee1383196fe7c420bd444b5b9e5d676b01b3eb9676fa40427983fb27`&#8203;`ad8458a784ea765d66be93567bac97aa173ab561cd7231d8c017a4fa70`].)
 
 The second thing I did was take a look at the metadata[^death-note-metadata]:
 
@@ -157,7 +111,7 @@ Samples of fanfiction are easy to acquire. [FanFiction.Net's](!Wikipedia "FanFic
 
 As a control-control, I selected some fanfictions that I knew to be of higher quality:
 
-- ["Harry Potter and the Methods of Rationality"](http://www.fanfiction.net/s/5782108/1/Harry-Potter-and-the-Methods-of-Rationality), by Eliezer Yudkowsky
+- ["Harry Potter and the Methods of Rationality"](http://www.fanfiction.net/s/5782108/1/Harry-Potter-and-the-Methods-of-Rationality), by [Eliezer Yudkowsky](!Wikipedia)
 - ["Trust in God, or, The Riddle of Kyon"](http://www.fanfiction.net/s/5588986/1/), by Yudkowsky
 - ["The Finale of the Ultimate Meta Mega Crossover"](http://www.fanfiction.net/s/5389450/1/The-Finale-of-the-Ultimate-Meta-Mega-Crossover), by Yudkowsky
 - ["Peggy Susie"](http://www.fanfiction.net/s/5731071/1/Peggy-Susie), by Yudkowsky
@@ -239,11 +193,11 @@ The script PDF, full corpus, intermediate files, and `stylo` source code are ava
 The graphed results are unsurprising:
 
 1. The movies cluster together in the top third
-2. The _Death Note_ fanfics are also a very distinct cluster at the bottom
+2. The _DN_ fanfics are also a very distinct cluster at the bottom
 3. In the middle, splitting the difference (which actually makes sense if they are indeed more competently or "professionally" written), are the "good" fanfics I selected. In particular, the fanfics by [Eliezer Yudkowsky](!Wikipedia) are generally close together - vindicating the basic idea of inferring authorship through similar word choice.
-4. Exactly as expected, the _Immortals_ subs and the leaked _Death Note_ script are as closely joined as possible, and they practically form their own little cluster within the movie scripts.
+4. Exactly as expected, the _Immortals_ subs and the leaked _DN_ script are as closely joined as possible, and they practically form their own little cluster within the movie scripts.
 
-    This is important because it's evidence for 2 different questions: whether the known Parlapanides work is similar to the leaked script, and whether the leaked script is similar to any fanfictions rather than movies. We can answer the latter question by noting that it is grouped far away from any fanfiction (the only fanfiction in the cluster, the "Three Characters" fanfiction, is very short and formalized), even though Eliezer Yudkowsky (a published author) wrote several of the fanfictions and one of them (_Harry Potter and the Methods of Rationality_) is intended for publication and perhaps [even a Hugo award](http://predictionbook.com/predictions/6556 "HP MoR: MoR will win a Hugo for Best Novel 2013-2017").
+    This is important because it's evidence for 2 different questions: whether the known Parlapanides work is similar to the leaked script, and whether the leaked script is similar to any fanfictions rather than movies. We can answer the latter question by noting that it is grouped far away from any fanfiction (the only fanfiction in the cluster, the "Three Characters" fanfiction, is very short and formalized), even though Eliezer Yudkowsky (himself a published author) wrote several of the fanfictions and one of them (_Harry Potter and the Methods of Rationality_) is intended for publication and perhaps [even a Hugo award](http://predictionbook.com/predictions/6556 "HP MoR: MoR will win a Hugo for Best Novel 2013-2017").
 
 That the analysis spat out the files together is evidence: there were 30 files in the corpus, so if we generated 15 pairs of files at random, there's just a $\frac{1}{15}=6.6\%$ chance of those two winding up together.
 
@@ -515,13 +469,11 @@ One complicating factor I noticed after writing this section is that Charley Par
 
 So far so good? *No!* [Vincent Yu](http://lesswrong.com/lw/f8y/open_thread_november_115_2012/7rol?context=3) points out something interesting: my PDF viewer, Evince, may display timezones as the *user's* timezone, not the actual timezone of creation. Is this true? Is Evince misleading me when it gives the timezone as EDT (the timezone I live in)? We appeal to `pdftk` again: the exact raw date was "D:20090409213247Z". [PHP](http://framework.zend.com/manual/1.6/en/zend.pdf.info.html) docs explain the datestamp, particularly the puzzling final character 'Z':
 
-> CreationDate - string, optional, the date and time the document was created, in the following form: "D:YYYYMMDDHHmmSSOHH'mm'", where: YYYY is the year. MM is the month. DD is the day (01–31)...The apostrophe character (') after HH and mm is part of the syntax. All fields after the year are optional. (The prefix D:, although also optional, is strongly recommended.) The default values for MM and DD are both 01; all other numerical fields default to zero values. A plus sign (+) as the value of the O field signifies that local time is later than UT [[Universal Time](!Wikipedia)], a minus sign (−) that local time is earlier than UT, and the letter Z that local time is equal to UT. If no UT information is specified, the relationship of the specified time to UT is considered to be unknown. Whether or not the time zone is known, the rest of the date should be specified in local time.
+> CreationDate - string, optional, the date and time the document was created, in the following form: "D:YYYYMMDDHHmmSSOHH'mm'", where: YYYY is the year. MM is the month. DD is the day (01-31)...The apostrophe character (') after HH and mm is part of the syntax. All fields after the year are optional. (The prefix D:, although also optional, is strongly recommended.) The default values for MM and DD are both 01; all other numerical fields default to zero values. A plus sign (+) as the value of the O field signifies that local time is later than UT [[Universal Time](!Wikipedia)], a minus sign (−) that local time is earlier than UT, and the letter Z that local time is equal to UT. If no UT information is specified, the relationship of the specified time to UT is considered to be unknown. Whether or not the time zone is known, the rest of the date should be specified in local time.
 
 The "Z" says the input date was in UT. UT? That's basically GMT - so this PDF was created in Europe/England? No; a little more sleuthing turns up the PDF creator software, DynamicPDF, has [an API](http://www.dynamicpdf.com/Support/Java_Help_Documentation_11_01/api-ref/com/cete/dynamicpdf/xmp/BasicSchema.html) in which the `CreationDate` is defined to be a [`java.util.Date` object](http://docs.oracle.com/javase/6/docs/api/java/util/Date.html) which doesn't deal with timezones but instead defaults to UT/GMT. So, the timezone doesn't exist in the metadata; it never existed; and it never *could* exist in data produced by this PDF creator software.
 
-We could try to rescue the timezone argument by shifting the argument to pointing out that the PDF creator software could have been a type which correctly stored the original timezone in the metadata, which could then provide evidence against authenticity if the timezone were not EDT, so we could regard this as a very weak piece of evidence in favor of authenticity - a possible counterpoint turned out to not exist - but this is now so weak it is better to drop the argument entirely.
-
-TODO: update all following numbers based on deleting the timezone argument
+We could try to rescue the timezone argument by shifting the argument to pointing out that the PDF creator software could have been a type which correctly stored the original timezone in the metadata, which could then provide evidence against authenticity if the timezone were not EDT, so we could regard this as a very weak piece of evidence in favor of authenticity - a possible counterpoint turned out to not exist - but this is now so tenuous it is better to drop the argument entirely.
 
 #### Writing/formatting
 
@@ -546,13 +498,13 @@ This leaves just length as a test:
 1. _a_ = is real
 2. _b_ = is full-length
 3. $P(a)$ = probability of being real = 0.691
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.691 = 0.309
-5. $P(b|a)$ = probability a real script will be full-length = 99% (not 100%: shit happens) = 0.99
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.691 = 0.334
+5. $P(b|a)$ = probability a real script will be full-length = 99% (shit happens) = 0.99
 6. $P(b|\lnot a)$ = probability a fake script will be full-length = $\frac{3}{4}$, by Laplace, $\frac{3+1}{4+2} = \frac{4}{6}$ = 0.66
 
 Substitute:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.691}{0.99 \times 0.691 + 0.66 \times 0.309} = 0.7703$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.665}{0.99 \times 0.665 + 0.66 \times 0.334} = 0.749$
 
 Likelihood ratio:
 
@@ -572,9 +524,9 @@ For example, if I gave 90% (fakes) vs 95% (real) for the individual localization
 
 $\frac{0.95}{0.90} + \frac{0.95}{0.90} + \frac{0.95}{0.90} + \frac{0.10}{0.50} + \frac{0.10}{0.50} = 3.5667$
 
-(Here we see an advantage of likelihood ratios: they're easy to calculate and give us an indicator of argument strength *without* having to run through 5 different iterations of Bayes's theorem.)
+(Here we see an advantage of likelihood ratios: they're easy to calculate and give us an indicator of argument strength *without* having to run through 5 different iterations of Bayes's theorem! This is something one learns to appreciate after a few calculations.)
 
-A likelihood ratio of 3.6 would be the single strongest set of arguments we have seen yet, and even stronger than the stylometric likelihood ratio in the next section. If we used this result, it would be solely responsible for a very large amount of the conclusion. A critic of the final conclusion would be right to wonder if the conclusion rested solely on this dubious and unusually subjective section, so we will omit it (with the understanding that as usual, we are being conservative and essentially trying to calculate a lower bound).
+A likelihood ratio of 3.6 would be the single strongest set of arguments we have seen yet, and even stronger than the stylometric likelihood ratio in the next section. If we used this result, it would be solely responsible for a very large amount of the conclusion. A critic of the final conclusion would be right to wonder if the conclusion rested solely on this dubious and unusually subjective section, so we will omit it (with the understanding that as usual, we are being conservative and essentially trying to calculate a lower bound to compensate for arrogance or overly favorable assumptions elsewhere).
 
 #### Stylometrics
 
@@ -582,12 +534,12 @@ The [stylometric result](#stylometrics) is straightforward: if a fake script get
 
 1. _a_ = is real
 2. _b_ = is paired with _Immortals_
-3. $P(a)$ = probability of being real = 0.7703
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.7703 = 0.2297
+3. $P(a)$ = probability of being real = 0.749
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.7703 = 0.251
 5. $P(b|a)$ = probability a real script will be paired with _Immortals_ = 50% = 0.50
 6. $P(b|\lnot a)$ = probability a fake script will paired with _Immortals_ = $\frac{1}{6}$ = 0.1667
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.50 \times 0.7703}{(0.50 \times 0.7703) + (0.1667 \times 0.2297)} = 0.9096$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.50 \times 0.749}{(0.50 \times 0.749) + (0.1667 \times 0.251)} = 0.899$
 
 $\frac{P(b|a)}{P(b|\lnot a)} = \frac{0.50}{0.1667} = 2.999$
 
@@ -624,14 +576,14 @@ In the case of "taking credit", we can imagine the boxes as years, and each year
 
 1. _a_ = is real
 2. _b_ = no one has claimed authorship
-3. $P(a)$ = probability of being real = 0.9096
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.9096 = 0.0904
+3. $P(a)$ = probability of being real = 0.899
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.899 = 0.101
 5. $P(b|a)$ = probability a real script will have no ownership claim = 99% (shit happens^[Or more precisely, sometimes people do falsely claim authorship and even sue studios over it; but if you picked 100 random scripts, would you expect to find more than 1 such instances? Keeping in mind most scripts never turn into movies but die in [development hell](!Wikipedia)!]) = 0.99
 6. $P(b|\lnot a)$ = probability a fake script will have no ownership claim = probability someone *will* claim it is the hope function with _n_=20, _i_=3, _L~0~_=50% = $\frac{\frac{20 - 3}{20} \times 0.5}{\frac{20 - 3}{20} \times 0.5 + (1 - 0.5)} = 0.45945$, so the probability someone will *not* is $1 - 0.45945 = 0.54055$
 
 Then Bayes:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.9096}{(0.99 \times 0.9096) + (0.54055 \times 0.0904)} = 0.9485$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.99 \times 0.899}{(0.99 \times 0.899) + (0.54055 \times 0.101)} = 0.942$
 
 Likelihood ratio:
 
@@ -674,14 +626,14 @@ Once we have settled on 5%/5%/50%, it's as routine as usual to work out the new 
 
 1. _a_ = is real
 2. _b_ = copies get taken down
-3. $P(a)$ = probability of being real = 0.9485
-4. $P(\lnot a)$ = probability of being not real = 1 - 0.9485 = 0.05149
+3. $P(a)$ = probability of being real = 0.942
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.942 = 0.05149
 5. $P(b|a)$ = probability a real script will have copies taken down = 50% = 0.50
 6. $P(b|\lnot a)$ = probability a fake script will have copies taken down = 5%+5% = 0.10
 
 Then Bayes:
 
-$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} =  \frac{0.5 \times 0.9485}{(0.5 \times 0.9485) + (0.1 \times 0.05149)} = 0.9893$
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.5 \times 0.942}{(0.5 \times 0.942) + (0.1 \times 0.058)} = 0.9878$
 
 Likelihood ratio:
 
@@ -693,62 +645,66 @@ To review and summarize each factor we considered:
 
 Argument/test   $P(a)$   $P(\lnot a)$     $P(b|a)$      $P(b|\lnot a)$     $P(a|b)$    $\frac{P(b|a)}{P(b|\lnot a)}$
 --------------- -------- ---------------- ------------- ------------------ ----------- -------------------------------
-authorship      0.5      0.5              0.83          0.5                0.643       1.8
-name spelling   0.64     0.36             0.5           0.93               0.49        0.538
+authorship      0.5      0.5              0.83          0.5                0.64        1.8
+name spelling   0.64     0.36             0.5           0.93               0.49        0.54
 address         0.49     0.51             0.16          0.16               0.49        1
-PDF date        0.49     0.51             0.5           0.25               0.658       2
-PDF creator     0.658    0.342            0.99          0.9585             0.6652      1.033
-PDF timezone    0.6652   0.3349           0.99          0.881              0.691       1.1237
-script length   0.691    0.309            0.99          0.66               0.7703      1.5
-Hollywood plot  0.7703   0.2297           ~1.0          ?                  ?           ? (>1)
-stylometrics    0.7703   0.2297           0.5           0.1667             0.9096      2.999
-dating          0.9096   0.0904           ?             ?                  ?           ? (>1)
-credit          0.9096   0.0904           0.99          0.54055            0.9485      1.831
-official plot   0.9485   0.05149          ~1.0          ?                  ?           ? (>1)
-legal takedown  0.9485   0.05149          0.5           0.10               0.9893      5
+PDF date        0.49     0.51             0.5           0.25               0.66        2
+PDF creator     0.66     0.34             0.99          0.96               0.67        1.03
+PDF timezone
+script length   0.666    0.333            0.99          0.66               0.749       1.5
+Hollywood plot  0.749    0.251            ~1.0          ?                  ?           ? (>1)
+stylometrics    0.749    0.251            0.5           0.167              0.899       2.99
+dating          0.899    0.101            ?             ?                  ?           ? (>1)
+credit          0.899    0.101            0.99          0.541              0.949       1.83
+official plot   0.942    0.058            ~1.0          ?                  ?           ? (>1)
+legal takedown  0.942    0.058            0.5           0.10               0.988       5
 
-The final posterior speaks for itself: 98.9%. By taking into account 9 different factors and thinking about how consistent each factor is with the script being real, we've gone from considerable uncertainty to a surprisingly high value, even after bending over backwards to omit 3 particularly disputable factors.
+The final posterior speaks for itself: 98%. By taking into account 9 different factors and thinking about how consistent each factor is with the script being real, we've gone from considerable uncertainty to a surprisingly high value, even after bending over backwards to omit 3 particularly disputable factors.
+
+## Likelihood ratio tweaking
 
 Is 98% *the* correct posterior? Well, that depends both on whether one accepts each individual analysis and also the original prior of 50%. Suppose one accepted the analysis as presented but believes that actually only 10% of leaked scripts are real? Would such a person wind up believing that the leak is real >50%? How can we answer this question without redoing 9 chained applications of Bayes's theorem? At last we will see the benefit of computing likelihood ratios all along: since likelihood ratios omit the prior $P(a)$, they are expressing something independent, and that turns out to be how much we should increase our prior (whatever it is).
 
-To update using a likelihood ratio (some more reading material: ["Simplifying Likelihood Ratios"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1495095/ "McGee 2002")), we express our $P(a)$ as instead $\frac{P(a)}{1 - P(a)}$, multiply by the likelihood ratio, and convert back! So for our table: we start with $\frac{0.5}{1 - 0.5} = 1$, multiply by 1.8, 0.538...5:
+To update using a likelihood ratio (some more reading material: ["Simplifying Likelihood Ratios"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1495095/ "McGee 2002")), we express our $P(a)$ as instead $\frac{P(a)}{1 - P(a)}$, multiply by the likelihood ratio, and convert back! So for our table: we start with $\frac{0.5}{1 - 0.5} = 1$, multiply by 1.8, 0.538, 1...5:
 
-$\frac{0.5}{1 - 0.5} \times 1.8 \times 0.538 \times 1 \times 2 \times 1.033 \times 1.1237 \times 1.5 \times 2.999 \times 1.831 \times 5 = 92.5895$
+$\frac{0.5}{1 - 0.5} \times 1.8 \times 0.538 \times 1 \times 2 \times 1.033 \times 1.5 \times 2.999 \times 1.831 \times 5 = 82.3$
 
-And we convert back as $\frac{92.5895}{1+92.5895} = 0.9893$ - like magic, our final posterior reappears. Knowing 89.664 is the factor to multiply by, we can easily run other examples. What of the 10% person? Well:
+And we convert back as $\frac{82.3}{1+82.3} = 0.98$ - like magic, our final posterior reappears. Knowing the product of our likelihood ratios is the factor to multiply by, we can easily run other examples. What of the person starting with a 10% prior? Well:
 
-$\frac{0.10}{1 - 0.10} \times 92.589 = 10.288$ and $\frac{10.288}{1+10.288}=0.9114$
+$\frac{0.10}{1 - 0.10} \times 82.3 = 9.1$ and $\frac{9.1}{1+9.1}=0.90$
 
-And a 1% person is $\frac{0.01}{1 - 0.01} \times 92.589 = 0.935$ and $\frac{0.935}{1+0.935}=0.483$ Ooh, *almost* to 50%, so we know anyone with a prior of 2% who accepts the analysis will be moved all the way to thinking the script more likely to be true than not (specifically, 0.654).
+And a 1% person is $\frac{0.01}{1 - 0.01} \times 82.3 = 0.83$ and $\frac{0.83}{1+0.83}=0.45$ Ooh, *almost* to 50%, so we know anyone with a prior of 2% who accepts the analysis may be moved all the way to thinking the script more likely to be true than not (specifically, 0.62).
 
-What if we thought we had the right prior of 50% but we terribly messed up each analysis and each likelihood factor was twice as large/small as it should be? If we cut each likelihood factor's difference from 1 by half[^Haskell-likelihood-factor], then we get a new total likelihood factor of 17.998, and our new posterior is:
+What if we thought we had the right prior of 50% but we terribly messed up each analysis and each likelihood factor was twice as large/small as it should be? If we cut each likelihood factor's strength by half[^Haskell-likelihood-factor], then we get a new total likelihood factor of 3.9, and our new posterior is:
 
-$\frac{0.5}{1 - 0.5} \times 17.58 = 17.58$; $\frac{17.58}{1+17.58} = 0.9461$
+$\frac{0.5}{1 - 0.5} \times 3.9 = 3.9$; $\frac{3.9}{1+3.9} = 0.79$
 
-Oh, that's not so bad.
+A little worrisome.
 
-[^Haskell-likelihood-factor]: The gory details:
+[^Haskell-likelihood-factor]: The gory details; since the strength of a ratio in either direction is the difference from 1, we need to subtract or add 1 depending on the direction:
 
     ~~~{.Haskell}
     map (\x -> if x==1 then 1 else (if x>1 then 1+((x-1)/2) else 1-(x/2)))
-        [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5]
-    [1.4,0.731,1.0,1.5,1.0165,1.06185,1.25,1.9995,1.4155,3.0]
+        [1.8, 0.538,1,2,1.033,1.5,2.999,1.831,5]
+    ~>
+    [1.4,0.731,1.0,1.5,1.0165,1.25,1.9995,1.4155,3.0]
 
     product (map (\x -> if x==1 then 1 else (if x>1 then 1+((x-1)/2) else 1-(x/2)))
-        [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5])
-    17.58
+        [1.4,0.731,1.0,1.5,1.0165,1.25,1.9995,1.4155,3.0])
+    ~>
+    3.91
     ~~~
 
 What if instead we ignored the 2 arguments with a likelihood ratio greater than 2? Then we get a multiplied likelihood ratio of 3.087[^Haskell-filtered] and from 50% we will go to:
 
-$\frac{0.5}{1 - 0.5} \times 3.087 = 3.087$; $\frac{3.087}{1+3.087} = 0.7553$
+$\frac{0.5}{1 - 0.5} \times 2.74 = 3.087$; $\frac{2.74}{1+2.74} = 0.73$
 
 [^Haskell-filtered]: Easy enough:
 
     ~~~{.Haskell}
-    product (filter (<2)
-        [1.8, 0.538,1,2,1.033,1.1237,1.5,2.999,1.831,5])
-    3.0873444556602596
+    product (filter (<2) [1.8, 0.538,1,2,1.033,1.5,2.999,1.831,5])
+    ~>
+    2.74
     ~~~
 
 *Challenges for advanced readers*:
@@ -779,14 +735,13 @@ If anyone else were interested in the issue, the framework of the 12 tests provi
 
 This would be the sort of discussion even bitter foes could engage in productively, by collaborating on compiling scripts or searching independently for material - and productive discussions are the best kind of discussion.
 
-<!--
-# The truth
+# The truth?
 
 In textual criticism, usually the ground truth is unobtainable: all parties are dead & new discoveries of definitive texts are rare. Many questions are "not beyond all conjecture" (pace Thomas Browne[^urn-burial]) but are beyond resolution.
 
 [^urn-burial]: Sir [Thomas Browne](!Wikipedia), _[Hydriotaphia, Urn Burial](!Wikipedia)_ ([chapter 5](http://penelope.uchicago.edu/hydrionoframes/hydrio5.html)):
 
-    > What Song the _Syrens_ sang, or what name _Achilles_ assumed when [he hid himself among women](/docs/1963-asimov-sword-of-achilles), though puzzling Questions are not beyond all conjecture. What time the persons of these Ossuaries entred the famous Nations of the dead, and slept with Princes and Counsellours, might admit a wide resolution. But who were the proprietaries of these bones, or what bodies these ashes made up, were a question above Antiquarism. Not to be resolved by man, nor easily perhaps by spirits, except we consult the Provinciall Guardians, or tutellary Observators. Had they made as good provision for their names, as they have done for their Reliques, they had not so grosly erred in the art of perpetuation. But to subsist in bones, and be but Pyramidally extant, is a fallacy in duration. Vain ashes, which in the oblivion of names, persons, times, and sexes, have found unto themselves, a fruitlesse continuation, and only arise unto late posterity, as Emblemes of mortall vanities; Antidotes against pride, vain-glory, and madding vices. Pagan vain-glories which thought the world might last for ever, had encouragement for ambition, and finding no _Atropos_ unto the immortality of their Names, were never dampt with the necessity of oblivion. Even old ambitions had the advantage of ours, in the attempts of their vain-glories, who acting early, and before the probable Meridian of time, have by this time found great accomplishment of their designes, whereby the ancient _Heroes_ have already out-lasted their Monuments, and Mechanicall preservations. But in this latter Scene of time we cannot expect such Mummies unto our memories, when ambition may fear the Prophecy of _Elias_, and _Charles_ the fifth can never hope to live within two _Methusela_'s of Hector.
+    > What Song the _Syrens_ sang, or what name _Achilles_ assumed when [he hid himself among women](/docs/1963-asimov-sword-of-achilles), though puzzling Questions are not beyond all conjecture. What time the persons of these Ossuaries entred the famous Nations of the dead, and slept with Princes and Counsellours, might admit a wide resolution. But who were the proprietaries of these bones, or what bodies these ashes made up, were a question above Antiquarism. Not to be resolved by man, nor easily perhaps by spirits, except we consult the Provinciall Guardians, or tutellary Observators. Had they made as good provision for their names, as they have done for their Reliques, they had not so grossly erred in the art of perpetuation. But to subsist in bones, and be but Pyramidally extant, is a fallacy in duration. Vain ashes, which in the oblivion of names, persons, times, and sexes, have found unto themselves, a fruitlesse continuation, and only arise unto late posterity, as Emblemes of mortall vanities; Antidotes against pride, vain-glory, and madding vices. Pagan vain-glories which thought the world might last for ever, had encouragement for ambition, and finding no _Atropos_ unto the immortality of their Names, were never dampt with the necessity of oblivion. Even old ambitions had the advantage of ours, in the attempts of their vain-glories, who acting early, and before the probable Meridian of time, have by this time found great accomplishment of their designes, whereby the ancient _Heroes_ have already out-lasted their Monuments, and Mechanicall preservations. But in this latter Scene of time we cannot expect such Mummies unto our memories, when ambition may fear the Prophecy of _Elias_, and _Charles_ the fifth can never hope to live within two _Methusela_'s of Hector.
 
 Our case is happier: we can just ask one of the Parlapanides. A [Twitter account](http://twitter.com/Cparlapanides) was already linked, so asking is easy. Will they reply? 2009 was a long time ago, but 2011 (when they were replaced) was not so long ago. Since the script was scrapped, one would hope they would feel free to reply or reply honestly, but we can't know.
 
@@ -798,15 +753,36 @@ Why this pessimism of only 85%?
 2. one argument turned out to be an argument against authenticity
 3. several arguments turned out to be useless or unquantifiable
 4. several arguments rest on weak enough data that they could also turn out useless or negative; eg. the PDF timezone argument
-5. the applications of Bayes assumes each argument is "independent" and can be taken at face-value; but several arguments are plausibly correlated with each other ([covariance](!Wikipedia)) and so the true conclusion will be weaker. Hopefully making conservative choices at least partially offset this overestimating tendency - but did it?
+5. the applications of Bayes assumes each argument is "independent" and can be taken at face-value; but several arguments are plausibly correlated with each other ([covariance](!Wikipedia)) and so the true conclusion will be weaker, perhaps much weaker. Hopefully making conservative choices at least partially offset this overestimating tendency - but did it?
 6. I made more mistakes than I care to admit working out each problem.
-7. And finally, I haven't been able to come up with multiple good arguments why the script is a fake, which suggests I am now personally invested in it being real and so my final 98% calculation is an overestimate.
+7. And finally, I haven't been able to come up with multiple good arguments why the script is a fake, which suggests I am now personally invested in it being real and so my final 98% calculation is an substantial overestimate. One shouldn't be foolishly confident in one's statistics.
 
-One shouldn't be foolishly confident in one's statistics.
+## No comment
 
+I messaged him on Twitter on 27 October 2012; after some back and forth, he specified that his "no" answer was an inference based on what was then the first line of the plot section: the mention that Ryuk did not appear in the script, but that they loved Ryuk and so it was not their script.  I tried getting a more direct answer by mentioning the ANN article about Shane and name-dropping "Luke Murray" to see if he would object or elaborate, but he repeated that the studio hated how Ryuk appeared in the manga and he couldn't say much more. I thanked him for his time and dropped the conversation.
+
+Unfortunately, this is not the clear open-and-shut denial or affirmation I was hoping for. (I do not hold it against him, since I'm grateful and a little surprised he took the time to answer me at all: there is no possible benefit for him to answer my questions, potential harm to his relationships with studios, and he is a busy guy from everything I read about him & his brother while researching this essay.)
+
+There are at least two ways to interpret curious sort of non-denial/non-affirmation: the script has nothing to do with the Parlapanides or the studios and is a fake which merely happens to match the studio's desires in omitting Ryuk entirely; or it is somehow a descendant or relative of the Parlapanides script which they are disowning or regard as not their script (Ryuk is a major character in most versions of _DN_).
+
+If Parlapanides had affirmed the script, then clearly that would be strong evidence for the script's authenticity. If he had denied the script, that would be strong evidence against the script's authenticity. And the in-between cases? If there had been a clear hint on his part - perhaps something like "of course I cannot officially claim that that script is authentic" - then we might want to construe it as evidence for authenticity, but he gave a specific way in which the leaked script did not match his script, and this must be evidence *against*.
+
+How much evidence against? I specified my best guess that he would reply clearly was 40% and that he would affirmatively conditional on replying clearly was 85%, so roughly, I was expecting a clear affirmation only 40% times 85% or 34%; so, I did not expect to get a clear affirmation despite having a high confidence in the script's authenticity, and this suggests that the lack of clear affirmation cannot be very strong evidence for me. I don't think I would be happy with a likelihood ratio stronger (smaller) than 0.25, so I would update thus, reusing our previous likelihood ratios:
+
+$\frac{0.5}{1 - 0.5} \times 82.3 \times 0.25 = 20.5$ and then we have a new posterior: $\frac{20.5}{1+20.5}=0.95$
+
+# Conclusion
+
+How should we regard this? I'm moderately disturbed: it *feels* like Parlapanides's non-answer should matter more. But all the previous points seem basically right. This represents an interesting question of bullet-biting & ["Confidence levels inside and outside an argument"](http://lesswrong.com/lw/3be/confidence_levels_inside_and_outside_an_argument/), or perhaps [modus tollens vs modus ponens](Prediction markets#modus-tollens-vs-modus-ponens): does the conclusion discredit the arguments & calculations, or do the arguments & calculations discredit the conclusion?
+
+Overall, I feel inclined to bite the bullet. Now that I have laid out the multiple lines of converging evidence and rigorously specified *why* I found them convincing arguments of authenticity, I simply don't see how to escape the conclusion. Even assuming large errors in the strength - in the likelihood section, we looked at halving the strength of each disjunct and also discarding the 2 best - we still increase in confidence.
+
+So: I believe the script is real, if not exactly what the Parlapanides brothers wrote.
+
+<!--
 Sent Saturday midnight 27 Oct 12;
 
-> @Cparlapanides Finished analysis of leaked 2009 script: gwern.net/Death%20Note%2… Dying to know: was I right? Was it really you & your brother's?
+> @Cparlapanides Finished analysis of leaked 2009 script: gwern.net/Death%20Note%20script Dying to know: was I right? Was it really you & your brother's?
 
 He did reply and fairly quickly; the first reply was on Monday 10:33 AM - 29 Oct 12:
 
@@ -831,11 +807,10 @@ Reply:
 
 Reply:
 
-> studio didn't want the death god. we kept telling them that we could do it ANGEL HEART / and how deniro portrayed the devil. They hated how Ryuk was depicted in the manga. Just put two and two togther, our draft had Ryuk. can't say much more. but what was posted on line was not ours
+> studio didn't want the death god. we kept telling them that we could do it ANGEL HEART / and how Deniro portrayed the Devil. They hated how Ryuk was depicted in the manga. Just put two and two together, our draft had Ryuk. can't say much more. but what was posted online was not ours
 > 03:48-03:49 PM - 16 Dec 12
 
 > OK, thanks for the reply. Won't bother you anymore. If it's not based on your script in any shape or form, then it's not. Guess it's just a talented prankster; too bad I'll probably never know the truth.
-
 -->
 
 # See also
@@ -846,6 +821,6 @@ Reply:
 
 # External links
 
-<!-- - [LessWrong discussion]() -->
+- [LessWrong discussion](http://lesswrong.com/lw/f63/case_study_the_death_note_script_and_bayes/)
 - ["Inherited Improbabilities: Transferring the Burden of Proof"](http://lesswrong.com/lw/35d/inherited_improbabilities_transferring_the_burden/)
 - ["Odds again: Bayes made usable"](http://rationallyspeaking.blogspot.com/2012/11/odds-again-bayes-made-usable.html)
