@@ -244,7 +244,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
     ~~~{.Bash}
     function markdown-lint () {
-        file "$@" | grep --invert-match "text"; # warn if not text, perhaps due to bad copy-paste
+        cat "$@" | file - | grep -v "text"; # warn if not text, perhaps due to bad copy-paste
         fgrep -e "(www" -e ")www" -e "![](" -e " percent " "$@";
         grep --only-matching '^\[\^.*\]: ' "$@" | sort | uniq --count | fgrep --invert-match "      1 [^";
         markdown-length-checker "$@";
