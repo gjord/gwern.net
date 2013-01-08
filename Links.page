@@ -292,6 +292,9 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. Identified performance issue & instigated addition of `--max-count` option for Filestore
 
 ## XMonad
+
+#. regular XMonadContrib patch reviews
+#. [Config archive downloader](http://www.haskell.org/haskellwiki/Xmonad/Config_archive#Downloading_all_configs)
 #. Contributed modules:
     i. XMonad.Util.Paste
     ii. XMonad.Actions.Search
@@ -300,6 +303,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. Maintain previous[^commit]
 
 ## Yi
+
 #. Contributed modules:
     i. Yi.IReader
     ii. Yi.Mode.IReader
@@ -311,6 +315,7 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #. Comment support to cabal-mode
 
 ## Lambdabot
+
 #. (Re)Cabalized[^cabalized]
 #. Adapted to use Mueval
 #. Refactored out code in multiple packages:
@@ -342,48 +347,59 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 - Maintain the Darcs backend (debug & optimize)
 
 ## Mueval
+
 - Wrote and maintain it
 
 ## wp-archivebot
+
 - Wrote and maintain it (see <http://www.haskell.org/pipermail/haskell/2009-June/021388.html>)
 
 ## archiver
+
 - Wrote and maintain it (see <http://www.haskell.org/pipermail/haskell-cafe/2010-December/087158.html>)
 
 ## Change-monger
+
 - Wrote and maintain it
 
 ## Base libraries
 #### Base
+
 - Added [`Control.Monad.void`](!Hoogle "Control.Monad.void")
 - Helped replace [`Data.List.sort`](!Hoogle "Data.List.sort") with YHC's more efficient implementation (see <http://hackage.haskell.org/trac/ghc/ticket/2143>)
 - Improved [`System.Environment` doc](http://www.haskell.org/pipermail/libraries/2012-February/017520.html)
 
 ### Unix
+
 - fixed a possible runtime crash in `mkstemp`
 - added `mkstemp` docs
 
 ## Autoproc
+
 - Cleanup
 - Improved basic functionality
 - Implemented an XMonad-style reload system to allow actual customization
 - Maintain it
 
 ## Frag
+
 - Updated for GHC 6.8 & 6.10[^ghc]
 - Cleanup
 - Replaced the non-Free level data and graphics with Free ones
 
 ## HalFS
+
 - Updated
 - Improved cabalization
 
 ## Shu-thing, Monadius
+
 - Linux portability fixes
 - Cabalized
 - Cleanup
 
 ## Hint
+
 - Improved examples, docs
 - Added UTF8 support
 - Made use ghc-paths library
@@ -391,86 +407,109 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 - Added GHC-options support
 
 ## Hlint
+
 - added GHCi integration
 
 ## Pugs
+
 - Cleaned up their third-party modules
 - Fixed up various Cabal issues
 - Helped maintain it
 
 ## ZFS
+
 - Cabalized
 - Cleanup
 
 ## Greencard
+
 - Updated
 - Cabalized & did the package split
 
 ## ArrayRef
+
 - Cabalized
 - Cleanup
 - Updated
 
 ## Hashell
+
 - Updated for 6.8's GHC API
 - Cleanup
 - Cabalized
 
 ## QuickCheck
+
 - Prototyped the Data.Complex instance
 
 ## GenI
+
 - Improved Cabalization
 
 ## HArchive
+
 - Cabalized
 
 ## HaLeX
+
 - Cabalized
 
 ## HTF
+
 - Cabalized
 
 ## PArrows
+
 - Cabalized
 
 ## Baskell
+
 - Cabalized
 
 ## Mage
+
 - Cabalized
 - Cleanup
 
 ## Haskell In Space
+
 - Cabalized
 - Cleanup
 - Updated
 
 ## Smallcheck
+
 - Cabalized
 
 ## Topkata
+
 - Improved Cabalization
 
 ## HsSyck
+
 - ByteString updates
 - Improved cabalization
 
 ## HList
+
 - Updated
 - Cabalized
 
 ## flow2dot
+
 - Updated
 
 ## hinvaders
+
 - Cabalized
 - Updated
 
 ## Whim
+
 - Cabalized whim
 
 ## Tagsoup
+
 - replaced old custom HTTP download code with standard library functions
 
 ## The others & the rest
