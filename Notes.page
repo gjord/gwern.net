@@ -1128,7 +1128,17 @@ If those 611 were merely ordinary, what would we expect? Lifetime estimates of a
 
 And 611 is very low an estimate. After all, everyone lives *somewhere*. The 8 million inhabitants of New York City will read about and be disgusted by the assistant New York Governor, the Mayor of New York City and his flunkies, the New York State legislature (212 members); and then there are the nearby counties like Nassau or Suffolk which are covered by newspapers in circulation in NYC like _Newsday_. We could plausibly double or triple this figure. (I had not heard of many politicians involved in sex scandals - like Khan, come to think of it - so they do not even need to be famous.)
 
-So we have noticed that there are 'too few' sex scandals in politics; the same reasoning seems to work for ordinary crimes like murder - there are too few! In fact, it seems that politicians are uncannily honest; the only category I can think of where politicians are normally unethical would be finance (bribes, conflicts of interest, insider trading by [Representatives](http://insidertrading.procon.org/sourcefiles/abnormal-returns-of-us-house-of-representatives-2011.pdf) & [Senators](http://www.thenationalbusinessassociation.com/content/JFQA-394-Ziobrowski-Proofs.pdf), etc). Why is this?
+So we have noticed that there are 'too few' sex scandals in politics; the same reasoning seems to work for ordinary crimes like murder - there are too few! In fact, besides Congressmen rarely committing suicide[^political-suicide] (despite the considerable stresses), it seems that politicians in general are uncannily honest; the only category I can think of where politicians are normally unethical would be finance (bribes, conflicts of interest, insider trading by [Representatives](http://insidertrading.procon.org/sourcefiles/abnormal-returns-of-us-house-of-representatives-2011.pdf) & [Senators](http://www.thenationalbusinessassociation.com/content/JFQA-394-Ziobrowski-Proofs.pdf), etc). Why is this?
+
+[^political-suicide]: From ["Leaving Office Feet First: Death In Congress"](http://home.gwu.edu/~forrest/fmdeathincongressps.pdf "Maltzman et al 1996"):
+
+    > According to the most reliable estimate available, eight members of Congress have committed suicide (Eisele 995). Amer (1989) reported only seven, but the 1925 suicide of Senator Joseph McCormick (R-IL), who overdosed on barbiturates, was subsequently made public (Miller 1992). Senator Lester Hunt (D-WY) is the only member to have killed himself in the Russell Office Building. He did so after supporters of Senator Joseph McCarthy (R-WI) threatened to publicize the arrest of Hunt's son for committing homosexual acts in a Washington park unless Hunt withdrew from his 1954 re-election campaign - an incident that provided the inspiration for Allen Drury's (1959) novel _Advise and Consent_.
+    >
+    > - Eisle, Albert 1995. "Members of Congress No Strangers to Violent Deaths", _The Hill_ (September 6)
+    > - Amer, Mildred 1989. "Members of the U.S. Congress Who have Died of Other Than a Natural Death While Still in Office: A Selected List". Washington, DC: Congressional Research Service
+    > - Miller, Kristie 1992. _Ruth Hanna McCormick: A Life in Politics 1880-1944_. Albuquerque: University of New Mexico Press
+
+    If there are 535 members of Congress and each has a career of 22 years, and we look at the 88 years of 1925-2013, then that is >=8 suicides spread over 4 blocks or a $\frac{8}{535 \times 4} \times 100 =$ 0.37% suicide rate; but in general, [suicide in the USA](!Wikipedia "Suicide in the United States") is a leading cause of death at around 100,000 deaths a year. Estimating total lifetime risk is harder, but some searching turned up [Nock et al 2008](http://epirev.oxfordjournals.org/content/30/1/133.full "Suicide and Suicidal Behavior") with estimates for US adults of suicide attempts somewhere around 1.9-8.7%, which if another estimate is right that out of every 10 attempts 1 succeeds may imply that the Congressional risk is equivalent (1.9%/10 < 0.37) or lower (8.7/10 > 0.37). For comparison, alcoholics have [2-3% lifetime risk](http://archpsyc.ama-assn.org/cgi/reprint/47/4/383.pdf "'The Lifetime Risk of Suicide in Alcoholism', ")
 
 ## Why?
 
@@ -1940,3 +1950,48 @@ They are probably best considered as a subset of "discovered" or "found" [esoter
 - _[Magic: the Gathering](!Wikipedia)_: [TC](http://www.toothycat.net/~hologram/Turing/ "Magic: the Gathering is Turing Complete") in the sense that players mechanically taking any option they are given, and otherwise all actions are forced
 - musical notation: given instructions for transposing successive notes, [musical notation becomes the esolang](http://programmers.stackexchange.com/a/136179) [Choon](http://www.stephensykes.com/choon/choon.html)
 - heart cells: interact in a way [allowing logic gates and hence TC-ness](http://eprints.uwe.ac.uk/15848/6/ScarleXbox.pdf "Implications of the Turing completeness of reaction-diffusion models, informed by GPGPU simulations on an XBox 360: Cardiac arrhythmias, re-entry and the halting problem', Scarle 2009") (perhaps not *too* surprising since cellular automatons were biologically motivated)
+
+<!--
+# Shell scripting applications
+
+things I have used shell scripting for over the years:
+
+https://plus.google.com/103530621949492999968/posts/J5TxoMpAcsB
+
+cuesplit.sh:             POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+darcs-smtp:              POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+filter-urls:             POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+firefox-urls:            POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+local-archiver:          POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+memento-mori:            POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+sousveillance:           POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
+
+.alias
+
+About.page:    ~~~{.Bash}
+Archiving URLs.page:~~~{.Bash}
+Archiving URLs.page:~~~{.Bash}
+hpmor.page:~~~{.Bash}
+hpmor.page:~~~{.Bash}
+hpmor.page:~~~{.Bash}
+In Defense Of Inclusionism.page:    ~~~{.Bash}
+In Defense Of Inclusionism.page:~~~~{.Bash}
+In Defense Of Inclusionism.page:~~~~{.Bash}
+Spaced repetition.page:- [Bash scripts](http://groups.google.com/group/mnemosyne-proj-users/browse_thread/thread/fd10b9e601fb0eb6) for generating vocabulary flashcards (processing multiple online dictionaries, good for having multiple examples; images; and audio)
+Zeo.page:~~~{.Bash}
+Zeo.page:~~~{.Bash}
+Zeo.page:    ~~~{.Bash}
+Zeo.page:    ~~~{.Bash}
+
+irssi pasting
+
+19:58 < gwern> ... http://www.bladeandepsilon.com/hybridtheory24final.txt http://www.bladeandepsilon.com/hybridtheory25final.txt http://www.bladeandepsilon.com/hybridtheory26final.txt http://www.bladeandepsilon.com/hybridtheory27final.txt http://www.bladeandepsilon.com/hybridtheory28final.txt http://www.bladeandepsilon.com/hybridtheory29final.txt http://www.bladeandepsilon.com/hybridtheory30final.txt && cat hybrid*.txt | wc -w && rm hybrid*.txt
+= 09:28 <@gwern> ggreer: http://predictionbook.com/predictions/6737 $ echo -n "Seth Roberts will not post a blog post on my (supposedly) null result for taking vitamin D in the morning." | sha512sum
+
+website CSS validator (one of many in crontab):
+= 12:31 <@gwern> perplexing. both 'if [ -z `curl --silent --head "http://www.gwern.net/static/css/default.css" | grep "Content-Type: text/html"` ]; then echo true; fi' and 'if [ -n `curl --silent --head "http://www.gwern.net/static/css/default.css" | grep "Content-Type: text/html"` ]; then echo true; fi' return the same exact thing
+
+markdown-lint
+eg = 16:46 <@gwern> grep --only-matching '^\[\^.*\]: ' "$@" | sort | uniq --count | fgrep --invert-match "      1 [^"
+
+-->
