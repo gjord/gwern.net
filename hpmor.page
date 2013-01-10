@@ -502,7 +502,7 @@ unsplit xs = let chapter = last xs
 A `runhaskell mor.hs` later and our [CSV of 18,852 reviews](/docs/2012-hpmor-reviews.csv) is ready for analysis in the R interpreter:
 
 ~~~{.R}
-data <- read.table("http://www.gwern.net/docs/2012-hpmor-reviews.csv",header=TRUE, sep=",",quote="")
+data <- read.csv("http://www.gwern.net/docs/2012-hpmor-reviews.csv")
 data
 ...
 18840                                        cheekylildevil  2/28/10       1
