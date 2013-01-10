@@ -127,7 +127,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 
     ~~~{.R}
     # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
-    mydata <- read.table("http://www.gwern.net/docs/2011-zeo-melatonin.csv", header=TRUE, sep=",")
+    mydata <- read.csv("http://www.gwern.net/docs/2011-zeo-melatonin.csv")
 
     # "SSCF 10" is the variable ('sleep stealer custom factor')
     # I edited the CSV to convert all '3' to '1' (& so a binary)
@@ -249,7 +249,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
            254.2174        233.2969
     ~~~
 
-<!-- source("BEST.R"); mydata <- read.table("http://www.gwern.net/docs/2011-zeo-melatonin.csv", header=TRUE, sep=","); on <- subset(mydata, SSCF.10==1); off <- subset(mydata, SSCF.10==0); mcmc = BESTmcmc(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)], numSavedSteps=1000000); BESTplot(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)],mcmc,TRUE, ROPEeff=c(-0.1,0.1)) -->
+<!-- source("BEST.R"); mydata <- read.csv("http://www.gwern.net/docs/2011-zeo-melatonin.csv"); on <- subset(mydata, SSCF.10==1); off <- subset(mydata, SSCF.10==0); mcmc = BESTmcmc(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)]); BESTplot(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)],mcmc,TRUE, ROPEeff=c(-0.1,0.1)) -->
 
 [^melatonin-multiple]: If we correct for multiple comparisons (see [previous footnote](#fn7)) at _q_-value=0.05, of our 10 _p_-values (0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779), none of them survive:
 
@@ -942,7 +942,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 [^vitamin-D-analysis-p]: The usual session:
 
     ~~~{.R}
-    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind.csv", header=TRUE, sep=",")
+    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind.csv")
     t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
@@ -1289,10 +1289,10 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
 [^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
     ~~~{.R}
-    data <- read.table("http://www.gwern.net/docs/gwern-zeodata.csv", header=TRUE, sep=",")
+    data <- read.csv("http://www.gwern.net/docs/gwern-zeodata.csv")
     # Master Zeo export file is periodically updated; your results may not be identical
     n <- length(data$Morning.Feel); n
-    [1] 448
+    [1] 686
     reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
     summary(reg)
 
@@ -1300,50 +1300,53 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
     lm(formula = Morning.Feel[2:n] ~ Morning.Feel[1:(n - 1)], data = data)
 
     Residuals:
-        Min      1Q  Median      3Q     Max
-    -1.8287 -0.6929  0.1713  0.3071  1.4430
+       Min     1Q Median     3Q    Max
+    -1.863 -0.742  0.197  0.258  1.318
 
     Coefficients:
                             Estimate Std. Error t value Pr(>|t|)
-    (Intercept)              2.42111    0.15763  15.359   <2e-16 ***
-    Morning.Feel[1:(n - 1)]  0.13587    0.05504   2.469   0.0141 *
-    ---
-    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    (Intercept)               2.6217     0.1219   21.51   <2e-16
+    Morning.Feel[1:(n - 1)]   0.0603     0.0424    1.42     0.16
 
-    Residual standard error: 0.667 on 322 degrees of freedom
-      (123 observations deleted due to missingness)
-    Multiple R-squared: 0.01858,    Adjusted R-squared: 0.01553
-    F-statistic: 6.095 on 1 and 322 DF,  p-value: 0.01407
+    Residual standard error: 0.723 on 554 degrees of freedom
+      (129 observations deleted due to missingness)
+    Multiple R-squared: 0.00364,    Adjusted R-squared: 0.00185
+    F-statistic: 2.03 on 1 and 554 DF,  p-value: 0.155
 
-    # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is 0.01
+    # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is <0.1
     # with a residual error of 0.7, that doesn't seem very correlated?
-    # although p=0.15 does indicate there's a very real (but still small) correlation from
-    # day to day, so I guess the p-values may be a little overstated
+    # although the _p_ does indicate there's a real (but very small) correlation from
+    # day to day, so I guess the p-values may be a *little* overstated
 
     cor(data$Morning.Feel[2:n], data$Morning.Feel[1:(n-1)], use = "complete.obs")
-    [1] 0.1363006
+    [1] 0.06037
 
-    # 123 observations missing? What's going on? Well, what does the data look like?
+    # 129 observations missing? What's going on? Well, what does the data look like?
 
     data$Morning.Feel
-      [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2
-     [26]  3  2  3 NA  3 NA NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4
-     [51] NA NA  4  4  3  4 NA NA NA NA NA NA NA  4 NA  2  3  3 NA NA  3 NA  3  3 NA
-     [76]  2 NA NA NA NA  3 NA NA NA NA NA NA NA  3  4 NA  4  3  3  3  4  4  3  3  3
-    [101]  2  3  3  2  3  3  3  2 NA  3  3  4  3 NA  3 NA  3 NA  3  3  3 NA  3  3 NA
-    [126] NA NA NA NA  2 NA NA  3  2  3 NA NA NA NA NA NA  3  2  3  2  2  2  2  2  3
-    [151]  3  3  3 NA  3  3  2  2  3  3  2  3  2  3 NA  2 NA NA  4  3  3  3  2  3 NA
-    [176]  4  3  2  3  3  3  3  3  3  4  3  4  3  3  3  3  3  2  3  2  3  3  3 NA  3
-    [201]  1  4 NA  3  2  4  4  2  2  3  3  3  3  3  3  3  3  3  3  4  3  3  2  2  3
-    [226]  3  2  3  3  3  2  2  3  3  3  3  3  4  3  3  2  2  2  1  2  3  3 NA  3  3
-    [251]  3  3  3  3  3  3  2  3  2  3  2  3  3  3  2  3  3  2  3  3  3  3  4  3  3
-    [276]  4  3  4  2  3 NA  3  3  2  2  2  3  3  3  3  2  3  3  2  2  2  3  3  2  2
-    [301]  3  2  3  3  3  3  3  3  2  3  3  2  1  3  4  3  2  3  3  2  2  3  3  3  1
-    [326]  2 NA  2  3  2  2  3  3  2  3  3 NA  3 NA  3  3  2  3  2  2  3  3  3  3  1
-    [351]  3  3  3  2  1  3 NA  2  3  3  3  3  2  1  2  2  3  2  2  3  3  3  3  3  4
-    [376]  3  2  3  3  3  2  2  3 NA  3  2  3  4  4  3  3  2  4  3  2  3  3  4  3  4
-    [401]  3  3 NA  2  2  3  3  3  4  4  3  1  3  3  2  4  3  3  3  2  3  2  4  2  4
-    [426]  3  3  3  4 NA  2  3  3  3  3  2  1  2  2  3  2  3  1  4  3  3  4  3
+      [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2  3  2  3 NA  3 NA
+     [32] NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4 NA NA  4  4  3  4 NA NA NA NA NA NA
+     [63] NA  4 NA  2  3  3 NA NA  3 NA  3  3 NA  2 NA NA NA NA  3 NA NA NA NA NA NA NA  3  4 NA  4  3
+     [94]  3  3  4  4  3  3  3  2  3  3  2  3  3  3  2 NA  3  3  4  3 NA  3 NA  3 NA  3  3  3 NA  3  3
+    [125] NA NA NA NA NA  2 NA NA  3  2  3 NA NA NA NA NA NA  3  2  3  2  2  2  2  2  3  3  3  3 NA  3
+    [156]  3  2  2  3  3  2  3  2  3 NA  2 NA NA  4  3  3  3  2  3 NA  4  3  2  3  3  3  3  3  3  4  3
+    [187]  4  3  3  3  3  3  2  3  2  3  3  3 NA  3  1  4 NA  3  2  4  4  2  2  3  3  3  3  3  3  3  3
+    [218]  3  3  4  3  3  2  2  3  3  2  3  3  3  2  2  3  3  3  3  3  4  3  3  2  2  2  1  2  3  3 NA
+    [249]  3  3  3  3  3  3  3  3  2  3  2  3  2  3  3  3  2  3  3  2  3  3  3  3  4  3  3  4  3  4  2
+    [280]  3 NA  3  3  2  2  2  3  3  3  3  2  3  3  2  2  2  3  3  2  2  3  2  3  3  3  3  3  3  2  3
+    [311]  3  2  1  3  4  3  2  3  3  2  2  3  3  3  1  2 NA  2  3  2  2  3  3  2  3  3 NA  3 NA  3  3
+    [342]  2  3  2  2  3  3  3  3  1  3  3  3  2  1  3 NA  2  3  3  3  3  2  1  2  2  3  2  2  3  3  3
+    [373]  3  3  4  3  2  3  3  3  2  2  3 NA  3  2  3  4  4  3  3  2  4  3  2  3  3  4  3  4  3  3 NA
+    [404]  2  2  3  3  3  4  4  3  1  3  3  2  4  3  3  3  2  3  2  4  2  4  3  3  3  4 NA  2  3  3  3
+    [435]  3  2  1  2  2  3  2  3  1  4  3  3  4  3  3  2  2  2  2  3  1  3  3  3  4  3  3  2  3  3  4
+    [466]  4  2  2  3  3  2  2  4  3  3  3  2  3  2  2  3  2  3  2  3  2  3  2  3  2  3  3  3  2  3  3
+    [497]  2  3  1  2  3  3  3  3  2  2  3  3  1  3  2  3  3  4  1  3  4  1  4  3  4  3  3  2  3  2 NA
+    [528]  3  4  2  4  3  3  3  4  4  1  3  2  3  3  3  2  3  4  3  3  2  3  3  3  4  2  2  2  3  3  3
+    [559]  4  4  1  3  3  3  4  3  4  3  3  1  1  2  3  2  3  3  4  3  3  3  2  2  3  4  4  1  4  4  3
+    [590]  4  3  3  3  3  3  2  3  3  2  3  3  2  3  4  2  2  3  1  3  3  2  3  3  2  2  3  4  3  2  1
+    [621]  3  3  3  3  2  4  2  3  3  3  3  4  3  3  3 NA  3 NA  4  3  2  2  2  2  3  3  3  4  3  2  3
+    [652]  2  3  3  1  3  4  3  3  4  4  4  2  3  2  1  4  2  4  3  2  3  3  3  3  2  3  4  2  2  2  2
+    [683]  3  4  3  4
 
     # ah, I just wasn't good about recording "Morning Feel" early on, and since then
     # there have been occasional slips (literally, with the headband)
@@ -1399,7 +1402,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 [^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
 
     ~~~{.R}
-    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv", header=TRUE, sep=",")
+    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv")
     t.test(ZQ~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
@@ -1559,7 +1562,7 @@ More precisely, the summary statistics indicate that the difference in means & m
 
     ~~~{.R}
     # set up data
-    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv", header=TRUE, sep=",")
+    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv")
     originalcontrol <- subset(mydata, SSCF.1==0)
     newcontrol <- subset(mydata, SSCF.1==1)
     # clean missing data
@@ -1584,7 +1587,7 @@ More precisely, the summary statistics indicate that the difference in means & m
 [^vitamin-d-control-frequentist]: As usual:
 
     ~~~{.R}
-    mydata <- read.table("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv", header=TRUE, sep=",")
+    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv")
     originalcontrol <- subset(mydata, SSCF.1==0)
     newcontrol <- subset(mydata, SSCF.1==1)
     t.test(originalcontrol$Morning.Feel, newcontrol$Morning.Feel)
@@ -1823,7 +1826,7 @@ As it happened, I managed to retrieve my pill-making machine and spare gel capsu
 06: 1
 07: 0
 08: 0
-09:
+09: 0
 10:
 -->
 
@@ -2073,8 +2076,8 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     I went through the 2870 lines until I found the first treadmill session I did on June 16. After splitting, deleting the date-stamps, and adding a CSV header like `WPM,Accuracy`, I had had 2285 entries for [2012-gwern-amphetype-before.csv](/docs/2012-gwern-amphetype-before.csv) and 585 for [2012-gwern-amphetype-after.csv](/docs/2012-gwern-amphetype-after.csv). Then it is easy to load the CSVs into R and test:
 
     ~~~{.R}
-    before <- read.table("http://www.gwern.net/docs/2012-gwern-amphetype-before.csv", header=TRUE, sep=",")
-    after <- read.table("http://www.gwern.net/docs/2012-gwern-amphetype-after.csv", header=TRUE, sep=",")
+    before <- read.csv("http://www.gwern.net/docs/2012-gwern-amphetype-before.csv")
+    after <- read.csv("http://www.gwern.net/docs/2012-gwern-amphetype-after.csv")
     t.test(before$WPM, after$WPM); t.test(before$Accuracy, after$Accuracy)
 
         Welch Two Sample t-test
@@ -2890,10 +2893,11 @@ January 2013
 06: 0 1
 07: 1 0
 08: 0 0
-09: 1 1?
+09: 1 1
+10: 1 1?
 
 Underpopulated data cells:
-52: 1 1
+53: 1 1
 53: 1 0
 58: 0 0
 59: 0 1
@@ -2957,7 +2961,7 @@ convert xs = CSVEntry { sleepDate = safeHead $ filter (\x -> isInfixOf "." x || 
 This was usable. My next question was: since none of his routines were randomized and correlations were all that one could extract, what correlations *were* in his data?
 
 ~~~{.R}
-table <- read.table("http://www.gwern.net/docs/2012-sdr-dream.csv",header=TRUE,sep=",")
+table <- read.csv("http://www.gwern.net/docs/2012-sdr-dream.csv")
 summary(table)
       Sleep.Date     Total.Z       Wake.Time     Intensity
  2011.10.02:  2   Min.   : 120          :216   Min.   :0.1000
@@ -3254,3 +3258,4 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 07 Jan 2013: off -->
 <!-- Redshift: 08 Jan 2013: on -->
 <!-- Redshift: 09 Jan 2013: off -->
+<!-- Redshift: 10 Jan 2013: off -->
