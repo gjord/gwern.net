@@ -7,7 +7,85 @@ status: in progress
 belief: likely
 ...
 
-So on Christmas I finally got a [Zeo](!Wikipedia "Zeo, Inc."). A Zeo is basically an alarm clock with a wireless scaled-down (one-electrode) [EEG](!Wikipedia) sensor-headband. The EEG data is processed to estimate whether one is asleep and what [stage](!Wikipedia "Sleep#Sleep stages") of sleep one is in. Zeo breaks sleep down into waking, [REM](!Wikipedia "Rapid eye movement sleep"), [light](!Wikipedia "Non-rapid eye movement sleep"), and [deep](!Wikipedia "Slow-wave sleep"). (The phases aren't necessarily that physiologically distinct.) It's been compared with regular [polysomnography](!Wikipedia) by [Zeo Inc and others](http://www.myzeo.com/sleep/validation) and seems to be reasonably accurate.
+> I discuss my beliefs about Quantified Self, and demonstrate with experiments using a Zeo. A Zeo records sleep via EEG; I have made many measurements and performed many experiments. This is what I have learned so far:
+>
+> 1. the Zeo headband is wearable long-term
+> 2. [melatonin](#melatonin) improves my sleep
+> 3. [one-legged standing](#one-legged-standing) does little
+> 4. Vitamin D ([at night](#vitamin-d-at-night-hurts)) damages my sleep
+> 5. Vitamin D ([in morning](#vitamin-d-at-morn-helps)) improves my morning mood
+> 6. potassium ([over the day](#potassium-day-use)) damages my sleep
+
+[Quantified Self](!Wikipedia) (QS) is a movement with many faces and as many variations as participants, but the core of everything is this: experiment with things that can improve your life.
+
+<!-- QS links
+http://lesswrong.com/lw/dms/open_thread_july_1631_2012/74eg?context=3
+http://www.sebastianmarshall.com/what-gets-measured-gets-managed
+Roberts 2004, "Self-experimentation as a source of new ideas: Ten examples about sleep, mood, health, and weight" http://www.stat.columbia.edu/~gelman/stuff_for_blog/selfexp.pdf
+citations of above http://scholar.google.com/scholar?cites=1711925790230211471&as_sdt=20005&sciodt=0,9&hl=en
+http://pubmedcentralcanada.ca/pmcc/articles/PMC3298919/?lang=en-ca
+Ebbinghaus's discovery of spaced repetition as self-experiment
+http://www.theatlantic.com/magazine/archive/2012/07/the-measured-man/309018/?single_page=truein inflammation
+http://www.sleepfoundation.org/article/press-release/annual-sleep-america-poll-exploring-connections-communications-technology-use-
+http://quantifiedself.com/2012/08/vahe-kassardjian-and-rafi-haladjian-on-crossing-the-data-desert/ Only one task at a time!
+meta-analysis: http://lesswrong.com/lw/e3a/open_thread_august_1631_2012/7azp?context=3
+http://lesswrong.com/r/discussion/lw/eck/how_to_tell_apart_science_from_pseudoscience_in_a/7c2y
+http://blog.givewell.org/2012/08/23/how-we-evaluate-a-study/
+http://blog.givewell.org/2012/09/06/surveying-the-research-on-a-topic/
+http://norvig.com/experiment-design.html
+https://www.nytimes.com/2010/05/02/magazine/02self-measurement-t.html?_r=1&ref=magazine&pagewanted=all
+-->
+
+# What is QS?
+
+Quantified Self is not expensive devices, or meet-ups, or videos, or even ebooks telling you what to do. Those are tools to an end. If reading this page does anything, my hope is to pass on to some readers the Quantified Self *attitude*: a playful thoughtful attitude, of wondering whether this thing affects that other thing and what implications could be easily tested. "Science" without the capital "S" or the belief that only scientists are allowed to think.
+
+That's all Quantified Self is, no matter how simple or complicated your devices, no matter how automated your data collection, no matter whether you found a pedometer lying around or hand-engineered your own EEG headset.
+
+Quantified Self is simply about having ideas, gathering some data, seeing what it says, and improving one's life based on the data. If gathering data is too hard and would make your life worse off - then don't do it! If the data can't make your life better - then don't do it! Not every idea can or should be tested.
+
+The QS cycle is straightforward and flexible:
+
+1. Have an idea
+2. Gather data
+3. Test the data
+4. Make a change; GOTO 1
+
+Any of these steps can overlap: you may be collecting sleep data long before you have the idea (in the expectation that you *will* have an idea), or you may be making the change as part of the data in an experimental design, or you may inadvertently engage in a "natural experiment" before wondering what the effects were (perhaps the baby wakes you up on random nights and lets you infer the costs of poor sleep).
+
+The point is not publishable scientific rigor. If you are the sort of person who wants to run such rigorous self-experiments, fantastic! The point is making your life better, for which scientific certainty is not necessary: imagine you are choosing between equally priced sleep pills and equal safety; the first sleep pill will make you go to sleep faster by 1 minute and has been validated in countless scientific trials, and while the second sleep pill has in the past week has ended the sweaty nightmares that have plagued you every few days since childhood but alas has only a few small trials in its favor - which would you choose? I would choose the second pill!
+
+To put it in more economic/statistical terms, what we want from a self-experiment is for it to give us a confidence just good enough to tell whether the expected value of our idea is more than the idea will cost. But we don't need more confidence unless we want to persuade other people! (So from this perspective, it is possible to do a QS self-experiment which is "too good". Much like one can overpay for safety and buy too much insurance - like [extra warranties](Console Insurance) on electronics such as video game consoles, a notorious rip-off.)
+
+## What QS Is Not: (Just) Data Gathering
+
+One failure mode which is particularly dangerous for QSers is to overdo the data collection and collect masses of data they never *use*. Famous computer entrepreneur & mathematician [Stephen Wolfram](!Wikipedia) exemplified this for me in March 2012 with his lengthy blog post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/) in which he did some impressive graphing and exploration of data from 1989 to 2012: a third of a million (!) emails, full keyboard logging, calendar, phone call logs (with missed calls include), a pedometer, revision history of his tome _A New Kind of Science_, file types accessed per date, parsing scanned documents for dates, a treadmill, and perhaps more he didn't mention.
+
+Wolfram's dataset is well-depicted in informative graphs, breathtaking in its thoroughness, and even more impressive for its duration. So why do I read his post with sorrow? I am sad for him because I have read the post several times, and as far as I can see, he has not benefited in any way from his data collection. Nothing in his life was better 1989-2012 because he did all this, and he shows no indication that he will benefit in the future (besides having a very nifty blog post). And just reading through his post with a little imagination suggests plenty of experiments he could do:
+
+1. He mentions that 7% of his keystrokes are the Backspace key.
+
+    This seems remarkably high and must be slowing down his typing by a nontrivial amount. Why doesn't he try a typing tutor to see if he can improve his typing skill, or learn the keyboard shortcuts in his text editor? If he is wasted >7% of all his typing (because he had to type what he is Backspacing over, of course), then he is wasting typing time, slowing things done, adding frustration to his computer interactions and worst, putting himself at greater risk of crippling RSI.
+2. How often does he access old files? Since he records access to all files, he can ask whether all the logging is paying for itself.
+3. Is there any connection between the steps his pedometer records and things like his mood or emailing? Exercise has been linked to many benefits, both physical and mental, but on the other hand, walking isn't a very quick form of exercise. Which effect predominates? This could have the practical consequence of scheduling a daily walk just as he tries to make sure he can have dinner with his family.
+4. Does a flurry of emails or phone calls disrupt his other forms of productivity that day? For example, while writing his book would he have been better off barricading himself in solitude or working on it in between other tasks?
+5. His email counts are astonishingly high in general:
+
+    Is answering so many emails *really* necessary? Perhaps he has put too much emphasis on email communication, or perhaps this indicates he should delegate more - or if running [Mathematica](!Wikipedia) is so time-consuming, perhaps he should re-evaluate his life and ask whether that is what he truly wants to do now. I have no idea what the answer to any of these questions are or whether an experiment of any kind could be run on them, but these are key life decisions which could be prompted by the data - but weren't.
+
+Another QS piece(["It's Hard to Stay Friends With a Digital Exercise Monitor"](http://www.nytimes.com/2012/07/29/technology/nike-fuelband-tracks-physical-activity-inconsistently.html)) struck me when the author, Jenna Wortham, reflected on her experience with her [Nike+ FuelBand](!Wikipedia) motion sensor:
+
+> The forgetfulness and guilt I experienced as my FuelBand honeymoon wore off is not uncommon, according to people who study behavioral science. The collected data is often interesting, but it is hard to analyze and use in a way that spurs change. "It doesn't trigger you to do anything habitually," said Michael Kim, who runs Kairos Labs, a Seattle-based company specializing in designing social software to influence behavior...Mr. Kim, whose résumé includes a stint as director of Xbox Live, the online gaming system created by Microsoft, said the game-like mechanisms of the Nike device and others like it were "not enough" for the average user. "Points and badges do not lead to behavior change," he said.
+
+One thinks of [a saying](http://deming.org/index.cfm?content=653 "Four Days with W. Edwards Deming") of [W. Edwards Deming](!Wikipedia): "Experience by itself teaches nothing." Indeed. A QS experiment is a 4-legged beast: if any leg is far too short or far too long, it can't carry our burdens.
+
+And with Wolfram and Wortham, we see that 2 legs of the poor beast have been amputated. They collected data, but they had no ideas and they made no changes in their life; and because QS was not part of their life, it soon left their life. Wortham seems to have dropped the approach entirely, and Wolfram may only persevere for as long as the data continues to be useful in demonstrating the abilities of his company's products.
+
+# Zeo QS
+
+On Christmas 2010, I finally got a [Zeo](!Wikipedia "Zeo, Inc.") after long coveting it and dreaming of using it for all sorts of sleep-related questions. With it, I begin to apply my thoughts about Quantified Self.
+
+A Zeo is a scaled-down (one-electrode) [EEG](!Wikipedia) sensor-headband, which happens to have an alarm clock attached. The EEG data is processed to estimate whether one is asleep and what [stage](!Wikipedia "Sleep#Sleep stages") of sleep one is in. Zeo breaks sleep down into waking, [REM](!Wikipedia "Rapid eye movement sleep"), [light](!Wikipedia "Non-rapid eye movement sleep"), and [deep](!Wikipedia "Slow-wave sleep"). (The phases aren't necessarily that physiologically distinct.) It's been compared with regular [polysomnography](!Wikipedia) by [Zeo Inc and others](http://www.myzeo.com/sleep/validation) and seems to be reasonably accurate.
 
 The data is much better than what you would get from more popular methods like cellphones with accelerometers, since an accelerometer only knows if you are moving or not, which isn't a very reliable indicator of sleep[^Fitbit]. (You could just be lying there staring at the ceiling, wide awake. Or perhaps the cat is kneading you while you are in light sleep.) As well, half the interest is how exactly sleep phases are arranged and how long the cycles are; you could use that information to devise [a custom polyphasic schedule](http://blog.myzeo.com/sleeping-round-the-clock-a-polyphasic-experiment/) or just figure out a better nap length than the rule-of-thumb of 20 minutes. And the price isn't *too* bad - $150 for the normal^[The mobile Zeo is cheaper, but I've seen people complain about it and apparently it doesn't collect the same data as the stand-alone bedside unit.] Zeo as of February 2012.
 
@@ -15,11 +93,11 @@ The data is much better than what you would get from more popular methods like c
 
 # Tests
 
-> "A thinker sees his own actions as experiments & questions - as attempts to find out something. Success and failure are for him *answers* above all." --Friedrich Nietzsche, _The Gay Science_ #41
+> "A thinker sees his own actions as experiments & questions - as attempts to find out something. Success and failure are for him *answers* above all." --[Friedrich Nietzsche](!Wikipedia), _[The Happy Science](!Wikipedia)_ #41
 
-I personally want the data for a few distinct purposes, but in the best Quantified Self vein[^QS], mostly experimenting:
+I personally want the data for a few distinct purposes, but in the best Quantified Self vein, mostly experimenting:
 
-1. quantifying the benefits of [melatonin](Melatonin)
+1. more thoroughly quantifying the benefits of [melatonin](Melatonin)
 
     - and dose levels: 1.5mg may be too much. I should experiment with a variety: 0.1, 0.5, 1.0, 1.5, and 3mg?
 2. quantifying the costs of [modafinil](Modafinil)
@@ -33,7 +111,6 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
     - do n-backing after waking up, to look for correlation between good/bad sleeps and performance (one would expect good sleep ~> good scores).
     - test the costs of polyphasic sleep on memory^[My own suspicion is that given the existence of [neuron-level sleep in mice](http://www.cosmosmagazine.com/news/4264/can-we-be-awake-and-asleep-same-time), [poor self-monitoring in humans](http://www.nytimes.com/2011/04/17/magazine/mag-17Sleep-t.html), and [anecdotal reports](http://lesswrong.com/lw/5n0/optimizing_sleep/44zu) about polyphasic sleep, is that polyphasic sleep is a real & workable phenomenon but that it comes at the price of a significant chunk of mental performance.]
 8. (positive) effect of [Seth Roberts](!Wikipedia)'s [one-legged standing](http://blog.sethroberts.net/2011/03/22/effect-of-one-legged-standing-on-sleep/) on sleep depth/efficiency
-9. effect of [vitamin D on sleep](#vitamin-d) (positive & negative)
 10. possible sleep reductions due to meditation
 11. serial cable uses:
 
@@ -42,57 +119,31 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
     - measure focus over the day and during specific activities (eg. correlate frequencies against n-backing performance)
 12. testing benefit of using [Redshift](http://jonls.dk/redshift/)/f.lux to adjust monitor color temperature
 13. Measure negative effect of nicotine on sleep & determine appropriate buffer
-14. Magnesium
+14. test claims of sleep benefits from magnesium
 
-I have tried to do my little self-experiments as well as I know how to, and hopefully my results are less bogus than the usual anecdotes one runs into online. What I would really like is for other people (especially Zeo owners) to *replicate* my results. To that end I have made pains to describe my setup completely so others can use it, along with the data and complete R or Haskell programs for analysis. If anyone replicates my results in any fashion, please contact me and I would be happy to link your self-experiment here!
+I have tried to do my little self-experiments as well as I know how to, and hopefully my results are less bogus than the usual anecdotes one runs into online. What I would really like is for other people (especially Zeo owners) to *replicate* my results. To that end I have taken pains to describe my setups in complete detail so others can use it, and provided the data and complete [R](!Wikipedia "R (programming language)") or [Haskell](!Wikipedia "Haskell (programming language)") programs used in analysis. If anyone replicates my results in any fashion, please contact me and I would be happy to link your self-experiment here!
 
-[^QS]: Note that one can use a Zeo and not be doing anything really recognizable as "Quantified Self". For example, one could just collect data. An example here would be Stephen Wolfram's post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/); Wolfram has collected an astonishing amount of information on his typing, emails, phone calls, calendars and walking over <20 years. Only in 2012 has he actually graphed any of it or attempted to analyze it.
-
-    In particular, he has never once changed his behavior in response to his gathered data nor has he ever experimented with different tools or strategies for, say, more efficient typing. (He mentions that 7% of his keystrokes are the Backspace key, which is remarkably high and probably indicates he could either benefit from learning better his favorite text editor or just basic typing training: at 7% backspacing, he is almost surely nowhere near a reasonable 80-100 WPM, which is costing him a great deal of time & effort given that he sends or receives hundreds of emails a day!)
-
-    One thinks of [a saying](http://deming.org/index.cfm?content=653 "Four Days with W. Edwards Deming") of [W. Edwards Deming](!Wikipedia):
-
-    > Experience by itself teaches nothing.
-
-    ["It's Hard to Stay Friends With a Digital Exercise Monitor"](http://www.nytimes.com/2012/07/29/technology/nike-fuelband-tracks-physical-activity-inconsistently.html), Jenna Wortham, on her [Nike+ FuelBand](!Wikipedia) motion sensor:
-
-    > The forgetfulness and guilt I experienced as my FuelBand honeymoon wore off is not uncommon, according to people who study behavioral science. The collected data is often interesting, but it is hard to analyze and use in a way that spurs change. "It doesn't trigger you to do anything habitually," said Michael Kim, who runs Kairos Labs, a Seattle-based company specializing in designing social software to influence behavior. "Habits are based on cues that happen every day, which leads to a routine and then a reward or achievement, which could just be something as general as an endorphin rush." Of the FuelBand, he said, "You just see a pretty number that isn't always enough to be a trigger." The FuelBand connects with smartphones and a Web-based interface, which shows users a cute animation of a dancing alien as a reward for reaching a goal. But Mr. Kim, whose résumé includes a stint as director of Xbox Live, the online gaming system created by Microsoft, said the gamelike mechanisms of the Nike device and others like it were "not enough" for the average user. "Points and badges do not lead to behavior change," he said.
-    >
-    > The FuelBand and its counterparts also allow users to announce their achievements on various social networks. But frequent updates could annoy the friends who see them. "Does anyone really want to see how many miles you ran, what you weigh, along with what the weather is where you are and the songs you're listening to?" said B. J. Fogg, who directs the Persuasive Technology Lab at Stanford and has conducted research tests with the FuelBand and other forms of wearable technology. But Mr. Fogg said he believed that the FuelBand might be useful in another way. Simply donning it can work as a fancier version of a string tied around your finger: a reminder to complete a task or errand, he said. It could be the nudge you need, for example, to get off the subway a few stops early and walk the rest of the way home, or to jog a few extra laps around the track.
 [^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his _The Four-hour Body_ claims:
 
     > Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20-30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using.
-
-# Conclusions
-
-This is what I have learned so far:
-
-1. the Zeo headband is wearable long-term
-2. melatonin improves my sleep
-3. one-legged standing does little
-4. Vitamin D (at night) damages my sleep
-5. Vitamin D (in morning) improves my morning mood
-6. potassium (over the day) damages my sleep
 
 # First impressions
 ## First night
 
 Christmas morning, I unpacked it and admired the packaging, and then looked through the manual. The base-station/alarm-clock seems pretty sturdy and has a large clear screen. The headband seemed comfortable enough that it wouldn't bother me. The various writings with it seemed rather fluffy and preppy, but I did my technical homework before hand, so could ignore their crap.
 
-Late that night (quite late, since the girls stayed up playing _[Fable 3](!Wikipedia)_ and Xbox [Kinect](!Wikipedia) dancing games and what not), I turn in wearily. I had noticed that the alarm seemed to be set for ~3:30 AM, but I was very tired from the long day and taking my melatonin, and didn't investigate further - I mean, what electronic would ship with the alarm both enabled and enabled for a bizarre time? It wasn't worth bothering the other sleeper by turning on the light and messing with it. I put on the headband, verified that the Zeo seemed to be doing stuff, and turned in.
-
-Come 3 AM, and the damn music goes off! I hit snooze, too discombobulated to figure out how to turn off the alarm.
+Late that night (quite late, since the girls stayed up playing _[Fable 3](!Wikipedia)_ and Xbox [Kinect](!Wikipedia) dancing games and what not), I turn in wearily. I had noticed that the alarm seemed to be set for ~3:30 AM, but I was very tired from the long day and taking my melatonin, and didn't investigate further - I mean, what electronic would ship with the alarm both enabled and enabled for a bizarre time? It wasn't worth bothering the other sleeper by turning on the light and messing with it. I put on the headband, verified that the Zeo seemed to be doing stuff, and turned in. Come 3 AM, and the damn music goes off! I hit snooze, too discombobulated to figure out how to turn off the alarm.
 
 So that explains the strange Zeo data for the first day:
 
 ![First night](/images/zeo/2010-12-25.png)
 
-The major surprise in this data was how quickly I fell asleep: 18 minutes. I had always thought that I took much longer to fall asleep, more like 45 minutes, and had budgeted accordingly; but apparently [being deluded](http://blog.myzeo.com/sleep-forgetting-to-remember-to-forget/) about when you are awake and asleep is common. The rest of the data seemed too messed up by the alarm to learn anything from.
+The major surprise in this data was how quickly I fell asleep: 18 minutes. I had always thought that I took much longer to fall asleep, more like 45 minutes, and had budgeted accordingly; but apparently [being deluded](http://blog.myzeo.com/sleep-forgetting-to-remember-to-forget/) about when you are awake and asleep is common - which leads into [an interesting philosophical point](Prediction markets#modus-tollens-vs-modus-ponens): if your memories disagree with the Zeo, who should you believe? The rest of the data seemed too messed up by the alarm to learn anything from.
 
 # Uses
 ## Meditation
 
-One possible application for Zeo was meditation. If it's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, _Modern Japanese diaries_, for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well!
+One possible application for Zeo was meditation. If it's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, _Modern Japanese diaries_, for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well.
 
 ## Smart alarm
 
@@ -102,7 +153,7 @@ In the morning, the smart alarm mode seemed to work pretty well. I woke up early
 
 ## Replacing headband
 
-Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for \$35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric); apparently they now [cost $50](http://www.myzeo.com/sleep/shop/zeo-accessories/zeo-bedside-headband-sensor-replacement-kit-x-3.html). A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually \$40, or ~\$13 a piece. I won't say that buying replacement headbands every 4 or 5 months is something that *thrills* me, but \$20 a year for sleep data is a pretty small sum. Certainly it's more cost-effective than most of the [nootropics](Nootropics) I have used. (Full disclosure: 9 months after starting this page, Zeo [offered me](#comment-309924264) a free set of sensors.)
+Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for \$35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric); apparently they now [cost $50](http://www.myzeo.com/sleep/shop/zeo-accessories/zeo-bedside-headband-sensor-replacement-kit-x-3.html). A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually \$40, or ~\$13 a piece. I won't say that buying replacement headbands semi-annually is something that *thrills* me, but \$20 a year for sleep data is a small sum. Certainly it's more cost-effective than most of the [nootropics](Nootropics) I have used. (Full disclosure: 9 months after starting this page, Zeo [offered me](#comment-309924264) a free set of sensors.)
 
 ![The old headband, with electrical tape residue](/images/zeo/zeo-headband-original.jpg) ![The disposable headband with the cloth covering removed](/images/zeo/zeo-headband-deconstructed.jpg)/
 ![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg) ![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)/
@@ -116,7 +167,7 @@ Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin 
 
 ## Melatonin analysis
 
-The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)). My basic dosage was 1.5mg of melatonin taken 0-30 minutes before going to sleep. The data is very noisy (especially towards the end as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional [NHST](!Wikipedia "Null hypothesis significance testing")-style[^Bayes] analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into [R](!Wikipedia "R (programming language)"); given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
+The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf)). My basic dosage was 1.5mg of melatonin taken 0-30 minutes before going to sleep. The data is very noisy (especially towards the end, perhaps as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional [NHST](!Wikipedia "Null hypothesis significance testing")-style[^Bayes] analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into R; given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
 
 [^Bayes]: [Kruschke 2012](http://www.indiana.edu/~kruschke/BEST/BEST.pdf "Bayesian estimation supersedes the _t_ test") argues that there is no need for people to use the old framework of _p_-values and null hypotheses etc, with their many well-known philosophical difficulties and misleading interpretations - interpretations I, alas, perpetuate in my analyses with my use of statistical significance:
 
@@ -138,7 +189,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  ZQ by SSCF.10
     t = 1.7467, df = 53.249, p-value = 0.08645
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -1.282982 18.602275
     sample estimates:
     mean in group 0 mean in group 1
@@ -151,7 +202,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Total.Z by SSCF.10
     t = 1.7696, df = 53.227, p-value = 0.08252
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
       -6.526613 104.420635
     sample estimates:
     mean in group 0 mean in group 1
@@ -164,7 +215,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.to.Z by SSCF.10
     t = 1.1337, df = 27.207, p-value = 0.2668
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -3.337966 11.587966
     sample estimates:
     mean in group 0 mean in group 1
@@ -177,7 +228,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.Wake by SSCF.10
     t = 0.6333, df = 46.823, p-value = 0.5296
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -2.012675  3.861860
     sample estimates:
     mean in group 0 mean in group 1
@@ -190,7 +241,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.REM by SSCF.10
     t = 2.6237, df = 62.064, p-value = 0.01093
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
       6.509461 48.165811
     sample estimates:
     mean in group 0 mean in group 1
@@ -203,7 +254,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.Deep by SSCF.10
     t = 0.1547, df = 35.496, p-value = 0.8779
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -7.743305  9.021837
     sample estimates:
     mean in group 0 mean in group 1
@@ -216,7 +267,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Awakenings by SSCF.10
     t = 0.7956, df = 40.835, p-value = 0.4309
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.6648722  1.5290027
     sample estimates:
     mean in group 0 mean in group 1
@@ -229,7 +280,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Morning.Feel by SSCF.10
     t = -1.3606, df = 44.188, p-value = 0.1805
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.5496275  0.1065633
     sample estimates:
     mean in group 0 mean in group 1
@@ -242,7 +293,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.Light by SSCF.10
     t = 1.2354, df = 46.426, p-value = 0.2229
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -13.15648  54.99751
     sample estimates:
     mean in group 0 mean in group 1
@@ -271,7 +322,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  ZQ by SSCF.10
     t = 1.5091, df = 85, p-value = 0.135
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -2.749923 20.069217
     sample estimates:
     mean in group 0 mean in group 1
@@ -282,7 +333,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Total.Z by SSCF.10
     t = 1.5291, df = 85, p-value = 0.13
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -14.69983 112.59385
     sample estimates:
     mean in group 0 mean in group 1
@@ -296,7 +347,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.to.Z by SSCF.10
     t = 1.4588, df = 85, p-value = 0.9258
     alternative hypothesis: true difference in means is less than 0
-    95 percent confidence interval:
+    95% confidence interval:
          -Inf 8.827328
     sample estimates:
     mean in group 0 mean in group 1
@@ -307,7 +358,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.Wake by SSCF.10
     t = 0.5783, df = 85, p-value = 0.7177
     alternative hypothesis: true difference in means is less than 0
-    95 percent confidence interval:
+    95% confidence interval:
         -Inf 3.58344
     sample estimates:
     mean in group 0 mean in group 1
@@ -321,7 +372,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.REM by SSCF.10
     t = 2.1307, df = 85, p-value = 0.036
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
       1.827653 52.847619
     sample estimates:
     mean in group 0 mean in group 1
@@ -332,7 +383,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.Deep by SSCF.10
     t = 0.163, df = 85, p-value = 0.8709
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -7.156889  8.435422
     sample estimates:
     mean in group 0 mean in group 1
@@ -346,7 +397,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Awakenings by SSCF.10
     t = 0.7756, df = 85, p-value = 0.7799
     alternative hypothesis: true difference in means is less than 0
-    95 percent confidence interval:
+    95% confidence interval:
          -Inf 1.358521
     sample estimates:
     mean in group 0 mean in group 1
@@ -357,7 +408,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Morning.Feel by SSCF.10
     t = -1.2918, df = 65, p-value = 0.8995
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.5076874        Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -370,7 +421,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     data:  Time.in.Light by SSCF.10
     t = 1.1324, df = 85, p-value = 0.8697
     alternative hypothesis: true difference in means is less than 0
-    95 percent confidence interval:
+    95% confidence interval:
          -Inf 51.64192
     sample estimates:
     mean in group 0 mean in group 1
@@ -390,38 +441,6 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
     > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant.
 
 As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes, [effect size](!Wikipedia) 0.37^[`(456.4783 -  407.5312) / sd(mydata$Total.Z, TRUE)` = 0.3723188]):
-
-<!-- Book links
-http://lesswrong.com/lw/dms/open_thread_july_1631_2012/74eg?context=3
-http://www.sebastianmarshall.com/what-gets-measured-gets-managed
-Roberts 2004, "Self-experimentation as a source of new ideas: Ten examples about sleep, mood, health, and weight" http://www.stat.columbia.edu/~gelman/stuff_for_blog/selfexp.pdf
-citations of above http://scholar.google.com/scholar?cites=1711925790230211471&as_sdt=20005&sciodt=0,9&hl=en
-http://pubmedcentralcanada.ca/pmcc/articles/PMC3298919/?lang=en-ca
-Ebbinghaus's discovery of spaced repetition as self-experiment
-http://www.theatlantic.com/magazine/archive/2012/07/the-measured-man/309018/?single_page=truein inflammation
-http://www.sleepfoundation.org/article/press-release/annual-sleep-america-poll-exploring-connections-communications-technology-use-
-http://quantifiedself.com/2012/08/vahe-kassardjian-and-rafi-haladjian-on-crossing-the-data-desert/ Only one task at a time!
-meta-analysis: http://lesswrong.com/lw/e3a/open_thread_august_1631_2012/7azp?context=3
-http://lesswrong.com/r/discussion/lw/eck/how_to_tell_apart_science_from_pseudoscience_in_a/7c2y
-http://blog.givewell.org/2012/08/23/how-we-evaluate-a-study/
-http://blog.givewell.org/2012/09/06/surveying-the-research-on-a-topic/
-http://norvig.com/experiment-design.html
-https://www.nytimes.com/2010/05/02/magazine/02self-measurement-t.html?_r=1&ref=magazine&pagewanted=all
--->
-<!-- Book organization
-- Intro with examples: Emphasize the importance of the topic (relevant population stats.) Conviction (or some evidence) that tracking will help with the subject addressed. Each book should open with a story or a few stories as examples.
-- Chapter One: Background on the tracking area. This will be a summary of what's involved in tracking things within this area, a bit of easily understood background (for instance, explanation of phases of sleep, or different food components that are often tracked, or pain scales, or mood measurement.) This can be brief! But it helps orient readers.
-- Chapter Two, Three?, Four?: Tools and options. An explanation of the tools available, the options for tracking, their pros and cons.
-- Chapter Five: Project examples and instructions. Some advice on good projects to try, ways to use the tools. This can be pretty technical, depending on the author/subject.
-- Chapter Six: Master class. Expert ideas, or speculative, future oriented suggestions, to inspire people to go further.
-- Chapter Seven: Conclusion/summary.
--->
-<!-- Paradox of external validity
-
-A sample size of one is more than enough for [*internal* validity](https://en.wikipedia.org/wiki/Internal_validity), assuming I take enough data points to detect an effect. (I typically do 20+ pairs; the stronger the effect, the less you need.)
-
-What _n_=1 threatens is any kind of [*external* validity](https://en.wikipedia.org/wiki/External_validity), that is, whether one would observe the effect or lack of effect in someone other than me. I may find that potassium is fantastic for me, but that tells me very little about whether potassium would help you or anyone else on this page.
--->
 
 ![](/images/zeo/melatonin-totalz.png)
 ![](/images/zeo/melatonin-timeswoken.png)
@@ -484,9 +503,7 @@ If I were to run further experiments, I would definitely run it double-blind, an
 
 [^blocking]: "Blocking" is a style of variation on a simple randomized design where instead of considering each day separate and randomizing a single day, we instead randomize pairs of days, or more; so instead of flipping our coin to decide whether 'this week' is placebo, we flip our coin to decide whether 'this week will be placebo & next active' or 'this week active & next placebo'. This has 2 big advantages which justify the complexity:
 
-    1. Often, I'm worried about simple randomization leading to an imbalance in sample vs experimental; if I'm only getting 20 total datapoints on something, then randomization could easily lead to something like 14 control and 6 experimental datapoints - throwing out a lot of statistical power compared to 10 control and 10 experimental! Why am I losing power? Because data is subject to [diminishing returns](!Wikipedia): each new point reduces the standard error of your estimates less than the previous one did (since the total error shrinks as, roughly, inverse of the square root of the total sample size; the difference between √1 and √2 is bigger and shrinks error more than √2 vs √3, etc) . So the extra 4 control datapoints reduce the error less than the lost 4 experimental datapoints would have, and this leaves me with a final answer less precise than if it had been exactly 10:10. (If diminishing returns isn't intuitive, imagine taking it to an extreme: is 10:10 just as good as 5:15? As good as 2:18? How about *0*:20?)
-
-    But if I pair days like this, then I *know* I will get exactly 10:10.
+    1. Often, I'm worried about simple randomization leading to an imbalance in sample vs experimental; if I'm only getting 20 total datapoints on something, then randomization could easily lead to something like 14 control and 6 experimental datapoints - throwing out a lot of statistical power compared to 10 control and 10 experimental! Why am I losing power? Because data is subject to [diminishing returns](!Wikipedia): each new point reduces the standard error of your estimates less than the previous one did (since the total error shrinks as, roughly, inverse of the square root of the total sample size; the difference between √1 and √2 is bigger and shrinks error more than √2 vs √3, etc) . So the extra 4 control datapoints reduce the error less than the lost 4 experimental datapoints would have, and this leaves me with a final answer less precise than if it had been exactly 10:10. (If diminishing returns isn't intuitive, imagine taking it to an extreme: is 10:10 just as good as 5:15? As good as 2:18? How about *0*:20?) But if I pair days like this, then I *know* I will get exactly 10:10.
     2. Blocking is the natural way to handle multiple-day effects or trends: if I think lithium operates slowly, I will pair entire weeks or months, rather than days and hoping enough experimental and control days form runs which will reveal any trend rather than wash it out in averaging.
 
 Worth comparing are [Jayson Virissimo's preliminary results](http://jayquantified.blogspot.com/2012/08/melatonin-preliminary-results.html "Melatonin: Preliminary Results"):
@@ -510,7 +527,11 @@ If the experiment says melatonin works, the information is useless to me since I
     > ...possibly a way to drive it home is to talk about dividing by `log 1.05`, which is essentially multiplying by 20.5. If you can make a one-time investment that pays off annually until you die, that's worth 20.5 times the annual return, and multiplying the value of something by 20 can often move it from not worth thinking about to worth thinking about.
 [^quitting]: For simplicity, in all my VoI calculations I assume that I'll stop buying the supplement (or doing the activity) if I hit a negative result. The *proper* way a real analyst would do this value of information question would be to say that the negative result gives us additional information which changes the expected-value of melatonin use.
 
-    In my [melatonin article](Melatonin#roi) article, I calculated that since melatonin saved me close to an hour while each dose cost literally a penny or two, the value was astronomical - in the thousands of percent (\$2350.60 a year!). By Bayes' formula, if I started with 80% confidence and had a 95% accurate test, a negative result drops my 80% all the way down to 17% (using [a derivation of Bayes's theorem](Modafinil#ordering-with-learning): $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.05 \times 0.8}{(0.05 \times 0.8) + (0.95 \times 0.2)} = 0.174$). If I now believed that melatonin only had a 17% chance of doing something helpful rather than nothing at all (as compared to my original 80% belief), well, 17% of \$2350 hundreds of dollars (\$117) is still way more money than the melatonin cost (\$10), so I'd use it *anyway*!
+    In my [melatonin article](Melatonin#roi) article, I calculated that since melatonin saved me close to an hour while each dose cost literally a penny or two, the value was astronomical - \$2350.60 a year! By Bayes' formula, if I started with 80% confidence and had a 95% accurate test, a negative result drops my 80% all the way down to 17%. We get this by using [a derivation of Bayes's theorem](Modafinil#ordering-with-learning):
+
+    $P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.05 \times 0.8}{(0.05 \times 0.8) + (0.95 \times 0.2)} = 0.174$
+
+    But ironically if I now believed that melatonin only had a 17% chance of doing something helpful rather than nothing at all (as compared to my original 80% belief), well, 17% of \$2350 (\$117) is still way more money than the melatonin cost (\$10), so I'd use it *anyway*!
 
     Would it make sense to iterate again and test melatonin a second time? Well, what does the calculation say? We have a new prior of 17; what happens if we get a negative result again? $\frac{0.05 \times 0.17}{(0.05 \times 0.17) + (0.95 \times 0.82)} = 0.01$ and then the expected value is $0.0107... \times 2350 = 25.7$, which is not much more than the cost of \$10, and given the difficult-to-quantify possibility of negative long-term health effects, is not enough of a profit to really entice me.
 
@@ -729,7 +750,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     data:  Total.Z by SSCF.11
     t = 0.8035, df = 48.455, p-value = 0.4256
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -17.09298  39.85727
     sample estimates:
     mean in group 0 mean in group 3
@@ -742,7 +763,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     data:  Time.in.REM by SSCF.11
     t = 2.4322, df = 54.225, p-value = 0.01834
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
       2.827521 29.343907
     sample estimates:
     mean in group 0 mean in group 3
@@ -755,7 +776,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     data:  ZQ by SSCF.11
     t = 1.3406, df = 56.26, p-value = 0.1854
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -1.754009  8.854009
     sample estimates:
     mean in group 0 mean in group 3
@@ -768,7 +789,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     data:  Awakenings by SSCF.11
     t = 0.3177, df = 62.634, p-value = 0.7518
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.9259517  1.2759517
     sample estimates:
     mean in group 0 mean in group 3
@@ -781,7 +802,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     data:  Time.in.Wake by SSCF.11
     t = 0.2617, df = 65.521, p-value = 0.7944
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -7.033471  9.154900
     sample estimates:
     mean in group 0 mean in group 3
@@ -794,7 +815,7 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     data:  Morning.Feel by SSCF.11
     t = 1.0479, df = 64.65, p-value = 0.2986
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.1427046  0.4577229
     sample estimates:
     mean in group 0 mean in group 3
@@ -834,7 +855,7 @@ To see what, if any existing research there was, I checked the 49 hits in [PubMe
 
 In June 2012, after I finished my 2 experiments, a preprint appeared for _Medical Hypotheses_: ["The world epidemic of sleep disorders is linked to vitamin D deficiency"](/docs/2012-gominak.pdf), Gominak & Stumpf 2012; the lead author, unfortunately, had little to tell me when I emailed her, indicating that the use of vitamin D was not systematic or recorded:
 
-> An observation of sleep improvement with vitamin D supplementation led to a 2 year uncontrolled trial of vitamin D supplementation in 1500 patients with neurologic complaints who also had evidence of abnormal sleep. Most patients had improvement in neurologic symptoms and sleep but only through maintaining a narrow range of 25(OH) vitamin D3 blood levels of 60–80 ng/ml. Comparisons of brain regions associated with sleep–wake regulation and vitamin D target neurons in the diencephalon and several brainstem nuclei suggest direct central effects of vitamin D on sleep...An uncontrolled trial of continuous positive airway pressure CPAP devices for patients with headache and obstructive sleep apnea was partially successful, but in the fall of 2009 two patients remarked that the serendipitous supplementation of vitamin D, in addition to the use of their CPAP devices had, over a period of weeks, allowed them to wake rested and without headaches. Because the majority of the daily headache sufferers also had vitamin D deficiency the same author went looking for a possible connection between vitamin D and paralysis during sleep. This led to the recognition that several nuclei in the hypothalamus and brainstem that are known to be involved in sleep have high concentrations of vitamin D receptors^15,16,17^. An uncontrolled clinical trial of vitamin D supplementation in 1500 patients over a 2 year period, maintaining a consistent vitamin D blood level in the range of 60–80 ng/ml over many months, produced normal sleep in most patients regardless of the type of sleep disorder, suggesting that multiple types of sleep disorders might share the same etiology...Like other steroid hormones, Vitamin D is thought to exert its effects in the nucleus of the cell, at the vitamin D receptor, promoting transcription of specific genes. There are also reports of actions unrelated to transcription, possibly mediated by surface membrane receptors, such as Ca++ channels, that produce cellular effects in minutes^5^. Surprisingly, doses of 20,000 IU/day promote normal sleep without being sedating, and the effect is apparent within the first day of dosing in patients who have had severe sleep disruption and very low 25(OH) vitamin D3 levels...Many of the ideas about normal sleep expressed here grew out of watching patients return to normal sleep cycles, over a period of months, with just the return of the 25(OH) vitamin D3 blood level to 60-80 ng/ml. A totally unexpected observation was that the sleep difficulties produced by vitamin D levels below 50 return, in the same form, as the level goes over 80 ng/ml suggesting a narrower range of "normal" vitamin D levels for sleep than those published for bone health. Also, Vitamin D2, ergocalciferol (widely recommended as an "equivalent" therapy for osteoporosis) prevented normal sleep in most patients, suggesting that D2 may be close enough in structure to act as a partial agonist at some locations, an antagonist at others.
+> An observation of sleep improvement with vitamin D supplementation led to a 2 year uncontrolled trial of vitamin D supplementation in 1500 patients with neurologic complaints who also had evidence of abnormal sleep. Most patients had improvement in neurologic symptoms and sleep but only through maintaining a narrow range of 25(OH) vitamin D3 blood levels of 60-80 ng/ml. Comparisons of brain regions associated with sleep-wake regulation and vitamin D target neurons in the diencephalon and several brainstem nuclei suggest direct central effects of vitamin D on sleep...An uncontrolled trial of continuous positive airway pressure CPAP devices for patients with headache and obstructive sleep apnea was partially successful, but in the fall of 2009 two patients remarked that the serendipitous supplementation of vitamin D, in addition to the use of their CPAP devices had, over a period of weeks, allowed them to wake rested and without headaches. Because the majority of the daily headache sufferers also had vitamin D deficiency the same author went looking for a possible connection between vitamin D and paralysis during sleep. This led to the recognition that several nuclei in the hypothalamus and brainstem that are known to be involved in sleep have high concentrations of vitamin D receptors^15,16,17^. An uncontrolled clinical trial of vitamin D supplementation in 1500 patients over a 2 year period, maintaining a consistent vitamin D blood level in the range of 60-80 ng/ml over many months, produced normal sleep in most patients regardless of the type of sleep disorder, suggesting that multiple types of sleep disorders might share the same etiology...Like other steroid hormones, Vitamin D is thought to exert its effects in the nucleus of the cell, at the vitamin D receptor, promoting transcription of specific genes. There are also reports of actions unrelated to transcription, possibly mediated by surface membrane receptors, such as Ca++ channels, that produce cellular effects in minutes^5^. Surprisingly, doses of 20,000 IU/day promote normal sleep without being sedating, and the effect is apparent within the first day of dosing in patients who have had severe sleep disruption and very low 25(OH) vitamin D3 levels...Many of the ideas about normal sleep expressed here grew out of watching patients return to normal sleep cycles, over a period of months, with just the return of the 25(OH) vitamin D3 blood level to 60-80 ng/ml. A totally unexpected observation was that the sleep difficulties produced by vitamin D levels below 50 return, in the same form, as the level goes over 80 ng/ml suggesting a narrower range of "normal" vitamin D levels for sleep than those published for bone health. Also, Vitamin D2, ergocalciferol (widely recommended as an "equivalent" therapy for osteoporosis) prevented normal sleep in most patients, suggesting that D2 may be close enough in structure to act as a partial agonist at some locations, an antagonist at others.
 
 Comments:
 
@@ -950,7 +971,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  ZQ by SSCF.12
     t = 1.9284, df = 36.417, p-value = 0.06163
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.2107102  8.4258132
     sample estimates:
     mean in group 0 mean in group 1
@@ -963,7 +984,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Total.Z by SSCF.12
     t = 1.8776, df = 33.985, p-value = 0.06904
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -1.738464 43.953567
     sample estimates:
     mean in group 0 mean in group 1
@@ -976,7 +997,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.in.REM by SSCF.12
     t = 2.4099, df = 31.155, p-value = 0.02205
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
       2.278176 27.332808
     sample estimates:
     mean in group 0 mean in group 1
@@ -989,7 +1010,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.in.Deep by SSCF.12
     t = -0.6214, df = 38.235, p-value = 0.538
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -7.404045  3.925784
     sample estimates:
     mean in group 0 mean in group 1
@@ -1002,7 +1023,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.in.Wake by SSCF.12
     t = -0.3332, df = 32.679, p-value = 0.7411
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -12.588395   9.046061
     sample estimates:
     mean in group 0 mean in group 1
@@ -1015,7 +1036,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Awakenings by SSCF.12
     t = -0.8485, df = 37.998, p-value = 0.4015
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -2.3089027  0.9450583
     sample estimates:
     mean in group 0 mean in group 1
@@ -1028,7 +1049,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Morning.Feel by SSCF.12
     t = 2.99, df = 32.596, p-value = 0.005276
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      0.1672538 0.8805931
     sample estimates:
     mean in group 0 mean in group 1
@@ -1041,7 +1062,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.to.Z by SSCF.12
     t = -0.6687, df = 32.607, p-value = 0.5084
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -12.779474   6.459107
     sample estimates:
     mean in group 0 mean in group 1
@@ -1063,7 +1084,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  ZQ by SSCF.12
     t = 1.9284, df = 36.417, p-value = 0.06163
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.2107102  8.4258132
     sample estimates:
     mean in group 0 mean in group 1
@@ -1076,7 +1097,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  ZQ by SSCF.12
     t = 1.9284, df = 36.417, p-value = 0.03082
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      0.5124493       Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1089,7 +1110,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  ZQ by SSCF.12
     t = 1.951, df = 40, p-value = 0.05809
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.1476258  8.3627288
     sample estimates:
     mean in group 0 mean in group 1
@@ -1102,7 +1123,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  ZQ by SSCF.12
     t = 1.951, df = 40, p-value = 0.02905
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      0.5623672       Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1120,7 +1141,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  ZQ by SSCF.12
     t = 1.951, df = 40, p-value = 0.02905
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      0.5623672       Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1131,7 +1152,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Total.Z by SSCF.12
     t = 1.9204, df = 40, p-value = 0.03098
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      2.599576      Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1145,7 +1166,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.in.REM by SSCF.12
     t = 2.4936, df = 40, p-value = 0.00844
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      4.807836      Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1156,7 +1177,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.in.Deep by SSCF.12
     t = -0.6225, df = 40, p-value = 0.5371
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -7.385555  3.907294
     sample estimates:
     mean in group 0 mean in group 1
@@ -1170,7 +1191,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.in.Wake by SSCF.12
     t = -0.3427, df = 40, p-value = 0.3668
     alternative hypothesis: true difference in means is less than 0
-    95 percent confidence interval:
+    95% confidence interval:
          -Inf 6.931845
     sample estimates:
     mean in group 0 mean in group 1
@@ -1181,7 +1202,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Awakenings by SSCF.12
     t = -0.8513, df = 40, p-value = 0.8002
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      -2.030783       Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1195,7 +1216,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Morning.Feel by SSCF.12
     t = 2.8647, df = 39, p-value = 0.003344
     alternative hypothesis: true difference in means is greater than 0
-    95 percent confidence interval:
+    95% confidence interval:
      0.2157825       Inf
     sample estimates:
     mean in group 0 mean in group 1
@@ -1206,7 +1227,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
     data:  Time.to.Z by SSCF.12
     t = -0.6878, df = 40, p-value = 0.2478
     alternative hypothesis: true difference in means is less than 0
-    95 percent confidence interval:
+    95% confidence interval:
         -Inf 4.57606
     sample estimates:
     mean in group 0 mean in group 1
@@ -1222,7 +1243,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053; _p_=0.0033)
 8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51; _p_=0.25)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
 
-So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly statistically significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{std-dev}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
+So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly statistically significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{standard deviation}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
 
 [^d-multiple]: [Correcting for multiple comparisons](#fn7) at _q_-value=0.05, of our 8 pessimistic _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
 
@@ -1410,7 +1431,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  ZQ by SSCF.1
     t = -0.9582, df = 49.202, p-value = 0.3427
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -11.394801   4.036468
     sample estimates:
     mean in group 0 mean in group 1
@@ -1423,7 +1444,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Total.Z by SSCF.1
     t = -0.7836, df = 44.939, p-value = 0.4374
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -55.87065  24.57482
     sample estimates:
     mean in group 0 mean in group 1
@@ -1436,7 +1457,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Time.in.REM by SSCF.1
     t = -0.7204, df = 42.881, p-value = 0.4752
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -22.26792  10.54709
     sample estimates:
     mean in group 0 mean in group 1
@@ -1449,7 +1470,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Time.in.Deep by SSCF.1
     t = -0.7593, df = 59.53, p-value = 0.4507
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -10.10198   4.54365
     sample estimates:
     mean in group 0 mean in group 1
@@ -1462,7 +1483,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Time.in.Wake by SSCF.1
     t = 0.9282, df = 56.632, p-value = 0.3572
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -4.627848 12.623682
     sample estimates:
     mean in group 0 mean in group 1
@@ -1475,7 +1496,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Awakenings by SSCF.1
     t = 0.2798, df = 54.725, p-value = 0.7807
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -1.451225  1.922059
     sample estimates:
     mean in group 0 mean in group 1
@@ -1488,7 +1509,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Morning.Feel by SSCF.1
     t = -2.8975, df = 58.965, p-value = 0.005272
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.9054147 -0.1657060
     sample estimates:
     mean in group 0 mean in group 1
@@ -1501,7 +1522,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Time.to.Z by SSCF.1
     t = 0.0055, df = 59.368, p-value = 0.9957
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -7.617116  7.658783
     sample estimates:
     mean in group 0 mean in group 1
@@ -1514,7 +1535,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     data:  Mood by SSCF.1
     t = 0.4591, df = 48.049, p-value = 0.6482
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.2407499  0.3832499
     sample estimates:
     mean in group 0 mean in group 1
@@ -1597,7 +1618,7 @@ More precisely, the summary statistics indicate that the difference in means & m
     data:  originalcontrol$Morning.Feel and newcontrol$Morning.Feel
     t = -0.0031, df = 67.67, p-value = 0.9975
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.3466966  0.3456190
     sample estimates:
     mean of x mean of y
@@ -1644,7 +1665,8 @@ If potassium was disturbing my sleep, I didn't necessarily want to wait for any 
 [^potassium-graph-1]: The generating R code (see later analysis footnote for definitions of data variables like `offtimeawake` etc):
 
     ~~~{.R}
-    plot(c(1:32), offtimeawake, col="blue", xlab="nth", ylab="latency/awakenings/awake (raw)")
+    plot(c(1:32), offtimeawake, col="blue",
+         xlab="nth", ylab="latency/awakenings/awake (raw)")
     points(c(1:32), offlatency, col="blue")
     points(c(1:32), offawakenings, col="blue")
     points(c(1:30), ontimeawake, col="red")
@@ -1665,7 +1687,8 @@ The trend has become much clearer, but the final step is to add each day's score
 [^potassium-graph-3]: Assuming the `zscore` conversion has been done:
 
     ~~~{.R}
-    plot(c(1:32), offtimeawake+offlatency+offawakenings, col="blue", xlab="nth", ylab="standardized sleep disturbance score")
+    plot(c(1:32), offtimeawake+offlatency+offawakenings, col="blue",
+         xlab="nth", ylab="standardized sleep disturbance score")
     points(c(1:30), ontimeawake+onlatency+onawakenings, col="red")
     ~~~
 
@@ -1679,14 +1702,18 @@ A t-test agrees:[^frequentist-potassium] _p_=0.0000037. (There is no need for mu
 
     ~~~{.R}
     # all the non-potassium days
-    offlatency <- c(11,15,16,16,17,18,20,21,21,24,24,26,29,33,36,42,40,19,32,28,37,36,19,25,30,22,11,20,33,33,42,31)
+    offlatency <- c(11,15,16,16,17,18,20,21,21,24,24,26,29,33,36,42,40,19,32,28,37,36,19,25,
+                    30,22,11,20,33,33,42,31)
     offawakenings <- c(8,6,2,7,6,8,7,4,8,3,8,4,7,7,9,12,11,14,8,10,8,6,9,8,13,9,5,5,13,12,9,9)
-    offtimeawake <- c(21,14,6,15,7,22,12,17,29,5,14,10,16,16,24,13,42,50,39,15,20,18,33,27,45,23,21,6,25,28,31,61)
+    offtimeawake <- c(21,14,6,15,7,22,12,17,29,5,14,10,16,16,24,13,42,50,39,15,20,18,33,27,45,
+                      23,21,6,25,28,31,61)
 
     # all the potassium days
-    onlatency <- c(12,15,16,17,18,19,21,21,23,25,25,26,26,26,27,29,30,30,32,33,33,34,34,54,30,31,30,22,26,23)
+    onlatency <- c(12,15,16,17,18,19,21,21,23,25,25,26,26,26,27,29,30,30,32,33,33,34,34,
+                   54,30,31,30,22,26,23)
     onawakenings <- c(8,3,4,10,8,9,4,5,4,10,7,4,7,8,7,8,12,8,7,3,6,2,8,7,10,9,4,9,11,8)
-    ontimeawake <- c(22,08,11,17,10,24,19,8,8,35,9,39,10,29,15,20,90,16,13,6,15,1,20,24,17,60,10,50,22,18)
+    ontimeawake <- c(22,08,11,17,10,24,19,8,8,35,9,39,10,29,15,20,90,16,13,6,15,1,20,24,
+                     17,60,10,50,22,18)
 
     # normalize
     zscore <- function(x,y) mapply(function(a) (a - mean(y))/sd(y), x)
@@ -1728,7 +1755,7 @@ A t-test agrees:[^frequentist-potassium] _p_=0.0000037. (There is no need for mu
     data:  off and on
     t = -4.479, df = 56.49, p-value = 3.702e-05
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -3.368 -1.287
     sample estimates:
     mean of x mean of y
@@ -1784,7 +1811,7 @@ There is little visible effect, and the formal Bayesian[^potassium-productivity-
     data:  off and on
     t = -0.3938, df = 59.93, p-value = 0.6951
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.4520  0.3033
     sample estimates:
     mean of x mean of y
@@ -1827,7 +1854,8 @@ As it happened, I managed to retrieve my pill-making machine and spare gel capsu
 07: 0
 08: 0
 09: 0
-10:
+10: 1
+11:
 -->
 
 # In progress
@@ -2085,7 +2113,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     data:  before$WPM and after$WPM
     t = -12.0053, df = 899.744, p-value < 2.2e-16
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -6.068614 -4.363238
     sample estimates:
     mean of x mean of y
@@ -2096,7 +2124,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     data:  before$Accuracy and after$Accuracy
     t = -4.4027, df = 940.588, p-value = 1.192e-05
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.0023275753 -0.0008923092
     sample estimates:
     mean of x mean of y
@@ -2112,7 +2140,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     data:  before$WPM[1144:2285] and after$WPM
     t = -5.3227, df = 1132.508, p-value = 1.232e-07
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -3.429192 -1.581982
     sample estimates:
     mean of x mean of y
@@ -2123,7 +2151,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     data:  before$Accuracy[1144:2285] and after$Accuracy
     t = -1.3091, df = 1156.249, p-value = 0.1908
     alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.0012902667  0.0002575397
     sample estimates:
     mean of x mean of y
@@ -2894,13 +2922,14 @@ January 2013
 07: 1 0
 08: 0 0
 09: 1 1
-10: 1 1?
+10: 0 1
+11: 1 1?
 
 Underpopulated data cells:
 53: 1 1
 53: 1 0
 58: 0 0
-59: 0 1
+60: 0 1
 -->
 
 # External links
@@ -3259,3 +3288,4 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 08 Jan 2013: on -->
 <!-- Redshift: 09 Jan 2013: off -->
 <!-- Redshift: 10 Jan 2013: off -->
+<!-- Redshift: 11 Jan 2013: on -->
