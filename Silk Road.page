@@ -4,177 +4,15 @@ description: Visiting, ordering, and using the anonymous drug market Silk Road
 created: 11 Jul 2011
 tags: cryptography, nootropics, politics
 status: finished
-belief: log
+belief: likely/log
 ...
 
-> This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it[^hamlet]; it is based on my experiences May-June 2011, and may be out-dated. "Trust, but verify."
+> This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it[^Hamlet]; it is based on my experiences May-June 2011, and may be out-dated. "Trust, but verify." Additional parts came from an essay, part of which was published by [_A Global Village_](http://aglobalvillage.org/).
 
-<!--
-> The cypherpunk movement laid the ideological roots of Bitcoin and the online drug market Silk Road; balancing previous emphasis on cryptography, I emphasize the non-cryptographic market aspects of Silk Road which is rooted in cypherpunk economic reasoning, and give a fully detailed account of how a buyer might use market information to rationally buy, and finish by discussing strengths and weaknesses of Silk Road, and what future developments are predicted by cypherpunk ideas.
-
-Neither Bitcoin nor the Silk Road should be understood outside their ideological and historical context: the now-obscure cipherpunks or cypherpunks movement.
-
-# Cypherpunks
-
-The "cypherpunk" group was a loose affiliation of cryptographic researchers and enthusiasts centered on an email list in the 1980s and 1990s who developed many novel ideas and approaches to communication, economics, and politics. Achievements of theirs included developing anonymous email remailers (inspiring the Tor anonymizing network), helping defeat the Clinton-era Clipper chip and setting a key precedent, and helping defeat USA export restrictions on cryptography (key to safe Internet commerce outside the USA; the costs of export restrictions can be seen to this day in South Korea, which locked itself into a Microsoft/Internet Explorer computer monoculture). No event marked their dissolution, but through the '90s, they gradually lost cohesion and interest as various ideas were successful and others remained barren. (Timothy May remarks in 1994 that an acceptable digital currency may take several years to develop but that he had been that optimistic years before as well; we could date the fulfillment of the dream to Bitcoin - 14 years later - in 2008.) Former cypherpunks include large corporations (PayPal was originally a usable offline currency) to technological innovation (BitTorrent) to niche groups like transhumanism (digital currency inventor Wei Dai) to activism (EFF, WikiLeaks) etc.
-
-The cypherpunk paradigm can be summarized as: replacing centralized systems of interactions enforced by coercion with decentralized systems of voluntary interaction enforced by mathematics/economics. Desiderata for systems include: communications private from all third-parties, anonymous, provably untampered with and from particular parties, social mechanisms like reputation replaced by formalized systems like feedback (see untampered messages), and legal mechanisms like anti-fraud statutes superseded by mechanisms such as escrow or bonds (which can be fortified by cryptographic techniques as multiple-party signatures). The ideal cypherpunk system is self-enforcing, self-regulating, and cannot be attacked directly by outsiders because they do not know where it is or how to affect it.
-
-Julian Assange et al 2012 recently wrote:
-
-> ...The state would leech into the veins and arteries of our new societies, gobbling up every relationship expressed or communicated, every web page read, every message sent and every thought googled, and then store this knowledge, billions of interceptions a day, undreamed of power, in vast top secret warehouses, forever. It would go on to mine and mine again this treasure, the collective private intellectual output of humanity, with ever more sophisticated search and pattern finding algorithms, enriching the treasure and maximizing the power imbalance between interceptors and the world of interceptees. And then the state would reflect what it had learned back into the physical world, to start wars, to target drones, to manipulate UN committees and trade deals, and to do favors for its vast connected network of industries, insiders and cronies. But we discovered something. Our one hope against total domination. A hope that with courage, insight and solidarity we could use to resist. A strange property of the physical universe that we live in. The universe believes in encryption. It is easier to encrypt information than it is to decrypt it.
-
-The decentralization is key. Centralization is unacceptable for many applications: centralization means any commercial or political interest can interfere for any purpose, be it rent-seeking or taxation, prosecuting economic warfare against another party, intended to hamper organized crime or terrorism, etc. This fear of centralization is not idle: the power offered by centralization has been grasped on many occasions, ranging from Paypal hampering its competitors to US-led crackdowns on ancient _hawala_ financial systems & Islamic charities in the name of counter-terrorism to the US suing the Intrade prediction market (with the assistance of the Central Bank of Ireland) to credit card companies' near-fatal boycott of WikiLeaks to Iran's severe inflation after economic embargoes. Previous centralized currencies like E-gold suffered the expected fates, and more pointedly, an earlier online drug market (the "Farmer's Market") was shut down and principals indicted, with the indictment listing scores of transactions sourced from banks and Paypal and Western Union.
-
-# Bitcoin
-
-The fundamental challenge confronting any electronic currency is coping with the "double-spend problem": when transactions conflict (eg. spending twice the same unit of currency), which transaction takes priority? Double-spends are difficult to perform with non-electronic money since you cannot give a dollar bill to one person while simultaneously giving it to another, but trivial with electronic messages.
-
-One solution is to centralize transactions: if you overdraw your bank account with 2 checks, the bank will choose one to bounce and one to honor. Similarly for credit card transactions. An electronic currency like Paypal processes each transaction in realtime, so you cannot log into your Paypal account in 2 browsers and send your entire balance to 2 different people. With centralization, there is someone or something which 'decides' which of the 2 conflicting transactions will become the real transaction. Centralization appears in many guises in currency systems: cryptographic pioneer David Chaum's own electronic currency could guarantee complete anonymity to anyone "spending" a coin, solving the double-spend problem by devising things so that a double-spend leaks enough information that the anonymity evaporates, but the math only works with a central "bank" which could be attacked. Chaum's system never took off, for several reasons, but this centralized point of failure is one.
-
-If we avoid the problems of centralization and resolve on a decentralized system, we face a different but equally severe set of problems: without centralization, in a distributed system in which no party has veto power (and any party can be anonymous or a mask for another party), how and *who* decides which of 2 conflicting transactions is the "real" transaction? Must a distributed system simply allow double-spends, and thus be useless as money?
-
-No. The [underappreciated genius of Bitcoin](http://www.gwern.net/Bitcoin%20is%20Worse%20is%20Better) is that it says that the valid transaction is simply the one which had the most computing power invested in producing it. Why does this work? In the Bitcoin distributed system, there are many 'good' parties at work producing new transactions, and they will independently latch onto one of the two competing transactions produced by an attacker and incorporate it into future transactions; the amount of computing power necessary to out-invest those other parties quickly becomes too enormous for any one entity to invest. Within hours, one transaction will be universal, and the other forgotten.
-
-Hence, Bitcoin is an acceptable cypherpunk currency: it is decentralized, parties participate out of self-interest, it is economically infeasible to attack Bitcoin directly.
-
-# Silk Road as _Cyphernomicon_'s black markets
-
-The Silk Road (SR) is a website accessible through the Tor anonymizing network. Tor is descended from cypherpunk designs for anonymous email: messages are swapped by servers in the "mix" network with changing cryptographic wrappers, so observers cannot tell what server a message ultimately ends up at nor who sent a message. Buyers create accounts, send bitcoins to SR-controlled addresses, browse vendor pages, and order quantities similar to any e-commerce site. (It is more akin to shopping on Amazon Marketplaces than eBay: there are no auction features.) SR has been covered in the media for years and is still operating successfully, indeed, Christin 2012 calculated a monthly turnover of $1.9m for annual revenue of $22m from 2011-2012, with daily sales volume:
-
-!["Figure 12: Estimate of the total amount of daily sales (in BTC) occurring on Silk Road. Each point corresponds to an average over the prior thirty days."](http://i.imgur.com/ePtPw.png)
-
-The design of SR could be taken straight out of early '90s cypherpunk - most of the design can be justified in [Timothy C. May](http://en.wikipedia.org/wiki/Timothy_C._May)'s 1994 _[Cyphernomicon](http://en.wikipedia.org/wiki/Cyphernomicon)_, itself mostly a summary of much earlier discussions. (In an historical coincidence, May mentioned a digital currency proposal called "The Digital Silk Road".) The Silk Road is an unregulated black marketplace which is:
-
-- reached via a anonymizing mix network
-- made up of pseudonymous entities, who
-- communicate privately and securely via public-key cryptography to arrange purchases
-- using escrow schemes for payment of vendors only on receipt of goods
-- said vendors must post the equivalent of bonds as surety before being allowed to sell
-- and buyers publicly rate their vendors (so the marketplace avoids becoming a lemon market)
-
-From an economic point of view, several measures serve to make incentives align:
-
-- SR is paid as a percentage of transactions; hence, it is motivated to encourage as high a turnover as possible, and maintain the satisfaction of both buyers and sellers
-- Sellers are encouraged to not scam buyers because they will not gain access to bitcoins in escrow and enough violations will forfeit their deposit held by SR
-- Buyers have limited incentive to scam sellers because their bitcoins are paid in advance and not under their control; SR arbitrates disputes and more than a few bad transactions can lead to their balances forfeited and being blacklisted, limiting their ability to scam large amounts
-
-And as far as people outside the marketplace are concerned, there is a network effect at play: the better incentives align, the more buyer and sellers there will be, and they will lead to better selections and lower prices. All familiar economic results about thick market, but perhaps unexpected to see in such an exotic marketplace.
-
-## Escrow
-
-One aspect of the incentives deserves coverage as most presciently discussed by the cypherpunks: the use of escrow.
-
-May's chapter 12 (["Legal Issues: Loose Ends: Escrow Agents"](http://www.cypherpunks.to/faq/cyphernomicron/chapter10.html#21)) lays out the necessity of escrow when a marketplace uses both pseudonymity and untraceable digital cash:
-
-> On-line clearing has the possible danger implicit in all trades that Alice will hand over the money, Bob will verify that it has cleared into his account (in older terms, Bob would await word that his Swiss bank account has just been credited), and then Bob will fail to complete his end of the bargain. If the transaction is truly anonymous, over computer lines, then of course Bob just hangs up his modem and the connection is broken. This situation is as old as time, and has always involved protocols in which trust, repeat business, etc., are factors. Or escrow agents.
->
-> ...In steps "Esther's Escrow Service." She is _also untraceable_, but has established a digitally-signed presence and a good reputation for fairness. Her business is in being an escrow agent, like a bonding agency, not in "burning" either party. (The math of this is interesting: as long as the profits to be gained from any small set of transactions is less than her "reputation capital," it is in her interest to forego the profits from burning and be honest. It is also possible to arrange that Esther cannot profit from burning either Alice or Bob or both of them, e.g., by suitably encrypting the escrowed stuff.) Alice can put her part of the transaction into escrow with Esther, Bob can do the same, and then Esther can release the items to the parties when conditions are met, when both parties agree, when adjudication of some sort occurs, etc. (There a dozen issues here, of course, about how disputes are settled, about how parties satisfy themselves that Esther has the items she says she has, etc.)
-
-"Esther" is SR, "on-line clearing" is bitcoins, Alice is buyers and Bob sellers, but otherwise the logic is clear and unmistakable: lack of escrow leads to a perverse incentive for Bob to scam Alice.
-
-We can see the proof in practice. For various reasons, SR provides buyers the option of releasing their funds from escrow to the seller, called "early finalization"; early finalization is one of the leading mechanisms for seller scams on SR. The cardinal example is the April 2012 scam where a trusted seller took the occasion of a SR-wide sales event (where SR waived its fees) to announce unusually low prices, took in hundreds of large orders totaling thousands of bitcoins (the equivalent of >$50,000) but requiring early finalization, withdrew all funds, and never delivered. A simple enough scam, yet highly effective: as May and other cypherpunks pointed out 2 decades or more before, one should never entrust a pseudonymous agent with more liquid anonymous cash than its "reputation capital" is worth. One can entrust the agent with less liquid anonymous cash, as previous buyers had done early finalization without problem, or one could entrust the agent with more escrowed anonymous cash (so they cannot "rip-and-run"), but not both more and un-escrowed.
-
-# Silk Road as a marketplace
-
-Beyond the basic cryptographic and features of the site itself, SR embodies the cypherpunk dream of letting free-market forces operate to inform buyers and let them find sellers with whom they can reach mutually acceptable agreements. There is no better way to demonstrate this dynamic than with a detailed example using real SR data of a hypothetical buyer compiling the information sr provides, making inferences on the provided data, applying his desires to appraise each seller's wares, trading off various criteria such as risk versus price, and finally settling on a particular product.
-
-## LSD ordering
-
-The psychedelic LSD is one of the harder purchases because there is a bewildering array of options and scammers are unusually common.
-
-### Vendor table
-
-Below is a table compiled late August 2012 from SR search results for "LSD". We will examine an American buyer interested in a small quantity of LSD, <฿12:
-
-Listing                   #    μg     ฿     S&H    μg/฿    Transit            User                  Age (days)    FE      Feedback     Weighted μg/฿                  LSD reviews    Forum hits
--------------------      ---  ---- ------- ------ ------   ----------    -------------------------- --------     -----   ------------ -------------------             ------------ -----------
- "Matrix™"                 5  250  11.67    1.75   93      international   EnterTheMatrix           360          yes?      300(98.7%)   90                             many             many
- "Alice in Wonderland"     5  120  6.99     0.42   81      international   aakoven                  360           no?      300(93.7%)   74                             >6               180
- "Hoffman Now"             2  110  2.96     0.34   70      international   PremiumDutch             360           yes      300(97.3%)   67                             2                60
- "5LSD Blotter"            5  200  7.45     0.58   125     international   juergen2001              360           yes      300(95.1%)   115                            >18              90
- "Trip"                    5  150  8.02     0      94       domestic       lonely kamel             120           no       173(93.4%)   84                             0                20
- 2 pcs Maya                2  250  4.12     1.42   104     international   VitaCat                  120           no?      300(99.9%)   103                            many             many
- 5 pcs Maya                5  250  10.21    1.42   107     international   VitaCat                  120           no?      300(99.9%)   106                            many             many
- "Premium LSD tabs"        5  ?    6.99     0      72       domestic       No FE ever               60            no       68(99.1%)    67                              2                22
- Mayan 1                   1  125  0.83     0.32   143     international   nipplesuckcanuck         60            yes?     127(97.6%)   134                            ?                11
- Mayan 2                   10 125  7.19     0.49   163     international  nipplesuckcanuck          60            yes?     127(97.6%)   153                            3                11
- "Shiva"                   2  100  2.18     0.18   85       domestic       graffenburg              30            no       76(100%)     82                             0                9
- "Hoffmann bike rides"     5  150  7.53     0      100     international   Machine Maid             30            no       10(100%)     74                             0                1
- "3Jane Latest"            5  100  7.36     0.59   63       domestic       Molly Want a Cracker     24            no       28(100%)     57                             0                9
- "Beetles Stamps"          5  150  4.28     0      175      domestic       USAReshipper             10            no       0(?%)        88                             0                3
- "5 strip Real Love"       5  150? 6.41     0.29   112      domestic       Ladylucy                 4             ?        0(?%)        56                             0                3
- "Koi Fish"                1  250  2.51     0.6    80      international   aciddotcom               7             yes      0(0%)        40                             0                0
-
-- For unit prices <฿3, the unit count is increased until the total price fits within ฿7.5; otherwise, μg/฿ is calculated the obvious way: dose times quantity divided by price plus shipping.
-- Weighted μg/฿: per-unit cost weighted by expected-value interpretation of risk; see the later Quantitative section.
-
-### Description
-
-Some general observations on this table of a subset of LSD vendors:
-
-1. There's a striking number of new sellers: listings from 'young' accounts (<=2 months old) make up more than half the table. In SR forum discussions of LSD, there are many complaints about a lack of US sellers but it seems the market is responding.
-2. There are few LSD reviews on the forums for any vendor except `EnterTheMatrix`; this seems to be partially due to the presence of many vendors not specializing in LSD.
-3. Long-term feedback below 95% is a warning sign. Of the 3 'old' vendors with ~95% or less feedback (`aakoven`, `juergen2001`, & `lonely kamel`), all 3 have plenty of bad feedback on the forums. If it were just one that had both bad feedback and bad forum comments, it might be some sort of astroturfing or 'hating' (as `aakoven` pre-emptively accuses his bad feedback rating), but when *all 3* have both bad forums and feedback ratings? Makes one wonder... Nor is that the 'cost of doing business' for very old vendor accounts, since we see that the similarly old `EnterTheMatrix` & `PremiumDutch` ratings are solidly better.
-
-    Since their μg/฿ are not stellar (save `juergen2001`'s), it's not clear why one would buy from them.
-4. Some of the new sellers seem to have a lot of feedback (eg. `No FE ever` or `nipplesuckcanuck`), but looking at their feedback, we see a great deal of early finalization! This renders them pretty suspect. And of course, the 3 youngest sellers have no feedback at all. This is a problem because scammers are a serious problem with LSD vendors; a quick read of forum threads lists 5 scammers over the previous 3 months: `Kat`, `Gar`, `Bloomingcolor`, `Fractaldelic`, & `DiMensionalTraveler`.
-5. The range of μg/฿ is interesting: a full order of magnitude is represented, from the low of 63μg/฿ to 175μg/฿.
-
-    Perhaps surprisingly, this range doesn't go away when adjusting for risk based on reviews: now the full range is 40μg/฿ (`aciddotcom`) to 153μg/฿ (`nipplesuckcanuck`).
-
-### Analysis
-#### Quantitative
-
-A standard normative approach in economics & decision theory is to do what maximizes one's expected value, which is just $\text{risk} \times \text{reward} = \text{EV}$. The reward is easy: total dose divided by total cost. The risk is harder: the vendors do not conveniently volunteer how likely you are to be scammed.
-
-The obvious way to quantify risk is to just take the feedback at face-value: a 97% rating says one is taking a 3% chance one will be screwed over. Multiply that by the reward, sort to find the largest EV, and we're done.
-
-An objection: "Are you seriously saying that a vendor with 1 bad review out of 100 is *equally* trustworthy as a vendor with 3 bad reviews out of 300, and that both of them are *less* trustworthy than a vendor with 0 bad reviews out of 10?" Intuitively, the 300-review guy's 99% is more reliable than the 100-rating guy's 99%; the 10-rating guy may have a perfect 100% now, but could easily wind up with something much lower after he's sold 100 or 300 things, and we would rather not be one of the buyers who causes those shifts downward.
-
-So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](http://en.wikipedia.org/wiki/Binomial_distribution). We're not interested in the optimistic question of "how *good* could these vendors turn out to be?", but rather we are interested in finding out how *bad* these vendors might truly be. What's the worst plausible vendor future rating given their existing ratings?
-
-We can ask for a [confidence interval](http://en.wikipedia.org/wiki/Confidence_interval) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](http://www.gwern.net/docs/1994-falk), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul). This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". We derive the lower bound using the Clopper-Pearson interval and multiply against the unit-price. (A check using the Bayesian Jeffreys credible interval yields similar results; a look at weighting vs number feedbacks demonstrates that feedback ratings don't start yielding high assurance until a surprisingly large number have been made.)
-
-Now we have risk factored in from just the quantitative data of the feedback amount & percentage. But we must be more subjective with the other factors.
-
-#### Qualitative
-
-We have to look at more qualitative information and start comparing & ranking possibilities. There are a few criteria that a reasonable American buyer should value; in descending order of importance:
-
-1. old > new
-2. high weighted-μg/฿
-3. many reviews on SR & forums
-4. no escrow (FE) > escrow
-5. domestic > international
-6. has feedback thread
-
-For a first cut, we look at all items meeting #2, where a good cut off seems to be weighted-μg/฿>90; this is just `EnterTheMatrix`, `juergen2001`, `VitaCat`, and `nipplesuckcanuck`. A second cut is #1, which deletes `nipplesuckcanuck` for being too new. #3 is useless, but #4 is helpful: we can scrap `juergen2001` for requiring FE; #5 is now useless as both are international, as is #6 since both have feedback threads.
-
-This leaves `VitaCat` and `EnterTheMatrix`. On most of the listed metrics, they are about equal - `EnterTheMatrix` seems to have an edge in feedback due to greater volume, but it's hard to say for sure. Going with `VitaCat` promises to save a little bit of money since his weighted-μg/฿ is ~10 greater. Our discussion concludes that the best vendor to order from would be `VitaCat`; from forum posts, many SR buyers have reached the same conclusion.
-
-# Future Developments
-
-So, we have seen that Bitcoin satisfies an old dilemma bedeviling the early cypherpunks; we have covered how SR follows recommended design principles in achieving their dream of self-enforcing marketplaces, and went through a lengthy example of how buyers can rationally order and thereby contribute to the necessary dynamics.
-
-The drug market has grown and thrived beyond all expectations, despite an extraordinary - perhaps unprecedented - level of media coverage and transparency of operation. By its mere existence, it lays bare the universality of illicit drug use; by its sales volume, it provides a benchmark for understanding what estimates of the global black market really mean: if the Silk Road has turnover of $20m a year and the black market turn over closer to $100b a year, then the latter is equivalent to *5000* Silk Roads. By its use of public technology (even immature & hard to use technologies) and ordinary postal services, it demonstrates the infeasibility of the long-standing War on Drugs; and by taming drug use, turning it from a violence-prone seamy affair to a smooth commercial transaction, it suggests that there is no necessity for the War on Drugs.
-
-What is next?
-
-No one foresaw Bitcoin in 2008; and the success of SR in 2011 took many by surprise (including the author) who had assumed that it would quickly be shut down by law enforcement, fall victim to hackers seeking a lucrative payday, or at best devolve into a lemon market with a few overpriced goods. All three of these possibilities still exist; lengthy SR downtime in November 2012 fueled speculation that law enforcement had finally found a viable attack or that SR was suffering a Denial of Service (DoS) attack. SR's administrator [stated](http://www.theverge.com/2012/11/21/3675278/silk-road-operator-says-fail-whale-not-feds-brought-down-notorious) the downtime was due to "record" numbers of users; but if large numbers of legitimate users can accidentally take down the site, clearly a full-fledged DoS attack is feasible.
-
-But supposing that SR continues to have an annual turnover of millions of dollars of drugs and other goods? Two striking possibilities come to mind.
-
-1. the next development may be "information markets": black markets for leaked data, whistleblowers, corporate espionage, personal information such as credit card numbers, etc. Existing "carding forums" may be a market niche to usurp, as they have had problems with law enforcement infiltration and would benefit from increased security. Similarly, WikiLeaks has reportedly tried to auction off access to documents in its possession, and while the auctions failed, this may be due to defections and severe internal turmoil and not flaws in the fundamental idea.
-2. One of the most extreme proposals was ["assassination markets"](http://en.wikipedia.org/wiki/Assassination_market): a market in which participants lay bets on when a particular person will die; when the total bets become large enough, they function as a bounty on that person - inasmuch as a would-be hit man knows when the person will die. Assassination markets were to be a weapon against government oppression, but such markets could be used against any non-anonymous but powerful humans.
-
-    This would seem to be much less plausible than either a drug market or an information market: both drug & information black markets are markets which exist offline and online already, with illegal drugs representing a global market best measured in hundreds of billions of dollars of turnover (against the SR's millions), so cypherpunk-style implementations are in a certain sense just 'business as usual'. Hit men, on the other hand, are rare outside organized crime and governments, and then usually confined to particular regions such as Mexico or Afghanistan. Further, a large drug delivery facilitated via SR will usually go unnoticed by the world as the recipient has no incentive to reveal it; a 'large' assassination, on the other hand, will be global news and may trigger a backlash large enough to take down the site, or in general degrade Tor & Bitcoin to the point where they cannot support large enough bounties on any individual to matter.
-
-Regardless, 2 key pieces of cypherpunk technology are now in place and already enabling remarkable new systems. Both researchers and digital entrepreneurs may benefit from taking a look back at some forgotten pioneers and re-evaluating their proposals in the light of recent successes.
-
+<!-- TODO abstract: "The cypherpunk movement laid the ideological roots of Bitcoin and the online drug market Silk Road; balancing previous emphasis on cryptography, I emphasize the non-cryptographic market aspects of Silk Road which is rooted in cypherpunk economic reasoning, and give a fully detailed account of how a buyer might use market information to rationally buy, and finish by discussing strengths and weaknesses of Silk Road, and what future developments are predicted by cypherpunk ideas."
 -->
 
-[^hamlet]: While BW held up its end of the deal and I understand why they might fear the legal consequences, I am a little disappointed that they chose after reflection not to publish it; I was reminded of _[Hamlet](!Wikipedia "To be, or not to be")_:
+[^Hamlet]: While BW held up its end of the deal and I understand why its operator might fear the legal consequences, I am a little disappointed that he chose not to publish it; I was reminded of _[Hamlet](!Wikipedia "To be, or not to be")_:
 
     > Thus conscience does make cowards of us all, \
     > And thus the native hue of resolution \
@@ -183,45 +21,132 @@ Regardless, 2 key pieces of cypherpunk technology are now in place and already e
     > With this regard their currents turn awry, \
     > And lose the name of action.
 
-The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR) - a drug marketplace - needs little introduction at this point, especially after that [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable) article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise[^blackmarket] using Bitcoins, some speculating that demand from SR patrons single-handedly pushed the exchange rate up by $5-10 that weekend. It has since flourished[^size].
+The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR), a drug marketplace operating in public, needs little introduction at this point, after [_Gawker_](http://gawker.com/5805928/the-underground-website-where-you-can-buy-any-drug-imaginable)'s 2011 article went viral, drawing fire from the likes of US federal Senators Schumer & Manchin. It is probably the single most famous commercial enterprise[^black-market] using [Bitcoins](!Wikipedia); some speculated that demand from SR patrons single-handedly pushed the exchange rate up by $5 the weekend of the _Gawker_ article. It has since flourished[^size].
 
-[^blackmarket]: I know of one competing marketplace as of 2011 using Bitcoin+Tor, named BlackMarket which apparently lives at <http://5onwnspjvuk7cwvk.onion/> ([non-Tor mirror](https://5onwnspjvuk7cwvk.tor2web.org/)); [informed opinion](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25bb3s) seems to be that it is very low-volume and stagnant.
+[^black-market]: I know of one competing Bitcoin+Tor marketplace as of 2011, named BlackMarket which apparently lives at <http://5onwnspjvuk7cwvk.onion/> ([non-Tor mirror](https://5onwnspjvuk7cwvk.tor2web.org/)); [informed opinion](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25bb3s) seems to be that it is low-volume and stagnant.
 [^size]: Estimates of Silk Road's size can be done several ways: most purchases entail a review at the end, and reviews are displayed on the front page, so one can monitor the front page and extrapolate to estimate average number of transactions per day or week, and from there estimate turnover and what Silk Road's commissions total to: eg. ~100 transactions a day over 2 years and averaging ~$150 is $200 \times 365 \times 2 \times 150 = 10,950,000$. ["Traveling the Silk Road: A measurement analysis of a large anonymous online marketplace"](http://arxiv.org/pdf/1207.7139v1.pdf) (Christin 2012) spidered Silk Road for 8 months (2011-2012) and did something similar by recording all public prices, feedback indicating how much had been sold, and calculating a monthly turnover of $1.9m for annual revenue of $22m; the difference in estimates seems explained by my estimate of daily transactions being considerably too low.
 
-    Another way is to look in the blockchain for Silk Road-related addresses or transactions; one [possible address](http://bitcointalk.org/index.php?topic=82952.0;all "Very Rich Address?") has a 23 June 2012 balance of 450,825btc or $2,885,280. Since it is unlikely there are ~$3m of transactions active or sitting in wallets that day on Silk Road when the largest previous Silk Road scammer - pulling out all the stops - got away with an order of magnitude less money, this is highly likely to represent Silk Road's profits or profits plus balances & escrows; which at a commission of 5-10% implies a total Silk Road turnover of >$28m. Interestingly, Christin 2012's analysis concluded that Silk Road was by July 2012 receiving $6k daily or $143k monthly or $1.7m yearly in commissions (ad twice that yearly figure is larger than that address balance - as it should be, being an upper bound).
+    Another way is to look in the blockchain for Silk Road-related addresses or transactions; one [possible address](http://bitcointalk.org/index.php?topic=82952.0;all "Very Rich Address?") had a 23 June 2012 balance of 450,825btc or $2,885,280. Since it is unlikely there are ~$3m of transactions active or sitting in wallets that day on Silk Road when the largest previous Silk Road scammer (Tony76) - pulling out all the stops - got away with an order of magnitude less money, this is highly likely to represent Silk Road's profits or profits plus balances & escrows; which at a commission of 5-10% implies a total Silk Road turnover of >$28m. Interestingly, Christin 2012's analysis concluded that Silk Road was by July 2012 receiving $6k daily or $143k monthly or $1.7m yearly in commissions (and twice that yearly figure is larger than that address balance - as it should be, being an upper bound).
 
-But one wonders: what is using it like? Does it have a decent selection? Is it safe[^safe]? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")? Shouldn't we keep quiet about it like Fight Club?[^fightclub]
+Neither Bitcoin nor the Silk Road should be understood outside their ideological and historical context: the now-obscure [cypherpunk](!Wikipedia) movement.
 
-[^safe]: Unsurprisingly, it's hard to find solid information on how many people have been busted using Silk Road or what happened to them, and the consequences will depend on the specific substance and amounts. For example, modafinil seems to be _de facto_ [not prosecuted](Modafinil#legal-risk) in the US, and the failure rates of importing from online pharmacies seem to be in the single percent range according to buyer anecdotes and 1 seller. General descriptions of drug importation also suggest low interception rates (as makes sense given the very large quantities of drugs sold every day); for example, [2 drug journalists](http://www.vice.com/read/narcomania-everything-you-wanted-to-know-about-the-drug-trade) discussing their most recent book:
+# Cypherpunks
 
-    > Q: "How much of the drugs that enter the country are actually seized by police?" A: "I think the figure that’s quoted in our book is about one percent; it really is a fraction of what gets in. There was one conversation I had with a chap who had access to the Serious Organised Crime Agency who said that if people knew how easy it was, then more people would do it."
+The "cypherpunk" group was a loose affiliation of cryptographic researchers and enthusiasts centered on the eponymous email list in the 1980s and 1990s who developed many novel ideas and approaches to communication, economics, and politics. Achievements of theirs included developing [anonymous email remailers](!Wikipedia "Anonymous remailer") (inspiring the [Tor anonymizing network](!Wikipedia "Tor (anonymity network)")), helping defeat the Clinton-era [Clipper chip](!Wikipedia) and setting a key precedent, and helping defeat USA [export restrictions on cryptography](!Wikipedia) (key to safe Internet commerce outside the USA; the costs of export restrictions can be seen to this day in South Korea, which locked itself into a [Microsoft/Internet Explorer](http://blog.mozilla.org/gen/2007/02/27/the-cost-of-monoculture/) [computer monoculture](http://blog.mozilla.org/gen/2007/09/21/update-on-the-cost-of-monoculture-in-korea/)). No event marked their dissolution, but through the '90s, they gradually lost cohesion and interest as various ideas were successful and others remained barren. ([Timothy C. May](!Wikipedia) remarked in 1994 that an acceptable digital currency may take several years to develop, but that he had been that optimistic years before as well; we could date the fulfillment of the dream to Bitcoin - 14 years later - in 2008.) Former cypherpunks include large corporations ([PayPal](!Wikipedia) was originally a usable offline currency) to technological innovation ([BitTorrent](!Wikipedia), descending from [MojoNation](!Wikipedia)) to niche groups like [transhumanism](!Wikipedia) (digital currency inventor [Wei Dai](http://www.weidai.com)) to activism ([EFF](!Wikipedia "Electronic Frontier Foundation"), [Julian Assange](!Wikipedia)'s [WikiLeaks](!Wikipedia)) etc.
 
-    Buyers and sellers seem to be treated differently as well: in the 2012 bust of the insecure Farmer's Market (see later footnote), the indictment only lists sellers and no buyers. [Gawker](http://gawker.com/5926440/are-authorities-closing-in-on-the-online-drug-market-silk-road "Are Authorities Closing In On the Online Drug Market Silk Road?") covers another case of a Canadian cocaine exporter apparently busted because they accepted payment via [Western Union](!Wikipedia).
+The cypherpunk paradigm can be summarized as: "replacing centralized systems of interactions enforced by coercion with decentralized systems of voluntary interaction whose rules are enforced by mathematics/economics". Desiderata for systems include: communications private from all third-parties, anonymous, provably untampered with and from particular parties, social mechanisms like reputation replaced by formalized systems like feedback, and legal mechanisms like anti-fraud statutes superseded by mechanisms such as [escrow](!Wikipedia) or bonds (which can be fortified by cryptographic techniques as multiple-party signatures).
 
-    An Australian student's MDMA was [intercepted by Customs](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10819029 "Officer's link to net drug market") but the article makes no mention of him being penalized, a later [prosecution](http://www.afp.gov.au/media-centre/news/afp/2012/july/afp-and-Customs-warn-users-of-silk-road.aspx "Media Release: AFP and Customs warn users of Silk Road") seems to have been related to a Customs interception, and [2 teens](http://au.news.yahoo.com/thewest/a/-/breaking/14980079/brothers-in-court-over-online-drugs/ "Brothers in court over online drugs") made the mistake of ordering so much that their parents turned them in. A [7 November 2012](http://www.theherald.com.au/story/734298/detectives-follow-the-silk-road/ "Detectives follow the Silk Road") Australian article claims 30 interceptions a month in an area, but mentions nothing specific about arrests. A [December 2012 article](http://www.abc.net.au/news/2012-12-05/dark-internet-linked-to-drug-seizure-spike/4410872 "Dealers shed light on dark internet's drug trade") quotes Customs claiming a 40% increase in seizures, but then quotes a SR seller as claiming a doubling or quadrupling of Australian buyers (implying a halving or more of the interception rate). A New Zealand Customs officer who likely used Silk Road was charged with possessing & "supplying" methamphetamine but this "was uncovered during police inquiries into another crime"; a NZer's MDMA was confiscated by Customs and his house visited, whereupon he admitted guilt to the officers and unsurprisingly was [arrested & convicted](http://www.stuff.co.nz/southland-times/news/court/7958999/Drugs-ordered-on-web "Drugs ordered on web"); a later [NZ article](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10826287 "Online drug trade triggers high alert") claims 80 interceptions a month with 7 arrests January-July 2012 or 1 arrest a month (suggesting each order has a risk of arrest <1/80).
+The ideal cypherpunk system is self-enforcing, self-regulating, and cannot be attacked directly by outsiders because they do not know where it is or how to affect it.
 
-    Security-wise, Silk Road seems to be receiving passing grades from law enforcement agencies; a [leaked FBI report](http://www.wired.com/images_blogs/threatlevel/2012/05/Bitcoin-FBI.pdf "'(U) Bitcoin Virtual Currency: Unique Features Present Distinct Challenges for Deterring Illicit Activity', 24 April 2012") mentioned no attacks against Silk Road, while a [May 2012 Australian document](http://www.scmagazine.com.au/News/314984,aussie-coppers-bedeviled-by-online-contraband-networks.aspx "Aussie coppers bedeviled by online contraband networks: War on the Silk Road requires legal barriers dismantled and police technical skills to be mapped") reportedly praised the security of vendor packaging and general site security.
+[Julian Assange et al 2012](http://cryptome.org/2012/12/assange-crypto-arms.htm "A Call to Cryptographic Arms") write:
 
-    My belief is that SR *can* be taken down; however, I am not sure LE (law enforcement) has permission to use the tactics necessary - explaining the lack of suggested attacks or realistic attacks in the leaked FBI Bitcoin paper and summaries of the leaked Australian SR paper (respectively). My two suggested attacks are 1. DDoSing the SR site, rendering it unusable (and congesting the overall Tor network); 2. fake buyer & seller accounts leading up to a single large scam. #1 would make the site simply unusable, and can be done on any address SR runs on since the address has to be widely known or how will the buyers & sellers know where to go? This would require a few dozen nodes, at least, although I'm not actually sure how hard it is to DDoS a Tor hidden server. #2 would require a fairly substantial financial investment, but depending on how effective the final step is, may actually run at a profit. Repeated a dozen times, this would massively destroy buyers' trust in SR, especially since there are currently only a few hundred active sellers at any point, AFAIK. Fortunately, I don't think LE is authorized to engage in cyberwar (#1) or mass entrapment & fraud (#2). And who knows, maybe SR could survive both.
+> The new world of the internet, abstracted from the old world of brute atoms, longed for independence. But states and their friends moved to control our new world -- by controlling its physical underpinnings. The state, like an army around an oil well, or a customs agent extracting bribes at the border, would soon learn to leverage its control of physical space to gain control over our platonic realm. It would prevent the independence we had dreamed of, and then, squatting on fiber optic lines and around satellite ground stations, it would go on to mass intercept the information flow of our new world -- its very essence even as every human, economic, and political relationship embraced it. The state would leech into the veins and arteries of our new societies, gobbling up every relationship expressed or communicated, every web page read, every message sent and every thought googled, and then store this knowledge, billions of interceptions a day, undreamed of power, in vast top secret warehouses, forever. It would go on to mine and mine again this treasure, the collective private intellectual output of humanity, with ever more sophisticated search and pattern finding algorithms, enriching the treasure and maximizing the power imbalance between interceptors and the world of interceptees. And then the state would reflect what it had learned back into the physical world, to start wars, to target drones, to manipulate UN committees and trade deals, and to do favors for its vast connected network of industries, insiders and cronies.
+>
+> But we discovered something. Our one hope against total domination. A hope that with courage, insight and solidarity we could use to resist. A strange property of the physical universe that we live in. The universe believes in encryption. It is easier to encrypt information than it is to decrypt it. We saw we could use this strange property to create the laws of a new world. To abstract away our new platonic realm from its base underpinnings of satellites, undersea cables and their controllers. To fortify our space behind a cryptographic veil. To create new lands barred to those who control physical reality, because to follow us into them would require infinite resources. And in this manner to declare independence.
 
-    In particular, I am *really* impressed that so far SR seems to have never been hacked or broken into: in the time SR has been running, there have been many hacks of other sites and even currency exchanges. And SR is the biggest target out there besides Mtgox, for multiple reasons - the sheer amounts that pass through it, the potential of it being a small team rather than a professional group (how do you hire penetration testers when you're Silk Road?), the unusual products you can order, the notoriety one would earn, and finally, the "lulz" value of their databases & info (suppose someone were able to harvest addresses & names that are foolishly sent to vendors in the clear & unencrypted; imagine the lulz value of releasing them all in a big dump! People would be wetting their pants worldwide.)
-[^fightclub]: Whenever classic, illegal, cypherpunk applications are implemented using Bitcoin, you are sure to find someone complaining that you must not talk about Fight Club - how will that play in Peoria? You will find quite a few, actually, as much as one would expect Bitcoin to select for hard-core libertarian types or techies who have internalized the [Streisand effect](!Wikipedia); indeed, the moderators of the [Bitcoin forum](http://forum.bitcoin.org/index.php) have - in a crime against history - deleted the early threads about Silk Road, including the thread that saw Silk Road announced. (I have copies of one thread due to my [obsessive interest in linkrot](Archiving URLs). I posted a [short thread](http://forum.bitcoin.org/index.php?topic=29737.0) linking this page, and I give it about [25%](http://predictionbook.com/predictions/2928) odds of being moderated/deleted; a few hours later, the thread had been deleted. I had drastically *underestimated* the cowardice of the moderators.)
+The decentralization is key. Centralization is unacceptable for many applications: centralization means any commercial or political interest can interfere for any purpose, be it rent-seeking or taxation, prosecuting economic warfare against another party, intended to hamper organized crime or terrorism, etc.
 
-    This is a certain double-bind and unfairness in such criticism. Would such critics be congratulating me if this article turned out to help Bitcoin by discussing and documenting a demand driver and important test-case? I suspect they wouldn't. Their argument is unfalsifiable and based more on their prejudices than hard data.
+This fear of centralization is not idle. The ring of power offered by centralization has been grasped on many occasions: ranging from Paypal hampering its competitors to US-led crackdowns on ancient _[hawala](!Wikipedia)_ financial systems & Islamic charities in the name of counter-terrorism to the US suing the [Intrade](!Wikipedia) prediction market (with the assistance of the Central Bank of Ireland) to credit card companies' near-fatal boycott of WikiLeaks to Iran's severe inflation after economic embargoes. Previous centralized currencies like [E-gold](!Wikipedia) suffered the expected fates, and more pointedly, an earlier online drug market (the "Farmer's Market") was shut down and principals indicted using scores of transactions revealed by banks and Paypal and Western Union.
 
-    To such people, my general reply is - What makes you so sure I want Bitcoin to succeed? It's interesting but that doesn't mean I have bought into the project and all its ideals. If SR coverage hurt Bitcoin, I may not care at all.
+# Bitcoin
 
-    And I would argue the contrary; I believe Silk Road coverage *helps* Bitcoin. Silk Road has not been harmed by its national coverage; the number of accounts and transactions have all increased dramatically, and SR's admin has stated his satisfaction with the new status quo on the SR forums and on [_Gawker_](http://gawker.com/5879924/now-you-can-buy-guns-on-the-online-underground-marketplace), and said later that "Silk Road was never meant to be private and exclusive." (9 January 2012, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0)); as has [a co-founder](http://bitcoinmedia.com/thank-you-schumer/) of a British Bitcoin exchange.)
+The fundamental challenge confronting any electronic currency is coping with the ["double-spend problem"](!Wikipedia "Double-spending"): when transactions conflict (eg. spending twice the same unit of currency), which transaction takes priority? Double-spends are difficult to perform with non-electronic money since you cannot give a dollar bill to one person while simultaneously giving it to another, but trivial with electronic messages.
 
-    Not that the admin ever sought secrecy - he announced Silk Road's official opening on the Bitcoin forums! Purchases of Bitcoin noticeably spiked after the Gawker article as already mentioned, and one cannot buy that much publicity. One might say of self-censorship that "_C'est pire qu'un crime, c'est une faute._"
+One solution is to centralize transactions: if you overdraw your bank account with 2 checks, the bank will choose one to bounce and one to honor. Similarly for credit card transactions. An electronic currency like Paypal processes each transaction in realtime, so you cannot log into your Paypal account in 2 browsers and send your entire balance to 2 different people. With centralization, there is someone or something which 'decides' which of the 2 conflicting transactions will become the real transaction. Centralization appears in many guises in currency systems: cryptographic pioneer [David Chaum](!Wikipedia)'s [own electronic currency](!Wikipedia "ecash") could guarantee complete anonymity to anyone "spending" a coin, solving the double-spend problem by devising things so that a double-spend leaks enough information that the anonymity evaporates, but the math only works with a central "bank" which could be attacked. Chaum's system never took off, for several reasons, but this centralized point of failure is one.
 
-    And suppose Silk Road coverage did hurt Bitcoin even to the extent that it would be worth devoting one neuron to thinking about it; I would publish *anyway* because that would mean that *the Bitcoin experiment has failed and must be terminated immediately*. If Bitcoin is not safe for the drug dealers, then it is not safe for anyone; if Bitcoin can be hurt by the truth, then it is already doomed - you cannot build on quicksand, and ["that which can be destroyed by the truth should be."](!Wikipedia "P. C. Hodgell") Good game, chaps, let's all meet back here when the next Satoshi figures out how to patch the vulnerabilities.
+If we avoid the problems of centralization and resolve on a decentralized system, we face a different but equally severe set of problems: without centralization, in a distributed system in which no party has veto power (and any party can be anonymous or [a mask](!Wikipedia "Sybil attack") for another party), how and *who* decides which of 2 conflicting transactions is the "real" transaction? Must a distributed system simply allow double-spends, and thus be useless as money?
 
-No way to know but to go. So, let's take a 'brazen' stroll down the Silk Road.
+No. The [underappreciated genius of Bitcoin](Bitcoin is Worse is Better) is that it says that the valid transaction is simply "the one which had the most computing power invested in producing it". Why does this work? In the Bitcoin distributed system, there are many 'good' parties at work producing new transactions, and they will independently latch onto one of the two competing transactions produced by an attacker and incorporate it into future transactions; the amount of computing power necessary to out-invest those other parties quickly becomes too enormous for any one entity to invest. Within hours, one transaction will be universal, and the other forgotten.
+
+Hence, Bitcoin is an acceptable cypherpunk currency: it is decentralized, parties participate out of self-interest, and it is economically infeasible to attack Bitcoin directly.
+
+# Silk Road as _Cyphernomicon_'s black markets
+
+The Silk Road (SR) is a website accessible through the Tor anonymizing network. Tor is descended from cypherpunk designs for anonymous email: messages are swapped by servers in the "mix" network with changing cryptographic wrappers, so observers cannot tell what server a message ultimately ends up at nor who sent a message. Buyers create accounts, send bitcoins to SR-controlled addresses, browse vendor pages, and order quantities similar to any e-commerce site. (Contrary to descriptions of Silk Road as "the eBay of drugs", SR is more akin to shopping on Amazon Marketplaces than eBay: there are no auction features.) SR has been covered in the media for years and is still operating successfully, indeed, Christin 2012 calculated a monthly turnover of $1.9m for annual revenue of $22m from 2011-2012, with daily sales volume:
+
+!["Figure 12: Estimate of the total amount of daily sales (in BTC) occurring on Silk Road. Each point corresponds to an average over the prior thirty days." --Christin 2012](/images/silkroad/2012-christin-sr-dailysales.png)
+
+The design of SR could be taken straight out of early '90s cypherpunk - most of the design can be justified in Timothy C. May's 1994 _[Cyphernomicon](!Wikipedia)_, itself mostly a summary of much earlier discussions. (In an amusing historical coincidence, May happens to mention an old digital currency proposal called... "The Digital Silk Road".) The Silk Road is an unregulated black marketplace which is:
+
+- reached via a anonymizing mix network
+- made up of pseudonymous entities, who
+- communicate privately and securely via [public-key cryptography](!Wikipedia) to arrange purchases
+- using escrow schemes for payment of vendors only on receipt of goods
+- said vendors post the equivalent of bonds as surety before being allowed to sell
+- and buyers publicly rate their vendors (so the marketplace avoids becoming a [lemon market](!Wikipedia))
+
+From an economic point of view, several measures serve to make incentives align:
+
+- SR is paid as a percentage of transactions; hence, it is motivated to encourage as high a turnover as possible, and maintain the satisfaction of both buyers and sellers
+- Sellers are encouraged to not scam buyers because they will not gain access to bitcoins in escrow and enough violations will forfeit their deposit held by SR
+- Buyers have limited incentive to scam sellers because their bitcoins are paid in advance and not under their control; SR arbitrates disputes and more than a few bad transactions can lead to their balances forfeited and being blacklisted, limiting their ability to scam large amounts
+
+And as far as people outside the marketplace are concerned, there is a network effect at play: the better incentives align, the more buyer and sellers there will be, and they will lead to better selections and lower prices. All familiar economic results about normal thick commodity markets, but perhaps unexpected to see in such an exotic marketplace.
+
+## Escrow
+
+One aspect of the incentives deserves coverage as most presciently discussed by the cypherpunks and underappreciated by users: the use of escrow.
+
+Timothy c. May's chapter 12 (["Legal Issues: Loose Ends: Escrow Agents"](http://www.cypherpunks.to/faq/cyphernomicron/chapter10.html#21)) lays out the necessity of escrow when a marketplace uses both pseudonymity and untraceable digital cash:
+
+> On-line clearing has the possible danger implicit in all trades that Alice will hand over the money, Bob will verify that it has cleared into his account (in older terms, Bob would await word that his Swiss bank account has just been credited), and then Bob will fail to complete his end of the bargain. If the transaction is truly anonymous, over computer lines, then of course Bob just hangs up his modem and the connection is broken. This situation is as old as time, and has always involved protocols in which trust, repeat business, etc., are factors. Or escrow agents.
+>
+> ...In steps "Esther's Escrow Service." She is _also untraceable_, but has established a digitally-signed presence and a good reputation for fairness. Her business is in being an escrow agent, like a bonding agency, not in "burning" either party. (The math of this is interesting: as long as the profits to be gained from any small set of transactions is less than her "reputation capital," it is in her interest to forego the profits from burning and be honest. It is also possible to arrange that Esther cannot profit from burning either Alice or Bob or both of them, e.g., by suitably encrypting the escrowed stuff.) Alice can put her part of the transaction into escrow with Esther, Bob can do the same, and then Esther can release the items to the parties when conditions are met, when both parties agree, when adjudication of some sort occurs, etc. (There a dozen issues here, of course, about how disputes are settled, about how parties satisfy themselves that Esther has the items she says she has, etc.)
+
+"Esther" is SR, "on-line clearing" is bitcoins, Alice is a buyer and Bob the seller, but otherwise the logic is clear and unmistakable: lack of escrow leads to a [perverse incentive](!Wikipedia) for Bob to scam Alice.
+
+We can see the proof in practice. For various reasons, SR provides buyers the option of releasing their funds from escrow to the seller, called "early finalization"; early finalization is one of the leading mechanisms for seller scams on SR. The cardinal example is the April 2012 scam where a trusted seller took the occasion of a SR-wide sales event (where SR waived its fees) to announce unusually low prices, took in hundreds of large orders totaling thousands of bitcoins (the equivalent of >$50,000) but requiring early finalization, withdrew all funds, and never delivered. A simple enough scam, yet highly effective: as May and other cypherpunks pointed out decades before, one should never entrust a pseudonymous agent with more liquid anonymous cash than its "reputation capital" is worth! One can entrust the agent with *less* liquid anonymous cash (not enough to burn one's reputation in exchange for), or one could entrust the agent with more *escrowed* anonymous cash (so they cannot "rip-and-run"), but not both more *and* un-escrowed (which is paying them to scam you).
+
+(This *could* be helped slightly by providing more information about sellers, like listing the outstanding balance for vendors so buyers can be wary of any vendor with an unusually large outstanding balance; but buyers will still be attracted by sales as excuses for finalizing early, and vendors could simply split their activity over multiple accounts. Escrow remains the best solution.)
+
+# Silk Road as a marketplace
+
+Beyond the basic cryptographic tools and features of the site itself, SR embodies the cypherpunk dream of letting free-market forces operate to inform buyers and let them find sellers with whom they can reach mutually acceptable agreements. There is no better way to demonstrate this dynamic than with a detailed example using real SR data of a hypothetical buyer compiling the information SR provides, making inferences on the provided data, applying his desires to appraise each seller's wares, trading off various criteria such as risk versus price, and finally settling on a particular product.
+
+But one wonders: what is using it like? Does it have a decent selection? Is it safe? Ridden with scammers? Has it succumbed to an [Eternal September](!Wikipedia) ("*I* used Silk Road when it was still underground")? Shouldn't we keep quiet about it like Fight Club?
+
+## Safe
+
+Unsurprisingly, it's hard to find solid information on how many people have been busted using Silk Road or what happened to them, and the consequences will depend on the specific substance and amounts. For example, modafinil seems to be _de facto_ [not prosecuted](Modafinil#legal-risk) in the US, and the failure rates of importing from online pharmacies seem to be in the <10% range according to buyer anecdotes and 1 seller. General descriptions of drug importation also suggest low interception rates (as makes sense given the very large quantities of drugs sold every day); for example, [2 English drug journalists](http://www.vice.com/read/narcomania-everything-you-wanted-to-know-about-the-drug-trade) discussing their most recent book:
+
+> Q: "How much of the drugs that enter the country are actually seized by police?"
+>
+> A: "I think the figure that's quoted in our book is about 1%; it really is a fraction of what gets in. There was one conversation I had with a chap who had access to the Serious Organised Crime Agency who said that if people knew how easy it was, then more people would do it."
+
+Buyers and sellers seem to be treated differently as well: in the 2012 bust of the insecure Farmer's Market (see later footnote), the indictment only lists sellers and no buyers. [_Gawker_](http://gawker.com/5926440/are-authorities-closing-in-on-the-online-drug-market-silk-road "Are Authorities Closing In On the Online Drug Market Silk Road?") covers another case of a Canadian cocaine exporter apparently busted because they accepted payment via [Western Union](!Wikipedia).
+
+An Australian student's MDMA was [intercepted by Customs](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10819029 "Officer's link to net drug market") but the article makes no mention of him being penalized, a later [prosecution](http://www.afp.gov.au/media-centre/news/afp/2012/july/afp-and-Customs-warn-users-of-silk-road.aspx "Media Release: AFP and Customs warn users of Silk Road") seems to have been related to a Customs interception, and [2 teens](http://au.news.yahoo.com/thewest/a/-/breaking/14980079/brothers-in-court-over-online-drugs/ "Brothers in court over online drugs") made the mistake of ordering so much that their parents turned them in. A [7 November 2012](http://www.theherald.com.au/story/734298/detectives-follow-the-silk-road/ "Detectives follow the Silk Road") Australian article claims 30 interceptions a month in an area, but mentions nothing specific about arrests. A [December 2012 article](http://www.abc.net.au/news/2012-12-05/dark-internet-linked-to-drug-seizure-spike/4410872 "Dealers shed light on dark Internet's drug trade") quotes Customs claiming a 40% increase in seizures, but then quotes a SR seller as claiming a doubling or quadrupling of Australian buyers (hence, implying the interception rate has halved or worse). A New Zealand Customs officer who likely used Silk Road was charged with possessing & "supplying" methamphetamine but this "was uncovered during police inquiries into another crime"; a NZer's MDMA was confiscated by Customs and his house visited, whereupon he admitted guilt to the officers and unsurprisingly was [arrested & convicted](http://www.stuff.co.nz/southland-times/news/court/7958999/Drugs-ordered-on-web "Drugs ordered on web"); a later [NZ article](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10826287 "Online drug trade triggers high alert") claims 80 interceptions a month with 7 arrests January-July 2012 or 1 arrest a month (suggesting each order has a risk of arrest <1/80).
+
+Security-wise, Silk Road seems to be receiving passing grades from law enforcement agencies; a [leaked FBI report](http://www.wired.com/images_blogs/threatlevel/2012/05/Bitcoin-FBI.pdf "'(U) Bitcoin Virtual Currency: Unique Features Present Distinct Challenges for Deterring Illicit Activity', 24 April 2012") mentioned no attacks against Silk Road, while a [May 2012 Australian document](http://www.scmagazine.com.au/News/314984,aussie-coppers-bedeviled-by-online-contraband-networks.aspx "Aussie coppers bedeviled by online contraband networks: War on the Silk Road requires legal barriers dismantled and police technical skills to be mapped") reportedly praised the security of vendor packaging and general site security.
+
+My belief is that SR *can* be taken down; however, I am not sure LE (law enforcement) has permission to use the tactics necessary - explaining the lack of suggested attacks or realistic attacks in the leaked FBI Bitcoin paper and summaries of the leaked Australian SR paper (respectively). My two suggested attacks are
+
+1. [DDoS](!Wikipedia)ing the SR site, rendering it unusable (and congesting the overall Tor network)
+2. fake buyer & seller accounts leading up to a single large scam.
+
+Attack #1 would make the site simply unusable, and can be done on any address SR runs on since the address has to be widely known or how will the buyers & sellers know where to go? This would require a few dozen nodes, at least, although I'm not actually sure how hard it is to DDoS a Tor hidden server. Attack #2 would require a fairly substantial financial investment, but depending on how effective the final step is, may actually run at a profit. Repeated, this would massively destroy buyers' trust in SR, especially since there are currently only a few hundred active sellers at any point, AFAIK. Fortunately, I don't think LE is authorized to engage in cyberwar (#1) or mass entrapment & fraud (#2). And who knows, maybe SR could survive both.
+
+In particular, I am impressed that so far SR seems to have never been seriously hacked or broken into: in the time SR has been running, there have been many hacks of other sites and even currency exchanges. In late 2012, there was a unclear incident of images being corrupted and a few people losing their orders by not being suspicious, but that seems to be it. And SR is the biggest target out there besides MtGox, for multiple reasons - the sheer amounts that pass through it, the potential of it being a small team rather than a professional group (how do you hire penetration testers when you're Silk Road?), the unusual products you can order, the notoriety one would earn, and finally, the "lulz" value of their databases (suppose someone were able to harvest addresses & names that are foolishly sent to vendors in the clear & unencrypted; imagine the lulz value of releasing them all in a big dump! People would be wetting their pants worldwide, since despite all warnings, there are always users who will not bother encrypting their addresses.)
+
+## Fight Club
+
+Whenever classic (and illegal) cypherpunk applications are implemented using Bitcoin, you are sure to find someone complaining that you must not talk about Fight Club - how will that play in Peoria⸮ You will find quite a few, actually, as much as one would expect Bitcoin to select for hard-core libertarian types or techies who have internalized the [Streisand effect](!Wikipedia); indeed, the moderators of the [Bitcoin forum](http://forum.bitcoin.org/index.php) have - in a crime against history - deleted the early threads about Silk Road, including the thread that saw Silk Road announced. (I posted a [short thread](http://forum.bitcoin.org/index.php?topic=29737.0) linking this page, and I give it about [25%](http://predictionbook.com/predictions/2928) odds of being moderated/deleted; a few hours later, the thread had been deleted. I had drastically underestimated the cowardice of the moderators.)
+
+This is a certain double-bind and unfairness in such criticism. Would such critics be congratulating me if this article turned out to help Bitcoin by discussing and documenting a demand driver and important test-case? I suspect they wouldn't. Their argument is unfalsifiable and based more on their prejudices than hard data.
+
+To such people, my general reply is: what makes you think I want Bitcoin to succeed? It's interesting but that doesn't mean I have drank the Kool-Aid. If SR coverage hurt Bitcoin, I may not care.
+
+And I would argue the contrary: I believe Silk Road coverage *helps* Bitcoin. Silk Road has not been harmed by its national coverage; the number of accounts and transactions have all increased dramatically, and SR's admin has stated his satisfaction with the new status quo on the SR forums and on [_Gawker_](http://gawker.com/5879924/now-you-can-buy-guns-on-the-online-underground-marketplace), and said later that "Silk Road was never meant to be private and exclusive." (9 January 2012, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0))); as has [a co-founder](http://bitcoinmedia.com/thank-you-schumer/) of a British Bitcoin exchange.
+
+Not that the SR admin ever sought secrecy - he announced Silk Road's official opening on the Bitcoin forums! Purchases of Bitcoin noticeably spiked after the _Gawker_ article as already mentioned, and one cannot buy that much publicity. One might say of self-censorship that "_C'est pire qu'un crime, c'est une faute._"
+
+And suppose Silk Road coverage did hurt Bitcoin even to the extent that it would be worth devoting one neuron to thinking about it; I would publish *anyway* because that would mean that *the Bitcoin experiment has failed and must be terminated immediately*. If Bitcoin is not safe for the drug dealers, then it is not safe for anyone; if Bitcoin can be hurt by the truth, then it is already doomed - you cannot build on quicksand, and ["that which can be destroyed by the truth should be."](!Wikipedia "P. C. Hodgell") Good game, chaps, let's all meet back here when the next Satoshi Nakamoto figures out how to patch the vulnerabilities.
 
 # Preparations
 
-Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for payment, and access to it being possible only through the [anonymizing Tor network](!Wikipedia "Tor (anonymity network)"), on which Silk Road and the Silk Road forum live as ["*hidden sites*"](!Wikipedia "Tor (anonymity network)#Hidden services") - both you and the server funnel your requests into a set of Tor nodes and you meet in the middle. (This isn't as slow as it might sound, and hidden sites eliminate the main security weakness of Tor: [evil exit nodes](!Wikipedia "Tor (anonymity network)#Weaknesses").) Tor itself is secure, but this doesn't mean as much as one might think it means: while Tor itself is basically the securest software you will ever use (or at least, it is far from the weakest link in your chain), what always kills you is what you choose to communicate *over* Tor: what you browser sends or doesn't send, or the mailing address you foolishly choose to send over it plaintext & unencrypted (vulnerable until the item ships) or the revealing message (vulnerable >2 months)[^data-retention-policy], or the pseudonym you choose to confide in, etc.. Tor is a tool which does one thing very well: renders secret the communication between your computer and someone else's computer. It does nothing whatsoever about anything that other computer may be able to figure out or record about you. The perfect envelope does little good if the person you mail it to is a policeman.
+But besides all that, how well does it *work*? No way to know but to go. So, let's take a 'brazen' stroll down the Silk Road.
+
+Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for payment, and access to it being possible only through the [anonymizing Tor network](!Wikipedia "Tor (anonymity network)"), on which Silk Road and the Silk Road forum live as ["*hidden sites*"](!Wikipedia "Tor (anonymity network)#Hidden services") - both you and the server funnel your requests into a set of Tor nodes and you meet in the middle. (This isn't as slow as it might sound, and hidden sites eliminate the main security weakness of Tor: [evil exit nodes](!Wikipedia "Tor (anonymity network)#Weaknesses").) Tor itself is secure, but this doesn't mean as much as one might think it means: while Tor itself is basically the securest software you will ever use (or at least, it is far from the weakest link in your chain), what always kills you is what you choose to communicate *over* Tor: what you browser sends or doesn't send, or the mailing address you foolishly choose to send over it plaintext & unencrypted (vulnerable until the item ships) or the revealing message (vulnerable >2 months)[^data-retention-policy], or the pseudonym you choose to confide in, etc. Tor is a tool which does one thing very well: keeps secret the communication between your computer and someone else's computer. It does nothing whatsoever about anything that other computer may be able to figure out or record about you or what you choose to send. The perfectly secure envelope does little good if the person you're mailing your confession to is a policeman.
 
 [^data-retention-policy]: [Dread Pirate Roberts](http://dkn255hz262ypmii.onion/index.php?topic=32573.msg370788#msg370788) on Silk Road's data retention policy c. July/August 2012:
 
@@ -235,7 +160,7 @@ Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for
     >
     > ...These time parameters were arrived at through trial and error. They are as tight as we can make them without sacrificing the integrity of the market. Could they be a little tighter? Maybe by a week or two, but please think through the implications of policy changes before you call for them.
 
-So the additional security from use of Bitcoin is nontrivial. As it happened, I already have some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/projects/torbrowser) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay) as well - this gives me both [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
+But as any kidnapper knows, you can communicate your demands easily enough, but how do you drop off the victim and grab the suitcase of cash without being nabbed? This has been a severe security problem forever. And bitcoins go a long way towards resolving it. So the additional security from use of Bitcoin is nontrivial. As it happened, I already had some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/projects/torbrowser) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay) as well - this gives me both [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
 
 With Tor running and the Torbutton enabled in the browser (along with any [privacy mode](!Wikipedia)), we can easily connect to Silk Road; we simply visit <http://silkroadvb5piz3r.onion>[^onion-address]. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
 
@@ -245,17 +170,17 @@ With Tor running and the Torbutton enabled in the browser (along with any [priva
 
 Upon connecting, you will see a bare log-in form:
 
-![](/images/silkroad/joinpage.png)
+![2011 Silk Road log-in form on the homepage](/images/silkroad/joinpage.png)
 
 Alternately, you might see an error page like the following; Silk Road is occasionally down for maintenance & new features or temporarily overloaded. Usually waiting a minute is enough, and longer downtimes are discussed on the Silk Road forums.
 
-![](/images/silkroad/silkroad-down.png)
+![2011 server error example](/images/silkroad/silkroad-down.png)
 
 Click on the join, and you will be taken to another page for registering your account, much like any other site. Invitations are not currently required, although to register a *seller* account is neither easy nor cheap, see later sections. (I suggest picking a strong password[^hash]. Learn from the Mt.Gox fiasco.) With your new account, you can now log in and see what there is to see on the main page:
 
 [^hash]: Specifically, one that will be very difficult to brute-force the hash. This won't protect you from some compromises of Silk Road (for example, the server being controlled by an attacker and harvesting passwords as they are entered by live users), but it will protect you from others - for example, if the database is stolen, a long password helps frustrate an attempt to derive the original password and let them log into your account and engineer endless nefarious misdeeds.
 
-![The front page](/images/silkroad/silkroad-mainpage.png)
+![The front page, displaying random images of merchandise on offer, categories of listings, and recent feedback posted by buyers](/images/silkroad/silkroad-mainpage.png)
 ![At another time](/images/silkroad/2012-frontpage.png)
 ![And another time](/images/silkroad/2012-frontpage2.png)
 
@@ -265,12 +190,12 @@ Notice at the bottom, below the random selections, is a section listing all the 
 
 The [stimulants](http://silkroadvb5piz3r.onion/index.php/silkroad/category/52) category contains much what you'd expect:
 
-![](/images/silkroad/stimulants.png)
+![2011 listing of stimulants: Adderall, 4-FA, methamphetamine, cocaine](/images/silkroad/stimulants.png)
 
 Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](http://silkroadvb5piz3r.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or [German pretzels](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25dwkd), or the ['services'](http://silkroadvb5piz3r.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
 
-![](/images/silkroad/collectibles.png)
-![](/images/silkroad/services.png)
+![Collectibles category: 1941 Canadian military helmet, reproduction German military helmet, Vietnam War American military helmet](/images/silkroad/collectibles.png)
+![Services category: upgraded shipping, manuals, website invitations, homework grading](/images/silkroad/services.png)
 
 There's also the book section, with its predictably illicit wares:
 
@@ -292,25 +217,25 @@ Well, you've browsed through the Silk Road proper. You can also visit the offici
 
 # Anonymity
 
-We have window-shopped long enough. It's time to take the plunge and buy something. Bitcoin developer Jeff Garzik is quoted in the _Gawker_ article as saying that "Attempting major illicit transactions with bitcoin, given existing statistical analysis techniques deployed in the field by law enforcement, is pretty damned dumb." Fortunately I do not plan 'major' transactions, and in any case, I tend to suspect that said statistical techniques are overblown.
+We have window-shopped long enough. It's time to take the plunge and buy something. Bitcoin developer Jeff Garzik is quoted in the _Gawker_ article as saying that "Attempting major illicit transactions with bitcoin, given existing statistical analysis techniques deployed in the field by law enforcement, is pretty damned dumb." Fortunately I do not plan 'major' transactions, and in any case, I tend to suspect that said statistical techniques are overblown; a few academics have published initial investigations into tracing transactions and examining the larger Bitcoin economy, and have linked transactions to individuals, but as of 2012 have only done so with addresses publicly linked to identities, and not broken the anonymity of people trying to be anonymous.
 
-The public nature of transactions means that [many interesting connections & graphs](http://arxiv.org/abs/1107.4524) can be generated and analyzed. But fortunately, it's straightforward to [anonymize Bitcoin transactions](https://en.bitcoin.it/wiki/Anonymity#Staying_Anonymous) ([mixing services](https://en.bitcoin.it/wiki/Category:Mixing_Services)) by a method analogous to the Tor network we are relying upon already: route the money through several intermediaries in several quantities and reconstructing the path backwards becomes nontrivial.
+The public nature of transactions means that [many interesting connections & graphs](http://arxiv.org/abs/1107.4524 "'An Analysis of Anonymity in the Bitcoin System', Reid & Harrigan 2011") can be generated and analyzed. But fortunately, it's straightforward to [anonymize Bitcoin transactions](https://en.bitcoin.it/wiki/Anonymity#Staying_Anonymous) ([mixing services](https://en.bitcoin.it/wiki/Category:Mixing_Services)) by a method analogous to the Tor network we are relying upon already: route the money through several intermediaries in several quantities and reconstructing the path backwards becomes nontrivial.
 
 My own method was to route 4 bitcoins through [Mt.Gox](https://mtgox.com/) (this was before the hacking, a series of events which confirmed my own resolution to keep a balance at Mt.Gox for as short a time as possible), then through MyBitcoin (which at the time was still considered trustworthy)^[Mt.Gox and MyBitcoin offer a doubly instructive lesson into why one trusts Bitcoin third-parties as little as possible, keeps one's bitcoins locally, and regularly back it up; the large Polish exchange [Bitomat](https://support.mtgox.com/entries/20357051-mt-gox-the-world-s-largest-bitcoin-exchange-to-acquire-bitomat-pl-compensate-loss-of-bitcoins) offers a third.]. This was straightforward - sign up for a throwaway account:
 
-![](/images/silkroad/mybitcoin-login.png)
+![MyBitcoin (defunct) login page](/images/silkroad/mybitcoin-login.png)
 
 Then deposit to the one-use address:
 
-![](/images/silkroad/mybitcoin-deposit.png)
+![MyBitcoin deposit interface](/images/silkroad/mybitcoin-deposit.png)
 
 A day or three later, I am tired enough of the game to route my Bitcoins into the last set of anonymizing mixes, Silk Road's own cointumbler. How do we do a deposit? We click on the link in the profile and see:
 
-![](/images/silkroad/deposit-form.png)
+![SR bitcoin deposit form interface](/images/silkroad/deposit-form.png)
 
 No big surprise there - it's another one-time address which expired at noon, so there's no time to shilly-shally:
 
-![](/images/silkroad/deposit.png)
+![SR deposit instructions: send bitcoins to this address etc](/images/silkroad/deposit.png)
 
 Once deposits have been made or purchases entered into, one's profile page begins to look like this:
 
@@ -320,15 +245,15 @@ Once deposits have been made or purchases entered into, one's profile page begin
 
 It's a good idea to read the documentation like the SR wiki on ["Making a successful purchase"](http://dkn255hz262ypmii.onion/wiki/index.php/Making_a_successful_purchase) and the ["Buyer's guide"](http://dkn255hz262ypmii.onion/wiki/index.php/Buyer%27s_guide) (["Scammed"](http://dkn255hz262ypmii.onion/wiki/index.php/Scammed) is good too) before ordering anything. After some browsing, I personally decided on an offering of the nootropic [selegiline](!Wikipedia). Safe, potentially useful, and not even especially illegal. The price was right:
 
-![](/images/silkroad/selegiline.png)
+![Bare-bones selegiline listing](/images/silkroad/selegiline.png)
 
 Should I buy it?
 
 ## Evaluating sellers
 
-Now, you will notice that for most sellers, there is no '(99)' or '(100)' after the seller's name; for example, this random seller:
+Now, you will notice that for most sellers, there is no '(99)' or '(100)' after the seller's name; for example, this random seller has no such indicator:
 
-![](/images/silkroad/generic-profile.png)
+![Vendor profile page with public key](/images/silkroad/generic-profile.png)
 
 This is due to the simple fact that when I joined, the post-_Gawker_ rush had resulted in membership jumping from the high-hundreds/low-thousands range to north of 10,000 accounts, and while many transactions had been entered into, the reviews and closures of transactions had only started. So I was not *too* bothered by the lack of feedback on this seller profile. I also used the handy SR forums and found no bad mentions of the seller. The user number was not terribly high, the description was detailed enough that it looked like he took selling seriously, there are no bad reviews, they posted a public key, etc. So, I was willing to take a chance on him.
 
@@ -342,7 +267,7 @@ Both the seller and the example above had standard [PGP](!Wikipedia "Pretty Good
 
 I add it to my cart (no one-click checkout, so at least SR doesn't have to worry about Amazon!):
 
-![](/images/silkroad/selegiline-shoppingcart.png)
+![Selegiline: shopping cart form - fill in form and push the button, if you dare](/images/silkroad/selegiline-shoppingcart.png)
 
 Notice the address field. Now, I *could* be a chump and put down my friend's address in the clear. But what if Silk Road itself is compromised? Right now, SR doesn't have anything about me, but the address is a good starting place for finding me. So, I go to the seller's profile, and like the example above, my seller has posted his public key. I want to encrypt the address against that public key. How?
 
@@ -350,24 +275,24 @@ Notice the address field. Now, I *could* be a chump and put down my friend's add
 
 There are a great many guides to GPG; the official [GPG handbook](http://www.gnupg.org/gph/en/manual.html) or [Ubuntu guide](http://help.ubuntu.com/community/GnuPrivacyGuardHowto) work well enough. (The [SR wiki page](http://dkn255hz262ypmii.onion/wiki/index.php/PGP/GPG_Encryption) mostly discusses where to get PGP-like software.) To summarize what I did:
 
-1. I copy the public key into a text file, say, `key.txt`
+1. I copy the public key into a text file named `key.txt`
 2. I tell GPG to memorize it: `gpg --import key.txt`
 
      GPG will spit out some output about how it now knows the public key of `nobody@cypherpunks.com` etc.
 3. I write down her address in a file, `address.txt`,
 4. and I encrypt it: `gpg --recipient nobody@cypherpunks.com --encrypt address.txt --output address.gpg --armor`
 
-    Hopefully the options make sense; we need `--armor` to get an ASCII text encrypted file which we can copy-and-paste into the shopping cart's address form, rather than a smaller file of binary gibberish. An example of doing this right:
+    Hopefully the options make sense. (We need `--armor` to get an ASCII text encrypted file which we can copy-and-paste into the shopping cart's address form, rather than a smaller file of binary gibberish.) An example of doing this right:
 
-![](/images/silkroad/selegiline-shoppingcart-message.png)
+![Selegiline shopping cart: with the encrypted address to send the selegiline to](/images/silkroad/selegiline-shoppingcart-message.png)
 
-Now, one might wonder how one would post one's *own* public key in case one asks questions and would like the answers from the seller to be as encrypted as one's addresses. It's easy to make one with `gpg --gen-key` and then a `gpg --armor --export USERNAME`, but where to post it? It used to be that you could simply push a button in your profile to register as a seller and then fill your own profile field with the public key like any seller, and I did just that. But recently Silk Road has closed free seller accounts, and [has announced](http://dkn255hz262ypmii.onion/index.php?topic=360.msg2059#msg2059)^[[Non-Tor mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=360.msg2059#msg2059) using [Tor2Web](http://tor2web.org/).] that they are being auctioned off. The [justification for this](http://dkn255hz262ypmii.onion/index.php?topic=360.msg3574#msg3574)^[[mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=360.msg3574#msg3574)] is SR claims to have received an anonymous threat to register many free seller accounts and simply mail poisoned pills out (which he [alluded to earlier](http://dkn255hz262ypmii.onion/index.php?topic=207.msg1033#msg1033)^[[Mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=207.msg1033#msg1033)]). Hopefully buyers will soon be able to edit their profile, but until then, there is a [thread on the SR forums](http://dkn255hz262ypmii.onion/index.php?topic=174.0)^[[Mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=174.0)] devoted to buyers posting their public keys.
+Now, one might wonder how one would post one's *own* public key in case one asks questions and would like the answers from the seller to be as encrypted as one's addresses. It's easy to make one with `gpg --gen-key` and then a `gpg --armor --export USERNAME`, but where to post it? It used to be that you could simply push a button in your profile to register as a seller and then fill your own profile field with the public key like any seller, and I did just that. But Silk Road closed free seller accounts and required large up-front deposits, and [has announced](http://dkn255hz262ypmii.onion/index.php?topic=360.msg2059#msg2059) ([non-Tor mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=360.msg2059#msg2059) using [Tor2Web](http://tor2web.org/)) that they are being auctioned off. The [justification for this](http://dkn255hz262ypmii.onion/index.php?topic=360.msg3574#msg3574) ([mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=360.msg3574#msg3574)) is SR claims to have received an anonymous threat to register many free seller accounts and simply mail poisoned pills out (which he [alluded to earlier](http://dkn255hz262ypmii.onion/index.php?topic=207.msg1033#msg1033) ([mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=207.msg1033#msg1033))). Hopefully buyers will soon be able to edit their profile, but until then, there is a [thread on the SR forums](http://dkn255hz262ypmii.onion/index.php?topic=174.0) ([mirror](https://dkn255hz262ypmii.tor2web.org/index.php?topic=174.0)) devoted to buyers posting their public keys.
 
 ## Now what?
 
 Once you have submitted the order, the ball is in the seller's court. The order is listed in your shopping cart as 'processing':
 
-![](/images/silkroad/selegiline-ordered.png)
+![And done](/images/silkroad/selegiline-ordered.png)
 
 Your balance also instantly decreases by the price, and if you look at your balance/transactions page, you will notice that that amount is listed as in [escrow](http://dkn255hz262ypmii.onion/wiki/index.php/Escrow)[^escrow]. SR holds onto your Bitcoins until you finalize[^finalization] the transaction with a review - one of the protections for the buyers.
 
@@ -375,21 +300,13 @@ Your balance also instantly decreases by the price, and if you look at your bala
 
     > From every indication Tony76 was setting everything up for this a couple of weeks in advance. He refused to send via express or priority or any type of tracked shipment, so it would take longer before people could say their package wasn't coming. He asked for FE from basically everybody, he opened up international. He then told everyone he was going offline to get caught up, further obscuring things. The simplest answer would seem to be he just completed one of the biggest scams on SR and is relaxing seaside with a Margarita with 60-100k of everybody's money.
 
-    This failure mode was foreseen by cypherpunks back in the 1980s & 1990s; [Timothy C. May](!Wikipedia) wrote in his _[Cyphernomicon](!Wikipedia)_ [that with](http://www.cypherpunks.to/faq/cyphernomicron/chapter10.html#21 "Legal Issues: Loose Ends: Escrow Agents") pseudonymity and untraceable digital cash:
+    This failure mode was foreseen by cypherpunks back in the 1980s & 1990s; Timothy C. May's comments on the issue have already been quoted. Christin 2012 gives us a SR-wide look into the practice of FE:
 
-    > On-line clearing has the possible danger implicit in all trades that Alice will hand over the money, Bob will verify that it has cleared into his account (in older terms, Bob would await word that his Swiss bank account has just been credited), and then Bob will fail to complete his end of the bargain. If the transaction is truly anonymous, over computer lines, then of course Bob just hangs up his modem and the connection is broken. This situation is as old as time, and has always involved protocols in which trust, repeat business, etc., are factors. Or [escrow](!Wikipedia) agents.
-    >
-    > ...In steps "Esther's Escrow Service." She is _also untraceable_, but has established a digitally-signed presence and a good reputation for fairness. Her business is in being an escrow agent, like a bonding agency, not in "burning" either party. (The math of this is interesting: as long as the profits to be gained from any small set of transactions is less than her "reputation capital," it is in her interest to forego the profits from burning and be honest. It is also possible to arrange that Esther cannot profit from burning either Alice or Bob or both of them, e.g., by suitably encrypting the escrowed stuff.) Alice can put her part of the transaction into escrow with Esther, Bob can do the same, and then Esther can release the items to the parties when conditions are met, when both parties agree, when adjudication of some sort occurs, etc. (There a dozen issues here, of course, about how disputes are settled, about how parties satisfy themselves that Esther has the items she says she has, etc.)
-
-    By finalizing early, a user is destroying all the security provided by escrow. By placing so much cash in a vendor's hand, the user is violating the 'interesting math': he is now incentivizing the vendor to defect since the money for the taking is equivalent to months or years of his legitimate profit margin. (This *could* be helped slightly by providing more information about sellers, like listing the outstanding balance for vendors so buyers can be wary of any vendor with an unusually large outstanding balance; but buyers will still be attracted by sales as excuses for finalizing early, and vendors could simply split their activity over multiple accounts. Escrow remains the best solution.)
-
-    Christin 2012 looked into early finalization:
-
-    > We observe that 19,396 instances of feedback contain variations of “F.E.,” “finalizing early,” or “finalize early.” This shows that finalizing early is a rather common practice on Silk Road. There does not appear to be significantly more problems reported with feedback including such strings (only 313 of them map to a rating of 1 or 2). This seems to show that established sellers that are offered the option of requesting early finalization from their customers do not abuse that privilege....A third observation is that item 4 stops being sold immediately after April 20. The last time it is observed on the site is April 25, before being de-listed. From discussions in Silk Road forums [6], it appears that the seller of that item abruptly left the marketplace, potentially leaving a large number of paid, finalized early, orders unfulfilled. In other words, there is suspicion of a “whitewashing attack [[12]](http://netecon.seas.harvard.edu/PINS04/Papers/feldman_04.pdf "'Free-Riding and Whitewashing in Peer-to-Peer Systems', Feldman et al 2004"),” whereby a seller creates an excellent reputation, before using that reputation to defraud users and leaving the system. In hindsight, the 20% drop in price occurring just prior to April 20 was considerably steeper than all the other promotional discounts. This could have been an indicator that the seller was not intending on fulfilling their orders and was instead artificially lowering prices in hopes of attracting large numbers of customers to defraud.
+    > We observe that 19,396 instances of feedback contain variations of "F.E.," "finalizing early," or "finalize early." This shows that finalizing early is a rather common practice on Silk Road. There does not appear to be significantly more problems reported with feedback including such strings (only 313 of them map to a rating of 1 or 2). This seems to show that established sellers that are offered the option of requesting early finalization from their customers do not abuse that privilege....A third observation is that item 4 stops being sold immediately after April 20. The last time it is observed on the site is April 25, before being de-listed. From discussions in Silk Road forums [6], it appears that the seller of that item abruptly left the marketplace, potentially leaving a large number of paid, finalized early, orders unfulfilled. In other words, there is suspicion of a "whitewashing attack [[12]](http://netecon.seas.harvard.edu/PINS04/Papers/feldman_04.pdf "'Free-Riding and Whitewashing in Peer-to-Peer Systems', Feldman et al 2004")," whereby a seller creates an excellent reputation, before using that reputation to defraud users and leaving the system. In hindsight, the 20% drop in price occurring just prior to April 20 was considerably steeper than all the other promotional discounts. This could have been an indicator that the seller was not intending on fulfilling their orders and was instead artificially lowering prices in hopes of attracting large numbers of customers to defraud.
 
     I'd note that this doesn't show that one can F.E. heedlessly, since it is a description of the current status quo in which users know not to F.E. lightly; this only proves a claim like 'existing vendors requesting early finalization have not *yet* significantly abused it'. Another flaw with these numbers is that the paper is unclear whether those figures include the giant Tony76 scam (since Christin 2012 speaks of "suspicion of a 'whitewashing attack'" rather than accepted fact).
 
-It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that[^shipping]. (See the [Silk Road subforum on shipping](http://dkn255hz262ypmii.onion/index.php?board=6.0)^[[Mirror](https://dkn255hz262ypmii.tor2web.org/index.php?board=6.0)].) A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can. Shipping is so safe for the seller that many of them will, without complaint, ship worldwide or across national borders because customs so rarely stops drug shipments.^[For example, I have never had a shipment of anything I have ordered from any site stopped or apparently even looked at hard by a Customs. In the 2 SR orders' cases, this turned out to be irrelevant as both sellers were in-country. Christin 2012 remarks with surprise on how freely sellers sell internationally, but rightly looks at the minimal risks sellers bear and incentive they have for broad markets to explain this.]
+It's worth noting that the buyers bear the real risk on SR. A seller can easily anonymize themselves and send packages without difficulty: simply drive out of town to an obscure post office and mail it, leaving behind fuzzy surveillance recordings, if even that[^shipping]. (See the [Silk Road subforum on shipping](http://dkn255hz262ypmii.onion/index.php?board=6.0) ([mirror](https://dkn255hz262ypmii.tor2web.org/index.php?board=6.0)).) A buyer, on the other hand, must at some point be physically present to consume the ordered drugs or items. There's no way to cleanly separate herself from the shipment like the seller can. Shipping is so safe for the seller that many of them will, without complaint, ship worldwide or across national borders because customs so rarely stops drug shipments. For example, I have never had a shipment of anything I have ordered from any site stopped or apparently even looked at hard by a Customs official. In the 2 SR orders' cases, this turned out to be irrelevant as both sellers were in-country. Christin 2012 remarks with surprise on how freely sellers sell internationally, but rightly looks to the minimal risks sellers bear and incentive they have for broad markets to explain this casual disregard.
 
 [^shipping]: To quote a [SR](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c259lb5) [seller](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c2590df):
 
@@ -402,7 +319,7 @@ It's worth noting that the buyers bear the real risk on SR. A seller can easily 
 
 I check in 1 day later: the order still processing. Items apparently aren't public once you've escrowed your dosh. 2 days later: still processing. 3 days later: canceled! My Bitcoins are unlocked, of course, but I'm not keen on ordering again right away. Need to browse more and look for deals. The cancellation message is not very informative:
 
-![](/images/silkroad/selegiline-canceled.png)
+![Order canceled, funds refunded](/images/silkroad/selegiline-canceled.png)
 
 Well sure, but *why* was it canceled? I speculate the seller decided he didn't want to send outside the EU despite his listing claiming he would - perhaps shipping cost more than he had factored into his price. (I checked back a few weeks later, and the seller says he canceled all orders and got a new public key because the Mt.Gox exploits have made him paranoid. I can't really fault him with that rationale. I wish he had mentioned it before, I would have cut him some slack.)
 
@@ -414,22 +331,22 @@ After some more browsing, I decide to go with either the cheapest [Adderall](!Wi
 
 Both have replied the next day; the Adderall seller has put up his public key, and the modafinil seller clarifies it's Indian - but it doesn't matter since the item's page has disappeared, indicating someone bought it already. Naturally, I reply and then delete all messages. One must assume that Silk Road will be compromised at some point... But the Adderall it is. The listing looks pretty good, and the price per pill is far superior to that I was quoted by one of my college-age friends (less than 1/3 the price) and also better than the Adderall price quote in the [_New Yorker_](http://www.newyorker.com/reporting/2009/04/27/090427fa_fact_talbot#), $15 for 20mg:
 
-![](/images/silkroad/adderall.png)
+![Adderall item listing](/images/silkroad/adderall.png)
 
 1 day after ordering: still processing, and 2 days, 'in transit':
 
-![](/images/silkroad/adderall-processing.png)
-![](/images/silkroad/adderall-intransit.png)
+![Checking in on the Adderall order: vendor is still preparing to send](/images/silkroad/adderall-processing.png)
+![And now the vendor says he's mailed it](/images/silkroad/adderall-intransit.png)
 
 ## Evaluating and reviewing
 
 3rd day: still in transit. 4th day: the package arrived! I go over immediately, and it's this harmless-looking little padded mailer. One would not suspect it of anything nefarious, not with those cute stamps^[I have no idea why the stamps are not [canceled](!Wikipedia "Cancellation (mail)"); Wikipedia mentions that sometimes the stamp cancellation machines fail and the stamps get a [pen cancel](!Wikipedia) instead. One seller mentions that [sometimes he receives](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25aico) uncanceled stamps, and asking older relatives, they did too (and sometimes the package or envelope *was* canceled - just not on the stamps).]:
 
-![](/images/silkroad/adderall-package.jpg)
+![Package of Adderall as received, before opening](/images/silkroad/adderall-package.jpg)
 
 The contents are as described, 10 blue Adderall, in a double ziplock baggy (the vacuum-sealed bags are not needed for a drug this low on the importance scale - there are no [drug dogs](!Wikipedia "Detection dog") for Adderall):
 
-![](/images/silkroad/adderall-pills.jpg)
+![The Adderall pills themselves in plastic bags](/images/silkroad/adderall-pills.jpg)
 
 While I have never used Adderall before, the effects are noticeable enough that I am convinced after the first dose that they are genuine (I have [continued to experiment](Nootropics#adderall) with them to somewhat lesser effect). The very sharp-eyed will notice that these are the 'generic' Adderall pills, but as it turns out, the generic Adderall pills are manufactured by the exact same pharmacorp as the branded Adderall - the two products are probably a case of [price discrimination](!Wikipedia). Economics can be a counter-intuitive thing. I also ordered generic [armodafinil](!Wikipedia) with similar steps since the armodafinil was noticeably *cheaper* than the regular Indian generic modafinil:
 
@@ -437,17 +354,17 @@ While I have never used Adderall before, the effects are noticeable enough that 
 
 They work fine (I have [begun experimenting](Nootropics#armodafinil) with them), and I leave the seller a nice review. My third order proceeds as straightforwardly as the second order, and results in an even better packaged shipment of product that seems to be genuine as far as I can tell. Heedful of the risks and probabilities, I leave another nice review; the review form (reached when you click the 'finalize' link) is as straightforward as the rest of the process:
 
-![](/images/silkroad/armodafinil-feedback.png)
+![The feedback form, after a successful order](/images/silkroad/armodafinil-feedback.png)
 
 Feedback is an important part of the process. I was surprised to revisit one of my seller's page when 3 or 4 of his transactions has caused him to go from no reviews to 4 positive reviews, and see that his prices had increased a good 30 or 40%. Apparently he had been selling at a considerable discount to drum up reviews. This suggests to me, at least, that existing SR users are a bit too chary of new sellers.
 
 Another transaction; 10x100mg Modalert ordered from an English seller, arrived in larger than one would expect packaging (which contained a pretty nifty way to hide a shipment, but I will omit those details):
 
-![](/images/silkroad/2011-modalert-package-gb.jpg)
+![The Modalert package as received](/images/silkroad/2011-modalert-package-gb.jpg)
 
 The Modalert was what one would expect:
 
-![](/images/2011-modalert-front-gb.jpg) ![](/images/2011-modalert-pill-gb.jpg)
+![Foil packaging, front](/images/2011-modalert-front-gb.jpg) ![Foil packaging, back](/images/2011-modalert-pill-gb.jpg)
 
 A final example: I search for modafinil:
 
@@ -469,13 +386,15 @@ Containing the agreed-upon purchase:
 
 There is no proof of all of the above - anything here could have been faked with Photoshop or simply reused (perhaps I have a legitimate Adderall prescription). Take it for what it is and see whether it convinces you: [argument screens off authority](http://lesswrong.com/lw/lx/argument_screens_off_authority/).
 
-But looking back, I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road^[Looking at the reviews posted to the front page and sentiment on the forum, I would hazard a guesstimate that scammers are 0-10% of the marketplace, and probably to the low end of that spectrum. In the January 2012 one-year anniversary message, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0)), the administrator claimed that "over 99% of all transactions conducted within the escrow system are completed to the satisfaction of both both buyer and seller, or a mutually agreed upon resolution is found." Christin 2012's analysis found 97.8% of feedbacks giving 4-5 stars (similar to eBay rankings) but notes that this cannot pick up scams done out of escrow (as one might expect many scams to be done).], and shipments do get lost in the mail or seized or otherwise not delivered. ([I do not expect](http://predictionbook.com/predictions/2911) any legal problems; law enforcement always go after the sellers, to achieve maximum impact, and Silk Road presents both technical and jurisdictional problems for law enforcement.) This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
+But looking back, I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road^[Looking at the reviews posted to the front page and sentiment on the forum, I would hazard a guesstimate that scammers are 0-10% of the marketplace, and probably to the low end of that spectrum. In the January 2012 one-year anniversary message, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0)), the administrator claimed that "over 99% of all transactions conducted within the escrow system are completed to the satisfaction of both buyer and seller, or a mutually agreed upon resolution is found." Christin 2012's analysis found 97.8% of feedbacks giving 4-5 stars (similar to eBay rankings) but notes that this cannot pick up scams done out of escrow (as one might expect many scams to be done).], and shipments do get lost in the mail or seized or otherwise not delivered. ([I do not expect](http://predictionbook.com/predictions/2911) any legal problems; law enforcement always go after the sellers, to achieve maximum impact, and Silk Road presents both technical and jurisdictional problems for law enforcement.) This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
 
 > Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there.
 
 On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://silkroadvb5piz3r.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
 
 <!--
+TODO: if exposing LSD, add 'statistics' to tag
+
 # LSD ordering
 
 With Adderall & modafinil, the vendor choices were restricted enough and scams rare enough that I did not need to think hard about the process. With LSD, this ease vanished: there was a bewildering array of options and scammer were an acknowledged plague. A more systematic approach was necessary, starting with compiling data about what my options were.
@@ -655,6 +574,25 @@ The fundamental question of a VoI analysis is: how would this information change
 This leads to a quick answer: if I tested a `VitaCat` dose (destroying >$20 of LSD) and it was negative, would I throw the rest out? No. I would be too curious, and I would have spent too much to tranquilly chuck it based on one test which I do not trust as compared against a very reputable seller. (I would be too curious since I do not plan to order again.) Therefore, the VoI is zero; and a value of zero does not justify spending the money on buying a kit and wasting LSD and time. I would just find out the hard way.
 -->
 
+# Future Developments
+
+So, we have seen that Bitcoin satisfies an old dilemma bedeviling the early cypherpunks; and we have covered how SR follows recommended design principles in achieving their dream of self-enforcing marketplaces. <!-- TODO and went through a lengthy example of how buyers can rationally order and thereby contribute to the necessary dynamics. -->
+
+The drug market has grown and thrived beyond all expectations, despite an extraordinary - perhaps unprecedented - level of media coverage and transparency of operation. By its mere existence, it lays bare the universality of illicit drug use; by its sales volume, it provides a benchmark for understanding what estimates of the global black market really mean: if the Silk Road has turnover of $20m a year and the black market turn over closer to $100b a year, then the latter is equivalent to *5000* Silk Roads. By its use of public technology (even immature & hard to use technologies) and ordinary postal services, it demonstrates the infeasibility of the long-standing War on Drugs; and by taming drug use, turning it from a violence-prone seamy affair to a smooth commercial transaction, it suggests that there is no necessity for the War on Drugs.
+
+What is next?
+
+No one foresaw Bitcoin in 2008; and the success of SR in 2011 took many by surprise (including the author) who had assumed that it would quickly be shut down by law enforcement, fall victim to hackers seeking a lucrative payday, or at best devolve into a lemon market with a few overpriced goods. All three of these possibilities still exist; lengthy SR downtime in November 2012 fueled speculation that law enforcement had finally found a viable attack or that SR was suffering a [Denial of Service](!Wikipedia) (DoS) attack. SR's administrator [stated](http://www.theverge.com/2012/11/21/3675278/silk-road-operator-says-fail-whale-not-feds-brought-down-notorious) the downtime was due to "record" numbers of users; but if large numbers of legitimate users can accidentally take down the site, clearly a full-fledged DoS attack is feasible.
+
+But supposing that SR continues to have an annual turnover of millions of dollars of drugs and other goods? Two striking possibilities come to mind.
+
+1. the next development may be "information markets": black markets for leaked data, whistleblowers, corporate espionage, personal information such as credit card numbers, etc. Existing "carding forums" may be a market niche to usurp, as they have had problems with law enforcement infiltration and would benefit from increased security. Similarly, WikiLeaks has reportedly tried to [auction off access to documents](http://www.wired.com/threatlevel/2008/08/wikileaks-aucti/ "Latest Wikileaks Prize for Sale to the Highest Bidder - Update") in its possession, and while the auctions apparently failed, this may be due to defections and severe internal turmoil and not flaws in the fundamental idea.
+2. The most extreme cypherpunk proposal was [Jim Bell](!Wikipedia)'s ["assassination markets"](!Wikipedia "Assassination market"): a market in which participants lay bets on when a particular person will die; when the total bets become large enough, they function as a bounty on that person - inasmuch as a would-be hit man knows when the person will die and can profit handsomely. Assassination markets were to be a weapon against government oppression, but such markets could be used against any non-anonymous but powerful humans.
+
+    This would seem to be much less plausible than either a drug market or an information market: both drug & information black markets are markets which exist offline and online already, with illegal drugs representing a global market best measured in hundreds of billions of dollars of turnover (against the SR's millions) with scores of millions of drug users worldwide, so cypherpunk-style implementations are in a certain sense just 'business as usual' with a very large customer base eager to participate and moral respectability to salve the conscience. Demand for hit men, on the other hand, is rare outside organized crime and governments, difficult for any ordinary person to justify the use of, and usually confined to particular regions such as Mexico or Afghanistan. Further, a large drug delivery facilitated via SR will usually go unnoticed by the world as the recipient has no incentive to reveal it; a 'large' assassination, on the other hand, will be global news and may trigger a backlash large enough to take down the site, or in general degrade Tor & Bitcoin to the point where they cannot support large enough bounties on any individual to matter.
+
+Regardless, 2 key pieces of cypherpunk technology are now in place and already enabling remarkable new systems. Both researchers and digital entrepreneurs may benefit from taking a look back at some forgotten pioneers and re-evaluating their proposals in the light of recent successes.
+
 # See also
 
 - [Nootropics]()
@@ -677,7 +615,7 @@ In mid-January 2012, a reporter from BBC Radio's "[5 Live](!Wikipedia "BBC Radio
 
 > How did you find out about Silk Road?
 
-I saw the original announcement of it on the Bitcoin forums when it was linked on Reddit. I figured it would fail, and then a few months later, I saw the Gawker article on it and apparently Silk Road was actually working!
+I saw the original announcement of it on the Bitcoin forums when it was linked on Reddit. I figured it would fail, and then a few months later, I saw the _Gawker_ article on it and apparently Silk Road was actually working!
 
 > What attracted you to using Silk Road?
 
@@ -685,7 +623,7 @@ Once I heard, I just had to look into it more - it was too interesting not to. T
 
 > What is the difference between ordering your drugs from Silk Road and getting them on the street?
 
-Modafinil is pretty hard to get on the street because everyone gets it either with a prescription or from an online pharmacy, so I have no idea. While I was still checking out Silk Road, I asked a friend in college how much Adderall would be and he told me he could get them for $9-10 a pill; it cost half that on Silk Road, so I went with them rather than him.
+Modafinil is pretty hard to get on the street because everyone gets it either with a prescription or from an online pharmacy, so I have no idea. While I was still checking out Silk Road, I asked a friend in college how much Adderall would be and he told me he could get them for $9-10 a pill (it was close to the end of the semester); it cost half that on Silk Road, so I went with them rather than him. I've always found it hard to resist a 'bargain'.
 
 > How is Silk Road different to other websites where you can buy drugs?
 
@@ -697,7 +635,7 @@ And then there's the split between Silk Road itself and all the sellers, which m
 
 > What have you ordered from the site and how often?
 
-I don't order very often because I like to thoroughly experiment with things, and my tests take a while to set up and run. I think so far I've done one order of Adderall, one order of armodafinil, and two orders of modafinil; another order was canceled.
+I don't order very often because I like to thoroughly experiment with things, and my tests take a while to set up and run. I think so far I've done one order of Adderall, one order of armodafinil, and two orders of modafinil; another order of selegiline was canceled.
 
 > How important is anonymity to you? Do you think the technology really protects your identity?
 
