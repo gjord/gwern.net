@@ -874,39 +874,32 @@ A more P2P scheme would be to have clients simply verify any solution for a set 
 
 If we had some way of estimating, we could implement this P2P scheme as well: users can subscribe to their favorite charity publishers of problems (or the publisher could pay the solver a sum to incentivize participation), and if any publisher attempted to weaken the system by publishing trivially solved problems, peers would simply reject the problem in favor of a different problem & solution or a hash.
 
-Does this magical way of estimating difficulty exist? I don't know. (I've [asked](http://stackoverflow.com/questions/10508323/estimating-difficulty-of-instances-of-np-problems).)
+How could we measure difficulty? Obviously you *could* measure difficulty by trying to solve the problem yourself: if it takes 1000 seconds, you know it's no harder than 1000 seconds. But what good would this do you? You could broadcast a message to all your peers saying "these problems are supposed to take at least 20000 seconds to compute, but this only took 1000 seconds!" but you have no *proof* of this; they could do the check themselves so as to reject trivial solutions & their linked sets of transactions, but if peers rechecked work just because some stranger on the Internet cried foul, they'd spend all their time rechecking work and the system would fail.
 
-Obviously you *could* measure difficulty by ignoring the solution and trying to solve the problem yourself: if it takes 1000 seconds, you know it's no harder than 1000 seconds. But what good would this do you? You could broadcast a message to all your peers saying "these problems are supposed to take at least 20000 seconds to compute, but this only took 1000 seconds!" but you have no *proof* of this; they could do the check themselves so as to reject trivial solutions & their linked sets of transactions, but if peers rechecked work just because some stranger on the Internet cried foul, they'd spend all their time rechecking work and the system would fail.
+Does this magical way of estimating difficulty exist? I don't know. I've [asked](http://stackoverflow.com/questions/10508323/estimating-difficulty-of-instances-of-np-problems), and have been pointed at imperfect predictors: apparently [3-SAT](!Wikipedia) has a curious and well-known spike in difficulty of problems when the total variables divided by number of clauses reaches >=0.5, a "phase transition point". A randomly-generated problem can be inspected and predicted with substantial accuracy how difficult it will be: ["Predicting Satisfiability at the Phase Transition"](http://www.cs.ubc.ca/~kevinlb/papers/2012-PredictingSatisfiability.pdf "Xu et al 2012") claims to reach "classification accuracies of about 70%".
+
+SAT-satisfiability prediction is a good step, but still incomplete: a 70% failure rate is far more than necessary to implement double-spend attacks at random just by hoping that several easy instances will be chosen, and it does not forbid offline pre-computing attacks.
 
 <!--
-foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into Bitcoin style hashes, which are only  assemble-able by the server; if the
-         creator=server, then we just invented a way to turn downloads  into nanopayments with zero mental transaction costs
+foucist> sipa: gwern> idea is to convert the hashes BitTorrent does already into Bitcoin style hashes, which are only  assemble-able by the server; if the creator=server, then we just invented a way to turn downloads  into nanopayments with zero mental transaction costs
 
-gwern> sipa: well, let's call this Artcoin. suppose there were a Artcoin-based economy but there were no upper limit but a built-in steady inflation. if downloads
-       solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing ...
-gwern> ... creators' livelihoods!'
+gwern> sipa: well, let's call this Artcoin. suppose there were a Artcoin-based economy but there were no upper limit but a built-in steady inflation. if downloads solve hashes along the way, we've made a system which gives originators of popular torrents some bitcoins, and the more popular they are, the more bitcoins structured right, this might be the most popular way of downloading - solving the issue of 'BitTorrent/p2p is killing creators' livelihoods!'
 foucist> it might be entirely possible to do that with the current Bitcoin system,  modify BitTorrent to use a different combo hash that ties into bitcoins somehow
-gwern> sipa: I thought about the Bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new
-       Bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
+gwern> sipa: I thought about the Bitcoin increasing difficulty thing, but it seems to me that this would discourage creators. what happens when generating a new Bitcoin becomes a rare event, like once a year or something? the incentive for the creator disappears.
 foucist> gwern: well the argument is that bitcoins isn't about mining
 gwern> 'even if I release my awesome new movie, I probably won't get this year's Bitcoin. so why bother?'
 
-gwern> sipa: paying creators using inflation isn't that bad an idea. inflation is invisible and doesn't require assent. assent is why microtransaction schemes have
-       failed in their thousands
+gwern> sipa: paying creators using inflation isn't that bad an idea. inflation is invisible and doesn't require assent. assent is why microtransaction schemes have failed in their thousands
 foucist> i think the base idea is to find a way to tie bitcoins into BitTorrent such that it's an automatic micropayment for creators of that content
 sipa> but you're describing two ideas
 gwern> (or at least, hundreds. micropayments seems like the sort of thing Internet folks have been trying for ages and failing miserably every time.)
 sipa> 1. using bitcoins to pay for downloads
 sipa> you mean content creators
 sipa> 2. reusing the hashing done by BitTorrent for Bitcoin
-gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover
-       advantage)
-sipa> furthermore, i don't see how you are going to reuse the hashing power... BitTorrent uses it in a deterministic way to verify whether data is identical, while
-      Bitcoin uses it as a pseudorandom function to look for a lot of zeroes
+gwern> the users mine as a side-effect of downloading for the benefit of the server/tracker, who may be the creator (given the creator's obvious first-mover advantage)
+sipa> furthermore, i don't see how you are going to reuse the hashing power... BitTorrent uses it in a deterministic way to verify whether data is identical, while Bitcoin uses it as a pseudorandom function to look for a lot of zeroes
 gwern> sipa: #1 is boring. it's the same damn failed idea that has been tried hundreds of times. #2 is more interesting. is there any variant which does both?
-gwern> that's where I fail because I don't know the math
-gwern> (is there any way to force mining as part of the download? of course the users/downloaders could volunteer some hashing, but then someone will write a client
-       which does no hashing because 'it was making my computer slow' and the scheme collapses)
+gwern> that's where I fail because I don't know the math (is there any way to force mining as part of the download? of course the users/downloaders could volunteer some hashing, but then someone will write a client which does no hashing because 'it was making my computer slow' and the scheme collapses)
 
 gwern> foucist: I don't think that'd work, because suppose you have no bitcoins? you have an incentive to find a plaintext torrent
 
@@ -919,12 +912,10 @@ sipa> and it's very wasteful
 sipa> since the profitability of CPU mining is already long gone
 gwern> sipa: in the current Bitcoin system, yeah, not some new Bitcoin system
 sipa> explain me why people would value your Artcoin's?
-gwern> foucist: well, you need to keep the Bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to
-       download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
+gwern> foucist: well, you need to keep the Bitcoin+BitTorrent not much more expensive in time than plain BitTorrent. if the new system took 3 times as long to download, then people have an incentive to use a parallel system. but if it were only, say, a 20% penalty, then lots of people would use it. look at iTunes
 foucist> gwern: Bitcoin mining of any kind is still kinda wasteful though, those CPU power could be used for solving real problems etc
 sipa> indeed, do that as payment in your paying-for-creators BitTorrent system
-gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular Bitcoin, it'd give you access to the new stuff, you'd not feel
-       guilty about piracy, that sort of thing. (again, why does anyone download from iTunes?)
+gwern> sipa: suppose creators began using it. it would have pretty much the same advantages as regular Bitcoin, it'd give you access to the new stuff, you'd not feel guilty about piracy, that sort of thing. (again, why does anyone download from iTunes?)
 sipa> pay with folding@home work units or some
 sipa> gwern: but it wouldn't have limited total supply
 
