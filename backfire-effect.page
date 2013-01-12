@@ -53,78 +53,178 @@ https://en.wikipedia.org/wiki/Censoring_%28statistics%29
 
 "damning with faint praise"
 
-= 11:23 <@gwern> just an endless loop playing in my head. 'It may seem strange and prima facie irrational that receiving information in support of a belief may actually increase your belief in its opposite, but...'
-= 11:24 <@gwern> 'Let us play a little game I call the Debate Game. You are trying to guess a real number P between 0 and 1; you opponent periodically tells you a real which is drawn from a normal distribution around P...'
-= 11:25 <@gwern> 'Let us play a different game called the Random Debate Game, where the real is drawn randomly from said normal distribution; you hold no opinion on what P is, and in the first round are told 0.75. what do you conclude?'
-= 11:26 <@gwern> 'Now let us play a third game, called the Worst Debate Game; now the real is not drawn randomly from said normal, but is at least one standard deviation between P; you are told 0.55, what do you conclude about P?'
+It may seem strange and prima facie irrational that receiving information in support of a belief may actually increase your belief in its opposite, but...
 
-22:50:07 < nshepperd> if you're talking to a proud supporter of position ¬X, and they only give you one bad argument against X, that's evidence for X
-22:50:58 <@gwern> nshepperd: note the crucial assumption there: you're assuming something about the distribution of the ~X arguments
-22:52:06 <@gwern> after all, what if they're biased to giving you only bad arguments? are you really going to conclude that them providing a bad argument is
-                  evidence for X?
-22:52:41 < nshepperd> yeah, the assumption is that proud supporters will know all the good arguments
-22:53:29 <@gwern> nshepperd: anyway, so that's the core argument: the naive belief that the backfire effect is 'perverse' is assuming the arguments are selected randomly so any argument of non-zero value ought to move them that direction, whereas the reality is you expect them to select their best argument, in which case you get an upper bound which can easily them the opposite direction
-22:55:30 < nshepperd> I think this was mentioned in one of the sequence posts on filtered evidence
-22:55:37 <@gwern> nshepperd: the math part is treating beliefs as reals 0-1, assuming a normal distribution of sampling arguments around the underlying belief, and showing that these different distributions yield the actual effects we claim (random selection = any arguments worth >0.5 increases confidence and vice-versa, biased selection toward max argument can decreases confidence even if >0.5)
-22:57:38 < nialo> gwern:  does that still preserve expected evidence = 0?  that is, sum(p(argument) * confidenceChange(arguement)) still zero?
-22:58:04 < nialo> (I ask cause it seems like it might and I can't prove it either way quickly)
-22:58:11 < nialo> (er, might not*)
-22:58:19 <@gwern> nialo: I think it does, it's just shifting a huge amount of probability mass toward the upper ranges
-22:59:17 <@gwern> nialo: my intuition is that, let's say your estimate of their belief P is currently 0.5; if they produce a 0.5, you take this as an upper bound and conclude it's <0.5, but if they produce a 0.9, then you will be shocked and revise massively upward
-22:59:38 < nshepperd> gwern: also if you expect them to list off a large number of arguments, then they only come up with two, then that is evidence they have less arguments on total
-22:59:54 <@gwern> nshepperd: yeah. there's a clear connection to the hope function too, although I'm not sure what it is
-23:00:05 <@gwern> it's really a kinda nifty model of political arguing
-23:01:15 < clone_of_saturn> someone should see what happens when someone states a weak argument first, then a much stronger one
-23:01:22 <@gwern> if only I were e.t. Jaynes, I could probably write this all out in an hour
-23:02:21 <@gwern> clone_of_saturn: an interesting question. going weak then strong sort of implies that they either aren't good at judging arguments since then they would start with the strong, or it's not actually strong in some way you aren't judging right and that's why they left it for later
-23:03:31 < nshepperd> or maybe they're listing their arguments in alphabetical order
-23:04:32 < nialo> or in order by length
-23:04:58 <@gwern> well, there's always alternative models available...
-23:05:09 < Namegduf> People like to start with arguments they feel emotionally attached to
-23:05:19 < Namegduf> Snappy ones, "heavy" ones, etc
-23:05:28 < Namegduf> These are not always ones which are perceived as stronger
-23:06:26 < Namegduf> That's my observation, anyway.
-23:07:40 < nialo> also gwern, this seems to intersect with Yvain's thing about mainstream ideas have worse average arguments: http://squid314.livejournal.com/333353.html  (I'm not sure how precisely, but I think there's a useful distribution for expected argument quality in there somewhere)
-23:12:31 <@gwern> the best I can think of is that beliefs which are really wrong will have a relatively narrow spread past the underlying belief - if you're a Klansman, it's hard to make an argument even worse than the underlying falsity of Klanism
-23:12:40 < nshepperd> well, to do this properly, you need a distribution over the set of arguments the clever arguer is likely to possess
-23:12:44 <@gwern> analogous to Gould's complexity argument
-23:12:53 < nshepperd> given which hypothesis is actually true
-23:13:00 <@gwern> you can't be less complex than viruses - there's a censorship of the data
-23:13:26 <@gwern> so Klan arguments in practice will come from the right part of the Klan bell curve and be better than expected
-23:13:57 <@gwern> if Klanism is at 0.2, I probably won't see the 0-0.2 arguments, but the 0.2-0.4 arguments, if you follow me
-23:15:04 < nialo> that roughly tracks what I'd expect also, yes
-23:15:16 <@gwern> but my brain is shutting down from all the statistics I've been learning today, so maybe that is not a very good point to extract from Yvain's post into my backfire model
-23:17:20 < nshepperd> Well, suppose there's a fixed supply of arguments for each side, whose number and strength depends only on whether Klanism is true
-23:17:42 < nshepperd> If Klanism is true there should be more and better arguments in favor of it
-23:18:44 < nshepperd> A particular person possess some subset of this supply of arguments.
-23:19:34 < nshepperd> However, Klansman, being non-mainstream, will have spent more time "mining" this argument supply for good arguments
-23:21:00 < nshepperd> This affects your distribution over arguments you expect the Klansman you're talking with to have.
-23:22:23 < nshepperd> Which in turn affects the arguments they'll actually tell you. So when you update on what they've said you have to sort of propagate that information back through each layer of the model to the factual truth of Klanism
-23:25:05 < nshepperd> (Klansman says only one good argument, meaning he probably doesn't have many good arguments because he would select all his best, meaning there probably aren't many good arguments because Klansman spend a lot of time looking for arguments, meaning Klanism is probably false because otherwise there'd be more good arguments for it)
-23:26:38 <@gwern> so how many good Klan arguments will finally be evidence for it?
-23:30:33 < nshepperd> gwern: approximately, more arguments than you'd expect there to be if Klanism were wrong
-23:33:04 <@gwern> nshepperd: which would be?
-23:33:25 < nialo> insufficient data
-23:33:47 <@gwern> nialo: my challenge wasn't for a real number but pseudocode for estimating it
-23:33:57 < nshepperd> depends on your distributions of P(existing arguments | K)
-23:34:28 <@gwern> nshepperd: that sounds like a boring model then
-23:36:23 < nshepperd> you could make a toy model with gaussians with different means, maybe
-23:36:59 < nialo> I think what nshepperd is saying is approximately equivalent to Klan arguments coming from the right half of the bell curve, as above
-23:38:26 < nshepperd> say if Klanism is true there exist a large number of arguments distributed in quality according to Norm(u_true, sigma), otherwise the arguments are distributed according to Norm(u_false, sigma) where u_true > u_false
-23:39:21 < nshepperd> then the Klansmen draw a bunch of arguments from whichever distribution is correct, and give you the top N they find
-23:40:08 <@gwern> how does that differ from my model?
-23:40:29 <@gwern> aside from collapsing multiple steps
-23:41:46 < nialo> I think you end up with a slightly different distribution at the end?
-23:41:58 < nshepperd> aside from being mathematically precise
-23:47:02 <@gwern> (believing in conspiracy theories means always being hopeful - that at least there's someone to blame)
-...
-00:06:28 < nshepperd> toy example I just calculated: if P(argument quality | H) ~ Normal(mu=1.05, sigma=0.2) and P(argument quality | ¬H) ~ Normal(mu=0.95, sigma=0.2) and the clever arguer possesses ten arguments drawn from whichever distribution is correct, and tells you his four best, which are [1.1, 1.09, 1.08, 1.07]
-00:07:26 < nshepperd> then the likelihood ratio P(E|H)/P(E|¬H) for that evidence is 0.40, and it's evidence against H
-00:08:50 < nshepperd> even though the arguments are on the high side of both distributions
-00:11:35 < nshepperd> but if you make the clever arguer work less hard to find arguments, and say he only has 6 arguments, of which he tells you the best four, then that same set becomes evidence for H (likelihood ratio 1.29)
-00:12:00 < clone_of_saturn> p(a|b) is pretty intuitive if you read the | as "given"
-00:12:28 < nshepperd> because then you no longer expect that he would have found much better arguments
+Let us play a little game I call the Debate Game. You are trying to guess a real number P between 0 and 1; you opponent periodically tells you a real which is drawn from a normal distribution around P.
+
+Let us play a different game called the Random Debate Game, where the real is drawn randomly from said normal distribution; you hold no opinion on what P is, and in the first round are told 0.75. what do you conclude?
+
+Now let us play a third game, called the Worst Debate Game; now the real is not drawn randomly from said normal, but is at least one standard deviation between P; you are told 0.55, what do you conclude about P?
+
+> nshepperd> if you're talking to a proud supporter of position ¬X, and they only give you one bad argument against X, that's evidence for X
+>
+> gwern> nshepperd: note the crucial assumption there: you're assuming something about the distribution of the ~X arguments
+>
+> gwern> after all, what if they're biased to giving you only bad arguments? are you really going to conclude that them providing a bad argument is evidence for X?
+>
+> nshepperd> yeah, the assumption is that proud supporters will know all the good arguments
+>
+> gwern> nshepperd: anyway, so that's the core argument: the naive belief that the backfire effect is 'perverse' is assuming the arguments are selected randomly so any argument of non-zero value ought to move them that direction, whereas the reality is you expect them to select their best argument, in which case you get an upper bound which can easily them the opposite direction
+>
+> nshepperd> I think this was mentioned in one of the sequence posts on filtered evidence
+>
+> gwern> nshepperd: the math part is treating beliefs as reals 0-1, assuming a normal distribution of sampling arguments around the underlying belief, and showing that these different distributions yield the actual effects we claim (random selection = any arguments worth >0.5 increases confidence and vice-versa, biased selection toward max argument can decreases confidence even if >0.5)
+>
+> nialo> gwern: does that still preserve expected evidence = 0?  that is, sum(p(argument) * confidenceChange(argument)) still zero?
+>
+> nialo> (I ask cause it seems like it might and I can't prove it either way quickly)
+>
+> nialo> (er, might not*)
+>
+> gwern> nialo: I think it does, it's just shifting a huge amount of probability mass toward the upper ranges
+>
+> gwern> nialo: my intuition is that, let's say your estimate of their belief P is currently 0.5; if they produce a 0.5, you take this as an upper bound and conclude it's <0.5, but if they produce a 0.9, then you will be shocked and revise massively upward
+>
+> nshepperd> gwern: also if you expect them to list off a large number of arguments, then they only come up with two, then that is evidence they have less arguments on total
+>
+> gwern> nshepperd: yeah. there's a clear connection to the hope function too, although I'm not sure what it is
+>
+> gwern> it's really a kinda nifty model of political arguing
+>
+> clone_of_saturn> someone should see what happens when someone states a weak argument first, then a much stronger one
+>
+> gwern> if only I were e.t. Jaynes, I could probably write this all out in an hour
+>
+> gwern> clone_of_saturn: an interesting question. going weak then strong sort of implies that they either aren't good at judging arguments since then they would start with the strong, or it's not actually strong in some way you aren't judging right and that's why they left it for later
+>
+> nshepperd> or maybe they're listing their arguments in alphabetical order
+>
+> nialo> or in order by length
+>
+> gwern> well, there's always alternative models available...
+>
+> Namegduf> People like to start with arguments they feel emotionally attached to
+>
+> Namegduf> Snappy ones, "heavy" ones, etc
+>
+> Namegduf> These are not always ones which are perceived as stronger
+>
+> Namegduf> That's my observation, anyway.
+>
+> nialo> also gwern, this seems to intersect with Yvain's thing about mainstream ideas have worse average arguments: http://squid314.livejournal.com/333353.html  (I'm not sure how precisely, but I think there's a useful distribution for expected argument quality in there somewhere)
+>
+> gwern> the best I can think of is that beliefs which are really wrong will have a relatively narrow spread past the underlying belief - if you're a Klansman, it's hard to make an argument even worse than the underlying falsity of Klanism
+>
+> nshepperd> well, to do this properly, you need a distribution over the set of arguments the clever arguer is likely to possess
+>
+> gwern> analogous to Gould's complexity argument
+>
+> nshepperd> given which hypothesis is actually true
+>
+> gwern> you can't be less complex than viruses - there's a censorship of the data
+>
+> gwern> so Klan arguments in practice will come from the right part of the Klan bell curve and be better than expected
+>
+> gwern> if Klanism is at 0.2, I probably won't see the 0-0.2 arguments, but the 0.2-0.4 arguments, if you follow me
+>
+> nialo> that roughly tracks what I'd expect also, yes
+>
+> gwern> but my brain is shutting down from all the statistics I've been learning today, so maybe that is not a very good point to extract from Yvain's post into my backfire model
+>
+> nshepperd> Well, suppose there's a fixed supply of arguments for each side, whose number and strength depends only on whether Klanism is true
+>
+> nshepperd> If Klanism is true there should be more and better arguments in favor of it
+>
+> nshepperd> A particular person possess some subset of this supply of arguments.
+>
+> nshepperd> However, Klansman, being non-mainstream, will have spent more time "mining" this argument supply for good arguments
+>
+> nshepperd> This affects your distribution over arguments you expect the Klansman you're talking with to have.
+>
+> nshepperd> Which in turn affects the arguments they'll actually tell you. So when you update on what they've said you have to sort of propagate that information back through each layer of the model to the factual truth of Klanism
+>
+> nshepperd> (Klansman says only one good argument, meaning he probably doesn't have many good arguments because he would select all his best, meaning there probably aren't many good arguments because Klansman spend a lot of time looking for arguments, meaning Klanism is probably false because otherwise there'd be more good arguments for it)
+>
+> gwern> so how many good Klan arguments will finally be evidence for it?
+>
+> nshepperd> gwern: approximately, more arguments than you'd expect there to be if Klanism were wrong
+>
+> gwern> nshepperd: which would be?
+>
+> nialo> insufficient data
+>
+> gwern> nialo: my challenge wasn't for a real number but pseudocode for estimating it
+>
+> nshepperd> depends on your distributions of P(existing arguments | K)
+>
+> gwern> nshepperd: that sounds like a boring model then
+>
+> nshepperd> you could make a toy model with gaussians with different means, maybe
+>
+> nialo> I think what nshepperd is saying is approximately equivalent to Klan arguments coming from the right half of the bell curve, as above
+>
+> nshepperd> say if Klanism is true there exist a large number of arguments distributed in quality according to Norm(u_true, sigma), otherwise the arguments are distributed according to Norm(u_false, sigma) where u_true > u_false
+>
+> nshepperd> then the Klansmen draw a bunch of arguments from whichever distribution is correct, and give you the top N they find
+>
+> gwern> how does that differ from my model?
+>
+> gwern> aside from collapsing multiple steps
+>
+> nialo> I think you end up with a slightly different distribution at the end?
+>
+> nshepperd> aside from being mathematically precise
+>
+> gwern> (believing in conspiracy theories means always being hopeful - that at least there's someone to blame)
+>
+> nshepperd> toy example I just calculated: if P(argument quality | H) ~ Normal(mu=1.05, sigma=0.2) and P(argument quality | ¬H) ~ Normal(mu=0.95, sigma=0.2) and the clever arguer possesses ten arguments drawn from whichever distribution is correct, and tells you his four best, which are [1.1, 1.09, 1.08, 1.07]
+>
+> nshepperd> then the likelihood ratio P(E|H)/P(E|¬H) for that evidence is 0.40, and it's evidence against H
+>
+> nshepperd> even though the arguments are on the high side of both distributions
+>
+> nshepperd> but if you make the clever arguer work less hard to find arguments, and say he only has 6 arguments, of which he tells you the best four, then that same set becomes evidence for H (likelihood ratio 1.29)
+>
+> clone_of_saturn> p(a|b) is pretty intuitive if you read the | as "given"
+>
+> nshepperd> because then you no longer expect that he would have found much better arguments
 
 http://doingbayesiandataanalysis.blogspot.com/2012/01/complete-example-of-right-censoring-in.html
 
 Frederic Bastiat: "The worst thing that can happen to a good cause is not to be skillfully attacked, but to be ineptly defended."
+
+Relevant to bad updating on hurricanes?
+
+["How Near-Miss Events Amplify or Attenuate Risky Decision Making"](http://www.mansci.journal.informs.org/content/early/2012/04/13/mnsc.1120.1517.full.pdf), Tinsley et al 2012
+
+> In the aftermath of many natural and man-made disasters, people often wonder why those affected were under-prepared, especially when the disaster was the result of known or regularly occurring hazards (e.g., hurricanes). We study one contributing factor: prior near-miss experiences. Near misses are events that have some nontrivial expectation of ending in disaster but, by chance, do not. We demonstrate that when near misses are interpreted as disasters that *did not occur*, people illegitimately underestimate the danger of subsequent hazardous situations and make riskier decisions (e.g., choosing not to engage in mitigation activities for the potential hazard). On the other hand, if near misses can be recognized and interpreted as disasters that *almost happened*, this will counter the basic "near-miss" effect and encourage more mitigation. We illustrate the robustness of this pattern across populations with varying levels of real expertise with hazards and different hazard contexts (household evacuation for a hurricane, Caribbean cruises during hurricane season, and deep-water oil drilling). We conclude with ideas to help people manage and communicate about risk.
+>
+> In the lead-up to the storm, Governor Haley Barbour of Mississippi warned of "hurricane fatigue"-the possibility that his constituents would not evacuate because they had successfully weathered earlier storms; similarly, one former Federal Emergency Management Agency official said people in the agency unfortunately approached the Katrina response as it had other responses, though the aftermath of Katrina was clearly "unusual" (Glasser and Grunwald 2005). Such complacency is not exclusive to hurricanes. Citizens who survive natural disasters in one season often fail to take actions that would mitigate their risk in future seasons (e.g., moving off a Midwestern flood plain or clearing brush to prevent wildfires in the West; see Lindell and Perry 2000)....Organizations experience near misses as well. For example, in the deep-sea oil drilling industry, dozens of Gulf of Mexico wells in the past two decades suffered minor blowouts during cementing; however, in each case chance factors (e.g., favorable wind direction, no one welding near the leak at the time, etc.) helped prevent an explosion (Tinsley et al. 2011).
+>
+> - Glasser SB, Grunwald M (2005) The steady buildup to a city's chaos: Confusion reigned at every level of government. Washington Post (September 11) A01
+> - Lindell MK, Perry RW (2000) Household adjustment to earthquake hazard: A review of research. Environ. Behav. 32(4):590-630
+> - Tinsley CH, Dillon RL, Madsen PM (2011) How to avoid catastrophe. Harvard Bus. Rev. 89(4):90-97
+>
+> We show that a particular type of personal experience, near misses, have an undue influence on how people evaluate risk and can lead to questionable choices when people face an impending hazard with which they have had prior near-miss experience. We show that this near-miss effect is robust because it seems to implicitly influence the thoughts people use as inputs to their decision making. This near-miss effect can be countered, but doing so needs to use the same kind of implicit mechanism.
+>
+> Dillon and Tinsley (2008) found that near misses in completing a space project encouraged people to choose a riskier strategy when faced with a future hazard threat to the mission. Although highly contextualized and specific, their research showed that near misses are events that alter evaluations of risk, and thus a near-miss bias should generalize to many kinds of hazards and be relevant to a large array of natural and man-made hazard environments.
+>
+> - Dillon RL, Tinsley CH (2008) How near-misses influence decision making under risk: A missed opportunity for learning. Management Sci. 54(8):1425-1440
+>
+> For example, in their discussion of aviation near misses, March et al. (1991, p. 10) essentially argue that near collisions can produce two different types of salient associations. They describe:
+>
+>> Every time a pilot avoids a collision, the event provides evidence both for the threat [of a collision] and for its irrelevance. It is not clear whether the organization came [close] to a disaster or that the disaster was avoided.
+>
+> - March JG, Sproull LS, Tamuz M (1991) Learning from samples of one or fewer. Organ. Sci. 2(1):1-13
+>
+> See also Kahneman and Varey (1990) for arguments on the critical distinction between an event that did not occur and an event that did not but almost occurred.
+>
+> - Kahneman D, Varey CA (1990) Propensities and counterfactuals: The loser that almost won. J. Personality Soc. Psych. 59(6):1101-1110
+>
+> We predict that near misses change the negativity associated with a bad event rather than changing probability assessments. This is consistent with Windschitl and Chambers' (2004) finding that people are more likely to change their feelings about a choice than their explicit beliefs about the probabilities. Furthermore, in the domain of near misses, Dillon and Tinsley (2008) showed that people changed their perceptions of risk without changing their probabilities.
+>
+> - Windschitl PD, Chambers JR (2004) The dud-alternative effect in likelihood judgment. J. Experiment. Psych.: Learning, Memory, Cognition 30(1):198-215
+>
+> Study 1 looked for evidence of the near-miss effect using a field survey of households in coastal counties of Louisiana and Texas who experienced Hurricane Lili.3 We examined how previous storm experience as well as prior near-miss experiences (in the form of unnecessary evacuations) influenced whether or not the individuals surveyed evacuated for Hurricane Lili. Studies 2-6 used the laboratory to discover how the near-miss phenomenon operates. Study 2 examined how encoding near misses as resilient or vulnerable led to different evacuation rates for a hypothetical hurricane and demonstrated that the addition of vulnerability information to the near-miss stimulus can counteract the complacency effect. Study 3 examined the components of people's SEU [subjective expected utility] assessments. It probed people's assessments of probabilities (P ), outcome attractiveness (O), and their ultimate judgments of risk versus safety (R) to test our hypothesized mediation. Study 4 generalizes our basic finding by changing the context from a house to a cruise ship; in doing so we address a concern that participants may be updating their calculations of the risk after a resilient near miss. Additionally, in Study 4, we examine the role counterfactuals have in the risky decision. Study 5 offered evidence that near misses do in fact change the hazard category, and hence the knowledge associated with a hazard, by examining what participants' thought about a hazardous situation. This study removed the need to make a decision, thereby (a) providing evidence for the first (implicit) step in our sequence of how near misses affect cognitive processes and (b) discounting a concern that people first chose what to do and then, when forced to answer questions, generate assessments of probabilities, outcomes, and risk to justify their choice (i.e., reverse causality). Study 6 corroborated the findings of Studies 2-5 with actual behavior by having participants' decisions regarding a risky situation have financial consequences for their compensation.
+
+On power laws: given the rareness of events out on the tail, but also their overwhelming magnitude, how do we perform inference on them? Does a Katrina increase our belief in super-storms? How much? How weak does a storm have to be before it ceases to increase our estimate of the power parameter and instead lower it?
