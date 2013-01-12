@@ -435,3 +435,51 @@ Evaluate:
 he's 10.0 feet tall
 
 # 6
+
+Evaluate:
+<code>w = "This is the left side of..."
+e = "a string with a right side."
+print w + e</code>
+<code>This is the left side of...a string with a right side.</code>
+
+Evaluate:
+<code>w = "This is the left side of..."
+e = "a string with a right side."
+print w ++ e</code>
+<code>Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: bad operand type for unary +: 'str'
+</code>
+
+Evaluate:
+<code>print "This is the left side of..." + "a string with a right side."</code>
+<code>This is the left side of...a string with a right side.</code>
+
+Evaluate:
+<code>print ("This is the left side of..." + "a string with a right side.")</code>
+<code>This is the left side of...a string with a right side.</code>
+
+Evaluate:
+<code>x = "There are %d types of people." % 10
+print "I said: %r." % x</code>
+<code>I said: 'There are 10 types of people.'.</code>
+
+Evaluate:
+<code>x = "There are %d types of people." % 10
+print "I said: '%r'." % x</code>
+<code>I said: ''There are 10 types of people.''.</code>
+
+Evaluate:
+<code>binary = "binary"
+do_not = "don't"
+y = "Those who know %s and those who %s." % (binary, do_not)
+print "I also said: '%s'." % y</code>
+<code>I also said: 'Those who know binary and those who don't.'.</code>
+
+Evaluate:
+<code>hilarious = False
+joke_evaluation = "Isn't that joke so funny?! %r"
+print joke_evaluation % hilarious</code>
+<code>Isn't that joke so funny?! False</code>
+
+# 7
