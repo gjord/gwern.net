@@ -483,3 +483,39 @@ print joke_evaluation % hilarious</code>
 <code>Isn't that joke so funny?! False</code>
 
 # 7
+
+Nothing new.
+
+# 8
+
+Evaluate:
+<code>formatter = "%r %r %r %r"
+print formatter % (1, 2, 3, 4)</code>
+<code>1 2 3 4</code>
+
+Evaluate:
+<code>formatter = "%r %r %r %r"
+print formatter % ("one", "two", "three", "four")</code>
+<code>'one' 'two' 'three' 'four'</code>
+
+Evaluate:
+<code>formatter = "%r %r %r %r"
+print formatter % (True, False, False, True)</code>
+<code>True False False True</code>
+
+Evaluate:
+<code>formatter = "%r %r %r %r"
+print formatter % (formatter, formatter, formatter, formatter)</code>
+<code>'%r %r %r %r' '%r %r %r %r' '%r %r %r %r' '%r %r %r %r'</code>
+
+Evaluate:
+<code>formatter = "%r %r %r %r"
+print formatter % (
+      "I had this thing.",
+      "That you could type up right.",
+      "But it didn't sing.",
+      "So I said goodnight."
+      )</code>
+<code>'I had this thing.' 'That you could type up right.' "But it didn't sing." 'So I said goodnight.'</code>
+
+# 9
