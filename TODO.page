@@ -5,130 +5,56 @@ created: 07 Nov 2008
 ...
 
 # Haskell
-## Packaging
-- BNF Converter <http://www.cs.chalmers.se/Cs/Research/Language-technology/BNFC/>
-- Functional Morphology <http://www.cs.chalmers.se/~markus/FM/>
-- WASH <http://www.informatik.uni-freiburg.de/~thiemann/haskell/WASH/>: HTML and MAIL look particularly useful.
-- <http://www.eyrie.org/~zednenem/2004/07/26/hsce>
-- <http://www.cs.chalmers.se/~bringert/darcs/>
-- <http://www.cs.waikato.ac.nz/Research/fm/amuzed.html>
-- Work my way backwards in time from [News/2006](!Hawiki)
-- Buddha is old; see if there is a darcs: <http://www.cs.mu.oz.au/~bjpop/buddha>
-- HaRe: <http://www.cs.kent.ac.uk/projects/refactor-fp/hare.html>
-- Pivotal: <http://www.cs.kent.ac.uk/projects/pivotal/downloads.html>
-- Steal Programmatica's stuff: <http://ogi.altocumulus.org/~hallgren/Programatica/cvs.html> and <http://programatica.cs.pdx.edu/>
-- dons says track down everything by Mark Jones <http://web.cecs.pdx.edu/~mpj/>
-- Hazakura: <http://web.archive.org/web/20061012042957/http://www.city5.org/haskellprog/hazakura/> & <http://haskell.org/pipermail/haskell/2006-April/017901.html>
-- Petri nets: <http://community.haskell.org/~claus/HCPN/>
-- 'Frob - an Embedded Domain Specific Language for controlling robots. It is built using the principals of Functional Reactive Programming, as developed by Conal Elliott for the Fran animation system. The current incarnation of Frob is part of the Yampa FRP system.'
-- PUre: <http://wiki.di.uminho.pt/twiki/bin/view/Research/PURe/UsingCVS>
-- <http://community.haskell.org/~claus/FunWorlds/>
-- <http://programatica.cs.pdx.edu/House/>
-- <http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/Haskell2LaTeX/>
-- <http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/Fraskell/> (is this too old?)
-- <http://research.microsoft.com/en-us/um/people/daan/ddata.html> (are these already included in Hackage'd libraries?)
-- everything on <http://repetae.net/computer/>.
-- <http://www.cs.york.ac.uk/fp/darcs/>
-- <http://www.cs.york.ac.uk/fp/software.php>
-- <http://www.cs.uu.nl/wiki/Ehc/WebHome>
-- RDF stuff: <http://www.ninebynine.org/Software/HaskellRDF/RDF/Harp/>
-- cabalize <http://homepages.cwi.nl/~tromp/cl/cl.html>
-- <http://wxhaskell.sourceforge.net/applications.html>
 
-## General
-
-- Extend [Simple unix tools](!Hawiki) to include more coreutils and maybe QuickCheck tests, and merge into HSH's ShellEquivs. Is there any useful merger of [HSH](http://software.complete.org/software/projects/show/hsh), and `Language.Sh`/ShSh <!-- shsh survives in my local repo -->
-- look for vector graphics libraries for Haskell; think about cloning DEFCON
-- Translate the Lisp from Hofstadter's _Metamagical Themas_ into Haskell
-- Split out Cpuperf's Sudo monad and make safer
-- Clean up the SHA1 mess:
-    i. Ginsu: module SHA1 (sha1,  sha1ShowHash, sha1String, sha1HashToBytes)
-    ii. HAppS: Kind of similar to Ginsu?
-    iii. Conjure: BSD FFI, module Conjure.Utils.SHA1 (sha1 :: ByteString -> ByteString)
-    iv. jhc: based on Igloo's original - module Util.SHA1 (sha1String,sha1file,sha1Bytes,hashToBytes,sha1Handle,ABCDE(..),Hash,emptyHash) where
-- de-haskell98 everything; [Hackage list](http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/haskell98);
-    - ./haskelldb/driver-wx/haskelldb-wx.cabal
-    - ./haskelldb/driver-dynamic/haskelldb-dynamic.cabal
-    - ./easyvision/cabal/patrec/patrec.cabal
-    - ./easyvision/cabal/imagproc/imagproc.cabal
-    - ./graphicsFormats/graphicsFormats.cabal
-    - ./ghc/libraries/Cabal/tests/systemTests/twoMains/test.cabal
-    - ./ghc/libraries/Cabal/tests/systemTests/wash2hs/wash2hs.cabal
-    - ./ghc/libraries/haskell98/haskell98.cabal
-    - ./ghc/utils/ghc-pkg/ghc-pkg.cabal
-    - ./ghc/utils/hsc2hs/hsc2hs.cabal
-    - ./ghc/utils/hpc/hpc-bin.cabal
-    - ./lhc/lhc.cabal
-    - ./nehe-tuts/nehe-tuts.cabal
-    - ./haskellfm/FileManager.cabal
-    - ./hera/prelude/hera-prelude.cabal
-    - ./hera/hera.cabal
-    - ./hera/ajaxgui/hera-ajaxgui.cabal
-    - ./hera/engine/hera-engine.cabal
-    - ./hybrid/hybrid.cabal
-    - ./hexpat/hexpat.cabal
-    - ./accelerate/accelerate.cabal
-    - ./ivor/ivor.cabal
-    - ./gplib/GPLib.cabal
-    - ./hopes/hopes.cabal
-    - ./flm/FermatsLastMargin.cabal
-    - ./flm/FLM.cabal
-    - ./haxml/HaXml.cabal
 - Remove [Data.Map.map](!Hoogle); see [original](http://www.mail-archive.com/haskell-cafe@haskell.org/msg22115.html) [email thread](http://www.mail-archive.com/haskell-cafe@haskell.org/msg22055.html) and the GHC [bug report](http://hackage.haskell.org/trac/ghc/ticket/1249).
 
 ## Pandoc
-- Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests/
-     figure out how the new TeXmath figures in
+
+- Write up what LaTeX Pandoc does understand; this can be found out by looking through the tests; figure out how the new TeXmath figures in
 
 ## XMonad
+
 - Look through my collection of XMonad configuration files. What can be done in XMonad core and XMonadContrib to simplify them?
 - XMonad.WindowGo and WindowBring could use quite a bit of refactoring and generalizing.
 - Hlint XMC
 - Run 'sim_text -d `find XMonadContrib/XMonad`' on XMC
 
 ## Darcs
-- Add --pager option to 'darcs changes' --this is a current [bug report](http://bugs.darcs.net/issue1303)
-- Look into darcswatch - can it be made more memory-efficient and usable on haskell.org?
 
-## Gitit
-
-- Caching needs improvements. Perhaps we can borrow from hackage-server and use 'Content-MD5' headers? This might be superior to expire headers.
+- Add --pager option to 'darcs changes': this is a current [bug report](http://bugs.darcs.net/issue1303)
 
 # Programming (in general)
 
 - English mode
     i. Get predictive completion
-    ii. String syntax highlighting?
-    iii. English indenting - implement visual-syntactic text formatting ([VSTF](http://www.readingonline.org/articles/r_walker/)) in Haskell (appears to've been commercialized as [LiveInk](http://www.liveink.com/)). Possibly using GF. Or perhaps some other Haskell library [Applications and libraries/Linguistics](!Hawiki).
+    ii. English indenting - implement visual-syntactic text formatting ([VSTF](http://www.readingonline.org/articles/r_walker/)) in Haskell (appears to've been commercialized as [LiveInk](http://www.liveink.com/)). Possibly using GF. Or perhaps some other Haskell library [Applications and libraries/Linguistics](!Hawiki).
 - Programming challenges: [Sphere classical problems](http://www.spoj.pl/problems/classical/), [Project Euler](http://projecteuler.net/), and [99 Haskell Problems](!Hawiki) (got to 11).
 - [_How to Design Programs_](http://www.htdp.org/2003-09-26/); another Scheme textbook
 - There's also [_Structure and Interpretation of Classical Mechanics_](!Wikipedia "Structure and Interpretation of Classical Mechanics"); is that best done before or after SICP?
 - [Learn Prolog](http://www.learnprolognow.org/), [Adventure in Prolog](http://www.amzi.com/AdventureInProlog/) - important paradigm; knowing Prolog, I can do this textbook on [partial evaluation/Futamura projections](http://www.itu.dk/people/sestoft/pebook/)
-- Write a clone of [Zendo (game)](!Wikipedia). It looks fun and doable, and doing it well would draw on all sorts of GUI and AI techniques. [Zendo wiki](http://www.icehousegames.org/wiki/index.php?title=Zendo), [online version](http://superdupergames.org/povray/), [general page](http://www.koryheath.com/games/zendo); [automated analysis of Bongard problems](http://www.foundalis.com/res/diss_research.html) (apparently a very similar problem); [rule generator](http://web.archive.org/web/20091027133816/http://geocities.com/~karlvonl/Zendomizer.html)
+- Write a clone of [Zendo (game)](!Wikipedia). It looks fun and doable, and doing it well could draw on all sorts of GUI and AI techniques. [Zendo wiki](http://www.icehousegames.org/wiki/index.php?title=Zendo), [online version](http://superdupergames.org/povray/), [general page](http://www.koryheath.com/games/zendo); [automated analysis of Bongard problems](http://www.foundalis.com/res/diss_research.html) (apparently a very similar problem); [rule generator](http://web.archive.org/web/20091027133816/http://geocities.com/~karlvonl/Zendomizer.html)
 - Learn TeX: [Help:Formula](!Wikipedia), <http://www.math.harvard.edu/texman/>, <http://sip.clarku.edu/tutorials/TeX/>
 - Learn Java: [JR's tutorials](http://home.cogeco.ca/~ve3ll/jatutor0.htm); [JavaBat](http://www.javabat.com/)? Don't forget local copy of _Thinking in Java_
 
 ## Mnemosyne plugins:
+
 - Spell-checker for adding cards
-- Metadata adder: in comment tags, add current date.
+- Metadata adder: in comment tags, add current date. TODO: is this actually necessary?
 - Per-category 'vice-versa' setting
 
 # General
+
 - Look into throwing knives as a supplementary hobby to archery
-- Math [notes](http://tutorial.math.lamar.edu/)
-- Compile a [_Lexicon Urthus_](http://www.siriusfiction.com/lexicon.html) but for the [_Long Sun_](!Wikipedia "The Book of the Long Sun") & [_Short Sun_](!Wikipedia "The Book of the Short Sun") series instead; focusing particularly on the [thieves' cant](!Wikipedia) in it. Resources:
-     - <http://www.fromoldbooks.org/NathanBailey-CantingDictionary/transcription.html>
-     - <http://www.gutenberg.org/ebooks/5402>
-     - <http://gutenberg.net.au/ebooks06/0600111.txt>
-     - <http://www.gutenberg.org/dirs/etext04/dcvgr10.txt>
+- compile an equivalent of "[Suzanne Delage]()" but for _Peace_?
 - Compile a [best of SL4](http://lesswrong.com/r/discussion/lw/5n2/sl4_meta_list_closure_2_month_followup/452r) list of emails/reading list
 - read through Akadot archives for _Eva_-related material: <http://wayback.archive.org/web/*/akadot.com/*>
-- Learn some [physics](http://ocw.mit.edu/courses/physics/8-01sc-physics-i-classical-mechanics-fall-2010/)
+- Learn some [physics](http://ocw.mit.edu/courses/physics/8-01sc-physics-i-classical-mechanics-fall-2010/) (cf. _SCIM_)
 - Learn statistics: <http://oli.web.cmu.edu/openlearning/forstudents/freecourses/statistics>, <http://ipsur.r-forge.r-project.org/book/>
 - Machine learning resources: <http://metaoptimize.com/qa/questions/186/>
 - make dorodango: <http://www.dorodango.com/create.html>
 
 ## Devices
+
 - A direction sensor belt (a ring of vibrators around one's waist; the one closest to North buzzes gently). See the [_Wired_](http://www.wired.com/wired/archive/15.04/esp.html) article on it, and a [2009 article](http://hplusmagazine.com/articles/enhanced/my-new-sense-organ) describing Sensebridge's Northpaw product  The [feelSpace](http://feelspace.cogsci.uni-osnabrueck.de/) homepage is here. There is a thread on [Hackers News](http://news.ycombinator.com/item?id=609983) about building one's own. Here's a [version of the belt](http://www.exothermia.net/monkeys_and_robots/2009/02/04/on-the-haptic-compass/) made using [Arduino](!Wikipedia). There's a quasi-commercial version available for $119-214 from [Sensebridge](http://sensebridge.net/projects/northpaw) ([video](http://vimeo.com/groups/45234/videos/11912761)), intended for wearing on one's ankle (the original ankle-based project is ["Noisebridge"](https://www.noisebridge.net/wiki/Compass_Vibro_Anklet)). There's an [Arduino-based belt](http://www.gradman.com/hapticcompass), then there's a [_hat_](https://www.noisebridge.net/wiki/Compass_Vibro_Anklet)! I think most approaches are just a little baroque; it might make more sense to have each vibrator be independent - with a vibrator, a compass, and a battery. After all, each one should be able to know independently of the others whether it is facing North or not.
 
      Parts:
