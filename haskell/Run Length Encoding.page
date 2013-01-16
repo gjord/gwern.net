@@ -143,21 +143,38 @@ Might as well remove the parentheses:
 rleLazyDecode (n,b) = take n $ repeat b
 ~~~~~
 
+We can do better. What is the type of `\n b -> take n $ repeat b`? It is `Int -> a -> [a]`, and a [Hoogle type-search](!Hoogle "Int -> a -> [a]") turns up an exact match: [replicate](!Hoogle). So we can improve it further:
+
+~~~~{.haskell}
+rleLazyDecode (n,b) = replicate n b
+~~~~~
+
+Are we quite done? Well, one could ask: `rleLazyDecade` is now basically nothing but an alias or new name for `replicate`, except for how it converts from a tuple `(n,b)` to normal uncurried arguments `n b`. Is there any function which will do this conversion for us? Well, we have a function `replicate :: a -> b -> c`, and data `(a,b)` passed into said function to produce a `c`, so we want a function with the type signature [(a -> b -> c) -> (a,b) -> c](!Hoogle), which turns out to be something called [uncurry](!Hoogle). Having reasoned our way this far, the implementation is much clearer than the type:
+
+~~~~{.haskell}
+uncurry :: (a -> b -> c) -> (a, b) -> c
+uncurry f (a,b) = f a b
+~~~~~
+
+That's what we were just doing manually. So now the next version is clear:
+
+~~~~{.haskell}
+rleLazyDecode = uncurry replicate
+~~~~~
+
 A satisfying, short, functional, and lazy one-liner. From here the definition of `rleDecode` is almost trivial: we extend it to a list of tuples by throwing in a [map](!Hoogle), and we turn the resulting list of lists into a single list by way of [concat](!Hoogle):
 
 ~~~~{.haskell}
 rleDecode ns = concat $ map rleLazyDecode ns
 ~~~~~
 
-We can tweak this further, as `'concat . map'` is a common enough idiom that there is a shortcut:
+We can tweak this further, as `concat . map` is a common enough idiom that there is a shortcut:
 
 ~~~~{.haskell}
 rleDecode ns = concatMap rleLazyDecode ns
 ~~~~~
 
-(As before, we could have found `concatMap` by searching for the type signature of `concat . map`: [(a1 -> [a]) -> [a1] -> [a]](!Hoogle)).
-
-Aw heck - let's make it [points-free](!Wikipedia "Tacit programming"):
+As before, we could have found `concatMap` by searching for the type signature of `concat . map`: [(a1 -> [a]) -> [a1] -> [a]](!Hoogle). Aw heck - let's make it [points-free](!Wikipedia "Tacit programming") like `rleLazyDecode`:
 
 ~~~~{.haskell}
 rleDecode = concatMap rleLazyDecode
@@ -166,14 +183,7 @@ rleDecode = concatMap rleLazyDecode
 And then we substitute in the `rleLazyDecode` definition:
 
 ~~~~{.haskell}
-rleDecode = concatMap (\(n,b) -> take n $ repeat b)
-~~~~~
-
-We could also write a version that omits the explicit lambda and naming of parameters by use of the helpful (but somewhat esoteric) [uncurry](!Hoogle) function. Its implementation is much clearer than its type:
-
-~~~~{.haskell}
-uncurry :: (a -> b -> c) -> (a, b) -> c
-uncurry f (a,b) = f a b
+rleDecode = concatMap (uncurry replicate)
 ~~~~~
 
 We can actually go even further into the realms of incomprehensibility. It turns out that lists are a monad. This means we can use `bind` and all the rest of the operations defined by the [Monad](!Hoogle) typeclass to operate on lists and other things. So we can write this bizarre (but short and effective) version of `rleDecode`:
