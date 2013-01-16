@@ -1253,6 +1253,14 @@ Caveats for this study:
 
 > A major limitation of the study was the small sample size and possibly sample characteristic, which may have lowered the power of analyses conducted. When Jaeggi et al. (2010) repeated the study with 25 students who trained on the Raven's Advanced Progressive Matrices (RAPM) for 20 days, they obtained an effect size (Cohen's _d_) of 0.98. Additionally, participants in the Jaeggi et al. (2010) study were culturally different from the participants in the current study. Participants from the former study were undergraduates from a university in Taiwan (mean age=19.4), while those from the current study were mostly American students attending a Midwestern university. The current study was designed according to the claims put forth by Jaeggi et al. (2008) as a study of replication and extension. In that study, participants were healthy, young adults who were slightly older (mean age=25.6 years) than the current sample (mean age= 20.0), and they were recruited from a university in Bern, Switzerland. Effect sizes obtained from our study for RAPM were not as high as reported by Jaeggi et al. (2008, 2010) - _d_=0.65 and _d_=0.98 respectively. With such large effect sizes, the analysis of paired t-test could achieve a power of 0.80 with 10- 12 participants. Referring to Table 4, the highest RAPM effect size (_d_=0.50) was from the 8-day passive control group that had 22 participants and this achieved a power of 0.83. The 20-day training group (_n_=13) had an effect size of 0.06 in RAPM, and to achieve a power of 0.80 this group would need more than 1700 participants. On the other hand, the effect size from the 20-day active control group with 11 participants was 0.40, and power could be improved by increasing the number of participants to 34. These observations led us to believe that the lack of improvements in the test variables was probably due to a combination of low sample size and differences in sample characteristics, of which participants in our study had restriction of range in intellectual ability.
 
+### Preece 2011 / Palmer 2011
+
+["The Effect of Working Memory (_n_-back) Training on Fluid Intelligence"](http://ro.ecu.edu.au/theses_hons/54/), David Preece 2011:
+
+> The present study replicated and extended these results by testing the fluid intelligence construct using a different type of fluid intelligence test, and employing an 'active' rather than 'no-contact' control group to account for motivational effects on intelligence test performance. 58 participants were involved and their fluid intelligence was assessed pre-training using the Figure Weights subtest from the Wechsler Adult Intelligence Scale - Fourth Edition (WAIS-IV). Participants were randomly assigned to two groups (experimental or active control), and both groups did a training task on their home computer for 20 days, for 20 minutes a day. The experimental group trained using a single _n_-back task whilst the control group completed general knowledge and vocabulary questions. After training, participants were retested using the Figure Weights subtest. Participants' Figure Weights scores were analysed using an analysis of covariance (ANCOVA). The results of this analysis revealed no significant difference between the training groups in terms of performance on the Figure Weights subtest, suggesting that the _n_-back task was not effective in increasing fluid reasoning ability. These findings were in contrast to those of Jaeggi et al. (2008) and Jaeggi et al. (2010) and suggested that differences between the working memory group and control group found in these studies were likely the result of placebo/motivational effects rather than the properties of the _n_-back task itself.
+
+Subjects were also tested on the RAPM pre/post, but that was reported in a separate thesis, Vaughan Palmer's "Improving fluid intelligence (Gf) though training", which is not available. I have emailed the supervising professor for more information.
+
 ### Kundu et al 2012
 
 ["Behavioral and EEG Effects of Working Memory Training"](http://psych.wisc.edu/postlab/posters/bornali_cns_2012.pdf); 13 controls and 13 experimentals trained for 1000 minutes on dual n-back (Brain Workshop) or Tetris. "Training does not appear to transfer to _gf_ [RAPM] or complex span [OSPAN]." This is not a published study but a conference poster, so details such as RAPM scores are not included. It may be related to [Kundu et al 2011](#kundu-et-al-2011).
@@ -1316,7 +1324,7 @@ What to make of these studies? When one has multiple quantitative studies going 
 
 > However, a recent meta-analysis by [Melby-Lervåg and Hulme](http://www.apa.org/pubs/journals/releases/dev-ofp-melby-lervag.pdf) (in press) indicates that even when considering published studies, few appropriately-powered empirical studies have found evidence for transfer from various WM training programs to fluid intelligence. Melby-Lervåg and Hulme reported that WM training showed evidence of transfer to verbal and spatial WM tasks (d = .79 and .52, respectively). When examining the effect of WM training on transfer to nonverbal abilities tests in 22 comparisons across 20 studies, they found an effect of d = .19. Critically, a moderator analysis showed that there was no effect (d = .00) in the 10 comparisons that used a treated control group, and there was a medium effect (d = .38) in the 12 comparisons that used an untreated control group.
 
-I'm not as interested in WM transfer from n-back - as the meta-analysis confirms, it surely does - but in the transfer with many more ramifications, transfer to *IQ*. So I decided to do a meta-analysis of my own. The hard part of a meta-analysis is doing a thorough literature search, but the above 2 sections of material listing conflicting studies on n-back represent a _de facto_ literature search. (I started the DNB FAQ in 2009 after following discussions closely, and have carefully kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts.) The corresponding authors of all the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions.
+I'm not as interested in WM transfer from n-back - as the Melby-Lervåg & Hulme 2012 meta-analysis confirms, it surely does - but in the transfer with many more ramifications, transfer to *IQ* as measured by a matrix test. So I decided to do a meta-analysis of my own. The hard part of a meta-analysis is doing a thorough literature search, but the above 2 sections of material listing conflicting studies on n-back represent a _de facto_ literature search. (I started the DNB FAQ in 2009 after following discussions closely, and have carefully kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts.) The corresponding authors of all the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions.
 
 For background on conducting meta-analyses, I am using [chapter 9](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_9/9_analysing_data_and_undertaking_meta_analyses.htm) of [part 2](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/index.htm#chapter_9/9_2_types_of_data_and_effect_measures.htm) of the [Cochrane Collaboration](!Wikipedia)'s [_Cochrane Handbook for Systematic Reviews of Interventions_](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/front_page.htm). For the actual statistical analysis, I am using the [`metafor` package](http://www.metafor-project.org/) for the R language.
 
@@ -1333,6 +1341,7 @@ The candidate studies:
 - [Jaeggi       2011](#jaeggi-2011)
 - [Chooi        2011](#chooi-2011)
 - [Schweizer    2011](#schweizer-2011)
+- Preece       2011
 - [Jaušovec     2012](#jaušovec-2012)
 - [Kundu et al  2012](#kundu-et-al-2012)
 - [Salminen et al 2012](#salminen-2012)
@@ -1341,6 +1350,7 @@ The candidate studies:
 - Jaeggi 2012?
 - Takeuchi et al 2012
 - Rudebeck 2012
+
 
 Going through them, I must note:
 
@@ -1400,6 +1410,7 @@ Going through them, I must note:
     3. pooled variance: $((25-1)*2.7 + (26-1)*2.44) / (25 + 26 - 2) = 2.56$
 
 - Jonasson 2011 omitted for lacking any measure of IQ
+- Preece 2011 omitted; only the Figure Weights subtest from the WAIS was reported, but RAPM scores were taken and published in the inaccessible Palmer 2011
 - Kundu et al 2011 and Kundu 2012 have been split into 2 experiments based on the raw data: the smaller one using the full RAPM 36-matrix 40-minute test, and the larger an 18-matrix 10-minute test
 - Redick et al: control & active control (visual search) RAPM post scores pooled[^Redick-2012-pool] for initial analysis (omitted SPM and Cattell Culture-Fair Test), and then n-back was split over them
 
