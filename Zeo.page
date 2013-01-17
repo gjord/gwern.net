@@ -1858,8 +1858,8 @@ As it happened, I managed to retrieve my pill-making machine and spare gel capsu
 11: 0
 12: 0
 13: 1
-14:
-15:
+14: 1
+15: 0
 16:
 -->
 
@@ -1993,6 +1993,11 @@ Then the Redshift call simply includes a check for the file's existence:
 ~~~
 
 Now we have completely automatic randomization and logging of the experiment. As long as I don't screw things up by deleting either file or uninstalling Redshift, and I keep using my Zeo, all the data is gathered and labeled nicely until I finish the experiment and do the analysis. Non-blinded, or perhaps I should say quasi-blinded - I initially don't know, but I *can* check the logs or file to see what that day was, and obviously I will at some point in the night notice whether the monitor is reddened or not.
+
+As it turned out, I received a proof that I was *not* noticing the randomization. On 11 January 2013, due to Internet connectivity problems, I was idling on my computer and thought to myself that I hadn't noticed Redshift turn my screen salmon-colored in a while, and I happened to idly try `redshift -x` (reset the screen to normal) and then `redshift -o` (immediately turn the screen red) - but neither did anything at all. Busy with other things, I set the anomaly aside until a few days later, I traced the problem to a package I had uninstalled back in 25 September 2012 because my system didn't use it - which it did not, but this had the effect of removing another package which turned out to set the default video driver to the proper driver, and so removing it forced my system to a more primitive driver which apparently did not support Redshift functionality! And I had not noticed for 3 solid months. This was a frustrating experiment, but since it took me so long to notice, I am going to keep the 3 months' data and just put them all into the 'off' category - this is not nearly as good as if those 3 months had varied (since now the 'on' category will be underpopulated), but it seems better than just deleting them all.
+
+(Geeky details: I found a error line in the X logs which appeared only when I invoked Redshift; the driver was `fbdev` and not the correct `radeon`, which mystified me further, until I read various bug reports and forum problems and wondered *why* `radeon` was not loading but the only non-`fbdev` error message indicated that some driver called `ati` was failing to load instead. Then I read that `ati` was the default wrapper over `radeon`, but then I saw that the package was not installed, installed it, noticed it was pulling in as a dependency useless Mach64 drivers, and had a flash: perhaps I had uninstalled the useless Mach64 drivers, forcing the package providing `ati` to be uninstalled too, permitted its uninstallation because I knew it was not the package providing `radeon`, which then caused the `ati` load to fail and to not then load `radeon` but X succeeding in loading `fbdev` which does not support Redshift, leading to a permanent failure of all uses of Redshift. Phew! I was right.)
+
 
 So to recap: the experiment is 100+ days with Redshift randomized on or off by a shell script, affecting the usual sleep metrics plus time of bed. The expectation is that lack of Redshift will produce a weak negative effect: increasing awakenings & time awake & light sleep, increasing overall sleep time, and also pushing back bedtime.
 
@@ -3013,11 +3018,13 @@ January 2013
 11: 1 1
 12: 1 0
 13: 1 0
-14: 1 ?
+14: 1 1
+15: 1 0
+16: 1 1?
 
 Underpopulated data cells:
-55: 1 0
-54: 1 1
+56: 1 0
+55: 1 1
 58: 0 0
 60: 0 1
 -->
@@ -3277,97 +3284,97 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 25 Sep 2012: off -->
 <!-- Redshift: 26 Sep 2012: off -->
 <!-- Redshift: 27 Sep 2012: off -->
-<!-- Redshift: 28 Sep 2012: on -->
+<!-- Redshift: 28 Sep 2012: off -->
 <!-- Redshift: 29 Sep 2012: off -->
-<!-- Redshift: 30 Sep 2012: on -->
-<!-- Redshift: 01 Oct 2012: on -->
-<!-- Redshift: 02 Oct 2012: on -->
-<!-- Redshift: 03 Oct 2012: on -->
-<!-- Redshift: 04 Oct 2012: on -->
-<!-- Redshift: 05 Oct 2012: on -->
+<!-- Redshift: 30 Sep 2012: off -->
+<!-- Redshift: 01 Oct 2012: off -->
+<!-- Redshift: 02 Oct 2012: off -->
+<!-- Redshift: 03 Oct 2012: off -->
+<!-- Redshift: 04 Oct 2012: off -->
+<!-- Redshift: 05 Oct 2012: off -->
 <!-- Redshift: 06 Oct 2012: off -->
 <!-- Redshift: 07 Oct 2012: off -->
-<!-- Redshift: 08 Oct 2012: on -->
+<!-- Redshift: 08 Oct 2012: off -->
 <!-- Redshift: 09 Oct 2012: off -->
 <!-- Redshift: 10 Oct 2012: off -->
-<!-- Redshift: 11 Oct 2012: on -->
+<!-- Redshift: 11 Oct 2012: off -->
 <!-- Redshift: 12 Oct 2012: off -->
 <!-- Redshift: 13 Oct 2012: off -->
 <!-- Redshift: 14 Oct 2012: off -->
-<!-- Redshift: 15 Oct 2012: on -->
-<!-- Redshift: 16 Oct 2012: on -->
-<!-- Redshift: 17 Oct 2012: on -->
+<!-- Redshift: 15 Oct 2012: off -->
+<!-- Redshift: 16 Oct 2012: off -->
+<!-- Redshift: 17 Oct 2012: off -->
 <!-- Redshift: 18 Oct 2012: off -->
 <!-- Redshift: 19 Oct 2012: off -->
-<!-- Redshift: 20 Oct 2012: on -->
-<!-- Redshift: 21 Oct 2012: on -->
-<!-- Redshift: 22 Oct 2012: on -->
+<!-- Redshift: 20 Oct 2012: off -->
+<!-- Redshift: 21 Oct 2012: off -->
+<!-- Redshift: 22 Oct 2012: off -->
 <!-- Redshift: 23 Oct 2012: off -->
-<!-- Redshift: 24 Oct 2012: on -->
+<!-- Redshift: 24 Oct 2012: off -->
 <!-- Redshift: 25 Oct 2012: off -->
-<!-- Redshift: 26 Oct 2012: on -->
-<!-- Redshift: 27 Oct 2012: on -->
+<!-- Redshift: 26 Oct 2012: off -->
+<!-- Redshift: 27 Oct 2012: off -->
 <!-- Redshift: 28 Oct 2012: off -->
-<!-- Redshift: 29 Oct 2012: on -->
-<!-- Redshift: 30 Oct 2012: on -->
-<!-- Redshift: 31 Oct 2012: on -->
-<!-- Redshift: 01 Nov 2012: on -->
+<!-- Redshift: 29 Oct 2012: off -->
+<!-- Redshift: 30 Oct 2012: off -->
+<!-- Redshift: 31 Oct 2012: off -->
+<!-- Redshift: 01 Nov 2012: off -->
 <!-- Redshift: 02 Nov 2012: off -->
 <!-- Redshift: 03 Nov 2012: off -->
-<!-- Redshift: 04 Nov 2012: on -->
-<!-- Redshift: 05 Nov 2012: on -->
+<!-- Redshift: 04 Nov 2012: off -->
+<!-- Redshift: 05 Nov 2012: off -->
 <!-- Redshift: 06 Nov 2012: off -->
 <!-- Redshift: 07 Nov 2012: off -->
-<!-- Redshift: 08 Nov 2012: on -->
+<!-- Redshift: 08 Nov 2012: off -->
 <!-- Redshift: 09 Nov 2012: off -->
-<!-- Redshift: 10 Nov 2012: on -->
+<!-- Redshift: 10 Nov 2012: off -->
 <!-- Redshift: 11 Nov 2012: off -->
 <!-- Redshift: 12 Nov 2012: off -->
-<!-- Redshift: 13 Nov 2012: on -->
+<!-- Redshift: 13 Nov 2012: off -->
 <!-- Redshift: 14 Nov 2012: off -->
 <!-- Redshift: 15 Nov 2012: off -->
 <!-- Redshift: 16 Nov 2012: off -->
 <!-- Redshift: 17 Nov 2012: off -->
 <!-- Redshift: 18 Nov 2012: off -->
-<!-- Redshift: 19 Nov 2012: on -->
+<!-- Redshift: 19 Nov 2012: off -->
 <!-- Redshift: 20 Nov 2012: off -->
-<!-- Redshift: 21 Nov 2012: on -->
-<!-- Redshift: 22 Nov 2012: on -->
-<!-- Redshift: 23 Nov 2012: on -->
-<!-- Redshift: 24 Nov 2012: on -->
-<!-- Redshift: 25 Nov 2012: on -->
+<!-- Redshift: 21 Nov 2012: off -->
+<!-- Redshift: 22 Nov 2012: off -->
+<!-- Redshift: 23 Nov 2012: off -->
+<!-- Redshift: 24 Nov 2012: off -->
+<!-- Redshift: 25 Nov 2012: off -->
 <!-- Redshift: 26 Nov 2012: off -->
-<!-- Redshift: 27 Nov 2012: on -->
-<!-- Redshift: 28 Nov 2012: on -->
+<!-- Redshift: 27 Nov 2012: off -->
+<!-- Redshift: 28 Nov 2012: off -->
 <!-- Redshift: 29 Nov 2012: off -->
-<!-- Redshift: 30 Nov 2012: on -->
+<!-- Redshift: 30 Nov 2012: off -->
 <!-- Redshift: 01 Dec 2012: off -->
-<!-- Redshift: 02 Dec 2012: on -->
-<!-- Redshift: 03 Dec 2012: on -->
+<!-- Redshift: 02 Dec 2012: off -->
+<!-- Redshift: 03 Dec 2012: off -->
 <!-- Redshift: 04 Dec 2012: off -->
 <!-- Redshift: 05 Dec 2012: off -->
-<!-- Redshift: 06 Dec 2012: on -->
+<!-- Redshift: 06 Dec 2012: off -->
 <!-- Redshift: 07 Dec 2012: off -->
 <!-- Redshift: 08 Dec 2012: off -->
 <!-- Redshift: 09 Dec 2012: off -->
-<!-- Redshift: 10 Dec 2012: on -->
+<!-- Redshift: 10 Dec 2012: off -->
 <!-- Redshift: 11 Dec 2012: off -->
 <!-- Redshift: 12 Dec 2012: off -->
-<!-- Redshift: 14 Dec 2012: on -->
-<!-- Redshift: 15 Dec 2012: on -->
+<!-- Redshift: 14 Dec 2012: off -->
+<!-- Redshift: 15 Dec 2012: off -->
 <!-- Redshift: 16 Dec 2012: off -->
-<!-- Redshift: 17 Dec 2012: on -->
-<!-- Redshift: 18 Dec 2012: on -->
+<!-- Redshift: 17 Dec 2012: off -->
+<!-- Redshift: 18 Dec 2012: off -->
 <!-- Redshift: 19 Dec 2012: off -->
-<!-- Redshift: 20 Dec 2012: on -->
-<!-- Redshift: 21 Dec 2012: on -->
+<!-- Redshift: 20 Dec 2012: off -->
+<!-- Redshift: 21 Dec 2012: off -->
 <!-- Redshift: 22 Dec 2012: off -->
-<!-- Redshift: 23 Dec 2012: on -->
-<!-- Redshift: 27 Dec 2012: on -->
-<!-- Redshift: 28 Dec 2012: on -->
-<!-- Redshift: 29 Dec 2012: on -->
-<!-- Redshift: 30 Dec 2012: on -->
-<!-- Redshift: 31 Dec 2012: on -->
+<!-- Redshift: 23 Dec 2012: off -->
+<!-- Redshift: 27 Dec 2012: off -->
+<!-- Redshift: 28 Dec 2012: off -->
+<!-- Redshift: 29 Dec 2012: off -->
+<!-- Redshift: 30 Dec 2012: off -->
+<!-- Redshift: 31 Dec 2012: off -->
 <!-- Redshift: 01 Jan 2013: off -->
 <!-- Redshift: 02 Jan 2013: off -->
 <!-- Redshift: 03 Jan 2013: off -->
@@ -3375,10 +3382,12 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 05 Jan 2013: off -->
 <!-- Redshift: 06 Jan 2013: off -->
 <!-- Redshift: 07 Jan 2013: off -->
-<!-- Redshift: 08 Jan 2013: on -->
+<!-- Redshift: 08 Jan 2013: off -->
 <!-- Redshift: 09 Jan 2013: off -->
 <!-- Redshift: 10 Jan 2013: off -->
-<!-- Redshift: 11 Jan 2013: on -->
+<!-- Redshift: 11 Jan 2013: off -->
 <!-- Redshift: 12 Jan 2013: off -->
-<!-- Redshift: 13 Jan 2013: on -->
-<!-- Redshift: 14 Jan 2013: on -->
+<!-- Redshift: 13 Jan 2013: off -->
+<!-- Redshift: 14 Jan 2013: off -->
+<!-- Redshift: 15 Jan 2013: off -->
+<!-- Redshift: 16 Jan 2013: on -->
