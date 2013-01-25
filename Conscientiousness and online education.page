@@ -128,7 +128,7 @@ Now, we discarded #3 as being impossible to generalize about, and #2 suggests th
 
 [^better-material-limits]: One wonders how much hope can we place in the falsity of #1. Just how much *can* education's IQ requirements be brought down? Advocates seem optimistic, but is the current material all that bad? How dumb can you be before even the best highest-quality of calculus becomes unlearnable with feasible amounts of time and effort on your part? How close are existing online courses to this lower bound on IQ? At what point does #1 resume being true?
 
-To belabor the obvious and dress it up in mathematical garb: for a particular static set/population Z, the number of Z members which satisfy the requirements  $IQ + C < IQ + (C+1)$, because the fraction of the population with both the necessary IQ and the necessary Conscientiousness must be equal to or smaller than the fraction with just the necessary IQ; for any properties $P(a \wedge b) \le P(a)$. See also the [conjunction fallacy](!Wikipedia).
+To belabor the obvious and dress it up in mathematical garb: for a particular static set/population Z, the number of Z members which satisfy the requirements  $IQ + C < IQ + (C+1)$, because the fraction of the population with both the necessary IQ and the necessary Conscientiousness must be equal to or smaller than the fraction with just the necessary IQ; for any properties $P(a \wedge b) \le P(a)$. See also the [conjunction fallacy](!Wikipedia). When it comes to normally distributed traits like IQ, modest selection pressure can drive down the fraction of eligible people to near-zero rates; for example, far less than 1% of the population will be 2 standard deviations above the mean on both IQ *and* Conscientiousness and this holds true even if we assume that both traits are highly correlated with each other (they're not), see the appendix for formulas & calculations.
 
 (A major caveat here is that the premises really do need absolute values of IQ and Conscientiousness. If you only have correlations, I believe it is possible for IQ's correlation for educational success remain the same and Conscientiousness's correlation go up while the fraction of the general population succeeding goes up *also*. For example, if online education reduced the need for Conscientiousness, but reduced the need for IQ even more, more people will pass by the opposite of our conjunctive reasoning, but any attempt to predict success will benefit less from information about IQ than about Conscientiousness.)
 
@@ -183,6 +183,159 @@ What other consequences may there be?
 
 - [Original discussion on Google+](https://plus.google.com/103530621949492999968/posts/aKa3qLatwZ3)
 - [LessWrong request for refs](http://lesswrong.com/lw/ac4/online_education_and_conscientiousness/)
+
+# Appendices
+## Selection on multiple normally distributed traits
+### Simple questions
+
+Suppose an elite university like Harvard decided to set a new admissions standard: they will only admit people who are 2 standard deviations above the mean on both IQ and Conscientiousness. If the filter is for 2 standard deviations above the mean and the variables are correlated with 1 (identical), then 2.3% of the population will pass; if the variables are uncorrelated with 0, then 2.3% of 2.3% (or 0.000529%) of the population will pass.
+
+### Correlated
+
+But what about intermediate values? For example, the psychology literature has reported a correlation of -0.21 between Conscientiousness & IQ, so we would expect an even tinier fraction of the population to pass, but what if we were optimistic and thought there was a positive correlation?
+
+I consulted [Wikipedia on bivariate normal distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution), but I didn't understand much of it. The closest I found was [sum of correlated normal random variables](http://en.wikipedia.org/wiki/Sum_of_normally_distributed_random_variables#Correlated_random_variables), but in this case what I want is closer to a `min` function.
+
+#### Simulation
+
+I was able to work up a R simulation to see how that worked, and it seemed in line with my intuitions:
+
+~~~{.R}
+install.packages("fMultivar")
+library ("fMultivar")
+
+x <- rnorm2d(10000000, rho=0.5)
+
+xgreater <- length(subset(x, x[,1] > mean(x[,1])+2*sd(x[,1])))
+xandygreater <- length(subset(x, x[,1] > mean(x[,1])+2*sd(x[,1]) & x[,2] > mean(x[,2])+2*sd(x[,2])))
+
+c(xgreater, xandygreater); c(xgreater / length(x), xandygreater / length(x), xgreater / xandygreater) * 100
+
+# example results for different values of 'rho='
+0.1
+[1] 454,664  17,570
+[1] 2.273e+00 8.785e-02 2.588e+03
+
+0.2
+[1] 458,284  82,552
+[1]   2.2914   0.4128 555.1458
+
+0.5
+[1] 454,484  80,872
+[1]   2.2724   0.4044 561.9794
+
+0.9
+[1] 455,242 267,912
+[1]   2.276   1.340 169.922
+
+0.95
+[1] 455,162 321,024
+[1]   2.276   1.605 141.784
+
+0.99
+[1] 455,260 394,448
+[1]   2.276   1.972 115.417
+~~~
+
+#### Exact calculation
+##### Bivariate min
+
+I really was hoping for more of a precise analytic solution, so some more searching eventually turned up a paper, ["Exact Distribution of the Max/Min of Two Gaussian Random Variables"](http://dl.dropbox.com/u/85192141/2008-nadarajah.pdf "Nadarajah & Kotz 2008"), which gives a definition for the min of 2 correlated normal variables. This seems to be what I want; top of pg1, second column:
+
+> ...where $\phi(.)$ and $\Phi(.)$ are, respectively, the pdf and the cumulative distribution function (cdf) of the standard normal distribution. It is known that the [pdf](!Wikipedia "Probability density function") of $Y = \min(X_1, X_2)$ is $f(y) = f_1(y) + f_2(y)$, where
+>
+> (3) $f_1(y) = \frac{1}{\sigma_1} \phi (\frac{y-\mu_1}{\sigma_1}) \times \Phi (\frac{p(y - \mu_1)}{\sigma_1 \sqrt{1 - p^2}} - \frac{y - \mu_2}{\sigma_2 \sqrt{1 - p^2}})$
+> (4) $f_2(y) = \frac{1}{\sigma_2} \phi (\frac{y-\mu_2}{\sigma_2}) \times \Phi (\frac{p(y - \mu_2)}{\sigma_2 \sqrt{1 - p^2}} - \frac{y - \mu_1}{\sigma_1 \sqrt{1 - p^2}})$
+
+They give an R implementation on pg6 (first column); it seems to have a `pnorm` typo, but I fixed that. Once it was working, I tried generating a slightly (0.1) correlated bivariate distribution, which look OK:
+
+~~~
+fmin <- function (y,mu1,mu2,sigma1,sigma2,rho)
+     {t1<-dnorm(y,mean=mu1,sd=sigma1)
+     tt<-rho*(y-mu1)/(sigma1*sqrt(1-rho*rho))
+     tt<-tt-(y-mu2)/(sigma2*sqrt(1-rho*rho))
+     t1<-t1*pnorm(tt)
+     t2<-dnorm(y,mean=mu2,sd=sigma2)
+     tt<-rho*(y-mu2)/(sigma2*sqrt(1-rho*rho))
+     tt<-tt-(y-mu1)/(sigma1*sqrt(1-rho*rho))
+     t2<-t2*pnorm(tt)
+     return(t1+t2)}
+
+fmin(c(1:200),100,100,15,15,0.1)
+  [1] 1.849e-11 2.864e-11 4.418e-11 6.784e-11 1.037e-10 1.578e-10 2.392e-10 3.608e-10 5.418e-10
+  ...
+~~~{.R}
+
+Now, I understand the PDF to be "a function that describes the relative likelihood for this random variable to take on a given value. The probability for the random variable to fall within a particular region is given by the integral of this variable’s density over the region". So I suppose I should sum up every point in the pdf >130 (since 130 is 2 standard deviations up, by construction when I specified SD=15) and that's my probability that a random deviate will be `min(130,130)`. What's the total probability someone will be over 130 on both variables? I think that would be:
+
+~~~{.R}
+sum(fmin(c(1:200),100,100,15,15,0.1)[130:200])
+[1] 0.001004
+~~~
+
+If I increase the _r_ to 0.9, the result is 0.01455 which is satisfyingly larger.
+
+A sanity check - as the correlation goes to 1.0, there should be no decrease. So we do the same question for a single normal distribution defined the same way:
+
+~~~{.R}
+sum(dnorm(c(1:200), 100, 15)[130:200])
+[1] 0.02459
+
+# the function blows NaN chunks on 1.0, so we'll try a lot of 9s:
+sum(fmin(c(1:200),100,100,15,15,0.9999999999)[130:200])
+[1] 0.02459
+~~~
+
+##### Bivariate double integral
+
+An acquaintance gave me a double-integral formula:
+
+$\int_2^\infty \int_2^\infty \frac{1}{2\pi\sqrt{1-\rho^2}}\exp\left (-\frac{1}{2(1-\rho^2)}\left [ x^2 + y^2 - 2\rho x y \right ] \right ) dx dy$
+
+To calculate in R:
+
+~~~{.R}
+llim <- 2
+ulim <- Inf
+rho <- 0.9
+
+f <- function(x,y) {
+    (1 / (2 * pi * sqrt(1 - rho^2))) * exp(-(1 / (2 * (1 - rho^2))) * (x^2 + y^2 - 2 * rho * x * y))
+}
+
+# double-integration
+integrate(function(y) {
+   sapply(y, function(y) {
+     integrate(function(x) f(x,y), llim, ulim)$value
+   })
+ }, llim, ulim)
+
+0.01336 with absolute error < 1.6e-05
+~~~
+
+In Python using [SciPy](!Wikipedia):
+
+~~~{.Python}
+from numpy import *;
+from scipy.integrate import *;
+
+from matplotlib.pyplot import *;
+
+def func(x, y, rho):
+        return 1.0/(2.0*pi*sqrt(1.0-rho**2.0)) * exp(-0.5/(1.0-rho**2.0) * (x**2.0 + y**2.0 - 2.0*rho*x*y))
+
+def answer(rho):
+        return dblquad(func, 2, 100, lambda x: 2, lambda x: 100, args=(rho,))[0]
+
+x = arange(-0.99, 0.99, 0.1)
+y = zeros(len(x))
+for i in range(len(x)):
+        y[i] = answer(x[i])
+        print x[i], y[i]
+
+plot(x, y)
+show()
+~~~
 
 <!-- Higher ability trainees benefit more from self-paced individualized
 instruction while lower ability trainees benefit more from group-paced classroom
