@@ -52,8 +52,6 @@ main = do  hakyll $ do
                  >>> arr tagsMap
                  >>> arr (map (\(t, p) -> (fromCapture "tags/*" t, makeTagList t p)))
 
-           mapM_ removeFile ["_site/homelessness", "_site/docs/resume-info", "_site/docs/resume-info.page"]
-
            putStrLn "generating & copying RSS feed..."
            writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
 
