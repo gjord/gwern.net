@@ -2,15 +2,14 @@
 title: Using Silk Road
 description: Visiting, ordering, and using the anonymous drug market Silk Road
 created: 11 Jul 2011
-tags: cryptography, nootropics, politics
+tags: cryptography, statistics, nootropics, politics
 status: finished
 belief: likely/log
 ...
 
+> The cypherpunk movement laid the ideological roots of Bitcoin and the online drug market Silk Road; balancing previous emphasis on cryptography, I emphasize the non-cryptographic market aspects of Silk Road which is rooted in cypherpunk economic reasoning, and give a fully detailed account of how a buyer might use market information to rationally buy, and finish by discussing strengths and weaknesses of Silk Road, and what future developments are predicted by cypherpunk ideas.
+>
 > This article was commissioned by [_Bitcoin Weekly_](http://bitcoinweekly.com), which ultimately decided to not run it[^Hamlet]; it is based on my experiences May-June 2011, and may be out-dated. "Trust, but verify." Additional parts came from an essay, part of which was published by [_A Global Village_](http://aglobalvillage.org/).
-
-<!-- TODO abstract: "The cypherpunk movement laid the ideological roots of Bitcoin and the online drug market Silk Road; balancing previous emphasis on cryptography, I emphasize the non-cryptographic market aspects of Silk Road which is rooted in cypherpunk economic reasoning, and give a fully detailed account of how a buyer might use market information to rationally buy, and finish by discussing strengths and weaknesses of Silk Road, and what future developments are predicted by cypherpunk ideas."
--->
 
 [^Hamlet]: While BW held up its end of the deal and I understand why its operator might fear the legal consequences, I am a little disappointed that he chose not to publish it; I was reminded of _[Hamlet](!Wikipedia "To be, or not to be")_:
 
@@ -386,26 +385,15 @@ Containing the agreed-upon purchase:
 
 ![the booty](/images/silkroad/2012-80-armodafinil.jpg)
 
-# _Finis_
+# LSD case study
 
-There is no proof of all of the above - anything here could have been faked with Photoshop or simply reused (perhaps I have a legitimate Adderall prescription). Take it for what it is and see whether it convinces you: [argument screens off authority](http://lesswrong.com/lw/lx/argument_screens_off_authority/).
-
-But looking back, I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road^[Looking at the reviews posted to the front page and sentiment on the forum, I would hazard a guesstimate that scammers are 0-10% of the marketplace, and probably to the low end of that spectrum. In the January 2012 one-year anniversary message, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0)), the administrator claimed that "over 99% of all transactions conducted within the escrow system are completed to the satisfaction of both buyer and seller, or a mutually agreed upon resolution is found." Christin 2012's analysis found 97.8% of feedbacks giving 4-5 stars (similar to eBay rankings) but notes that this cannot pick up scams done out of escrow (as one might expect many scams to be done).], and shipments do get lost in the mail or seized or otherwise not delivered. ([I do not expect](http://predictionbook.com/predictions/2911) any legal problems; law enforcement always go after the sellers, to achieve maximum impact, and Silk Road presents both technical and jurisdictional problems for law enforcement.) This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
-
-> Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there.
-
-On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://silkroadvb5piz3r.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
-
-<!--
-TODO: if exposing LSD, add 'statistics' to tag
-
-# LSD ordering
-
-With Adderall & modafinil, the vendor choices were restricted enough and scams rare enough that I did not need to think hard about the process. With LSD, this ease vanished: there was a bewildering array of options and scammer were an acknowledged plague. A more systematic approach was necessary, starting with compiling data about what my options were.
+With Adderall & modafinil, the vendor choices were restricted enough and scams rare enough that I did not need to think hard about the process. With LSD, this ease vanished: there was a bewildering array of options and scammers were an acknowledged plague. This means that a hypothetical LSD order would serve as motivation for a case study of a systematic approach to evaluating the available information (but mostly an excuse to collect some unusual data and apply some statistical reasoning).
 
 ## Vendor table
 
-Background reading: ["Official discussion thread of current LSD vendors"](http://dkn255hz262ypmii.tor2web.org/index.php?topic=7077.0) & ["Collective Acid Database"](http://dkn255hz262ypmii.tor2web.org/index.php?topic=10774.0). Table compiled 3 September 2012 from [SR search results for "LSD"](http://silkroadvb5piz3r.tor2web.org/index.php/silkroad/search_results/LSD/0) (VitaCat added 4 September), including blotter listings <฿12 which ship to USA:
+Background reading: ["Official discussion thread of current LSD vendors"](http://dkn255hz262ypmii.tor2web.org/index.php?topic=7077.0) & ["Collective Acid Database"](http://dkn255hz262ypmii.tor2web.org/index.php?topic=10774.0).
+
+This table of blotter listings <฿12 which ship to USA was compiled 3 September 2012 from [SR search results for "LSD"](http://silkroadvb5piz3r.onion/index.php/silkroad/search_results/LSD/0). Note that the table is now entirely obsolete and not useful for ordering; this and following material are presented as merely an example of how one *could* have ordered at that time.
 
 Listing                   #    μg     ฿     S&H    μg/฿    Transit            User                  Age (days)    FE      Feedback     Weighted μg/฿       Threads                      LSD reviews    Forum hits
 -------------------      ---  ---- ------- ------ ------   ----------    -------------------------- --------     -----   ------------ ------------------- ------------------            ------------ -----------
@@ -483,7 +471,7 @@ Listing                   #    μg     ฿     S&H    μg/฿    Transit        
 [^i]: For unit prices <฿3, I increase the unit count until it fits within ฿7.5; otherwise, μg/฿ is calculated the obvious way: dose times quantity divided by price plus shipping.
 [^j]: This metric is the per-unit cost weighted by an expected-value interpretation of what feedback implies about the risk; see the later Quantitative section for the full explanation.
 
-An anonymous person provided me in November 2012 with a catalogue from a Dutch bulk vendor who sells LSD among other things; their listed prices serve as a useful comparison:
+An anonymous email provided me in November 2012 with a catalogue from a Dutch bulk vendor who sells LSD (among other things); their listed prices serve as a useful comparison:
 
 Blotter brand       Dose (μg) Unit-count unit-price (€) min. total cost (€)  min. μg/€
 -------------       --------- ---------- -------------- -------------------  ---------
@@ -532,7 +520,7 @@ Some general observations on this table of a subset of LSD vendors:
 2. There are dismayingly few LSD reviews on the forums for any vendor except `EnterTheMatrix`; this seems to be partially due to the presence of many vendors not specializing in LSD.
 3. Long-term feedback below 95% is a warning sign. Of the 3 'old' vendors with ~95% or less feedback (`aakoven`, `juergen2001`, & `lonely kamel`), all 3 have plenty of bad feedback on the forums. If it were just one that had both bad feedback and bad forum comments, it might be some sort of astroturfing or 'hating' (as `aakoven` pre-emptively accuses his bad feedback rating), but when *all 3* have both bad forums and feedback ratings? Makes one wonder... Nor is that the 'cost of doing business' for very old vendor accounts, since we see that the similarly old `EnterTheMatrix` & `PremiumDutch` ratings are solidly better.
 
-    Since their μg/฿ are not stellar (save `juergen2001`'s), it's not clear why one would buy from them.
+    Since their μg/฿ are not stellar (save `juergen2001`'s), it's not clear why anyone would buy from them.
 4. Some of the new sellers seem to have a lot of feedback (eg. `No FE ever` or `nipplesuckcanuck`), but looking at their feedback, we see a great deal of early finalization! This renders them pretty suspect. And of course, the 3 youngest sellers have no feedback at all. This is a problem because scammers are a serious problem with LSD vendors; a quick read of forum threads lists 5 scammers over the past 3 months: `Kat`, `Gar`, `Bloomingcolor`, `Fractaldelic`, & `DiMensionalTraveler`.
 5. The range of μg/฿ is interesting: a full order of magnitude is represented, from the low of 63μg/฿ to 175μg/฿.
 
@@ -543,7 +531,7 @@ Some general observations on this table of a subset of LSD vendors:
 
 In my [modafinil article](Modafinil) I discussed [some basic statistical techniques](Modafinil#ordering-behavior) for optimizing orders under uncertainty: one-shot ordering, repeated ordering with free learning, & repeated ordering with expensive learning.
 
-In this case, we're only ordering one, so one-short ordering it is. One-shot ordering simply counsels ordering from a mix of the cheapest and the safest vendor - what maximizes one's [expected value](!Wikipedia) (EV), which is just $\text{risk} \times \text{reward} = \text{EV}$. The reward is easy: total dose divided by total cost. The risk is harder: the vendors do not conveniently volunteer how likely you are to be scammed.
+In this case, it's a single order, so one-short ordering it is. One-shot ordering simply counsels ordering from a mix of the cheapest and the safest vendor - what maximizes one's [expected value](!Wikipedia) (EV), which is just $\text{risk} \times \text{reward} = \text{EV}$. The reward is easy: total dose divided by total cost. The risk is harder: the vendors do not conveniently volunteer how likely you are to be scammed.
 
 The obvious way to quantify risk is to just take the feedback at face-value: a 97% rating says I am taking a 3% chance I will be screwed over. Multiply that by the reward, sort to find the largest EV, and we're done.
 
@@ -554,11 +542,11 @@ So. Suppose we pretended reviews were like polling or surveys which are drawing 
 ~~~{.R}
 # Frequentist analysis:
 # http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper-Pearson_interval
-y <- function(ugbtc,n,percent) { ((binom.test(round((percent/100)*n),n,conf.level=0.90))$conf.int):1 * ugbtc }
+y <- function(ugbtc,n,pct) {((binom.test(round((pct/100)*n),n,conf.level=0.90))$conf.int):1 * ugbtc}
 # Binomial CI doesn't work on 0 data; what do we do? Punt with the age-old 50%/coin-flip/equal-indifference
-# Why 90% CIs, not 95%? Fake feedback skews the stats up and down, so we might as well get narrower intervals...
-c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
-    y(94, 173, 93.4), y(100, 10, 100), 112*0.5, y(125, 300, 95.1), y(143, 127, 97.6), y(163, 127, 97.6), 175*0.5)
+# Why 90% CIs? Fake feedback skews the stats up and down, so we might as well get narrower intervals...
+c(y(63,28,100), y(70,300,97.3), y(72,68,99.1), 90*0.5, y(81,300,93.7), y(85,76,100), y(93,300,98.7),
+    y(94,173,93.4), y(100,10,100), 112*0.5, y(125,300,95.1), y(143 127,97.6), y(163,127,97.6), 175*0.5)
  [1]  56.60766  66.66799  67.11326  45.00000  73.58456  81.71468  90.18671
  [8]  84.31314  74.11344  56.00000 115.50641 134.43170 153.23333  87.50000
 
@@ -566,14 +554,15 @@ c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y
 # http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Jeffreys_interval
 install.packages("MKmisc")
 library(MKmisc)
-y <- function(ugbtc,n,percent) {binomCI(x=round((percent/100)*n),n=n,conf.level=0.90,method ="jeffreys")$CI:1 * ugbtc }
-c(y(63, 28, 100), y(70, 300, 97.3), y(72, 68, 99.1), 90*0.5, y(81, 300, 93.7), y(85, 76, 100), y(93, 300, 98.7),
-     y(94, 173, 93.4), y(100, 10, 100), 112*0.5, y(125, 300, 95.1), y(143, 127, 97.6), y(163, 127, 97.6), 175*0.5)
+y <- function(ugbtc,n,percent) {binomCI(x=round((percent/100)*n),n=n,conf.level=0.90,
+                                method ="jeffreys")$CI:1 * ugbtc }
+c(y(63,28,100), y(70,300,97.3), y(72,68,99.1), 90*0.5, y(81,300,93.7), y(85,76,100), y(93,300,98.7),
+     y(94,173,93.4), y(100,10,100), 112*0.5, y(125,300,95.1), y(143,127,97.6), y(163,127,97.6), 175*0.5)
  [1]  58.85933  66.81522  67.96488  45.00000  73.74114  82.88563  90.39917
  [8]  84.64024  82.92269  56.00000 115.75319 135.22059 154.13256  87.50000
 # Answer: it's almost identical.
 
-# If Bayesian and frequentist methods differed much, one would be obviously wrong and no one would use it!
+# If Bayesian and frequentist methods differed much, one would be wrong and no one would use it!
 # let's look in further, how *exactly* do the ug/btc ratings differ?
 binom <- c(56.60766, 66.66799, 67.11326, 45.00000, 73.58456, 81.71468, 90.18671, 84.31314, 74.11344,
                        56.00000, 115.50641, 134.43170, 153.23333, 87.50000)
@@ -585,13 +574,13 @@ mapply(function(x,y) round((x-y)/y * 100,digits=2), binom, jeffreys)
 # in 1 case, for Machine Maid, the ug/btc estimates differ by 10.62%, which is interesting
 ~~~
 
-(This demonstrates, incidentally, that feedback ratings don't start yielding very high assurance until a surprisingly large amount is in.)
+(This demonstrates, incidentally, that feedback ratings don't start yielding very high assurance until a surprisingly large number of reviews have been made.)
 
 Now we have risk factored in from just the quantitative data of the feedback amount & percentage. But we must be more subjective with the other factors.
 
 ### Qualitative
 
-We have to look at more qualitative information and start comparing & ranking possibilities. There are a few criteria that I value; in descending order of importance:
+We have to look at more qualitative information and start comparing & ranking possibilities. There are a few criteria that one should value; in roughly descending order of importance:
 
 1. old > new
 2. high weighted-μg/฿
@@ -602,7 +591,11 @@ We have to look at more qualitative information and start comparing & ranking po
 
 For a first cut, we look at all items meeting #2, where a good cut off seems to be weighted-μg/฿>90; this is just `EnterTheMatrix`, `juergen2001`, `VitaCat`, and `nipplesuckcanuck`. A second cut is #1, which deletes `nipplesuckcanuck` for being too new. #3 is useless, but #4 is helpful: we can scrap `juergen2001` for requiring FE; #5 is now useless as both are international, as is #6 since both have feedback threads.
 
-So we're down to `VitaCat` and `EnterTheMatrix`. On most of the listed metrics, they are about equal - `EnterTheMatrix` seems to have an edge in feedback due to greater volume, but it's hard to say for sure. Going with `VitaCat` promises to save a little bit of money since his weighted-μg/฿ is ~10 greater. So, `VitaCat` it was. I bought the 2-dose item since I couldn't afford the 5-dose one. (It would've been useful but I wasn't sure I wanted to sink in that much money, 2 doses *should* suffice, and it was highly likely that he would sell out before I had converted money into Bitcoin, as indeed he did.) So instead I paid extra for tracking.
+So we're down to `VitaCat` and `EnterTheMatrix`. On most of the listed metrics, they are about equal - `EnterTheMatrix` seems to have an edge in feedback due to greater volume, but it's hard to say for sure. Going with `VitaCat` promises to save a little bit of money since his weighted-μg/฿ is ~10 greater. So our analysis winds up with the conclusion of ordering from `VitaCat`
+
+Was this the *right* choice? I have no idea. The best I can say is that checking the SR forums in December 2012, by which time any September order would have been delivered or not, there were no reports of that vendor being a scammer or having engaged in a rip-and-run, while some of the lower-ranked vendors seem to have disappeared.
+
+<!-- I bought the 2-dose item since I couldn't afford the 5-dose one. (It would've been useful but I wasn't sure I wanted to sink in that much money, 2 doses *should* suffice, and it was highly likely that he would sell out before I had converted money into Bitcoin, as indeed he did.) So instead I paid extra for tracking. -->
 
 ### VoI: Ehrlich test
 
@@ -616,12 +609,21 @@ The only SR listing for an Ehrlich test is a [`Synaptic` listing](http://silkroa
 
 The fundamental question of a VoI analysis is: how would this information change your actions? If the test being positive rather than negative would not lead you to do anything differently, then the information has no (direct) value.
 
-This leads to a quick answer: if I tested a `VitaCat` dose (destroying >$20 of LSD) and it was negative, would I throw the rest out? No. I would be too curious, and I would have spent too much to tranquilly chuck it based on one test which I do not trust as compared against a very reputable seller. (I would be too curious since I do not plan to order again.) Therefore, the VoI is zero; and a value of zero does not justify spending the money on buying a kit and wasting LSD and time. I would just find out the hard way.
--->
+<!-- This leads to a quick answer: if I tested a `VitaCat` dose (destroying >$20 of LSD) and it was negative, would I throw the rest out? No. I would be too curious, and I would have spent too much to tranquilly chuck it based on one test which I do not trust as compared against a very reputable seller. (I would be too curious since I do not plan to order again.) Therefore, the VoI is zero; and a value of zero does not justify spending the money on buying a kit and wasting LSD and time. I would just find out the hard way. -->
+
+# _Finis_
+
+There is no proof of all of the above - anything here could have been faked with Photoshop or simply reused (perhaps I have a legitimate Adderall prescription). Take it for what it is and see whether it convinces you: [argument screens off authority](http://lesswrong.com/lw/lx/argument_screens_off_authority/).
+
+But looking back, I have been lucky: from reading the forums, it's clear that there *are* scammers on Silk Road^[Looking at the reviews posted to the front page and sentiment on the forum, I would hazard a guesstimate that scammers are 0-10% of the marketplace, and probably to the low end of that spectrum. In the January 2012 one-year anniversary message, ["State of the Road Address"](http://dkn255hz262ypmii.onion/index.php?topic=8397.0) ([non-Tor mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=8397.0)), the administrator claimed that "over 99% of all transactions conducted within the escrow system are completed to the satisfaction of both buyer and seller, or a mutually agreed upon resolution is found." Christin 2012's analysis found 97.8% of feedbacks giving 4-5 stars (similar to eBay rankings) but notes that this cannot pick up scams done out of escrow (as one might expect many scams to be done).], and shipments do get lost in the mail or seized or otherwise not delivered. ([I do not expect](http://predictionbook.com/predictions/2911) any legal problems; law enforcement always go after the sellers, to achieve maximum impact, and Silk Road presents both technical and jurisdictional problems for law enforcement.) This is inherent to the idea of an anonymous marketplace, but the system worked for me. SR describes it well in one of his messages:
+
+> Things are going really well here. There are many new buyers and sellers working well together, our servers are secure and humming along, and you may even start to feel comfortable. DO NOT get comfortable! This is not wal-mart, or even amazon.com. It is the wild west and there are as many crooks as there are honest businessmen and women. Keep your guard up and be safe, even paranoid. If you buy from someone without reputation, get to know them really well through pm, and even then be suspicious. Unfortunately it only takes one bad apple to spoil the bunch, and there are bad apples out there.
+
+On SR, there are lions and tigers and pigs oh my, but: [_alea iacta est!_](http://silkroadvb5piz3r.onion/index.php/forums/thread/894) Like Bitcoin, Silk Road may live another few months, or another few years, but will it? Like using Silk Road, there's no way to know but to go.
 
 # Future Developments
 
-So, we have seen that Bitcoin satisfies an old dilemma bedeviling the early cypherpunks; and we have covered how SR follows recommended design principles in achieving their dream of self-enforcing marketplaces. <!-- TODO and went through a lengthy example of how buyers can rationally order and thereby contribute to the necessary dynamics. -->
+So, we have seen that Bitcoin satisfies an old dilemma bedeviling the early cypherpunks; and we have covered how SR follows recommended design principles in achieving their dream of self-enforcing marketplaces, and then went through a lengthy example of how buyers can rationally order and thereby contribute to the necessary dynamics.
 
 The drug market has grown and thrived beyond all expectations, despite an extraordinary - perhaps unprecedented - level of media coverage and transparency of operation. By its mere existence, it lays bare the universality of illicit drug use; by its sales volume, it provides a benchmark for understanding what estimates of the global black market really mean: if the Silk Road has turnover of $20m a year and the black market turn over closer to $100b a year, then the latter is equivalent to *5000* Silk Roads. By its use of public technology (even immature & hard to use technologies) and ordinary postal services, it demonstrates the infeasibility of the long-standing War on Drugs; and by taming drug use, turning it from a violence-prone seamy affair to a smooth commercial transaction, it suggests that there is no necessity for the War on Drugs.
 
