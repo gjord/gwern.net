@@ -14,7 +14,9 @@ Given my interest in [long term content](About#long-content) and extensive linki
 
     I used to semiannually tar up my important folders, add [PAR2](!Wikipedia) redundancy, and burn them to DVD, but that's no longer really feasible; if I ever get a Blu-ray burner, I'll resume WORM backups. (Magnetic media doesn't strike me as reliable over many decades, and it would ease my mind to have optical backups.)
 
-The statistics are dismal. To quote [Wikipedia](!Wikipedia "Link rot#Prevalence"):
+# Link rot
+
+The dimension of digital decay is dismal and distressing. [Wikipedia](!Wikipedia "Link rot#Prevalence"):
 
 > In a 2003 experiment, [Fetterly et al.](http://www2003.org/cdrom/papers/refereed/p097/P97%20sources/p97-fetterly.html) discovered that about one link out of every 200 disappeared each week from the Internet. [McCown et al. (2005)](http://iwaw.europarchive.org/05/papers/iwaw05-mccown1.pdf) discovered that half of the URLs cited in [D-Lib Magazine](!Wikipedia) articles were no longer accessible 10 years after publication [the irony!], and other studies have shown link rot in academic literature to be even worse ([Spinellis, 2003](http://www.spinellis.gr/pubs/jrnl/2003-CACM-URLcite/html/urlcite.html), [Lawrence et al., 2001](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.97.9695&rep=rep1&type=pdf)). [Nelson and Allen (2002)](http://www.dlib.org/dlib/january02/nelson/01nelson.html) examined link rot in digital libraries and found that about 3% of the objects were no longer accessible after one year.
 
@@ -27,7 +29,17 @@ The statistics are dismal. To quote [Wikipedia](!Wikipedia "Link rot#Prevalence"
 
     > Bits and pieces of the web disappear all the time. It's called 'link rot', and we're all used to it. A friend saved 65 links in 1999 when he planned a trip to Tuscany; only half of them still work today. In my own blog, essays and news articles and websites that I link to regularly disappear -- sometimes within a few days of my linking to them.
 
-My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites)^[By 6 January 2013, the number has increased to ~12000 external links, ~7200 to non-Wikipedia domains.]. Even at the lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.17$ or just 17%, or to put it another way, an 83% chance any given link *will* die. The 95% [confidence interval](!Wikipedia) for the [Poisson distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~338-409 will survive to 2070. If we try to predict using a more reasonable estimate of 50% linkrot, then approximately 0 links will survive ($0.50^{2070-2011} = 1.73472348 \times 10^{-16} \simeq 0$). It would be a good idea to simply assume that *no* link will survive.
+My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites)^[By 6 January 2013, the number has increased to ~12000 external links, ~7200 to non-Wikipedia domains.]. Even at the lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.16$ (or to put it another way, an 84% chance any given link *will* die). The 95% [confidence interval](!Wikipedia) for such a [binomial distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~336-394 will survive to 2070[^R-binomial]. If we try to predict using a more reasonable estimate of 50% linkrot, then an average of 0 links will survive ($0.50^{2070-2011} \times 2200 = 1.73472348 \times 10^{-16} \times 2200 \simeq 0$). It would be a good idea to simply assume that *no* link will survive.
+
+[^R-binomial]: If each link has a fixed chance of dying in each time period, such as 3%, then the total risk of death is an [exponential distribution](!Wikipedia); over the time period 2011-2070 the cumulative chance it will beat each of the 3% risks is 0.1658. So in 2070, how many of the 2200 links will have beat the odds? Each link is independent, so they are like flipping a biased coin and form a [binomial distribution](!Wikipedia). The binomial distribution, being discrete, has no easy equation, so we just ask R how many links survive at the 5th percentile/quantile (a lower bound) and how many survive at the 95th percentile (an upper bound):
+
+    ~~~{.R}
+    qbinom(c(0.05, 0.95), 2200, 0.97^(2070-2011))
+    [1] 336 394
+
+    # the 50% annual link rot hypothetical:
+    qbinom(c(0.05, 0.95), 2200, 0.97^(2070-2011))
+    ~~~
 
 With that in mind, one can consider remedies. (If we lie to ourselves and say it won't be a problem in the future, then we guarantee that it *will* be a problem. ["People can stand what is true, for they are already enduring it."](http://wiki.lesswrong.com/wiki/Litany_of_Gendlin))
 
