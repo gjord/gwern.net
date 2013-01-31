@@ -1,6 +1,6 @@
 ---
 description: Technology-driven shift in demand for Conscientiousness, not intelligence
-tags: IQ, psychology, sociology, meta-analysis
+tags: IQ, psychology, sociology, meta-analysis, anime
 created: 20 Jul 2012
 belief: possible
 status: in progress
@@ -249,7 +249,7 @@ I really was hoping for more of a precise analytic solution, so some more search
 
 They give an R implementation on pg6 (first column); it seems to have a `pnorm` typo, but I fixed that. Once it was working, I tried generating a slightly (0.1) correlated bivariate distribution, which look OK:
 
-~~~
+~~~{.R}
 fmin <- function (y,mu1,mu2,sigma1,sigma2,rho)
      {t1<-dnorm(y,mean=mu1,sd=sigma1)
      tt<-rho*(y-mu1)/(sigma1*sqrt(1-rho*rho))
@@ -264,7 +264,7 @@ fmin <- function (y,mu1,mu2,sigma1,sigma2,rho)
 fmin(c(1:200),100,100,15,15,0.1)
   [1] 1.849e-11 2.864e-11 4.418e-11 6.784e-11 1.037e-10 1.578e-10 2.392e-10 3.608e-10 5.418e-10
   ...
-~~~{.R}
+~~~
 
 Now, I understand the PDF to be "a function that describes the relative likelihood for this random variable to take on a given value. The probability for the random variable to fall within a particular region is given by the integral of this variable’s density over the region". So I suppose I should sum up every point in the pdf >130 (since 130 is 2 standard deviations up, by construction when I specified SD=15) and that's my probability that a random deviate will be `min(130,130)`. What's the total probability someone will be over 130 on both variables? I think that would be:
 
@@ -292,7 +292,7 @@ An acquaintance gave me a double-integral formula:
 
 $\int_2^\infty \int_2^\infty \frac{1}{2\pi\sqrt{1-\rho^2}}\exp\left (-\frac{1}{2(1-\rho^2)}\left [ x^2 + y^2 - 2\rho x y \right ] \right ) dx dy$
 
-To calculate in R:
+To calculate our 2-standard deviation minimum bivariate problem with a _r_=0.9 in R:
 
 ~~~{.R}
 llim <- 2
@@ -336,6 +336,18 @@ for i in range(len(x)):
 plot(x, y)
 show()
 ~~~
+
+Incidentally, we could also use this code for more frivolous purposes; for example, the critically-regarded manga [_Monster_](!Wikipedia "Monster (manga)") centers around two fraternal twins, one a psychopathic genius, and one might wonder how frequently pairs of fraternal twins come as pairs of geniuses (~3 standard deviations up) given that the fraternal correlations _r_=[0.5](!Wikipedia "Heritability of IQ#Correlations between IQ and degree of genetic relatedness")-[0.7](http://online.sfsu.edu/psych200/unit7/76.htm "MODULE 6: Effects of Heredity and Environment on individual Differences ")? We modify the R parameters:
+
+~~~{.R}
+llim <- 3
+ulim <- Inf
+rho <- 0.6
+...
+0.0001397 with absolute error < 3.4e-05
+~~~
+
+Twins in general make up 1-2% of the population, so one can tack another two zeroes to get an estimate of genius twins as being 0.0001397% of the global population or ~9,779 ($7000000000 \times 0.0001397 \times 0.01$); this is a bit of an underestimate since identical twins have much higher correlations like _r_=0.86, but could also be an overestimate since twins may have [IQs lower](http://www.bmj.com/content/331/7528/1306 "'The cognitive cost of being a twin: evidence from comparisons within families in the Aberdeen children of the 1950s cohort study', Ronalds et al 2005") by a third of a standard deviation (although [not all studies](http://www.bmj.com/content/333/7578/1095 "'Comparison of academic performance of twins and singletons in adolescence: follow-up study', Christensen et al 2006") are consistent) and this implicitly assumes a global average IQ of 100 (actual mean is more like 89). Finally, how many of those ~9,779 might we expect to be [psychopathic](!Wikipedia)? The correlation between IQ and psychopathy has [been found](!Wikipedia "Psychopathy#Intelligence") to be weakly positive, non-correlated, or weakly negative (once selection effects like imprisonment are dealt with), for no apparent correlation; so we can simply multiply the 9,779 against the estimated population prevalence of ~1% for a final estimate of 98 genius psychopathic twins worldwide. (What fraction of those twins that might be raised in abusive orphanages and go on to star in manga is impossible to estimate.)
 
 <!-- Higher ability trainees benefit more from self-paced individualized
 instruction while lower ability trainees benefit more from group-paced classroom
