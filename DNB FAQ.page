@@ -961,10 +961,10 @@ Takeuchi 2011 has many points of interest:
 - the adaptiveness is *really* important; they say the group doing non-adaptive arithmetic was the same as the no-intervention group on every measure! Including 'a complex arithmetic task'
 - one of the key quotes:
 
-    > "Behavioral results comparing the combined control group, and the IATWMMC group showed a significantly larger pre- to post- test increase for performance of a complex arithmetic task (P = 0.049), for performance of the letter span task (P = 0.002), and for reverse Stroop interference (P = 0.008) in the IATWMMC group. The IATWMMC group showed a significantly larger pre- to post- test decrease in creativity test performance (P = 0.007) (for all the results of the psychological measures, see Table 1). Also the IATWMMC group showed a statistical trend of increase in the mental rotation task (P = 0.064)."
+    > Behavioral results comparing the combined control group, and the IATWMMC group showed a significantly larger pre- to post- test increase for performance of a complex arithmetic task (P = 0.049), for performance of the letter span task (P = 0.002), and for reverse Stroop interference (P = 0.008) in the IATWMMC group. The IATWMMC group showed a significantly larger pre- to post- test decrease in creativity test performance (P = 0.007) (for all the results of the psychological measures, see Table 1). Also the IATWMMC group showed a statistical trend of increase in the mental rotation task (P = 0.064).
 - About the only good news for n-backers is that the results were not huge enough to easily survive multiple-comparison correction
 
-    > "We performed several psychological tests and did not correct for the number of comparisons between statistical tests, as is almost always the case with this kind of study. When corrected using the [Bonferroni correction](!Wikipedia), even after removing the probably void tests (RAPM and WAIS arithmetic), the statistical value for the effect of IATWMMC on the creativity tests marginally surpassed the threshold of P = 0.05 (P = 0.06). Thus, the results should be interpreted with caution until replicated."
+    > We performed several psychological tests and did not correct for the number of comparisons between statistical tests, as is almost always the case with this kind of study. When corrected using the [Bonferroni correction](!Wikipedia), even after removing the probably void tests (RAPM and WAIS arithmetic), the statistical value for the effect of IATWMMC on the creativity tests marginally surpassed the threshold of P = 0.05 (P = 0.06). Thus, the results should be interpreted with caution until replicated.
 
 ##### Vartanian 2013
 
@@ -1555,16 +1555,18 @@ estimate       se     zval     pval    ci.lb    ci.ub
   0.5325   0.1321   4.0307   <.0001   0.2736   0.7914      ***
 ~~~
 
-The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^, and a [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one study with _d_=2.59 (!) and some instances of _d_<0. We use a random-effects model: high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect (although in this case, the fixed effects estimate is almost the same as the random effects model).
-
 To depict the random-effects model in a more graphic form, we use the "[forest plot](!Wikipedia)":
 
 ![`forest(res1, slab = paste(dnb$study, dnb$year, sep = ", "))`](/images/dnb-forest.png)
 
+The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. We use a random-effects model: the high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect (although in this case, the fixed effects estimate is almost the same as the random effects model).
+
+The confidence interval excludes zero, so one might conclude that n-back really does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase IQ is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal iodine or iron), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. This skeptical attitude is relevant to our examination of moderators.
+
 ### Moderators
 #### Control groups
 
-A major criticism of n-back studies is some using a no-contact or passive control group rather than an active control group. Each study has been coded appropriately, and we can ask whether it matters:
+A major criticism of n-back studies is that the effect is being manufactured by the methodological problem of some studies using a no-contact or passive control group rather than an active control group. (Passive controls know they received no intervention and that the researchers don't expect them to do better on the post-test, which may reduce their efforts & lower their scores.) Each study has been coded appropriately, and we can ask whether it matters:
 
 ~~~{.R}
 rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
