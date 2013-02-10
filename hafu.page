@@ -239,7 +239,7 @@ Year Series                               Character                     Gender  
 1963 _Yuki no Taiyou_                     Sanae                         F        Japanese        American
 1964 _Cyborg 009_                         Joe Shimamura                 M        American        Japanese    brown  brown   TVTropes says "half-Japanese (mother), half-American (father), and in the manga he was bullied because of that"; I did not find any other online sources specifying the parents, and do not have the manga handy.
 1967 _Lupin III_                          Lupin III                     M        French?         Japanese?   black  black   [Wikipedia](!Wikipedia "Arsène Lupin III#Origins") discusses the ambiguity.
-1967 _Nekome Kozou_                       Cat-Eyed Boy                  M        Japanese        Fantasy      yellow
+1967 _Nekome Kozou_                       Cat-Eyed Boy                  M        Japanese        Fantasy     yellow
 1972 _Gatchaman_                          Jun 'the Swan'                F                                    green  green   Information about Jun is very scarce; [asked](!Wikipedia "Talk:Science Ninja Team Gatchaman#Parentage")
 1974 _Great Mazinger_                     Jun Hono                      F        American        Japanese    black  black
 1975 _Ichigo Monogatari_                  Ichigo                        F        Scandinavian?   Japanese?   brown  brown   [Baka-Updates](http://www.mangaupdates.com/series.html?id=37203) describes the plot: "Ichigo is a fourteen year old half Japanese girl that grew up in Lapland. After the death of her father, she moves to Japan where she is hosted by Ikuta Rintaro and his family.", translating from an [Italian website](http://www.shoujo-manga.net/autrici/bio/ooshimaopere.html). Making matters worse, the [Lapland region](!Wikipedia "Lapland (region)") is claimed in parts by Norway, Sweden, Finland and Russia.
@@ -379,11 +379,11 @@ Year Series                               Character                     Gender  
 2003 _Star Ocean: Till the End of Time_   Fayt Leingod                  M                        Japanese    green   blue
 2003 _Star Ocean: Till the End of Time_   Sophia Esteed                 F                        Japanese    green   brown
 2003 _Tokyo Mew Mew a la Mode_            Berry Shirayuki               F        Japanese?       French?     red     blond
-2004 _Ashinaga Ojisama_                   Nishinomiya Ryuutarou         M        Arabian         Japanese     grey    black Ch1 pg15
-2004 _Bath Towel_                         Izutsuya Anju                 M        French          Japanese    blue    blond  Vol.1 Ch.3.1; Anju state his mother had a one-night stand with a French man.
+2004 _Ashinaga Ojisama_                   Nishinomiya Ryuutarou         M        Arabian         Japanese    grey    black  Ch1 pg15
+2004 _Bath Towel_                         Izutsuya Anju                 M        French          Japanese    blue    blond  Vol.1 Ch.3.1; Anju states his mother had a one-night stand with a French man.
 2004 _Durarara!!_                         Walker Yumasaki               M                                            brown  [Asked](http://durarara.wikia.com/wiki/Talk:Walker_Yumasaki#Parentage).
 2004 _Fate/Stay Night_                    Illyasviel Einzbern           F        Japanese        German       red    white
-2004 _Green Green 2 Koi no Special_       Lucy Mika Matsuura            F                                     blue    blond
+2004 _Green Green 2 Koi no Special_       Lucy Mika Matsuura            F                                     blue   blond
 2004 _Jubei-chan 2_                       Freesia Yagyu                 F        Japanese        Russian      blue   blond
 2004 _Kamen no Maid Guy_                  Elizabeth K. Strawberryfield  F        English?        Japanese?    blue   blond  [Asked](!Wikipedia "Talk:Kamen no Maid Guy#Strawberryfield ancestry")
 2004 _Kamen no Maid Guy_                  Heindrick Strawberryfield     M        English?        Japanese?    red    blond
@@ -586,6 +586,11 @@ So, the absence of Korean characters is curious, and may represent a dog that di
 
 ### Statistical
 
+<!-- library(XML)
+hafu <- readHTMLTable("http://www.gwern.net/hafu#list")[[1]]
+hafu[hafu==""] <- NA
+-->
+
 TODO:
 
 1. descriptive: Run a correlation matrix on each variable (omitting titles and names)
@@ -597,246 +602,23 @@ TODO:
 4. can we plot binomial confidences for the underlying ratio (given the sample size)?
 5. basic test for gender imbalance in parentage: chi-squared
 
-<!-- library(XML); hafu <- readHTMLTable("http://www.gwern.net/hafu#list")[[1]] -->
-
 #### Capture-recapture
 
 The universe of anime/manga since 1963 is of unknown total size but *very* large. I've wondered: how I could estimate how complete my sample is at any point?
 
-My search procedure can be summarized as: I check many different places, looking for keywords and phrases that may indicate a hafu character, and if I find one I add it to the database but if it's already in it, I do nothing. Places change, and new places appear, so the checking is never done, but once a character has been added, I will always recognize it even if I find it multiple times.
-
-This turns out to strongly resemble a problem from *ecology*: a ecologist or biologist wishes to know how many animals are in a region, but while animals can be tagged or marked or otherwise recorded (if they have unique spots or fur), animals are hard to find, there's a lot of them, and you never know when you're done even if your traps are stuffed full of animals you've already seen before.
-
-But if all your traps are turning up no new animals, surely that's consistent with having trapped most or all the animals, right? If every time you trapped an animal you got a new animal, the total population of animals must be truly enormous for you to not trap the same animal twice!
+My search procedure can be summarized as: I check many different places, looking for keywords and phrases that may indicate a hafu character, and if I find one I add it to the database but if it's already in it, I do nothing. Places change, and new places appear, so the checking is never done, but once a character has been added, I will always recognize it even if I find it multiple times. This turns out to strongly resemble a problem from *ecology*: a ecologist or biologist wishes to know how many animals are in a region, but while animals can be tagged or marked or otherwise recorded (if they have unique spots or fur), animals are hard to find, there's a lot of them, and you never know when you're done even if your traps are stuffed full of animals you've already seen before. But if all your traps are turning up no new animals, surely that's consistent with having trapped most or all the animals, right? If every time you trapped an animal you got a new animal, the total population of animals must be truly enormous for you to not trap the same animal twice!
 
 This intuition is right. Formalized as statistics, it is called "capture-recapture" or "[mark and recapture](!Wikipedia)", and it applies to any area which satisfies the basic description of very large population and repeated captures of the same member (for example, [testing software for bugs](http://stats.stackexchange.com/questions/16317/predicting-total-number-of-bugs-based-on-number-of-bugs-revealed-by-each-tester)). Libraries are already available; I like the looks of the R library [Rcapture](http://cran.r-project.org/web/packages/Rcapture/index.html) ([manual](http://cran.r-project.org/web/packages/Rcapture/Rcapture.pdf); [paper](http://cran.r-project.org/web/packages/Rcapture/vignettes/RcaptureJSS.pdf "'Rcapture: Loglinear Models for Capture-Recapture in R', Baillargeon  & Rivest 2007")).
 
 I've never seen capture-recapture used for literary topics, but so far [no one](http://stats.stackexchange.com/questions/43707/capture-recapture-sampling-valid-in-literary-analysis "Capture-recapture sampling valid in literary analysis?") has told me it *can't* work! I can treat my existing data collection as the captures in capture-recapture: so eg. each time I get a Google Alert for a new character but it's already on my list, this counts as a "recapture", but if I run a search in Google Books and I find 15 characters and 14 are already on the list, that's 14 "recaptures" and 1 "capture".
 
-Capture/recapture log:
+The main limitation of capture-recapture in this context seems to be the precise population one is making inferences about. Not all half-Japanese characters from the past will have been noted as such in media, characters where half-Japanese is implied but not definitively stated as being such may have that omitted from any discussion, fewer characters will appear in English discussions anywhere, and only a subset of those will appear in accessible digitized materials. Using capture-recapture means we are only making inferences about the size of "the population of characters with information available on the English Web".
 
-    GSA:
-        _Adolf_: recapture
-        _Rainbow Trotsky_: capture
-        _Rainbow: Nisha Rokubō no Shichinin_: capture
-    IRC #lesswrong
-        Khoth _Kids on the Slope_: capture
-    http://www.sequentialtart.com/archive/mar04/cv_0304_2.shtml
-        _Marmalade Boy_: recapture
-    http://germaninjapan.tumblr.com/post/26503313045/thematizing-halfs-in-manga-and-anime-yamaken
-        _Hirahira Hy~n_: capture
-        _Tsuritama_: capture
-        _Kids on the Slope_: recapture
-        _Durarara!!_: recapture
-    http://www.animenewsnetwork.com/review/haganai/i-dont-have-many-friends/gn-1
-        _Haganai_: recapture
-    http://www.mangavolume.com/manga-archive/mangas/search-half-japanese
-        _Adolf_: recapture
-    TvTropes (December 2012 check):
-        _Magic Kaito_: capture
-        _Mad Bull 34_: capture
-        _Gunsmith Cats_: capture
-        _Kinnikuman Nisei_: capture
-        _X1999_: capture
-        _Fate/stay night_: recapture
-        _Tsukihime_: recapture
-        _Sono Hanabira Ni Kuchizuke Wo_: capture
-        _Kara no Shoujo_: capture
-        _Little Busters!!_: capture
-        _Street Fighter_: recapture (Ken)
-        _Street Fighter_: recapture (Sean)
-        _Dead or Alive_: recapture (Hitomi)
-        _Dead or Alive 4_: capture (Kokoro)
-        _Metal Gear_: recapture (Solid Snake)
-        _Metal Gear Solid_: capture (Kazuhira Miller)
-        _Onimusha_: capture
-        _Parasite Eve_: capture
-        _Ring of Red_: capture
-        _Shadow Hearts_: capture
-        _Star Ocean_: capture
-        _Super Robot Wars_: capture
-        _Tekken_: capture
-        _Trace Memory_: capture
-        _Trauma Center_: capture
-    http://tvtropes.org/pmwiki/remarks.php?trope=Main.ButNotTooForeign
-        _Tokyo Mew Mew a la Mode_: capture
-    http://vndb.org/i674?m=2 / http://vndb.org/i674?m=2;fil=tagspoil-2.trait_inc-674;p=2
-        _Starry Sky_: recapture
-        _Katawa Shoujo_: recapture
-        _Little Busters!_: recapture
-        _Muv-Luv Alternative - Total Eclipse: recapture
-        _Kara no Shoujo_: recapture
-        _ef - a tale of memories_: recapture
-        _Uta no☆Princesama♪ Amazi_: capture
-        _Sono Hanabira Ni Kuchizuke Wo_: recapture
-        _Supipara_: capture
-        _Manbiki_: capture
-        _Eden They Were Only Two_: capture
-        _a fairy tale of the two_: capture
-        _Sono Hanabira ni Kuchizuke _: capture
-        _Hisho x Hisho_: capture
-        _Riddle Garden_: capture
-        _Natsumegu_: capture
-        _Grisaia no Kajitsu_: capture
-        _Tokimeki Memorial 4_: capture
-        _Sei Yariman Gakuen Enkou Nikki_: capture
-        _Chou no Doku Hana no Kusari_: capture
-        _Ochiba no Mau Koro_: capture
-        _Nee_: capture
-        _Ano Machi no Koi no Uta_: capture
-        _Raspberry Welcome to Cafe _: capture
-        _Natsuiro Sagittarius_: capture
-        _Iinchou wa Shounin Sezu! I_: capture
-        _Shachou Reijou wo Homeless _: capture
-        _Kita e. Diamond Dust_: capture
-        _Honoo no Haramase Oppai Shi_: capture
-        _Green Green 2 Koi no Speci_: capture
-        _Homura Kansen 3 Shuto Houkai_: capture
-        _Shuffle!_: capture
-        _Meimeimei!_: capture
-        _Rhythmic Rev_: capture
-        _Maya Madoromijima no Nemur_: capture
-        _Rakuen Ai Kawarazu na Boku_: capture
-        _Midorigafuchi Yotogi no Mur_: capture
-        _Ushinawareta Mirai wo Motomete_: capture
-        _Lucky x Crosse_: capture
-        _Tamayura_: capture
-        _Tenshi no Hashigo_: capture
-        _Lost Number_: capture
-        _Kurenai no Tsuki_: capture
-        _Class Zenin Ore no Yome_: capture
-        _Shiyouzumi Condom_: capture
-        _Mr.Invisible Legend of Rap_: capture
-        _Shuffle!_: capture
-        _Akatsuki no Goei Tsumibuka_: capture
-        _Otome ga Tsumugu Koi no Canvas_: capture
-        _Sono Hanabira ni Kuchizuke _: capture
-        _Kiss to Maou to Darjeeling_: capture
-        _Futa Ane Bitter & Sweet_: capture
-        _Boku no Shokora    _: capture
-        _Kachou Fuugetsu Koi ni Och_: capture
-        _Onegai Goshujinsama!_: capture
-        _Gsenjou no Maou_: capture
-        _Remember11 the age of infi_: capture
-        _MuvLuv Alternative  Total_: capture
-        _Nejire_: capture
-        _D.C. III Da Capo III_: capture
-        _Hoshi no Oujikun_: capture
-    http://myanimelist.net/forum/?topicid=141256&show=60#msg10542373
-        _Evangelion_: recapture
-        _Ouran Host_: recapture
-        _Death Note_: recapture
-        _Katekyo Hitman Reborn!_: recapture
-    http://en.wikipedia.org/wiki/List_of_Da_Capo_series_characters
-        _Da Capo_: capture
-    http://www.peterpayne.net/2011/12/anime-characters-with-blonde-hair.html
-        _Haganai_: recapture
-        _Onegai Twins_: recapture
-        _Da Capo_: recapture
-    http://anidb.net/perl-bin/animedb.pl?show=lexicon&mode=character&vtype=ctag&relid=2296
-        _Peacemaker Kurogane_: recapture
-        _Kurau Phantom Memory_: recapture
-        _Mobile Suit Gundam_: recapture
-        _Eyeshield 21_: recapture
-        _Sister Princess_: recapture
-        _Ef - a Tale of Melodies_: recapture
-        _Katekyo Hitman Reborn!_: recapture
-        _Detective Conan_: recapture
-        _UFO Baby_: recapture
-        _Haganai_: recapture
-        _Master Keaton_: recapture
-        _AnoHana_: recapture
-        _Canvas 2_: recapture
-        _Tona-Gura!_: recapture
-        _Prince of Tennis_: recapture
-        _Code Geass_: recapture
-        _Mobile Police Patlabor_: recapture
-        _Yes! PreCure 5_: recapture
-        _Kita e. ~Diamond Dust~_: recapture
-        _Nabari no Ou_: recapture
-        _Death Note_: recapture
-        _Rebuild Evangelion 2.0_: recapture
-        _Sakura Taisen_: recapture
-        _Muv-Luv Alternative_: recapture
-        _Durarara!!_: recapture
-        _Read or Die_: recapture
-        _Da Capo_: recapture
-        _Ouran Host_: recapture
-        _Darker than Black 2_: recapture
-        _Neon Genesis Evangelion_: recapture
-        _Fruits Basket_: recapture
-        _Yakitate!! Japan_: recapture
-        _Sakura Taisen_: recapture
-        _Best Student Council_: recapture
-        _Nana_: recapture
-        _School Rumble_: recapture
-        _Kujibiki Unbalance_: recapture
-        _Pani Poni Dash!_: recapture
-        _Little Busters!_: recapture
-        _Amagami SS_: recapture
-        _To Heart_: recapture
-        _GetBackers_: recapture
-        _Haganai_: capture
-        _AnoHana_: capture
-        _Papa no Iukoto o Kikinasai!_: capture
-        _Boys Be..._: capture
-        _Ben-To_: capture
-        _Hyper Police_: capture
-        _Silent Mobius_: capture
-        _Kamichama Karin_: capture
-        _Vampire Princess Miyu_: capture
-        _Tsuyokiss Cool x Sweet_: capture
-        _Shin Seiki GPX Cyber Formula_: capture
-        _Himawari!_: capture
-        _Tentacle and Witches_: capture
-        _Dog Days_: capture
-        _Devil Lady_: capture
-        _Rean no Tsubasa_: capture
-    http://tvtropes.org/pmwiki/pmwiki.php/Main/Mukokuseki
-        _Michiko to Hatchin_: capture
-        _Michiko to Hatchin_: capture
-        _Mobile Suit Gundam_: recapture
-        _Mobile Suit Gundam Wing_: capture
-        _Digimon Adventure 02_: recapture
-        _Digimon Adventure 02_: recapture
-        _Digimon Tamers_: recapture
-        _Digimon Tamers_: recapture
-        _Digimon Tamers_: recapture
-        _Digimon Tamers_: recapture
-        _Adolf_: recapture
-        _Code Geass_: recapture
-        _Evangelion 2.0_: recapture
-        _Full Metal Panic!_: recapture
-        _Neon Genesis Evangelion_: recapture
-        _Kuragehime_: recapture
-    http://www.comicforum.de/archive/index.php/t-122076-p-38.html
-        _Royal Straight_: recapture
-    http://www.mangaupdates.com/showtopic.php?tid=35093
-        _Venus Capriccio_: recapture
-        _Hanasakeru Seishounen_: recapture
-        _Itazura na Kiss_: capture
-        _Haikara-san ga Tooru_: capture
-        _Great Teacher Onizuka_: capture
-    http://www.mangaupdates.com/series.html?page=1&perpage=100&category=Mixed+Blood&orderby=year
-        _The Fox Lover_: capture
-        _Hinekure Shisho no Mikaiketsu_: capture
-        _Boku wa Tomodachi ga Sukunai_: recapture
-        _Itsuka Sora kara_: capture
-        _NightS_: capture
-        _Tsukiyo-Zoushi_: capture
-        _Café Latte Rhapsody_: recapture
-        _High-School DxD_: capture
-        _Atori Shou_: capture
-        _Puchi Houndo_: capture
-        _Sakura no Nekohime_: capture
-        _Ashinaga Ojisama_: capture
-        _Ousama no Lesson_: capture
-        _Nigai Kajitsu_: capture
-        _Inuyasha_: recapture
-        _Hyper Police_: recapture
-        _Nekome Kozou_: capture
-        _Kashou no Tsuki_: recapture
-        _Yo-u_: capture
+##### Analysis
+
+The most appropriate population model treats hafu characters as a closed population, since characters once created do not cease to exist. I performed sampling in 18 phrases (corresponding to discrete data sources), and I classified as 1 large collection period all characters collected before the capture-recapture log was started.
+
+The model that `Rcapture` fit to logs of 296 characters (minimizing the [AIC](!Wikipedia "Akaike information criterion")) was the M~0~ Chao model, corresponding to each sampling phase and each character having the same probability of capture each time (somewhat to my surprise). The M~0~ model yields an estimate of 657 total accessible hafu characters, and a 95% confidence interval of 559-781 characters, implying that a database of _n_=296 achieves coverage of 28-52%.
 
 # External links
 
@@ -847,3 +629,357 @@ Capture/recapture log:
     3. ["Part 3: Blonds Are Trouble"](http://www.sequentialtart.com/archive/apr04/cv_0404_2.shtml)
     4. ["Part 4: When Is a Blond Not a Blond?"](http://www.sequentialtart.com/archive/may04/cv_0504_2.shtml)
 - ["The Hafu Project: Exploring the question of what it means to be Japanese"](http://www.japantoday.com/category/lifestyle/view/the-hafu-project-exploring-the-question-of-what-it-means-to-be-japanese) -(the 317 comments demonstrate how polarizing the topic can be)
+
+# Appendices
+## Capture-recapture code
+
+Run as `R --slave --file=rcapture.r`:
+
+~~~{.R}
+# O=Original compilation before capture-recapture log started
+# GSA=Google Search Alerts
+# ST=http://www.sequentialtart.com/archive/mar04/cv_0304_2.shtml
+# GIJ=http://germaninjapan.tumblr.com/post/26503313045/thematizing-halfs-in-manga-and-anime-yamaken
+# ANN=http://www.animenewsnetwork.com/review/haganai/i-dont-have-many-friends/gn-1
+# MV=http://www.mangavolume.com/manga-archive/mangas/search-half-japanese
+# TV2=TvTropes (December 2012 check)
+# TV3=http://tvtropes.org/pmwiki/remarks.php?trope=Main.ButNotTooForeign
+# VN=http://vndb.org/i674?m=2 / http://vndb.org/i674?m=2;fil=tagspoil-2.trait_inc-674;p=2
+# MAL=http://myanimelist.net/forum/?topicid=141256&show=60#msg10542373
+# DC=http://en.wikipedia.org/wiki/List_of_Da_Capo_series_characters
+# PP=http://www.peterpayne.net/2011/12/anime-characters-with-blonde-hair.html
+# AND=http://anidb.net/perl-bin/animedb.pl?show=lexicon&mode=character&vtype=ctag&relid=2296
+# TVM=http://tvtropes.org/pmwiki/pmwiki.php/Main/Mukokuseki
+# CF=http://www.comicforum.de/archive/index.php/t-122076-p-38.html
+# BU1=http://www.mangaupdates.com/showtopic.php?tid=35093
+# BU2=http://www.mangaupdates.com/series.html?page=1&perpage=100&category=Mixed+Blood&orderby=year
+hafu <- read.table(stdin(),header=TRUE)
+Work                O GSA IRC ST GIJ ANN MV TV2 TV3 VN MAL DC PP AND TVM CF BU1 BU2
+".hackLegend of"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"2nd Super Robot W" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"801 T.T.S. Airbat" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Adolf"             1 1   0   0  0   0   1  0   0   0  0   0  0  0   1   0  0   0
+"Ai Kora"           1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Akatsuki no Goei"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Akuma to Love Son" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Amagami SS"        1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Ame Nochi Hare"    1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Angel Sanctuary1"  1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Angel Sanctuary2"  1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Ano Machi no Koi"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"AnoHana1"          1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"AnoHana2"          0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Arisa"             1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ashinaga Ojisama"  0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Atori Shou"        0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Baccano"           1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Bath Towel"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ben-To"            0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Best Student Coun" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Beyblade"          1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Bleach"            1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Boku no Shokora"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Bokutachi Otoko n" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Boys Be"           0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Butterfly 69"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Caf Latte Rhapso"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Canvas 2"          1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Card Captors Saku" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Chanto Shiyou Yo"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Cheerism"          1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Chka Ichiban"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Chou no Doku Han"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Class Zenin Ore"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Coda"              1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Code Geass"        1 0   0   0  0   0   0  0   0   0  0   0  0  1   1   0  0   0
+"Code Geass: Lost"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Cyborg 009"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"D.C. III Da Capo"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"DOA Hitomi"        1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"DOA Kokoro"        0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Da Capo I"         0 0   0   0  0   0   0  0   0   0  0   1  1  0   0   0  0   0
+"Da Capo I"         1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Dance in the Vamp" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Darenimo Ienai"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Darker than Blac"  1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Darker than Blac2" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Dear My Mister"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Death Note"        1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Death Note2"       1 0   0   0  0   0   0  0   0   0  1   0  0  0   0   0  0   0
+"Desert Storm"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Detective Conan"   1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Devil Lady"        0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Diamond Head"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Digimon A 02"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Digimon Adventure" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Digimon Savers"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Digimon Tamers1"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Digimon Tamers2"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Digimon Tamers3"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Digimon Tamers4"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Dog Days"          0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Durarara!!1"       1 0   0   0  1   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Eden They Were O"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Ef - a Tale of Me" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Evangelion 2.0"    1 0   0   0  0   0   0  0   0   0  0   0  0  1   1   0  0   0
+"Neon Genesis Evan" 1 0   0   0  0   0   0  0   0   0  1   0  0  1   1   0  0   0
+"Eyeshield 21"      1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Fake"              1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Fate/stay night"   1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Fruits Basket"     1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Full Metal Panic"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Futa Ane Bitter"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"G-senjou no Maou"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Gakuen Alice"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Gatchaman"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"GetBackers"        1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"GoShogun"          1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Golden Days"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Great Mazinger"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Great Teacher Oni" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Green Green 2 Ko"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Grisaia no Kajit"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Gsenjou no Maou"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Gundam 00.1"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Gundam 00.2"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Gundam 00.3"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Gundam 00.4"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Haganai"           1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   1
+"Haganai"           1 0   0   0  0   1   0  0   0   0  0   0  0  1   0   0  0   0
+"Haganai2"          0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Haikara-san ga To" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Hana Yori Dango"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Hana-kimi"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Hanasakeru Seisho" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Hanjuku Orange"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Harem Lodge"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"High-School DxD"   0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Himawari"          0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Hinekure Shisho n" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Hirahira Hy~n"     0 0   0   0  1   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Hisho x Hisho"     0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Holy Knight"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Homura Kansen 3"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Honoo no Haramas"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Hoshi no Oujikun"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Hungry Heart"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Hyper Police"      0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   1
+"Ice Forest"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ichigo Monogatari" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Iinchou wa Shoun"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Ijigen kara no Ta" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Inuyasha"          1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Itazura na Kiss.1" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Itazura na Kiss.2" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Itazura na Kiss.3" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Itsuka Sora kara"  0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"JoJo's Bizarre.1"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"JoJo's Bizarre.2"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"JoJo's Bizarre.3"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"JoJo's Bizarre.4"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Jubei-chan 2"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"K-On"              1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"K-On"              1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kachou Fuugetsu"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Kaichou wa Maid-s" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kamen no Maid Guy" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kamichama Karin"   0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Kansen 3 ~Shuto H" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kara no Shoujo"    0 0   0   0  0   0   0  1   0   1  0   0  0  0   0   0  0   0
+"Kashou no Tsuki"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Katekyo Hitman Re" 1 0   0   0  0   0   0  0   0   0  1   0  0  1   0   0  0   0
+"Kids on the Slope" 0 0   1   0  1   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kimi to Boku"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kinnikuman Nisei"  0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Kiss to Maou to"   0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Kiss/Hug"          1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kita e. ~Diamond"  0 0   0   0  0   0   0  0   0   1  0   0  0  1   0   0  0   0
+"Kochira Katsushik" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kodomo no Omocha"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Koiseyo Shounen"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Konbini S"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Kujibiki Unbalanc" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Kuragehime"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   1   0  0   0
+"Kurau Phantom Mem" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Kurenai no Tsuki"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Lady"              1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Little Busters"    0 0   0   0  0   0   0  1   0   1  0   0  0  1   0   0  0   0
+"Love Monster"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Lovetore"          1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Lucky x Crosse"    0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Lupin III"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"MGS Miller"        0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"MGS SS"            1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Gundam Wing"       0 0   0   0  0   0   0  0   0   0  0   0  0  1   1   0  0   0
+"Macross"           1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Mad Bull 34"       0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Magic Kaito"       0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Mahou Sensei Neg"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Manbiki"           0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Maria Holic"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Maria-sama Ga Mit" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Marmalade Boy"     1 0   0   1  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Master Keaton"     1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Matryoshka"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Maya Madoromijim"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Mecha Love"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Meimeimei"         0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Meruhen-chan"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Midorigafuchi Yo"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Milkman"           1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Mitsu no Yoru"     1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Mobile Police Pat" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Mobile Suit Gunda" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Motto Itte"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Mr.Invisible Leg"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Muv-Luv Alternati" 1 0   0   0  0   0   0  0   0   1  0   0  0  1   0   0  0   0
+"Nabari no Ou"      1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Nana"              1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Natsuiro Sagitta"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Natsumegu"         0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Naze Nani Honey"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Nee"               0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Negima"            1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Nejire"            0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Nekome Kozou"      0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Nigai Kajitsu"     0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"NightS"            0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Nisekoi"           1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"No More Heroes"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Nurarihyon no Ma"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Nurarihyon no Ma"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ochiba no Mau Ko"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Ohana to Chocolat" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Onegai Goshujins"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Onegai Twins"      1 0   0   0  0   0   0  0   0   0  0   0  1  0   0   0  0   0
+"Onimusha"          0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Oreimo"            1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Otome ga Tsumugu"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Otona Pink"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ougon Honey"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ouran Host"        1 0   0   0  0   0   0  0   0   0  1   0  0  1   0   0  0   0
+"Ousama no Lesson"  0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Oyasumi Punpun"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Pani Poni Dash"    1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Papa no Iukoto o"  0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Parasite Eve"      0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Parfait ~Chocolat" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Peacemaker Kuroga" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Pineapple Army"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Prince of Tennis"  1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Private Love Less" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Puchi Houndo"      0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Rainbow Trotsky"   0 1   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Rainbow: Nisha"    0 1   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Rakuen Ai Kawara"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Raspberry Welcom"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Read or Die"       1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Rean no Tsubasa"   0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Remember11 the a"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Rhythmic Rev"      0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Riddle Garden"     0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Rikujou Bouei-tai" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Ring of Red"       0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Royal Straight"    0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   1  0   0
+"SF Ken"            1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"SF Sean"           1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Saint Seiya"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Saitama Chainsaw"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sakura Gari"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sakura Taisen 3"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sakura Taisen 5"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sakura Taisen"     1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Sakura Taisen"     1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Sakura no Nekohim" 0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Samurai Gun"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"School Rumble"     1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Secret Area"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sei Yariman Gaku"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Seitoshidoushitsu" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Senobi no Housoku" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sensual Phrase"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Shachou Reijou w"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Shadow Hearts"     0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Shanimuni Go"      1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Shigeshshi"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Shin Seiki GPX Cy" 0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Shippuu Karen Jin" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Shiyouzumi Condo"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Shuffle.1"         0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Shuffle.2"         0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Sister Princess.1" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sister Princess.2" 1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sister Princess.3" 1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Skip Beat"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Slam Dunk"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Sono Hanabira Ni"  0 0   0   0  0   0   0  1   0   1  0   0  0  0   0   0  0   0
+"Sono Hanabira Ni"  1 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Soul Eater"        1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Star Ocean"        0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Starry Sky"        0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Super Robot Wars"  0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Supipara"          0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"TMM a la Mode"     0 0   0   0  0   0   0  0   1   0  0   0  0  0   0   0  0   0
+"Tamayura"          0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Tekken 6 Bloodlin" 1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Tenchi Muyo"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Tenshi no Hashig"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Tentacle and Witc" 0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"That Summer"       1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"The Fox Lover"     0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"The Idolmaster"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"The Man of Tango"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"To Heart"          1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Tokimeki Memoria"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Tona-Gura"         1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Trace Memory"      0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Tsukihime"         1 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Tsukiyo-Zoushi"    0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Tsuritama"         0 0   0   0  1   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Tsuyokiss Cool x"  0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"UFO Baby"          1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Ushinawareta Mir"  0 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"UtanoPrincesama"   1 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+"Vampire Princess"  0 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Venus Capriccio"   1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  1   0
+"Venus in Love"     1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"X1999"             0 0   0   0  0   0   0  1   0   0  0   0  0  0   0   0  0   0
+"Yakitate!! Japan"  1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Yakitate!! Japan"  1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Yes! PreCure 5"    1 0   0   0  0   0   0  0   0   0  0   0  0  1   0   0  0   0
+"Ykan Club"         1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"Yo-u"              0 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   1
+"Yuki no Taiyou"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0
+"ef a tale of"      1 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0
+
+library(Rcapture)
+
+# closedp.t fits more models, but computationally intractable due to extreme memory use
+closedp.0(hafu[,-1])
+closedpCI.0(hafu[,-1])
+~~~
+
+Output:
+
+~~~
+Number of captured units: 296
+
+Abundance estimations and model fits:
+              abundance  stderr  deviance  df    AIC
+M0                656.7    55.7     1.269  16  25.20
+Mh Chao (LB)      659.8    58.8     1.238   8  41.17
+Mh Poisson2       635.8    81.1     1.153  15  27.09
+Mh Darroch        606.6   122.4     1.092  15  27.03
+Mh Gamma3.5       579.6   157.3     1.059  15  26.99
+
+
+Number of captured units: 296
+
+Poisson estimation and model fit:
+    abundance  stderr  deviance  df   AIC
+M0      656.7    55.7     1.269  16  25.2
+
+Multinomial estimation, 95% profile likelihood confidence interval:
+    abundance  InfCL  SupCL
+M0      654.8  559.7  780.9
+~~~
