@@ -6,7 +6,7 @@ status: finished
 belief: highly likely
 ...
 
-> "Decay is inherent in all compound things. Work out your own salvation with diligence." --Last words of the Buddha.
+> "Decay is inherent in all compound things. Work out your own salvation with diligence." --Last words of the Buddha
 
 Given my interest in [long term content](About#long-content) and extensive linking, [link rot](!Wikipedia) is an issue of deep concern to me. I need backups not just for my files[^backups], but for the web pages I read and use - they're all part of my [exomind](!Wikipedia). It's not much good to have an extensive essay on some topic where half the links are dead and the reader can neither verify my claims nor get context for my claims.
 
@@ -29,7 +29,7 @@ The dimension of digital decay is dismal and distressing. [Wikipedia](!Wikipedia
 
     > Bits and pieces of the web disappear all the time. It's called 'link rot', and we're all used to it. A friend saved 65 links in 1999 when he planned a trip to Tuscany; only half of them still work today. In my own blog, essays and news articles and websites that I link to regularly disappear -- sometimes within a few days of my linking to them.
 
-My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites)^[By 6 January 2013, the number has increased to ~12000 external links, ~7200 to non-Wikipedia domains.]. Even at the lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.16$ (or to put it another way, an 84% chance any given link *will* die). The 95% [confidence interval](!Wikipedia) for such a [binomial distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~336-394 will survive to 2070[^R-binomial]. If we try to predict using a more reasonable estimate of 50% linkrot, then an average of 0 links will survive ($0.50^{2070-2011} \times 2200 = 1.73472348 \times 10^{-16} \times 2200 \simeq 0$). It would be a good idea to simply assume that *no* link will survive.
+My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites)^[By 6 January 2013, the number has increased to ~12000 external links, ~7200 to non-Wikipedia domains.]. Even at the lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.16$ (or to put it another way, an 84% chance any given link *will* die). The 95% [confidence interval](!Wikipedia) for such a [binomial distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~336-394 will survive to 2070[^R-binomial]. If we try to predict using a more reasonable estimate of 50% linkrot, then an average of 0 links will survive ($0.50^{2070-2011} \times 2200 = 1.735 \times 10^{-16} \times 2200 \simeq 0$). It would be a good idea to simply assume that *no* link will survive.
 
 [^R-binomial]: If each link has a fixed chance of dying in each time period, such as 3%, then the total risk of death is an [exponential distribution](!Wikipedia); over the time period 2011-2070 the cumulative chance it will beat each of the 3% risks is 0.1658. So in 2070, how many of the 2200 links will have beat the odds? Each link is independent, so they are like flipping a biased coin and form a [binomial distribution](!Wikipedia). The binomial distribution, being discrete, has no easy equation, so we just ask R how many links survive at the 5th percentile/quantile (a lower bound) and how many survive at the 95th percentile (an upper bound):
 
@@ -38,7 +38,8 @@ My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.
     [1] 336 394
 
     # the 50% annual link rot hypothetical:
-    qbinom(c(0.05, 0.95), 2200, 0.97^(2070-2011))
+    qbinom(c(0.05, 0.50), 2200, 0.50^(2070-2011))
+    [1] 0 0
     ~~~
 
 With that in mind, one can consider remedies. (If we lie to ourselves and say it won't be a problem in the future, then we guarantee that it *will* be a problem. ["People can stand what is true, for they are already enduring it."](http://wiki.lesswrong.com/wiki/Litany_of_Gendlin))
