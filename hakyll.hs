@@ -6,11 +6,10 @@ import Data.ByteString.Lazy.Char8 (unpack)
 import Data.Char (isAlphaNum, isAscii)
 import Data.FileStore (darcsFileStore)
 import Data.FileStore.Utils (runShellCommand)
-import Data.List (nub, sort)
+import Data.List (isInfixOf, nub, sort)
 import Data.Monoid (mempty, mconcat)
 import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString)
-import System.Directory (removeFile)
 import Text.HTML.TagSoup (renderTagsOptions,parseTags,renderOptions, optMinimize, Tag(TagOpen))
 import Text.Printf (printf)
 import qualified Data.Map as M (fromList, lookup, Map)
@@ -91,12 +90,17 @@ myPageRenderPandocWith :: Compiler (Page String) (Page String)
 myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options) >>^ fmap (unsafePerformIO . addImgDimensions)
 
 pandocTransform :: Pandoc -> Pandoc
-pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks))
+pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks . addAmazonAffiliate))
+
+addAmazonAffiliate :: Inline -> Inline
+addAmazonAffiliate x@(Link r (l, t)) =  if "amazon.com/" `isInfixOf` l && not ("?tag=" `isInfixOf` l)
+                                        then Link r (l++"?tag=gwernnet-20", t) else x
+addAmazonAffiliate x = x
 
 -- GITIT -> HAKYLL LINKS PLUGIN
 -- | Convert links with no URL to wikilinks.
 convertHakyllLinks :: Inline -> Inline
-convertHakyllLinks (Link ref ("", "")) =   let ref' = inlinesToURL ref in Link ref (ref', "Go to wiki page: " ++ ref')
+convertHakyllLinks (Link ref ("", "")) = let ref' = inlinesToURL ref in Link ref (ref', "Go to wiki page: " ++ ref')
 convertHakyllLinks x = x
 
 -- FASTER HTML RENDERING BY STATICLY SPECIFYING ALL IMAGE DIMENSIONS
@@ -115,6 +119,7 @@ staticImg x@(TagOpen "img" xs) = do let path = lookup "src" xs
                                     case path of
                                            Nothing -> return x
                                            Just p -> do let p' = if head p == '/' then tail p else p
+                                                        print p'
                                                         (height,width) <- imageMagick p'
                                                         return (TagOpen "img" (uniq ([("height",height), ("width",width)]++xs)))
             where uniq = nub . sort
@@ -173,12 +178,9 @@ customInterwikiMap = [("Hackage", "http://hackage.haskell.org/package/"),
                       ("Hoogle", "http://www.haskell.org/hoogle/?hoogle=")]
 wpInterwikiMap = [ ("Commons", "http://commons.wikimedia.org/wiki/"),
                  ("EmacsWiki", "http://www.emacswiki.org/cgi-bin/wiki.pl?"),
-                 ("Google", "http://www.google.com/search?q="),
                  ("Wikimedia", "http://wikimediafoundation.org/wiki/"),
-                 ("Wikinews", "http://en.wikinews.org/wiki/"),
                  ("Wikipedia", "http://en.wikipedia.org/wiki/"),
                  ("Wikiquote", "http://en.wikiquote.org/wiki/"),
-                 ("Wikischool", "http://www.wikischool.de/wiki/"),
                  ("Wikisource", "http://en.wikisource.org/wiki/"),
                  ("Wiktionary", "http://en.wiktionary.org/wiki/"),
                  ("WMF", "http://wikimediafoundation.org/wiki/"),
