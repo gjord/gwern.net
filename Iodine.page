@@ -7,7 +7,7 @@ status: in progress
 belief: highly likely
 ...
 
-[Iodine deficiency](!Wikipedia) is interesting from the ethical standpoint as one of the most cost-effective - yet obscure - [public health](!Wikipedia) measures ever devised which deserves a name like [nootropics](!Wikipedia): a few pennies of iodine added to salt eliminates many cases of mental retardation & goiters.
+[iodine deficiency](!Wikipedia) is interesting from the ethical standpoint as one of the most cost-effective - yet obscure - [public health](!Wikipedia) measures ever devised which deserves a name like [nootropics](!Wikipedia): a few pennies of iodine added to salt eliminates many cases of mental retardation & goiters.
 
 # Background
 
@@ -83,6 +83,8 @@ Unfortunately, no study of the issue is so large and high-quality that it defini
 
 While iodine has been extensively studied, this is a narrow question which many studies do not consider (a common problem in nootropics); we are interested in cases only where someone is mentally tested before and after iodine supplementation, or where 1 cohort receives supplementation after birth when compared against a similar cohort who receive no supplementation. Most studies turn out to be either correlational (eg. stratifying by blood levels of thyroid hormone) or comparing fetal supplementation against a non-supplemented control group.
 
+## Possible studies
+
 I currently know of these studies involving post-birth effects which I considered for use:
 
 1. ["Neurological damage to the fetus resulting from severe iodine deficiency during pregnancy"](/docs/1971-pharoah.pdf), Pharoah et al 1971; ["The effect of iodine prophylaxis on the incidence of endemic cretinism"](/docs/1972-pharoah.pdf), Pharoah et al 1972; ["Fetal iodine deficiency and motor performance during childhood"](/docs/1979-connolly.pdf), Connolly et al 1979; ["A controlled trial of iodinated oil for the prevention of endemic cretinism: a long-term follow-up"](/docs/1987-pharoah.pdf), Pharoah & Connolly 1987; a 1966 Papua New Guinea trial which in 1972 began supplementing the control group as well (who were now 0-6 years old); at the 1982 followup, the control group still suffered cretinism and deficits compared to the experimental - no effect. These studies turn out to not test the adults or children born before iodization and so are not useful for our purpose.
@@ -108,29 +110,30 @@ I currently know of these studies involving post-birth effects which I considere
 
 (My above searches & review turned out to be partially redundant with a review that was published online a few months afterwards, in June 2012: Zimmerman's ["The Effects of Iodine Deficiency in Pregnancy and Infancy"](/docs/2012-zimmerman.pdf). Regardless, the above was still useful because Zimmerman's focus was not on any childhood or adult effects but the pregnancy & infancy effects. I have also benefited from ["Iodine intake in human nutrition: a systematic literature review"](http://www.foodandnutritionresearch.net/index.php/fnr/article/view/19731/24399 "Gunnarsdottir & Dahl 2012"))
 
-Unfortunately, a few of the useful studies also tested a variety of substances, so any estimate of iodine's effect size (such as it is) would be an overestimate: the iodine might be synergizing with one of the other ingredients (eg. [selenium](!Wikipedia)) or the iodine might not be the responsible agent at all! But what implications can we draw out via a [meta-analysis](!Wikipedia)? First, the data from the surviving studies:
+Unfortunately, a few of the useful studies also tested a variety of substances, so any estimate of iodine's effect size (such as it is) would be an overestimate: the iodine might be synergizing with one of the other ingredients (eg. [selenium](!Wikipedia)) or the iodine might not be the responsible agent at all! But what implications can we draw out via a [meta-analysis](!Wikipedia)?
 
-~~~{.R}
-iodine <-read.table(stdin(),header=TRUE)
-"study"          "year" "n.e" "mean.e" "sd.e" "n.c" "mean.c" "sd.c" "age" "dose"
-"Bautista"       1982   100   69.43    10.96  100   70.31    10.96  8.75  475
-"Boyages"        1990   28    34.4     15.4   24    29.5     8.5    29.5  720
-"Schoenthaler.1" 1991   100   10.1     8.9    33.3  8.9      7.3    14    12.675
-"Schoenthaler.2" 1991   105   12.6     7.9    33.3  8.9      7.3    14    25.350
-"Schoenthaler.3" 1991   105   10.4     7.6    33.3  8.9      7.3    14    25.350
-"Cao.1"          1994   90    79       10     18.5  75       18     0.125 50
-"Cao.2"          1994   93    80       8      18.5  75       18     0.625 50
-"Southon"        1994   22    63.94    2.6    29    64.1     1.87   13.5  16.8
-"Shrestha.1"     1994   72    17.1     1.8    36    10.7     2.4    7.1   490
-"Shrestha.2"     1994   80    18.2     1.5    36    10.7     2.4    7.1   490
-"Isa"            2000   60    85.25    14.6   100   83.6     16.2   11.39 480
-"Huda"           2001   145   14.88    3.28   142   14.60    3.19   9.8   400
-"Zimmerman"      2006   159   25       6.3    151   20.5     5.6    11    400
-"McNeill"        2007   398   11.5     2.3    374   11.7     2.1    72    54.75
-"Menger"         2008   254   3.2      1.56   253   3.3      1.53   9.45  7.75
-"Gordon"         2009   84    10.2     3      82    9.6      2.4    11.5  29.4
+## Data
 
-~~~
+First, the data from the surviving studies:
+
+study           year   n.e   mean.e   sd.e   n.c   mean.c   sd.c   age   dose
+-----           ----   ---   ------   -----  ----  ------   -----  ----  -----
+Bautista        1982   100   69.43    10.96  100   70.31    10.96  8.75  475
+Boyages         1990   28    34.4     15.4   24    29.5     8.5    29.5  720
+Schoenthaler.1  1991   100   10.1     8.9    33.3  8.9      7.3    14    12.68
+Schoenthaler.2  1991   105   12.6     7.9    33.3  8.9      7.3    14    25.35
+Schoenthaler.3  1991   105   10.4     7.6    33.3  8.9      7.3    14    25.35
+Cao.1           1994   90    79       10     18.5  75       18     0.13  50
+Cao.2           1994   93    80       8      18.5  75       18     0.63  50
+Southon         1994   22    63.94    2.6    29    64.1     1.87   13.5  16.8
+Shrestha.1      1994   72    17.1     1.8    36    10.7     2.4    7.1   490
+Shrestha.2      1994   80    18.2     1.5    36    10.7     2.4    7.1   490
+Isa             2000   60    85.25    14.6   100   83.6     16.2   11.39 480
+Huda            2001   145   14.88    3.28   142   14.60    3.19   9.8   400
+Zimmerman       2006   159   25       6.3    151   20.5     5.6    11    400
+McNeill         2007   398   11.5     2.3    374   11.7     2.1    72    54.75
+Menger          2008   254   3.2      1.56   253   3.3      1.53   9.45  7.75
+Gordon          2009   84    10.2     3      82    9.6      2.4    11.5  29.4
 
 Comments:
 
@@ -183,11 +186,6 @@ The result of the meta-analysis:
 -->
 
 ~~~{.R}
-install.packages("metafor")
-library(metafor)
-effects <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
-                  data = iodine)
-res1 <- rma(yi, vi, data = effects); res1 # random-effects meta-analysis
 Random-Effects Model (k = 16; tau^2 estimator: REML)
 
 tau^2 (estimate of total amount of heterogeneity): 1.3028 (SE = 0.4918)
@@ -202,7 +200,8 @@ Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
   0.6132   0.2902   2.1133   0.0346   0.0445   1.1820        *
-
+~~~
+~~~{.R}
 res2 <- rma(yi, vi, data = effects, method="FE"); res2 # fixed-effects meta-analysis
 Fixed-Effects Model (k = 16)
 
@@ -225,15 +224,13 @@ A pretty [forest plot](!Wikipedia) summary:
 forest(res1, slab = paste(iodine$study, iodine$year, sep = ", "))
 ~~~
 
-![A forest plot of iodine studies](/images/iodine-forest.png)
+![A forest plot of iodine studies](/images/iodine/forest.png)
 
 ## Moderators: age & dose
 
 We suspected, based on the equivocal results in post-birth studies and the large decline in effect over the duration of a pregnancy in the Chinese studies, that if there was any benefit, it would be in the young; on the same reasoning, we might expect large doses to do more good than smaller ones. The necessary data is encoded into the table already, so we run a meta-analytic regression on them as independent predictors:
 
 ~~~{.R}
-rma(yi, vi, mods = ~ iodine$age + iodine$dose, data = effects)
-
 Mixed-Effects Model (k = 16; tau^2 estimator: REML)
 
 tau^2 (estimate of residual amount of heterogeneity): 1.1791 (SE = 0.4803)
@@ -255,11 +252,11 @@ iodine$dose    0.0019  0.0012   1.6620  0.0965  -0.0003  0.0042  .
 
 Some graphs to help us visualize. Graphing by age, we see what might be a slight negative relationship, as the regression suggests (driven by Shrestha 1994):
 
-![`plot(iodine$age, effects$yi)`](/images/iodine-age.png)
+![`plot(iodine$age, effects$yi)`](/images/iodine/age.png)
 
 Graphing by dose, we see no relationship at all to my eyes (outliers are Shrestha 1994, again):
 
-![`plot(iodine$dose, effects$yi)`](/images/iodine-dose.png)
+![`plot(iodine$dose, effects$yi)`](/images/iodine/dose.png)
 
 The `estimate` is the important part: neither of the moderators seem to have a strong relationship with the cognitive benefits (nor are they at least statistically significant). It would seem that any effectiveness of iodine is unrelated to age and dose. Whether the effectiveness is being driven by a few studies is what we'll look at next.
 
@@ -270,25 +267,23 @@ The `estimate` is the important part: neither of the moderators seem to have a s
 A test & graph:
 
 ~~~{.R}
-regtest(res1, model = "rma", predictor = "sei", ni = NULL)
 Regression Test for Funnel Plot Asymmetry
 
 model:     mixed-effects meta-regression model
 predictor: standard error
 
 z = 2.9560, p = 0.0031
-# hm, there may be something there... visualize:
-funnel(res1)
 ~~~
 
-![A funnel plot of effect size versus sample size, checking for bias in publishing only good-looking results on iodine](/images/iodine-funnel.png)
+![A funnel plot of effect size versus sample size, checking for bias in publishing only good-looking results on iodine](/images/iodine/funnel.png)
 
-So Shrestha 1994 is driving most of the effect! (Not a surprise at this point.)
+So Shrestha 1994 is driving most of the effect! (Not a surprise at this point.) If we omit those points, the funnel plot snaps into place cleanly:
+
+![A funnel plot with Shrestha removed, showing better fit from the weaker estimate.](/images/iodine/funnel-moderated.png)
 
 A trim-and-fill check agrees with us and not the test, by deciding not to add in any new studies between Shrestha and the rest; we also notice that the τ^2^ & _i_^2^ are extremely high, which is just telling us what we know - Shrestha 1994 is different from the other studies:
 
 ~~~{.R}
-tf <- trimfill(res1); tf
 Estimated number of missing studies on the left side is zero.
 
 Random-Effects Model (k = 16; tau^2 estimator: REML)
@@ -312,8 +307,6 @@ If we were to redo the analysis but omitting Shrestha 1994, we see a much smalle
 <!-- TODO: exploit the 'subset' argument to rma instead of rerunning the full calculation -->
 
 ~~~{.R}
-rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
-                  data = iodine[c(1:8,11:17),]))
 Random-Effects Model (k = 14; tau^2 estimator: REML)
 
 tau^2 (estimate of total amount of heterogeneity): 0.0520 (SE = 0.0316)
@@ -328,6 +321,63 @@ Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
   0.1854   0.0769   2.4108   0.0159   0.0347   0.3361        *
+~~~
+
+## Code
+
+Run as `R --slave --file=iodine.r`:
+
+~~~{.R}
+# TODO: factor out common parts of `png` (& make less square), and `rma` calls
+# install.packages("XML") # if not installed
+library(XML)
+iodine <- readHTMLTable(colClasses = c("character", "integer", rep("numeric", 8)),
+                     "http://www.gwern.net/Iodine#data")[[1]]
+# install.packages("metafor") # if not installed
+library(metafor)
+
+effects <- escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+                  data = iodine)
+
+cat("Basic random-effects meta-analysis of all studies:\n")
+res1 <- rma(yi, vi, data = effects); res1
+
+cat("Fixed-effects version:\n")
+res2 <- rma(yi, vi, data = effects, method="FE"); res2
+
+png(file="~/wiki/images/iodine/forest.png", width = 480, height = 480)
+forest(res1, slab = paste(iodine$study, iodine$year, sep = ", "))
+invisible(dev.off())
+
+cat("Random-effects with age & dose moderators:\n")
+rma(yi, vi, mods = ~ iodine$age + iodine$dose, data = effects)
+
+png(file="~/wiki/images/iodine/age.png", width = 480, height = 480)
+plot(iodine$age, effects$yi)
+invisible(dev.off())
+
+png(file="~/wiki/images/iodine/dose.png", width = 480, height = 480)
+plot(iodine$dose, effects$yi)
+invisible(dev.off())
+
+png(file="~/wiki/images/iodine/funnel.png", width = 480, height = 480)
+funnel(res1)
+invisible(dev.off())
+
+cat("The funnel plot looks weird, test it:\n")
+regtest(res1, model = "rma", predictor = "sei", ni = NULL)
+
+cat("For kicks, what does a trim-and-fill say?\n")
+tf <- trimfill(res1); tf
+
+cat("Re-run random-effects meta-analysis, omitting Shrestha:\n")
+res3 <- rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+                    data = iodine[c(1:8,11:16),])); res3
+
+# funnel plot with Shrestha omitted
+png(file="~/wiki/images/iodine/funnel-moderated.png", width = 480, height = 480)
+funnel(res3)
+invisible(dev.off())
 ~~~
 
 # See also
