@@ -59,7 +59,7 @@ To put it in more economic/statistical terms, what we want from a self-experimen
 
 ## What QS Is Not: (Just) Data Gathering
 
-One failure mode which is particularly dangerous for QSers is to overdo the data collection and collect masses of data they never *use*. Famous computer entrepreneur & mathematician [Stephen Wolfram](!Wikipedia) exemplified this for me in March 2012 with his lengthy blog post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/) in which he did some impressive graphing and exploration of data from 1989 to 2012: a third of a million (!) emails, full keyboard logging, calendar, phone call logs (with missed calls include), a pedometer, revision history of his tome _A New Kind of Science_, file types accessed per date, parsing scanned documents for dates, a treadmill, and perhaps more he didn't mention.
+One failure mode which is particularly dangerous for QSers is to overdo the data collection and collect masses of data they never *use*. Famous computer entrepreneur & mathematician [Stephen Wolfram](!Wikipedia) exemplified this for me in March 2012 with his lengthy blog post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/) in which he did some impressive graphing and exploration of data from 1989 to 2012: a third of a million (!) emails, full keyboard logging, calendar, phone call logs (with missed calls include), a pedometer, revision history of his tome [_A New Kind of Science_](http://www.amazon.com/New-Kind-Science-Stephen-Wolfram/dp/1579550088/), file types accessed per date, parsing scanned documents for dates, a treadmill, and perhaps more he didn't mention.
 
 Wolfram's dataset is well-depicted in informative graphs, breathtaking in its thoroughness, and even more impressive for its duration. So why do I read his post with sorrow? I am sad for him because I have read the post several times, and as far as I can see, he has not benefited in any way from his data collection. Nothing in his life was better 1989-2012 because he did all this, and he shows no indication that he will benefit in the future (besides having a very nifty blog post). And just reading through his post with a little imagination suggests plenty of experiments he could do:
 
@@ -123,7 +123,7 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
 
 I have tried to do my little self-experiments as well as I know how to, and hopefully my results are less bogus than the usual anecdotes one runs into online. What I would really like is for other people (especially Zeo owners) to *replicate* my results. To that end I have taken pains to describe my setups in complete detail so others can use it, and provided the data and complete [R](!Wikipedia "R (programming language)") or [Haskell](!Wikipedia "Haskell (programming language)") programs used in analysis. If anyone replicates my results in any fashion, please contact me and I would be happy to link your self-experiment here!
 
-[^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his _The Four-hour Body_ claims:
+[^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his [_The Four-hour Body_](http://www.amazon.com/4-Hour-Body-Uncommon-Incredible-Superhuman/dp/030746363X/) claims:
 
     > Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20-30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using.
 
@@ -143,7 +143,7 @@ The major surprise in this data was how quickly I fell asleep: 18 minutes. I had
 # Uses
 ## Meditation
 
-One possible application for Zeo was meditation. If it's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, _Modern Japanese diaries_, for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well.
+One possible application for Zeo was meditation. If it's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, [_Modern Japanese diaries_](http://www.amazon.com/Modern-Japanese-Diaries-Donald-Keene/dp/0231114435/), for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well.
 
 ## Smart alarm
 
@@ -1835,7 +1835,7 @@ This experiment was hastily done and has several weaknesses, some I mentioned be
     I am not sure how much this matters. I had no expectation that potassium would affect my sleep at all, one user specifically denied any effect, the only study suggested I'd find improvements, I did not want to find a negative effect much less such a severe effect, and the sheer strength of the effect over a multi-month period is a bit more than I would expect from any expectancy or placebo effect.
 4. *timing* was not uniform
 
-    Of the issues, this is the most important. If potassium has some stimulatory effects as anecdotes claim, then timing may be causing all the sleep disturbances and not potassium _per se_. It might be exactly like vitamin D in this respect: taken in the evening, it badly damages sleep but taken in the morning, it does nothing or it improves sleep.
+    Of the issues, this is the most important. If potassium has some stimulatory effects as anecdotes claim, then timing may be causing all the sleep disturbances and not potassium per se. It might be exactly like vitamin D in this respect: taken in the evening, it badly damages sleep but taken in the morning, it does nothing or it improves sleep.
 
 If I were to do a followup experiment, it would be blinded & randomized as usual, with consistent doses (eliminating objections 1-3), but more importantly, the dose would be consumed upon awakening.
 
@@ -1843,7 +1843,7 @@ I am not sure I will bother with a followup experiment. Potassium is not of part
 
 ## Potassium morning use
 
-As it happened, I managed to retrieve my pill-making machine and spare gel capsules, and I *do* hate to waste perfectly good potassium citrate powder, so I decided to do a morning experiment. I made 3x24 potassium pills and 3x24 brown rice pills (out of flour); I take one set of 3 pills each morning, randomly picking. This procedure addresses all 4 issues, and will answer the question about whether potassium's sleep disturbance is due to a timing issue like that of caffeine and vitamin D. Analysis will be the same as before: 3 metrics of sleep disturbance, and then daily self-rating.
+As it happened, I managed to retrieve my pill-making machine and spare gel capsules, and I *do* hate to waste perfectly good potassium citrate powder, so I decided to do a morning experiment. I made 3x24 potassium pills and 3x24 brown rice pills (out of flour); I take one set of 3 pills each morning, randomly picking. This procedure addresses all 4 issues, and will answer the question about whether potassium's sleep disturbance is due to a timing issue like that of caffeine and vitamin D. Analysis will be the same as before: 3 metrics of sleep disturbance, and then daily self-rating. (I didn't devise a paired-blocks setup since my marked containers were in use elsewhere; as often happens I ran out of one set of pills first, the rice placebo pills, on 10 February 2013, and made another batch of 24 rice placebo pills.)
 
 <!--
 02 Jan 2013: 0
@@ -1880,6 +1880,15 @@ February 2013
 01: 1
 02: 1
 03: 1
+04: 0
+05: 1
+06: 1
+07: 0
+08: 0
+09: 0
+10: 0
+11: 1
+12: 1
 -->
 
 # In progress
@@ -3076,13 +3085,21 @@ February 2013
 01: 1 1
 02: 0 0
 03: 0 1
-04: 1 0?
+04: 1 0
+05: 1 0
+06: 1 0
+07: 1 1
+08: 0 1
+09: 0 0
+10: 1 1
+11: 0 1
+12: 1 0?
 
 Underpopulated data cells:
-58: 1 0
-60: 1 1
-65: 0 0
-65: 0 1
+61: 1 0
+62: 1 1
+66: 0 0
+67: 0 1
 -->
 
 # External links
@@ -3196,7 +3213,7 @@ Much of the data is too impoverished to draw any suggestions from; the 'Melatoni
 - 'Interrupted'/'Recall': _r_=-0.165
 - 'Interrupted'/'Emotion': _r_=0.284
 
-    'Interruption' is experimentally manipulable by eg. an alarm clock or roommate. 'Recall' might be improved by some change in journaling, for example doing at your bed instead of waiting until you're on your computer. The positive correlation with 'Emotion' suggests that, per the [WILD](http://lucid.wikia.com/wiki/Wake_Initiated_Lucid_Dream) methodology of lucid dreaming (see [LaBerge](!Wikipedia "Stephen LaBerge") & [Rheingold](!Wikipedia "Howard Rheingold"), _Exploring the World of Lucid Dreaming_), a temporary awakening does increase the chance of a lucid dream (laden with emotion).
+    'Interruption' is experimentally manipulable by eg. an alarm clock or roommate. 'Recall' might be improved by some change in journaling, for example doing at your bed instead of waiting until you're on your computer. The positive correlation with 'Emotion' suggests that, per the [WILD](http://lucid.wikia.com/wiki/Wake_Initiated_Lucid_Dream) methodology of lucid dreaming (see [LaBerge](!Wikipedia "Stephen LaBerge") & [Rheingold](!Wikipedia "Howard Rheingold"), [_Exploring the World of Lucid Dreaming_](http://www.amazon.com/Exploring-World-Dreaming-Stephen-LaBerge/dp/034537410X/)), a temporary awakening does increase the chance of a lucid dream (laden with emotion).
 
 (One observation that came to mind working on cleaning the data was that collection was very sparse, sporadic, and accidental-looking.)
 
@@ -3466,3 +3483,12 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 02 Feb 2013: off -->
 <!-- Redshift: 03 Feb 2013: on -->
 <!-- Redshift: 04 Feb 2013: on -->
+<!-- Redshift: 05 Feb 2013: on -->
+<!-- Redshift: 06 Feb 2013: off -->
+<!-- Redshift: 07 Feb 2013: off -->
+<!-- Redshift: 08 Feb 2013: on -->
+<!-- Redshift: 09 Feb 2013: on -->
+<!-- Redshift: 10 Feb 2013: on -->
+<!-- Redshift: 11 Feb 2013: off -->
+<!-- Redshift: 12 Feb 2013: off -->
+<!-- Redshift: 13 Feb 2013: on -->
