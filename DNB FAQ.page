@@ -1308,13 +1308,6 @@ TODO
 "Improved fluid intelligence limited to working memory capacity using intensive n-back tasks with a visuospatial component" Mentioned in Stephenson's CV
 
 I've emailed him. He says "Should be accepted in October, but can't guarantee anything until the papers are signed." followed up 30 November 2012, then 18 February 2013.
-
-### Stegman & Abron 2012?
-
-http://embedit.in/veXowuWPoM Kids, but poster is missing much of the data and is described as 'preliminary'
-
-emailed them 18 February 2013
-
 -->
 
 ## Meta-analysis
@@ -1844,6 +1837,10 @@ invisible(dev.off())
 cat("Trim-and-fill with outlier deleted:\n")
 trimfill(rma(measure = "SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
          data = dnb, subset = c(1:6,9:25)))
+
+# optimize the generated graphs by cropping whitespace & losslessly compressing them
+system('cd ~/wiki/images/dnb/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
+system("optipng -o9 -fix ~/wiki/images/dnb/*.png", ignore.stdout = TRUE)
 ~~~
 
 ## Non-IQ or non-DNB gains
