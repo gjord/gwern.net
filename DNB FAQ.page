@@ -1356,7 +1356,7 @@ Going through them, I must note:
 
 - Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated, and I used his approach in estimating values for each training group. IQ test time is based on the description in Redick et al 2012:
 
-    > In addition, the 19-session groups were  20 min to complete BOMAT, whereas the 12- and 17-session groups received only 10 min (S. M. Jaeggi, personal communication, May 25, 2011). As shown in Figure 2, the use of the short time limit in the 12- and 17-session studies produced substantially lower scores than the 19-session study.
+    > In addition, the 19-session groups were 20 min to complete BOMAT, whereas the 12- and 17-session groups received only 10 min (S. M. Jaeggi, personal communication, May 25, 2011). As shown in Figure 2, the use of the short time limit in the 12- and 17-session studies produced substantially lower scores than the 19-session study.
 - polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
 - Jaeggi 2010: used BOMAT scores; should I somehow pool RAPM with BOMAT?
 - Jaeggi 2011: used SPM (a Raven's); should I somehow pool the TONI?
@@ -1409,7 +1409,7 @@ Going through them, I must note:
     2. mean = $\frac{(25 \times 14.96) + (26 \times 15.23)}{25+26} = 15.097$
     3. pooled variance: $((25-1)*2.7 + (26-1)*2.44) / (25 + 26 - 2) = 2.56$
 
-- Zhong 2011 omitted because I cannot read Chinese and cannot understand the experimental setup or tables
+- Zhong 2011: "dual attention channel" task omitted, dual and single n-back scores kept unpooled and controls split across the 2; I thank Emile Kroger for his translations of key parts of the thesis. Unable to get IQ test type or whether administered scored, but Zhong 2011 appears to have replicated Jaeggi 2008's training time
 - Jonasson 2011 omitted for lacking any measure of IQ
 - Preece 2011 omitted; only the Figure Weights subtest from the WAIS was reported, but RAPM scores were taken and published in the inaccessible Palmer 2011
 - Kundu et al 2011 and Kundu 2012 have been split into 2 experiments based on the raw data: the smaller one using the full RAPM 36-matrix 40-minute test, and the larger an 18-matrix 10-minute test
@@ -1490,56 +1490,79 @@ Differentials based on fig.3 in Jaeggi 2008:
 
 (25 minutes per day)
 -->
+<!--
+Zhong 2011 active: 0 training: variable IQ: unknown speed: unknown
+Zhong
+283 in first experiment; 16 groups = 17.6 per group
+control
+"single task of visual working
+memory"
+"working memory dual n-back"
+"dual-channel attention
+task"
+1. 25min training per day? replicating jaeggi 2008; so 125,250,375,500 minutes; experiment n=17.6, split control=8.8
+2. 74 in second; 4 groups = 18.5 per group; 375,475min
+-->
 
 The data from the surviving studies:
 
-study         year   n.e  mean.e    sd.e   n.c   mean.c  sd.c   active   training   IQ   speed
-------------- ----   --   -----     ----   ---   -----   ----   ------   --------   --   -----
-Jaeggi1.1     2008   16   9.84      0.59   8.75  10.51   3.721  0        200        0    10
-Jaeggi1.2     2008   22   11.2      0.48   8.75  10.51   3.721  0        300        1    10
-Jaeggi1.3     2008   16   13.29     0.7    8.75  10.51   3.721  0        425        1    10
-Jaeggi1.4     2008   15   14.16     0.76   8.75  10.51   3.721  0        475        1    20
-polar         2009   13   32.76     1.83   8     25.12   9.37   0        360        0    30
-Qiu           2009   9    132.1     3.2    10    130     5.3    0        250        2    25
-Stephenson.1  2010   41   16.085    0.83   28    15.50   0.99   1        400        1    10
-Stephenson.2  2010   41   16.085    0.83   26    14.08   0.65   0        400        1    10
-Jaeggi2       2010   46   12.975    3.13   43    11.44   2.58   0        370        0    16
-Jaeggi3       2011   32   16.94     4.75   30    16.2    5.1    1        287        2    10
-Chooi.1       2011   4.5  12.7      2      22    11.3    2.59   0        240        1    20
-Chooi.2       2011   4.5  12.7      2      15    13.3    1.91   1        240        1    20
-Chooi.3       2011   6.5  12.1      2.81   23    11.9    2.64   0        600        1    20
-Chooi.4       2011   6.5  12.1      2.81   11    13.4    2.70   1        600        1    20
-Jaeggi4       2011   51   15.097    2.56   27    14.74   2.8    1        500        1    30
-Kundu1        2011   3    31        1.73   3     30.3    4.51   1        1000       1    40
-Schweizer     2011   29   27.07     2.16   16    26.5    4.5    1        463        2    30
-Jaušovec      2012   14   32.43     5.65   15    29.2    6.34   1        1800       1    8.3
-Kundu2        2012   11   10.81     2.32   12    9.5     2.02   1        1000       1    10
-Salminen      2012   13   13.7      2.2    9     10.9    4.3    0        319        1    20
-Redick.1      2012   12   6.25      3.08   20    6       3      0        700        1    10
-Redick.2      2012   12   6.25      3.08   29    6.24    3.34   1        700        1    10
-Takeuchi      2012   41   31.9      0.4    20    31.2    0.9    0        270        1    30
-Rudebeck      2012   27   9.52      2.03   28    7.75    2.53   0        400        0    10
-Vartanian     2013   17   11.18     2.53   17    10.41   2.24   1        60         1    10
+year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training   IQ   speed
+---- ------------- ---   -----     ----   ---   -----   ----   ------   --------   --   -----
+2008 Jaeggi1.1     16    9.84      0.59   8.75  10.51   3.721  0        200        0    10
+2008 Jaeggi1.2     22    11.2      0.48   8.75  10.51   3.721  0        300        1    10
+2008 Jaeggi1.3     16    13.29     0.7    8.75  10.51   3.721  0        425        1    10
+2008 Jaeggi1.4     15    14.16     0.76   8.75  10.51   3.721  0        475        1    20
+2009 Qiu           9     132.1     3.2    10    130     5.3    0        250        2    25
+2009 polar         13    32.76     1.83   8     25.12   9.37   0        360        0    30
+2010 Jaeggi2       46    12.975    3.13   43    11.44   2.58   0        370        0    16
+2010 Stephenson.1  41    16.085    0.83   28    15.50   0.99   1        400        1    10
+2010 Stephenson.2  41    16.085    0.83   26    14.08   0.65   0        400        1    10
+2011 Chooi.1       4.5   12.7      2      22    11.3    2.59   0        240        1    20
+2011 Chooi.2       4.5   12.7      2      15    13.3    1.91   1        240        1    20
+2011 Chooi.3       6.5   12.1      2.81   23    11.9    2.64   0        600        1    20
+2011 Chooi.4       6.5   12.1      2.81   11    13.4    2.70   1        600        1    20
+2011 Jaeggi3       32    16.94     4.75   30    16.2    5.1    1        287        2    10
+2011 Jaeggi4       51    15.097    2.56   27    14.74   2.8    1        500        1    30
+2011 Kundu1        3     31        1.73   3     30.3    4.51   1        1000       1    40
+2011 Schweizer     29    27.07     2.16   16    26.5    4.5    1        463        2    30
+2011 Zhong.1.05d   17.6  6.38      1.75   8.8   6.9     1.25   0        125
+2011 Zhong.1.05s   17.6  7.22      1.00   8.8   6.9     1.25   0        125
+2011 Zhong.1.10d   17.6  6.05      1.68   8.8   5.35    2.03   0        250
+2011 Zhong.1.10s   17.6  6.71      1.57   8.8   5.35    2.03   0        250
+2011 Zhong.1.15d   17.6  6.88      1.50   8.8   6.78    1.35   0        375
+2011 Zhong.1.15s   17.6  6.94      1.06   8.8   6.78    1.35   0        375
+2011 Zhong.1.20d   17.6  7.18      1.11   8.8   7.15    0.9    0        500
+2011 Zhong.1.20s   17.6  7.06      1.65   8.8   7.15    0.9    0        500
+2011 Zhong.2.15s   18.5  6.89      0.99   18.5  5.15    2.01   0        375
+2011 Zhong.2.19s   18.5  6.72      1.07   18.5  5.35    1.62   0        475
+2012 Jaušovec      14    32.43     5.65   15    29.2    6.34   1        1800       1    8.3
+2012 Kundu2        11    10.81     2.32   12    9.5     2.02   1        1000       1    10
+2012 Redick.1      12    6.25      3.08   20    6       3      0        700        1    10
+2012 Redick.2      12    6.25      3.08   29    6.24    3.34   1        700        1    10
+2012 Rudebeck      27    9.52      2.03   28    7.75    2.53   0        400        0    10
+2012 Salminen      13    13.7      2.2    9     10.9    4.3    0        319        1    20
+2012 Takeuchi      41    31.9      0.4    20    31.2    0.9    0        270        1    30
+2013 Vartanian     17    11.18     2.53   17    10.41   2.24   1        60         1    10
 
 ### Analysis
 
 The result of the meta-analysis:
 
 ~~~{.R}
-Random-Effects Model (k = 25; tau^2 estimator: REML)
+Random-Effects Model (k = 35; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 0.2822 (SE = 0.1238)
-tau (sqrt of the estimate of total heterogeneity): 0.5313
-I^2 (% of total variability due to heterogeneity): 69.33%
-H^2 (total variability / sampling variability):    3.26
+tau^2 (estimate of total amount of heterogeneity): 0.2231 (SE = 0.0900)
+tau (sqrt of the estimate of total heterogeneity): 0.4723
+I^2 (% of total variability due to heterogeneity): 62.68%
+H^2 (total variability / sampling variability):    2.68
 
 Test for Heterogeneity:
-Q(df = 24) = 73.9433, p-val < .0001
+Q(df = 34) = 88.3102, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.5325   0.1321   4.0307   <.0001   0.2736   0.7914      ***
+  0.4824   0.1038   4.6461   <.0001   0.2789   0.6859      ***
 ~~~
 
 To depict the random-effects model in a more graphic form, we use the "[forest plot](!Wikipedia)":
@@ -1548,7 +1571,7 @@ To depict the random-effects model in a more graphic form, we use the "[forest p
 
 The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. We use a random-effects model: the high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect (although in this case, the fixed effects estimate is almost the same as the random effects model).
 
-The confidence interval excludes zero, so one might conclude that n-back really does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase IQ is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal iodine or iron), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. This skeptical attitude is relevant to our examination of moderators.
+The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal iodine or iron), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. This skeptical attitude is relevant to our examination of moderators.
 
 ### Moderators
 #### Control groups
@@ -1556,50 +1579,50 @@ The confidence interval excludes zero, so one might conclude that n-back really 
 A major criticism of n-back studies is that the effect is being manufactured by the methodological problem of some studies using a no-contact or passive control group rather than an active control group. (Passive controls know they received no intervention and that the researchers don't expect them to do better on the post-test, which may reduce their efforts & lower their scores.) Each study has been coded appropriately, and we can ask whether it matters:
 
 ~~~{.R}
-Mixed-Effects Model (k = 25; tau^2 estimator: REML)
+Mixed-Effects Model (k = 35; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 0.2113 (SE = 0.1047)
-tau (sqrt of the estimate of residual heterogeneity): 0.4597
+tau^2 (estimate of residual amount of heterogeneity): 0.1975 (SE = 0.0849)
+tau (sqrt of the estimate of residual heterogeneity): 0.4444
 
 Test for Residual Heterogeneity:
-QE(df = 23) = 58.1332, p-val < .0001
+QE(df = 33) = 78.3025, p-val < .0001
 
 Test of Moderators (coefficient(s) 1,2):
-QM(df = 2) = 25.5796, p-val < .0001
+QM(df = 2) = 26.8772, p-val < .0001
 
 Model Results:
 
                      estimate      se    zval    pval    ci.lb   ci.ub
-factor(dnb$active)0    0.7975  0.1621  4.9214  <.0001   0.4799  1.1152  ***
-factor(dnb$active)1    0.2095  0.1797  1.1659  0.2436  -0.1427  0.5618
+factor(dnb$active)0    0.6140  0.1217  5.0441  <.0001   0.3754  0.8525  ***
+factor(dnb$active)1    0.2106  0.1759  1.1974  0.2311  -0.1341  0.5554
 ~~~
 
-The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals overlap only partially. The effect with passive control groups is a dramatic _d_=0.8 while with active control groups, the IQ gains shrink to _d_=0.2.
+The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals overlap only partially. The effect with passive control groups is a dramatic _d_=0.6 while with active control groups, the IQ gains shrink to _d_=0.2.
 
 #### Training time
 
 Jaeggi et al 2008 observed a dose-response to training, where those who trained the longest apparently improved the most. Ever since, this has been cited as a factor in what studies will observe gains or as an explanation why some studies did not see improvements - perhaps they just didn't do enough training. `metafor` is able to look at the number of minutes subjects in each study trained for to see if there's any obvious linear relationship:
 
 ~~~{.R}
-Mixed-Effects Model (k = 25; tau^2 estimator: REML)
+Mixed-Effects Model (k = 35; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 0.2985 (SE = 0.1315)
-tau (sqrt of the estimate of residual heterogeneity): 0.5464
+tau^2 (estimate of residual amount of heterogeneity): 0.2338 (SE = 0.0941)
+tau (sqrt of the estimate of residual heterogeneity): 0.4835
 
 Test for Residual Heterogeneity:
-QE(df = 23) = 73.5582, p-val < .0001
+QE(df = 33) = 88.2552, p-val < .0001
 
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.1022, p-val = 0.7492
+QM(df = 1) = 0.0049, p-val = 0.9444
 
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.5932  0.2334   2.5409  0.0111   0.1356  1.0507  *
-mods      -0.0001  0.0004  -0.3197  0.7492  -0.0009  0.0006
+intrcpt    0.4927  0.1858   2.6517  0.0080   0.1285  0.8568  **
+mods      -0.0000  0.0003  -0.0697  0.9444  -0.0007  0.0007
 ~~~
 
-The estimate of the relationship is that there probably is none at all: the estimated coefficient has a large _p_-value, and further, that coefficient is negative. This may seem initially implausible but if we graph the time spent training per study with the final (unweighted) effect size, we see why:
+The estimate of the relationship is that there is none at all: the estimated coefficient has a large _p_-value, and further, that coefficient is negative. This may seem initially implausible but if we graph the time spent training per study with the final (unweighted) effect size, we see why:
 
 ![`plot(dnb$training, res1$yi)`](/images/dnb/effectsizevstrainingtime.png)
 
@@ -1706,7 +1729,7 @@ Regression Test for Funnel Plot Asymmetry
 model:     mixed-effects meta-regression model
 predictor: standard error
 
-z = -0.3700, p = 0.7114
+z = -0.7196, p = 0.4718
 ~~~
 
 So, nothing; let's visualize it:
@@ -1722,48 +1745,50 @@ This looks reasonably good, although the studies are crowding the edges of the f
 The trim-and-fill estimate:
 
 ~~~{.R}
-Estimated number of missing studies on the right side: 6
+Estimated number of missing studies on the right side: 7
 
-Random-Effects Model (k = 31; tau^2 estimator: REML)
+Random-Effects Model (k = 42; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 0.3600 (SE = 0.1333)
-tau (sqrt of the estimate of total heterogeneity): 0.6000
-I^2 (% of total variability due to heterogeneity): 73.14%
-H^2 (total variability / sampling variability):    3.72
+tau^2 (estimate of total amount of heterogeneity): 0.2796 (SE = 0.0961)
+tau (sqrt of the estimate of total heterogeneity): 0.5288
+I^2 (% of total variability due to heterogeneity): 66.84%
+H^2 (total variability / sampling variability):    3.02
 
 Test for Heterogeneity:
-Q(df = 30) = 105.0833, p-val < .0001
+Q(df = 41) = 119.0040, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.7235   0.1298   5.5726   <.0001   0.4690   0.9779      ***
+  0.6329   0.1024   6.1786   <.0001   0.4321   0.8336      ***
 ~~~
 
-The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while many of the entries average around _d_=0.3, there must be 6 missing (sub)studies _d_>1, and hence it estimates a stronger effect size; graphing it:
+The trim-and-fill method thinks that because of Stephenson 2010 being such an outlier at _d_=1.5 while many of the entries average around _d_=0.3, there must be missing studies _d_>1, and hence it estimates a stronger effect size; graphing it:
 
 ![`funnel(tf)`](/images/dnb/funnel-trimfill.png)
 
 If the visible outlier on the funnel & forest plots (Stephenson 2010) is deleted, the trim-and-fill changes:
 
 ~~~{.R}
-Random-Effects Model (k = 23; tau^2 estimator: REML)
+Estimated number of missing studies on the right side: 5
 
-tau^2 (estimate of total amount of heterogeneity): 0.0672 (SE = 0.0602)
-tau (sqrt of the estimate of total heterogeneity): 0.2592
-I^2 (% of total variability due to heterogeneity): 33.87%
-H^2 (total variability / sampling variability):    1.51
+Random-Effects Model (k = 28; tau^2 estimator: REML)
+
+tau^2 (estimate of total amount of heterogeneity): 0.3996 (SE = 0.1590)
+tau (sqrt of the estimate of total heterogeneity): 0.6321
+I^2 (% of total variability due to heterogeneity): 70.67%
+H^2 (total variability / sampling variability):    3.41
 
 Test for Heterogeneity:
-Q(df = 22) = 34.0793, p-val = 0.0482
+Q(df = 27) = 93.8075, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.4239   0.0960   4.4155   <.0001   0.2358   0.6121      ***
+  0.5678   0.1450   3.9147   <.0001   0.2835   0.8521      ***
 ~~~
 
-That is, without Stephenson 2010, the trim-and-fill will fill in no hypothetical studies. So, overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from any obvious publication bias.
+Without Stephenson 2010, the trim-and-fill will fill in somewhat fewer hypothetical studies. So, overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from any obvious publication bias.
 
 <!--
 TODO:
@@ -1780,7 +1805,7 @@ Run as `R --slave --file=dnb.r`:
 ~~~{.R}
 # TODO: factor out common parts of `png` (& make less square), and `rma` calls
 library(XML)
-dnb <- readHTMLTable(colClasses = c("character", "integer", rep("numeric", 10)),
+dnb <- readHTMLTable(colClasses = c("integer", "character", rep("numeric", 10)),
                      "http://www.gwern.net/DNB%20FAQ")[[1]]
 # install.packages("metafor") # if not installed
 library(metafor)
@@ -1789,7 +1814,7 @@ cat("Basic random-effects meta-analysis of all studies:\n")
 res1 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
             data = dnb); res1
 
-png(file="~/wiki/images/dnb/forest.png", width = 480, height = 480)
+png(file="~/wiki/images/dnb/forest.png", width = 580, height = 580)
 forest(res1, slab = paste(dnb$study, dnb$year, sep = ", "))
 invisible(dev.off())
 
@@ -1801,7 +1826,7 @@ cat("Random-effects, regressing against training time:\n")
 rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
     mods = dnb$training)
 
-png(file="~/wiki/images/dnb/effectsizevstrainingtime.png", width = 480, height = 480)
+png(file="~/wiki/images/dnb/effectsizevstrainingtime.png", width = 580, height = 580)
 plot(dnb$training, res1$yi)
 invisible(dev.off())
 
@@ -1809,19 +1834,19 @@ cat("Random-effects, regressing against administered speed of IQ tests:\n")
 rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
     data = dnb, mods=dnb$speed)
 
-png(file="~/wiki/images/dnb/iqspeedversuseffect.png", width = 480, height = 480)
+png(file="~/wiki/images/dnb/iqspeedversuseffect.png", width = 580, height = 580)
 plot(dnb$speed, res1$yi)
 invisible(dev.off())
 
 cat("Publication bias checks using funnel plots:\n")
 regtest(res1, model = "rma", predictor = "sei", ni = NULL)
 
-png(file="~/wiki/images/dnb/funnel.png", width = 480, height = 480)
+png(file="~/wiki/images/dnb/funnel.png", width = 580, height = 580)
 funnel(res1)
 invisible(dev.off())
 
 # If we plot the residual left after correcting for active vs passive, the funnel plot improves
-png(file="~/wiki/images/dnb/funnel-moderators.png", width = 480, height = 480)
+png(file="~/wiki/images/dnb/funnel-moderators.png", width = 580, height = 580)
 res <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
            data = dnb, mods = ~ factor(dnb$active)-1 )
 funnel(res)
@@ -1830,7 +1855,7 @@ invisible(dev.off())
 cat("Little publication bias, but let's see trim-and-fill's suggestions anyway:\n")
 tf <- trimfill(res1); tf
 
-png(file="~/wiki/images/dnb/funnel-trimfill.png", width = 480, height = 480)
+png(file="~/wiki/images/dnb/funnel-trimfill.png", width = 580, height = 580)
 funnel(tf)
 invisible(dev.off())
 
