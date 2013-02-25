@@ -584,7 +584,7 @@ So, the absence of Korean characters is curious, and may represent a dog that di
 
 (An explanation might be the many [Japan-Korea disputes](!Wikipedia), but the legacy of colonization & exploitation would presumably burn more painfully for the Koreans - the sufferers - than the Japanese, and so one might expect any silence and ignoring of the other country to be on the Korean side rather than the Japanese.)
 
-### Statistical
+### Source code
 
 Run as: `R --slave --file=hafu.r`:
 
@@ -661,6 +661,10 @@ cat("\nTabulate hair color against eye color:\n")
 print(table(hafu$Hair, hafu$Eye), zero.print=".")
 
 # with(hafu[hafu$Mother=="Japanese",], print(table(Hair, Eyes, Father), zero.print="."))
+
+# optimize the generated graphs by cropping whitespace & losslessly compressing them
+system('cd ~/wiki/images/hafu/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
+system("optipng -o9 -fix ~/wiki/images/hafu/*.png", ignore.stdout = TRUE)
 ~~~
 
 #### Capture-recapture
@@ -669,11 +673,18 @@ The universe of anime/manga since 1963 is of unknown total size but *very* large
 
 My search procedure can be summarized as: I check many different places, looking for keywords and phrases that may indicate a hafu character, and if I find one I add it to the database but if it's already in it, I do nothing. Places change, and new places appear, so the checking is never done, but once a character has been added, I will always recognize it even if I find it multiple times. This turns out to strongly resemble a problem from *ecology*: a ecologist or biologist wishes to know how many animals are in a region, but while animals can be tagged or marked or otherwise recorded (if they have unique spots or fur), animals are hard to find, there's a lot of them, and you never know when you're done even if your traps are stuffed full of animals you've already seen before. But if all your traps are turning up no new animals, surely that's consistent with having trapped most or all the animals, right? If every time you trapped an animal you got a new animal, the total population of animals must be truly enormous for you to not trap the same animal twice!
 
-This intuition is right. Formalized as statistics, it is called "capture-recapture" or "[mark and recapture](!Wikipedia)", and it applies to any area which satisfies the basic description of very large population and repeated captures of the same member (for example, [testing software for bugs](http://stats.stackexchange.com/questions/16317/predicting-total-number-of-bugs-based-on-number-of-bugs-revealed-by-each-tester)). Libraries are already available; I like the looks of the R library [Rcapture](http://cran.r-project.org/web/packages/Rcapture/index.html) ([manual](http://cran.r-project.org/web/packages/Rcapture/Rcapture.pdf); [paper](http://cran.r-project.org/web/packages/Rcapture/vignettes/RcaptureJSS.pdf "'Rcapture: Loglinear Models for Capture-Recapture in R', Baillargeon  & Rivest 2007")).
+This intuition is right. Formalized as statistics, it is called "capture-recapture" or "[mark and recapture](!Wikipedia)", and it applies to any area which satisfies the basic description of very large population and repeated captures of the same member. Past applications of it and similar techniques include [testing software for bugs](http://stats.stackexchange.com/questions/16317/predicting-total-number-of-bugs-based-on-number-of-bugs-revealed-by-each-tester), [estimating](http://www.interfacesymposia.org/I01/I2001Proceedings/ADobra/ADobra.pdf "'', Dobra & Fienberg 2003") [the size](http://knowledge.emory.edu/papers/227.pdf "'The Little Engines that Could: Modeling the Performance of World Wide Web Search Engines', Bradlow & Schmittlein 2000") of the World Wide Web or [Shakespeare's vocabulary](http://dl.dropbox.com/u/85192141/1976-efron.pdf "Estimating the Number of Unseen Species: How Many Words Did Shakespeare Know?', Efron & Thisted 1976") ([overview of related topics](http://cvcl.mit.edu/SUNSeminar/BungeFitzpatrick_1993.pdf "'Estimating the Number of Species: A Review', Bunge & Fitzpatrick 1993")). Libraries are already available; I choose to use the R library [Rcapture](http://cran.r-project.org/web/packages/Rcapture/index.html) ([manual](http://cran.r-project.org/web/packages/Rcapture/Rcapture.pdf); [paper](http://cran.r-project.org/web/packages/Rcapture/vignettes/RcaptureJSS.pdf "'Rcapture: Loglinear Models for Capture-Recapture in R', Baillargeon  & Rivest 2007")).
 
-I've never seen capture-recapture used for literary topics, but so far [no one](http://stats.stackexchange.com/questions/43707/capture-recapture-sampling-valid-in-literary-analysis "Capture-recapture sampling valid in literary analysis?") has told me it *can't* work! I can treat my existing data collection as the captures in capture-recapture: so eg. each time I get a Google Alert for a new character but it's already on my list, this counts as a "recapture", but if I run a search in Google Books and I find 15 characters and 14 are already on the list, that's 14 "recaptures" and 1 "capture".
+I can treat my existing data collection as the captures in capture-recapture: so eg. each time I get a Google Alert for a new character but it's already on my list, this counts as a "recapture", but if I run a search in Google Books and I find 15 characters and 14 are already on the list, that's 14 "recaptures" and 1 "capture".
 
-The main limitation of capture-recapture in this context seems to be the precise population one is making inferences about. Not all half-Japanese characters from the past will have been noted as such in media, characters where half-Japanese is implied but not definitively stated as being such may have that omitted from any discussion, fewer characters will appear in English discussions anywhere, and only a subset of those will appear in accessible digitized materials. Using capture-recapture means we are only making inferences about the size of "the population of characters with information available on the English Web".
+There seem to be two main issues with capture-recapture in this context:
+
+1. The models generally require properties like that each member of the population have an equal chance of being captured or independence of capture occasions.
+
+    The former (heterogeneous capture probability) is addressed by the more advanced models in Rcapture, and eyeballing the capture log, it's very rare for a character to appear more than 2 or 3 times, suggesting general equality of captures. The latter requirement is difficult to verify; the best I can say is that very few characters show up in more than one source, and each of the major sources seems to have been compiled in ignorance of the others (there were no discussions, comments, links, or citations)
+2. The results are valid only for the precise population one is making inferences about.
+
+    Not all half-Japanese characters from the past will have been noted as such in media, characters where half-Japanese is implied but not definitively stated as being such may have that omitted from any discussion, fewer characters will appear in English discussions anywhere, and only a subset of those will appear in accessible digitized materials. Using capture-recapture means we are only making inferences about the size of "the population of characters with information available on the English Web".
 
 ##### Corpus estimation result
 
