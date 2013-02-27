@@ -107,9 +107,11 @@ My predictions were substantially better than random chance[^proper-scoring-rule
     In this case, a blind guesser would guess 50% every time (roughly half the days were Adderall and roughly half were not) so the question is, did the 50% guesser beat me?
 
     ~~~{.haskell}
-    (15 * log 0.5)
-    ~> -10.397
-    (15 * log 0.5) > logScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),
+    logScore [(True,0.5),(False,0.5),(True,0.5),(True,0.5),(False,0.50),
+              (False,0.5),(False,0.5),(True,0.5),(True,0.5),(True,0.5),
+              (False,0.5),(True,0.50),(True,0.5),(True,0.5)]
+    ~> -9.7
+    (-9.7) > logScore [(True,0.95),(False,0.30),(True,0.85),(True,0.75),(False,0.50),
                                (False,0.25),(False,0.60),(True,0.70),(True,0.65),(True,0.60),
                                (False,0.30),(True,0.50),(True,0.90),(True,0.40)]
     ~> False
@@ -869,9 +871,15 @@ From first trip, we get data excluding the trip day: off:17,18,19 on:20,21,22
 16. First block: 6, 7, 8 February: 0 http://predictionbook.com/predictions/15712
 
     Second block: 10, 11, 12 February: 1
-17. First block: 13, 14, 15 February:
+17. First block: 13, 14, 15 February: 1 http://predictionbook.com/predictions/15936
 
-    Second block: 16, 17, 18 February:
+    Second block: 16, 17, 18 February: 0
+18. First block: 20,21,22 February: 1 http://predictionbook.com/predictions/16145
+
+    Second block: 23,24,25 February: 0
+19. First block: 26,27,28 February:
+
+    Second block: 1?,2?,3? March:
 
 TODO:
 outstanding predictions:
@@ -1571,9 +1579,7 @@ Potassium is not the safest supplement ever, but it's reasonably safe (kidneys c
 
 [Potassium citrate](!Wikipedia) powder is neither expensive nor cheap: I purchased [453g for $21](http://www.amazon.com/Potassium-Citrate-TriPotassium-Dihydrate-Powder/dp/B00729L4NO/ "Potassium Citrate - 100% Pure TriPotassium Citrate Dihydrate Powder - 1 lb Bulk Pack"). The powder is crystalline white, dissolves instantly in water, and largely tasteless (sort of saline & slightly unpleasant). The powder is 37% potassium by weight (the formula is C~6~H~5~K~3~O~7~) so 453g is actually 167g of potassium, so 80-160 days' worth depending on dose.
 
-My first impression of ~1g around 12:30PM was that while I do not feel like running around, within an hour I did feel like the 'brain fog' was lighter than before. The effect wasn't dramatic, so I can't be very confident. Operationalizing 'brain fog' for an experiment might be hard: it doesn't necessarily feel like I would do better on dual n-back. I took 2 smaller doses 3 and 6 hours later, to no further effect.
-
-Over the following weeks and months, I continued to randomly alternate between potassium & non-potassium days. I noticed no effects other than sleep problems.
+My first impression of ~1g around 12:30PM was that while I do not feel like running around, within an hour I did feel like the 'brain fog' was lighter than before. The effect wasn't dramatic, so I can't be very confident. Operationalizing 'brain fog' for an experiment might be hard: it doesn't necessarily feel like I would do better on dual n-back. I took 2 smaller doses 3 and 6 hours later, to no further effect. Over the following weeks and months, I continued to randomly alternate between potassium & non-potassium days. I noticed no effects other than sleep problems.
 
 ## Potassium sleep
 
@@ -1581,7 +1587,9 @@ That first night, I had severe trouble sleeping, falling asleep in 30 minutes ra
 
 > I think a general high water high electrolyte diet has benefited my sleep. I haven't noticed potassium immediately before bed decreasing sleep quality.
 
-I began recording a subset of sleep data by hand as [another sleep experiment](Zeo#potassium). The conclusion was that there was a very strong negative effect on my sleep (_d_=-1.1). As such, I will not be purchasing further potassium and I may discontinue even my present use.
+I began recording a subset of sleep data by hand as [another sleep experiment](Zeo#potassium). The conclusion was that there was a very strong negative effect on my sleep (_d_=-1.1) and no benefit to my mood/productivity self-ratings.
+
+Since my experiment had a number of flaws (non-blind, varying doses at varying times of day), I wound up doing a [second better experiment](Zeo#potassium-morning-use) using blind standardized smaller doses in the morning. The negative effect was much smaller, but there was still no mood/productivity benefit. Having used up my first batch of potassium citrate in these 2 experiments, I will not be ordering again since it clearly doesn't work for me.
 
 # Selegiline / Deprenyl
 
