@@ -1,0 +1,303 @@
+---
+title: Touhou music by the numbers
+description: Collect music metadata and look for patterns
+tags: statistics, sociology
+created: 28 Feb 2013
+status: in progress
+belief: possible
+...
+
+Idea: correlate Touhou music production against Japanese youth unemployment: does the total production of music as measured in seconds increase with unemployment?
+
+Opposite view, recessions dent production (perhaps because people are working harder and so have less free time even if other people are unemployed?) http://www.gamesetwatch.com/2009/12/sound_current_yokohamas_mediam.php
+
+> While the turnout at M3 remains strong, at the same time an economic recession cannot help but touch a community whose activities rely on having free time. Furthermore while previously many hobbyists dreamed of someday breaking into the industry, more recently many also fear that game companies will begin cracking down on unlicensed tributes.
+
+# Data
+## Unemployment data source
+
+Used FRED [Adjusted Unemployment Rate for Youth [15-24yo] in Japan (JPNURYNAA)](http://research.stlouisfed.org/fred2/series/JPNURYNAA); downloaded as CSV, annual percentage 2000-2011
+
+~~~{.R}
+jpn <- read.table(stdin(),header=TRUE)
+      DATE VALUE
+2000-01-01   8.9
+2001-01-01   9.1
+2002-01-01   9.5
+2003-01-01   9.6
+2004-01-01   9.0
+2005-01-01   8.1
+2006-01-01   7.5
+2007-01-01   7.5
+2008-01-01   7.0
+2009-01-01   8.9
+2010-01-01   9.0
+2011-01-01   8.1
+~~~
+
+## Touhou data sources
+
+TODO Suggestions: http://www.reddit.com/r/TOUHOUMUSIC/comments/19hh2m/touhou_music_databases_comprehensive_easily/ http://boards.4chan.org/jp/res/10559057
+
+alternative sources
+
+- [VGMdb Touhou entries](http://vgmdb.net/product/9) but it is substantially smaller with metadata on <1389 albums
+- [Touhouwiki.net](http://en.touhouwiki.net/wiki/Doujin_circles) another source, with <1182 albums
+- "東方音団録 ～ Arrange Circle Database ver.3.0"; [homepage](http://www16.atwiki.jp/toho) & [release info](http://www16.atwiki.jp/toho/pages/727.html) ([debate](http://www16.atwiki.jp/toho/pages/13.html), [chat](http://www16.atwiki.jp/toho/pages/948.html)), [product page](http://www.toranoana.jp/bl/article/04/0030/04/86/040030048682.html) with j-subculture.com quoting a partial total of $15, Paypal and shipping outside Japan boosting to $20+!
+
+   Strategy: first I'll ask for an Arrange CD download in the wiki's chatroom; then I'll look for an email by someone running it and email them directly; then I'll see if there's anyone in japan who either owes me a favor or is willing to do me a favor; then I'll ask around for a cheaper reshipper; and if all that fails, then I'll pay j-subculture's extortionate $25 probable total cost.
+
+Need more for capture-recapture analysis!
+
+### Torrent
+
+Music source: [Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790), 265.2GB of 44421 tracks from 4952 albums produced X-Y by <1,264 groups or "circles".
+
+~~~{.sh}
+$ find ~/torrent/Touhou\ lossy\ music\ collection/ -type f -name "*.mp3"|wc
+  44421
+$ ls torrent/Touhou\ lossy\ music\ collection/|wc
+   1264
+$ ls torrent/Touhou\ lossy\ music\ collection/*/|wc
+   7477
+~~`
+
+File name, music length, and metadata year (if any) are extracted using `exiftool`:
+
+events:
+例大祭["","SP","SP2",2-9]: annual Reitaisai
+M3*: annual Media Mix Market eg. http://polymetrica.wordpress.com/2009/10/09/things-i-am-excited-about-04-m324/
+C[63-82]: semi-annual Comiket
+サンクリ[28-50]: annual? Sunshine Creation http://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AA%E3%82%A8%E3%82%A4%E3%82%B7%E3%83%A7%E3%83%B3_%28%E5%90%8C%E4%BA%BA%E5%8D%B3%E5%A3%B2%E4%BC%9A%29
+東方紅楼夢[?2-8]: annual Koromu
+月の宴?2-5: annual? Feast of the Month
+紅のひろば?2-6: semiannual Red Square
+東方不敗小町?2-6, SP, ぷちこまち: Komachi
+杜の奇跡[15-16]
+東方杜郷想[2-3]
+幺樂団カァニバル！?2-3
+東方幻楽祭[2]: semiannual
+コミコミ[12-14]
+FF[9-17] ?
+こみトレ[12-17]
+COMIC1☆2-6
+COMIC CITY大阪[63,73]
+恋魔理?2-3
+東方椰麟祭?2-3
+東方名華祭2
+
+exiftool; json
+
+Is `exiftool`'s length approximation trustworthy? Yes, it seems to be always within seconds of the full `mp3info` answer:
+
+~~~{.sh}
+$ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3" -exec mp3info -F -p "0:%02m:%02s " {} \; -exec exiftool -Duration {} \;
+0:00:23 Duration                        : 23.12 s (approx)
+0:04:28 Duration                        : 0:04:28 (approx)
+0:02:44 Duration                        : 0:02:44 (approx)
+0:04:52 Duration                        : 0:04:52 (approx)
+0:03:56 Duration                        : 0:03:56 (approx)
+0:01:44 Duration                        : 0:01:44 (approx)
+0:04:34 Duration                        : 0:04:34 (approx)
+0:02:30 Duration                        : 0:02:30 (approx)
+0:03:02 Duration                        : 0:03:02 (approx)
+0:03:43 Duration                        : 0:03:42 (approx)
+0:03:23 Duration                        : 0:03:23 (approx)
+0:03:11 Duration                        : 0:03:11 (approx)
+0:04:22 Duration                        : 0:04:22 (approx)
+0:03:13 Duration                        : 0:03:13 (approx)
+0:04:04 Duration                        : 0:04:04 (approx)
+0:03:58 Duration                        : 0:03:57 (approx)
+0:05:24 Duration                        : 0:05:24 (approx)
+0:04:17 Duration                        : 0:04:17 (approx)
+0:03:14 Duration                        : 0:03:14 (approx)
+0:01:59 Duration                        : 0:01:58 (approx)
+0:03:21 Duration                        : 0:03:21 (approx)
+0:02:35 Duration                        : 0:02:35 (approx)
+0:04:20 Duration                        : 0:04:20 (approx)
+...
+~~~
+
+~~~{.R}
+# generate and parse and cleanup data
+# system("exiftool -extension mp3 -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json") # takes ~30m
+library("rjson")
+# download from http://www.gwern.net/docs/2013-gwern-touhoumusic-torrent.json.7z and decompress with 7zip
+json_data <- fromJSON(paste(readLines("2013-gwern-touhoutorrent.json"), collapse=""))
+touhou <- data.frame(matrix(unlist(json_data), ncol=12, byrow=TRUE))
+colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
+                      "Track", "Directory", "FileName", "FileSize", "AudioBitrate")
+# Delete SourceFile column; redundant with Directory/FileName
+touhou <- touhou[,-1]
+touhou$Directory <- sub("/home/gwern/torrent/Touhou lossy music collection/", "", as.character(touhou$Directory))
+touhou[touhou==""] <- NA
+touhou[touhou=="-"] <- NA
+touhou$Year <- as.integer(as.character(touhou$Year))
+# torrent doesn't cover 2013 music, and music predating the PC-98 games doesn't exist...
+touhou$Year[touhou$Year<1990] <- NA
+touhou$Year[touhou$Year>2012] <- NA
+# Genre is "None" or " "? both useless and false (thanks, tagger); so it goes too:
+touhou$Genre[touhou$Genre=="None"] <- NA
+touhou$Genre[touhou$Genre==" "] <- NA
+# turn the track lengths and bitrates into usable numbers on a common scale (seconds and MBs, respectively)
+touhou$Length <- gsub(" \\(approx\\)","",as.character(touhou$Length))
+touhou$AudioBitrate <- as.integer(sub(" kbps","",as.character(touhou$AudioBitrate)))
+# exiftool leaves us "16 s"; if so, strip the " s" and turn it into an integer
+# else, eg. "0:04:37"; split on colon, multiple hour by 3600 seconds, minutes=60 each, seconds=seconds; and sum
+interval <- function(x) { if (!is.na(x)) { if (grepl(" s",x)) as.integer(sub(" s","",x)) else {y <- unlist(strsplit(x, ":")); as.integer(y[[1]])*3600 + as.integer(y[[2]])*60 + as.integer(y[[3]]); }} else NA}
+touhou$Length <- sapply(touhou$Length,interval)
+filesize <- function(x) { if (grepl(" kB",x)) (as.integer(sub(" kB","",x))/1000) else as.integer(sub(" MB","",x))}
+touhou$FileSize <- sapply(touhou$FileSize, filesize)
+# Serious work: turn the encoded information in Directory into usable columns. Not for the faint of heart.
+#
+# The Directory column looks like "[twith1450]/2009.03.08 TOHOMOHO [例大祭6]"
+# The schema here is "[circle]/eventDate album [event]"
+#
+# "[Angelic Quasar]/2006.01.29 [AQSH-0003] Racial Ethnic Nation"
+# "[Alstroemeria Records]/[ARCD0001] The regret of stars, but stars shine bright (C65) (mp3)"
+# "[Aqua Style／ひえろぐらふ]/2010.05.24 [AQUA-0031] 春宵一刻値千金 -シュンショウイッコク　アタイセンキン-"
+brackets <- function(b) sub("\\]","", sub("\\[","",b))
+# easy first step: parse out the leading group/circle (always there, terminated by forward-slash) as new column
+touhou$Circle <- sapply(touhou$Directory, function(x) brackets(unlist(strsplit(as.character(x), "/"))[1]))
+# destructively update by removing the group/circle, to make the next step easier
+# this makes Directory looks like "2009.06.07 [PAER-0007] #01 -LILITH- [東方幻楽祭2]"
+# or "[ARCD0001] The regret of stars, but stars shine bright (C65) (mp3)"
+touhou$Directory <- sapply(touhou$Directory, function(x) unlist(strsplit(as.character(x), "/"))[2])
+touhou$Date <- as.Date(sapply(touhou$Directory, function(x) substring(x, 1, 10)), format="%Y.%m.%d")
+# and like before, we strip the event date that we've parsed out, leaving eg. "ピアノのための東方小品集 Op.1-1 [御射宮司祭]"
+# or "月遊 [例大祭8]" or "[AQUA-0031] 春宵一刻値千金 -シュンショウイッコク　アタイセンキン-"
+touhou$Directory <- sapply(touhou$Directory, function(x) substring(x, 12))
+# extracting the next parameter, the event the album was released at, is harder still
+library(stringr)
+# if the directory does not end in a right-bracket, there's no event info and we should bomb out
+# else, grab w/regexp last pair of brackets with a space before (excludes any album numbering schemes) & trim
+# that didn't work? then it must be one of the directories where there's no space before the bracketed event, retry without leading space
+touhou$Event <- sapply(touhou$Directory, function(x) { if (str_sub(x,start=-1) == "]") { res <- brackets(unlist(str_split(x, " \\["))[2]); if (!is.na(res)) res else brackets(unlist(str_split(x, "\\["))[2]) } else x})
+# if you examine the Event column, it's full of wrong entries. I have made a list of 19 event-prefixes (I hope), which
+# we'll use as a whitelist by erasing anything which lacks all of the 19 prefixes.
+isPrefix <- function(x,y) grepl(paste0("^",x), y)
+events <- c("例大祭","M3","C","サンクリ","東方紅楼夢","月の宴","紅のひろば","東方不敗小町","杜の奇跡","東方杜郷想",
+            "幺樂団カァニバル！","東方幻楽祭","コミコミ","FF","こみトレ","COMIC1","COMIC CITY大阪","恋魔理","東方椰麟祭","東方名華祭")
+touhou$Event <- sapply(as.character(touhou$Event),
+                       function(target) if (sum(sapply(events, function(e) isPrefix(e,target))) != 0) target else NA)
+# this whitelist covers almost the entire sample, so I think it works well:
+## R> sum(!is.na(touhou$Event))
+## [1] 39190
+## R> length(touhou$Event)
+## [1] 41866
+#
+# one final thing, since (almost) all directories had Dates while not all files had Years; overwrite any missing Years
+# based on the Date we just extracted
+touhou$Year <- as.integer(format(touhou$Date, "%Y"))
+touhou$Directory <- NULL # clean up
+# escape with the loot:
+write.csv(touhou, file="2013-gwern-touhoumusic-torrent.csv", row.names=FALSE)
+~~~
+
+## VGMdb
+
+
+
+
+# Analysis
+
+~~~{.R}
+touhou <- read.csv("http://www.gwern.net/docs/2013-gwern-touhoumusic-torrent.csv",
+                   colClasses=c("character", "integer", "factor", "character", "integer", "factor",
+                                "character", "character", "numeric", "integer", "factor", "Date"))
+
+# do stuff with the data
+# general correlations
+t <- data.frame(touhou$Year, touhou$Length, touhou$FileSize, touhou$AudioBitrate)
+cor(t,use="pairwise.complete.obs")
+#                     touhou.Year touhou.Length touhou.FileSize touhou.AudioBitrate
+# touhou.Year
+# touhou.Length          -0.01091
+# touhou.FileSize         0.04484       0.93915
+# touhou.AudioBitrate     0.19188       0.11091         0.35499
+
+# test the correlation between higher bitrate and larger files:
+cor.test(touhou$FileSize, touhou$AudioBitrate)
+
+# the genre metadata is useless!
+sort(table(touhou$Genre), decreasing=TRUE)
+
+# boxplot avg length per year
+plot(touhou$Length ~ factor(touhou$Year))
+~~~
+
+Economics modeling:
+
+~~~{.R}
+jpn <- read.csv(stdin(),header=TRUE)
+DATE,VALUE
+2000-01-01,8.9
+2001-01-01,9.1
+2002-01-01,9.5
+2003-01-01,9.6
+2004-01-01,9.0
+2005-01-01,8.1
+2006-01-01,7.5
+2007-01-01,7.5
+2008-01-01,7.0
+2009-01-01,8.9
+2010-01-01,9.0
+2011-01-01,8.1
+
+# number of works per year does not correlate:
+cor.test(jpn$VALUE[3:12], table(touhou$Year)[1:10])
+    Pearson's product-moment correlation
+
+    Pearson's product-moment correlation
+
+data:  jpn$VALUE[3:12] and table(touhou$Year)[1:10]
+t = -0.3053, df = 8, p-value = 0.768
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.6903  0.5602
+sample estimates:
+    cor
+-0.1073
+
+model <- lm(table(touhou$Year)[1:10] ~ c(2002:2011) + jpn$VALUE[3:12]); summary(model)
+Call:
+lm(formula = table(touhou$Year)[1:10] ~ c(2002:2011) + jpn$VALUE[3:12])
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-2128.6  -716.4    52.4   632.6  2253.4
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+(Intercept)     -2775278     342171   -8.11  8.3e-05
+c(2002:2011)        1379        170    8.13  8.2e-05
+jpn$VALUE[3:12]     1450        567    2.56    0.038
+
+Residual standard error: 1400 on 7 degrees of freedom
+Multiple R-squared: 0.905,  Adjusted R-squared: 0.878
+F-statistic: 33.5 on 2 and 7 DF,  p-value: 0.00026
+
+
+
+logModel <- lm(log(table(touhou$Year)[1:10]) ~ c(2002:2011) + jpn$VALUE[3:12])
+summary(logModel)
+Call:
+lm(formula = log(table(touhou$Year)[1:10]) ~ c(2002:2011) + jpn$VALUE[3:12])
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-1.218 -0.632  0.108  0.551  0.982
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)     -1295.060    207.535   -6.24  0.00043
+c(2002:2011)        0.652      0.103    6.34  0.00039
+jpn$VALUE[3:12]    -0.725      0.344   -2.11  0.07301
+
+Residual standard error: 0.849 on 7 degrees of freedom
+Multiple R-squared: 0.906,  Adjusted R-squared: 0.879
+F-statistic: 33.8 on 2 and 7 DF,  p-value: 0.000253
+
+plot(c(2002:2011),table(touhou$Year)[1:10])
+points(c(2002:2011),exp(predict(logModel)),type='l',col='blue')
+~~~
