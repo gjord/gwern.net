@@ -106,7 +106,8 @@ I currently know of these studies involving post-birth effects which I considere
 16. ["Delayed Neurobehavioral Development in Children Born to Pregnant Women with Mild Hypothyroxinemia During the First Month of Gestation: The Importance of Early Iodine Supplementation"](/docs/2009-berbel.pdf), Berbel et al 2009; turns out that supplementation was administered to all women during their pregnancy, so the development scores are not useful here.
 17. ["Iodine supplementation improves cognition in mildly iodine-deficient children"](http://www.ajcn.org/content/90/5/1264.full), Gordon et al 2009
 18. ["The effect of iodine supplementation on cognition of mildly iodine deficient young New Zealand adults"](http://otago.ourarchive.ac.nz/handle/10523/2176), Fitzgerald 2012: Young adult ("18-30 years"), 0.15mg; no effect. (The paper should be available in "late" 2012, according to Fitzgerald.)
-19. ["Iodine and Cognition in Young Adults: A Randomised, Placebo-Controlled Trial"](http://otago.ourarchive.ac.nz/handle/10523/2341), Redman 2012; this may be a re-reporting of Fitzgerald 2012 or a replication. <!-- Followup once Fitzgerald is available -->
+19. ["Iodine and Cognition in Young Adults: A Randomised, Placebo-Controlled Trial"](http://otago.ourarchive.ac.nz/handle/10523/2341), Redman 2012; this may be a re-reporting of Fitzgerald 2012 or a replication. <!-- TODO Followup once Fitzgerald is available -->
+20. Dewi et al 2012, ["Iodine supplementation into drinking water improved intelligence of preschool children aged 25-59 months in Ngargoyoso sub-district, Central Java, Indonesia: A randomized control trial"](http://www.iiste.org/Journals/index.php/JBAH/article/download/1994/1973); subjects selected for low urinary iodine excretion, region has >50% goiter rates
 
 (My above searches & review turned out to be partially redundant with a review that was published online a few months afterwards, in June 2012: Zimmerman's ["The Effects of Iodine Deficiency in Pregnancy and Infancy"](/docs/2012-zimmerman.pdf). Regardless, the above was still useful because Zimmerman's focus was not on any childhood or adult effects but the pregnancy & infancy effects. I have also benefited from ["Iodine intake in human nutrition: a systematic literature review"](http://www.foodandnutritionresearch.net/index.php/fnr/article/view/19731/24399 "Gunnarsdottir & Dahl 2012"))
 
@@ -134,10 +135,11 @@ Zimmerman       2006   159   25       6.3    151   20.5     5.6    11    400
 McNeill         2007   398   11.5     2.3    374   11.7     2.1    72    54.75
 Menger          2008   254   3.2      1.56   253   3.3      1.53   9.45  7.75
 Gordon          2009   84    10.2     3      82    9.6      2.4    11.5  29.4
+Dewi            2012   33    110.27   9.04   34    103.06   9.99   3.1   8.4
 
 Comments:
 
-0. "age" variable is based on a simple average age of subjects (unweighted) or the reported mean; "dose" is total administered iodine in milligrams
+0. "age" variable is based on a simple average age of subjects (unweighted) or the reported mean; "dose" is total administered iodine in milligrams (note that studies typically report in micrograms/μg per day or week)
 1. Bautista notes: Stanford-Binet IQ, some data re-derived[^Bautista-reverse-engineering]
 2. Boyages: the two groups were not randomly chosen and may have pre-existing differences in IQ
 3. Schoenthaler: RAPM IQ
@@ -186,43 +188,38 @@ The result of the meta-analysis:
 -->
 
 ~~~{.R}
-Random-Effects Model (k = 16; tau^2 estimator: REML)
+Random-Effects Model (k = 17; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 1.3028 (SE = 0.4918)
-tau (sqrt of the estimate of total heterogeneity): 1.1414
-I^2 (% of total variability due to heterogeneity): 98.25%
-H^2 (total variability / sampling variability):    57.10
+tau^2 (estimate of total amount of heterogeneity): 1.2152 (SE = 0.4456)
+tau (sqrt of the estimate of total heterogeneity): 1.1024
+I^2 (% of total variability due to heterogeneity): 98.05%
+H^2 (total variability / sampling variability):    51.37
 
 Test for Heterogeneity:
-Q(df = 15) = 290.9491, p-val < .0001
+Q(df = 16) = 295.4447, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.6132   0.2902   2.1133   0.0346   0.0445   1.1820        *
+  0.6198   0.2723   2.2762   0.0228   0.0861   1.1536        *
 ~~~
 ~~~{.R}
-res2 <- rma(yi, vi, data = effects, method="FE"); res2 # fixed-effects meta-analysis
-Fixed-Effects Model (k = 16)
+Fixed-Effects Model (k = 17)
 
 Test for Heterogeneity:
-Q(df = 15) = 290.9491, p-val < .0001
+Q(df = 16) = 295.4447, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.2059   0.0367   5.6127   <.0001   0.1340   0.2779      ***
+  0.2171   0.0363   5.9794   <.0001   0.1459   0.2883      ***
 ~~~
 
 So the effect size is, as expected, small: _d_=0.2. A far cry from the _d_>1 which we estimated from the prenatal studies.
 
-The very large difference in _d_ - 0.2 vs 0.6 - between the fixed-effects and random-effects models is concerning. Given the very high heterogeneity of the _i_^2^, which indicates that there are large differences between some of the studies, a random-effects is more appropriate in principle; but further analysis shows this is being driven by a far outlier, and so I believe the fixed-effects estimate of 0.2 is more accurate.
+The large difference in _d_ - 0.2 vs 0.6 - between the fixed-effects and random-effects models is concerning. Given the very high heterogeneity of the _i_^2^, which indicates that there are large differences between some of the studies, a random-effects is more appropriate in principle; but further analysis shows this is being driven by a far outlier, and so I believe the fixed-effects estimate of 0.2 is more accurate.
 
 A pretty [forest plot](!Wikipedia) summary:
-
-~~~{.R}
-forest(res1, slab = paste(iodine$study, iodine$year, sep = ", "))
-~~~
 
 ![A forest plot of iodine studies](/images/iodine/forest.png)
 
@@ -231,23 +228,23 @@ forest(res1, slab = paste(iodine$study, iodine$year, sep = ", "))
 We suspected, based on the equivocal results in post-birth studies and the large decline in effect over the duration of a pregnancy in the Chinese studies, that if there was any benefit, it would be in the young; on the same reasoning, we might expect large doses to do more good than smaller ones. The necessary data is encoded into the table already, so we run a meta-analytic regression on them as independent predictors:
 
 ~~~{.R}
-Mixed-Effects Model (k = 16; tau^2 estimator: REML)
+Mixed-Effects Model (k = 17; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 1.1791 (SE = 0.4803)
-tau (sqrt of the estimate of residual heterogeneity): 1.0859
+tau^2 (estimate of residual amount of heterogeneity): 1.0983 (SE = 0.4327)
+tau (sqrt of the estimate of residual heterogeneity): 1.0480
 
 Test for Residual Heterogeneity:
-QE(df = 13) = 240.6870, p-val < .0001
+QE(df = 14) = 246.1499, p-val < .0001
 
 Test of Moderators (coefficient(s) 2,3):
-QM(df = 2) = 3.6629, p-val = 0.1602
+QM(df = 2) = 3.8012, p-val = 0.1495
 
 Model Results:
 
              estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt        0.3801  0.4676   0.8127  0.4164  -0.5365  1.2966
-iodine$age    -0.0146  0.0170  -0.8590  0.3903  -0.0479  0.0187
-iodine$dose    0.0019  0.0012   1.6620  0.0965  -0.0003  0.0042  .
+intrcpt        0.4353  0.4215   1.0327  0.3017  -0.3908  1.2614
+iodine$age    -0.0155  0.0162  -0.9625  0.3358  -0.0472  0.0161
+iodine$dose    0.0018  0.0011   1.6812  0.0927  -0.0003  0.0040  .
 ~~~
 
 Some graphs to help us visualize. Graphing by age, we see what might be a slight negative relationship, as the regression suggests (driven by Shrestha 1994):
@@ -262,7 +259,7 @@ The `estimate` is the important part: neither of the moderators seem to have a s
 
 ## Bias checks
 
-16 groups from fewer studies is not enough to reliably check for biases like [publication bias](!Wikipedia), but we can still try. The [funnel plot](!Wikipedia) looks pretty bizarre, with almost all studies tightly bunched around the null effect but 2 outliers - the 2 Shrestha 1994 groups we just saw - showing shockingly high effect sizes of _d_=3.1/4.1. Why did Shrestha 1994 observe such large IQ effects? I don't know, although the Malawi region *was* chosen for its iodine deficiency.
+We do not have enough to reliably check for biases like [publication bias](!Wikipedia), but we can still try. The [funnel plot](!Wikipedia) looks pretty bizarre, with almost all studies tightly bunched around the null effect but 2 outliers - the 2 Shrestha 1994 groups we just saw - showing shockingly high effect sizes of _d_=3.1/4.1. Why did Shrestha 1994 observe such large IQ effects? I don't know, although the Malawi region *was* chosen for its iodine deficiency.
 
 A test & graph:
 
@@ -272,7 +269,7 @@ Regression Test for Funnel Plot Asymmetry
 model:     mixed-effects meta-regression model
 predictor: standard error
 
-z = 2.9560, p = 0.0031
+z = 3.0250, p = 0.0025
 ~~~
 
 ![A funnel plot of effect size versus sample size, checking for bias in publishing only good-looking results on iodine](/images/iodine/funnel.png)
@@ -286,20 +283,20 @@ A trim-and-fill check agrees with us and not the test, by deciding not to add in
 ~~~{.R}
 Estimated number of missing studies on the left side is zero.
 
-Random-Effects Model (k = 16; tau^2 estimator: REML)
+Random-Effects Model (k = 17; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 1.3028 (SE = 0.4918)
-tau (sqrt of the estimate of total heterogeneity): 1.1414
-I^2 (% of total variability due to heterogeneity): 98.25%
-H^2 (total variability / sampling variability):    57.10
+tau^2 (estimate of total amount of heterogeneity): 1.2152 (SE = 0.4456)
+tau (sqrt of the estimate of total heterogeneity): 1.1024
+I^2 (% of total variability due to heterogeneity): 98.05%
+H^2 (total variability / sampling variability):    51.37
 
 Test for Heterogeneity:
-Q(df = 15) = 290.9491, p-val < .0001
+Q(df = 16) = 295.4447, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.6132   0.2902   2.1133   0.0346   0.0445   1.1820        *
+  0.6198   0.2723   2.2762   0.0228   0.0861   1.1536        *
 ~~~
 
 If we were to redo the analysis but omitting Shrestha 1994, we see a much smaller effect-size:
@@ -307,21 +304,23 @@ If we were to redo the analysis but omitting Shrestha 1994, we see a much smalle
 <!-- TODO: exploit the 'subset' argument to rma instead of rerunning the full calculation -->
 
 ~~~{.R}
-Random-Effects Model (k = 14; tau^2 estimator: REML)
+Random-Effects Model (k = 15; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 0.0520 (SE = 0.0316)
-tau (sqrt of the estimate of total heterogeneity): 0.2280
-I^2 (% of total variability due to heterogeneity): 71.35%
-H^2 (total variability / sampling variability):    3.49
+tau^2 (estimate of total amount of heterogeneity): 0.0585 (SE = 0.0337)
+tau (sqrt of the estimate of total heterogeneity): 0.2419
+I^2 (% of total variability due to heterogeneity): 72.81%
+H^2 (total variability / sampling variability):    3.68
 
 Test for Heterogeneity:
-Q(df = 13) = 51.5235, p-val < .0001
+Q(df = 14) = 57.7189, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.1854   0.0769   2.4108   0.0159   0.0347   0.3361        *
+  0.2149   0.0781   2.7527   0.0059   0.0619   0.3679       **
 ~~~
+
+So, it seems a lot of the effect size is being driven by a few studies turning in large or extremely large effect sizes: Shrestha, Zimmerman, and Diwi (in chronological order). One common factor to these studies seems to be that they worked in the most iodine-deprived areas possible: Shrestha chose his region as being the worst he could find, and Diwi cites reports of goiter in half the population while targeting the supplementation to the most deficient children.
 
 ## Code
 
@@ -367,17 +366,21 @@ invisible(dev.off())
 cat("The funnel plot looks weird, test it:\n")
 regtest(res1, model = "rma", predictor = "sei", ni = NULL)
 
-cat("For kicks, what does a trim-and-fill say?\n")
+cat("For kicks, what does a (normal) trim-and-fill say?\n")
 tf <- trimfill(res1); tf
 
 cat("Re-run random-effects meta-analysis, omitting Shrestha:\n")
 res3 <- rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
-                    data = iodine[c(1:8,11:16),])); res3
+                    data = iodine[c(1:8,11:17),])); res3
 
 # funnel plot with Shrestha omitted
 png(file="~/wiki/images/iodine/funnel-moderated.png", width = 480, height = 480)
 funnel(res3)
 invisible(dev.off())
+
+# optimize the generated graphs by cropping whitespace & losslessly compressing them
+system('cd ~/wiki/images/iodine/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
+system("optipng -o9 -fix ~/wiki/images/iodine/*.png", ignore.stdout = TRUE)
 ~~~
 
 # See also
