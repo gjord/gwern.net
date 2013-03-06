@@ -9,7 +9,7 @@ belief: highly likely
 
 > Statistically analyzing in `R` hundreds of predictions compiled for ~10 forecasters of the 2012 American Presidential election, and ranking them by Brier, RMSE, & log scores; the best overall performance seems to be by Drew Linzer and Wang & Holbrook, while Nate Silver appears as somewhat over-rated and the famous Intrade prediction market turning in a disappointing overall performance.
 
-In November 2012, I was hired by CFAR to compile an extensive dataset of pundits, modelers, hobbyists, and academics who had attempted to statistically forecast the 2012 American presidential race and other minor races; the results were interesting in that they contradicted the lionization of [Nate Silver](!Wikipedia)'s forecasts in _The New York Times_. This page is a full listing of the `R` source code I used to produce my analysis for the CFAR essay; notes on the derivation of each dataset are stored at [`2012-election-gwern-notes.txt`](/docs/2012-election-gwern-notes.txt).
+In November 2012, I was hired by CFAR to compile an extensive dataset of pundits, modelers, hobbyists, and academics who had attempted to statistically forecast the 2012 American presidential race and other minor races; the results were interesting in that they contradicted the lionization of [Nate Silver](!Wikipedia)'s forecasts in _The New York Times_. This page is a full listing of the R source code I used to produce my analysis for the CFAR essay; notes on the derivation of each dataset are stored at [`2012-election-gwern-notes.txt`](/docs/2012-election-gwern-notes.txt).
 
 The essay itself lives at ["Was Nate Silver the Most Accurate 2012 Election Pundit?"](http://appliedrationality.org/2012/11/09/was-nate-silver-the-most-accurate-2012-election-pundit/).
 
@@ -23,7 +23,7 @@ This election prediction judgment divided up into several sections dealing with 
 
 Few forecasters made predictions in all categories, the ones who did make predictions did not always make their full predictions public, etc. Note that all percentages are normalized in terms of that going to Obama, Democrats, or in some cases, Independents/Greens. The "Reality" 'forecaster' is the ground truth; these were all updated 23 November in what is hopefully a final update.
 
-The point of these calculations is to extract [Brier scores](!Wikipedia) (for categorical predictions like percentage of Obama victory) and [RMSE](!Wikipedia) sums (for continuous/quantitative predictions like vote share).
+The point of these calculations is to extract [Brier scores](!Wikipedia) (for categorical predictions like percentage of Obama victory) and [RMSE](!Wikipedia) sums (for continuous/quantitative predictions like vote share). Intrade prices were interpreted as straightforward probabilities without any correction for Intrade's [long-shot bias](Prediction markets#fn24)^[I have been told that once Intrade pries have been corrected for this, the new results are comparable to Silver & Wang. This doesn't necessarily surprise me, but during the original analysis I did not look into doing the long-shot bias correction because: hardly anyone does in discussions of prediction markets; it would've been more work; I'm not sure it's really legitimate, since if Intrade is biased, then it's biased - if someone produces extreme estimates which can be easily improved by regressing to some relevant mean, it doesn't seem quite honest to present your corrected version instead as what they "really" meant.]
 
 # Presidential
 
