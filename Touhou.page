@@ -1,7 +1,7 @@
 ---
 title: Touhou music by the numbers
 description: Collect music metadata and look for patterns
-tags: statistics, sociology
+tags: statistics, sociology, Haskell
 created: 28 Feb 2013
 status: in progress
 belief: possible
@@ -61,7 +61,7 @@ $ ls torrent/Touhou\ lossy\ music\ collection/|wc
    1264
 $ ls torrent/Touhou\ lossy\ music\ collection/*/|wc
    7477
-~~`
+~~~
 
 File name, music length, and metadata year (if any) are extracted using `exiftool`:
 
@@ -123,7 +123,7 @@ $ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3
 # generate and parse and cleanup data
 # system("exiftool -extension mp3 -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json") # takes ~30m
 library("rjson")
-# download from http://www.gwern.net/docs/2013-gwern-touhoumusic-torrent.json.7z and decompress with 7zip
+# download from http://www.gwern.net/docs/touhou/2013-torrent.json.7z and decompress with 7zip
 json_data <- fromJSON(paste(readLines("2013-gwern-touhoutorrent.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=12, byrow=TRUE))
 colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
@@ -202,7 +202,7 @@ The [Touhou project page](http://vgmdb.net/product/9) turns out to be incomplete
 The VGMdb administrators kindly gave me read-only access to their MySQL databases. I grabbed the entirety of the tables `vgmdb_albums` and `vgmdb_tracks` from the main VGMdb database; I exported them as 2 CSV files with comma separators, renamed `2013-vgmdb-albums.csv` and `2013-vgmdb-tracks.csv`. Before loading the exports, I had to delete all escaped quotes; the default R CSV parsing doesn't handle them. The track rows are 1 track with an album ID, so to turn each track record/row into an equivalent of the torrent rows, I need to fill in based on the album table.
 
 ~~~{.R}
-albums <- read.csv("2013-vgmdb-albums.csv")
+albums <- read.csv("http://www.gwern.net/docs/touhou/2013-vgmdb.csv")
 albums <- with(albums,
            data.frame(albumid,reldate,publisher,game,albumtitles))
 albums <- albums[grepl("ouhou", albums$game),]; albums$game <- NULL
@@ -223,10 +223,14 @@ touhou <- touhou[c(2,7,5,3,1,4,6)]
 write.csv(touhou, file="2013-vgmdb-touhou.csv", row.names=FALSE)
 ~~~
 
+## `touhouwiki.net`
+
+
+
 # Analysis
 
 ~~~{.R}
-touhou <- read.csv("http://www.gwern.net/docs/2013-gwern-touhoumusic-torrent.csv",
+touhou <- read.csv("http://www.gwern.net/docs/touhou/2013-torrent.csv",
                    colClasses=c("character", "integer", "factor", "character", "integer", "factor",
                                 "character", "character", "numeric", "integer", "factor", "Date"))
 
@@ -327,6 +331,129 @@ points(c(2002:2011),exp(predict(logModel)),type='l',col='blue')
 ~~~
 
 # Appendix
+## `touhouwiki.net` scraping code
+
+Uses the [Tagsoup](http://hackage.haskell.org/package/tagsoup) and [split](http://hackage.haskell.org/package/split) packages; emits CSV to standard out. It is a pile of kludges which I am a little ashamed to post publicly, and may not work for you.
+
+~~~{.Haskell}
+import Text.HTML.TagSoup (fromAttrib, fromTagText, isTagOpen, isTagText,
+                          parseTags, (~/=), Tag(TagComment, TagOpen,TagText))
+import Network.HTTP (getResponseBody, getRequest, simpleHTTP)
+import Data.List (isInfixOf, isPrefixOf, nub, sort, stripPrefix)
+import Data.Char (isSpace)
+import Codec.Binary.UTF8.String (decodeString)
+import Data.Maybe (fromMaybe, isJust, listToMaybe)
+import Data.List.Split (keepDelimsL, split, whenElt)
+import Control.Monad (join, unless)
+
+main :: IO ()
+main = do albums1 <- getAlbums "http://en.touhouwiki.net/wiki/List_by_Groups"
+          albums2 <- getAlbums "http://en.touhouwiki.net/wiki/List_of_Old_Touhou_Arrangement_Groups"
+          let albumURLs = map ("http://en.touhouwiki.net"++) $ nub $ sort $ albums1 ++ albums2
+          putStrLn header
+          mapM_ getAlbum albumURLs
+
+getAlbums :: String -> IO [String]
+getAlbums index = do touhou <- openURL index
+                     return $ drop 22 $ reverse [link | (TagOpen "a" ((ref, link):_)) <- parseTags touhou,
+                                                        ref=="href",
+                                                        "/wiki/" `isPrefixOf` link,
+                                                        let fltr x = not (x `isInfixOf` link),
+                                                        fltr "_Groups", fltr "Touhou_Wiki:", fltr "Special:",
+                                                        fltr "Template:", fltr "Category:", fltr "Talk:"]
+
+type Album = [Track]
+data Track = Track { title :: String, year :: Int, date :: String,artist :: String,
+                     album :: String, event :: String, circle :: String, duration :: Maybe Int,
+                     track :: Int } deriving Show
+empty :: Track
+empty = Track {title="",year=0,date="",album="",event="",circle="",artist="",duration=Nothing,track=0}
+
+header :: String
+header = "Title,Year,Date,Album,Event,Circle,Duration,Track"
+convert :: Track -> String
+convert t = "\"" ++ dequote (title t) ++ "\"," ++ show (year t) ++ "," ++ show (date t) ++ ",\"" ++ dequote (album t) ++ "\",\"" ++
+             event t ++ "\",\"" ++ circle t ++ "\"," ++ maybe "" show (duration t) ++ "," ++ show (track t)
+
+-- You are not expected to understand this.
+getAlbum :: String -> IO ()
+getAlbum a = do t <- fmap parseTags $ openURL a
+                --TagText "Released",TagClose "th",TagOpen "td" [],TagText "\n2007-03-23"
+                let dt = let target = dropWhile (TagText "Released" ~/=) t
+                         in if null target then ""
+                            else deleteParens $ fromTagText $ head $ tail $ filter isTagText target
+                -- TagText "Released",TagClose "th",TagOpen "td" [],TagText "\n2009/02/08 (",
+                -- TagOpen "a" [("href","/wiki/Category:Sunshine_Creation_42"),("title","Category:Sunshine Creation 42")],
+                -- TagText "Sunshine Creation 42",TagClose "a",TagText ")",TagClose "td"
+                let evnt = let stream = filter isTagText $ dropWhile (TagText "Released" ~/=) t
+                           in if '(' == last (fromTagText $ head $ take 5 $ drop 1 stream) -- )
+                              then fromTagText (filter isTagText (dropWhile (TagText "Released" ~/=) t) !! 2)
+                              else ""
+                -- "2007-03-23"
+                let yr = if null dt then 0 else read (take 4 dt)::Int
+                -- TagText "Album by CODE ZTS LABEL"
+                let hasCrcl = [cl | TagText cl <- t, "Album by " `isPrefixOf` cl]
+                unless (null hasCrcl || (yr==0 && null dt)) $ do
+                    let crcl = lookForCircle t
+                    -- TagText "Selfregards2 - Touhou Wiki - Characters, games, locations, and more"
+                    let albm = reverse $ drop 55 $ reverse $ head [al | TagText al <- t,
+                                 " - Touhou Wiki - Characters, games, locations, and more" `isInfixOf` al]
+                    let dflt = empty { date = dt, year = yr, circle = crcl, album = albm, event = evnt }
+                    let table = filter (\x -> not ("Disc" `isInfixOf` x || " CD" `isInfixOf` x)) $
+                                 filter (not . all isSpace) $
+                                  map (trim . fromTagText) $ filter isTagText $
+                                   drop 5 $ takeWhile (TagOpen "table"
+                                     [("class","navbox"),("cellspacing","0"),
+                                      ("style","background:#FFFBEE;border-color:#A8A077;")] ~/=) $
+                                       takeWhile (TagComment "" ~/=) $
+                                        dropWhile (TagOpen "span"
+                                         [("class","mw-headline"),("id","Tracks")] ~/=) t
+                    let tracks = filter (not . null) $
+                                  split (keepDelimsL $ whenElt
+                                   (\x -> length x==3 && "." `isInfixOf` x &&  isJust(maybeRead x :: Maybe Int))) table
+                    mapM_ (putStrLn . convert . trackToTrack dflt) tracks
+
+-- TagText "Album by ",TagOpen "a"
+-- [("href","/wiki/ALiCE%27S_EMOTiON"),("title","ALiCE'S EMOTiON")],TagText
+-- "ALiCE'S EMOTiON",TagClose "a"
+lookForCircle :: [Tag String] -> String
+lookForCircle t = let c = head [cl | TagText cl <- t, "Album by " `isPrefixOf` cl]
+                      res = if c == "Album by " then (let tg = (dropWhile (TagText "Album by " ~/=) t !! 2)
+                        in if isTagText tg then fromTagText tg else
+                            (if isTagOpen tg then fromAttrib "title" tg else "") ) else drop 9 c
+                      in if "(page does not exist)" `isInfixOf` res then takeWhile (/='(') res else res -- )
+
+-- ["01.","The mom","(04:07)","arrangement: ZTS","composition: ZTS","original title: The mom","source: Parhelia"]
+trackToTrack :: Track -> [String] -> Track
+trackToTrack tr t = tr { track = fromMaybe 0 (maybeRead (head t) :: Maybe Int),
+                         title = t !! 1,
+                         duration = if length t >=3 then Just (timeConverter $ deleteParens (t !! 2)) else Nothing,
+                         artist =  lookForAnArtist t }
+
+lookForAnArtist :: [String] -> String
+lookForAnArtist t = let targets = dropWhile (\x -> not ("arrangement:" `isPrefixOf` x || "composition:" `isPrefixOf` x)) t
+                        target
+                            | null targets = ""
+                            | last (head targets) == ':' = head targets ++ (targets !! 1)
+                            | otherwise = head targets
+                    in trim $ fromMaybe "" $ join $ fmap (stripPrefix "arrangement:") $ stripPrefix "composition:" target
+
+-- utility functions
+openURL :: String -> IO String
+openURL url = fmap decodeString (simpleHTTP (getRequest url) >>= getResponseBody)
+deleteParens, trim, dequote :: String -> String
+deleteParens = trim . filter (\x -> x /= '(' && x /= ')')
+trim = reverse . dropWhile isSpace . reverse . dropWhile isSpace
+dequote = map (\x -> if x=='"' then '\'' else x) -- "')
+timeConverter :: String -> Int
+timeConverter n = let (m,s) = break (==':') n
+                      m' = maybeRead m :: Maybe Int
+                      s' = maybeRead (drop 1 s) :: Maybe Int
+                  in (fromMaybe 0 m' * 60) + fromMaybe 0 s'
+maybeRead :: Read a => String -> Maybe a
+maybeRead = fmap fst . listToMaybe . reads
+~~~
+
 ## VGMdb scraping code
 
 The following is a buggy program for scraping Touhou albums from VGMdb; it works on a limited subset of album pages, but has an unknown number of fatal bugs. I abandoned it once I was offered read-only database access, and that was what I actually used to get my VGMdb data. This is in case I ever need to go back.
@@ -357,7 +484,8 @@ empty = Track {title="",year=0,date="",album="",circle="",duration=Nothing,track
 header :: String
 header = "Title,Year,Date,Album,Circle,Duration,Track"
 convert :: Track -> String
-convert t = "\"" ++ title t ++ "\"," ++ show(year t) ++ "," ++ show (date t) ++ ",\"" ++ album t ++ "\",\"" ++ circle t ++ "\"," ++ maybe "" show(duration t) ++ "," ++ show (track t)
+convert t = "\"" ++ title t ++ "\"," ++ show(year t) ++ "," ++ show (date t) ++ ",\"" ++
+              album t ++ "\",\"" ++ circle t ++ "\"," ++ maybe "" show(duration t) ++ "," ++ show (track t)
 
 -- example album link: 'TagOpen "a" [("class","albumtitle album-doujin"),
 --                                   ("href","http://vgmdb.net/album/36901"),
@@ -376,7 +504,9 @@ toAlbum page = let tags = parseTags page
                    albm = extractAlbum tags
                    crcl = extractCircle tags
                    files = extractMusic tags
-               in map (\t -> Track {title = title t, year = yr, date = dt, album = albm, circle = crcl, duration = duration t, track = track t}) files
+               in map (\t -> Track {title = title t, year = yr, date = dt,
+                                    album = albm, circle = crcl, duration = duration t,
+                                    track = track t}) files
 
 
 -- TagOpen "a" [("title","View albums released on Dec 30, 2011"),("href","/db/calendar.php?year=2011&month=12#20111230")]
@@ -391,12 +521,18 @@ extractDate t = let (a:b:_) = map snd $ head [atts | TagOpen "a" atts <- t,
 extractAlbum :: [Tag String] -> String
 extractAlbum t = (\(TagText x) -> reverse $ drop 8 $ reverse x) (dropWhile (not . isTagOpenName "title") t !! 1)
 
--- [TagText "Published by",TagClose "b",TagClose "span",TagClose "td",TagText "\r\n",TagOpen "td" [],TagOpen "a" [("href","/org/217")],TagOpen "span" [("class","productname"),("lang","en"),("style","display:inline")],TagText "PopKorn"]
+-- [TagText "Published by",TagClose "b",TagClose "span",TagClose "td",TagText "\r\n",
+-- TagOpen "td" [],TagOpen "a" [("href","/org/217")],TagOpen "span"
+-- [("class","productname"),("lang","en"),("style","display:inline")],TagText "PopKorn"]
 extractCircle :: [Tag String] -> String
 extractCircle t = fromTagText(head (drop 8 (dropWhile (\x -> not(isTagText x && (fromTagText x)=="Published by")) t)))
 
 extractMusic :: [Tag String] -> [Track]
-extractMusic t = let tracks = filter (not . all isSpace) $  tail $ dropWhile (\z -> z /= "Disc 1") $ map fromTagText $ filter isTagText $ takeWhile (\y -> not(isTagText y && (fromTagText y)=="Disc length")) $ dropWhile (\x -> not(isTagText x && (fromTagText x)=="Tracklist")) t
+extractMusic t = let tracks = filter (not . all isSpace) $
+                               tail $ dropWhile (\z -> z /= "Disc 1") $
+                                map fromTagText $ filter isTagText $
+                                 takeWhile (\y -> not(isTagText y && (fromTagText y)=="Disc length")) $
+                                  dropWhile (\x -> not(isTagText x && (fromTagText x)=="Tracklist")) t
                    in if length tracks `rem` 3 == 0 then threezip tracks else twozip tracks
        where
        twozip,threezip :: [String] -> [Track]
