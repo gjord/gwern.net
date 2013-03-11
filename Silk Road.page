@@ -173,7 +173,11 @@ With Tor running and the Torbutton enabled in the browser (along with any [priva
 
 [^onion-address]: Note that this is *not* a normal WWW site; there are no normal WWW sites for the Silk Road. There was `http://silkroadmarket.org` which was apparently controlled in some fashion by SR (probably to stop domain squatting or scam sites pretending to be SR), but whatever it was, it wasn't important; not updated regularly and no longer working.
 
-    The bad thing about .onion URLs is that they are not human-memorable (see [Zooko's triangle](!Wikipedia)), and so it is especially easy to spread a fake link. In particular, Silk Road has been the target of many [phishing](!Wikipedia) attacks, where a random .onion hidden server is set up to look like Silk Road and either pretends to be Silk Road or just does a [man in the middle attack](!Wikipedia), proxying for the real SR server. For example, one such site has already been linked in the comments on this page; it was easy to detect as it was even slower than SR (since there are two hidden servers involved), and it blindly forwarded me to the real SR .onion with the fake user/password pair, apparently expecting that I would be logged in without problem. (Naturally, nothing stops the .onion URLs supplied on this page from themselves being part of a phishing/man-in-the-middle attack! This is a fundamental security problem: how do you bootstrap yourself into a [web of trust](!Wikipedia)? In this case, if you don't know the SR admins, about all you can do is Google the URLs I have listed, and see whether enough other people claim that they are the true URLs that you will trust the URLs. Caveat emptor.)
+    The bad thing about .onion URLs is that they are not human-memorable (see [Zooko's triangle](!Wikipedia)), and so it is especially easy to spread a fake link. In particular, SR has been the target of many [phishing](!Wikipedia) attacks, where a random .onion hidden server is set up to look like SR and either pretends to be SR or just does a [man in the middle attack](!Wikipedia), proxying for the real SR server. For example, one such site has already been linked in the comments on this page; it was easy to detect as it was even slower than SR (since there are two hidden servers involved), and it blindly forwarded me to the real SR .onion with the fake user/password pair, apparently expecting that I would be logged in without problem. Later, SR introduced PINs required for any withdrawal of bitcoins, so phishers adapted their login forms to ask for PINs as well. A 2012-2013 example of such a phishing page:
+
+    ![A screenshot of a SR phish, with the tell-tale PIN field circled.](http://i2.minus.com/jVZrHTXTstrjD.jpg)
+
+    Naturally, nothing stops the `.onion` URLs supplied on this page from themselves being part of a phishing/man-in-the-middle attack! This is a fundamental security problem: how do you bootstrap yourself into a [web of trust](!Wikipedia)? In this case, if you don't know the SR admins, about all you can do is Google the URLs I have listed, and see whether enough other people claim that they are the true URLs that you will trust the URLs. Caveat emptor.
 
 Upon connecting, you will see a bare log-in form:
 
@@ -530,9 +534,9 @@ Some general observations on this table of a subset of LSD vendors:
 
     Perhaps surprisingly, this range doesn't go away when I try to adjust for risk based on reviews: now the full range is 40μg/฿ (`aciddotcom`) to 153μg/฿ (`nipplesuckcanuck`).
 
-[^LSD-scam]: Illustrating the danger of early finalization even for top vendors, he did a "sale" FE rip-and-run [in February 2013](http://dkn255hz262ypmii.onion/index.php?topic=124539.15) ([mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=124539.15)) which netted >฿700 (>$21k); reportedly he left a _Wire_ quote on his profile page: "But, the game’s out there, and it’s play or get played. That simple." To which one might add, ["Silly woman, you knew I was a snake"](!Wikipedia "The Farmer and the Viper"). ETM's scam played out as it slowly became apparent that another LSD vendor, LucyDrop, was [pulling the same thing](http://weirderweb.com/2013/02/28/is-lucydrop-the-latest-silk-road-scammer-65000-in-late-lsd-orders-says-yes/) and probably hadn't shipped any of their >600 outstanding orders (>$70k).
+[^LSD-scam]: Illustrating the danger of early finalization even for top vendors, he did a "sale" FE rip-and-run [in February 2013](http://dkn255hz262ypmii.onion/index.php?topic=124539.15) ([mirror](http://dkn255hz262ypmii.tor2web.org/index.php?topic=124539.15)) which netted >฿700 (>$21k); reportedly he left a _Wire_ quote on his profile page: "But, the game’s out there, and it’s play or get played. That simple." To which one might add, ["Silly woman, you knew I was a snake"](!Wikipedia "The Farmer and the Viper"). <!-- ETM's scam played out as it slowly became apparent that another LSD vendor, LucyDrop, was [pulling the same thing](http://weirderweb.com/2013/02/28/is-lucydrop-the-latest-silk-road-scammer-65000-in-late-lsd-orders-says-yes/) and probably hadn't shipped any of their >600 outstanding orders (>$70k). -->
 
-    I am increasingly disgusted watching these FE scams: while suckers will always be suckers and people scammed by FE have mostly themselves to blame, equally to blame is the SR staff/DPR, for enabling these scams. They could at any time simply ban FE, and choose not to. Nor am I alone in this; discussing ETM and LucyDrop with several people, the conversation invariably went something like this:
+    I am increasingly disgusted watching these FE scams: while suckers will always be suckers and people scammed by FE have mostly themselves to blame, equally to blame is the SR staff/DPR, for enabling these scams. They could at any time simply ban FE, and choose not to. Nor am I alone in this; discussing events with several people, the conversation invariably went something like this:
 
     > - `me:` [mentions latest FE scam]
     > - `them:` What's FE?
@@ -545,7 +549,7 @@ Some general observations on this table of a subset of LSD vendors:
     > - `me:` We think that they made away with $40-140k, but it could be more depending on how many people haven't left feedback, how many will continue ordering, what exchange rate they cash out at, etc.
     > - `them:` And how much does SR sell a month?
     > - `me:` Christin 2012 estimates something like $1.2m a month.
-    > - `them:` So this month SR buyers have lost to just 2 particular scammers the equivalent of a tenth of the entire monthly turnover of SR, as much as SR itself takes in commissions, all thanks to an almost entirely useless 'feature', and the SR staff have done nothing about it?
+    > - `them:` So this month SR buyers have lost to just 1 or 2 scammers the equivalent of a tenth of the entire monthly turnover of SR, as much as SR itself takes in commissions, all thanks to an almost entirely useless 'feature', and the SR staff have done nothing about it?
     > - `me:` Looks like it.
     > - `them:` [hopeful] Did this 'early finalization' feature *just* get added?
     > - `me:` No. It's been there since the start ~3 years ago. [helpfully] There's been lots of big scams before this too, like Tony76 who made off with, I think, >$100k in total.
@@ -563,7 +567,7 @@ The obvious way to quantify risk is to just take the feedback at face-value: a 9
 
 An objection: "Are you seriously saying that a vendor with 1 bad review out of 100 is *equally* trustworthy as a vendor with 3 bad reviews out of 300, and that both of them are *less* trustworthy than a vendor with 0 bad reviews out of 10?" It does seem intuitive that the 300 guy's 99% is more reliable than the 100 guy's 99%; the 10 guy may have a perfect 100% now, but could easily wind up with something much lower after he's sold 100 or 300 things, and we would rather not be one of the buyers who causes those shifts downward.
 
-So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](!Wikipedia). We're not interested in the optimistic question of "how *good* could these vendors turn out to be?", but rather we are interested in finding out how *bad* these vendors might truly be. What's the worst plausible vendor future rating given their existing ratings? We can ask for a [confidence interval](!Wikipedia) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](/docs/1994-falk), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul). This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". What are the results? The numbers were calculated as follows:
+So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](!Wikipedia). We're not interested in the optimistic question of "how *good* could these vendors turn out to be?", but rather we are interested in finding out how *bad* these vendors might truly be. What's the worst plausible vendor future rating given their existing ratings? We can ask for a [confidence interval](!Wikipedia) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](/docs/1994-falk), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul; the actual SR feedback system seems to use some sort of weighted average.) This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". What are the results? The numbers were calculated as follows:
 
 ~~~{.R}
 # Frequentist analysis:
@@ -775,3 +779,87 @@ A list of tips from an anonymous Redditor, presented for what they are worth (no
 > - Use GPG to encrypt your messages to the vendors. Rationale: While this doesn't protect you if the vendor is compromised, it does prevent your name and address from being stored 'in the clear' in Silk Road's database.
 > - Don't order out of escrow. Rationale: Your only protection from bad vendor behavior is their reputation and escrow. And some vendor's don't care about their reputation.
 > - Read up on vendor's in the forums. Rationale: You'll get a much better idea of their product quality than you can get from their official ratings/reviews alone.
+
+<!--
+## A mole?
+### _J'accuse tu_
+
+In March 2013, I learned of a rumor that a particular vendor on SR was actually a federal mole. It came from a person who claimed that the [carding](!Wikipedia "Credit card fraud#Carding") forum `carder.su` which had been [busted in](http://www.huffingtonpost.com/2012/03/17/cardersu-id-theft-ring-busted_n_1355631.html "Carder.su ID Theft Ring Busted; Feds Arrest 19 In 9 States") [early 2012](http://www.lvrj.com/news/identity-theft-investigation-nets-19-arrests-143020085.html "Arrests made in identity theft case"), was undone by an agent who infiltrated it over 2 years as a user named "celtic" by selling high-quality fake IDs to members. He thought that the vendor had a similar modus operandi, making the following comparisons:
+
+1. celtic sold fake custom IDs from 15 states; the vendor likewise sells these specific states
+2. celtic sold a large variety of IDs; the vendor sells a wider variety than others,
+3. celtic advertised with lengthy detailed descriptions; the vendor has descriptions which are much more than a few lines, like some other SR vendors
+4. celtic sold expensive high-quality IDs, with difficult new security features; likewise
+5. celtic advertised his wares as "novelty IDs"
+6. celtic implied he was Russian
+7. celtic asked for the necessary information to be sent via email and required 2 email addresses
+8. celtic had his non-anonymous payments sent within Nevada
+9. celtic had operated on the forum for over 2 years; the vendor was at the 1 year mark.
+
+They also mentioned that after contacting the SR admins, they were blocked from accessing SR under that or other accounts.
+
+### Objections
+
+This rumor struck me as unusually detailed, plausible, and interesting. It would also be cool to scoop the investigation. So I looked into the matter more deeply:
+
+1. the `carder.su` mole supposedly sold 15 states' IDs and so does KOC. But KOC's current profile lists only the following:
+
+    Product                                             Price
+    --------------------------------------------------- -----
+    Montana Driver's License (Holograms + Scannable)    ฿6.61
+    Indiana Driver's License (Holograms + Scannable)    ฿6.61
+    Wisconsin Driver's License (Holograms + Scannable)  ฿6.61
+    Alaska Driver's License (Holograms + Scannable)     ฿6.61
+    New California Drivers License (Holograms + Scans)  ฿6.61
+    Rhode Island Driver's License (Hologram+Scannable)  ฿6.60
+    Idaho Driver's License (Holograms + Scannable)      ฿6.60
+    Tennessee Driver's License (Holograms + Scannable)  ฿6.60
+    Arizona Driver's License (Holograms + Scannable)    ฿6.60
+    New York Driver's License (Hologram + Scannable)    ฿6.60
+    Ontario Driver's License (Raised Lettering, Scans)  ฿6.60
+    New Texas Drivers License(Raised LTR, Holo, Scans)  ฿6.60
+    Texas Drivers License (Holograms + Scannable)       ฿6.60
+    subtotal: 13
+    New South Wales Driving License (Holograms+Scans)   ฿6.61
+    Manitoba Driver's License (Scannable Tracks 1,2,3)  ฿6.60
+    Quebec Driver's License (Scannable Magstripe1,2,3)  ฿6.60
+    Alberta Driver's License (Holo, Raised LTR, Scans)  ฿6.60
+    UK Driving License (Holograms + Scannable)          ฿6.60
+    subtotal: 5
+    total: 18 (excludes combo offers)
+
+    No matter how you sum it, that's not 15 states.
+2. It's not clear that celtic or KOC's variety is unusual. For example, in the indictment 2 of the defendants, Haggerty or "Wave" & John Doe or "Gruber", actually sound almost identical to this "celtic": they counterfeited driver's licenses in 15 states; this does not seem consistent with their story and undermines the value of any observation of KOC selling 15 states since that's at least 2 people who also sold for 15 states - suggesting that 15 states is simply what is easily handled by the equipment, are favored due to having many residents being tourists, or something like that.
+3. On the SR side of things, KOC does not seem all that unusual. Some vendors talk a lot and sell a lot, others don't. For example, the vendor [namedeclined](http://silkroadvb5piz3r.onion/silkroad/user/d55ca24e41) has something like 21 different items in the forgery & fake ID sections, and is positively prolix about one I randomly clicked on, his [fake Geico insurance card](http://silkroadvb5piz3r.onion/silkroad/item/9a30857e65).
+4. If his cards were being done with government equipment, or top of the line anyway, they ought to be excellent and might as well be cheap to attract as many suspects as possible. But there are many complaints in the SR forums & Reddit that his rather expensive cards weren't very good and in some cases were very poor. He also isn't all that cool with customers, easily losing his temper. All this is reflected in his feedback score, which is not terrible but also is not great.
+5. KOC using the term "novelty ID" doesn't mean much. As far as I know, all the Chinese/Asian vendors use that excuse as well: "oh, they're not fake IDs, they're *novelty* IDs; we can't be blamed if our customers misuse them."
+6. KOC doesn't make it sound like he's Russian. He comes off as American, and his listings imply he's shipping domestically.
+7. obviously in buying custom fake IDs, customers need to provide the relevant info like age and a photo of the person who will be using the ID. KOC provides a public key, accepts encrypted private messages on SR for the form, and links repeatedly to a hidden service for image uploads; he does list a `tormail.org` email address as an option, but you can just connect to `tormail.org`'s hidden service (that's the point of it) and send an email via them. You would have to be lazy or foolish to send such an email from your regular email address before he would have access to your email, and there is no mention of requiring 2 email addresses
+8. while KOC seems to have accepted Western Union, Moneygram, and Moneypak early on (like a mole might), he seems to have dropped them entirely: his profile specifically disclaims accepting anything but bitcoin. Why would a mole do that?
+9. Many vendors are less than 2-3 years old, since SR is still relatively new and it wasn't clear early on that it would survive or be worth doing business on; given that new vendors probably drop quickly as they stop selling for various reasons (they were scammers, it turned out to be too much work, whatever), we would expect to see mostly medium-aged accounts selling.
+
+Two additional points I would make:
+
+- while the media does confirm that `carder.su` members used fake IDs, this is common to many or all carding forums; more importatly, I cannot confirm their account of the demise of `carder.su` based on [the 2012 indictment](http://www.cis.uab.edu/forensics/blog/Kostyukov.Indictment.pdf), and no one in Google mentions any "celtic" in combination with `carder.su`. The redactions make it difficult to be sure, but they do not seem to have usually redacted the usernames or pseudonyms or nicks (eg pg40), and in the lists of redacted defendants' offenses, few short-names come off with large quantities of forged items or other such violations. While the Farmers Market indictment listed enough details that I could be sure that it was mostly due to Hushmail rolling over (as indeed proved to be the case), here I'm not sure of anything; the indictment goes into the wrong details for me to feel I can infer anything.
+- At least one of their claims seems false: yes, SR might ban an account for filing a false report against a vendor. But it can't lock you out based on your IP or something like that; the Tor hidden service architecture simply doesn't allow for that, as far as I know. The most it could do is maybe set a cookie and not let anyone with a cookie from a banned account log in or register an account, but that is trivially bypassed by deleting all cookies or using an incognito mode or using a different browser.
+
+A counter-objection is that celtic-KOC might have deliberately dropped Nevada IDs and non-bitcoin payment to throw off anyone familiar with the previous identity. But in this scenario, presumably the absence would be for public consumption and anyone requesting either would get what they asked for as they became juicy targets for his investigation. This can be easily tested just by asking; so 2 throwaway accounts messaged KOC on those issues:
+
+1. TODO: comment
+
+    - > "I know they're not listed, but would it be possible for you to do either a Utah or Nevada license? (Ideally with UV and hologram.)"
+    - > "I won't be able to do Nevada but I may be able to do Utah with UV and holos, i'll get back to you in the next couple days on that"
+2. TODO: comment
+    - > "bro how are you, do you make Nevada license and do you accept WU OR MG thanks"
+    - > "I don't do Nevada DL's at the moment but I can do a bunch of different states that aren't listed, what else are you interested in? I don't accept WU or MG but if you go under the "Money" section of SR and go to the vendor 'FreeMoney' he will be able to exchange your WU or MG or Moneypak for BTC. Regards."
+
+While his consistent disavowal of both non-bitcoin payments and making Nevada licenses might simply be trying to be consistent in his persona, that would imply considerable paranoia on his part about being recognized - and makes this possibility that much more unlikely.
+
+### Resolution
+
+When will we know? The `carder.su` indictment was signed 10 January 2012. The earliest dates mentioned in it are in 2007, but most of the early dates seem to be in 2009, in line with a >2 year infiltration which suggests a 2-3 year lag (or possibly as much as 5 years). The KOC account is listed as 1 year old and consistent with that, he has initial forum posts dating back to March 2012. That suggests any busts will come March 2014-2015, up to 2017. (I can't guess whether the hypothetical SR bust would be faster or slower than `carder.su`: SR is much more secure and decentralized from a vendor's point of view, so one might expect it to take longer; but SR is also much higher profile as far as I can tell and so one could expect there to be much more pressure to deliver some sort of victory.)
+
+What's my current opinion? Reading through all of the above, thinking about the difficulties of attacking SR (KOC can only have access to small fry buyers, not SR staff like Dread Pirate Roberts), I feel that I can only assign [20% to a prediction](http://predictionbook.com/predictions/16142) that by March 2015, "there will have been a bust (>10 named defendants) related to forged IDs eg. driver's licenses, linked to the SR vendor KOC".
+
+We'll see.
+-->
