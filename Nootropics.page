@@ -694,6 +694,10 @@ The methodology would be essentially the same as the [vitamin D in the morning](
 
     1. first block: 25 August - 31 August: active
     2. second block: 1 September - 4 September, stopped until 24 September, finished 25 September: placebo
+9. ninth block pair:
+
+    1. 12 March - 18 March:
+    2. 19? March - 25? March:
 
 ### VoI
 
@@ -886,11 +890,24 @@ With background, design, and power calculation out of the way, we can calculate 
 
     Second block: 7,8,9 February: 1
 
+## Fadiman comments
+
+After I completed the experiment and prepared the data, but before doing any analysis besides the prediction accuracy, I emailed Fadiman the following questions:
+
+> 1. You've seen my planning and methodology write up, and I've attached the current version of my full writeup with everything I've added or changed since (mostly more background, a log of dates, that sort of thing) if you want to reread it. Do you have any objections to how I did it?
+> 2. Have you or anyone else as far as you know, done a long blind/randomized/both self-experiment on LSD microdosing?
+> 3. If the results turn out to be non-statistically-significant or have very small effect sizes, why do you think they might have turned out that way? Which reasons would you have most confidence in as an explanation of null results?
+> 4. Do you expect the results to turn out positive? (By positive here, I mean statistically significant after multiple correction and _d_>0.1.) How much so?
+> 5. Are you willing to be quoted on any of the above?
+
+I did this for much the same reason as I wrote down the exact metrics and analysis in advance: to specify what results are expected, how one will interpret them, and to eliminate the temptation to fudge or modify or spin or self-deceive about any of it.
+
 ## Analysis
+### Preparation
 
 Preparing the data:
 
-Needed to extract Mnemosyne scores for the past [175 days](http://www.timeanddate.com/date/durationresult.html?m1=9&d1=16&y1=2012&m2=3&d2=9&y2=2013&ti=on). Using a Mnemosyne script in the development repository, I set the time interval:
+Needed to extract Mnemosyne scores for the past [175 days](http://www.timeanddate.com/date/durationresult.html?m1=9&d1=16&y1=2012&m2=3&d2=9&y2=2013&ti=on); for a multi-level model analysis, I'll want even more days which were neither active nor control so I extract even more days than that. Using a Mnemosyne script in the development repository, I set the time interval:
 
 ~~~{.Python}
 +++ mnemosyne/mnemosyne/example_scripts/export_stats.py 2013-03-10 21:54:04 +0000
@@ -899,7 +916,7 @@ Needed to extract Mnemosyne scores for the past [175 days](http://www.timeanddat
  mnemosyne = Mnemosyne(data_dir)
 
 -for n in range(-10, 0):
-+for n in range(-175, 0):
++for n in range(-275, -1):
      start_of_day = mnemosyne.database().start_of_day_n_days_ago(abs(n))
 ~~~
 
@@ -914,6 +931,8 @@ In R I read in a hand-trimmed Zeo export (`lsd.csv`), parse dates, add in the Mn
 ~~~{.R}
 lsd <- read.csv("lsd.csv")
 lsd$Date <- as.Date(lsd$Date, format="%m/%d/%Y")
+# Zeo's CSV export silently omits missing days; look for them to hand-edit empty rows in
+# which(!((as.Date("2012-06-09"):as.Date("2012-09-15")) %in% lsd$Date))
 mnemo <- read.table("mnemosyne.csv")
 lsd$Mnemosyne <- NA
 lsd$Mnemosyne <- mnemo$V1
@@ -925,6 +944,8 @@ lsd$Creativity <- NA
 lsd$Creativity <- creativity$V1
 write.csv(lsd, file="lsd.csv", row.names=FALSE)
 ~~~
+
+### Blinding
 
 How successful was the blinding: could I guess whether I had gotten a LSD or a placebo? A comparison of the log score shows my self-assessments were only slightly better than random (eg. remove the last prediction, and the random guesser performs equally or better):
 
@@ -941,6 +962,438 @@ logScore predictions
 log 0.50 * fromIntegral (length predictions)
 ~> -13.8629
 ~~~
+
+### Testing the metrics
+
+Testing for a statistically-significant (_p_<0.05) difference on the listed metrics[^LSD-NHST]:
+
+1. Sleep:
+
+    - latency: none
+    - total sleep: none
+    - number of awakenings: none
+    - morning feel: increased
+
+        There is an increase in "Morning Feel" from 2.597 to 2.935, _p_=0.0231; correcting for performing 7 different tests, this result is not significant (it does not survive a [Bonferroni correction](!Wikipedia) (since $0.0231 > \frac{0.05}{7}$) nor the [_q_-value approach](Zeo#fn7) to family-wise correction[^LSD-q-value]).
+2. Flashcard scores: none
+3. Mood/productivity: none
+4. Creativity: none
+5. active/placebo prediction: see previous (none?)
+6. Before/after Openness: see previous (none?)
+
+Overall, there seems to have been no meaningful effects.
+
+[^LSD-NHST]: The full analysis:
+
+    ~~~{.R}
+    R> lsd <- read.csv("lsd.csv") # TODO: update with URL address at some point
+    R>
+    R> # `paired=TRUE` reflects that all samples are draw from the same subject;
+    R> # but would it be more correct to specify `var.equal=TRUE` instead?
+    R> t.test(Time.to.Z ~ LSD, paired=TRUE, data=lsd)
+
+        Paired t-test
+
+    data:  Time.to.Z by LSD
+    t = -0.819, df = 61, p-value = 0.416
+    alternative hypothesis: true difference in means is not equal to 0
+    95% confidence interval:
+     -6.994  2.930
+    sample estimates:
+    mean of the differences
+                     -2.032
+    R>
+    R> t.test(Total.Z ~ LSD, paired=TRUE, data=lsd)
+
+        Paired t-test
+
+    data:  Total.Z by LSD
+    t = -1.466, df = 61, p-value = 0.1479
+    alternative hypothesis: true difference in means is not equal to 0
+    95% confidence interval:
+     -31.079   4.789
+    sample estimates:
+    mean of the differences
+                     -13.15
+    R>
+    R> t.test(Awakenings ~ LSD, paired=TRUE, data=lsd)
+
+        Paired t-test
+
+    data:  Awakenings by LSD
+    t = -0.9311, df = 61, p-value = 0.3554
+    alternative hypothesis: true difference in means is not equal to 0
+    95% confidence interval:
+     -1.3199  0.4812
+    sample estimates:
+    mean of the differences
+                    -0.4194
+    R>
+    R> t.test(Morning.Feel ~ LSD, paired=TRUE, data=lsd)
+
+        Paired t-test
+
+    data:  Morning.Feel by LSD
+    t = -2.33, df = 61, p-value = 0.0231
+    alternative hypothesis: true difference in means is not equal to 0
+    95% confidence interval:
+     -0.62933 -0.04809
+    sample estimates:
+    mean of the differences
+                    -0.3387
+    R>
+    R> # we can't use `paired=TRUE` because an imbalanced number of days are missing from Mnemosyne
+    R> # read `alternative="less"` as "the first sample being less (smaller) than the second sample"
+    R> t.test(Mnemosyne ~ LSD, alternative="less", data=lsd)
+
+        Welch Two Sample t-test
+
+    data:  Mnemosyne by LSD
+    t = 0.0515, df = 103.8, p-value = 0.5205
+    alternative hypothesis: true difference in means is less than 0
+    95% confidence interval:
+        -Inf 0.04254
+    sample estimates:
+    mean in group 0 mean in group 1
+              3.817           3.816
+    R>
+    R> t.test(MP ~ LSD, paired=TRUE, alternative="less", data=lsd[-1,])
+
+        Paired t-test
+
+    data:  MP by LSD
+    t = 1.085, df = 62, p-value = 0.8589
+    alternative hypothesis: true difference in means is less than 0
+    95% confidence interval:
+       -Inf 0.3627
+    sample estimates:
+    mean of the differences
+                     0.1429
+    R>
+    R> t.test(Creativity ~ LSD, paired=TRUE, alternative="less", data=lsd[-1,])
+
+        Paired t-test
+
+    data:  Creativity by LSD
+    t = 1.154, df = 62, p-value = 0.8735
+    alternative hypothesis: true difference in means is less than 0
+    95% confidence interval:
+       -Inf 0.2719
+    sample estimates:
+    mean of the differences
+                     0.1111
+    R>
+    R> # since MP and Creativity are categorical responses, it would be more correct
+    R> # to use a χ² test or a logit regression. The former gives larger p-values, however:
+    R> chisq.test(table(lsd$MP, lsd$LSD)[-1,], simulate.p.value = TRUE, B = 100000000)
+
+       Pearson's Chi-squared test with simulated p-value (based on 1e+08 replicates)
+
+    data:  table(lsd$MP, lsd$LSD)[-1, ]
+    X-squared = 1.127, df = NA, p-value = 0.6056
+    R>
+    R> chisq.test(table(lsd$Creativity, lsd$LSD), simulate.p.value = TRUE, B = 100000000)
+
+        Pearson's Chi-squared test with simulated p-value (based on 1e+08 replicates)
+
+    data:  table(lsd$Creativity, lsd$LSD)
+    X-squared = 1.923, df = NA, p-value = 0.4746
+    ~~~
+[^LSD-q-value]: None are greater than the normal cutoff after correction:
+
+    ~~~{.R}
+    R> p.adjust(c(0.416, 0.1479, 0.3554, 0.0231, 0.5205, 0.8589, 0.8735), method="BH") < 0.05
+    [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+    ~~~
+
+### Advanced analysis: multi-level models
+
+TODO: clean this up into something comprehensible
+
+~~~{.R}
+# install.packages("lme4")
+library(lme4)
+lsd$LSD[is.na(lsd$LSD)] <- -1
+lsd$Subject <- rep(1,274) # every datapoint is from me
+lmer(MP ~ LSD + (LSD | Subject), lsd)
+
+or?
+
+lmer(MP ~ LSD + (as.factor(LSD) | Subject), lsd)
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (as.factor(LSD) | Subject)
+   Data: lsd
+ AIC BIC logLik deviance REMLdev
+ 623 656   -303      598     605
+Random effects:
+ Groups   Name            Variance Std.Dev. Corr
+ Subject  (Intercept)     5.17e-03 7.19e-02
+          as.factor(LSD)0 4.75e-12 2.18e-06 -1.000
+          as.factor(LSD)1 4.34e-11 6.59e-06 -1.000  1.000
+ Residual                 5.29e-01 7.28e-01
+Number of obs: 272, groups: Subject, 1
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   2.9635     0.0859    34.5
+LSD          -0.0481     0.0537    -0.9
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD 0.189
+
+short <- lsd[lsd$LSD != -1,]
+lmer(MP ~ LSD + (LSD | Subject), short)
+
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (LSD | Subject)
+   Data: short
+ AIC BIC logLik deviance REMLdev
+ 290 307   -139      274     278
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Subject  (Intercept) 0.0106   0.103
+          LSD         0.0214   0.146    0.000
+ Residual             0.5057   0.711
+Number of obs: 127, groups: Subject, 1
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)    3.016      0.136   22.16
+LSD           -0.127      0.193   -0.66
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD -0.301
+
+R> cor.test(lsd$LSD, lsd$MP)
+
+    Pearson's product-moment correlation
+
+data:  lsd$LSD and lsd$MP
+t = -0.8943, df = 270, p-value = 0.372
+alternative hypothesis: true correlation is not equal to 0
+95% confidence interval:
+ -0.17216  0.06501
+sample estimates:
+     cor
+-0.05434
+
+R> cor.test(short$LSD, short$MP)
+
+    Pearson's product-moment correlation
+
+data:  short$LSD and short$MP
+t = -1.004, df = 125, p-value = 0.3172
+alternative hypothesis: true correlation is not equal to 0
+95% confidence interval:
+ -0.2596  0.0861
+sample estimates:
+     cor
+-0.08946
+
+R> lsd$LSD[lsd$LSD == -1] <- 2
+R> lmer(MP ~ LSD + (as.factor(LSD) | Subject), lsd)
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (as.factor(LSD) | Subject)
+   Data: lsd
+ AIC BIC logLik deviance REMLdev
+ 624 657   -303      600     606
+Random effects:
+ Groups   Name            Variance Std.Dev. Corr
+ Subject  (Intercept)     0.005241 0.0724
+          as.factor(LSD)1 0.000142 0.0119   -0.199
+          as.factor(LSD)2 0.010664 0.1033    0.011  0.059
+ Residual                 0.530508 0.7284
+Number of obs: 272, groups: Subject, 1
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   2.9790     0.1104   26.98
+LSD          -0.0202     0.0742   -0.27
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD -0.557
+R> lsd$LSD
+  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ [48] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ [95] 2 2 2 2 2 0 0 0 0 1 1 1 2 2 2 2 2 2 2 2 2 0 0 0 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 2 0 0 0 0
+[142] 0 0 2 2 2 2 2 1 1 1 1 1 1 2 2 2 2 2 0 0 0 2 0 0 0 1 1 1 2 0 0 0 2 2 2 1 1 1 1 1 1 0 0 0 0 0 0
+[189] 1 1 1 1 1 1 0 0 0 2 2 2 2 2 2 2 2 0 0 0 1 1 1 1 1 1 0 0 0 1 1 1 0 0 0 1 1 1 2 0 0 0 0 0 0 1 1
+[236] 1 0 0 0 1 1 1 0 0 0 2 1 1 1 1 1 1 0 0 0 2 1 1 1 0 0 0 0 0 0 1 1 1 0 0 0 1 1 1
+R> lmer(MP ~ LSD + (LSD | Subject), lsd)
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (LSD | Subject)
+   Data: lsd
+ AIC BIC logLik deviance REMLdev
+ 618 640   -303      600     606
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Subject  (Intercept) 0.00521  0.0722
+          LSD         0.00221  0.0470   0.000
+ Residual             0.53098  0.7287
+Number of obs: 272, groups: Subject, 1
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  2.97242    0.10952   27.14
+LSD          0.00426    0.07126    0.06
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD -0.478
+
+
+lsd$LSD[lsd$LSD == 2] <- 0
+lsd[lsd$LSD == 2,]$Subject <- 2
+lsd[lsd$Subject ==2,]$LSD <- 0
+R> lmer(MP ~ LSD + (LSD | Subject), lsd)
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (LSD | Subject)
+   Data: lsd
+ AIC BIC logLik deviance REMLdev
+ 616 637   -302      598     604
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Subject  (Intercept) 0.0000   0.000
+          LSD         0.0447   0.212      NaN
+ Residual             0.5286   0.727
+Number of obs: 272, groups: Subject, 2
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   3.0048     0.0503    59.7
+LSD          -0.1159     0.2359    -0.5
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD -0.213
+
+
+# install.packages("arm")
+library(arm)
+
+R> display(lmer(MP ~ LSD + (LSD | Subject), data=lsd))
+lmer(formula = MP ~ LSD + (LSD | Subject), data = lsd)
+            coef.est coef.se
+(Intercept)  3.00     0.05
+LSD         -0.12     0.24
+
+Error terms:
+ Groups   Name        Std.Dev. Corr
+ Subject  (Intercept) 0.00
+          LSD         0.21      NaN
+ Residual             0.73
+---
+number of obs: 272, groups: Subject, 2
+AIC = 615.6, DIC = 593.1
+deviance = 598.3
+R> display(lmer(MP ~ LSD + (LSD | Subject), data=short))
+lmer(formula = MP ~ LSD + (LSD | Subject), data = short)
+            coef.est coef.se
+(Intercept)  3.02     0.14
+LSD         -0.13     0.19
+
+Error terms:
+ Groups   Name        Std.Dev. Corr
+ Subject  (Intercept) 0.10
+          LSD         0.15     0.00
+ Residual             0.71
+---
+number of obs: 127, groups: Subject, 1
+AIC = 289.8, DIC = 270.4
+deviance = 274.1
+
+# what's the p-value of the LSD now? first stab, using some ANOVA-based code
+# which ignores the sticky issues
+#
+# install.packages("car")
+library(car)
+model <- lmer(MP ~ LSD + (LSD | Subject), lsd)
+# Anova(model)
+# Analysis of Deviance Table (Type II Wald chisquare tests)
+#
+# Response: MP
+#     Chisq Df Pr(>Chisq)
+# LSD  0.24  1       0.62
+
+# lme4 author advises against ANOVA https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html
+# and suggests MCMC sampling:
+#
+# install.packages("languageR")
+library(languageR)
+model <- lmer(MP ~ LSD + (1 | Subject), lsd)
+pvals.fnc(model)
+
+
+R> model1 <- lmer(MP ~ LSD + (LSD | Subject), lsd); model1
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (LSD | Subject)
+   Data: lsd
+ AIC BIC logLik deviance REMLdev
+ 616 637   -302      598     604
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Subject  (Intercept) 0.0000   0.000
+          LSD         0.0447   0.212      NaN
+ Residual             0.5286   0.727
+Number of obs: 272, groups: Subject, 2
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   3.0048     0.0503    59.7
+LSD          -0.1159     0.2359    -0.5
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD -0.213
+
+R> model2 <- lmer(MP ~ LSD + (1 | Subject), lsd); model2
+Linear mixed model fit by REML
+Formula: MP ~ LSD + (1 | Subject)
+   Data: lsd
+ AIC BIC logLik deviance REMLdev
+ 612 626   -302      596     604
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Subject  (Intercept) 0.000    0.000
+ Residual             0.529    0.727
+Number of obs: 272, groups: Subject, 2
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   3.0048     0.0503    59.7
+LSD          -0.1159     0.1045    -1.1
+
+Correlation of Fixed Effects:
+    (Intr)
+LSD -0.481
+
+R> anova(model1, model2)
+Data: lsd
+Models:
+model2: MP ~ LSD + (1 | Subject)
+model1: MP ~ LSD + (LSD | Subject)
+       Df AIC BIC logLik Chisq Chi Df Pr(>Chisq)
+model2  4 604 619   -298
+model1  6 610 632   -299     0      2          1
+
+AIC, better is lower; so, the second model which assumes no variation in off-LSD metrics fits better after adding a complexity penalty. Using this simpler model, what is our 95% "highest probability density" (like confidence intervals) on the LSD parameter?
+
+R> pvals.fnc(model2, nsim=1000000)
+$fixed
+            Estimate MCMCmean HPD95lower HPD95upper  pMCMC Pr(>|t|)
+(Intercept)   3.0048   3.0033     0.9071     5.1288 0.0346   0.0000
+LSD          -0.1159  -0.1216    -0.3565     0.1114 0.3008   0.2684
+
+$random
+    Groups        Name Std.Dev. MCMCmedian MCMCmean HPD95lower HPD95upper
+1  Subject (Intercept)    0.000     0.1066   0.9086     0.0000     3.9766
+2 Residual                0.727     0.7279   0.7291     0.6687     0.7919
+~~~
+
+graph of inferred parameter (LSD value lower right hand): http://i.imgur.com/5TPLAQK.png
 
 TODO:
 outstanding predictions:
