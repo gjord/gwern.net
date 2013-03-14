@@ -171,7 +171,7 @@ archiveURL email url = openURL url' >> return ()
 
 Now we have our finished prototype. We can compile it and run it like:
 
-> $ wp-archivebot "gwern0@gmail.com"
+> $ wp-archivebot "gwern@gwern.net"
 
 (Installation is just as easy; this bot is available on Hackage, so it's a `cabal install wp-archivebot` away.)
 
