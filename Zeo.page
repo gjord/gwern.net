@@ -304,10 +304,9 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 
 [^melatonin-multiple]: If we correct for multiple comparisons (see [previous footnote](#fn7)) at _q_-value=0.05, of our 10 _p_-values (0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779), none of them survive:
 
-    ~~~{.haskell}
-    let bh (i,p) = p < ((i * 0.05) / 10) in map bh
-                         (zip [1..] [0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779])
-    [False,False,False,False,False,False,False,False,False,False]
+    ~~~{.R}
+    R> p.adjust(c(0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779), method="BH") < 0.05
+    [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
     ~~~
 
     Oh well.
@@ -823,10 +822,9 @@ No _p_-values survived multiple-correction[^leg-multiple-correction]:.
     ~~~
 [^leg-multiple-correction]: If we correct for multiple comparisons (see [previous footnote](#fn7) on the Bonferroni correction) at _q_-value=0.05, of our 6 _p_-values (0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), none of them survive:
 
-    ~~~{.haskell}
-    let bh (index,pvalue) = pvalue < ((index * 0.05) / 6) in
-                              map bh (zip [1..] [0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944])
-    [False,False,False,False,False,False]
+    ~~~{.R}
+    R> p.adjust(c(0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), method="BH") < 0.05
+    [1] FALSE FALSE FALSE FALSE FALSE FALSE
     ~~~
 
     Oh well! Statistics is a harsh mistress indeed.
@@ -1247,11 +1245,9 @@ So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on
 
 [^d-multiple]: [Correcting for multiple comparisons](#fn7) at _q_-value=0.05, of our 8 pessimistic _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
 
-    ~~~{.haskell}
-    let bh (index,pvalue) = pvalue < ((index * 0.05) / 8) in
-                              map bh (zip [1..] [0.005276, 0.02205, 0.06163, 0.06904,
-                                                 0.4015, 0.5084, 0.538, 0.7411])
-    [True,False,False,False,False,False,False,False]
+    ~~~{.R}
+    R> p.adjust(c(0.005276, 0.02205, 0.06163, 0.06904,0.4015, 0.5084, 0.538, 0.7411), method="BH") < 0.05
+    [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
     ~~~
 
     Remarkable - the first time a _p_-value survived. (That was the 'Morning Feel' one.)
@@ -1543,10 +1539,9 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
     ~~~
 [^d-multiple-morning]: [Correcting for multiple comparisons](#fn7) at _q_-value=0.05, of our 9 pessimistic _p_-values, 1 survives:
 
-    ~~~{.haskell}
-    let bh (index, pvalue) = pvalue < ((index * 0.05) / 9) in
-         map bh (zip [1..] [0.34, 0.44, 0.48, 0.45, 0.36, 0.78, 0.005, 0.99, 0.65])
-    [False,False,False,False,False,False,True,False,False]
+    ~~~{.R}
+    R> p.adjust(c(0.34, 0.44, 0.48, 0.45, 0.36, 0.78, 0.005, 0.99, 0.65), method="BH") < 0.05
+    [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
     ~~~
 [^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
 
@@ -2272,47 +2267,47 @@ If it turns out the treadmill is not helpful, I can probably sell it for ~$100 b
 <!--
 Mood & productivity & pedometer data
 February 2012
-16: 1.5
-17: 3.0
-18: 4.0
-19: 4.5
+16: 1
+17: 3
+18: 4
+19: 5
 20: 4
 21: 4
 22: 3
 23: 4
-24: 2.5
+24: 2
 25: 3
 26: 4
 27: 4
-28: 2.5
+28: 2
 29: 3
 March
-01: 2.5
+01: 2
 02: 3
 03: 3
-04: 2.5
-05: 2.7
+04: 2
+05: 3
 06: 2
 07: 3
 08: 4
 09: 3
-10: 2.5
+10: 2
 11: 3
-12: 2.5
+12: 2
 13: 3
 14: 1
 15: 2
 16: 4
 17: 3
-18: 2.9
+18: 3
 20: 3
 21: 3
-22: 2.8
+22: 3
 23: 3
 March
 date: mood-productivity / steps
-24: 2.5 / 3862
-25: 3.1 / 7879
+24: 2 / 3862
+25: 3 / 7879
 26: 4 / 1532
 27: 3 / 5000
 28: 3 / 4409
@@ -2324,12 +2319,12 @@ April
 02: 2 / 10131
 03: 3 / 7489
 04: 4 / 15077
-05: 2.5 / 6310
+05: 3 / 6310
 06: 3 / 7093
-07: 2.7 / 2697
+07: 3 / 2697
 08: 4 / 4569
 09: 3 / 1079
-10: 2.7 / 2112
+10: 3 / 2112
 11: 1 / 5251
 12: 3 / 2572
 13: 2 / 1534
@@ -2337,9 +2332,9 @@ April
 15: 3 / 3243
 16: 4 / 3288
 17: 3 / 4671
-18: 2.5 / 2139
+18: 2 / 2139
 19: 3 / 1349
-20: 2.5 / 2072
+20: 2 / 2072
 21: 4 / 5011
 22: 4 / 3762
 23: 4 / 2599
@@ -2351,7 +2346,7 @@ April
 29: 4 / 3338
 30: 3 / 4522
 May
-01: 2.5 / 2026
+01: 3 / 2026
 02: 2 / 3229
 03: 3 / 2642
 04: 3 / 3717
@@ -2441,14 +2436,14 @@ July
 25: 4
 26: 3
 27: 2
-28: 2.5
+28: 3
 29: 3
 30: 2
 31: 3
 August
 01: 3
 02: 3
-03: 2.5
+03: 2
 04: 2
 05: 2
 06: 2
@@ -3269,13 +3264,14 @@ March
 09: 0 0
 10: 0 0
 11: 1 1
-12: 1 0?
+12: 0 1
+13: 1 0?
 
 Underpopulated data cells:
-68: 1 1
 67: 1 0
+68: 1 1
 75: 0 0
-74: 0 1
+75: 0 1
 -->
 
 # External links
@@ -3701,3 +3697,5 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 10 Mar 2013: off -->
 <!-- Redshift: 11 Mar 2013: off -->
 <!-- Redshift: 12 Mar 2013: on -->
+<!-- Redshift: 13 Mar 2013: on -->
+<!-- Redshift: 14 Mar 2013: off -->
