@@ -19,7 +19,7 @@ https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "V
 http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
 http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
 http://stackoverflow.com/tags/google-website-optimizer/hot
-https://github.com/danmaz74/ABalytics
+
 
 # ideas for testing
 
@@ -157,3 +157,7 @@ div#content { line-height: 130%;}
 
 a { color: black; text-decoration: underline;}
 a { color:#005AF2; text-decoration:none; }
+
+# Resumption
+
+In March 2013, I decided to give A/B testing another whack. Google Analytics Experiment did not seem to have improved and the commercial services continued to charge unacceptable prices, so I gave the Google Analytics custom variable integration approach another trying using [ABalytics](https://github.com/danmaz74/ABalytics). The usual puzzling, debugging, and frustration of combining so many disparate technologies (HTML *and* CSS *and* JS *and* Google Analytics) aside, it seemed to work on my test page. The current downside seems to be that the ABalytics approach may be fragile, and the UI in GA is awful (you have to do the statistics yourself).
