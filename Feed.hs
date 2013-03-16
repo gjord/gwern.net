@@ -82,14 +82,14 @@ generateEmptyfeed generator title home _ authors now =
     where baseNull = nullFeed home (TextString title) now
 
 revisionToEntry :: String -> Revision -> Entry
-revisionToEntry home Revision{ revId = rid, revDateTime = rdt,
+revisionToEntry home Revision{ revDateTime = rdt,
                                revAuthor = ra, revDescription = rd,
                                revChanges = rv} =
   baseEntry{ entrySummary = Just $ TextString rd
            , entryAuthors = [authorToPerson ra], entryLinks = [ln] }
    where baseEntry = nullEntry url (TextString (intercalate ", " $ map show rv))
                         (formatFeedTime rdt)
-         url = home ++ escape (extract $ head rv) ++ "?revision=" ++ rid
+         url = home ++ escape (extract $ head rv) ++ "?utm_source=RSS&utm_medium=feed&utm_campaign=1"
          ln = (nullLink url) {linkRel = Just (Left "alternate")}
 
 -- gitit is set up not to reveal registration emails
