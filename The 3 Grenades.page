@@ -173,6 +173,40 @@ Now just plug this proposition into our liar-rectifying question like so:
 
 Now ask the above question. If they answer "yes", the ball is green. If they answer "no", the ball is red. If they answer nothing, or if they answer "mu", or if their head explodes, the ball is blue.
 
+## Mestroyer's tale
+
+[Mestroyer](http://lesswrong.com/user/Mestroyer/overview/) offers this graphical take on the problem:
+
+---
+
+Your essay "The 3 Grenades" is wrong (as a few commenters have pointed out). Precluding self-referential questions like Boxo comes up with, 4 questions are not enough when the person doesn't *have* to lie. However, if out of 4 questions, they are forced to lie exactly once, it can be done in 4 questions. If they have to lie exactly once, you can actually pick from among 4 colors in 4 questions.
+
+(There's another assumption I didn't realize I was making: you don't change future questions based on what answers you get.) But here goes: If every question is dependent only on the colors of the grenades, and you have 4 questions, then if you draw out a grid like this:
+
+![](http://s16.postimg.org/bdz9llc85/Blank_Grid.png)
+
+Then each square represents a set of four answers, one for each of questions Q1, Q2, Q3, and Q4. The column decides the answers to Q1 and Q2. The row decides the aswers to Q3 and Q4. I'm using "1" for "yes" and "2" for "no." The columns and rows are numberd in grey code, which means that moving one square in any direction is equivalent to flipping one Y/N answer. Because there are 4 answers to flip, and 4 directions to move in (you can move left on the leftmost square to end up on the rightmost, same with top and bottom. Like the "Asteroids" video game), every answer-flip is represented by a move of one square in a particular direction.
+
+So for each possible grenade color, answering the questions truthfully would specify a square in the grid. Answering one incorrectly will move the set of answers one square in one direction. So if when the grenade is really red, the true answers are 0101 (No to Q1, yes to Q2, no to Q3, yes to Q4), the sets of answers the person can give are the ones filled in below:
+
+![](http://s18.postimg.org/3zx1ufpd5/Red_Grid.png)
+
+The light red one is if they don't lie, and the dark red ones are if they ile once. To make it so we can always determine the ball color, we have to arrange 3 of these shapes on the grid so that they don't overlap. If they do overlap, then they could have answered that way if the ball was one of two or more different colors.
+
+Because this grid wraps like the asteroids game, it doesn't matter where you put the first "+". Mentally placing a second plus makes it obvious that there is nowhere to put the last , no matter where you put it.
+
+But, if they have to lie, then the answers they can give look like this:
+
+![](http://s22.postimg.org/5zndvhqhd/Must_lie_grid.png)
+
+And you can fit 4 of this shape on the grid:
+
+![](http://s8.postimg.org/okis8ol9x/Must_lie_grid_filled.png)
+
+So to determine the grenade color if 4 colors are possible in 4 questions, if in 4 questions they must lie, just pick the questions so that if the grenade is red, the correct answers are 0101, if blue, 1101, if green, 1010, if pink, 0010. This means Q1 should be "Is the ball blue or green," Q2 should be "Is it red or blue," Q3: "Is it green or pink", Q4: "is it red or blue" (Yes, the last three are basically the same.)
+
+When you get your answers, look up a square in the grid, and whatever color it is, is the color of the ball.
+
 # External links
 
 - ["Error correcting codes: Why your texts don’t end up as gibberish"](https://nolaymanleftbehind.wordpress.com/2011/07/11/error-correcting-codes-why-your-texts-dont-end-up-as-gibberish/)
