@@ -25,7 +25,7 @@ As it happens, since 16 February 2012, I have been daily writing down my impress
 
 # Data
 
-A convenient source of data seems to be [Weather Underground](!Wikipedia "Weather Underground (weather service)"). Going via [API](http://allthingsr.blogspot.com/2012/04/getting-historical-weather-data-in-r.html) is overkill, since we just need data from [Islip](http://www.wunderground.com/history/airport/KISP/2013/3/19/MonthlyHistory.html?MR=1) for 16 February 2012 - 08 July 2012 ([CSV](http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1)) and from [Pax River](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&MR=1) 11 July 2012 - 22 March 2013 ([CSV](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=22&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1)). I'm using the nearest airport, rather than the nearest volunteer weather station, to get data on cloud cover; cloud cover should be a good proxy for brightness or sunniness.
+A convenient source of data seems to be [Weather Underground](!Wikipedia "Weather Underground (weather service)"). Going via [API](http://allthingsr.blogspot.com/2012/04/getting-historical-weather-data-in-r.html) is overkill, since we just need data from [Islip](http://www.wunderground.com/history/airport/KISP/2013/3/19/MonthlyHistory.html?MR=1) for 16 February 2012 - 08 July 2012 ([CSV](http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1)) and from [Pax River](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&MR=1) 11 July 2012 - 22 March 2013 ([CSV](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=22&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1)). I'm using the nearest airport, rather than the nearest volunteer weather station, to get data on cloud cover; cloud cover should be a good proxy for brightness or sunniness. The [insol](http://cran.r-project.org/web/packages/insol/index.html) library calculates the length of day, another potentially relevant variable.
 
 ~~~{.R}
 # gather and clean data
@@ -46,7 +46,13 @@ weather2$MP <- c(2,4,4,4,3,4,3,3,4,3,2,3,4,4,4,3,2,3,3,2,3,3,3,2,2,2,2,2,3,4,3,4
                  4,4,3,2,3,2,2,2,3,3,3,4,3,4,3,3,3,2,2,3,3,3,4,4,3,2,2,2,3,3,4,3,4,3,4,
                  3,2,4,4,3,3,2,4,3,3,3,2,3,3,2,3,2,3,3,3,3,2,3,3,3,3,3,3,4,2,3,2,4,3,3,
                  2,2,3,3,3,2,4,3,3,3)
+# compute length of day for each location
+library(insol)
+weather1$DayLength <- daylength(40,73, julian(as.Date(as.character(weather1$EDT))), 1)[,3]
+weather2$DayLength <- daylength(38,76, julian(as.Date(as.character(weather2$EDT))), 1)[,3]
+# combine & start cleaning
 weather <- rbind(weather1,weather2)
+weather$EDT <- as.Date(as.character(weather$EDT))
 weather$WindDirDegrees.br... <- sub("<br />", "", weather$WindDirDegrees.br...)
 weather$WindDirDegrees.br... <- as.integer(weather$WindDirDegrees.br...)
 weather$Events <- as.integer(weather$Events)
@@ -150,41 +156,45 @@ So the data looks clean and tame; now we can begin real interpretation. The firs
 # all weather correlations with mood/productivity
 round(cor(weather[-1], use="complete.obs")[23,], digits=3)
          Max.TemperatureF         Mean.TemperatureF          Min.TemperatureF
-                    0.016                     0.006                     0.000
+                    0.012                     0.004                     0.000
            Max.Dew.PointF            MeanDew.PointF             Min.DewpointF
-                   -0.005                    -0.012                    -0.014
+                    0.002                    -0.007                    -0.019
              Max.Humidity             Mean.Humidity              Min.Humidity
-                    0.013                    -0.058                    -0.085
+                    0.015                    -0.025                    -0.052
  Max.Sea.Level.PressureIn Mean.Sea.Level.PressureIn  Min.Sea.Level.PressureIn
-                   -0.018                    -0.047                    -0.057
+                    0.007                    -0.009                    -0.008
       Max.VisibilityMiles      Mean.VisibilityMiles       Min.VisibilityMiles
-                    0.081                     0.042                     0.014
+                    0.078                     0.021                     0.000
         Max.Wind.SpeedMPH        Mean.Wind.SpeedMPH         Max.Gust.SpeedMPH
-                    0.117                     0.053                     0.098
+                    0.046                     0.016                     0.030
           PrecipitationIn                CloudCover                    Events
-                   -0.052                    -0.016                    -0.063
-     WindDirDegrees.br...
-                    0.131
+                   -0.051                     0.004                    -0.052
+     WindDirDegrees.br...                                           DayLength
+                    0.043                                               0.025
+
 ~~~
 
 All the _r_ values seem very small; only 2 are >0.1, and not by much. But some of the more plausible correlations may be statistically significant, so we'll look for that:
 
 ~~~{.R}
-sapply(c("Events", "Min.Humidity", "Min.VisibilityMiles", "PrecipitationIn", "CloudCover", "Events"),
+sapply(c("Events", "Min.Humidity", "Min.VisibilityMiles", "PrecipitationIn", "CloudCover", "Events", "DayLength"),
        function(x) cor.test(weather$MP, weather[[x]]))
 ...
             Events                                 Min.Humidity
-statistic   -1.116                                 -0.9314
-p.value     0.2651                                 0.3522
-estimate    -0.05686                               -0.04748
+p.value     0.2993                                 0.2964
+estimate    -0.05209                               -0.0524
+
             Min.VisibilityMiles                    PrecipitationIn
-statistic   -0.03959                               -1.005
-p.value     0.9684                                 0.3157
-estimate    -0.00202                               -0.0512
+p.value     0.9945                                 0.3086
+estimate    -0.0003455                             -0.0511
+
             CloudCover                             Events
-statistic   0.05795                                -1.116
-p.value     0.9538                                 0.2651
-estimate    0.002957                               -0.05686
+p.value     0.9437                                 0.2993
+estimate    0.003549                               -0.05209
+
+            DayLength
+p.value     0.6254
+estimate    0.02451
 ~~~
 
 These specific variables turn out to be failures too, with large _p_-values.
@@ -194,15 +204,15 @@ One useful technique is to convert metrics into standardized units (of standard 
 ~~~{.R}
 # construct a z-score for all of them to see if it does any better
 cor.test(weather$MP, (weather$Events + scale(weather$Min.Humidity) + scale(weather$Min.VisibilityMiles)
-                      + scale(weather$PrecipitationIn) + scale(weather$CloudCover)))
+                      + scale(weather$PrecipitationIn) + scale(weather$CloudCover) + scale(weather$DayLength)))
 ...
-t = -1.16, df = 384, p-value = 0.2466
+t = -0.8365, df = 397, p-value = 0.4034
 alternative hypothesis: true correlation is not equal to 0
-95% confidence interval:
- -0.15799  0.04095
+95 percent confidence interval:
+ -0.13955  0.05646
 sample estimates:
      cor
--0.05911
+-0.04195
 ~~~
 
 ## Modeling
@@ -216,69 +226,67 @@ model1 <- lm(MP ~ ., data=weather[-1]); summary(model1)
 ...
 Residuals:
     Min      1Q  Median      3Q     Max
--2.1100 -0.6099  0.0334  0.4803  1.9408
+-2.0809 -0.7307  0.0203  0.6627  1.4204
 
 Coefficients:
                            Estimate Std. Error t value Pr(>|t|)
-(Intercept)               -5.090859   9.190807   -0.55    0.580
-Max.TemperatureF           0.060006   0.049484    1.21    0.227
-Mean.TemperatureF         -0.125364   0.091541   -1.37    0.172
-Min.TemperatureF           0.061215   0.046994    1.30    0.194
-Max.Dew.PointF            -0.006010   0.021281   -0.28    0.778
-MeanDew.PointF            -0.004949   0.037104   -0.13    0.894
-Min.DewpointF              0.019909   0.019694    1.01    0.313
-Max.Humidity               0.023531   0.012512    1.88    0.061
-Mean.Humidity             -0.030931   0.021568   -1.43    0.153
-Min.Humidity               0.007428   0.012367    0.60    0.549
-Max.Sea.Level.PressureIn   1.431655   1.263961    1.13    0.259
-Mean.Sea.Level.PressureIn -1.432649   2.107542   -0.68    0.497
-Min.Sea.Level.PressureIn   0.092097   1.067824    0.09    0.931
-Max.VisibilityMiles        0.446642   0.406223    1.10    0.273
-Mean.VisibilityMiles       0.003546   0.055505    0.06    0.949
-Min.VisibilityMiles       -0.010738   0.029222   -0.37    0.714
-Max.Wind.SpeedMPH          0.022396   0.021102    1.06    0.290
-Mean.Wind.SpeedMPH        -0.008188   0.022209   -0.37    0.713
-Max.Gust.SpeedMPH          0.002484   0.014994    0.17    0.869
-PrecipitationIn           -0.151632   0.110769   -1.37    0.172
-CloudCover                 0.034424   0.035424    0.97    0.332
-Events                    -0.159402   0.152808   -1.04    0.298
-WindDirDegrees.br...       0.000895   0.000626    1.43    0.154
+(Intercept)               -2.73e+00   7.04e+00   -0.39     0.70
+Max.TemperatureF           3.70e-02   3.91e-02    0.95     0.34
+Mean.TemperatureF         -6.47e-02   7.36e-02   -0.88     0.38
+Min.TemperatureF           3.56e-02   3.85e-02    0.93     0.36
+Max.Dew.PointF            -4.22e-04   1.66e-02   -0.03     0.98
+MeanDew.PointF            -8.03e-03   3.04e-02   -0.26     0.79
+Min.DewpointF             -6.85e-03   1.58e-02   -0.43     0.66
+Max.Humidity               6.31e-03   9.79e-03    0.65     0.52
+Mean.Humidity              9.16e-05   1.58e-02    0.01     1.00
+Min.Humidity               2.80e-03   9.38e-03    0.30     0.77
+Max.Sea.Level.PressureIn   1.31e+00   1.05e+00    1.24     0.22
+Mean.Sea.Level.PressureIn -1.78e+00   1.76e+00   -1.01     0.31
+Min.Sea.Level.PressureIn   5.50e-01   9.10e-01    0.60     0.55
+Max.VisibilityMiles        1.94e-01   1.50e-01    1.29     0.20
+Mean.VisibilityMiles      -2.82e-03   4.39e-02   -0.06     0.95
+Min.VisibilityMiles       -8.46e-03   2.28e-02   -0.37     0.71
+Max.Wind.SpeedMPH          1.32e-02   1.50e-02    0.88     0.38
+Mean.Wind.SpeedMPH        -8.96e-03   1.87e-02   -0.48     0.63
+Max.Gust.SpeedMPH         -1.45e-03   5.34e-03   -0.27     0.79
+PrecipitationIn           -1.51e-01   1.00e-01   -1.51     0.13
+CloudCover                 3.22e-02   2.72e-02    1.18     0.24
+Events                    -1.82e-01   1.14e-01   -1.61     0.11
+WindDirDegrees.br...       2.53e-04   4.62e-04    0.55     0.58
+DayLength                  7.64e-02   5.51e-02    1.39     0.17
 
-Residual standard error: 0.76 on 231 degrees of freedom
-  (132 observations deleted due to missingness)
-Multiple R-squared: 0.0856, Adjusted R-squared: -0.00145
-F-statistic: 0.983 on 22 and 231 DF,  p-value: 0.486
+Residual standard error: 0.752 on 375 degrees of freedom
+Multiple R-squared: 0.0391, Adjusted R-squared: -0.0198
+F-statistic: 0.664 on 23 and 375 DF,  p-value: 0.88
 ~~~
 
-The variance explained is extremely minimal, even with 22 different variables in the linear model, and suggests overfitting (as one would expect). By Occam's razor, most of the variables should be scrapped for not carrying their weight; the `step` function uses a [complexity penalty](!Wikipedia "Akaike information criterion") to choose which variable to eliminate while still fitting the data reasonably well. It choose to keep only 2 variables:
+The variance explained is extremely minimal, even with 23 different variables in the linear model, and suggests overfitting (as one would expect). By Occam's razor, most of the variables should be scrapped for not carrying their weight; the `step` function uses a [complexity penalty](!Wikipedia "Akaike information criterion") to choose which variable to eliminate while still fitting the data reasonably well. It choose to keep only 2 variables:
 
 ~~~{.R}
 smodel1 <- step(model1); summary(smodel1)
 ...
+lm(formula = MP ~ 1, data = weather[-1])
+
 Residuals:
     Min      1Q  Median      3Q     Max
--2.0599 -0.9055  0.0143  0.8578  1.9607
+-1.9875 -0.9875  0.0125  1.0125  1.0125
 
 Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)
-(Intercept)        2.83348    0.11563   24.51   <2e-16
-Max.Wind.SpeedMPH  0.01029    0.00663    1.55     0.12
-PrecipitationIn   -0.12680    0.08406   -1.51     0.13
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)   2.9875     0.0373    80.1   <2e-16
 
-Residual standard error: 0.753 on 383 degrees of freedom
-Multiple R-squared: 0.0089, Adjusted R-squared: 0.00373
-F-statistic: 1.72 on 2 and 383 DF,  p-value: 0.18
+Residual standard error: 0.745 on 398 degrees of freedom
 ~~~
 
-The model is much simpler, and appears to fit as well or better. Nevertheless, neither data variable reveals any large coefficient with statistical significance. We can compare the models' prediction accuracy on the dataset (lower is better in mean-squared-error):
+The model with *no* data variables is much simpler, and appears to fit as well or better. We can compare the models' prediction accuracy on the dataset (lower is better in mean-squared-error):
 
 ~~~{.R}
 mean((weather$MP - weather$MP)^2) # perfect
 [1] 0
 mean((weather$MP - model1$fitted.values)^2) # original
-[1] 0.6062
+[1] 0.5321
 mean((weather$MP - smodel1$fitted.values)^2) # simpler model
-[1] 0.5622
+[1] 0.5537
 ~~~
 
 ### Random forests regression
@@ -289,15 +297,14 @@ Linear modeling having failed to reveal any interesting relationships, we'll tak
 library(randomForest)
 rmodel <- randomForest(MP ~ ., data=weather[-1], proximity=TRUE); rmodel
 ...
-               Type of random forest: regression
                      Number of trees: 500
 No. of variables tried at each split: 7
 
-          Mean of squared residuals: 0.5807
-                    % Var explained: -3.79
+          Mean of squared residuals: 0.5608
+                    % Var explained: -1.29
 ~~~
 
-The error with all variables is a little higher than the simpler linear model. Troublingly, a random forests with the simpler variables increases the error:
+The error with all variables is a little higher than the simpler linear model. Troublingly, a random forests with the simpler variables (the last two variables left in the `step` procedure before it deleted all of them) increases the error:
 
 ~~~{.R}
 srmodel <- randomForest(MP ~ Max.Wind.SpeedMPH + PrecipitationIn, data=weather[-1], proximity=TRUE); srmodel
@@ -317,7 +324,7 @@ Perhaps treating MP as a continuous variable was a bad idea. Let's start over.
 We turn the MP data into an ordered factor:
 
 ~~~{.R}
-weather$MP <- factor(weather$MP, ordered=TRUE)
+weather$MP <- ordered(weather$MP)
 ~~~
 
 #### Logistic model
@@ -330,48 +337,49 @@ lmodel <- multinom(MP ~ ., data = weather[-1], maxit=150)
 # relative risk or odds; how much difference between categories is there?
 exp(coef(lmodel))
   (Intercept) Max.TemperatureF Mean.TemperatureF Min.TemperatureF Max.Dew.PointF MeanDew.PointF
-2    8.620154            12.67          0.007235            15.87          1.456         0.3647
-3    0.758188            13.58          0.006698            15.48          1.440         0.3900
-4    0.008288            14.51          0.005604            18.22          1.425         0.3787
+2   3.550e+01            16.71          0.004009            21.55          1.387         0.4164
+3   3.352e+00            17.65          0.003849            20.83          1.398         0.4274
+4   1.566e-04            18.39          0.003373            23.53          1.366         0.4242
   Min.DewpointF Max.Humidity Mean.Humidity Min.Humidity Max.Sea.Level.PressureIn
-2         1.459       0.8817        1.0681        1.322                5.754e+18
-3         1.427       0.8675        1.0545        1.327                1.527e+20
-4         1.414       0.9275        0.9976        1.356                1.339e+20
+2         1.242       0.8354         1.239        1.276                1.473e+12
+3         1.225       0.8228         1.226        1.284                6.919e+13
+4         1.191       0.8606         1.225        1.281                4.289e+13
   Mean.Sea.Level.PressureIn Min.Sea.Level.PressureIn Max.VisibilityMiles Mean.VisibilityMiles
-2                 1.973e-34                4.027e+17           3.987e-09                2.963
-3                 3.516e-36                7.498e+17           9.744e-09                3.123
-4                 2.296e-36                1.468e+18           7.575e-09                2.792
+2                 1.634e-25                1.330e+15           4.533e-09                4.164
+3                 1.003e-27                3.961e+15           1.120e-08                4.494
+4                 2.142e-27                3.813e+15           7.838e-09                4.011
   Min.VisibilityMiles Max.Wind.SpeedMPH Mean.Wind.SpeedMPH Max.Gust.SpeedMPH PrecipitationIn
-2              0.5671             2.237              2.717            0.7403           1.851
-3              0.5188             2.216              2.568            0.7397           1.636
-4              0.5523             2.328              2.615            0.7406           1.112
-  CloudCover  Events WindDirDegrees.br...
-2     0.7039 0.12818               0.9466
-3     0.7436 0.08973               0.9482
-4     0.8104 0.06307               0.9478
+2              0.5302             2.127              3.342            0.7471           2.933
+3              0.4853             2.081              3.145            0.7495           2.674
+4              0.5167             2.215              3.197            0.7467           1.653
+  CloudCover  Events WindDirDegrees.br... DayLength
+2     0.7315 0.12959               0.9454     1.578
+3     0.7715 0.09469               0.9468     1.574
+4     0.8518 0.06345               0.9467     2.079
 ~~~
 
-Another use of `step` and this time the final simplified model uses *none* of the data in attempting to predict days:
+Another use of `step`; this time, it builds something more interesting than a constant predictor:
 
 ~~~{.R}
 slmodel <- step(lmodel); summary(slmodel)
 ...
-multinom(formula = MP ~ 1, data = weather[-1], maxit = 150)
+multinom(formula = MP ~ Mean.TemperatureF + Min.TemperatureF,
+    data = weather[-1], maxit = 150)
 
 Coefficients:
-  (Intercept)
-2       3.199
-3       3.818
-4       3.239
+  (Intercept) Mean.TemperatureF Min.TemperatureF
+2       4.977           -0.2965           0.3161
+3       5.052           -0.2060           0.2222
+4       4.715           -0.2509           0.2692
 
 Std. Errors:
-  (Intercept)
-2      0.5101
-3      0.5055
-4      0.5097
+  (Intercept) Mean.TemperatureF Min.TemperatureF
+2       2.582            0.1770           0.1760
+3       2.563            0.1748           0.1737
+4       2.580            0.1766           0.1755
 
-Residual Deviance: 850.4
-AIC: 856.4
+Residual Deviance: 868.6
+AIC: 886.6
 ~~~
 
 #### Random forests classification
@@ -385,26 +393,53 @@ rmodel <- randomForest(MP ~ ., data=weather[-1], proximity=TRUE); rmodel
                      Number of trees: 500
 No. of variables tried at each split: 4
 
-        OOB estimate of  error rate: 58.29%
+        OOB estimate of  error rate: 57.89%
 Confusion matrix:
   1  2   3  4 class.error
 1 0  0   4  0      1.0000
-2 0 13  79  6      0.8673
-3 0 23 135 24      0.2582
-4 0 12  77 13      0.8725
+2 0 11  84  6      0.8911
+3 0 21 142 27      0.2526
+4 0  7  82 15      0.8558
 ~~~
 
-We can now compare the fraction of days that are incorrectly predicted by the constant predictor, the logistic regression, and the random forests:
+We can't `step` through random forests since it doesn't have a complexity measure like AIC to use, so we'll reuse the variables from the simplified multinomial:
+
+~~~{.R}
+srmodel <- randomForest(MP ~ Mean.TemperatureF + Min.TemperatureF, data=weather[-1], proximity=TRUE); srmodel
+...
+               Type of random forest: classification
+                     Number of trees: 500
+No. of variables tried at each split: 1
+
+        OOB estimate of  error rate: 60.4%
+Confusion matrix:
+  1  2   3  4 class.error
+1 0  0   3  1      1.0000
+2 0 17  60 24      0.8317
+3 0 24 117 49      0.3842
+4 1 19  60 24      0.7692
+~~~
+
+No improvement; perhaps the forests were benefiting from the other data variables.
+
+
+#### Multinomial vs Random forests
+
+We can now compare the fraction of days that are incorrectly predicted by the constant predictor, the logistic regression (full & simplified), and the random forests (full & simplified):
 
 ~~~{.R}
 1 - (sum(weather$MP==3) / length(weather$MP))
-[1] 0.5285
+[1] 0.5238
 
 1 - (sum(weather$MP == as.ordered(predict(lmodel))) / length(weather$MP))
-[1] 0.5155
+[1] 0.4887
+1 - (sum(weather$MP == as.integer(predict(slmodel))) / length(weather$MP))
+[1] 0.5213
 
 1 - (sum(as.integer(weather$MP) == as.integer(predict(rmodel))) / length(weather$MP))
-[1] 0.5829
+[1] 0.5789
+1 - (sum(as.integer(weather$MP) == as.integer(predict(srmodel))) / length(weather$MP))
+[1] 0.604
 ~~~
 
 It would seem that the logistic regression is equivalent or better than the constant predictor, and the random forests does worse than either.
@@ -425,26 +460,28 @@ ORDINARY NONPARAMETRIC BOOTSTRAP
 ...
 Bootstrap Statistics :
     original  bias    std. error
-t1*   0.5155 0.03303     0.03512
+t1*   0.4887 0.05083     0.03494
 
 boot.ci(bs)
 ...
 Intervals :
 Level      Normal              Basic
-95%   ( 0.4137,  0.5513 )   ( 0.4352,  0.5207 )
+95%   ( 0.3694,  0.5064 )   ( 0.3935,  0.4762 )
 
 Level     Percentile            BCa
-95%   ( 0.5104,  0.5959 )   ( 0.4845,  0.5181 )
+95%   ( 0.5013,  0.5840 )   ( 0.4762,  0.4767 )
 Calculations and Intervals on Original Scale
 
+
 hist(bs$t, xlab="Error rate", ylab="Number of samples", main="Bootstrap check of logistic regression accuracy")
-sum(bs$t > 0.5285) / length(bs$t)
-[1] 0.7835
+sum(bs$t > (1 - (sum(weather$MP==3) / length(weather$MP)))) / length(bs$t)
+[1] 0.7124
+
 ~~~
 
 ![Distribution of logistic regression classification rates](/images/2013-weather-bootstrap.png)
 
-There's substantial uncertainty in the classification rate, as evidence by the potentially wide confidence intervals, but in ~80% of the new logistic regressions, the classification rate was worse than the constant predictor (and in a few, the error rate is extremely high). This confirms the fragility claim and suggests that the regression is unlikely to be finding any meaningful signal in the weather noise.
+There's substantial uncertainty in the classification rate, as evidence by the potentially wide confidence intervals, but in ~71% of the new logistic regressions, the classification rate was worse than the constant predictor (and in a few, the error rate is extremely high). This confirms the fragility claim and suggests that the regression is unlikely to be finding any meaningful signal in the weather noise.
 
 # Conclusion
 
@@ -453,4 +490,3 @@ An attack on the data turned up nothing in several ways; the only model that see
 TODO:
 
 power simulation
-length of day - where to get? http://aa.usno.navy.mil/data/docs/RS_OneYear.php need longitudes, home: https://en.wikipedia.org/wiki/Selden,_NY appartment https://en.wikipedia.org/wiki/Leonardtown,_Maryland
