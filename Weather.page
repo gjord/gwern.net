@@ -19,19 +19,18 @@ The scientific literature has found that [lighting & temperature](http://blog.bu
 
 But things everyone knows often turn out to be wrong; and in my case, it seems like my morning use of [vitamin D](Nootropics#vitamin-d) and evening [melatonin](Melatonin) supplementation may be screening off the environmental effects. So one rainy and then sunny day in March 2013, I wondered if I could find an influence of rain or darkness on my own mood or productivity.
 
-As it happens, since 16 February 2012, I have been daily writing down my impression of whether my mood & productivity (MP) that day was average, below-average, or above; this gave me 386 ratings to work with. I didn't record any weather data, but weather data ought to be available online. So I can find it, and see what aspects of the weather influence my self-rating, if any.
+As it happens, since 16 February 2012, I have been daily writing down my impression of whether my mood & productivity (MP) that day was average, below-average, or above; this gave me 399 ratings to work with. I didn't record any weather data, but weather data ought to be available online. So I can find it, and see what aspects of the weather influence my self-rating, if any.
 
 <!-- TODO: schedule a followup in a year or three?; post to LW open thread; post to Data Analysis -->
 
 # Data
 
-A convenient source of data seems to be [Weather Underground](!Wikipedia "Weather Underground (weather service)"). Going via [API](http://allthingsr.blogspot.com/2012/04/getting-historical-weather-data-in-r.html) is overkill, since we just need data from [Islip](http://www.wunderground.com/history/airport/KISP/2013/3/19/MonthlyHistory.html?MR=1) for 16 February 2012 - 08 July 2012 ([CSV](http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1)) and from [Pax River](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&MR=1) 11 July 2012 - 9 March 2013 ([CSV](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1)). I'm using the nearest airport, rather than the nearest volunteer weather station, to get data on cloud cover; cloud cover should be a good proxy for brightness or sunniness.
+A convenient source of data seems to be [Weather Underground](!Wikipedia "Weather Underground (weather service)"). Going via [API](http://allthingsr.blogspot.com/2012/04/getting-historical-weather-data-in-r.html) is overkill, since we just need data from [Islip](http://www.wunderground.com/history/airport/KISP/2013/3/19/MonthlyHistory.html?MR=1) for 16 February 2012 - 08 July 2012 ([CSV](http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1)) and from [Pax River](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&MR=1) 11 July 2012 - 22 March 2013 ([CSV](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=22&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1)). I'm using the nearest airport, rather than the nearest volunteer weather station, to get data on cloud cover; cloud cover should be a good proxy for brightness or sunniness.
 
 ~~~{.R}
 # gather and clean data
 weather1 <- read.csv("http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1")
-weather2 <- read.csv("http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1")
-colnames(weather1)[1] <- "EST"
+weather2 <- read.csv("http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=22&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1")
 weather1$PrecipitationIn <- as.numeric(as.character(weather1$PrecipitationIn)) # delete weird "T" factor; ???
 # mood/productivity (MP) sourced from personal log
 weather1$MP <- c(1,3,4,4,4,4,3,4,2,3,4,4,2,3,2,3,3,2,3,2,3,4,3,2,3,2,3,1,2,4,3,3,3,3,3,
@@ -45,7 +44,8 @@ weather2$MP <- c(2,4,4,4,3,4,3,3,4,3,2,3,4,4,4,3,2,3,3,2,3,3,3,2,2,2,2,2,3,4,3,4
                  4,4,3,4,2,2,2,3,4,3,4,3,4,3,4,4,3,3,2,3,2,4,4,3,4,2,3,4,2,3,3,2,2,2,3,
                  2,3,3,4,2,3,4,3,4,3,3,2,2,3,4,4,3,4,2,2,3,2,3,2,2,2,4,3,3,4,2,2,3,3,3,
                  4,4,3,2,3,2,2,2,3,3,3,4,3,4,3,3,3,2,2,3,3,3,4,4,3,2,2,2,3,3,4,3,4,3,4,
-                 3,2,4,4,3,3,2,4,3,3,3,2,3,3,2,3,2,3,3,3,3,2,3,3,3,3,3,3,4,2,3,2)
+                 3,2,4,4,3,3,2,4,3,3,3,2,3,3,2,3,2,3,3,3,3,2,3,3,3,3,3,3,4,2,3,2,4,3,3,
+                 2,2,3,3,3,2,4,3,3,3)
 weather <- rbind(weather1,weather2)
 weather$WindDirDegrees.br... <- sub("<br />", "", weather$WindDirDegrees.br...)
 weather$WindDirDegrees.br... <- as.integer(weather$WindDirDegrees.br...)
@@ -99,9 +99,52 @@ summary(weather[-1])
  Max.   :2.00   Max.   :360
 ~~~
 
-`CloudCover` being 0-8 looks a bit odd, since one might've expected a decimal or percentage or some quantification of thickness but turns out to be a standard measurement, the "[okta](!Wikipedia)".
+`CloudCover` being 0-8 looks a bit odd, since one might've expected a decimal or percentage or some quantification of thickness but turns out to be a standard measurement, the "[okta](!Wikipedia)". We might expect some seasonal effects, but graphing a sensitive [LOESS](!Wikipedia) [moving average](!Wikipedia) and then a per-week spineplot suggests just 1 anomaly, that there were some days I rated "1" but never subsequently (this has an explanation: as I began keeping the series, my car caught on fire, was totaled; and I was then put through the wringer with the insurance & junkyard, and felt truly miserable at multiple points):
 
-The first and most obvious thing to do is to see what the overall correlation matrix with MP looks like:
+~~~{.R}
+par(mfrow=c(2,1))
+scatter.smooth(x=weather$EDT, y=weather$MP, span=0.3, col="#CCCCCC", xlab="Days", ylab="MP rating")
+weeks <- c(seq(from=1,to=length(weather$MP),by=7), length(weather$MP))
+spineplot(c(1:(length(weather$MP))), as.factor(weather$MP), breaks=weeks, xlab="Weeks", ylab="MP rating ratios")
+~~~
+
+![MP from February 2012 to March 2013](/images/2013-weather-seasonal.png)
+
+A formal check for [autocorrelation](!Wikipedia) in MP ratings (most methods assume independence) turns up little enough[^autocorrelation] that I feel free to ignore them.
+
+[^autocorrelation]: A test using `acf` shows no autocorrelation worth mentioning:
+
+    ~~~{.R}
+    acf(weather$MP, main="Do days predict subsequent days at various distances?")
+    ~~~
+
+    ![MP series shows almost no autocorrelation at any timelag](/images/2013-weather-autocorrelation-mp.png)
+
+    For comparison, here is `acf` for a data series where one would expect a great deal of autocorrelation - my daily weight - and one does indeed observe it:
+
+    ~~~{.R}
+    acf(c(205,214,216,213,213,218,218,214,215,216,218,216,210,219,217,
+          219,217,215,215,217,219,216,215,218,215,219,219,219,218,218,
+          220,220,219,219,219,221,220,219,216,220,220,218,218,220,219,
+          220,215,215,218,218,215,216,216,218,218,220,219,216,217,220,
+          215,215,218,216,214,213,216,215,214,213,214,216,216,212,209,
+          212,214,213,210,211,210,213,211,215,211,212,212,216,212,215,
+          216,215,215,212,216,213,212,211,215,214,215,216,214,212,212,
+          213,212,213,211,214,215,210,211,211,211,212,210,210,212,211,
+          214,213,214,212,215,214,213,215,211,214,214,216,215,213,215,
+          213,213,212,215,211,212,212,211,212,211,212,210,211,213,218,
+          217,212,214,216,213,212,211,211,214,212,211,216,218,216,214,
+          215,216,216,213,216,214,215,219,218,216,215,218,217,219,219,
+          219,219,219,218,217,216,216,215,218,219,217,216,219,217,216,
+          216,219,216,218,215,216,215,215,213,214,215,217,216,215,215,
+          216,214,215,215,214,216,211,214,213,214,211,212,211,210,212,
+          211,212,214,212,211,214,212,211,212,211,212,213,210,212,210,
+          210,211,210))
+    ~~~
+
+    ![Weight series showing autocorrelation at every timelag](/images/2013-weather-autocorrelation-weight.png)
+
+So the data looks clean and tame; now we can begin real interpretation. The first and most obvious thing to do is to see what the overall correlation matrix with MP looks like:
 
 ~~~{.R}
 # all weather correlations with mood/productivity
@@ -406,3 +449,8 @@ There's substantial uncertainty in the classification rate, as evidence by the p
 # Conclusion
 
 An attack on the data turned up nothing in several ways; the only model that seemed to improve on random guessing turned out to look mostly like a fluke.
+
+TODO:
+
+power simulation
+length of day - where to get? http://aa.usno.navy.mil/data/docs/RS_OneYear.php need longitudes, home: https://en.wikipedia.org/wiki/Selden,_NY appartment https://en.wikipedia.org/wiki/Leonardtown,_Maryland
