@@ -460,6 +460,51 @@ The revision history is kept in [Darcs](!Wikipedia), but I periodically mirror i
 
 As of 3 January 2013, the source of `gwern.net` is composed of >166 files with >1,404,179 words or 9.2MB; this includes documents transcribed into Markdown but excludes images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is >304M. The source repository contains >6,378 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
 
+##### Benford's law
+
+In March 2013 I wondered, upon seeing a mention of [Benford's law](!Wikipedia): "if I extracted all the numbers from everything I've written on `gwern.net`, would it satisfy Benford's law?" It seems the answer is... *almost*. I generate the list of numbers by running a Haskell program to parse digits, commas, and periods; and then I process it with shell utilities.[^Benford-Haskell] This can then be read in R to run a [chi-squared test](!Wikipedia) confirming lack of fit (_p_=~0) and generate this comparison of the data & Benford's law[^Benford-R]:
+
+![Histogram/barplot of parsed numbers vs predicted](/images/2013-benfords-law.png)
+
+There's a very clear resemblance for everything but the digit '2', which then blows the fit to heck. I have no idea why 2 is so overrepresented - it may be due to all the citations to recent academic papers which would involve numbers starting with '2' (2002, 2010, 2013...) and cause a double-count in both the citation and filename, since if I look in the `docs/` fulltext folder, I see 160 files starting with '1' but 326 starting with '2'. But this can't be the entire explanation since '2' has 20.3k entries while to fit Benford, it needs to be just 11.5k - leaving a gap of ~10k numbers unexplained. A mystery.
+
+[^Benford-Haskell]: We write a short Haskell program as part of a pipeline:
+
+    ~~~{.Bash}
+    echo '{-# LANGUAGE OverloadedStrings #-};
+          import Data.Text as T;
+          main = interact (T.unpack . T.unlines . Prelude.filter (/="") .
+                           T.split (not . (`elem` "0123456789,.")) . T.pack)' > ~/number.hs &&
+    find ~/wiki/ -type f -name "*.page" -exec cat "{}" \; | runhaskell ~/number.hs |
+     sort | tr -d ',' | tr -d '.' | cut -c 1 | sed -e 's/0$//' -e '/^$/d' > ~/number.txt
+    ~~~
+
+[^Benford-R]: Graph then test:
+
+    ~~~{.R}
+    numbers <- read.table("number.txt")
+    ta <- table(numbers$V1); ta
+
+        1     2     3     4     5     6     7     8     9
+    20550 20356  7087  5655  3900  2508  2075  2349  2068
+    # cribbing exact R code from http://www.math.utah.edu/~treiberg/M3074BenfordEg.pdf
+    sta <- sum(ta)
+    pb <- sapply(1:9, function(x) log10(1+1/x)); pb
+    m <- cbind(ta/sta,pb)
+    colnames(m)<- c("Observed Prop.", "Theoretical Prop.")
+    barplot( rbind(ta/sta,pb/sum(pb)), beside = T, col = rainbow(7)[c(2,5)],
+                  xlab = "First Digit")
+    title("Benford’s Law Compared to Writing Data")
+    legend(16,.28, legend = c("From Page Data", "Theoretical"),
+           fill = rainbow(7)[c(2,5)],bg="white")
+    chisq.test(ta,p=pb)
+
+        Chi-squared test for given probabilities
+
+    data:  ta
+    X-squared = 9331, df = 8, p-value < 2.2e-16
+    ~~~
+
 ### Tools
 
 Tools which are used in the site as a whole:
