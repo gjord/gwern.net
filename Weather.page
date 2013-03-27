@@ -23,7 +23,7 @@ As it happens, since 16 February 2012, I have been daily writing down my impress
 
 # Data
 
-A convenient source of data seems to be [Weather Underground](!Wikipedia "Weather Underground (weather service)"). Going via [API](http://allthingsr.blogspot.com/2012/04/getting-historical-weather-data-in-r.html) is overkill, since we just need data from [Islip](http://www.wunderground.com/history/airport/KISP/2013/3/19/MonthlyHistory.html?MR=1) for 16 February 2012 - 08 July 2012 ([CSV](http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1)) and from [Pax River](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&MR=1) 11 July 2012 - 22 March 2013 ([CSV](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=22&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1)). I'm using the nearest airport, rather than the nearest volunteer weather station, to get data on cloud cover; cloud cover should be a good proxy for brightness or sunniness. The [insol](http://cran.r-project.org/web/packages/insol/index.html) library calculates the length of day, another potentially relevant variable.
+A convenient source of data seems to be [Weather Underground](!Wikipedia "Weather Underground (weather service)"). Going via [API](http://allthingsr.blogspot.com/2012/04/getting-historical-weather-data-in-r.html) is overkill, since we just need data from [Islip](http://www.wunderground.com/history/airport/KISP/2013/3/19/MonthlyHistory.html?MR=1) for 16 February 2012 - 08 July 2012 ([CSV](http://www.wunderground.com/history/airport/KISP/2012/2/16/CustomHistory.html?dayend=8&monthend=7&yearend=2012&req_city=NA&req_state=NA&req_statename=NA&format=1)) and from [Pax River](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=9&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&MR=1) 11 July 2012 - 22 March 2013 ([CSV](http://www.wunderground.com/history/airport/KNHK/2012/7/11/CustomHistory.html?dayend=22&monthend=3&yearend=2013&req_city=NA&req_state=NA&req_statename=NA&format=1)). I'm using the nearest airport, rather than the nearest volunteer weather station, to get data on cloud cover; cloud cover should be a good proxy for brightness or sunniness. The [`insol`](http://cran.r-project.org/web/packages/insol/index.html) library calculates the length of day, another potentially relevant variable.
 
 ~~~{.R}
 # gather and clean data
@@ -206,7 +206,7 @@ cor.test(weather$MP, (weather$Events + scale(weather$Min.Humidity) + scale(weath
 ...
 t = -0.8365, df = 397, p-value = 0.4034
 alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
+95% confidence interval:
  -0.13955  0.05646
 sample estimates:
      cor
@@ -408,13 +408,85 @@ Intercepts:
 
 Residual Deviance: 868.85
 AIC: 882.85
+~~~
 
+#### Correlation size & implications
+
+These seem like reasonable variables; for example the first one (the [dew point](!Wikipedia "Dew point#Relationship to human comfort") temperature) reflects the barometric pressure, so perhaps that variable is tapping into some sort of measure of rain better than just `Max.Humidity`.
+
+But we want to know whether these surviving variables are robust or potentially useful in practice. We again exponentiate the log odds to get more understandable odds:
+
+~~{.R}
 exp(coef(slmodel))
       Min.DewpointF        Max.Humidity Max.VisibilityMiles           DayLength
              0.9763              1.0171              1.7202              1.2019
 ~~~
 
-These seem like reasonable variables; the [dew point](!Wikipedia "Dew point#Relationship to human comfort") temperature reflects the barometric pressure, so perhaps that variable is tapping into some sort of rain variable.
+What do these estimates mean in practice? Let's take `DayLength` as a variable that may be manipulable by buying bright lights, with an odds of 1.2; if we could somehow maximize each day's `DayLength`, the model would predict 141 higher days:
+
+~~~{.R}
+weatherOdds <- weather # copy data & max out DayLength
+weatherOdds$DayLength <- max(weather$DayLength)
+sum(as.integer(predict(slmodel, newdata=weatherOdds))) - sum(as.integer(predict(slmodel, newdata=weather)))
+[1] 141
+~~~
+
+A combination of `DayLength` & `Max.VisibilityMiles` (for the sake of argument, since I have no intuition about what exactly the latter is measuring or how one would affect the underlying processes) would affect 145 days (the smallness of the increase may be a ceiling effect):
+
+~~~{.R}
+weatherOdds <- weather
+weatherOdds$DayLength <- max(weather$DayLength)
+weatherOdds$Max.VisibilityMiles <- max(weather$Max.VisibilityMiles)
+sum(as.integer(predict(slmodel, newdata=weatherOdds))) - sum(as.integer(predict(slmodel, newdata=weather)))
+[1] 145
+~~~
+
+If we wanted to test this potential effect via an experiment (eg. buying a powerful lighting system, and turning it on or off on random days), how many days _n_ should the experiment run? Treating the MP data as a continuous response for a _t_-test: we can calculate the effect size of 141 incremented days and then ask for the _n_ required for a self-experiment with good power of 80%; this turns out to be a 78 day-long experiment:
+
+~~~{.R}
+effect <- (mean(as.integer(weather$MP) + c(rep(1,141),rep(0,258))) - mean(as.integer(weather$MP))) / sd(weather$MP); effect
+[1] 0.4743
+power.t.test(d=effect,power=0.80, type="paired")
+
+     Paired t test power calculation
+
+              n = 36.86
+          delta = 0.4743
+             sd = 1
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+ NOTE: n is number of *pairs*, sd is std.dev. of *differences* within pairs
+~~~
+
+Similarly if we treat the original data and the modified data as the true probabilities and ask how many samples are needed for a chi-squared test to reject the hypothesis of the former using a chi-squared test, we get a similar answer of 71 days (which makes sense):
+
+~~~{.R}
+table(as.integer(weather$MP))/length(weather$MP)
+      1       2       3       4
+0.01003 0.25313 0.47619 0.26065
+table(as.integer(weather$MP) + c(rep(1,141),rep(0,258)))/length(weather$MP)
+      2       3       4       5
+0.17293 0.40852 0.32331 0.09524
+# we'll lump 1 and 5 ratings in with 2 and 4s
+before <- c(0.2632,0.47619,0.26065);
+after <- c(0.17293,0.40852,0.4185)
+
+effect <- ES.w1(before,after); effect
+[1] 0.369
+
+pwr.chisq.test(w=effect, df=(2-1)*(3-1), power=0.8)
+
+     Chi squared power calculation
+
+              w = 0.369
+              N = 70.75
+             df = 2
+      sig.level = 0.05
+          power = 0.8
+~~~
+
 
 #### Random forests classification
 
@@ -485,12 +557,12 @@ Before concluding that the ordinal logistic regression is better than the consta
 
 ~~~{.R}
 library(boot)
-classify <- function(dt, indices) {
+errorRate <- function(dt, indices) {
   d <- dt[indices,] # allows boot to select subsample
   lmodel <- polr(as.ordered(MP) ~ ., data = d) # train new regression model on subsample
   return(1 - (sum(d$MP == predict(lmodel)) / length(d$MP)))
 }
-bs <- boot(data=weather, statistic=classify, R=10000); bs
+bs <- boot(data=weather, statistic=errorRate, R=10000); bs
 ORDINARY NONPARAMETRIC BOOTSTRAP
 ...
 Bootstrap Statistics :
