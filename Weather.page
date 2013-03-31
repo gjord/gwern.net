@@ -410,13 +410,22 @@ Residual Deviance: 868.85
 AIC: 882.85
 ~~~
 
-#### Correlation size & implications
 
-These seem like reasonable variables; for example the first one (the [dew point](!Wikipedia "Dew point#Relationship to human comfort") temperature) reflects the barometric pressure, so perhaps that variable is tapping into some sort of measure of rain better than just `Max.Humidity`.
+##### Correlation size & implications
 
-But we want to know whether these surviving variables are robust or potentially useful in practice. We again exponentiate the log odds to get more understandable odds:
+These seem like reasonable variables; for example the first one (the [dew point](!Wikipedia "Dew point#Relationship to human comfort") temperature) reflects the barometric pressure, so perhaps that variable is tapping into some sort of measure of rain better than just `Max.Humidity`. We can visualize the coefficients thusly:
 
-~~{.R}
+~~~{.R}
+library(arm)
+x <- ((attr(profile(slmodel), "summary"))$coefficients)[1:3,][,1:2]
+coefplot(x[,1], x[,2], varnames=rownames(x), vertical=FALSE, var.las=1, main="95% CIs for the log odds of predictors")
+~~~
+
+![Variables with confidence intervals show log odds size and whether the CI excludes zero](/images/2013-weather-coefficients-ci.png)
+
+They don't *look* particularly impressive; but we want to know whether these surviving variables are potentially useful in practice, what their "cash value" might be. We again exponentiate the log odds to get more understandable odds:
+
+~~~{.R}
 exp(coef(slmodel))
       Min.DewpointF        Max.Humidity Max.VisibilityMiles           DayLength
              0.9763              1.0171              1.7202              1.2019
@@ -444,9 +453,10 @@ sum(as.integer(predict(slmodel, newdata=weatherOdds))) - sum(as.integer(predict(
 If we wanted to test this potential effect via an experiment (eg. buying a powerful lighting system, and turning it on or off on random days), how many days _n_ should the experiment run? Treating the MP data as a continuous response for a _t_-test: we can calculate the effect size of 141 incremented days and then ask for the _n_ required for a self-experiment with good power of 80%; this turns out to be a 78 day-long experiment:
 
 ~~~{.R}
-effect <- (mean(as.integer(weather$MP) + c(rep(1,141),rep(0,258))) - mean(as.integer(weather$MP))) / sd(weather$MP); effect
+(mean(as.integer(weather$MP) + c(rep(1,141),rep(0,258))) - mean(as.integer(weather$MP))) /
+           sd(weather$MP)
 [1] 0.4743
-power.t.test(d=effect,power=0.80, type="paired")
+power.t.test(d=0.4743,power=0.80, type="paired")
 
      Paired t test power calculation
 
@@ -463,10 +473,10 @@ power.t.test(d=effect,power=0.80, type="paired")
 Similarly if we treat the original data and the modified data as the true probabilities and ask how many samples are needed for a chi-squared test to reject the hypothesis of the former using a chi-squared test, we get a similar answer of 71 days (which makes sense):
 
 ~~~{.R}
-table(as.integer(weather$MP))/length(weather$MP)
+table(as.integer(weather$MP)) / length(weather$MP)
       1       2       3       4
 0.01003 0.25313 0.47619 0.26065
-table(as.integer(weather$MP) + c(rep(1,141),rep(0,258)))/length(weather$MP)
+table(as.integer(weather$MP) + c(rep(1,141),rep(0,258))) / length(weather$MP)
       2       3       4       5
 0.17293 0.40852 0.32331 0.09524
 # we'll lump 1 and 5 ratings in with 2 and 4s
