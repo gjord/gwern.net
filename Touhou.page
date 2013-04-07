@@ -7,6 +7,18 @@ status: in progress
 belief: possible
 ...
 
+<!-- TODO: from Culture is not about esthetics: mv here?
+[^touhou]: This is a general assertion that is fairly hard to prove, but an example may be suggestive. The [Touhou](!Wikipedia "Touhou Project") doujinshi-game phenomenon has a [fair amount of music](http://touhou.wikia.com/wiki/Category:Music), but to get a sense of the true scale, we can look at some numbers. From the talk ["Riding on Fans' Energy: Touhou, Fan Culture, and Grassroot Entertainment"](http://cardcaptor.moekaku.com/?p=112) ([Barcamp](!Wikipedia) Bangkok 2 on August 31, 2008):
+
+    > Touhou is [ZUN](!Wikipedia "Team Shanghai Alice#Member")'s work as much as it is a gigantic repertoire of fan-made manga, games, music, and video clips. I estimate that there are roughly at least three thousands short manga, five hundred music rearrangement albums, and one hundred derivative games created since 2003. These works are traded mainly in conventions dedicated to them, and some commercial firms are starting to capitalize on their popularity. Doujinshi shops like [Tora no Ana](!Wikipedia "Comic Toranoana") and [Mandarake](!Wikipedia) have shelves dedicate to Touhou comics. And Amazon.co.jp are carrying CDs of arranged/sampled Touhou music (but not ZUN's originals). More and more people are attracted to the franchise because its diverse derivative works provide a variety of entry points for potential fans. In fact, Touhou's popularity skyrocketed when it became one of the killer content of [Nico Nico Douga](!Wikipedia), a Japanese equivalent of YouTube launched one year and a half earlier. There, Touhou content spread like wild fire and gave rise to many recurring memes and tens of thousands of mashup videos. To give a sense of how popular Touhou is in Nico Nico Douga, 18 of 100 most viewed videos are Touhou-related, and the best Touhou video ranks the 6th. [[5]](http://cardcaptor.moekaku.com/?p=112#touhou-popularity-in-nico-nico-douga)
+
+    For a recent estimate, we can turn to [TV Tropes](!Wikipedia)'s [article](http://tvtropes.org/pmwiki/pmwiki.php/CrowningMusic/TouhouProject) on Touhou music:
+
+    > The Touhou Project really gets a lot of great pieces of music for [the music] being [originally] made up by a single guy with a synthesizer. To put the sheer number of remix CDs in perspective, there is a torrent with over 870.4 gigabytes of over 3000 Touhou remixes, and that only includes the ones that the (English-speaking) maintainers of the torrent have added.
+
+    (This is outdated; the October 2011 lossless torrent is [1,020 gigabytes](http://www.nyaa.eu/?page=torrentinfo&tid=255825). Personally, [I](http://www.reddit.com/r/TOUHOUMUSIC/search?q=author%3A%27gwern%27&restrict_sr=on) enjoy the orchestral pieces like the [WAVE](http://www.circle-wave.net/) group's [Luna Forest (第七楽章)](http://www.youtube.com/watch?v=xhDNC12hWKc).)
+-->
+
 Idea: correlate Touhou music production against Japanese youth unemployment: does the total production of music as measured in seconds increase with unemployment?
 
 Opposite view, recessions dent production (perhaps because people are working harder and so have less free time even if other people are unemployed?) http://www.gamesetwatch.com/2009/12/sound_current_yokohamas_mediam.php
@@ -46,7 +58,7 @@ alternative sources
 - [Touhouwiki.net](http://en.touhouwiki.net/wiki/Doujin_circles) another source, with <1182 albums
 - "東方音団録 ～ Arrange Circle Database ver.3.0"; [homepage](http://www16.atwiki.jp/toho) & [release info](http://www16.atwiki.jp/toho/pages/727.html) ([debate](http://www16.atwiki.jp/toho/pages/13.html), [chat](http://www16.atwiki.jp/toho/pages/948.html)), [product page](http://www.toranoana.jp/bl/article/04/0030/04/86/040030048682.html) with j-subculture.com quoting a partial total of $15, Paypal and shipping outside Japan boosting to $20+!
 
-   Strategy: first I'll ask for an Arrange CD download in the wiki's chatroom; then I'll look for an email by someone running it and email them directly; then I'll see if there's anyone in japan who either owes me a favor or is willing to do me a favor; then I'll ask around for a cheaper reshipper; and if all that fails, then I'll pay j-subculture's extortionate $25 probable total cost.
+   Strategy: first I'll ask for an Arrange CD download in the wiki's chatroom; then I'll look for an email by someone running it and email them directly; then I'll see if there's anyone in Japan who either owes me a favor or is willing to do me a favor; then I'll ask around for a cheaper reshipper; and if all that fails, then I'll pay j-subculture's extortionate $25 probable total cost.
 
 Need more for capture-recapture analysis!
 
@@ -55,11 +67,11 @@ Need more for capture-recapture analysis!
 Music source: [Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790), 265.2GB of 44421 tracks from 4952 albums produced X-Y by <1,264 groups or "circles".
 
 ~~~{.sh}
-$ find ~/torrent/Touhou\ lossy\ music\ collection/ -type f -name "*.mp3"|wc
+$ find ~/torrent/Touhou\ lossy\ music\ collection/ -type f -name "*.mp3" | wc
   44421
-$ ls torrent/Touhou\ lossy\ music\ collection/|wc
+$ ls torrent/Touhou\ lossy\ music\ collection/ | wc
    1264
-$ ls torrent/Touhou\ lossy\ music\ collection/*/|wc
+$ ls torrent/Touhou\ lossy\ music\ collection/*/ | wc
    7477
 ~~~
 
@@ -121,7 +133,11 @@ $ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3
 
 ~~~{.R}
 # generate and parse and cleanup data
-# system("exiftool -extension mp3 -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json") # takes ~30m
+#
+# takes ~30m:
+# R> system("exiftool -extension mp3 -json -forcePrint
+#           -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate
+#           ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json")
 library("rjson")
 # download from http://www.gwern.net/docs/touhou/2013-torrent.json.7z and decompress with 7zip
 json_data <- fromJSON(paste(readLines("2013-gwern-touhoutorrent.json"), collapse=""))
@@ -224,6 +240,33 @@ write.csv(touhou, file="2013-vgmdb-touhou.csv", row.names=FALSE)
 ~~~
 
 ## `touhouwiki.net`
+
+## 4chan /jp/ C83 threads
+
+A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.org/jp/1) subforum collaborate each Comiket to upload and distribute doujin manga, games, and music released at that Comiket; some are uploaded by Comiket attendees, some are bought from resellers like [Comic Toranoana](!Wikipedia), and many files are harvested from Japanese P2P filesharing networks like [Winny](!Wikipedia)/[Share](!Wikipedia "Share (P2P)")/[Perfect Dark](!Wikipedia "Perfect Dark (P2P)"). I compiled a list of ~400 files from the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/15pp33/c83_resource_thread/) C83 thread (principally from the 4chan links) & the blog [All Doujin Music](http://alldoujinmusic.wordpress.com) and gradually downloaded them from January to March 2013. After dead links, I was left with 400-500 files. Many are not music, or even Touhou-related, so I hand-filtered albums, looking for signs of being Touhou doujin works (credits to ZUN, Touhou characters in the artwork, themes I recognized as Touhou, etc); when I was not sure, I erred on the side of exclusion. The [final compilation](/docs/touhou/2013-c83-downloads.txt) yielded 3503 files (evenly split: 1776 Touhou vs 1728 "other") with 953 Touhou music files.
+
+    Playback length:
+
+~~~{.R}
+# exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date -recurse ~/c83/touhou/ ~/c83/touhou/*/** ~/c83/touhou/*/*/** ~/c83/touhou/*/*/*/** > ~/2013-c83-downloads.json
+library("rjson")
+# download from http://www.gwern.net/docs/touhou/2013-torrent.json.7z and decompress with 7zip
+json_data <- fromJSON(paste(readLines("2013-c83-downloads.json"), collapse=""))
+touhou <- data.frame(matrix(unlist(json_data), ncol=13, byrow=TRUE))
+colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
+                      "Track", "Directory", "FileName", "FileSize", "AudioBitrate", "Date")
+# Delete SourceFile column; redundant with Directory/FileName
+touhou <- touhou[,-1]
+for (filter in c("/home/gwern/c83/touhou/", "\\[touhou.vnsharing.net\\]", " \\(320K\\+BK\\)", "/mp3",
+                 " MP3v0", " v0", " \\(flac\\+scans\\)", " \\(128K\\)", " \\(V0\\)", " \\(320\\)",
+                 " \\(mp3 320\\)", " \\(v0\\+jpg\\)"))
+ { touhou$Directory <- sub(filter, "", as.character(touhou$Directory)) }
+touhou[touhou==""] <- NA
+touhou[touhou=="-"] <- NA
+
+~~~
+
+find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|g "Playback length"
 
 
 
