@@ -1,0 +1,427 @@
+---
+title: Google product shutdowns
+description: Analyzing predictors of Google abandoning products; predicting future shutdowns
+created: 28 Mar 2013
+tags: statistics, archiving, predictions
+status: in progress
+belief: likely
+...
+
+> The summer grasses -- \
+> the sole remnants of many \
+> brave warriors' dreams.
+
+The following is a list of services/APIs/programs that Google has shut down or abandoned, taken from ["Google Keep? It'll probably be with us until March 2017 - on average: The closure of Google Reader has got early adopters and developers worried that Google services or APIs they adopt will just get shut off. An analysis of 39 shuttered offerings says how long they get"](http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed) by Charles Arthur.
+
+Arthur's list seemed relatively complete, but I've added in >83 items he missed based on the [Slate graveyard](http://www.slate.com/articles/technology/map_of_the_week/2013/03/google_reader_joins_graveyard_of_dead_google_products.html), Weber's ["Google Fails 36% Of The Time"](http://thenextweb.com/google/2011/10/17/google-fails/), the [Wikipedia category](!Wikipedia "Category:Google acquisitions")/[list](!Wikipedia "List of mergers and acquisitions by Google") for Google acquisitions, the [Wikipedia category](!Wikipedia "Category:Discontinued Google services")/[list](!Wikipedia "List of Google products#Discontinued products and services"), and finally the official [Google History](https://www.google.com/about/company/history/). (The additional shut downs include multiple shutdowns predating 2010, suggesting that Arthur's list is biased towards recent shutdowns.) In a few cases, the start dates are guesses (eg. [Google Translate](https://plus.google.com/u/0/103530621949492999968/posts/fqxuM2SBRQ5)) and dates of abandonment/shut-down are even harder to get due to the lack of attention paid to most (Joga Bonito) and so I infer the date from archived pages on the Internet Archive, news reports, blogs, the dates of press releases, the shutdown of closely related services (eReader Play based on Reader), source code repositories (AngularJS) etc; some are listed as discontinued (Google Catalogs) but are still supported or were merged into other software (Spreadsheets, Docs, Writely, News Archive) or sold/given to third parties (Flu Shot Finder, App Inventor, Body) or active effort has ceased but the content remains and I do not list those as dead; for cases of acquired software/services that were shut down, I date the start from Google's purchase.
+
+A major criticism of Arthur's post was that it was fundamentally using the wrong data: if you have a dataset of all Google products which have been shut down, you can make statements like "the average dead Google product lived 3.9 years", but you can't infer very much about a live product's life expectancy - because you don't know if it will join the dead products. You can only make inferences conditional on a product eventually dying, you cannot make an unconditional inference. Unfortunately, an unconditional "will it die?" is a major question any Google-user (including myself) might want answered. So I have compiled a second list, of still-living products; the ratio of living to dead gives a base rate for how likely a randomly selected Google product is to be canceled within the 1997-2013 window, and with the date of the founding of each living product, we can also do a simple right-censored [survival analysis](!Wikipedia) which will let us make better still predictions by extracting results like mean time to failure. Some items are obviously dead in a meaningful sense since they have been closed to new users (eg. Google Sync), lost major functionality (eg. FeedBurner, Meebo), degraded severely due to neglect (eg. Google Alerts), or just been completely neglected for a decade or more (Google Group's Usenet archive) - but haven't actually died or closed yet, so I list them as alive.
+
+Finally, for both datasets I have collected several covariates which might help predict longevity:
+
+- `Hits`: the number of Google hits for a service
+
+    While number of Google hits is a very crude measure, at best, for underlying variables like "popularity" or "number of users" or "profitability", and clearly biased towards recently released products (there aren't going to be as many hits for, say, "Google Answers" as there would have been if we had searched for it in 2002), it may add some insight.
+
+    There do not seem to be any other free quality sources indicating traffic to a product URL/homepage which could be used in the analysis - services like Alexa or Google Ad Planner either are commercial, for domains only, or simply do not cover many of the URLs.
+- `Type`: a categorization into "service"/"program"/"thing"/"other"
+
+    1. A service is anything primarily accessed through a web browser or API or the Internet; so for example, Gmail or a browser loading fonts from a Google server, but not a Gmail alert program one runs on one's computer or a font released under a Free license for download and distribution.
+    2. A program is anything which is an application, plugin, library, framework, or all of these combined; some are very small (Authenticator) and some are very large (Android). This does include programs which require Internet connections or Google APIs as well as programs for which the source code has not been released, so things in the program category are not immune to shut down and often survive only at Google's sufferance.
+    3. A thing is anything which is primarily a physical object. A cellphone or laptop running Android would be an example.
+    4. Other is the catch-all category for things which don't quite seem to fit. Where does a Google thinktank or charity fit in? They certainly aren't software, but they don't seem to be quite services either.
+- `Profit`: whether Google directly makes money off a product
+
+    This is a tricky one.Google excuses many of its products by saying that anything which increases Internet usage benefits Google and so by this logic, every single one of its services could potentially increase profit; but this is a little stretched, and one would expect that products without direct monetization are more likely to be killed. Generally, I classify as for profit any Google product relating to producing or displaying advertising, paid subscriptions, fees, or purchases (Adwords, Gmail, Blogger, Search, shopping engines), but many do not seem to have any form of monetization related to them (Alerts, Office, Drive, Gears, Reader). Some services like Voice charge (for international calls) but the amounts are minor enough that one might wonder if classifying them as for profit is really right. While it might make sense to define every feature added to, say, Google Search (eg. Personalized Search, or Search History) as being 'for profit' since Search lucratively displays ads, I have chosen to classify these secondary features as being not for profit.
+- `FLOSS`: whether the source code was released or Google otherwise made it possible for third parties to continue the service or maintain the application.
+
+    Android, AngularJS, and Chrome are all examples of software products where Google losing interest would not be fatal; services spun off to third parties would also count. Many of the codebases rely on a proprietary Google API or service (especially the mobile applications), which means that this variable is not as meaningful and laudable as one might expect, so in the minority of cases where this variable is relevant, I code `Dead` & `Ended` as related to whether & when Google abandoned it, regardless of whether it was then picked up by third parties or not. (Example: App Inventor for Android is listed as dying in December 2011, though it was then half a year later handed over to MIT, who has supported it since.) It's important to not naively believe that simply because source code is available, Google support doesn't matter.
+- `Acquisition`: whether it was related to a purchase of a company or licensing, or internally developed.
+
+    Many startups have been bought (DoubleClick, Dodgeball, Android, Picasa), or technologies/data licensed (SYSTRAN for Translate, Twitter data for Real-Time Search). If a closely related product is developed and released after purchase, like a mobile application, I do not class it as an acquisition; just products that were in existence when the company was purchased. I do not include products that Google dropped immediately on purchase (Apture, fflick, Sparrow, Reqwireless, PeakStream) or where products based on them have not been released (BumpTop).
+
+Deflating Google hits. There are three main problems with the Google hits metric: the Web keeps growing, so 1 million hits in 2000 are not equivalent to 1 million hits in 2013; services which are not killed live longer and can rack up more hits; and the longer ago a product's hits came into existence, the more likely they are to have disappeared themselves.
+
+We can try to partially compensate for the first two: we can estimate the size of Google's index at any period and interpret the current hits as a fraction of the index when the service died (example: suppose Answers has 1 million hits, died in 2006, and in 2006 the index held 1 billion URLs, then we'd turn our 1m hit figure into 1/1000 or 0.001); then we can divide by the number of days a service lived to more fairly compare how popular both short-lived and long-lived services were.
+
+We'll deflate the hits by fitting an exponential to the rare public reports of the size of the Google index:
+
+~~~{.R}
+index <- read.csv("2013-google-index.csv", colClasses=c("Date","double","character"))
+plot(log(index$Size) ~ index$Date)
+model1 <- lm(log(index$Size) ~ index$Date)
+# broken!
+predict(model1, newdata=data.frame(Date=as.Date("2013-04-04")))
+~~~
+
+> I spur my horse past ruins \
+> Ruins move a traveler's heart \
+> the old parapets high and low \
+> the ancient graves great and small \
+> the shuddering shadow of a tumbleweed \
+> the steady sound of giant trees. \
+> But what I lament are the common bones \
+> unnamed in the records of Immortals.
+
+> To my good friend \
+> Would I show, I thought, \
+> The plum blossoms, \
+> Now lost to sight \
+> Amid the falling snow.
+
+> In the long run, the utility of all non-Free software approaches zero. All non-Free software is a dead end.^[[Mark Pilgrim](!Wikipedia), ["Freedom 0"](http://web.archive.org/web/20110726001925/http://diveintomark.org/archives/2004/05/14/freedom-0); ironically, Pilgrim (hired by Google in 2007) seems to be responsible for at least one of the entries being marked dead, Google's Doctype tech encyclopedia, since it disappeared around the time of his "infosuicide" and has not been resurrected - it was only *partially* FLOSS.]
+
+TODO: lifespan predictions for: http://www.ats.ucla.edu/stat/r/examples/asa/asa_ch2_r.htm
+Google Alerts
+Blogger
+FeedBurner
+Scholar
+Book Search
+
+TODO: Ping the dead service sources like http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed , and also http://www.slate.com/articles/technology/technology/2013/03/google_reader_why_did_everyone_s_favorite_rss_program_die_what_free_web.html https://news.ycombinator.com/item?id=5495523 http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p28 thank gostips@gmail.com/http://googlesystem.blogspot.com/ ; ask for help http://www.reddit.com/r/MachineLearning/
+
+
+~~~{.R}
+google <- read.csv("2013-google.csv", colClasses=c("character","logical","Date","Date","double","factor","logical","logical","logical","logical"))
+summary(google[-1])
+
+plot(dead$Ended ~ dead$Started, xlab="Opened", ylab="Shut down")
+    Dead            Started               Ended                 Hits               Type
+ Mode :logical   Min.   :1997-09-15   Min.   :2005-10-22   Min.   :8.00e+00   other  :  5
+ FALSE:193       1st Qu.:2006-05-10   1st Qu.:2009-12-11   1st Qu.:1.72e+05   program: 75
+ TRUE :106       Median :2008-07-23   Median :2011-09-30   Median :9.16e+05   service:211
+ NA's :0         Mean   :2008-03-20   Mean   :2011-03-14   Mean   :8.02e+07   thing  :  8
+                 3rd Qu.:2010-03-16   3rd Qu.:2012-06-20   3rd Qu.:6.51e+06
+                 Max.   :2013-03-20   Max.   :2013-11-01   Max.   :3.86e+09
+   Profit          FLOSS
+ Mode :logical   Mode :logical
+ FALSE:17        FALSE:21
+ TRUE :10        TRUE :6
+ NA's :272       NA's :272
+~~~
+http://i.imgur.com/Zt5vAw3.png
+
+Better yet, a stacked line plot of start/end intervals?
+something like http://stackoverflow.com/questions/9871043/increasing-the-performance-of-visualising-overlapping-segments or
+
+~~~{.R}
+viewReads <- function(reads){
+    # sort by start
+    sorted <- reads[order(reads$Started),];
+
+    #---
+    # In the first iteration we work out the y-axis
+    # positions that segments should be plotted on
+    # segments should be plotted on the next availible
+    # y position without merging with another segment
+    #---
+    yread <- c(); #keeps track of the x space that is used up by segments
+
+    # get x axis limits
+    minstart <- min(sorted$Started);
+    maxend <- max(sorted$Ended);
+
+    # initialise yread
+    yread[1] <- minstart - 1;
+    ypos <- c(); #holds the y pos of the ith segment
+
+    # for each read
+    for (r in 1:nrow(sorted)){
+        read <- sorted[r,];
+        start <- read$Started;
+        placed <- FALSE;
+
+        # iterate through yread to find the next availible
+        # y pos at this x pos (start)
+        y <- 1;
+        while(!placed){
+            print(start)
+            if(yread[y] < start){
+                ypos[r] <- y;
+                yread[y] <- read$Ended;
+                placed <- TRUE;
+            }
+
+            # current y pos is used by another segment, increment
+            y <- y + 1;
+            # initialize another y pos if we're at the end of the list
+            if(y > length(yread)){
+                yread[y] <- minstart-1;
+            }
+        }
+    }
+
+    # find the maximum y pos that is used to size up the plot
+    maxy <- length(yread);
+    sorted$ypos <- ypos;
+
+    # Now we have all the information, start the plot
+    plot.new();
+    plot.window(xlim=c(minstart, maxend+((maxend-minstart)/10)), ylim=c(1,maxy));
+    axis(3);
+
+    #---
+    # This second iteration plots the segments using the found y pos and
+    # the start and end values
+    #---
+    for (r in 1:nrow(sorted)){
+        read <- sorted[r,];
+        #plot this segment!
+        segments(read$Started, maxy-read$ypos, read$Ended, maxy-read$ypos);
+    }
+}
+
+
+google$Ended[is.na(google$Ended)] <- as.Date(Sys.Date())
+google$Days <- as.integer(google$Ended - google$Started)
+summary(glm(Dead ~ Type * Days * Profit * FLOSS * Acquisition * Social, data=google[-1],family="binomial"))
+step(glm(Dead ~ Type * Days * Profit * FLOSS * Acquisition * Social, data=google[-1],family="binomial"))
+
+summary(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social, data=google,family="binomial"))
+~~~
+
+...about all I can meaningfully say is that google has a past history of screwing up social and then killing them, which is useless to know since Page got obsessed with social in 2009; that google is deprecating software products in favor of web services, which is obvious; and that things which charge or show advertising are more likely to survive, also obvious
+
+Normally, we would expect a sort of diagonal: services opened early on would be shut down early on, services opened later would be shut down later, etc. Instead, we get a horizontal line with no diagonal trend. What's going on? A survival curve might help:
+
+~~~{.R}
+library(survival)
+dead.surv <- survfit(Surv(google$Days) ~ google$Dead, conf.type="none")
+
+Surv(google$Started, google$Days, google$Dead, type="right")
+surv <- survfit(Surv(as.integer(google$Started), google$Dead, type="right") ~ 1)
+plot(surv, xlab="Days", ylab="Survival Probability")
+~~~
+http://i.imgur.com/GvYTH8x.png
+
+~~~{.R}
+library(randomForest)
+rf <- randomForest(as.factor(Dead) ~ ., data=google[-1])
+google[rf$predicted != google$Dead,]
+rf
+# data snooping on the end-date! those 4 were wrong because they are dead, but scheduled to due after today. the random forests were just emitting 'dead' for everything with an end date before 2013-04-04 and alive for then or after
+
+
+rf <- randomForest(as.factor(Dead) ~ google$Started + Hits + Type + Profit + FLOSS + Acquisition + Social + Days, data=google[-1])
+google[rf$predicted != google$Dead,]$Product
+rf
+
+# 17% error rate. not much of an improvement over a constant guess of 'alive', though, which has a 35% error rate:
+
+sum(google$Dead) / nrow(google)
+[1] 0.3524
+
+rf <- randomForest(as.factor(Dead) ~ Hits + Type + Profit + FLOSS + Acquisition + Social, data=google)
+google[rf$predicted != google$Dead,]$Product
+rf
+~~~
+
+;_; if I take out the starting date the random forests error rate shoots up to 30%. the stupidest possible predictor scoring 35%, remember. on a dataset of 321 google properties. implying that all my painstakingly gathered data basically doesn't amount to a hill of beans
+
+
+The abrupt increase in mortality in the middle is suspicious. We can plot lifetime against shut-down to get a better picture:
+
+plot(google$Days ~ google$Ended, xlab="Opened", ylab="Total lifetime")
+http://i.imgur.com/P3l4jxr.png
+
+Here something jumps out of the plot: almost every shut down is in 2012 or 2013. As late as 2011, there are a grand total of perhaps 3 shut-downs (out of 39), and then in late 2011 there is the start of a veritable wall of shut-downs of services, from services as young as 365 days (Google Aardvark) to as old as 8.5 years (iGoogle).
+
+~~~{.R}
+head(dead[dead$Ended > "2012-01-01",], 1); tail(dead[dead$Ended > "2012-01-01",], 1)
+   Product    Started      Ended Days
+2 Aardvark 2011-02-01 2012-02-01  365
+                   Product    Started      Ended Days
+78 Search API for Shopping 2011-02-11 2013-09-16  939
+~~~
+
+To emphasize this bulge in late 2011-2012, we can plot the histogram by year and then the density:
+
+~~~{.R}
+hist(google$Ended, breaks=seq.Date(as.Date("2005-01-01"), as.Date("2014-01-01"), "years"),
+                   main="Shut downs per year", xlab="Year")
+~~~
+http://i.imgur.com/RxBXN0j.png
+
+
+~~~{.R}
+plot(table(months(dead$Ended)))
+# beware the ides of September?
+chisq.test(table(months(dead$Ended)))
+
+    Chi-squared test for given probabilities
+
+data:  table(months(dead$Ended))
+X-squared = 38.52, df = 11, p-value = 6.4e-05
+
+Popularity help? doesn't look like it:
+
+plot(dead$Days, log(dead$Hits))
+
+cor.test(dead$Days, log(dead$Hits))
+
+    Pearson's product-moment correlation
+
+data:  dead$Days and log(dead$Hits)
+t = 1.037, df = 93, p-value = 0.3025
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.09673  0.30194
+sample estimates:
+   cor
+0.1069
+
+plot(density(as.numeric(dead$Ended)), main="Shut down density over time")
+~~~
+http://i.imgur.com/0XpKAoi.png
+
+The kernel density brings out an aspect of shut downs we might have missed before: there seems to be an absence of recent shut downs. There are 4 shut downs scheduled for 2013 but the last one is scheduled for November, suggesting that we have seen the last of the 2013 casualties and that any future shut downs may be for 2014.
+
+What explains such a graph over time? The obvious candidate is the 4 April 2011 accession of Larry Page to CEO, replacing Eric Schmidt who had been hired to provide "adult supervision" for pre-IPO Google. He respected Steve Jobs greatly (he and Brin suggested, before meeting Schmidt, that their CEO be Jobs). Isaacon's _Steve Jobs_ records that before his death, Jobs had strongly advised Page to "focus", and asked "What are the five products you want to focus on?", saying "Get rid of the rest, because they're dragging you down." And indeed, on [14 July 2011](https://plus.google.com/+LarryPage/posts/dRtqKJCbpZ7) Page posted:
+
+> ...Greater focus has also been another big feature for me this quarter -- more wood behind fewer arrows. Last month, for example, we announced that we will be closing Google Health and Google PowerMeter. We’ve also done substantial internal work simplifying and streamlining our product lines. While much of that work has not yet become visible externally, I am very happy with our progress here. Focus and prioritization are crucial given our amazing opportunities.
+
+While some have [tried to disagree](http://thenextweb.com/google/2013/01/12/larry-page-did-well-to-ignore-steve-jobs/ "Larry Page ignored Steve Jobs’s deathbed advice, and Google is doing great"), it's hard not to conclude that indeed, a wall of shut downs followed in late 2011 and 2012. But this sound very much like a one-time purge: if one has a new focus on focus (if you'll pardon the expression), then you may not be starting up as many services as before.
+
+Deadweight loss: in some of the more successful acquisitions, google's modus operandi was to take a paid or premium service and make it free. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Eart) charged money for their services (sometimes a great deal). this leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
+
+maybe blogger is not as doomed as I thought. it seems to e favored with g4etting exclusive access to quite a few otherwise shut down things, for example, Scribe, Friend Connect, it was the ground zero for google's Dynamic Views skin redesign, and google is still heavily using blogger for all the official announcements even into the google+ era
+
+
+> We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been cancelled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
+http://www.alltechienews.com/posts/google-fails-36-of-the-time
+
+interesting the patterns showing up in these shut downs.
+you can see the wall of shut downs when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
+plus there are like 4 or 5 things which all got rolled into Docs+Drive
+
+18:51:02 < Kiba> focus, focus, focus
+18:52:12 <@gwern> Kiba: not really. the docs+drive thing is just logical; the
+                  Firefox stuff is interesting and sorta ruthless competition;
+                  the YouTube-competitor and social media stuff are just failures
+
+popularity:
+
+~~~{.sh}
+for URL in `cat google.txt`
+do elinks -dump $URL |
+    grep "results" | grep -v "http://" |
+    sed -e "s/Search           About //" -e "s/ results//" | tr -d ","
+done
+~~~
+
+http://www.google.com/search?q=google%20%22Lively%22
+http://www.google.com/search?q=google%20%22Aardvark%22
+http://www.google.com/search?q=google%20%22One%20Pass%22
+http://www.google.com/search?q=google%20%22+1%20Reporting%20for%20Webmaster%20Tools%22
+http://www.google.com/search?q=google%20%22News%20Badges%22
+http://www.google.com/search?q=google%20%22Search%20Timeline%22
+http://www.google.com/search?q=google%20%22Fast%20Flip%22
+http://www.google.com/search?q=google%20%22Sidewiki%22
+http://www.google.com/search?q=google%20%22Listen%22
+http://www.google.com/search?q=google%20%22Classic%20Plus%22
+http://www.google.com/search?q=google%20%22Buzz%22
+http://www.google.com/search?q=google%20%22Wave%22
+http://www.google.com/search?q=google%20%22Maps%20API%20for%20Flash%22
+http://www.google.com/search?q=google%20%22Places%20Directory%20app%20(Android)%22
+http://www.google.com/search?q=google%20%22Health%22
+http://www.google.com/search?q=google%20%22Code%20Search%20API%22
+http://www.google.com/search?q=google%20%22Knol%22
+http://www.google.com/search?q=google%20%22Friend%20Connect%22
+http://www.google.com/search?q=google%20%22Apps%20for%20Teams%22
+http://www.google.com/search?q=google%20%22AdSense%20for%20Feeds%22
+http://www.google.com/search?q=google%20%22Translate%20API%22
+http://www.google.com/search?q=google%20%22Video%20for%20Business%22
+http://www.google.com/search?q=google%20%22Jaiku%22
+http://www.google.com/search?q=google%20%22Talk%20Chatback%22
+http://www.google.com/search?q=google%20%22EAS%20sync%20for%20Gmail%22
+http://www.google.com/search?q=google%20%22Spreadsheet%20Gadgets%22
+http://www.google.com/search?q=google%20%22Answers%22
+http://www.google.com/search?q=google%20%22Pack%22
+http://www.google.com/search?q=google%20%22Image%20Labeler%22
+http://www.google.com/search?q=google%20%22Sync%20for%20BlackBerry%22
+http://www.google.com/search?q=google%20%22CalDAV%20support%20for%20Gmail%22
+http://www.google.com/search?q=google%20%22Subscribed%20Links%22
+http://www.google.com/search?q=google%20%22Notebook%22
+http://www.google.com/search?q=google%20%22Picasa%20for%20Linux%22
+http://www.google.com/search?q=google%20%22Bookmarks%20Lists%22
+http://www.google.com/search?q=google%20%22Desktop%22
+http://www.google.com/search?q=google%20%22Video%22
+http://www.google.com/search?q=google%20%22Reader%22
+http://www.google.com/search?q=google%20%22iGoogle%22
+http://www.google.com/search?q=google%20%22Blocked%20Sites%22
+http://www.google.com/search?q=google%20%22SearchWiki%22
+http://www.google.com/search?q=google%20%22Base%22
+http://www.google.com/search?q=google%20%22GOOG-411%22
+http://www.google.com/search?q=google%20%22Mashup%20Editor%22
+http://www.google.com/search?q=google%20%22Page%20Creator%22
+http://www.google.com/search?q=google%20%22Video%20Marketplace%22
+http://www.google.com/search?q=google%20%22Academic%20API%22
+http://www.google.com/search?q=google%20%22Picnik%22
+http://www.google.com/search?q=google%20%22Web%20Accelerator%22
+http://www.google.com/search?q=google%20%22Video%20Player%22
+http://www.google.com/search?q=google%20%22Squared%22
+http://www.google.com/search?q=google%20%22Slide.com%22
+http://www.google.com/search?q=google%20%22PowerMeter%22
+http://www.google.com/search?q=google%20%22Audio%20ads%22
+http://www.google.com/search?q=google%20%22Print%20Ads%22
+http://www.google.com/search?q=google%20%22Real%20Estate%22
+http://www.google.com/search?q=google%20%22SearchMash%22
+http://www.google.com/search?q=google%20%22Blogger%20Web%20Comments%22
+http://www.google.com/search?q=google%20%22City%20Tours%22
+http://www.google.com/search?q=google%20%22News%20Timeline%22
+http://www.google.com/search?q=google%20%22Click-to-Call%22
+http://www.google.com/search?q=google%20%22Related%20Links%22
+http://www.google.com/search?q=google%20%22Dashboard%20Widgets%20for%20Mac%22
+http://www.google.com/search?q=google%20%22Joga%20Bonito%22
+http://www.google.com/search?q=google%20%22Music%20Trends%22
+http://www.google.com/search?q=google%20%22Send%20to%20Phone%22
+http://www.google.com/search?q=google%20%22Google%20Sets%22
+http://www.google.com/search?q=google%20%22Pack%22
+http://www.google.com/search?q=google%20%22Rebang%22
+http://www.google.com/search?q=google%20%22Shared%20Stuff%22
+http://www.google.com/search?q=google%20%22TV%20Ads%22
+http://www.google.com/search?q=google%20%22Dodgeball%22
+http://www.google.com/search?q=google%20%22Ride%20Finder%22
+http://www.google.com/search?q=google%20%22Snapseed%20Desktop%22
+http://www.google.com/search?q=google%20%22Building%20Maker%22
+http://www.google.com/search?q=google%20%22Cloud%20Connect%22
+http://www.google.com/search?q=google%20%22Google%20Voice%20App%20for%20Blackberry%22
+http://www.google.com/search?q=google%20%22Search%20API%20for%20Shopping%22
+http://www.google.com/search?q=google%20%22Hello%22
+http://www.google.com/search?q=google%20%22Gears%22
+http://www.google.com/search?q=google%20%22Directory%22
+http://www.google.com/search?q=google%20%22Browser%20Sync%22
+http://www.google.com/search?q=google%20%22Checkout%22
+http://www.google.com/search?q=google%20%22Web%20Security%22
+http://www.google.com/search?q=google%20%22Message%20Filtering%22
+http://www.google.com/search?q=google%20%22Postini%20Small%20Business%20Edition%22
+http://www.google.com/search?q=google%20%22Related%22
+http://www.google.com/search?q=google%20%22Picasa%20Web%20Albums%20Uploader%20for%20Mac%22
+http://www.google.com/search?q=google%20%22Picasa%20Web%20Albums%20Plugin%20for%20iPhoto%22
+http://www.google.com/search?q=google%20%22Deskbar%22
+http://www.google.com/search?q=google%20%22Tashkeel%22
+http://www.google.com/search?q=google%20%22Breadcrumb%22
+http://www.google.com/search?q=google%20%22Script%20Converter%22
+http://www.google.com/search?q=google%20%22Talk%20Guru%22
+http://www.google.com/search?q=google%20%22Mini%22
+
+Google products I regularly use:
+
+Alerts
+Gmail
+Calendar
+Analytics
+AdSense
+JavaScript CDN
+Google+
+Search
+Docs (Spreadsheet)
+
+Alert search for updates:
+`google ("shut down" OR "shutting" OR "closing" OR "killing" OR "abandoning" OR "leaving")`
+
+# See also
+
+- [Archive Team](!Wikipedia)
+- [Archiving URLs]()
+- [Wikipedia and Knol]()
