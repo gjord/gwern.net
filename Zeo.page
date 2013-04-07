@@ -2,7 +2,7 @@
 title: Zeo sleep experiments
 description: EEG recordings of sleep and my experiments with things affecting sleep quality or durations
 created: 28 Dec 2010
-tags: sleep, experiments, psychology, DNB, nootropics, statistics
+tags: experiments, biology, psychology, DNB, nootropics, statistics, predictions
 status: in progress
 belief: likely
 ...
@@ -120,10 +120,11 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
 12. testing benefit of using [Redshift](http://jonls.dk/redshift/)/f.lux to adjust monitor color temperature
 13. Measure negative effect of nicotine on sleep & determine appropriate buffer
 14. test claims of sleep benefits from magnesium
+15. [caffeine pill](http://www.aleph.se/andart/archives/2007/11/the_early_bird_gets_the_caffeine_pill.html) [wake-up trick](http://lesswrong.com/r/discussion/lw/h2m/solved_problems_repository/8ol7)
 
 I have tried to do my little self-experiments as well as I know how to, and hopefully my results are less bogus than the usual anecdotes one runs into online. What I would really like is for other people (especially Zeo owners) to *replicate* my results. To that end I have taken pains to describe my setups in complete detail so others can use it, and provided the data and complete [R](!Wikipedia "R (programming language)") or [Haskell](!Wikipedia "Haskell (programming language)") programs used in analysis. If anyone replicates my results in any fashion, please contact me and I would be happy to link your self-experiment here!
 
-[^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and found no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his [_The Four-hour Body_](http://www.amazon.com/4-Hour-Body-Uncommon-Incredible-Superhuman/dp/030746363X/) claims:
+[^Ferriss]: I had previously [tried](Nootropics#huperzine-a) huperzine-A and subjectively noticed no effect from it, but I had no way of really noticing any effect on sleep, and [Timothy Ferriss](!Wikipedia) in his [_The Four-hour Body_](http://www.amazon.com/4-Hour-Body-Uncommon-Incredible-Superhuman/dp/030746363X/) claims:
 
     > Taking 200 milligrams of huperzine-A 30 minutes before bed can increase total REM by 20-30%. Huperzine-A, an extract of _Huperzia serrata_, slows the breakdown of the neurotransmitter acetylcholine. It is a popular nootropic (smart drug), and I have used it in the past to accelerate learning and increase the incidence of lucid dreaming. I now only use huperzine-A for the first few weeks of language acquisition, and no more than three days per week to avoid side effects. Ironically, one documented side effect of overuse is insomnia. The brain is a sensitive instrument, and while generally well tolerated, this drug is contraindicated with some classes of medications. Speak with your doctor before using.
 
@@ -2270,7 +2271,7 @@ February 2012
 16: 1
 17: 3
 18: 4
-19: 5
+19: 4
 20: 4
 21: 4
 22: 3
@@ -2300,11 +2301,11 @@ March
 16: 4
 17: 3
 18: 3
+19: 3
 20: 3
 21: 3
 22: 3
 23: 3
-March
 date: mood-productivity / steps
 24: 2 / 3862
 25: 3 / 7879
@@ -2375,7 +2376,7 @@ May
 27: 2
 28: 2 / 7923
 29: 4 / 6332
-30: 31 / 5378
+30: 3 / 5378
 31: 3 / 1528
 June
 01: 2 / 3831
@@ -2417,8 +2418,8 @@ July
 06: 2
 07: 4
 08: 4
-09:
-10:
+09: 1
+10: 1
 11: 2
 12: 4
 13: 4
@@ -2669,6 +2670,19 @@ March
 07: 2/3000
 08: 3
 09: 2
+10: 4
+11: 3
+12: 3
+13: 2
+14: 2
+15: 3
+16: 3/3000
+17: 3
+18: 2
+19: 4
+20: 3
+21: 3/1500
+22: 3
 -->
 
 <!-- Creativity 1-3
@@ -2880,6 +2894,19 @@ March
 07: 1
 08: 2
 09: 1
+10: 2
+11: 1
+12: 1
+13: 1
+14: 1
+15: 1
+16: 2
+17: 1
+18: 1
+19: 2
+20: 1
+21: 1
+22: 1
 -->
 
 <!--
@@ -3265,13 +3292,38 @@ March
 10: 0 0
 11: 1 1
 12: 0 1
-13: 1 0?
+13: 1 0
+14: 1 0
+15: 1 1
+16: 0 1
+17: 1 1
+18: 1 0
+19: 1 1
+20: 0 0
+21: 1 0
+22: 0 0
+23: 0 1
+24: 0 0
+25: 1 0
+26: 0 0
+27: 1 1
+28: 0 1
+29: 0 1
+30: 0 0
+31: 0 0
+April 2013
+01: 0 0
+02: 0 0
+03: 0 1
+04: 0 1
+05: 0 0
+06: 1 1?
 
 Underpopulated data cells:
-67: 1 0
-68: 1 1
-75: 0 0
-75: 0 1
+72: 1 1
+72: 1 0
+81: 0 1
+84: 0 0
 -->
 
 # External links
@@ -3286,6 +3338,8 @@ Underpopulated data cells:
 
 # Appendix
 ## SDr lucid dreaming: exploratory data analysis
+
+<!-- TODO: update with https://docs.google.com/spreadsheet/ccc?key=0Ao3RpZe396VZdE5udDB0S1dqcFpPY0o2Sk5LVkNvX0E#gid=0   now has an additional 60+ datapoints -->
 
 In October 2012, an acquaintance offered me an extract from his free-form data on [lucid dreaming](!Wikipedia) which he had been compiling since 2004, to see what insights I could extract.
 
@@ -3699,3 +3753,27 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 12 Mar 2013: on -->
 <!-- Redshift: 13 Mar 2013: on -->
 <!-- Redshift: 14 Mar 2013: off -->
+<!-- Redshift: 15 Mar 2013: on -->
+<!-- Redshift: 16 Mar 2013: off -->
+<!-- Redshift: 17 Mar 2013: on -->
+<!-- Redshift: 18 Mar 2013: on -->
+<!-- Redshift: 19 Mar 2013: on -->
+<!-- Redshift: 20 Mar 2013: on -->
+<!-- Redshift: 21 Mar 2013: on -->
+<!-- Redshift: 22 Mar 2013: on -->
+<!-- Redshift: 23 Mar 2013: on -->
+<!-- Redshift: 24 Mar 2013: off -->
+<!-- Redshift: 25 Mar 2013: on -->
+<!-- Redshift: 26 Mar 2013: on -->
+<!-- Redshift: 27 Mar 2013: on -->
+<!-- Redshift: 28 Mar 2013: on -->
+<!-- Redshift: 29 Mar 2013: off -->
+<!-- Redshift: 30 Mar 2013: off -->
+<!-- Redshift: 31 Mar 2013: off -->
+<!-- Redshift: 01 Apr 2013: on -->
+<!-- Redshift: 02 Apr 2013: on -->
+<!-- Redshift: 03 Apr 2013: off -->
+<!-- Redshift: 04 Apr 2013: off -->
+<!-- Redshift: 05 Apr 2013: off -->
+<!-- Redshift: 06 Apr 2013: on -->
+<!-- Redshift: 07 Apr 2013: off -->
