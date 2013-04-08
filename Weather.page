@@ -114,41 +114,7 @@ spineplot(c(1:(length(weather$MP))), as.factor(weather$MP), breaks=weeks, xlab="
 
 ![MP from February 2012 to March 2013](/images/2013-weather-seasonal.png)
 
-A formal check for [autocorrelation](!Wikipedia) in MP ratings (most methods assume independence) turns up little enough[^autocorrelation] that I feel free to ignore them.
-
-[^autocorrelation]: A test using `acf` shows no autocorrelation worth mentioning:
-
-    ~~~{.R}
-    acf(weather$MP, main="Do days predict subsequent days at various distances?")
-    ~~~
-
-    ![MP series shows almost no autocorrelation at any timelag](/images/2013-weather-autocorrelation-mp.png)
-
-    For comparison, here is `acf` for a data series where one would expect a great deal of autocorrelation - my daily weight - and one does indeed observe it:
-
-    ~~~{.R}
-    acf(c(205,214,216,213,213,218,218,214,215,216,218,216,210,219,217,
-          219,217,215,215,217,219,216,215,218,215,219,219,219,218,218,
-          220,220,219,219,219,221,220,219,216,220,220,218,218,220,219,
-          220,215,215,218,218,215,216,216,218,218,220,219,216,217,220,
-          215,215,218,216,214,213,216,215,214,213,214,216,216,212,209,
-          212,214,213,210,211,210,213,211,215,211,212,212,216,212,215,
-          216,215,215,212,216,213,212,211,215,214,215,216,214,212,212,
-          213,212,213,211,214,215,210,211,211,211,212,210,210,212,211,
-          214,213,214,212,215,214,213,215,211,214,214,216,215,213,215,
-          213,213,212,215,211,212,212,211,212,211,212,210,211,213,218,
-          217,212,214,216,213,212,211,211,214,212,211,216,218,216,214,
-          215,216,216,213,216,214,215,219,218,216,215,218,217,219,219,
-          219,219,219,218,217,216,216,215,218,219,217,216,219,217,216,
-          216,219,216,218,215,216,215,215,213,214,215,217,216,215,215,
-          216,214,215,215,214,216,211,214,213,214,211,212,211,210,212,
-          211,212,214,212,211,214,212,211,212,211,212,213,210,212,210,
-          210,211,210))
-    ~~~
-
-    ![Weight series showing autocorrelation at every timelag](/images/2013-weather-autocorrelation-weight.png)
-
-So the data looks clean and tame; now we can begin real interpretation. The first and most obvious thing to do is to see what the overall correlation matrix with MP looks like:
+A formal check for [autocorrelation](!Wikipedia) in MP ratings (most methods assume independence) turns up [little enough](#autocorrelation) that I feel free to ignore them. So the data looks clean and tame; now we can begin real interpretation. The first and most obvious thing to do is to see what the overall correlation matrix with MP looks like:
 
 ~~~{.R}
 # all weather correlations with mood/productivity
@@ -603,3 +569,38 @@ There's substantial uncertainty in the classification rate, as evidence by the p
 # Conclusion
 
 An attack on the data turned up nothing in several ways; the only model that seemed to improve on random guessing does not do so by very much, indicating weak weather effects. Those effects seem to operate via humidity and light, so perhaps a humidifier and additional lighting would be useful. I will attempt to follow up in 2 years to see if the results replicate with a longer data series.
+
+# Appendix
+## Autocorrelation
+
+A test using `acf` shows no autocorrelation worth mentioning:
+
+~~~{.R}
+acf(weather$MP, main="Do days predict subsequent days at various distances?")
+~~~
+
+![MP series shows almost no autocorrelation at any timelag](/images/2013-weather-autocorrelation-mp.png)
+
+For comparison, here is `acf` for a data series where one would expect a great deal of autocorrelation - my daily weight - and one does indeed observe it:
+
+~~~{.R}
+acf(c(205,214,216,213,213,218,218,214,215,216,218,216,210,219,217,
+      219,217,215,215,217,219,216,215,218,215,219,219,219,218,218,
+      220,220,219,219,219,221,220,219,216,220,220,218,218,220,219,
+      220,215,215,218,218,215,216,216,218,218,220,219,216,217,220,
+      215,215,218,216,214,213,216,215,214,213,214,216,216,212,209,
+      212,214,213,210,211,210,213,211,215,211,212,212,216,212,215,
+      216,215,215,212,216,213,212,211,215,214,215,216,214,212,212,
+      213,212,213,211,214,215,210,211,211,211,212,210,210,212,211,
+      214,213,214,212,215,214,213,215,211,214,214,216,215,213,215,
+      213,213,212,215,211,212,212,211,212,211,212,210,211,213,218,
+      217,212,214,216,213,212,211,211,214,212,211,216,218,216,214,
+      215,216,216,213,216,214,215,219,218,216,215,218,217,219,219,
+      219,219,219,218,217,216,216,215,218,219,217,216,219,217,216,
+      216,219,216,218,215,216,215,215,213,214,215,217,216,215,215,
+      216,214,215,215,214,216,211,214,213,214,211,212,211,210,212,
+      211,212,214,212,211,214,212,211,212,211,212,213,210,212,210,
+      210,211,210))
+~~~
+
+![Weight series showing autocorrelation at every timelag](/images/2013-weather-autocorrelation-weight.png)
