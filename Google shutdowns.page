@@ -1,5 +1,5 @@
 ---
-title: Google product shutdowns
+title: Predicting Google closures
 description: Analyzing predictors of Google abandoning products; predicting future shutdowns
 created: 28 Mar 2013
 tags: statistics, archiving, predictions
@@ -40,19 +40,6 @@ Finally, for both datasets I have collected several covariates which might help 
 
     Many startups have been bought (DoubleClick, Dodgeball, Android, Picasa), or technologies/data licensed (SYSTRAN for Translate, Twitter data for Real-Time Search). If a closely related product is developed and released after purchase, like a mobile application, I do not class it as an acquisition; just products that were in existence when the company was purchased. I do not include products that Google dropped immediately on purchase (Apture, fflick, Sparrow, Reqwireless, PeakStream) or where products based on them have not been released (BumpTop).
 
-Deflating Google hits. There are three main problems with the Google hits metric: the Web keeps growing, so 1 million hits in 2000 are not equivalent to 1 million hits in 2013; services which are not killed live longer and can rack up more hits; and the longer ago a product's hits came into existence, the more likely they are to have disappeared themselves.
-
-We can try to partially compensate for the first two: we can estimate the size of Google's index at any period and interpret the current hits as a fraction of the index when the service died (example: suppose Answers has 1 million hits, died in 2006, and in 2006 the index held 1 billion URLs, then we'd turn our 1m hit figure into 1/1000 or 0.001); then we can divide by the number of days a service lived to more fairly compare how popular both short-lived and long-lived services were.
-
-We'll deflate the hits by fitting an exponential to the rare public reports of the size of the Google index:
-
-~~~{.R}
-index <- read.csv("2013-google-index.csv", colClasses=c("Date","double","character"))
-plot(log(index$Size) ~ index$Date)
-model1 <- lm(log(index$Size) ~ index$Date)
-# broken!
-predict(model1, newdata=data.frame(Date=as.Date("2013-04-04")))
-~~~
 
 > I spur my horse past ruins \
 > Ruins move a traveler's heart \
@@ -82,7 +69,7 @@ TODO: Ping the dead service sources like http://www.guardian.co.uk/technology/20
 
 
 ~~~{.R}
-google <- read.csv("2013-google.csv", colClasses=c("character","logical","Date","Date","double","factor","logical","logical","logical","logical"))
+google <- read.csv("wiki/docs/2013-google.csv", colClasses=c("character","logical","Date","Date","double","factor","logical","logical","logical","logical"))
 summary(google[-1])
 
 plot(dead$Ended ~ dead$Started, xlab="Opened", ylab="Shut down")
@@ -177,10 +164,164 @@ google$Days <- as.integer(google$Ended - google$Started)
 summary(glm(Dead ~ Type * Days * Profit * FLOSS * Acquisition * Social, data=google[-1],family="binomial"))
 step(glm(Dead ~ Type * Days * Profit * FLOSS * Acquisition * Social, data=google[-1],family="binomial"))
 
-summary(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social, data=google,family="binomial"))
+summary(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social + log(Hits), data=google,family="binomial"))
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.772  -0.914  -0.616   1.109   2.674
+
+Coefficients:
+                Estimate Std. Error z value Pr(>|z|)
+(Intercept)       2.3953     1.0676    2.24    0.025
+Typeprogram       0.9353     0.8180    1.14    0.253
+Typeservice       1.2271     0.7893    1.55    0.120
+Typething         0.8737     1.1613    0.75    0.452
+ProfitTRUE       -0.3833     0.2951   -1.30    0.194
+FLOSSTRUE        -0.1481     0.3803   -0.39    0.697
+AcquisitionTRUE   0.4893     0.3433    1.43    0.154
+SocialTRUE        0.7832     0.3887    2.02    0.044
+log(Hits)        -0.3090     0.0567   -5.45    5e-08
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 452.96  on 348  degrees of freedom
+Residual deviance: 402.14  on 340  degrees of freedom
+AIC: 420.1
 ~~~
 
-...about all I can meaningfully say is that google has a past history of screwing up social and then killing them, which is useless to know since Page got obsessed with social in 2009; that google is deprecating software products in favor of web services, which is obvious; and that things which charge or show advertising are more likely to survive, also obvious
+So, we can say that:
+
+- Google has a past history of screwing up social and then killing them
+
+    This seems useless for predicting since Page got obsessed with social in 2009, and we might expect anything to do with "social" will now either be merged into Google+ or otherwise be kept on life support far longer than before
+- Google is deprecating software products in favor of web services
+
+    This should have been obvious to anyone watching - a lot of Google's efforts with Firefox and then Chromium was for improving web browsers as a platform for delivering applications.
+- things which charge or show advertising are more likely to survive
+
+    Also obvious, but it's good to have confirmation (if nothing else, it partially validates the data).
+- Popularity as measured by Google hits seems to matter
+
+    Likewise obvious... or is it? All this data has been collected after the fact, sometimes many years; what if the data have been contaminated by the fact that something shut down? For example, by a burst of publicity about an obscure service shutting down? (Ironically, this page is contributing to the inflation of hits for any dead service mentioned.) Are we just seeing [leakage](http://www.cs.umb.edu/~ding/history/470_670_fall_2011/papers/cs670_Tran_PreferredPaper_LeakingInDataMining.pdf "'Leakage in Data Mining: Formulation, Detection, and Avoidance', Kaufman et al 2011")?
+
+Investigating further, hits by themselves do matter:
+
+~~~{.R}
+
+summary(glm(Dead ~ log(Hits), data=google,family="binomial"))
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.491  -0.934  -0.653   1.160   2.540
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   3.4221     0.7305    4.68  2.8e-06
+log(Hits)    -0.3008     0.0549   -5.48  4.3e-08
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 452.96  on 348  degrees of freedom
+Residual deviance: 416.61  on 347  degrees of freedom
+AIC: 420.6
+~~~
+
+Ideally we would have Google hits from the day before a product was officially killed, but the past is, alas, no longer accessible to us, and we only have hits from searches I conducted 1-5 April 2013.
+
+There are three main problems with the Google hits metric: the Web keeps growing, so 1 million hits in 2000 are not equivalent to 1 million hits in 2013; services which are not killed live longer and can rack up more hits; and the longer ago a product's hits came into existence, the more likely the relevant hits may be to have disappeared themselves.
+
+We can partially compensate by looking at hits averaged by lifespan; 100k hits means much less for something that lived for a decade than 100k hits means for something that lived just 6 months. Does this add anything?
+
+<!--
+WARNING: leakage
+Yes, but curiously, the higher the average hits is, the *more* likely a product is to have died:
+
+~~~{.R}
+google$AvgHits <- google$Hits / google$Started
+summary(glm(Dead ~ log(Hits) + log(AvgHits), data=google,family="binomial"))
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.558  -0.917  -0.613   1.129   2.645
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)     6.231      1.204    5.18  2.3e-07
+log(Hits)      -0.718      0.149   -4.81  1.5e-06
+log(AvgHits)    0.432      0.141    3.07   0.0021
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 452.96  on 348  degrees of freedom
+Residual deviance: 406.29  on 346  degrees of freedom
+AIC: 412.3
+~~~
+-->
+
+~~~{.R}
+google$AvgHits <- google$Hits / as.integer(Sys.Date() - google$Started)
+summary(glm(Dead ~ log(Hits) + log(AvgHits), data=google,family="binomial"))
+...
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)    -2.157      1.559   -1.38    0.166
+log(Hits)       0.495      0.206    2.41    0.016
+log(AvgHits)   -0.837      0.213   -3.93  8.4e-05
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 452.96  on 348  degrees of freedom
+Residual deviance: 398.16  on 346  degrees of freedom
+AIC: 404.2
+~~~
+
+This is more than a little strange; the higher the average hits, the less likely to be killed makes perfect sense but then, surely the higher the hits, the less likely as well? But no.
+
+What about the growth objection? We can estimate the size of Google's index at any period and interpret the current hits as a fraction of the index when the service died (example: suppose Answers has 1 million hits, died in 2006, and in 2006 the index held 1 billion URLs, then we'd turn our 1m hit figure into 1/1000 or 0.001); then
+
+We'll deflate the hits by first estimating the size of the index by fitting an exponential to the rare public reports and third-party estimates of the size of the Google index:
+
+~~~{.R}
+index <- read.csv("wiki/docs/2013-google-index.csv", colClasses=c("Date","double","character"))
+# an exponential doesn't fit too badly:
+model1 <- lm(log(Size) ~ Date, data=index); summary(model1)
+
+# plot logged size data and the fit:
+plot(log(index$Size) ~ index$Date, ylab="WWW index size", xlab="Date")
+abline(model1)
+
+~~~
+http://i.imgur.com/tv1LyaA.png
+It fits reasonably well. A sigmoid might work a bit better, but maybe not, given the large disagreements towards the end.
+
+Then we can divide total hits for a property by the total estimated size of the Google index when that property started
+
+~~~{.R}
+google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
+summary(glm(Dead ~ log(Hits) + log(AvgHits) + log(DeflatedHits), data=google,family="binomial"))
+...
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)
+(Intercept)        -20.707     11.667   -1.77   0.0759
+log(Hits)            1.972      0.953    2.07   0.0385
+log(AvgHits)        -1.853      0.686   -2.70   0.0069
+log(DeflatedHits)   -0.442      0.273   -1.62   0.1050
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 452.96  on 348  degrees of freedom
+Residual deviance: 395.23  on 345  degrees of freedom
+AIC: 403.2
+~~~
+
+Finally, let's combine the two strategies: deflate and then average.
+
+google$AvgHits <- google$Hits / as.integer(Sys.Date() - google$Started)
+google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
+google$AvgDeflatedHits <- google$AvgHits / google$DeflatedHits
+summary(glm(Dead ~ log(Hits) + log(AvgHits) + log(DeflatedHits) + log(AvgDeflatedHits), data=google, family="binomial"))
+
+# Survival curve
 
 Normally, we would expect a sort of diagonal: services opened early on would be shut down early on, services opened later would be shut down later, etc. Instead, we get a horizontal line with no diagonal trend. What's going on? A survival curve might help:
 
