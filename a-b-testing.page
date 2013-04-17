@@ -249,3 +249,49 @@ Width (px) Visits Conversion
            109772 14.03%
 
 1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58) but I want to move on to the next test and by the same logic it is highly unlikely that the difference between them is large or much in 1300px's favor (the kind of mistake I care about: switching between 2 equivalent choices doesn't matter, missing out on an improvement *does* matter - maximizing β, not minimizing α).
+
+## Fonts
+
+The _New York Times_ ran [an informal online experiment](http://opinionator.blogs.nytimes.com/2012/08/08/hear-all-ye-people-hearken-o-earth/ "Hear, All Ye People; Hearken, O Earth (Part One)") with a large number of readers (_n_=60750) and found that the [Baskerville](!Wikipedia) font led to more readers agreeing with a short text passage - this seems plausible enough given their very large sample size and Wikipedia's note that "The refined feeling of the typeface makes it an excellent choice to convey dignity and tradition." Does this work on `gwern.net` too? Let's see. The sample size is quite manageable, as over a month I will easily have 60k visits, and they tested 6 fonts, expanding their necessary sample. I had previously drawn on the NYT experiment for my site design:
+
+~~~{.Css}
+html {
+...
+    font-family: Georgia, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,
+                 Arial, "Lucida Grande", garamond, palatino, verdana, sans-serif;
+}
+~~~
+
+I had not used Baskerville but [Georgia](!Wikipedia "Georgia (typeface)") since Georgia seemed similar and was convenient, but we'll fix that now. Besides Baskerville & Georgia, we'll omit [Comic Sans](!Wikipedia) (of course), but we can try [Trebuchet](!Wikipedia "Trebuchet MS") for a total of 4 fonts (falling back to Georgia):
+
+~~~{.Html}
+hunk ./static/templates/default.html 28
++    <!-- override CSS with a/b test -->
++    <div class="fontfamily_class1"></div>
+...
+hunk ./static/templates/default.html 121
++      fontfamily: [
++      {
++      name: 'Baskerville',
++      "fontfamily_class1": "<style>html { font-family: Baskerville, Georgia; }</style>",
++      "fontfamily_class2": ""
++      },
++      {
++      name: 'Georgia',
++      "fontfamily_class1": "<style>html { font-family: Georgia; }</style>",
++      "fontfamily_class2": ""
++      },
++      {
++      name: 'Trebuchet',
++      "fontfamily_class1": "<style>html { font-family: 'Trebuchet MS', Georgia; }</style>",
++      "fontfamily_class2": ""
++      },
++      {
++      name: 'Helvetica',
++      "fontfamily_class1": "<style>html { font-family: Helvetica, Georgia; }</style>",
++      "fontfamily_class2": ""
++      }
++      ],
+~~~
+
+TODO: ping with results http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8our?context=1#8our
