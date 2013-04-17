@@ -9,16 +9,16 @@ belief: possible
 
 # background
 
-https://www.google.com/analytics/siteopt/exptlist?account=18912926
-http://www.pqinternet.com/196.htm
-https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=61203 "Experiment with site-wide changes"
-https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=117911 "Working with global headers"
-https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-AU&answer=74345 "Time on page as a conversion goal" - every page converts, by using a timeout (mine is 40 seconds)
-https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-GB&answer=61427
-https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "Varying page and element styles" - testing with inline CSS overriding the defaults
-http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
-http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
-http://stackoverflow.com/tags/google-website-optimizer/hot
+- https://www.google.com/analytics/siteopt/exptlist?account=18912926
+- http://www.pqinternet.com/196.htm
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=61203 "Experiment with site-wide changes"
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=117911 "Working with global headers"
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-AU&answer=74345 "Time on page as a conversion goal" - every page converts, by using a timeout (mine is 40 seconds)
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-GB&answer=61427
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "Varying page and element styles" - testing with inline CSS overriding the defaults
+- http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
+- http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
+- http://stackoverflow.com/tags/google-website-optimizer/hot
 
 
 # ideas for testing
@@ -48,7 +48,7 @@ http://stackoverflow.com/tags/google-website-optimizer/hot
 
 CSS-3 property: set how wide the page will be in pixels if unlimited screen real estate is available. I noticed some people complained that pages were 'too wide' and this made it hard to read, which apparently is a real thing since lines are supposed to fit in eye saccades. So I tossed in 800px, 900px, 1300px, and 1400px to the first A/B test.
 
-~~{.Javascript}
+~~{.Html}
 <!-- Google Website Optimizer Control Script -->
 <script>
 function utmx_section(){}function utmx(){}
@@ -109,7 +109,7 @@ Oy vey! When I discovered Google had deleted my results, I decided to simply swi
 
 Blockquote before quote, stolen from Readability:
 
-~~~{.CSS}
+~~~{.Css}
 blockquote: : before {
     content: "\201C";
     filter: alpha(opacity=20);
@@ -125,39 +125,127 @@ blockquote: : before {
 
 2. blockquote striping
 
+~~~{.Css}
 blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(240, 240, 240); }
 blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(250, 250, 250); }
+~~~
 
 3. white on black vs variants
 
+~~~{.Css}
 html { padding: 0px; margin: 0px; background-color: white; color: black; font-family: sans-serif;}
 body { font:1em/1.625em "lucida grande","lucida sans unicode", sans-serif; background-color:#FFFEF0; font-size-adjust:none;font-style:normal;font-variant:normal;font-weight:normal;}
+~~~
 
 how about a blue background?
 see http://www.overcomingbias.com/2010/06/near-far-summary.html for more design ideas
 
 4. max-widths
 
+~~~{.Css}
 body { max-width: 1400px;} /* important to test all max-width values!! */*
+~~~
 
 5. table striping
 
+~~~{.Css}
 tbody tr:hover td { background-color: #f5f5f5;}
 tbody tr:nth-child(odd) td { background-color: #f9f9f9;}
+~~~
 
 6. line height
 
+~~~{.Css}
 div#content { line-height: 130%;}
+~~~
 
 7. number size
 
+~~~{.Css}
 .num { font-size: 85%; }
+~~~
 
 8. link decoration
 
+~~~{.Css}
 a { color: black; text-decoration: underline;}
 a { color:#005AF2; text-decoration:none; }
+~~~
 
-# Resumption
+# Resumption: ABalytics
 
 In March 2013, I decided to give A/B testing another whack. Google Analytics Experiment did not seem to have improved and the commercial services continued to charge unacceptable prices, so I gave the Google Analytics custom variable integration approach another trying using [ABalytics](https://github.com/danmaz74/ABalytics). The usual puzzling, debugging, and frustration of combining so many disparate technologies (HTML *and* CSS *and* JS *and* Google Analytics) aside, it seemed to work on my test page. The current downside seems to be that the ABalytics approach may be fragile, and the UI in GA is awful (you have to do the statistics yourself).
+
+## `max-width` redux
+
+The obvious test case is to rerun the `max-width` test, and this time get the data. The exact changes:
+
+~~~{.Diff}
+Sun Mar 17 11:25:39 EDT 2013  gwern@gwern.net
+  * default.html: setup ABalytics a/b testing https://github.com/danmaz74/ABalytics (hope this doesn't break anything...)
+    addfile ./static/js/abalytics.js
+    hunk ./static/js/abalytics.js 1
+...
+    hunk ./static/templates/default.html 28
+    +    <!-- override CSS with a/b test -->
+    +    <div class="maxwidth_class1"></div>
+    +
+...
+    -    <noscript><p>Enable JavaScript for Disqus comments</p></noscript>
+    +      window.onload = function() {
+    +      ABalytics.applyHtml();
+    +      };
+    +    </script>
+    hunk ./static/templates/default.html 119
+    +
+    +      ABalytics.init({
+    +      maxwidth: [
+    +      {
+    +      name: '800',
+    +      "maxwidth_class1": "<style>body { max-width: 800px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '900',
+    +      "maxwidth_class1": "<style>body { max-width: 900px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1100',
+    +      "maxwidth_class1": "<style>body { max-width: 1100px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1200',
+    +      "maxwidth_class1": "<style>body { max-width: 1200px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1300',
+    +      "maxwidth_class1": "<style>body { max-width: 1300px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1400',
+    +      "maxwidth_class1": "<style>body { max-width: 1400px; }</style>",
+    +      "maxwidth_class2": ""
+    +      }
+    +      ],
+    +      }, _gaq);
+    +
+~~~
+
+
+I wound up the test on 17 April 2013 with the following results:
+
+Width (px) Visits Conversion
+---------- ------ ----------
+1100       18,164 14.49%
+1300       18,071 14.28%
+1200       18,150 13.99%
+800        18,599 13.94%
+900        18,419 13.78%
+1400       18,378 13.68%
+           109772 14.03%
+
+1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58) but I want to move on to the next test and by the same logic it is highly unlikely that the difference between them is large or much in 1300px's favor (the kind of mistake I care about: switching between 2 equivalent choices doesn't matter, missing out on an improvement *does* matter - maximizing β, not minimizing α).
