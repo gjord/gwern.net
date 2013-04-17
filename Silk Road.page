@@ -2,7 +2,7 @@
 title: Using Silk Road
 description: Visiting, ordering, and using the anonymous drug market Silk Road
 created: 11 Jul 2011
-tags: cryptography, statistics, nootropics, politics
+tags: cryptography, statistics, nootropics, politics, predictions
 status: finished
 belief: likely/log
 ...
@@ -25,7 +25,7 @@ The website [Silk Road](!Wikipedia "Silk Road (anonymous marketplace)") (SR), a 
 [^black-market]: I know of one competing English Bitcoin+Tor marketplace as of 2011, named Black Market Reloaded which apparently lives at <http://5onwnspjvuk7cwvk.onion/> ([non-Tor mirror](https://5onwnspjvuk7cwvk.tor2web.org/)); [informed 2011 opinion](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25bb3s) seemed to be that it is low-volume and stagnant, but it apparently has improved substantially and as of February 2013, [has grown substantially](http://weirderweb.com/2013/02/01/black-market-reloaded-grew-more-than-16000-new-registrations-in-january-and-has-more-publicly-available-items-than-silk-road/) and begun to rival Silk Road. There are 2 Russian competitors, [RAMP and Shop of Magic Products](http://weirderweb.com/2013/02/26/russia-just-banned-erowid-but-russias-version-of-silk-road-is-growing-fast/), which have been compared to SR and BMR (respectively).
 [^size]: Estimates of Silk Road's size can be done several ways: most purchases entail a review at the end, and reviews are displayed on the front page, so one can monitor the front page and extrapolate to estimate average number of transactions per day or week, and from there estimate turnover and what Silk Road's commissions total to: eg. ~100 transactions a day over 2 years and averaging ~$150 is $200 \times 365 \times 2 \times 150 = 10,950,000$. ["Traveling the Silk Road: A measurement analysis of a large anonymous online marketplace"](http://arxiv.org/abs/1207.7139) (Christin 2012) spidered Silk Road for 8 months (2011-2012) and did something similar by recording all public prices, feedback indicating how much had been sold, and calculating a monthly turnover of $1.2m for annual revenue of ~$15m; the difference in estimates seems explained by my estimate of daily transactions being considerably too low.
 
-    Another way is to look in the blockchain for Silk Road-related addresses or transactions; one [possible address](http://bitcointalk.org/index.php?topic=82952.0;all "Very Rich Address?") had a 23 June 2012 balance of 450,825btc or $2,885,280. Since it is unlikely there are ~$3m of transactions active or sitting in wallets that day on Silk Road when the largest previous Silk Road scammer (Tony76) - pulling out all the stops - got away with an order of magnitude less money, this is highly likely to represent Silk Road's profits or profits plus balances & escrows; which at a commission of 5-10% implies a total Silk Road turnover of >$28m. Interestingly, Christin 2012's analysis concluded that Silk Road was by July 2012 receiving $92k monthly or $1.7m yearly in commissions (and twice that yearly figure is larger than that address balance - as it should be, being an upper bound).
+    Another way is to look in the blockchain for Silk Road-related addresses or transactions; one [possible address](http://bitcointalk.org/index.php?topic=82952.0;all "Very Rich Address?") had a 23 June 2012 balance of 450,825btc or $2,885,280. Since it is unlikely there are ~$3m of transactions active or sitting in wallets that day on Silk Road when the largest previous Silk Road scammer (Tony76) - pulling out all the stops - got away with an order of magnitude less money, this is highly likely to represent Silk Road's profits or profits plus balances & escrows; which at a commission of 5-10% implies a total Silk Road turnover of >$28m. Interestingly, Christin 2012's analysis concluded that Silk Road was by July 2012 receiving $92k monthly or $1.7m yearly in commissions (and twice that yearly figure is larger than that address balance - as it should be, being an upper bound). On 9 April 2013, a [single transaction](http://blockchain.info/address/1HQ3Go3ggs8pFnXuHVHRytPCq5fGG8Hbhx) of 69471btc was made by the address `1BAD...GuYZ`, and may have been related to the SR tumbler.
 
 Neither Bitcoin nor the Silk Road should be understood outside their ideological and historical context: the now-obscure [cypherpunk](!Wikipedia) movement.
 
@@ -114,7 +114,7 @@ Unsurprisingly, it's hard to find solid information on how many people have been
 
 Buyers and sellers seem to be treated differently as well: in the 2012 bust of the insecure Farmer's Market (see later footnote), the indictment only lists sellers and no buyers. [_Gawker_](http://gawker.com/5926440/are-authorities-closing-in-on-the-online-drug-market-silk-road "Are Authorities Closing In On the Online Drug Market Silk Road?") covers another case of a Canadian cocaine exporter apparently busted because they accepted payment via [Western Union](!Wikipedia).
 
-An Australian student's MDMA was [intercepted by Customs](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10819029 "Officer's link to net drug market") but the article makes no mention of him being penalized, a later [prosecution](http://www.afp.gov.au/media-centre/news/afp/2012/july/afp-and-Customs-warn-users-of-silk-road.aspx "Media Release: AFP and Customs warn users of Silk Road") & [conviction](http://www.theage.com.au/victoria/secret-website-harboured-drugs-smorgasbord-court-hears-20130131-2dlw3.html) of a SR vendor seems to have been related to a Customs interception of his large imports from Netherlands/Germany, and [2 teens](http://au.news.yahoo.com/thewest/a/-/breaking/14980079/brothers-in-court-over-online-drugs/ "Brothers in court over online drugs") made the mistake of ordering so much that their parents turned them in. A [7 November 2012](http://www.theherald.com.au/story/734298/detectives-follow-the-silk-road/ "Detectives follow the Silk Road") Australian article claims 30 interceptions a month in an area, but mentions nothing specific about arrests. A [December 2012 article](http://www.abc.net.au/news/2012-12-05/dark-internet-linked-to-drug-seizure-spike/4410872 "Dealers shed light on dark Internet's drug trade") quotes Customs claiming a 40% increase in seizures, but then quotes a SR seller as claiming a doubling or quadrupling of Australian buyers (hence, implying the interception rate has halved or worse).
+An Australian student's MDMA was [intercepted by Customs](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10819029 "Officer's link to net drug market") but the article makes no mention of him being penalized, a later [prosecution](http://www.afp.gov.au/media-centre/news/afp/2012/july/afp-and-Customs-warn-users-of-silk-road.aspx "Media Release: AFP and Customs warn users of Silk Road") & [conviction](http://www.theage.com.au/victoria/secret-website-harboured-drugs-smorgasbord-court-hears-20130131-2dlw3.html) of a SR vendor seems to have been related to a Customs interception of his large imports from Netherlands/Germany, and [2 teens](http://au.news.yahoo.com/thewest/a/-/breaking/14980079/brothers-in-court-over-online-drugs/ "Brothers in court over online drugs") made the mistake of ordering so much that their parents turned them in. A [7 November 2012](http://www.theherald.com.au/story/734298/detectives-follow-the-silk-road/ "Detectives follow the Silk Road") Australian article claims 30 interceptions a month in an area, but mentions nothing specific about arrests. A [December 2012 article](http://www.abc.net.au/news/2012-12-05/dark-internet-linked-to-drug-seizure-spike/4410872 "Dealers shed light on dark Internet's drug trade") quotes Customs claiming a 40% increase in seizures, but then quotes a SR seller as claiming a doubling or quadrupling of Australian buyers (hence, implying the interception rate has halved or worse). Estimating total number of Australian users is difficult, but the Global Drug Survey reportedly found [184 SR purchasers in its sample of >6600 Australians](http://www.smh.com.au/technology/technology-news/teens-flock-to-hidden-website-for-drugs-20130319-2gddg.html "Teens flock to hidden website for drugs") suggesting a risk of arrest or publicity $\lt \frac{5}{184}$ (and incidentally, remembering this is a biased sample and the South Australian [recent illicit drug use rate](http://www.dassa.sa.gov.au/site/page.cfm?u=204 "Statistics on Illicit Drug Use in South Australia") is ~14.9%, it suggests a very loose upper bound of all Australian SR users of $23000000 \times 0.149 \times \frac{184}{6600} \lt 95541$).
 
 A New Zealand Customs officer who likely used Silk Road was charged with possessing & "supplying" methamphetamine but this "was uncovered during police inquiries into another crime", with the resolution unclear. A young NZer's MDMA was confiscated by Customs and his house visited, whereupon he admitted guilt to the officers and unsurprisingly was [arrested & convicted](http://www.stuff.co.nz/southland-times/news/court/7958999/Drugs-ordered-on-web "Drugs ordered on web"). What seems to be a third NZer was [sentenced to 18 months probation](http://www.nbr.co.nz/article/chch-man-sentenced-after-buying-amazon-illegal-drugs-website-ck-1356590 "Christchurch man sentenced after buying from 'Amazon of illegal drugs' website"). That article estimates 52m items passing through Customs in 2012 with 1.4k intercepted as drugs; an earlier [NZ article](http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=10826287 "Online drug trade triggers high alert") claimed 80 interceptions a month with 7 arrests January-July 2012 or 1 arrest a month (suggesting each interception has a risk of leading to an arrest of ~1/80; the risk per order then depends on how many of the 52m items were drug packages).
 
@@ -169,6 +169,8 @@ Silk Road's 2 technical claims to fame is the near-exclusive use of Bitcoins for
 
 But as any kidnapper knows, you can communicate your demands easily enough, but how do you drop off the victim and grab the suitcase of cash without being nabbed? This has been a severe security problem forever. And bitcoins go a long way towards resolving it. So the additional security from use of Bitcoin is nontrivial. As it happened, I already had some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/projects/torbrowser) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. Other options include entire OSes like [Tails](http://tails.boum.org/) or [Liberté Linux](http://dee.su/liberte). (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay) as well - this gives me both [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
 
+# Silk Road
+
 With Tor running and the Torbutton enabled in the browser (along with any [privacy mode](!Wikipedia)), we can easily connect to Silk Road; we simply visit <http://silkroadvb5piz3r.onion>[^onion-address]. (Newbies to Tor might wonder why the gibberish address. The address is derived from the public key of the server, making it more difficult for an attacker to pretend to be the real Silk Road or do a [man in the middle attack](!Wikipedia).)
 
 [^onion-address]: Note that this is *not* a normal WWW site; there are no normal WWW sites for the Silk Road. There was `http://silkroadmarket.org` which was apparently controlled in some fashion by SR (probably to stop domain squatting or scam sites pretending to be SR), but whatever it was, it wasn't important; not updated regularly and no longer working.
@@ -203,18 +205,26 @@ The [stimulants](http://silkroadvb5piz3r.onion/index.php/silkroad/category/52) c
 
 ![2011 listing of stimulants: Adderall, 4-FA, methamphetamine, cocaine](/images/silkroad/stimulants.png)
 
+Moving on, we have the section for selling forgeries:
+
+![Forgery selection](/images/silkroad/2012-forgeries.png)
+
+# Legal wares
+
 Perhaps more surprising are the *non*-drug listings. They don't get mentioned much in the usual coverage, but Silk Road has aspirations of being a marketplace for more than just drugs. For example, the [collectibles](http://silkroadvb5piz3r.onion/index.php/silkroad/category/138) category with its military surplus or replica helmets, or [German pretzels](http://www.reddit.com/r/IAmA/comments/inrbo/iama_seller_on_the_illegal_anonymous_marketplace/c25dwkd), or the ['services'](http://silkroadvb5piz3r.onion/index.php/silkroad/category/94) category, which has, interestingly, become a way for sellers to offer 'extras' with their wares like faster shipping (or just oddball offers, like one offering to write a German prescription for any prescribable drug in Germany):
 
 ![Collectibles category: 1941 Canadian military helmet, reproduction German military helmet, Vietnam War American military helmet](/images/silkroad/collectibles.png)
 ![Services category: upgraded shipping, manuals, website invitations, homework grading](/images/silkroad/services.png)
 
-There's also the book section, with its predictably illicit wares:
+There's also the book section, with its predictably less than commendable but perhaps not actually illegal wares:
 
 ![Guides to committing illegal activities](/images/silkroad/2012-books.png)
 
-And the closely related section for selling forgeries:
+Although reportedly the book section can also be used to buy books censored for political reasons in China (["Bitcoin bursts: Hacker currency gets wild ride"](http://news.theage.com.au/breaking-news-technology/bitcoin-bursts-hacker-currency-gets-wild-ride-20130411-2hmia.html), AP Digital):
 
-![Forgery selection](/images/silkroad/2012-forgeries.png)
+> One British user told AP he first got interested in Silk Road while he was working in China, where he used the site to order banned books. After moving to Japan, he turned to the site for an occasional high.
+
+This is a handy reminder that even if you happen to agree with some drug laws, there are many other laws domestic & foreign one might disagree with (bans of [Kinder eggs](!Wikipedia "Kinder Surprise#Deaths in the United Kingdom"), [extremely costly regulation](http://www.reddit.com/r/SilkRoad/comments/14kwc6/venison_on_silk_road_beginner_question/) of [venison](!Wikipedia), etc).
 
 One section that perplexed me when I browsed it was the *art* section, for [blotters](!Wikipedia "Blotting paper#Drugs"):
 
@@ -224,9 +234,46 @@ An euphemism for the LSD section? Apparently no - they seem to be genuine little
 
 ![A vintage LSD blotter with artwork on it](/images/silkroad/2012-art-blotters.png)
 
-Well, you've browsed through the Silk Road proper. You can also visit the official Silk Road forums at <http://dkn255hz262ypmii.onion>^[[non-Tor mirror](https://dkn255hz262ypmii.tor2web.org/)]. The discussions are fairly active, but most importantly, the forums are where official rule changes to SR are announced by the SR administrator.
+Besides the mentioned blotter artwork, books, Kinder eggs, and venison, I was curious how many legal goods were available on SR in general. On 17 April 2013, I visited SR and did some guessing at the legal fraction of the 25 items on the first page for each category. (If there was only 1 page / <25 items, I simply eyeballed what was there.) Evaluating the legality of drugs is difficult because many are regulated differently in jurisdiction (an Englishman can legally import modafinil while an American is breaking the law), are unregulated (analogues), or may be regulated differently based on the exact chemical form (the [former](!Wikipedia "Fair Sentencing Act") American legal distinction between forms of cocaine); hence, I ignored the drug & drug paraphernalia sections. Copyright infringement is counted as illegal (so an e-book counts, but a physical book doesn't), but hacking tools are not since I am unclear on what hacking tools, if any, are either criminal or civilly prohibited. My results:
+
+Category             Total items Questionable Notes on items
+-------------------- ----------- ------------ ---------------------------
+Drugs                8845        100%?
+Drug paraphernalia   337         100%?
+Apparel              321         100%         Counterfeit or knockoff goods
+Art                  112         8%           Blotter art, pornography (copyright infringement)
+Biotic materials     2           0%           [Opium tea](!Wikipedia) (apparently legal), [damiana](!Wikipedia) (banned in Louisiana only)
+Books                878         12%          Copyright infringement (e-books)
+Collectibles         13          8%           Moonshine
+Computer equipment   67          0%           Specialized but legal software, hardware
+Custom Orders        82          32%          Most do not specify what they are for; 8 are drug-related
+Digital goods        655         16%          Site accounts or invites
+Electronics          92          4%           Counterfeit/knockoff
+Erotica              612         100%         Copyright infringement, site accounts
+Fireworks            4           0%
+Food                 10          4%           Moonshine
+Forgeries            100         92%          Driver's licenses principally
+Hardware             33          0%           Hard drives, safes, night vision goggles, lockpicks
+Herbs & Supplements  6           0%           Not that I recommend [maca root](!Wikipedia) as an aphrodisiac...
+Home & Garden        9           0%           Poppy plant seeds, Gillette razors, Mylar film, electric lights
+Jewelry              93          96%          Counterfeit/knockoff (mainly Cartier/Hermes/Montblanc/Gucci)
+Lab Supplies         46          0%           Glass vials, flasks, mushroom spores, tablet machine
+Lotteries & games    82          100%         Presumably all such gambling is regulated
+Medical              36          36%          Needles/syringes, tablet machine, prescription drugs
+Money                145         0%           Cash, debit cards, bullion, guides
+Musical instruments  2           100%         Beta-blockers (miscategorized products?)
+Packaging            49          0%           Plastic bags, stamps, heat-sealing equipment
+Services             81          24%          DDoS; username/password cracking; many takers for 'Common Sense'?
+Tickets              1           0%           ?
+Weight loss          53          84%          Drugs; [2,4-Dinitrophenol](!Wikipedia), [clenbuterol](!Wikipedia) etc
+Writing              4           0%           Drug sampling/review; ghost paper-writing; custom poems/stories
+Yubikeys             4           25%          An Adderall listing (another miscategorization?); intended for [two-factor authentication products](http://www.yubico.com/products/yubikey-hardware/)
+
+Extrapolating to all the other public listings and multiplying out the percentages, my table suggests 10709 questionable/illegal products out of 12774 total public listings, or ~83% of SR public listings are illegal goods. (It assumes all drug/drug paraphernalia are illegal, that the first page listing is representative, does not try to assess private listings which will likely skew to illegal drugs, etc.) This is much lower than I expected, but this estimate tells us little about how much is actually bought & sold, how much turnover there is, and what fraction of each are illegal.
 
 # Anonymity
+
+Well, you've browsed through the Silk Road proper. You can also visit the official Silk Road forums at <http://dkn255hz262ypmii.onion>^[[non-Tor mirror](https://dkn255hz262ypmii.tor2web.org/)]. The discussions are fairly active, but most importantly, the forums are where official rule changes to SR are announced by the SR administrator.
 
 We have window-shopped long enough. It's time to take the plunge and buy something. Bitcoin developer Jeff Garzik is quoted in the _Gawker_ article as saying that "Attempting major illicit transactions with bitcoin, given existing statistical analysis techniques deployed in the field by law enforcement, is pretty damned dumb." Fortunately I do not plan 'major' transactions, and in any case, I tend to suspect that said statistical techniques are overblown; a few academics have published initial investigations into tracing transactions and examining the larger Bitcoin economy, and have linked transactions to individuals, but as of 2012 have only done so with addresses publicly linked to identities, and not broken the anonymity of people trying to be anonymous.
 
