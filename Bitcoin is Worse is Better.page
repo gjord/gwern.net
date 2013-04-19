@@ -23,7 +23,7 @@ Some wonder who is the real man under the Satoshi Nakamoto mask; a hard question
 
 The interesting thing is that by even the most generous accounting, all the pieces were in place for at least 8 years before Satoshi's publication, which was followed more than half a year later^[The first revision in the [Github repository](https://github.com/bitcoin/bitcoin) is dated August 2009 by `sirius-m`.] by the first public[^private] prototype. If we look at the citations in the whitepaper and others, and then order the relevant technologies by year in descending order:
 
-[^private]: Satoshi claims that before he write the whitepaper, he [wrote a prototype](http://www.mail-archive.com/cryptography@metzdowd.com/msg10011.html)
+[^private]: Satoshi claims that before he write the whitepaper, he [wrote a prototype](http://www.mail-archive.com/cryptography@metzdowd.com/msg10011.html).
 
 1. 2001: [SHA-256](!Wikipedia) finalized
 2. 1999-present: [Byzantine fault tolerance](!Wikipedia) (PBFT etc.)
@@ -117,7 +117,7 @@ I think it's instructive to look at Satoshi's [ANN thread](http://www.mail-archi
     > It's worth noting that the whole system assumes SHA-256 -- the bitcoin community says that rolling over to something else is just a matter of introducing a new algo, but in actuality it's not nearly that simple. The protocol has no concept of upgrading to different algos, so it would necessitate a complete overhaul of the protocol (since there's a lot of 32-byte fields in there) AND a re-computation/rollover of the entire transaction history.
     > ...The protocol also has had no thought put into it re: network architecture -- there are peers and that's it. Due to the cryptographic nature of transactions, it's simply not possible to have realtime transactions with bitcoin as the network scales (it already take 5-10 mins on average for the network to see a single transaction). Thus, there will need to be some concept of a node in the network that can facilitate interactions between two peers in a faster fashion, with the assumption of a measure of trust. You shouldn't *require* it, of course, but it should be defined, I think."
 
-    Security expert [Dan Kaminsky](!Wikipedia) is similarly appalled at the bandwidth requirements to scale (":0" was his emoticon) and predicts that the Bitcoin network will eventually turn into a quasi-bank-like oligarchy of supernodes (which changes the system and "offers a host of ugly semantics" since the supernodes "don't need 50% -- just need to inconvenience 50% to accept your opinion"). He [comments](http://www.slideshare.net/dakami/bitcoin-8776098) that while "Normal Code" seems good but "Scratch the surface, it's actually really bad", the Bitcoin codebase "Looks really bad up front" but "Scratch the surface, it's actually surprisingly good". _[New Yorker](!Wikipedia)_ article's ["The Crypto-currency: Bitcoin and its mysterious inventor"](http://cryptome.org/0005/bitcoin-who.pdf):
+    Security expert [Dan Kaminsky](!Wikipedia) is similarly appalled at the bandwidth requirements to scale (":0" was his emoticon) and predicts that the Bitcoin network will eventually turn into a quasi-bank-like oligarchy of supernodes (which changes the system and "offers a host of ugly semantics" since the supernodes "don't need 50% -- just need to inconvenience 50% to accept your opinion"). He [comments](http://www.slideshare.net/dakami/bitcoin-8776098) that while "Normal Code" seems good but "Scratch the surface, it's actually really bad", the Bitcoin codebase "Looks really bad up front" but "Scratch the surface, it's actually surprisingly good". _[New Yorker](!Wikipedia)_ article's ["The Crypto-currency: Bitcoin and its mysterious inventor"](/docs/2011-davis):
 
     > "When I first looked at the code, I was sure I was going to be able to break it", Kaminsky said, noting that the programming style was dense and inscrutable. "The way the whole thing was formatted was insane. Only the most paranoid, painstaking coder in the world could avoid making mistakes."...He quickly identified nine ways to compromise the system...when he found the right spot, there was a message waiting for him. "Attack Removed", it said. The same thing happened over and over, infuriating Kaminsky. "I came up with beautiful bugs", he said. "But every time I went after the code there was a line that addressed the problem."..."I've never seen anything like it", Kaminsky said, still in awe..."Either there's a team of people who worked on this", Kaminsky said, "or this guy is a genius."
 
@@ -194,9 +194,9 @@ No! What's wrong with Bitcoin is that it's *ugly*. It is not [elegant](!Wikipedi
     >     - With network speeds increasing dramatically, on-line clearing should be feasible for most transactions. Off-line systems may of course be useful, especially for small transactions, the ones now handled with coins and small bills.
 [^Laurie-2]: ["Decentralised Currencies Are Probably Impossible: But Let's At Least Make Them Efficient"](http://www.links.org/files/decentralised-currencies.pdf), Ben Laurie:
 
-    > "Now that we understand the core problem, namely that of agreement, we can quite easily understand Bitcoin's solution to the problem. Bitcoin defines the consensus group as "all the computing power in existence", and requires participants to prove their possession of whatever fraction of this power they care to spend on Bitcoin by using it to produce proof-of-work tokens. And once we state the problem like this, we can quite clearly see the flaw. Until at least half of the computing power in existence is actually used to produce Bitcoins, we cannot know that we have consensus! If, for example, 1% of the total power available^Strictly,\ I\ mean\ energy\ rather\ than\ power,\ since\ Bitcoin\ actually,\ in\ effect,\ sums\ power\ over\ time.^ is used to produce Bitcoins at present (in fact, the amount is far less than that), then at any point someone could come along with a further 1.1% of the total power and use this to define their own consensus^By\ forking\ history\ right\ back\ to\ the\ first\ block,\ and\ producing\ a\ hash\ chain\ that\ is\ longer\ than\ the\ current\ consensus.^, thus invalidating all the work, *and all the money*, of the initial group, and instead take possession of the entire currency for themselves.
+    > Now that we understand the core problem, namely that of agreement, we can quite easily understand Bitcoin's solution to the problem. Bitcoin defines the consensus group as "all the computing power in existence", and requires participants to prove their possession of whatever fraction of this power they care to spend on Bitcoin by using it to produce proof-of-work tokens. And once we state the problem like this, we can quite clearly see the flaw. Until at least half of the computing power in existence is actually used to produce Bitcoins, we cannot know that we have consensus! If, for example, 1% of the total power available^Strictly,\ I\ mean\ energy\ rather\ than\ power,\ since\ Bitcoin\ actually,\ in\ effect,\ sums\ power\ over\ time.^ is used to produce Bitcoins at present (in fact, the amount is far less than that), then at any point someone could come along with a further 1.1% of the total power and use this to define their own consensus^By\ forking\ history\ right\ back\ to\ the\ first\ block,\ and\ producing\ a\ hash\ chain\ that\ is\ longer\ than\ the\ current\ consensus.^, thus invalidating all the work, *and all the money*, of the initial group, and instead take possession of the entire currency for themselves.
     >
-    > ...Even worse, it is clear that arriving at the equilibrium state for Bitcoin is incredibly expensive: half of all the computing power in existence must be burnt, in perpetuity, maintaining agreement about the current state of the currency. It also unknowable: we can never be sure that we actually are burning half of all the power in existence, because we do not know how much power exists."
+    > ...Even worse, it is clear that arriving at the equilibrium state for Bitcoin is incredibly expensive: half of all the computing power in existence must be burnt, in perpetuity, maintaining agreement about the current state of the currency. It also unknowable: we can never be sure that we actually are burning half of all the power in existence, because we do not know how much power exists.
 
     Laurie points out that in practice, the Bitcoin community does *depend* on a centralized authority which periodically passes down 'blessed' block-chains - the Bitcoin developers periodically hardwire known-good states of the block-chain into the clients (which of course is a theoretical weakness).
 
@@ -267,6 +267,10 @@ My own belief is that #1 is probably a significant factor but questionable since
 
     > ...If you read the Wikipedia article, you should know that I didn't create Bitcoin but only described a similar idea more than a decade ago. And my understanding is that the creator of Bitcoin, who goes by the name Satoshi Nakamoto, didn't even read my article before reinventing the idea himself. He learned about it afterward and credited me in his paper. So my connection with the project is quite limited.
 
+    Adam Back, [18 April 2013](https://bitcointalk.org/index.php?topic=15672.msg1873483#msg1873483):
+
+    > ...So anyway I know a few things about ecash, privacy tech, crypto, distributed systems (my comp sci PhD is in distributed systems) and I guess I was one of the moderately early people to read about and try to comprehend the p2p crypto cleverness that is bitcoin.  In fact I believe it was me who got Wei Dai's b-money reference added to Satoshi's bitcoin paper when he emailed me about hashcash back in 2008.  If like Hal Finney I'd actually tried to run the miner back then, I may too be sitting on some genesis/bootstrap era coins.  Alas I own not a single bitcoin which is kind of ironic as the actual bitcoin mining is basically my hashcash invention.
+
 # See also
 
 - [Silk Road]() -(using the Silk Road marketplace)
@@ -279,3 +283,25 @@ My own belief is that #1 is probably a significant factor but questionable since
     - [Reddit discussion](http://www.reddit.com/r/Bitcoin/comments/hlu9l/bitcoin_is_worse_is_better/)
     - [Hacker News discussion](http://news.ycombinator.com/item?id=2934879)
 - ["Bitcoin Theory (Byzantine Generals and Beyond)"](https://bitcointalk.org/index.php?topic=99631.0)
+
+<!-- Notes toward de-anonymization:
+http://p2presearch.979870.n3.nabble.com/template/NamlServlet.jtp?macro=search_page&node=2040379&query=message%3ABitcoin&days=0&i=12&sort=date
+http://www.reddit.com/r/Bitcoin/comments/18j2aw/satoshi_likely_in_utc4_region/
+http://sourceforge.net/mailarchive/forum.php?viewmonth=&viewday=&forum_name=bitcoin-list&style=nested
+~/bin/bitcoin-svn-historical/
+https://www.bitcoinforum.com/bitcoin-discussion/what-would-satoshi-nakamoto-do/msg622/#msg622
+ask kanzure for personal emails
+difficulty/mining: https://bitcointalk.org/index.php?topic=37333 https://bitcointalk.org/index.php?topic=160186.msg1708163#msg1708163 https://bitcointalk.org/index.php?topic=164569.0 https://bitcointalk.org/index.php?topic=175996.0;all https://bitcointalk.org/index.php?topic=175996.msg1843782#msg1843782 https://bitslog.wordpress.com/2013/04/17/the-well-deserved-fortune-of-satoshi-nakamoto/
+statistically unlikely to be dead: http://www.reddit.com/r/Bitcoin/comments/1cmd0o/estimating_how_many_blocks_satoshi_mined_1m/c9hvnji
+http://www.wired.com/magazine/2011/11/mf_bitcoin/all/
+Reiter: http://www.reddit.com/r/Bitcoin/comments/1ccqmy/disprove_me_how_i_figured_out_who_satoshi/
+/docs/2011-davis New Yorker article
+https://bitcointalk.org/index.php?topic=153071.msg1624887#msg1624887
+http://www.theatlanticwire.com/technology/2011/10/race-unmask-bitcoins-inventors/43535/
+http://www.fastcompany.com/1785445/bitcoin-crypto-currency-mystery-reopened
+"Quantitative Analysis of the Full Bitcoin Transaction Graph" http://eprint.iacr.org/2012/584.pdf mentions mysterious large transaction - can this be attributed to the Winklevosses?
+http://web.archive.org/web/20100704213649/http://www.bitcoin.org/bitcoin.pdf
+https://en.bitcoin.it/wiki/Satoshi_Nakamoto
+http://web.archive.org/web/20100702211420/http://p2pfoundation.ning.com/profile/SatoshiNakamoto / http://p2pfoundation.ning.com/profile/SatoshiNakamoto
+http://sourceforge.net/users/s_nakamoto
+-->
