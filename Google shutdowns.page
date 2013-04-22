@@ -30,6 +30,16 @@ The shut down of the popular service [Google Reader](!Wikipedia), announced on [
     >
     > So when news spread internally of Reader's gelding, it was like Hemingway's line about going broke: "Two ways. Gradually, then suddenly." Shih found out in the spring that Reader's internal sharing functions - the asymmetrical following model, endemic commenting and liking, and its advanced privacy settings - would be superseded by the forthcoming Google+ model. Of course, he was forbidden from breathing a word to users.
 
+    Shih further [writes on Quora](https://www.quora.com/Google-Reader-Shut-Down-March-2013/Why-is-Google-killing-Google-Reader):
+
+    > Let's be clear that this has nothing to do with revenue vs operating costs. Reader never made money directly (though you could maybe attribute some of Feedburner and AdSense for Feeds usage to it), and it wasn't the goal of the product. Reader has been fighting for approval/survival at Google since long before I was a PM for the product. I'm pretty sure Reader was threatened with de-staffing at least three times before it actually happened. It was often for some reason related to social:
+    >
+    > - 2008 - let's pull the team off to build OpenSocial
+    > - 2009 - let's pull the team off to build Buzz
+    > - 2010 - let's pull the team off to build Google+
+    >
+    > It turns out they decided to kill it anyway in 2010, even though most of the engineers opted against joining G+. Ironically, I think the reason Google always wanted to pull the Reader team off to build these other social products was that the Reader team actually understood social (and tried a lot of experiments over the years that informed the larger social features at the company) [See Reader's friends implementations v1, v2, and v3, comments, privacy controls, and sharing features. Actually wait, you can't see those anymore, since they were all ripped out.]. Reader's social features also evolved very organically in response to users, instead of being designed top-down like some of Google's other efforts [Rob Fishman's Buzzfeed article has good coverage of this: [Google's Lost Social Network](http://www.buzzfeed.com/robf4/googles-lost-social-network)]. I suspect that it survived for some time after being put into maintenance because they believed it could still be a useful source of content into G+. Reader users were always voracious consumers of content, and many of them filtered and shared a great deal of it. But after switching the sharing features over to G+ (the so called "share-pocalypse") along with the redesigned UI, my guess is that usage just started to fall - particularly around sharing. I know that my sharing basically stopped completely once the redesign happened [[Reader redesign: Terrible decision, or worst decision?](http://www.brianshih.com/post/30194495552/reader-redesign-terrible-decision-or-worst-decision) I was a lot angrier then than I am now -- now I'm just sad.]. Though Google did ultimately fix a lot of the UI issues, the sharing (and therefore content going into G+) would never recover. So with dwindling usefulness to G+, (likely) dwindling or flattening usage due to being in maintenance, and Google's big drive to focus in the last couple of years, what choice was there but to kill the product?
+
     The sign story is confirmed by another Googler; ["Google Reader lived on borrowed time: creator Chris Wetherell reflects"](http://gigaom.com/2013/03/13/chris-wetherll-google-reader/):
 
     > "When they replaced sharing with +1 on Google Reader, it was clear that this day was going to come," he said. Wetherell, 43, is amazed that Reader has lasted this long. Even before the project saw the light of the day, Google executives were unsure about the service and it was through sheer perseverance that it squeaked out into the market. At one point, the management team threatened to cancel the project even before it saw the light of the day, if there was a delay. "We had a sign that said, '*days since cancellation*' and it was there from the very beginning," added a very sanguine Wetherell. My translation: Google never really believed in the project. Google Reader started in 2005 at what was really the golden age of RSS, blogging systems and a new content ecosystem. The big kahuna at that time was Bloglines (acquired by Ask.com) and Google Reader was an upstart.
@@ -383,9 +393,10 @@ model1 <- lm(log(Size) ~ Date, data=index); summary(model1)
 # plot logged size data and the fit:
 plot(log(index$Size) ~ index$Date, ylab="WWW index size", xlab="Date")
 abline(model1)
-
 ~~~
+
 http://i.imgur.com/tv1LyaA.png
+
 It fits reasonably well. A sigmoid might work a bit better, but maybe not, given the large disagreements towards the end.
 
 Then we can divide total hits for a property by the total estimated size of the Google index when that property started
@@ -462,6 +473,7 @@ Surv(google$Started, google$Days, google$Dead, type="right")
 surv <- survfit(Surv(as.integer(google$Started), google$Dead, type="right") ~ 1)
 plot(surv, xlab="Days", ylab="Survival Probability")
 ~~~
+
 http://i.imgur.com/GvYTH8x.png
 
 ~~~{.R}
@@ -491,7 +503,10 @@ rf
 
 The abrupt increase in mortality in the middle is suspicious. We can plot lifetime against shut-down to get a better picture:
 
+~~~{.R}
 plot(google$Days ~ google$Ended, xlab="Opened", ylab="Total lifetime")
+~~~
+
 http://i.imgur.com/P3l4jxr.png
 
 Here something jumps out of the plot: almost every shut down is in 2012 or 2013. As late as 2011, there are a grand total of perhaps 3 shut-downs (out of 39), and then in late 2011 there is the start of a veritable wall of shut-downs of services, from services as young as 365 days (Google Aardvark) to as old as 8.5 years (iGoogle).
@@ -510,6 +525,7 @@ To emphasize this bulge in late 2011-2012, we can plot the histogram by year and
 hist(google$Ended, breaks=seq.Date(as.Date("2005-01-01"), as.Date("2014-01-01"), "years"),
                    main="Shut downs per year", xlab="Year")
 ~~~
+
 http://i.imgur.com/RxBXN0j.png
 
 
@@ -542,6 +558,7 @@ sample estimates:
 
 plot(density(as.numeric(dead$Ended)), main="Shut down density over time")
 ~~~
+
 http://i.imgur.com/0XpKAoi.png
 
 The kernel density brings out an aspect of shut downs we might have missed before: there seems to be an absence of recent shut downs. There are 4 shut downs scheduled for 2013 but the last one is scheduled for November, suggesting that we have seen the last of the 2013 casualties and that any future shut downs may be for 2014.
@@ -573,11 +590,13 @@ plus there are like 4 or 5 things which all got rolled into Docs+Drive
 
 
 TODO: lifespan predictions for: http://www.ats.ucla.edu/stat/r/examples/asa/asa_ch2_r.htm
-Google Alerts
-Blogger
-FeedBurner
-Scholar
-Book Search
+    Google Alerts
+    Blogger
+    FeedBurner
+    Scholar
+    Book Search
+    Brevio's FunF
+    Voice http://www.wired.com/gadgetlab/2013/04/google-voice-future-uncertain/ http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p28
 
 Google products I regularly use; what are the predictions and how well can I cope with any shut downs?
 
@@ -617,3 +636,13 @@ TODO: finished?
 - https://news.ycombinator.com/item?id=5495523
 - thank gostips@gmail.com/http://googlesystem.blogspot.com/
 - ask for help http://www.reddit.com/r/MachineLearning/ / Coursera 'Data Analysis' forum
+
+<!-- How to handle updates? I guess we'll store it here. New data:
+
+"Product","Dead","Started","Ended","Hits","Type","Profit","FLOSS","Acquisition","Social"
+"Inactive Account Manager",FALSE,2013-04-11,NA,175000,service,FALSE,FALSE,FALSE,FALSE
+"Affiliate Network",TRUE,2007-04-13,2013-04-16,3480000,service,TRUE,FALSE,TRUE,FALSE http://googleaffiliatenetwork-blog.blogspot.in/2013/04/an-update-on-google-affiliate-network.html
+Behavio's FunF http://www.sfgate.com/technology/businessinsider/article/Google-Just-Bought-A-Cool-SXSW-Startup-Behavio-4430716.php supposedly Google will continue it but it may be killed too quickly to count for this list
+"AdWords Pay Per Action",TRUE,2007-03-20,2008-08-31,144000,service,TRUE,FALSE,TRUE,FALSE
+"AdSense Referrals",TRUE,2007-04-05,2008-08-31,25000,service,TRUE,FALSE,FALSE,FALSE
+-->
