@@ -1,6 +1,6 @@
 ---
 description: Technology-driven shift in demand for Conscientiousness, not intelligence
-tags: IQ, psychology, sociology, meta-analysis, anime
+tags: psychology, sociology, meta-analysis, anime
 created: 20 Jul 2012
 belief: possible
 status: in progress
@@ -77,7 +77,7 @@ How does online education affect them - reducing the need for that factor to rea
 
 ## Existing research
 
-The general background of online education demonstrated in a large [DoE 2009 meta-analysis](http://www2.ed.gov/rschstat/eval/tech/evidence-based-practices/finalreport.pdf "'Evaluation of Evidence-Based Practices in Online Learning: A Meta-Analysis and Review of Online Learning Studies', Means et al") is that a lot of studies are poor or not randomized controlled trials (unsurprisingly) but in the quality studies, online learning slightly outperforms regular classes and mixed classes outperform both online & offline classes[^extras] (see also [Zhao et al 2005](http://www.csupomona.edu/~dolce/pdf/zhao.pdf "What makes the difference? A practical analysis of research on the effectiveness of distance education")). The age of students doesn't seem to matter much although the meta-analysis seemed to see a shrinking effect going from undergraduate college students to professionals or postgraduates^[This might be evidence against: since Conscientiousness increases modestly with age/experience, we would expect older people (professional/post-grad) to benefit more than younger (undergrads). This may reflect differences in the kinds of subjects or the material - perhaps older people taking training are different from the studied undergrads or perhaps their more advanced/specialized material has not been pedagogically polished as more common undergrad material, etc.]. This meta-analytic result is broadly consistent with the picture previously painted: if we accept that online education should be better then a small increase in average scores is consistent with some students benefiting much more and some losing a little; the mixed classes, with their face-to-face elements, compensate for lacks in Conscientiousness, giving more students the best of both worlds; and independent study hurts results for the exact same reason.
+The general background of online education demonstrated in a large [DoE 2009 meta-analysis](http://www2.ed.gov/rschstat/eval/tech/evidence-based-practices/finalreport.pdf "'Evaluation of Evidence-Based Practices in Online Learning: A Meta-Analysis and Review of Online Learning Studies', Means et al") is that a lot of studies are poor or not randomized controlled trials (unsurprisingly) but in the quality studies, online learning slightly outperforms regular classes and mixed classes outperform both online & offline classes[^extras] (see also the similar results [Zhao et al 2005](http://www.csupomona.edu/~dolce/pdf/zhao.pdf "What makes the difference? A practical analysis of research on the effectiveness of distance education") & [Bowen et al 2012](http://mitcet.mit.edu/wp-content/uploads/2012/05/BowenReport-2012.pdf "Interactive Learning Online at Public Universities: Evidence from Randomized Trials")). The age of students doesn't seem to matter much although the meta-analysis seemed to see a shrinking effect going from undergraduate college students to professionals or postgraduates^[This might be evidence against: since Conscientiousness increases modestly with age/experience, we would expect older people (professional/post-grad) to benefit more than younger (undergrads). This may reflect differences in the kinds of subjects or the material - perhaps older people taking training are different from the studied undergrads or perhaps their more advanced/specialized material has not been pedagogically polished as more common undergrad material, etc.]. This meta-analytic result is broadly consistent with the picture previously painted: if we accept that online education should be better then a small increase in average scores is consistent with some students benefiting much more and some losing a little; the mixed classes, with their face-to-face elements, compensate for lacks in Conscientiousness, giving more students the best of both worlds; and independent study hurts results for the exact same reason.
 
 [^extras]: In an interesting comment on the "possibilities" argument for online learning (that such courses can add material and media that offline courses cannot or will not), identity of courses turns out to be an important moderator:
 
@@ -201,7 +201,7 @@ I consulted [Wikipedia on bivariate normal distributions](https://en.wikipedia.o
 I was able to work up a R simulation to see how that worked, and it seemed in line with my intuitions:
 
 ~~~{.R}
-install.packages("fMultivar")
+# install.packages("fMultivar")
 library ("fMultivar")
 
 x <- rnorm2d(10000000, rho=0.5)
@@ -422,4 +422,23 @@ I was curious and I asked Kiriana Cowansage what role music played in her life. 
 A lot of what we don't like, in the arts, is simply creative forms that appeal to different and perhaps unusual neurologies. I am not saying that all people with unusual neurologies love atonal music or for that matter even know much about atonal music. It's just that if I go to a concert of contemporary classical music-the scratchy kind-I expect to see people with rather specialized cognitive skills, including the ability to order sounds that can easily seem chaotic into a comprehensible hierarchy.
 Atonal and serialist music represent further signs of the division of productive labor present in all economically advanced societies. The world has become so wealthy and so diverse that some composers make music that appeals to people only with a very particular and very refine sense of musical appreciation. That's the best way to think about much of the music-and other art forms-that you may hate.
 As with atonal music, the most common reaction is simply to evaluate the aesthetic perspective through the taste of either the public or the educated critics. We privilege those perspectives either because they have social status or because, in the case of the consumers, they have buying power and thus they command the attention of the media. So if it is serial killer stories, maybe the critics call it too lowbrow and talk about the decline of our society. If it is atonal music, it gets labeled as too inaccessible or too highbrow or it is claimed that the academic composers are perverse and self-indulgent. Most cultural criticism is staggering in how much it begs the question of what is the appropriate middle ground.
+-->
+
+<!-- ["Morningness-eveningness and educational outcomes: The lark has an advantage over the owl at high school"](http://dl.dropbox.com/u/85192141/2013-preckel.pdf), Preckel et al 2013:
+Individuals’ cognitive ability has been examined in a plethora of studies and has been
+shown to be one of the best single predictors of academic attainment (e.g., Deary, Strand,
+Smith, & Fernandes, 2007; Mayes, Calhoun, Bixler, & Zimmerman, 2009). Meta-analysis
+by Fraser, Walberg, Welch, and Hattie (1987) revealed a correlation of .71 between
+IQ and academic performance. In a more recent meta-analysis, Strenze (2007) found
+a corrected correlation between IQ and academic performance (GPA) of .56 (see also
+Kuncel, Hezlett, & Ones, 2004).
+Another well-investigated predictor of academic performance is conscientiousness,
+which represents one of the five factors of the Big Five model of personality (Goldberg,
+1993) and which is described by such traits as being reliable, hardworking, self-
+disciplined, and persevering. The link between academic performance and consci-
+entiousness has been examined in several studies (e.g., Furnham & Monsen, 2009;
+MacCann, Duckworth, & Roberts, 2009; Noftle & Robins, 2007; Preckel, Holling, & Vock,
+2006). In a recent meta-analysis (Poropat, 2009), conscientiousness was confirmed as
+the strongest Big Five predictor of academic performance, faring better in some samples
+than intelligence (corrected r = .22).
 -->
