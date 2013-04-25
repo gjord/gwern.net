@@ -93,12 +93,12 @@ Finally, for all products, I have collected several covariates which I thought m
     1. A *service* is anything primarily accessed through a web browser or API or the Internet; so Gmail or a browser loading fonts from a Google server, but not a Gmail notification program one runs on one's computer or a FLOSS font available for download & distribution.
     2. A *program* is anything which is an application, plugin, library, framework, or all of these combined; some are very small (Authenticator) and some are very large (Android). This does include programs which require Internet connections or Google APIs as well as programs for which the source code has not been released, so things in the program category are not immune to shut down and may be useful only as long as Google supports them.
     3. A *thing* is anything which is primarily a physical object. A cellphone or laptop running Android would be an example.
-    4. *Other* is the catch-all category for things which don't quite seem to fit. Where does a Google thinktank, charity, conference, or venture capital fund fit in? They certainly aren't software, but they don't seem to be quite services either.
+    4. *Other* is the catch-all category for things which don't quite seem to fit. Where does a Google think-tank, charity, conference, or venture capital fund fit in? They certainly aren't software, but they don't seem to be quite services either.
 - `Profit`: whether Google *directly* makes money off a product
 
     This is a tricky one. Google excuses many of its products by saying that anything which increases Internet usage benefits Google and so by this logic, every single one of its services could potentially increase profit; but this is a little stretched, the truth very hard to judge by an outsider, and one would expect that products without direct monetization are more likely to be killed.
 
-    Generally, I classify as for profit any Google product directly relating to producing/displaying advertising, paid subscriptions, fees, or purchases (Adwords, Gmail, Blogger, Search, shopping engines, surveys); but many do not seem to have any form of monetization related to them (Alerts, Office, Drive, Gears, Reader[^Reader-monetization]). Some services like Voice charge (for international calls) but the amounts are minor enough that one might wonder if classifying them as for profit is really right. While it might make sense to define every feature added to, say, Google Search (eg. Personalized Search, or Search History) as being 'for profit' since Search lucratively displays ads, I have chosen to classify these secondary features as being not for profit.
+    Generally, I classify as for profit any Google product directly relating to producing/displaying advertising, paid subscriptions, fees, or purchases (AdWords, Gmail, Blogger, Search, shopping engines, surveys); but many do not seem to have any form of monetization related to them (Alerts, Office, Drive, Gears, Reader[^Reader-monetization]). Some services like Voice charge (for international calls) but the amounts are minor enough that one might wonder if classifying them as for profit is really right. While it might make sense to define every feature added to, say, Google Search (eg. Personalized Search, or Search History) as being 'for profit' since Search lucratively displays ads, I have chosen to classify these secondary features as being not for profit.
 - `FLOSS`: whether the source code was released or Google otherwise made it possible for third parties to continue the service or maintain the application.
 
     Android, AngularJS, and Chrome are all examples of software products where Google losing interest would not be fatal; services spun off to third parties would also count. Many of the codebases rely on a proprietary Google API or service (especially the mobile applications), which means that this variable is not as meaningful and laudable as one might expect, so in the minority of cases where this variable is relevant, I code `Dead` & `Ended` as related to whether & when Google abandoned it, regardless of whether it was then picked up by third parties or not. (Example: App Inventor for Android is listed as dying in December 2011, though it was then half a year later handed over to MIT, who has supported it since.) It's important to not naively believe that simply because source code is available, Google support doesn't matter.
@@ -159,7 +159,7 @@ viewReads <- function(reads){
     #---
     # In the first iteration we work out the y-axis
     # positions that segments should be plotted on
-    # segments should be plotted on the next availible
+    # segments should be plotted on the next available
     # y position without merging with another segment
     #---
     yread <- c(); #keeps track of the x space that is used up by segments
@@ -178,7 +178,7 @@ viewReads <- function(reads){
         start <- read$Started;
         placed <- FALSE;
 
-        # iterate through yread to find the next availible
+        # iterate through yread to find the next available
         # y pos at this x pos (start)
         y <- 1;
         while(!placed){
@@ -569,16 +569,16 @@ What explains such a graph over time? The obvious candidate is the 4 April 2011 
 
 While some have [tried to disagree](http://thenextweb.com/google/2013/01/12/larry-page-did-well-to-ignore-steve-jobs/ "Larry Page ignored Steve Jobs's deathbed advice, and Google is doing great"), it's hard not to conclude that indeed, a wall of shut downs followed in late 2011 and 2012. But this sound very much like a one-time purge: if one has a new focus on focus (if you'll pardon the expression), then you may not be starting up as many services as before.
 
-Deadweight loss: in some of the more successful acquisitions, google's modus operandi was to take a paid or premium service and make it free. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Eart) charged money for their services (sometimes a great deal). this leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
+Deadweight loss: in some of the more successful acquisitions, Google's modus operandi was to take a paid or premium service and make it free. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Eart) charged money for their services (sometimes a great deal). this leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
 
-maybe blogger is not as doomed as I thought. it seems to e favored with g4etting exclusive access to quite a few otherwise shut down things, for example, Scribe, Friend Connect, it was the ground zero for google's Dynamic Views skin redesign, and google is still heavily using blogger for all the official announcements even into the google+ era
+maybe blogger is not as doomed as I thought. it seems to be favored with getting exclusive access to quite a few otherwise shut down things, for example, Scribe, Friend Connect, it was the ground zero for Google's Dynamic Views skin redesign, and google is still heavily using blogger for all the official announcements even into the google+ era
 
 
-> We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been cancelled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
+> We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been canceled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
 http://www.alltechienews.com/posts/google-fails-36-of-the-time
 
 interesting the patterns showing up in these shut downs.
-you can see the wall of shut downs when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
+you can see the wall of shut downs when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about Firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
 plus there are like 4 or 5 things which all got rolled into Docs+Drive
 
 18:51:02 < Kiba> focus, focus, focus
@@ -629,6 +629,16 @@ Alerts search for updates: `google ("shut down" OR "shutting" OR "closing" OR "k
 > But what I lament are the common bones \
 > unnamed in the records of Immortals.^[[Han-Shan](!Wikipedia "Hanshan (poet)"); #18 in _The Collected Songs of Cold Mountain_, Red Pine 2000, ISBN 1-55659-140-3]
 
+> "Show me the person who doesn't die - \
+> death remains impartial. \
+> I recall a towering man \
+> who is now a pile of dust. \
+> The World Below knows no dawn \
+> though plants enjoy another spring; \
+> those visiting this sorrowful place \
+> the pine wind slays with grief."^[Han-Shan, #50]
+
+> This is something that literature has always been very keen on, that technology never gets around to acknowledging. The cold wind moaning through the empty stone box. When are you gonna own up to it? Where are the Dell PCs? This is Austin, Texas. Michael Dell is the biggest tech mogul in central Texas. Why is he not here? Why is he not at least not selling his wares? Where are the dedicated gaming consoles you used to love? Do you remember how important those were? I could spend all day here just reciting the names of the causalities in your line of work. It's always the electronic frontier. Nobody ever goes back to look at the electronic forests that were cut down with chainsaws and tossed into the rivers. And then there's this empty pretense that these innovations make the world "better". This is a dangerous word. Like: "If we're not making the world better, then why are we doing this at all?" Now, I don't want to claim that this attitude is hypocritical. Because when you say a thing like that at South By: "Oh, we're here to make the world better" - you haven't even *reached* the level of hypocrisy. You're stuck at the level of childish naivete.^[[Bruce Sterling](!Wikipedia), ["Text of SXSW2013 closing remarks"](http://www.wired.com/beyond_the_beyond/2013/04/text-of-sxsw2013-closing-remarks-by-bruce-sterling/)]
 
 TODO: finished?
 - run `markdown-lint`
@@ -645,4 +655,5 @@ TODO: finished?
 Behavio's FunF http://www.sfgate.com/technology/businessinsider/article/Google-Just-Bought-A-Cool-SXSW-Startup-Behavio-4430716.php supposedly Google will continue it but it may be killed too quickly to count for this list
 "AdWords Pay Per Action",TRUE,2007-03-20,2008-08-31,144000,service,TRUE,FALSE,TRUE,FALSE
 "AdSense Referrals",TRUE,2007-04-05,2008-08-31,25000,service,TRUE,FALSE,FALSE,FALSE
+"Wavii",FALSE,2012-04-10,NA,111000,program,FALSE,FALSE,TRUE,TRUE
 -->
