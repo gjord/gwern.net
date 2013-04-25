@@ -1,6 +1,6 @@
 ---
 description: Misc thoughts, memories, proto-essays, musings, etc.
-tags: biology, psychology, experiments, NGE, anime, criticism, poetry, transhumanism, statistics, IQ,
+tags: biology, psychology, NGE, anime, criticism, poetry, transhumanism, statistics
 created: 05 Aug 2009
 status: in progress
 belief: possible
@@ -1068,7 +1068,7 @@ Here is a farm. It seems robust and eternal and sturdy. Nothing about this negle
 
 # Fermi calculations
 
-I really like [Fermi problems](!Wikipedia) - it's like [dimensional analysis](!Wikipedia) for everything outside of physics^[This is a little misleading; dimensional analysis is much more like [type-checking](!Wikipedia) a program in a language with a good type system like Haskell. Given certain data types as *inputs* and certain allowed transformations on those data types, what data types *must* be the resulting output? But the analogy is still useful.].
+I really like [Fermi problems](!Wikipedia) ([LessWrong](http://lesswrong.com/lw/h5e/fermi_estimates/)) - it's like [dimensional analysis](!Wikipedia) for everything outside of physics^[This is a little misleading; dimensional analysis is much more like [type-checking](!Wikipedia) a program in a language with a good type system like Haskell. Given certain data types as *inputs* and certain allowed transformations on those data types, what data types *must* be the resulting output? But the analogy is still useful.].
 
 Not only are they fun to think about, they can be amazingly accurate, and are extremely cheap to do - because they are so easy, you do them in all sorts of situations you wouldn't do a 'real' estimate for, and are a fun part of a [physics education](http://arxiv.org/abs/1109.1165). The common distaste for them baffles me; even if you never work through [_Street-Fighting Mathematics_](http://library.nu/docs/6SKBIYUCDP/Street-Fighting%20Mathematics%3A%20The%20Art%20of%20Educated%20Guessing%20and%20Opportunistic%20Problem%20Solving) or read [Douglas Hofstadter](!Wikipedia)'s essay ["On Number Numbness"](http://userwww.service.emory.edu/~dlinzer/Hofstadter-NumberNumbness.pdf) (collected in _[Metamagical Themas](!Wikipedia)_), it's something you can teach yourself by asking, what information is public available, what can I compare this too, how can I put various boundaries around the true answers^[eg. if someone asks you how many piano tuners there are in Chicago, don't look blank, start thinking! 'Well, there must be fewer than 7 billion, because the human race isn't made of piano tuners, and likewise fewer than 300 million (the population of the United States), and heck, Wikipedia says Chicago has only 2.6 million people and piano tuners are rare, so there must be many fewer than *that*...'] You especially want to do Fermi calculations in areas where the data is unavailable; I ponder these areas frequently:
 
@@ -1088,14 +1088,16 @@ Not only are they fun to think about, they can be amazingly accurate, and are ex
 - [how many times have video gamers killed Mario](http://www.reddit.com/r/estimation/comments/105okb/request_how_many_times_has_mario_died/)
 - is tiger skin [more profitable](http://www.reddit.com/r/WTF/comments/188zui/this_is_beyond_saddening_tigers_starved_to_make/c8cql4x) than tiger bone wine?
 - [plating Versailles with gold](http://slatestarcodex.com/2013/03/03/reactionary-philosophy-in-an-enormous-planet-sized-nutshell/#comment-544)
+- the [number of people killed by falling pianos](http://lesswrong.com/lw/h5e/fermi_estimates/8pts)
+- [the plausibility of](http://www.reddit.com/r/anime/comments/1cqtae/in_honor_of_kuronekos_birthday_my_favorite_scene/c9ja9a5) _[Oreimo](!Wikipedia)'s Kirino Kosaka character
 
-An entire ["estimation" subreddit](http://www.reddit.com/r/estimation/) is devoted to working through questions like these; it can be quite fun.
+An entire ["estimation" subreddit](http://www.reddit.com/r/estimation/) is devoted to working through questions like these (it can be quite fun), and of course, there are the memorable ["what if?"](http://what-if.xkcd.com/) _xkcd_ columns.
 
 [Timothy Gowers](!Wikipedia) suggests [a number of problems](https://gowers.wordpress.com/2012/06/08/how-should-mathematics-be-taught-to-non-mathematicians/ "How should mathematics be taught to non-mathematicians?") which might help children really learn how to think with & apply the math they learn.
 
-To look further afield, here's a quick and nifty application by investor John Hempton to the [Sino Forestry fraud](!Wikipedia "Sino-Forest Corporation#Fraud allegations and share suspension"): ["Risk management and sounding crazy"](http://brontecapital.blogspot.com/2011/09/risk-management-and-sounding-crazy.html).
+To look further afield, here's a quick and nifty application by investor John Hempton to the [Sino Forestry fraud](!Wikipedia "Sino-Forest Corporation#Fraud allegations and share suspension"): ["Risk management and sounding crazy"](http://brontecapital.blogspot.com/2011/09/risk-management-and-sounding-crazy.html). What I personally found most interesting about this post was not the overall theme that the whistleblowers were discounted before and after they were proven right (we see this in many bubbles, for example, the housing bubble), but how one could use a sort of [Outside View](http://wiki.lesswrong.com/wiki/Outside_view)/Fermi calculation to sanity-check the claims. If Sino Forestry was really causing 17m cubic meters of wood to be processed a year, where was all the processing? This simple question tells us a *lot*. With medicine, there is one simple question one can always ask too - where is the increased longevity? (This is an important question to ask of studies, such as a [recent caloric restriction study](http://aging.wisc.edu/pdfs/2297.pdf).)
 
-What I personally found most interesting about this post was not the overall theme that the whistleblowers were discounted before and after they were proven right (we see this in many bubbles, for example, the housing bubble), but how one could use a sort of [Outside View](http://wiki.lesswrong.com/wiki/Outside_view)/Fermi calculation to sanity-check the claims. If Sino Forestry was really causing 17m cubic meters of wood to be processed a year, where was all the processing? This simple question tells us a *lot*. With medicine, there is one simple question one can always ask too - where is the increased longevity? (This is an important question to ask of studies, such as a [recent caloric restriction study](http://aging.wisc.edu/pdfs/2297.pdf).) Simple questions tell us a lot.
+Simple questions and reasoning can tell us a lot.
 
 # Politicians are not unethical
 
@@ -1546,10 +1548,7 @@ Luke: That paragraph and its footnote is a rough draft from Anna on the Laplacia
 > Here are some famous examples of the kind of objections to the rule of succession which you find in the literature:
 >
 > 1. Suppose the solidification of hydrogen to have been once accomplished. According to the rule of succession, the probability that it will solidify again if the experiment is repeated is 2/3. This does not in the least represent the state of belief of any scientist.
-> 2. A boy 10 years old today. According to the rule of succession, he has the probability
-> 11/12 of living one more year. His grandfather is 70; and so according to this rule
-> he has the probability 71/72 of living one more year. The rule violates qualitative
-> common sense!
+> 2. A boy 10 years old today. According to the rule of succession, he has the probability 11/12 of living one more year. His grandfather is 70; and so according to this rule he has the probability 71/72 of living one more year. The rule violates qualitative common sense!
 > 3. Consider the case N = n = 0. It then says that any conjecture without verification has the probability 1/2. Thus there is probability 1/2 that there are exactly 137 elephants on Mars. Also there is probability 1/2 that there are 138 elephants on Mars. Therefore, it is certain that there are at least 137 elephants on Mars. But the rule says also that there is probability 1/2 that there are no elephants on Mars. The rule is logically self-contradictory!
 >
 > ...The trouble with examples (1) and (2) is obvious in view of our earlier remarks; in each case, highly relevant prior information, known to all of us, was simply ignored, producing a flagrant misuse of the rule of succession. But let's look a little more closely at example (3). Wasn't the rule applied correctly here? We certainly can't claim that we had prior information about elephants on Mars which was ignored.
