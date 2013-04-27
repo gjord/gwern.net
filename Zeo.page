@@ -1908,26 +1908,10 @@ The results look almost identical to before[^potassium-2-mp]:
       effSz      0.060755  0.06100  0.07764 -0.5064   0.6339    58.29
     ~~~
 
-(Curiously, playing around with the data, poor sleep quality seemed to correlate with higher mood/productivity ratings. I will have to investigate this further to see if it's a general phenomenon and what might explain it.[^sleep-does-not-equal-productivity])
-
-[^sleep-does-not-equal-productivity]: The inverse correlation comes as a surprise. I have a couple theories on what could be going on:
-
-    1. it could be an artifact and actually better sleep means better performance: I've always been concerned about the possibility of off-by-one errors in my data or analyses. If better sleep meant better performance (as one would naively suspect), and either sleep data or performance data was 'shifted' by one day, then you would observe the exact opposite.
-
-        One would have to carefully check the data and make sure every field is referring to the time it should. If a entry records 10hrs sleep for 3 February 2012, does that refer to sleep that *morning* which is necessary because you were awake during 2 February 2012, or does it refer to the sleep you engage in that *evening* (you go to bed at 11pm 3 February 2012 and that is the sleep data being used).
-    2. it could be that on productive days, you leap out of bed; but if you are depressed, unmotivated, apathetic, you might hang around in bed for a while after the alarm rings. Depressed people sometimes sleep more than regular people; for pretty much this reason, I'd guess.
-
-        This could be checked by looking at sleep quality indicators in the beginning or middle of the night. For example time to fall asleep (higher on more productive days in this sample), or percentage in deep sleep (mostly done towards the beginning and middle of a sleep; seemed to be lower for productive days). One could try to test the sluggard hypothesis: how much past an alarm one snoozed.
-    3. it's a temporary correlation of this time period, perhaps related to the potassium, perhaps not.
-
-        This is checkable just with more data. I have M/P ratings for the last 360 days or so, which ought to be enough to investigate the correlations. I just don't feel like figuring out how to enter them all.
-    4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](http://dl.dropboxusercontent.com/u/85192141/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl.
-
-    If it's not these, I don't have any suggestion on why it might be. Why would poor sleep either cause productivity or be caused by something that later also causes productivity?
-
 ### Conclusion
 
 A much higher-quality experiment with more favorable conditions for potassium showed a result consistent with some harm to my sleep, and no benefit. I will not continue using potassium.
+
 
 # In progress
 
@@ -3419,6 +3403,149 @@ Underpopulated data cells:
 - Reddit: [potassium discussion](http://www.reddit.com/r/Nootropics/comments/1578ly/does_potassium_hurt_anyone_elses_sleep/)
 
 # Appendix
+### Inverse correlation of sleep quality with productivity?
+
+Curiously, playing around with the full potassium data after the 2013 morning experiment, poor sleep quality seemed to correlate with higher mood/productivity ratings:
+
+~~~{.R}
+cor.test(pot$Disturbance, pot$MP)
+
+    Pearson's product-moment correlation
+
+data:  pot$Disturbance and pot$MP
+t = 1.224, df = 49, p-value = 0.2269
+alternative hypothesis: true correlation is not equal to 0
+95% confidence interval:
+ -0.1085  0.4275
+sample estimates:
+   cor
+0.1722
+~~~
+
+#### Hypotheses
+
+While not statistically-significant, this inverse correlation comes as a surprise and I thought worth thinking about more. I have a couple theories on what could be going on:
+
+1. it could be an artifact and actually better sleep means better performance: I've always been concerned about the possibility of off-by-one errors in my data or analyses. If better sleep meant better performance (as one would naively suspect), and either sleep data or performance data was 'shifted' by one day, then you would observe the exact opposite.
+
+    One would have to carefully check the data and make sure every field is referring to the time it should. If a entry records 10hrs sleep for 3 February 2012, does that refer to sleep that *morning* which is necessary because you were awake during 2 February 2012, or does it refer to the sleep you engage in that *evening* (you go to bed at 11pm 3 February 2012 and that is the sleep data being used).
+
+    This seems unlikely, since such an error should screw up all sorts of other analyses (for example such a flip ought to have claimed that potassium would help sleep, if days were being reversed).
+2. it could be that on productive days, you leap out of bed; but if you are depressed, unmotivated, apathetic, you might hang around in bed for a while after the alarm rings. Depressed people sometimes sleep more than regular people; for pretty much this reason, I'd guess.
+
+    This could be checked by looking at sleep quality indicators in the beginning or middle of the night. For example time to fall asleep (higher on more productive days in this sample), or percentage in deep sleep (mostly done towards the beginning and middle of a sleep; seemed to be lower for productive days). One could try to test the sluggard hypothesis: how much past an alarm one snoozed.
+3. it's a temporary correlation of this time period, perhaps related to the potassium, perhaps not.
+
+    This is testable: with more data, does the correlation shrink or go away?
+4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](http://dl.dropboxusercontent.com/u/85192141/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl. What does this imply?
+
+    We can do some back-of-the-envelope estimates. [Wikipedia](!Wikipedia "Depression (mood)") reports a very high depression incidence; we'll call it a 25% lifetime risk. But presumably the treatment only works if one is actually in a depressive episode, and while it's unclear what the distribution or length of depression period (as opposed to individual episodes) might be, it seems to be closer to years than months or decades, so we'll put it at ~3 years out of an adult lifespan of ~60 years or a per-year risk of $\frac{1}{20}=0.05$. On closer examination of Selvi et al 2006, the morning/evening split only appears with the total sleep deprivation procedure (morning types see their mood worsen, evening sees it improve) while with partial sleep deprivation both groups seem to see an improvement in their mood; since I rarely skip sleep entirely and such nights are dropped from the Zeo data, the total sleep deprivation results are irrelevant, but then my chronotype being evening doesn't matter. Finally, the sleep deprivation papers estimate <60% effectiveness in the depressed, so that knocks the possibility that both I am depressed and partial sleep deprivation helps me to <0.025. 2.5% is not a large possibility; and my vague speculation and a small inverse correlation do not seem like they would increase that possibility a *lot*.
+
+(If it's not these, I don't have any suggestion on why it might be. Why would poor sleep either cause productivity or be caused by something that later also causes productivity?)
+
+#### Analysis
+
+But before rashly assuming I am depressive or engaging in personally costly self-experiments like sleep deprivation, I decided on 26 April 2013 to check the correlation on a larger dataset.
+
+Typing up my full self-rating dataset of 416 days and cleaning up all the data[^inverse-data-preparation], I rechecked the correlation: _r_=0.066[^inverse-correlation] This is noticeably smaller (hence, less practically relevant) than the previous correlation, is also not statistically-significant, and shrinking is what one would expect from a spurious relationship.
+
+To be more sure, I reused some of the techniques from my [analysis of the effect of weather on my mood/productivity](Weather) (specifically, [ordinal](!Wikipedia "Ordered logit") [logistic regression](!Wikipedia)) and looked for a relationship; the result was similar, an odds which was inverse but close to no effect (1.057[^inverse-logistic-regression]). More importantly, when all the other variables are taken into account in the logistic regression, things change[^inverse-full-logistic-regression]: with other data to condition on, the inverse relationship of sleep quality with mood/productivity reverses and becomes the expected relationship (an increase in sleep disturbances predicts lower mood/productivity); many of the other variables turn out to be far stronger predictors (bigger odds); and some of the signs look odd (how can total sleep time predict increased mood/productivity, yet increasing all forms of sleep - REM/light/deep - predicts *decreased* mood/productivity‽). I attempted to construct a simpler model, which wound up ignoring any metric of sleep disturbance and ignoring all but 3 variables, and concluding that "Morning Feel" was the most important predictor[^inverse-simplified] - which makes a lot of sense to me, and confirms my previous experiments' focusing on the "Morning Feel" variable.
+
+Given this weakening and in the absence of any corroborating information, I consider it highly unlikely that the original correlation is reflecting an anti-depressant effect due to sleep deprivation. A followup in a few years may be warranted to see if a larger still dataset will shrink the correlation closer to zero.
+
+[^inverse-data-preparation]: The exact processing steps, for those curious:
+
+    ~~~{.R}
+    zeo <- read.csv("~/wiki/docs/gwern-zeodata.csv")
+    zeo$Sleep.Date <- as.Date(zeo$Sleep.Date, format="%m/%d/%Y")
+    mp <- read.csv("mp.csv", colClasses=c("Date","factor"))
+    zeo$MP <- ordered(mp[mp$Date %in% zeo$Sleep.Date,]$MP)
+    zeo$Disturbance <- scale(zeo$Time.to.Z) + scale(zeo$Awakenings) + scale(zeo$Time.in.Wake)
+    zeo <- zeo[!is.na(zeo$Disturbance) & !is.na(zeo$Morning.Feel),]
+    ~~~
+[^inverse-correlation]: Load & correlate:
+
+    ~~~{.R}
+    zeo <- read.csv("http://www.gwern.net/docs/2013-gwern-sleepdisturbances-productivity.csv")
+    cor.test(zeo$Disturbance, as.integer(zeo$MP))
+
+        Pearson's product-moment correlation
+
+    data:  zeo$Disturbance and as.integer(zeo$MP)
+    t = 1.344, df = 414, p-value = 0.1798
+    alternative hypothesis: true correlation is not equal to 0
+    95 percent confidence interval:
+     -0.03045  0.16102
+    sample estimates:
+        cor
+    0.06589
+    ~~~
+[^inverse-logistic-regression]: We regress a continuous predictor onto a categorical outcome:
+
+    ~~~{.R}
+    # turn into an ordinal variable
+    zeo$MP <- ordered(zeo$MP)
+
+    library(MASS)
+    lmodel <- polr(MP ~ Disturbance, data = zeo); summary(lmodel)
+    ...
+    Coefficients:
+                 Value Std. Error t value
+    Disturbance 0.0553     0.0429    1.29
+
+    Intercepts:
+        Value  Std. Error t value
+    1|2 -4.413  0.450     -9.808
+    2|3 -0.990  0.110     -8.965
+    3|4  1.101  0.113      9.711
+
+    Residual Deviance: 915.66
+    AIC: 923.66
+
+    exp(lmodel$coefficients)
+    Disturbance
+           1.057
+    ~~~
+[^inverse-full-logistic-regression]: Try out more variables:
+
+    ~~~{.R}
+    almodel <- polr(MP ~ Disturbance + ZQ + Total.Z + Time.to.Z + Time.in.Wake + Time.in.REM +
+                         Time.in.Light + Time.in.Deep + Awakenings + Morning.Feel, data = zeo); almodel
+
+    Coefficients:
+      Disturbance            ZQ       Total.Z     Time.to.Z  Time.in.Wake   Time.in.REM Time.in.Light
+        -0.431623     -0.276236      0.307941      0.045819      0.003266     -0.246901     -0.272593
+     Time.in.Deep  Morning.Feel
+        -0.227003      0.205541
+
+    Intercepts:
+        1|2     2|3     3|4
+    -2.9105  0.5465  2.6902
+
+    Residual Deviance: 903.01
+    AIC: 927.01
+    ~~~
+[^inverse-simplified]: Reduced by cutting out extraneous variables using [stepwise regression](!Wikipedia):
+
+    ~~~{.R}
+    salmodel <- step(almodel); summary(salmodel)
+    ...
+    Coefficients:
+                   Value Std. Error t value
+    Time.to.Z     0.0163    0.00713    2.29
+    Time.in.Deep -0.0152    0.00823   -1.85
+    Morning.Feel  0.1906    0.12683    1.50
+
+    Intercepts:
+        Value  Std. Error t value
+    1|2 -4.457  0.785     -5.675
+    2|3 -1.011  0.649     -1.557
+    3|4  1.113  0.649      1.713
+
+    Residual Deviance: 907.60
+    AIC: 919.60
+    ~~~
+
 ## SDr lucid dreaming: exploratory data analysis
 
 <!-- TODO: update with https://docs.google.com/spreadsheet/ccc?key=0Ao3RpZe396VZdE5udDB0S1dqcFpPY0o2Sk5LVkNvX0E#gid=0   now has an additional 60+ datapoints -->
