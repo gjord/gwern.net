@@ -1854,35 +1854,29 @@ Running the analysis the same way as before, we get a small increase in sleep di
 
     ~~~{.R}
     pot <- read.csv("http://www.gwern.net/docs/2013-gwern-potassium-morning.csv")
-    on <- pot[pot$Potassium==1,]
-    off <- pot[pot$Potassium==0,]
 
-    zscore <- function(x,y) mapply(function(a) (a - mean(y))/sd(y), x)
-    offlatency <- zscore(off$Time.to.Z, c(off$Time.to.Z, on$Time.to.Z))
-    onlatency  <- zscore(on$Time.to.Z,  c(off$Time.to.Z, on$Time.to.Z))
-    offawakenings <- zscore(off$Time.to.Z, c(off$Time.to.Z, on$Time.to.Z))
-    onawakenings  <- zscore(on$Awakenings,  c(off$Awakenings, on$Awakenings))
-    offtimeawake <- zscore(off$Time.in.Wake, c(off$Time.in.Wake, on$Time.in.Wake))
-    ontimeawake <- zscore(on$Time.in.Wake, c(off$Time.in.Wake, on$Time.in.Wake))
+    # standardize & combine into a single equally-weighted synthetic index z-score
+    pot$Disturbance <- scale(pot$Time.to.Z) + scale(pot$Awakenings) + scale(pot$Time.in.Wake)
 
-    off <- offlatency + offawakenings + offtimeawake
-    on <- onlatency + onawakenings + ontimeawake
+    on  <- pot[pot$Potassium==1,]$Disturbance
+    off <- pot[pot$Potassium==0,]$Disturbance
 
     source("BEST.R")
     mcmcChain = BESTmcmc(off, on)
     postInfo = BESTplot(off, on, mcmcChain) # graph
     postInfo
-                   SUMMARY.INFO
+
+               SUMMARY.INFO
     PARAMETER      mean   median     mode  HDIlow HDIhigh pcgtZero
-      mu1        0.0686  0.06179  0.07386 -0.9530  1.1036       NA
-      mu2       -0.2906 -0.29584 -0.30774 -1.1425  0.5691       NA
-      muDiff     0.3592  0.35697  0.37294 -0.9434  1.6661    70.83
-      sigma1     2.5016  2.47962  2.43753  1.5926  3.4139       NA
-      sigma2     1.8967  1.86904  1.82462  1.1880  2.6799       NA
-      sigmaDiff  0.6049  0.59694  0.59576 -0.4401  1.6722    88.16
-      nu        27.7825 18.51970  5.28480  1.1481 83.4955       NA
-      nuLog10    1.2503  1.26763  1.36215  0.4393  2.0239       NA
-      effSz      0.1623  0.16223  0.14897 -0.4224  0.7439    70.83
+      mu1        0.1329  0.13224  0.11468 -0.6505  0.9203       NA
+      mu2       -0.2626 -0.26479 -0.22430 -1.1154  0.5966       NA
+      muDiff     0.3956  0.39838  0.37996 -0.7724  1.5327    75.39
+      sigma1     1.9961  1.96663  1.89699  1.3978  2.6302       NA
+      sigma2     1.9403  1.90682  1.86314  1.2797  2.6697       NA
+      sigmaDiff  0.0558  0.06166  0.04212 -0.8615  0.9499    55.85
+      nu        33.0593 24.28680  9.49415  1.7036 90.8230       NA
+      nuLog10    1.3674  1.38537  1.47058  0.6392  2.0655       NA
+      effSz      0.2054  0.20334  0.18368 -0.3619  0.8119    75.39
     ~~~
 
 I suspect there really is an underlying causal effect: the first experiment indicated a large increase in sleep disturbances, and a much smaller one is in line with my expectations of the effect of a smaller standardized dose first thing upon waking.
@@ -1895,11 +1889,9 @@ The results look almost identical to before[^potassium-2-mp]:
 
 ![](/images/zeo/potassium-morning-mp.png)
 
-[^potassium-2-mp]: `pot` defined and BEST loaded in previous analysis:
+[^potassium-2-mp]: `on`/`off` defined and BEST loaded in previous analysis:
 
     ~~~{.R}
-    on <- pot[pot$Potassium==1,]
-    off <- pot[pot$Potassium==0,]
     mcmcChain = BESTmcmc(off$MP, on$MP)
     postInfo = BESTplot(off$MP, on$MP, mcmcChain) # graph
     postInfo
@@ -1929,6 +1921,7 @@ The results look almost identical to before[^potassium-2-mp]:
     3. it's a temporary correlation of this time period, perhaps related to the potassium, perhaps not.
 
         This is checkable just with more data. I have M/P ratings for the last 360 days or so, which ought to be enough to investigate the correlations. I just don't feel like figuring out how to enter them all.
+    4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](http://dl.dropboxusercontent.com/u/85192141/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl.
 
     If it's not these, I don't have any suggestion on why it might be. Why would poor sleep either cause productivity or be caused by something that later also causes productivity?
 
@@ -2683,6 +2676,41 @@ March
 20: 3
 21: 3/1500
 22: 3
+23: 3
+24: 4
+25: 4
+26: 3
+27: 3
+28: 3
+29: 3
+30: 2/4000
+31: 3
+April 2013
+01: 2
+02: 2/3000
+03: 3/3000
+04: 3
+05: 2
+06: 3/3000
+07: 2/3000
+08: 3
+09: 2/3000
+10: 3
+11: 3
+12: 2
+13: 2
+14: 3
+15: 3/3000
+15: 3/3000
+16: 4/3000
+17: 4/3000
+18: 3
+19: 2/3000
+20: 2/3000
+22: 3
+23: 2/3000
+24: 3/3000
+25: 2
 -->
 
 <!-- Creativity 1-3
@@ -2907,6 +2935,41 @@ March
 20: 1
 21: 1
 22: 1
+23: 1
+24: 1
+25: 1
+26: 2
+27: 1
+28: 2
+29: 1
+30: 1
+31: 1
+April 2013
+01: 1
+02: 1
+03: 2
+04: 1
+05: 1
+06: 1
+07: 1
+08: 2
+09: 1
+10: 2
+11: 1
+12: 1
+13: 1
+14: 1
+15: 1
+16: 1
+17: 2
+18: 1
+19: 1
+20: 1
+21: 1
+22: 1
+23: 1
+24: 1
+25: 1
 -->
 
 <!--
@@ -3335,13 +3398,14 @@ April 2013
 21: 0 1
 22: 1 1
 23: 1 0
-24: 1 1?
+24: 0 0
+25: 1 1?
 
 Underpopulated data cells:
 76: 1 0
 76: 1 1
 88: 0 1
-88: 0 0
+89: 0 0
 -->
 
 # External links
@@ -3812,3 +3876,5 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 22 Apr 2013: on -->
 <!-- Redshift: 23 Apr 2013: on -->
 <!-- Redshift: 24 Apr 2013: off -->
+<!-- Redshift: 25 Apr 2013: on -->
+<!-- Redshift: 26 Apr 2013: off -->
