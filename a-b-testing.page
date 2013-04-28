@@ -42,9 +42,10 @@ belief: possible
 
 - test the suggestions in https://code.google.com/p/better-web-readability-project/ http://www.vcarrer.com/2009/05/how-we-read-on-web-and-how-can-we.html
 - notes: choose high significance levels! I can afford them and I want long-term results
+- check how much AdSense is turning off readers and reducing reading. If it's damaging reader engagement substantially, maybe I can't afford to disable AdSense immediately, but I can remember that for when I *can* do so.
 
 # Testing
-## Max-width
+## `max-width`
 
 CSS-3 property: set how wide the page will be in pixels if unlimited screen real estate is available. I noticed some people complained that pages were 'too wide' and this made it hard to read, which apparently is a real thing since lines are supposed to fit in eye saccades. So I tossed in 800px, 900px, 1300px, and 1400px to the first A/B test.
 
@@ -252,7 +253,32 @@ Width (px) Visits Conversion
 
 ## Fonts
 
-The _New York Times_ ran [an informal online experiment](http://opinionator.blogs.nytimes.com/2012/08/08/hear-all-ye-people-hearken-o-earth/ "Hear, All Ye People; Hearken, O Earth (Part One)") with a large number of readers (_n_=60750) and found that the [Baskerville](!Wikipedia) font led to more readers agreeing with a short text passage - this seems plausible enough given their very large sample size and Wikipedia's note that "The refined feeling of the typeface makes it an excellent choice to convey dignity and tradition." Does this work on `gwern.net` too? Let's see. The sample size is quite manageable, as over a month I will easily have 60k visits, and they tested 6 fonts, expanding their necessary sample. I had previously drawn on the NYT experiment for my site design:
+The _New York Times_ ran [an informal online experiment](http://opinionator.blogs.nytimes.com/2012/08/08/hear-all-ye-people-hearken-o-earth/ "Hear, All Ye People; Hearken, O Earth (Part One)") with a large number of readers (_n_=60750) and found that the [Baskerville](!Wikipedia) font led to more readers agreeing with a short text passage - this seems plausible enough given their very large sample size and Wikipedia's note that "The refined feeling of the typeface makes it an excellent choice to convey dignity and tradition."
+
+### Power analysis
+
+Would this font work its magic on `gwern.net` too? Let's see. The sample size is quite manageable, as over a month I will easily have 60k visits, and they tested 6 fonts, expanding their necessary sample. What sample size do I actually need? Their professor estimates the effect size of Baskerville at 1.5%; I would like my A/B test to have very high statistical power (0.9) and reach more stringent statistical-significance (_p_<0.01) so I can go around and in good conscience tell people to use Baskerville. I already know the average "conversion rate" is ~13%, so I get this power calculation:
+
+~~~{.R}
+power.prop.test(p1=0.13+0.015, p2=0.13, power=0.90, sig.level=0.01)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 15683
+             p1 = 0.145
+             p2 = 0.13
+      sig.level = 0.01
+          power = 0.9
+    alternative = two.sided
+
+ NOTE: n is number in *each* group
+~~~
+
+15000 visitors in each group seems reasonable; at ~16k visitors a week, that suggests a few weeks of testing. Of course I'm testing 4 fonts (see below), but that still fits in the ~2 months I've allotted for this test.
+
+### Implementation
+
+I had previously drawn on the NYT experiment for my site design:
 
 ~~~{.Css}
 html {
@@ -293,5 +319,7 @@ hunk ./static/templates/default.html 121
 +      }
 +      ],
 ~~~
+
+### Results
 
 TODO: ping with results http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8our?context=1#8our
