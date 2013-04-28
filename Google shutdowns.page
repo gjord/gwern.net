@@ -42,9 +42,9 @@ The shut down of the popular service [Google Reader](!Wikipedia), announced on [
 
     The sign story is confirmed by another Googler; ["Google Reader lived on borrowed time: creator Chris Wetherell reflects"](http://gigaom.com/2013/03/13/chris-wetherll-google-reader/):
 
-    > "When they replaced sharing with +1 on Google Reader, it was clear that this day was going to come," he said. Wetherell, 43, is amazed that Reader has lasted this long. Even before the project saw the light of the day, Google executives were unsure about the service and it was through sheer perseverance that it squeaked out into the market. At one point, the management team threatened to cancel the project even before it saw the light of the day, if there was a delay. "We had a sign that said, '*days since cancellation*' and it was there from the very beginning," added a very sanguine Wetherell. My translation: Google never really believed in the project. Google Reader started in 2005 at what was really the golden age of RSS, blogging systems and a new content ecosystem. The big kahuna at that time was Bloglines (acquired by Ask.com) and Google Reader was an upstart.
+    > "When they replaced sharing with +1 on Google Reader, it was clear that this day was going to come", he said. Wetherell, 43, is amazed that Reader has lasted this long. Even before the project saw the light of the day, Google executives were unsure about the service and it was through sheer perseverance that it squeaked out into the market. At one point, the management team threatened to cancel the project even before it saw the light of the day, if there was a delay. "We had a sign that said, '*days since cancellation*' and it was there from the very beginning", added a very sanguine Wetherell. My translation: Google never really believed in the project. Google Reader started in 2005 at what was really the golden age of RSS, blogging systems and a new content ecosystem. The big kahuna at that time was [Bloglines](!Wikipedia) (acquired by [Ask.com](!Wikipedia)) and Google Reader was an upstart.
 
-    Jason Scott in 2009 reminded us that this lack of transparency is completely predictable: "Since the dawn of time, companies have hired people whose entire job is to tell you everything is all right and you can completely trust them and the company is as stable as a rock, and to do so until they, themselves are fired because the company is out of business."
+    Jason Scott in 2009 reminded us that this lack of transparency is completely predictable: "Since the dawn of time, companies have hired people whose entire job is to tell you everything is all right and you can completely trust them and the company is as stable as a rock, and to do so until they, themselves, are fired because the company is out of business."
 [^Reader-popularity]: The official PR release stated that too little usage was the reason Reader was being abandoned. Whether this is the genuine reason has been questioned by third parties, who observe that Reader seems to [drive far more traffic](http://www.buzzfeed.com/jwherrman/google-reader-still-sends-far-more-traffic-than-google) than another service which Google has yet to ax, Google+; that one app had [>2m users who also had Reader accounts](http://allthingsd.com/20130324/another-reason-google-reader-died-increased-concern-about-privacy-and-compliance/); that just one alternative to Reader (Feedly) had in excess of [3 million signups post-announcement](http://blog.feedly.com/2013/04/02/announcing-the-new-feedly-mobile-and-welcoming-3-million-reader-refugees/); and the largest of several petitions to Google reached [148k](https://www.change.org/petitions/google-keep-google-reader-running) signatures. Given that few users will sign up at Feedly specifically, sign a petition, visit the BuzzFeed network, or use the apps in question, it seems likely that Reader had closer to 20m users than 2m users when its closure was announced.
 
 In the case of Reader, while Reader destroyed the original RSS reader market, there still exist some usable alternatives; the main damage is a shrinkage in the RSS audience as inevitably many users choose not to invest in a new reader or give up, and an irreversible loss of Reader's uniquely comprehensive RSS archives covering back to 2005.
@@ -104,7 +104,7 @@ Finally, for all products, I have collected several covariates which I thought m
     Android, AngularJS, and Chrome are all examples of software products where Google losing interest would not be fatal; services spun off to third parties would also count. Many of the codebases rely on a proprietary Google API or service (especially the mobile applications), which means that this variable is not as meaningful and laudable as one might expect, so in the minority of cases where this variable is relevant, I code `Dead` & `Ended` as related to whether & when Google abandoned it, regardless of whether it was then picked up by third parties or not. (Example: App Inventor for Android is listed as dying in December 2011, though it was then half a year later handed over to MIT, who has supported it since.) It's important to not naively believe that simply because source code is available, Google support doesn't matter.
 - `Acquisition`: whether it was related to a purchase of a company or licensing, or internally developed.
 
-    Many startups have been bought (DoubleClick, Dodgeball, Android, Picasa), or technologies/data licensed (SYSTRAN for Translate, Twitter data for Real-Time Search). If a closely related product is developed and released after purchase, like a mobile application, I do not class it as an acquisition; just products that were in existence when the company was purchased. I do not include products that Google dropped immediately on purchase (Apture, fflick, Sparrow, Reqwireless, PeakStream) or where products based on them have not been released (BumpTop).
+    Many startups have been bought (DoubleClick, Dodgeball, Android, Picasa), or technologies/data licensed (SYSTRAN for Translate, Twitter data for Real-Time Search). If a closely related product is developed and released after purchase, like a mobile application, I do not class it as an acquisition; just products that were in existence when the company was purchased. I do not include products that Google dropped immediately on purchase (Apture, fflick, Sparrow, Reqwireless, PeakStream, Wavii) or where products based on them have not been released (BumpTop).
 
 [^Reader-monetization]: Some have justified Reader's shut down as simply a rational act, since Reader was not bringing in any money and Google is not a charity. The truth seems to be related more to Google's lack of interest since the start - it's hard to see how Google could possibly be able to monetize Gmail and not also monetize Reader, which is confirmed by two involved Googlers (from "Google Reader lived on borrowed time: creator Chris Wetherell reflects"):
 
@@ -119,12 +119,12 @@ Finally, for all products, I have collected several covariates which I thought m
 
 
 ~~~{.R}
-google <- read.csv("wiki/docs/2013-google.csv", colClasses=c("character","logical","Date","Date",
-                                                             "double","factor","logical","logical",
-                                                             "logical","logical"))
-# if no end-date is listed, use today, since we know not what the morrow brings; and
-# sufficient unto the user is the evil of the day
-google$Ended[is.na(google$Ended)] <- as.Date(Sys.Date())
+google <- read.csv("http://www.gwern.net/docs/2013-google.csv", colClasses=c("character","logical","Date","Date",
+                                                                 "double","factor","logical","logical",
+                                                                 "logical","logical"))
+# if no end-date is listed, use end of data collection period, since we knew not what the morrow brings; and
+# sufficient unto the user was the evil of the day
+google$Ended[is.na(google$Ended)] <- as.Date("2013-04-01")
 # infer lifetimes
 google$Days <- as.integer(google$Ended - google$Started)
 # data looks clean, although Hits spans such a huge magnitude we'll log-transform it when we use it
@@ -143,7 +143,7 @@ summary(google[-1])
  FALSE:17        FALSE:21
  TRUE :10        TRUE :6
  NA's :272       NA's :272
-plot(dead$Ended ~ dead$Started, xlab="Opened", ylab="Shut down")
+plot(google$Ended ~ google$Started, xlab="Opened", ylab="Shut down")
 ~~~
 
 ![A scatterplot of openings vs closings](http://i.imgur.com/Zt5vAw3.png)
@@ -223,40 +223,37 @@ viewReads <- function(reads){
 
 Since we're predicting a binary outcome (a product living or dying), we need a [logistic regression](!Wikipedia).
 
-
-summary(glm(Dead ~ Type * Days * Profit * FLOSS * Acquisition * Social, data=google[-1],family="binomial"))
-step(glm(Dead ~ Type * Days * Profit * FLOSS * Acquisition * Social, data=google[-1],family="binomial"))
-
-summary(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social + log(Hits), data=google,family="binomial"))
+~~~{.R}
+summary(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social + log(Hits), data=google, family="binomial"))
 ...
 Deviance Residuals:
    Min      1Q  Median      3Q     Max
--1.772  -0.914  -0.616   1.109   2.674
+-1.776  -0.911  -0.618   1.106   2.675
 
 Coefficients:
                 Estimate Std. Error z value Pr(>|z|)
-(Intercept)       2.3953     1.0676    2.24    0.025
-Typeprogram       0.9353     0.8180    1.14    0.253
-Typeservice       1.2271     0.7893    1.55    0.120
-Typething         0.8737     1.1613    0.75    0.452
-ProfitTRUE       -0.3833     0.2951   -1.30    0.194
-FLOSSTRUE        -0.1481     0.3803   -0.39    0.697
-AcquisitionTRUE   0.4893     0.3433    1.43    0.154
-SocialTRUE        0.7832     0.3887    2.02    0.044
-log(Hits)        -0.3090     0.0567   -5.45    5e-08
+(Intercept)       2.3968     1.0680    2.24    0.025
+Typeprogram       0.9248     0.8181    1.13    0.258
+Typeservice       1.2261     0.7894    1.55    0.120
+Typething         0.8805     1.1617    0.76    0.448
+ProfitTRUE       -0.3857     0.2952   -1.31    0.191
+FLOSSTRUE        -0.1777     0.3791   -0.47    0.639
+AcquisitionTRUE   0.4955     0.3434    1.44    0.149
+SocialTRUE        0.7866     0.3888    2.02    0.043
+log(Hits)        -0.3089     0.0567   -5.45  5.1e-08
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 452.96  on 348  degrees of freedom
-Residual deviance: 402.14  on 340  degrees of freedom
-AIC: 420.1
+    Null deviance: 453.83  on 349  degrees of freedom
+Residual deviance: 402.96  on 341  degrees of freedom
+AIC: 421
 ~~~
 
 So, we can say that:
 
 - Google has a past history of screwing up social and then killing them
 
-    This seems useless for predicting since Page got obsessed with social in 2009, and we might expect anything to do with "social" will now either be merged into Google+ or otherwise be kept on life support far longer than before
+    This seems useless for predicting since Larry Page got obsessed with social in 2009, and we might expect anything to do with "social" will now either be merged into Google+ or otherwise be kept on life support far longer than before
 - Google is deprecating software products in favor of web services
 
     This should have been obvious to anyone watching - a lot of Google's efforts with Firefox and then Chromium was for improving web browsers as a platform for delivering applications.
@@ -267,27 +264,25 @@ So, we can say that:
 
     Likewise obvious... or is it? All this data has been collected after the fact, sometimes many years; what if the data have been contaminated by the fact that something shut down? For example, by a burst of publicity about an obscure service shutting down? (Ironically, this page is contributing to the inflation of hits for any dead service mentioned.) Are we just seeing [leakage](http://www.cs.umb.edu/~ding/history/470_670_fall_2011/papers/cs670_Tran_PreferredPaper_LeakingInDataMining.pdf "'Leakage in Data Mining: Formulation, Detection, and Avoidance', Kaufman et al 2011")?
 
-
 Investigating further, hits by themselves do matter:
 
 ~~~{.R}
-
 summary(glm(Dead ~ log(Hits), data=google,family="binomial"))
 ...
 Deviance Residuals:
    Min      1Q  Median      3Q     Max
--1.491  -0.934  -0.653   1.160   2.540
+-1.487  -0.934  -0.656   1.163   2.539
 
 Coefficients:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)   3.4221     0.7305    4.68  2.8e-06
-log(Hits)    -0.3008     0.0549   -5.48  4.3e-08
+(Intercept)   3.4052     0.7302    4.66  3.1e-06
+log(Hits)    -0.3000     0.0549   -5.46  4.7e-08
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 452.96  on 348  degrees of freedom
-Residual deviance: 416.61  on 347  degrees of freedom
-AIC: 420.6
+    Null deviance: 453.83  on 349  degrees of freedom
+Residual deviance: 417.69  on 348  degrees of freedom
+AIC: 421.7
 ~~~
 
 Ideally we would have Google hits from the day before a product was officially killed, but the past is, alas, no longer accessible to us, and we only have hits from searches I conducted 1-5 April 2013.
@@ -366,17 +361,16 @@ TRUE      8  115     0.06504
 google$AvgHits <- google$Hits / as.integer(Sys.Date() - google$Started)
 summary(glm(Dead ~ log(Hits) + log(AvgHits), data=google,family="binomial"))
 ...
-Coefficients:
              Estimate Std. Error z value Pr(>|z|)
-(Intercept)    -2.157      1.559   -1.38    0.166
-log(Hits)       0.495      0.206    2.41    0.016
-log(AvgHits)   -0.837      0.213   -3.93  8.4e-05
+(Intercept)    -2.291      1.585   -1.45    0.148
+log(Hits)       0.510      0.209    2.44    0.015
+log(AvgHits)   -0.852      0.216   -3.93  8.4e-05
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 452.96  on 348  degrees of freedom
-Residual deviance: 398.16  on 346  degrees of freedom
-AIC: 404.2
+    Null deviance: 453.83  on 349  degrees of freedom
+Residual deviance: 399.42  on 347  degrees of freedom
+AIC: 405.4
 ~~~
 
 This is more than a little strange; the higher the average hits, the less likely to be killed makes perfect sense but then, surely the higher the hits, the less likely as well? But no.
@@ -386,7 +380,7 @@ What about the growth objection? We can estimate the size of Google's index at a
 We'll deflate the hits by first estimating the size of the index by fitting an exponential to the rare public reports and third-party estimates of the size of the Google index:
 
 ~~~{.R}
-index <- read.csv("wiki/docs/2013-google-index.csv", colClasses=c("Date","double","character"))
+index <- read.csv("http://www.gwern.net/docs/2013-google-index.csv", colClasses=c("Date","double","character"))
 # an exponential doesn't fit too badly:
 model1 <- lm(log(Size) ~ Date, data=index); summary(model1)
 
@@ -397,7 +391,7 @@ abline(model1)
 
 http://i.imgur.com/tv1LyaA.png
 
-It fits reasonably well. A sigmoid might work a bit better, but maybe not, given the large disagreements towards the end.
+It fits reasonably well. (A sigmoid might fit better, but maybe not, given the large disagreements towards the end.)
 
 Then we can divide total hits for a property by the total estimated size of the Google index when that property started
 
@@ -405,18 +399,22 @@ Then we can divide total hits for a property by the total estimated size of the 
 google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
 summary(glm(Dead ~ log(Hits) + log(AvgHits) + log(DeflatedHits), data=google,family="binomial"))
 ...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.711  -0.920  -0.567   1.053   2.601
+
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)        -20.707     11.667   -1.77   0.0759
-log(Hits)            1.972      0.953    2.07   0.0385
-log(AvgHits)        -1.853      0.686   -2.70   0.0069
-log(DeflatedHits)   -0.442      0.273   -1.62   0.1050
+(Intercept)        -21.525     11.939   -1.80   0.0714
+log(Hits)            2.048      0.979    2.09   0.0364
+log(AvgHits)        -1.916      0.707   -2.71   0.0067
+log(DeflatedHits)   -0.455      0.277   -1.64   0.1007
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 452.96  on 348  degrees of freedom
-Residual deviance: 395.23  on 345  degrees of freedom
-AIC: 403.2
+    Null deviance: 453.83  on 349  degrees of freedom
+Residual deviance: 396.41  on 346  degrees of freedom
+AIC: 404.4
 ~~~
 
 Finally, let's combine the two strategies: deflate and then average.
@@ -427,34 +425,46 @@ google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date
 google$AvgDeflatedHits <- log(google$AvgHits) / log(google$DeflatedHits)
 summary(glm(Dead ~ log(Hits) + log(AvgHits) + log(DeflatedHits) + AvgDeflatedHits, data=google, family="binomial"))
 ...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.731  -0.924  -0.561   1.043   2.657
+
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)       -23.7689    12.1867   -1.95   0.0511
-log(Hits)           2.2056     0.9936    2.22   0.0264
-log(AvgHits)       -2.0244     0.7182   -2.82   0.0048
-log(DeflatedHits)  -0.5238     0.2870   -1.82   0.0680
-AvgDeflatedHits    -0.0644     0.0604   -1.07   0.2865
+(Intercept)       -24.6191    12.4528   -1.98   0.0480
+log(Hits)           2.2845     1.0187    2.24   0.0249
+log(AvgHits)       -2.0892     0.7392   -2.83   0.0047
+log(DeflatedHits)  -0.5370     0.2911   -1.84   0.0651
+AvgDeflatedHits    -0.0650     0.0605   -1.07   0.2824
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 452.96  on 348  degrees of freedom
-Residual deviance: 394.29  on 344  degrees of freedom
-AIC: 404.3
+    Null deviance: 453.83  on 349  degrees of freedom
+Residual deviance: 395.47  on 345  degrees of freedom
+AIC: 405.5
 ~~~
 
 If we toss in all the non-hits predictors and look for a reduced simpler model with reasonable fit, we get:
 
 ~~~{.R}
-summary(step(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social + log(Hits) + log(AvgHits) + log(DeflatedHits) + AvgDeflatedHits, data=google, family="binomial")))
+summary(step(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social +
+                  log(Hits) + log(AvgHits) + log(DeflatedHits) + AvgDeflatedHits,
+                 data=google, family="binomial")))
 ...
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)        -22.396     11.737   -1.91   0.0564
-AcquisitionTRUE      0.627      0.350    1.79   0.0734
-SocialTRUE           0.902      0.394    2.29   0.0220
-log(Hits)            2.117      0.957    2.21   0.0270
-log(AvgHits)        -1.996      0.690   -2.89   0.0038
-log(DeflatedHits)   -0.477      0.276   -1.73   0.0835
+(Intercept)        -23.274     12.017   -1.94   0.0528
+AcquisitionTRUE      0.631      0.350    1.80   0.0711
+SocialTRUE           0.907      0.394    2.30   0.0213
+log(Hits)            2.198      0.983    2.24   0.0254
+log(AvgHits)        -2.063      0.711   -2.90   0.0037
+log(DeflatedHits)   -0.491      0.280   -1.75   0.0797
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 453.83  on 349  degrees of freedom
+Residual deviance: 384.92  on 344  degrees of freedom
+AIC: 396.9
 ~~~
 
 Most of the predictors were removed as not helping a lot, 3 of the 4 hit variables survived (but not the both averaged & deflated hits, suggesting it wasn't adding much in combination), and we see two of the better predictors from earlier survived: whether something was an acquisition and whether it was social.
@@ -467,14 +477,71 @@ Normally, we would expect a sort of diagonal: services opened early on would be 
 
 ~~~{.R}
 library(survival)
-dead.surv <- survfit(Surv(google$Days) ~ google$Dead, conf.type="none")
+surv <- survfit(Surv(google$Days, google$Dead, type="right") ~ 1); surv
 
-Surv(google$Started, google$Days, google$Dead, type="right")
-surv <- survfit(Surv(as.integer(google$Started), google$Dead, type="right") ~ 1)
+records   n.max n.start  events  median 0.95LCL 0.95UCL
+    350     350     350     123    2824    2095      NA
+
 plot(surv, xlab="Days", ylab="Survival Probability")
+# http://i.imgur.com/qw518gg.png
+
+# see how the moderators help predict exchange death
+cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits), data = google)
+summary(cmodel)
+...
+  n= 350, number of events= 123
+
+                    coef exp(coef) se(coef)     z Pr(>|z|)
+AcquisitionTRUE    0.130     1.139    0.257  0.51    0.613
+FLOSSTRUE          0.141     1.151    0.293  0.48    0.630
+ProfitTRUE        -0.180     0.836    0.231 -0.78    0.438
+SocialTRUE         0.664     1.943    0.262  2.53    0.011
+Typeprogram        0.957     2.603    0.747  1.28    0.200
+Typeservice        1.291     3.638    0.725  1.78    0.075
+Typething          1.682     5.378    1.023  1.64    0.100
+log(DeflatedHits) -0.288     0.749    0.036 -8.01  1.2e-15
+
+                  exp(coef) exp(-coef) lower .95 upper .95
+AcquisitionTRUE       1.139      0.878     0.688     1.884
+FLOSSTRUE             1.151      0.868     0.648     2.045
+ProfitTRUE            0.836      1.197     0.531     1.315
+SocialTRUE            1.943      0.515     1.163     3.247
+Typeprogram           2.603      0.384     0.602    11.247
+Typeservice           3.637      0.275     0.878    15.064
+Typething             5.377      0.186     0.724    39.955
+log(DeflatedHits)     0.749      1.334     0.698     0.804
+
+Concordance= 0.726  (se = 0.028 )
+Rsquare= 0.227   (max possible= 0.974 )
+Likelihood ratio test= 90.1  on 8 df,   p=4.44e-16
+Wald test            = 79.5  on 8 df,   p=6.22e-14
+Score (logrank) test = 83.5  on 8 df,   p=9.77e-15
+
+# as before, the simplified model deletes most of the variables
+# as not contributing much to the produced r^2
+scmodel <- step(cmodel); summary(scmodel)
+...
+  n= 350, number of events= 123
+
+                     coef exp(coef) se(coef)     z Pr(>|z|)
+SocialTRUE         0.7277    2.0704   0.2368  3.07   0.0021
+log(DeflatedHits) -0.2908    0.7477   0.0352 -8.26   <2e-16
+
+                  exp(coef) exp(-coef) lower .95 upper .95
+SocialTRUE            2.070      0.483     1.302     3.293
+log(DeflatedHits)     0.748      1.338     0.698     0.801
+
+Concordance= 0.722  (se = 0.028 )
+Rsquare= 0.212   (max possible= 0.974 )
+Likelihood ratio test= 83.5  on 2 df,   p=0
+Wald test            = 75.6  on 2 df,   p=0
+Score (logrank) test = 75.6  on 2 df,   p=0
 ~~~
 
-http://i.imgur.com/GvYTH8x.png
+
+google.new<-data.frame(Social=c(FALSE,TRUE),Acquisition=c(FALSE,FALSE),FLOSS=c(FALSE,FALSE),Profit=c(FALSE,FALSE),Type=c("service","service"),DeflatedHits=c(100,100))
+plot(survfit(cmodel, newdata=google.new), xlab="Survival Time (Days)",
+     ylab="Survival Probability")
 
 ~~~{.R}
 library(randomForest)
@@ -539,13 +606,13 @@ chisq.test(table(months(dead$Ended)))
 data:  table(months(dead$Ended))
 X-squared = 38.52, df = 11, p-value = 6.4e-05
 
-Popularity help? doesn't look like it:
+# Popularity help? doesn't look like it:
 
 plot(dead$Days, log(dead$Hits))
 
 cor.test(dead$Days, log(dead$Hits))
 
-    Pearson's product-moment correlation
+    Pearson`s product-moment correlation
 
 data:  dead$Days and log(dead$Hits)
 t = 1.037, df = 93, p-value = 0.3025
@@ -581,13 +648,11 @@ interesting the patterns showing up in these shut downs.
 you can see the wall of shut downs when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about Firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
 plus there are like 4 or 5 things which all got rolled into Docs+Drive
 
-18:51:02 < Kiba> focus, focus, focus
-18:52:12 <@gwern> Kiba: not really. the docs+drive thing is just logical; the
-                  Firefox stuff is interesting and sorta ruthless competition;
-                  the YouTube-competitor and social media stuff are just failures
+> focus, focus, focus
+
+Not really. the docs+drive thing is just logical; the Firefox stuff is interesting and sorta ruthless competition; the YouTube-competitor and social media stuff are just failures.
 
 # Predictions
-
 
 TODO: lifespan predictions for: http://www.ats.ucla.edu/stat/r/examples/asa/asa_ch2_r.htm
     Google Alerts
@@ -655,5 +720,4 @@ TODO: finished?
 Behavio's FunF http://www.sfgate.com/technology/businessinsider/article/Google-Just-Bought-A-Cool-SXSW-Startup-Behavio-4430716.php supposedly Google will continue it but it may be killed too quickly to count for this list
 "AdWords Pay Per Action",TRUE,2007-03-20,2008-08-31,144000,service,TRUE,FALSE,TRUE,FALSE
 "AdSense Referrals",TRUE,2007-04-05,2008-08-31,25000,service,TRUE,FALSE,FALSE,FALSE
-"Wavii",FALSE,2012-04-10,NA,111000,program,FALSE,FALSE,TRUE,TRUE
 -->
