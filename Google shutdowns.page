@@ -7,7 +7,11 @@ status: in progress
 belief: likely
 ...
 
-> Annoyingly, Google has occasionally shutdown services I use. I collect data on >=350 Google products, and look for predictive variables. I find some, model shutdown patterns,  and make some predictions about future shutdowns.
+Google has occasionally shutdown services I use, and typically without any serious warning (here one day and gone the next); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the history destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on >=350 Google products and look for predictive variables. I find some, model shutdown patterns, and make some predictions about future shutdowns. Hopefully the results are interesting, useful, or both.
+
+# A glance back
+
+> This is something that literature has always been very keen on, that technology never gets around to acknowledging. The cold wind moaning through the empty stone box. When are you gonna own up to it? Where are the Dell PCs? This is Austin, Texas. Michael Dell is the biggest tech mogul in central Texas. Why is he not here? Why is he not at least not selling his wares? Where are the dedicated gaming consoles you used to love? Do you remember how important those were? I could spend all day here just reciting the names of the causalities in your line of work. It's always the electronic frontier. Nobody ever goes back to look at the electronic forests that were cut down with chainsaws and tossed into the rivers. And then there's this empty pretense that these innovations make the world "better"...Like: "If we're not making the world better, then why are we doing this at all?" Now, I don't want to claim that this attitude is hypocritical. Because when you say a thing like that at South By: "Oh, we're here to make the world better" - you haven't even *reached* the level of hypocrisy. You're stuck at the level of childish naivete.^[[Bruce Sterling](!Wikipedia), ["Text of SXSW2013 closing remarks"](http://www.wired.com/beyond_the_beyond/2013/04/text-of-sxsw2013-closing-remarks-by-bruce-sterling/)]
 
 The shutdown of the popular service [Google Reader](!Wikipedia), announced on [13 March 2013](http://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html), has brought home to many people that some products they rely on exist only at Google's sufferance: it provides the products for reasons that are difficult for outsiders to divine, may have little commitment to a product[^Reader-threats], may not include their users' best interests, may choose to withdraw the product at any time for any reason[^Reader-popularity] (especially since most of the products are services[^cloud-suckers] & not FLOSS, and may be too tightly coupled with the Google infrastructure[^unportable]), and users have no voice[^voice-utility] - [only exit](!Wikipedia "Exit, Voice, and Loyalty") as an option.
 
@@ -101,6 +105,8 @@ Finally, for all products, I have collected several covariates which I thought m
     Generally, I classify as for profit any Google product directly relating to producing/displaying advertising, paid subscriptions, fees, or purchases (AdWords, Gmail, Blogger, Search, shopping engines, surveys); but many do not seem to have any form of monetization related to them (Alerts, Office, Drive, Gears, Reader[^Reader-monetization]). Some services like Voice charge (for international calls) but the amounts are minor enough that one might wonder if classifying them as for profit is really right. While it might make sense to define every feature added to, say, Google Search (eg. Personalized Search, or Search History) as being 'for profit' since Search lucratively displays ads, I have chosen to classify these secondary features as being not for profit.
 - `FLOSS`: whether the source code was released or Google otherwise made it possible for third parties to continue the service or maintain the application.
 
+    > In the long run, the utility of all non-Free software approaches zero. All non-Free software is a dead end.^[[Mark Pilgrim](!Wikipedia), ["Freedom 0"](http://web.archive.org/web/20110726001925/http://diveintomark.org/archives/2004/05/14/freedom-0); ironically, Pilgrim (hired by Google in 2007) seems to be responsible for at least one of the entries being marked dead, Google's Doctype tech encyclopedia, since it disappeared around the time of his "infosuicide" and has not been resurrected - it was only *partially* FLOSS.]
+
     Android, AngularJS, and Chrome are all examples of software products where Google losing interest would not be fatal; services spun off to third parties would also count. Many of the codebases rely on a proprietary Google API or service (especially the mobile applications), which means that this variable is not as meaningful and laudable as one might expect, so in the minority of cases where this variable is relevant, I code `Dead` & `Ended` as related to whether & when Google abandoned it, regardless of whether it was then picked up by third parties or not. (Example: App Inventor for Android is listed as dying in December 2011, though it was then half a year later handed over to MIT, who has supported it since.) It's important to not naively believe that simply because source code is available, Google support doesn't matter.
 - `Acquisition`: whether it was related to a purchase of a company or licensing, or internally developed.
 
@@ -133,6 +139,16 @@ It fits reasonably well. (A sigmoid might fit better, but maybe not, given the l
 If a product has not ended, the end-date is defined as 01 April 2013 (which is when I stopped compiling products); then the total lifetime is simply the end-date minus the start-date.
 
 # Analysis
+
+> I spur my horse past ruins \
+> Ruins move a traveler's heart \
+> the old parapets high and low \
+> the ancient graves great and small \
+> the shuddering shadow of a tumbleweed \
+> the steady sound of giant trees. \
+> But what I lament are the common bones \
+> unnamed in the records of Immortals.^[[Han-Shan](!Wikipedia "Hanshan (poet)"); #18 in _The Collected Songs of Cold Mountain_, Red Pine 2000, ISBN 1-55659-140-3]
+
 ## Descriptive
 
 Loading up our hard-won data and looking at a summary, we can see we have a lot of data to look out
@@ -199,7 +215,7 @@ What explains such graphs over time? The obvious candidate is the 4 April 2011 a
 
 While some have [tried to disagree](http://thenextweb.com/google/2013/01/12/larry-page-did-well-to-ignore-steve-jobs/ "Larry Page ignored Steve Jobs's deathbed advice, and Google is doing great"), it's hard not to conclude that indeed, a wall of shutdowns followed in late 2011 and 2012. But this sound very much like a one-time purge: if one has a new focus on focus (if you'll pardon the expression), then you may not be starting up as many services as before.
 
-## Predicting
+## Modeling
 ### Logistic regression
 
 A first step in predicting when a product will be shutdown is predicting whether it will be shutdown. Since we're predicting a binary outcome (a product living or dying), we can use an ordinary [logistic regression](!Wikipedia). Our first look uses the main variables plus the total hits:
@@ -295,9 +311,9 @@ Most of the predictors were removed as not helping a lot, 3 of the 4 hit variabl
 
 The original hits variable has the wrong sign, as expected of data leakage; now the average and deflated hits have the predicted sign (the higher the hit count, the lower the risk of death), but this doesn't put to rest my concerns: the average hits has the right sign, yes, but now the effect size seems way too high - we reject the hits with a log-odds of +2.1 as obviously contaminated and a correlation almost 4 times larger than one of the known-good correlations (being an acquisition), but the average hits is -2 & almost as big a log odds! The only variable which seems trustworthy is the deflated hits: it has the right sign and is a more plausible 5x smaller. I'll use just the deflated hits variable (although I will keep in mind that I'm still not sure it is free from data leakage).
 
-## Survival curve
+### Survival curve
 
-The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might help. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/). The initial characterization gives us an optimistic median of 2824 days (note that this is much higher than Arthur's mean of 1459 days because it includes products which were never canceled and I made a much stronger effort to collect older pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound.
+The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration of logistic-style approaches. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/). The initial characterization gives us an optimistic median of 2824 days (note that this is much higher than Arthur's mean of 1459 days because it includes products which were never canceled and I made a much stronger effort to collect older pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound.
 
 ~~~{.R}
 records   n.max n.start  events  median 0.95LCL 0.95UCL
@@ -402,6 +418,8 @@ This all makes sense to me. I find particularly interesting the profit and socia
 
 ![All products over time, split by `Social` variable](/images/google/social-survivorship-curve.png)
 
+TODO: ???
+
 google.social <- with(google, data.frame(Social=c(0,1), FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
                                          Type=c("program","program"),DeflatedHits=c(0.007335,0.007335)))
 plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
@@ -416,46 +434,25 @@ plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c
                                              xlab="Days", ylab="Proportion not shutdown")
 legend("bottomleft", legend=c("Predicted w/max observed deflated hits", "* minimum observed hits"), lty=c(1 ,2), inset=0.02)
 
+### Random forests
+
+Because I can, I was curious how [random forests](!Wikipedia) might stack up to the logistic regression and against a base-rate predictor (that nothing was shut down, since ~65% of the products are still alive).
+
+I trained a random forest as a classifier, yielding reasonable looking error rates:
 
 ~~~{.R}
-library(randomForest)
+No. of variables tried at each split: 2
 
-rf <- randomForest(as.factor(Dead) ~
-                    google$Started + Hits + Type + Profit + FLOSS + Acquisition + Social + Days,
-                   data=google[-1])
-google[rf$predicted != google$Dead,]$Product
-rf
-
-# 17% error rate. not much of an improvement over a constant guess of 'alive' (35% error rate):
-
-sum(google$Dead) / nrow(google)
-[1] 0.3524
-
-rf <- randomForest(as.factor(Dead) ~ Hits + Type + Profit + FLOSS + Acquisition + Social, data=google)
-google[rf$predicted != google$Dead,]$Product
-rf
+        OOB estimate of  error rate: 32%
+Confusion matrix:
+      FALSE TRUE class.error
+FALSE   221    6     0.02643
+TRUE    106   17     0.86179
 ~~~
 
-;_; if I take out the starting date the random forests error rate shoots up to 30%. the stupidest possible predictor scoring 35%, remember. on a dataset of 321 google properties. implying that all my painstakingly gathered data basically doesn't amount to a hill of beans
+to compare its accuracy with the logistic, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. The base-rate predictor got 65% right by definition, the logistic managed to score 69% correct, and the random forest got up to 71%. (This is not quite as bad as it seems: I excluded the lifetime length from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage), so there's predictive power being left on the table.) Regardless, there's no real reason to switch to the more complex random forests just for 2%.
 
-
-Deadweight loss: in some of the more successful acquisitions, Google's modus operandi was to take a paid or premium service and make it free. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Eart) charged money for their services (sometimes a great deal). this leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
-
-maybe blogger is not as doomed as I thought. it seems to be favored with getting exclusive access to quite a few otherwise shutdown things, for example, Scribe, Friend Connect, it was the ground zero for Google's Dynamic Views skin redesign, and google is still heavily using blogger for all the official announcements even into the google+ era
-
-
-> We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been canceled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
-http://www.alltechienews.com/posts/google-fails-36-of-the-time
-
-interesting the patterns showing up in these shutdowns.
-you can see the wall of shutdowns when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about Firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
-plus there are like 4 or 5 things which all got rolled into Docs+Drive
-
-> focus, focus, focus
-
-Not really. the docs+drive thing is just logical; the Firefox stuff is interesting and sorta ruthless competition; the YouTube-competitor and social media stuff are just failures.
-
-# Predictions
+## Predictions
 
 TODO: lifespan predictions for: http://www.ats.ucla.edu/stat/r/examples/asa/asa_ch2_r.htm
     Google Alerts
@@ -478,24 +475,36 @@ Google products I regularly use; what are the predictions and how well can I cop
 8. Google+
 9. Docs (Spreadsheet)
 
-Alerts search for updates: `google ("shut down" OR "shutting" OR "closing" OR "killing" OR "abandoning" OR "leaving")`
+# TODO
+
+Deadweight loss: in some of the more successful acquisitions, Google's modus operandi was to take a paid or premium service and make it free. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Eart) charged money for their services (sometimes a great deal). this leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
+
+maybe blogger is not as doomed as I thought. it seems to be favored with getting exclusive access to quite a few otherwise shutdown things, for example, Scribe, Friend Connect, it was the ground zero for Google's Dynamic Views skin redesign, and google is still heavily using blogger for all the official announcements even into the google+ era
+
+> We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been canceled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
+http://www.alltechienews.com/posts/google-fails-36-of-the-time
+
+interesting the patterns showing up in these shutdowns.
+you can see the wall of shutdowns when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about Firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
+plus there are like 4 or 5 things which all got rolled into Docs+Drive
+
+> focus, focus, focus
+
+Not really. the docs+drive thing is just logical; the Firefox stuff is interesting and sorta ruthless competition; the YouTube-competitor and social media stuff are just failures.
+
+# Followups
+
+It seems like it might be worthwhile to continue compiling a database and do a followup analysis in 5 years (2018), by which point we might guess another 100 products will have been shut down (going by the >30 casualties of 2011 and 2012) and the covariate estimates rendered that much sharper. So I've set up 2 Google Alerts searches for compiling updates:
+
+- `google ("shut down" OR "shut down" "shutting" OR "closing" OR "killing" OR "abandoning" OR "leaving")`
+- `google (launch OR release OR announce)`
 
 # See also
-
-> In the long run, the utility of all non-Free software approaches zero. All non-Free software is a dead end.^[[Mark Pilgrim](!Wikipedia), ["Freedom 0"](http://web.archive.org/web/20110726001925/http://diveintomark.org/archives/2004/05/14/freedom-0); ironically, Pilgrim (hired by Google in 2007) seems to be responsible for at least one of the entries being marked dead, Google's Doctype tech encyclopedia, since it disappeared around the time of his "infosuicide" and has not been resurrected - it was only *partially* FLOSS.]
 
 - [Archive Team](!Wikipedia)
 - [Archiving URLs]()
 - [Wikipedia and Knol]()
 
-> I spur my horse past ruins \
-> Ruins move a traveler's heart \
-> the old parapets high and low \
-> the ancient graves great and small \
-> the shuddering shadow of a tumbleweed \
-> the steady sound of giant trees. \
-> But what I lament are the common bones \
-> unnamed in the records of Immortals.^[[Han-Shan](!Wikipedia "Hanshan (poet)"); #18 in _The Collected Songs of Cold Mountain_, Red Pine 2000, ISBN 1-55659-140-3]
 
 > Show me the person who doesn't die - \
 > death remains impartial. \
@@ -506,7 +515,7 @@ Alerts search for updates: `google ("shut down" OR "shutting" OR "closing" OR "k
 > those visiting this sorrowful place \
 > the pine wind slays with grief.^[Han-Shan, #50]
 
-> This is something that literature has always been very keen on, that technology never gets around to acknowledging. The cold wind moaning through the empty stone box. When are you gonna own up to it? Where are the Dell PCs? This is Austin, Texas. Michael Dell is the biggest tech mogul in central Texas. Why is he not here? Why is he not at least not selling his wares? Where are the dedicated gaming consoles you used to love? Do you remember how important those were? I could spend all day here just reciting the names of the causalities in your line of work. It's always the electronic frontier. Nobody ever goes back to look at the electronic forests that were cut down with chainsaws and tossed into the rivers. And then there's this empty pretense that these innovations make the world "better". This is a dangerous word. Like: "If we're not making the world better, then why are we doing this at all?" Now, I don't want to claim that this attitude is hypocritical. Because when you say a thing like that at South By: "Oh, we're here to make the world better" - you haven't even *reached* the level of hypocrisy. You're stuck at the level of childish naivete.^[[Bruce Sterling](!Wikipedia), ["Text of SXSW2013 closing remarks"](http://www.wired.com/beyond_the_beyond/2013/04/text-of-sxsw2013-closing-remarks-by-bruce-sterling/)]
+
 
 <!--
 TODO: finished?
@@ -654,6 +663,21 @@ png(file="~/wiki/images/google/social-survivorship-curve.png", width = 1.5*480, 
 plot(smodel2, lty=c(1, 2), xlab="Days", ylab="Fraction surviving by Day")
 legend("bottomleft", legend=c("Social = no", "Social = yes"), lty=c(1 ,2), inset=0.02)
 invisible(dev.off())
+
+cat("\nTrain some random forests for prediction:\n")
+library(randomForest)
+lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle + Days,
+                   data=google, family="binomial")
+rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle,
+                   data=google)
+print(rf)
+
+cat("\nBase-rate predictor of ~65% products alive:\n")
+print(sum(FALSE == google$Dead) / nrow(google))
+cat("\nLogistic regression's correct predictions:\n")
+print(sum((exp(predict(lmodel))>1) == google$Dead) / nrow(google))
+cat("\nRandom forest's correct predictions:\n")
+print(sum((as.logical(predict(rf))) == google$Dead) / nrow(google))
 
 cat("\nOptimize the generated graphs by cropping whitespace & losslessly compressing them...\n")
 system('cd ~/wiki/images/google/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
