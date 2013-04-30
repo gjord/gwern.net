@@ -63,7 +63,7 @@ But every shutdown hurts its users to some degree, even if we - currently[^survi
 > the sole remnants of many \
 > brave warriors' dreams.
 
-I begin with a list of services/APIs/programs that Google has shutdown or abandoned taken from the _Guardian_ article ["Google Keep? It'll probably be with us until March 2017 - on average: The closure of Google Reader has got early adopters and developers worried that Google services or APIs they adopt will just get shut off. An analysis of 39 shuttered offerings says how long they get"](http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed) by Charles Arthur. Arthur's list seemed relatively complete, but I've added in >83 items he missed based on the [Slate graveyard](http://www.slate.com/articles/technology/map_of_the_week/2013/03/google_reader_joins_graveyard_of_dead_google_products.html), Weber's ["Google Fails 36% Of The Time"](http://thenextweb.com/google/2011/10/17/google-fails/), the [Wikipedia category](!Wikipedia "Category:Google acquisitions")/[list](!Wikipedia "List of mergers and acquisitions by Google") for Google acquisitions, the [Wikipedia category](!Wikipedia "Category:Discontinued Google services")/[list](!Wikipedia "List of Google products#Discontinued products and services"), and finally the official [Google History](https://www.google.com/about/company/history/). (The additional shutdowns include many shutdowns predating 2010, suggesting that Arthur's list was biased towards recent shutdowns.)
+I begin with a list of services/APIs/programs that Google has shutdown or abandoned taken from the _Guardian_ article ["Google Keep? It'll probably be with us until March 2017 - on average: The closure of Google Reader has got early adopters and developers worried that Google services or APIs they adopt will just get shut off. An analysis of 39 shuttered offerings says how long they get"](http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed) by Charles Arthur. Arthur's list seemed relatively complete, but I've added in >300 items he missed based on the [Slate graveyard](http://www.slate.com/articles/technology/map_of_the_week/2013/03/google_reader_joins_graveyard_of_dead_google_products.html), Weber's ["Google Fails 36% Of The Time"](http://thenextweb.com/google/2011/10/17/google-fails/), the [Wikipedia category](!Wikipedia "Category:Google acquisitions")/[list](!Wikipedia "List of mergers and acquisitions by Google") for Google acquisitions, the [Wikipedia category](!Wikipedia "Category:Discontinued Google services")/[list](!Wikipedia "List of Google products#Discontinued products and services"), and finally the official [Google History](https://www.google.com/about/company/history/). (The additional shutdowns include many shutdowns predating 2010, suggesting that Arthur's list was biased towards recent shutdowns.)
 
 In a few cases, the start dates are well-informed guesses (eg. [Google Translate](https://plus.google.com/u/0/103530621949492999968/posts/fqxuM2SBRQ5)) and dates of abandonment/shut-down are even harder to get due to the lack of attention paid to most (Joga Bonito) and so I infer the date from archived pages on the Internet Archive, news reports, blogs such as [Google Operating System](http://googlesystem.blogspot.com/), the dates of press releases, the shutdown of closely related services (eReader Play based on Reader), source code repositories (AngularJS) etc; some are listed as discontinued (Google Catalogs) but are still supported or were merged into other software (Spreadsheets, Docs, Writely, News Archive) or sold/given to third parties (Flu Shot Finder, App Inventor, Body) or active effort has ceased but the content remains and I do not list those as dead; for cases of acquired software/services that were shutdown, I date the start from Google's purchase.
 
@@ -173,21 +173,22 @@ An interesting aspect of the shutdowns is they are unevenly distributed by month
 
 ![Shutdowns binned by month of year, revealing peaks in September, March, and April](/images/google/shutdownsbymonth.png)
 
-Google launched very few things from 1997-2004, and many more from 2005 and on:
+As befits a company which has grown enormously since 1997, we can see other imbalances over time: eg. Google launched very few products from 1997-2004, and many more from 2005 and on:
 
 ![Starts binned by year](/images/google/startsbyyear.png)
 
-We can look at openings vs closing in general:
+Or looking at openings vs closing in general:
 
-![A scatterplot of all openings vs closings](/images/google/openedvsclosed.png)
+![A scatterplot of all openings vs closings (spike is data collection cutoff)](/images/google/openedvsclosed.png)
 
-That clumpiness around 2009 is suspicious. We can plot lifetime against shut-down to get a better picture:
+That clumpiness around 2009 is suspicious. We can rotate the plot (plot lifetime against shut-down) to get a clearer picture:
 
 ![All products scatter-plotted date of opening vs lifespan](/images/google/openedvslifespan.png)
 
 To emphasize this bulge of shutdowns in late 2011-2012, we can plot the histogram of dead products by year and also a kernel density:
 
 ![Shutdown density binned by year](/images/google/shutdownsbyyear.png)
+
 ![Equivalent kernel density (default bandwidth)](/images/google/shutdownsbyyear-kernel.png)
 
 The kernel density brings out an aspect of shutdowns we might have missed before: there seems to be an absence of recent shut downs. There are 4 shut downs scheduled for 2013 but the last one is scheduled for November, suggesting that we have seen the last of the 2013 casualties and that any future shut downs may be for 2014.
@@ -296,70 +297,110 @@ The original hits variable has the wrong sign, as expected of data leakage; now 
 
 ## Survival curve
 
-The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might help. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's _Applied Survival Analysis_:
+The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might help. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/). The initial characterization gives us an optimistic median of 2824 days (note that this is much higher than Arthur's mean of 1459 days because it includes products which were never canceled and I made a much stronger effort to collect older pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound.
 
 ~~~{.R}
-library(survival)
-surv <- survfit(Surv(google$Days, google$Dead, type="right") ~ 1); surv
-
 records   n.max n.start  events  median 0.95LCL 0.95UCL
     350     350     350     123    2824    2095      NA
-
-plot(surv, xlab="Days", ylab="Survival Probability function with 95% CI")
-# http://i.imgur.com/qw518gg.png
-
-# see how the moderators help predict exchange death
-cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits),
-                data = google, method = "exact"); summary(cmodel)
-...
-  n= 350, number of events= 123
-
-                     coef exp(coef) se(coef)     z Pr(>|z|)
-AcquisitionTRUE    0.1288    1.1374   0.2571  0.50    0.616
-FLOSSTRUE          0.1412    1.1516   0.2932  0.48    0.630
-ProfitTRUE        -0.1799    0.8354   0.2316 -0.78    0.437
-SocialTRUE         0.6631    1.9407   0.2622  2.53    0.011
-Typeprogram        0.9572    2.6043   0.7468  1.28    0.200
-Typeservice        1.2917    3.6391   0.7251  1.78    0.075
-Typething          1.6829    5.3813   1.0235  1.64    0.100
-log(DeflatedHits) -0.2884    0.7494   0.0361 -8.00  1.2e-15
-
-                  exp(coef) exp(-coef) lower .95 upper .95
-AcquisitionTRUE       1.137      0.879     0.687     1.883
-FLOSSTRUE             1.152      0.868     0.648     2.046
-ProfitTRUE            0.835      1.197     0.531     1.315
-SocialTRUE            1.941      0.515     1.161     3.245
-Typeprogram           2.604      0.384     0.603    11.255
-Typeservice           3.639      0.275     0.879    15.074
-Typething             5.381      0.186     0.724    40.004
-log(DeflatedHits)     0.749      1.334     0.698     0.804
-
-Rsquare= 0.227   (max possible= 0.974 )
-Likelihood ratio test= 90  on 8 df,   p=4.44e-16
-Wald test            = 79.3  on 8 df,   p=6.76e-14
-Score (logrank) test = 83.3  on 8 df,   p=1.04e-14
-
-# as before, the simplified model deletes most of the variables
-# as not contributing much to the produced r^2
-scmodel <- step(cmodel); summary(scmodel)
-...
-  n= 350, number of events= 123
-
-                     coef exp(coef) se(coef)     z Pr(>|z|)
-SocialTRUE         0.7262    2.0672   0.2370  3.06   0.0022
-log(DeflatedHits) -0.2907    0.7477   0.0352 -8.25   <2e-16
-
-                  exp(coef) exp(-coef) lower .95 upper .95
-SocialTRUE            2.067      0.484     1.299     3.290
-log(DeflatedHits)     0.748      1.337     0.698     0.801
-
-Rsquare= 0.212   (max possible= 0.974 )
-Likelihood ratio test= 83.4  on 2 df,   p=0
-Wald test            = 75.5  on 2 df,   p=0
-Score (logrank) test = 75.5  on 2 df,   p=0
 ~~~
 
-(An exponentiated coefficient of 2.067 implies that having been marked 'social' increases the daily hazard for a product by 100%; while every additional unit of logged deflated hits cuts the daily hazard by 25%.)
+Our overall [Kaplan-Meier](!Wikipedia "Kaplan-Meier estimator") [survivorship curve](!Wikipedia) looks a bit interesting:
+
+![Shutdown cumulative probability as a function of time](/images/google/overall-survivorship-curve.png)
+
+If there were constant mortality of products at each day after their launch, we would expect a "type II" curve where it looks like a straight line, but in fact it looks like there's a sort of "leveling off" of deaths, suggesting a "type III" curve; per Wikipedia:
+
+> ...the greatest mortality is experienced early on in life, with relatively low rates of death for those surviving this bottleneck. This type of curve is characteristic of species that produce a large number of offspring (see [r/K selection theory](!Wikipedia)).
+
+Very nifty: the survivorship curve is consistent with tech industry or startup philosophies of doing lots of things, iterating fast, and throwing things at the wall to see what sticks.
+
+However, it looks like the mortality only starts decreasing around 2000 days, so any product that far out must have been founded around or before 2005, which is when we previously noted that Google started pumping out a lot of products and may also have changed its shutdown-related behaviors; this could violate a basic assumption of Kaplan-Meier, that the underlying survival function isn't itself changing over time.
+
+Our next step is to fit a Cox [proportional hazards model](!Wikipedia) to our covariates:
+
+~~~{.R}
+...
+  n= 350, number of events= 123
+
+                    coef exp(coef) se(coef)     z Pr(>|z|)
+AcquisitionTRUE    0.130     1.139    0.257  0.51    0.613
+FLOSSTRUE          0.141     1.151    0.293  0.48    0.630
+ProfitTRUE        -0.180     0.836    0.231 -0.78    0.438
+SocialTRUE         0.664     1.943    0.262  2.53    0.011
+Typeprogram        0.957     2.603    0.747  1.28    0.200
+Typeservice        1.291     3.638    0.725  1.78    0.075
+Typething          1.682     5.378    1.023  1.64    0.100
+log(DeflatedHits) -0.288     0.749    0.036 -8.01  1.2e-15
+
+                  exp(coef) exp(-coef) lower .95 upper .95
+AcquisitionTRUE       1.139      0.878     0.688     1.884
+FLOSSTRUE             1.151      0.868     0.648     2.045
+ProfitTRUE            0.836      1.197     0.531     1.315
+SocialTRUE            1.943      0.515     1.163     3.247
+Typeprogram           2.603      0.384     0.602    11.247
+Typeservice           3.637      0.275     0.878    15.064
+Typething             5.377      0.186     0.724    39.955
+log(DeflatedHits)     0.749      1.334     0.698     0.804
+
+Concordance= 0.726  (se = 0.028 )
+Rsquare= 0.227   (max possible= 0.974 )
+Likelihood ratio test= 90.1  on 8 df,   p=4.44e-16
+Wald test            = 79.5  on 8 df,   p=6.22e-14
+Score (logrank) test = 83.5  on 8 df,   p=9.77e-15
+~~~
+
+And then we can also test whether any of the covariates are suspicious; in general they seem to be fine:
+
+~~~{.R}
+                      rho  chisq     p
+AcquisitionTRUE   -0.0252 0.0805 0.777
+FLOSSTRUE          0.0168 0.0370 0.848
+ProfitTRUE        -0.0694 0.6290 0.428
+SocialTRUE         0.0279 0.0882 0.767
+Typeprogram        0.0857 0.9429 0.332
+Typeservice        0.0936 1.1433 0.285
+Typething          0.0613 0.4697 0.493
+log(DeflatedHits) -0.0450 0.2610 0.609
+GLOBAL                 NA 2.5358 0.960
+~~~
+
+My suspicion lingers, though, so I threw in another covariate (`EarlyGoogle`): whether a product was released before or after 2005. Does this add predictive value above and over simply knowing that a product is really old, and does the regression still pass the proportional assumption check? Apparently yes to both:
+
+~~~{.R}
+...
+                   coef     exp(coef) se(coef) z      Pr(>|z|)
+AcquisitionTRUE    0.1674    1.1823   0.2553  0.66    0.512
+FLOSSTRUE          0.1034    1.1090   0.2922  0.35    0.723
+ProfitTRUE        -0.1949    0.8230   0.2318 -0.84    0.401
+SocialTRUE         0.6541    1.9233   0.2601  2.51    0.012
+Typeprogram        0.8195    2.2694   0.7472  1.10    0.273
+Typeservice        1.1619    3.1960   0.7262  1.60    0.110
+Typething          1.6200    5.0529   1.0234  1.58    0.113
+log(DeflatedHits) -0.2645    0.7676   0.0375 -7.06  1.7e-12
+EarlyGoogleTRUE   -1.0061    0.3656   0.5279 -1.91    0.057
+...
+                       rho   chisq     p
+...
+EarlyGoogleTRUE   -0.05167 0.51424 0.473
+GLOBAL                  NA 2.52587 0.980
+~~~
+
+As predicted, the pre-2005 variable predicts less chance of being shutdown and is a large predictor as well, but doesn't trigger the assumption tester, so we'll keep using the Cox model.
+
+Now let's interpret the model. The covariates tell us that to reduce the risk of shutdown, you want to:
+
+1. Not be an acquisition
+2. Not be FLOSS
+3. Be directly making money
+4. Not be related to social networking
+5. Have lots of Google hits relative to lifetime
+6. Have been launched early in Google's lifetime
+
+This all makes sense to me. I find particularly interesting the profit and social effects, but the odds are a little hard to understand intuitively; if being social increases the odds of shutdown by 1.9233 and not being directly profitable increases the odds by 1.215, what do those *look* like? We can graph pairs of survivorship curves, splitting the full dataset, to get a grasp of what these numbers mean:
+
+![All products over time, split by `Profit` variable](/images/google/profit-survivorship-curve.png)
+
+![All products over time, split by `Social` variable](/images/google/social-survivorship-curve.png)
 
 google.social <- with(google, data.frame(Social=c(0,1), FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
                                          Type=c("program","program"),DeflatedHits=c(0.007335,0.007335)))
@@ -378,17 +419,14 @@ legend("bottomleft", legend=c("Predicted w/max observed deflated hits", "* minim
 
 ~~~{.R}
 library(randomForest)
-rf <- randomForest(as.factor(Dead) ~ ., data=google[-1])
-google[rf$predicted != google$Dead,]
-rf
-# data leakage on the end-date! those 4 were wrong because they are dead, but scheduled to due after today. the random forests were just emitting 'dead' for everything with an end date before 2013-04-04 and alive for then or after
 
-
-rf <- randomForest(as.factor(Dead) ~ google$Started + Hits + Type + Profit + FLOSS + Acquisition + Social + Days, data=google[-1])
+rf <- randomForest(as.factor(Dead) ~
+                    google$Started + Hits + Type + Profit + FLOSS + Acquisition + Social + Days,
+                   data=google[-1])
 google[rf$predicted != google$Dead,]$Product
 rf
 
-# 17% error rate. not much of an improvement over a constant guess of 'alive', though, which has a 35% error rate:
+# 17% error rate. not much of an improvement over a constant guess of 'alive' (35% error rate):
 
 sum(google$Dead) / nrow(google)
 [1] 0.3524
@@ -478,10 +516,10 @@ TODO: finished?
 - https://news.ycombinator.com/item?id=5495523
 - thank gostips@gmail.com / http://googlesystem.blogspot.com/
 - ask for help http://www.reddit.com/r/MachineLearning/ / Coursera 'Data Analysis' forum
--
 -->
 
-<!-- How to handle updates? I guess we'll store it here. New data:
+<!--
+How to handle updates? I guess we'll store it here. New data:
 
 "Product","Dead","Started","Ended","Hits","Type","Profit","FLOSS","Acquisition","Social"
 "Inactive Account Manager",FALSE,2013-04-11,NA,175000,service,FALSE,FALSE,FALSE,FALSE
@@ -489,6 +527,7 @@ TODO: finished?
 Behavio's FunF http://www.sfgate.com/technology/businessinsider/article/Google-Just-Bought-A-Cool-SXSW-Startup-Behavio-4430716.php supposedly Google will continue it but it may be killed too quickly to count for this list
 "AdWords Pay Per Action",TRUE,2007-03-20,2008-08-31,144000,service,TRUE,FALSE,TRUE,FALSE
 "AdSense Referrals",TRUE,2007-04-05,2008-08-31,25000,service,TRUE,FALSE,FALSE,FALSE
+"Quick View in Search",TRUE,2009-10-07,2013-04-24,2460000,service,FALSE,FALSE,FALSE,FALSE http://googleblog.blogspot.com/2009/10/quickly-view-formatted-pdfs-in-your.html http://googlesystem.blogspot.com/2013/04/no-more-quick-view-in-google-search.html exact search query: "google search" "quick view"
 -->
 
 # Appendix
@@ -498,48 +537,52 @@ Run as `R --slave --file=google.r`:
 
 ~~~{.R}
 # Load the data, fit, and plot:
-index <- read.csv("http://www.gwern.net/docs/2013-google-index.csv", colClasses=c("Date","double","character"))
+index <- read.csv("http://www.gwern.net/docs/2013-google-index.csv",
+                   colClasses=c("Date","double","character"))
 # an exponential doesn't fit too badly:
 model1 <- lm(log(Size) ~ Date, data=index); summary(model1)
 # plot logged size data and the fit:
-png(file="~/wiki/images/google/www-index-model.png", width = 3*480, height = 2*480)
+png(file="~/wiki/images/google/www-index-model.png", width = 3*480, height = 1*480)
 plot(log(index$Size) ~ index$Date, ylab="WWW index size", xlab="Date")
 abline(model1)
 invisible(dev.off())
 
-google <- read.csv("http://www.gwern.net/docs/2013-google.csv", colClasses=c("character","logical","Date","Date",
-                                                                 "double","factor","logical","logical","logical",
-                                                                 "logical", "integer", "numeric", "numeric"))
+google <- read.csv("~/wiki/docs/2013-google.csv",
+                    colClasses=c("character","logical","Date","Date","double","factor",
+                                 "logical","logical","logical","logical", "integer",
+                                 "numeric", "numeric", "numeric"))
+# google$Days <- as.integer(google$Ended - google$Started)
+# derive all the Google index-variables
+## hits per day to the present
+# google$AvgHits <- google$Hits / as.integer(as.Date("2013-04-01") - google$Started)
+## divide total hits for each product by total estimated size of Google index when that product started
+# google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
+## Finally, let's combine the two strategies: deflate and then average.
+# google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
+# google$AvgDeflatedHits <- log(google$AvgHits) / log(google$DeflatedHits)
 
+cat("\nOverview of data:\n")
 print(summary(google[-1]))
 
-# derive all the Google index-variables
-# hits per day to the present
-google$AvgHits <- google$Hits / as.integer(as.Date("2013-04-01") - google$Started)
-# we can divide total hits for a property by the total estimated size of the Google index when that property started
-google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
-# Finally, let's combine the two strategies: deflate and then average.
-google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
-google$AvgDeflatedHits <- log(google$AvgHits) / log(google$DeflatedHits)
-
-png(file="~/wiki/images/google/openedvsclosed.png", width = 3*480, height = 2*480)
+png(file="~/wiki/images/google/openedvsclosed.png", width = 1.5*480, height = 1*480)
 plot(google$Ended ~ google$Started, xlab="Opened", ylab="shutdown")
 invisible(dev.off())
 
-png(file="~/wiki/images/google/openedvslifespan.png", width = 3*480, height = 2*480)
+png(file="~/wiki/images/google/openedvslifespan.png", width = 1.5*480, height = 1*480)
 plot(google$Days ~ google$Ended, xlab="Opened", ylab="Total lifetime")
 invisible(dev.off())
 
-png(file="~/wiki/images/google/shutdownsbyyear.png", width = 3*480, height = 2*480)
+png(file="~/wiki/images/google/shutdownsbyyear.png", width = 1.5*480, height = 1*480)
 hist(google[google$Dead,]$Ended, breaks=seq.Date(as.Date("2005-01-01"), as.Date("2014-01-01"), "years"),
                    main="shutdowns per year", xlab="Year")
 invisible(dev.off())
-png(file="~/wiki/images/google/shutdownsbyyear-kernel.png", width = 2*480, height = 1*480)
+png(file="~/wiki/images/google/shutdownsbyyear-kernel.png", width = 1*480, height = 1*480)
 plot(density(as.numeric(google[google$Dead,]$Ended)), main="Shutdown kernel density over time")
 invisible(dev.off())
 
-png(file="~/wiki/images/google/startsbyyear.png", width = 3*480, height = 2*480)
-hist(google$Started,breaks=seq.Date(as.Date("1997-01-01"), as.Date("2014-01-01"), "years"), xlab="Total products released in year")
+png(file="~/wiki/images/google/startsbyyear.png", width = 1.5*480, height = 1*480)
+hist(google$Started, breaks=seq.Date(as.Date("1997-01-01"), as.Date("2014-01-01"), "years"),
+     xlab="total products released in year")
 invisible(dev.off())
 
 # extract the month of each kill
@@ -551,7 +594,7 @@ months <- table(sort(m_fac))
 # shutdowns by month are imbalanced:
 print(chisq.test(months))
 # and visibly so:
-png(file="~/wiki/images/google/shutdownsbymonth.png", width = 3*480, height = 2*480)
+png(file="~/wiki/images/google/shutdownsbymonth.png", width = 1.5*480, height = 1*480)
 plot(months)
 invisible(dev.off())
 
@@ -573,11 +616,48 @@ print(summary(step(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social +
                         log(Hits) + log(AvgHits) + log(DeflatedHits) + AvgDeflatedHits,
                        data=google, family="binomial"))))
 
-# optimize the generated graphs by cropping whitespace & losslessly compressing them
-system('cd ~/wiki/images/google/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' inf
-o:` +repage "$f"; done')
-system("optipng -o9 -fix ~/wiki/images/google/*.png", ignore.stdout = TRUE)
+cat("\nEntering survival analysis section:\n")
 
+library(survival)
+
+cat("\nUnconditional Kaplan-Meier survival curve:\n")
+surv <- survfit(Surv(google$Days, google$Dead, type="right") ~ 1)
+png(file="~/wiki/images/google/overall-survivorship-curve.png", width = 1.5*480, height = 1*480)
+plot(surv, xlab="Days", ylab="Survival Probability function with 95% CI")
+invisible(dev.off())
+
+cat("\nCox:\n")
+cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits),
+                data = google)
+print(summary(cmodel))
+cat("\nTest proportional assumption:\n")
+print(cox.zph(cmodel))
+
+cat("\nPrimitive check for regime change (re-regress & check):\n")
+google$EarlyGoogle <- (as.POSIXlt(google$Started)$year+1900) < 2005
+cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits) + EarlyGoogle,
+                data = google)
+print(summary(cmodel))
+print(cox.zph(cmodel))
+
+cat("\nGenerating intuitive plots of social & profit;\n")
+cat("\nPlot empirical survival split by profit...\n")
+png(file="~/wiki/images/google/profit-survivorship-curve.png", width = 1.5*480, height = 1*480)
+smodel1 <- survfit(Surv(Days, Dead) ~ Profit, data = google);
+plot(smodel1, lty=c(1, 2), xlab="Days", ylab="Fraction surviving by Day");
+legend("bottomleft", legend=c("Profit = no", "Profit = yes"), lty=c(1 ,2), inset=0.02)
+invisible(dev.off())
+
+cat("\nSplit by social...\n")
+smodel2 <- survfit(Surv(Days, Dead) ~ Social, data = google)
+png(file="~/wiki/images/google/social-survivorship-curve.png", width = 1.5*480, height = 1*480)
+plot(smodel2, lty=c(1, 2), xlab="Days", ylab="Fraction surviving by Day")
+legend("bottomleft", legend=c("Social = no", "Social = yes"), lty=c(1 ,2), inset=0.02)
+invisible(dev.off())
+
+cat("\nOptimize the generated graphs by cropping whitespace & losslessly compressing them...\n")
+system('cd ~/wiki/images/google/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
+system("optipng -o9 -fix ~/wiki/images/google/*.png", ignore.stdout = TRUE)
 ~~~
 
 ## Leakage
