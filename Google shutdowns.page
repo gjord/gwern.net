@@ -91,7 +91,7 @@ Finally, for all products, I have collected several covariates which I thought m
 
     While number of Google hits is a very crude measure, at best, for underlying variables like "popularity" or "number of users" or "profitability", and clearly biased towards recently released products (there aren't going to be as many hits for, say, "Google Answers" as there would have been if we had searched for it in 2002), it may add some insight.
 
-    There do not seem to be any other free quality sources indicating either historical or contemporary traffic to a product URL/homepage which could be used in the analysis - services like Alexa or Google Ad Planner either are commercial, for domains only, or simply do not cover many of the URLs.
+    There do not seem to be any other free quality sources indicating either historical or contemporary traffic to a product URL/homepage which could be used in the analysis - services like Alexa or Google Ad Planner either are commercial, for domains only, or simply do not cover many of the URLs. (After I finished data collection, it was pointed out to me that while Google's Ad Planner may not be useful, Google's AdWords *does* yield a count of global searches for a particular query that month, which would have worked albeit it would only indicate current levels of interest and nothing about historical levels.)
 - `Type`: a categorization into "service"/"program"/"thing"/"other"
 
     1. A *service* is anything primarily accessed through a web browser or API or the Internet; so Gmail or a browser loading fonts from a Google server, but not a Gmail notification program one runs on one's computer or a FLOSS font available for download & distribution.
@@ -412,27 +412,11 @@ Now let's interpret the model. The covariates tell us that to reduce the risk of
 5. Have lots of Google hits relative to lifetime
 6. Have been launched early in Google's lifetime
 
-This all makes sense to me. I find particularly interesting the profit and social effects, but the odds are a little hard to understand intuitively; if being social increases the odds of shutdown by 1.9233 and not being directly profitable increases the odds by 1.215, what do those *look* like? We can graph pairs of survivorship curves, splitting the full dataset, to get a grasp of what these numbers mean:
+This all makes sense to me. I find particularly interesting the profit and social effects, but the odds are a little hard to understand intuitively; if being social increases the odds of shutdown by 1.9233 and not being directly profitable increases the odds by 1.215, what do those *look* like? We can graph pairs of survivorship curves, splitting the full dataset (omitting the confidence intervals for legibility, although they do overlap), to get a grasp of what these numbers mean:
 
 ![All products over time, split by `Profit` variable](/images/google/profit-survivorship-curve.png)
 
 ![All products over time, split by `Social` variable](/images/google/social-survivorship-curve.png)
-
-TODO: ???
-
-google.social <- with(google, data.frame(Social=c(0,1), FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
-                                         Type=c("program","program"),DeflatedHits=c(0.007335,0.007335)))
-plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
-                                             xlab="Days", ylab="Proportion not shutdown")
-legend("bottomleft", legend=c("Social = no", "Social = yes"), lty=c(1 ,2), inset=0.02)
-# http://i.imgur.com/LMiI6cP.png
-
-google.hits <- with(google, data.frame(Social=c(0.5,0.5),FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
-                                         Type=c("program","program"),
-                                         DeflatedHits=c(max(google$DeflatedHits), min(google$DeflatedHits))))
-plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
-                                             xlab="Days", ylab="Proportion not shutdown")
-legend("bottomleft", legend=c("Predicted w/max observed deflated hits", "* minimum observed hits"), lty=c(1 ,2), inset=0.02)
 
 ### Random forests
 
@@ -450,18 +434,53 @@ FALSE   221    6     0.02643
 TRUE    106   17     0.86179
 ~~~
 
-to compare its accuracy with the logistic, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. The base-rate predictor got 65% right by definition, the logistic managed to score 69% correct, and the random forest got up to 71%. (This is not quite as bad as it seems: I excluded the lifetime length from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage), so there's predictive power being left on the table.) Regardless, there's no real reason to switch to the more complex random forests just for 2%.
+To compare the random forest accuracy with the logistic and survival model accuracy, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. The base-rate predictor got 65% right by definition, the logistic managed to score 69% correct (bootstrap 95% CI: 66-72%), and the random forest got up to 71% (63-75%). These rates are not quite as bad as they may seem: I excluded the lifetime length (`Days`) from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage); so there's predictive power being left on the table. Regardless, there's no real reason to switch to the more complex random forests just for 2%.
 
 ## Predictions
 
-TODO: lifespan predictions for: http://www.ats.ucla.edu/stat/r/examples/asa/asa_ch2_r.htm
-    Google Alerts
-    Blogger
-    FeedBurner
-    Scholar
-    Book Search
-    Brevio's FunF
-    Voice http://www.wired.com/gadgetlab/2013/04/google-voice-future-uncertain/ http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p28
+Before making explicit predictions of the future, let's look at the relative risks for products which haven't been shutdown. What does the Cox model consider the 10 most risky and likely to be shutdown products?
+
+It lists (in descending order of riskiness):
+
+1. Schemer
+2. Boutiques
+3. Magnifier
+4. Hotpot
+5. Page Speed Online API
+6. WhatsonWhen
+7. Unofficial Guides
+8. WDYL search engine
+9. Cloud Messaging
+10. Correlate
+
+These all seem like reasonable products to signal out (to some extent it's surprising Correlate and Boutiques still exist), except for Cloud Messaging which seems to be a key part of a lot of Android. And likewise, the list of the 10 *least* risky (in increasingly risky order):
+
+1. Search
+2. Translate
+3. AdWords
+4. Picasa
+5. Groups
+6. Image Search
+7. News
+8. Books
+9. Toolbar
+10. AdSense
+
+One can't imagine flagship products like Search or Books ever being shut down, so this list is good as far as it goes; I am skeptical about the actual unriskiness of Picasa and Toolbar given their general neglect and old-fashionedness, though I understand why the model favors them (both are pre-2005, proprietary, many hits, and advertising-supported).
+
+
+TODO: lifespan predictions for
+cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits) + EarlyGoogle,  data = google, model=TRUE)
+predictees <- subset(google, Product %in% c("Alerts","Blogger","FeedBurner","Scholar","Book Search","Voice","Search","Gmail","Analytics","AdSense","Calendar","Alerts","Google+","Docs"))
+predictees$Days <- predictees$Days + (365.25 * 5)
+predict(cmodel, newdata=predictees, type="expected")
+
+Original: [1] 0.32318 0.94215 1.05876 1.41125 1.58263 1.69739 1.25353 0.33796 0.25589 0.42647 0.09363 1.06958
+Expanded: [1] 0.32318 0.94215 1.05876 1.41125 1.58263 1.69739 1.25353 0.33796 0.25589 0.42647 0.09363 0.27806 1.06958
+
+TODO: Brevio's FunF?
+
+http://www.wired.com/gadgetlab/2013/04/google-voice-future-uncertain/ http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p28
 
 Google products I regularly use; what are the predictions and how well can I cope with any shutdowns?
 
@@ -491,6 +510,24 @@ plus there are like 4 or 5 things which all got rolled into Docs+Drive
 > focus, focus, focus
 
 Not really. the docs+drive thing is just logical; the Firefox stuff is interesting and sorta ruthless competition; the YouTube-competitor and social media stuff are just failures.
+
+
+TODO: assess usefulness; abortive efforts at graphing survival curves by covariate:
+
+google.social <- with(google, data.frame(Social=c(0,1), FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
+                                         Type=c("program","program"),DeflatedHits=c(0.007335,0.007335)))
+plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
+                                             xlab="Days", ylab="Proportion not shutdown")
+legend("bottomleft", legend=c("Social = no", "Social = yes"), lty=c(1 ,2), inset=0.02)
+http://i.imgur.com/LMiI6cP.png
+
+google.hits <- with(google, data.frame(Social=c(0.5,0.5),FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
+                                         Type=c("program","program"),
+                                         DeflatedHits=c(max(google$DeflatedHits), min(google$DeflatedHits))))
+plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
+                                             xlab="Days", ylab="Proportion not shutdown")
+legend("bottomleft", legend=c("Predicted w/max observed deflated hits", "* minimum observed hits"), lty=c(1 ,2), inset=0.02)
+
 
 # Followups
 
@@ -545,6 +582,8 @@ Behavio's FunF http://www.sfgate.com/technology/businessinsider/article/Google-J
 Run as `R --slave --file=google.r`:
 
 ~~~{.R}
+set.seed(7777) # for reproducible numbers
+
 # Load the data, fit, and plot:
 index <- read.csv("http://www.gwern.net/docs/2013-google-index.csv",
                    colClasses=c("Date","double","character"))
@@ -669,8 +708,9 @@ library(randomForest)
 lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle + Days,
                    data=google, family="binomial")
 rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle,
-                   data=google)
+                   importance=TRUE, data=google)
 print(rf)
+print(importance(rf))
 
 cat("\nBase-rate predictor of ~65% products alive:\n")
 print(sum(FALSE == google$Dead) / nrow(google))
@@ -678,6 +718,45 @@ cat("\nLogistic regression's correct predictions:\n")
 print(sum((exp(predict(lmodel))>1) == google$Dead) / nrow(google))
 cat("\nRandom forest's correct predictions:\n")
 print(sum((as.logical(predict(rf))) == google$Dead) / nrow(google))
+
+cat("\nBegin bootstrap test of predictive accuracy...\n")
+library(boot)
+
+cat("\nGet a subsample, train logistic regression on it, test accuracy on original Google data:\n")
+logisticPredictionAccuracy <- function(gb, indices) {
+  g <- gb[indices,] # allows boot to select subsample
+  # train new regression model on subsample
+  lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type +
+                       log(g$DeflatedHits) + EarlyGoogle + Days,
+                   data=g, family="binomial")
+  return(sum((exp(predict(lmodel, newdata=google))>1) == google$Dead) / nrow(google))
+}
+lbs <- boot(data=google, statistic=logisticPredictionAccuracy, R=20000)
+print(boot.ci(lbs, type="norm"))
+
+cat("\nDitto for random forests:\n")
+randomforestPredictionAccuracy <- function(gb, indices) {
+  g <- gb[indices,]
+  g$DeflatedHits <- log(g$DeflatedHits) # dunno why can't write in the formula `log(g$DeflatedHits)`...
+  rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
+                       DeflatedHits + EarlyGoogle + Days,
+                   data=g)
+  return(sum((as.logical(predict(rf))) == google$Dead) / nrow(google))
+}
+rfbs <- boot(data=google, statistic=randomforestPredictionAccuracy, R=20000)
+print(boot.ci(rfbs, type="norm"))
+
+cat("\nRanking products by risk...\n")
+google$RiskRatio <- predict(cmodel, type="risk")
+alive <- google[!google$Dead,]
+
+cat("\nExtract the 10 living products with highest estimated relative risks:\n")
+print(head(alive[order(alive$RiskRatio, decreasing=TRUE),], n=10)$Product)
+
+cat("\nExtract the 10 living products with lowest estimated relative risk:\n")
+print(head(alive[order(alive$RiskRatio, decreasing=FALSE),], n=10)$Product)
+
+
 
 cat("\nOptimize the generated graphs by cropping whitespace & losslessly compressing them...\n")
 system('cd ~/wiki/images/google/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
