@@ -472,7 +472,7 @@ One can't imagine flagship products like Search or Books ever being shut down, s
 TODO: lifespan predictions for
 cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits) + EarlyGoogle,  data = google, model=TRUE)
 predictees <- subset(google, Product %in% c("Alerts","Blogger","FeedBurner","Scholar","Book Search","Voice","Search","Gmail","Analytics","AdSense","Calendar","Alerts","Google+","Docs"))
-predictees$Days <- predictees$Days + (365.25 * 5)
+# predictees$Days <- predictees$Days + (365.25 * 500)
 predict(cmodel, newdata=predictees, type="expected")
 
 Original: [1] 0.32318 0.94215 1.05876 1.41125 1.58263 1.69739 1.25353 0.33796 0.25589 0.42647 0.09363 1.06958
@@ -584,6 +584,7 @@ Run as `R --slave --file=google.r`:
 ~~~{.R}
 set.seed(7777) # for reproducible numbers
 
+# Generate Google corpus model for use in main analysis
 # Load the data, fit, and plot:
 index <- read.csv("http://www.gwern.net/docs/2013-google-index.csv",
                    colClasses=c("Date","double","character"))
@@ -595,7 +596,8 @@ plot(log(index$Size) ~ index$Date, ylab="WWW index size", xlab="Date")
 abline(model1)
 invisible(dev.off())
 
-google <- read.csv("~/wiki/docs/2013-google.csv",
+# Begin actual data analysis
+google <- read.csv("http://www.gwern.net/docs/2013-google.csv",
                     colClasses=c("character","logical","Date","Date","double","factor",
                                  "logical","logical","logical","logical", "integer",
                                  "numeric", "numeric", "numeric"))
@@ -710,6 +712,7 @@ lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type + log(google$D
 rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle,
                    importance=TRUE, data=google)
 print(rf)
+cat("\nVariables by importance for forests:\n")
 print(importance(rf))
 
 cat("\nBase-rate predictor of ~65% products alive:\n")
@@ -756,10 +759,13 @@ print(head(alive[order(alive$RiskRatio, decreasing=TRUE),], n=10)$Product)
 cat("\nExtract the 10 living products with lowest estimated relative risk:\n")
 print(head(alive[order(alive$RiskRatio, decreasing=FALSE),], n=10)$Product)
 
-
+# Analysis done
 
 cat("\nOptimize the generated graphs by cropping whitespace & losslessly compressing them...\n")
-system('cd ~/wiki/images/google/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
+system(paste('cd ~/wiki/images/google/ &&',
+             'for f in *.png; do convert "$f" -crop',
+             '`nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format',
+             '\'%wx%h%O\' info:` +repage "$f"; done'))
 system("optipng -o9 -fix ~/wiki/images/google/*.png", ignore.stdout = TRUE)
 ~~~
 
