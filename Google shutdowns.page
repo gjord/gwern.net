@@ -7,7 +7,7 @@ status: finished
 belief: likely
 ...
 
-Google has occasionally shutdown services I use, and typically without any serious warning (here one day and gone the next); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the history destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on >=350 Google products and look for predictive variables. I find some, model shutdown patterns, and make some predictions about future shutdowns. Hopefully the results are interesting, useful, or both.
+Google has occasionally shutdown services I use, and typically without any serious warning (here one day and gone the next); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the unique history^[One sobering example I mention in my [link rot page](Archiving URLs): [11% of Arab Spring-related tweets](http://arxiv.org/pdf/1209.3026v1.pdf "'Losing My Revolution: How Many Resources Shared on Social Media Have Been Lost?', SalahEldeen & Nelson 2012") were gone within a year. I do not know what the full dimension of the Reader RSS archive loss will be.] or data casually destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on [350 Google products](#sources) and look for [predictive variables](#variables). I find some while [modeling shutdown patterns](#modeling), and [make some predictions](#predictions) about future shutdowns. Hopefully the results are interesting, useful, or both.
 
 # A glance back
 
@@ -211,7 +211,7 @@ As befits a company which has grown enormously since 1997, we can see other imba
 
 Or looking at openings vs closing in general:
 
-![A scatterplot of all openings vs closings (spike is data collection cutoff)](/images/google/openedvsclosed.png)
+![A scatterplot of all openings vs closings](/images/google/openedvsclosed.png)
 
 That clumpiness around 2009 is suspicious. We can rotate the plot (plot lifetime against shut-down) to get a clearer picture:
 
@@ -313,7 +313,6 @@ AvgDeflatedHits    -0.0651     0.0605   -1.08   0.2819
 It's not that the hit variables are somehow summarizing or proxying for the others, because if we toss in all the non-hits predictors and penalize parameters based on adding complexity without increasing fit, we still wind up with the 3 hit variables:
 
 ~~~{.R}
-Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
 (Intercept)        -23.341     12.034   -1.94   0.0524
 AcquisitionTRUE      0.631      0.350    1.80   0.0712
@@ -494,23 +493,27 @@ These all seem like reasonable products to signal out (to some extent it's surpr
 
 One can't imagine flagship products like Search or Books ever being shut down, so this list is good as far as it goes; I am skeptical about the actual unriskiness of Picasa and Toolbar given their general neglect and old-fashionedness, though I understand why the model favors them (both are pre-2005, proprietary, many hits, and advertising-supported). But let's get more specific; looking at still alive services, what predictions do we make about the odds of a selected batch surviving the next, say, 5 years? We can derive a survival curve for each member of the batch adjusted for each subject's covariates (and they visibly differ from each other):
 
-![Estimated curves for 11 interesting products (AdSense, Scholar, Voice, etc)](/images/google/11-predicted-survivorship-curves.png)
+![Estimated curves for 15 interesting products (AdSense, Scholar, Voice, etc)](/images/google/15-predicted-survivorship-curves.png)
 
 But these are the curves for hypothetical populations all like the specific product in question, starting from Day 0. Can we extract specific estimates assuming the product has survived to today (as by definition these live services have done)? Yes, but extracting them turns out to be a pretty gruesome hack to extract predictions from survival curves; anyway, I derive the following 5-year estimates and as commentary, register my own best guesses as well (I'm [not too bad](Prediction markets) at making predictions):
 
-Product     5-year survival   Personal guess Relative risk vs average (lower=better)
------------ ----------------- -------------- ----------------------------------------------------
-AdSense     100%              [99%][]        0.07
-Alerts      89%               [70%][]        0.21
-Analytics   76%               [97%][]        0.24
-Blogger     100%              [80%][]        0.32
-Calendar    66%               [95%][]        0.36
-Docs        63%               [95%][DOCS]    0.39
-FeedBurner  43%               [35%][]        0.66
-Gmail       96%               [99%][GMAIL]   0.08
-Google+     79%               [85%][]        0.36
-Scholar     92%               [85%][S]       0.10
-Voice[^v]   44%               [50%][]        0.78
+Product        5-year survival   Personal guess Relative risk vs average (lower=better)
+-----------    ----------------- -------------- ----------------------------------------------------
+AdSense        100%              [99%][]        0.07
+Alerts         89%               [70%][]        0.21
+Analytics      76%               [97%][]        0.24
+Blogger        100%              [80%][]        0.32
+Calendar       66%               [95%][]        0.36
+Docs           63%               [95%][DOCS]    0.39
+FeedBurner     43%               [35%][]        0.66
+Gmail          96%               [99%][GMAIL]   0.08
+Google+        79%               [85%][]        0.36
+Scholar        92%               [85%][S]       0.10
+Voice[^v]      44%               [50%][]        0.78
+Chrome         70%               [95%][C]       0.24
+Project Glass  37%               [50%][Glass]   0.10
+Search         96%               [100%][]       0.05
+Translate      92%               [95%][T]       0.78
 
 [99%]: http://predictionbook.com/predictions/17897
 [70%]: http://predictionbook.com/predictions/17898
@@ -523,6 +526,9 @@ Voice[^v]   44%               [50%][]        0.78
 [85%]: http://predictionbook.com/predictions/17905
 [S]: http://predictionbook.com/predictions/17906
 [50%]: http://predictionbook.com/predictions/17907
+[Glass]: http://predictionbook.com/predictions/17911
+[100%]: http://predictionbook.com/predictions/17912
+[T]: http://predictionbook.com/predictions/17913
 
 [^v]: I include Voice even though I don't use it or otherwise find it interesting (my criteria for the other 10) because [speculation](http://www.wired.com/gadgetlab/2013/04/google-voice-future-uncertain/ "Will Google Hang Up on Voice?") has been rife and because a prediction on its future [was requested](http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p2q).
 
@@ -613,20 +619,21 @@ google <- read.csv("http://www.gwern.net/docs/2013-google.csv",
 cat("\nOverview of data:\n")
 print(summary(google[-1]))
 
+dead <- google[google$Dead,]
 png(file="~/wiki/images/google/openedvsclosed.png", width = 1.5*480, height = 1*480)
-plot(google$Ended ~ google$Started, xlab="Opened", ylab="shutdown")
+plot(dead$Ended ~ dead$Started, xlab="Opened", ylab="shutdown")
 invisible(dev.off())
 
 png(file="~/wiki/images/google/openedvslifespan.png", width = 1.5*480, height = 1*480)
-plot(google$Days ~ google$Ended, xlab="Opened", ylab="Total lifetime")
+plot(dead$Days ~ dead$Ended, xlab="Opened", ylab="Total lifetime")
 invisible(dev.off())
 
 png(file="~/wiki/images/google/shutdownsbyyear.png", width = 1.5*480, height = 1*480)
-hist(google[google$Dead,]$Ended, breaks=seq.Date(as.Date("2005-01-01"), as.Date("2014-01-01"), "years"),
+hist(dead$Ended, breaks=seq.Date(as.Date("2005-01-01"), as.Date("2014-01-01"), "years"),
                    main="shutdowns per year", xlab="Year")
 invisible(dev.off())
 png(file="~/wiki/images/google/shutdownsbyyear-kernel.png", width = 1*480, height = 1*480)
-plot(density(as.numeric(google[google$Dead,]$Ended)), main="Shutdown kernel density over time")
+plot(density(as.numeric(dead$Ended)), main="Shutdown kernel density over time")
 invisible(dev.off())
 
 png(file="~/wiki/images/google/startsbyyear.png", width = 1.5*480, height = 1*480)
@@ -635,7 +642,7 @@ hist(google$Started, breaks=seq.Date(as.Date("1997-01-01"), as.Date("2014-01-01"
 invisible(dev.off())
 
 # extract the month of each kill
-m = months(google[google$Dead,]$Ended)
+m = months(dead$Ended)
 # sort by chronological order, not alphabetical
 m_fac = factor(m, levels = month.name)
 # count by month
@@ -768,7 +775,8 @@ cpmodel <- cph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
                data = google, x=TRUE, y=TRUE, surv=TRUE)
 predictees <- subset(google, Product %in% c("Alerts","Blogger","FeedBurner","Scholar",
                                             "Book Search","Voice","Gmail","Analytics",
-                                            "AdSense","Calendar","Alerts","Google+","Docs"))
+                                            "AdSense","Calendar","Alerts","Google+","Docs",
+                                            "Search", "Project Glass", "Chrome", "Translate"))
 conditionalProbability <- function (d, followupUnits) {
     chances <- rep(NA, nrow(d)) # stash results
 
@@ -799,12 +807,12 @@ conditionalProbability <- function (d, followupUnits) {
 # google$ExpectedEvents <- predict(cmodel, newdata=google, type="expected")
 # google$FiveYearSurvival <- conditionalProbability(google, 5*365.25)
 
-# graphs survival curves for each of the 11
-png(file="~/wiki/images/google/11-predicted-survivorship-curves.png", width = 1.5*480, height = 1*480)
+# graphs survival curves for each of the 15
+png(file="~/wiki/images/google/15-predicted-survivorship-curves.png", width = 1.5*480, height = 1*480)
 plot(survfit(cmodel, newdata=predictees),
-     xlab = "time", ylab="Survival", main="Survival curves for 11 selected Google products")
+     xlab = "time", ylab="Survival", main="Survival curves for 15 selected Google products")
 invisible(dev.off())
-cat("\nPredictions for the 11 and also their relative risks:\n")
+cat("\nPredictions for the 15 and also their relative risks:\n")
 ps <- conditionalProbability(predictees, 5*365.25)
 print(data.frame(predictees$Product, ps*100))
 print(round(predict(cmodel, newdata=predictees, type="risk"), digits=2))
