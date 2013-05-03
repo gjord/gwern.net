@@ -3,7 +3,7 @@ title: Predicting Google closures
 description: Analyzing predictors of Google abandoning products; predicting future shutdowns
 created: 28 Mar 2013
 tags: statistics, archiving, predictions
-status: in progress
+status: finished
 belief: likely
 ...
 
@@ -53,8 +53,9 @@ The shutdown of the popular service [Google Reader](!Wikipedia), announced on [1
 
 In the case of Reader, while Reader destroyed the original RSS reader market, there still exist some usable alternatives; the main damage is a shrinkage in the RSS audience as inevitably many users choose not to invest in a new reader or give up, and an irreversible loss of Reader's uniquely comprehensive RSS archives covering back to 2005.
 
-But every shutdown hurts its users to some degree, even if we - currently[^survival] - can rule out the most devastating shutdowns, like a shutdown of Gmail. It would be interesting to see if shutdowns are to some degree predictable, whether there are any obvious patterns, whether common claims about relevant factors can be confirmed, and what the results might suggest for the future.
+But every shutdown hurts its users to some degree, even if we - currently[^survival] - can rule out the most devastating shutdowns, like a shutdown of Gmail. (Although to be fair, Google's practices of undercutting all market incumbents with free services *also* has very large benefits[^benefits], so we shouldn't focus just on [the seen](http://bastiat.org/en/twisatwins.html "'That Which is Seen, and That Which is Not Seen', Frederic Bastiat (1850)").) It would be interesting to see if shutdowns are to some degree predictable, whether there are any obvious patterns, whether common claims about relevant factors can be confirmed, and what the results might suggest for the future.
 
+[^benefits]: Specifically, this can be seen as a sort of issue of reducing [deadweight loss](!Wikipedia): in some of the more successful acquisitions, Google's modus operandi was to take a very expensive or highly premium service and make it completely free while also improving the quality. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Earth) charged money for their services (sometimes a great deal). This leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
 [^survival]: If there is one truth of the tech industry, it's that no giant (except IBM) survives forever. Death rates for all corporations and nonprofits are [very high](Girl Scouts and good governance#fn1), but particularly so for tech. [One blogger](http://shkspr.mobi/blog/2013/03/preparing-for-the-collapse-of-digital-civilization/ "Preparing for the Collapse of Digital Civilization") asks a good question:
 
     > As we come to rely more and more on the Internet, it's becoming clear that there is a real threat posed by tying oneself to a 3rd party service. The Internet is famously designed to route around failures caused by a nuclear strike - but it cannot defend against a service being withdrawn or a company going bankrupt. It's tempting to say that multi-billion dollar companies like Apple and Google will never disappear - but a quick look at history shows Nokia, Enron, Amstrad, Sega, and many more which have fallen from great heights until they are mere shells and no longer offer the services which many people once relied on...I like to pose this question to my photography friends - "What would you do if Yahoo! suddenly decided to delete all your Flickr photos?" Some of them have backups - most faint at the thought of all their work vanishing.
@@ -67,11 +68,19 @@ But every shutdown hurts its users to some degree, even if we - currently[^survi
 > the sole remnants of many \
 > brave warriors' dreams.
 
-I begin with a list of services/APIs/programs that Google has shutdown or abandoned taken from the _Guardian_ article ["Google Keep? It'll probably be with us until March 2017 - on average: The closure of Google Reader has got early adopters and developers worried that Google services or APIs they adopt will just get shut off. An analysis of 39 shuttered offerings says how long they get"](http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed) by Charles Arthur. Arthur's list seemed relatively complete, but I've added in >300 items he missed based on the [Slate graveyard](http://www.slate.com/articles/technology/map_of_the_week/2013/03/google_reader_joins_graveyard_of_dead_google_products.html), Weber's ["Google Fails 36% Of The Time"](http://thenextweb.com/google/2011/10/17/google-fails/), the [Wikipedia category](!Wikipedia "Category:Google acquisitions")/[list](!Wikipedia "List of mergers and acquisitions by Google") for Google acquisitions, the [Wikipedia category](!Wikipedia "Category:Discontinued Google services")/[list](!Wikipedia "List of Google products#Discontinued products and services"), and finally the official [Google History](https://www.google.com/about/company/history/). (The additional shutdowns include many shutdowns predating 2010, suggesting that Arthur's list was biased towards recent shutdowns.)
+I begin with a list of services/APIs/programs that Google has shutdown or abandoned taken from the _Guardian_ article ["Google Keep? It'll probably be with us until March 2017 - on average: The closure of Google Reader has got early adopters and developers worried that Google services or APIs they adopt will just get shut off. An analysis of 39 shuttered offerings says how long they get"](http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed) by Charles Arthur. Arthur's list seemed relatively complete, but I've added in >300 items he missed based on the [Slate graveyard](http://www.slate.com/articles/technology/map_of_the_week/2013/03/google_reader_joins_graveyard_of_dead_google_products.html), Weber's ["Google Fails 36% Of The Time"](http://thenextweb.com/google/2011/10/17/google-fails/)[^Weber], the [Wikipedia category](!Wikipedia "Category:Google acquisitions")/[list](!Wikipedia "List of mergers and acquisitions by Google") for Google acquisitions, the [Wikipedia category](!Wikipedia "Category:Discontinued Google services")/[list](!Wikipedia "List of Google products#Discontinued products and services"), and finally the official [Google History](https://www.google.com/about/company/history/). (The additional shutdowns include many shutdowns predating 2010, suggesting that Arthur's list was biased towards recent shutdowns.)
+
+[^Weber]: Weber's conclusion:
+
+    > We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been canceled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
+
+    In an even more happy accident, my dataset of 350 products yields 123 canceled/shutdown entries, or 35%!
 
 In a few cases, the start dates are well-informed guesses (eg. [Google Translate](https://plus.google.com/u/0/103530621949492999968/posts/fqxuM2SBRQ5)) and dates of abandonment/shut-down are even harder to get due to the lack of attention paid to most (Joga Bonito) and so I infer the date from archived pages on the Internet Archive, news reports, blogs such as [Google Operating System](http://googlesystem.blogspot.com/), the dates of press releases, the shutdown of closely related services (eReader Play based on Reader), source code repositories (AngularJS) etc; some are listed as discontinued (Google Catalogs) but are still supported or were merged into other software (Spreadsheets, Docs, Writely, News Archive) or sold/given to third parties (Flu Shot Finder, App Inventor, Body) or active effort has ceased but the content remains and I do not list those as dead; for cases of acquired software/services that were shutdown, I date the start from Google's purchase.
 
 ### Live products
+
+> "...He often lying broad awake, and yet / Remaining from the body, and apart / In intellect and power and will, hath heard / Time flowing in the middle of the night, / And all things creeping to a day of doom."^[["The Mystic"](http://www.blackcatpoems.com/t/the_mystic.html), _Poems, Chiefly Lyrical_; [Lord Alfred Tennyson](!Wikipedia "Alfred, Lord Tennyson")]
 
 A major criticism of Arthur's post was that it was fundamentally using the wrong data: if you have a dataset of all Google products which have been shutdown, you can make statements like "the average dead Google product lived 1459 days", but you can't infer very much about a live product's life expectancy - because you don't know if it will join the dead products. If, for example, only 1% of products ever died, then 1459 days would lead to a massive underestimates of the average lifespan of all currently living products. With his data, you can only make inferences conditional on a product eventually dying, you cannot make an unconditional inference. Unfortunately, the unconditional question "will it die?" is the real question any Google user wants answered!
 
@@ -136,7 +145,7 @@ It fits reasonably well. (A sigmoid might fit better, but maybe not, given the l
 
 ## Processing
 
-If a product has not ended, the end-date is defined as 01 April 2013 (which is when I stopped compiling products); then the total lifetime is simply the end-date minus the start-date.
+If a product has not ended, the end-date is defined as 01 April 2013 (which is when I stopped compiling products); then the total lifetime is simply the end-date minus the start-date. The final CSV is available at [docs/2013-google.csv](/docs/2013-google.csv). (I welcome corrections from Googlers or Xooglers about any variables like launch or shutdown dates or products directly raising revenue.)
 
 # Analysis
 
@@ -151,30 +160,37 @@ If a product has not ended, the end-date is defined as 01 April 2013 (which is w
 
 ## Descriptive
 
-Loading up our hard-won data and looking at a summary, we can see we have a lot of data to look out
+Loading up our hard-won data and looking at an R summary (for full source code reproducing all graphs and analyses below, see the [appendix](#source-code)), we can see we have a lot of data to look out
 
 ~~~{.R}
-   Product             Dead            Started               Ended                 Hits
- Length:350         Mode :logical   Min.   :1997-09-15   Min.   :2005-03-16   Min.   :2.04e+03
- Class :character   FALSE:227       1st Qu.:2006-06-09   1st Qu.:2012-04-27   1st Qu.:1.55e+05
- Mode  :character   TRUE :123       Median :2008-10-18   Median :2013-04-01   Median :6.50e+05
-                                    Mean   :2008-05-27   Mean   :2012-07-16   Mean   :5.23e+07
-                                    3rd Qu.:2010-05-28   3rd Qu.:2013-04-01   3rd Qu.:4.16e+06
-                                    Max.   :2013-03-20   Max.   :2013-11-01   Max.   :3.86e+09
-      Type       Profit          FLOSS         Acquisition       Social             Days
- other  : 14   Mode :logical   Mode :logical   Mode :logical   Mode :logical   Min.   :   1
- program: 92   FALSE:227       FALSE:300       FALSE:287       FALSE:305       1st Qu.: 746
- service:234   TRUE :123       TRUE :50        TRUE :63        TRUE :45        Median :1340
- thing  : 10                                                                   Mean   :1511
-                                                                               3rd Qu.:2112
-                                                                               Max.   :5677
-    AvgHits         DeflatedHits    AvgDeflatedHits
- Min.   :      1   Min.   :0.0000   Min.   :-36.57
- 1st Qu.:    104   1st Qu.:0.0000   1st Qu.: -0.84
- Median :    466   Median :0.0000   Median : -0.54
- Mean   :  29870   Mean   :0.0073   Mean   : -0.95
- 3rd Qu.:   2980   3rd Qu.:0.0001   3rd Qu.: -0.37
- Max.   :3611940   Max.   :0.7669   Max.   :  0.00
+    Dead            Started               Ended                 Hits               Type
+ Mode :logical   Min.   :1997-09-15   Min.   :2005-03-16   Min.   :2.04e+03   other  : 14
+ FALSE:227       1st Qu.:2006-06-09   1st Qu.:2012-04-27   1st Qu.:1.55e+05   program: 92
+ TRUE :123       Median :2008-10-18   Median :2013-04-01   Median :6.50e+05   service:234
+                 Mean   :2008-05-27   Mean   :2012-07-16   Mean   :5.23e+07   thing  : 10
+                 3rd Qu.:2010-05-28   3rd Qu.:2013-04-01   3rd Qu.:4.16e+06
+                 Max.   :2013-03-20   Max.   :2013-11-01   Max.   :3.86e+09
+   Profit          FLOSS         Acquisition       Social             Days         AvgHits
+ Mode :logical   Mode :logical   Mode :logical   Mode :logical   Min.   :   1   Min.   :      1
+ FALSE:227       FALSE:300       FALSE:287       FALSE:305       1st Qu.: 746   1st Qu.:    104
+ TRUE :123       TRUE :50        TRUE :63        TRUE :45        Median :1340   Median :    466
+                                                                 Mean   :1511   Mean   :  29870
+                                                                 3rd Qu.:2112   3rd Qu.:   2980
+                                                                 Max.   :5677   Max.   :3611940
+  DeflatedHits    AvgDeflatedHits  EarlyGoogle      RelativeRisk    LinearPredictor
+ Min.   :0.0000   Min.   :-36.57   Mode :logical   Min.   : 0.021   Min.   :-3.848
+ 1st Qu.:0.0000   1st Qu.: -0.84   FALSE:317       1st Qu.: 0.597   1st Qu.:-0.517
+ Median :0.0000   Median : -0.54   TRUE :33        Median : 1.262   Median : 0.233
+ Mean   :0.0073   Mean   : -0.95                   Mean   : 1.578   Mean   : 0.000
+ 3rd Qu.:0.0001   3rd Qu.: -0.37                   3rd Qu.: 2.100   3rd Qu.: 0.742
+ Max.   :0.7669   Max.   :  0.00                   Max.   :12.556   Max.   : 2.530
+ ExpectedEvents   FiveYearSurvival
+ Min.   :0.0008   Min.   :0.0002
+ 1st Qu.:0.1280   1st Qu.:0.1699
+ Median :0.2408   Median :0.3417
+ Mean   :0.3518   Mean   :0.3952
+ 3rd Qu.:0.4580   3rd Qu.:0.5839
+ Max.   :2.0456   Max.   :1.3443
 ~~~
 
 <!-- Better yet, a stacked line plot of start/end intervals? something like http://stackoverflow.com/questions/9871043/increasing-the-performance-of-visualising-overlapping-segments? -->
@@ -185,7 +201,7 @@ Loading up our hard-won data and looking at a summary, we can see we have a lot 
 >
 > `Dataset`: "Beware the ides of March."^[ _Google Reader_ Act 1, scene 2, 15-19; with apologies.]
 
-An interesting aspect of the shutdowns is they are unevenly distributed by month as we can see with a chi-squared test (_p_<0.05) and graphically:
+An interesting aspect of the shutdowns is they are unevenly distributed by month as we can see with a chi-squared test (_p_=0.014) and graphically:
 
 ![Shutdowns binned by month of year, revealing peaks in September, March, and April](/images/google/shutdownsbymonth.png)
 
@@ -234,9 +250,9 @@ SocialTRUE        0.7866     0.3888    2.02    0.043
 log(Hits)        -0.3089     0.0567   -5.45  5.1e-08
 ~~~
 
-In log odds, >0 increases the chance of an event (shutdown) and <0 decreases it. So looking at the coefficients, we can venture some interpretations:
+In [log odds](!Wikipedia), >0 increases the chance of an event (shutdown) and <0 decreases it. So looking at the coefficients, we can venture some interpretations:
 
-- Google has a striking past history of screwing up social and then killing them
+- Google has a past history of screwing up social and then killing them
 
     This is interesting for confirming the general belief that Google has handled badly its social properties in the past, but I'm not sure how useful this is for predicting the future: since Larry Page became obsessed with social in 2009, a we might expect anything to do with "social" will now either be merged into Google+ or otherwise be kept on life support far longer than it would before
 - Google is deprecating software products in favor of web services
@@ -259,7 +275,6 @@ Is our popularity metric - or any of the 4 - trustworthy? All this data has been
 Investigating further, hits by themselves do matter:
 
 ~~~{.R}
-Coefficients:
             Estimate Std. Error z value Pr(>|z|)
 (Intercept)   3.4052     0.7302    4.66  3.1e-06
 log(Hits)    -0.3000     0.0549   -5.46  4.7e-08
@@ -269,42 +284,45 @@ Average hits (hits over the product's lifetime) turns out to be even more import
 
 ~~~{.R}
              Estimate Std. Error z value Pr(>|z|)
-(Intercept)    -2.291      1.585   -1.45    0.148
-log(Hits)       0.510      0.209    2.44    0.015
-log(AvgHits)   -0.852      0.216   -3.93  8.4e-05
+(Intercept)    -2.297      1.586   -1.45    0.147
+log(Hits)       0.511      0.209    2.44    0.015
+log(AvgHits)   -0.852      0.217   -3.93  8.3e-05
 ~~~
 
 This is more than a little strange; the higher the average hits, the less likely to be killed makes perfect sense but then, surely the higher the hits, the less likely as well? But no. The mystery deepens as we bring in the third hit metric we developed:
 
 ~~~{.R}
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)        -21.525     11.939   -1.80   0.0714
-log(Hits)            2.048      0.979    2.09   0.0364
-log(AvgHits)        -1.916      0.707   -2.71   0.0067
-log(DeflatedHits)   -0.455      0.277   -1.64   0.1007
+(Intercept)        -21.589     11.955   -1.81   0.0709
+log(Hits)            2.054      0.980    2.10   0.0362
+log(AvgHits)        -1.921      0.708   -2.71   0.0067
+log(DeflatedHits)   -0.456      0.277   -1.64   0.1001
 ~~~
 
 And sure enough, if we run all 4 hit variables, 3 of them turn out to be statistically-significant and large:
 
 ~~~{.R}
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)       -24.6191    12.4528   -1.98   0.0480
-log(Hits)           2.2845     1.0187    2.24   0.0249
-log(AvgHits)       -2.0892     0.7392   -2.83   0.0047
-log(DeflatedHits)  -0.5370     0.2911   -1.84   0.0651
-AvgDeflatedHits    -0.0650     0.0605   -1.07   0.2824
+(Intercept)       -24.6898    12.4696   -1.98   0.0477
+log(Hits)           2.2908     1.0203    2.25   0.0248
+log(AvgHits)       -2.0943     0.7405   -2.83   0.0047
+log(DeflatedHits)  -0.5383     0.2914   -1.85   0.0647
+AvgDeflatedHits    -0.0651     0.0605   -1.08   0.2819
 ~~~
 
 It's not that the hit variables are somehow summarizing or proxying for the others, because if we toss in all the non-hits predictors and penalize parameters based on adding complexity without increasing fit, we still wind up with the 3 hit variables:
 
 ~~~{.R}
+Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)        -23.274     12.017   -1.94   0.0528
-AcquisitionTRUE      0.631      0.350    1.80   0.0711
+(Intercept)        -23.341     12.034   -1.94   0.0524
+AcquisitionTRUE      0.631      0.350    1.80   0.0712
 SocialTRUE           0.907      0.394    2.30   0.0213
-log(Hits)            2.198      0.983    2.24   0.0254
-log(AvgHits)        -2.063      0.711   -2.90   0.0037
-log(DeflatedHits)   -0.491      0.280   -1.75   0.0797
+log(Hits)            2.204      0.985    2.24   0.0252
+log(AvgHits)        -2.068      0.713   -2.90   0.0037
+log(DeflatedHits)   -0.492      0.280   -1.75   0.0793
+...
+AIC: 396.9
 ~~~
 
 Most of the predictors were removed as not helping a lot, 3 of the 4 hit variables survived (but not the both averaged & deflated hits, suggesting it wasn't adding much in combination), and we see two of the better predictors from earlier survived: whether something was an acquisition and whether it was social.
@@ -313,7 +331,7 @@ The original hits variable has the wrong sign, as expected of data leakage; now 
 
 ### Survival curve
 
-The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration of logistic-style approaches. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/). The initial characterization gives us an optimistic median of 2824 days (note that this is much higher than Arthur's mean of 1459 days because it includes products which were never canceled and I made a much stronger effort to collect older pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound.
+The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration of logistic-style approaches. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/). The initial characterization gives us an optimistic median of 2824 days (note that this is much higher than Arthur's mean of 1459 days because it includes products which were never canceled and I made a much stronger effort to collect older pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound:
 
 ~~~{.R}
 records   n.max n.start  events  median 0.95LCL 0.95UCL
@@ -383,8 +401,7 @@ GLOBAL                 NA 2.5358 0.960
 My suspicion lingers, though, so I threw in another covariate (`EarlyGoogle`): whether a product was released before or after 2005. Does this add predictive value above and over simply knowing that a product is really old, and does the regression still pass the proportional assumption check? Apparently yes to both:
 
 ~~~{.R}
-...
-                   coef     exp(coef) se(coef) z      Pr(>|z|)
+                     coef exp(coef) se(coef)     z Pr(>|z|)
 AcquisitionTRUE    0.1674    1.1823   0.2553  0.66    0.512
 FLOSSTRUE          0.1034    1.1090   0.2922  0.35    0.723
 ProfitTRUE        -0.1949    0.8230   0.2318 -0.84    0.401
@@ -395,6 +412,13 @@ Typething          1.6200    5.0529   1.0234  1.58    0.113
 log(DeflatedHits) -0.2645    0.7676   0.0375 -7.06  1.7e-12
 EarlyGoogleTRUE   -1.0061    0.3656   0.5279 -1.91    0.057
 ...
+Concordance= 0.728  (se = 0.028 )
+Rsquare= 0.237   (max possible= 0.974 )
+Likelihood ratio test= 94.7  on 9 df,   p=2.22e-16
+Wald test            = 76.7  on 9 df,   p=7.2e-13
+Score (logrank) test = 83.8  on 9 df,   p=2.85e-14
+~~~
+~~~{.R}
                        rho   chisq     p
 ...
 EarlyGoogleTRUE   -0.05167 0.51424 0.473
@@ -425,22 +449,24 @@ Because I can, I was curious how [random forests](!Wikipedia) might stack up to 
 I trained a random forest as a classifier, yielding reasonable looking error rates:
 
 ~~~{.R}
+               Type of random forest: classification
+                     Number of trees: 500
 No. of variables tried at each split: 2
 
-        OOB estimate of  error rate: 32%
+        OOB estimate of  error rate: 31.71%
 Confusion matrix:
       FALSE TRUE class.error
-FALSE   221    6     0.02643
-TRUE    106   17     0.86179
+FALSE   216   11     0.04846
+TRUE    100   23     0.81301
 ~~~
 
-To compare the random forest accuracy with the logistic and survival model accuracy, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. The base-rate predictor got 65% right by definition, the logistic managed to score 69% correct (bootstrap 95% CI: 66-72%), and the random forest got up to 71% (63-75%). These rates are not quite as bad as they may seem: I excluded the lifetime length (`Days`) from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage); so there's predictive power being left on the table. Regardless, there's no real reason to switch to the more complex random forests just for 2%.
+To compare the random forest accuracy with the logistic and survival model accuracy, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. The base-rate predictor got 65% right by definition, the logistic managed to score 68% correct ([bootstrap](!Wikipedia "Bootstrapping (statistics)")^[Specifically: building a logistic model on a bootstrap sample and then testing accuracy against full Google dataset.] 95% CI: 66-72%), and the random forest similarly got 68% (67-78%). These rates are not quite as bad as they may seem: I excluded the lifetime length (`Days`) from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage); so there's predictive power being left on the table. (There are survival analysis-specific ways of applying random forests, apparently; I may try them out in the future.) Regardless, there's no real reason to switch to the more complex random forests.
 
 ## Predictions
 
-Before making explicit predictions of the future, let's look at the relative risks for products which haven't been shutdown. What does the Cox model consider the 10 most risky and likely to be shutdown products?
+Before making explicit predictions of the future, let's look at the [relative risks](!Wikipedia) for products which haven't been shutdown. What does the Cox model consider the 10 most risky and likely to be shutdown products?
 
-It lists (in descending order of riskiness):
+It lists (in decreasingly risky order):
 
 1. Schemer
 2. Boutiques
@@ -453,7 +479,7 @@ It lists (in descending order of riskiness):
 9. Cloud Messaging
 10. Correlate
 
-These all seem like reasonable products to signal out (to some extent it's surprising Correlate and Boutiques still exist), except for Cloud Messaging which seems to be a key part of a lot of Android. And likewise, the list of the 10 *least* risky (in increasingly risky order):
+These all seem like reasonable products to signal out (to some extent it's surprising Correlate and Boutiques still exist), except for Cloud Messaging which seems to be a key part of a lot of Android. And likewise, the list of the 10 *least* risky (increasingly risky order):
 
 1. Search
 2. Translate
@@ -466,82 +492,45 @@ These all seem like reasonable products to signal out (to some extent it's surpr
 9. Toolbar
 10. AdSense
 
-One can't imagine flagship products like Search or Books ever being shut down, so this list is good as far as it goes; I am skeptical about the actual unriskiness of Picasa and Toolbar given their general neglect and old-fashionedness, though I understand why the model favors them (both are pre-2005, proprietary, many hits, and advertising-supported).
+One can't imagine flagship products like Search or Books ever being shut down, so this list is good as far as it goes; I am skeptical about the actual unriskiness of Picasa and Toolbar given their general neglect and old-fashionedness, though I understand why the model favors them (both are pre-2005, proprietary, many hits, and advertising-supported). But let's get more specific; looking at still alive services, what predictions do we make about the odds of a selected batch surviving the next, say, 5 years? We can derive a survival curve for each member of the batch adjusted for each subject's covariates (and they visibly differ from each other):
 
+![Estimated curves for 11 interesting products (AdSense, Scholar, Voice, etc)](/images/google/11-predicted-survivorship-curves.png)
 
-TODO: lifespan predictions for
-cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits) + EarlyGoogle,  data = google, model=TRUE)
-predictees <- subset(google, Product %in% c("Alerts","Blogger","FeedBurner","Scholar","Book Search","Voice","Search","Gmail","Analytics","AdSense","Calendar","Alerts","Google+","Docs"))
-# predictees$Days <- predictees$Days + (365.25 * 500)
-predict(cmodel, newdata=predictees, type="expected")
+But these are the curves for hypothetical populations all like the specific product in question, starting from Day 0. Can we extract specific estimates assuming the product has survived to today (as by definition these live services have done)? Yes, but extracting them turns out to be a pretty gruesome hack to extract predictions from survival curves; anyway, I derive the following 5-year estimates and as commentary, register my own best guesses as well (I'm [not too bad](Prediction markets) at making predictions):
 
-Original: [1] 0.32318 0.94215 1.05876 1.41125 1.58263 1.69739 1.25353 0.33796 0.25589 0.42647 0.09363 1.06958
-Expanded: [1] 0.32318 0.94215 1.05876 1.41125 1.58263 1.69739 1.25353 0.33796 0.25589 0.42647 0.09363 0.27806 1.06958
+Product     5-year survival   Personal guess Relative risk vs average (lower=better)
+----------- ----------------- -------------- ----------------------------------------------------
+AdSense     100%              [99%][]        0.07
+Alerts      89%               [70%][]        0.21
+Analytics   76%               [97%][]        0.24
+Blogger     100%              [80%][]        0.32
+Calendar    66%               [95%][]        0.36
+Docs        63%               [95%][DOCS]    0.39
+FeedBurner  43%               [35%][]        0.66
+Gmail       96%               [99%][GMAIL]   0.08
+Google+     79%               [85%][]        0.36
+Scholar     92%               [85%][S]       0.10
+Voice[^v]   44%               [50%][]        0.78
 
-TODO: Brevio's FunF?
+[99%]: http://predictionbook.com/predictions/17897
+[70%]: http://predictionbook.com/predictions/17898
+[97%]: http://predictionbook.com/predictions/17899
+[80%]: http://predictionbook.com/predictions/17900
+[95%]: http://predictionbook.com/predictions/17901
+[DOCS]: http://predictionbook.com/predictions/17902
+[35%]: http://predictionbook.com/predictions/17903
+[GMAIL]: http://predictionbook.com/predictions/17904
+[85%]: http://predictionbook.com/predictions/17905
+[S]: http://predictionbook.com/predictions/17906
+[50%]: http://predictionbook.com/predictions/17907
 
-http://www.wired.com/gadgetlab/2013/04/google-voice-future-uncertain/ http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p28
+[^v]: I include Voice even though I don't use it or otherwise find it interesting (my criteria for the other 10) because [speculation](http://www.wired.com/gadgetlab/2013/04/google-voice-future-uncertain/ "Will Google Hang Up on Voice?") has been rife and because a prediction on its future [was requested](http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p2q).
 
-Google products I regularly use; what are the predictions and how well can I cope with any shutdowns?
+One immediately spots that some of the model's estimates seem questionable in the light of our greater knowledge of Google. I am more pessimistic about the much neglected Alerts. And I think it's absurd to give any serious credence Analytics or Calendar or Docs being at risk (Analytics is a key part of the advertising infrastructure, and Calendar a sine qua non of any business software suite much less the core of said suite itself). But some are more forgivable - Google *does* have a bad track record with social media so skepticism about Google+ seems warranted - and on FeedBurner or Voice, I agree with the model that considerable uncertainty clouds their future. The extreme optimism about Blogger is interesting since before I began this project, I thought it was slowly dying and would inevitably shut down in a few years; but as I researched the timelines for various Google products, I noticed that Blogger seems to be favored in some ways: such as getting exclusive access to a few otherwise shutdown things (eg. Scribe & Friend Connect); it was the ground zero for Google's Dynamic Views skin redesign which was applied globally; and Google is still heavily using Blogger for all its official announcements even into the Google+ era. But overall, these are pretty sane-sounding estimates!
 
-1. Search
-2. Gmail
-3. Analytics
-4. AdSense
-5. Calendar
-6. Alerts
-7. JavaScript CDN
-8. Google+
-9. Docs (Spreadsheet)
-
-# TODO
-
-Deadweight loss: in some of the more successful acquisitions, Google's modus operandi was to take a paid or premium service and make it free. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Eart) charged money for their services (sometimes a great deal). this leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
-
-maybe blogger is not as doomed as I thought. it seems to be favored with getting exclusive access to quite a few otherwise shutdown things, for example, Scribe, Friend Connect, it was the ground zero for Google's Dynamic Views skin redesign, and google is still heavily using blogger for all the official announcements even into the google+ era
-
-> We discovered there's been a total of about 251 independent Google products since 1998 (avoiding add-on features and experiments that merged into other projects), and found that 90, or approximately 36% of them have been canceled. Awesomely, we also collected 8 major flops and 14 major successes, which means that 36% of its high-profile products are failures. That's quite the coincidence! NOTE: We did not manipulate data to come to this conclusion. It was a happy accident.
-http://www.alltechienews.com/posts/google-fails-36-of-the-time
-
-interesting the patterns showing up in these shutdowns.
-you can see the wall of shutdowns when Page became CEO; you can see a clump of shut downs when Chromium was launched and Google ceased caring about Firefox support and extensions; you can see its pre-YouTube video efforts; and you can see a whole rash of failed social media stuff
-plus there are like 4 or 5 things which all got rolled into Docs+Drive
-
-> focus, focus, focus
-
-Not really. the docs+drive thing is just logical; the Firefox stuff is interesting and sorta ruthless competition; the YouTube-competitor and social media stuff are just failures.
-
-
-TODO: assess usefulness; abortive efforts at graphing survival curves by covariate:
-
-google.social <- with(google, data.frame(Social=c(0,1), FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
-                                         Type=c("program","program"),DeflatedHits=c(0.007335,0.007335)))
-plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
-                                             xlab="Days", ylab="Proportion not shutdown")
-legend("bottomleft", legend=c("Social = no", "Social = yes"), lty=c(1 ,2), inset=0.02)
-http://i.imgur.com/LMiI6cP.png
-
-google.hits <- with(google, data.frame(Social=c(0.5,0.5),FLOSS=c(0.5,0.5),Profit=c(0.5,0.5),Acquisition=c(0.5,0.5),
-                                         Type=c("program","program"),
-                                         DeflatedHits=c(max(google$DeflatedHits), min(google$DeflatedHits))))
-plot(survfit(cmodel, newdata=google.social), conf.int=FALSE, lty=c(1, 2), ylim=c(0.6, 1),
-                                             xlab="Days", ylab="Proportion not shutdown")
-legend("bottomleft", legend=c("Predicted w/max observed deflated hits", "* minimum observed hits"), lty=c(1 ,2), inset=0.02)
-
+(I welcome statistical corrections or elaborations if accompanied by reproducible R source code.)
 
 # Followups
-
-It seems like it might be worthwhile to continue compiling a database and do a followup analysis in 5 years (2018), by which point we might guess another 100 products will have been shut down (going by the >30 casualties of 2011 and 2012) and the covariate estimates rendered that much sharper. So I've set up 2 Google Alerts searches for compiling updates:
-
-- `google ("shut down" OR "shut down" "shutting" OR "closing" OR "killing" OR "abandoning" OR "leaving")`
-- `google (launch OR release OR announce)`
-
-# See also
-
-- [Archive Team](!Wikipedia)
-- [Archiving URLs]()
-- [Wikipedia and Knol]()
-
 
 > Show me the person who doesn't die - \
 > death remains impartial. \
@@ -552,14 +541,24 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 > those visiting this sorrowful place \
 > the pine wind slays with grief.^[Han-Shan, #50]
 
+It seems like it might be worthwhile to continue compiling a database and do a followup analysis in 5 years (2018), by which point we can judge how my predictions stacked up against the model, and also because ~100 products may have been shut down (going by the >30 casualties of 2011 and 2012) and the survival curve & covariate estimates rendered that much sharper. So to compile updates, I've:
 
+- set up 2 Google Alerts searches:
+
+    - `google ("shut down" OR "shut down" "shutting" OR "closing" OR "killing" OR "abandoning" OR "leaving")`
+    - `google (launch OR release OR announce)`
+- and subscribed to the aforementioned Google Operating System blog
+
+# See also
+
+- [Archive Team](!Wikipedia)
+- [Archiving URLs]()
+- [Wikipedia and Knol]()
 
 <!--
 TODO: finished?
-- run `markdown-lint`
-- link in index.page
-- Ping the dead service sources like http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed http://www.theatlantic.com/technology/archive/2013/03/finale-for-now-on-googles-self-inflicted-trust-problem/274286/ http://www.slate.com/articles/technology/technology/2013/03/google_reader_why_did_everyone_s_favorite_rss_program_die_what_free_web.html
-- https://news.ycombinator.com/item?id=5495523
+- Ping the dead service sources like http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed http://www.theatlantic.com/technology/archive/2013/03/finale-for-now-on-googles-self-inflicted-trust-problem/274286/ http://www.slate.com/articles/technology/technology/2013/03/google_reader_why_did_everyone_s_favorite_rss_program_die_what_free_web.html http://thenextweb.com/google/2011/10/17/google-fails/
+- ping https://news.ycombinator.com/item?id=5495523 http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p2q
 - thank gostips@gmail.com / http://googlesystem.blogspot.com/
 - ask for help http://www.reddit.com/r/MachineLearning/ / Coursera 'Data Analysis' forum
 -->
@@ -600,6 +599,7 @@ invisible(dev.off())
 google <- read.csv("http://www.gwern.net/docs/2013-google.csv",
                     colClasses=c("character","logical","Date","Date","double","factor",
                                  "logical","logical","logical","logical", "integer",
+                                 "numeric", "numeric", "numeric", "logical", "numeric",
                                  "numeric", "numeric", "numeric"))
 # google$Days <- as.integer(google$Ended - google$Started)
 # derive all the Google index-variables
@@ -608,7 +608,6 @@ google <- read.csv("http://www.gwern.net/docs/2013-google.csv",
 ## divide total hits for each product by total estimated size of Google index when that product started
 # google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
 ## Finally, let's combine the two strategies: deflate and then average.
-# google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
 # google$AvgDeflatedHits <- log(google$AvgHits) / log(google$DeflatedHits)
 
 cat("\nOverview of data:\n")
@@ -685,7 +684,8 @@ print(cox.zph(cmodel))
 
 cat("\nPrimitive check for regime change (re-regress & check):\n")
 google$EarlyGoogle <- (as.POSIXlt(google$Started)$year+1900) < 2005
-cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits) + EarlyGoogle,
+cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
+                                   log(DeflatedHits) + EarlyGoogle,
                 data = google)
 print(summary(cmodel))
 print(cox.zph(cmodel))
@@ -707,9 +707,11 @@ invisible(dev.off())
 
 cat("\nTrain some random forests for prediction:\n")
 library(randomForest)
-lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle + Days,
+lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type +
+                     log(google$DeflatedHits) + EarlyGoogle + Days,
                    data=google, family="binomial")
-rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(google$DeflatedHits) + EarlyGoogle,
+rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social +
+                                     Type + log(google$DeflatedHits) + EarlyGoogle,
                    importance=TRUE, data=google)
 print(rf)
 cat("\nVariables by importance for forests:\n")
@@ -759,9 +761,57 @@ print(head(alive[order(alive$RiskRatio, decreasing=TRUE),], n=10)$Product)
 cat("\nExtract the 10 living products with lowest estimated relative risk:\n")
 print(head(alive[order(alive$RiskRatio, decreasing=FALSE),], n=10)$Product)
 
+cat("\nBegin calculating specific numerical predictions about remaining lifespans..\n")
+library(rms)
+cpmodel <- cph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
+                                  log(DeflatedHits) + EarlyGoogle,
+               data = google, x=TRUE, y=TRUE, surv=TRUE)
+predictees <- subset(google, Product %in% c("Alerts","Blogger","FeedBurner","Scholar",
+                                            "Book Search","Voice","Gmail","Analytics",
+                                            "AdSense","Calendar","Alerts","Google+","Docs"))
+conditionalProbability <- function (d, followupUnits) {
+    chances <- rep(NA, nrow(d)) # stash results
+
+    for (i in 1:nrow(d)) {
+
+        # extract chance of particular subject surviving as long as it has:
+        beginProb <- survest.cph(cpmodel, d[i,], times=(d[i,]$Days))$surv
+        if (length(beginProb)==0) { beginProb <- 1 } # set to a default
+
+        tmpFollowup <- followupUnits # reset in each for loop
+        while (TRUE) {
+            # extract chance of subject surviving as long as it has + an arbitrary additional time-units
+            endProb <- survest.cph(cpmodel, d[i,], times=(d[i,]$Days + tmpFollowup))$surv
+            # survival curve may not reach that far! 'survexp returns 'numeric(0)' if it doesn't;
+            # so we shrink down 1 day and try again until 'survexp' *does* return a usable answer
+            if (length(endProb)==0) { tmpFollowup <- tmpFollowup - 1} else { break }
+        }
+
+        # if 50% of all subjects survive to time t, and 20% of all survive to time t+100, say, what chance
+        # does a survivor - at exactly time t - have of making it to time t+100? 40%: 0.20 / 0.50 = 0.40
+        chances[i] <- endProb / beginProb
+    }
+    return(chances)
+}
+## the risks and survival estimate have been stashed in the original CSV to save computation
+# google$RelativeRisk <- predict(cmodel, newdata=google, type="risk")
+# google$LinearPredictor <- predict(cmodel, newdata=google, type="lp")
+# google$ExpectedEvents <- predict(cmodel, newdata=google, type="expected")
+# google$FiveYearSurvival <- conditionalProbability(google, 5*365.25)
+
+# graphs survival curves for each of the 11
+png(file="~/wiki/images/google/11-predicted-survivorship-curves.png", width = 1.5*480, height = 1*480)
+plot(survfit(cmodel, newdata=predictees),
+     xlab = "time", ylab="Survival", main="Survival curves for 11 selected Google products")
+invisible(dev.off())
+cat("\nPredictions for the 11 and also their relative risks:\n")
+ps <- conditionalProbability(predictees, 5*365.25)
+print(data.frame(predictees$Product, ps*100))
+print(round(predict(cmodel, newdata=predictees, type="risk"), digits=2))
+
 # Analysis done
 
-cat("\nOptimize the generated graphs by cropping whitespace & losslessly compressing them...\n")
+cat("\nOptimizing the generated graphs by cropping whitespace & losslessly compressing them...\n")
 system(paste('cd ~/wiki/images/google/ &&',
              'for f in *.png; do convert "$f" -crop',
              '`nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format',
