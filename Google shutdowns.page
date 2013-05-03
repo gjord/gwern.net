@@ -209,15 +209,11 @@ As befits a company which has grown enormously since 1997, we can see other imba
 
 ![Starts binned by year](/images/google/startsbyyear.png)
 
-Or looking at openings vs closing in general:
-
-![A scatterplot of all openings vs closings](/images/google/openedvsclosed.png)
-
-That clumpiness around 2009 is suspicious. We can rotate the plot (plot lifetime against shut-down) to get a clearer picture:
+We can plot lifetime against shut-down to get a clearer picture:
 
 ![All products scatter-plotted date of opening vs lifespan](/images/google/openedvslifespan.png)
 
-To emphasize this bulge of shutdowns in late 2011-2012, we can plot the histogram of dead products by year and also a kernel density:
+That clumpiness around 2009 is suspicious.  To emphasize this bulge of shutdowns in late 2011-2012, we can plot the histogram of dead products by year and also a kernel density:
 
 ![Shutdown density binned by year](/images/google/shutdownsbyyear.png)
 
@@ -620,12 +616,9 @@ cat("\nOverview of data:\n")
 print(summary(google[-1]))
 
 dead <- google[google$Dead,]
-png(file="~/wiki/images/google/openedvsclosed.png", width = 1.5*480, height = 1*480)
-plot(dead$Ended ~ dead$Started, xlab="Opened", ylab="shutdown")
-invisible(dev.off())
 
 png(file="~/wiki/images/google/openedvslifespan.png", width = 1.5*480, height = 1*480)
-plot(dead$Days ~ dead$Ended, xlab="Opened", ylab="Total lifetime")
+plot(dead$Days ~ dead$Ended, xlab="Shutdown", ylab="Total lifespan")
 invisible(dev.off())
 
 png(file="~/wiki/images/google/shutdownsbyyear.png", width = 1.5*480, height = 1*480)
