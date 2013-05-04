@@ -682,7 +682,10 @@ print(table(hafu$Hair, hafu$Eye), zero.print=".")
 # with(hafu[hafu$Mother=="Japanese",], print(table(Hair, Eyes, Father), zero.print="."))
 
 # optimize the generated graphs by cropping whitespace & losslessly compressing them
-system('cd ~/wiki/images/hafu/ && for f in *.png; do convert "$f" -crop `nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format \'%wx%h%O\' info:` +repage "$f"; done')
+system(paste('cd ~/wiki/images/hafu/ &&',
+             'for f in *.png; do convert "$f" -crop',
+             '`nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format',
+             '\'%wx%h%O\' info:` +repage "$f"; done'))
 system("optipng -o9 -fix ~/wiki/images/hafu/*.png", ignore.stdout = TRUE)
 ~~~
 
