@@ -56,7 +56,7 @@ In the case of Reader, while Reader destroyed the original RSS reader market, th
 But every shutdown hurts its users to some degree, even if we - currently[^survival] - can rule out the most devastating shutdowns, like a shutdown of Gmail. (Although to be fair, Google's practices of undercutting all market incumbents with free services *also* has very large benefits[^benefits], so we shouldn't focus just on [the seen](http://bastiat.org/en/twisatwins.html "'That Which is Seen, and That Which is Not Seen', Frederic Bastiat (1850)").) It would be interesting to see if shutdowns are to some degree predictable, whether there are any obvious patterns, whether common claims about relevant factors can be confirmed, and what the results might suggest for the future.
 
 [^benefits]: Specifically, this can be seen as a sort of issue of reducing [deadweight loss](!Wikipedia): in some of the more successful acquisitions, Google's modus operandi was to take a very expensive or highly premium service and make it completely free while also improving the quality. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Earth) charged money for their services (sometimes a great deal). This leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
-[^survival]: If there is one truth of the tech industry, it's that no giant (except IBM) survives forever. Death rates for all corporations and nonprofits are [very high](Girl Scouts and good governance#fn1), but particularly so for tech. [One blogger](http://shkspr.mobi/blog/2013/03/preparing-for-the-collapse-of-digital-civilization/ "Preparing for the Collapse of Digital Civilization") asks a good question:
+[^survival]: Gmail seems like a service for the ages; but once upon a time, so did [Hotmail](!Wikipedia) (even in 2012, 8 years after Gmail's launch, still the #2 email service) - yet, RIP Hotmail (1996-2013). If there is one truth of the tech industry, it's that no giant (except IBM) survives forever. Death rates for all corporations and nonprofits are [very high](Girl Scouts and good governance#fn1), but particularly so for tech. [One blogger](http://shkspr.mobi/blog/2013/03/preparing-for-the-collapse-of-digital-civilization/ "Preparing for the Collapse of Digital Civilization") asks a good question:
 
     > As we come to rely more and more on the Internet, it's becoming clear that there is a real threat posed by tying oneself to a 3rd party service. The Internet is famously designed to route around failures caused by a nuclear strike - but it cannot defend against a service being withdrawn or a company going bankrupt. It's tempting to say that multi-billion dollar companies like Apple and Google will never disappear - but a quick look at history shows Nokia, Enron, Amstrad, Sega, and many more which have fallen from great heights until they are mere shells and no longer offer the services which many people once relied on...I like to pose this question to my photography friends - "What would you do if Yahoo! suddenly decided to delete all your Flickr photos?" Some of them have backups - most faint at the thought of all their work vanishing.
 
@@ -199,7 +199,7 @@ Loading up our hard-won data and looking at an R summary (for full source code r
 
 > `Google Reader`: "Who is it in the blogs that calls on me? / I hear a tongue shriller than all the YouTubes / Cry 'Reader!' Speak, Reader is turn'd to hear."
 >
-> `Dataset`: "Beware the ides of March."^[ _Google Reader_ Act 1, scene 2, 15-19; with apologies.]
+> `Dataset`: "Beware the ides of [March](http://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html "'A second spring of cleaning', 13 March 2013")."^[[_Google Reader_](!Wikipedia "Julius Caesar (play)") Act 1, scene 2, 15-19; with apologies.]
 
 An interesting aspect of the shutdowns is they are unevenly distributed by month as we can see with a chi-squared test (_p_=0.014) and graphically:
 
@@ -560,9 +560,6 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 <!--
 TODO: finished?
 - Ping the dead service sources like http://www.guardian.co.uk/technology/2013/mar/22/google-keep-services-closed http://www.theatlantic.com/technology/archive/2013/03/finale-for-now-on-googles-self-inflicted-trust-problem/274286/ http://www.slate.com/articles/technology/technology/2013/03/google_reader_why_did_everyone_s_favorite_rss_program_die_what_free_web.html http://thenextweb.com/google/2011/10/17/google-fails/
-- ping https://news.ycombinator.com/item?id=5495523 http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8p2q
-- thank gostips@gmail.com / http://googlesystem.blogspot.com/
-- ask for help http://www.reddit.com/r/MachineLearning/ / Coursera 'Data Analysis' forum
 -->
 
 <!--
