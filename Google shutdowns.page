@@ -7,7 +7,7 @@ status: finished
 belief: likely
 ...
 
-Google has occasionally shutdown services I use, and typically without any serious warning (here one day and gone the next); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the unique history^[One sobering example I mention in my [link rot page](Archiving URLs): [11% of Arab Spring-related tweets](http://arxiv.org/pdf/1209.3026v1.pdf "'Losing My Revolution: How Many Resources Shared on Social Media Have Been Lost?', SalahEldeen & Nelson 2012") were gone within a year. I do not know what the full dimension of the Reader RSS archive loss will be.] or data casually destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on [350 Google products](#sources) and look for [predictive variables](#variables). I find some while [modeling shutdown patterns](#modeling), and [make some predictions](#predictions) about future shutdowns. Hopefully the results are interesting, useful, or both.
+Google has occasionally shutdown services I use, and not always with serious warning (many tech companies are like that - here one day and gone the next); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the unique history^[One sobering example I mention in my [link rot page](Archiving URLs): [11% of Arab Spring-related tweets](http://arxiv.org/pdf/1209.3026v1.pdf "'Losing My Revolution: How Many Resources Shared on Social Media Have Been Lost?', SalahEldeen & Nelson 2012") were gone within a year. I do not know what the full dimension of the Reader RSS archive loss will be.] or data casually destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on [350 Google products](#sources) and look for [predictive variables](#variables). I find some while [modeling shutdown patterns](#modeling), and [make some predictions](#predictions) about future shutdowns. Hopefully the results are interesting, useful, or both.
 
 # A glance back
 
@@ -201,9 +201,17 @@ Loading up our hard-won data and looking at an R summary (for full source code r
 >
 > `Dataset`: "Beware the ides of [March](http://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html "'A second spring of cleaning', 13 March 2013")."^[[_Google Reader_](!Wikipedia "Julius Caesar (play)") Act 1, scene 2, 15-19; with apologies.]
 
-An interesting aspect of the shutdowns is they are unevenly distributed by month as we can see with a chi-squared test (_p_=0.014) and graphically:
+An interesting aspect of the shutdowns is they are unevenly distributed by month as we can see with a chi-squared test (_p_=0.014) and graphically, with a major spike in September and then March/April[^by-months-vacation]:
 
 ![Shutdowns binned by month of year, revealing peaks in September, March, and April](/images/google/shutdownsbymonth.png)
+
+[^by-months-vacation]: Xoogler [Rachel Kroll](http://rachelbythebay.com/) [on this spike](http://news.ycombinator.com/item?id=5653934):
+
+    > I have some thoughts about the spikes on the death dates.
+    >
+    > September: all of the interns go back to school. These people who exist on the fringes of the system manage to get a lot of work done, possibly because they are free of most of the overhead facing real employees. Once they leave, it's up to the FTEs [Full Time Employee] to own whatever was created, and that doesn't always work. I wish I could have kept some of them and swapped them for some of the full-timers.
+    >
+    > March/April: Annual bonus time? That's what it used to be, at least, and I say this as someone who quit in May, and that was no accident. Same thing: people leave, and that dooms whatever they left.
 
 As befits a company which has grown enormously since 1997, we can see other imbalances over time: eg. Google launched very few products from 1997-2004, and many more from 2005 and on:
 
@@ -556,6 +564,10 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 - [Archive Team](!Wikipedia)
 - [Archiving URLs]()
 - [Wikipedia and Knol]()
+
+# External links
+
+- Comments: [Hacker News](http://news.ycombinator.com/item?id=5653748)
 
 <!--
 TODO: finished?
