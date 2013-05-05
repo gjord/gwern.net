@@ -7,13 +7,13 @@ status: finished
 belief: likely
 ...
 
-Google has occasionally shutdown services I use, and not always with serious warning (many tech companies are like that - here one day and gone the next); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the unique history^[One sobering example I mention in my [link rot page](Archiving URLs): [11% of Arab Spring-related tweets](http://arxiv.org/pdf/1209.3026v1.pdf "'Losing My Revolution: How Many Resources Shared on Social Media Have Been Lost?', SalahEldeen & Nelson 2012") were gone within a year. I do not know what the full dimension of the Reader RSS archive loss will be.] or data casually destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on [350 Google products](#sources) and look for [predictive variables](#variables). I find some while [modeling shutdown patterns](#modeling), and [make some predictions](#predictions) about future shutdowns. Hopefully the results are interesting, useful, or both.
+Google has occasionally shutdown services I use, and not always with serious warning (many tech companies are like that - here one day and gone the next - though Google is one of the least-worst); this is frustrating and tedious. Naturally, we are preached at by apologists that Google owes us nothing and if it's a problem then it's all our fault and we should've prophesied the future better (and too bad about all the ordinary people who may be screwed over or the unique history^[One sobering example I mention in my [link rot page](Archiving URLs): [11% of Arab Spring-related tweets](http://arxiv.org/pdf/1209.3026v1.pdf "'Losing My Revolution: How Many Resources Shared on Social Media Have Been Lost?', SalahEldeen & Nelson 2012") were gone within a year. I do not know what the full dimension of the Reader RSS archive loss will be.] or data casually destroyed). But how can we have any sort of rational expectation if we lack any data or ideas about how long Google will run anything or why or how it chooses to do what it does? So in the following essay, I collect data on [350 Google products](#sources) and look for [predictive variables](#variables). I find some while [modeling shutdown patterns](#modeling), and [make some predictions](#predictions) about future shutdowns. Hopefully the results are interesting, useful, or both.
 
 # A glance back
 
-> "This is something that literature has always been very keen on, that technology never gets around to acknowledging. The cold wind moaning through the empty stone box. When are you gonna own up to it? Where are the Dell PCs? This is Austin, Texas. Michael Dell is the biggest tech mogul in central Texas. Why is he not here? Why is he not at least not selling his wares? Where are the dedicated gaming consoles you used to love? Do you remember how important those were? I could spend all day here just reciting the names of the causalities in your line of work. It's always the electronic frontier. Nobody ever goes back to look at the electronic forests that were cut down with chainsaws and tossed into the rivers. And then there's this empty pretense that these innovations make the world "better"...Like: "If we're not making the world better, then why are we doing this at all?" Now, I don't want to claim that this attitude is hypocritical. Because when you say a thing like that at South By: "Oh, we're here to make the world better" - you haven't even *reached* the level of hypocrisy. You're stuck at the level of childish naivete." --[Bruce Sterling](!Wikipedia), ["Text of SXSW2013 closing remarks"](http://www.wired.com/beyond_the_beyond/2013/04/text-of-sxsw2013-closing-remarks-by-bruce-sterling/)
+> 'This is something that literature has always been very keen on, that technology never gets around to acknowledging. The cold wind moaning through the empty stone box. When are you gonna own up to it? Where are the Dell PCs? This is Austin, Texas. Michael Dell is the biggest tech mogul in central Texas. Why is he not here? Why is he not at least not selling his wares? Where are the dedicated gaming consoles you used to love? Do you remember how important those were? I could spend all day here just reciting the names of the causalities in your line of work. It's always the electronic frontier. Nobody ever goes back to look at the electronic forests that were cut down with chainsaws and tossed into the rivers. And then there's this empty pretense that these innovations make the world "better"...Like: "If we're not making the world better, then why are we doing this at all?" Now, I don't want to claim that this attitude is hypocritical. Because when you say a thing like that at South By: "Oh, we're here to make the world better" - you haven't even *reached* the level of hypocrisy. You're stuck at the level of childish naivete.' --[Bruce Sterling](!Wikipedia), ["Text of SXSW2013 closing remarks"](http://www.wired.com/beyond_the_beyond/2013/04/text-of-sxsw2013-closing-remarks-by-bruce-sterling/)
 
-The shutdown of the popular service [Google Reader](!Wikipedia), announced on [13 March 2013](http://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html), has brought home to many people that some products they rely on exist only at Google's sufferance: it provides the products for reasons that are difficult for outsiders to divine, may have little commitment to a product[^Reader-threats], may not include their users' best interests, may choose to withdraw the product at any time for any reason[^Reader-popularity] (especially since most of the products are services[^cloud-suckers] & not FLOSS, and may be too tightly coupled with the Google infrastructure[^unportable]), and users have no voice[^voice-utility] - [only exit](!Wikipedia "Exit, Voice, and Loyalty") as an option.
+The shutdown of the popular service [Google Reader](!Wikipedia), announced on [13 March 2013](http://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html), has brought home to many people that some products they rely on exist only at Google's sufferance: it provides the products for reasons that are difficult for outsiders to divine, may have little commitment to a product[^Reader-threats], may not include their users' best interests, may choose to withdraw the product at any time for any reason[^Reader-popularity] (especially since most of the products are services[^cloud-suckers] & not [FLOSS](!Wikipedia "Free and open-source software") in any way, and may be too tightly coupled with the Google infrastructure[^unportable] to be spun off or sold), and users have no voice[^voice-utility] - [only exit](!Wikipedia "Exit, Voice, and Loyalty") as an option.
 
 [^unportable]: From Gannes's ["Another Reason Google Reader Died: Increased Concern About Privacy and Compliance"](http://allthingsd.com/20130324/another-reason-google-reader-died-increased-concern-about-privacy-and-compliance/)
 
@@ -53,7 +53,7 @@ The shutdown of the popular service [Google Reader](!Wikipedia), announced on [1
 
 In the case of Reader, while Reader destroyed the original RSS reader market, there still exist some usable alternatives; the main damage is a shrinkage in the RSS audience as inevitably many users choose not to invest in a new reader or give up, and an irreversible loss of Reader's uniquely comprehensive RSS archives covering back to 2005.
 
-But every shutdown hurts its users to some degree, even if we - currently[^survival] - can rule out the most devastating shutdowns, like a shutdown of Gmail. (Although to be fair, Google's practices of undercutting all market incumbents with free services *also* has very large benefits[^benefits], so we shouldn't focus just on [the seen](http://bastiat.org/en/twisatwins.html "'That Which is Seen, and That Which is Not Seen', Frederic Bastiat (1850)").) It would be interesting to see if shutdowns are to some degree predictable, whether there are any obvious patterns, whether common claims about relevant factors can be confirmed, and what the results might suggest for the future.
+But every shutdown hurts its users to some degree, even if we - currently[^survival] - can rule out the most devastating possible shutdowns, like Gmail. (Although to be fair, Google's practices of undercutting all market incumbents with free services *also* has very large benefits[^benefits], so we shouldn't focus just on [the seen](http://bastiat.org/en/twisatwins.html "'That Which is Seen, and That Which is Not Seen', Frederic Bastiat (1850)").) It would be interesting to see if shutdowns are to some degree predictable, whether there are any obvious patterns, whether common claims about relevant factors can be confirmed, and what the results might suggest for the future.
 
 [^benefits]: Specifically, this can be seen as a sort of issue of reducing [deadweight loss](!Wikipedia): in some of the more successful acquisitions, Google's modus operandi was to take a very expensive or highly premium service and make it completely free while also improving the quality. Analytics, Maps, Earth, Feedburner all come to mind as services whose predecessors (multiple, in the cases of Maps and Earth) charged money for their services (sometimes a great deal). This leads to deadweight loss as people do not use them, who would benefit to some degree but not to the full amount of the price (plus other factors like riskiness of investing time and money into trying it out). Google cites figures like billions of users over the years for several of these formerly-premium services, suggesting the gains from reduced deadweight loss are large.
 [^survival]: Gmail seems like a service for the ages; but once upon a time, so did [Hotmail](!Wikipedia) (even in 2012, 8 years after Gmail's launch, still the #2 email service) - yet, RIP Hotmail (1996-2013). If there is one truth of the tech industry, it's that no giant (except IBM) survives forever. Death rates for all corporations and nonprofits are [very high](Girl Scouts and good governance#fn1), but particularly so for tech. [One blogger](http://shkspr.mobi/blog/2013/03/preparing-for-the-collapse-of-digital-civilization/ "Preparing for the Collapse of Digital Civilization") asks a good question:
@@ -92,7 +92,7 @@ So drawing on the same sources, I have compiled a second list of *living* produc
 > Would I show, I thought, \
 > The plum blossoms, \
 > Now lost to sight \
-> Amid the falling snow.^[[Yamabe no Akahito](!Wikipedia), _Man'yōshū_ [VIII: 1426](http://www.temcauley.staff.shef.ac.uk/waka0088.shtml)]
+> Amid the falling snow.^[[Yamabe no Akahito](!Wikipedia), [_Man'yōshū_](http://en.wikipedia.org/wiki/Man%27y%C5%8Dsh%C5%AB) [VIII: 1426](http://www.temcauley.staff.shef.ac.uk/waka0088.shtml)]
 
 Finally, for all products, I have collected several covariates which I thought might help predict longevity:
 
@@ -156,7 +156,7 @@ If a product has not ended, the end-date is defined as 01 April 2013 (which is w
 > the shuddering shadow of a tumbleweed \
 > the steady sound of giant trees. \
 > But what I lament are the common bones \
-> unnamed in the records of Immortals.^[[Han-Shan](!Wikipedia "Hanshan (poet)"); #18 in _The Collected Songs of Cold Mountain_, Red Pine 2000, ISBN 1-55659-140-3]
+> unnamed in the records of Immortals.^[[Han-Shan](!Wikipedia "Hanshan (poet)"); #18 in [_The Collected Songs of Cold Mountain_](http://www.amazon.com/Collected-Mountain-Mandarin-Chinese-English/dp/1556591403/), Red Pine 2000, ISBN 1-55659-140-3]
 
 ## Descriptive
 
@@ -238,7 +238,7 @@ While some have [tried to disagree](http://thenextweb.com/google/2013/01/12/larr
 ## Modeling
 ### Logistic regression
 
-A first step in predicting when a product will be shutdown is predicting whether it will be shutdown. Since we're predicting a binary outcome (a product living or dying), we can use an ordinary [logistic regression](!Wikipedia). Our first look uses the main variables plus the total hits:
+A first step in predicting when a product will be shutdown is predicting whether it will be shutdown. Since we're predicting a binary outcome (a product living or dying), we can use the usual: an ordinary [logistic regression](!Wikipedia). Our first look uses the main variables plus the total hits:
 
 ~~~{.R}
 Coefficients:
@@ -421,6 +421,7 @@ Likelihood ratio test= 94.7  on 9 df,   p=2.22e-16
 Wald test            = 76.7  on 9 df,   p=7.2e-13
 Score (logrank) test = 83.8  on 9 df,   p=2.85e-14
 ~~~
+
 ~~~{.R}
                        rho   chisq     p
 ...
@@ -467,7 +468,7 @@ To compare the random forest accuracy with the logistic and survival model accur
 
 ## Predictions
 
-Before making explicit predictions of the future, let's look at the [relative risks](!Wikipedia) for products which haven't been shutdown. What does the Cox model consider the 10 most risky and likely to be shutdown products?
+Before making explicit predictions of the future, let's look at the [relative risks](!Wikipedia) for products which haven't been shutdown. What does the Cox model consider the 10 most at risk and likely to be shutdown products?
 
 It lists (in decreasingly risky order):
 
@@ -482,7 +483,7 @@ It lists (in decreasingly risky order):
 9. Cloud Messaging
 10. Correlate
 
-These all seem like reasonable products to signal out (to some extent it's surprising Correlate and Boutiques still exist), except for Cloud Messaging which seems to be a key part of a lot of Android. And likewise, the list of the 10 *least* risky (increasingly risky order):
+These all seem like reasonable products to signal out (as much as I love Correlate for making it [easier than ever to demonstrate "correlation≠causation"](http://slatestarcodex.com/2013/02/16/google-correlate-does-not-imply-google-causation/), it's surprising it or Boutiques still exist), except for Cloud Messaging which seems to be a key part of a lot of Android. And likewise, the list of the 10 *least* risky (increasingly risky order):
 
 1. Search
 2. Translate
@@ -567,7 +568,10 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 
 # External links
 
-- Comments: [Hacker News](http://news.ycombinator.com/item?id=5653748)
+- Comments:
+
+    - [Hacker News](http://news.ycombinator.com/item?id=5653748)
+    - [Metafilter](http://www.metafilter.com/127712/In-a-few-cases-the-start-dates-are-wellinformed-guesses)
 
 <!--
 TODO: finished?
