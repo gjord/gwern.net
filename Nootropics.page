@@ -1274,14 +1274,42 @@ Running low on gum (even using it weekly or less, it still runs out), I decided 
 
 # Noopept
 
-Reportedly a better -racetam, [Noopept](!Wikipedia) is one of the many obscure Russian nootropics. (Further reading: [Google Scholar](http://scholar.google.com/scholar?q=noopept), [Examine.com](http://examine.com/supplements/Noopept/), [Reddit](http://www.reddit.com/r/Nootropics/search?q=noopept&sort=relevance&restrict_sr=on), [Longecity](http://www.longecity.org/forum/tags/forums/noopept/), [Bluelight.ru](http://www.google.com/cse?cx=009513296995230692334%3Afaadujg162k&q=noopept).)
+Related to the famous -racetams but reportedly better (and much less bulky), [Noopept](!Wikipedia) is one of the many obscure Russian nootropics. (Further reading: [Google Scholar](http://scholar.google.com/scholar?q=noopept), [Examine.com](http://examine.com/supplements/Noopept/), [Reddit](http://www.reddit.com/r/Nootropics/search?q=noopept&sort=relevance&restrict_sr=on), [Longecity](http://www.longecity.org/forum/tags/forums/noopept/), [Bluelight.ru](http://www.google.com/cse?cx=009513296995230692334%3Afaadujg162k&q=noopept).) Its advantages seem to be that it's far more compact than piracetam and doesn't taste awful so it's easier to store and consume; doesn't have the cloud hanging over it that piracetam does due to the FDA letters, so it's easy to purchase through normal channels; is cheap on a per-dose basis; and it has fans claiming it is better than piracetam.
 
 A Redditor ordered some Russian brand Noopept, but finding it was unpleasant & not working for him, gave the left-over half to me:
 
 ![Russian Noopept box, front & back](/images/nootropics-noopept-box.jpg)
 ![Russian Noopept blister-pack, front & back](/images/nootropics-noopept-pills.jpg)
 
-It appears in reasonably good shape, and closely matches the photographs in the Wikipedia article. I have not taken any or designed any experiments yet.
+It appeared in reasonably good shape, and closely matched the photographs in the Wikipedia article. I took 2 of the 25 on successive days, and didn't notice anything in particular; I didn't find it unpleasant, though.
+
+## Experiment
+
+So, I thought I might as well experiment since I have it. I put the 23 remaining pills into gel capsules with brown rice as filling, made ~30 placebo capsules, and will use the one-bag blinding/randomization method. I don't want to spend the time it would take to n-back every day, so I will simply look for an effect on my daily mood/productivity self-rating.
+
+### Power
+
+I don't expect to find an effect, though; a quick _t_-test power analysis of a one-sided paired design with 23 pairs suggests that a reasonable power of 80% would still only be able to detect an increase of _d_>=0.5:
+
+~~~{.R}
+pwr.t.test(n=23, type="paired", alternative="greater", sig.level=0.05, power=0.8)
+
+     Paired t test power calculation
+
+              n = 23
+              d = 0.5352
+...
+~~~
+
+Or in other words, since the standard deviation of my previous self-ratings is 0.75 (see the [Weather and my productivity](Weather) data), a mean rating increase of >0.39 on the self-rating. This is, unfortunately, implying an extreme shift in my self-assessments (for example, 3s are ~50% of the self-ratings and 4s ~25%; to cause an increase of 0.25 while leaving 2s alone in a sample of 23 days, one would have to push 3s down to ~25% and 4s up to ~47%). So in advance, we can see that the weak plausible effects for Noopept are not going to be detected here at our usual statistical levels with just the sample I have (a more plausible experiment might use 178 pairs over a year, detecting down to _d_>=0.18). But if the sign is right, it might make Noopept worthwhile to investigate further. And the hardest part of this was just making the pills, so it's not a waste of effort.
+
+### Data
+
+15 May 2013: TODO
+
+### Analysis
+
+TODO
 
 # Oxiracetam
 
