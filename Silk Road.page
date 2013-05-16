@@ -169,7 +169,7 @@ Silk Road's 2 technical claims to fame are the exclusive use of Bitcoins for pay
     >
     > ...These time parameters were arrived at through trial and error. They are as tight as we can make them without sacrificing the integrity of the market. Could they be a little tighter? Maybe by a week or two, but please think through the implications of policy changes before you call for them.
 
-But as any kidnapper knows, you can communicate your demands easily enough, but how do you drop off the victim and grab the suitcase of cash without being nabbed? This has been a severe security problem forever. And bitcoins go a long way towards resolving it. So the additional security from use of Bitcoin is nontrivial. As it happened, I already had some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/projects/torbrowser) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. Other options include entire OSes like [Tails](http://tails.boum.org/) or [Liberté Linux](http://dee.su/liberte). (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay) as well - this gives me both [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
+But as any kidnapper knows, you can communicate your demands easily enough, but how do you drop off the victim and grab the suitcase of cash without being nabbed? This has been a severe security problem forever. And bitcoins go a long way towards resolving it. So the additional security from use of Bitcoin is nontrivial. As it happened, I already had some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/download/download-easy.html.en) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. Other options include entire OSes like [Tails](http://tails.boum.org/) or [Liberté Linux](http://dee.su/liberte), which can be used on bootable Flash drives. (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay) as well - this gives me both [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
 
 # Silk Road
 
@@ -179,7 +179,7 @@ With Tor running and the Torbutton enabled in the browser (along with any [priva
 
     The bad thing about .onion URLs is that they are not human-memorable (see [Zooko's triangle](!Wikipedia)), and so it is especially easy to spread a fake link. In particular, SR has been the target of many [phishing](!Wikipedia) attacks, where a random .onion hidden server is set up to look like SR and either pretends to be SR or just does a [man in the middle attack](!Wikipedia), proxying for the real SR server. For example, one such site has already been linked in the comments on this page; it was easy to detect as it was even slower than SR (since there are two hidden servers involved), and it blindly forwarded me to the real SR .onion with the fake user/password pair, apparently expecting that I would be logged in without problem. Later, SR introduced PINs required for any withdrawal of bitcoins, so phishers adapted their login forms to ask for PINs as well. A 2012-2013 example of such a phishing page:
 
-    ![A screenshot of a SR phish, with the tell-tale PIN field circled.](http://i2.minus.com/jVZrHTXTstrjD.jpg)
+    ![A screenshot of a SR phish, with the tell-tale PIN field circled; provided by anonymous author](/images/silkroad/2012-phishingexample.jpg)
 
     Naturally, nothing stops the `.onion` URLs supplied on this page from themselves being part of a phishing/man-in-the-middle attack! This is a fundamental security problem: how do you bootstrap yourself into a [web of trust](!Wikipedia)? In this case, if you don't know the SR admins, about all you can do is Google the URLs I have listed, and see whether enough other people claim that they are the true URLs that you will trust the URLs. Caveat emptor.
 
@@ -281,7 +281,7 @@ We have window-shopped long enough. It's time to take the plunge and buy somethi
 
 The public nature of transactions means that [many interesting connections & graphs](http://arxiv.org/abs/1107.4524 "'An Analysis of Anonymity in the Bitcoin System', Reid & Harrigan 2011") can be generated and analyzed. But fortunately, it's straightforward to [anonymize Bitcoin transactions](https://en.bitcoin.it/wiki/Anonymity#Staying_Anonymous) ([mixing services](https://en.bitcoin.it/wiki/Category:Mixing_Services)) by a method analogous to the Tor network we are relying upon already: route the money through several intermediaries in several quantities and reconstructing the path backwards becomes nontrivial.
 
-My own method was to route 4 bitcoins through [Mt.Gox](https://mtgox.com/) (this was before the hacking, a series of events which confirmed my own resolution to keep a balance at Mt.Gox for as short a time as possible), then through MyBitcoin (which at the time was still considered trustworthy)^[Mt.Gox and MyBitcoin offer a doubly instructive lesson into why one trusts Bitcoin third-parties as little as possible, keeps one's bitcoins locally, and regularly back it up; the large Polish exchange [Bitomat](https://support.mtgox.com/entries/20357051-mt-gox-the-world-s-largest-bitcoin-exchange-to-acquire-bitomat-pl-compensate-loss-of-bitcoins) offers a third.]. This was straightforward - sign up for a throwaway account:
+My own method was to route 4 bitcoins through [Mt.Gox](https://mtgox.com/) (this was before the hacking, a series of events which confirmed my own resolution to keep a balance at Mt.Gox for as short a time as possible; a [retrospective analysis of Bitcoin exchanges](#bitcoin-exchange-risk) suggests that for every month you keep a balance at an exchange, you run a ~1% chance of losing your money), then through MyBitcoin (which at the time was still considered trustworthy)^[Mt.Gox and MyBitcoin offer a doubly instructive lesson into why one trusts Bitcoin third-parties as little as possible, keeps one's bitcoins locally, and regularly back it up; the large Polish exchange [Bitomat](https://support.mtgox.com/entries/20357051-mt-gox-the-world-s-largest-bitcoin-exchange-to-acquire-bitomat-pl-compensate-loss-of-bitcoins) offers a third.]. This was straightforward - sign up for a throwaway account:
 
 ![MyBitcoin (defunct) login page](/images/silkroad/mybitcoin-login.png)
 
@@ -549,7 +549,7 @@ To convert ฿ to € (as of 3 September 2012), we multiply by 8.3. So for compa
 
 A factor of 3 seems pretty reasonable, given the very large markups along the LSD supply-chain. 2003 trial testimony[^Skinner-LSD] for the American LSD chemist [William Leonard Pickard](!Wikipedia) stated that his wholesale customers paid him ~$0.3 per 100μg, or (as of 3 September 2012) 0.0286฿ per 100μg, or 3497μg/฿. (A stark contrast to 163μg/฿!)
 
-[^Skinner-LSD]: The [second transcript](http://dl.dropbox.com/u/85192141/2003-pickard-lsd-trial-transcript2.pdf) of testimony by Skinner (co-conspirator, turned state's evidence) has this passage on page 7-8:
+[^Skinner-LSD]: The [second transcript](/docs/2003-pickard-lsd-trial-transcript2.pdf) of testimony by Skinner (co-conspirator, turned state's evidence) has this passage on page 7-8:
 
     > `[Skinner:]` ...This [aspirin pill] weighs approximately a gram. And if it was ground up and everything, this would be about 10,000 doses of LSD in the pure crystalline form.
     >
@@ -911,3 +911,91 @@ When will we know? The `carder.su` indictment was signed 10 January 2012. The ea
 What's my current opinion? Reading through all of the above, thinking about the difficulties of attacking SR (KOC can only have access to small fry buyers, not SR staff like Dread Pirate Roberts), I feel that I can only assign [20% to a prediction](http://predictionbook.com/predictions/16142) that by March 2015, "there will have been a bust (>10 named defendants) related to forged IDs eg. driver's licenses, linked to the SR vendor KOC".
 
 We'll see.
+
+## Bitcoin exchange risk
+
+["Beware the Middleman: Empirical Analysis of Bitcoin-Exchange Risk"](http://lyle.smu.edu/~tylerm/fc13.pdf "Moore & Christin 2013 ") compiles a list of Bitcoin exchanges and which ones have died or failed to return one's money; I was interested in the average risk per day, but the paper did not include the relevant figure, so I copied the raw data and partially replicated their analysis in R:
+
+~~~{.R}
+exchange <- read.csv("http://www.gwern.net/docs/2013-moorechristin-bitcoinexchanges.csv")
+# log transform busy-ness per paper
+exchange$ActiveDailyVolume <- log1p(exchange$ActiveDailyVolume)
+# calculate lifetime lengths
+exchange$Days <- as.integer(as.Date(exchange$Dates) - as.Date(exchange$Origin))
+# but the paper says "The median lifetime of exchanges is 381 days"!
+# The difference may be due to me defaulting each exchange opening/closing to the 1st of the month,
+# since the paper's table on pg3 only specifies month/year.
+summary(exchange$Days)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+     15     168     344     365     565     930
+
+# Rough daily risk percentage calculation: # of lossy exchange-days / total exchange-days:
+(sum(exchange$Repaid==0, na.rm=TRUE) / sum(exchange$Days)) * 100
+[1] 0.03421
+# eg. so leaving funds on an exchange for a month is ~1% (0.03 * 30 = 0.899 ~= 1)
+
+# replicate Cox model survival curve & regression
+library(survival)
+# plot aggregate survival curve
+surv <- survfit(Surv(exchange$Days, exchange$Closed, type="right") ~ 1)
+plot(surv, xlab="Days", ylab="Survival Probability")
+# http://i.imgur.com/lFZEKbv.png
+
+# see how the moderators help predict exchange death
+cmodel <- coxph(Surv(Days, Closed) ~ Breached + ActiveDailyVolume + AML, data = exchange)
+summary(cmodel)
+...
+  n=40, number of events=18
+
+                      coef exp(coef) se(coef)     z Pr(>|z|)
+Breached           0.80309   2.23242  0.57129  1.41    0.160
+ActiveDailyVolume -0.22233   0.80065  0.10493 -2.12    0.034
+AML                0.00156   1.00157  0.04230  0.04    0.970
+
+                  exp(coef) exp(-coef) lower .95 upper .95
+Breached              2.232      0.448     0.729     6.840
+ActiveDailyVolume     0.801      1.249     0.652     0.983
+AML                   1.002      0.998     0.922     1.088
+
+Concordance= 0.696  (se = 0.08 )
+Rsquare= 0.116   (max possible= 0.94 )
+Likelihood ratio test= 4.91  on 3 df,   p=0.178
+Wald test            = 5.22  on 3 df,   p=0.156
+Score (logrank) test = 5.41  on 3 df,   p=0.144
+
+# I have trouble with the risk ratios, though; most of them are very similar, but some are dramatically
+# different, particularly for "Brasil Bitcoin Market"! Asked Moore, he doesn't know why the difference.
+predict(cmodel, type="risk")
+ [1] 1.0062 1.2807 1.8416 1.4132 0.6280 0.6687 2.5166 1.4629 1.3860 1.3283 0.8558 1.6955 1.1386
+[14] 0.9682 0.6275 1.9333 0.5593 1.1443 1.1941 1.8569 1.9889 3.6656 0.9899 0.9849 0.5649 0.6393
+[27] 0.5527 0.4847 0.5212 0.8798 0.5222 0.8132 0.8166 0.5222 0.4404 1.2850 0.6114 1.0574 0.9704
+[40] 1.8765
+# difference between the paper's risk ratios and the calculated risks:
+predict(cmodel, type="risk") - exchange$Risk.Ratio
+ [1] -0.1138438  0.0007105 -0.1684229 -0.1768372 -0.0219620  0.0586867 -1.3333981 -0.1070626
+ [9] -0.0639567 -0.1416868 -0.0841594 -0.1044674 -0.1013990 -0.0117733  0.0174954  0.0533416
+[17]  0.0293197  0.0543248  0.0540563 -0.2930878 -0.2411229 -0.7444104 -0.0901261  0.0348886
+[25]  0.0348513  0.0392880  0.0327111  0.0347424  0.0311519 -0.0302076  0.0321711  0.0532302
+[33]  0.0165801 -0.0178064 -0.0095536 -0.1650013 -0.0186322 -0.0825834 -0.0696364 -0.3535190
+summary(predict(cmodel, type="risk") - exchange$Risk.Ratio)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+-1.3300 -0.1090 -0.0203 -0.0992  0.0323  0.0587
+
+# Moving on; replicate the logistic regression they ran on predicting breaches:
+lbreach <- glm(Breached ~ ActiveDailyVolume + I(Days/30), family="binomial", data = exchange)
+summary(lbreach)
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.158  -0.671  -0.283  -0.102   2.982
+
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)
+(Intercept)        -4.4996     1.7666   -2.55    0.011
+ActiveDailyVolume   0.7730     0.3182    2.43    0.015
+I(Days/30)         -0.1048     0.0698   -1.50    0.133
+
+    Null deviance: 42.653  on 39  degrees of freedom
+Residual deviance: 32.113  on 37  degrees of freedom
+AIC: 38.11
+~~~
