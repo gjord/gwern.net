@@ -47,7 +47,7 @@ The shutdown of the popular service [Google Reader](!Wikipedia), announced on [1
 [^Reader-threats-3]: The sign story is confirmed by another Googler; ["Google Reader lived on borrowed time: creator Chris Wetherell reflects"](http://gigaom.com/2013/03/13/chris-wetherll-google-reader/):
 
     > "When they replaced sharing with +1 on Google Reader, it was clear that this day was going to come", he said. Wetherell, 43, is amazed that Reader has lasted this long. Even before the project saw the light of the day, Google executives were unsure about the service and it was through sheer perseverance that it squeaked out into the market. At one point, the management team threatened to cancel the project even before it saw the light of the day, if there was a delay. "We had a sign that said, '*days since cancellation*' and it was there from the very beginning", added a very sanguine Wetherell. My translation: Google never really believed in the project. Google Reader started in 2005 at what was really the golden age of RSS, blogging systems and a new content ecosystem. The big kahuna at that time was [Bloglines](!Wikipedia) (acquired by [Ask.com](!Wikipedia)) and Google Reader was an upstart.
-[^Reader-popularity]: The official PR release stated that too little usage was the reason Reader was being abandoned. Whether this is the genuine reason has been questioned by third parties, who observe that Reader seems to [drive far more traffic](http://www.buzzfeed.com/jwherrman/google-reader-still-sends-far-more-traffic-than-google) than another service which Google has yet to ax, Google+; that one app had [>2m users who also had Reader accounts](http://allthingsd.com/20130324/another-reason-google-reader-died-increased-concern-about-privacy-and-compliance/); that just one alternative to Reader (Feedly) had in excess of [3 million signups post-announcement](http://blog.feedly.com/2013/04/02/announcing-the-new-feedly-mobile-and-welcoming-3-million-reader-refugees/); and the largest of several petitions to Google reached [148k](https://www.change.org/petitions/google-keep-google-reader-running) signatures. Given that few users will sign up at Feedly specifically, sign a petition, visit the BuzzFeed network, or use the apps in question, it seems likely that Reader had closer to 20m users than 2m users when its closure was announced. Jason Scott in 2009 reminded us that this lack of transparency is completely predictable: "Since the dawn of time, companies have hired people whose entire job is to tell you everything is all right and you can completely trust them and the company is as stable as a rock, and to do so until they, themselves, are fired because the company is out of business."
+[^Reader-popularity]: The official PR release stated that too little usage was the reason Reader was being abandoned. Whether this is the genuine reason has been questioned by third parties, who observe that Reader seems to [drive far more traffic](http://www.buzzfeed.com/jwherrman/google-reader-still-sends-far-more-traffic-than-google) than another service which Google has yet to ax, Google+; that one app had [>2m users who also had Reader accounts](http://allthingsd.com/20130324/another-reason-google-reader-died-increased-concern-about-privacy-and-compliance/); that just one alternative to Reader (Feedly) had in excess of [3 million signups post-announcement](http://blog.feedly.com/2013/04/02/announcing-the-new-feedly-mobile-and-welcoming-3-million-reader-refugees/) (reportedly, up to [4 million](http://www.nytimes.com/2013/05/09/technology/personaltech/three-ways-feedly-outdoes-the-vanishing-google-reader.html?pagewanted=all "Google's Aggregator Gives Way to an Heir")); and the largest of several petitions to Google reached [148k](https://www.change.org/petitions/google-keep-google-reader-running) signatures. Given that few users will sign up at Feedly specifically, sign a petition, visit the BuzzFeed network, or use the apps in question, it seems likely that Reader had closer to 20m users than 2m users when its closure was announced. Jason Scott in 2009 reminded us that this lack of transparency is completely predictable: "Since the dawn of time, companies have hired people whose entire job is to tell you everything is all right and you can completely trust them and the company is as stable as a rock, and to do so until they, themselves, are fired because the company is out of business."
 
 <!-- https://groups.google.com/d/msg/google-ajax-search-api/OaGf0eP57js/aViIaxWxL4UJ
 "Hi everyone,
@@ -340,7 +340,11 @@ The original hits variable has the wrong sign, as expected of data leakage; now 
 
 ### Survival curve
 
-The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not. For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration of logistic-style approaches. Drawing on [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf) and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/). The initial characterization gives us an optimistic median of 2824 days (note that this is higher than Arthur's mean of 1459 days because it addressed the conditionality issue discussed earlier by including products which were never canceled, and I made a stronger effort to collect pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound:
+The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not; it can't use the potentially very important variable of how many days a product has survived for the obvious reason that *of course* mortality will increase with time! ("But this long run is a misleading guide to current affairs. In the long run we are all dead.")
+
+For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration. Not being previously familiar with the area, I drew on Wikipedia, [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf), [Bewick et al 2004](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1065034/ "Statistics review 12: Survival analysis"), [Zhou's tutorial](http://www.www.ms.uky.edu/~mai/Rsurv.pdf "Use Software R to do Survival Analysis and Simulation. A tutorial"), and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/) for the following results using the `survival` library (see also [CRAN Task View: Survival Analysis](http://cran.r-project.org/web/views/Survival.html)).
+
+The initial characterization gives us an optimistic median of 2824 days (note that this is higher than Arthur's mean of 1459 days because it addressed the conditionality issue discussed earlier by including products which were never canceled, and I made a stronger effort to collect pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound:
 
 ~~~{.R}
 records   n.max n.start  events  median 0.95LCL 0.95UCL
@@ -456,7 +460,7 @@ This all makes sense to me. I find particularly interesting the profit and socia
 
 Because I can, I was curious how [random forests](!Wikipedia) might stack up to the logistic regression and against a base-rate predictor (that nothing was shut down, since ~65% of the products are still alive).
 
-I trained a random forest as a classifier, yielding reasonable looking error rates:
+With [`randomForest`](http://cran.r-project.org/web/packages/randomForest/index.html), I trained a random forest as a classifier, yielding reasonable looking error rates:
 
 ~~~{.R}
                Type of random forest: classification
@@ -470,7 +474,76 @@ FALSE   216   11     0.04846
 TRUE    100   23     0.81301
 ~~~
 
-To compare the random forest accuracy with the logistic and survival model accuracy, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. The base-rate predictor got 65% right by definition, the logistic managed to score 68% correct ([bootstrap](!Wikipedia "Bootstrapping (statistics)")^[Specifically: building a logistic model on a bootstrap sample and then testing accuracy against full Google dataset.] 95% CI: 66-72%), and the random forest similarly got 68% (67-78%). These rates are not quite as bad as they may seem: I excluded the lifetime length (`Days`) from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage); so there's predictive power being left on the table. (There are survival analysis-specific ways of applying random forests, apparently; I may try them out in the future.) Regardless, there's no real reason to switch to the more complex random forests.
+To compare the random forest accuracy with the logistic model's accuracy, I interpreted the logistic estimate of shutdown odds >1 as predicting shutdown and <1 as predicting not shutdown; I then compared the full sets of predictions with the actual shutdown status. (This is not a [proper scoring rule](!Wikipedia) like those I employed in grading forecasts of the [2012 American elections](2012 election predictions), but this should be an intuitively understandable way of grading models' predictions.)
+
+The base-rate predictor got 65% right by definition, the logistic managed to score 68% correct ([bootstrap](!Wikipedia "Bootstrapping (statistics)")^[Specifically: building a logistic model on a bootstrap sample and then testing accuracy against full Google dataset.] 95% CI: 66-72%), and the random forest similarly got 68% (67-78%). These rates are not quite as bad as they may seem: I excluded the lifetime length (`Days`) from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage); so there's predictive power being left on the table. Regardless, there's no real reason to switch to the more complex random forests.
+
+<!--
+["Random survival forests"](http://arxiv.org/pdf/0811.1645 "Ishwaran et al 2008"); ["Evaluating Random Forests for Survival Analysis: Using Prediction Error Curves"](http://www.jstatsoft.org/v50/i11/paper "Mogensen et al 2012")
+
+[`randomForestSRC`](http://cran.r-project.org/web/packages/randomForestSRC/index.html) (successor to original [`randomSurvivalForest`](http://cran.r-project.org/web/packages/randomSurvivalForest/index.html) described in paper)
+
+library(randomForestSRC)
+tmp <- google; tmp$DeflatedHits <- log(tmp$DeflatedHits)
+rsf <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits + EarlyGoogle, data=tmp, nsplit=1)
+rsf
+                         Sample size: 350
+                    Number of deaths: 122
+                     Number of trees: 1000
+          Minimum terminal node size: 3
+       Average no. of terminal nodes: 60.81
+No. of variables tried at each split: 3
+              Total no. of variables: 7
+                            Analysis: Random Forests [S]RC
+                              Family: surv
+                      Splitting rule: logrank *random*
+       Number of random split points: 1
+              Estimate of error rate: 35.26%
+
+plot(rsf)
+
+               Importance   Relative Imp
+DeflatedHits       0.0801         1.0000
+EarlyGoogle        0.0132         0.1652
+Social             0.0039         0.0484
+Profit             0.0037         0.0466
+Acquisition        0.0008         0.0102
+FLOSS             -0.0093        -0.1167
+Type              -0.0128        -0.1597
+
+library(prodlim) # for sindex
+# cumulative hazard function adapted from Mogensen et al 2012
+predictSurvProb.rsf <- function (object, newdata, times, ...) {
+    N <- NROW(newdata)
+    # class(object) <- c("rsf", "grow")
+    S <- exp(-predict.rfsrc(object, test = newdata)$chf)
+    if(N == 1) S <- matrix(S, nrow = 1)
+    Time <- object$time.interest
+    p <- cbind(1, S)[, 1 + sindex(Time, times),drop = FALSE]
+    if(NROW(p) != NROW(newdata) || NCOL(p) != length(times))
+     stop("Prediction failed")
+    p
+}
+totals <- as.integer(as.Date("2013-04-01") - google$Started)
+predictionMatrix <- predictSurvProb.rsf(rsf, google, totals)
+predictions <- NULL; for (i in 1:length(totals)) { predictions[i] <- predictionMatrix[i,i] }
+sum((predictions<0.50) == google$Dead) / nrow(google)
+[1] 0.8
+
+library(boot)
+randomSurvivalPredictionAccuracy <- function(gb, indices) {
+    g <- gb[indices,]
+    rsf <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits + EarlyGoogle,
+                 data=tmp, nsplit=1)
+    predictionMatrix <- predictSurvProb.rsf(rsf, google, totals)
+    predictions <- NULL; for (i in 1:length(totals)) { predictions[i] <- predictionMatrix[i,i] }
+    return(sum((predictions<0.50) == google$Dead) / nrow(google))
+}
+rsfBs <- boot(data=google, statistic=randomSurvivalPredictionAccuracy, R=10)
+print(boot.ci(rsfBs, type="norm"))
+
+TODO: derive cumulative hazard function from the final Cox model to compare with random survival forests
+-->
 
 ## Predictions
 
@@ -572,7 +645,7 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 
 # See also
 
-- [Archive Team](!Wikipedia)
+- [Archive Team](!Wikipedia) ([ArchiveTeam Warrior](http://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior))
 - [Archiving URLs]()
 - [Wikipedia and Knol]()
 
@@ -584,6 +657,10 @@ It seems like it might be worthwhile to continue compiling a database and do a f
     - [Metafilter](http://www.metafilter.com/127712/In-a-few-cases-the-start-dates-are-wellinformed-guesses)
 - [_Ars Technica_ coverage](http://arstechnica.com/business/2013/05/google-services-survive-if-they-make-money-arent-social/ "Google services survive if they make money, aren't social: Statistical analysis of Google products finds a shutdown rate of 35 percent") ([comments](http://arstechnica.com/business/2013/05/google-services-survive-if-they-make-money-arent-social/?comments=1))
 - ["'Interesting' Software Follow-Up: Scrivener, Google's Orphans: A new, free guide to an exceptional program "](http://www.theatlantic.com/technology/archive/2013/05/interesting-software-follow-up-scrivener-googles-orphans/275563/) (James Fallows, _Atlantic_)
+- _Forbes_:
+
+    - ["Is This One Emotion Driving The Google Stock Price Up?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/08/what-is-driving-the-google-stock-price-up/)
+    - ["Google Glass - Is It Meant To Last?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/09/google-glass-has-only-a-37-chance-of-going-five-years-lessons/)
 
 <!--
 How to handle updates? I guess we'll store it here. Idea: new covariate for 'business' vs 'consumer' vs 'both'. New data:
@@ -595,9 +672,15 @@ Behavio's FunF http://www.sfgate.com/technology/businessinsider/article/Google-J
 "AdWords Pay Per Action",TRUE,2007-03-20,2008-08-31,144000,service,TRUE,FALSE,TRUE,FALSE
 "AdSense Referrals",TRUE,2007-04-05,2008-08-31,25000,service,TRUE,FALSE,FALSE,FALSE
 "Quick View in Search",TRUE,2009-10-07,2013-04-24,2460000,service,FALSE,FALSE,FALSE,FALSE http://googleblog.blogspot.com/2009/10/quickly-view-formatted-pdfs-in-your.html http://googlesystem.blogspot.com/2013/04/no-more-quick-view-in-google-search.html exact search query: "google search" "quick view"
-WhatsonWhen: dead? site down after January 2013, but no apparent announcements.
-Free Zone: http://www.nation.lk/edition/biz-news/item/17466-dialog-axiata-and-google-launch-free-zone.html
-Meebo Bar: http://www.pcmag.com/article2/0,2817,2418268,00.asp
+WhatsonWhen: dead? site down after January 2013, but no apparent announcements. "google whatsonwhen " 48,400 results
+Free Zone: http://www.nation.lk/edition/biz-news/item/17466-dialog-axiata-and-google-launch-free-zone.html 'google "free zone"' 3,030,000 results
+Meebo Bar: http://www.pcmag.com/article2/0,2817,2418268,00.asp 'google "meebo bar"' 160,000 results
+'paid channels'? http://www.wired.com/gadgetlab/2013/05/youtube-adds-paid-channel-subscriptions/ http://youtube-global.blogspot.com/2013/05/yt-pc-2013.html
+SMS down 9 May 2013:  http://productforums.google.com/forum/#!msg/websearch/yKG7BGro7QQ/ntAXQWWKj70J https://news.ycombinator.com/item?id=5695086 "google sms" 579,000 other results.
+Scratchpad free program non-social non-acquisition non-floss  "google scratchpad" 965 results  dead 2 November 2012 http://www.omgchrome.com/google-stopping-development-of-scratchpad-web-app/ general description: https://support.google.com/chrome_webstore/answer/183097?hl=en merged into Keep? "* * Scratchpad is moving to Google Keep. * * If you have unsynced Scratchpad notes, please open the app and follow instructions to save your notes. You can add Google Keep here:  https://chrome.google.com/webstore/detail/google-keep/hmjkmjkepdijhoojdojkdfohbdgmmhki" when was it launched? best guess, January 2011 http://voices.yahoo.com/scratchpad-notepad-application-google-chrome-7581750.html?cat=15
+Cloud Messaging for Chrome http://developer.chrome.com/apps/cloudMessaging.html "service",FALSE,FALSE,FALSE,FALSE launch: 10 May 2013 search 'Google "Cloud Messaging for Chrome"' 23,300 results
+Google Play Music 15 05 2013 paid service non-acquisition non-FLOSS social? ("You can share songs on your google+") '"google play music"' About 37,300,000 results (0.46 seconds)
+Google+ Games, launched 11 08 2011 http://googleblog.blogspot.com/2011/08/games-in-google-fun-that-fits-your.html Dead, 30 June 2013 https://support.google.com/plus/answer/3123176?p=plus_games&rd=1 non-FLOSS, non-acqusition profit social, '"google+ games"' 142000 hits
 -->
 
 # Appendix
@@ -631,9 +714,10 @@ google <- read.csv("http://www.gwern.net/docs/2013-google.csv",
 ## hits per day to the present
 # google$AvgHits <- google$Hits / as.integer(as.Date("2013-04-01") - google$Started)
 ## divide total hits for each product by total estimated size of Google index when that product started
-# google$DeflatedHits <- google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started)))
+# google$DeflatedHits <- log(google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started))))
+google$DeflatedHits <- log(google$DeflatedHits)
 ## Finally, let's combine the two strategies: deflate and then average.
-# google$AvgDeflatedHits <- log(google$AvgHits) / log(google$DeflatedHits)
+# google$AvgDeflatedHits <- log(google$AvgHits) / google$DeflatedHits
 
 cat("\nOverview of data:\n")
 print(summary(google[-1]))
@@ -679,13 +763,13 @@ print(summary(glm(Dead ~ log(Hits), data=google,family="binomial")))
 cat("\nTotal + average:\n")
 print(summary(glm(Dead ~ log(Hits) + log(AvgHits), data=google,family="binomial")))
 cat("\nTotal, average, deflated:\n")
-print(summary(glm(Dead ~ log(Hits) + log(AvgHits) + log(DeflatedHits), data=google,family="binomial")))
+print(summary(glm(Dead ~ log(Hits) + log(AvgHits) + DeflatedHits, data=google,family="binomial")))
 cat("\nAll:\n")
-print(summary(glm(Dead ~ log(Hits) + log(AvgHits) + log(DeflatedHits) + AvgDeflatedHits,
+print(summary(glm(Dead ~ log(Hits) + log(AvgHits) + DeflatedHits + AvgDeflatedHits,
                   data=google, family="binomial")))
 cat("\nStepwise regression through possible logistic regressions involving the hit variables:\n")
 print(summary(step(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social +
-                        log(Hits) + log(AvgHits) + log(DeflatedHits) + AvgDeflatedHits,
+                        log(Hits) + log(AvgHits) + DeflatedHits + AvgDeflatedHits,
                        data=google, family="binomial"))))
 
 cat("\nEntering survival analysis section:\n")
@@ -699,7 +783,7 @@ plot(surv, xlab="Days", ylab="Survival Probability function with 95% CI")
 invisible(dev.off())
 
 cat("\nCox:\n")
-cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + log(DeflatedHits),
+cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits,
                 data = google)
 print(summary(cmodel))
 cat("\nTest proportional assumption:\n")
@@ -708,7 +792,7 @@ print(cox.zph(cmodel))
 cat("\nPrimitive check for regime change (re-regress & check):\n")
 google$EarlyGoogle <- (as.POSIXlt(google$Started)$year+1900) < 2005
 cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
-                                   log(DeflatedHits) + EarlyGoogle,
+                                   DeflatedHits + EarlyGoogle,
                 data = google)
 print(summary(cmodel))
 print(cox.zph(cmodel))
@@ -731,10 +815,10 @@ invisible(dev.off())
 cat("\nTrain some random forests for prediction:\n")
 library(randomForest)
 lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type +
-                     log(google$DeflatedHits) + EarlyGoogle + Days,
+                     DeflatedHits + EarlyGoogle + Days,
                    data=google, family="binomial")
 rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social +
-                                     Type + log(google$DeflatedHits) + EarlyGoogle,
+                                     Type + DeflatedHits + EarlyGoogle,
                    importance=TRUE, data=google)
 print(rf)
 cat("\nVariables by importance for forests:\n")
@@ -755,7 +839,7 @@ logisticPredictionAccuracy <- function(gb, indices) {
   g <- gb[indices,] # allows boot to select subsample
   # train new regression model on subsample
   lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type +
-                       log(g$DeflatedHits) + EarlyGoogle + Days,
+                       DeflatedHits + EarlyGoogle + Days,
                    data=g, family="binomial")
   return(sum((exp(predict(lmodel, newdata=google))>1) == google$Dead) / nrow(google))
 }
@@ -765,7 +849,6 @@ print(boot.ci(lbs, type="norm"))
 cat("\nDitto for random forests:\n")
 randomforestPredictionAccuracy <- function(gb, indices) {
   g <- gb[indices,]
-  g$DeflatedHits <- log(g$DeflatedHits) # dunno why can't write in the formula `log(g$DeflatedHits)`...
   rf <- randomForest(as.factor(Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
                        DeflatedHits + EarlyGoogle + Days,
                    data=g)
@@ -787,7 +870,7 @@ print(head(alive[order(alive$RiskRatio, decreasing=FALSE),], n=10)$Product)
 cat("\nBegin calculating specific numerical predictions about remaining lifespans..\n")
 library(rms)
 cpmodel <- cph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
-                                  log(DeflatedHits) + EarlyGoogle,
+                                  DeflatedHits + EarlyGoogle,
                data = google, x=TRUE, y=TRUE, surv=TRUE)
 predictees <- subset(google, Product %in% c("Alerts","Blogger","FeedBurner","Scholar",
                                             "Book Search","Voice","Gmail","Analytics",
