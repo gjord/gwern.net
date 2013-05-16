@@ -1,6 +1,6 @@
 ---
 description: Site ideals; source & content; traffic; examples; license
-tags: personal, psychology, archiving
+tags: personal, psychology, archiving, statistics, predictions
 created: 01 Oct 2010
 status: finished
 belief: highly likely
@@ -37,7 +37,7 @@ What sort of writing could you create if you worked on it (be it ever so rarely)
     >
     > The Marshal replied, "In that case, there is no time to lose, plant it this afternoon."'
 
-> "Of all the books I have delivered to the presses, none, I think, is as personal as the straggling collection mustered for this hodgepodge, precisely because it abounds in reflections and interpolations. Few things have happened to me, and I have read a great many. Or rather, few things have happened to me more worth remembering than Schopenhauer's thought or the music of England’s words.
+> "Of all the books I have delivered to the presses, none, I think, is as personal as the straggling collection mustered for this hodgepodge, precisely because it abounds in reflections and interpolations. Few things have happened to me, and I have read a great many. Or rather, few things have happened to me more worth remembering than Schopenhauer's thought or the music of England's words.
 >
 > A man sets himself the task of portraying the world. Through the years he peoples a space with images of provinces, kingdoms, mountains, bays, ships, islands, fishes, rooms, instruments, stars, horses, and people. Shortly before his death, he discovers that that patient labyrinth of lines traces the image of his face."^[[Jorge Luis Borges](!Wikipedia), _[Dreamtigers](!Wikipedia)_ [Epilogue](http://thefloatinglibrary.com/2008/12/09/dreamtigers-epiloge-j-l-borges/)]
 
@@ -47,16 +47,16 @@ What sort of writing could you create if you worked on it (be it ever so rarely)
 >
 > If it's worth writing, it's worth keeping. If it can be kept, it might be worth writing...If you store your writing on a third party site like [Blogger](!Wikipedia), [Livejournal](!Wikipedia) or even on your own site, but in the complex format used by blog/wiki software de jour you will *lose it forever* as soon as hypersonic wings of Internet labor flows direct people's energies elsewhere. For most information published on the Internet, perhaps that is *not a moment too soon*, but how can the muse of originality soar when immolating transience brushes every feather?"^[[Julian Assange](!Wikipedia), 5 December 2006, ["Self destructing paper"](http://web.archive.org/web/20071020051936/http://iq.org/)]
 
-Keeping the site running that long is a challenge, and leads to the recommendations for [Resilient Haskell Software](): 100% [FLOSS](!Wikipedia) software[^zeroth], [open standards](!Wikipedia "Open format") for data, [textual](http://catb.org/~esr/writings/taoup/html/ch05s01.html) human-readability, avoiding external dependencies[^bitly], and staticness.
+Keeping the site running that long is a challenge, and leads to the recommendations for [Resilient Haskell Software](): 100% [FLOSS](!Wikipedia) software[^zeroth], [open standards](!Wikipedia "Open format") for data, [textual](http://catb.org/~esr/writings/taoup/html/ch05s01.html) human-readability, avoiding external dependencies[^bitly-1][^bitly-2], and staticness.
 
 [^zeroth]: [Mark Pilgrim](!Wikipedia), ["Freedom 0"](http://web.archive.org/web/20110726001925/http://diveintomark.org/archives/2004/05/14/freedom-0):
 
     > In the long run, the utility of all non-Free software approaches zero. All non-Free software is a dead end.
-[^bitly]: These dependencies are not always obvious. Computer archivist Jason Scott [writes](http://web.archive.org/web/20110716201019/http://www.archiveteam.org/archives/media/The%20Spendiferous%20Story%20of%20Archive%20Team%20-%20Jason%20Scott%20-%20PDA2011.txt) of [URL shortening](!Wikipedia "URL shortening#Criticism and problems") services that:
+[^bitly-1]: These dependencies are not always obvious. Computer archivist Jason Scott [writes](http://web.archive.org/web/20110716201019/http://www.archiveteam.org/archives/media/The%20Spendiferous%20Story%20of%20Archive%20Team%20-%20Jason%20Scott%20-%20PDA2011.txt) of [URL shortening](!Wikipedia "URL shortening#Criticism and problems") services that:
 
     > URL shorteners may be one of the worst ideas, one of the most backward ideas, to come out of the last five years. In very recent times, per-site shorteners, where a website registers a smaller version of its hostname and provides a single small link for a more complicated piece of content within it... those are fine. But these general-purpose URL shorteners, with their shady or fragile setups and utter dependence upon them, well. If we lose [TinyURL](!Wikipedia) or [bit.ly](!Wikipedia), millions of weblogs, essays, and non-archived tweets lose their meaning. Instantly. To someone in the future, it'll be like everyone from a certain era of history, say ten years of the 18th century, started speaking in a one-time pad of cryptographic pass phrases. We're doing our best to stop it. Some of the shorteners have been helpful, others have been hostile. A number have died. We're going to release torrents on a regular basis of these spreadsheets, these code breaking spreadsheets, and we hope others do too.
 
-    [Joshua Schachter](!Wikipedia) [remarks](http://joshua.schachter.org/2009/04/on-url-shorteners.html) (and the comments provide even more examples):
+[^bitly-2]: [Joshua Schachter](!Wikipedia) [remarks](http://joshua.schachter.org/2009/04/on-url-shorteners.html) (and the comments provide even more examples) further on URL shorteners:
 
     > But the biggest burden falls on the clicker, the person who follows the links. The extra layer of indirection slows down browsing with additional DNS lookups and server hits. A new and [potentially unreliable middleman](http://ask.slashdot.org/article.pl?sid=07/11/18/1319201) now sits between the link and its destination. And the long-term archivability of the hyperlink now depends on the health of a third party. The shortener may decide a link is a [Terms Of Service violation](!Wikipedia "TinyURL#Criticism") and delete it. If the shortener [accidentally erases a database](http://ma.gnolia.com/), forgets to renew its domain, or just [disappears](http://6uold.blogspot.com/2008/06/long-list-of-url-shorteners.html), the link will break. If a top-level domain [changes its policy on commercial use](http://workbench.cadenhead.org/news/3503/bitly-builds-business-libya-domain), the link will break. If the shortener gets hacked, every link becomes a potential phishing attack.
 
@@ -99,10 +99,11 @@ My answer is that one uses such a framework to work on projects that are too big
 
 1. [DNB FAQ]():
 
-     When I read in _Wired_ in 2008 that the obscure working memory exercise called dual n-back (DNB) had been found to increase IQ significantly, I was shocked. IQ is one of the most stubborn properties of one's mind, one of the most fragile[^fragile], the hardest to affect positively[^increase], but also one of the most valuable traits one could have[^conscientiousness]; if the technique panned out, it would be *huge*. Unfortunately, DNB requires a major time investment^[As in, 1 hour daily would not be too much.]; not a problem if it delivers, but it could be a huge loss. So, to do DNB or not?
+     When I read in _Wired_ in 2008 that the obscure working memory exercise called dual n-back (DNB) had been found to increase IQ significantly, I was shocked. IQ is one of the most stubborn properties of one's mind, one of the most fragile[^fragile], the hardest to affect positively[^increase], but also one of the most valuable traits one could have[^conscientiousness]; if the technique panned out, it would be *huge*. Unfortunately, DNB requires a major time investment (as in, half an hour daily); which would be a bargain - if it delivers. So, to do DNB or not?
 
      Questions of great import like this are worth studying carefully. The wheels of academia grind exceeding slow, and only a fool expects unanimous answers from fields like psychology. Any attempt to answer the question 'is DNB worthwhile?' will require years and cover a breadth of material. This FAQ on DNB is my attempt to cover that breadth over those years.
 2. [_Neon Genesis Evangelion_ notes](otaku) and [essay draft](otaku-essay):
+
     I have been discussing [NGE](!Wikipedia "Neon Genesis Evangelion") since 2004. The task of interpreting Eva is very difficult; the source works themselves are a major time-sink^[25 episodes, 6 movies, >11 manga volumes - just to stick to the core works.], and there are thousands of primary, secondary, and tertiary works to consider - personal essays, interviews, reviews, etc. The net effect is that many Eva fans 'know' certain things about Eva, such as _[End of Evangelion](!Wikipedia)_ not being a grand 'screw you' statement by Hideaki Anno or that the TV series was censored, but they no longer have *proof*. Because each fan remembers a different subset, they have irreconcilable interpretations. (Half the value of the page for me is having a place to store things I've said in countless fora which I can eventually turn into something more systematic.)
 
     To compile claims from all those works, to dig up forgotten references, to scroll through microfilms, buy issues of defunct magazines - all this is enough work to shatter [the heart](!Wikipedia "Karoshi") of the stoutest salaryman. Which is why I began years ago and expect not to finish for years to come. (Finishing by 2020 seems like a good [prediction](http://predictionbook.com/predictions/1951).)
@@ -112,7 +113,7 @@ My answer is that one uses such a framework to work on projects that are too big
     I wrote several drafts but always lost them. Sad[^Tadamine] and discouraged, I abandoned it for years. This fear leads straight into the next example.
 4. A Book reading list:
 
-    Once, I didn't have to keep reading lists. I simply went to the school library shelf where I left off and grabbed the next book. But then I began reading harder books, and they would cite other books, and sometimes would even have horrifying lists of hundreds of other books I ought to read ('bibliographies'). I tried remembering the most important ones but quickly forgot. So I began keeping a book list on paper. I thought I would throw it away in a few months when I read them all, but somehow it kept growing and growing. I didn't trust computers to store it before^[As with _Cloud Nine_; I accidentally erased everything on a routine basis while messing around with Windows.], but now I do, and it lives on in digital form (currently on [Goodreads](http://www.goodreads.com/user/show/11004626-gwern) - because they have export functionality). With it, I can track how my interests evolved over time^[For example, I notice I am no longer deeply interested in the occult. Hopefully this is because I have grown mentally and recognize it as rubbish; I would be embarrassed if when I died it turned out my youthful self had a better grasp on the real world.], and what I was reading at the time. I sometimes wonder if I will read them all even by 2070.
+    Once, I didn't have to keep reading lists. I simply went to the school library shelf where I left off and grabbed the next book. But then I began reading harder books, and they would cite other books, and sometimes would even have horrifying lists of hundreds of other books I ought to read ('bibliographies'). I tried remembering the most important ones but quickly forgot. So I began keeping a book list on paper. I thought I would throw it away in a few months when I read them all, but somehow it kept growing and growing. I didn't trust computers to store it before^[As with _Cloud Nine_; I accidentally erased everything on a routine basis while messing around with Windows.], but now I do, and it lives on in digital form (currently on [Goodreads](Links#websites) - because they have export functionality). With it, I can track how my interests evolved over time^[For example, I notice I am no longer deeply interested in the occult. Hopefully this is because I have grown mentally and recognize it as rubbish; I would be embarrassed if when I died it turned out my youthful self had a better grasp on the real world.], and what I was reading at the time. I sometimes wonder if I will read them all even by 2070.
 
 [^conscientiousness]: For details on the many valuable correlates of the Conscientiousness personality factor, see [Conscientiousness and online education](Conscientiousness and online education#conscientiousness).
 [^increase]: And America has tried pretty hard over the past 60 years to affect IQ. The whole nature/nurture [black-white IQ debate](!Wikipedia "Race and intelligence") would be moot if there were some nutrient or educational system which could add even 10 points on average, because then we would use it on all the blacks. But it seems that I'm constantly reading about programs like [Headstart](!Wikipedia) which boost IQ for a little while... and do nothing in the long run.
@@ -140,6 +141,32 @@ One of the ironies of this approach is that as a [transhumanist](!Wikipedia), I 
 I personally believe that one should "think Less Wrong and act Long Now", if you follow me. I diligently do my daily [spaced-repetition review](Spaced repetition) and n-backing; I carefully design my website and writings to last decades, actively think about how to write material that improves with time, and work on writings that will not be finished for years (if ever). It's a bit schizophrenic since both are totalized worldviews with drastically conflicting recommendations about where to invest my time. It's a case of high [discount rates](!Wikipedia) versus low discount rates; and one could fairly accuse me of committing the [sunk cost fallacy](!Wikipedia), but then, I'm not sure that [sunk cost fallacy is a fallacy](Sunk cost) (certainly, I have more to show for my wasted time than most people).
 
 The Long Now views its proposals like the Clock and the Long Library and [seedbanks](!Wikipedia) as insurance - in case the future turns out to be surprisingly *unsurprising*. I view these writings similarly. If [Ray Kurzweil](!Wikipedia)'s most ambitious predictions turn out right and the [Singularity](!Wikipedia "Technological singularity") happens by 2050 or so, then much of my writings will be moot, but I will have all the benefits of said Singularity; if the Singularity never happens or ultimately pays off in a very disappointing way, then my writings will be valuable to me. By working on them, I hedge my bets.
+
+## Finding my ideas
+
+To the extent I personally have any method for 'getting started' on writing something, it's to pay attention to anytime you find yourself thinking, "how irritating that there's no good webpage/Wikipedia article on _X_" or "I wonder if _Y_" or "has anyone done _Z_" or "huh, I just realized that _A_!" The DNB FAQ started because I was irritated people were repeating themselves on the dual n-back mailing list; the [modafinil](Modafinil) article started because it was a pain in the ass to even figure out where one *could* order modafinil; the trio of _Death Note_ articles ([Anonymity](Death Note Anonymity), [Ending](Death Note Ending), [Script](Death Note script)) all started because I had an amusing thought about information theory; the [Silk Road]() page was commissioned after I growsed about how deeply sensationalist & shallow & ill-informed all the mainstream media articles on the Silk Road drug marketplace were (similarly for [Bitcoin is Worse is Better]()); my [Google survival analysis](Google shutdowns) was based on thinking it was a pity that Arthur's _Guardian_ analysis was trivially & fatally flawed; and so on and so forth.
+
+None of these seems very special to me. Anyone could've compiled the DNB FAQ; anyone could've kept a list of online pharmacies where one could buy modafinil; the Google analysis was so obvious a strategy that someone did it before me (and the fancier statistics all standard tools). If I have done anything meritorious with them, it was perhaps simply putting more work into them than someone else would have; to [quote Teller](http://www.smithsonianmag.com/arts-culture/Teller-Reveals-His-Secrets.html?c=y&story=fullstory "Teller Reveals His Secrets: The smaller, quieter half of the magician duo Penn & Teller writes about how magicians manipulate the human mind"):
+
+> "I think you'll see what I mean if I teach you a few principles magicians employ when they want to alter your perceptions...Make the secret a lot more trouble than the trick seems worth. You will be fooled by a trick if it involves more time, money and practice than you (or any other sane onlooker) would be willing to invest. My partner, Penn, and I once produced 500 live cockroaches from a top hat on the desk of talk-show host David Letterman. To prepare this took weeks. We hired an entomologist who provided slow-moving, camera-friendly cockroaches (the kind from under your stove don't hang around for close-ups) and taught us to pick the bugs up without screaming like preadolescent girls. Then we built a secret compartment out of foam-core (one of the few materials cockroaches can't cling to) and worked out a devious routine for sneaking the compartment into the hat. More trouble than the trick was worth? To you, probably. But not to magicians."
+
+Besides that, I think after a while writing/research can be a virtuous circle or autocatalytic. If one were to look at [my repo statistics](/docs/gwern.net-gitstats/index.html), you see that I haven't always been writing as much. What seems to happen is that as I write more:
+
+- I learn more tools
+
+    eg. I learned basic [meta-analysis](!Wikipedia) in R to answer the burning question of what all the positive & negative n-back studies [summed to](DNB FAQ#meta-analysis), but then I was able to use it for [iodine](Iodine#meta-analysis); I learned linear models for [analyzing _MoR_ reviews](hpmor#analysis) but now I can use them anywhere I want to, like in my [Touhou material](Touhou)
+- I internalize a habit of noticing interesting questions that flit across my brain
+
+    eg. in March 2013 while meditating: "I wonder if more doujin music gets released when unemployment goes up and people may have more spare time or fail to find jobs? Hey! That giant Touhou music torrent I downloaded, with its 45000 songs all tagged with release year, could probably answer that!" (One could argue that these questions probably *should* be ignored and not investigated in depth - Teller again - but nevertheless, this is how things work for me.)
+- if you aren't writing, you'll ignore useful links or quotes; but if you stick them in small asides or footnotes as you notice them, eventually you'll have something bigger.
+
+    I grab things I see on Google Alerts & Scholar, Pubmed, Reddit, Hacker News, my RSS feeds, books I read, and note them somewhere until they finally amount to something. (An example would be my slowly accreting citations on [IQ and economics](http://lesswrong.com/lw/7e1/rationality_quotes_september_2011/4r01).)
+- people leave comments, ping me on IRC, send me emails, or leave anonymous messages, all of which can help
+
+    The most recent examples of this come from my most popular page, on Silk Road:
+
+    1. an anonymous message led me to [investigate a vendor in depth and ponder the accusation leveled against them](Silk Road#a-mole); I wrote it up and gave my opinions and thus I got another short essay to add to my SR page which I would not have had otherwise (and I think there's a [<20% chance](http://predictionbook.com/predictions/16142) that in a few years this will pay off and become a very interesting essay).
+    2. CMU's Nicholas Christin, who [wrote a paper](http://arxiv.org/abs/1207.7139 "Traveling the Silk Road: A measurement analysis of a large anonymous online marketplace") by scraping SR for many months and giving all sorts of overall statistics, emailed me to point out I was citing inaccurate figures from the first version of his paper. I thanked him for the correction and while I was replying, mentioned I had a hard time believing his paper's claims about the extreme rarity of scams on SR as estimated through buyer feedback. After some back and forth and suggesting specific mechanisms how the estimates could be positively biased, he was able to check his database and confirmed that there was at least one very large omission of scams in the scraped data and there was probably a general undersampling; so now I have a more accurate feedback estimate for my SR page (important for estimating risk of ordering) and he said he'll acknowledge me in the/a paper, which is nice.
 
 ## Belief tags
 
@@ -218,8 +245,8 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         "<!--"
         "-->"
         "<-- "
-        "<—"
-        "—>"
+        "<-"
+        "->"
         "$title$"
         "$description$"
         "$author$"
@@ -233,7 +260,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
     ~~~{.Bash}
     function markdown-lint () {
         cat "$@" | file - | grep -v "text"; # warn if not text, perhaps due to bad copy-paste
-        fgrep -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " "$@";
+        fgrep -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" "$@";
         grep --only-matching '^\[\^.*\]: ' "$@" | sort | uniq --count | fgrep --invert-match "      1 [^";
         markdown-length-checker "$@";
         cat "$@" \
@@ -241,7 +268,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         | pandoc --mathml --standalone - \
         | elinks -dump --force-html \
         | fgrep -e '\frac' -e '\times' -e '(http' -e ')http' -e '[http' -e ']http' -e ' _ ' \
-                -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<—' -e '—>' -e '$title$' \
+                -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<-' -e '->' -e '$title$' \
                 -e '$description$' -e '$author$' -e '$tags$' -e '$category$'; }
     ~~~
 
@@ -315,7 +342,7 @@ As a writer, I desire feedback. I also want to feel that my work has been of use
 2. Google [AdWords](!Wikipedia): initially disappointing, with after 3010 impression, there were still no clicks! It was funded by the $100 coupon for signing up for Google's Webmaster Tools. Interface is decent given complexity of task, but deeply frustrating to have to wait many weeks for the [DNB FAQ]() and [Modafinil]() ads to be approved or rejected. Finally, almost in June, the DNB FAQ ads were approved and the modafinil ads rejected. From 23 March to 2 July 2011, I paid $21.07 for 98,900 impressions yielding 63 clicks through. (Those visitors only spent an average of <1.5 minutes on the site, too.) Again, not a great investment of time.
 3. [StumbleUpon](!Wikipedia): with just 3 articles 'stumbled' (included in the database), specifically DNB FAQ, [In Defense Of Inclusionism]() & [Nootropics](), StumbleUpon was responsible for 161 visits or 2.77% of all traffic in the period I looked at. How much traffic could I expect with 30 or 40 articles stumbled? Quite a bit. SU has no 'front page' like other social news aggregators so traffic is more of a trickle than flood, but nevertheless, [Death Note Ending]() somehow clicked with SU readers and I got >500 readers out of it in a day or two. In total over this time, SU drove 2,257 visits. SU tended to give a pretty steady 30-50 visits a day with rare spikes when an article clicked. The downside is that after looking at SU comments and at how much time they spend on pages^[They spend an average of 27 seconds; in comparison, my *second* largest source of traffic, LessWrongers, average 3 minutes and 29 seconds; even my third largest traffic source, Redditers, manage almost 2 minutes. Even random people coming from Google manage to spend 44 seconds on their visit!], I have to agree with Arvind Narayanan's ["StumbleUpon Considered Harmful"](http://arvindn.livejournal.com/133249.html) - SUers do not want quality content but quick content, for the dopamine boost.
 4. [Hacker News](!Wikipedia): [Girl Scouts and good governance]() made it to the front page, resulting in 1,727 visits & setting `gwern.net` traffic records (it is that giant spike in the traffic graph), but apparently minimal viewing of other pages. Further, while I seem to get a modest amount of Reddit traffic from even unsuccessful submissions, HN submissions will sink without a trace. Kiba calls Hacker News a 'lottery', but it seems to be one worth playing.
-5. LessWrong is a natural place to post many of my writings: <http://lesswrong.com/user/gwern/submitted/> And perhaps unsurprisingly, LW is my second-largest source of traffic, coming in after SU with 1,857 visits. While few of my submissions get upvoted all that highly, most of them drove a fair amount of traffic even in the Discussion ghetto. (Linking in comments also drives a surprising amount of traffic over long periods to my practical articles like on n-back or melatonin.) At some point I hope to have a good Article and see how much of a disparity there is.
+5. LessWrong is a natural place to [post many of my writings](http://lesswrong.com/user/gwern/submitted/). And perhaps unsurprisingly, LW is my second-largest source of traffic, coming in after SU with 1,857 visits. While few of my submissions get upvoted all that highly, most of them drove a fair amount of traffic even in the Discussion ghetto. (Linking in comments also drives a surprising amount of traffic over long periods to my practical articles like on n-back or melatonin.) At some point I hope to have a good Article and see how much of a disparity there is.
 
 ### July 2011 - December 2011
 
@@ -443,6 +470,8 @@ To Hacker News, Reddit, and LessWrong, I can add as a major referrer Wikipedia -
 
 I haven't spent much time promoting my content, but improving the site with metadata & writing new content: for example, I tripled the size of my [hafu]() anime/manga character database.
 
+<!-- https://news.ycombinator.com/item?id=5660220 https://news.ycombinator.com/item?id=5653874 -->
+
 ## Colophon
 ### Hosting
 
@@ -494,7 +523,7 @@ There's a very clear resemblance for everything but the digit '2', which then bl
     colnames(m)<- c("Observed Prop.", "Theoretical Prop.")
     barplot( rbind(ta/sta,pb/sum(pb)), beside = T, col = rainbow(7)[c(2,5)],
                   xlab = "First Digit")
-    title("Benford’s Law Compared to Writing Data")
+    title("Benford's Law Compared to Writing Data")
     legend(16,.28, legend = c("From Page Data", "Theoretical"),
            fill = rainbow(7)[c(2,5)],bg="white")
     chisq.test(ta,p=pb)
@@ -534,7 +563,7 @@ These tools encourage a minimalist site; I believe that [minimalism](!Wikipedia)
 
 ### License
 
-This site is licensed under the [Creative Commons](!Wikipedia) [public domain](http://creativecommons.org/about/cc0) license.
+This site is licensed under the [Creative Commons](!Wikipedia) [public domain (CC-0)](http://creativecommons.org/about/cc0) license.
 
 I believe the public domain license reduces [FUD](!Wikipedia) and [dead-weight loss](!Wikipedia)[^access], encourages copying ([LOCKSS](!Wikipedia)), gives back (however little) to [Free Software](!Wikipedia)/[Free Content](!Wikipedia), and costs me nothing^[Not that I *could* sell anything on this wiki; and if I could, I would polish it as much as possible, giving me fresh copyright.].
 
