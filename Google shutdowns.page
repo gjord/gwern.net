@@ -33,7 +33,6 @@ The shutdown of the popular service [Google Reader](!Wikipedia), announced on [1
     > The difficulty was that Reader users, while hyper-engaged with the product, never snowballed into the tens or hundreds of millions. Brian Shih became the product manager for Reader in the fall of 2008. "If Reader were its own startup, it's the kind of company that Google would have bought. Because we were at Google, when you stack it up against some of these products, it's tiny and isn't worth the investment", he said. At one point, Shih remembers, engineers were pulled off Reader to work on OpenSocial, a "half-baked" development platform that never amounted to much. "There was always a political fight internally on keeping people staffed on this little project", he recalled. Someone hung a sign in the Reader offices that said "DAYS SINCE LAST THREAT OF CANCELLATION." The number was almost always zero. At the same time, user growth - while small next to Gmail's hundreds of millions - more than doubled under Shih's tenure. But the "senior types", as Bilotta remembers, "would look at absolute user numbers. They wouldn't look at market saturation. So Reader was constantly on the chopping block."
     >
     > So when news spread internally of Reader's gelding, it was like Hemingway's line about going broke: "Two ways. Gradually, then suddenly." Shih found out in the spring that Reader's internal sharing functions - the asymmetrical following model, endemic commenting and liking, and its advanced privacy settings - would be superseded by the forthcoming Google+ model. Of course, he was forbidden from breathing a word to users.
-
 [^Reader-threats-2]: Shih further [writes on Quora](https://www.quora.com/Google-Reader-Shut-Down-March-2013/Why-is-Google-killing-Google-Reader):
 
     > Let's be clear that this has nothing to do with revenue vs operating costs. Reader never made money directly (though you could maybe attribute some of Feedburner and AdSense for Feeds usage to it), and it wasn't the goal of the product. Reader has been fighting for approval/survival at Google since long before I was a PM for the product. I'm pretty sure Reader was threatened with de-staffing at least three times before it actually happened. It was often for some reason related to social:
@@ -43,7 +42,6 @@ The shutdown of the popular service [Google Reader](!Wikipedia), announced on [1
     > - 2010 - let's pull the team off to build Google+
     >
     > It turns out they decided to kill it anyway in 2010, even though most of the engineers opted against joining G+. Ironically, I think the reason Google always wanted to pull the Reader team off to build these other social products was that the Reader team actually understood social (and tried a lot of experiments over the years that informed the larger social features at the company) [See Reader's friends implementations v1, v2, and v3, comments, privacy controls, and sharing features. Actually wait, you can't see those anymore, since they were all ripped out.]. Reader's social features also evolved very organically in response to users, instead of being designed top-down like some of Google's other efforts [Rob Fishman's Buzzfeed article has good coverage of this: [Google's Lost Social Network](http://www.buzzfeed.com/robf4/googles-lost-social-network)]. I suspect that it survived for some time after being put into maintenance because they believed it could still be a useful source of content into G+. Reader users were always voracious consumers of content, and many of them filtered and shared a great deal of it. But after switching the sharing features over to G+ (the so called "share-pocalypse") along with the redesigned UI, my guess is that usage just started to fall - particularly around sharing. I know that my sharing basically stopped completely once the redesign happened [[Reader redesign: Terrible decision, or worst decision?](http://www.brianshih.com/post/30194495552/reader-redesign-terrible-decision-or-worst-decision) I was a lot angrier then than I am now -- now I'm just sad.]. Though Google did ultimately fix a lot of the UI issues, the sharing (and therefore content going into G+) would never recover. So with dwindling usefulness to G+, (likely) dwindling or flattening usage due to being in maintenance, and Google's big drive to focus in the last couple of years, what choice was there but to kill the product?
-
 [^Reader-threats-3]: The sign story is confirmed by another Googler; ["Google Reader lived on borrowed time: creator Chris Wetherell reflects"](http://gigaom.com/2013/03/13/chris-wetherll-google-reader/):
 
     > "When they replaced sharing with +1 on Google Reader, it was clear that this day was going to come", he said. Wetherell, 43, is amazed that Reader has lasted this long. Even before the project saw the light of the day, Google executives were unsure about the service and it was through sheer perseverance that it squeaked out into the market. At one point, the management team threatened to cancel the project even before it saw the light of the day, if there was a delay. "We had a sign that said, '*days since cancellation*' and it was there from the very beginning", added a very sanguine Wetherell. My translation: Google never really believed in the project. Google Reader started in 2005 at what was really the golden age of RSS, blogging systems and a new content ecosystem. The big kahuna at that time was [Bloglines](!Wikipedia) (acquired by [Ask.com](!Wikipedia)) and Google Reader was an upstart.
@@ -458,7 +456,7 @@ This all makes sense to me. I find particularly interesting the profit and socia
 
 ### Random forests
 
-Because I can, I was curious how [random forests](!Wikipedia) might stack up to the logistic regression and against a base-rate predictor (that nothing was shut down, since ~65% of the products are still alive).
+Because I can, I was curious how [random forests](!Wikipedia) ([Breiman 2001](http://www.oz.berkeley.edu/~breiman/randomforest2001.pdf "Random Forests")) might stack up to the logistic regression and against a base-rate predictor (that nothing was shut down, since ~65% of the products are still alive).
 
 With [`randomForest`](http://cran.r-project.org/web/packages/randomForest/index.html), I trained a random forest as a classifier, yielding reasonable looking error rates:
 
@@ -478,72 +476,32 @@ To compare the random forest accuracy with the logistic model's accuracy, I inte
 
 The base-rate predictor got 65% right by definition, the logistic managed to score 68% correct ([bootstrap](!Wikipedia "Bootstrapping (statistics)")^[Specifically: building a logistic model on a bootstrap sample and then testing accuracy against full Google dataset.] 95% CI: 66-72%), and the random forest similarly got 68% (67-78%). These rates are not quite as bad as they may seem: I excluded the lifetime length (`Days`) from the logistic and random forests because unless one is handling it specially with survival analysis, [it leaks information](#leakage); so there's predictive power being left on the table. Regardless, there's no real reason to switch to the more complex random forests.
 
-<!--
-["Random survival forests"](http://arxiv.org/pdf/0811.1645 "Ishwaran et al 2008"); ["Evaluating Random Forests for Survival Analysis: Using Prediction Error Curves"](http://www.jstatsoft.org/v50/i11/paper "Mogensen et al 2012")
+#### Random survival forests
 
-[`randomForestSRC`](http://cran.r-project.org/web/packages/randomForestSRC/index.html) (successor to original [`randomSurvivalForest`](http://cran.r-project.org/web/packages/randomSurvivalForest/index.html) described in paper)
+The obvious next step is to take into accounts lifetime length & estimated survival curves. We can do that using ["Random survival forests"](http://arxiv.org/pdf/0811.1645 "Ishwaran et al 2008") (see also ["Mogensen et al 2012"](http://www.jstatsoft.org/v50/i11/paper "Evaluating Random Forests for Survival Analysis: Using Prediction Error Curves")), implemented in [`randomForestSRC`](http://cran.r-project.org/web/packages/randomForestSRC/index.html) (successor to Ishwaran's original library [`randomSurvivalForest`](http://cran.r-project.org/web/packages/randomSurvivalForest/index.html)). This initially seems very promising:
 
-library(randomForestSRC)
-tmp <- google; tmp$DeflatedHits <- log(tmp$DeflatedHits)
-rsf <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits + EarlyGoogle, data=tmp, nsplit=1)
-rsf
+~~~{.R}
                          Sample size: 350
                     Number of deaths: 122
                      Number of trees: 1000
           Minimum terminal node size: 3
-       Average no. of terminal nodes: 60.81
+       Average no. of terminal nodes: 61.05
 No. of variables tried at each split: 3
               Total no. of variables: 7
                             Analysis: Random Forests [S]RC
                               Family: surv
                       Splitting rule: logrank *random*
        Number of random split points: 1
-              Estimate of error rate: 35.26%
+              Estimate of error rate: 35.37%
+~~~
 
-plot(rsf)
+and even gives us a cute plot of how accuracy varies with how big the forest is (looks like we don't need to tweak it) and how important each variable is as a predictor:
 
-               Importance   Relative Imp
-DeflatedHits       0.0801         1.0000
-EarlyGoogle        0.0132         0.1652
-Social             0.0039         0.0484
-Profit             0.0037         0.0466
-Acquisition        0.0008         0.0102
-FLOSS             -0.0093        -0.1167
-Type              -0.0128        -0.1597
+![Visual comparison of the average usefulness of each variable to decision trees](/images/google/rsf-importance.png)
 
-library(prodlim) # for sindex
-# cumulative hazard function adapted from Mogensen et al 2012
-predictSurvProb.rsf <- function (object, newdata, times, ...) {
-    N <- NROW(newdata)
-    # class(object) <- c("rsf", "grow")
-    S <- exp(-predict.rfsrc(object, test = newdata)$chf)
-    if(N == 1) S <- matrix(S, nrow = 1)
-    Time <- object$time.interest
-    p <- cbind(1, S)[, 1 + sindex(Time, times),drop = FALSE]
-    if(NROW(p) != NROW(newdata) || NCOL(p) != length(times))
-     stop("Prediction failed")
-    p
-}
-totals <- as.integer(as.Date("2013-04-01") - google$Started)
-predictionMatrix <- predictSurvProb.rsf(rsf, google, totals)
-predictions <- NULL; for (i in 1:length(totals)) { predictions[i] <- predictionMatrix[i,i] }
-sum((predictions<0.50) == google$Dead) / nrow(google)
-[1] 0.8
+Estimating the error rate for this random survival forest like we did previously, we're happy to see a 78% error rate. Building a predictor based on the Cox model, we get a lesser (but still better than the non-survival models) 72% error rate.
 
-library(boot)
-randomSurvivalPredictionAccuracy <- function(gb, indices) {
-    g <- gb[indices,]
-    rsf <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits + EarlyGoogle,
-                 data=tmp, nsplit=1)
-    predictionMatrix <- predictSurvProb.rsf(rsf, google, totals)
-    predictions <- NULL; for (i in 1:length(totals)) { predictions[i] <- predictionMatrix[i,i] }
-    return(sum((predictions<0.50) == google$Dead) / nrow(google))
-}
-rsfBs <- boot(data=google, statistic=randomSurvivalPredictionAccuracy, R=10)
-print(boot.ci(rsfBs, type="norm"))
-
-TODO: derive cumulative hazard function from the final Cox model to compare with random survival forests
--->
+How do these models perform when we check their robustness via the bootstrap? Not so great. The random survival forest collapses to 57-64% (95% on 200 replicates), but the Cox model just to 68-73%. This suggests to me that something is going wrong with the random survival forest model (overfitting? programming error?), so here too we'll stick with the ordinary Cox model.
 
 ## Predictions
 
@@ -715,9 +673,9 @@ google <- read.csv("http://www.gwern.net/docs/2013-google.csv",
 # google$AvgHits <- google$Hits / as.integer(as.Date("2013-04-01") - google$Started)
 ## divide total hits for each product by total estimated size of Google index when that product started
 # google$DeflatedHits <- log(google$Hits / exp(predict(model1, newdata=data.frame(Date = google$Started))))
-google$DeflatedHits <- log(google$DeflatedHits)
 ## Finally, let's combine the two strategies: deflate and then average.
 # google$AvgDeflatedHits <- log(google$AvgHits) / google$DeflatedHits
+# google$DeflatedHits <- log(google$DeflatedHits)
 
 cat("\nOverview of data:\n")
 print(summary(google[-1]))
@@ -843,7 +801,7 @@ logisticPredictionAccuracy <- function(gb, indices) {
                    data=g, family="binomial")
   return(sum((exp(predict(lmodel, newdata=google))>1) == google$Dead) / nrow(google))
 }
-lbs <- boot(data=google, statistic=logisticPredictionAccuracy, R=20000)
+lbs <- boot(data=google, statistic=logisticPredictionAccuracy, R=20000, parallel="multicore", ncpus=4)
 print(boot.ci(lbs, type="norm"))
 
 cat("\nDitto for random forests:\n")
@@ -854,10 +812,73 @@ randomforestPredictionAccuracy <- function(gb, indices) {
                    data=g)
   return(sum((as.logical(predict(rf))) == google$Dead) / nrow(google))
 }
-rfbs <- boot(data=google, statistic=randomforestPredictionAccuracy, R=20000)
+rfbs <- boot(data=google, statistic=randomforestPredictionAccuracy, R=20000, parallel="multicore", ncpus=4)
 print(boot.ci(rfbs, type="norm"))
 
-cat("\nRanking products by risk...\n")
+cat("\nFancier comparison: random survival forests and full Cox model with bootstrap\n")
+library(randomForestSRC)
+rsf <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits + EarlyGoogle,
+             data=google, nsplit=1)
+print(rsf)
+
+png(file="~/wiki/images/google/rsf-importance.png", width = 1.5*480, height = 1*480)
+plot(rsf)
+invisible(dev.off())
+
+# calculate cumulative hazard function; adapted from Mogensen et al 2012
+library(prodlim) # for 'sindex' call
+predictSurvProb.rsf <- function (object, newdata, times, ...) {
+    N <- NROW(newdata)
+    # class(object) <- c("rsf", "grow")
+    S <- exp(-predict.rfsrc(object, test = newdata)$chf)
+    if(N == 1) S <- matrix(S, nrow = 1)
+    Time <- object$time.interest
+    p <- cbind(1, S)[, 1 + sindex(Time, times),drop = FALSE]
+    if(NROW(p) != NROW(newdata) || NCOL(p) != length(times))
+     stop("Prediction failed")
+    p
+}
+totals <- as.integer(as.Date("2013-04-01") - google$Started)
+randomSurvivalPredictionAccuracy <- function(gb, indices) {
+    g <- gb[indices,]
+    rsfB <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
+                                     DeflatedHits + EarlyGoogle,
+                 data=g, nsplit=1)
+
+    predictionMatrix <- predictSurvProb.rsf(rsfB, google, totals)
+    predictions <- NULL; for (i in 1:nrow(google)) { predictions[i] <- predictionMatrix[i,i] }
+
+    return(sum((predictions<0.50) == google$Dead) / nrow(google))
+}
+# accuracy on full Google dataset
+print(randomSurvivalPredictionAccuracy(google, 1:nrow(google)))
+# check this high accuracy using bootstrap
+rsfBs <- boot(data=google, statistic=randomSurvivalPredictionAccuracy, R=200, parallel="multicore", ncpus=4)
+print(rsfBs)
+print(boot.ci(rsfBs, type="perc"))
+
+coxProbability <- function(cm, d, t) {
+    x <- survfit(cm, newdata=d)
+    p <- x$surv[Position(function(a) a>t, x$time)]
+    if (is.null(p)) { coxProbability(d, (t-1)) } else {if (is.na(p)) p <- 0}
+    p
+    }
+randomCoxPredictionAccuracy <- function(gb, indices) {
+    g <- gb[indices,]
+    cmodel <- cmodel <- coxph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits,
+                data = g)
+
+    predictions <- NULL;
+    for (i in 1:nrow(google)) { predictions[i] <- coxProbability(cmodel, google[i,], totals[i]) }
+
+    return(sum((predictions<0.50) == google$Dead) / nrow(google))
+    }
+print(randomCoxPredictionAccuracy(google, 1:nrow(google)))
+coxBs <- boot(data=google, statistic=randomCoxPredictionAccuracy, R=200, parallel="multicore", ncpus=4)
+print(coxBs)
+print(boot.ci(coxBs, type="perc"))
+
+cat("\nRanking products by Cox risk ratio...\n")
 google$RiskRatio <- predict(cmodel, type="risk")
 alive <- google[!google$Dead,]
 
