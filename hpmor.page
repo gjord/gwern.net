@@ -4,7 +4,7 @@ description: Recording fan speculation for retrospectives; statistically modelin
 created: 25 Mar 2012
 status: in progress
 belief: likely
-tags: statistics, predictions, computer science, transhumanism, Haskell
+tags: statistics, predictions, Haskell
 ...
 
 Sources for predictions: [PredictionBook.com](http://predictionbook.com), [LessWrong](http://lesswrong.com/r/discussion/lw/7jd/harry_potter_and_the_methods_of_rationality/), & [TvTropes](http://tvtropes.org/pmwiki/pmwiki.php/WMG/HarryPotterAndTheMethodsOfRationality)
@@ -442,15 +442,14 @@ I decided to take a stab at it.
 
 ~~~{.Bash}
 for i in {1..1256}
-do elinks -dump-width 1000 -no-numbering -no-references -dump http://www.fanfiction.net/r/5782108/0/$i/
+do elinks -dump-width 1000 -no-numbering -no-references -dump http://www.fanfiction.net/r/5782108/0/$i/ \
      | grep "report review for abuse " >> reviews.txt
 done
 ~~~
 
-Since page #1 is for the most recent URLs and we started with 1, the reviews were dumped newest to oldest:
+Since page #1 is for the most recent URLs and we started with 1, the reviews were dumped newest to oldest: eg.
 
-eg.
-
+    ...
     [IMG] report review for abuse Faerie of Tara 4/1/12 . chapter 3
     [IMG] report review for abuse Faerie of Tara 4/1/12 . chapter 2
     report review for abuse Aww 4/1/12 . chapter 81
@@ -461,6 +460,7 @@ eg.
     report review for abuse Joe in Australia 4/1/12 . chapter 81
     report review for abuse of course 3/31/12 . chapter 45
     report review for abuse RickJs 3/31/12 . chapter 22
+    ...
 
 We can clean this up with more shell scripting:
 
@@ -519,7 +519,7 @@ data
 18851                                            wetterwaxs  2/28/10       1
 18852                                                Errrrr  2/28/10       1
 # Convert the date strings to R dates
-data=data.frame(Chapter=data$Chapter, Date=as.Date(data$Date,"%m/%d/%Y"), User=data$User)
+data <- data.frame(Chapter=data$Chapter, Date=as.Date(data$Date,"%m/%d/%Y"), User=data$User)
 summary(data)
 
     Chapter           Date                      User
@@ -594,7 +594,7 @@ totalreviews
 [46]  246  334  120  148  104  181   69   47  183   38  143   74  202   80  131
 [61]  127  164  303  175  146   42  147  130  253  296  217  398  136  249  187
 [76]  231  525  185  153  308  235  113   74  154  236
-# Now the hard part: map over the list of vectors, and filter out anything dated 7 days after the first date
+# Now the hard part: map over the list of vectors, & filter out anything dated 7 days after the first date
 earlyreviews <- unlist(lapply(lapply(myList,
     function(a) Filter(function(b) {if (b > a[1]+7) return(FALSE) else return(TRUE)}, a)), length))
  [1]  17  11  13  42 341 191 204 210 296 282 117 136 162 144 126 155 199 199 159
@@ -963,9 +963,7 @@ days <- days[(length(days)-100):length(days)]
 plot(days, totals)
 model <- lm(totals ~ days)
 summary(model)
-Call:
-lm(formula = totals ~ days)
-
+...
 Residuals:
      Min       1Q   Median       3Q      Max
 -18.4305  -4.4631   0.2601   7.4555  16.0125
@@ -1021,6 +1019,150 @@ We solve for _x_:
 9. $x = 1988.926$ days, or $\frac{1988.926}{365.25} = 5.445383$ years
 
 Phew! That's a long time. But it's not "never" (as it is in the logarithmic fits). With that in mind, I don't predict that _MoR_ will surpass _UC_ [within a year](http://predictionbook.com/predictions/10022), but bearing in mind that 5.4 years isn't too far off and I expect additional bursts of reviews as _MoR_ updates, I consider it [possible within 2 years](http://predictionbook.com/predictions/10023).
+
+## Survival analysis
+
+> I compile additional reviews and perform a survival analysis finding a difference in retention between roughly the first half of _MoR_ and the second half, which I attribute to the changed update schedule & slower production in the second half.
+
+On 17 May 2013, having finished learning [survival analysis](!Wikipedia) & practicing it on a real dataset in [my analysis of Google shutdowns](Google shutdowns), I decided to return to _MoR_. At that point, more than 7 months had passed since my previous analysis, and more reviews had accumulated (1256 pages' worth in November 2012, 1364 by May 2013), so I downloaded as before, processed into a clean CSV, and wound up with 20447 reviews by 7508 users.
+
+I then consolidated the reviews into per-user records: for each reviewer, I extracted their username, the first chapter they reviewed, the date of the first review, the last chapter they reviewed, and the last review's date. A great many reviewers apparently leave only 1 review ever. The sparsity of reviews presents a challenge for defining an event or 'death', since to me the most natural definition of 'death' is "not having reviewed the latest chapter": with such sparsity, a reviewer may still be a reader (the property of interest) without having left a review on the latest chapter. Specifically, of the 7508 users, only 182 have reviewed chapter 87. To deal with this, I arbitrarily make the cutoff "any review of chapter 82 or more recent": a great deal of plot happened in those 5 chapters, so I reason anyone who isn't moved to comment (however briefly) on any of them may not be heavily engaged with the story.
+
+As the days pass, the number of reviewers who are that 'old' will dwindle as they check out or unsubscribe or simply stop being as enthusiastic as they used to be. We can graph this decline over time (zooming in to account for the issue that only 35% of reviewers leave >1 reviews ever); no particular pattern jumps out beyond a slow exponential decay:
+
+![Age of reviewers against probability they will not leave another review](/hpmor/survival-overall.png)
+
+But this is plotting age of reviewers and has no clear connection to calendar time, which was the original hypothesis: that the past 2 years have damaged readership more than the earlier chapters which were posted more timely. In particular, chapter posting seems to have slowed down ~ch62 (published 2010-11-27). So, if we were to look at every user who seems to have begun reading _MoR_ only after that date (as evidenced by their first review postdating ch62's publication) and compare them to those reading before, do they have additional mortality (above and beyond the low mortality we would expect by being relatively latecomers to _MoR_, which is adjusted for by the survival curve)? The answer seems to be yes, the survival curves look different when we partition users this way:
+
+![Different mortality curves for 2 groups of reviewers](/images/hpmor/survival-earlylate-split.png)
+
+~~~{.R}
+  n= 7508, number of events= 6927
+
+           coef exp(coef) se(coef)    z Pr(>|z|)
+LateTRUE 0.2868    1.3322   0.0247 11.6   <2e-16
+
+         exp(coef) exp(-coef) lower .95 upper .95
+LateTRUE      1.33      0.751      1.27       1.4
+~~~
+
+A pretty clear difference between groups, and an [odds ratio](!Wikipedia) of 1.33 ([bootstrap](!Wikipedia "Bootstrapping (statistics)") 95% CI: 1.26-1.39) is not trivially small. I think we can consider the original hypothesis supported to some degree: the later chapters, either because of the update schedule or perhaps the change in subject matter or attracting a different audience or some other reason, seem to be more likely to lose its readers.
+
+But two further minor observations:
+
+- Visually, the two groups of early & late reviewers look like they might be converging after several years of aging. We might try to interpret this as a 'hardcore' vs 'populist' distinction: the early reviewers tend to all be early adopters hardcore geeks who become devoted fans in for the long haul, while the latecoming regular people get gradually turned off and only the remaining geeks continue to review.
+- Can we more specifically nail down this increased mortality to the interval between a reviewer's last review and the next chapter? So far, no; there is actually a trivially small effect the other direction when we add that as a variable:
+
+    ~~~{.R}
+      n= 7326, number of events= 6927
+       (182 observations deleted due to missingness)
+
+                  coef exp(coef)  se(coef)     z Pr(>|z|)
+    LateTRUE  0.433604  1.542808  0.024906  17.4   <2e-16
+    Delay    -0.004236  0.995773  0.000262 -16.2   <2e-16
+
+             exp(coef) exp(-coef) lower .95 upper .95
+    LateTRUE     1.543      0.648     1.469     1.620
+    Delay        0.996      1.004     0.995     0.996
+    ~~~
+
+    I interpret this as indicating that an update which is posted after a long drought may be a *tiny* bit (95% CI: 0.9953-0.9963) more likely to elicit some subsequent reviews (perhaps because extremely long delays are associated with posting multiple chapters quickly), but nevertheless, that overall period with long delays is associated with increased reviewer loss. This makes some post hoc intuitive sense as a polarization effect: if a franchise after a long hiatus finally releases an exciting new work, you may be more likely to discuss or review it, even as the hiatuses make you more likely to finally "check out" for good - you'll either engage or finally abandon it, but you probably won't be indifferent.
+
+### Source code
+
+Data generation & formatting:
+
+~~~{.R}
+data <- read.csv("2013-hpmor-rawreviews.csv", colClasses=c("integer", "Date", "factor"))
+users <- unique(data$User)
+lifetimes <- data.frame(User=NA, Start=NA, End=NA, FirstChapter=NA, LastChapter=NA)[-1,]
+for (i in 1:length(users)) { # isolate a specific user
+                  d <- data[data$User == users[i],]
+                  # sort by date
+                  d <- d[order(d$Date),]
+
+                  first <- head(d, n=1)
+                  last <- tail(d, n=1)
+                  # build & store new row (per user)
+                  new <- data.frame(User=users[i], Start=first$Date, End=last$Date,
+                                    FirstChapter=first$Chapter, LastChapter=last$Chapter)
+                  lifetimes <- rbind(lifetimes, new)
+}
+lifetimes$Days <- lifetimes$End - lifetimes$Start
+summary(lifetimes$Days)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+    0.0     0.0     0.0    55.2     6.0  1160.0
+lifetimes$Dead <- lifetimes$LastChapter <= 82
+
+lifetimes$Late <- lifetimes$Start >= as.Date("10-11-27")
+
+# figure out when each chapter was written by its earliest review
+chapterDates <- as.Date(NA)
+for (i in 1:max(data$Chapter)) { chapterDates[i] <- min(data[data$Chapter==i,]$Date) }
+
+# how long after chapter X was posted did chapter X+1 come along? (obviously NA/unknown for latest chapter)
+intervals <- integer(0)
+for (i in 1:length(chapterDates)) { intervals[i] <- chapterDates[i+1] - chapterDates[i] }
+
+# look up for every user the relevant delay after their last review
+delay <- integer(0)
+for (i in 1:nrow(lifetimes)) { delay[i] <- intervals[lifetimes$LastChapter[i]] }
+lifetimes$Delay <- delay
+~~~
+
+Analysis:
+
+~~~{.R}
+lifetimes <- read.csv("http://www.gwern.net/docs/2013-hpmor-reviewers.csv",
+                       colClasses=c("factor", "Date", "Date", "integer", "integer",
+                                    "integer", "logical", "logical","integer"))
+
+library(survival)
+
+surv <- survfit(Surv(Days, Dead, type="right") ~ 1, data=lifetimes)
+
+png(file="~/wiki/images/hpmor/survival-overall.png", width = 3*480, height = 1*480)
+plot(surv, ylim=c(0, 0.35))
+invisible(dev.off())
+
+cmodel <- coxph(Surv(Days, Dead) ~ Late, data=lifetimes)
+print(summary(cmodel))
+
+cat("\nTest for assumption violation to confirm the Cox regression:\n")
+print(cox.zph(cmodel))
+
+png(file="~/wiki/images/hpmor/survival-earlylate-split.png", width = 3*480, height = 1*480)
+plot(survfit(Surv(Days, Dead) ~ Late, data=lifetimes),
+     lty=c(1,2), ylim=c(0, 0.4), main="Reader survivorship: first review before or after chapter 62",
+     ylab="Fraction of reader group surviving", xlab="Days between reader's first & last review")
+legend("topright", legend=c("Early readers", "Late readers"), lty=c(1 ,2), inset=0.02)
+invisible(dev.off())
+
+print(summary(coxph(Surv(Days, Dead) ~ Late + Delay, data=lifetimes)))
+
+cat("\nBegin bootstrap test of coefficient size...\n")
+library(boot)
+cat("\nGet a subsample, train Cox on it, extract coefficient estimate;\n")
+cat("\nfirst the simplest early/late model, then the more complex:\n")
+# TODO: factor out duplication
+coxCoefficient1 <- function(gb, indices) {
+  g <- gb[indices,] # allows boot to select subsample
+  # train new regression model on subsample
+  cmodel <- coxph(Surv(Days, Dead) ~ Late, data=g)
+  return(coef(cmodel))
+}
+cox1Bs <- boot(data=lifetimes, statistic=coxCoefficient1, R=20000, parallel="multicore", ncpus=4)
+print(boot.ci(cox1Bs, type="perc"))
+coxCoefficient2 <- function(gb, indices) {
+  g <- gb[indices,] # allows boot to select subsample
+  # train new regression model on subsample
+  cmodel <- coxph(Surv(Days, Dead) ~ Late + Delay, data=g)
+  return(coef(cmodel))
+}
+cox2Bs <- boot(data=lifetimes, statistic=coxCoefficient2, R=20000, parallel="multicore", ncpus=4)
+print(boot.ci(cox2Bs, type="perc", index=1)) # `Late`
+print(boot.ci(cox2Bs, type="perc", index=2)) # `Delay`
+~~~
 
 <!-- Further work TODO:
 conversion to LW: http://lesswrong.com/r/discussion/lw/fag/analyzing_ffnet_reviews_of_harry_potter_and_the/7rpy
