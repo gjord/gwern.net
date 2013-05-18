@@ -6,6 +6,28 @@ status: in progress
 belief: log
 ...
 
+<style type="text/css">
+/* CSS provided by cwillu of #lesswrong. This CSS:
+1. reflows sections to use up all horizontal whitespace so every section fits on 1 screen
+2. hides the Table of Contents (not needed since all sections are visible) */
+div#content section { display: inline-block; vertical-align: top; max-width:700px; }
+div#content div#TOC { display: none; }
+
+/* Hide donation requests */
+div#paypal, div#bitcoin, div#flattr { display: none; }
+/* Hide metadata which is not interesting for index.page */
+div#page-created, div#tags, div#version, div#epistemological-status { display: none; }
+
+/* Get as many columns on the page as possible;
+this overrides the A/B-tested narrower max-width for content pages */
+body { max-width: 1700px; }
+
+/* Undo the quicksilver change in default.css; with the qs change, the index no longer
+fits on one page because there's too much whitespace in list entries! We want compact list there. */
+li { margin-top: 0em; }
+li p { margin: 0em; }
+</style>
+
 # Philosophy
 
 - [Culture is not about Esthetics](Culture is not about Esthetics "Aesthetically & economically, there is too much new art")
@@ -106,8 +128,6 @@ belief: log
 - ["Nor the Summers as Golden: Writing Multivolume Works"](/docs/2007-wolfe "Gene Wolfe on the depth and ending of novel series") (Wolfe)
 - [Asimov's "The Sword of Achilles"](/docs/1963-asimov-sword-of-achilles "Interest in science fiction predicts future scientific merit?")
 
-<!-- Teika collection omitted as unfinished -->
-
 # Anime docs
 
 - [_NGE_ source anthology](otaku "Anthology of Gainax/Anno/Evangelion quotes, sources, references, and analyses") (all)
@@ -176,4 +196,5 @@ presocratic-path-to-atomism (draft)
 sources-of-religious-experience (the seed of an interesting essay on complexity and religion and mental states)
 fiction/the-case-of-penpen (Eva fanfic; not sure I dare make this public...)
 wittgenstein-thesis (not sure I say anything worthwhile about Zen and Wittgenstein here)
+Teika collection omitted as unfinished
 -->
