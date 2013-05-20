@@ -123,7 +123,7 @@ Simply collecting the data is useful since it allows us to make some estimates l
     Android, AngularJS, and Chrome are all examples of software products where Google losing interest would not be fatal; services spun off to third parties would also count. Many of the codebases rely on a proprietary Google API or service (especially the mobile applications), which means that this variable is not as meaningful and laudable as one might expect, so in the minority of cases where this variable is relevant, I code `Dead` & `Ended` as related to whether & when Google abandoned it, regardless of whether it was then picked up by third parties or not. (Example: App Inventor for Android is listed as dying in December 2011, though it was then half a year later handed over to MIT, who has supported it since.) It's important to not naively believe that simply because source code is available, Google support doesn't matter.
 - `Acquisition`: whether it was related to a purchase of a company or licensing, or internally developed.
 
-    Many startups have been bought (DoubleClick, Dodgeball, Android, Picasa), or technologies/data licensed (SYSTRAN for Translate, Twitter data for Real-Time Search). If a closely related product is developed and released after purchase, like a mobile application, I do not class it as an acquisition; just products that were in existence when the company was purchased. I do not include products that Google dropped immediately on purchase (Apture, fflick, Sparrow, Reqwireless, PeakStream, Wavii) or where products based on them have not been released (BumpTop).
+    This is useful for investigating the so-called ["Google black hole"](http://www.slate.com/articles/technology/technology/2008/08/the_google_black_hole.single.html "The Google Black Hole: Sergey and Larry just bought my company. Uh oh."): Google has bought many startups (DoubleClick, Dodgeball, Android, Picasa), or technologies/data licensed (SYSTRAN for Translate, Twitter data for Real-Time Search), but it's claimed many stagnate & wither (Jaiku, JotSpot, Dodgeball). So we'll include this. If a closely related product is developed and released after purchase, like a mobile application, I do not class it as an acquisition; just products that were in existence when the company was purchased. I do not include products that Google dropped immediately on purchase (Apture, fflick, Sparrow, Reqwireless, PeakStream, Wavii) or where products based on them have not been released (BumpTop).
 
 [^Reader-monetization]: Some have justified Reader's shutdown as simply a rational act, since Reader was not bringing in any money and Google is not a charity. The truth seems to be related more to Google's lack of interest since the start - it's hard to see how Google could possibly be able to monetize Gmail and not also monetize Reader, which is confirmed by two involved Googlers (from "Google Reader lived on borrowed time: creator Chris Wetherell reflects"):
 
@@ -209,7 +209,7 @@ An interesting aspect of the shutdowns is they are unevenly distributed by month
 
 ![Shutdowns binned by month of year, revealing peaks in September, March, and April](/images/google/shutdownsbymonth.png)
 
-[^by-months-vacation]: Xoogler [Rachel Kroll](http://rachelbythebay.com/) [on this spike](http://news.ycombinator.com/item?id=5653934):
+[^by-months-vacation]: Xoogler [Rachel Kroll](http://rachelbythebay.com/) [on this spike](https://news.ycombinator.com/item?id=5653934):
 
     > I have some thoughts about the spikes on the death dates.
     >
@@ -603,22 +603,34 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 
 # See also
 
-- [Archive Team](!Wikipedia) ([ArchiveTeam Warrior](http://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior))
 - [Archiving URLs]()
+- [survival analysis of _MoR_ readers](hpmor#survival-analysis)
 - [Wikipedia and Knol]()
 
 # External links
 
+- [Archive Team](!Wikipedia) ([ArchiveTeam Warrior](http://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior))
 - Comments:
 
-    - [Hacker News](http://news.ycombinator.com/item?id=5653748)
+    - [Hacker News](https://news.ycombinator.com/item?id=5653748)
     - [Metafilter](http://www.metafilter.com/127712/In-a-few-cases-the-start-dates-are-wellinformed-guesses)
-- [_Ars Technica_ coverage](http://arstechnica.com/business/2013/05/google-services-survive-if-they-make-money-arent-social/ "Google services survive if they make money, aren't social: Statistical analysis of Google products finds a shutdown rate of 35 percent") ([comments](http://arstechnica.com/business/2013/05/google-services-survive-if-they-make-money-arent-social/?comments=1))
-- ["'Interesting' Software Follow-Up: Scrivener, Google's Orphans: A new, free guide to an exceptional program "](http://www.theatlantic.com/technology/archive/2013/05/interesting-software-follow-up-scrivener-googles-orphans/275563/) (James Fallows, _Atlantic_)
-- _Forbes_:
+- Article coverage:
 
-    - ["Is This One Emotion Driving The Google Stock Price Up?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/08/what-is-driving-the-google-stock-price-up/)
-    - ["Google Glass - Is It Meant To Last?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/09/google-glass-has-only-a-37-chance-of-going-five-years-lessons/)
+    - [_Ars Technica_](http://arstechnica.com/business/2013/05/google-services-survive-if-they-make-money-arent-social/ "Google services survive if they make money, aren't social: Statistical analysis of Google products finds a shutdown rate of 35 percent") ([comments](http://arstechnica.com/business/2013/05/google-services-survive-if-they-make-money-arent-social/?comments=1))
+    - ["'Interesting' Software Follow-Up: Scrivener, Google's Orphans: A new, free guide to an exceptional program "](http://www.theatlantic.com/technology/archive/2013/05/interesting-software-follow-up-scrivener-googles-orphans/275563/) (James Fallows, _Atlantic_)
+    - _Forbes_:
+
+        - ["Is This One Emotion Driving The Google Stock Price Up?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/08/what-is-driving-the-google-stock-price-up/)
+        - ["Google Glass - Is It Meant To Last?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/09/google-glass-has-only-a-37-chance-of-going-five-years-lessons/)
+- Acquisition background:
+
+    - ["What Happened to Yahoo"](http://paulgraham.com/yahoo.html), Paul Graham
+    - 37signals' ["Exit Interview" series](http://www.google.com/search?q=%22Exit+Interview%22&sitesearch=37signals.com/svn/posts/):
+
+        1. ["Exit interview: Jaiku's Jyri Engeström"](http://37signals.com/svn/posts/2883-exit-interview-jaikus-jyri-engestrm)
+        2. ["Exit Interview: Founders look back at acquisitions by Google, AOL, Microsoft, and more"](http://37signals.com/svn/posts/2942-exit-interview-founders-look-back-at-acquisitions-by-google-aol-microsoft-and-more)
+        3. ["Exit Interview: Ask Jeeves' acquisition of Bloglines"](http://37signals.com/svn/posts/2806-exit-interview-ask-jeeves-acquisition-of-bloglines)
+        4. ["What happens after Yahoo acquires you"](http://37signals.com/svn/posts/2777-what-happens-after-yahoo-acquires-you)
 
 <!--
 How to handle updates? I guess we'll store it here. Idea: new covariate for 'business' vs 'consumer' vs 'both'. New data:
