@@ -14,7 +14,7 @@ A record of [nootropics](!Wikipedia) I have tried, with thoughts about which one
 
 Your mileage *will* vary. There are so many parameters and interactions in the brain that any of them could be [the bottleneck](!Wikipedia "Liebig's law of the minimum") or responsible pathway, and one could fall prey to the common U-shaped [dose-response curve](!Wikipedia) (eg. [Yerkes-Dodson law](!Wikipedia); see also ["Chemistry of the adaptive mind"](http://rsta.royalsocietypublishing.org/content/362/1825/2871.full.pdf "Cools & Robbins 2004") & [de Jongh et al 2007](http://radian.org/notebook/wp-content/uploads/2009/04/brain-botox.pdf "Botox for the brain: enhancement of cognition, mood and pro-social behavior and blunting of unwanted memories")) which may imply that the smartest are those who benefit *least*[^equalizing-1][^equalizing-2] but ultimately they all cash out in a very few subjective assessments like 'energetic' or 'motivated', with even apparently precise descriptions like 'working memory' or 'verbal fluency' not telling you much about what the nootropic *actually* did. It's tempting to list the nootropics that worked for *you* and tell everyone to go use them, but that is merely [generalizing from one example](http://lesswrong.com/lw/dr/generalizing_from_one_example/) (and the more nootropics - or meditation styles, or self-help books, or "getting things done" systems - you try, the stronger the temptation is to [evangelize](http://lesswrong.com/lw/9v/beware_of_otheroptimizing/)). The best you can do is read all the testimonials and studies and use that to prioritize your list of nootropics to try. You don't know in advance which ones will pay off and which will be wasted. You *can't* know in advance. And wasted some must be; to coin a [Umeshism](http://www.scottaaronson.com/blog/?p=40 "If you've never missed a flight, you're spending too much time in airports."): if all your experiments work, you're just fooling yourself. (And the corollary - if someone *else*'s experiments always work, they're not [telling you everything](!Wikipedia "Publication bias").)
 
-The above are all reasons to expect that even if I do excellent experiments, there will still be the old problem of "[internal validity](!Wikipedia)" versus "[external validity](!Wikipedia)": an experiment may be wrong or erroneous or unlucky in some way (lack of internal validity) or be right but not matter to anyone else (lack of external validity). For example, alcohol makes me sad & depressed; I could run the perfect blind randomized experiment for hundreds of trials and be extremely sure that alcohol makes me less happy, but would that prove that alcohol makes everyone sad or unhappy? Of course not, and as far as I know, for a lot of people alcohol has the opposite effect. So my hypothetical alcohol experiment might have tremendous internal validity (it does prove that I am sadder after inebriating), and zero external validity (someone who has never tried alcohol learns nothing about whether they will be depressed after imbibing). Keep this in mind if you are minded to take the experiments *too* seriously.
+The above are all reasons to expect that even if I do excellent [single-subject design](!Wikipedia) self-experiments, there will still be the old problem of "[internal validity](!Wikipedia)" versus "[external validity](!Wikipedia)": an experiment may be wrong or erroneous or unlucky in some way (lack of internal validity) or be right but not matter to anyone else (lack of external validity). For example, alcohol makes me sad & depressed; I could run the perfect blind randomized experiment for hundreds of trials and be extremely sure that alcohol makes me less happy, but would that prove that alcohol makes everyone sad or unhappy? Of course not, and as far as I know, for a lot of people alcohol has the opposite effect. So my hypothetical alcohol experiment might have tremendous internal validity (it does prove that I am sadder after inebriating), and zero external validity (someone who has never tried alcohol learns nothing about whether they will be depressed after imbibing). Keep this in mind if you are minded to take the experiments *too* seriously.
 
 [^equalizing-1]: More than once I have seen results indicating that high-IQ types benefit the least from random nootropics; nutritional deficits are the premier example, because high-IQ types almost by definition suffer from no major deficiencies like [iodine](Iodine). But a stimulant [modafinil](Modafinil#fn14) may be another such nootropic (see ["Cognitive effects of modafinil in student volunteers may depend on IQ"](http://www.ncbi.nlm.nih.gov/pubmed/16140369) ([PDF](http://www.erowid.org/references/refs_view.php?A=ShowDocPartFrame&ID=6624&DocPartID=6148)), Randall et al 2005), which mentions:
 
@@ -221,7 +221,7 @@ After several weeks of regularly consuming coconut oil and using up the first ja
 
 # Coluracetam
 
-One of the most obscure -racetams around, [coluracetam](!Wikipedia) acts in a different way from [piracetam](#piracetam) - piracetam apparently attacks the breakdown of acetylcholine while coluracetam instead increases how much choline can be turned into useful acetylcholine. This apparently is a unique mechanism. A crazy Longecity user, [ScienceGuy](http://www.longecity.org/forum/topic/58609-coluracetam-user-feedback/) ponied up $16,000 (!) for a custom synthesis of 500g; he was experimenting with 10-80mg sublingual doses (the ranges in the original anti-depressive trials) and reported a laundry list of effects: primarily that it was anxiolytic and increased work stamina. Unfortunately for my stack, he claims it combines poorly with piracetam. He offered free 2g samples for regulars to test his claims. I applied and was accepted.
+One of the most obscure -racetams around, [coluracetam](!Wikipedia) acts in a different way from [piracetam](#piracetam) - piracetam apparently attacks the breakdown of acetylcholine while coluracetam instead increases how much choline can be turned into useful acetylcholine. This apparently is a unique mechanism. A crazy Longecity user, [ScienceGuy](http://www.longecity.org/forum/topic/58609-coluracetam-user-feedback/) ponied up $16,000 (!) for a custom synthesis of 500g; he was experimenting with 10-80mg sublingual doses (the ranges in the original anti-depressive trials) and reported a laundry list of effects: primarily that it was anxiolytic and increased work stamina. Unfortunately for my stack, he claims it combines poorly with piracetam. He offered free 2g samples for regulars to test his claims. I asked & received some.
 
 Experiment design is complicated by his lack of use of any kind of objective tests, but 3 metrics seem obvious:
 
@@ -231,11 +231,9 @@ Experiment design is complicated by his lack of use of any kind of objective tes
     > I have personally found that with respect to the NOOTROPIC effect(s) of all the RACETAMS, whilst I have experienced improvements in  concentration and working capacity / productivity, I have never experienced a noticable ongoing improvement in memory. COLURACETAM is the only RACETAM that I have taken wherein I noticed an improvement in MEMORY, both with regards to SHORT-TERM and MEDIUM-TERM MEMORY. To put matters into perspective, the memory improvement has been mild, yet still significant; whereas I have experienced no such improvement at all with the other RACETAMS.
 3. daily mood/productivity log (1-5): for the anxiolytic and working claims.
 
-(In all 3, higher = better, so multiple-corrected one-tailed t-tests for each.)
+(In all 3, higher = better, so multiple-corrected one-tailed _t_-tests for each.)
 
-He recommends a 10mg dose, but sublingually. He mentions "COLURACETAM's taste is more akin to that of PRAMIRACETAM than OXIRACETAM, in that it tastes absolutely vile" (not a surprise, to say the least), so it is impossible to double-blind a sublingual administration - even if I knew of an inactive vile-tasting substitute, I'm not sure I would subject myself to it. To compensate for ingesting the coluracetam, I will double the dose to 20mg (turning the 2g into <100 doses). Whether the effects persist over multiple days is not clear; I'll assume it does not until someone says it does, since this makes things much easier.
-
-(All this planning assumes, of course, that ScienceGuy does in fact send me the sample of coluracetam. There's nowhere one can buy it, and while I am very interested in testing coluracetam, I am not interested in paying thousands of dollars for a custom synthesis!)
+He recommends a 10mg dose, but sublingually. He mentions "COLURACETAM's taste is more akin to that of PRAMIRACETAM than OXIRACETAM, in that it tastes absolutely vile" (not a surprise), so it is impossible to double-blind a sublingual administration - even if I knew of an inactive equally-vile-tasting substitute, I'm not sure I would subject myself to it. To compensate for ingesting the coluracetam, it would make sense to double the dose to 20mg (turning the 2g into <100 doses). Whether the effects persist over multiple days is not clear; I'll assume it does not until someone says it does, since this makes things much easier.
 
 # Creatine
 
@@ -243,9 +241,9 @@ He recommends a 10mg dose, but sublingually. He mentions "COLURACETAM's taste is
 
 I'm not a bodybuilder, but my interest was sparked by [several studies](DNB FAQ#creatine), some showing benefits and others not - usually in subpopulations like vegetarians or old people.
 
-As I am not any of the latter, I didn't *really* expect a mental benefit. As it happens, I observed nothing. What surprised me was something I had forgotten about: its physical benefits. My performance in [Taekwondo](!Wikipedia) classes suddenly improved - specifically, my endurance increased substantially. Before, classes had left me nearly prostrate at the end, but after, I was weary yet fairly alert and happy. (I have done Taekwondo since I was 7, and I have a pretty good sense of what is and is not normal performance for my body. This was not anything as simple as failing to notice increasing fitness or something.) This was driven home to me one day when in a flurry before class, I prepared my customary tea with piracetam, choline & creatine; by the middle of the class, I was feeling faint & tired, had to take a break, and suddenly, thunderstruck, realized that I had absentmindedly forgot to actually drink it! This made me a believer.
+As I am not any of the latter, I didn't *really* expect a mental benefit. As it happens, I observed nothing. What surprised me was something I had forgotten about: its physical benefits. My performance in [Taekwondo](!Wikipedia) classes suddenly improved - specifically, my endurance increased substantially. Before, classes had left me nearly prostrate at the end, but after, I was weary yet fairly alert and happy. (I have done Taekwondo since I was 7, and I have a pretty good sense of what is and is not normal performance for my body. This was not anything as simple as failing to notice increasing fitness or something.) This was driven home to me one day when in a flurry before class, I prepared my customary tea with piracetam, choline & creatine; by the middle of the class, I was feeling faint & tired, had to take a break, and suddenly, thunderstruck, realized that I had absentmindedly forgot to actually *drink* it! This made me a believer.
 
-After I ran out of creatine, I noticed the increased difficulty, and resolved to buy it again at some point; many months later, there was a sale so bought it in my batch order, $12 for [1000g](http://www.smartpowders.com/p-5280-creatine-monohydrate-powder-1000-grams.aspx). As before, it made Taekwondo classes a bit easier. I paid closer attention this second time around and noticed that as one would expect, it only helped with muscular fatigue and did nothing for my aerobic issues.
+After I ran out of creatine, I noticed the increased difficulty, and resolved to buy it again at some point; many months later, there was a sale so bought it in my batch order, $12 for [1000g](http://www.smartpowders.com/p-5280-creatine-monohydrate-powder-1000-grams.aspx). As before, it made Taekwondo classes a bit easier. I paid closer attention this second time around and noticed that as one would expect, it only helped with muscular fatigue and did nothing for my aerobic issues. (I hate aerobic exercise, so it's always been a weak point.)
 
 # Fish oil
 
@@ -709,8 +707,12 @@ The methodology would be essentially the same as the [vitamin D in the morning](
     2. 29 April - 5 May: placebo
 13. thirteenth pair:
 
-    1. 6 May - 12? May: ?
-    2. 13? May - 19? May: ?
+    1. 6 May - 12 May: 0
+    2. 13 May - 19 May: 1
+14. fourteenth pair:
+
+    1. 20 May - 26? May: ?
+    2. 27? May - 2? June: ?
 
 ### VoI
 
@@ -729,7 +731,7 @@ This is a place-holder section for a non-public experiment; it is included in th
     - number of awakenings: none (_p_=0.3554)
     - morning feel: increased (_p_=0.0231)
 
-        There is an increase in "Morning Feel" from 2.6 to 2.9, _p_=0.023; correcting for performing 7 different tests, this result is not significant (it does not survive a [Bonferroni correction](!Wikipedia) (since $0.0231 > \frac{0.05}{7}$) nor the [_q_-value approach](Zeo#fn7) to family-wise correction).
+        There is an increase in "Morning Feel" from 2.6 to 2.9, _d_=0.42 & _p_=0.023; correcting for performing 7 different tests, this result is not significant (it does not survive a [Bonferroni correction](!Wikipedia) (since $0.0231 > \frac{0.05}{7}$) nor the [_q_-value approach](Zeo#fn7) to family-wise correction).
 2. Mnemosyne flashcard scores: none (_p_=0.5205)
 3. Mood/productivity: none (_d_=-0.18; _p_=0.8589)
 4. Creativity: none (_d_=-0.19; _p_=0.8735)
@@ -1281,11 +1283,11 @@ A Redditor ordered some Russian brand Noopept, but finding it was unpleasant & n
 ![Russian Noopept box, front & back](/images/nootropics-noopept-box.jpg)
 ![Russian Noopept blister-pack, front & back](/images/nootropics-noopept-pills.jpg)
 
-It appeared in reasonably good shape, and closely matched the photographs in the Wikipedia article. I took 2 of the 25 on successive days, and didn't notice anything in particular; I didn't find it unpleasant, though.
+It appeared in reasonably good shape, and closely matched the photographs in the Wikipedia article. I took 2 of the 25 10mg pills on successive days on top of my usual caffeine+piracetam stack, and didn't notice anything in particular; I didn't find it unpleasant, though.
 
 ## Experiment
 
-So, I thought I might as well experiment since I have it. I put the 23 remaining pills into gel capsules with brown rice as filling, made ~30 placebo capsules, and will use the one-bag blinding/randomization method. I don't want to spend the time it would take to n-back every day, so I will simply look for an effect on my daily mood/productivity self-rating.
+So, I thought I might as well experiment since I have it. I put the 23 remaining pills into gel capsules with brown rice as filling, made ~30 placebo capsules, and will use the one-bag blinding/randomization method. I don't want to spend the time it would take to n-back every day, so I will simply look for an effect on my daily mood/productivity self-rating; hopefully Noopept will add a little on average above and beyond my existing practices like caffeine+piracetam (yes, Noopept may be as good as piracetam, but since I still have a ton of piracetam from my 3kg order, I am primarily interested in whether Noopept adds onto piracetam rather than replaces). 10mg doses seem to be on the low side for Noopept users, weakening the effect, but on the other hand, if I were to take 2 capsules at a time, then I'd halve the sample size; it's not clear what is the optimal tradeoff between dose and _n_ for statistical power.
 
 ### Power
 
@@ -1305,7 +1307,7 @@ Or in other words, since the standard deviation of my previous self-ratings is 0
 
 ### Data
 
-15 May 2013: TODO
+15 May 2013: 1; 16: 1; 17: 1; 18: 1; 19: 1; 20: 0; 21: 1; 22: 0; 23: 1; 24:
 
 ### Analysis
 
