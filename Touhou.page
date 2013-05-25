@@ -66,7 +66,7 @@ Need more for capture-recapture analysis!
 
 Music source: [Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790), 265.2GB of 44421 tracks from 4952 albums produced X-Y by <1,264 groups or "circles".
 
-~~~{.sh}
+~~~{.Bash}
 $ find ~/torrent/Touhou\ lossy\ music\ collection/ -type f -name "*.mp3" | wc
   44421
 $ ls torrent/Touhou\ lossy\ music\ collection/ | wc
@@ -103,8 +103,9 @@ exiftool; json
 
 Is `exiftool`'s length approximation trustworthy? Yes, it seems to be always within seconds of the full `mp3info` answer:
 
-~~~{.sh}
-$ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3" -exec mp3info -F -p "0:%02m:%02s " {} \; -exec exiftool -Duration {} \;
+~~~{.Bash}
+$ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3" \
+        -exec mp3info -F -p "0:%02m:%02s " {} \; -exec exiftool -Duration {} \;
 0:00:23 Duration                        : 23.12 s (approx)
 0:04:28 Duration                        : 0:04:28 (approx)
 0:02:44 Duration                        : 0:02:44 (approx)
@@ -146,7 +147,8 @@ colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length"
                       "Track", "Directory", "FileName", "FileSize", "AudioBitrate")
 # Delete SourceFile column; redundant with Directory/FileName
 touhou <- touhou[,-1]
-touhou$Directory <- sub("/home/gwern/torrent/Touhou lossy music collection/", "", as.character(touhou$Directory))
+touhou$Directory <- sub("/home/gwern/torrent/Touhou lossy music collection/", "",
+                         as.character(touhou$Directory))
 touhou[touhou==""] <- NA
 touhou[touhou=="-"] <- NA
 touhou$Year <- as.integer(as.character(touhou$Year))
@@ -160,8 +162,14 @@ touhou$Genre[touhou$Genre==" "] <- NA
 touhou$Length <- gsub(" \\(approx\\)","",as.character(touhou$Length))
 touhou$AudioBitrate <- as.integer(sub(" kbps","",as.character(touhou$AudioBitrate)))
 # exiftool leaves us "16 s"; if so, strip the " s" and turn it into an integer
-# else, eg. "0:04:37"; split on colon, multiple hour by 3600 seconds, minutes=60 each, seconds=seconds; and sum
-interval <- function(x) { if (!is.na(x)) { if (grepl(" s",x)) as.integer(sub(" s","",x)) else {y <- unlist(strsplit(x, ":")); as.integer(y[[1]])*3600 + as.integer(y[[2]])*60 + as.integer(y[[3]]); }} else NA}
+# else, eg. "0:04:37"; split on colon,
+# multiply hour by 3600 seconds, minutes=60 each, seconds=seconds; and sum it
+interval <- function(x) { if (!is.na(x)) { if (grepl(" s",x)) as.integer(sub(" s","",x))
+                                           else { y <- unlist(strsplit(x, ":"));
+                                                  as.integer(y[[1]])*3600 + as.integer(y[[2]])*60 + as.integer(y[[3]]); }
+                                                  }
+                          else NA
+                          }
 touhou$Length <- sapply(touhou$Length,interval)
 filesize <- function(x) { if (grepl(" kB",x)) (as.integer(sub(" kB","",x))/1000) else as.integer(sub(" MB","",x))}
 touhou$FileSize <- sapply(touhou$FileSize, filesize)
@@ -317,14 +325,12 @@ DATE,VALUE
 
 # number of works per year does not correlate:
 cor.test(jpn$VALUE[3:12], table(touhou$Year)[1:10])
-    Pearson's product-moment correlation
-
-    Pearson's product-moment correlation
+    Pearson`s product-moment correlation
 
 data:  jpn$VALUE[3:12] and table(touhou$Year)[1:10]
 t = -0.3053, df = 8, p-value = 0.768
 alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
+95% confidence interval:
  -0.6903  0.5602
 sample estimates:
     cor
