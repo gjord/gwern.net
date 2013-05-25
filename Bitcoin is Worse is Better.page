@@ -187,7 +187,7 @@ No! What's wrong with Bitcoin is that it's *ugly*. It is not [elegant](!Wikipedi
     >> Hash Difficulty >= Difficulty Target / ( max(Coin-confirmations used to sign block, 100 satoshi-confirmations) )^( _p_ / (_1_-p))
     >
     > where 0 <= _p_ < 1. Stake becomes more and more important as _p_ approaches 1. _p_=0.8 is suggested as an appropriate choice. _p_=0 is identical to the current proof-of-work system. If the block is signed by a bitcoin account holding less than 100 satoshi-confirmations, this is treated as if the account held 100 satoshi-confirmations. Thus non-stakeholders are allowed to verify blocks, but relative to stakeholders they must meet extremely stringent difficulty criteria. Permitting non-stakeholders to verify blocks solves the initial distribution problem. As before the Difficulty Target is a periodically adjusted constant which is set to maintain a target generation rate of 1 block every 10 minutes.
-[^May]: Chaum pays a price for his systems' ability to work offline. Don't take my word for it; see [Tim May](!Wikipedia) in [section 12.6.6](http://koeln.ccc.de/archiv/cyphernomicon/chapter12/12.6.html) of his early '90s _[Cyphernomicon](!Wikipedia)_ (not to be confused with [Stephenson's](!Wikipedia "Neal Stephenson") [novel](!Wikipedia "Cryptonomicon") drawing heavily on it):
+[^May]: Chaum pays a price for his systems' ability to work offline / without directly processing transactions. Don't take my word for it; see [Tim May](!Wikipedia) in [section 12.6.6](http://koeln.ccc.de/archiv/cyphernomicon/chapter12/12.6.html) of his early '90s _[Cyphernomicon](!Wikipedia)_ (not to be confused with [Stephenson's](!Wikipedia "Neal Stephenson") [novel](!Wikipedia "Cryptonomicon")):
 
     > ...Chaum went to great lengths to develop system which preserve anonymity for single-spending instances, but which break anonymity and thus reveal identity for double-spending instances. I'm not sure what market forces caused him to think about this as being so important, but it creates many headaches. Besides being clumsy, it require physical ID, it invokes a legal system to try to collect from "double spenders", and it admits the extremely serious breach of privacy by enabling stings. For example, Alice pays Bob a unit of money, then quickly Alice spends that money before Bob can...Bob is then revealed as a "double spender," and his identity revealed to whomever wanted it...Alice, IRS, Gestapo, etc. A very broken idea. Acceptable mainly for small transactions.
     >
@@ -228,8 +228,11 @@ But it *seems to work*. Just like Unix, there were countless ways to destroy you
 
 > The Internet is a big fan of the worst-possible-thing. Many people thought Twitter was the worst possible way for people to communicate, little more than discourse abbreviated into tiny little chunks; Facebook was a horrible way to experience human relationships, commodifying them into a list of friends whom one pokes. The Arab Spring changed the story somewhat. (BuzzFeed is another example-let them eat cat pictures.) One recipe for Internet success seems to be this: Start at the bottom, at the most awful, ridiculous, essential idea, and own it. Promote it breathlessly, until you're acquired or you take over the world. Bitcoin is playing out in a similar way. It asks its users to forget about central banking in the same way Steve Jobs asked iPhone (AAPL) users to forget about the mouse.
 
-But he lacks the "worse is better" paradigm (despite being a programmer) and doesn't understand *how* Bitcoin is the worst-possible-thing. It's not the decentralized aspect of Bitcoin, it's how Bitcoin is decentralized: a cryptographer would have difficulty coming up with Bitcoin because the mechanism is so ugly and there are so many elegant features he wants in it. Programmers and mathematicians often speak of "taste", and how they lead one to better solutions. A cryptographer's taste is for cryptosystems optimized for efficiency and theorems; it is not for systems optimized for virulence, for their sociological appeal[^Ponzi]. Centralized systems are natural solutions because they are easy, like the integers are easy; but like the integers are but a vanishingly small subset of the reals, so too are centralized systems a tiny subset of decentralized ones[^subset]. DigiCash and all the other cryptocurrency startups may have had many nifty features, may have been far more efficient, and all that jazz, but they died anyway. They had no communities, and their centralization meant that they fell with their corporate patrons. They had to win in their compressed timeframe or die out completely. But "that is not dead which can eternal lie".
+But he lacks the "worse is better" paradigm (despite being a programmer) and doesn't understand *how* Bitcoin is the worst-possible-thing. It's not the decentralized aspect of Bitcoin, it's how Bitcoin is decentralized: a cryptographer would have difficulty coming up with Bitcoin because the mechanism is so ugly and there are so many elegant features he wants in it. Programmers and mathematicians often speak of "taste", and how they lead one to better solutions. A cryptographer's taste is for cryptosystems optimized for efficiency and theorems; it is not for systems optimized for virulence, for their sociological appeal[^Ponzi]. Centralized systems are natural solutions because they are easy, like the integers are easy; but like the integers are but a vanishingly small subset of the reals, so too are centralized systems a tiny subset of decentralized ones[^subset]. DigiCash and all the other cryptocurrency startups may have had many nifty features, may have been far more efficient, and all that jazz, but they died anyway[^better-unix]. They had no communities, and their centralization meant that they fell with their corporate patrons. They had to win in their compressed timeframe or die out completely. But "that is not dead which can eternal lie".
 
+[^better-unix]: [betterunix](https://news.ycombinator.com/item?id=5671924) offers an interesting defense of DigiCash:
+
+    > ...It is worth pointing out that Digicash survived longer than Bitcoin has even been around -- twice as long, in fact. The reasons for its failure are not as simple as "people just did not care." There were forces in the US government actively working against *all* civilian use of cryptography, especially those systems that might thwart law enforcement investigations. Patents on cryptography (ironically, this includes patents held by Chaum himself) did what they typically do: prevent systems from being deployed on a large scale. There were bad management decisions, like Chaum's refusal to accept a huge monetary offer from Microsoft to integrate his system with Windows 95 and another large offer from Visa...In another four years, if the news about Bitcoin is something other than, "Bitcoin trading at all-time lows", or "Analyzing the failure of cryptocurrencies", you can at least claim that Bitcoin fared better than Chaum's systems.
 [^Ponzi]: Many [anonymous commenters](http://www.links.org/?p=1171#comment-415465) point this out because it makes Bitcoin smell like some sort of [Ponzi scheme](!Wikipedia) or [multilevel marketing scheme](!Wikipedia):
 
     > Bitcoin, like the recent commercial phenomenon [Groupon](!Wikipedia), tends to turn people into marketers because they feel they have something to gain, however small it might be in the end; I think that partly accounts for its temporary success.
@@ -289,36 +292,5 @@ My own belief is that #1 is probably a significant factor but questionable since
 - [Original essay](http://bitcoinweekly.com/articles/bitcoin-is-worse-is-better/) published on _Bitcoin Weekly_ (7 comments)
 
     - [Reddit discussion](http://www.reddit.com/r/Bitcoin/comments/hlu9l/bitcoin_is_worse_is_better/)
-    - [Hacker News discussion](http://news.ycombinator.com/item?id=2934879)
+    - [Hacker News discussion](https://news.ycombinator.com/item?id=2934879)
 - ["Bitcoin Theory (Byzantine Generals and Beyond)"](https://bitcointalk.org/index.php?topic=99631.0)
-
-<!-- Notes toward de-anonymization:
-http://p2presearch.979870.n3.nabble.com/template/NamlServlet.jtp?macro=search_page&node=2040379&query=message%3ABitcoin&days=0&i=12&sort=date
-http://www.reddit.com/r/Bitcoin/comments/18j2aw/satoshi_likely_in_utc4_region/
-http://sourceforge.net/mailarchive/forum.php?viewmonth=&viewday=&forum_name=bitcoin-list&style=nested
-~/bin/bitcoin-svn-historical/
-https://www.bitcoinforum.com/bitcoin-discussion/what-would-satoshi-nakamoto-do/msg622/#msg622
-ask kanzure for personal emails
-difficulty/mining: https://bitcointalk.org/index.php?topic=37333 https://bitcointalk.org/index.php?topic=160186.msg1708163#msg1708163 https://bitcointalk.org/index.php?topic=164569.0 https://bitcointalk.org/index.php?topic=175996.0;all https://bitcointalk.org/index.php?topic=175996.msg1843782#msg1843782 https://bitslog.wordpress.com/2013/04/17/the-well-deserved-fortune-of-satoshi-nakamoto/
-statistically unlikely to be dead: http://www.reddit.com/r/Bitcoin/comments/1cmd0o/estimating_how_many_blocks_satoshi_mined_1m/c9hvnji
-http://www.wired.com/magazine/2011/11/mf_bitcoin/all/
-Reiter: http://www.reddit.com/r/Bitcoin/comments/1ccqmy/disprove_me_how_i_figured_out_who_satoshi/
-/docs/2011-davis New Yorker article
-https://bitcointalk.org/index.php?topic=153071.msg1624887#msg1624887
-http://www.theatlanticwire.com/technology/2011/10/race-unmask-bitcoins-inventors/43535/
-http://www.fastcompany.com/1785445/bitcoin-crypto-currency-mystery-reopened
-"Quantitative Analysis of the Full Bitcoin Transaction Graph" http://eprint.iacr.org/2012/584.pdf mentions mysterious large transaction - can this be attributed to the Winklevosses?
-http://web.archive.org/web/20100704213649/http://www.bitcoin.org/bitcoin.pdf
-https://en.bitcoin.it/wiki/Satoshi_Nakamoto
-http://web.archive.org/web/20100702211420/http://p2pfoundation.ning.com/profile/SatoshiNakamoto / http://p2pfoundation.ning.com/profile/SatoshiNakamoto
-http://sourceforge.net/users/s_nakamoto
-https://bitcointalk.org/index.php?topic=25764.msg320778#msg320778
-https://bitcointalk.org/index.php?topic=49751.0;all
-Julian Assange? but the timing... http://www.reddit.com/r/Bitcoin/comments/1cnmqn/transcript_of_secret_meeting_between_julian/c9ijdes
-any Austrianism in Japan? Austrian libertarianism having zero exponents in Japan, basically, as makes sense given their own deflationary currency and deflationary spiral... no Japanese traces - no kanji, katakana, Japanese websites, did not mention any JapaneseP2P projects when asked, released Bitcoin as FLOSS which is unusual for Japanese developers (see Melancholy of Subculture appendix) etc
-kanzure suggestion: once you have a stylometric corpus, you can fake a Satoshi successor! make an account, run your writings by the stylo checker, and post the most Satoshi-like material. this can be used to destroy any attempt to follow up a successful stylometric attack...
-http://www.reddit.com/r/Bitcoin/comments/1csvkl/legendary_vc_paul_graham_suspects_bitcoin_was/c9jpqj3 on code style and (in)competence
-https://bitcointalk.org/index.php?action=profile;u=3 Forum account; compare against IA of original forums? have posts been censored?
-on UK paper: article was available online at the time, not evidence of a paper subscription
-Satoshi excerpt courtesy of Wei Dai http://lesswrong.com/lw/h8z/bitcoins_are_not_digital_greenbacks/8trx
--->
