@@ -7,7 +7,7 @@ status: in progress
 belief: likely
 ...
 
-> I discuss my beliefs about Quantified Self, and demonstrate with experiments using a Zeo. A Zeo records sleep via EEG; I have made many measurements and performed many experiments. This is what I have learned so far:
+> I discuss my beliefs about Quantified Self, and demonstrate with a series of [single-subject design](!Wikipedia) self-experiments using a Zeo. A Zeo records sleep via EEG; I have made many measurements and performed many experiments. This is what I have learned so far:
 >
 > 1. the Zeo headband is wearable long-term
 > 2. [melatonin](#melatonin) improves my sleep
@@ -34,6 +34,7 @@ http://blog.givewell.org/2012/08/23/how-we-evaluate-a-study/
 http://blog.givewell.org/2012/09/06/surveying-the-research-on-a-topic/
 http://norvig.com/experiment-design.html
 https://www.nytimes.com/2010/05/02/magazine/02self-measurement-t.html?_r=1&ref=magazine&pagewanted=all
+http://mobihealthnews.com/22410/can-personal-health-data-motivate-behavioral-change-it-depends/
 -->
 
 # What is QS?
@@ -61,7 +62,11 @@ To put it in more economic/statistical terms, what we want from a self-experimen
 
 One failure mode which is particularly dangerous for QSers is to overdo the data collection and collect masses of data they never *use*. Famous computer entrepreneur & mathematician [Stephen Wolfram](!Wikipedia) exemplified this for me in March 2012 with his lengthy blog post ["The Personal Analytics of My Life"](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/) in which he did some impressive graphing and exploration of data from 1989 to 2012: a third of a million (!) emails, full keyboard logging, calendar, phone call logs (with missed calls include), a pedometer, revision history of his tome [_A New Kind of Science_](http://www.amazon.com/New-Kind-Science-Stephen-Wolfram/dp/1579550088/), file types accessed per date, parsing scanned documents for dates, a treadmill, and perhaps more he didn't mention.
 
-Wolfram's dataset is well-depicted in informative graphs, breathtaking in its thoroughness, and even more impressive for its duration. So why do I read his post with sorrow? I am sad for him because I have read the post several times, and as far as I can see, he has not benefited in any way from his data collection. Nothing in his life was better 1989-2012 because he did all this, and he shows no indication that he will benefit in the future (besides having a very nifty blog post). And just reading through his post with a little imagination suggests plenty of experiments he could do:
+Wolfram's dataset is well-depicted in informative graphs, breathtaking in its thoroughness, and even more impressive for its duration. So why do I read his post with sorrow? I am sad for him because I have read the post several times, and as far as I can see, he has not benefited in any way from his data collection, with [one minor exception](http://www.technologyreview.com/news/514356/stephen-wolfram-on-personal-analytics/ "Stephen Wolfram on Personal Analytics: The creator of the Wolfram Alpha search engine explains why he thinks your life should be measured, analyzed, and improved"):
+
+> Very early on, back in the 1990s, when I first analyzed my e-mail archive, I learned that a lot of e-mail threads at my company would, by a certain time of day, just resolve themselves. That was a useful thing to know, because if I jumped in too early I was just wasting my time.
+
+Nothing else in his life was better 1989-2012 because he did all this, and he shows no indication that he will benefit in the future (besides having a very nifty blog post). And just reading through his post with a little imagination suggests plenty of experiments he could do:
 
 1. He mentions that 7% of his keystrokes are the Backspace key.
 
@@ -154,7 +159,7 @@ In the morning, the smart alarm mode seemed to work pretty well. I woke up early
 
 ## Replacing headband
 
-Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for \$35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric); apparently they now [cost $50](http://www.myzeo.com/sleep/shop/zeo-accessories/zeo-bedside-headband-sensor-replacement-kit-x-3.html). A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually \$40, or ~\$13 a piece. I won't say that buying replacement headbands semi-annually is something that *thrills* me, but \$20 a year for sleep data is a small sum. Certainly it's more cost-effective than most of the [nootropics](Nootropics) I have used. (Full disclosure: 9 months after starting this page, Zeo [offered me](#comment-309924264) a free set of sensors. I used them and when the news broke about Zeo going out of business, I bought another set.)
+Around 15 May 2011, I gave up on the original headband - it was getting too dirty to get good readings - and decided to rip it apart to see what it was made of, and to order a new set of three for \$35 (which seems reasonable given the expensive material that the contacts are made of - silver fabric); they then [cost \$50](http://web.archive.org/web/20120605135712/http://www.myzeo.com/sleep/shop/zeo-accessories/zeo-bedside-headband-sensor-replacement-kit-x-3.html). A little googling found me a coupon, `FREESHIP`, but apparently it only applied to the Zeo itself and so the pads were actually \$40, or ~\$13 a piece. I won't say that buying replacement headbands semi-annually is something that *thrills* me, but \$20 a year for sleep data is a small sum. Certainly it's more cost-effective than most of the [nootropics](Nootropics) I have used. (Full disclosure: 9 months after starting this page, Zeo [offered me](#comment-309924264) a free set of sensors. I used them and when the news broke about Zeo going out of business, I bought another set.)
 
 ![The old headband, with electrical tape residue](/images/zeo/zeo-headband-original.jpg) ![The disposable headband with the cloth covering removed](/images/zeo/zeo-headband-deconstructed.jpg)/
 ![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg) ![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)/
@@ -513,6 +518,8 @@ Worth comparing are [Jayson Virissimo's preliminary results](http://jayquantifie
 ## Value of Information (VoI)
 
 > See also the discussion as applied to [ordering modafinil](Modafinil#ordering-when-learning-isnt-free) and [testing nootropics](Nootropics#value-of-information-voi)
+
+We all know it's possible to spend more time figuring out how to "save time" on a task than we would actually save time like rearranging books on a shelf or cleaning up in the name of efficiency (_xkcd_ even has a cute chart listing the break-even points for various possibilities,["Is It Worth The Time?"](http://xkcd.com/1205/)), and similarly, it's possible to spend more money trying to "save money" than one would actually save; less appreciated is that the same thing is also possible to do with gaining information.
 
 The value of an experiment is the information it produces. What is the value of information? Well, we can take the economic tack and say value of information is the value of the decisions it *changes*. (Would you pay for a weather forecast about somewhere you are not going to? No. Or a weather forecast about your trip where you *have* to make that trip, come hell or high water? Only to the extent you can make preparations like bringing an umbrella.)
 
@@ -1912,20 +1919,23 @@ The results look almost identical to before[^potassium-2-mp]:
 
 A much higher-quality experiment with more favorable conditions for potassium showed a result consistent with some harm to my sleep, and no benefit. I will not continue using potassium.
 
+# X
+
+In the middle of the five-fold experiment, I paused part of it to run [a more interesting self-experiment using X](Nootropics#x); I included sleep metrics to check for disturbances. X did not seem to affect latency, total sleep, or awakenings, but did improve (_d_=0.42) the "morning feel" non-statistically-significantly (due to the multiple correction). Unfortunately, given that it seemed to negatively affect more important metrics like the self-rating of mood/productivity & creativity, this is not nearly enough to begin to justify use of X for me.
 
 # In progress
 
 Someone suggested that instead of running experiments serially, with limited sample sizes (because I am impatient to try the next interesting suggestion), I could instead take a step up in statistical sophistication and use a *[factorial experiment](!Wikipedia)* design: use multiple experimental interventions simultaneously for a much larger sample size, and then run [ANOVA](!Wikipedia) analyses rather than simpler two-sample t-tests. No less than [R.A. Fisher](!Wikipedia) praises multifactorial experiments as being more efficient: squeezing more data out of a given sample. Hence, I thought a crazy thought: my lithium experiment was going to run for ~360 days, and so I kept putting it off. But what if I ran multiple experiments for 360 days? If I had 4 or 5, then by the end of the year, I would have 5 results to show, and I would have the statistical equivalent of *more* than _n_=72  ($\frac{360}{5}$) for each experiment. Win-win.
 
-Classic multifactorial designs arrange to have every possible combination of the _n_ experiments happen on some day or other (such an arrangement is called a [Latin square](!Wikipedia)). However, with 5 experiments, each of which has 2 states (on and off), that means I only have 2^5^=32 possible arrangements, all of which ought to be covered over 360 days. So I will be lazy and will independently randomize each experiment.
+Classic multifactorial designs arrange to have every possible combination of the _n_ experiments happen on some day or other (such an arrangement is called a [Latin square](!Wikipedia)). However, with 5 experiments, each of which has 2 states (on and off), that means I only have 2^5^=32 possible arrangements, all of which ought to be covered over 360 days, terminating in March 2013. (It actually will take much longer, as I paused the lithium sub-experiment for several months to run the [X self-experiment](#x).)
 
-I don't actually know how to use ANOVA in R, but I can figure that out in a year. In the mean time, what are my 5 chosen interventions?
+So I will be lazy and will independently randomize each experiment. What are my 5 chosen interventions?
 
 <!-- TODO: handle the TODO in each section; ping Wozniak/Supermemo for overall results -->
 
 ## Lithium
 
-Rationale & procedure in the [Nootropics page](Nootropics#lithium). Randomized in 7-day blocks. Blinded.
+Rationale & procedure in the [Nootropics page](Nootropics#lithium). Randomized in 7-day paired blocks. Blinded.
 
 ## Redshift/f.lux
 
@@ -2045,10 +2055,9 @@ Then the Redshift call simply includes a check for the file's existence:
 
 Now we have completely automatic randomization and logging of the experiment. As long as I don't screw things up by deleting either file or uninstalling Redshift, and I keep using my Zeo, all the data is gathered and labeled nicely until I finish the experiment and do the analysis. Non-blinded, or perhaps I should say quasi-blinded - I initially don't know, but I *can* check the logs or file to see what that day was, and obviously I will at some point in the night notice whether the monitor is reddened or not.
 
-As it turned out, I received a proof that I was *not* noticing the randomization. On 11 January 2013, due to Internet connectivity problems, I was idling on my computer and thought to myself that I hadn't noticed Redshift turn my screen salmon-colored in a while, and I happened to idly try `redshift -x` (reset the screen to normal) and then `redshift -o` (immediately turn the screen red) - but neither did anything at all. Busy with other things, I set the anomaly aside until a few days later, I traced the problem to a package I had uninstalled back in 25 September 2012 because my system didn't use it - which it did not, but this had the effect of removing another package which turned out to set the default video driver to the proper driver, and so removing it forced my system to a more primitive driver which apparently did not support Redshift functionality! And I had not noticed for 3 solid months. This was a frustrating experiment, but since it took me so long to notice, I am going to keep the 3 months' data and just put them all into the 'off' category - this is not nearly as good as if those 3 months had varied (since now the 'on' category will be underpopulated), but it seems better than just deleting them all.
+As it turned out, I received a proof that I was *not* noticing the randomization. On 11 January 2013, due to Internet connectivity problems, I was idling on my computer and thought to myself that I hadn't noticed Redshift turn my screen salmon-colored in a while, and I happened to idly try `redshift -x` (reset the screen to normal) and then `redshift -o` (immediately turn the screen red) - but neither did anything at all. Busy with other things, I set the anomaly aside until a few days later, I traced the problem to a package I had uninstalled back in 25 September 2012 because my system didn't use it - which it did not, but this had the effect of removing another package which turned out to set the default video driver to the proper driver, and so removing it forced my system to a more primitive driver which apparently did not support Redshift functionality[^X-redshift-problem]! And I had not noticed for 3 solid months. This was a frustrating incident, but since it took me so long to notice, I am going to keep the 3 months' data and keep them in the 'off' category - this is not nearly as good as if those 3 months had varied (since now the 'on' category will be underpopulated), but it seems better than just deleting them all.
 
-(Geeky details: I found a error line in the X logs which appeared only when I invoked Redshift; the driver was `fbdev` and not the correct `radeon`, which mystified me further, until I read various bug reports and forum problems and wondered *why* `radeon` was not loading but the only non-`fbdev` error message indicated that some driver called `ati` was failing to load instead. Then I read that `ati` was the default wrapper over `radeon`, but then I saw that the package was not installed, installed it, noticed it was pulling in as a dependency useless Mach64 drivers, and had a flash: perhaps I had uninstalled the useless Mach64 drivers, forcing the package providing `ati` to be uninstalled too, permitted its uninstallation because I knew it was not the package providing `radeon`, which then caused the `ati` load to fail and to not then load `radeon` but X succeeding in loading `fbdev` which does not support Redshift, leading to a permanent failure of all uses of Redshift. Phew! I was right.)
-
+[^X-redshift-problem]: The geeky details: I found a error line in the X logs which appeared only when I invoked Redshift; the driver was `fbdev` and not the correct `radeon`, which mystified me further, until I read various bug reports and forum problems and wondered *why* `radeon` was not loading but the only non-`fbdev` error message indicated that some driver called `ati` was failing to load instead. Then I read that `ati` was the default wrapper over `radeon`, but then I saw that the package was not installed, installed it, noticed it was pulling in as a dependency useless Mach64 drivers, and had a flash: perhaps I had uninstalled the useless Mach64 drivers, forcing the package providing `ati` to be uninstalled too, permitted its uninstallation because I knew it was not the package providing `radeon`, which then caused the `ati` load to fail and to not then load `radeon` but X succeeding in loading `fbdev` which does not support Redshift, leading to a permanent failure of all uses of Redshift. Phew! I was right.
 
 So to recap: the experiment is 100+ days with Redshift randomized on or off by a shell script, affecting the usual sleep metrics plus time of bed. The expectation is that lack of Redshift will produce a weak negative effect: increasing awakenings & time awake & light sleep, increasing overall sleep time, and also pushing back bedtime.
 
@@ -2695,6 +2704,35 @@ April 2013
 23: 2/3000
 24: 3/3000
 25: 2
+26: 4
+27: 4/3000
+28: 4
+29: 3
+30: 3
+May
+01: 3/3000
+02: 4/3000
+03: 3/3000
+04: 4/3000
+05: 3
+06: 4
+07: 4
+08: 2
+09: 2/3000
+10: 2
+11: 4
+12: 4/4307
+13: 3
+14: 2/3000
+15: 2/3000
+16: 3
+17: 4
+18: 3
+19: 2/3000
+20: 4/3000
+21: 2
+22: 3/3000
+23: 4
 -->
 
 <!-- Creativity 1-3
@@ -2954,6 +2992,35 @@ April 2013
 23: 1
 24: 1
 25: 1
+26: 2
+27: 1
+28: 1
+29: 1
+30: 1
+May
+01: 1
+02: 1
+03: 1
+04: 1
+05: 2
+06: 1
+07: 3
+08: 1
+09: 1
+10: 1
+11: 1
+12: 1
+13: 1
+14: 1
+15: 2
+16: 2
+17: 1
+18: 1
+19: 2
+20: 1
+21: 1
+22: 1
+23: 2
 -->
 
 <!--
@@ -3383,20 +3450,55 @@ April 2013
 22: 1 1
 23: 1 0
 24: 0 0
-25: 1 1?
+25: 0 1
+26: 1 1
+27: 1 0
+28: 1 0
+29: 0 1
+30: 1 1
+May 2013
+01: 1 0
+02: 1 1
+03: 0 0
+04: 1 1
+05: 1 0
+06: 1 1
+07: 1 0
+08: 1 1
+09: 1 0
+10: 1 1
+11: 1 0
+12: 0 0
+13: 1 0
+14: 1 1
+15: 1 0
+16: 1 1
+17: 0 1
+18: 0 0
+19: 1 1
+20: 1 0
+21: 1 0
+22: 0 0
+23: 1 0
+24: 1 1?
 
 Underpopulated data cells:
-76: 1 0
-76: 1 1
-88: 0 1
-89: 0 0
+86: 1 1
+88: 1 0
+91: 0 1
+93: 0 0
 -->
+<!-- Alcohol log:
+May 2013
+03; 08; 10; 13; 16; 17; 18
+-->
+<!-- melatonin ran out; last day, 06 May 2013; used again on the 21st -->
 
 # External links
 
 - Vitamin D discussion:
 
-    - [Hacker News](http://news.ycombinator.com/item?id=3592017)
+    - [Hacker News](https://news.ycombinator.com/item?id=3592017)
     - Reddit: [1](http://www.reddit.com/r/Nootropics/comments/po3zk/psa_dont_take_vitamin_d_at_bedtime/), [2](http://www.reddit.com/r/fitnesscirclejerk/comments/po47w/so_i_heard_you_guys_like_vitamin_d_hopefully_not/)
     - [Imminst](http://www.longecity.org/forum/topic/54364-vitamin-d-sleep-experiment/)
     - [_Business Insider_ blog](http://www.businessinsider.com/this-is-what-happens-when-you-track-your-sleep-obsessively-2012-2)
@@ -3410,7 +3512,7 @@ Curiously, playing around with the full potassium data after the 2013 morning ex
 ~~~{.R}
 cor.test(pot$Disturbance, pot$MP)
 
-    Pearson's product-moment correlation
+    Pearson`s product-moment correlation
 
 data:  pot$Disturbance and pot$MP
 t = 1.224, df = 49, p-value = 0.2269
@@ -3437,7 +3539,7 @@ While not statistically-significant, this inverse correlation comes as a surpris
 3. it's a temporary correlation of this time period, perhaps related to the potassium, perhaps not.
 
     This is testable: with more data, does the correlation shrink or go away?
-4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](http://dl.dropboxusercontent.com/u/85192141/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl. What does this imply?
+4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](/docs/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl. What does this imply?
 
     We can do some back-of-the-envelope estimates. [Wikipedia](!Wikipedia "Depression (mood)") reports a very high depression incidence; we'll call it a 25% lifetime risk. But presumably the treatment only works if one is actually in a depressive episode, and while it's unclear what the distribution or length of depression period (as opposed to individual episodes) might be, it seems to be closer to years than months or decades, so we'll put it at ~3 years out of an adult lifespan of ~60 years or a per-year risk of $\frac{1}{20}=0.05$. On closer examination of Selvi et al 2006, the morning/evening split only appears with the total sleep deprivation procedure (morning types see their mood worsen, evening sees it improve) while with partial sleep deprivation both groups seem to see an improvement in their mood; since I rarely skip sleep entirely and such nights are dropped from the Zeo data, the total sleep deprivation results are irrelevant, but then my chronotype being evening doesn't matter. Finally, the sleep deprivation papers estimate <60% effectiveness in the depressed, so that knocks the possibility that both I am depressed and partial sleep deprivation helps me to <0.025. 2.5% is not a large possibility; and my vague speculation and a small inverse correlation do not seem like they would increase that possibility a *lot*.
 
@@ -3469,12 +3571,12 @@ Given this weakening and in the absence of any corroborating information, I cons
     zeo <- read.csv("http://www.gwern.net/docs/2013-gwern-sleepdisturbances-productivity.csv")
     cor.test(zeo$Disturbance, as.integer(zeo$MP))
 
-        Pearson's product-moment correlation
+        Pearson`s product-moment correlation
 
     data:  zeo$Disturbance and as.integer(zeo$MP)
     t = 1.344, df = 414, p-value = 0.1798
     alternative hypothesis: true correlation is not equal to 0
-    95 percent confidence interval:
+    95% confidence interval:
      -0.03045  0.16102
     sample estimates:
         cor
@@ -4005,3 +4107,31 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 24 Apr 2013: off -->
 <!-- Redshift: 25 Apr 2013: on -->
 <!-- Redshift: 26 Apr 2013: off -->
+<!-- Redshift: 27 Apr 2013: off -->
+<!-- Redshift: 28 Apr 2013: on -->
+<!-- Redshift: 29 Apr 2013: on -->
+<!-- Redshift: 30 Apr 2013: on -->
+<!-- Redshift: 01 May 2013: on -->
+<!-- Redshift: 02 May 2013: on -->
+<!-- Redshift: 03 May 2013: on -->
+<!-- Redshift: 04 May 2013: on -->
+<!-- Redshift: 05 May 2013: off -->
+<!-- Redshift: 06 May 2013: on -->
+<!-- Redshift: 07 May 2013: off -->
+<!-- Redshift: 08 May 2013: off -->
+<!-- Redshift: 09 May 2013: on -->
+<!-- Redshift: 10 May 2013: on -->
+<!-- Redshift: 11 May 2013: on -->
+<!-- Redshift: 12 May 2013: on -->
+<!-- Redshift: 13 May 2013: on -->
+<!-- Redshift: 14 May 2013: off -->
+<!-- Redshift: 15 May 2013: on -->
+<!-- Redshift: 16 May 2013: on -->
+<!-- Redshift: 17 May 2013: on -->
+<!-- Redshift: 18 May 2013: off -->
+<!-- Redshift: 19 May 2013: on -->
+<!-- Redshift: 20 May 2013: on -->
+<!-- Redshift: 21 May 2013: on -->
+<!-- Redshift: 22 May 2013: on -->
+<!-- Redshift: 23 May 2013: on -->
+<!-- Redshift: 24 May 2013: on -->
