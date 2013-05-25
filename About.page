@@ -27,7 +27,7 @@ One of my personal interests is applying the idea of the [Long Now](!Wikipedia).
     > "If the individual lived five hundred or one thousand years, this clash (between his interests and those of society) might not exist or at least might be considerably reduced. He then might live and harvest with joy what he sowed in sorrow; the suffering of one historical period which will bear fruit in the next one could bear fruit for him too."
 [^posner]: From [Richard Posner](!Wikipedia)'s [_Aging and Old Age_](http://www.amazon.com/Aging-Old-Age-Richard-Posner/dp/0226675688/):
 
-    > One way to distinguish empirically between aging effects and proximity-to-death effects would be to compare, with respect to choice of occupation, investment, education, leisure activities, and other activities, elderly people on the one hand with young or middle-aged people who have truncated life expectancies but are in apparent good health, on the other. For example, a person newly infected with the AIDS virus (HIV) has roughly the same life expectancy as a 65-year-old and is unlikely to have, as yet, significant symptoms. The conventional human-capital model implies that, after correction for differences in income and for other differences between such persons and elderly persons who have the same life expectancy (a big difference is that the former will not have pension entitlements to fall back upon), the behavior of the two groups will be similar. It does appear to be similar, so far as investing in human capital is concerned; the truncation of the payback period causes disinvestment. And there is a high suicide rate among HIV-infected persons (even before they have reached the point in the progression of the disease at which they are classified as persons with AIDS), just as there is, as we shall see in chapter 6, among elderly persons.
+    > One way to distinguish empirically between aging effects and proximity-to-death effects would be to compare, with respect to choice of occupation, investment, education, leisure activities, and other activities, elderly people on the one hand with young or middle-aged people who have truncated life expectancies but are in apparent good health, on the other. For example, a person newly infected with the AIDS virus (HIV) has roughly the same life expectancy as a 65-year-old and is unlikely to have, as yet, [major] symptoms. The conventional human-capital model implies that, after correction for differences in income and for other differences between such persons and elderly persons who have the same life expectancy (a big difference is that the former will not have pension entitlements to fall back upon), the behavior of the two groups will be similar. It does appear to be similar, so far as investing in human capital is concerned; the truncation of the payback period causes disinvestment. And there is a high suicide rate among HIV-infected persons (even before they have reached the point in the progression of the disease at which they are classified as persons with AIDS), just as there is, as we shall see in chapter 6, among elderly persons.
 
 What sort of writing could you create if you worked on it (be it ever so rarely) for the next 60 years? What could you do if you started *now*?[^JFK]
 
@@ -99,7 +99,7 @@ My answer is that one uses such a framework to work on projects that are too big
 
 1. [DNB FAQ]():
 
-     When I read in _Wired_ in 2008 that the obscure working memory exercise called dual n-back (DNB) had been found to increase IQ significantly, I was shocked. IQ is one of the most stubborn properties of one's mind, one of the most fragile[^fragile], the hardest to affect positively[^increase], but also one of the most valuable traits one could have[^conscientiousness]; if the technique panned out, it would be *huge*. Unfortunately, DNB requires a major time investment (as in, half an hour daily); which would be a bargain - if it delivers. So, to do DNB or not?
+     When I read in _Wired_ in 2008 that the obscure working memory exercise called dual n-back (DNB) had been found to increase IQ substantially, I was shocked. IQ is one of the most stubborn properties of one's mind, one of the most fragile[^fragile], the hardest to affect positively[^increase], but also one of the most valuable traits one could have[^conscientiousness]; if the technique panned out, it would be *huge*. Unfortunately, DNB requires a major time investment (as in, half an hour daily); which would be a bargain - if it delivers. So, to do DNB or not?
 
      Questions of great import like this are worth studying carefully. The wheels of academia grind exceeding slow, and only a fool expects unanimous answers from fields like psychology. Any attempt to answer the question 'is DNB worthwhile?' will require years and cover a breadth of material. This FAQ on DNB is my attempt to cover that breadth over those years.
 2. [_Neon Genesis Evangelion_ notes](otaku) and [essay draft](otaku-essay):
@@ -136,7 +136,7 @@ For example, the Evangelion essay's paradigm implies many things about the futur
 
 I don't think "Long Content" is simply for working on things which are equivalent to a "[monograph](!Wikipedia)" (a work which attempts to be an exhaustive exposition of all that is known - and what has been recently discovered - on a single topic), although monographs clearly would benefit from such an approach. If I write a short essay cynically remarking on, say, Al Gore and predicting he'd sell out and registered some predictions and came back 20 years later to see how it worked out, I would consider this "Long Content" (it gets more interesting with time, as the predictions reach maturation); but one couldn't consider this a "monograph" in any ordinary sense of the word.
 
-One of the ironies of this approach is that as a [transhumanist](!Wikipedia), I assign significant probability to the world undergoing massive change during the 21st century due to any of a number of technologies such as artificial intelligence (such as [mind uploading](!Wikipedia)^[See Robin Hanson, ["If Uploads Come First"](http://hanson.gmu.edu/uploads.html)]) or [nanotechnology](!Wikipedia "Molecular assembler"); yet here I am, planning as if I and the world were immortal.
+One of the ironies of this approach is that as a [transhumanist](!Wikipedia), I assign non-trivial probability to the world undergoing massive change during the 21st century due to any of a number of technologies such as artificial intelligence (such as [mind uploading](!Wikipedia)^[See Robin Hanson, ["If Uploads Come First"](http://hanson.gmu.edu/uploads.html)]) or [nanotechnology](!Wikipedia "Molecular assembler"); yet here I am, planning as if I and the world were immortal.
 
 I personally believe that one should "think Less Wrong and act Long Now", if you follow me. I diligently do my daily [spaced-repetition review](Spaced repetition) and n-backing; I carefully design my website and writings to last decades, actively think about how to write material that improves with time, and work on writings that will not be finished for years (if ever). It's a bit schizophrenic since both are totalized worldviews with drastically conflicting recommendations about where to invest my time. It's a case of high [discount rates](!Wikipedia) versus low discount rates; and one could fairly accuse me of committing the [sunk cost fallacy](!Wikipedia), but then, I'm not sure that [sunk cost fallacy is a fallacy](Sunk cost) (certainly, I have more to show for my wasted time than most people).
 
@@ -198,7 +198,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         2. inserting into [archive queue](Archiving URLs)
 
     - do a Pandoc/Firefox preview for visible major formatting problems
-    - Markdown [lint](!Wikipedia "lint (software)")-checker[^lint]
+    - [Markdown lint-checker](#markdown-checker)
 - references:
 
     - for academic hyperlinks,  include a [tooltip](!Wikipedia) with the title & author metadata
@@ -208,7 +208,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
     - [spellcheck](!Wikipedia "Ispell")
     - check readability level (eg. [Flesch-Kincaid](!Wikipedia))
     - [probability word checklist](#belief-tags)
-    - check for use of the word "significant"/"significance" and insert "[statistically]" as appropriate (to disambiguate between [effect sizes](!Wikipedia) and [statistical significance](!Wikipedia))
+    - check for use of the word "significant"/"significance" and insert "[statistically]" as appropriate (to disambiguate between [effect sizes](!Wikipedia) and [statistical significance](!Wikipedia); this common confusion is one reason for [statistical-significance considered harmful](http://lesswrong.com/lw/g13/against_nhst/ "Against NHST"))
     - convert English units to metric <!-- grep -e " feet" -e " foot " -e pound -e mile -e inch -->
 - content:
 
@@ -221,56 +221,74 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
         3. [PubMed](!Wikipedia) alerts
 - after publication, publicize; currently:
 
-    1. StumbleUpon
-    2. Google+
-    3. Reddit
-    4. LessWrong (and further sites as appropriate)
+    1. Google+
+    2. Reddit
+    3. LessWrong (and further sites as appropriate)
 
-[^lint]: I've noticed that when I make Markdown syntax errors, they tend to be predictable and show up either in the original Markdown source, or in the rendered HTML. Two common source errors:
+### Markdown checker
 
-        "(www"
-        ")www"
+I've noticed that when I make Markdown syntax errors, they tend to be predictable and show up either in the original Markdown source, or in the rendered HTML. Two common source errors:
 
-    And the following should *rarely* show up in the final rendered HTML:
+    "(www"
+    ")www"
 
-        "\frac"
-        "\times"
-        "(http"
-        ")http"
-        "[http"
-        "]http"
-        " _ "
-        "[^"
-        "^]"
-        "<!--"
-        "-->"
-        "<-- "
-        "<-"
-        "->"
-        "$title$"
-        "$description$"
-        "$author$"
-        "$tags$"
-        "$category$"
+And the following should *rarely* show up in the final rendered HTML:
 
-    Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](http://groups.google.com/d/topic/pandoc-discuss/2C5p5pp6ReM/discussion).
+    "\frac"
+    "\times"
+    "(http"
+    ")http"
+    "[http"
+    "]http"
+    " _ "
+    "[^"
+    "^]"
+    "<!--"
+    "-->"
+    "<-- "
+    "<-"
+    "->"
+    "$title$"
+    "$description$"
+    "$author$"
+    "$tags$"
+    "$category$"
 
-    A shell script for an individual file which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options):
+Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](http://groups.google.com/d/topic/pandoc-discuss/2C5p5pp6ReM/discussion), and one for a bad habit of mine - [too-long footnotes](https://groups.google.com/forum/#!msg/pandoc-discuss/KBw2QHB9z_M/WG2q9manh5AJ). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options):
 
-    ~~~{.Bash}
-    function markdown-lint () {
-        cat "$@" | file - | grep -v "text"; # warn if not text, perhaps due to bad copy-paste
-        fgrep -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" "$@";
-        grep --only-matching '^\[\^.*\]: ' "$@" | sort | uniq --count | fgrep --invert-match "      1 [^";
-        markdown-length-checker "$@";
-        cat "$@" \
-        | tail -n +3 \
-        | pandoc --mathml --standalone - \
-        | elinks -dump --force-html \
-        | fgrep -e '\frac' -e '\times' -e '(http' -e ')http' -e '[http' -e ']http' -e ' _ ' \
-                -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<-' -e '->' -e '$title$' \
-                -e '$description$' -e '$author$' -e '$tags$' -e '$category$'; }
-    ~~~
+~~~{.Bash}
+function markdown-lint () {
+    for PAGE in "$@"
+    do
+        if [[ $PAGE == *.page ]]; then
+
+            # warn if not text, perhaps due to bad copy-paste
+            cat "$PAGE" | file - | grep -v "text";
+
+            # find bad URLS, malformed syntax, unmatched apostrophes, illegitimate statistics
+            fgrep -e "http://dl.dropbox" -e "http://news.ycombinator.com" -e "http://www.coursera.org" \
+                  -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
+                  -e '~~~{.sh}' -e ' significant ' -e ' significantly ' "$PAGE";
+            grep --only-matching '^\[\^.*\]: ' "$PAGE" | sort | uniq --count | \
+                   fgrep --invert-match "      1 [^";
+
+            # image hotlinking deprecated; impolite, and slows page loads & site compiles
+            egrep --only-matching '\!\[.*\]\(http://.*\)' "$PAGE";
+
+            markdown-length-checker "$PAGE";
+            markdown-footnote-length "$PAGE";
+
+            local HTML=`cat "$PAGE" | tail -n +3 | pandoc --mathml --standalone -`
+            echo $HTML | fgrep -e "<""del"">";
+            echo $HTML | elinks -dump --force-html \
+                       | fgrep -e '\frac' -e '\times' -e '(http' -e ')http' -e '[http' -e ']http'  \
+                               -e ' _ ' -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<—' -e '—>' \
+                               -e '$title$' -e '<del>' \
+                               -e '$description$' -e '$author$' -e '$tags$' -e '$category$' \
+                -e '(!Wikipedia' -e '(!Hoogle'; # ))
+        fi
+    done }
+~~~
 
 # Technical aspects
 ## Popularity
@@ -551,8 +569,8 @@ Tools which are used in the site as a whole:
     - the HTML tables are sortable via [tablesorter](http://tablesorter.com/docs/)
     - the MathML is rendered using [MathJax](!Wikipedia)
     - analytics are handled by [Google Analytics](!Wikipedia)
-    - [A/B testing](!Wikipedia) is done using [ABalytics](https://github.com/danmaz74/ABalytics) (hooks into Google Analytics; see current [testing notes](a-b-testing.page))
-    - ads are served by Google [AdSense](!Wikipedia)
+    - [A/B testing](!Wikipedia) is done using [ABalytics](https://github.com/danmaz74/ABalytics) (hooks into Google Analytics; see current [testing notes](a-b-testing))
+    <!-- - ads are served by Google [AdSense](!Wikipedia) -->
 - Book affiliate links are through an [Amazon Affiliates](!Wikipedia) tag appended in the `hakyll.hs`
 
 These tools encourage a minimalist site; I believe that [minimalism](!Wikipedia) helps one focus on the content. Anything besides the content is [distraction and not design](http://www.jwz.org/gruntle/design.html). 'Attention!', as [Ikkyu](!Wikipedia) would say[^attention].
