@@ -622,6 +622,7 @@ It seems like it might be worthwhile to continue compiling a database and do a f
 
         - ["Is This One Emotion Driving The Google Stock Price Up?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/08/what-is-driving-the-google-stock-price-up/)
         - ["Google Glass - Is It Meant To Last?"](http://www.forbes.com/sites/haydnshaughnessy/2013/05/09/google-glass-has-only-a-37-chance-of-going-five-years-lessons/)
+    - [_Boy Genius Report_](http://bgr.com/2013/05/07/google-services-shut-down-study/ "Statistical analysis finds Google shuts down 35% of its services")
 - Acquisition background:
 
     - ["What Happened to Yahoo"](http://paulgraham.com/yahoo.html), Paul Graham
@@ -651,6 +652,23 @@ Scratchpad free program non-social non-acquisition non-floss  "google scratchpad
 Cloud Messaging for Chrome http://developer.chrome.com/apps/cloudMessaging.html "service",FALSE,FALSE,FALSE,FALSE launch: 10 May 2013 search 'Google "Cloud Messaging for Chrome"' 23,300 results
 Google Play Music 15 05 2013 paid service non-acquisition non-FLOSS social? ("You can share songs on your google+") '"google play music"' About 37,300,000 results (0.46 seconds)
 Google+ Games, launched 11 08 2011 http://googleblog.blogspot.com/2011/08/games-in-google-fun-that-fits-your.html Dead, 30 June 2013 https://support.google.com/plus/answer/3123176?p=plus_games&rd=1 non-FLOSS, non-acqusition profit social, '"google+ games"' 142000 hits
+Checkout Gadget: dead, see http://googlecommerce.blogspot.com/2013/05/an-update-to-google-checkout-for.html https://support.google.com/checkout/sell/answer/3080449
+is checkout proper dead?
+"On November 20th, 2013, Google will shut down its Checkout product. Here’s how this may affect you:
+
+    Merchants selling digital goods may transition to Google Wallet for digital goods
+    Merchants selling through Google-hosted marketplaces (e.g. Google Play) will be unaffected
+    Merchants selling physical goods will need to switch to third-party alternatives (see below)"
+https://news.ycombinator.com/item?id=5740447
+"> Wait, so what's the difference between this and Google Wallet?
+
+With Checkout, Google is a credit card processor.
+
+With Wallet, Google isn't a credit card processor, they are partnered with Bankcorp Bank who is issuing virtual cards which are funded either by transferring funds from the users bank account or by charging credit cards."
+
+04:57:29 < quanticle> gwern: When you get this, would you mind giving me your opinion on the continued long-term viability of Google Tasks? My prediction is that it won't last much longer; it seems to be a massively underdeveloped part of GMail/Google Calendar, and the task-list/to-do-list market is fiercely competitive.
+05:11:25 < harrow> old Closure Library codebase, guy who wrote it quit, no tie-in with G+
+Tasks LIVE, service non-profit non-social non-acquisition '"Google Tasks"' 641000 hits launched: 8 December 2008 http://gmailblog.blogspot.com/2008/12/new-in-labs-tasks.html
 -->
 
 # Appendix
@@ -660,6 +678,13 @@ Run as `R --slave --file=google.r`:
 
 ~~~{.R}
 set.seed(7777) # for reproducible numbers
+
+library(survival)
+library(randomForest)
+library(boot)
+library(randomForestSRC)
+library(prodlim) # for 'sindex' call
+library(rms)
 
 # Generate Google corpus model for use in main analysis
 # Load the data, fit, and plot:
@@ -744,8 +769,6 @@ print(summary(step(glm(Dead ~ Type + Profit + FLOSS + Acquisition + Social +
 
 cat("\nEntering survival analysis section:\n")
 
-library(survival)
-
 cat("\nUnconditional Kaplan-Meier survival curve:\n")
 surv <- survfit(Surv(google$Days, google$Dead, type="right") ~ 1)
 png(file="~/wiki/images/google/overall-survivorship-curve.png", width = 1.5*480, height = 1*480)
@@ -783,7 +806,6 @@ legend("bottomleft", legend=c("Social = no", "Social = yes"), lty=c(1 ,2), inset
 invisible(dev.off())
 
 cat("\nTrain some random forests for prediction:\n")
-library(randomForest)
 lmodel <- glm(Dead ~ Acquisition + FLOSS + Profit + Social + Type +
                      DeflatedHits + EarlyGoogle + Days,
                    data=google, family="binomial")
@@ -802,8 +824,6 @@ cat("\nRandom forest's correct predictions:\n")
 print(sum((as.logical(predict(rf))) == google$Dead) / nrow(google))
 
 cat("\nBegin bootstrap test of predictive accuracy...\n")
-library(boot)
-
 cat("\nGet a subsample, train logistic regression on it, test accuracy on original Google data:\n")
 logisticPredictionAccuracy <- function(gb, indices) {
   g <- gb[indices,] # allows boot to select subsample
@@ -828,7 +848,6 @@ rfbs <- boot(data=google, statistic=randomforestPredictionAccuracy, R=20000, par
 print(boot.ci(rfbs, type="norm"))
 
 cat("\nFancier comparison: random survival forests and full Cox model with bootstrap\n")
-library(randomForestSRC)
 rsf <- rfsrc(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type + DeflatedHits + EarlyGoogle,
              data=google, nsplit=1)
 print(rsf)
@@ -838,7 +857,6 @@ plot(rsf)
 invisible(dev.off())
 
 # calculate cumulative hazard function; adapted from Mogensen et al 2012
-library(prodlim) # for 'sindex' call
 predictSurvProb.rsf <- function (object, newdata, times, ...) {
     N <- NROW(newdata)
     # class(object) <- c("rsf", "grow")
@@ -901,7 +919,6 @@ cat("\nExtract the 10 living products with lowest estimated relative risk:\n")
 print(head(alive[order(alive$RiskRatio, decreasing=FALSE),], n=10)$Product)
 
 cat("\nBegin calculating specific numerical predictions about remaining lifespans..\n")
-library(rms)
 cpmodel <- cph(Surv(Days, Dead) ~ Acquisition + FLOSS + Profit + Social + Type +
                                   DeflatedHits + EarlyGoogle,
                data = google, x=TRUE, y=TRUE, surv=TRUE)
