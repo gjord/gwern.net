@@ -254,7 +254,7 @@ And the following should *rarely* show up in the final rendered HTML:
     "$tags$"
     "$category$"
 
-Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](http://groups.google.com/d/topic/pandoc-discuss/2C5p5pp6ReM/discussion), and one for a bad habit of mine - [too-long footnotes](https://groups.google.com/forum/#!msg/pandoc-discuss/KBw2QHB9z_M/WG2q9manh5AJ). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options):
+Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](/haskell/markdown-length-checker), and one for a bad habit of mine - [too-long footnotes](/haskell/markdown-footnote-length). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options):
 
 ~~~{.Bash}
 function markdown-lint () {
@@ -265,8 +265,9 @@ function markdown-lint () {
             # warn if not text, perhaps due to bad copy-paste
             cat "$PAGE" | file - | grep -v "text";
 
-            # find bad URLS, malformed syntax, unmatched apostrophes, illegitimate statistics
+            # find bad URLS, unacceptable domains, malformed syntax, unmatched apostrophes, illegitimate statistics
             fgrep -e "http://dl.dropbox" -e "http://news.ycombinator.com" -e "http://www.coursera.org" \
+                  -e ".wiley.com/" -e "http://www.ncbi.nlm.nih.gov/pubmed/" \
                   -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
                   -e '~~~{.sh}' -e ' significant ' -e ' significantly ' "$PAGE";
             grep --only-matching '^\[\^.*\]: ' "$PAGE" | sort | uniq --count | \
