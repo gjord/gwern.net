@@ -1309,9 +1309,19 @@ Speeded BOMAT ("Due to time restrictions and the possibility of ceiling effects 
 
 Single n-back; passive control group; no transfer in young or old training group to "Raven's Standard Progressive Matrices (Raven's SPM) and the Figural Relations subtest of a German intelligence test (Leistungspruefsystem, LPS, Horn, 1983)" (increased but sample size is too small to reach statistical-significance in the young group); RPM speeded (7.5 minutes). See pg19 for graphs of the IQ test performance.
 
+## Thompson et al 2013
+
+["Failure of Working Memory Training to Enhance Cognition or Intelligence"](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0063614):
+
+> ...The current study attempted to replicate and expand those results by administering a broad assessment of cognitive abilities and personality traits to young adults who underwent 20 sessions of an adaptive dual n-back working memory training program and comparing their post-training performance on those tests to a matched set of young adults who underwent 20 sessions of an adaptive attentional tracking program. Pre- and post-training measurements of fluid intelligence, standardized intelligence tests, speed of processing, reading skills, and other tests of working memory were assessed. Both training groups exhibited substantial and specific improvements on the trained tasks that persisted for at least 6 months post-training, but no transfer of improvement was observed to any of the non-trained measurements when compared to a third untrained group serving as a passive control. These findings fail to support the idea that adaptive working memory training in healthy young adults enhances working memory capacity in non-trained tasks, fluid intelligence, or other measures of cognitive abilities.
+
+Covariate details:
+
+> ...Two groups of young adults, stratified so as to be equated on initial fluid IQ scores, were randomly assigned to two conditions (a randomized controlled trial or RCT). The experimental group performed the dual n-back task (as in the original Jaeggi et al., 2008 study [6]) for approximately 40 minutes per day, 5 days per week for 4 weeks (20 sessions of 30 blocks per session, exceeding the maximum of 19 sessions of 20 blocks per day in the original Jaeggi et al., 2008 study). An active control group performed a visuospatial skill learning task, multiple object tracking (or MOT), on an identical training schedule. We also tested a no-contact group equated for initial fluid IQ in case both kinds of training enhanced cognitive abilities...Participants were given 25 minutes to complete each half of the RAPM....Participants in the training groups were paid $20 per training session, with a $20 bonus per week for completing all five training sessions in that week. All participants were paid $20 per hour for behavioral testing, and $30 per hour for imaging sessions (data from imaging sessions are reported separately)....After recruitment, participants underwent approximately six hours of behavioral testing spread across three days and two hours of structural and functional magnetic resonance imaging. [((20*4 + 20*4)*(2/3) + 6*20 + 2*30) = 287]
+
 <!--
 TODO
-### Stephenson & Halpern 2012?
+### Stephenson & Halpern 2013?
 
 "Improved fluid intelligence limited to working memory capacity using intensive n-back tasks with a visuospatial component" Mentioned in Stephenson's CV
 
@@ -1398,6 +1408,7 @@ Going through them, I must note:
 - Redick et al: n-back split over passive control & active control (visual search) RAPM post scores (omitted SPM and Cattell Culture-Fair Test)
 - Vartanian 2013: short n-back intervention not adaptive; I did not specify in advance that the n-back interventions had to be adaptive (possibly some of the others were not) and subjects trained for <50 minutes, so the lack of adaptiveness may not have mattered.
 - Heinzel et al 2013 mentions conducting a pilot study; I contacted Heinzel and no measures like Raven's were taken in it. The main study used both SPM and also "the Figural Relations subtest of a German intelligence test (LPS)"; as usual, I drop alternatives in favor of the more common test.
+- Thompson et al 2013; used RAPM rather than WAIS; treated the "multiple object tracking"/MOT as an active control group since it did not statistically-significantly improve RAPM scores
 
 The following authors had their studies omitted and have been contacted for clarification:
 
@@ -1534,33 +1545,35 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2013 Vartanian     17    11.18     2.53   17    10.41   2.24   1        60         1    10    1   0
 2013 Heinzel.1     15    24.53     2.9    15    23.07   2.34   0        540        2    7.5   1   129
 2013 Heinzel.2     15    17        3.89   15    15.87   3.13   0        540        2    7.5   1   129
+2013 Thompson.1    10    13.2      0.67   19    12.7    0.62   0        800        1    25    0   287
+2013 Thompson.2    10    13.2      0.67   19    13.3    0.5    1        800        1    25    0   287
 
 ### Analysis
 
 The result of the meta-analysis:
 
 ~~~{.R}
-Random-Effects Model (k = 43; tau^2 estimator: REML)
+Random-Effects Model (k = 45; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 0.2144 (SE = 0.0827)
-tau (sqrt of the estimate of total heterogeneity): 0.4630
-I^2 (% of total variability due to heterogeneity): 58.07%
-H^2 (total variability / sampling variability):    2.38
+tau^2 (estimated amount of total heterogeneity): 0.2062 (SE = 0.0789)
+tau (square root of estimated tau^2 value):      0.4541
+I^2 (total heterogeneity / total variability):   57.10%
+H^2 (total variability / sampling variability):  2.33
 
 Test for Heterogeneity:
-Q(df = 42) = 103.0485, p-val < .0001
+Q(df = 44) = 106.3486, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.5235   0.0947   5.5274   <.0001   0.3379   0.7092      ***
+  0.5119   0.0915   5.5959   <.0001   0.3326   0.6913
 ~~~
 
 To depict the random-effects model in a more graphic form, we use the "[forest plot](!Wikipedia)":
 
 ![`forest(res1, slab = paste(dnb$study, dnb$year, sep = ", "))`](/images/dnb/forest.png)
 
-The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. We use a random-effects model: the high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect (although in this case, the fixed effects estimate is almost the same as the random effects model).
+The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. The high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect, so we use a random-effects.
 
 The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal iodine or iron), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. This skeptical attitude is relevant to our examination of moderators.
 
@@ -1570,47 +1583,51 @@ The confidence interval excludes zero, so one might conclude that n-back does in
 A major criticism of n-back studies is that the effect is being manufactured by the methodological problem of some studies using a no-contact or passive control group rather than an active control group. (Passive controls know they received no intervention and that the researchers don't expect them to do better on the post-test, which may reduce their efforts & lower their scores.) Each study has been coded appropriately, and we can ask whether it matters:
 
 ~~~{.R}
-Mixed-Effects Model (k = 43; tau^2 estimator: REML)
+Mixed-Effects Model (k = 45; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 0.1612 (SE = 0.0715)
-tau (sqrt of the estimate of residual heterogeneity): 0.4015
+tau^2 (estimated amount of residual heterogeneity):     0.1416 (SE = 0.0653)
+tau (square root of estimated tau^2 value):             0.3763
+I^2 (residual heterogeneity / unaccounted variability): 47.62%
+H^2 (unaccounted variability / sampling variability):   1.91
 
 Test for Residual Heterogeneity:
-QE(df = 41) = 90.8549, p-val < .0001
+QE(df = 43) = 91.7976, p-val < .0001
 
 Test of Moderators (coefficient(s) 1,2):
-QM(df = 2) = 40.6236, p-val < .0001
+QM(df = 2) = 44.4450, p-val < .0001
 
 Model Results:
 
                  estimate      se    zval    pval    ci.lb   ci.ub
-factor(active)0    0.6645  0.1070  6.2122  <.0001   0.4548  0.8741  ***
-factor(active)1    0.2179  0.1529  1.4255  0.1540  -0.0817  0.5175
+factor(active)0    0.6653  0.1018  6.5326  <.0001   0.4657  0.8649
+factor(active)1    0.1898  0.1427  1.3303  0.1834  -0.0898  0.4694
 ~~~
 
-The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals overlap only partially. The effect with passive control groups is a dramatic _d_=0.7 while with active control groups, the IQ gains shrink to _d_=0.2 (and the 95% CI does not exclude _d_=0).
+The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals overlap only partially. The effect with passive control groups is a dramatic _d_=0.7 while with active control groups, the IQ gains shrink to _d_=0.2 (and the 95% CI does not exclude _d_=0). Indeed, the difference is almost statistically-significant since the CIs only just barely overlap.
 
 #### Training time
 
 Jaeggi et al 2008 observed a dose-response to training, where those who trained the longest apparently improved the most. Ever since, this has been cited as a factor in what studies will observe gains or as an explanation why some studies did not see improvements - perhaps they just didn't do enough training. `metafor` is able to look at the number of minutes subjects in each study trained for to see if there's any obvious linear relationship:
 
 ~~~{.R}
-Mixed-Effects Model (k = 43; tau^2 estimator: REML)
+Mixed-Effects Model (k = 45; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 0.2281 (SE = 0.0870)
-tau (sqrt of the estimate of residual heterogeneity): 0.4776
+tau^2 (estimated amount of residual heterogeneity):     0.2178 (SE = 0.0825)
+tau (square root of estimated tau^2 value):             0.4667
+I^2 (residual heterogeneity / unaccounted variability): 58.40%
+H^2 (unaccounted variability / sampling variability):   2.40
 
 Test for Residual Heterogeneity:
-QE(df = 41) = 102.8443, p-val < .0001
+QE(df = 43) = 105.9564, p-val < .0001
 
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.1079, p-val = 0.7425
+QM(df = 1) = 0.2098, p-val = 0.6469
 
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.5748  0.1801   3.1921  0.0014   0.2219  0.9278  **
-mods      -0.0001  0.0003  -0.3285  0.7425  -0.0008  0.0006
+intrcpt    0.5818  0.1766   3.2951  0.0010   0.2358  0.9279
+mods      -0.0001  0.0003  -0.4581  0.6469  -0.0008  0.0005
 ~~~
 
 The estimate of the relationship is that there is none at all: the estimated coefficient has a large _p_-value, and further, that coefficient is negative. This may seem initially implausible but if we graph the time spent training per study with the final (unweighted) effect size, we see why:
@@ -1622,22 +1639,24 @@ The estimate of the relationship is that there is none at all: the estimated coe
 Similarly, Moody 2009 identified the 10 minute test-time or "speeding" of the RAPM as a concern in whether far transfer actually happened; after collecting the allotted test time for the studies, we can likewise look for whether there is an inverse relationship (the more time given to subjects on the IQ test, the smaller their IQ gains):
 
 ~~~{.R}
-Mixed-Effects Model (k = 33; tau^2 estimator: REML)
+Mixed-Effects Model (k = 35; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 0.3104 (SE = 0.1222)
-tau (sqrt of the estimate of residual heterogeneity): 0.5572
+tau^2 (estimated amount of residual heterogeneity):     0.2887 (SE = 0.1127)
+tau (square root of estimated tau^2 value):             0.5373
+I^2 (residual heterogeneity / unaccounted variability): 65.15%
+H^2 (unaccounted variability / sampling variability):   2.87
 
 Test for Residual Heterogeneity:
-QE(df = 31) = 87.0259, p-val < .0001
+QE(df = 33) = 90.2648, p-val < .0001
 
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.2603, p-val = 0.6099
+QM(df = 1) = 0.3870, p-val = 0.5339
 
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.6713  0.2639   2.5435  0.0110   0.1540  1.1887  *
-mods      -0.0074  0.0145  -0.5102  0.6099  -0.0359  0.0211
+intrcpt    0.6763  0.2561   2.6407  0.0083   0.1744  1.1783
+mods      -0.0086  0.0138  -0.6221  0.5339  -0.0355  0.0184
 ~~~
 
 A tiny slope which is extremely non-statistically significant; graphing the (unweighted) studies suggests as much:
@@ -1649,23 +1668,25 @@ A tiny slope which is extremely non-statistically significant; graphing the (unw
 One question of interest both for issues of validity and for effective training is whether the existing studies show larger effects for a particular kind of n-back training: dual (visual & audio; labeled 0) or single (visual; labeled 1) or single (audio; labeled 2)? If visual single n-back turns in the largest effects, that is troubling since it's also the one most resembling a matrix IQ test. Checking against the 3 kinds of n-back training:
 
 ~~~{.R}
-Mixed-Effects Model (k = 43; tau^2 estimator: REML)
+Mixed-Effects Model (k = 45; tau^2 estimator: REML)
 
-tau^2 (estimate of residual amount of heterogeneity): 0.2424 (SE = 0.0916)
-tau (sqrt of the estimate of residual heterogeneity): 0.4923
+tau^2 (estimated amount of residual heterogeneity):     0.2325 (SE = 0.0870)
+tau (square root of estimated tau^2 value):             0.4821
+I^2 (residual heterogeneity / unaccounted variability): 59.74%
+H^2 (unaccounted variability / sampling variability):   2.48
 
 Test for Residual Heterogeneity:
-QE(df = 40) = 102.2538, p-val < .0001
+QE(df = 42) = 105.7191, p-val < .0001
 
 Test of Moderators (coefficient(s) 1,2,3):
-QM(df = 3) = 28.8865, p-val < .0001
+QM(df = 3) = 29.6189, p-val < .0001
 
 Model Results:
 
               estimate      se    zval    pval    ci.lb   ci.ub
-factor(nbt)0    0.5500  0.1134  4.8520  <.0001   0.3278  0.7721  ***
-factor(nbt)1    0.4562  0.2312  1.9730  0.0485   0.0030  0.9094    *
-factor(nbt)2    0.4507  0.3740  1.2052  0.2281  -0.2823  1.1836
+factor(nbt)0    0.5334  0.1085  4.9145  <.0001   0.3207  0.7461
+factor(nbt)1    0.4556  0.2281  1.9972  0.0458   0.0085  0.9026
+factor(nbt)2    0.4492  0.3694  1.2159  0.2240  -0.2749  1.1732
 ~~~
 
 There are not enough studies using the other kinds of n-back to say anything conclusive.
@@ -1681,47 +1702,47 @@ I investigated payment as a moderator. Payment seems to actually be quite rare i
 More specifically, if we check payment as a binary variable, we get a decrease in effect size which is not statistically-significant:
 
 ~~~{.R}
-Mixed-Effects Model (k = 43; tau^2 estimator: REML)
-...
+tau^2 (estimated amount of residual heterogeneity):     0.2073 (SE = 0.0803)
+tau (square root of estimated tau^2 value):             0.4553
+I^2 (residual heterogeneity / unaccounted variability): 57.03%
+H^2 (unaccounted variability / sampling variability):   2.33
+
+Test for Residual Heterogeneity:
+QE(df = 43) = 103.4400, p-val < .0001
+
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.8511, p-val = 0.3563
+QM(df = 1) = 1.1418, p-val = 0.2853
 
 Model Results:
 
                       estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt                 0.5701  0.1076   5.2978  <.0001   0.3592  0.7810
-as.logical(paid)TRUE   -0.2139  0.2319  -0.9225  0.3563  -0.6684  0.2406
+intrcpt                 0.5689  0.1060   5.3691  <.0001   0.3612  0.7766
+as.logical(paid)TRUE   -0.2254  0.2110  -1.0686  0.2853  -0.6389  0.1881
 ~~~
 
 If we instead regress against the total payment size (perhaps larger payments discourage one more?), the effect of each additional dollar is very small and 0 is far from excluded as the coefficient:
 
 ~~~{.R}
-Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.9653, p-val = 0.3259
-
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.5618  0.1028   5.4675  <.0001   0.3604  0.7632
-paid      -0.0017  0.0018  -0.9825  0.3259  -0.0052  0.0017
+intrcpt    0.5558  0.1003   5.5394  <.0001   0.3591  0.7524
+paid      -0.0013  0.0012  -1.0714  0.2840  -0.0036  0.0011
 ~~~
 
-Finally, as I've mentioned before, the difference in effect size between active and passive control groups is quite striking, and I noticed that the Redick et al 2012 experiment paid subjects a lot of money to put up with all its tests and ensure subject retention, so what happens if we look for an interaction?
+Finally, as I've mentioned before, the difference in effect size between active and passive control groups is quite striking, and I noticed that eg. the Redick et al 2012 experiment paid subjects a lot of money to put up with all its tests and ensure subject retention & Thompson et al 2013 paid a lot to put up with the fMRI machine and long training sessions, so what happens if we look for an interaction?
 
 ~~~{.R}
-Test of Moderators (coefficient(s) 2,3,4):
-QM(df = 3) = 6.7326, p-val = 0.0809
-
 Model Results:
 
                              estimate      se     zval    pval    ci.lb    ci.ub
-intrcpt                        0.7307  0.1256   5.8188  <.0001   0.4846   0.9768
-active                        -0.4810  0.2146  -2.2416  0.0250  -0.9016  -0.0604
-as.logical(paid)TRUE          -0.2722  0.2589  -1.0513  0.2931  -0.7796   0.2352
-active:as.logical(paid)TRUE    0.1054  0.4805   0.2193  0.8264  -0.8364   1.0472
+intrcpt                        0.7276  0.1212   6.0035  <.0001   0.4901   0.9652
+active                        -0.4791  0.2070  -2.3144  0.0206  -0.8848  -0.0734
+as.logical(paid)TRUE          -0.2303  0.2362  -0.9750  0.3296  -0.6933   0.2327
+active:as.logical(paid)TRUE   -0.0072  0.4136  -0.0175  0.9860  -0.8179   0.8034
 ~~~
 
-Active control groups cut the observed effect of n-back by more than half, as usual, and passive+payment shrinks the effect size by ~34%, but active+payment correlates with an increased effect by 16%.
+Active control groups cut the observed effect of n-back by more than half, as usual, and passive+payment shrinks the effect size by ~34%, but active+payment cuts to zero effect.
 
 Hence, I infer that the previous negative correlation is probably because all the passive experiments are also not paying (no need to pay controls if they're not doing anything besides showing up twice for testing, really), but the true impact of payment is, if anything, probably opposite of Jaeggi's suggestion.
 
@@ -1801,14 +1822,14 @@ Regression Test for Funnel Plot Asymmetry
 model:     mixed-effects meta-regression model
 predictor: standard error
 
-z = 2.7409, p = 0.0061
+test for funnel plot asymmetry: z = 2.7702, p = 0.0056
 ~~~
 
-Let's visualize it:
+The asymmetry has reached statistical-significance, so let's visualize it:
 
 ![`funnel(res1)`](/images/dnb/funnel.png)
 
-This looks reasonably good, although the studies are crowding the edges of the funnel. We know that the studies with active control groups show twice the effect-size of the passive control groups, is this related? If we plot the residual left after correcting for active vs passive, the funnel plot improves (Stephenson remains an outlier):
+This looks reasonably good, although we see that studies are crowding the edges of the funnel. We know that the studies with active control groups show twice the effect-size of the passive control groups, is this related? If we plot the residual left after correcting for active vs passive, the funnel plot improves a lot (Stephenson remains an outlier):
 
 ![Mixed-effects plot of standard error versus effect size after moderator correction.](/images/dnb/funnel-moderators.png)
 
@@ -1817,29 +1838,29 @@ This looks reasonably good, although the studies are crowding the edges of the f
 The trim-and-fill estimate:
 
 ~~~{.R}
-Estimated number of missing studies on the left side is zero.
+Estimated number of missing studies on the left side: 0
 
-Random-Effects Model (k = 43; tau^2 estimator: REML)
+Random-Effects Model (k = 45; tau^2 estimator: REML)
 
-tau^2 (estimate of total amount of heterogeneity): 0.2144 (SE = 0.0827)
-tau (sqrt of the estimate of total heterogeneity): 0.4630
-I^2 (% of total variability due to heterogeneity): 58.07%
-H^2 (total variability / sampling variability):    2.38
+tau^2 (estimated amount of total heterogeneity): 0.2062 (SE = 0.0789)
+tau (square root of estimated tau^2 value):      0.4541
+I^2 (total heterogeneity / total variability):   57.10%
+H^2 (total variability / sampling variability):  2.33
 
 Test for Heterogeneity:
-Q(df = 42) = 103.0485, p-val < .0001
+Q(df = 44) = 106.3486, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.5235   0.0947   5.5274   <.0001   0.3379   0.7092      ***
+  0.5119   0.0915   5.5959   <.0001   0.3326   0.6913
 ~~~
 
 Graphing it:
 
 ![`funnel(tf)`](/images/dnb/funnel-trimfill.png)
 
-Overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from serious publication bias.
+Overall, the results suggest that this particular (comprehensive) collection of DNB studies does not suffer from serious publication bias after taking in account the active/passive moderator.
 
 <!--
 TODO:
@@ -1878,16 +1899,6 @@ cat("Random-effects, regressing against training time:\n")
 rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
     mods = training)
 
-cat("*, regressing against payment amount:\n")
-rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
-    mods = ~ paid)
-cat("*, payment as a binary moderator:\n")
-rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
-    mods = ~ as.logical(paid))
-cat("*, checking for interaction with higher experiment quality:\n")
-rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
-    mods = ~ active * as.logical(paid))
-
 png(file="~/wiki/images/dnb/effectsizevstrainingtime.png", width = 580, height = 580)
 plot(dnb$training, res1$yi)
 invisible(dev.off())
@@ -1903,6 +1914,16 @@ invisible(dev.off())
 cat("Random-effects, regressing against kind of n-back training:\n")
 rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
                    data = dnb, mods=~factor(nbt)-1)
+
+cat("*, regressing against payment amount:\n")
+rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
+    mods = ~ paid)
+cat("*, payment as a binary moderator:\n")
+rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
+    mods = ~ as.logical(paid))
+cat("*, checking for interaction with higher experiment quality:\n")
+rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
+    mods = ~ active * as.logical(paid))
 
 cat("Publication bias checks using funnel plots:\n")
 regtest(res1, model = "rma", predictor = "sei", ni = NULL)
