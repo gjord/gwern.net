@@ -114,7 +114,7 @@ I personally want the data for a few distinct purposes, but in the best Quantifi
 
     - do n-backing just before sleep, and see whether percentages shift (more deep sleep as the brain grows/changes?) or whether one sleeps better (fewer awakenings, less light sleep).
     - do n-backing after waking up, to look for correlation between good/bad sleeps and performance (one would expect good sleep ~> good scores).
-    - test the costs of polyphasic sleep on memory^[My own suspicion is that given the existence of [neuron-level sleep in mice](http://www.cosmosmagazine.com/news/4264/can-we-be-awake-and-asleep-same-time), [poor self-monitoring in humans](http://www.nytimes.com/2011/04/17/magazine/mag-17Sleep-t.html), and [anecdotal reports](http://lesswrong.com/lw/5n0/optimizing_sleep/44zu) about polyphasic sleep, is that polyphasic sleep is a real & workable phenomenon but that it comes at the price of a significant chunk of mental performance.]
+    - test the costs of polyphasic sleep on memory^[My own suspicion is that given the existence of [neuron-level sleep in mice](http://www.cosmosmagazine.com/news/4264/can-we-be-awake-and-asleep-same-time), [poor self-monitoring in humans](http://www.nytimes.com/2011/04/17/magazine/mag-17Sleep-t.html), and [anecdotal reports](http://lesswrong.com/lw/5n0/optimizing_sleep/44zu) about polyphasic sleep, is that polyphasic sleep is a real & workable phenomenon but that it comes at the price of a large chunk of mental performance.]
 8. (positive) effect of [Seth Roberts](!Wikipedia)'s [one-legged standing](http://blog.sethroberts.net/2011/03/22/effect-of-one-legged-standing-on-sleep/) on sleep depth/efficiency
 10. possible sleep reductions due to meditation
 11. serial cable uses:
@@ -433,17 +433,17 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
            254.2174        233.2969
     ~~~
 
-[^Bonferroni]: The usual way to correct for the issue of multiple comparisons inflating results (a big problem in epidemiology and why their results are so often false) is to use a [Bonferroni correction](!Wikipedia) - if I look at the _p_-values for 7 Zeo metrics, I wouldn't consider any to be significant at '_p_=0.05' unless they were actually significant at $\frac{0.05}{7} = 0.00714 = 0.007$, which is even more stringent than the rarer '_p_=0.01' criterion. With the even stronger criterion '_p_=0.007', it's a safe bet than *none* of my tests give significant results. Which may be the right thing to conclude, since all my data is just _n_=1 and unreliable in many ways, but still, the Bonferroni correction is not being  very helpful here.
+[^Bonferroni]: The usual way to correct for the issue of multiple comparisons inflating results (a big problem in epidemiology and why their results are so often false) is to use a [Bonferroni correction](!Wikipedia) - if I look at the _p_-values for 7 Zeo metrics, I wouldn't consider any to be statistically-significant at '_p_=0.05' unless they were actually statistically-significant at $\frac{0.05}{7} = 0.00714 = 0.007$, which is even more stringent than the rarer '_p_=0.01' criterion. With the even stronger criterion '_p_=0.007', it's a safe bet than *none* of my tests give statistically-significant results. Which may be the right thing to conclude, since all my data is just _n_=1 and unreliable in many ways, but still, the Bonferroni correction is not being  very helpful here.
 
-    The caveat is that the Bonferroni correction is intended for use on 'independent' data, while the Zeo metrics are all very dependent, some by *definition* (eg. ZQ is defined partly as what the REM sleep length was, AFAIK). So while the Bonferroni correction will still do the job of only letting through *really* significant data, it'll do so by throwing out way more potentially good results than one has to. (It'll avoid some false positives by making many false negatives.) So what should we do?
+    The caveat is that the Bonferroni correction is intended for use on 'independent' data, while the Zeo metrics are all very dependent, some by *definition* (eg. ZQ is defined partly as what the REM sleep length was, AFAIK). So while the Bonferroni correction will still do the job of only letting through *really* statistically-significant data, it'll do so by throwing out way more potentially good results than one has to. (It'll avoid some false positives by making many false negatives.) So what should we do?
 
     [Andy McKenzie](http://lesswrong.com/lw/9ui/ask_for_help_on_your_project_open_thread/5ump#thingrow_t1_5ump) suggested limiting our [false discovery rate](!Wikipedia) by using the method of [Benjamin & Hochberg 1995](http://www.math.tau.ac.il/~ybenja/MyPapers/benjamini_hochberg1995.pdf "Controlling the False Discovery Rate: a Practical and Powerful Approach to Multiple Testing"):
 
     > ...let's say that you test 6 hypotheses, corresponding to different features of your Zeo data. You could use a t-test for each, as above. Then aggregate and sort all the _p_-values in ascending order. Let's say that they are 0.001, 0.013, 0.021, 0.030, 0.067, and 0.134.
     >
-    > Assume, arbitrarily, that you want the overall false discovery rate to be 0.05, which is in this context called the _q_-value. You would then sequentially test, from the last value to the first, whether the current _p_-value is less than $\frac{\text{the current index} \times \text{the false discovery rate}}{\text{the overall number of hypotheses}}$. You stop when you get to the first true inequality and call the _p_-values of the rest of the hypotheses significant.
+    > Assume, arbitrarily, that you want the overall false discovery rate to be 0.05, which is in this context called the _q_-value. You would then sequentially test, from the last value to the first, whether the current _p_-value is less than $\frac{\text{the current index} \times \text{the false discovery rate}}{\text{the overall number of hypotheses}}$. You stop when you get to the first true inequality and call the _p_-values of the rest of the hypotheses [statistically-]significant.
     >
-    > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called significant.
+    > So in this example, you would stop when you correctly call $0.030 \lt \frac{4 \times 0.05}{6}$, and only the hypotheses corresponding to the first four [smallest] _p_-values would be called [statistically-]significant.
 
 As expected, when using melatonin, total sleep and 'times awoken' were both reduced (_p_=0.083 & _p_=0.431); the total sleep fell by 12% (456 minutes to 402 minutes, [effect size](!Wikipedia) 0.37^[`(456.4783 -  407.5312) / sd(mydata$Total.Z, TRUE)` = 0.3723188]):
 
@@ -484,7 +484,7 @@ Deep sleep and 'time in wake' were both apparently unaffected (_p_=0.88 & _p_=0.
 
 ![](/images/zeo/melatonin-timedeep.png)
 
-Surprisingly, total REM sleep fell 20% (145 to 116 minutes), for a significant reduction (_p_=0.011):
+Surprisingly, total REM sleep fell 20% (145 to 116 minutes), for a large & statistically-significant reduction (_p_=0.011):
 
 ![](/images/zeo/melatonin-timerem.png)
 
@@ -854,10 +854,10 @@ To see what, if any existing research there was, I checked the 49 hits in [PubMe
     > ...The increased odds of high PSQI score for greater hemoglobin level and for high ESS score for use of vitamin D analogues were unexpected results for which we cannot speculate about the cause or association and that may simply be spurious findings arising from statistical analysis.
 [^America]: ["Relationships among dietary nutrients and subjective sleep, objective sleep, and napping in women"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819566/) (Grandner et al 2010):
 
-    > This study found a significant relationship between circadian phase of sleep and dietary Vitamin D intake. Later sleep acrophase, an indicator of sleep timing, was associated with more dietary Vitamin D. For most people, most Vitamin D is obtained through sunlight(44), though dietary Vitamin D is usually obtained through supplementation, usually in pills or in dairy products(44). It is currently unknown why those who consumed more Vitamin D would demonstrate a sleep phase delay, especially since in this same subject group, those exposed to more light had earlier circadian acrophases(45).
-[^Japan]: ["The midpoint of sleep is associated with dietary intake and dietary behavior among young Japanese women"](http://www.ncbi.nlm.nih.gov/pubmed/21296614) (Sato-Mito et al 2011):
+    > This study found a [statistically-]significant relationship between circadian phase of sleep and dietary Vitamin D intake. Later sleep acrophase, an indicator of sleep timing, was associated with more dietary Vitamin D. For most people, most Vitamin D is obtained through sunlight(44), though dietary Vitamin D is usually obtained through supplementation, usually in pills or in dairy products(44). It is currently unknown why those who consumed more Vitamin D would demonstrate a sleep phase delay, especially since in this same subject group, those exposed to more light had earlier circadian acrophases(45).
+[^Japan]: ["The midpoint of sleep is associated with dietary intake and dietary behavior among young Japanese women"](/docs/2011-sato-mito.pdf) (Sato-Mito et al 2011):
 
-    > Late midpoint of sleep was significantly negatively associated with the percentage of energy from protein and carbohydrates, and the energy-adjusted intake of cholesterol, potassium, calcium, magnesium, iron, zinc, vitamin A, vitamin D, thiamin, riboflavin, vitamin B(6), folate, rice, vegetables, pulses, eggs, and milk and milk products.
+    > Late midpoint of sleep was [statistically-]significantly negatively associated with the percentage of energy from protein and carbohydrates, and the energy-adjusted intake of cholesterol, potassium, calcium, magnesium, iron, zinc, vitamin A, vitamin D, thiamin, riboflavin, vitamin B(6), folate, rice, vegetables, pulses, eggs, and milk and milk products.
 
 In June 2012, after I finished my 2 experiments, a preprint appeared for _Medical Hypotheses_: ["The world epidemic of sleep disorders is linked to vitamin D deficiency"](/docs/2012-gominak.pdf), Gominak & Stumpf 2012; the lead author, unfortunately, had little to tell me when I emailed her, indicating that the use of vitamin D was not systematic or recorded:
 
@@ -891,7 +891,7 @@ Based on the first 10 days' ZQs, I predict I'll find in the final data set:
 
 Roberts theorizes that besides vitamin D damaging sleep, it could actively improve your sleep if taken in the morning. As it happens, in this setup, on 'placebo' days I do take vitamin D in the morning - so wouldn't one expect to see scores improve on the nights following a placebo night (a vitamin D morning), regardless of whether *that* night was vitamin D or placebo? A quick analysis of the first 24 nights showed the lagged nights to average a ZQ of 94.5. My monthly averages for October and November were 96, so there is no obvious improvement here.
 
-One thing I suspect but cannot confirm - since I do not have a heart rate monitor - is that ~10 minutes after taking the vitamin D pills, my heart rate increases. Not to any uncomfortable or worrisome degree, but when one expects one's heart rate to go down after going to bed, even a small increase in the opposite direction is noticeable. On the 12th, I finally got around to writing down this impression; then I searched online a bit and found that low vitamin D levels are associated with arrhythmia and other issues, but so are very high levels, and increased heart rates in the studies and anecdotes are associated with higher heart rates^[See the general remarks in [LiveStrong](http://www.livestrong.com/article/448585-vitamin-d-deficiency-heart-rate/), ["Vitamin D warning: Too much can harm your heart"](http://www.msnbc.msn.com/id/45325473/ns/health-diet_and_nutrition/t/vitamin-d-warning-too-much-can-harm-your-heart/), and the 2009 study ["Relation of serum 25-hydroxyvitamin D to heart rate and cardiac work (from the National Health and Nutrition Examination Surveys)"](http://www.ncbi.nlm.nih.gov/pubmed/20102903).]. I'm not worried about the heart rate, but I am concerned that this is defeating the double-blinding: if all I have to do is notice my heart rate (and lying swaddled in bed in complete silence, it would be hard for me *not* to), then I've unblinded myself *before* falling asleep. Other stimulants like caffeine or sulbutiamine might similarly increase my heart rate, but they'd obviously also interfere with sleep, so I can't create any 'active placebo' even if I wanted to start over. (One promising future gadget is the ["Basis" wristwatch](http://mybasis.com/) which measures, among other things, heart-rate; I look forward to the early reviews.)
+One thing I suspect but cannot confirm - since I do not have a heart rate monitor - is that ~10 minutes after taking the vitamin D pills, my heart rate increases. Not to any uncomfortable or worrisome degree, but when one expects one's heart rate to go down after going to bed, even a small increase in the opposite direction is noticeable. On the 12th, I finally got around to writing down this impression; then I searched online a bit and found that low vitamin D levels are associated with arrhythmia and other issues, but so are very high levels, and increased heart rates in the studies and anecdotes are associated with higher heart rates^[See the general remarks in [LiveStrong](http://www.livestrong.com/article/448585-vitamin-d-deficiency-heart-rate/), ["Vitamin D warning: Too much can harm your heart"](http://www.msnbc.msn.com/id/45325473/ns/health-diet_and_nutrition/t/vitamin-d-warning-too-much-can-harm-your-heart/), and the 2009 study ["Relation of serum 25-hydroxyvitamin D to heart rate and cardiac work (from the National Health and Nutrition Examination Surveys)"](/docs/2010-scragg.pdf "Scragg et al 2010").]. I'm not worried about the heart rate, but I am concerned that this is defeating the double-blinding: if all I have to do is notice my heart rate (and lying swaddled in bed in complete silence, it would be hard for me *not* to), then I've unblinded myself *before* falling asleep. Other stimulants like caffeine or sulbutiamine might similarly increase my heart rate, but they'd obviously also interfere with sleep, so I can't create any 'active placebo' even if I wanted to start over. (One promising future gadget is the ["Basis" wristwatch](http://mybasis.com/) which measures, among other things, heart-rate; I look forward to the early reviews.)
 
 ### Vitamin D data
 
@@ -1249,7 +1249,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 7. 'Morning Feel' decreased, 2.84 vs 2.32 (_p_=0.0053; _p_=0.0033)
 8. 'Time to Z' increased, 17.58m vs 20.74m (but _p_=0.51; _p_=0.25)^[This one really surprised me. I was convinced it was taking longer to get to sleep, which it was, but that the effect was consistent enough it'd reach at least _p_=0.1 or something.]
 
-So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get highly statistically significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{standard deviation}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
+So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on the other hand, we get statistically-significant changes in REM & Morning Feel (the latter even survives a multiple comparison correction[^d-multiple]), which look like they'd have pretty decent [effect sizes](!Wikipedia) too[^effect-size]. (I only calculated the effect size for ZQs: something like 0.58^[[Cohen's d](!Wikipedia) is the one I see most often; that's $\frac{\text{bigger mean} - \text{smaller mean}}{\text{standard deviation}}$; placebo had a bigger mean of 93.3684 and Vitamin D a smaller ZQ mean of 89.2609, and an online tool told me the standard-deviation of all the ZQs was 7.0198, so: $\frac{93.3684 - 89.2609}{7.0198} = 0.585$], which is medium-sized^[[Wikipedia](!Wikipedia "Effect_size#.22Small.22.2C_.22medium.22.2C_.22large.22"): "For Cohen's _d_ an effect size of 0.2 to 0.3 might be a 'small' effect, around 0.5 a 'medium' effect and 0.8 to infinity, a 'large' effect."].)
 
 [^d-multiple]: [Correcting for multiple comparisons](#fn7) at _q_-value=0.05, of our 8 pessimistic _p_-values (0.005276, 0.02205, 0.06163, 0.06904, 0.4015, 0.5084, 0.538, 0.7411), 1 survives:
 
@@ -1265,7 +1265,7 @@ So we see the Deep & Wakening & Time to Z changes are weak-to-irrelevant, but on
 
 Going back to my predictions after the first 10 days, they're *sort* of right:
 
-1. sleep latency was increased, but not statistically significantly and only by ~4m, which is less than half the predicted 10 minutes
+1. sleep latency was increased, but not statistically-significantly and only by ~4m, which is less than half the predicted 10 minutes
 2. increased awakenings was less than 1 additional awakening (compared to predicted 1-2) and didn't reach statistical significance
 3. ZQ did decrease, and by roughly 4.1 points (reached statistical significance), but that's a bit under the tentatively predicted range of 5-10 points
 
@@ -1393,7 +1393,7 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
 
 As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect size of 0.7.[^d-effect-size-morning]
 
-All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.) I have no idea how vitamin D could improve *only* my morning mood without affecting any of the other parameters. If it was improving my sleep in general with less awakenings or something, it should have shown up strongly on those parameters; or if vitamin D deficiency was causing depressive symptoms, it should have shown up in the overall Mood metric etc.
+All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most statistically-significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.) I have no idea how vitamin D could improve *only* my morning mood without affecting any of the other parameters. If it was improving my sleep in general with less awakenings or something, it should have shown up strongly on those parameters; or if vitamin D deficiency was causing depressive symptoms, it should have shown up in the overall Mood metric etc.
 
 If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning Feel', it looks like the effect on 'Morning Feel' is being driven by a greater quantity of '4' mornings, and not so much by a reduction in number of bad '2' mornings. (I also notices that when my car burned, my 'Mood' takes a clearly visible fall for a week, while my sleep looks like it was affected less - it seems that during that period, waking up was literally the best part of the day...)
 
@@ -2201,7 +2201,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     0.9875169 0.9891269
     ~~~
 
-    What? Using a treadmill made my average WPM go *up* 5 WPM? And my average accuracy increased 0.002%? And both are highly significant (not a surprise, given how many entries there were)? What's going on - this is the exact opposite of expected! The key is the low mean of the `before` data: I type much faster than 82 WPM now. What happened was that I spent 3 years practicing. Given that I was improving, it is wrong to compare the treadmill typing data against a long-run average. What would be better would be to lop off the first half of the `before` data to get a fairer comparison with `after`, since I began to plateau around then. Redoing the tests:
+    What? Using a treadmill made my average WPM go *up* 5 WPM? And my average accuracy increased 0.002%? And both are highly statistically-significant (not a surprise, given how many entries there were)? What's going on - this is the exact opposite of expected! The key is the low mean of the `before` data: I type much faster than 82 WPM now. What happened was that I spent 3 years practicing. Given that I was improving, it is wrong to compare the treadmill typing data against a long-run average. What would be better would be to lop off the first half of the `before` data to get a fairer comparison with `after`, since I began to plateau around then. Redoing the tests:
 
     ~~~{.R}
     t.test(before$WPM[1144:2285], after$WPM); t.test(before$Accuracy[1144:2285], after$Accuracy)
@@ -3480,19 +3480,25 @@ May 2013
 21: 1 0
 22: 0 0
 23: 1 0
-24: 1 1?
+24: 1 1
+25: 0 1
+26: 1 0
+27: 1 0
+28: 1 1
+29: 1 1
+30: 1 0?
 
 Underpopulated data cells:
-86: 1 1
-88: 1 0
-91: 0 1
+89: 1 1
+90: 1 0
+92: 0 1
 93: 0 0
 -->
 <!-- Alcohol log:
 May 2013
 03; 08; 10; 13; 16; 17; 18
 -->
-<!-- melatonin ran out; last day, 06 May 2013; used again on the 21st -->
+<!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th -->
 
 # External links
 
@@ -3650,13 +3656,11 @@ Given this weakening and in the absence of any corroborating information, I cons
 
 ## SDr lucid dreaming: exploratory data analysis
 
-<!-- TODO: update with https://docs.google.com/spreadsheet/ccc?key=0Ao3RpZe396VZdE5udDB0S1dqcFpPY0o2Sk5LVkNvX0E#gid=0   now has an additional 60+ datapoints -->
-
-In October 2012, an acquaintance offered me an extract from his free-form data on [lucid dreaming](!Wikipedia) which he had been compiling since 2004, to see what insights I could extract.
+In October 2012, an acquaintance offered me an extract from his free-form data on [lucid dreaming](!Wikipedia) which he had been compiling since 2004, to see what insights I could extract. In May 2013, I augmented it with [another 60 entries](https://docs.google.com/spreadsheet/ccc?key=0Ao3RpZe396VZdE5udDB0S1dqcFpPY0o2Sk5LVkNvX0E#gid=0)
 
 ### Data cleaning
 
-The text was a serious mess, and I put several hours into cleaning it up and organizing it into something [more sensible](/docs/2012-sdr-dream.txt). This wasn't enough, so I wrote an ugly Haskell program to parse it into a quasi-CSV file:
+The original text was a serious mess, and I put several hours into cleaning it up and organizing it into something [more sensible](/docs/2012-sdr-dream.txt). This wasn't enough, so I wrote an ugly Haskell program to parse it into a quasi-CSV file:
 
 ~~~{.Haskell}
 import Data.List (isInfixOf, isPrefixOf, intercalate)
@@ -3703,32 +3707,24 @@ convert xs = CSVEntry { sleepDate = safeHead $ filter (\x -> isInfixOf "." x || 
 This was usable. My next question was: since none of his routines were randomized and correlations were all that one could extract, what correlations *were* in his data?
 
 ~~~{.R}
-table <- read.csv("http://www.gwern.net/docs/2012-sdr-dream.csv")
+table <- read.csv("http://www.gwern.net/docs/2013-sdr-dream.csv")
 summary(table)
-      Sleep.Date     Total.Z       Wake.Time     Intensity
- 2011.10.02:  2   Min.   : 120          :216   Min.   :0.1000
- 2011.11.26:  2   1st Qu.: 480   16:00  :  3   1st Qu.:0.3000
- 2012.02.28:  2   Median : 600   11:00  :  2   Median :0.4000
- 2012.04.15:  2   Mean   : 621   01:30  :  1   Mean   :0.4417
- 2012.06.21:  2   3rd Qu.: 720   01:42  :  1   3rd Qu.:0.5000
- 2004.03.05:  1   Max.   :1320   02:25  :  1   Max.   :7.0000
- (Other)   :241   NA's   :7      (Other): 28   NA's   :18
-     Recall          Emotion         Interrupted        Melatonin
- Min.   :0.1000   Min.   :-0.5000   Min.   :0.00000   Min.   :0.00000
- 1st Qu.:0.2000   1st Qu.: 0.0000   1st Qu.:0.00000   1st Qu.:0.00000
- Median :0.3000   Median : 0.2000   Median :0.00000   Median :0.00000
- Mean   :0.3159   Mean   : 0.1781   Mean   :0.06746   Mean   :0.02381
- 3rd Qu.:0.4000   3rd Qu.: 0.4000   3rd Qu.:0.00000   3rd Qu.:0.00000
- Max.   :0.8000   Max.   : 0.7000   Max.   :1.00000   Max.   :1.00000
- NA's   :25       NA's   :220
-     Lucid
- Min.   :0.0000
- 1st Qu.:0.1000
- Median :0.2000
- Mean   :0.1889
- 3rd Qu.:0.2000
- Max.   :0.6000
- NA's   :243
+      Sleep.Date     Total.Z        Wake.Time     Intensity        Recall         Emotion
+ 2011.10.02:  2   Min.   : 120           :217   Min.   :0.10   Min.   :0.000   Min.   :-0.50
+ 2011.11.26:  2   1st Qu.: 480   16:00   :  3   1st Qu.:0.30   1st Qu.:0.200   1st Qu.: 0.00
+ 2012.02.28:  2   Median : 600   11:00   :  2   Median :0.40   Median :0.300   Median : 0.20
+ 2012.04.15:  2   Mean   : 613   13:23:00:  2   Mean   :0.44   Mean   :0.367   Mean   : 0.18
+ 2012.06.21:  2   3rd Qu.: 720   19:17:00:  2   3rd Qu.:0.50   3rd Qu.:0.500   3rd Qu.: 0.40
+ 2013.01.23:  2   Max.   :1320   4:55:00 :  2   Max.   :7.00   Max.   :1.000   Max.   : 0.70
+ (Other)   :316   NA's   :8      (Other) :100   NA's   :94     NA's   :26      NA's   :296
+  Interrupted     Melatonin          Lucid      Day.quality
+ Min.   :0.00   Min.   :0.0000   Min.   :0.0   Min.   :0.10
+ 1st Qu.:0.00   1st Qu.:0.0000   1st Qu.:0.1   1st Qu.:0.30
+ Median :0.00   Median :0.0000   Median :0.2   Median :0.40
+ Mean   :0.07   Mean   :0.0762   Mean   :0.2   Mean   :0.42
+ 3rd Qu.:0.00   3rd Qu.:0.0000   3rd Qu.:0.2   3rd Qu.:0.52
+ Max.   :1.00   Max.   :1.0000   Max.   :0.6   Max.   :0.70
+ NA's   :76                      NA's   :319   NA's   :312
 
 # These 2 date fields haven't been turned into anything useful, so we'll just delete them:
 table$Wake.Time <- NULL; table$Sleep.Date <- NULL
@@ -3737,26 +3733,28 @@ table$Wake.Time <- NULL; table$Sleep.Date <- NULL
 # Table cleaned up heavily by hand from default R output:
 # deleted duplicates, censored any correlation -0.1<x<0.1 etc.
 cor(table,use="pairwise.complete.obs")
-            Total.Z        Intensity    Recall       Emotion    Interrupted     Melatonin      Lucid
-Total.Z                                                                         -0.124        -0.439
-Intensity                               0.356        0.375                                     0.798
-Recall                                               0.164      -0.165                        -0.158
-Emotion                                                          0.284          -0.148
-Interrupted                                                                                    0.911
+             Recall  Emotion Interrupted Melatonin  Lucid  Day.quality
+Total.Z                                    -0.12    -0.43  0.56
+Intensity    0.35     0.37                           0.79
+Recall                0.16      -0.16       0.14    -0.15
+Emotion                          0.28      -0.14
+Interrupted                                          0.91
+Melatonin                                                  0.25
 ~~~
 
-Much of the data is too impoverished to draw any suggestions from; the 'Melatonin' and 'Lucid' correlations can be disregarded entirely until they are at least 4x larger. The remaining correlations are:
+Much of the data is too impoverished to draw any suggestions from. The remaining correlations are:
 
-- 'Intensity'/'Recall': _r_=0.356
+- 'Intensity'/'Recall': _r_=0.35
 
     The causality is likely 'Intensity'->'Recall'; either one is probably impossible to experimentally manipulate.
-- 'Intensity'/'Emotion': _r_=0.375
+- 'Intensity'/'Emotion': _r_=0.37
 
     Causality could go either way or to a third factor; 'Emotion' *might* be manipulable by intending to dream of disturbing topics, but might not.
-- 'Interrupted'/'Recall': _r_=-0.165
-- 'Interrupted'/'Emotion': _r_=0.284
+- 'Interrupted'/'Recall': _r_=-0.16
+- 'Interrupted'/'Emotion': _r_=0.28
 
     'Interruption' is experimentally manipulable by eg. an alarm clock or roommate. 'Recall' might be improved by some change in journaling, for example doing at your bed instead of waiting until you're on your computer. The positive correlation with 'Emotion' suggests that, per the [WILD](http://lucid.wikia.com/wiki/Wake_Initiated_Lucid_Dream) methodology of lucid dreaming (see [LaBerge](!Wikipedia "Stephen LaBerge") & [Rheingold](!Wikipedia "Howard Rheingold"), [_Exploring the World of Lucid Dreaming_](http://www.amazon.com/Exploring-World-Dreaming-Stephen-LaBerge/dp/034537410X/)), a temporary awakening does increase the chance of a lucid dream (laden with emotion).
+- 'Melatonin' interestingly correlates with both day quality and with reduced sleep; this is interesting because `Total.Z` increasing also increased `Day.quality` so it's not clear how melatonin could do both at the same time if more sleep is otherwise better. The correlations may be statistically-significant but the data is too wretched and the melatonin/day-quality variables too few to say anything further.
 
 (One observation that came to mind working on cleaning the data was that collection was very sparse, sporadic, and accidental-looking.)
 
@@ -4135,3 +4133,9 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 22 May 2013: on -->
 <!-- Redshift: 23 May 2013: on -->
 <!-- Redshift: 24 May 2013: on -->
+<!-- Redshift: 25 May 2013: on -->
+<!-- Redshift: 26 May 2013: off -->
+<!-- Redshift: 27 May 2013: off -->
+<!-- Redshift: 28 May 2013: on -->
+<!-- Redshift: 29 May 2013: off -->
+<!-- Redshift: 30 May 2013: off -->
