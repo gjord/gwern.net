@@ -15,8 +15,9 @@ div#content div#TOC { display: none; }
 
 /* Hide donation requests */
 div#paypal, div#bitcoin, div#flattr { display: none; }
+
 /* Hide metadata which is not interesting for index.page */
-div#page-created, div#tags, div#version, div#epistemological-status { display: none; }
+div#metadata { display: none; }
 
 /* Get as many columns on the page as possible;
 this overrides the A/B-tested narrower max-width for content pages */
@@ -77,7 +78,7 @@ li p { margin: 0em; }
 
 # Practical
 
-- [Dual N-Back FAQ](DNB FAQ "A compendium of DNB, WM, IQ information")
+- [Dual N-Back FAQ](DNB FAQ "A compendium of working memory & IQ information") ([meta-analysis](DNB meta-analysis "Does DNB increase IQ? What factors affect the studies?"))
 - [Melatonin](Melatonin "Melatonin improves sleep, & sleep is valuable")
 - [Modafinil](Modafinil "Pros, cons, prices, sources, and ordering strategies")
 - [Spaced Repetition & Learning](Spaced repetition "Efficient memorization (using Mnemosyne) & what it's good for.")
