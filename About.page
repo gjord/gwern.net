@@ -154,7 +154,7 @@ Besides that, I think after a while writing/research can be a virtuous circle or
 
 - I learn more tools
 
-    eg. I learned basic [meta-analysis](!Wikipedia) in R to answer the burning question of what all the positive & negative n-back studies [summed to](DNB FAQ#meta-analysis), but then I was able to use it for [iodine](Iodine#meta-analysis); I learned linear models for [analyzing _MoR_ reviews](hpmor#analysis) but now I can use them anywhere I want to, like in my [Touhou material](Touhou)
+    eg. I learned basic [meta-analysis](!Wikipedia) in R to answer the burning question of what all the positive & negative [n-back studies](DNB FAQ) [summed to](DNB meta-analysis), but then I was able to use it for [iodine](Iodine#meta-analysis); I learned linear models for [analyzing _MoR_ reviews](hpmor#analysis) but now I can use them anywhere I want to, like in my [Touhou material](Touhou)
 - I internalize a habit of noticing interesting questions that flit across my brain
 
     eg. in March 2013 while meditating: "I wonder if more doujin music gets released when unemployment goes up and people may have more spare time or fail to find jobs? Hey! That giant Touhou music torrent I downloaded, with its 45000 songs all tagged with release year, could probably answer that!" (One could argue that these questions probably *should* be ignored and not investigated in depth - Teller again - but nevertheless, this is how things work for me.)
@@ -254,42 +254,7 @@ And the following should *rarely* show up in the final rendered HTML:
     "$tags$"
     "$category$"
 
-Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](/haskell/markdown-length-checker), and one for a bad habit of mine - [too-long footnotes](/haskell/markdown-footnote-length). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options):
-
-~~~{.Bash}
-function markdown-lint () {
-    for PAGE in "$@"
-    do
-        if [[ $PAGE == *.page ]]; then
-
-            # warn if not text, perhaps due to bad copy-paste
-            cat "$PAGE" | file - | grep -v "text";
-
-            # find bad URLS, unacceptable domains, malformed syntax, unmatched apostrophes, illegitimate statistics
-            fgrep -e "http://dl.dropbox" -e "http://news.ycombinator.com" -e "http://www.coursera.org" \
-                  -e ".wiley.com/" -e "http://www.ncbi.nlm.nih.gov/pubmed/" \
-                  -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
-                  -e '~~~{.sh}' -e ' significant ' -e ' significantly ' "$PAGE";
-            grep --only-matching '^\[\^.*\]: ' "$PAGE" | sort | uniq --count | \
-                   fgrep --invert-match "      1 [^";
-
-            # image hotlinking deprecated; impolite, and slows page loads & site compiles
-            egrep --only-matching '\!\[.*\]\(http://.*\)' "$PAGE";
-
-            markdown-length-checker "$PAGE";
-            markdown-footnote-length "$PAGE";
-
-            local HTML=`cat "$PAGE" | tail -n +3 | pandoc --mathml --standalone -`
-            echo $HTML | fgrep -e "<""del"">";
-            echo $HTML | elinks -dump --force-html \
-                       | fgrep -e '\frac' -e '\times' -e '(http' -e ')http' -e '[http' -e ']http'  \
-                               -e ' _ ' -e '[^' -e '^]' -e '<!--' -e '-->' -e '<-- ' -e '<—' -e '—>' \
-                               -e '$title$' -e '<del>' \
-                               -e '$description$' -e '$author$' -e '$tags$' -e '$category$' \
-                -e '(!Wikipedia' -e '(!Hoogle'; # ))
-        fi
-    done }
-~~~
+Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](/haskell/markdown-length-checker), and one for a bad habit of mine - [too-long footnotes](/haskell/markdown-footnote-length). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options). The shell script can be found at [`markdown-lint.sh`](markdown-lint.sh).
 
 # Technical aspects
 ## Popularity
@@ -526,7 +491,6 @@ There's a very clear resemblance for everything but the digit '2', which then bl
     find ~/wiki/ -type f -name "*.page" -exec cat "{}" \; | runhaskell ~/number.hs |
      sort | tr -d ',' | tr -d '.' | cut -c 1 | sed -e 's/0$//' -e '/^$/d' > ~/number.txt
     ~~~
-
 [^Benford-R]: Graph then test:
 
     ~~~{.R}
