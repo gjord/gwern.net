@@ -49,7 +49,7 @@ belief: possible
 
 CSS-3 property: set how wide the page will be in pixels if unlimited screen real estate is available. I noticed some people complained that pages were 'too wide' and this made it hard to read, which apparently is a real thing since lines are supposed to fit in eye saccades. So I tossed in 800px, 900px, 1300px, and 1400px to the first A/B test.
 
-~~{.Html}
+~~~{.Html}
 <!-- Google Website Optimizer Control Script -->
 <script>
 function utmx_section(){}function utmx(){}
@@ -102,7 +102,7 @@ The results were initially very promising: 'conversion' was defined as staying o
 
 The second distressing thing was that Google's estimated chance of a particular intervention beating the default (which I believe is a Bonferroni-corrected _p_-value), did not increase! Even as each version received 20,000 hits, the chance stubbornly bounced around the 70-90% range for 900px and 1300px. This remained true all the way to the bitter end. At the end, each version had racked up 93,000 hits *and still was in the 80% decile*. Wow.
 
-Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf and http://www.exp-platform.com/Documents/controlledExperimentDMKD.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain).
+Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf and http://www.exp-platform.com/Documents/controlledExperimentDMKD.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain). And it's a general phenomenon that even for large correlations, the trend will bounce around a lot before it stabilizes ([Schönbrodt & Perugini 2013](http://www.psy.lmu.de/allg2/download/schoenbrodt/pub/stable_correlations.pdf "At what sample size do correlations stabilize?")).
 
 Oy vey! When I discovered Google had deleted my results, I decided to simply switch to 900px. Running a new test would not provide any better answers.
 
@@ -141,12 +141,6 @@ body { font:1em/1.625em "lucida grande","lucida sans unicode", sans-serif; backg
 how about a blue background?
 see http://www.overcomingbias.com/2010/06/near-far-summary.html for more design ideas
 
-4. max-widths
-
-~~~{.Css}
-body { max-width: 1400px;} /* important to test all max-width values!! */*
-~~~
-
 5. table striping
 
 ~~~{.Css}
@@ -179,7 +173,11 @@ In March 2013, I decided to give A/B testing another whack. Google Analytics Exp
 
 ## `max-width` redux
 
-The obvious test case is to rerun the `max-width` test, and this time get the data. The exact changes:
+The obvious test case is to rerun the `max-width` test, and this time get the data.
+
+### Implementation
+
+The exact changes:
 
 ~~~{.Diff}
 Sun Mar 17 11:25:39 EDT 2013  gwern@gwern.net
@@ -236,6 +234,7 @@ Sun Mar 17 11:25:39 EDT 2013  gwern@gwern.net
     +
 ~~~
 
+### Results
 
 I wound up the test on 17 April 2013 with the following results:
 
@@ -249,7 +248,11 @@ Width (px) Visits Conversion
 1400       18,378 13.68%
            109772 14.03%
 
-1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58) but I want to move on to the next test and by the same logic it is highly unlikely that the difference between them is large or much in 1300px's favor (the kind of mistake I care about: switching between 2 equivalent choices doesn't matter, missing out on an improvement *does* matter - maximizing β, not minimizing α).
+### Analysis
+
+1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58), and we might want more data.
+
+But I want to move on to the next test and by the same logic it is highly unlikely that the difference between them is large or much in 1300px's favor (the kind of mistake I care about: switching between 2 equivalent choices doesn't matter, missing out on an improvement *does* matter - maximizing β, not minimizing α).
 
 ## Fonts
 
@@ -322,4 +325,67 @@ hunk ./static/templates/default.html 121
 
 ### Results
 
-TODO: ping with results http://lesswrong.com/r/discussion/lw/h3w/open_thread_april_115_2013/8our?context=1#8our
+Running from 14 April 2013 to 16 June 2013:
+
+Font         Type   Visits  Conversion
+----------   ------ ------- ----------
+Trebuchet    sans   35,473  13.81%
+Baskerville  serif  36,021  13.73%
+Helvetica    sans   35,656  13.43%
+Georgia      serif  35,833  13.31%
+             sans   71,129  13.62%
+             serif  71,854  13.52%
+                    142,983 13.57%
+
+The sample size for each font is 20k higher than I projected due to the enormous popularity of [an analysis of the lifetimes of Google services](Google shutdowns) I finished during the test. Regardless, it's clear that the results - with double the total sample size of the NYT experiment - are disappointing and there seems to be very little difference between fonts.
+
+### Analysis
+
+Picking the most extreme difference, between Trebuchet and Georgia, the difference is close to the usual definition of statistical-significance:
+
+~~~{.R}
+R> prop.test(c(0.1381*35473,0.1331*35833),c(35473,35833))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(0.1381 * 35473, 0.1331 * 35833) out of c(35473, 35833)
+X-squared = 3.76, df = 1, p-value = 0.0525
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -5.394e-05  1.005e-02
+sample estimates:
+prop 1 prop 2
+0.1381 0.1331
+~~~
+
+Which naturally implies that the much smaller difference between Trebuchet and Baskerville is not statistically-significant:
+
+~~~{.R}
+R> prop.test(c(0.1381*35473,0.1373*36021), c(35473,36021))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(0.1381 * 35473, 0.1373 * 36021) out of c(35473, 36021)
+X-squared = 0.0897, df = 1, p-value = 0.7645
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.00428  0.00588
+~~~
+
+Since there's only small differences between individual fonts, I wondered if there might be a difference between the two sans-serifs and the two serifs. If we lump the 4 fonts into those 2 categories and look at the small difference in mean conversion rate:
+
+~~~{.R}
+R> prop.test(c(0.1362*71129,0.1352*71854), c(71129,71854))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(0.1362 * 71129, 0.1352 * 71854) out of c(71129, 71854)
+X-squared = 0.2963, df = 1, p-value = 0.5862
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.002564  0.004564
+~~~
+
+Nothing doing there either.
+
+With essentially no meaningful differences between conversion rates, this suggests that however fonts matter, they don't matter for reading duration. So I feel free to pick the font that appeals to me visually, which is Baskerville.
