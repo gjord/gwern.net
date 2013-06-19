@@ -13,8 +13,8 @@ do
 
         # find bad URLS, unacceptable domains, malformed syntax, unmatched apostrophes, illegitimate statistics
         fgp -e "http://dl.dropbox" -e "http://news.ycombinator.com" -e "http://www.coursera.org" \
-              -e ".wiley.com/" -e "http://www.ncbi.nlm.nih.gov/pubmed/" -e "www.tandfonline.com/doi/abs/" \
-                 "$PAGE";
+            -e ".wiley.com/" -e "http://www.ncbi.nlm.nih.gov/pubmed/" -e "www.tandfonline.com/doi/abs/" \
+            -e "jstor.org"   "$PAGE";
         egp -e "http://www.pnas.org/content/.*/.*/.*.abstract" "$PAGE";
         fgp -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
               -e '~~~{.sh}' -e ' significant ' -e ' significantly ' "$PAGE";
