@@ -52,60 +52,6 @@ The candidate studies:
 - Heinzel et al 2013
 - Smith et al 2013
 
-## Notes
-
-Going through them, I must note:
-
-- Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated, and I used his approach in estimating values for each training group. IQ test time is based on the description in Redick et al 2012:
-
-    > In addition, the 19-session groups were 20 min to complete BOMAT, whereas the 12- and 17-session groups received only 10 min (S. M. Jaeggi, personal communication, May 25, 2011). As shown in Figure 2, the use of the short time limit in the 12- and 17-session studies produced substantially lower scores than the 19-session study.
-- polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
-- Jaeggi 2010: used BOMAT scores; should I somehow pool RAPM with BOMAT? Control group split.
-- Jaeggi 2011: used SPM (a Raven's); should I somehow pool the TONI?
-- Schweizer 2011: used the adjusted final scores as suggested by the authors due to potential pre-existing differences in their control & experimental groups:
-
-    > ...This raises the possibility that the relative gains in Gf in the training versus control groups may be to some extent an artefact of baseline differences. However, the interactive effect of transfer as a function of group remained [statistically-]significant even after more closely matching the training and control groups for pre-training RPM scores (by removing the highest scoring controls) F(1, 30) = 3.66, P = 0.032, gp2 = 0.10. The adjusted means (standard deviations) for the control and training groups were now 27.20 (1.93), 26.63 (2.60) at pre-training (t(43) = 1.29, P.0.05) and 26.50 (4.50), 27.07 (2.16) at post-training, respectively.
-- Stephenson data from pg79/95; means are post-scores on Raven's. I am omitting Stephenson scores on WASI, Cattell's Culture Fair Test, & BETA III Matrix Reasoning subset because `metafor` does not support multivariate meta-analyses and including them as separate studies would be statistically illegitimate. The active and passive control groups were split into thirds over each of the 3 n-back training regimens, and each training regimen split in half over the active & passive controls.
-
-    The splitting is worth discussion. Some of these studies have multiple experimental groups, control groups, or both. A criticism of early studies was the use of no-contact control groups - the control groups did nothing except be tested twice, and it was suggested that the experimental group gains might be in part solely because they are doing a task, any task, and the control group should be doing some non-WM task as well. The WM meta-analysis Melby-Lervåg & Hulme 2013 checked for this and found that use of no-contact control groups led to a much larger estimate of effect size than studies which did use an active control. When trying to incorporate such a multi-part experiment, one cannot just copy controls as the [Cochrane Handbook](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_16/16_5_4_how_to_include_multiple_groups_from_one_study.htm "16.5.4  How to include multiple groups from one study") points out:
-
-    > One approach that must be avoided is simply to enter several comparisons into the meta-analysis when these have one or more intervention groups in common. This 'double-counts' the participants in the 'shared' intervention group(s), and creates a unit-of-analysis error due to the unaddressed correlation between the estimated intervention effects from multiple comparisons (see Chapter 9, Section 9.3).
-
-    Just dropping one control or experimental group weakens the meta-analysis, and may bias it as well if not done systematically. I have used one of its suggested approaches which accepts some additional error in exchange for greater power in checking this possible active versus no-contact distinction, in which we instead *split* the shared group:
-
-    > A further possibility is to include each pair-wise comparison separately, but with shared intervention groups divided out approximately evenly among the comparisons. For example, if a trial compares 121 patients receiving acupuncture with 124 patients receiving sham acupuncture and 117 patients receiving no acupuncture, then two comparisons (of, say, 61 'acupuncture' against 124 'sham acupuncture', and of 60 'acupuncture' against 117 'no intervention') might be entered into the meta-analysis. For dichotomous outcomes, both the number of events and the total number of patients would be divided up. For continuous outcomes, only the total number of participants would be divided up and the means and standard deviations left unchanged. This method only partially overcomes the unit-of-analysis error (because the resulting comparisons remain correlated) so is not generally recommended. A potential advantage of this approach, however, would be that approximate investigations of heterogeneity across intervention arms are possible (for example, in the case of the example here, the difference between using sham acupuncture and no intervention as a control group).
-- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; I split each experimental group in half to pair it up with the active and passive control groups which trained the same number of days
-- Jaeggi 2011 Psychonomics poster (`Jaeggi4`): as-yet unpublished study; poster with table of scores provided in personal communication, used scores on the RAPM (not Cattell's CFT, BOMAT, or the BOMAT followup); 2 experimental groups (one was single audio n-back, the other dual n-back), one control group split <!-- docs/2011-jaeggi-poster.pdf -->
-- [Takeuchi et al 2012](/docs/2012-takeuchi.pdf "Effects of working memory training on functional connectivity and cerebral blood flow during rest"): subjects were trained on 3 WM tasks in addition to DNB for 27 days, 30-60 minutes; RAPM scores used, BOMAT & Tanaka B-type intelligence test scores omitted
-- Jaušovec 2012: IQ test time was calculated based on the description
-
-    > Used were 50 test items - 25 easy (Advanced Progressive Matrices Set I - 12 items and the B Set of the Colored Progressive Matrices), and 25 difficult items (Advanced Progressive Matrices Set II, items 12-36). Participants saw a figural matrix with the lower right entry missing. They had to determine which of the four options fitted into the missing space. The tasks were presented on a computer screen (positioned about 80-100 cm in front of the respondent), at fixed 10 or 14 s interstimulus intervals. They were exposed for 6 s (easy) or 10 s (difficult) following a 2-s interval, when a cross was presented. During this time the participants were instructed to press a button on a response pad (1-4) which indicated their answer.
-
-    $\frac{25 \times (6+2) + 25 \times (10+2)}{60} = 8.33$ minutes.
-- Zhong 2011: "dual attention channel" task omitted, dual and single n-back scores kept unpooled and controls split across the 2; I thank Emile Kroger for his translations of key parts of the thesis. Unable to get whether IQ test was administered speeded. Zhong 2011 appears to have replicated Jaeggi 2008's training time.
-- Jonasson 2011 omitted for lacking any measure of IQ
-- Preece 2011 omitted; only the Figure Weights subtest from the WAIS was reported, but RAPM scores were taken and published in the inaccessible Palmer 2011
-- Kundu et al 2011 and Kundu 2012 have been split into 2 experiments based on the raw data: the smaller one using the full RAPM 36-matrix 40-minute test, and the larger an 18-matrix 10-minute test
-- Redick et al: n-back split over passive control & active control (visual search) RAPM post scores (omitted SPM and Cattell Culture-Fair Test)
-- Vartanian 2013: short n-back intervention not adaptive; I did not specify in advance that the n-back interventions had to be adaptive (possibly some of the others were not) and subjects trained for <50 minutes, so the lack of adaptiveness may not have mattered.
-- Heinzel et al 2013 mentions conducting a pilot study; I contacted Heinzel and no measures like Raven's were taken in it. The main study used both SPM and also "the Figural Relations subtest of a German intelligence test (LPS)"; as usual, I drop alternatives in favor of the more common test.
-- Thompson et al 2013; used RAPM rather than WAIS; treated the "multiple object tracking"/MOT as an active control group since it did not statistically-significantly improve RAPM scores
-- Smith et al 2013; 4 groups. Consistent with all the other studies, I have ignored the post-post-tests (a 4-week followup). To deal with the 4 groups, I have combined the _Brain Age_ & strategy game groups into a single active control group, and then split the dual n-back group in half over the original passive control group and the new active control group.
-
-<!-- Smith et al 2013, active control group pooling:
-
-strategy game=10 12(2.45)
-_Brain Age_=10 12.3(3.02)
-
-pooling:
-mean = ((10*12) + (10*12.3)) / (10+10) = 12.15
-standard deviation = ((10-1)*2.45 + (10-1)*3.02) / (10+10 - 2) = 2.735
--->
-
-The following authors had their studies omitted and have been contacted for clarification:
-
-- Seidler, Jaeggi et al 2010 (experimental: _n_=47; control: _n_=45) did not report means or standard deviations
-
 The `active` moderator variable is whether a control group was no-contact or trained on some other task. The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact control groups limited the validity of such studies, a criticism that was echoed with greater force by Shipstead, Redick, & Engle 2012; the Melby-Lervåg & Hulme 2013 meta-analysis then confirmed that use of no-contact controls inflated the effect size estimates. So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2013, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.)
 
 Other variables:
@@ -145,7 +91,7 @@ Kundu2: ditto previous
 Salminen: 14 days, resulting in a stimulus presentation rate of 3 s...Altogether, 20 runs were completed in each session, and one run consisted of 20 + n trials (e.g., a 2-back task contained 22 trials). ...final mean DNB level was 3.63 from a start of 2
 so: ((((((2+3.63)/2 + 20) * 3) / 60) * 20) * 14) = 319
 Redick 2012: Subjects in the two training groups completed an additional 20 practice sessions, each of which took between 30-40 min
-Takeuchi: 'The WMT program consisted of computerized, in-house developed Borland Cþþ programs comprising four computerized tasks. Subjects undertook approximately 4 weeks (27 days) of training (each day, 20e60 min in most cases).'; DNB was 1 task, so 27 * (((20+60)/2)/4)=270
+Takeuchi: 'The WMT program consisted of computerized, in-house developed Borland C++ programs comprising four computerized tasks. Subjects undertook approximately 4 weeks (27 days) of training (each day, 20e60 min in most cases).'; DNB was 1 task, so 27 * (((20+60)/2)/4)=270
 -->
 <!-- Jaeggi 2008: extract by counting pixels! Training gain:
 
@@ -271,7 +217,7 @@ To depict the random-effects model in a more graphic form, we use the "[forest p
 
 The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. The high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect, so we use a random-effects.
 
-The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal iodine or iron), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. This skeptical attitude is relevant to our examination of moderators.
+The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal [iodine](Iodine) or iron supplementation), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. (For further reading, see [the statistics/methodology discussion in the DNB FAQ](DNB FAQ#flaws-in-mainstream-science-and-psychology).) This skeptical attitude is relevant to our examination of moderators.
 
 ## Moderators
 ### Control groups
@@ -469,7 +415,7 @@ control
 
 N-back has been presented in some popular & academic medias in an entirely uncritical & positive light: ignoring the overwhelming failure of intelligence interventions in the past, not citing the failures to replicate, and giving short schrift to the criticisms which have been made. (Examples include the [_NYT_](http://www.nytimes.com/2008/04/29/health/research/29brai.html), [_WSJ_](http://online.wsj.com/article/SB10001424052702304432304576371462612272884.html), [_Scientific American_](https://docs.google.com/file/d/0B-bpmBygrg8LUTJvazhzOFYwQUk/edit), & [Nisbett et al 2012](http://scottbarrykaufman.com/wp-content/uploads/2012/01/Nisbett-et-al.-2012.pdf "Intelligence: New Findings and Theoretical Developments").) One researcher told me that a reviewer savaged their work, asserting that n-back works and thus their null result meant only that they did something wrong. So it's worth investigating, to the extent we can, whether there is a [publication bias](!Wikipedia) towards publishing only positive results.
 
-20+ groups (some from quite small studies) is considered medium for a meta-analysis but it does permit us to generate [funnel plots](!Wikipedia "Funnel plot") , or check for possible publication bias via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000").
+20+ studies (some quite small) is considered medium-sized for a meta-analysis, but that many does permit us to generate [funnel plots](!Wikipedia "Funnel plot") , or check for possible publication bias via the [trim-and-fill method](/docs/2000-duval.pdf "'Trim and fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis', Duval & Tweedie 2000").
 
 ### Funnel plot
 
@@ -525,6 +471,60 @@ TODO:
 2. do some form of [sensitivity analysis](!Wikipedia) for study selection - remove or include the most questionable studies? Polar, perhaps
 3. ping Kenny Hicks for meta-analysis review once Stephenson and Seidler are in
 -->
+
+## Notes
+
+Going through them, I must note:
+
+- Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated, and I used his approach in estimating values for each training group. IQ test time is based on the description in Redick et al 2012:
+
+    > In addition, the 19-session groups were 20 min to complete BOMAT, whereas the 12- and 17-session groups received only 10 min (S. M. Jaeggi, personal communication, May 25, 2011). As shown in Figure 2, the use of the short time limit in the 12- and 17-session studies produced substantially lower scores than the 19-session study.
+- polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
+- Jaeggi 2010: used BOMAT scores; should I somehow pool RAPM with BOMAT? Control group split.
+- Jaeggi 2011: used SPM (a Raven's); should I somehow pool the TONI?
+- Schweizer 2011: used the adjusted final scores as suggested by the authors due to potential pre-existing differences in their control & experimental groups:
+
+    > ...This raises the possibility that the relative gains in Gf in the training versus control groups may be to some extent an artefact of baseline differences. However, the interactive effect of transfer as a function of group remained [statistically-]significant even after more closely matching the training and control groups for pre-training RPM scores (by removing the highest scoring controls) F(1, 30) = 3.66, P = 0.032, gp2 = 0.10. The adjusted means (standard deviations) for the control and training groups were now 27.20 (1.93), 26.63 (2.60) at pre-training (t(43) = 1.29, P.0.05) and 26.50 (4.50), 27.07 (2.16) at post-training, respectively.
+- Stephenson data from pg79/95; means are post-scores on Raven's. I am omitting Stephenson scores on WASI, Cattell's Culture Fair Test, & BETA III Matrix Reasoning subset because `metafor` does not support multivariate meta-analyses and including them as separate studies would be statistically illegitimate. The active and passive control groups were split into thirds over each of the 3 n-back training regimens, and each training regimen split in half over the active & passive controls.
+
+    The splitting is worth discussion. Some of these studies have multiple experimental groups, control groups, or both. A criticism of early studies was the use of no-contact control groups - the control groups did nothing except be tested twice, and it was suggested that the experimental group gains might be in part solely because they are doing a task, any task, and the control group should be doing some non-WM task as well. The WM meta-analysis Melby-Lervåg & Hulme 2013 checked for this and found that use of no-contact control groups led to a much larger estimate of effect size than studies which did use an active control. When trying to incorporate such a multi-part experiment, one cannot just copy controls as the [Cochrane Handbook](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_16/16_5_4_how_to_include_multiple_groups_from_one_study.htm "16.5.4  How to include multiple groups from one study") points out:
+
+    > One approach that must be avoided is simply to enter several comparisons into the meta-analysis when these have one or more intervention groups in common. This 'double-counts' the participants in the 'shared' intervention group(s), and creates a unit-of-analysis error due to the unaddressed correlation between the estimated intervention effects from multiple comparisons (see Chapter 9, Section 9.3).
+
+    Just dropping one control or experimental group weakens the meta-analysis, and may bias it as well if not done systematically. I have used one of its suggested approaches which accepts some additional error in exchange for greater power in checking this possible active versus no-contact distinction, in which we instead *split* the shared group:
+
+    > A further possibility is to include each pair-wise comparison separately, but with shared intervention groups divided out approximately evenly among the comparisons. For example, if a trial compares 121 patients receiving acupuncture with 124 patients receiving sham acupuncture and 117 patients receiving no acupuncture, then two comparisons (of, say, 61 'acupuncture' against 124 'sham acupuncture', and of 60 'acupuncture' against 117 'no intervention') might be entered into the meta-analysis. For dichotomous outcomes, both the number of events and the total number of patients would be divided up. For continuous outcomes, only the total number of participants would be divided up and the means and standard deviations left unchanged. This method only partially overcomes the unit-of-analysis error (because the resulting comparisons remain correlated) so is not generally recommended. A potential advantage of this approach, however, would be that approximate investigations of heterogeneity across intervention arms are possible (for example, in the case of the example here, the difference between using sham acupuncture and no intervention as a control group).
+- Chooi: [the relevant table](/docs/2010-chooi-table.pdf) was provided in private communication; I split each experimental group in half to pair it up with the active and passive control groups which trained the same number of days
+- [Jaeggi 2011 Psychonomics poster](/docs/2011-jaeggi-poster.pdf "Working Memory Training and Transfer to Gf: Evidence for Domain Specificity?") (`Jaeggi4`): as-yet unpublished study; poster with table of scores provided in personal communication, used scores on the RAPM (not Cattell's CFT, BOMAT, or the BOMAT followup); 2 experimental groups (one was single audio n-back, the other dual n-back), one control group split
+- [Takeuchi et al 2012](/docs/2012-takeuchi.pdf "Effects of working memory training on functional connectivity and cerebral blood flow during rest"): subjects were trained on 3 WM tasks in addition to DNB for 27 days, 30-60 minutes; RAPM scores used, BOMAT & Tanaka B-type intelligence test scores omitted
+- Jaušovec 2012: IQ test time was calculated based on the description
+
+    > Used were 50 test items - 25 easy (Advanced Progressive Matrices Set I - 12 items and the B Set of the Colored Progressive Matrices), and 25 difficult items (Advanced Progressive Matrices Set II, items 12-36). Participants saw a figural matrix with the lower right entry missing. They had to determine which of the four options fitted into the missing space. The tasks were presented on a computer screen (positioned about 80-100 cm in front of the respondent), at fixed 10 or 14 s interstimulus intervals. They were exposed for 6 s (easy) or 10 s (difficult) following a 2-s interval, when a cross was presented. During this time the participants were instructed to press a button on a response pad (1-4) which indicated their answer.
+
+    $\frac{25 \times (6+2) + 25 \times (10+2)}{60} = 8.33$ minutes.
+- Zhong 2011: "dual attention channel" task omitted, dual and single n-back scores kept unpooled and controls split across the 2; I thank Emile Kroger for his translations of key parts of the thesis. Unable to get whether IQ test was administered speeded. Zhong 2011 appears to have replicated Jaeggi 2008's training time.
+- Jonasson 2011 omitted for lacking any measure of IQ
+- Preece 2011 omitted; only the Figure Weights subtest from the WAIS was reported, but RAPM scores were taken and published in the inaccessible Palmer 2011
+- Kundu et al 2011 and Kundu 2012 have been split into 2 experiments based on the raw data: the smaller one using the full RAPM 36-matrix 40-minute test, and the larger an 18-matrix 10-minute test
+- Redick et al: n-back split over passive control & active control (visual search) RAPM post scores (omitted SPM and Cattell Culture-Fair Test)
+- Vartanian 2013: short n-back intervention not adaptive; I did not specify in advance that the n-back interventions had to be adaptive (possibly some of the others were not) and subjects trained for <50 minutes, so the lack of adaptiveness may not have mattered.
+- Heinzel et al 2013 mentions conducting a pilot study; I contacted Heinzel and no measures like Raven's were taken in it. The main study used both SPM and also "the Figural Relations subtest of a German intelligence test (LPS)"; as usual, I drop alternatives in favor of the more common test.
+- Thompson et al 2013; used RAPM rather than WAIS; treated the "multiple object tracking"/MOT as an active control group since it did not statistically-significantly improve RAPM scores
+- Smith et al 2013; 4 groups. Consistent with all the other studies, I have ignored the post-post-tests (a 4-week followup). To deal with the 4 groups, I have combined the _Brain Age_ & strategy game groups into a single active control group, and then split the dual n-back group in half over the original passive control group and the new active control group.
+
+<!-- Smith et al 2013, active control group pooling:
+
+strategy game=10 12(2.45)
+_Brain Age_=10 12.3(3.02)
+
+pooling:
+mean = ((10*12) + (10*12.3)) / (10+10) = 12.15
+standard deviation = ((10-1)*2.45 + (10-1)*3.02) / (10+10 - 2) = 2.735
+-->
+
+The following authors had their studies omitted and have been contacted for clarification:
+
+- Seidler, Jaeggi et al 2010 (experimental: _n_=47; control: _n_=45) did not report means or standard deviations
 
 ## Source
 
