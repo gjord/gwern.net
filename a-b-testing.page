@@ -102,7 +102,7 @@ The results were initially very promising: 'conversion' was defined as staying o
 
 The second distressing thing was that Google's estimated chance of a particular intervention beating the default (which I believe is a Bonferroni-corrected _p_-value), did not increase! Even as each version received 20,000 hits, the chance stubbornly bounced around the 70-90% range for 900px and 1300px. This remained true all the way to the bitter end. At the end, each version had racked up 93,000 hits *and still was in the 80% decile*. Wow.
 
-Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf and http://www.exp-platform.com/Documents/controlledExperimentDMKD.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain). And it's a general phenomenon that even for large correlations, the trend will bounce around a lot before it stabilizes ([Schönbrodt & Perugini 2013](http://www.psy.lmu.de/allg2/download/schoenbrodt/pub/stable_correlations.pdf "At what sample size do correlations stabilize?")).
+Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf and http://www.exp-platform.com/Documents/controlledExperimentDMKD.pdf and http://www.exp-platform.com/Documents/2013%20controlledExperimentsAtScale.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain). And it's a general phenomenon that even for large correlations, the trend will bounce around a lot before it stabilizes ([Schönbrodt & Perugini 2013](http://www.psy.lmu.de/allg2/download/schoenbrodt/pub/stable_correlations.pdf "At what sample size do correlations stabilize?")).
 
 Oy vey! When I discovered Google had deleted my results, I decided to simply switch to 900px. Running a new test would not provide any better answers.
 
@@ -434,3 +434,5 @@ hunk ./static/templates/default.html 173
 +      "linewidth_class1": "<style>div#content { line-height: 150%;}</style>",
 +      "linewidth_class2": ""
 ~~~
+
+TODO: when the line-width is done, do a "null" A/B test to see what happens
