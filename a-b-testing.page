@@ -13,13 +13,31 @@ belief: possible
 - http://www.pqinternet.com/196.htm
 - https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=61203 "Experiment with site-wide changes"
 - https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=117911 "Working with global headers"
-- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-AU&answer=74345 "Time on page as a conversion goal" - every page converts, by using a timeout (mine is 40 seconds)
 - https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-GB&answer=61427
 - https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "Varying page and element styles" - testing with inline CSS overriding the defaults
 - http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
 - http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
 - http://stackoverflow.com/tags/google-website-optimizer/hot
 
+# Problems with "conversion" metric
+
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-AU&answer=74345 "Time on page as a conversion goal" - every page converts, by using a timeout (mine is 40 seconds). Problem: dichotomizing a continuous variable into a single binary variable destroys a massive amount of information. This is well-known in the statistical and psychological literature (eg. [MacCallum et al 2002](http://www.psychology.sunysb.edu/attachment/measures/content/maccallum_on_dichotomizing.pdf "On the Practice of Dichotomization of Quantitative Variables")) but I'll illustrate further with some information-theoretical observations.
+
+According to my Analytics, the mean reading time (time on page) is 1:47 and the maximum bracket, hit by 1% of viewers, is 1801 seconds, and the range 1-1801 takes <10.8 bits to encode (`log2(1801) ~> 10.81`), hence each page view could be represented by <10.8 bits (less since reading time is so highly skewed). But if we dichotomize, then we learn simply that ~14% of readers will read for 40 seconds, hence each reader carries not 6 bits, nor 1 bit (if 50% read that long) but closer to 2/3 of a bit:
+
+~~~{.R}
+R> p=0.14;  q=1-p; (-p*log2(p) - q*log2(q))
+[1] 0.5842
+~~~
+
+This isn't even an efficient dichotomization: we could improve the fractional bit to 1 bit if we could somehow dichotomize at 50% of readers:
+
+~~~{.R}
+R> p=0.50;  q=1-p; (-p*log2(p) - q*log2(q))
+[1] 1
+~~~
+
+But unfortunately, simply lowering the timeout will have minimal returns as Analytics also reports that 82% of reader spend 0-10 seconds on pages. So we are stuck with a severe loss.
 
 # ideas for testing
 
