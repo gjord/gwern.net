@@ -22,15 +22,24 @@ What is one to make of these studies? When one has multiple quantitative studies
 
 > However, a recent meta-analysis by Melby-Lervåg and Hulme (in press) indicates that even when considering published studies, few appropriately-powered empirical studies have found evidence for transfer from various WM training programs to fluid intelligence. Melby-Lervåg and Hulme reported that WM training showed evidence of transfer to verbal and spatial WM tasks (_d_ = .79 and .52, respectively). When examining the effect of WM training on transfer to nonverbal abilities tests in 22 comparisons across 20 studies, they found an effect of _d_ = .19. Critically, a moderator analysis showed that there was no effect (_d_ = .00) in the 10 comparisons that used a treated control group, and there was a medium effect (_d_ = .38) in the 12 comparisons that used an untreated control group.
 
-I'm not as interested in near WM transfer from n-back training - as the Melby-Lervåg & Hulme 2013 meta-analysis confirms, it surely does - but in the transfer with many more ramifications, transfer to *IQ* as measured by a matrix test. So I decided to do a meta-analysis of my own. The hard part of a meta-analysis is doing a thorough literature search, but the FAQ sections represent a _de facto_ literature search. (I started the DNB FAQ in March 2009 after reading through all available previous discussions, and have kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts.) The corresponding authors of most of the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions.
+I'm not as interested in near WM transfer from n-back training - as the Melby-Lervåg & Hulme 2013 meta-analysis confirms, it surely does - but in the transfer with many more ramifications, transfer to *IQ* as measured by a matrix test. So I decided to do a meta-analysis of my own.
 
 For background on conducting meta-analyses, I am using [chapter 9](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/chapter_9/9_analysing_data_and_undertaking_meta_analyses.htm) of [part 2](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/index.htm#chapter_9/9_2_types_of_data_and_effect_measures.htm) of the [Cochrane Collaboration](!Wikipedia)'s [_Cochrane Handbook for Systematic Reviews of Interventions_](http://www.mrc-bsu.cam.ac.uk/cochrane/handbook/front_page.htm). For the actual statistical analysis, I am using the [`metafor` package](http://www.metafor-project.org/) for the R language.
+
+# Literature search
+
+The hard part of a meta-analysis is doing a thorough literature search, but the FAQ sections represent a _de facto_ literature search. I started the DNB FAQ in March 2009 after reading through all available previous discussions, and have kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts. The corresponding authors of most of the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions; none had a useful suggestion.
+
+In addition, in June 2013 I searched for `"n-back" AND ("fluid intelligence" OR "IQ")` in [Google Scholar](http://scholar.google.com/scholar?q=%22n-back%22+AND+%28%22fluid+intelligence%22+OR+%22IQ%22%29) & [Pubmed](http://www.ncbi.nlm.nih.gov/pubmed/?term=%22n-back%22+AND+%28%22fluid+intelligence%22+OR+%22IQ%22%29). Pubmed yielded no new studies; Scholar yielded Jaeggi's 2005 thesis. Finally, I searched Proquest Dissertations & Theses Full Text (master's theses & doctoral dissertations) for "n-back" and "n-back intelligence", which turned up no new works.
 
 # Data
 
 The candidate studies:
 
 - [Jaeggi       2008](DNB FAQ#jaeggi-2008)
+- [Li et al 2008](http://library.mpib-berlin.mpg.de/ft/sli/SLI_Working_2008.pdf "Working Memory Plasticity in Old Age: Practice Gain, Transfer, and Maintenance")
+
+    Excluded for using non-adaptive n-back and not administering an IQ post-test.
 - [Qiu          2009](DNB FAQ#qiu-2009)
 - [polar        2009](DNB FAQ#polar-june-2009)
 - [Seidler      2010](DNB FAQ#seidler-2010)
@@ -51,6 +60,7 @@ The candidate studies:
 - [Vartanian 2013](DNB FAQ#vartanian-2013)
 - Heinzel et al 2013
 - Smith et al 2013
+- Stephenson & Halpern 2013
 
 The `active` moderator variable is whether a control group was no-contact or trained on some other task. The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact control groups limited the validity of such studies, a criticism that was echoed with greater force by Shipstead, Redick, & Engle 2012; the Melby-Lervåg & Hulme 2013 meta-analysis then confirmed that use of no-contact controls inflated the effect size estimates. So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2013, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.)
 
@@ -136,6 +146,21 @@ task"
 2. 74 in second; 4 groups = 18.5 per group; 375,475min; scores in table 7
 -->
 
+<!--
+passive
+chose RAPM (omitted "Cattell's Culture Fair Test, the Matrix Reasoning subtest for Wechsler's Abbreviated Scale of Intelligence (WASI), and the Matrix Reasoning subtest for the BETA-III")
+10min
+$2.18
+400minutes training
+
+dual n-back n=28 17.54 4.04
+visual single n-back n=29 15.34 4.83
+auditory single n-back n=25 15.32 4.15
+control n=26 14.15 3.32
+
+($15 * 4 weeks * 4 training groups)/(136 total participants - 26 controls); hence: (15 * 4 * 4) / (136-26) = 2.18
+-->
+
 ## Table
 
 The data from the surviving studies:
@@ -157,7 +182,7 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2010 Stephenson.5  12.5  15.32     0.83   9.3   15.50   0.99   1        400        1    10    2   0.44
 2010 Stephenson.6  12.5  15.32     0.83   8.6   14.08   0.65   0        400        1    10    2   0.44
 2011 Jaeggi4.d     25    14.96     2.7    13.5  14.74   2.8    1        500        1    30    0   0
-2011 Jaeggi4.s     26    15.23     2.44   13.5  14.74   2.8    1        500        1    30    2   0
+2011 Jaeggi4.v     26    15.23     2.44   13.5  14.74   2.8    1        500        1    30    2   0
 2011 Chooi.1.1     4.5   12.7      2      15    13.3    1.91   1        240        1    20    0   0
 2011 Chooi.1.2     4.5   12.7      2      22    11.3    2.59   0        240        1    20    0   0
 2011 Chooi.2.1     6.5   12.1      2.81   11    13.4    2.7    1        600        1    20    0   0
@@ -189,6 +214,9 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2013 Thompson.2    10    13.2      0.67   19    13.3    0.5    1        800        1    25    0   287
 2013 Smith.1       5     11.5      2.99   9     11.9    1.58   0        340        1    10    0   3.9
 2013 Smith.2       5     11.5      2.99   20    12.15   2.735  1        340        1    10    0   3.9
+2013 Stephenson.d  28    17.54     4.04   8.6   14.15   3.32   0        400        1    10    0   2.18
+2013 Stephenson.v  29    15.34     4.83   8.6   14.15   3.32   0        400        1    10    1   2.18
+2013 Stephenson.a  25    15.32     4.15   8.6   14.15   3.32   0        400        1    10    2   2.18
 
 # Analysis
 
@@ -240,6 +268,33 @@ The active/control variable confirms the criticism: lack of active control group
 We can see the difference by splitting a forest plot on passive vs active:
 
 ![The visibly different groups of passive then active studies, plotted on the same axis](/images/dnb/forest-activevspassive.png)
+
+<!-- Muncer style compensation for power issues, split by active vs passive:
+
+passive <- dnb[dnb$active==0,]
+meta <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = passive)
+effectSize <- meta$b[1] # 0.64
+passive$effects <- meta$yi # -0.29120  0.34016  1.19698  1.52927  0.45201...
+for (i in 1:nrow(passive)) { passive$power[i] <- (pwr.t2n.test(passive[i,]$n.c, passive[i,]$n.e, d=effectSize))$power }
+passiveCorrected <- passive[passive$power>0.5,]
+meta2 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = passiveCorrected); meta2
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.7376   0.1753   4.2072   <.0001   0.3940   1.0812
+
+active <- dnb[dnb$active==1,]
+meta <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = active)
+effectSize <- meta$b[1] # 0.162
+active$effects <- meta$yi # 2.29543 -0.16511 -0.19220  0.07878...
+for (i in 1:nrow(active)) { active$power[i] <- (pwr.t2n.test(active[i,]$n.c, active[i,]$n.e, d=effectSize))$power }
+activeCorrected <- active[active$power>0.5,]
+activeCorrected
+# error! no studies!
+# meta3 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = activeCorrected); meta3
+round(active$power, digits=2)
+ [1] 0.07 0.07 0.06 0.08 0.08 0.06 0.06 0.10 0.05 0.08 0.07 0.07 0.07 0.07 0.07 0.06
+# estimate: ???
+-->
 
 ### Training time
 
@@ -511,6 +566,7 @@ Going through them, I must note:
 - Heinzel et al 2013 mentions conducting a pilot study; I contacted Heinzel and no measures like Raven's were taken in it. The main study used both SPM and also "the Figural Relations subtest of a German intelligence test (LPS)"; as usual, I drop alternatives in favor of the more common test.
 - Thompson et al 2013; used RAPM rather than WAIS; treated the "multiple object tracking"/MOT as an active control group since it did not statistically-significantly improve RAPM scores
 - Smith et al 2013; 4 groups. Consistent with all the other studies, I have ignored the post-post-tests (a 4-week followup). To deal with the 4 groups, I have combined the _Brain Age_ & strategy game groups into a single active control group, and then split the dual n-back group in half over the original passive control group and the new active control group.
+- Stephenson & Halpern 2013: they administered multiple IQ tests; as usual, I chose RAPM (omitted "Cattell's Culture Fair Test, the Matrix Reasoning subtest for Wechsler's Abbreviated Scale of Intelligence (WASI), and the Matrix Reasoning subtest for the BETA-III")
 
 <!-- Smith et al 2013, active control group pooling:
 
@@ -525,6 +581,7 @@ standard deviation = ((10-1)*2.45 + (10-1)*3.02) / (10+10 - 2) = 2.735
 The following authors had their studies omitted and have been contacted for clarification:
 
 - Seidler, Jaeggi et al 2010 (experimental: _n_=47; control: _n_=45) did not report means or standard deviations
+- Preece's supervising researcher
 
 ## Source
 
