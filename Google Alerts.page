@@ -1,0 +1,465 @@
+---
+title: Alerts Over Time
+description: Does Google Alerts return fewer results each year?
+created: 1 July 2013
+tags: statistics
+status: finished
+belief: likely
+...
+
+> Responding to rumors of its demise, I investigate the number of results in my personal Google Alerts notifications 2007-2013, and find no overall trend of decline until I look at a transition in mid-2011 where the results fall dramatically. I speculate about the cause and implications for Alerts's future.
+
+While researching my [Google shutdowns]() essay on how long Google products survive before being killed (inspired by Reader), I came across speculation that [Google Alerts](!Wikipedia), a service which runs search queries on your behalf & emails you about any new matching webpages (extremely useful for keeping abreast of topics and one of the oldest Google services), [had](http://searchengineland.com/google-alerts-arent-working-148642 "Dear Google Alerts: Why Aren’t You Working?") [broken](http://searchengineland.com/google-alerts-still-broken-152444 "Google Alerts: Still Broken") [badly](http://thefinancialbrand.com/28346/google-alerts-broken/ "An Open Letter to Google: Google Alerts Broken, Now Useless To Financial Marketers") in 2012. Troublingly, Alerts has already lost [its RSS functionality](http://googlesystem.blogspot.com/2013/07/google-alerts-drops-rss-feeds.html). Alerts dying would be a problem for me as I have used Alerts extensively since 28 January 2007 (2347 days) with 23 current Alerts (and many more in the past) - of my 501,662 total emails, 3,815 were Alert emails - and there did not seem to be any usable alternatives^[I have seen a service called [talkwalker](http://talkwalker.com/en) suggested but have not used them.].
+
+As it happened, the survival model suggested that Alerts had a good chance of surviving a long time, and I put it from mind until I remembered that since I had so many emails from Alerts, I could check the claims for myself - *did* Alerts abruptly stop returning many hits? This is a straightforward question to answer: extract the subject/date/number of links from each Alerts email, stratify by unique alert, and regress over time. So I did.
+
+# Data
+
+As part of my backup procedures, I fetch daily my Gmail emails using [`getmail4`](http://pyropus.ca/software/getmail/) into a [maildir](!Wikipedia). Alerts uses an unchanging and stereotypical subject line like `Subject: Google Alert - "Frank Herbert" -mason`, so it is easy to find all its emails and separate them out.
+
+~~~{.Bash}
+~/mail/
+$ find ~/mail/ -type f -exec fgrep -l {} 'Google Alert -' \;
+/home/gwern/mail/new/1282125775.M532208P12203Q683Rb91205f53b0fec0d.craft
+/home/gwern/mail/new/1282125789.M55800P12266Q737Rd98db4aa1e58e9ed.craft
+...
+$ find ~/mail/ -type f -exec fgrep -l 'Google Alert -' {} \; > alerts.txt
+$ mkdir 2013-07-01-gwern-googlealertsemails/
+$ mv `cat alerts.txt` 2013-07-01-gwern-googlealertsemails/
+~~~
+
+I deleted emails from a few alerts which were private; the remaining 65M of emails are available at [`2013-07-01-gwern-googlealertsemails.tar.7z`](/docs/2013-07-01-gwern-googlealertsemails.tar.7z). Then a loop & some shell-scripting extracts the subject-line, the date, and how many instances of "http://" there are in an email:
+
+~~~{.Bash}
+cd 2013-07-01-gwern-googlealertsemails/
+
+echo "Search,Date,Links" >> alerts.csv # set up the header
+
+for EMAIL in *.craft *.; do
+    SUBJECT="`egrep '^Subject: Google Alert - ' $EMAIL  | sed -e 's/Subject: Google Alert - //'`"
+    DATE="`egrep '^Date: ' $EMAIL | cut -d ' ' -f 3-5 | sed -e 's/<b>..*/ /'`"
+    COUNT="`fgrep --no-filename --count 'http://' $EMAIL`"
+
+    echo $SUBJECT,$DATE,$COUNT >> alerts.csv
+done
+~~~
+
+The scripting isn't perfect and I had to delete several spurious lines before I could read it into R and format it into a clean CSV:
+
+~~~{.R}
+alerts <- read.csv("alerts.csv", quote=c(), colClasses=c("character","character","integer"))
+alerts$Date <- as.Date(alerts$Date, format="%d %b %Y")
+write.csv(alerts, file="2013-07-01-gwern-googlealerts.csv", row.names=FALSE)
+~~~
+
+# Analysis
+## Descriptive
+
+~~~{.R}
+alerts <- read.csv("http://www.gwern.net/docs/2013-07-01-gwern-googlealerts.csv",
+                   colClasses=c("factor","Date","integer"))
+summary(alerts)
+                     Search          Date                Links
+ wikipedia              : 255   Min.   :2007-01-28   Min.   :  0.0
+ Neon Genesis Evangelion: 247   1st Qu.:2008-11-25   1st Qu.: 11.0
+ "Gene Wolfe"           : 238   Median :2011-01-03   Median : 22.5
+ "Nick Bostrom"         : 220   Mean   :2010-09-05   Mean   : 37.7
+ modafinil              : 178   3rd Qu.:2012-05-11   3rd Qu.: 44.0
+ "Frank Herbert" -mason : 174   Max.   :2013-07-01   Max.   :563.0
+ (Other)                :2498
+# So many because I have deleted many topics I am no longer interested in,
+# and refined the search criteria of others
+length(unique(alerts$Search))
+[1] 63
+
+plot(Links ~ Date, data=alerts)
+~~~
+
+![Links in each email, graphed over time](/images/google/alerts/linksperemail.png)
+
+The first thing I notice is that it looks like the number of links per email is going up over time, with a spike in mid-2010. The second is that there's quite a bit of variation from email to email - while most are around 0, some are as high as 300. The third is that there's a weird early anomaly where emails are recorded as having 0 links; looking at those emails, they are [base64](!Wikipedia) encoded, for no apparent reason, and then all subsequent emails are in more sensible HTML/text formats. An ill-fated experiment by Google? I have no idea.
+
+## Linear model
+
+The spikiness prompts me to adjust for variation in sending rate and whatnot by bucketing emails into months, and overlay a linear regression:
+
+~~~
+library(lubridate)
+alerts$Date <- floor_date(alerts$Date, "month")
+alerts <- aggregate(Links ~ Search + Date, alerts, "sum")
+
+# a simple linear model agrees with *small* monthly increase, but notes that there is a tremendous
+# amount of unexplained variation
+lm <- lm(Links ~ Date, data=alerts); summary(lm)
+
+Call:
+lm(formula = Links ~ Date, data = alerts)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-179.8 -112.0  -59.4   45.4  989.8
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept) -5.04e+02   1.15e+02   -4.39  1.2e-05
+Date         4.37e-02   7.73e-03    5.65  2.1e-08
+
+Residual standard error: 175 on 1000 degrees of freedom
+Multiple R-squared:  0.031, Adjusted R-squared:  0.03
+F-statistic:   32 on 1 and 1000 DF,  p-value: 2.06e-08
+
+plot(Links ~ Date, data=alerts)
+abline(lm)
+~~~
+
+![Total links in each search, by month](wiki/images/google/alerts/linkspermonth.png)
+
+No big difference with the original plot: still a generic increasing trend. Here is a basic problem with this regression: does this increase reflect an increase in the *number of alerts* I am subscribed to, tweaks to each alert to make each return more hits (shifting from old alerts to *new* alerts), or a increase per *unique* alert? It is only the last claim we are interested in, but any of these or other phenomenon could produce an increase.
+
+### Per alert
+
+We could try treating each alert separately and doing a linear regression on them, and comparing with the linear model on all data indiscriminately:
+
+~~~{.R}
+library(ggplot2)
+qplot(Date, Links, color=Search, data=alerts) +
+    stat_smooth(method="lm", se=FALSE, fullrange=TRUE, size=0.2) +
+    geom_abline(aes(intercept=lm$coefficients[1], slope=lm$coefficients[2], color=c()), size=1) +
+    ylim(0,1130) +
+    theme(legend.position = "none")
+~~~
+
+![Splitting data by alert, regressing individually](/images/google/alerts/monthlylinks-individuallinearregression.png)
+
+The result is chaotic. Individual alerts are pointing every which way. Regressing on every alert together confounds issues, and regressing on individual alerts produces no agreement. We want some intermediate approach which respects that alerts have different behavior, but yields a meaningful overall statement.
+
+## Multi-level model
+
+What we want is to look at each unique alert, estimate its increase/decrease over time, and perhaps summarize all the slopes into a single grand slope. There is a hierarchical structure to the data: the overall slope of Google influences the slope of each alert, which influences the distribution of the data points around each slope.
+
+We can do this with a [multi-level model](!Wikipedia), using [`lme4`](http://cran.r-project.org/web/packages/lme4/index.html).
+
+We'll start by fitting & comparing 2 models:
+
+1. only the intercept varies between each alert, but all alerts increase or decrease at the same rate
+2. the intercept varies between each alert, and also alerts differ in their waxing or waning
+
+~~~{.R}
+library(lme4)
+mlm1 <- lmer(Links ~ Date + (1|Search), alerts); mlm1
+
+Linear mixed model fit by REML
+Formula: Links ~ Date + (1 | Search)
+   Data: alerts
+   AIC   BIC logLik deviance REMLdev
+ 12440 12459  -6216    12432   12432
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Search   (Intercept) 31950    179
+ Residual             11618    108
+Number of obs: 1002, groups: Search, 63
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept) 329.0212   142.8165    2.30
+Date         -0.0126     0.0095   -1.32
+
+Correlation of Fixed Effects:
+     (Intr)
+Date -0.987
+
+mlm2 <- lmer(Links ~ Date + (1+Date|Search), alerts); mlm2
+
+Linear mixed model fit by REML
+Formula: Links ~ Date + (1 + Date | Search)
+   Data: alerts
+   AIC   BIC logLik deviance REMLdev
+ 12144 12173  -6066    12135   12132
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Search   (Intercept) 6.46e+06 2541.044
+          Date        2.86e-02    0.169 -0.997
+ Residual             7.82e+03   88.408
+Number of obs: 1002, groups: Search, 63
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept) 6.54e+01   4.32e+02    0.15
+Date        6.86e-03   2.88e-02    0.24
+
+Correlation of Fixed Effects:
+     (Intr)
+Date -0.998
+# compare the models: does model 2 buy us anything?
+anova(mlm1, mlm2)
+
+Data: alerts
+Models:
+mlm1: Links ~ Date + (1 | Search)
+mlm2: Links ~ Date + (1 + Date | Search)
+     Df   AIC   BIC logLik Chisq Chi Df Pr(>Chisq)
+mlm1  4 12440 12460  -6216
+mlm2  6 12147 12176  -6067   298      2     <2e-16
+~~~
+
+Model 2 is better on both simplicity/fit criteria, so we'll look at that closer:
+
+~~~{.R}
+coef(mlm2)
+$Search
+                                                               (Intercept)       Date
+adult iodine supplementation (IQ OR intelligence OR cognitive)      697.38 -0.0418453
+AMD pacifica virtualization                                        -984.79  0.0729847
+(anime OR manga) (half-Japanese OR hafu OR half-American)           897.29 -0.0555918
+caloric restriction                                               -2303.42  0.1739674
+"Death Note" (script OR live-action OR Parlapanides)                465.50 -0.0254431
+"dual n-back"                                                      4222.94 -0.2675752
+dual n-back                                                         878.35 -0.0516867
+electric sheep screensaver                                         -891.22  0.0665540
+"Frank Herbert"                                                    -272.63  0.0258926
+"Frank Herbert" -mason                                            10945.37 -0.6848497
+freenet project                                                   -1328.94  0.0998159
+"Gene Wolfe"                                                        380.54 -0.0187238
+Gene Wolfe                                                           34.54  0.0093632
+...
+WikiLeaks                                                          -482.00  0.0382767
+wikipedia                                                         -1686.92  0.1352269
+Xen                                                                 309.96 -0.0113617
+~~~
+
+Date is in links per month, so when Xen has a slope of -0.01, that means that every month there is a tenth of a link less; so after a year, we'd expect not 310 links per month but more like 308. This is not a very big change. The single largest slope is
+
+~~~{.R}
+max(abs(coef(mlm2)$Search$Date))
+[1] 0.6848
+~~~
+
+Which comes from the `"Frank Herbert" -mason` search, probably reflecting how relatively new the search is or the effectiveness of the filter I added to the original `"Frank Herbert"` search. In general, the slopes are very similar, there seem to be as many positive slopes as there are negative, and the overall summary slope is a tiny positive slope in the second model (0.0286); very few of the searches' slopes exclude zero:
+
+![`qqmath(ranef(mlm2, postVar=TRUE))`](/images/google/alerts/mlm2-slopes.png)
+
+This says to me that there is no real change over time happening within each alert, as the original claims went. When we plot the overall regression and the per-alert regressions, we see
+
+~~~{.R}
+fixParam<-fixef(mlm2)
+ranParam<-ranef(mlm2)$Search
+params<-cbind(ranParam[1]+fixParam[1], ranParam[2]+fixParam[2])
+p <- qplot(Date, Links, color=Search, data=alerts)
+p +
+  geom_abline(aes(intercept=`(Intercept)`, slope=Date, color=rownames(params)), data=params, size=0.2) +
+  geom_abline(aes(intercept=fixef(mlm2)[1], slope=fixef(mlm2)[2], color=c()), size=1) +
+  ylim(0,1130) +
+  theme(legend.position = "none")
+~~~
+
+![Multi-level regression, grand and individual lines](/images/google/alerts/monthlylinks-individualmlm.png)
+
+This clearly makes more sense than regressing each alert separately, as we avoid crazily steep slopes when there are just a few emails to use and their regressions get shrunk to the overall regression. We also see no evidence for any large or statistically-significant change over time for alerts in general: some alerts do increase over time but some alerts also decrease over time, and there is no general decrease which we might blame on internal Google problems.
+
+### Robustness
+
+How reliable *is* the slight positive overall correlation that we saw? We can do a posterior check of how much variation there is in the inferred model by randomly generating data from that model and seeing how often the overall `Date` fixed effect varies from positive to negative:
+
+~~~{.R}
+library(arm)
+mlm2.sim <- sim(mlm2,  n.sims = 100000)
+fixef.mlm2.sim <- fixef(mlm2.sim)
+quantile(fixef.mlm2.sim[,2], probs = c(0, 0.025, 0.975, 1))
+      0%     2.5%    97.5%     100%
+-0.12879 -0.04986  0.06343  0.12596
+
+hist(fixef.mlm2.sim[,2], main="Change in hits per month, 100k simulations", xlab="Coefficient")
+~~~
+
+![Distribution of slopes estimated from 100k simulation runs](/images/google/alerts/mlm2-simulation.png)
+
+## What about the fall?
+
+Having done all this, I thought I was finished until I remembered that the original bloggers didn't complain about a *steady* deterioration over time, but an abrupt one starting somewhere in 2012. What happens when I do a binary split and compare 2010/2011 to 2012/2013?
+
+~~~{.R}
+alertsRecent <- alerts[year(alerts$Date)>=2010,]
+alertsRecent$Recent <- year(alertsRecent$Date) >= 2012
+wilcox.test(Links ~ Recent, conf.int=TRUE, data=alertsRecent)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  Links by Recent
+W = 61370, p-value = 2.631e-08
+alternative hypothesis: true location shift is not equal to 0
+95% confidence interval:
+ 31 72
+sample estimates:
+difference in location
+                    50
+~~~
+
+I avoided a normality-based test like `t.test` because there's no reason to expect the number of links per month to follow a normal distribution, but regardless, there's a very big difference between the two time periods: 219 vs 144 links. A fall of 35% is certainly a serious decline, and it cannot be waved away as due to my Alerts settings (I always use "All results" and never "Only the best results") nor, as we'll see now, a confound like the possibilities that motivated multi-level model use:
+
+~~~{.R}
+R> alerts$Recent <- year(alerts$Date) >= 2012
+R> mlm3 <- lmer(Links ~ Date + Recent + (1+Date|Search), alerts); mlm3
+Linear mixed model fit by REML
+Formula: Links ~ Date + Recent + (1 + Date | Search)
+   Data: alerts
+   AIC   BIC logLik deviance REMLdev
+ 12129 12163  -6057    12125   12115
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Search   (Intercept) 5.88e+06 2423.878
+          Date        2.61e-02    0.162 -0.997
+ Residual             7.77e+03   88.167
+Number of obs: 1002, groups: Search, 63
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept) -308.5754   434.0001   -0.71
+Date           0.0327     0.0290    1.13
+RecentTRUE   -40.6539    12.8808   -3.16
+
+Correlation of Fixed Effects:
+           (Intr) Date
+Date       -0.998
+RecentTRUE  0.277 -0.286
+
+R> anova(mlm1, mlm2, mlm3)
+Models:
+mlm1: Links ~ Date + (1 | Search)
+mlm2: Links ~ Date + (1 + Date | Search)
+mlm3: Links ~ Date + Recent + (1 + Date | Search)
+     Df   AIC   BIC logLik  Chisq Chi Df Pr(>Chisq)
+mlm1  4 12440 12460  -6216
+mlm2  6 12147 12176  -6067 297.67      2     <2e-16
+mlm3  7 12139 12173  -6062   9.88      1     0.0017
+~~~
+
+### It was mid-2011
+
+A new model treating pre-2012 as different turns up with a superior fit. Can we do better? A [`changepoint`](http://cran.r-project.org/web/packages/changepoint/index.html) fingers May/June 2011 as the culprit and giving a larger difference in means (254 vs 147):
+
+~~~{.R}
+library(changepoint)
+plot(cpt.meanvar(alertsRecent$Links), ylab="Links")
+~~~
+
+![Link count 2010-2013, depicting a regime transition in May/June 2011](/images/google/alerts/changepoint.png)
+
+With this new changepoint, the test is more significant
+
+~~~{.R}
+alertsRecent <- alerts[year(alerts$Date)>=2010,]
+alertsRecent$Recent <- alertsRecent$Date > "2011-05-01"
+wilcox.test(Links ~ Recent, conf.int=TRUE, data=alertsRecent)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  Links by Recent
+W = 56790, p-value = 6.07e-11
+alternative hypothesis: true location shift is not equal to 0
+95% confidence interval:
+  58 110
+sample estimates:
+difference in location
+                    84
+~~~
+
+And the fit improves by a large amount:
+
+~~~{.R}
+R> alerts$Recent <- alerts$Date > "2011-05-01"
+R> mlm4 <- lmer(Links ~ Date + Recent + (1+Date|Search), alerts); mlm4
+Linear mixed model fit by REML
+Formula: Links ~ Date + Recent + (1 + Date | Search)
+   Data: alerts
+   AIC   BIC logLik deviance REMLdev
+ 12049 12083  -6017    12045   12035
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ Search   (Intercept) 5.23e+06 2285.925
+          Date        2.33e-02    0.153 -0.997
+ Residual             7.16e+03   84.641
+Number of obs: 1002, groups: Search, 63
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept) -884.8992   409.0614   -2.16
+Date           0.0743     0.0274    2.71
+RecentTRUE  -127.1581    13.1081   -9.70
+
+Correlation of Fixed Effects:
+           (Intr) Date
+Date       -0.998
+RecentTRUE  0.243 -0.258
+R> anova(mlm1, mlm2, mlm3, mlm4)
+Data: alerts
+Models:
+mlm1: Links ~ Date + (1 | Search)
+mlm2: Links ~ Date + (1 + Date | Search)
+mlm3: Links ~ Date + Recent + (1 + Date | Search)
+mlm4: Links ~ Date + Recent + (1 + Date | Search)
+     Df   AIC   BIC logLik  Chisq Chi Df Pr(>Chisq)
+mlm1  4 12440 12460  -6216
+mlm2  6 12147 12176  -6067 297.67      2     <2e-16
+mlm3  7 12139 12173  -6062   9.88      1     0.0017
+mlm4  7 12059 12093  -6022  80.02      0     <2e-16
+~~~
+
+Given the foregoing, it's not surprising that the posterior simulation never spits out an estimate for `Recent` anywhere close to zero:
+
+~~~{.R}
+mlm4.sim <- sim(mlm4,  n.sims = 100000)
+fixef.mlm4.sim <- fixef(mlm4.sim)
+quantile(fixef.mlm4.sim[,3], probs = c(0, 0.025, 0.975, 1))
+     0%    2.5%   97.5%    100%
+-186.74 -152.69 -101.37  -69.05
+~~~
+
+The posterior check is good, so I take a look at the other direction: is the fall robust against different samples of my data, using bootstrapping? The answer is yes, and the Wilcoxon test even turns out to have given us a pretty good confidence interval earlier:
+
+~~~{.R}
+library(boot)
+recentEstimate <- function(dt, indices) {
+  d <- dt[indices,] # allows boot to select subsample
+  mlm4 <- lmer(Links ~ Date + Recent + (1+Date|Search), d)
+  return(fixef(mlm4)[3])
+}
+bs <- boot(data=alerts, statistic=recentEstimate, R=10000, parallel="multicore", ncpus=4); bs
+...
+Bootstrap Statistics :
+    original  bias    std. error
+t1*   -127.2  -1.807       14.62
+
+boot.ci(bs)
+...
+Intervals :
+Level      Normal              Basic
+95%   (-154.0,  -96.7 )   (-152.7,  -95.4 )
+
+Level     Percentile            BCa
+95%   (-158.9, -101.6 )   (-155.4,  -99.6 )
+~~~
+
+A confidence interval of -159,-95 is both statistically-significant in this context and also an effect size to be reckoned with. It seems this mid-2011 fall is real.
+
+### Panda?
+
+I don't know of any changes announced to Google Alerts in May/June 2011, and the emails can't tell us directly what happened. But I can speculate.
+
+There is one culprit that comes to mind for what may have changed in early 2011 which would then led to a fall in collated links (a fall which would accumulate to statistical-significance in June 2011): the pervasive change to webpage rankings called [Google Panda](!Wikipedia). It affected many websites & searches, had teething problems, reportedly boosted social networking sites (which I generally see very few of in my own alerts), and was rolled out globally in April 2011 - just in time to trigger a change in May/June (with continuous [changes through 2011](http://moz.com/google-algorithm-change#2011 "Google Algorithm Change History")).
+
+# Conclusion
+
+So where does this leave us?
+
+Well, the overall linear regressions turned out to not answer the question, but they were still educational in demonstrating the considerable diversity between alerts and the trickiness of understanding what question exactly we were asking; the variability and differences between alerts reminds us to not be fooled by randomness and try to look for big effects & the big picture - if someone says their alerts seem a little down, they may have been fooled by selective memory, but when they say their alerts went from 20 links an email to 3, then we should avoid unthinking skepticism and look more carefully.
+
+When we investigated the claim directly, we didn't *quite* find the claim: there was no changepoint anywhere in 2012 as claimed by bloggers like - they seem to have been half a year off from when the change occurred in my own alerts. What's going on there? It's hard to say. Google sometimes rolls out changes to users over long periods of time, so perhaps I was hit early by some changes drastically reducing links. Or perhaps it simply took time for people to become certain that there were fewer links (in which case I have given them too little credit). Or perhaps separate SEO-related changes hit their searches after mine were.
+
+Is Alerts "broken"? Well, it's taken a clear hit: the number of found links are down, and my own impression is that the returned links are not such gems that they make up for their gem-like rarity. And it's certainly not good that the problem is now 2 years old without any discernible improvement.
+
+But on closer inspection, the hit seems to have been a one-time deal, and if my Panda speculation is correct, it does not reflect any neglect or contempt by Google but simply more important factors - Search remaining high-quality will always be a higher priority than Alerts, because Search is the dog that wags the tail. My survival model may yet have the last laugh and Alerts outlast its more famous brethren.
+
+# See also
+
+- [Fanfiction reviewer survival curves](hpmor "A survival analysis finds no major anomalies in reviewer lifetimes, but an apparent increase in mortality for reviewers who started reviewing with later chapters")
+- [Weather]()
