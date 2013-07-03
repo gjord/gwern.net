@@ -24,6 +24,8 @@ do
 
         # image hotlinking deprecated; impolite, and slows page loads & site compiles
         egp --only-matching '\!\[.*\]\(http://.*\)' "$PAGE";
+        # indicates broken copy-paste of image location
+        egp --only-matching '\!\[.*\]\(wiki/.*\)' "$PAGE";
 
         markdown-length-checker "$PAGE";
         markdown-footnote-length "$PAGE";
