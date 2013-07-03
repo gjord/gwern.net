@@ -192,13 +192,12 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 - syntax:
 
     - [balanced brackets & quotes check](http://www.emacswiki.org/emacs/MarkdownMode#toc1)
+    - do a Pandoc/Firefox preview for visible major formatting problems
+    - [Markdown lint-checker](#markdown-checker)
     - [`linkchecker`](http://linkchecker.sourceforge.net/) for
 
         1. dead links
         2. inserting into [archive queue](Archiving URLs)
-
-    - do a Pandoc/Firefox preview for visible major formatting problems
-    - [Markdown lint-checker](#markdown-checker)
 - references:
 
     - for academic hyperlinks,  include a [tooltip](!Wikipedia) with the title & author metadata
@@ -214,7 +213,7 @@ It turns out that writing essays (technical or philosophical) is a lot like writ
 
     - mention any use of PredictionBook in [Prediction markets]()
     - mention any use of Fermi estimates in [Fermi calculations](Notes#fermi-calculations)
-    - arrange for notifications of future results (when relevant, eg. for following dual n-back research):
+    - arrange for notifications of future results (when relevant, eg. dual n-back research):
 
         1. [Google Alerts](http://www.google.com/alerts)
         2. [Google Scholar Alerts](http://googlescholar.blogspot.com/2010/06/google-scholar-alerts.html)
@@ -454,7 +453,54 @@ To Hacker News, Reddit, and LessWrong, I can add as a major referrer Wikipedia -
 
 I haven't spent much time promoting my content, but improving the site with metadata & writing new content: for example, I tripled the size of my [hafu]() anime/manga character database.
 
-<!-- https://news.ycombinator.com/item?id=5660220 https://news.ycombinator.com/item?id=5653874 -->
+### January 2013 - July 2013
+
+> "I was decimated. To program any more would be pointless. My programs would never live as long as [_The Trial_](!Wikipedia). A computer will never live as long as _The Trial_. ...What if [_Amerika_](!Wikipedia "Amerika (novel)") was only written for [32-bit PowerPC](!Wikipedia "PowerPC#32-bit PowerPC")?" --[_why the lucky stiff, _CLOSURE_](http://kevinw.github.io/2013/04/30/why-did-why-the-lucky-stiff-quit/ "Why Did why the lucky stiff Quit? ...or, is this time well spent?")
+
+`darcs-graph` for this period (3 January 2013 - 2 July 2013): <!-- darcs-graph - - filter=20130103 - - y=30 - - output=darcs-history.png - - name=gwern.net /home/gwern/wiki/ -->
+
+![Plot of patch creations (y-axis) versus date (x-axis): February 2013 to 2 July 2013](/images/2013-july-darcs-history.png)
+
+#### Traffic
+
+[Analytics traffic](/docs/20130103-20130702-gwern.net-analytics.pdf) records 832,415 page views by 422,285 unique visitors over 181 days, or 4,598 page-views per day. (The lifetime total page-views has thus reached 2,403,807.) This represents ~11% growth in traffic compared to the previous 6-month period of 4,124 dailies, continuing the slowdown trend - possibly the next half-year won't see any growth, or a decline.
+
+![Plot of page-hits (y-axis) versus date (x-axis), early-mid 2013](/images/20130103-20130702-traffic-history.png)
+
+Popularity rankings have changed: Silk Road lost a lot of Wikipedia traffic when, during an editing dispute, an administrator deleted it from their article on Silk Road, and it was only restored on 2 July. 2 new statistical essays ([Death Note script]() & [Google shutdowns]()) enter the top 10, but neither were able to dethrone Silk Road as that black market continues to thrive & receive media coverage:
+
+1. Silk Road: 396,993
+2. Modafinil: 58,856
+3. Google shutdowns: 49,907
+4. DNB FAQ: 25,979
+5. Death Note script: 25,792
+6. Nootropics: 22,702
+7. home/main page: 20,051
+8. Links: 16,789
+9. About: 14,746
+10. Spaced repetition: 11,711
+
+Financial: this period was a remarkable period. My contracting work dried up (largely my own fault) and pressed for money, I began exploring alternatives:
+
+1. the most obvious strategy was to turn all my Amazon links for books & nootropics & miscellaneous into affiliate links; they are already there, do not affect readers, and coding it up was as simple as appending a string to links. This worked as far as it went, which was not very far ($47 in Q1 2013 and $130 Q2 2013).
+2. more painfully, I decided to try Google's [AdSense](!Wikipedia). While AdWords hadn't been the most pleasant experience in the world, it was fairly decent, and Google's ads always seemed reasonable to me in the search engine (before I learned of AdBlock). AdSese has scary language in its terms of service forbidding detailed discussion of revenue, but I should be safe when I say that the mean CTR was 0.17% & the mean CPC was $0.57, ~40% of visitors did *not* have ad filtering enabled, and so over the 80 days AdSense was enabled, I earned ~$260. Helpful, but not rent-paying.
+3. donations made the difference. After "Google shutdowns" [hit the front page](https://news.ycombinator.com/item?id=5653748) of Hacker News, an acquaintance [mentioned I could use some money](https://news.ycombinator.com/item?id=5654008). [I received](https://news.ycombinator.com/item?id=5653874) $408 in 14 Paypal donations; through Bitcoin, 1.62btc (then $189) in 4 donations ([followup](https://news.ycombinator.com/item?id=5660220)). I am grateful to all the Hacker Newsers who donated.
+4. Related to that, I was contacted in May by [Nava Whiteford](http://www.sgenomics.co.uk/) with an offer: he had heard my financial target of $300/month and offered that (in bitcoins) in exchange for a sponsorship/banner linking to his graphical terminal [HTerm](http://41j.com/hterm/) - a combination purchase/donation. This was both larger & more stable than AdSense, so I accepted, and 3 months have thus far passed.
+
+#### Promotion
+
+Wikipedia declines in this period due to the aforementioned removal, and more obscure sites become chief referrers:
+
+1. `news.ycombinator.com`: 45,186
+2. `reddit.com`: 34,225
+3. `en.wikipedia.org`: 16,527
+4. `lesswrong.com`: 11,177
+5. Twitter: 6,717
+6. `facebook.com`: 5,675
+7. `mainstreamlos.tumblr.com`: 5,576
+8. `boingboing.net`: 4,982
+9. `motherboard.vice.com`: 4,496
+10. `bulletproofexec.com`: 4,336
 
 ## Colophon
 ### Hosting
@@ -463,7 +509,7 @@ I haven't spent much time promoting my content, but improving the site with meta
 
 From October 2010 to June 2012, the site was hosted on [NearlyFreeSpeech.net](http://www.nearlyfreespeech.net), an old hosting company; its specific niche is controversial material and activist-friendly pricing. Its libertarian owners cast a jaundiced eye on [takedown request](!Wikipedia)s, and pricing is [pay-as-you-go](!Wikipedia). I like the former aspect, but the latter sold me on NFSN. Before I stumbled on NFSN (someone mentioned it in [#lesswrong](irc://freenode.net#lesswrong)), I was getting ready to pay \$10-15 a month (\$120 yearly) to [Linode](!Wikipedia). Linode's offerings are overkill since I do not run dynamic websites or something like [Haskell.org](http://www.haskell.org) (with wikis and mailing lists and [darcs](!Wikipedia) repositories), but I didn't know a good alternative. NFSN's pricing meant that I paid for usage rather than large flat fees. I put in \$32 to cover registering `gwern.net` until 2014, and then another \$10 to cover bandwidth & storage price. DNS aside, I was billed \$8.27 for October-December 2010; DNS included, January-April 2011 cost \$10.09. \$10 covered months of `gwern.net` for what I would have paid Linode in 1 month! In total, my 2010 costs were \$39.44; my 2011 costs were \$118.32 (\$9.86 a month); and my 2012 costs through June were \$112.54 (\$21 a month); sum total: $270.3.
 
-The switch to Amazon S3 hosting is complicated by my simultaneous addition of CloudFlare as a CDN; my total June 2012 Amazon bill is $1.62, with $0.19 for storage. CloudFlare claims it covered 17.5GB of 24.9GB total bandwidth, so the $1.41 represents 30% of my total bandwidth; multiply 1.41 by 3 is 4.30, and my hypothetical non-CloudFlare S3 bill is ~$4.5. Even at $10, this is well below the \$21 monthly cost at NFSN. (The traffic graph indicates that June 2012 was a relatively quiet period, but I don't think this eliminates the factor of 5.)
+The switch to Amazon S3 hosting is complicated by my simultaneous addition of CloudFlare as a CDN; my total June 2012 Amazon bill is $1.62, with $0.19 for storage. CloudFlare claims it covered 17.5GB of 24.9GB total bandwidth, so the $1.41 represents 30% of my total bandwidth; multiply 1.41 by 3 is 4.30, and my hypothetical non-CloudFlare S3 bill is ~$4.5. Even at $10, this was well below the \$21 monthly cost at NFSN. (The traffic graph indicates that June 2012 was a relatively quiet period, but I don't think this eliminates the factor of 5.) From July 2012 to June 2013, my Amazon bills totaled $60, which is reasonable except for the steady increase ($1.62/$3.27/$2.43/$2.45/$2.88/$3.43/$4.12/$5.36/$5.65/$5.49/$4.88/$8.48/$9.26), being primarily driven by out-bound bandwidth (in June 2013, the $9.26 was largely due to the 75GB transferred - and that was *after* CloudFlare dealt with 82GB); $9.26 is much higher than I would prefer since that would be >$110 annually.
 
 ### Source
 
@@ -471,7 +517,7 @@ The revision history is kept in [Darcs](!Wikipedia), but I periodically mirror i
 
 #### Size
 
-As of 3 January 2013, the source of `gwern.net` is composed of >166 files with >1,404,179 words or 9.2MB; this includes documents transcribed into Markdown but excludes images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is >304M. The source repository contains >6,378 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
+As of 3 July 2013, the source of `gwern.net` is composed of >171 files with >1,520,152 words or 10MB<!-- duh *.page */*.page */*/*.page -->; this includes documents transcribed into Markdown but excludes images, PDFs, files necessary to generate the site, and the revision history. <!-- Statistics from `find . -type f -name "*.page" -exec cat "{}" \; | wc` --> With those included and everything compiled to the static^[I like the static site approach to things; it yields [better performance](http://inessential.com/2011/03/16/a_plea_for_baked_weblogs) and leads to fewer [hassles & runtime issues](http://www.aaronsw.com/weblog/000404).] HTML, the site is >563.8M. The source repository contains >6,990 patches (this is an under-count as the creation of the repository in 26 September 2008 included already written & tracked material)
 
 ##### Benford's law
 
