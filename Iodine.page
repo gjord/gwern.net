@@ -133,8 +133,6 @@ Boyages         1990   28    34.4     15.4   24    29.5     8.5    29.5  720    
 Schoenthaler.1  1991   100   10.1     8.9    33.3  8.9      7.3    14    12.68   1
 Schoenthaler.2  1991   105   12.6     7.9    33.3  8.9      7.3    14    25.35   1
 Schoenthaler.3  1991   105   10.4     7.6    33.3  8.9      7.3    14    25.35   1
-Cao.1           1994   90    79       10     18.5  75       18     0.13  50      0
-Cao.2           1994   93    80       8      18.5  75       18     0.63  50      0
 Southon         1994   22    63.94    2.6    29    64.1     1.87   13.5  16.8    1
 Shrestha.1      1994   72    17.1     1.8    36    10.7     2.4    7.1   490     0
 Shrestha.2      1994   80    18.2     1.5    36    10.7     2.4    7.1   490     0
@@ -142,10 +140,8 @@ Isa             2000   60    85.25    14.6   100   83.6     16.2   11.39 480    
 Huda            2001   145   14.88    3.28   142   14.60    3.19   9.8   400     0
 Zimmerman       2006   159   25       6.3    151   20.5     5.6    11    400     0
 McNeill         2007   398   11.5     2.3    374   11.7     2.1    72    54.75   1
-Manger          2008   254   3.2      1.56   253   3.3      1.53   9.45  7.75    1
 Gordon          2009   84    10.2     3      82    9.6      2.4    11.5  29.4    0
 Dewi            2012   33    110.27   9.04   34    103.06   9.99   3.1   8.4     0
-Stuijvenberg    1999   62    3.65     1.26   66    3.79     1.25   8.5   25.8    1
 Salarkia        2004   19    96       10     246   89       13     1.5   1272    0
 Untoro          1999   121   89       7      43    88       6      9     464     0
 
@@ -155,12 +151,12 @@ Comments:
 1. Bautista notes: Stanford-Binet IQ, some data re-derived[^Bautista-reverse-engineering]
 2. Boyages: the two groups were not randomly chosen and may have pre-existing differences in IQ
 3. Schoenthaler: RAPM IQ
-4. Cao: "developmental quotient" used, not an IQ; I exclude the pregnant women's offspring
+4. Cao: an earlier version of this meta-analysis used its "developmental quotient" excluding the pregnant women's offspring; since this does not seem to be IQ, I removed it <!-- Cao.1           1994   90    79       10     18.5  75       18     0.13  50      0/ Cao.2           1994   93    80       8      18.5  75       18     0.63  50      0 -->
 5. Southon: Non-verbal IQ scores pooled[^Southon-pooling]
 6. McNeill: [Digit span](!Wikipedia) used in place of IQ scores (WM correlates highly with IQ)
 7. Gordon: score from matrix subtest (1 of 4 subtest scores; 2 showed positive trend but not significance)
-8. Manger: score from backwards digit span, not forwards (backwards loads higher on _g_; WM test)
-9. Stuijvenberg: backwards digit span
+8. Manger: earlier version used Manger's backwards digit span (backwards is a WM test which loads on _g_); however, the meta-analysis [Melby-Lervåg & Hulme 2013](http://www.apa.org/pubs/journals/releases/dev-49-2-270.pdf "Is Working Memory Training Effective? A Meta-Analytic Review") & my own [n-back meta-analysis](DNB meta-analysis) found that WM exercises which transferred to digit spans did not also transfer to IQ tests, raising questions about using digit span as a proxy for IQ in a causal rather than correlational analysis <!-- Manger          2008   254   3.2      1.56   253   3.3      1.53   9.45  7.75    1 -->
+9. Stuijvenberg: see Manger <!-- Stuijvenberg    1999   62    3.65     1.26   66    3.79     1.25   8.5   25.8    1 -->
 10. Isa: IQ scores reported in unhelpful format; means & deviations reverse-engineered from percentile distribution[^Isa]; as usual, pregnancy-related scores are omitted
 11. Shrestha: 'Fluid intelligence' scores reported, omitting 'Crystallized intelligence' & 'Perceptual skill'; the control group is split across the iodine intervention ("Shrestha.1") and the iodine+iron intervention ("Shrestha.2")
 12. Salarkia:
@@ -210,32 +206,32 @@ The result of the meta-analysis:
 -->
 
 ~~~{.R}
-Random-Effects Model (k = 20; tau^2 estimator: REML)
+Random-Effects Model (k = 16; tau^2 estimator: REML)
 
-tau^2 (estimated amount of total heterogeneity): 1.0372 (SE = 0.3509)
-tau (square root of estimated tau^2 value):      1.0185
-I^2 (total heterogeneity / total variability):   97.62%
-H^2 (total variability / sampling variability):  41.98
+tau^2 (estimated amount of total heterogeneity): 1.2797 (SE = 0.4837)
+tau (square root of estimated tau^2 value):      1.1313
+I^2 (total heterogeneity / total variability):   97.96%
+H^2 (total variability / sampling variability):  49.02
 
 Test for Heterogeneity:
-Q(df = 19) = 300.8484, p-val < .0001
+Q(df = 15) = 284.4073, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.5527   0.2326   2.3766   0.0175   0.0969   1.0086
+  0.6560   0.2878   2.2794   0.0226   0.0919   1.2200
 ~~~
 
 ~~~{.R}
-Fixed-Effects Model (k = 20)
+Fixed-Effects Model (k = 16)
 
 Test for Heterogeneity:
-Q(df = 19) = 300.8484, p-val < .0001
+Q(df = 15) = 284.4073, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.2088   0.0345   6.0505   <.0001   0.1412   0.2765
+  0.2683   0.0392   6.8429   <.0001   0.1915   0.3451
 ~~~
 
 So the effect size is, as expected, small: _d_=0.2. A far cry from the _d_>1 which we might estimate from the prenatal studies.
@@ -252,25 +248,24 @@ A pretty [forest plot](!Wikipedia) summary:
 We suspected, based on the equivocal results in post-birth studies and the large decline in effect over the duration of a pregnancy in the Chinese studies, that if there was any benefit, it would be in the young; on the same reasoning, we might expect large doses to do more good than smaller ones. The necessary data is encoded into the table already, so we run a meta-analytic regression on them as independent predictors:
 
 ~~~{.R}
-Mixed-Effects Model (k = 20; tau^2 estimator: REML)
-
-tau^2 (estimated amount of residual heterogeneity):     1.0469 (SE = 0.3746)
-tau (square root of estimated tau^2 value):             1.0232
-I^2 (residual heterogeneity / unaccounted variability): 97.13%
-H^2 (unaccounted variability / sampling variability):   34.86
+tau^2 (estimated amount of residual heterogeneity):     1.3528 (SE = 0.5489)
+tau (square root of estimated tau^2 value):             1.1631
+I^2 (residual heterogeneity / unaccounted variability): 97.61%
+H^2 (unaccounted variability / sampling variability):   41.91
+R^2 (amount of heterogeneity accounted for):            0.00%
 
 Test for Residual Heterogeneity:
-QE(df = 17) = 257.9610, p-val < .0001
+QE(df = 13) = 242.3638, p-val < .0001
 
 Test of Moderators (coefficient(s) 2,3):
-QM(df = 2) = 1.9689, p-val = 0.3736
+QM(df = 2) = 1.3383, p-val = 0.5121
 
 Model Results:
 
              estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt        0.4911  0.3814   1.2877  0.1979  -0.2564  1.2386
-iodine$age    -0.0117  0.0156  -0.7536  0.4511  -0.0423  0.0188
-iodine$dose    0.0008  0.0007   1.0731  0.2832  -0.0006  0.0022
+intrcpt        0.7114  0.5525   1.2875  0.1979  -0.3716  1.7943
+iodine$age    -0.0155  0.0190  -0.8149  0.4151  -0.0528  0.0218
+iodine$dose    0.0005  0.0009   0.5822  0.5604  -0.0013  0.0023
 ~~~
 
 The coefficients and variability are disappointing: the age and dose moderators explain little of what is going on.
@@ -287,17 +282,16 @@ The `estimate` is the important part: neither of the moderators seem to have a s
 
 ### Multiple supplements
 
-One methodological concern is that by including studies like Southon which supplemented many things besides iodine, our results are merely picking up the efficacy of other supplements (iron is a particular concern). However, the effect of multiple-supplement studies is hardly any larger than the others:
+One methodological concern is that by including studies like Southon which supplemented many things besides iodine, our results are merely picking up the efficacy of other supplements (iron is a particular concern). Curiously, despite our expectation that the multi-vitamin studies would have higher effect sizes because any of the ingredients could be helpful singly or synergistically, it is strikingly the opposite:
 
 ~~~{.R}
-Test of Moderators (coefficient(s) 1,2):
-QM(df = 2) = 8.6381, p-val = 0.0133
+QM(df = 2) = 6.9361, p-val = 0.0312
 
 Model Results:
 
                        estimate      se    zval    pval    ci.lb   ci.ub
-factor(iodine$multi)0    0.8161  0.2782  2.9337  0.0033   0.2709  1.3614
-factor(iodine$multi)1    0.0669  0.3762  0.1778  0.8589  -0.6704  0.8042
+factor(iodine$multi)0    0.8954  0.3416  2.6210  0.0088   0.2258  1.5650
+factor(iodine$multi)1    0.1300  0.5054  0.2572  0.7970  -0.8605  1.1205
 ~~~
 
 ## Bias checks
@@ -307,12 +301,7 @@ We do not have enough to reliably check for biases like [publication bias](!Wiki
 A test & graph:
 
 ~~~{.R}
-Regression Test for Funnel Plot Asymmetry
-
-model:     mixed-effects meta-regression model
-predictor: standard error
-
-test for funnel plot asymmetry: z = 3.3021, p = 0.0010
+test for funnel plot asymmetry: z = 3.1469, p = 0.0017
 ~~~
 
 ![A funnel plot of effect size versus sample size, checking for bias in publishing only good-looking results on iodine](/images/iodine/funnel.png)
@@ -324,7 +313,7 @@ So Shrestha 1994 is driving most of the effect! (Not a surprise at this point.) 
 A trim-and-fill check agrees with us and not the test, by deciding not to add in any new studies between Shrestha and the rest; we also notice that the τ^2^ & _i_^2^ are extremely high, which is just telling us what we know - Shrestha 1994 is different from the other studies:
 
 ~~~{.R}
-Estimated number of missing studies on the left side is zero.
+Estimated number of missing studies on the left side: 0 (SE = NA)
 ~~~
 
 If we were to redo the analysis but omitting Shrestha 1994, we see a much smaller effect-size:
@@ -332,20 +321,20 @@ If we were to redo the analysis but omitting Shrestha 1994, we see a much smalle
 <!-- TODO: exploit the 'subset' argument to rma instead of rerunning the full calculation -->
 
 ~~~{.R}
-Random-Effects Model (k = 16; tau^2 estimator: REML)
+Random-Effects Model (k = 14; tau^2 estimator: REML)
 
-tau^2 (estimated amount of total heterogeneity): 0.0581 (SE = 0.0324)
-tau (square root of estimated tau^2 value):      0.2411
-I^2 (total heterogeneity / total variability):   72.35%
-H^2 (total variability / sampling variability):  3.62
+tau^2 (estimated amount of total heterogeneity): 0.0571 (SE = 0.0347)
+tau (square root of estimated tau^2 value):      0.2389
+I^2 (total heterogeneity / total variability):   70.33%
+H^2 (total variability / sampling variability):  3.37
 
 Test for Heterogeneity:
-Q(df = 15) = 59.4224, p-val < .0001
+Q(df = 13) = 52.7355, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.1941   0.0754   2.5753   0.0100   0.0464   0.3418
+  0.2352   0.0802   2.9307   0.0034   0.0779   0.3924
 ~~~
 
 So, it seems a lot of the effect size is being driven by a few studies turning in large or extremely large effect sizes: Shrestha, Zimmerman, and Dewi (in chronological order). One common factor to these studies seems to be that they worked in the most iodine-deprived areas possible: Shrestha chose his region as being the worst he could find, and Dewi cites reports of goiter in half the population while targeting the supplementation to the most deficient children.
@@ -404,7 +393,7 @@ tf <- trimfill(res1); tf
 cat("Re-run random-effects meta-analysis, omitting Shrestha:\n")
 res3 <- rma(yi, vi, data = escalc("SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c,
                                   n1i = n.e, n2i = n.c,
-                                  data = iodine[c(1:8,11:18),])); res3
+                                  data = iodine[!(grepl("Shrestha", iodine$study)),])); res3
 
 # funnel plot with Shrestha omitted
 png(file="~/wiki/images/iodine/funnel-moderated.png", width = 480, height = 480)
