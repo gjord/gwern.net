@@ -569,7 +569,7 @@ Tools which are used in the site as a whole:
 
 - The source files are written in [Pandoc](http://johnmacfarlane.net/pandoc/) [Markdown](!Wikipedia)
 - math is written in [LaTeX](!Wikipedia) compiled to [MathML](!Wikipedia)
-- the site is compiled with the [Hakyll](http://github.com/jaspervdj/Hakyll/) static site generator, used to generate `gwern.net`, written in [Haskell](!Wikipedia "Haskell (programming language)"); for the gory details, see [`hakyll.hs`](hakyll.hs) which implements the compilation, RSS feed generation, & parsing of interwiki links as well.
+- the site is compiled with the [Hakyll](https://github.com/jaspervdj/Hakyll/) static site generator, used to generate `gwern.net`, written in [Haskell](!Wikipedia "Haskell (programming language)"); for the gory details, see [`hakyll.hs`](hakyll.hs) which implements the compilation, RSS feed generation, & parsing of interwiki links as well.
 
     My preferred method of use is to browse & edit locally using Emacs, and then distribute using Hakyll. To use Hakyll, you `cd` into your repository and `runhaskell hakyll.hs build` (with `hakyll.hs` having whatever options you like). Hakyll will build a static HTML/CSS hierarchy inside `_site/`; you can then do something like `firefox _static/index`. (Because HTML extensions are not specified in the interest of [cool URIs](http://www.w3.org/TR/cooluris/), you cannot use the Hakyll `preview` webserver as of February 2013.)
 - the CSS is borrowed from a motley of sources but stems primarily from the [Hakyll homepage](http://jaspervdj.be/hakyll/) & [Gitit](http://gitit.net/); for specifics, see the unminified `static/css/default.css` in the source repository.
