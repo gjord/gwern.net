@@ -9,7 +9,7 @@ belief: likely
 
 > Has Google Alerts been sending fewer results the past few years? Yes. Responding to rumors of its demise, I investigate the number of results in my personal Google Alerts notifications 2007-2013, and find no overall trend of decline until I look at a transition in [mid-2011](#it-was-mid-2011) where the results fall dramatically. I speculate about [the cause](#panda) and [implications](#conclusion) for Alerts's future.
 
-While researching my [Google shutdowns]() essay on how long Google products survive before being killed (inspired by Reader), I came across speculation that [Google Alerts](!Wikipedia), a service which runs search queries on your behalf & emails you about any new matching webpages (extremely useful for keeping abreast of topics and one of the oldest Google services), [had](http://searchengineland.com/google-alerts-arent-working-148642 "Dear Google Alerts: Why Aren’t You Working?") [broken](http://searchengineland.com/google-alerts-still-broken-152444 "Google Alerts: Still Broken") [badly](http://thefinancialbrand.com/28346/google-alerts-broken/ "An Open Letter to Google: Google Alerts Broken, Now Useless To Financial Marketers") in 2012. When I saw this, I remembered thinking that my own alerts did not seem to be as useful as they did, but I hadn't been sure if this was Alerts's fault or if my particular keywords were just less active than the past.
+While researching my [Google shutdowns]() essay on how long Google products survive before being killed (inspired by Reader), I came across speculation that [Google Alerts](!Wikipedia), a service which runs search queries on your behalf & emails you about any new matching webpages (extremely useful for keeping abreast of topics and one of the oldest Google services), [had](http://searchengineland.com/google-alerts-arent-working-148642 "Dear Google Alerts: Why Aren't You Working?") [broken](http://searchengineland.com/google-alerts-still-broken-152444 "Google Alerts: Still Broken") [badly](http://thefinancialbrand.com/28346/google-alerts-broken/ "An Open Letter to Google: Google Alerts Broken, Now Useless To Financial Marketers") in 2012. When I saw this, I remembered thinking that my own alerts did not seem to be as useful as they did, but I hadn't been sure if this was Alerts's fault or if my particular keywords were just less active than the past.
 
 Alerts dying would be a problem for me as I have used Alerts extensively since 28 January 2007 (2347 days) with 23 current Alerts (and many more in the past) - of my 501,662 total emails, 3,815 were Alert emails - and there did not seem to be any usable alternatives^[I have seen some alternative services, [Yahoo! Search Alerts](http://www.ghacks.net/2013/06/29/yahoo-search-alerts-a-google-alerts-alternative/), [talkwalker](http://talkwalker.com/en) & [Mention](https://en.mention.net/) suggested, but have not used them; the latter 2 do well in [a comparison with Google Alerts](http://moz.com/ugc/google-alerts-vs-mention-vs-talkwalker "Google Alerts VS Mention VS Talkwalker").]. Troublingly, Alerts has already lost [its RSS functionality](http://googlesystem.blogspot.com/2013/07/google-alerts-drops-rss-feeds.html).
 
@@ -79,7 +79,7 @@ plot(Links ~ Date, data=alerts)
 
 ![Links in each email, graphed over time](/images/google/alerts/linksperemail.png)
 
-The first thing I notice is that it looks like the number of links per email is going up over time, with a spike in mid-2010. The second is that there's quite a bit of variation from email to email - while most are around 0, some are as high as 300. The third is that there's a weird early anomaly where emails are recorded as having 0 links; looking at those emails, they are [base64](!Wikipedia) encoded, for no apparent reason, and then all subsequent emails are in more sensible HTML/text formats. An ill-fated experiment by Google? I have no idea.
+The first thing I notice is that it looks like the number of links per email is going up over time, with a spike in mid-2010. The second is that there's quite a bit of variation from email to email - while most are around 0, some are as high as 300. The third is that there's a weird early anomaly where emails are recorded as having 0 links; looking at those emails, they are [base64](!Wikipedia) encoded, for no apparent reason, and then all subsequent emails are in more sensible HTML/text formats. An ill-fated experiment by Google? I have no idea. The highest number is 563, which isn't very big; so despite the skew, I didn't bother to log-transform `Links`.
 
 ## Linear model
 
@@ -211,21 +211,21 @@ coef(mlm2)
 $Search
                                                                (Intercept)       Date
 adult iodine supplementation (IQ OR intelligence OR cognitive)      697.38 -0.0418453
-AMD pacifica virtualization                                        -984.79  0.0729847
+AMD Pacifica virtualization                                        -984.79  0.0729847
 (anime OR manga) (half-Japanese OR hafu OR half-American)           897.29 -0.0555918
 caloric restriction                                               -2303.42  0.1739674
 "Death Note" (script OR live-action OR Parlapanides)                465.50 -0.0254431
 "dual n-back"                                                      4222.94 -0.2675752
 dual n-back                                                         878.35 -0.0516867
-electric sheep screensaver                                         -891.22  0.0665540
+Electric Sheep screensaver                                         -891.22  0.0665540
 "Frank Herbert"                                                    -272.63  0.0258926
 "Frank Herbert" -mason                                            10945.37 -0.6848497
-freenet project                                                   -1328.94  0.0998159
+Freenet project                                                   -1328.94  0.0998159
 "Gene Wolfe"                                                        380.54 -0.0187238
 Gene Wolfe                                                           34.54  0.0093632
 ...
 WikiLeaks                                                          -482.00  0.0382767
-wikipedia                                                         -1686.92  0.1352269
+Wikipedia                                                         -1686.92  0.1352269
 Xen                                                                 309.96 -0.0113617
 ~~~
 
@@ -236,7 +236,7 @@ max(abs(coef(mlm2)$Search$Date))
 [1] 0.6848
 ~~~
 
-Which comes from the `"Frank Herbert" -mason` search, probably reflecting how relatively new the search is or the effectiveness of the filter I added to the original `"Frank Herbert"` search. In general, the slopes are very similar, there seem to be as many positive slopes as there are negative, and the overall summary slope is a tiny positive slope in the second model (0.0286); very few of the searches' slopes exclude zero:
+Which comes from the `"Frank Herbert" -mason` search, probably reflecting how relatively new the search is or the effectiveness of the filter I added to the original `"Frank Herbert"` search. In general, the slopes are very similar, there seem to be as many positive slopes as there are negative, and the overall summary slope is a tiny positive slope in the second model (0.0286); very few of the searches' slopes exclude zero in the caterpillar plot:
 
 ![`qqmath(ranef(mlm2, postVar=TRUE))`](/images/google/alerts/mlm2-slopes.png)
 
@@ -467,3 +467,5 @@ But on closer inspection, the hit seems to have been a one-time deal, and if my 
 
 - [Fanfiction reviewer survival curves](hpmor "A survival analysis finds no major anomalies in reviewer lifetimes, but an apparent increase in mortality for reviewers who started reviewing with later chapters")
 - [Weather]()
+
+<!-- For the update, use a generalized MLM, using a Poisson family as matching the underlying process more accurately -->
