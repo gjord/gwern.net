@@ -248,7 +248,12 @@ To depict the random-effects model in a more graphic form, we use the "[forest p
 
 The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. The high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect, so we use a random-effects.
 
-The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems: our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal [iodine](Iodine) or iron supplementation), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. (For further reading, see [the statistics/methodology discussion in the DNB FAQ](DNB FAQ#flaws-in-mainstream-science-and-psychology).) This skeptical attitude is relevant to our examination of moderators.
+The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems, for two reasons:
+
+1. meta-analyses are generally believed to be biased towards larger effects due to systematic biases like publication bias
+2. our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal [iodine](Iodine) or iron supplementation), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. (For further reading, see [the statistics/methodology discussion in the DNB FAQ](DNB FAQ#flaws-in-mainstream-science-and-psychology).)
+
+This skeptical attitude is relevant to our examination of moderators.
 
 ## Moderators
 ### Control groups
@@ -269,32 +274,7 @@ We can see the difference by splitting a forest plot on passive vs active:
 
 ![The visibly different groups of passive then active studies, plotted on the same axis](/images/dnb/forest-activevspassive.png)
 
-<!-- Muncer style compensation for power issues, split by active vs passive:
-
-passive <- dnb[dnb$active==0,]
-meta <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = passive)
-effectSize <- meta$b[1] # 0.64
-passive$effects <- meta$yi # -0.29120  0.34016  1.19698  1.52927  0.45201...
-for (i in 1:nrow(passive)) { passive$power[i] <- (pwr.t2n.test(passive[i,]$n.c, passive[i,]$n.e, d=effectSize))$power }
-passiveCorrected <- passive[passive$power>0.5,]
-meta2 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = passiveCorrected); meta2
-
-estimate       se     zval     pval    ci.lb    ci.ub
-  0.7376   0.1753   4.2072   <.0001   0.3940   1.0812
-
-active <- dnb[dnb$active==1,]
-meta <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = active)
-effectSize <- meta$b[1] # 0.162
-active$effects <- meta$yi # 2.29543 -0.16511 -0.19220  0.07878...
-for (i in 1:nrow(active)) { active$power[i] <- (pwr.t2n.test(active[i,]$n.c, active[i,]$n.e, d=effectSize))$power }
-activeCorrected <- active[active$power>0.5,]
-activeCorrected
-# error! no studies!
-# meta3 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = activeCorrected); meta3
-round(active$power, digits=2)
- [1] 0.07 0.07 0.06 0.08 0.08 0.06 0.06 0.10 0.05 0.08 0.07 0.07 0.07 0.07 0.07 0.06
-# estimate: ???
--->
+This is very damaging to the case that dual n-back increases IQ. Not only do the better studies find a drastically smaller effect, they are not sufficiently powered to find such a small effect at all, even aggregated in a meta-analysis, with a power of ~0.12, which is dismal indeed when compared to a usual benchmark of 0.8, and leads to worries that even that is too high an estimate and that the active control studies are aberrant somehow in being subject to a winner's curse or subject to other biases. (Because most studies used convenient passive control groups and the passive effect size is 3x larger, they in aggregate are very well-powered: 0.97; however, we already know how they are skewed upwards.)
 
 ### Training time
 
@@ -576,8 +556,11 @@ forest(res1, slab = paste(dnb$study, dnb$year, sep = ", "))
 invisible(dev.off())
 
 cat("Random-effects with passive/active control groups moderator:\n")
-rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
-    mods = ~ factor(active) - 1)
+res0 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c, data = dnb,
+            mods = ~ factor(active) - 1); res0
+cat("Power analysis of the passive control group sample, then the active:\n")
+with(dnb[dnb$active==0,],   power.t.test(n = mean(sum(n.c), sum(n.e)), delta=res0$b[1], sd = mean(c(sd.c, sd.e))))
+with(dnb[dnb$active==1,],   power.t.test(n = mean(sum(n.c), sum(n.e)), delta=res0$b[2], sd = mean(c(sd.c, sd.e))))
 
 # this is ridiculously ugly & fragile, I regret ever wanting to show the split.
 png(file="~/wiki/images/dnb/forest-activevspassive.png", width = 580, height = 780)
