@@ -90,7 +90,7 @@ And with Wolfram and Wortham, we see that 2 legs of the poor beast have been amp
 
 On Christmas 2010, I received one of [Zeo Inc](!Wikipedia "Zeo, Inc.")'s (founded 2003, [shutting down 2013](http://mobihealthnews.com/20772/exclusive-sleep-coach-company-zeo-is-shutting-down/ "Exclusive: Sleep coach company Zeo is shutting down")) Zeo bedside unit after long coveting it and dreaming of using it for all sorts of sleep-related questions. (As of February 2013, the bedside unit seems to've been discontinued; the most comparable Zeo Inc. product seems to be the [Zeo Sleep Manager Pro](http://www.amazon.com/Zeo-ZEO301-Sleep-Manager-Pro/dp/B008I20LJ2/), ~$90.) With it, I begin to apply my thoughts about Quantified Self.
 
-A Zeo is a scaled-down (one-electrode) [EEG](!Wikipedia) sensor-headband, which happens to have an alarm clock attached. The EEG data is processed to estimate whether one is asleep and what [stage](!Wikipedia "Sleep#Sleep stages") of sleep one is in. Zeo breaks sleep down into waking, [REM](!Wikipedia "Rapid eye movement sleep"), [light](!Wikipedia "Non-rapid eye movement sleep"), and [deep](!Wikipedia "Slow-wave sleep"). (The phases aren't necessarily that physiologically distinct.) It's been compared with regular [polysomnography](!Wikipedia) by [Zeo Inc and others](http://web.archive.org/web/20130515062508/http://www.myzeo.com/sleep/validation) and seems to be reasonably accurate. (Since regular sleep tests cost thousands of dollars per session and are of questionable external validity since they are a very different setting than your own bedroom, I am fine with a Zeo being just "reasonably" accurate.)
+A Zeo is a scaled-down (one-electrode) [EEG](!Wikipedia) sensor-headband, which happens to have an alarm clock attached. The EEG data is processed to estimate whether one is asleep and what [stage](!Wikipedia "Sleep#Physiology") of sleep one is in. Zeo breaks sleep down into waking, [REM](!Wikipedia "Rapid eye movement sleep"), [light](!Wikipedia "Non-rapid eye movement sleep"), and [deep](!Wikipedia "Slow-wave sleep"). (The phases aren't necessarily that physiologically distinct.) It's been compared with regular [polysomnography](!Wikipedia) by [Zeo Inc and others](http://web.archive.org/web/20130515062508/http://www.myzeo.com/sleep/validation) and seems to be reasonably accurate. (Since regular sleep tests cost thousands of dollars per session and are of questionable external validity since they are a very different setting than your own bedroom, I am fine with a Zeo being just "reasonably" accurate.)
 
 The data is much better than what you would get from more popular methods like cellphones with accelerometers, since an accelerometer only knows if you are moving or not, which isn't a very reliable indicator of sleep[^Fitbit]. (You could just be lying there staring at the ceiling, wide awake. Or perhaps the cat is kneading you while you are in light sleep.) As well, half the interest is how exactly sleep phases are arranged and how long the cycles are; you could use that information to devise [a custom polyphasic schedule](http://web.archive.org/web/20130528120222/http://blog.myzeo.com/sleeping-round-the-clock-a-polyphasic-experiment/) or just figure out a better nap length than the rule-of-thumb of 20 minutes. And the price isn't *too* bad - $150 for the normal Zeo as of February 2012. (The basic mobile Zeo is much cheaper, but I've seen people complain about it and apparently it doesn't collect the same data as more expensive mobile version or the original bedside unit.)
 
@@ -149,7 +149,7 @@ The major surprise in this data was how quickly I fell asleep: 18 minutes. I had
 # Uses
 ## Meditation
 
-One possible application for Zeo was meditation. If it's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, [_Modern Japanese diaries_](http://www.amazon.com/Modern-Japanese-Diaries-Donald-Keene/dp/0231114435/), for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well.
+One possible application for Zeo was meditation. Most meditation studies are [very small & methodologically weak](http://archive.ahrq.gov/downloads/pub/evidence/pdf/meditation/medit.pdf "'Meditation Practices for Health: State of the Research', Ospina et al 2007"), so it might be worthwhile to verify for oneself any interesting claims. If Zeo's measuring via EEG, then presumably it's learning something about how relaxed and activity-less one's mind is. I'm not seeking enlightenment, just calmness, which would seem to be in the purview of an EEG signal. (As Charles Babbage said. errors made using insufficient data are still less than errors made using no data at all.) But alas, I meditated for a solid 25 minutes and the Zeo stubbornly read at the same wake level the entire time; I then read my [Donald Keene](!Wikipedia) book, [_Modern Japanese diaries_](http://www.amazon.com/Modern-Japanese-Diaries-Donald-Keene/dp/0231114435/), for a similar period with no change at all. It is possible that the 5-minute averaging (Zeo measures every 2 seconds) is hiding useful changes, but probably it's simply not picking up any real differences. Oh well.
 
 ## Smart alarm
 
@@ -1632,15 +1632,15 @@ More precisely, the summary statistics indicate that the difference in means & m
 
 > For background on "value of information" calculations, see the [first calculation](#value-of-information-voi).
 
-With the vitamin D theory partially vindicated by the previous experiment, I became fairly sure that vitamin D in the morning would benefit my sleep somehow: 70%. Benefit how? I had no idea, it might be large or small. I didn't expect it to be a second melatonin, improving my sleep and trimming it by 50 minutes, but I hoped maybe it would help me get to sleep faster or wake up less. The actual experiment turned out to show, with very high confidence, absolutely no change except in my mood upon awakening in the morning.
+With the vitamin D theory partially vindicated by the previous experiment, I became fairly sure that vitamin D in the morning would benefit my sleep somehow: 70%. Benefit how? I had no idea, it might be large or small. I didn't expect it to be a second melatonin, improving my sleep and trimming it by 50 minutes, but I hoped maybe it would help me get to sleep faster or wake up less. The actual experiment turned out to show, with very high confidence, no bad change (and a good change in my mood upon awakening in the morning).
 
-What is the "value of information" for this experiment? Essentially - nothing! Zero!
+What is the "value of information" for this experiment? Essentially - zero:
 
 1. If the experiment had shown any benefit, I obviously would have continued taking it in the morning
 2. if the experiment had shown no effect, I would have continued taking it in the morning to avoid incurring the evening penalty discovered in the previous experiment
-3. if the experiment had shown the unthinkable, a negative effect, it would have to be substantial to convince me to stop taking vitamin D altogether and forfeit its other health benefits, and it's not worth bothering to analyze an outcome I would have given <=5% chance to.
+3. if the experiment had shown the unthinkable (a negative effect), it would have to be substantial to convince me to stop taking vitamin D altogether and forfeit its many other apparent health benefits, and it's not worth bothering to analyze an outcome I would have given <=5% chance to.
 
-Of course, I did it anyway because it was cool and interesting! (Estimated time cost: perhaps half the evening experiment, since I manually recorded less data and had the analysis worked out from before.)
+So since I did, was then, and still do supplement vitamin D, why bother? But of course, I did it because it was cool and interesting! (Estimated time cost: perhaps half the evening experiment, since I had to manually record less data, and already had the analysis worked out from before.)
 
 # Potassium
 ## Potassium day use
@@ -2733,6 +2733,55 @@ May
 21: 2
 22: 3/3000
 23: 4
+24: 2
+25: 4/3000
+26: 4
+27: 2/3000
+28: 3
+29: 2/3000
+30: 3
+31: 3
+June
+01: 3/3000
+02: 2
+03: 2
+04: 2
+05: 3/3000
+06: 3/3000
+07: 2
+08: 2
+09: 3/3000
+10: 4
+11: 4
+12: 2
+13: 3
+14: 2/3000
+15: 2/3000
+16: 3
+17: 4
+18: 4
+19: 3/3000
+20: 2/3000
+21: 2
+22: 3/3000
+23: 4
+24: 4
+25: 3
+26: 3/2000
+27: 3/3000
+28: 3/3000
+29: 2
+30: 4
+July
+01: 3
+02: 3
+03: 4
+04: 3/3000
+05: 3
+06: 3
+07: 4
+08: 3
+09: 4
 -->
 
 <!-- Creativity 1-3
@@ -3021,6 +3070,55 @@ May
 21: 1
 22: 1
 23: 2
+24: 1
+25: 1
+26: 2
+27: 1
+28: 1
+29: 1
+30: 2
+31: 1
+June
+01: 1
+02: 1
+03: 1
+04: 1
+05: 1
+06: 2
+07: 1
+08: 1
+09: 1
+10: 2
+11: 1
+12: 1
+13: 1
+14: 1
+15: 1
+16: 1
+17: 1
+18: 2
+19: 1
+20: 1
+21: 1
+22: 1
+23: 2
+24: 1
+25: 1
+26: 1
+27: 2
+28: 2
+29: 1
+30: 1
+July
+01: 2
+02: 2
+03: 1
+04: 1
+05: 1
+06: 1
+07: 1
+08: 1
+09: 1
 -->
 
 <!--
@@ -3499,19 +3597,50 @@ June
 08: 1 1
 09: 0 1
 10: 1 1
+11: 1 0
+12: 0 0
+13: 1 0
+14: 0 0
+15: 0 1
+16: 0 0
+17: 1 1
+18: 1 0
+19: 0 0
+20: 1 1
+21: 0 1
+22: 1 0
+23: 1 1
+24: 0 1
+25: 0 0
+26: 1 0
+27: 0 0
+28: 1 0
+29: 0 1
+30: 0 1
+July 2013
+01: 1 1
+02: 1 0
+03: 1 1
+04: 1 0
+05: 0 0
+06: 1 1
+07: 0 0
+08: 0 1
+09: 0 1
+10: 1 1
 11: 1 0?
 
 Underpopulated data cells:
-93: 1 1
-91: 1 0
-94: 0 0
-96: 0 1
+99: 1 0
+100: 1 1
+102: 0 1
+102: 0 0
 -->
 <!-- Alcohol log:
 May 2013
-03; 08; 10; 13; 16; 17; 18; 02-04 June
+03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June
 -->
-<!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03 June -->
+<!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03, 12, 16, 19 June; resumed 24 June -->
 
 # External links
 
@@ -4164,3 +4293,33 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 09 Jun 2013: off -->
 <!-- Redshift: 10 Jun 2013: off -->
 <!-- Redshift: 11 Jun 2013: off -->
+<!-- Redshift: 12 Jun 2013: on -->
+<!-- Redshift: 13 Jun 2013: off -->
+<!-- Redshift: 14 Jun 2013: off -->
+<!-- Redshift: 15 Jun 2013: off -->
+<!-- Redshift: 16 Jun 2013: on -->
+<!-- Redshift: 17 Jun 2013: off -->
+<!-- Redshift: 18 Jun 2013: off -->
+<!-- Redshift: 19 Jun 2013: off -->
+<!-- Redshift: 20 Jun 2013: off -->
+<!-- Redshift: 21 Jun 2013: off -->
+<!-- Redshift: 22 Jun 2013: off -->
+<!-- Redshift: 23 Jun 2013: on -->
+<!-- Redshift: 24 Jun 2013: on -->
+<!-- Redshift: 25 Jun 2013: on -->
+<!-- Redshift: 26 Jun 2013: off -->
+<!-- Redshift: 27 Jun 2013: on -->
+<!-- Redshift: 28 Jun 2013: on -->
+<!-- Redshift: 29 Jun 2013: off -->
+<!-- Redshift: 30 Jun 2013: off -->
+<!-- Redshift: 01 Jul 2013: on -->
+<!-- Redshift: 02 Jul 2013: on -->
+<!-- Redshift: 03 Jul 2013: on -->
+<!-- Redshift: 04 Jul 2013: off -->
+<!-- Redshift: 05 Jul 2013: off -->
+<!-- Redshift: 06 Jul 2013: off -->
+<!-- Redshift: 07 Jul 2013: on -->
+<!-- Redshift: 08 Jul 2013: off -->
+<!-- Redshift: 09 Jul 2013: off -->
+<!-- Redshift: 10 Jul 2013: off -->
+<!-- Redshift: 11 Jul 2013: on -->
