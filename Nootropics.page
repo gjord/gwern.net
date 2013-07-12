@@ -736,8 +736,8 @@ The methodology would be essentially the same as the [vitamin D in the morning](
     2. 26 June - 2 July: 1
 17. seventeenth:
 
-    1. 3 July - 9? July: ?
-    2. 10? July - 16? July: ?
+    1. 3 July - 9 July: ?
+    2. 10 July - 16? July: ?
 
 ### VoI
 
@@ -773,7 +773,7 @@ The powder itself is quite bulky; the recommended dose to hit 200mg of absorbed 
 
 One thing I did do was piggyback on my [Noopept self-experiment](#noopept): I blinded & randomized the Noopept for a real experiment, but simply made sure to vary the Magtein without worrying about blinding or randomizing it. (The powder is quite bulky.) The correlation the experiment turned in was a odds-ratio of 1.9; interesting and in the right direction (higher is better), but since the magnesium part wasn't random or blind, not a causal result.
 
-<!-- 23-26: on; 27: off; 28-31: on; 1-3: on; 4: off; 5: on; 6-9: off; 10-11: on; 12-16: off; 17: on; 18: off; 19: on; 20: off; 21: on; 22: off; 23: on; 24-26: off; 27-28: on; 29,30: off; 1 July: off; 2 July: on; 3: off; 4-6: on; 7: off; 8: on; 9: on -->
+<!-- 23-26: on; 27: off; 28-31: on; 1-3: on; 4: off; 5: on; 6-9: off; 10-11: on; 12-16: off; 17: on; 18: off; 19: on; 20: off; 21: on; 22: off; 23: on; 24-26: off; 27-28: on; 29,30: off; 1 July: off; 2 July: on; 3: off; 4-6: on; 7: off; 8: on; 9: on; 10: off -->
 
 # Melatonin
 
@@ -1354,7 +1354,7 @@ Some quick tests turn in similar conclusions: both Noopept and the "Magtein" inc
 npt <- read.csv("http://www.gwern.net/docs/2013-gwern-noopept.csv")
 t.test(MP ~ Noopept, alternative="less", var.equal=TRUE, data = npt)
 
-	Two Sample t-test
+    Two Sample t-test
 
 data:  MP by Noopept
 t = -0.6459, df = 54, p-value = 0.2605
@@ -1381,7 +1381,7 @@ Noopept       0.0886     0.2098    0.42     0.67
 Magtein       0.2673     0.2070    1.29     0.20
 
 Residual standard error: 0.761 on 53 degrees of freedom
-Multiple R-squared:  0.0379,	Adjusted R-squared:  0.00164
+Multiple R-squared:  0.0379,    Adjusted R-squared:  0.00164
 F-statistic: 1.05 on 2 and 53 DF,  p-value: 0.359
 ~~~
 
@@ -1625,6 +1625,39 @@ Either prescription or illegal, daily use of testosterone would not be cheap. On
 On 8 April 2011, I purchased from Smart Powders ([20g for $8](http://www.smartpowders.com/p-5327-l-theanine-powder-20-grams.aspx "L-Theanine Powder: 20 grams")); as before, some light searching seemed to turn up SP as the best seller given shipping overhead; tt was on sale and I planned to cap it so I got 80g. This may seem like a lot, but I was highly confident that theanine and I would get along since I already drink so much tea and was a tad annoyed at the edge I got with straight caffeine. So far I'm pretty happy with it. My goal was to eliminate the physical & mental "twitchiness" of caffeine, which subjectively it seems to do.
 
 Running low on my theanine in May 2013, I learned SP was now undercut by LiftMode selling [50g for $14](http://www.amazon.com/dp/B0093UHQPA/ "L-Theanine - 50 Grams (1.76 Oz) - 99+% Pure - FBA"), so I got 2 (I was doing a big Amazon order anyway). Like the SP theanine it is a nice fluffy white powder and seems to work as well.
+
+# TruBrain
+
+A new all-in-one nootropic [mix/company](http://trubrain.com/) run by some people I know from [`/r/nootropics`](http://reddit.com/r/nootropics/); they offered me a month's supply for free to try & review for them. At ~$100 a month (it depends on how many months one buys), it is aimed at people uninterested in spending a great deal of time reviewing research papers & anecdotes or capping their own pills (ie. people with lives) and it's unlikely I could spare the money to subscribe if TruBrain worked well for me, but certainly there was no harm in trying it out.
+
+The ingredients list was sane and similar to what I would have chosen, and doesn't include any jokers like caffeine:
+
+1. Piracetam: 3g
+
+    Naturally, as piracetam is the standard -racetam to use. It's always worked well for me. 3g is a reasonable amount for people who aren't taking any other sources of piracetam.
+2. ALCAR: 0.5g
+
+    I didn't notice any personal benefits from ALCAR, but I didn't notice any bad effects either and many people claim to benefit.
+3. CDP-Choline: 0.25g
+
+    You'll want choline when using -racetams. 0.25g strikes me as low.
+4. EPA/DHA: 1.2g
+
+    Fish oil is a safe bet for supplements. 1.2g is also low, I would prefer double that. (In the batch I got, there was a sort of fruity/gummy taste & aftertaste. Apparently it's cherry-flavored.)
+5. Magnesium: 0.2g
+
+    My magnesium l-threonate correlation from the Noopept self-experiment suggested magnesium would help me, so I don't mind seeing magnesium here as well.
+6. [Pramiracetam](!Wikipedia): 0.3g
+
+    I don't know very much about pramiracetam.
+7. Theanine: 0.2g
+
+    An old favorite of mine.
+8. Tyrosine: 0.35g
+
+    Like ALCAR, did nothing subjectively noticeable for me, but nothing bad either.
+
+The packaging is nice, if a little confusing (it's not entirely clear what packets are supposed to be taken on the initial days as part of the "loading"). The pills are swallowable (one takes a set with breakfast and a second set with lunch). I do not seem to have died or gone into untoward states like seizures, and the first day went swimmingly.
 
 # Tryptophan
 
