@@ -251,6 +251,8 @@ One is supposed to translate a reasonably complicated expression into prefix for
 
 > "Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers."
 
+My original solution:
+
 ~~~~{.scheme}
 (define (tri x y z)
   (cond
@@ -266,6 +268,53 @@ tri x y z
     | x >= y && y <= z = x*x + z*z
     | otherwise        = y*y + z*z
 ~~~~
+
+It was pointed out to me that this is not right; consider _z_=1, _x_=2, _y_=3. If I don't limit myself to a simple conditional but write a version with sorting, I can easily fix this:
+
+~~~{.haskell}
+import Data.List (sort)
+tri2 :: Int -> Int -> Int -> Int
+tri2 x y z = let a = sort [x,y,z] in (a!!1)^2 + (a!!2)^2
+~~~
+
+Using the [QuickCheck](!Wikipedia) random-tester to take my known-correct version and test its equality with the old version, I verify the presence of error:
+
+~~~{.haskell}
+testWrong :: IO ()
+testWrong = quickCheck(\x y z -> tri x y z == tri2 x y z)
+~> *** Failed! Falsifiable (after 7 tests and 7 shrinks): 0 1 -1
+~~~
+
+This new version `tri2` is correct but not in the spirit of the _SICP_ exercise, which is to do it with a minimal set of conditionals. But having `tri2` lets me use one of my favorite QuickCheck tricks: whatever new version I come up with, test its equality with the known-correct version.
+
+What new version? Thinking a little harder this time, I come up with a corrected `tri3`: the problem requires us to pick 2 numbers out of 3 (and then map multiplication & fold addition on them), and there's only 3 [possible such selections](!Wikipedia "Binomial coefficient") (${3 \choose 2} = \frac{3!}{2! \times (3-2)!} = \frac{3!}{2! \times 1!} = \frac{3!}{2 \times 1} = \frac{3!}{2} = \frac{6}{2} = 3$) - _x_ & _y_, _x_ & _z_, and _z_ & _y_. Now what does it mean to pick _x_ & _y_ and leave out _z_? Well, it must mean that _z_ is less than or equal to _x_, and likewise to _y_, which is obviously just `z <= x && z <= y`. And likewise for the other two cases where we leave out _x_, and then _y_. (Our number of comparisons goes up if we need to work on a 4-item list (${4 \choose 3} = 4$)  or a 5-item list (${5 \choose 4} = 5$).)
+
+Our new version then passes the test:
+
+~~~{.Haskell}
+tri3 :: Int -> Int -> Int -> Int
+tri3 x y z
+    | x<=y && x<=z = y*y + z*z
+    | z<=y && z<=x = y*y + x*x
+    | otherwise = x*x + z*z -- y<=x && y<=z
+
+testRight :: IO ()
+testRight = quickCheck(\x y z -> tri2 x y z == tri3 x y z)
+~> +++ OK, passed 100 tests.
+~~~
+
+The Scheme is then:
+
+~~~~{.scheme}
+(define (tri x y z)
+  (cond
+    ((and (<= x y) (<= x z)) (+ (* y y) (* z z)))
+    ((and (<= z y) (<= z x)) (+ (* y y) (* x x)))
+    (true                    (+ (* x x) (* z z)))
+    ))
+~~~~
+
+Actually, from a theoretical perspective, the version with `sort` is a *generalized* version of our 3 conditionals, because with the 3 conditionals we have hand-written a [sorting network](!Wikipedia) which specifies every possible sort of a 3-item list.
 
 #### 1.4
 
