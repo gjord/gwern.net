@@ -1,6 +1,6 @@
 ---
 description: A retrospective of 7 years of SoC, and lessons learned
-tags: Haskell
+tags: Haskell, predictions
 created: 11 Feb 2009
 status: in progress
 belief: highly likely
@@ -222,7 +222,7 @@ In general, these looked good. Most of them will be widely useful -- especially 
     The LLVM backend is still on track to become the default GHC backend^[A development that surprises me, since I had been under the impression that most GHC work ultimately winds up being scrapped or abandoned like [Liskell](http://www.liskell.org/) or [Mobile Haskell](http://www.haskell.org/haskellwiki/Research_papers/Parallelism_and_concurrency#Mobile_Haskell).], suggesting that it's popular in GHC HQ (and the [DDC](http://disciple.ouroborus.net/) dialect), and it seems to also be popular among [Haskell bloggers](http://www.reddit.com/r/haskell/search?q=LLVM&restrict_sr=on). The scope is restricted to taking a working backend and optimizing it. In general, it seems like a decent SoC proposal, and better than the next one:
 - [Implementing the Immix Garbage Collection Algorithm](http://www2.dcc.ufmg.br/laboratorios/llp/wiki/doku.php?id=marco_soc); Marco Túlio Gontijo e Silva, mentored by Simon Marlow
 
-    **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I'm happy with the state it is now. I think it's a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.) The [GHC wiki](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage/GC/Immix) says that "it's functional, doesn't have known bugs and gets better results than the default GC in the nofib suite. On the other hand, it gets worse results than the default GC for the nofib/gc suite." Marco said in a [Disqus comment](http://disq.us/13lqay) on this page:
+    **Unsuccessful**. The GHC repository history, as of 4 February, contains no patches adding Immix GC. Silva writes in his blog's [SoC summary](http://marcotmarcot.wordpress.com/2010/08/20/immix-on-ghc-summer-of-code-final-report/) that "Although the implementation is not mature enough to be included in the repository, I'm happy with the state it is now. I think it's a good start, and I plan to keep working on it." (His [new blog](http://marcot.eti.br/blog/), begun in August 2010, contains no mention of Immix work.) The [GHC wiki](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage/GC/Immix) says that "it's functional, doesn't have known bugs and gets better results than the default GC in the nofib suite. On the other hand, it gets worse results than the default GC for the nofib/gc suite." Marco said in a [Disqus comment](http://www.gwern.net/Haskell%20Summer%20of%20Code#comment-143756091) on this page:
 
     > Hi. I wondered about continuing my work on the Immix GC collector, but Simon Marlow, my mentor, thought it was not a good idea to invest more effort on Immix. So I dropped it, and started working on other things. Greetings.
 - ["Improving Darcs Performance"](http://darcs.net/GSoC/2010-Cache); Adolfo Builes, mentored by Eric Kow
@@ -292,11 +292,11 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
 
 Which seem like good selections for SoC, and which seem less appropriate?
 
-1. \#1 is the *second* EclipseFP SoC, after a failed [2009](#2009) attempt; why should we think this one will do better?
+1. \#1 is the *second* EclipseFP SoC, after a failed [2009](#section-3) attempt; why should we think this one will do better?
 2. With #2, the fear is that the result will not be used; there is an OpenGL binding already, after all, and I haven't heard that there are very many people who want to do OpenGL graphics but were deterred by complexity or danger in it.
 3. `cabal ghci` is a long-requested Cabal feature, and it sounds as if all the groundwork and experimentation has been done. I have no problem with this one.
 4. Benchmarking sounds quite doable, and `text` is increasingly used; but if I had to criticize it, I would criticize it for *under*ambition, for sounding too modest and not a good use of a slot.
-5. \#5 is a second crack at the parallel compilation problem (building on a [2008](#2008) SoC) and is troubling in the same way the EclipseFP SoC is.
+5. \#5 is a second crack at the parallel compilation problem (building on a [2008](#section-2) SoC) and is troubling in the same way the EclipseFP SoC is.
 6. There are multiple existing Darcs->other VCS programs, so the task is quite doable. An escape hatch would be very valuable for users (even if rarely used).
 7. This one sounds tremendously speculative to me.
 
@@ -418,14 +418,12 @@ In [2012](http://www.google-melange.com/gsoc/org/google/gsoc2012/haskell), Haske
     > People are running into dependency hell when installing Haskell packages. I want to help move in the direction of solving it.
 7. ["multiuser browser-based interactive ghci, hpaste.org meets tryhaskell.org, for improved teaching of those new to Haskell."](http://www.google-melange.com/gsoc/project/google/gsoc2012/shapr/18001) ([proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/shapr/1)); Shae Erisson, mentored by Heinrich Apfelmus
 
-    > Many new users learn Haskell from the `#haskell` irc channel. lambdabot's mueval is good for interactive teaching, but only allows short code snippets. hpaste allows large snippets to be shared, but not into an interactive ghci. Chris Done's <http://www.tryhaskell.org> allows larger snippets to be loaded, but is not explicitly multiuser. If tryhaskell allowed multiple users to view the same interpreter state, and allowed users to paste in new code, teaching and debugging would be much easier for people new to Haskell.
+    > Many new users learn Haskell from the `#haskell` IRC channel. lambdabot's mueval is good for interactive teaching, but only allows short code snippets. hpaste allows large snippets to be shared, but not into an interactive ghci. Chris Done's <http://www.tryhaskell.org> allows larger snippets to be loaded, but is not explicitly multiuser. If tryhaskell allowed multiple users to view the same interpreter state, and allowed users to paste in new code, teaching and debugging would be much easier for people new to Haskell.
 8. ["Haskell-Type-Exts"](http://www.google-melange.com/gsoc/project/google/gsoc2012/shayannajd/18001); Shayan Najd, mentored by Niklas Broberg
 
     > Following the proposal by Niklas Broberg [0], I am highly eager to expand the existing typechecker [1] for Haskell-Src-Exts [2] to support most of the features available in Haskell 2010 with the major extensions like GADTs, RankNTypes and Type-Functions. It is done by following the guidelines of "Typing Haskell in Haskell" [3] as the basis; adding support for RankNTypes [5]; and then introducing GADTs and Type-Functions by local assumptions [4]. [0] http://hackage.haskell.org/trac/summer-of-code/ticket/1620 [1] http://hackage.haskell.org/package/haskell-src-exts [2] http://hackage.haskell.org/package/haskell-type-exts [3] M. P. Jones. Typing Haskell in Haskell [4] D. Vytiniotis, S. Peyton Jones, T. Schrijvers, M. Sulzmann. OutsideIn(X) - Modular type inference with local assumptions
 
 #### 2012 predictions
-
-<!-- WARNING: linked in [Prediction markets](); update link there when making '#### 2013 predictions' (thanks to Pandoc's bad unstable headers) -->
 
 Instead of qualitative predictions this year, I will [record probabilities](Prediction markets) on [PredictionBook.com](http://predictionbook.com/); all predictions assume delivery, but some need different judgment criteria.
 
@@ -521,6 +519,64 @@ logBinaryScore [(0.80, True), (0.40, False), (0.60, False), (0.40, False),
 
 I performed worse than random, in part because 2012 was such a bad year. In particular, I placed great weight on Erisson succeeding (without that prediction, I would score 0.95). In retrospect, I am also disappointed that I assigned the GHC project a high as 65% when I knew GHC projects are as dangerous as Cabal projects and the multiple packages work was a lot of low-level problems with minimal foregoing work.
 
+### 2013
+
+For [2013](https://www.google-melange.com/gsoc/org/google/gsoc2013/haskell), Haskell.org/Darcs picked up a full 11 slots:
+
+1. ["Enhancing Darcsden"](http://darcs.net/GSoC/2013-Darcsden); BSRK Aditya, mentored by Ganesh Sittampalam
+
+    > The goal of this project is to increase the functionality of Darcsden. Darcsden is an open source repository hosting platform for darcs, written in Haskell. The main features are authentication from Github/OpenID, Password Recovery, Editing repository files online, and Comparison between a repository and its forks.
+2. ["Overloaded record fields for GHC"](https://www.google-melange.com/gsoc/project/google/gsoc2013/adamgundry/23001); Adam Gundry, mentored by Simon Peyton Jones
+
+    > Haskell's record system lacks support for overloaded field names. This leads to unnecessarily cluttered code and inhibits code reuse. I propose to implement support for overloaded field names and polymorphic record projection as a GHC extension, with the aim to ultimately add them to the language standard in a future revision. This relatively straightforward change would remove a significant source of frustration for Haskell programmers.
+3. ["interactive-diagrams and a paste site with the ability for dynamic rendering of diagrams"](https://www.google-melange.com/gsoc/project/google/gsoc2013/difrumin/18001); Dan Frumin, mentored by Luite Stegeman
+
+    > I want to build an active-diagrams library for compiling diagrams code into active HTML + JS widgets. The diagrams are active in the sense that user can interact with them: for example, a result of type `(Bool -> Diagram)` should be compiled to a widget that renders a diagram depending on the state of the checkbox. In addition, a pastebin site should be built, that can be used as an interactive scratchpad, where diagrams code can be automatically compiled and the graphical output shown along. This is useful for sharing graphical experiments, teaching beginners and so on. The rendered diagram, together with its interactive capabilities, should be easily embedded in third-party blogs, websites.
+4. ["Haddock extension for Pandoc compatibility"](https://www.google-melange.com/gsoc/project/google/gsoc2013/fuuzetsu/16001); Fūzetsu [Mateusz Kowalczyk?], mentored by Simon Hengel ([further discussion](http://www.haskell.org/pipermail/haskell-cafe/2013-April/107808.html))
+
+    > Project aiming to extend Haddock to a point where writing reader and writer modules for Pandoc is possible. The general goal is to allow for documentation writing in different formats, including the ever popular Markdown.
+5. ["Port Charts to use Diagrams"](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/jbracker/1); jbracker, mentored by Tim Docker
+
+    > Right now the Charts library uses Cairo as backend. Cairo can be difficult to build on platforms other then Linux. Goal of the project would be to port the Charts library to be independent of the used backend. Like that it can support to use Diagrams as backend. Diagrams supports a variety of backends (SVG, Postscript, Cairo (Optional!), Tikz, Gtk), some of which are written platform independent. As Diagrams is easy to install on every platform supported by Haskell, so will the Charts Library built upon Diagrams. This will make it easy for Haskellers to add charting capabilities to their own applications and libraries in a manner portable across all platforms without any pain.
+6. ["Better record command for darcs"](http://darcs.net/GSoC/2013-BetterRecord); José Neder, mentored by Guillaume Hoffmann
+
+    > The objective of this project is to improve the darcs record command implementing several options...Diffing two given files can produce various correct outputs, depending on the algorithm used. The standard diff algorithm (used in darcs and many other places) has been criticized to sometimes produce counterintuitive diffs. We would like to try out the ["patience diff"](http://www.owenstephens.co.uk/programming/2010/12/24/scala-patience-diff.html) algorithm ([Issue 346](http://bugs.darcs.net/issue346)), which seems to produce more interesting chunks when used on source code. One downside of patience diff is that it may be slower than classic diff, so performance will have to be evaluated.
+    >
+    > Moreover, just as the existing flag `--look-for-adds` proposes adding unversioned files to the new patch, we could use a `--look-for-moves` flag, which would be handful when one wants to record a file move after having done the move, ie, without using `darcs move` ([Issue 642](http://bugs.darcs.net/issue642)). Another cool flag would be `--look-for-replaces`, which would detect token renaming when one forgets about using `darcs replace` ([Issue 2209](http://bugs.darcs.net/issue2209)).
+    >
+    > If time allows, a `--provide-primitive-patches` would be useful for darcs to be called by another program that provides the changes to record. For instance, a web interface providing a simple on-line code edit feature a la GitHub.
+7. ["Communicating with mobile devices"](https://www.google-melange.com/gsoc/project/google/gsoc2013/marcospividori/45001);  Marcos Pividori, mentored by Michael Snoyman ([further discussion](http://www.haskell.org/pipermail/haskell-cafe/2013-May/108038.html))
+
+    > The aim of this project is to develop a server-side library in Haskell for sending push notifications to devices running different OS, such as Android, iOS, Windows Phone, BlackBerry, and so on. And, once we have this libraries, investigate the possibility of maintaining a "back and forth" communication between a server and mobile devices and develop a library to handle this.
+8. ["Improve the feedback of the cabal-install dependency solver"](https://www.google-melange.com/gsoc/project/google/gsoc2013/mr_/23001); Martin, mentored by Andres Löh
+
+    > The dependency solver can be a mysterious piece of the installation process. I want to give the user the possibility to see what is happening and also give them a better chance to understand what happened if something does not just work. Further, I would like to enable them to use that information to fix the installation in some cases.
+9.  [Parallelise `cabal build`](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/refold/71002); Mikhail Glushenkov, mentored by Johan Tibell
+
+    > This project aims to add support for module-level parallel builds to Cabal, a system for building and packaging Haskell libraries and programs. I suggest a novel solution for this problem in the context of GHC/Cabal that, unlike existing approaches, will make a more effective use of multi-core CPUs.
+10. ["Extending GHC to support building modules in parallel"](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/parcs/1); Patrick Palka, mentored by Thomas Schilling
+
+    > The aim of this project is to implement native support for building modules in parallel in GHC. This entails making the compilation pipeline thread-safe, and writing a parallel compilation driver next to the existing sequential driver. Focus will be placed on correctness and deterministic output, with speed a latent concern. Nothing in the user's end should change other than there being a new `-j` flag that specifies the number of modules to build in parallel. The cabal-install project should be augmented with the ability to use this new `-j` flag to speed up builds, alongside its existing package-level parallelization.
+11. ["Haskell Qt Binding Generator"](https://www.google-melange.com/gsoc/project/google/gsoc2013/ofan/44001); Zhengliang Feng, mentored by Carter Schonwald
+
+    > This project aims to provide a generation tool that creating Qt bindings automatically for Haskell and make generation as much automation as possible. It parses Qt header files and generates corresponding Qt-style Haskell interfaces (type classes, data types).
+
+#### 2013 predictions
+
+Compiling the 2006-2012 results, I get an overall base-rate of 47% successful, 40% unsuccessful, & 13% unknown projects. With this base rate in mind, I predicted thusly:
+
+1. Darcsden: [65%](http://predictionbook.com/predictions/20625)
+2. Overloaded records: [40%](http://predictionbook.com/predictions/20626)
+3. interactive-digrams: [35%](http://predictionbook.com/predictions/20627)
+4. Pandoc Haddock: [55%](http://predictionbook.com/predictions/20628)
+5. Charts on Diagrams: [75%](http://predictionbook.com/predictions/20629)
+6. `darcs record: [65%](http://predictionbook.com/predictions/20630)
+7. mobile push: [25%](http://predictionbook.com/predictions/20631)
+8. dependency-solver error-messages: [40%](http://predictionbook.com/predictions/20632)
+9. Parallel build: [33%](http://predictionbook.com/predictions/20633)
+10. Parallel modules: [33%](http://predictionbook.com/predictions/20634)
+11. Qt binding generator: [40%](http://predictionbook.com/predictions/20635)
+
 ### Lessons learned
 
 So, what lessons can we learn from the past years of SoCs? It seems to me like there are roughly 3 groups of explanations for failure. They are:
@@ -583,3 +639,4 @@ It's difficult to quantify how 'useful' a package is; it's easier to punt and as
 # External links
 
 - ["How to recruit open-source contributors"](http://redmonk.com/dberkholz/2012/07/10/how-to-recruit-open-source-contributors/) -(Gentoo developer Donnie Berkholz on increasing GSoC->regular developer yields)
+- [Writing a good Haskell SoC application](http://www.haskell.org/pipermail/haskell-cafe/2013-May/108503.html "[Haskell-cafe] [haskell.org Google Summer of Code 2013] Approved Projects") (by mentor Edward Kmett)
