@@ -1001,8 +1001,6 @@ Likelihood ratio test= 4.91  on 3 df,   p=0.178
 Wald test            = 5.22  on 3 df,   p=0.156
 Score (logrank) test = 5.41  on 3 df,   p=0.144
 
-# I have trouble with the risk ratios, though; most of them are very similar, but some are dramatically
-# different, particularly for "Brasil Bitcoin Market"! Asked Moore, he doesn't know why the difference.
 predict(cmodel, type="risk")
  [1] 1.0062 1.2807 1.8416 1.4132 0.6280 0.6687 2.5166 1.4629 1.3860 1.3283 0.8558 1.6955 1.1386
 [14] 0.9682 0.6275 1.9333 0.5593 1.1443 1.1941 1.8569 1.9889 3.6656 0.9899 0.9849 0.5649 0.6393
@@ -1037,3 +1035,5 @@ I(Days/30)         -0.1048     0.0698   -1.50    0.133
 Residual deviance: 32.113  on 37  degrees of freedom
 AIC: 38.11
 ~~~
+
+Moore has provided his original [R source code](http://lyle.smu.edu/~tylerm/data/bitcoin/bitcoinExScript.R), his [exchange data](http://lyle.smu.edu/~tylerm/data/bitcoin/sdatamodCC.csv), and [anti-money-laundering-laws data](http://lyle.smu.edu/~tylerm/data/bitcoin/compliance-aml-cft-whole.csv), so his original analysis can be replicated by anyone interested in the topic.
