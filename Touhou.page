@@ -19,6 +19,61 @@ belief: possible
     (This is outdated; the October 2011 lossless torrent is [1,020 gigabytes](http://www.nyaa.eu/?page=torrentinfo&tid=255825). Personally, [I](http://www.reddit.com/r/TOUHOUMUSIC/search?q=author%3A%27gwern%27&restrict_sr=on) enjoy the orchestral pieces like the [WAVE](http://www.circle-wave.net/) group's [Luna Forest (第七楽章)](http://www.youtube.com/watch?v=xhDNC12hWKc).)
 -->
 
+<!--
+16:19:10 <@gwern> Speed: it is difficult to explain. also, it's much more than 44k
+16:19:23 < klfwip> speed, touhou is a video game franchise which has one of the best fan bases in the world.
+16:19:24 <@gwern> that's just that one highly incomplete torrent
+16:19:28 < Speed> I've found the Touhou Project on wikipedia
+16:19:40 < Speed> but that one seems to list maybe 10 CD's
+16:19:48 < klfwip> they have multiple festivals per year in japan almost completely devoted to selling touhou music and other collectables
+16:21:13 <@gwern> klfwip: actually, I'm not entirely sure about that... I think zun may've put out his stuff under a custom license
+16:21:58 <@gwern> http://cardcaptor.moekaku.com/?p=125 eg
+16:22:08 <@gwern> http://en.touhouwiki.net/wiki/Touhou_Wiki:Copyrights#Copyright_status.2FTerms_of_Use_of_the_Touhou_Project
+16:22:40 <@gwern> this seems pretty unusual for doujin works, but both touhou and vocaloid are big enough that they've'd to've make things more explicit
+16:24:23 <@gwern> Speed: nope. I think it's heavily biased toward recent music, the growth seems too rapid
+16:24:44 < Speed> how much Touhou music does then exist by your estimations?
+16:25:56 <@gwern> Speed: I'm not sure yt. I haven't cleaned the data enough to get a good idea of the counts, and I can't run a capture-recapture estimate of the total universe until the data has improved
+16:26:09 <@gwern> Speed: I wouldn't be too surprised if it were >100k though
+16:26:30 < klfwip> for every big artist who releases dozens of albums, I suspect there are thousands who post one vocaloid mix of a touhou song to niconico
+                   video.
+16:26:39 < Siod> how is most touhou music made?
+16:27:23 < Speed> I'm still not entirely able to believe that many derivatives could have been made from just a few soundtracks
+16:27:39 < Siod> what? it's all derived from soundtracks?
+16:27:41 < klfwip> speed, there are hundreds of original touhou songs.
+16:27:47 < Speed> klfwip: since you have a collection, can you give me a few samples of the music?
+16:27:58 < klfwip> electro, classical, metal, what do you want?
+16:28:04 <@gwern> Speed: oh come on, that's like saying 'I don't know how there can be thousands of apocrypha when there's onyl like a hundred canonical books
+                  in the bible'
+16:28:25 <@gwern> or, 'I don't know how there can be 300m+ books in total'
+16:28:26 < klfwip> and some of them honestly have very little in comon with the source except a melody.
+16:28:38  * gwern links Speed to https://xkcd.com/915/
+16:31:55 <@gwern> Burninate: remixes, distant inspirations, borrowing a hook or melody... they can be remixes in the same way Book of Mormon is a remix of
+                  Zoroastrianism
+16:32:34 < quanticle> gwern: More apropos, it's like saying, "I don't know how a single 5-second drum and bass solo can give rise to an entire genre of music."
+                      http://en.wikipedia.org/wiki/Amen_break
+16:33:46 < quanticle> gwern: Yeah. Pretty much the entire DNB scene is made up of derivatives and riffs on Amen Break.
+16:35:59 < Speed> gwern: so, how does one then classify something as Touhou music or not?
+16:36:02 <@gwern> but it's only 'indie' because zun can make a living off it
+16:37:04 <@gwern> Speed: well, obviously if something is a rearrangement of an existing Zun track like 'Shanghai Teahouse', it's touhou, but there are a lot of
+                  marginal cases where it's simply social - does the creator consider it touhou? did they use touhou-related artowkr or characters? do they
+                  thank zun?
+16:37:38 < klfwip> some really big names in the touhou scene also have succesful careers are pro musicians outside of it.
+16:37:49 <@gwern> nothing stops people from writing their own music without reference to the canonical Zun melodies or themes and simply branding it as Touhou
+16:37:57 < klfwip> if they don't call a particular album a touhou remix album, I would just assume it not to be.
+16:38:14 < Burninate> So Zun made 15 games.  Himself.  Without involving a studio (dojin).
+16:38:28 < Burninate> and then fans made a bunch of derivatives of those 15 games
+16:38:42 <@gwern> Burninate: hm, wasn't the last one or two a collaboration with another group? is that 15 counting the collaborations?
+16:38:44 < Burninate> songs, other games, anime, comics
+16:38:46 <@gwern> novels
+16:38:48 < klfwip> correct
+16:39:01 < Burninate> the descriptions are confusing as fuck
+16:39:05  * Tuxedage would like to add that Zun is insanely talented
+16:39:07 < Tuxedage> Except for the art
+16:39:10 < klfwip> gwern, also the earliest games were not under his control, remember.
+-->
+
+<!-- "Videos containing Touhou tag  Total Hits: 153,553" http://www.nicovideo.jp/tag/Touhou TODO: scrape niconico -->
+
 Idea: correlate Touhou music production against Japanese youth unemployment: does the total production of music as measured in seconds increase with unemployment?
 
 Opposite view, recessions dent production (perhaps because people are working harder and so have less free time even if other people are unemployed?) http://www.gamesetwatch.com/2009/12/sound_current_yokohamas_mediam.php
@@ -64,9 +119,34 @@ alternative sources
 
 Need more databases for capture-recapture analysis!
 
+<!--
+The ISO file seems to be broken: `file` just calls it 'data', and when I mount it as a loopback iso9660 file, `mount` throws an error. I redownloaded it and compared it, but the copies were identical.
+
+The good news is that the zip file seems to work fine. The data is in a .accdb file in a subfolder, which turns out to be the latest Microsoft Access database format. Unfortunately, this turns out to be almost entirely unsupported by anything on Linux (except for a Java library), but fortunately, an acquaintance had an Office 365 subscription and re-exported the .accdb file as a .mdb file (the older Access format) which was successfully read and converted to CSV by `mdb-tools`. The entries look like this:
+
+$ mdb-tables Toho_arrange_circle_database-gwern.mdb
+アレンジサークルリスト
+$ mdb-export Toho_arrange_circle_database-gwern.mdb `mdb-tables Toho_arrange_circle_database-gwern.mdb` > Toho_arrange_circle_database-gwern.csv
+$ head Toho_arrange_circle_database-gwern.csv
+    ID,pin,サークル名,ふりがな,URL,ジャンル,Vocal,主な頒布CD,原曲アレンジの程度,一言,memo
+    1,,"っ´Д｀)っゼロ式の処刑場（っ´Д｀)っゼロ式の家・DESTRUCTIVE ANGEL）","ぜろしきのしょけいじょう","http://shinzanzeroshiki.fc2web.com/","メタル","男","Crazy Trancy Ecstasy","原曲維持","重厚感あふれる荘厳なメタル。（Black）",
+    2,,"α music","あるふぁみゅーじっく","http://www19.atpages.jp/tatu4/","オーケストラ、ピアノ",,"東方風水華月","原曲維持",,
+    3,,"凸凹えんたーていめんとすたじお","でこぼこえんたーていめんとすたじお","http://3rd.geocities.jp/deko_boko_es/index/","リコーダー、ゲームミュージック",,"Electronic Magus","原曲維持","8ビットあり、リコーダー生演奏ありと多彩。（Black）",
+    4,,"[4989]","しくはっく","http://4989mm.littlestar.jp/","ロック","男女","musick for me","原曲維持","スローなロック風アレンジにハイトーン男声ボーカル、エレクトロも混ざったインストも。ドラマCDあり。（Black）",
+    5,,"[ kapparecords])","かっぱれこーず","http://www5f.biglobe.ne.jp/~kapparecords/","ハードロック","男","SCARLET FANTASIA","原曲維持","生演奏ギタードラムベースと男声ボーカルがんばれ。（Black）",
+    6,,"＜echo＞PROJECT","えこぷろじぇくと","http://echoproject.3rin.net/","ダンス、ポップス、ロック","女","eclat:","原曲重視～維持","女性ボーカルを軸にしてジャンルは何でもアレンジ。（Black）",
+    7,,"#039","しゃーぷさんきゅー","http://sharp039.web.fc2.com/",,,"EMERGENCE",,,
+    8,,"#ゆうかりんちゃんねる","ゆうかりんちゃんねる","http://yuukach.web.fc2.com/","オーケストラ、クラシック、ピアノ、エレクトロ、ロック",,"ゴリラ人間のための華麗なる大幻想曲集","原曲維持","クラシカルな構成と管弦を散りばめたオーケストラ、クラシック風インスト。バイオリンの倍音の響きが印象的。（Black）",
+    9,,"10-GALLON(Digit Smith)","てんがろん","http://10-gallon.net/","ロック、エレクトロ、ハードロック","女","悪魔城レミリア","原曲維持","原曲メロをミドルテンポなロックとエレクトロに乗せて。（Black）",
+$ tail -1 Toho_arrange_circle_database-gwern.csv
+    1316,,"侘助","わびすけ","http://ameblo.jp/wa-bi-su-ke/","エレクトロ、ロック","女","東方乙女椿","原曲維持","速めのエレクトロ、ロックアレンジが多め。女声ボーカル。（Black）",
+
+I am a little surprised that there are only 1316 entries. Either I've overestimated their thoroughness or this is limited to a specific convention or something like that... Need to look into this more.
+-->
+
 ### Torrent
 
-Music source: [Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790), 265.2GB of 44421 tracks from 4952 albums produced X-Y by <1,264 groups or "circles".
+Music source: [Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790) (derived from the [Touhou lossless music collection](http://www.tlmc.eu/) collection), 265.2GB of 44421 tracks from 4952 albums produced by <1,264 groups or "circles".
 
 ~~~{.Bash}
 $ find ~/torrent/Touhou\ lossy\ music\ collection/ -type f -name "*.mp3" | wc
@@ -142,7 +222,7 @@ $ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3
 #           -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate
 #           ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json")
 library("rjson")
-# download from http://www.gwern.net/docs/touhou/2013-torrent.json.7z and decompress with 7zip
+# download from http://www.gwern.net/docs/touhou/2013-torrent.json.xz and decompress with xz
 json_data <- fromJSON(paste(readLines("2013-gwern-touhoutorrent.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=12, byrow=TRUE))
 colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
@@ -260,7 +340,7 @@ A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.or
 ~~~{.R}
 # exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date -recurse ~/c83/touhou/ ~/c83/touhou/*/** ~/c83/touhou/*/*/** ~/c83/touhou/*/*/*/** > ~/2013-c83-downloads.json
 library("rjson")
-# download from http://www.gwern.net/docs/touhou/2013-torrent.json.7z and decompress with 7zip
+# download from http://www.gwern.net/docs/touhou/2013-torrent.json.xz and decompress with xz
 json_data <- fromJSON(paste(readLines("2013-c83-downloads.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=13, byrow=TRUE))
 colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
