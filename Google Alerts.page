@@ -30,7 +30,7 @@ $ mkdir 2013-07-01-gwern-googlealertsemails/
 $ mv `cat alerts.txt` 2013-07-01-gwern-googlealertsemails/
 ~~~
 
-I deleted emails from a few alerts which were private; the remaining 65M of emails are available at [`2013-07-01-gwern-googlealertsemails.tar.7z`](/docs/2013-07-01-gwern-googlealertsemails.tar.7z). Then a loop & some shell-scripting extracts the subject-line, the date, and how many instances of "http://" there are in an email:
+I deleted emails from a few alerts which were private; the remaining 65M of emails are available at [`2013-07-01-gwern-googlealertsemails.tar.xz`](/docs/2013-07-01-gwern-googlealertsemails.tar.xz). Then a loop & some shell-scripting extracts the subject-line, the date, and how many instances of "http://" there are in an email:
 
 ~~~{.Bash}
 cd 2013-07-01-gwern-googlealertsemails/
@@ -468,4 +468,6 @@ But on closer inspection, the hit seems to have been a one-time deal, and if my 
 - [Fanfiction reviewer survival curves](hpmor "A survival analysis finds no major anomalies in reviewer lifetimes, but an apparent increase in mortality for reviewers who started reviewing with later chapters")
 - [Weather]()
 
-<!-- For the update, use a generalized MLM, using a Poisson family as matching the underlying process more accurately -->
+<!-- For the update:
+1. use a MLM, using a Poisson family - matches the underlying process more accurately
+2. add additional level of nesting for unique subject lines but about the same subject (so it would go email-subject-lines nested under general-topics eg. all the Gene Wolfe searches should be clustered) -->
