@@ -186,8 +186,9 @@ For the analysis, I have 2 questions:
 Some Bayesian inference using [BEST](http://www.indiana.edu/~kruschke/BEST/):
 
 ~~~{.R}
-lw <- read.table(stdin(),header=TRUE)
-...
+lw <- data.frame(Anchor     = c( 0, 0, 1, 0, 1, 0, 1,  1, 1, 1, 0, 0, 1, 0, 1, 0, 0),
+                 Post.karma = c(11,19,50, 9,19,11,62,120,49,20,16,20,10,45,22,23,33))
+
 source("BEST.R")
 neg <- lw[lw$Anchor==0,]$Post.karma
 pos <- lw[lw$Anchor==1,]$Post.karma
@@ -246,9 +247,57 @@ PARAMETER       mean   median     mode  HDIlow HDIhigh pcgtZero
 
 The difference in means has shrunk but not gone away; it's large enough that 10% of the possible effect sizes (of "a negative initial comment rather than positive") may be zero or actually be positive (increase karma) instead. This is a little concerning, but I don't take this too seriously:
 
-- this is not a lot of data
-- as we've seen there are extreme outliers suggesting that the assumptions of normality may be badly wrong
-- even at face value, 10 karma points doesn't seem like it's large enough to have any important real-world consequences (like make people leave LW who should've stayed)
+1. this is not a lot of data
+2. as we've seen there are extreme outliers suggesting that the assumption that karma scores are Gaussian/normal may be badly wrong
+3. even at face value, 10 karma points doesn't seem like it's large enough to have any important real-world consequences (like make people leave LW who should've stayed)
+
+Pursuing point number two, there's two main options for dealing with the normal distribution assumption of BEST/_t_-tests being violated: either switch to a test which assumes a distribution more like what we actually see & hope that this new distribution is close enough to true, or use a test which doesn't rely on distributions at all.
+
+For example, we could try to model it as a [Poisson distribution](!Wikipedia) and see if the anchoring variable is an important predictor of the mean of the process sum, which it seems to be:
+
+~~~{.R}
+summary(glm(Post.karma ~ Anchor, data=lw, family=poisson))
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-6.194  -2.915  -0.396   0.885   9.423
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   3.0339     0.0731   41.49   <2e-16
+Anchor        0.7503     0.0905    8.29   <2e-16
+...
+summary(glm(Post.karma ~ Anchor, data=(lw[lw$Post.karma<100,]), family=poisson))
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-4.724  -2.386  -0.744   2.493   4.594
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   3.0339     0.0731   41.49   <2e-16
+Anchor        0.4669     0.0983    4.75    2e-06
+~~~
+
+For a non-distribution test or nonparametric test, we can try the [Mann-Whitney U](!Wikipedia) test, which hearteningly turns out to give a very similar answer as the _t_-test did:
+
+~~~{.R}
+wilcox.test(Post.karma ~ Anchor, data=lw)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  Post.karma by Anchor
+W = 19, p-value = 0.1117
+...
+wilcox.test(Post.karma ~ Anchor, data=(lw[lw$Post.karma<100,]))
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  Post.karma by Anchor
+W = 19, p-value = 0.203
+~~~
+
+(On a side note, I regard these _p_-values as evidence for an effect even thought they don't fall under 0.05 or another alpha I defined in advance: with this small sample size and hence low [statistical power](!Wikipedia), to reach _p_<0.05, each anchoring comment would have to have a grotesquely large effect on article karma - but anchoring comments having such an effect is highly unlikely! Anchoring, in psychology, isn't *that* omnipotent: it's relatively subtle. So we have a similar problem as with the [2013 Lewis meditation results](Lewis meditation) - they're the sort of situations where it'd be nicer to be talking in more relative terms like [Bayes factor](!Wikipedia)s.)
 
 ## Comment treatment
 
