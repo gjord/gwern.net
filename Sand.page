@@ -7,7 +7,7 @@ status: in progress
 belief: likely
 ...
 
-I find it interesting how many small cultural changes impede our understanding of even recent materials; for example:
+I find it interesting how many small cultural changes impede our understanding of even recent materials, in a less recondite form of [incommensurability](!Wikipedia "Commensurability (philosophy of science)"). I am sure historians could cite thousands of examples where ordinary practices or beliefs or techniques have been lost and baffle modern-day people reading about them, but I would like to record here some of the ones I have discovered for myself. For example:
 
 > "Tu Mu relates a stratagem of Chu-ko Liang, who in 149 BC, when occupying Yang-p'ing and about to be attacked by Ssu-ma I, suddenly struck his colors, stopped the beating of the drums, and flung open the city gates, showing only a few men engaged in sweeping and sprinkling the ground. This unexpected proceeding had the intended effect; for Ssu-ma I, suspecting an ambush, actually drew off his army and retreated." --Editorial note by [Lionel Giles](!Wikipedia), _[The Art of War](!Wikipedia)_ (1910)
 
@@ -199,7 +199,9 @@ Curious to what extent this knowledge has been lost, how many well-educated inte
 
     1. Do you know what a "holystone" is and is used for?
 
-        [poll]{no}{unsure}{yes}
+        - no
+        - unsure
+        - yes
     2. In this passage:
 
         > "Tu Mu relates a stratagem of Chu-ko Liang, who in 149 BC, when occupying Yang-p'ing
@@ -210,9 +212,11 @@ Curious to what extent this knowledge has been lost, how many well-educated inte
 
        Do you know why the men are "sprinkling the ground"?
 
-       [poll]{no}{unsure}{yes}
+       - no
+       - unsure
+       - yes
 
-       If yes, please reply to this comment using rot13 with
+       If yes, please reply to this comment using [rot13](!Wikipedia), with
        what you believe they are doing and why.
     3. In this passage:
 
@@ -224,10 +228,66 @@ Curious to what extent this knowledge has been lost, how many well-educated inte
 
         Does "sanded floor" refer to...?
 
-        [poll]{a floor made of dirt}{a floor recently repainted}{a dirty floor}{a floor scrubbed with sand}
-              {a floor made of sandstone}
+        - a floor made of dirt
+        - a floor recently repainted
+        - a dirty floor
+        - a floor scrubbed with sand
+        - a floor made of sandstone
 
-The responses were: TODO
+LWers tend to be intelligent and well-read, hence the number who know the right answer is probably an upper-bound on the general population's knowledge of this trivia. [The responses](/docs/2013-07-22-sand-lwpoll.csv) were *mostly* as expected:
+
+1. no: 90%, yes: 5%
+2. no: 66%, yes: 3%
+3. in descending order:
+
+    - "a floor scrubbed with sand": 82%
+    - "a floor made of dirt": 13%
+    - "a floor made of sandstone": 3%
+    - "a dirty floor": 2%
+
+Mostly, because while we obtained the expect majority ignorance on the matter of holystones & sprinkling water to keep down dust, the majority cottons on the right guess in the third question. Some of the replies to the poll agreed with me that this meant I screwed up the wording of the options or its placement, and made it too easy to guess. It seems impossible that a full 82% of LWers would know about scrubbing floors with sand - when they *didn't* know about scrubbing ship decks with sandstone or the now equally obscure practice of watering dust.
+
+So presumably the people taking my little LW poll were clued in by either the first two questions, the correct response sticking out, or by the passage itself giving too much context and implicitly defining what "sanded floor" means. All three hypotheses can be tested by running suitably modified polls:
+
+1. if the first two questions alerted poll-takers to what was going on, then presumably putting the key question *first* would resolve it
+2. if the correct response is too obvious, then replace it by an option which is a superset: "none of the above". Anyone who knows what a sanded floor is will know that none of the other options match, and pick "none of the above".
+3. if the passage is too obvious, use a different passage. The Rowfant Club passage looks like a good candidate.
+
+So I made 3 surveys on Toluna/QuickSurveys (which I used for my previous [iodine eye-color survey](Nootropics#iodine-eye-color-changes)): the first randomized the order of questions, which will let us compare how being put first affects the Morris quote; the second was identical except it replaced question 3's "a floor scrubbed with sand" by "other (none of the above)"; the third was identical to the first, except it replaced the Morris quote with the Rowfant Club quote previously quoted from Google Books. Toluna doesn't seem to easily support testing all 3 variations at once, so I will simply run each survey for a week or so, and analyze each hypothesis separately. If a tweak eliminates the absurdly high guesses at what "sanded floor" means, it should be pretty obvious as the correct response rate plummets from 82% to more like 5%.
+
+<!-- TODO: ping the following LW users as promised:
+http://lesswrong.com/message/compose/?to=abramdemski
+http://lesswrong.com/message/compose/?to=ahartell
+http://lesswrong.com/message/compose/?to=aleksiL
+http://lesswrong.com/message/compose/?to=ArisKatsaris
+http://lesswrong.com/message/compose/?to=arundelo
+http://lesswrong.com/message/compose/?to=ChristianKl
+http://lesswrong.com/message/compose/?to=DubiousTwizzler
+http://lesswrong.com/message/compose/?to=Emile
+http://lesswrong.com/message/compose/?to=Eneasz
+http://lesswrong.com/message/compose/?to=gwern
+http://lesswrong.com/message/compose/?to=iconreforged
+http://lesswrong.com/message/compose/?to=James_Miller
+http://lesswrong.com/message/compose/?to=Kaj_Sotala
+http://lesswrong.com/message/compose/?to=khafra
+http://lesswrong.com/message/compose/?to=mcallisterjp
+http://lesswrong.com/message/compose/?to=moreati
+http://lesswrong.com/message/compose/?to=moridinamael
+http://lesswrong.com/message/compose/?to=nicdevera
+http://lesswrong.com/message/compose/?to=oooo
+http://lesswrong.com/message/compose/?to=Oscar_Cunningham
+http://lesswrong.com/message/compose/?to=Qiaochu_Yuan
+http://lesswrong.com/message/compose/?to=quanticle
+http://lesswrong.com/message/compose/?to=rejuvyesh
+http://lesswrong.com/message/compose/?to=Sniffnoy
+http://lesswrong.com/message/compose/?to=TeMPOraL
+http://lesswrong.com/message/compose/?to=TodesBrot
+http://lesswrong.com/message/compose/?to=toner
+http://lesswrong.com/message/compose/?to=Vaniver -->
+
+# External links
+
+- ["The What-You’d-Implicitly-Heard-Before Telling Thing"](http://slatestarcodex.com/2013/06/17/the-what-youd-implicitly-heard-before-telling-thing/) -(Yvain)
 
 # Appendix
 ## "Scanners Live in Vain" as realistic SF
