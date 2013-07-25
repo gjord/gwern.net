@@ -1,6 +1,6 @@
 ---
 title: 2013 Lewis meditation results
-description: Multi-level modeling of effect of small group's meditation on math errors
+description: Multilevel modeling of effect of small group's meditation on math errors
 tags: psychology, experiments, statistics
 created: 12 July 2013
 status: in progress
@@ -220,7 +220,7 @@ Hours          -0.0526     0.0162   -3.25
 
 To my surprise, there really is a time-of-day effect. (I expected that there wouldn't be enough data to see one, or that it would be a complex squiggle corresponding to circadian rhythms.) And it's a simple linear one, too, which jumps out when one plots errors against hour:
 
-![`qplot(Hours, ErrorCount, color=Meditated, data=mdtt)`](/images//lewis-meditation/hoursvserrors.png)
+![`qplot(Hours, ErrorCount, color=Meditated, data=mdtt)`](/images/lewis-meditation/hoursvserrors.png)
 
 The lesson here is that doing arithmetic at 7AM is not a good idea. (Would that American high schools could realize this...) But moving on: I really don't think there's enough data to get a day-of-week effect as Roberts suggests, so I'll also do a simpler split on weekends.
 
