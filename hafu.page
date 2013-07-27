@@ -527,6 +527,7 @@ Year Series                               Character                     Gender  
 2010 _Sono Hanabira Ni Kuchizuke Wo_      Eris Shitogi                  F        Japanese                     blue    blond The [Giant Bomb](http://www.giantbomb.com/eris-shitogi/94-24814/) entry says "Eris' mother is from Northern Europe and her father is a Japanese businessman. They met on one of his business trips. Eris is very friendly and expressive. She also occasionally uses English words."
 2010 _Ushinawareta Mirai wo Motomete_     Osafune Kenny Taidaro         M        Japanese?       American?    blue    brown
 2010 _Uta no Prince-sama_                 Aijima Cecil                  M                        Japanese     green   brown Cecil is from the "desert country" of Agna Palace; given the description and his appearance, it seems to be a sort of Middle Eastern kingdom like Saudi Arabia.
+2010 _Kiniro Mosaic_                      Karen Kujo                    F        Japanese        English      purple  blond Karen's father is half-Japanese according to the main character (pg 6, ch3.2, v01).
 2011 _AnoHana_                            Meiko "Menma" Honma           F        Japanese        Russian?     blue    white Meiko's blonde/grey blue-eyed mother is listed on the gate as being named "Irene", which is written in Cyrillic.
 2011 _AnoHana_                            Satoshi Honma                 M        Japanese        Russian?     blue    white
 2011 _Bird Cage_                          Washimiya Rin                 F        Japanese        Swedish      blue    blond
@@ -563,6 +564,7 @@ Notes on possibly-controversial excluded characters:
 - 1998: _Ai Yori Aoshi_: Tina Foster, while raised in Japan, is American
 - 1998: _Metal Gear Solid_: TvTropes speculates that the minor recurring character "Johnny Sasaki" is half-Japanese; omitted for lack of evidence
 - 2000: _Super Robot Wars Alpha_: Yuuki Jaggar may or may not be a German-Japanese; no resources online discuss his background (not even the [deleted Wikipedia article](http://www.reference.com/browse/Yuuki_Jaggar)). Excluded for lack of evidence
+- 2002: _Black Lagoon_: Revy is Chinese-American, not Japanese-American
 - 2004: _Kurau Phantom Memory_: Ayaka Steiger is listed as a "mixed heritage" character, but no information seems to be available on her parents' ethnicity or nationality, so I exclude her in the absence of any specific claims. <!-- black -->
 - 2005: _Trauma Center_: Angela "Angie" Thompson is part German, but otherwise is apparently American
 - 2006: _Do You Want to Try?_; Hye Won Han's mother is Korean & her father French, but this is excluded for being a Korean _manwha_ rather than Japanese manga
@@ -1058,11 +1060,12 @@ Work                O GSA IRC ST GIJ ANN MV TV2 TV3 VN MAL DC PP AND TVM CF BU1 
 "Yuki no Taiyou"    1 0   0   0  0   0   0  0   0   0  0   0  0  0   0   0  0   0   0
 "ef a tale of"      1 0   0   0  0   0   0  0   0   1  0   0  0  0   0   0  0   0   0
 
-# closedp.t fits more models, but computationally intractable due to extreme memory use
+# closedp.t fits more models, but computationally intractable due to extreme memory use (>7GB)
 closedp.0(hafu[,-1])
 closedpCI.0(hafu[,-1])
 ~~~
 
+<!-- Kiniro Mosaic_                      Karen Kujo; Khoth on IRC; maybe combine all the IRC hits into one? -->
 <!-- can I use any of the memory-saving packages mentioned in http://randyzwitch.com/r-amazon-ec2/ to run the better heterogenous models? -->
 
 Output:
