@@ -17,7 +17,7 @@ do
             -e "www.tandfonline.com/doi/abs/" -e "jstor.org"   "$PAGE";
         egp -e "http://www.pnas.org/content/.*/.*/.*.abstract" "$PAGE";
         fgp -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
-              -e '~~~{.sh}' -e ' significant ' -e ' significantly ' "$PAGE";
+              -e '~~~{.sh}' -e 'library("' -e ' significant ' -e ' significantly ' "$PAGE";
         # force no highlighting, because the terminal escape codes trigger bracket-matching
         egrep --only-matching '^\[\^.*\]: ' "$PAGE" | sort | uniq --count | \
             fgrep --invert-match "      1 [^";
