@@ -35,6 +35,7 @@ http://blog.givewell.org/2012/09/06/surveying-the-research-on-a-topic/
 http://norvig.com/experiment-design.html
 https://www.nytimes.com/2010/05/02/magazine/02self-measurement-t.html?_r=1&ref=magazine&pagewanted=all
 http://mobihealthnews.com/22410/can-personal-health-data-motivate-behavioral-change-it-depends/
+https://moalquraishi.wordpress.com/2013/07/24/10-months-at-harvard-quantified/
 -->
 
 # What is QS?
@@ -1403,7 +1404,7 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
 [^R-morning-graph]: Code written by Ben Wieland:
 
     ~~~{.R}
-    library("ggplot2")
+    library(ggplot2)
     sleep <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv")
 
     qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar",
@@ -2164,7 +2165,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     ...
     ~~~
 
-    The pipes are delimiters, which I replaced with commas. The first field is a date-stamp as expressed in seconds since the [Unix epoch](!Wikipedia); they can be converted to more readable dates like so:
+    The pipes are delimiters, which I replaced with commas (`tr '|' ','`). The first field is a date-stamp expressed in seconds since the [Unix epoch](!Wikipedia); they can be converted to more readable dates like so:
 
     ~~~{.Bash}
     $ date --date '@1308320681.44771'
@@ -2201,7 +2202,7 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     0.9875169 0.9891269
     ~~~
 
-    What? Using a treadmill made my average WPM go *up* 5 WPM? And my average accuracy increased 0.002%? And both are highly statistically-significant (not a surprise, given how many entries there were)? What's going on - this is the exact opposite of expected! The key is the low mean of the `before` data: I type much faster than 82 WPM now. What happened was that I spent 3 years practicing. Given that I was improving, it is wrong to compare the treadmill typing data against a long-run average. What would be better would be to lop off the first half of the `before` data to get a fairer comparison with `after`, since I began to plateau around then. Redoing the tests:
+    What? Using a treadmill made my average WPM go *up* 5 WPM? And my average accuracy increased 0.002%? And both are highly statistically-significant (not a surprise, given how many entries there were)? What's going on - this is the exact opposite of expected! The key is the low mean of the `before` data: I type much faster than 82 WPM now, more like 90 or 100 WPM. What happened was that I spent 3 years practicing. Given that I was improving, it is wrong to compare the recent treadmill typing data against a low long-run average without any consideration of this trend of increasing WPM. What would be better would be to lop off the first half of the `before` data to get a fairer comparison with `after`, since I began to plateau around then. Redoing the tests:
 
     ~~~{.R}
     t.test(before$WPM[1144:2285], after$WPM); t.test(before$Accuracy[1144:2285], after$Accuracy)
@@ -2222,13 +2223,40 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
     t = -1.3091, df = 1156.249, p-value = 0.1908
     alternative hypothesis: true difference in means is not equal to 0
     95% confidence interval:
-     -0.0012902667  0.0002575397
+     -0.001290  0.000257
     sample estimates:
     mean of x mean of y
     0.9886105 0.9891269
     ~~~
 
-    This is more reasonable: only a 2 WPM gain from the treadmill. 2 WPM could be explicable as just a placebo effect: me wanting to justify the time I've sunk into the treadmill and typing practice every day. It's still a little surprising, but the result seems solid. (If we drop every score before 2000 instead of 1144, the difference continues to shrink but still favors the treadmill. We have to go to scores 2100-2285 before the treadmill starts to lose, but with 2200-2285 the treadmill wins!) Accuracy seems largely unaffected.
+    This is more reasonable: only a 2 WPM gain from the treadmill. 2 WPM could be explicable as just a placebo effect: me wanting to justify the time I've sunk into the treadmill and typing practice every day. It's still a little surprising, but the result initially seems solider. (If we drop every score before 2000 instead of 1144, the difference continues to shrink but still favors the treadmill. We have to go to scores 2100-2285 before the treadmill starts to lose, but with 2200-2285 the treadmill wins!) Accuracy seems largely unaffected. Better yet, we can model the linear progress of my WPM over time and test for a variation that way:
+
+    ~~~{.R}
+    before$Treadmill <- FALSE
+    after$Treadmill <- TRUE
+    typing <- rbind(before, after)
+    typing$Nth <- 1:nrow(typing)
+    summary(lm(WPM ~ Nth + Treadmill, data=typing))
+
+    Call:
+    lm(formula = WPM ~ Nth + Treadmill, data = typing)
+
+    Residuals:
+       Min     1Q Median     3Q    Max
+    -77.36  -5.87  -0.06   6.29  27.49
+
+    Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   77.06152    0.37071  207.88   <2e-16
+    Nth            0.00462    0.00028   16.49   <2e-16
+    TreadmillTRUE -1.41533    0.57651   -2.45    0.014
+
+    Residual standard error: 8.91 on 2867 degrees of freedom
+    Multiple R-squared:  0.131, Adjusted R-squared:  0.13
+    F-statistic:  216 on 2 and 2867 DF,  p-value: <2e-16
+    ~~~
+
+    This is more as expected: so walking on the treadmill cost me -1.5WPM in typing speed, and a day of practice correlates with +0.004WPM (and so a full month of practice would be worth 0.12WPM, so it's probably time to call typing practice quits as having reached diminishing returns).
 
 ### Power
 
@@ -2243,7 +2271,7 @@ pwr.t.test(n=(330/2),power=0.75,sig.level=0.01,type="paired",alternative="less")
               d = -0.2355713
 ~~~
 
-Not that great. We may wind up being able to conclude nothing about the effect on productivity; similarly for sleep - the effect would have to be comparable to vitamin D or melatonin to be detectable.
+Not that great. We may wind up being able to conclude little about the effect on productivity; similarly for sleep - the effect would have to be comparable to vitamin D or melatonin to be detectable.
 
 ### VoI
 
@@ -2782,6 +2810,25 @@ July
 07: 4
 08: 3
 09: 4
+10: 4
+11: 4
+12: 4/3000
+13: 3/3000
+14: 3
+15: 3
+16: 2
+17: 2/3000
+18: 2
+19: 4
+20: 3/3000
+21: 4
+22: 4
+23: 2
+24: 2/3000
+25: 3/3000
+26: 4
+27: 4
+28: 3
 -->
 
 <!-- Creativity 1-3
@@ -3119,6 +3166,25 @@ July
 07: 1
 08: 1
 09: 1
+10: 1
+11: 1
+12: 1
+13: 1
+14: 1
+15: 1
+16: 1
+17: 1
+18: 1
+19: 1
+20: 1
+21: 2
+22: 1
+23: 1
+24: 1
+25: 1
+26: 2
+27: 1
+28: 1
 -->
 
 <!--
@@ -3643,16 +3709,27 @@ July 2013
 23: 1 0
 24: 0 1
 25: 1 0
-26: 1 1?
+26: 1 1
+27: 1 1
+28: 0 0
+29: 0 0
+30: 1 0
+31: 0 0
+August
+01: 0 1
+02: 0 0
+03: 1 1?
 
 Underpopulated data cells:
-103: 1 1
-105: 1 0
-105: 0 1
-105: 0 0
+105: 1 1
+106: 1 0
+106: 0 1
+109: 0 0
 -->
 <!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July -->
 <!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03, 12, 16, 19 June; resumed 24 June -->
+<!-- MP: 28 July: 3; 29 July: 2; 30 July: 3; 31 July: 4; 1 August: 2; 2 August: 3; 3 August: 4 -->
+<!-- Creativity: 31 July -->
 
 # External links
 
@@ -3816,15 +3893,21 @@ I happened to see some news coverage of a sleep paper entitled ["Evidence that t
 
 This interested me both because of the novelty of the claim and because if lunar phase has an impact on sleep, then adding it as a covariate could increase the power of my sleep analyses by reducing error (and best of all, could be calculated for any date - without requiring data I did not collect at the time).
 
-Reading the paper, I didn't find it convincing. It's a small sample size (something like ~64 nights across 33 people), there's a ton of measured variables they could look at for responses, some of the analysis choices are questionable (like how they binned phase of moon: why discretize it when the *easy* approach is to use some astronomical library to get an exact percentage visible? They never justify their "three lunar classes"), they show the scatterplot of only one of their variables which isn't terribly impressive, there's many possible covariates like gender & age, it's a post-hoc analysis they admit they thought up one night (so how many other analyses did they run and not publish...?), and as they say the priors are against there being any effect since previous research has generally failed.
+Reading the paper, I didn't find it convincing. It's a small sample size (something like ~64 nights across 33 people), there's a ton of measured variables they could look at for responses, some of the analysis choices are questionable (like how they binned phase of moon: why discretize it when the *easy* approach is to use some astronomical library to get an exact percentage visible? They never justify their "three lunar classes"), they show the scatterplot of only one of their variables which isn't terribly impressive, there's many possible covariates like gender & age, it's a post-hoc analysis they admit they thought up one night (so how many other analyses did they run and not publish...?), the data is very old which makes me wonder why now & where is the rest of the data from their sleep lab, and (as they say) the priors are against there being any effect since previous research has generally failed.
 
 Of course, I have been using a Zeo since 2010, so I can attempt a replication myself. While I don't have salivary melatonin or cortisol levels or raw EEGs, I do have all the summary metrics from my Zeo, which my latest export a few months ago gave me collectively ~821 days of data (~13x more nights, all from one subject with the reduced variability but also reduced external validity that implies). The analysis is easy enough, and I can even improve on their analysis by using a better phase variable than their arbitrary trichotomy; my life is not as well controlled as a sleep laboratory but here I have the advantage of no sleep disturbance from the laboratory or equipment an in any case, because I would be exposed to lunar cues like the full moon, we would expect the error here to be finding a relationship where there is not one due to circadian rhythms.
+
+### Results
 
 A high level overview is to just take the 4 key variables and plot them against fullness of moon; if there is any relationship, we should expect to see a clear trend (or at least a spike downwards at the right where 100% indicates a full or nearly full moon). Nevertheless, I see nothing in my sleep data:
 
 ![800 days of 4 sleep metrics (time in deep sleep, total sleep time, sleep latency, subjective restedness) plotted against lunar brightness](/images/zeo/2013-lunar.png)
 
-(There's oversampling at 0% and 100% brightness, yes, but that merely shows the moon spends more time in being a full moon or new moon than in transitioning.) Walking through a bunch of statistical tests doesn't turn up much of anything either; throwing the kitchen sink at the data, there's a correlation of lunar brightness with total sleep time but it doesn't quite reach _p_<0.05 and we would expect something like that after running so many tests anyway.
+(There's oversampling at 0% and 100% brightness, yes, but that merely shows the moon spends more time in being a full moon or new moon than in transitioning.)
+
+Walking through a bunch of statistical tests doesn't turn up much of anything either; throwing the kitchen sink at the data, there's a correlation of lunar brightness with total sleep time but it doesn't quite reach _p_<0.05 and we would expect something like that after running so many tests anyway.
+
+### Analysis
 
 Here is my complete R code & analysis:
 
@@ -3832,7 +3915,7 @@ Here is my complete R code & analysis:
 R> set.seed(8888)
 R> zeo <- read.csv("http://www.gwern.net/docs/gwern-zeodata.csv")
 # install.packages("moonsun")
-R> library("moonsun")
+R> library(moonsun)
 R> zeo$Julian.Date <- julian(as.Date(zeo$Sleep.Date, format="%m/%d/%Y"))
 # need location data for astronomical calculations: USA, eastern coast
 R> options(longitude=-72)
@@ -3840,7 +3923,8 @@ R> options(longitude=-72)
 R> zeo$Phase <- moon(zeo$Julian.Date)$phase
 # key claims in Cajochen et al 2013's abstract:
 # "We found that around full moon,
-# 1. electroencephalogram (EEG) delta activity during NREM sleep, an indicator of deep sleep, decreased by 30%,
+# 1. electroencephalogram (EEG) delta activity during NREM sleep, an indicator of deep sleep,
+#    decreased by 30%,
 # 2. time to fall asleep increased by 5 min
 # 3. and EEG-assessed total sleep duration was reduced by 20 min.
 # 4. These changes were associated with a decrease in subjective sleep quality"
@@ -3868,7 +3952,7 @@ Phase       0.000418   0.000777    0.54     0.59
 
 Residual standard error: 0.739 on 733 degrees of freedom
   (86 observations deleted due to missingness)
-Multiple R-squared:  0.000394,	Adjusted R-squared:  -0.00097
+Multiple R-squared:  0.000394,  Adjusted R-squared:  -0.00097
 F-statistic: 0.289 on 1 and 733 DF,  p-value: 0.591
 
 
@@ -3888,7 +3972,7 @@ Phase        -0.0153     0.0141   -1.09     0.28
 
 Residual standard error: 13.4 on 733 degrees of freedom
   (86 observations deleted due to missingness)
-Multiple R-squared:  0.00163,	Adjusted R-squared:  0.000263
+Multiple R-squared:  0.00163,   Adjusted R-squared:  0.000263
 F-statistic: 1.19 on 1 and 733 DF,  p-value: 0.275
 
 
@@ -3908,7 +3992,7 @@ Phase        -0.1350     0.0697   -1.94    0.053
 
 Residual standard error: 66.3 on 733 degrees of freedom
   (86 observations deleted due to missingness)
-Multiple R-squared:  0.00509,	Adjusted R-squared:  0.00373
+Multiple R-squared:  0.00509,   Adjusted R-squared:  0.00373
 F-statistic: 3.75 on 1 and 733 DF,  p-value: 0.0532
 
 
@@ -3928,11 +4012,12 @@ Phase        0.00169    0.01287    0.13      0.9
 
 Residual standard error: 12.2 on 733 degrees of freedom
   (86 observations deleted due to missingness)
-Multiple R-squared:  2.36e-05,	Adjusted R-squared:  -0.00134
+Multiple R-squared:  2.36e-05,  Adjusted R-squared:  -0.00134
 F-statistic: 0.0173 on 1 and 733 DF,  p-value: 0.895
 
 # Let's combine all indicators into a single z-score:
-R> summary(lm((scale(Morning.Feel) + scale(Time.to.Z) + scale(Total.Z) + scale(Time.in.Deep)) ~ Phase, data=zeo))
+R> summary(lm((scale(Morning.Feel) + scale(Time.to.Z) + scale(Total.Z) + scale(Time.in.Deep)) ~ Phase,
+              data=zeo))
 ...
 Residuals:
     Min      1Q  Median      3Q     Max
@@ -3945,7 +4030,7 @@ Phase       -0.00214    0.00212   -1.01    0.314
 
 Residual standard error: 2.02 on 733 degrees of freedom
   (86 observations deleted due to missingness)
-Multiple R-squared:  0.00138,	Adjusted R-squared:  2.12e-05
+Multiple R-squared:  0.00138,   Adjusted R-squared:  2.12e-05
 F-statistic: 1.02 on 1 and 733 DF,  p-value: 0.314
 
 # Still didn't work.
@@ -4505,3 +4590,9 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 24 Jul 2013: on -->
 <!-- Redshift: 25 Jul 2013: on -->
 <!-- Redshift: 26 Jul 2013: off -->
+<!-- Redshift: 27 Jul 2013: off -->
+<!-- Redshift: 28 Jul 2013: on -->
+<!-- Redshift: 30 Jul 2013: on -->
+<!-- Redshift: 01 Aug 2013: off -->
+<!-- Redshift: 02 Aug 2013: off -->
+<!-- Redshift: 03 Aug 2013: on -->
