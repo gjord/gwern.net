@@ -221,7 +221,7 @@ $ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3
 # R> system("exiftool -extension mp3 -json -forcePrint
 #           -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate
 #           ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json")
-library("rjson")
+library(rjson)
 # download from http://www.gwern.net/docs/touhou/2013-torrent.json.xz and decompress with xz
 json_data <- fromJSON(paste(readLines("2013-gwern-touhoutorrent.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=12, byrow=TRUE))
@@ -331,15 +331,17 @@ write.csv(touhou, file="2013-vgmdb-touhou.csv", row.names=FALSE)
 
 ## `touhouwiki.net`
 
-## 4chan /jp/ C83 threads
+## Personal downloads
+### 4chan /jp/ C83 threads
 
 A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.org/jp/1) subforum collaborate each Comiket to upload and distribute doujin manga, games, and music released at that Comiket; some are uploaded by Comiket attendees, some are bought from resellers like [Comic Toranoana](!Wikipedia), and many files are harvested from Japanese P2P filesharing networks like [Winny](!Wikipedia)/[Share](!Wikipedia "Share (P2P)")/[Perfect Dark](!Wikipedia "Perfect Dark (P2P)"). I compiled a list of ~400 files from the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/15pp33/c83_resource_thread/) C83 thread (principally from the 4chan links) & the blog [All Doujin Music](http://alldoujinmusic.wordpress.com) and gradually downloaded them from January to March 2013. After dead links, I was left with 400-500 files. Many are not music, or even Touhou-related, so I hand-filtered albums, looking for signs of being Touhou doujin works (credits to ZUN, Touhou characters in the artwork, themes I recognized as Touhou, etc); when I was not sure, I erred on the side of exclusion. The [final compilation](/docs/touhou/2013-c83-downloads.txt) yielded 3503 files (evenly split: 1776 Touhou vs 1728 "other") with 953 Touhou music files.
 
-    Playback length:
-
 ~~~{.R}
-# exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date -recurse ~/c83/touhou/ ~/c83/touhou/*/** ~/c83/touhou/*/*/** ~/c83/touhou/*/*/*/** > ~/2013-c83-downloads.json
-library("rjson")
+# exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory
+# -FileName -FileSize -NominalBitrate -Date -recurse
+# ~/c83/touhou/ ~/c83/touhou/*/** ~/c83/touhou/*/*/** ~/c83/touhou/*/*/*/** > ~/2013-c83-downloads.json
+
+library(rjson)
 # download from http://www.gwern.net/docs/touhou/2013-torrent.json.xz and decompress with xz
 json_data <- fromJSON(paste(readLines("2013-c83-downloads.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=13, byrow=TRUE))
@@ -356,8 +358,15 @@ touhou[touhou=="-"] <- NA
 
 ~~~
 
+Playback length:
+
 find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|g "Playback length"
 
+### 4chan /jp/ Reitaisai 10 threads
+
+Similarly to above, drawing on the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/1f3ikk/the_reitaisai_10_resource_thread/) discussion and manually pruning duplicates & non-Touhou down to 491 music files.
+
+exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date */*.ogg >> ~/2013-reitaisai-downloads.json
 
 
 # Analysis
