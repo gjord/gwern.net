@@ -412,7 +412,7 @@ With essentially no meaningful differences between conversion rates, this sugges
 
 I have seen complaints that lines on `gwern.net` are "too closely spaced" or "run together" or "cramped", referring to the [line height](!Wikipedia "Leading") (the CSS property `line-height`). I set the CSS to `line-height: 150%;` to deal with this objection, but this was a simple hack based on rough eyeballing of it, and it was done before I changed the `max-width` and `font-family` settings after the previous testing. So it's worth testing some variants.
 
-Most web design guides seem to suggest a safe default of 120%, rather than my current 150%. If we try to test each decile plus one on the outside, that'd give us 110, 120, 130, 140, 150, 160 or 6 options, which combined with the expected small effect, would require an unreasonable sample size (and I have nothing in the pipeline I expect might catch fire like the Google analysis and deliver an excess >50k visits). So I'll try just 120-150.
+Most web design guides seem to suggest a safe default of 120%, rather than my current 150%. If we try to test each decile plus one on the outside, that'd give us 110, 120, 130, 140, 150, 160 or 6 options, which combined with the expected small effect, would require an unreasonable sample size (and I have nothing in the pipeline I expect might catch fire like the Google analysis and deliver an excess >50k visits). So I'll try just 120/130/140/150, and schedule a similar block of time as fonts (ending the experiment on 16 August 2013, with presumably >70k datapoints).
 
 ### Implementation
 
@@ -453,4 +453,27 @@ hunk ./static/templates/default.html 173
 +      "linewidth_class2": ""
 ~~~
 
-TODO: when the line-width is done, do a "null" A/B test to see what happens
+### Analysis
+
+From 15 June 2013 - 15 August 2013:
+
+line %  _n_    Conversion %
+------ ------- ------------
+130    18,124  15.26
+150    17,459  15.22
+120    17,773  14.92
+140    17,927  14.92
+       71,283  15.08
+
+Just from looking at the miserably small difference between the most extreme percentages ($15.26 - 14.92 = 0.34$%), we can predict that nothing here was statistically-significant:
+
+~~~{.R}
+x1 <- 18124; x2 <- 17927; prop.test(c(x1*0.1524, x2*0.1476), c(x1,x2))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(x1 * 0.1524, x2 * 0.1476) out of c(x1, x2)
+X-squared = 1.591, df = 1, p-value = 0.2072
+~~~
+
+Since the difference between 130 and 150 is trivially small, I will not bother to change the 150% setting to 130%.
