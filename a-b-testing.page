@@ -477,3 +477,36 @@ X-squared = 1.591, df = 1, p-value = 0.2072
 ~~~
 
 Since the difference between 130 and 150 is trivially small, I will not bother to change the 150% setting to 130%.
+
+## Null test
+
+One of the suggestions in the A/B testing papers was to run a "null" A/B test where the payload is empty but the A/B testing framework is still measuring conversions etc. By definition, the null hypothesis of "no difference" should be true and at an alpha of 0.05, only 5% of the time would the null tests yield a _p_<0.05 (which is very different from the usual situation). The interest here is that it's possible that something is going wrong in one's A/B setup or in general, and so if one gets a "statistically-significant" result, it may be worthwhile investigating this anomaly.
+
+It's easy to switch from the lineheight test to the null test; just rename the variables for Google Analytics, and empty the payloads:
+
+~~~{.Html}
+hunk ./static/templates/default.html 160
+-      name: 'Line120',
+-      "linewidth_class1": "<style>div#content { line-height: 120%;}</style>",
++      name: 'null1',
++      "linewidth_class1": "",
+hunk ./static/templates/default.html 165
+-      { ...
+-      name: 'Line130',
+-      "linewidth_class1": "<style>div#content { line-height: 130%;}</style>",
+-      "linewidth_class2": ""
+-      },
+-      {
+-      name: 'Line140',
+-      "linewidth_class1": "<style>div#content { line-height: 140%;}</style>",
+-      "linewidth_class2": ""
+-      },
+-      {
+-      name: 'Line150',
+-      "linewidth_class1": "<style>div#content { line-height: 150%;}</style>",
++      name: 'null2',
++      "linewidth_class1": "",
++       ... }
+~~~
+
+Since any difference due to the testing framework should be noticeable, this will be a shorter experiment, from August 15 to September 15.
