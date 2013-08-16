@@ -52,7 +52,7 @@ Similar works:
 <!-- TODO: check Usenet for any contemporary discussion -->
 <!-- TODO: compile the Spanish passages, and find someone to translate them -->
 <!-- TODO: when done, schedule an email interview / series of questions for Scholz:
-why so little about Los Alamos? just one brief reference towards the end
+why so little about Los Alamos? just two brief references towards the end
 why transpose the Project Excalibur scandal from Reagan-era to Clinton-era?
 and not coverage the existential threat of a full test ban, and the grand bargain struck for the supercomputers & lasers to replace testing? from McNamara pg241:
 
@@ -64,7 +64,8 @@ Denial, however, is only part of the story. Several of the weapons experts I met
 do any research on the ground at LLNL?
 reaction to reception - or reception at nuke labs? lots of SF fans there
 overall take on science/technology: purely negative or more mixed?
-surpise at accurate prediction of 'This is probably [Yoshitaka Fujii](!Wikipedia), who had worked at the University of Tsukuba & 3 other institutions; while he was not officially found fraudulent until 2012, the first accusations were leveled in 2000.'
+surprise at accurate prediction of 'This is probably [Yoshitaka Fujii](!Wikipedia), who had worked at the University of Tsukuba & 3 other institutions; while he was not officially found fraudulent until 2012, the first accusations were leveled in 2000.'
+apparent complete failure of 4th gen scaremongering?
 -->
 
 # Background
@@ -6151,7 +6152,28 @@ He shivered as she held him. In the streetlight the line of her lip was archaic,
 
 --Did you ever see him use it?
 
---PGP? Nope. But his mail password had six characters, all lower-case letters.
+--PGP? Nope. But his mail password had six characters, all lower-case letters.[^Highet-password]
+
+[^Highet-password]: This is fatally small; even in the 1970s this could be trivially cracked. With a single Pentium (early '90s), the entire 6-character alphabetical keyspace could be brute-forced in <2 days.
+
+    Worse, it is later revealed that Highet used the dictionary word "coyote"; so it would be unnecessary to use anything as sophisticated as [GPGuess](http://sourceforge.net/projects/gpguess/), a simple shell script [like this one](http://www.linux-archive.org/gentoo-user/518631-script-crack-gpg-passphrase.html) would suffice:
+
+    ~~~{.Bash}
+    #!/bin/bash
+    # try all words:
+    for word in $(cat /usr/share/dict/words); do
+        # try to encrypt with $word passphrase
+        echo "${word}" | gpg --passphrase-fd 0 --no-tty -a --export seckey.gpg -o file;
+
+        # if decrypt is successful; stop
+        if [ $? -eq 0 ]; then
+
+        echo "GPG passphrase is: ${word}";
+        exit 0;
+    fi
+    ~~~
+
+    This uses the standard Unix dictionary any Unix user (like Quine or Conor) would be familiar with; the 99k words of my full dictionary would be tested in minutes, but it can easily be cut down to 11k words by selecting just the six-character words (`grep -E '^.{6}$' /usr/share/dict/words`). Quine is an intelligent physicist who has programmed C for years, and Conor is a Unix sysadmin; in real life, either would understand the weakness of the password and break it in minutes using approaches like these.
 
 --How do you know that?
 
@@ -7551,4 +7573,126 @@ His hand came off her. --I'm, what?
 
 --Just to, to the bathroom.
 
-He stood in the dark voiding. Outside a pale light fled across the sky. Through a break in the clouds, the moon appeared full and racing [pg271]
+He stood in the dark voiding. Outside a pale light fled across the sky. Through a break in the clouds, the moon appeared full and racing [pg271] like a ship through foam. The view from Persephone looking back toward Earth at that moment would have shown, clustered like jewels in a handsbreath of Aquarian space, the Sun and crescent Earth set against the diadem of Venus, Mars, Mercury, and Saturn, but its cameras pointed the other way, downward, like a man looking for dropped change on the Moon's bright and barren surface.
+
+
+### Three
+
+<!-- TODO -->
+
+[pg272] Though the equinox bore down, winter hung on, bracketing days of sun with downpours, relenting for a week then returning in force, breaking the banks of rivers, undermining cliffside rads and homes, covering the mountains in forgetful snow. Sun, when it appeared, penetrated his office from unaccustomed angles, striking the corner where twenty-five volumes of Funding Request FY95 were stacked on the floor in piles of varying height as from time to time he carried one to his desk, consulted it, left it open for the drift of papers and folders across it till a chance thaw exposed it to be shut and returned to the pile. Papers accumulated in wire baskets, on the desk, they fell into half opened drawers and onto the carpet, where he bent to recover Core R&AT Program Elements (Detail) as the shadow of a frown passed over his features at Characteristics Of Principle-Centered Leaders, *See yourself each morning yoking up, putting on the harness of service in your various stewardships, see yourself taking the straps and connecting them around your shoulders as you* lift the phone for --Yes? Thank you Dolores, put him through. Hello Reese I, I, wait who is this? Well get off the line! Dolores? Did you say secure line, somebody was just, oh all right, yes I'll. Yes just let me, hello? Oh hello Reese. Yes i, just fine. Oh well, you know, the usual glitches, but overall things are. Yes I do, wait just a... scanning the desk and jabbing the hold button to call, --Dolores! Where's that courier package! as she entered with a vinyl pouch and tossed it on his desk for unzipping and the candystriped border on the folder within, --okay I have [pg273] it, mission need, earth penetrating, reduced yield. Uh huh. I'll pass this on to oh you did, okay then. My approval? Sure, give me a minute to just look over the, uh huh, okay, I see it now, in light of Gulf War lessons, seek new options for hardened nuclear, attack and destroy underground bunkers, earth-coupled shock waves, uh huh, ...1987? Reagan admin, yes I see it, capability against deeply buried targets, B fifty three unsuitable for, that's a, the B fifty three is a, a nine megaton device? What they used to call a city buster? What? Crowd pleaser? Oh really? I didn't know the individual bombs had nicknames. Yes, I can see it's overkill for a bunker. Won't fit in a Stealth B two. Dial-a-yield now that's... oh, there's actually a dial? Uh huh. Ten to three hundred kilotons. And that's the existing mark, the, the B sixty one rev seven. Uh huh. I mean we're not, this is a modification right, not a new weapon. No change to the physics package? Uh huh. Okay. Yes, I will. Oh, and Reese, one thing, as the restless stir of his fingers found Core R&AT Program Elements (Detail), --We've been saying in our public information tat we won't design new weapons. Nuclear, yes, nuclear weapon designs, that's what I mean. But let me read this to you, ah... "concepts under consideration range from relatively minor modifications in the components of existing weapons to entirely new physics designs for a proposed or candidate weapon". Yes. That's from a DOE document on a public server. Also this... "concept design studies arising out of experiences during and after the Gulf War indicated potential military utility for types of nuclear weapons not currently in the stockpile". Yes well, our public information office asked me to, to clarify it. Because all this might sound like new designs to someone who, who isn't. Concepts, yes of course I understand, I just worry that someone else who, who, might, might. Yes but if, I mean it's on an open server! Anyone could. Yes I do, right here. It's, hold on, FTP colon slash slash DP dot DOE dot GOV slash DP hyphen ten slash DP hyphen eleven slash detail dot D eleven. And just, just one more thing, research on pure fusion weapons^[See the _The Quest for Fourth Generation Nuclear Weapons_ (quoted extensively in a following section); unlike a normal fusion nuclear bomb where a small fission nuclear bomb compresses the fuel and kicks off a fusion reaction, "pure" fusion weapons would go straight from something like a powerful laser to a fusion reaction, potentially offering very different performance.] is still classified, correct? I thought so, but, as papers flurried off the edge of the desk to settle on the carpet, --here it is, sixteen A, unclassified, fact of research on pure fusion weapons, do you know about that? On the same server. Uhhuh. I see. Fact of research but no details. Well, I ask because of Avalon and [pg274] the nonproliferation issues, I mean we have a public hearing coming up don't we? Yes, the one Chase asked for. You've scheduled it for, when, May? Yes we'll have the conceptual Design Report done by then. Yes, just so, so we're on the same... as the next page was uncovered by the brusque sweep of his hand, pushing aside DOE Performance Agreement, *The Department has changed its priorities, so that we contribute to the restoring of the American Dream, improved communications and trust, a safe and rewarding workplace that is results-oriented and fun*, and DOE Openness Initiative Update: *Appointment of the Advisory Committee on Human Radiation Experiments has enabled the Department to regain control of the controversy and to slow down public*, for URL-ID-120738 Avalon System Design Requirements, folding it firmly back to X-Ray Laser Experiments, *needed to preserve our competency in non-LTE design and to develop short-wavelength x-ray lasers for dual-benefit applications*.
+
+The days lengthened, extending the near perpetual twilight of wind and rain that stippled the construction area, the parking lot, the freeway, the driveway of his house, most often empty, with Lynn preparing for the hearing, or away on some retreat. Twice in the month they were together for a night, a bubble of time outside normal succession, a pocket utopia whose boundaries, for that moment, excluded the greater world, but always that world returned, ominous as the dark tower of cloud behind Mount Ohlone as he dropped the blinds and sat frowning at
+
+<!-- TODO -->
+
+> *Atten: Dr. Philip Quine, director* \
+> *From: Dennis Kihara* \
+> *Re: DOJ request* \
+> *To effectualize a Department of Justice request, E Section performed experiments stopping automobile engines with microwave beams. Using Laboratory equipment, we beamed microwaves onto an engine. The engine, which was idling, stopped within a couple of seconds* \
+> *Because our equipment could only generate modest amounts of power, the hood was opened to maximize the exposure. Our automobile [pg275] was a standard government issue sedan. We believe that the microwave confused the computer. A sensor was upset and gave the computer a too lean reading, causing the engine to stall. After the experiment, we drove the automobile back to our office 15 miles away. After hundreds of exposures under various stressing conditions, the sensor did quit.* \
+> *We will present our data in a classified talk and tell our story about how the media changed our story.* \
+> *Work performed under Contract W-7405-Eng-48.*
+
+<!-- TODO: white dog is a Navajo or Zuni fetish -->
+
+--Just the kind of high quality first-principles research we want to effectualize around here... he muttered, as it vanished under Ohlone Valley Herald, Critics Charge, and he lifted the phone for --Dolores, tell Dennis Kihara I want to see him in here right aw... who? Put him on. Jeremy, how's Washington? Yes fine, the Herald seems to have, at least your hiring's no longer... what? No I didn't. Okay, I'll look into it. Listen, those Nullpoint papers I gave you, did you, did you show... what do you mean you already, Highet gave them to you? Before he? But, to clarify that he hadn't, but you mean he, no now look you mean, waiving commercial rights, spinning off shell companies you, you mean all that's legal? Yes I know DOE was encouraging technology transfer but that's what CRADAs are for you can't just... Yes I do want to bring it up again, there's, there's what do you mean more import, no but look this is important the principle is important! He can't get away with... Me? How can it bite me? I had nothing to do with it! Yes I see that but, but and what? Four hundred mill, that has nothing to do with me, how can you even... a, a history? Well it's not my history! but, withhold until a full accounting, who... Bangerter? Who's he? Armed Serv, and and where did he hear...? Well it's none of his business who I, I, I, what my personal life is or what her politics are, who does he think he... well if he thinks he can use any of this to stop Avalon he's wrong because I'm going to do what I think is best for the Lab no matter wh... well fine then you just deal with that! He dropped the handset and leaned back in the chair, eyes shut, opening at last to a fly orbiting his head to land on the computer screen, where he came forward for [pg276] `mQEPAzlqPx0AAAEIALEPWTHRLZ6x0n75VZkUwjpOFI3coOOvmB35xXcwgym+Du8biuNgKrK+KwkHvJxdaywtkixRZkl/IEKEktWviruj520c1tuy5DNV+MR0pZUDKZbbj1I2PscuTS9D4qFRXQ/hNKbTtFjQD9RavfBr2kTHEFqzqnmJY9KOlm2bK312Wz05` and squandered a minute trying six letter permutations at Password: ••••••, as the fly lighted on Counterproliferation in the New World Order and he quietly raised Ohlone Val poised to come crashing down on a white stone dog uncovered by the force of his blow as the fly entered a new orbit eccentric as any asteroid's. Eyes narrowed on it he lifted the phone for, --Dolores? Where's Dennis Kihara? He's not? First day he's been gone since his leave started... as the sun broke briefly upon his desk, finding him unwilling to turn for long from the ongoing distraction of the present to the eternal reproach of the past or the future's capricious threats, addressed in gory detail by STRATCOM 2010 Potential Uses For Low-Yield Nuclear Weapons In The New World Order, *We doubt that any president would authorize the use of nuclear weapons in our present arsenal against Third World nations. It is precisely this doubt that leads us to argue for the development of subkiloton nuclear weapons, weapons whose power is effective but not abhorrent...An earth penetrator with a yield of just ten tons could hold buried leadership and C3 at risk while keeping collateral damage very localized...The most appealing concepts focus on nuclear warheads with very small yields and with design and delivery techniques that minimize fallout, residual radiation, and collateral damage, offering a wider range of targeting options for maintaining a credible nuclear deterrence in the new world order.* His head lifted for the sharp rattle of rain against the window, only to lower again to *That the US may become irrational and vindictive if its vital interests are attacked should be part of the national persona we project to all adversaries...* as he looked up into Nolan's saturnine face, colorless and fixed in the rainlight. --Bran?
+
+
+--Did you look at those environmental reports yet?
+
+--The, I'm sorry, the what?
+
+--Last month I gave you a couple of files concerning toxics?
+
+--Oh yes, I, I meant to, but you, you can see what I'm up against here, gesturing vaguely at the clutter around him, surprised as Nolan seriously followed his gaze across FY95, System Design Requirements [pg277], FUDGE: A Fusion Diagnostic for Avalon, to the edge of the desk where something hidden behind The 7 Habits of Hi seemed to catch Nolan's eye, --not, not even sure where those files are now...
+
+--What's this?
+
+--The, what...? his baffled gaze rising to the white stone dog in Nolan's hand, its snout pointed skyward, its mouth a blue dart back to where haunches were more implied than incised.
+
+--Oh it's, I think Highet left it behind. Do you know what it is?
+
+--Coyote fetish. Navajo, maybe Zuni. He could have got it on a visit to our. sister lab in the Southwest. Ten bucks at a roadside stand. So you're not doing anything about those toxics reports?
+
+--I'll look at them, but, what with the Conceptual Design Report and I've really got to finish reviewing the System Design Requirements oh and the budget stuff... anyway isn't Boniface in charge of
+
+--Okay, I can see you're busy, I'll handle it some other way.
+
+--Thanks, I... as the coyote fetish went back on the desk, to hold down a turned-back page, *The monetary and deferred maintenance costs of more than fifty years of the nuclear arms race rise like a cresting wave to shadow present and future generations. The cost of building our present stockpile was approximately five trillion dollars, and the cost of managing it will be far higher*, glowing more brightly under the halogen lamp as night came on and Quine paused over Ohlone Valley Herald to tear out Respect Fades For Activists, moved some papers aside from System Design Requirements Part V X-Ray Laser Research, eyes falling on The Quest For Fourth Generation Nuclear Weapons, Andrew Sorokin, 1211 Geneva 12 Switzerland. The familiar name lashed out from a past that, like so many of these papers, refused to stay buried.
+
+> *First generation nuclear weapons (NW) are uranium or plutonium fission bombs, such as the Hiroshima and Nagasaki weapons. They are relatively simple, reliable, rugged and compact.*
+>
+> *Second generation NWs are two-stage thermonuclear devices, commonly called hydrogen bombs. a tritium-boosted fission bomb is used to implode and ignite a secondary fusion reaction which produces most of the yield.*
+>
+> *Third generation NWs are "tailored" or "enhanced" to increase or [pg278] decrease certain effects such as degree of radioactive fallout. A typical example is the so-called neutron bomb.*
+>
+> *Fourth generation nuclear weapons are based on atomic or nuclear processes that are not restricted by the CTBT. Their development will be essentially science based. It is likely that the first fourth generation nuclear weapons will be miniaturized explosives with yields in the range of 1 to 100 ton equivalent TNT, i.e., in the gap which today separates conventional weapons from nuclear weapons. These relatively low yield nuclear explosives would not qualify as weapons of mass destruction.*
+>
+> *Considerable research is underway in all five nuclear-weapon states into inertial confinement fusion (ICF) and other physical processes necessary to develop fourth-generation NWs. A major arms control of fourth generation weapons is that their development is very closely related to pure scientific research. The chief purpose of the CTBT is to freeze the technology of nuclear weapons as a first step toward general and complete nuclear disarmament. In order to archive that, it is necessary to implement effective measures of preventive arms control, such as internationally binding restrictions in all relevant areas of R&D whether they are claimed to be for military or civilian purposes.*
+
+00Easy for you to say... as he raised blinds to a night sky the blacker for floodlights glaring below it and the broken grid of lights where some had stayed late working to sketch against that blackness, as it were, some foreseeable future, some extension of these lines of light past the boundaries of the Lab and into a world bodied forth in those pages he returned to, a world in which *High Energy Laser (HEL) systems offer the potential to maintain an asymmetric edge over adversaries for the foreseeable future. Funding for HEL Science & Technology programs should be increased to support priority acquisition programs and to develop new technologies for future applications. The HEL industrial supplier base is fragile and lacks adequate incentive to make the large investments required to support anticipated DoD needs. The DoD should leverage HEL relevant research being supported by the Department of Energy (DOE)*, as he muttered, --Put assets in space you have to protect them, let's sow a [pg279] few dragon's teeth while we're at it... industrial supplier base a little fragile let's pump up the demand... what time is it anyway...?
+
+Rain in the early hours abated only for the bluster of wind and a rush of dappled light across the torn and lakeleted pit below, the glistening black piles of gravel and mounds of dun earth cradling sky colored pools like a model sierra, as day made its tentative way into the empty office, asserting itself across _Types of fourth generation weapons_ until the blind was dropped to close it out, and the chair creaked under his weight settling back to
+
+> 1. *Subcritical and microfission explosives. With 1 kg of high explosive and under 1 gram of Pu, it is theoretically possible to produce a highly compact weapon with a yield of several tons TNT equivalent.*
+> 2. *Transplutonic and superheavy elements. These elements are in general fissile, and their critical masses are much smaller than that of Pu, potentially in the range of grams rather than kilograms. The goal is to find a long-lived superheavy element with a critical mass of 1 g or less. ^267^108 was synthesized at Dubna last year with a halflie of 19 msec, and ^265^106 and ^265^107 with halflives of about 10 seconds, confirming Nix's theory about stability, suggesting that close to 400 stable superheavy nuclei may be found between elements 106 and 136 and that at least a dozen of them should have halflives longer than 25,000 years.*
+> 3. *Antimatter. Releases 275 times more energy per unit mass than any other reaction. Antiprotons have been captured and confined in magnetic traps. CERN is building an antiproton decelerator. Could be used to ignite subcritical burn of fissile material.*
+> 4. *Nuclear isomers. High explosives have energy contents ≈ 5 kJ/g. Nuclear isomers yield ≈ 1 GJ/g. Fission yield ≈ 80 GJ/g. Long-lived isomers in the region of interest have not yet been observed.*
+> 5. *Superexplosives and metallic hydrogen. Could be used to greatly reduce size of fission trigger.*
+> 6. *Pure fusion. The challenge is to build a compact single-use device that can replace the huge accelerator, laser, capacitor bank, or magnet that is necessary for laboratory ignition of fission or fusion capsules. Whether or not a fusion driver such as a compact laser can be designed, ICF experiments with laboratory lasers will enable the [pg280] development of mini-secondaries.*
+> 7. *Superlasers. There is no fundamental obstacle to reaching the theoretical maximum intensity of 10^24^ W/cm^2^. Such devices could be made compact enough to have numerous weapons applications, from fusion drivers to particle beam collimators. Their civilian applications are so numerous that containing such developments will be nearly impossible*
+
+...and the blind lifted onto another twilight overborne by the flicker of the overhead fluorescents, their meandering buzz grating against his rising panic at another day so quickly slipped away, and he rose to snap them off, the evening light at that moment perversely swelling as the sun found space to swim beneath the leaden overcast into delicate bands of salmon and silver cloud figured on the darkness like floating meadows, till it ignited in them like a jewel and sent shafts of fire across the wide air and into the office, washing the wall with rosy light, a quickly gathered promise that as quickly faded as if sorrowed that its luminosity hadn't been seized, but was overlooked for The Avalon Facility And The Issue Of Nonproliferation DRAFT,
+
+> *This section will explore, within classification guidelines, what weapons science is technically possible at Avalon.
+>
+> i. Radiation flow
+> ii. Properties of matter
+> iii. Mix and hydrodynamics
+> iv. Using ignition for weapons science
+> v. X-ray laser research
+>
+> For two reasons, Avalon would not be sufficient to develop a pure fusion weapon: (1) its targets are much too small to be a weapon; and (2) the driving mechanisms and conditions that would be required for a weapon are entirely different than those required for ICF.
+
+But that... overlooked and forgotten radiance returned soon enough through slats in the blind aligned so that it glazed the white stone coyote, still at attention, holding down Organization For The Creative Person, as his hand reached for it but was checked by, --Hello? Reese? Oh, yes... you did? Okay, let me... turning to the computer for
+
+> \> **ftp dp.doe.gov**
+>
+> `Connected to dp.doe.gov` \
+> `220 Welcome to the Department of Energy FTP Server.` [pg281] \
+> `220 Unauthorized or illegal use of this archive is prohibited.` \
+> `Name:` **anonymous** \
+> `331 Guest login ok, send your complete e-mail address as password.` \
+> `Password:` **quine@lucinda.lab.gov** \
+> `230 Welcome to the Department of Energy FTP Server.` \
+> `230 Guest login ok, access restrictions apply.` \
+> `ftp>` **cd /dp-10/dp-11** \
+> `250 CWD command successful.` \
+> `ftp>` **get detail.d11** \
+> `550 detail.d11: Permission denied.`
+
+then lifting the handset, --Yes, I just checked, it's, it's gone. What? Yes it's, I'm just finishing it, the statement of work, I'll e-mail it to you right away... bringing up a new window on the screen to type quickly, *The B61 rev 11 will be designed with the help of computer simulations. Hydrotest Shot 3574 will be the basis for certifying the B61 rev 11. Full scale penetration tests will be conducted at Aguas Secas Test Site*, filling in To: reeset@doe.gov and clicking SEND. The stone dog snared his eye again and in annoyance he reached to move it, but once it was in his hand his eyes narrowed and he held it. After a moment he replaced it on the desk, turned to the computer and /highet/pgp/ and typed Password: coyote for a flood of files opening one over another until windows too many to count were overlapped with arched brows and sultry eyes and splayed limbs and grasping hands and pouting lips, where lovely Lyca, tanned in the face by shining suns and blowing winds, lay with Rose and Sharon and Lily and their valleys and the hinds of their fields putting forth what might have been green figs hanging from every man with his sword upon his thigh, while in desart wild the virgin view'd loos'd her slender dress for the threat'ning horn blush'd fiery red, seeking only itself to please, naked in the sunny beam's delight, pressing with slow rude muscle to deposit the fruits of the gushing showers from pent-up aching rivers, his eyes fixed on the lineaments of gratified desire as he muttered, --What, more of these? and the phone blurted. --Yes. Oh! No yes I'm glad you. Yes I miss you too. Yes me too, but I can't, can't come, I mean, no I don't mean it's just I'm kind of chained, to, to my I mean... yes but it's hard, no I mean, hard to, listen, can you hold it for just a...? as he put down the handset [pg282] and clicked QUIT to collapse the windows as he muttered --Hundreds more megabytes of smut, what was he thinking? picking up the handset again for --Lynn I'm sorry it's, I just... yes I know I said that I'd, that we'd, but I'm just going have to stay tonight... how about Thursday? Oh. Well why didn't you tell me? Good Friday, yes you did say, I did know that but, but is it Easter already...? as the office door swung wide and Dolores deposited two more boxes of papers just inside --What, what about this weekend then? Retreat from what? Oh. I see. Yes okay then I'll, I'll be home Monday by six. I promise. I do? Well yes, things are working out there I think I see some light at the end of... Yes, me too... hanging up as on the field now cleared of venery new directories appeared, /4thgen/, /icf/, /papers/, and he browsed the scanned images of papers Highet had written or, more often, cowritten, or in which he'd simply gotten a cite or acknowledgment, --Zero Point Quantum Dynamic Energy, Inflatable Kevlar Space Station, Steganography: A Novel Approach To Data Hiding, perpetual Motion of the Third Kind, typical, not a bit of real science in sight... until he opened Laser Compression Of Matter For Thermonuclear Fusion A. Réti F. Szabo L. Highet 1974 and his muttering ceased and after a while he reached for a pencil and paper while his eyes remained fixed on the screen.
+
+*Calculations show that one kilojoule of light energy is sufficient to generate an equal quantity of thermonuclear energy.* --But, one kilojoule...? ...staring at his own scribbles that, impossibly, seemed to confirm it, until he went on browsing into 1976, *Calculations show that ten kilojoules should be sufficient to*, and 1979, *One hundred kilojoules should provide sufficient energy*, and *Funding for the laser upgrade will assure leadership in inertial confinement fusion research*, and *Funding for validation tests of our computer models*, following the trail of increasing energies and enticing predictions and fiscal years to an apparent terminus in LANCET 1979-1991, *Overview: The Lancet series of underground tests has been undertaken to validate and refine x-ray laser codes as well as codes related to the thermodynamic ignition of deuterium-tritium (DT) capsules. The tests in this series are: Alder, Willow, Rowan, Plumtree, Primrose, Raspberry, Honeysuckle, Cherry, Goldenrod, Hawthorn, Appletree, and Taliesin.* [pg283]
+
+And within this directory was another, /data/, where he found 1013 TALIESIN DOE 911107 ASTS SHAFT P8 80 KT. Columns of numbers. T SYMM PULSE TEMP BURN... It was the x-ray laser data he'd spent months trying to square with simulation codes. This was his. What he'd bled over. But there were columns of unfamiliar numbers, measurements he'd never seen. As he'd piggybacked his reflectors, someone had added something else. Every other test in the series the same. Dual use. attempts to ignite fusion capsules. And these were the roots of Avalon, going back twenty years and more. He stared out the window at floodlights and darkness. A lone figure crossed down there near the dry fountains, his shadow behind him.[^Eliot] Quine kicked off his shoes, moved volumes of FY95 from the couch to the floor. He stretched out and shut his eyes for just a moment. Panic flickered there, in the last moment before sleep rose like a cresting wave to shadow present and future concerns.
+
+[^Eliot]: A possible allusion: the mention of Easter suggests we are in April 1995; April is the month T.S. Eliot's "[The Wasteland](!Wikipedia)" opens with, and a passage in it has both been applied to nuclear war and would aptly describe the Lab & Quine:
+
+        What are the roots that clutch, what branches grow
+        Out of this stony rubbish? Son of man,
+        You cannot say, or guess, for you know only
+        A heap of broken images, where the sun beats,
+        And the dead tree gives no shelter, the cricket no relief,
+        And the dry stone no sound of water. Only
+        There is shadow under this red rock,
+        (Come in under the shadow of this red rock),
+        And I will show you something different from either
+        Your shadow at morning striding behind you
+        Or your shadow at evening rising to meet you;
+        I will show you fear in a handful of dust.
+
+### Four
+
+[pg285]
