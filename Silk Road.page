@@ -180,7 +180,7 @@ SR's 2 technical claims to fame are the exclusive use of Bitcoins for payment, a
     >
     > ...These time parameters were arrived at through trial and error. They are as tight as we can make them without sacrificing the integrity of the market. Could they be a little tighter? Maybe by a week or two, but please think through the implications of policy changes before you call for them.
 
-But as any kidnapper knows, you can communicate your demands easily enough, but how do you drop off the victim and grab the suitcase of cash without being nabbed? This has been a severe security problem forever. And bitcoins go a long way towards resolving it. So the additional security from use of Bitcoin is nontrivial. As it happened, I already had some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/download/download-easy.html.en) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. Other options include entire OSes like [Tails](http://tails.boum.org/) or [Liberté Linux](http://dee.su/liberte), which can be used on bootable Flash drives. (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay)/middleman as well - this gives me [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
+But as any kidnapper knows, you can communicate your demands easily enough, but how do you drop off the victim and grab the suitcase of cash without being nabbed? This has been a severe security problem forever. And bitcoins go a long way towards resolving it. So the additional security from use of Bitcoin is nontrivial. As it happened, I already had some bitcoins. (Typically, one buys bitcoins on an exchange like [Mt.Gox](http://mtgox.com), although the routes are always changing, so see the [Bitcoin wiki's buying guide](https://en.bitcoin.it/wiki/Buying_bitcoins); the era of easy profitable ['mining'](https://en.bitcoin.it/wiki/Mining) passed long ago.) Tor was a little more tricky, but on my Debian system, it required simply following the [official install guide](https://www.torproject.org/docs/debian.html.en): `apt-get install` the Tor and Polipo programs, stick in the proper config file, and then install the Torbutton. Alternately, one could use the [Tor browser bundle](https://www.torproject.org/download/download-easy.html.en) which packages up the Tor daemon, proxy, and a web browser all configured to work together; I've never used it but I have heard it is convenient. Other options include entire OSes like [Tails](http://tails.boum.org/) or [Liberté Linux](http://dee.su/liberte), which can be used on bootable Flash drives. (I also usually set my Tor installation to be a [Tor server](https://www.torproject.org/docs/tor-doc-relay)/middleman as well - this gives me [more anonymity](https://trac.torproject.org/projects/tor/wiki/doc/TorFAQ#DoIgetbetteranonymityifIrunarelay), speeds up my connections since the first hop/connection is unnecessary, and helps the Tor network & community by donating bandwidth.)
 
 # Silk Road
 
@@ -1076,3 +1076,18 @@ For myself & other people, I sometimes archive sets of black-market pages; they 
     1. [May 2013](/docs/sr/modafinil/2013-05-28.tar.xz)
     2. [July 2013](/docs/sr/modafinil/2013-07-03.tar.xz)
     3. [August 2013](/docs/sr/modafinil/2013-08-03.tar.xz)
+
+<!-- Probability of SR surviving 5 years?
+$s$ failures and $n$ total orders, is $\frac{s+1}{n+2}$
+
+0 shutdowns, 3 years
+probability of shutdown in year 4: 0+1/3+2 = 1/5
+* in year 5, if it's still alive: 0+1/4+2 = 1/6
+* in year 6, if it's still alive: 0+1/5+2 = 1/7
+* in year 7, *: 0+1/6+2 = 1/8
+* in year 8, *: 0+1/7+2 = 1/9
+
+probability of surviving 4-8: (1 - 1/5) * (1 - 1/6) * (1 - 1/7) * (1 - 1/8) * (1 - 1/9) = 4/9 = 0.44
+
+http://zlkj.in/survival.html
+-->
