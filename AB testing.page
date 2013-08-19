@@ -3,9 +3,11 @@ title: A/B testing Gwern.net
 description: a log of experiments done on the site design
 created: 16 Jun 2012
 tags: experiments, statistics, computer science
-status: notes
+status: in progress
 belief: possible
 ...
+
+> To gain some statistical & web development experience and to improve my readers' experiences, I have been running a series of CSS A/B tests since June 2012. As expected, most do not show any meaningful difference.
 
 # background
 
@@ -476,7 +478,7 @@ data:  c(x1 * 0.1524, x2 * 0.1476) out of c(x1, x2)
 X-squared = 1.591, df = 1, p-value = 0.2072
 ~~~
 
-Since the difference between 130 and 150 is trivially small, I will not bother to change the 150% setting to 130%.
+I changed the 150% to 130% for the heck of it, even though the difference between 130 and 150 was trivially small.
 
 ## Null test
 
@@ -485,11 +487,18 @@ One of the suggestions in the A/B testing papers was to run a "null" A/B test wh
 It's easy to switch from the lineheight test to the null test; just rename the variables for Google Analytics, and empty the payloads:
 
 ~~~{.Html}
+hunk ./static/templates/default.html 30
+-    <div class="linewidth_class1"></div>
++    <div class="null_class1"></div>
+hunk ./static/templates/default.html 158
+-      linewidth: [
++      null: [
++      ...]]
 hunk ./static/templates/default.html 160
 -      name: 'Line120',
 -      "linewidth_class1": "<style>div#content { line-height: 120%;}</style>",
 +      name: 'null1',
-+      "linewidth_class1": "",
++      "null_class1": "",
 hunk ./static/templates/default.html 165
 -      { ...
 -      name: 'Line130',
@@ -505,7 +514,7 @@ hunk ./static/templates/default.html 165
 -      name: 'Line150',
 -      "linewidth_class1": "<style>div#content { line-height: 150%;}</style>",
 +      name: 'null2',
-+      "linewidth_class1": "",
++      "null_class1": "",
 +       ... }
 ~~~
 
