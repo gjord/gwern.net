@@ -470,6 +470,43 @@ plot(c(2002:2011),table(touhou$Year)[1:10])
 points(c(2002:2011),exp(predict(logModel)),type='l',col='blue')
 ~~~
 
+## Growth over time
+
+How fast is the corpus of Touhou music growing?
+
+Constant growth model: the first game was released in 1996, no? So that gives 17 years to accumulate 1.26TB or 1,260GB or 74.1GB per year. The screenshot is downloading at 0kb/s, which is not useful, but it says 2640 days left so we can estimate that he's downloading at 0.47GB per day (`1260/2640`), and over a year 0.47GB is 174GB which is 2.35x faster than the 74GB per year. So at that annual increase, OP is *not* doomed and can in fact catch up.
+
+Exponential growth mode: a little trickier since we can't force a formula just from the cumulative total and elapsed time. I need more data. So using my 2012 Touhou Lossy Torrent data, I can try to regress an exponential against the annual count... but wait! The amount of music does not seem to be increasing exponentially!
+
+    R> touhou <- read.csv("http://www.gwern.net/docs/touhou/2013-torrent.csv",
+    +                    colClasses=c("character", "integer", "factor", "character",
+    +                                         "integer", "factor", "character",
+    +                                         "character", "numeric", "integer",
+    +                                         "factor", "Date"))
+    R> summary(touhou$Year)
+    R> perYear <- table(touhou$Year); perYear; plot(perYear)
+
+     2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012
+       13    23   255  1241  2070  2599  5073 10278  9765  7494  2999
+
+Graph: http://i.imgur.com/23fMA5c.png
+
+Looks like Touhou music's growth peaked in 2009; this might reflect the torrent's incompleteness, except the torrent is from 2012, and you'd expect coverage of 2010 or 2011 to be pretty good by that point. So the growth of the torrent *overall* looks more like a sigmoid or log:
+
+    R> runningTotal <- cumsum(table(touhou$Year)); runningTotal; plot(runningTotal)
+     2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012
+       13    36   291  1532  3602  6201 11274 21552 31317 38811 41810
+
+http://i.imgur.com/Lv9vHrZ.png
+
+So probably it'd be better to ask, 'if 2012-rate growth continues, what is the ratio to his download speed?'
+
+2012 added 19.5GB to the torrent:
+
+    R> # FileSize is in megabytes, so gigabytes
+    R> sum(touhou[touhou$Year==2012,]$FileSize, na.rm=TRUE) / 1000
+    [1] 19.5
+
 # Appendix
 ## `touhouwiki.net` scraping code
 
