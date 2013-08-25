@@ -586,10 +586,10 @@ forest(rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, 
        ylim=c(0, totalHeight), rows=c(3:activeTop, (4+activeTop):(totalHeight-3)), mlab="overall")
 res2 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
             subset=(active==0),data = dnb)
-addpoly(res2, row=19, cex=.75, atransf=exp, mlab="passive")
+addpoly(res2, row=21, cex=.75, atransf=exp, mlab="passive")
 res3 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
             subset=(active==1),data = dnb)
-addpoly(res3, row=1, cex=.75, atransf=exp, mlab="active")
+addpoly(res3, row=2, cex=.75, atransf=exp, mlab="active")
 invisible(dev.off())
 
 cat("Random-effects, regressing against training time:\n")
