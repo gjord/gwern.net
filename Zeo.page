@@ -174,7 +174,7 @@ Before writing my [melatonin advocacy](Melatonin) article, I had used melatonin 
 
 ## Melatonin analysis
 
-The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://web.archive.org/web/20120606152734/http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf "The Export Data feature allows you to download all of your sleep data, journal entries, bedside display settings and more into a spreadsheet readable format (CSV). This help sheet describes how you can interpret your exported sleep data in its CSV format.")). My basic dosage was 1.5mg of melatonin taken 0-30 minutes before going to sleep. The data is very noisy (especially towards the end, perhaps as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional [NHST](!Wikipedia "Null hypothesis significance testing")-style[^Bayes] analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into R; given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
+The [following section](#melatonin-data) represents 5 or 6 months of data ([raw CSV data](/docs/zeo/2011-zeo-melatonin.csv); [guide to Zeo CSV](http://web.archive.org/web/20120606152734/http://mysleep.myzeo.com/export/Export%20Data%20Help%20Sheet.pdf "The Export Data feature allows you to download all of your sleep data, journal entries, bedside display settings and more into a spreadsheet readable format (CSV). This help sheet describes how you can interpret your exported sleep data in its CSV format.")). My basic dosage was 1.5mg of melatonin taken 0-30 minutes before going to sleep. The data is very noisy (especially towards the end, perhaps as the headband got dirty), but hopefully the overall conclusions are not entirely untrustworthy. Let's look at some average. Zeo's website lets you enter in a 3-valued variable and then graph the average day for each variable against a particular recorded property like ZQ or total length of REM sleep. I defined one dummy variable, and decided that a '0' would correspond to not using melatonin, '1' would correspond to using it, and '2' would correspond to using a double-dose or more (on the rare occasions I felt I needed sleep insurance). The following additional [NHST](!Wikipedia "Null hypothesis significance testing")-style[^Bayes] analyses of _p_-values[^R-melatonin-analysis-p][^R-melatonin-analysis-o] is done by importing the CSV into R; given all the issues with self-experimentation (these melatonin days weren't even blinded), the _p_-values should be treated as gross guesses, where <0.01 indicates I should take it seriously, <0.05 is pretty good, <0.10 means I shouldn't sweat it, and anything bigger than 0.20 is, at most, interesting while >0.5 means ignore it; we'll also look at correcting for multiple comparisons[^Bonferroni], for the heck of it.
 
 [^Bayes]: [Kruschke 2012](http://www.indiana.edu/~kruschke/BEST/BEST.pdf "Bayesian estimation supersedes the _t_ test") argues that there is no need for people to use the old framework of _p_-values and null hypotheses etc, with their many well-known philosophical difficulties and misleading interpretations - interpretations I, alas, perpetuate in my analyses with my use of statistical significance:
 
@@ -185,7 +185,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
 
     ~~~{.R}
     # Read in data w/ variable names in header; uninteresting columns deleted in OpenOffice.org
-    mydata <- read.csv("http://www.gwern.net/docs/2011-zeo-melatonin.csv")
+    mydata <- read.csv("http://www.gwern.net/docs/zeo/2011-zeo-melatonin.csv")
 
     # "SSCF 10" is the variable ('sleep stealer custom factor')
     # I edited the CSV to convert all '3' to '1' (& so a binary)
@@ -307,7 +307,7 @@ The [following section](#melatonin-data) represents 5 or 6 months of data ([raw 
            254.2174        233.2969
     ~~~
 
-<!-- source("BEST.R"); mydata <- read.csv("http://www.gwern.net/docs/2011-zeo-melatonin.csv"); on <- subset(mydata, SSCF.10==1); off <- subset(mydata, SSCF.10==0); mcmc = BESTmcmc(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)]); BESTplot(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)],mcmc,TRUE, ROPEeff=c(-0.1,0.1)) -->
+<!-- source("BEST.R"); mydata <- read.csv("http://www.gwern.net/docs/zeo/2011-zeo-melatonin.csv"); on <- subset(mydata, SSCF.10==1); off <- subset(mydata, SSCF.10==0); mcmc = BESTmcmc(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)]); BESTplot(off$ZQ[!is.na(off$ZQ)], on$ZQ[!is.na(on$ZQ)],mcmc,TRUE, ROPEeff=c(-0.1,0.1)) -->
 
 [^melatonin-multiple]: If we correct for multiple comparisons (see [previous footnote](#fn7)) at _q_-value=0.05, of our 10 _p_-values (0.01093, 0.08252, 0.08645, 0.1805, 0.2229, 0.2668, 0.4309, 0.5296, 0.8779), none of them survive:
 
@@ -727,7 +727,7 @@ Roberts tried a fairly complicated randomized routine. I am simply alternating d
 
 ### One-legged standing analysis
 
-The initial results were promising. Of the first 5 days, 3 are 'on' and 2 are off; all 3 on-days had higher ZQs than the 2 off-days. Unfortunately, the full time series did not seem to bear this out. Looking at the ~70 recorded days between 11 June 2011 and 27 August 2011 ([raw CSV data](/docs/2011-zeo-oneleg.csv)), the averages looked like this (as before, the '3' means the intervention was used, '0' that it was not):
+The initial results were promising. Of the first 5 days, 3 are 'on' and 2 are off; all 3 on-days had higher ZQs than the 2 off-days. Unfortunately, the full time series did not seem to bear this out. Looking at the ~70 recorded days between 11 June 2011 and 27 August 2011 ([raw CSV data](/docs/zeo/2011-zeo-oneleg.csv)), the averages looked like this (as before, the '3' means the intervention was used, '0' that it was not):
 
 ![Standing ZQ vs non-standing](/images/zeo/2011-oneleg-zq.png)
 ![Morning feel rating](/images/zeo/2011-oneleg-morningfeel.png)
@@ -856,11 +856,11 @@ To see what, if any existing research there was, I checked the 49 hits in [PubMe
 [^America]: ["Relationships among dietary nutrients and subjective sleep, objective sleep, and napping in women"](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819566/) (Grandner et al 2010):
 
     > This study found a [statistically-]significant relationship between circadian phase of sleep and dietary Vitamin D intake. Later sleep acrophase, an indicator of sleep timing, was associated with more dietary Vitamin D. For most people, most Vitamin D is obtained through sunlight(44), though dietary Vitamin D is usually obtained through supplementation, usually in pills or in dairy products(44). It is currently unknown why those who consumed more Vitamin D would demonstrate a sleep phase delay, especially since in this same subject group, those exposed to more light had earlier circadian acrophases(45).
-[^Japan]: ["The midpoint of sleep is associated with dietary intake and dietary behavior among young Japanese women"](/docs/2011-sato-mito.pdf) (Sato-Mito et al 2011):
+[^Japan]: ["The midpoint of sleep is associated with dietary intake and dietary behavior among young Japanese women"](/docs/zeo/2011-sato-mito.pdf) (Sato-Mito et al 2011):
 
     > Late midpoint of sleep was [statistically-]significantly negatively associated with the percentage of energy from protein and carbohydrates, and the energy-adjusted intake of cholesterol, potassium, calcium, magnesium, iron, zinc, vitamin A, vitamin D, thiamin, riboflavin, vitamin B(6), folate, rice, vegetables, pulses, eggs, and milk and milk products.
 
-In June 2012, after I finished my 2 experiments, a preprint appeared for _Medical Hypotheses_: ["The world epidemic of sleep disorders is linked to vitamin D deficiency"](/docs/2012-gominak.pdf), Gominak & Stumpf 2012; the lead author, unfortunately, had little to tell me when I emailed her, indicating that the use of vitamin D was not systematic or recorded:
+In June 2012, after I finished my 2 experiments, a preprint appeared for _Medical Hypotheses_: ["The world epidemic of sleep disorders is linked to vitamin D deficiency"](/docs/zeo/2012-gominak.pdf), Gominak & Stumpf 2012; the lead author, unfortunately, had little to tell me when I emailed her, indicating that the use of vitamin D was not systematic or recorded:
 
 > An observation of sleep improvement with vitamin D supplementation led to a 2 year uncontrolled trial of vitamin D supplementation in 1500 patients with neurologic complaints who also had evidence of abnormal sleep. Most patients had improvement in neurologic symptoms and sleep but only through maintaining a narrow range of 25(OH) vitamin D3 blood levels of 60-80 ng/ml. Comparisons of brain regions associated with sleep-wake regulation and vitamin D target neurons in the diencephalon and several brainstem nuclei suggest direct central effects of vitamin D on sleep...An uncontrolled trial of continuous positive airway pressure CPAP devices for patients with headache and obstructive sleep apnea was partially successful, but in the fall of 2009 two patients remarked that the serendipitous supplementation of vitamin D, in addition to the use of their CPAP devices had, over a period of weeks, allowed them to wake rested and without headaches. Because the majority of the daily headache sufferers also had vitamin D deficiency the same author went looking for a possible connection between vitamin D and paralysis during sleep. This led to the recognition that several nuclei in the hypothalamus and brainstem that are known to be involved in sleep have high concentrations of vitamin D receptors^15,16,17^. An uncontrolled clinical trial of vitamin D supplementation in 1500 patients over a 2 year period, maintaining a consistent vitamin D blood level in the range of 60-80 ng/ml over many months, produced normal sleep in most patients regardless of the type of sleep disorder, suggesting that multiple types of sleep disorders might share the same etiology...Like other steroid hormones, Vitamin D is thought to exert its effects in the nucleus of the cell, at the vitamin D receptor, promoting transcription of specific genes. There are also reports of actions unrelated to transcription, possibly mediated by surface membrane receptors, such as Ca++ channels, that produce cellular effects in minutes^5^. Surprisingly, doses of 20,000 IU/day promote normal sleep without being sedating, and the effect is apparent within the first day of dosing in patients who have had severe sleep disruption and very low 25(OH) vitamin D3 levels...Many of the ideas about normal sleep expressed here grew out of watching patients return to normal sleep cycles, over a period of months, with just the return of the 25(OH) vitamin D3 blood level to 60-80 ng/ml. A totally unexpected observation was that the sleep difficulties produced by vitamin D levels below 50 return, in the same form, as the level goes over 80 ng/ml suggesting a narrower range of "normal" vitamin D levels for sleep than those published for bone health. Also, Vitamin D2, ergocalciferol (widely recommended as an "equivalent" therapy for osteoporosis) prevented normal sleep in most patients, suggesting that D2 may be close enough in structure to act as a partial agonist at some locations, an antagonist at others.
 
@@ -871,7 +871,7 @@ Comments:
 - the authors cover much more specific potential connections between vitamin D and sleep than just "circadian rhythms"
 - the methodology section is non-existent; how were these 1500 patients picked? how long did each use vitamin D? Unfortunately, I nor Roberts has taken vitamin D blood tests (as far as I know) and so we cannot verify that the authors' 60-80ng/ml range is what we fell into, but it's plausible. how is sleep quality being measured? are these results consistent or inconsistent with our two cases of morning mood/restedness improvement but little else? Although even if they were inconsistent, that could be explained by neither of us being sleep disorder sufferers and the effect being weaker in us
 
-In July 2012, preprints of [Huang et al 2012](/docs/2012-huang.pdf "Improvement of Pain, Sleep, and Quality of Life in Chronic Pain Patients With Vitamin D Supplementation") became available; it is a [case series](!Wikipedia) - the authors followed a group of veterans with chronic pain who received vitamin D supplements, finding improvements to pain but also reduction in sleep latency and increase in sleep duration. While I did not observe any effect on latency or duration in my following experiments, this would still be a promising datapoint but unfortunately, the sample had substantial dropout, and had no control group (hence no randomizing or blinding). This renders the study not very useful - the improvements being perhaps just [regression toward the mean](!Wikipedia) or a [selection bias](!Wikipedia).
+In July 2012, preprints of [Huang et al 2012](/docs/zeo/2012-huang.pdf "Improvement of Pain, Sleep, and Quality of Life in Chronic Pain Patients With Vitamin D Supplementation") became available; it is a [case series](!Wikipedia) - the authors followed a group of veterans with chronic pain who received vitamin D supplements, finding improvements to pain but also reduction in sleep latency and increase in sleep duration. While I did not observe any effect on latency or duration in my following experiments, this would still be a promising datapoint but unfortunately, the sample had substantial dropout, and had no control group (hence no randomizing or blinding). This renders the study not very useful - the improvements being perhaps just [regression toward the mean](!Wikipedia) or a [selection bias](!Wikipedia).
 
 Blogger Chris L [looked back in August 2012](http://evenbetterchris.blogspot.com/2012/08/vitamin-d-destroyed-my-deep-sleep.html "Vitamin D destroyed my deep sleep") on ~1 year of Zeo data and a quasi-experiment in which he started with 4000IU of vitamin D supplementation, then 5000IU, then none; he took them at night, then switched to morning; the results were that the length of his deep sleep started high, dropped, and then recovered. He interprets this as evidence that too much vitamin D hurts sleep.
 
@@ -892,11 +892,11 @@ Based on the first 10 days' ZQs, I predict I'll find in the final data set:
 
 Roberts theorizes that besides vitamin D damaging sleep, it could actively improve your sleep if taken in the morning. As it happens, in this setup, on 'placebo' days I do take vitamin D in the morning - so wouldn't one expect to see scores improve on the nights following a placebo night (a vitamin D morning), regardless of whether *that* night was vitamin D or placebo? A quick analysis of the first 24 nights showed the lagged nights to average a ZQ of 94.5. My monthly averages for October and November were 96, so there is no obvious improvement here.
 
-One thing I suspect but cannot confirm - since I do not have a heart rate monitor - is that ~10 minutes after taking the vitamin D pills, my heart rate increases. Not to any uncomfortable or worrisome degree, but when one expects one's heart rate to go down after going to bed, even a small increase in the opposite direction is noticeable. On the 12th, I finally got around to writing down this impression; then I searched online a bit and found that low vitamin D levels are associated with arrhythmia and other issues, but so are very high levels, and increased heart rates in the studies and anecdotes are associated with higher heart rates^[See the general remarks in [LiveStrong](http://www.livestrong.com/article/448585-vitamin-d-deficiency-heart-rate/), ["Vitamin D warning: Too much can harm your heart"](http://www.msnbc.msn.com/id/45325473/ns/health-diet_and_nutrition/t/vitamin-d-warning-too-much-can-harm-your-heart/), and the 2009 study ["Relation of serum 25-hydroxyvitamin D to heart rate and cardiac work (from the National Health and Nutrition Examination Surveys)"](/docs/2010-scragg.pdf "Scragg et al 2010").]. I'm not worried about the heart rate, but I am concerned that this is defeating the double-blinding: if all I have to do is notice my heart rate (and lying swaddled in bed in complete silence, it would be hard for me *not* to), then I've unblinded myself *before* falling asleep. Other stimulants like caffeine or sulbutiamine might similarly increase my heart rate, but they'd obviously also interfere with sleep, so I can't create any 'active placebo' even if I wanted to start over. (One promising future gadget is the ["Basis" wristwatch](http://mybasis.com/) which measures, among other things, heart-rate; I look forward to the early reviews.)
+One thing I suspect but cannot confirm - since I do not have a heart rate monitor - is that ~10 minutes after taking the vitamin D pills, my heart rate increases. Not to any uncomfortable or worrisome degree, but when one expects one's heart rate to go down after going to bed, even a small increase in the opposite direction is noticeable. On the 12th, I finally got around to writing down this impression; then I searched online a bit and found that low vitamin D levels are associated with arrhythmia and other issues, but so are very high levels, and increased heart rates in the studies and anecdotes are associated with higher heart rates^[See the general remarks in [LiveStrong](http://www.livestrong.com/article/448585-vitamin-d-deficiency-heart-rate/), ["Vitamin D warning: Too much can harm your heart"](http://www.msnbc.msn.com/id/45325473/ns/health-diet_and_nutrition/t/vitamin-d-warning-too-much-can-harm-your-heart/), and the 2009 study ["Relation of serum 25-hydroxyvitamin D to heart rate and cardiac work (from the National Health and Nutrition Examination Surveys)"](/docs/zeo/2010-scragg.pdf "Scragg et al 2010").]. I'm not worried about the heart rate, but I am concerned that this is defeating the double-blinding: if all I have to do is notice my heart rate (and lying swaddled in bed in complete silence, it would be hard for me *not* to), then I've unblinded myself *before* falling asleep. Other stimulants like caffeine or sulbutiamine might similarly increase my heart rate, but they'd obviously also interfere with sleep, so I can't create any 'active placebo' even if I wanted to start over. (One promising future gadget is the ["Basis" wristwatch](http://mybasis.com/) which measures, among other things, heart-rate; I look forward to the early reviews.)
 
 ### Vitamin D data
 
-The data ([trimmed CSV](/docs/2012-zeo-vitamind.csv)), covering January-February 2012:
+The data ([trimmed CSV](/docs/zeo/2012-zeo-vitamind.csv)), covering January-February 2012:
 
 Date   Pill       Quality[^q]  ZQ      Guess
 ----   ----       -------      ---     -----
@@ -970,7 +970,7 @@ Looking at the data averages in the Zeo website, it looked like ZQ & total & REM
 [^vitamin-D-analysis-p]: The usual session:
 
     ~~~{.R}
-    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind.csv")
+    mydata <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind.csv")
     t.test(ZQ~SSCF.12, data=mydata)
 
         Welch Two Sample t-test
@@ -1306,7 +1306,7 @@ Analysis will be the same Zeo parameters as before, but this time augmented by a
     - 9A-19: (omit April 11, 12) guess: [placebo](http://predictionbook.com/predictions/6720) actual: placebo
     - 20-27: active (omit April 21, 22)
 
-Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefully Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/docs/2012-zeo-vitamind-morning.csv). Mood was coded as fractional integers as the `Mood` column.
+Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other Disruptions 4' through the Zeo web interface, since I assumed that if 'Other Disruptions 3' was `SSCF.12`, that would put the data into `SSCF.13` - but it turns out that does not get *exported in the CSV*! Apparently the CSV is limited to 1-3. So I edited the exported CSV and just reused `SSCF.1`. Hopefully Zeo Inc. will fix the export functionality, since it's very frustrating to be able to see the data used in the 'Cause & Effect' tool, for example, but not export it.] in the [CSV export](/docs/zeo/2012-zeo-vitamind-morning.csv). Mood was coded as fractional integers as the `Mood` column.
 
 ### Morning analysis
 
@@ -1315,7 +1315,7 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
 [^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
     ~~~{.R}
-    data <- read.csv("http://www.gwern.net/docs/gwern-zeodata.csv")
+    data <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv")
     # Master Zeo export file is periodically updated; your results may not be identical
     n <- length(data$Morning.Feel); n
     [1] 686
@@ -1405,7 +1405,7 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
 
     ~~~{.R}
     library(ggplot2)
-    sleep <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv")
+    sleep <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind-morning.csv")
 
     qplot(as.Date(Sleep.Date,format="%m/%d/%Y"), weight=Mood, data=sleep, geom="bar",
         binwidth=1, fill=factor(sleep$SSCF.1, labels=c("placebo","active")),
@@ -1428,7 +1428,7 @@ So, vitamin D seems to improve my mood when I wake up in the morning, which is g
 [^r-vitamin-d-morning]: The interpreter session (pessimistic assumptions; optimistic left as exercise for the reader):
 
     ~~~{.R}
-    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning.csv")
+    mydata <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind-morning.csv")
     t.test(ZQ~SSCF.1, data=mydata)
 
         Welch Two Sample t-test
@@ -1587,7 +1587,7 @@ More precisely, the summary statistics indicate that the difference in means & m
 
     ~~~{.R}
     # set up data
-    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv")
+    mydata <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind-morning-control.csv")
     originalcontrol <- subset(mydata, SSCF.1==0)
     newcontrol <- subset(mydata, SSCF.1==1)
     # clean missing data
@@ -1612,7 +1612,7 @@ More precisely, the summary statistics indicate that the difference in means & m
 [^vitamin-d-control-frequentist]: As usual:
 
     ~~~{.R}
-    mydata <- read.csv("http://www.gwern.net/docs/2012-zeo-vitamind-morning-control.csv")
+    mydata <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind-morning-control.csv")
     originalcontrol <- subset(mydata, SSCF.1==0)
     newcontrol <- subset(mydata, SSCF.1==1)
     t.test(originalcontrol$Morning.Feel, newcontrol$Morning.Feel)
@@ -1650,7 +1650,7 @@ In October 2012, [I bought some potassium citrate](Nootropics#potassium) on a la
 
 ### Background
 
-Partway through the process, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](/docs/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger benefit in "WASO" (time awake during sleep time; this probably drove the sleep efficiency).
+Partway through the process, I searched Google Scholar and Pubmed (human trials) for "potassium sleep"; I checked the first 70 results of both. A general Google search turned up mostly speculation on the relationship of potassium *deficiency* and sleep. The only useful citation was ["Potassium affects actigraph-identified sleep"](/docs/zeo/1991-drennan.pdf), Drennan et al 1991; [actigraphs](!Wikipedia) likely aren't as good as a Zeo, and _n_=6, but the study is directly relevant. Only 2 actigraph results reached statistical significance: a small improvement in sleep efficiency (the percentage of time spent laying in bed and actually sleeping) and a bigger benefit in "WASO" (time awake during sleep time; this probably drove the sleep efficiency).
 
 ### Data
 
@@ -1861,7 +1861,7 @@ Running the analysis the same way as before, we get a small increase in sleep di
 [^potassium-2-disturbance]: See previously for explanation:
 
     ~~~{.R}
-    pot <- read.csv("http://www.gwern.net/docs/2013-gwern-potassium-morning.csv")
+    pot <- read.csv("http://www.gwern.net/docs/zeo/2013-gwern-potassium-morning.csv")
 
     # standardize & combine into a single equally-weighted synthetic index z-score
     pot$Disturbance <- scale(pot$Time.to.Z) + scale(pot$Awakenings) + scale(pot$Time.in.Wake)
@@ -2134,7 +2134,7 @@ This example demonstrates that drugs aren't the only expensive things for which 
 
 ## Masturbation
 
-Orgasm has been linked occasionally with changes in sleep latency, although [one 1985 experimental study](/docs/1985-brissette.pdf "'Sexual Activity and Sleep in Humans', Brissette et al 1985") found no changes. [Schenck et al 2007](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1978350/ "Sleep and Sex: What Can Go Wrong? A Review of the Literature on Sleep Related Disorders and Abnormal Sexual Behaviors and Experiences") covers some inconclusive followup studies on related matters like whether arousal or brief viewing of porn interferes with sleep (no).
+Orgasm has been linked occasionally with changes in sleep latency, although [one 1985 experimental study](/docs/zeo/1985-brissette.pdf "'Sexual Activity and Sleep in Humans', Brissette et al 1985") found no changes. [Schenck et al 2007](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1978350/ "Sleep and Sex: What Can Go Wrong? A Review of the Literature on Sleep Related Disorders and Abnormal Sexual Behaviors and Experiences") covers some inconclusive followup studies on related matters like whether arousal or brief viewing of porn interferes with sleep (no).
 
 Randomized on a daily basis before going to bed; no placebo, but abstinence. Non-blinded. Since the theory has always been about a very short-term effect, there's no need to worry about daytime activities. (This would only matter if I were testing something like the folk wisdom that masturbation reduces testosterone levels, where the timing is not as important as the quantity.)
 
@@ -2829,6 +2829,22 @@ July
 26: 4
 27: 4
 28: 3
+29: 2
+30: 3
+31: 4
+August
+01: 2
+02: 3
+03: 4
+04: 3
+05: 3
+06: 4
+07: 3/3000
+08: 3
+09: 3
+10: 2
+11: 2
+12: 3?
 -->
 
 <!-- Creativity 1-3
@@ -3185,6 +3201,22 @@ July
 26: 2
 27: 1
 28: 1
+29: 1
+30: 1
+31: 2
+August
+01: 1
+02: 1
+03: 1
+04: 1
+05: 1
+06: 1
+07: 1
+08: 1
+09: 1
+10: 1
+11: 1
+12: 1?
 -->
 
 <!--
@@ -3718,18 +3750,38 @@ July 2013
 August
 01: 0 1
 02: 0 0
-03: 1 1?
+03: 0 0
+04: 1 0
+05: 1 1
+06: 0 0
+07: 0 1
+08: 1 1
+09: 0 1
+10: 0 1
+11: 0 1
+12: 1 0
+13: 1 1
+14: 0 1
+15: 1 0
+16: 0 0
+17: 0 1
+18: 1 1
+19: 0 0
+20: 0 1
+21: 0 1
+22: 0 0
+23: 1 0
+24: 1 1?
 
 Underpopulated data cells:
-105: 1 1
-106: 1 0
-106: 0 1
-109: 0 0
+108: 1 1
+110: 1 0
+114: 0 1
+114: 0 0
 -->
-<!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July -->
+<!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July; 11, 12, 17, 24 August -->
 <!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03, 12, 16, 19 June; resumed 24 June -->
-<!-- MP: 28 July: 3; 29 July: 2; 30 July: 3; 31 July: 4; 1 August: 2; 2 August: 3; 3 August: 4 -->
-<!-- Creativity: 31 July -->
+<!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi -->
 
 # External links
 
@@ -3776,7 +3828,7 @@ While not statistically-significant, this inverse correlation comes as a surpris
 3. it's a temporary correlation of this time period, perhaps related to the potassium, perhaps not.
 
     This is testable: with more data, does the correlation shrink or go away?
-4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](/docs/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl. What does this imply?
+4. I have sometimes wondered if I am depressed. One of the curious facts about depression is that [sleep deprivation can temporarily relieve](!Wikipedia "Sleep deprivation#Treatment for depression") the symptoms of depression in [people who prefer evenings](/docs/zeo/2006-selvi.pdf "'Mood changes after sleep deprivation in morningness-eveningness chronotypes in healthy individuals', Selvi et al 2006") (owls), and I am indeed an owl. What does this imply?
 
     We can do some back-of-the-envelope estimates. [Wikipedia](!Wikipedia "Depression (mood)") reports a very high depression incidence; we'll call it a 25% lifetime risk. But presumably the treatment only works if one is actually in a depressive episode, and while it's unclear what the distribution or length of depression period (as opposed to individual episodes) might be, it seems to be closer to years than months or decades, so we'll put it at ~3 years out of an adult lifespan of ~60 years or a per-year risk of $\frac{1}{20}=0.05$. On closer examination of Selvi et al 2006, the morning/evening split only appears with the total sleep deprivation procedure (morning types see their mood worsen, evening sees it improve) while with partial sleep deprivation both groups seem to see an improvement in their mood; since I rarely skip sleep entirely and such nights are dropped from the Zeo data, the total sleep deprivation results are irrelevant, but then my chronotype being evening doesn't matter. Finally, the sleep deprivation papers estimate <60% effectiveness in the depressed, so that knocks the possibility that both I am depressed and partial sleep deprivation helps me to <0.025. 2.5% is not a large possibility; and my vague speculation and a small inverse correlation do not seem like they would increase that possibility a *lot*.
 
@@ -3795,7 +3847,7 @@ Given this weakening and in the absence of any corroborating information, I cons
 [^inverse-data-preparation]: The exact processing steps, for those curious:
 
     ~~~{.R}
-    zeo <- read.csv("~/wiki/docs/gwern-zeodata.csv")
+    zeo <- read.csv("~/wiki/docs/zeo/gwern-zeodata.csv")
     zeo$Sleep.Date <- as.Date(zeo$Sleep.Date, format="%m/%d/%Y")
     mp <- read.csv("mp.csv", colClasses=c("Date","factor"))
     zeo$MP <- ordered(mp[mp$Date %in% zeo$Sleep.Date,]$MP)
@@ -3805,7 +3857,7 @@ Given this weakening and in the absence of any corroborating information, I cons
 [^inverse-correlation]: Load & correlate:
 
     ~~~{.R}
-    zeo <- read.csv("http://www.gwern.net/docs/2013-gwern-sleepdisturbances-productivity.csv")
+    zeo <- read.csv("http://www.gwern.net/docs/zeo/2013-gwern-sleepdisturbances-productivity.csv")
     cor.test(zeo$Disturbance, as.integer(zeo$MP))
 
         Pearson`s product-moment correlation
@@ -3887,7 +3939,7 @@ Given this weakening and in the absence of any corroborating information, I cons
 
 ## Phases of the moon
 
-I happened to see some news coverage of a sleep paper entitled ["Evidence that the Lunar Cycle Influences Human Sleep"](/docs/2013-cajochen.pdf "Cajochen et al 2013"):
+I happened to see some news coverage of a sleep paper entitled ["Evidence that the Lunar Cycle Influences Human Sleep"](/docs/zeo/2013-cajochen.pdf "Cajochen et al 2013"):
 
 > ...Here we show that subjective and objective measures of sleep vary according to lunar phase and thus may reflect circalunar rhythmicity in humans. To exclude confounders such as increased light at night or the potential bias in perception regarding a lunar influence on sleep, we retrospectively analyzed sleep structure, electroencephalographic activity during non-rapid-eye-movement (NREM) sleep, and secretion of the hormones melatonin and cortisol found under stringently controlled laboratory conditions in a cross-sectional setting. At no point during and after the study were volunteers or investigators aware of the a posteriori analysis relative to lunar phase. We found that around full moon, electroencephalogram (EEG) delta activity during NREM sleep, an indicator of deep sleep, decreased by 30%, time to fall asleep increased by 5 min, and EEG-assessed total sleep duration was reduced by 20 min. These changes were associated with a decrease in subjective sleep quality and diminished endogenous melatonin levels. This is the first reliable evidence that a lunar rhythm can modulate sleep structure in humans when measured under the highly controlled conditions of a circadian laboratory study protocol without time cues...
 
@@ -3913,7 +3965,7 @@ Here is my complete R code & analysis:
 
 ~~~{.R}
 R> set.seed(8888)
-R> zeo <- read.csv("http://www.gwern.net/docs/gwern-zeodata.csv")
+R> zeo <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv")
 # install.packages("moonsun")
 R> library(moonsun)
 R> zeo$Julian.Date <- julian(as.Date(zeo$Sleep.Date, format="%m/%d/%Y"))
@@ -4053,7 +4105,7 @@ In October 2012, an acquaintance offered me an extract from his free-form data o
 
 ### Data cleaning
 
-The original text was a serious mess, and I put several hours into cleaning it up and organizing it into something [more sensible](/docs/2012-sdr-dream.txt). This wasn't enough, so I wrote an ugly Haskell program to parse it into a quasi-CSV file:
+The original text was a serious mess, and I put several hours into cleaning it up and organizing it into something [more sensible](/docs/zeo/2012-sdr-dream.txt). This wasn't enough, so I wrote an ugly Haskell program to parse it into a quasi-CSV file:
 
 ~~~{.Haskell}
 import Data.List (isInfixOf, isPrefixOf, intercalate)
@@ -4100,7 +4152,7 @@ convert xs = CSVEntry { sleepDate = safeHead $ filter (\x -> isInfixOf "." x || 
 This was usable. My next question was: since none of his routines were randomized and correlations were all that one could extract, what correlations *were* in his data?
 
 ~~~{.R}
-table <- read.csv("http://www.gwern.net/docs/2013-sdr-dream.csv")
+table <- read.csv("http://www.gwern.net/docs/zeo/2013-sdr-dream.csv")
 summary(table)
       Sleep.Date     Total.Z        Wake.Time     Intensity        Recall         Emotion
  2011.10.02:  2   Min.   : 120           :217   Min.   :0.10   Min.   :0.000   Min.   :-0.50
@@ -4596,3 +4648,24 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 01 Aug 2013: off -->
 <!-- Redshift: 02 Aug 2013: off -->
 <!-- Redshift: 03 Aug 2013: on -->
+<!-- Redshift: 04 Aug 2013: on -->
+<!-- Redshift: 05 Aug 2013: off -->
+<!-- Redshift: 06 Aug 2013: off -->
+<!-- Redshift: 07 Aug 2013: off -->
+<!-- Redshift: 08 Aug 2013: off -->
+<!-- Redshift: 09 Aug 2013: off -->
+<!-- Redshift: 10 Aug 2013: off -->
+<!-- Redshift: 11 Aug 2013: on -->
+<!-- Redshift: 12 Aug 2013: off -->
+<!-- Redshift: 13 Aug 2013: off -->
+<!-- Redshift: 14 Aug 2013: on -->
+<!-- Redshift: 15 Aug 2013: on -->
+<!-- Redshift: 16 Aug 2013: on -->
+<!-- Redshift: 17 Aug 2013: off -->
+<!-- Redshift: 18 Aug 2013: on -->
+<!-- Redshift: 19 Aug 2013: on -->
+<!-- Redshift: 20 Aug 2013: off -->
+<!-- Redshift: 21 Aug 2013: off -->
+<!-- Redshift: 22 Aug 2013: off -->
+<!-- Redshift: 23 Aug 2013: off -->
+<!-- Redshift: 24 Aug 2013: on -->
