@@ -22,7 +22,7 @@ import Data.List as L (sortBy)
 import Data.Maybe (catMaybes)
 import System.Environment (getArgs)
 import Text.Pandoc -- (Pandoc(..), Inline(..), Block(..), Meta(..), WriterOptions(..), defaultParserState, readMarkdown, writeMarkdown,)
-import Text.Pandoc.Builder as TPB (simpleTable, singleton, unBlocks, Blocks)
+import Text.Pandoc.Builder as TPB (fromList, simpleTable, singleton, unBlocks, Blocks)
 import Text.Pandoc.Highlighting (pygments)
 import qualified Data.ByteString.Lazy as B (readFile, ByteString)
 import qualified Data.Sequence as S (index)
@@ -81,7 +81,7 @@ bookToRow gr = if  myRating gr == 0 then [] else -- 0 as rating means unread/unr
                                           Plain [Str (handleRating (myRating gr))],
                                           Plain [Str (handleDate gr)],
                                           Plain [Str (dateRead gr)]] ++
-              Prelude.map TPB.singleton (handleReview (review gr))
+                  [TPB.fromList $ handleReview $ review gr]
 
 handleISBN :: Maybe Int -> (String,String)
 handleISBN i = case i of
