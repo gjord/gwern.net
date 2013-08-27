@@ -795,9 +795,48 @@ One thing I did do was piggyback on my [Noopept self-experiment](#noopept): I bl
 
 The l-threonate caused me no apparent problems, and correlated with better days, but would be difficult to cap (and hence blind self-experiment) and is ruinously expensive on a per-dose basis. So I looked around for alternatives; one of the most common compounds suggested was the citrate form because it is reasonably well-absorbed and causes fewer digestive problems.
 
-Finding a usable product on Amazon caused me some difficulties. I wanted a 500mg magnesium-citrate-only product at <$20 for 120 doses, but I discovered most of the selection for "magnesium citrate" had sub-500mg doses, involved *calcium* citrate or other substances like zinc (not necessarily a bad thing, but would confound an experiment), were mostly magnesium *oxide* rather than citrate, or some still other problem. Ultimately I settled on [Solgar's $13 120x400mg magnesium citrate](http://www.amazon.com/Solgar-Magnesium-Citrate-120-tablets/dp/B00013Z0ZG/) as acceptable. (To compare with the bulkiness of the LEF vitamin D+l-threonate powder, [the Office of Dietary Supplements](http://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/) says magnesium citrate is 16% magnesium, so to get 400mg of magnesium as claimed, would take 2.5g of material, rather than 7g for 200mg; even if l-threonate is absorbed 100% and citrate 50%, the citrate is ahead. The pills turn out to be quite big; if I want to get them into my gel capsules, I will probably have to break them in half.)
+Finding a usable product on Amazon caused me some difficulties. I wanted a 500mg magnesium-citrate-only product at <$20 for 120 doses, but I discovered most of the selection for "magnesium citrate" had sub-500mg doses, involved *calcium* citrate or other substances like zinc (not necessarily a bad thing, but would confound an experiment), were mostly magnesium *oxide* rather than citrate, or some still other problem. Ultimately I settled on [Solgar's $13 120x400mg magnesium citrate](http://www.amazon.com/Solgar-Magnesium-Citrate-120-tablets/dp/B00013Z0ZG/) as acceptable. (To compare with the bulkiness of the LEF vitamin D+l-threonate powder, [the Office of Dietary Supplements](http://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/) says magnesium citrate is 16% magnesium, so to get 400mg of magnesium as claimed, would take 2.5g of material, rather than 7g for 200mg; even if l-threonate is absorbed 100% and citrate 50%, the citrate is ahead. The pills turn out to wider and longer than my 00 pills; if I want to get them into my gel capsules, I will probably have to crush them.)
 
-<!-- 23, 24 August: 800mg -->
+My impression after the first two days (2 doses of 400mg each, one with breakfast & then lunch) was positive. I did not have the rumored digestion problems, and the first day went excellently: I was up until 1:30AM working and even then didn't feel like going to bed - and I probably should have since I then slept abominably, which made the second day merely a good day. The third day I took none and it was an ordinary day. This is consistent with what I expected from the LEF l-threonate & TruBrain glycinate/lycinate, and so it is worth investigating with a self-experiment.
+
+<!-- 23, 24 August: 800mg; 26 Aug: 900mg -->
+
+### Experiment
+
+The basic idea is to remedy a deficiency, not use an acute stimulant, so week-long blocks seem appropriate. I can reuse the same methodology as the lithium self-experiment. The response variables will be the usual mood/productivity self-rating and, since I was originally interested in magnesium for possible sleep quality improvements, a standardized score of sleep latency + # of awakenings + time spent awake (the same variable as my [potassium sleep experiment](Zeo#potassium)).
+
+#### Power
+
+Reusing the magnesium correlation from the first [Noopept](#noopept) self-experiment and using the _t_-test as an approximation
+
+~~~{.R}
+R> pwr.t.test(d = (0.27 / sd(npt$MP)), power = 0.8, type="paired", alternative="greater")
+
+     Paired t test power calculation
+
+              n = 50.61
+~~~
+
+50 pairs of active/placebos or 100 days. With 120 tablets and 4 tablets used up, that leaves me 58 doses. That might seem adequate except the paired _t_-test approximation is overly-optimistic, and I also expect the non-randomized non-blinded correlation is too high which means that is overly-optimistic as well. The power would be lower than I'd prefer. I decided to simply order another bottle of Solgar's & double the sample size to be safe.
+
+Is 200 enough? There are no canned power functions for the ordinal logistic regression I would be using, so the standard advice is to estimate power by simulation: generating thousands of new datasets where we know by construction that the binary magnesium variable increases MP by 0.27 (such as by bootstrapping the original Noopept experiment's data), and seeing how often in this collection the cutoff of statistical-significance is passed when the usual analysis is done (background: [CrossValidated](http://stats.stackexchange.com/questions/22406/power-analysis-for-ordinal-logistic-regression) or ["Power Analysis and Sample Size Estimation using Bootstrap"](http://www.lexjansen.com/pharmasug/2005/statisticspharmacokinetics/sp05.pdf)). In this case, we leave alpha at 0.05, reuse the Noopept experiment's data with its Magtein correlation, and ask for the power when _n_=200
+
+~~~{.R}
+library(boot)
+npt <- read.csv("http://www.gwern.net/docs/nootropics/2013-gwern-noopept.csv")
+n <- 200
+magteinPower <- function(dt, indices) {
+    d <- dt[sample(nrow(dt), n, replace=TRUE), ] # new dataset, possibly larger than the original
+    lmodel <- lrm(MP ~ Noopept + Magtein, data = d)
+    return(anova(lmodel)[8])
+}
+bs <- boot(data=npt, statistic=magteinPower, R=100000, parallel="multicore", ncpus=4)
+alpha <- 0.05
+print(sum(bs$t<=alpha)/length(bs$t))
+# [1] 0.7132
+~~~
+
+So the power will be ~71%.
 
 # Melatonin
 
