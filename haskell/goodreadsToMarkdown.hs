@@ -1,6 +1,9 @@
+#! /usr/bin/env runhaskell
 -- $ cabal install cassava stringsearch
 -- $ wget http://www.gwern.net/docs/gwern-goodreads.csv
--- $ rm foo.html; runhaskell tmp.hs | pandoc --standalone --smart --number-sections --toc --reference-links --css=/home/gwern/wiki/static/css/default.css --css=http://www.gwern.net/static/css/default.css --mathml -o foo.html && firefox foo.html
+-- # Demonstration usage:
+-- $ ./goodreadsToMarkdown.hs gwern-goodreads.csv > book-reviews.page
+
 {- Background on parsing the GoodReads CSV export:
 
 CSV header looks like this:
@@ -11,26 +14,26 @@ Example CSV line:
 -}
 -- Background on Amazon: Generic ISBN search looks like this http://www.amazon.com/gp/search/ref=sr_adv_b/?search-alias=stripbooks&unfiltered=1&field-isbn=9781401302023
 
-{-# LANGUAGE OverloadedStrings, RecordWildCards #-}
-import Control.Applicative
+{-# LANGUAGE OverloadedStrings #-}
+import Control.Applicative ((<*>), (<$>))
 import Data.ByteString.Lazy.Search as BLS (replace)
-import Data.Csv
-import Data.Maybe
-import Text.Pandoc
-import Text.Pandoc.Builder as TPB
+import Data.Csv (FromNamedRecord(..), (.:), decodeByName)
+import Data.List as L (sortBy)
+import Data.Maybe (catMaybes)
+import System.Environment (getArgs)
+import Text.Pandoc -- (Pandoc(..), Inline(..), Block(..), Meta(..), WriterOptions(..), defaultParserState, readMarkdown, writeMarkdown,)
+import Text.Pandoc.Builder as TPB (simpleTable, singleton, unBlocks, Blocks)
 import Text.Pandoc.Highlighting (pygments)
-import qualified Data.ByteString.Lazy as B
-import qualified Data.Sequence as S
-import qualified Data.Vector as V
--- import System.Environment (getArgs)
+import qualified Data.ByteString.Lazy as B (readFile, ByteString)
+import qualified Data.Sequence as S (index)
+import qualified Data.Vector as V (toList, Vector)
+
 main :: IO ()
-main = do books <- B.readFile "gwern-goodreads.csv"
-          -- books <- fmap head getArgs >>= B.readFile
+main = do books <- fmap head getArgs >>= B.readFile
           let books' = BLS.replace "=\"" ("\""::B.ByteString) books
-          -- B.putStrLn books'
           case decodeByName books' of
               Left err -> putStrLn err
-              Right (_, v) -> putStrLn (writeMarkdown def (Pandoc nullMeta [(bookTable v)]))
+              Right (_, v) -> putStrLn (writeMarkdown def (Pandoc nullMeta [bookTable v]))
 
 data GoodReads = GoodReads { title :: String, author :: String, isbn :: Maybe Int,
                              myRating :: Int,
@@ -53,8 +56,15 @@ instance FromNamedRecord GoodReads where
 -- type Blocks  = Many Block
 
 bookTable :: V.Vector GoodReads -> Block
-bookTable books = let rows = V.toList (V.map bookToRow books)
+bookTable books = let sorted = L.sortBy rating $ V.toList books
+                      rows = map bookToRow sorted
                       in S.index (unBlocks (simpleTable colHeaders rows)) 0
+         -- descending: 5 stars first; break ties with reviews
+   where rating b1 b2
+           | myRating b1 < myRating b2 = GT
+           | myRating b1 == myRating b2 =
+              if length (review b1) < length (review b2) then GT else LT
+           | otherwise = LT
 
 colHeaders :: [Blocks]
 colHeaders = Prelude.map TPB.singleton [Plain [Str "Title"],
@@ -65,7 +75,8 @@ colHeaders = Prelude.map TPB.singleton [Plain [Str "Title"],
                                         Plain [Str "Review"]]
 
 bookToRow :: GoodReads -> [Blocks]
-bookToRow gr = Prelude.map TPB.singleton [Plain [Emph [Link [Str (title gr)] (handleISBN (isbn gr))]],
+bookToRow gr = if  myRating gr == 0 then [] else -- 0 as rating means unread/unrated
+                  Prelude.map TPB.singleton [Plain [Emph [Link [Str (title gr)] (handleISBN (isbn gr))]],
                                           Plain [Str (author gr)],
                                           Plain [Str (handleRating (myRating gr))],
                                           Plain [Str (handleDate gr)],
@@ -75,10 +86,10 @@ bookToRow gr = Prelude.map TPB.singleton [Plain [Emph [Link [Str (title gr)] (ha
 handleISBN :: Maybe Int -> (String,String)
 handleISBN i = case i of
                 Nothing -> ("","")
-                Just i' -> (getAmazonPage i', "ISBN: "++show(i'))
+                Just i' -> (getAmazonPage i', "ISBN: " ++ show i')
 
                 where getAmazonPage :: Int -> String
-                      getAmazonPage isbn =  "http://www.amazon.com/gp/search?keywords="++show(isbn)++"&index=books"
+                      getAmazonPage ibn =  "http://www.amazon.com/gp/search?keywords="++show ibn++"&index=books"
 
 handleRating :: Int -> String
 handleRating stars = replicate stars '★'
@@ -126,5 +137,4 @@ def = WriterOptions { writerStandalone         = False
                       , writerLiterateHaskell  = False
                       , writerEmailObfuscation = undefined
                       , writerHighlightStyle   = pygments
-                      , writerXeTeX = False
-                      }
+                      , writerXeTeX = False }
