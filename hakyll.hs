@@ -75,7 +75,7 @@ options :: WriterOptions
 options = defaultWriterOptions{ writerSectionDivs = True,
                                 writerStandalone = True,
                                 writerTableOfContents = True,
-                                writerColumns = 90,
+                                writerColumns = 120,
                                 writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
                                 writerHtml5 = True,
                                 writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
