@@ -64,6 +64,7 @@ The candidate studies:
 - Stephenson & Halpern 2013
 - Nussbaumer et al 2013
 - Oelhafen et al 2013
+- Clouter 2013
 
 The `active` moderator variable is whether a control group was no-contact or trained on some other task. The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact control groups limited the validity of such studies, a criticism that was echoed with greater force by Shipstead, Redick, & Engle 2012; the Melby-Lervåg & Hulme 2013 meta-analysis then confirmed that use of no-contact controls inflated the effect size estimates[^Melby-active]. So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2013, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.)
 
@@ -87,6 +88,7 @@ Other variables:
    0. BOMAT
    1. Raven's Advanced Progressive Matrices (RAPM)
    2. Raven's Standard Progressive Matrices (SPM)
+   3. other (eg. Cattell's Culture Fair Intelligence Test/CFIT)
 2. record speed of IQ test: minutes allotted (upper bound if more details are given; if no time limits, default to 30 minutes since apparently few take longer)
 3. n-back type:
 
@@ -236,6 +238,7 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2005 Jaeggi0.1     4     14        2.93   7     12.13   2.59   0        240        1    20    0   0
 2005 Jaeggi0.2     4     14        2.93   8     12.86   1.46   1        240        1    20    0   0
 2013 Oelhafen      28    18.7      3.75   15    19.9    4.7    0        350        0    45    0   54
+2013 Clouter       18    28.83     0.821  18    30.94   0.801  1        605        3    13    0   1
 
 # Analysis
 
