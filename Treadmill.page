@@ -127,6 +127,17 @@ F-statistic:  216 on 2 and 2867 DF,  p-value: <2e-16
 
 This is more as expected: so walking on the treadmill cost me -1.5WPM in typing speed, and a day of practice correlates with +0.004WPM (and so a full month of practice would be worth 0.12WPM, so it's probably time to call typing practice quits as having reached diminishing returns).
 
+# Spaced repetition
+
+[Starting in 2010](http://blog.sethroberts.net/category/walking-and-learning/), Seth Roberts began claiming that he found his [Anki](!Wikipedia "Anki (software)") flashcard reviews ([spaced repetition](Spaced repetition)) to be easier when he did them while using his treadmill, and offers some just-so evolutionary psychology theorizing that walking may cue knowledge absorption in a "thirst for knowledge".
+
+An effect strikes me as plausible: flashcard review does not require fine motor skills or difficult thinking, and the walking might well wake one up if nothing else. But on the other hand, the walking might also be simply a distraction from the work of recall and damage real performance, much like how a lot of people claim playing music while studying "helps them focus" (for example, [Perham & Sykora 2012](/docs/dnb/2012-perham.pdf "Disliked Music can be Better for Performance than Liked Music") found music damaged memory recall, and enjoyed music the most).
+
+Since Anki, like Mnemosyne, records detailed statistics about flashcard reviews, he has the data to show some objective performance measurements like whether days on the treadmill increase the average flashcard scores; he would have years of data, far more than he needs to show what he believes to be "a big effect". As far as I know, he has never made any use of the Anki data. He does [quote some data](http://blog.sethroberts.net/2012/09/05/new-treadmill-catalyzes-learning-results/) from a [2012 presentation by Jeremy Howard](http://vimeo.com/40265872), who claims a 5% review error-rate while walking and 8% while not-walking, and to be "40% faster [at learning]".
+
+Having acquired a treadmill, and being a long-time user of Mnemosyne, this seems eminently testable. While trying to adapt to the treadmill, I simply randomize whether I do my daily Mnemosyne review before or after getting on the treadmill. (Unfortunately, I can think of no way to blind treadmill use, so randomization is it.)
+
+One concern, prompted by the [2013 Lewis meditation](Lewis meditation) results, is that there may be time-of-day effects on flashcard review; I tend to not use the treadmill in the morning (I am not a morning person), so if recall improved in the afternoon, then it might be conflated with the treadmill. So I have downloaded the 4GB public Mnemosyne dataset (every Mnemosyne user is offered the option to anonymously submit statistical data about their flashcards) to try to analyze it and estimate fixed effects of time which will control for such issues.
 
 <!--
 Treadmill data
@@ -152,5 +163,4 @@ June 2012
 -->
 
 <!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi -->
-<!-- Mnemosyne reviews while on treadmill: 25, 26
-<!-- can I use the Mnemosyne torrent to nail down time-of-day effects and time-of-week effects? -->
+<!-- Mnemosyne reviews while on treadmill: 25, 26 -->
