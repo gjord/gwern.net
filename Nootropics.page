@@ -42,6 +42,8 @@ Somewhat ironically given the stereotypes, while I was in college I dabbled very
 [^blinding]: I've been criticized for calling it "[double-blinding](!Wikipedia "Blind experiment")" - if I am both the 'subject' and the 'experimenter', then blinding one person blinds both roles, and one ought to just call it "blinding". I believe that "blinding" is ambiguous, though: perhaps I am using a friend or roommate to randomize each dose, in which single-blinding case it is *not* as good as when I "blind" myself (and achieve a double-blind). The terminology should reflect the true quality of each design, and not conflate single-blinding with double-blinding.
 
 <!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013 -->
+<!-- Multivitamin: started 24 August 2013 -->
+<!-- Iron: 24, 25, 26, 28 August 2013 -->
 
 # Acetyl-l-carnitine (ALCAR)
 
@@ -795,7 +797,7 @@ One thing I did do was piggyback on my [Noopept self-experiment](#noopept): I bl
 
 The l-threonate caused me no apparent problems, and correlated with better days, but would be difficult to cap (and hence blind self-experiment) and is ruinously expensive on a per-dose basis. So I looked around for alternatives; one of the most common compounds suggested was the citrate form because it is reasonably well-absorbed and causes fewer digestive problems.
 
-Finding a usable product on Amazon caused me some difficulties. I wanted a 500mg magnesium-citrate-only product at <$20 for 120 doses, but I discovered most of the selection for "magnesium citrate" had sub-500mg doses, involved *calcium* citrate or other substances like zinc (not necessarily a bad thing, but would confound an experiment), were mostly magnesium *oxide* rather than citrate, or some still other problem. Ultimately I settled on [Solgar's $13 120x400mg magnesium citrate](http://www.amazon.com/Solgar-Magnesium-Citrate-120-tablets/dp/B00013Z0ZG/) as acceptable. (To compare with the bulkiness of the LEF vitamin D+l-threonate powder, [the Office of Dietary Supplements](http://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/) says magnesium citrate is 16% magnesium, so to get 400mg of magnesium as claimed, would take 2.5g of material, rather than 7g for 200mg; even if l-threonate is absorbed 100% and citrate 50%, the citrate is ahead. The pills turn out to wider and longer than my 00 pills; if I want to get them into my gel capsules, I will probably have to crush them.)
+Finding a usable product on Amazon caused me some difficulties. I wanted a 500mg magnesium-citrate-only product at <$20 for 120 doses, but I discovered most of the selection for "magnesium citrate" had sub-500mg doses, involved *calcium* citrate or other substances like zinc (not necessarily a bad thing, but would confound an experiment), were mostly magnesium *oxide* rather than citrate, or some still other problem. Ultimately I settled on [Solgar's $13 120x400mg magnesium citrate](http://www.amazon.com/Solgar-Magnesium-Citrate-120-tablets/dp/B00013Z0ZG/) as acceptable. (To compare with the bulkiness of the LEF vitamin D+l-threonate powder, [the Office of Dietary Supplements](http://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/) says magnesium citrate is 16% magnesium, so to get 400mg of magnesium as claimed, would take 2.5g of material, rather than 7g for 200mg; even if l-threonate is absorbed 100% and citrate 50%, the citrate is ahead. The pills turn out to wider and longer than my 00 pills; if I want to get them into my gel capsules, I have to crush them into fine powder. The powder from one pill turns out to take up 2 00 pills.)
 
 My impression after the first two days (2 doses of 400mg each, one with breakfast & then lunch) was positive. I did not have the rumored digestion problems, and the first day went excellently: I was up until 1:30AM working and even then didn't feel like going to bed - and I probably should have since I then slept abominably, which made the second day merely a good day. The third day I took none and it was an ordinary day. This is consistent with what I expected from the LEF l-threonate & TruBrain glycinate/lycinate, and so it is worth investigating with a self-experiment.
 
@@ -804,6 +806,8 @@ My impression after the first two days (2 doses of 400mg each, one with breakfas
 ### Experiment
 
 The basic idea is to remedy a deficiency, not use an acute stimulant, so week-long blocks seem appropriate. I can reuse the same methodology as the lithium self-experiment. The response variables will be the usual mood/productivity self-rating and, since I was originally interested in magnesium for possible sleep quality improvements, a standardized score of sleep latency + # of awakenings + time spent awake (the same variable as my [potassium sleep experiment](Zeo#potassium)).
+
+Since each 400mg pill takes up 2 00 pills, that's 4 pills a day, or 224 pills for the first batch of Solgar magnesium pills. Turning the Solgar tablets into gel capsules was difficult enough that I switched to [NOW Food's 227g magnesium citrate powder](http://www.amazon.com/Foods-Magnesium-Citrate-Powder-Ounces/dp/B004189JCW/) for the second batch.
 
 #### Power
 
@@ -837,6 +841,60 @@ print(sum(bs$t<=alpha)/length(bs$t))
 ~~~
 
 So the power will be ~71%.
+
+<!--
+### VoI
+
+1. Cost of regular magnesium use:
+
+    $13 for a jar of 120x400mg, at 800mg a day, is 60 doses or $80 a year. Since magnesium supplementation is a lifelong proposition, the net present value at my usual 5% annual discount rate is: `80 / log(1.05) ~> [1] 1640`.
+2. Cost of experiment testing magnesium:
+
+    I will need >400 pills (100 pairs = 200 days, each day = >2 pills), which is ~$5. The magnesium cost is excluded as a sunk cost since my default in lieu of an experiment is to keep taking them. I will need to grind the magnesium up before I can fill the capsules; it turns out I did not have a mortar & pestle, and that the magnesium tablets were very hard to work with, so making the first batch of magnesium & placebo capsules ate 3 and a half hours start to finish, so 7 hours total or $51. Taking them is trivial but over 200 days would add up to maybe 2 hours, or $18. So call the total $69.
+3. Priors:
+
+    The power calculation suggests the experiment is ~71% reliable. The American populace base-rates say I am deficient in magnesium, magnesium plays roles in cognitive function, the Noopept experiment's Magtein correlation suggests a benefit to me, as do the first 2 days of magnesium citrate; even keeping in mind how many times I have fooled myself in the past, I still feel that I would be relatively surprised if the experiment turned in a small effect size, so I would say 75% confidence that the magnesium is causing a benefit.
+4. Value of Information:
+
+    Power times prior times benefit minus cost of experimentation: $(0.71 \times 0.75 \times 1640) - 69 = 804$. As expected, given the high cost of lifetime supplementation and the relatively cheap cost of a decisive experiment (I was going to take the magnesium *anyway*, right?), it makes sense to do the experiment.
+
+Benefit of magnesium use: thinking about the difference between a '3' and a '4' day, I'd be willing to pay $10 to turn a former into the latter; a fifth of the difference then is $2 per day. At $13 for 60 days, that's a net profit of 2*60 - 13 or $107. I am only 75% sure that this is what is happening when I take magnesium, so the expected value is a quarter less or more like $75, or $468 a year net profit ((2 * 365 * 0.75) - ((365/60) * 13)). This would be a lifetime profit of `468 / log(1.05) = 9592`. Since the expected value is positive, in lieu of compelling information to the contrary, I would want to use magnesium.
+
+Of course, if the magnesium effect did not exist, then my profit would disappear and I would be left with a lifetime loss of -$1640.
+
+If I did the experiment with a power of 71% and it turned in a null result, then my prior of 75% would be knock down to
+
+TODO:
+(2 * 365 * 0.75) - ((365/60) * 13)
+
+(0.05 * 0.8) / ((0.05 * 0.8) + (0.95 * 0.2))
+(0.25 * 0.9) / ((0.25 * 0.9) + (0.75 * 0.1))
+
+3. $P(a)$ = probability of being no effect = 0.75
+4. $P(\lnot a)$ = probability of being not real = 1 - 0.25 = 0.25
+5. $P(b|a)$ = probability of experiment turning in positive result when effect exists (power) = 0.9
+6. $P(b|\lnot a)$ = probability of positive result if effect doesn't exist (alpha) = 0.05
+
+likelihood ratio = \frac{P(b|a)}{P(b|\lnot a)}
+
+\frac{0.9}{0.05} = 18
+
+$P(a|b) = \frac{P(b|a) \times P(a)}{(P(b|a) \times P(a)) + (P(b|\lnot a) \times P(\lnot a))} = \frac{0.9 \times 0.75}{(0.9 \times 0.75) + (0.05 \times 0.25)} = 0.9878$
+
+(0.9*0.75)/((0.9*0.75) + (0.05*0.25))
+
+R = 3/4
+β = 0.1
+α = 0.05
+PPV = (1 - β)R/(R - βR + α)
+((1 - 0.1)*(3/4))/((3/4) - 0.1*(3/4) + 0.05) = 0.931
+
+-->
+
+### Data
+
+1. 27 August - 2? September: ?
+   3? September - 9? September: ?
 
 # Melatonin
 
@@ -1381,13 +1439,13 @@ A Redditor ordered some Russian brand Noopept, but finding it was unpleasant & n
 ![Russian Noopept box, front & back](/images/nootropics-noopept-box.jpg)
 ![Russian Noopept blister-pack, front & back](/images/nootropics-noopept-pills.jpg)
 
-It appeared in reasonably good shape, and closely matched the photographs in the Wikipedia article. I took 2 of the 25 10mg pills on successive days on top of my usual caffeine+piracetam stack, and didn't notice anything in particular; I didn't find it unpleasant, though.
+It appeared in reasonably good shape, and closely matched the photographs in the Wikipedia article. I took 2 of the 25 10mg pills on successive days on top of my usual caffeine+piracetam stack, and didn't notice anything; in particular, I didn't find it unpleasant like he did.
 
-## Experiment
+## Pilot experiment
 
 So, I thought I might as well experiment since I have it. I put the 23 remaining pills into gel capsules with brown rice as filling, made ~30 placebo capsules, and will use the one-bag blinding/randomization method. I don't want to spend the time it would take to n-back every day, so I will simply look for an effect on my daily mood/productivity self-rating; hopefully Noopept will add a little on average above and beyond my existing practices like caffeine+piracetam (yes, Noopept may be as good as piracetam, but since I still have a ton of piracetam from my 3kg order, I am primarily interested in whether Noopept adds onto piracetam rather than replaces). 10mg doses seem to be on the low side for Noopept users, weakening the effect, but on the other hand, if I were to take 2 capsules at a time, then I'd halve the sample size; it's not clear what is the optimal tradeoff between dose and _n_ for statistical power.
 
-Nor am I sure how important the results are - partway through, I haven't noticed anything bad, at least, from taking Noopept. And any effect is going to be subtle: people seem to think that 10mg is too small and I should be taking twice as much, and Noopept's claimed to be a chronic gradual sort of thing, with less of an acute effect. If the effect size is positive, regardless of statistical-significance, I'll probably think about doing a bigger real self-experiment.
+Nor am I sure how important the results are - partway through, I haven't noticed anything bad, at least, from taking Noopept. And any effect is going to be subtle: people seem to think that 10mg is too small for an ingested rather than sublingual dose and I should be taking twice as much, and Noopept's claimed to be a chronic gradual sort of thing, with less of an acute effect. If the effect size is positive, regardless of statistical-significance, I'll probably think about doing a bigger real self-experiment (more days blocked into weeks or months & 20mg dose)
 
 ### Power
 
@@ -1479,6 +1537,44 @@ print(sum(bs$t<=alpha) / length(bs$t))
 ~~~
 
 So for the observed effect size, the small Noopept sample had only 7% power to turn in a statistically-significant result. Given the plausible effect size, and weakness of the experiment, I find these results encouraging.
+
+## Followup experiment
+### Power
+
+In using powder, there are two opposite considerations: Russian Noopept is reportedly the best, so we might expect anything I buy online to be weaker or impure or inferior somehow and the effect size smaller than in the pilot experiment; but by buying my own supply & using powder I can double the dose to 20mg (to compensate for ingestion rather than sublingual dosing) and so the effect size larger than in the pilot experiment. To be safe, I'll assume the effect size should be the same.
+
+Assuming the effect size to be the same & using the usual alpha, we can find the necessary sample size by a slight variation on the magnesium bootstrap power calculation. Since the 56 days gave a power of 7% while we want closer to 80%, we probably want to start our power estimation much higher, with _n_ in the 300s:
+
+~~~{.R}
+library(boot)
+library(rms)
+npt <- read.csv("http://www.gwern.net/docs/nootropics/2013-gwern-noopept.csv")
+newNoopeptPower <- function(dt, indices) {
+    d <- dt[sample(nrow(dt), n, replace=TRUE), ] # new dataset, possibly larger than the original
+    lmodel <- lrm(MP ~ Noopept + Magtein, data = d)
+    return(anova(lmodel)[7])
+}
+alpha <- 0.05
+for (n in seq(from = 300, to = 600, by = 10)) {
+   bs <- boot(data=npt, statistic=newNoopeptPower, R=1000, parallel="multicore", ncpus=4)
+   print(c(n, sum(bs$t<=alpha)/length(bs$t)))
+}
+~~~
+
+Even at _n_=600 (or nearly 2 years), the estimated power is only 32%. This is absurdly small and such an experiment would be a waste of time.
+
+Suppose we were optimistic and we doubled the effect from 0.23 to 0.47 (this can be done by editing the first two Noopept rows and incrementing the MP variable by 1), and then looked again at power? At _n_=300, power has reached 60%, and by _n_=530, we have hit the desired 80%.
+
+~~~{.R}
+npt[1,2] <- npt[1,2] + 1
+npt[2,2] <- npt[2,2] + 1
+n <- 530
+bs <- boot(data=npt, statistic=newNoopeptPower, R=100000, parallel="multicore", ncpus=4)
+print(c(n, sum(bs$t<=alpha)/length(bs$t)))
+[1] 530.0000   0.8241
+~~~
+
+530 is better, but still far too long an experiment. I may try a second pilot experiment with magnesium held constant to try to get a better effect size estimate - in the first pilot experiment, the Noopept & Magtein tended to coincide (collinearity), making the effect unclear and possibly underestimated.
 
 # Oxiracetam
 
