@@ -45,7 +45,6 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
 
         JS:
                 disqus
-                google+
                 floating footnotes
         CSS
                 differences from readability
@@ -90,7 +89,8 @@ d.write('<sc'+'ript src="'+
   _gaq.push(['gwo._trackPageview', '/0520977997/test']);
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
+              + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
@@ -104,7 +104,8 @@ d.write('<sc'+'ript src="'+
       }, 40000);
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+              '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
@@ -518,4 +519,77 @@ hunk ./static/templates/default.html 165
 +       ... }
 ~~~
 
-Since any difference due to the testing framework should be noticeable, this will be a shorter experiment, from August 15 to September 15.
+Since any difference due to the testing framework should be noticeable, this will be a shorter experiment, from 15 August to 29 August.
+
+### Results
+
+While amusingly the first pair of 1k hits resulted in a dramatic 18% vs 14% result, this quickly disappeared into a much more normal-looking set of data:
+
+option _n_    conversion
+------ -----  ------
+null2  7,359  16.23%
+null1  7,488  15.89%
+       14,847 16.06%
+
+### Analysis
+
+Ah, but can we reject the null hypothesis that ""==""? In a victory for null-hypothesis-significance-testing, we do not commit a Type I error:
+
+~~~{.R}
+R> x1 <- 7359; x2 <- 7488; prop.test(c(x1*0.1623, x2*0.1589), c(x1,x2))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(x1 * 0.1623, x2 * 0.1589) out of c(x1, x2)
+X-squared = 0.2936, df = 1, p-value = 0.5879
+alternative hypothesis: two.sided
+95% confidence interval:
+ -0.008547  0.015347
+~~~
+
+But seriously, it's nice to see that ABalytics does not seem to be broken & favoring either option and any results driven by placement in the array of options.
+
+## Link anchor color
+
+As part of the generally monochromatic color scheme, all links are colored light-black & underlined:
+
+~~~{.Css}
+a {
+    color: #303C3C; /* off-black */
+    text-decoration: underline;
+}
+~~~
+
+But maybe underlining is excessive? Perhaps in the dark ages of the Web, people needed obtrusive indications of hyperlinks like purple-colored text, but do they now? Perhaps the underline just jars. I should try deleting the underlining. (`text-decoration` accepts several other options, but they are hideous: `overline`/`line-through`/`blink`.)
+
+### Implementation
+
+The usual:
+
+~~~{.Html}
+hunk ./static/templates/default.html 30
+-    <div class="null_class1"></div>
++    <div class="underline_class1"></div>
+hunk ./static/templates/default.html 157
+-      null: [
++      underline: [
+hunk ./static/templates/default.html 159
+-      name: 'null1',
+-      "null_class1": "",
+-      "null_class2": ""
++      name: 'underline1',
++      "underline_class1": "<style>a { color: #303C3C; text-decoration: underline; }</style>",
++      "underline_class2": ""
+hunk ./static/templates/default.html 164
+-      name: 'null2',
+-      "null_class1": "",
+-      "null_class2": ""
++      name: 'underline2',
++      "underline_class1": "<style>a { color: #303C3C; text-decoration: none; }</style>",
++      "underline_class2": ""
+... ]]
+~~~
+
+### Data
+
+I am a little curious about this one, so it gets a full month: 29 August - 30 September.
