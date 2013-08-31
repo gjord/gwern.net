@@ -170,7 +170,7 @@ This is called every hour by `cron`:
 
 This gets all visited URLs in the last time period and prints them out to the file for archiver to process. Hence, everything I browse is backed-up through `archiver`.
 
-Non-Firefox browsers can be supported with similar strategies; for example, [Zachary Vance's Chromium script](https://gist.github.com/vanceza/6337391) likewise extracts URLs from Chromium's SQL history.
+Non-Firefox browsers can be supported with similar strategies; for example, Zachary Vance's Chromium scripts likewise extracts URLs from Chromium's [SQL history](https://github.com/vanceza/rip-chrome-history) & [bookmarks](https://github.com/vanceza/export-chrome-bookmarks).
 
 #### Document links
 
