@@ -1348,6 +1348,12 @@ I leave the thought exercise at this point, having overseen the labefaction of t
 
 # On meta-ethical optimization
 
+> "The killer whale's heart weighs one hundred kilos
+> but in other respects it is light.
+> There is nothing more animal-like
+> than a clear conscience
+> on the third planet of the Sun." --"In Praise of Self-Deprecation ", [Wislawa Szymborska](http://www.journeywithjesus.net/PoemsAndPrayers/Wislawa_Szymborska.shtml)
+
 When I or another utilitarian point out (eg. in [Charity is not about helping]()) that it costs only a few thousand dollars to reliably save a human life, and then note that one choosing to spend money on something else is choosing to not save that life, one of the common reactions is that this is true of every expenditure and that this implies we ought to donate most or all of our wealth.
 
 This is quite true. If you have $10,000 and you donate it all, there will be say 5 more humans alive than in the counterfactual scenario where you spend $10,000 on a daily cup of coffee at Starbucks. This is a simple fact about how the world works. To deny it requires quibbling about probabilities and expected value (despite one accepting them in every other part of one's life) or engaging in desperate postulations about infinitely precise counter-balancing mechanisms ("maybe if I donate, that means someone somewhere will donate that much less! So it conveniently doesn't matter whether or not I do, I don't make a difference!"). Fundamentally, if to give a little helps, then for non-billionaires, giving a lot helps more, and given even more helps even more. What a dull point to make.
@@ -1816,15 +1822,16 @@ TC-ness, besides being foundational to computer science and understanding many k
 
 [^tc-proofs]: An active area of research is into languages & systems carefully designed and proven to *not* be Turing-complete (eg. [total functional programming](!Wikipedia)). Why this effort to make a language in which many programs can't be written? Because TC-ness is intimately tied to [Godel's incompleteness theorems](!Wikipedia) & [Rice's theorem](!Wikipedia), allowing TC-ness means that one is forfeiting all sorts of provability properties: in a non-TC language, one may be able to easily prove all sorts of useful things to know; for example, that programs terminate, that they are type-safe or not, that they can be easily converted into a logical theorem, that they consume a bounded amount of resources, etc.
 
-They are probably best considered as a subset of "discovered" or "found" [esoteric programming language](!Wikipedia)s (esolangs). So [FRACTRAN](!Wikipedia), as extraordinarily minimalist as it is, does not count; nor would a deliberately-obfuscated language like [Malbolge](!Wikipedia) (where it took years to write a trivial program) count because it was designed to an esolang; but neither would [Conway's Game of Life](!Wikipedia) count because questions about whether it was TC appeared almost immediately upon publication, and so it turning out to be TC is not surprising. Many configuration or special-purpose languages or tools or complicated games, like [MediaWiki templates](http://mentalpolyphonics.com/posts/wikimedia-proves-greenspuns-tenth-law), [`sed`](http://www.catonmat.net/blog/proof-that-sed-is-turing-complete/), [XSLT](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8846&rep=rep1&type=pdf "'A Simple Proof for the Turing-Completeness of XSLT and XQuery', Kepser 2004"), [Infinite Minesweeper](http://for.mat.bham.ac.uk/R.W.Kaye/minesw/minesw.htm#infinite%20minesweeper) [_Dwarf_](http://dwarffortresswiki.org/index.php/User:BaronW#The_Almighty_Dwarven_Calculator) [_Fortress_](http://mkv25.net/dfma/map-8269)^[_DF_ provides clockwork mechanisms, so TC-ness is unsurprising; but the water is implemented as a simple cellular automation, so there might be *more* ways of getting TC-ness in _DF_!], [_Starcraft_](http://boingboing.net/2010/04/15/colossal-turing-mach.html#comment-227149400), [_Minecraft_](http://gaming.stackexchange.com/a/20220), [Ant](!Wikipedia "Apache Ant"), [C++ templates](!Wikipedia "Template (C++)") etc. are TC but these are not surprising either: TC may be as simple as including syntax for calling out to a better-known language like shell or Perl. Similarly, such feats as creating a small Turing machine using Legos would not count, since we already know that mechanical computers work. What is surprising may differ from person to person.
+They are probably best considered as a subset of "discovered" or "found" [esoteric programming language](!Wikipedia)s (esolangs). So [FRACTRAN](!Wikipedia), as extraordinarily minimalist as it is, does not count; nor would a deliberately-obfuscated language like [Malbolge](!Wikipedia) (where it took years to write a trivial program) count because it was designed to be an esolang; but neither would [Conway's Game of Life](!Wikipedia) count because questions about whether it was TC appeared almost immediately upon publication, and so it turning out to be TC is not surprising. Many configuration or special-purpose languages or tools or complicated games, like [MediaWiki templates](http://mentalpolyphonics.com/posts/wikimedia-proves-greenspuns-tenth-law), [`sed`](http://www.catonmat.net/blog/proof-that-sed-is-turing-complete/), [XSLT](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8846&rep=rep1&type=pdf "'A Simple Proof for the Turing-Completeness of XSLT and XQuery', Kepser 2004"), [Infinite Minesweeper](http://for.mat.bham.ac.uk/R.W.Kaye/minesw/minesw.htm#infinite%20minesweeper), [_Dwarf_](http://dwarffortresswiki.org/index.php/User:BaronW#The_Almighty_Dwarven_Calculator) [_Fortress_](http://mkv25.net/dfma/map-8269)^[_DF_ provides clockwork mechanisms, so TC-ness is unsurprising; but the water is implemented as a simple cellular automation, so there might be *more* ways of getting TC-ness in _DF_!], [_Starcraft_](http://boingboing.net/2010/04/15/colossal-turing-mach.html#comment-227149400), [_Minecraft_](http://gaming.stackexchange.com/a/20220), [Ant](!Wikipedia "Apache Ant"), [C++ templates](!Wikipedia "Template (C++)") etc. are TC but these are not surprising either: TC may be as simple as including syntax for calling out to a better-known language like Perl. Similarly, such feats as creating a small Turing machine using Legos would not count, since we already know that mechanical computers work. What is surprising may differ from person to person.
 
 - [Peano arithmetic](!Wikipedia): multiplication on natural numbers is enough to be TC; in contrast, [Presburger arithmetic](!Wikipedia) removes multiplication and hence is not TC
 - [Wang tiles](!Wikipedia): multi-colored squares, whose placement is governed by the rule that adjacent colors must be the same
 - [CSS](!Wikipedia): was designed to be a declarative markup language for tweaking the visual appearance of HTML pages, but the declarations interact with each other just enough to [allow an encoding](https://github.com/elitheeli/stupid-machines#readme) of the cellular automaton [Rule 110](!Wikipedia)
 - [MMU](!Wikipedia "Memory management unit") shuffle computer RAM around to make programming easier; if a program sets up its share of memory properly, it can [execute arbitrary computations via MMU faults](https://github.com/jbangert/trapcc#readme) ([comments](https://news.ycombinator.com/item?id=5261598)) without ever running code itself by turning the MMU faulting mechanism into a [one-instruction set computer](!Wikipedia "One_instruction_set_computer#Subtract_and_branch_if_less_than_or_equal_to_zero").
+- ["`mov` is Turing-complete"](http://www.cl.cam.ac.uk/~sd601/papers/mov.pdf "Dolan 2013"): the apparently innocuous x86 assembler instruction [`mov`](!Wikipedia "MOV (x86 instruction)"), which copies data between the CPU & RAM, can be used to implement a [transport-triggered-architecture](!Wikipedia "Transport triggered architecture") [one instruction set computer](!Wikipedia)
 - "return-into-[libc](!Wikipedia) attacks": software libraries provide pre-packaged functions, each of which is intended to do one useful thing; a fully TC 'language' can be cobbled out of just calls to these functions and nothing else, which enables evasion of security mechanisms since the attacker is not running any recognizable code of his own. See ["On the Expressiveness of Return-into-libc Attacks"](http://www4.ncsu.edu/~mqtran/pubs/rilc.pdf), Tran et al 2011
 - _[Pokemon Yellow](!Wikipedia)_: ["Pokemon Yellow Total Control Hack"](http://aurellem.org/vba-clojure/html/total-control.html) outlines an exploit of a memory corruption attack which allows one to write arbitrary Game Boy assembler programs by repeated in-game walking and item purchasing.
-- _[Magic: the Gathering](!Wikipedia)_: [TC](http://www.toothycat.net/~hologram/Turing/ "Magic: the Gathering is Turing Complete") in the sense that players mechanically taking any option they are given, and otherwise all actions are forced
+- _[Magic: the Gathering](!Wikipedia)_: [TC](http://www.toothycat.net/~hologram/Turing/ "Magic: the Gathering is Turing Complete") with the assumption that players mechanically take any option they are given (but otherwise all actions are forced)
 - musical notation: given instructions for transposing successive notes, [musical notation becomes the esolang](http://programmers.stackexchange.com/a/136179) [Choon](http://www.stephensykes.com/choon/choon.html)
 - heart cells: interact in a way [allowing logic gates and hence TC-ness](http://eprints.uwe.ac.uk/15848/6/ScarleXbox.pdf "Implications of the Turing completeness of reaction-diffusion models, informed by GPGPU simulations on an XBox 360: Cardiac arrhythmias, re-entry and the halting problem', Scarle 2009") (perhaps not *too* surprising since cellular automatons were biologically motivated)
 
@@ -1954,50 +1961,6 @@ This unexpected re-appearance of his brother Roger prompted me to search for Rog
 Unfortunately, further details seem hard to find. Aside from a mention on a [York High School reunion](http://www.ccstrat.com/yhs2011reunion/regrets2011.html) page, the hits for Roger D. Moulton are contaminated by some chemist's papers/citations/patents.
 
 I have to admit defeat at this point - I've checked all the databases I can easily think of, so for followup, I created a Google Alert in case additional materials surface on the public web (`"Arthur Bernard Moulton" OR "Arthur B Moulton" OR "Arthur B. Moulton" OR "Roger D. Moulton" OR "Roger D Moulton"`). We'll see.
--->
-
-<!--
-# Shell scripting applications
-
-things I have used shell scripting for over the years:
-
-https://plus.google.com/103530621949492999968/posts/J5TxoMpAcsB
-
-cuesplit.sh:             POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-darcs-smtp:              POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-filter-urls:             POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-firefox-urls:            POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-local-archiver:          POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-memento-mori:            POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-sousveillance:           POSIX shell script text executable\012- a /bin/sh script, ASCII text executable
-
-.alias
-
-About.page:    ~~~{.Bash}
-Archiving URLs.page:~~~{.Bash}
-Archiving URLs.page:~~~{.Bash}
-hpmor.page:~~~{.Bash}
-hpmor.page:~~~{.Bash}
-hpmor.page:~~~{.Bash}
-In Defense Of Inclusionism.page:    ~~~{.Bash}
-In Defense Of Inclusionism.page:~~~~{.Bash}
-In Defense Of Inclusionism.page:~~~~{.Bash}
-Spaced repetition.page:- [Bash scripts](http://groups.google.com/group/mnemosyne-proj-users/browse_thread/thread/fd10b9e601fb0eb6) for generating vocabulary flashcards (processing multiple online dictionaries, good for having multiple examples; images; and audio)
-Zeo.page:~~~{.Bash}
-Zeo.page:~~~{.Bash}
-Zeo.page:    ~~~{.Bash}
-Zeo.page:    ~~~{.Bash}
-
-irssi pasting
-
-19:58 < gwern> ... http://www.bladeandepsilon.com/hybridtheory24final.txt http://www.bladeandepsilon.com/hybridtheory25final.txt http://www.bladeandepsilon.com/hybridtheory26final.txt http://www.bladeandepsilon.com/hybridtheory27final.txt http://www.bladeandepsilon.com/hybridtheory28final.txt http://www.bladeandepsilon.com/hybridtheory29final.txt http://www.bladeandepsilon.com/hybridtheory30final.txt && cat hybrid*.txt | wc -w && rm hybrid*.txt
-= 09:28 <@gwern> ggreer: http://predictionbook.com/predictions/6737 $ echo -n "Seth Roberts will not post a blog post on my (supposedly) null result for taking vitamin D in the morning." | sha512sum
-
-website CSS validator (one of many in crontab):
-= 12:31 <@gwern> perplexing. both 'if [ -z `curl --silent --head "http://www.gwern.net/static/css/default.css" | grep "Content-Type: text/html"` ]; then echo true; fi' and 'if [ -n `curl --silent --head "http://www.gwern.net/static/css/default.css" | grep "Content-Type: text/html"` ]; then echo true; fi' return the same exact thing
-
-markdown-lint
-eg = 16:46 <@gwern> grep --only-matching '^\[\^.*\]: ' "$@" | sort | uniq --count | fgrep --invert-match "      1 [^"
 -->
 
 # Cicadas
