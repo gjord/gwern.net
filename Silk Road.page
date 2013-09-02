@@ -346,7 +346,7 @@ Notice the address field. Now, I *could* be a chump and put down my friend's add
 
 ## Encryption
 
-There are a great many guides to GPG; the official [GPG handbook](http://www.gnupg.org/gph/en/manual.html) or [Ubuntu guide](http://help.ubuntu.com/community/GnuPrivacyGuardHowto) work well enough. (The [SR wiki page](http://dkn255hz262ypmii.onion/wiki/index.php/PGP/GPG_Encryption) mostly discusses where to get PGP-like software.) To summarize what I did:
+There are a great many guides to GPG; the official [GPG handbook](http://www.gnupg.org/gph/en/manual.html), the [Ubuntu guide](http://help.ubuntu.com/community/GnuPrivacyGuardHowto), or [Heinlein's "Quick Start"](http://www.madboa.com/geek/gpg-quickstart/) work well enough. (The [SR wiki page](http://dkn255hz262ypmii.onion/wiki/index.php/PGP/GPG_Encryption) mostly discusses where to get PGP-like software.) To summarize what I did:
 
 1. I copy the public key into a text file named `key.txt`
 2. I tell GPG to memorize it: `gpg --import key.txt`
@@ -768,6 +768,7 @@ Regardless, 2 key pieces of cypherpunk technology are now in place and already e
 
         > Silk Road founder Dread Pirate Roberts hasn't signed on for a full interview quite yet but, interestingly, he does often oblige Ormsby's questions with quick answers. Even without a DPR fireside chat, Ormsby says she is happy with the caliber of interviewees so far. Outside of Silk Road, she's received "offers of assistance from people like Dr. Monica Barrett, who is Australia's leading academic on drugs and the internet and 'Gwern' of gwern.net fame, who has made some of the most comprehensive and well-researched analysis of Silk Road available."
     - ["Traveling the Silk Road: A measurement analysis of a large anonymous online marketplace"](https://www.andrew.cmu.edu/user/nicolasc/publications/Christin-WWW13.pdf), Christin 2013
+    - ["'Silk Road', the virtual drug marketplace: A single case study of user experiences"](/docs/sr/2013-van-hout.pdf), Van Hout & Bingham 2013
     - ["The Silk Road Is Showing Cracks"](http://motherboard.vice.com/blog/the-silk-road-is-showing-cracks), _Vice_
     - ["The Business Of Bitcoin: Entrepreneurs See Opportunities In Alternative Currencies"](http://techcrunch.com/2011/10/24/the-business-of-bitcoin-entrepreneurs-see-opportunities-in-alternative-currencies/) & ["The Chinese Are Coming! The Chinese Are Coming!"](http://techcrunch.com/2013/02/23/the-chinese-are-coming-the-chinese-are-coming/), _TechCrunch_
     - ["Eight Months After Sen. Chuck Schumer Blasted Bitcoin, Silk Road is Still Booming"](http://betabeat.com/2012/01/eight-months-after-sen-chuck-schumer-blasted-bitcoin-silk-road-is-still-booming/) & ["Silk Road, Secret Website Where You Can Buy Drugs, Is Hiring; the e-bazaar needs a database engineer and a customer service rep"](http://betabeat.com/2012/01/silk-road-secret-website-where-you-can-buy-drugs-is-hiring/), _Betabeat_
