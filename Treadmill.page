@@ -162,5 +162,853 @@ June 2012
 08: 2.6 w=201
 -->
 
-<!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi -->
-<!-- Mnemosyne reviews while on treadmill: 25, 26 -->
+<!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66 -->
+<!-- Mnemosyne reviews while on treadmill: 25, 26, 29 -->
+
+<!--
+$ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
+$ R
+mnemosyne <- read.csv("http://dl.dropboxusercontent.com/u/182368464/gwern-mnemosyne.csv", header=FALSE, col.names=c("Date", "ID", "Grade"), colClasses=c("integer", "factor", "numeric"))
+mnemosyne$Date <- as.POSIXct(mnemosyne$Date, origin = "1970-01-01", tz = "UTC")
+mnemosyne$WeekDay <- as.factor(weekdays(mnemosyne$Date))
+mnemosyne$Hour <- as.factor(as.numeric(format(mnemosyne$Date, "%H")))
+mnemosyne <- mnemosyne[order(mnemosyne$ID),]
+
+nrow(mnemosyne)
+[1] 136006
+summary(mnemosyne)
+      Date                                   ID             Grade           WeekDay
+ Min.   :2009-05-31 23:06:25.00   088b40ad.inv:    43   Min.   :0.00   Friday   :19155
+ 1st Qu.:2009-12-09 18:22:59.50   e8764710    :    39   1st Qu.:3.00   Monday   :21208
+ Median :2010-07-19 10:21:03.00   27fc28b3    :    37   Median :4.00   Saturday :15692
+ Mean   :2010-10-20 13:56:42.72   86b870ac    :    37   Mean   :3.63   Sunday   :20172
+ 3rd Qu.:2011-06-22 00:37:01.50   1644a7c7    :    35   3rd Qu.:4.00   Thursday :19577
+ Max.   :2013-08-28 18:49:38.00   7b0e88b5    :    34   Max.   :5.00   Tuesday  :19108
+                                  (Other)     :135781                  Wednesday:21094
+      Hour
+ 17     :11154
+ 18     : 9522
+ 15     : 9293
+ 16     : 9042
+ 14     : 8613
+ 3      : 6935
+R> summary(lm(Grade ~ Hour + WeekDay, data=mnemosyne))
+
+Call:
+lm(formula = Grade ~ Hour + WeekDay, data = mnemosyne)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-3.665 -0.558  0.344  0.384  1.547
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       3.60571    0.01219  295.85  < 2e-16
+Hour1             0.00427    0.01490    0.29  0.77444
+Hour2             0.02998    0.01453    2.06  0.03902
+Hour3             0.05026    0.01430    3.51  0.00044
+Hour4             0.08360    0.01499    5.58  2.5e-08
+Hour5            -0.01255    0.01648   -0.76  0.44627
+Hour6            -0.12910    0.01709   -7.55  4.3e-14
+Hour7             0.03412    0.01851    1.84  0.06533
+Hour8             0.01991    0.01889    1.05  0.29187
+Hour9            -0.05590    0.01986   -2.81  0.00489
+Hour10           -0.00116    0.01562   -0.07  0.94068
+Hour11            0.06561    0.01515    4.33  1.5e-05
+Hour12           -0.08372    0.02694   -3.11  0.00188
+Hour13            0.00773    0.01578    0.49  0.62409
+Hour14            0.04938    0.01372    3.60  0.00032
+Hour15            0.03429    0.01352    2.54  0.01123
+Hour16            0.10032    0.01359    7.38  1.6e-13
+Hour17            0.07692    0.01311    5.87  4.5e-09
+Hour18            0.10567    0.01346    7.85  4.2e-15
+Hour19            0.01149    0.01459    0.79  0.43105
+Hour20            0.03121    0.01471    2.12  0.03388
+Hour21            0.02553    0.01452    1.76  0.07865
+Hour22           -0.03006    0.01659   -1.81  0.07011
+Hour23            0.03909    0.01498    2.61  0.00906
+WeekDayMonday    -0.01263    0.00771   -1.64  0.10146
+WeekDaySaturday  -0.02119    0.00834   -2.54  0.01107
+WeekDaySunday    -0.02362    0.00783   -3.02  0.00256
+WeekDayThursday   0.01129    0.00787    1.43  0.15164
+WeekDayTuesday   -0.01783    0.00792   -2.25  0.02442
+WeekDayWednesday  0.00066    0.00773    0.09  0.93195
+
+Residual standard error: 0.77 on 135976 degrees of freedom
+Multiple R-squared:  0.00397,   Adjusted R-squared:  0.00376
+F-statistic: 18.7 on 29 and 135976 DF,  p-value: <2e-16
+
+R> summary(glm(Grade ~ Hour + WeekDay, data=mnemosyne, family=poisson))
+
+Call:
+glm(formula = Grade ~ Hour + WeekDay, family = poisson, data = mnemosyne)
+
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-2.707  -0.304   0.177   0.198   0.779
+
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)
+(Intercept)       1.282496   0.008339  153.79   <2e-16
+Hour1             0.001185   0.010207    0.12   0.9076
+Hour2             0.008298   0.009933    0.84   0.4035
+Hour3             0.013870   0.009767    1.42   0.1556
+Hour4             0.022972   0.010216    2.25   0.0245
+Hour5            -0.003502   0.011300   -0.31   0.7566
+Hour6            -0.036503   0.011835   -3.08   0.0020
+Hour7             0.009439   0.012644    0.75   0.4554
+Hour8             0.005517   0.012921    0.43   0.6694
+Hour9            -0.015663   0.013683   -1.14   0.2523
+Hour10           -0.000325   0.010699   -0.03   0.9757
+Hour11            0.018069   0.010332    1.75   0.0803
+Hour12           -0.023645   0.018656   -1.27   0.2050
+Hour13            0.002145   0.010804    0.20   0.8426
+Hour14            0.013633   0.009380    1.45   0.1461
+Hour15            0.009484   0.009249    1.03   0.3052
+Hour16            0.027505   0.009265    2.97   0.0030
+Hour17            0.021157   0.008956    2.36   0.0182
+Hour18            0.028956   0.009178    3.16   0.0016
+Hour19            0.003182   0.009987    0.32   0.7500
+Hour20            0.008634   0.010059    0.86   0.3907
+Hour21            0.007070   0.009933    0.71   0.4766
+Hour22           -0.008396   0.011397   -0.74   0.4613
+Hour23            0.010808   0.010238    1.06   0.2911
+WeekDayMonday    -0.003475   0.005256   -0.66   0.5085
+WeekDaySaturday  -0.005829   0.005686   -1.03   0.3053
+WeekDaySunday    -0.006508   0.005342   -1.22   0.2231
+WeekDayThursday   0.003098   0.005359    0.58   0.5632
+WeekDayTuesday   -0.004907   0.005401   -0.91   0.3636
+WeekDayWednesday  0.000180   0.005265    0.03   0.9728
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 25258  on 136005  degrees of freedom
+Residual deviance: 25170  on 135976  degrees of freedom
+AIC: 453224
+
+Number of Fisher Scoring iterations: 4
+
+R> summary(glm(Grade ~ Hour + WeekDay, data=mnemosyne, family=gaussian))
+
+Call:
+glm(formula = Grade ~ Hour + WeekDay, family = gaussian, data = mnemosyne)
+
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-3.665  -0.558   0.344   0.384   1.547
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       3.60571    0.01219  295.85  < 2e-16
+Hour1             0.00427    0.01490    0.29  0.77444
+Hour2             0.02998    0.01453    2.06  0.03902
+Hour3             0.05026    0.01430    3.51  0.00044
+Hour4             0.08360    0.01499    5.58  2.5e-08
+Hour5            -0.01255    0.01648   -0.76  0.44627
+Hour6            -0.12910    0.01709   -7.55  4.3e-14
+Hour7             0.03412    0.01851    1.84  0.06533
+Hour8             0.01991    0.01889    1.05  0.29187
+Hour9            -0.05590    0.01986   -2.81  0.00489
+Hour10           -0.00116    0.01562   -0.07  0.94068
+Hour11            0.06561    0.01515    4.33  1.5e-05
+Hour12           -0.08372    0.02694   -3.11  0.00188
+Hour13            0.00773    0.01578    0.49  0.62409
+Hour14            0.04938    0.01372    3.60  0.00032
+Hour15            0.03429    0.01352    2.54  0.01123
+Hour16            0.10032    0.01359    7.38  1.6e-13
+Hour17            0.07692    0.01311    5.87  4.5e-09
+Hour18            0.10567    0.01346    7.85  4.2e-15
+Hour19            0.01149    0.01459    0.79  0.43105
+Hour20            0.03121    0.01471    2.12  0.03388
+Hour21            0.02553    0.01452    1.76  0.07865
+Hour22           -0.03006    0.01659   -1.81  0.07011
+Hour23            0.03909    0.01498    2.61  0.00906
+WeekDayMonday    -0.01263    0.00771   -1.64  0.10146
+WeekDaySaturday  -0.02119    0.00834   -2.54  0.01107
+WeekDaySunday    -0.02362    0.00783   -3.02  0.00256
+WeekDayThursday   0.01129    0.00787    1.43  0.15164
+WeekDayTuesday   -0.01783    0.00792   -2.25  0.02442
+WeekDayWednesday  0.00066    0.00773    0.09  0.93195
+
+(Dispersion parameter for gaussian family taken to be 0.5922)
+
+    Null deviance: 80842  on 136005  degrees of freedom
+Residual deviance: 80521  on 135976  degrees of freedom
+AIC: 314739
+
+Number of Fisher Scoring iterations: 2
+
+R> lrm(Grade ~ Hour + WeekDay, data = mnemosyne)
+
+Logistic Regression Model
+
+lrm(formula = Grade ~ Hour + WeekDay, data = mnemosyne)
+
+Frequencies of Responses
+
+    0     1     2     3     4     5
+   18   817 17638 16523 96581  4429
+
+                      Model Likelihood     Discrimination    Rank Discrim.
+                         Ratio Test            Indexes          Indexes
+Obs        136006    LR chi2     411.69    R2       0.004    C       0.529
+max |deriv| 6e-11    d.f.            29    g        0.130    Dxy     0.059
+                     Pr(> chi2) <0.0001    gr       1.138    gamma   0.062
+                                           gp       0.015    tau-a   0.027
+                                           Brier    0.117
+
+                  Coef    S.E.   Wald Z Pr(>|Z|)
+y>=1               8.8943 0.2381  37.35 <0.0001
+y>=2               5.0512 0.0484 104.45 <0.0001
+y>=3               1.8112 0.0346  52.35 <0.0001
+y>=4               1.0182 0.0342  29.74 <0.0001
+y>=5              -3.4421 0.0370 -92.97 <0.0001
+Hour=1             0.0227 0.0419   0.54 0.5880
+Hour=2             0.0502 0.0408   1.23 0.2180
+Hour=3             0.1246 0.0404   3.09 0.0020
+Hour=4             0.1934 0.0425   4.55 <0.0001
+Hour=5            -0.0687 0.0461  -1.49 0.1355
+Hour=6            -0.3181 0.0476  -6.68 <0.0001
+Hour=7             0.0940 0.0532   1.77 0.0773
+Hour=8             0.0164 0.0532   0.31 0.7584
+Hour=9            -0.2097 0.0540  -3.88 0.0001
+Hour=10            0.0096 0.0441   0.22 0.8275
+Hour=11            0.1634 0.0432   3.78 0.0002
+Hour=12           -0.2266 0.0745  -3.04 0.0024
+Hour=13           -0.0375 0.0438  -0.85 0.3926
+Hour=14            0.0729 0.0384   1.90 0.0580
+Hour=15            0.0417 0.0378   1.10 0.2704
+Hour=16            0.2269 0.0384   5.91 <0.0001
+Hour=17            0.1580 0.0369   4.28 <0.0001
+Hour=18            0.2412 0.0381   6.34 <0.0001
+Hour=19            0.0388 0.0409   0.95 0.3427
+Hour=20            0.0390 0.0411   0.95 0.3435
+Hour=21            0.0315 0.0406   0.78 0.4379
+Hour=22           -0.0740 0.0461  -1.60 0.1088
+Hour=23            0.0525 0.0418   1.26 0.2094
+WeekDay=Monday    -0.0400 0.0218  -1.84 0.0663
+WeekDay=Saturday  -0.0518 0.0235  -2.20 0.0278
+WeekDay=Sunday    -0.0602 0.0220  -2.73 0.0063
+WeekDay=Thursday   0.0314 0.0223   1.41 0.1599
+WeekDay=Tuesday   -0.0496 0.0223  -2.22 0.0266
+WeekDay=Wednesday -0.0093 0.0219  -0.42 0.6725
+
+
+# install.packages("lme4")
+library(lme4)
+lmr <- lmer(Grade ~ Hour + WeekDay + (1|ID), data=mnemosyne); lmr
+
+lmr1 <- lmer(Grade ~ (1:ID) + (1|Hour:WeekDay) + (1|WeekDay), data=mnemosyne)
+lmr2 <- lmer(Grade ~ (1:ID) + (1|WeekDay:Hour) + (1|Hour), data=mnemosyne)
+lmr3 <- lmer(Grade ~ (1:ID) + (1|Hour) + (1|WeekDay), data=mnemosyne)
+lmr4 <- lmer(Grade ~ (1:ID) + (1|WeekDay), data=mnemosyne)
+lmr5 <- lmer(Grade ~ (1:ID) + (1|Hour), data=mnemosyne)
+lmr6 <- lmer(Grade ~ (1|Hour) + (1|WeekDay), data=mnemosyne)
+lmr7 <- lmer(Grade ~ (1|Hour), data=mnemosyne)
+lmr8 <- lmer(Grade ~ (1|WeekDay), data=mnemosyne)
+anova(lmr1, lmr2, lmr3, lmr4, lmr5, lmr6, lmr7, lmr8)
+...
+     Df    AIC    BIC  logLik deviance   Chisq Chi Df Pr(>Chisq)
+lmr4  3 315209 315238 -157601   315203
+lmr5  3 314817 314846 -157405   314811  391.60      0     <2e-16
+lmr7  3 314817 314846 -157405   314811    0.00      0          1
+lmr8  3 315209 315238 -157601   315203    0.00      0          1
+lmr1  4 313076 313115 -156534   313068 2134.91      1     <2e-16
+lmr2  4 313071 313111 -156532   313063    4.22      0     <2e-16
+lmr3  4 314802 314841 -157397   314794    0.00      0          1
+lmr6  4 314802 314841 -157397   314794    0.00      0          1
+
+# lmr2 fits the best:
+lmr; ranef(lmr2)
+Linear mixed model fit by REML ['lmerMod']
+Formula: Grade ~ (1:ID) + (1 | WeekDay:Hour) + (1 | Hour)
+   Data: mnemosyne
+
+REML criterion at convergence: 313070
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ WeekDay:Hour (Intercept) 0.02200  0.1483
+ Hour         (Intercept) 0.00312  0.0559
+ Residual                 0.58263  0.7633
+Number of obs: 136006, groups: WeekDay:Hour, 168; Hour, 24
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   3.6009     0.0164     220
+$`WeekDay:Hour`
+             (Intercept)
+Friday:0       -0.019139
+Friday:1        0.066000
+Friday:2        0.127930
+Friday:3       -0.030641
+Friday:4       -0.003555
+Friday:5        0.050270
+Friday:6       -0.069348
+Friday:7        0.162819
+Friday:8        0.111000
+Friday:9       -0.095142
+Friday:10      -0.302438
+Friday:11      -0.109022
+Friday:12       0.062432
+Friday:13      -0.191936
+Friday:14       0.080181
+Friday:15       0.056169
+Friday:16       0.019640
+Friday:17       0.060872
+Friday:18       0.121200
+Friday:19       0.021702
+Friday:20      -0.070333
+Friday:21       0.010426
+Friday:22       0.184549
+Friday:23       0.034788
+Monday:0       -0.050514
+Monday:1       -0.028257
+Monday:2        0.044377
+Monday:3        0.039661
+Monday:4        0.195395
+Monday:5        0.084555
+Monday:6        0.245055
+Monday:7        0.012922
+Monday:8       -0.026822
+Monday:9        0.090738
+Monday:10       0.058359
+Monday:11       0.079431
+Monday:12       0.078798
+Monday:13      -0.065937
+Monday:14      -0.008352
+Monday:15      -0.071668
+Monday:16      -0.112114
+Monday:17       0.035863
+Monday:18       0.073842
+Monday:19       0.118506
+Monday:20       0.072537
+Monday:21      -0.018688
+Monday:22      -0.281828
+Monday:23       0.043099
+Saturday:0      0.036154
+Saturday:1     -0.068238
+Saturday:2     -0.060102
+Saturday:3      0.130476
+Saturday:4      0.093435
+Saturday:5      0.032539
+Saturday:6     -1.030752
+Saturday:7     -0.070630
+Saturday:8     -0.200564
+Saturday:9      0.063551
+Saturday:10     0.110013
+Saturday:11     0.004704
+Saturday:12    -0.634920
+Saturday:13     0.109141
+Saturday:14    -0.031036
+Saturday:15     0.083492
+Saturday:16     0.058052
+Saturday:17    -0.001440
+Saturday:18     0.053168
+Saturday:19    -0.129243
+Saturday:20    -0.049725
+Saturday:21     0.052595
+Saturday:22     0.030970
+Saturday:23     0.089661
+Sunday:0        0.077668
+Sunday:1        0.002151
+Sunday:2        0.036547
+Sunday:3       -0.101526
+Sunday:4       -0.093471
+Sunday:5       -0.285501
+Sunday:6        0.219535
+Sunday:7        0.043141
+Sunday:8        0.120761
+Sunday:9       -0.104879
+Sunday:10      -0.044698
+Sunday:11      -0.173190
+Sunday:12       0.135313
+Sunday:13       0.085895
+Sunday:14       0.046830
+Sunday:15      -0.027498
+Sunday:16       0.028319
+Sunday:17      -0.113491
+Sunday:18       0.021524
+Sunday:19       0.037930
+Sunday:20       0.043320
+Sunday:21      -0.069593
+Sunday:22       0.074461
+Sunday:23       0.059064
+Thursday:0      0.097109
+Thursday:1     -0.022386
+Thursday:2     -0.035211
+Thursday:3      0.100196
+Thursday:4     -0.012246
+Thursday:5     -0.124873
+Thursday:6      0.269351
+Thursday:7     -0.253772
+Thursday:8      0.031430
+Thursday:9     -0.044216
+Thursday:10     0.025595
+Thursday:11     0.144850
+Thursday:12    -0.245026
+Thursday:13     0.063981
+Thursday:14     0.026730
+Thursday:15     0.058664
+Thursday:16     0.166390
+Thursday:17     0.066198
+Thursday:18     0.013504
+Thursday:19    -0.157871
+Thursday:20    -0.055170
+Thursday:21     0.077850
+Thursday:22    -0.030607
+Thursday:23     0.026882
+Tuesday:0      -0.175450
+Tuesday:1       0.103698
+Tuesday:2      -0.050102
+Tuesday:3       0.037554
+Tuesday:4       0.011223
+Tuesday:5       0.057910
+Tuesday:6      -0.155696
+Tuesday:7      -0.039166
+Tuesday:8       0.064975
+Tuesday:9      -0.010484
+Tuesday:10     -0.076896
+Tuesday:11      0.064807
+Tuesday:12     -0.005010
+Tuesday:13     -0.079948
+Tuesday:14      0.037390
+Tuesday:15      0.075767
+Tuesday:16      0.106249
+Tuesday:17      0.071065
+Tuesday:18      0.035418
+Tuesday:19      0.022454
+Tuesday:20      0.069751
+Tuesday:21     -0.035432
+Tuesday:22     -0.070137
+Tuesday:23     -0.188515
+Wednesday:0    -0.016837
+Wednesday:1    -0.052541
+Wednesday:2     0.031597
+Wednesday:3    -0.016883
+Wednesday:4     0.095349
+Wednesday:5     0.082828
+Wednesday:6    -0.385014
+Wednesday:7     0.128185
+Wednesday:8    -0.074648
+Wednesday:9    -0.083151
+Wednesday:10    0.195809
+Wednesday:11    0.072926
+Wednesday:12   -0.007923
+Wednesday:13    0.058538
+Wednesday:14   -0.035893
+Wednesday:15   -0.073958
+Wednesday:16    0.076137
+Wednesday:17    0.128695
+Wednesday:18    0.026047
+Wednesday:19    0.091466
+Wednesday:20    0.058831
+Wednesday:21    0.068955
+Wednesday:22   -0.017855
+Wednesday:23    0.013263
+
+$Hour
+   (Intercept)
+0   -7.240e-03
+1    6.061e-05
+2    1.349e-02
+3    2.255e-02
+4    4.061e-02
+5   -1.452e-02
+6   -1.287e-01
+7   -2.342e-03
+8    3.709e-03
+9   -2.606e-02
+10  -4.862e-03
+11   1.199e-02
+12  -8.748e-02
+13  -2.877e-03
+14   1.644e-02
+15   1.433e-02
+16   4.864e-02
+17   3.517e-02
+18   4.893e-02
+19   7.016e-04
+20   9.824e-03
+21   1.222e-02
+22  -1.568e-02
+23   1.111e-02
+
+
+
+effects <- ranef(lmr2)$`WeekDay:Hour`
+lmr1DayHours <- data.frame(Day=sapply(strsplit(rownames(effects), ":"),  function (x) {x[1]}),
+                           Hour=as.integer(sapply(strsplit(rownames(effects), ":"),  function (x) {x[2]})),
+                           Effect=effects[1:nrow(effects),])
+qplot(Day, Hour, color=Effect, data=lmr1DayHours) + scale_colour_gradient(low="black", high="white")
+
+http://i.imgur.com/6wyR9QZ.png
+-->
+<!--
+
+I extract the data as before:
+
+    $ sqlite3 -batch ./mnemosyne-stats/logs.db "SELECT timestamp,object_id,grade FROM log WHERE event==9;" | tr '|' ',' > ~/mnemosyne-all.csv
+    $ wc mnemosyne-all.csv
+      47794669   47794669 1114023396 mnemosyne-all.csv
+    $ R
+    R> install.packages("biglm")
+
+The `biglm` package offers an *incremental* linear model function: you can read in a million rows, 'add' them to a `biglm` object, read in another million rows and so on. Since I can fit 1 million rows in RAM but not 48 million rows, this works great:
+
+    library(biglm)
+
+    m <- file("mnemosyne-all.csv", open="rt")
+
+    get <- function(filepath) {
+        chunk <- read.csv(filepath, nrows=2000000, header=FALSE, col.names=c("Date", "ID", "Grade"), colClasses=c("integer", "factor", "numeric"))
+        chunk$Date <- as.POSIXct(chunk$Date, origin = "1970-01-01", tz = "UTC")
+        chunk$WeekDay <- as.factor(weekdays(chunk$Date))
+        chunk$Hour <- as.factor(as.numeric(format(chunk$Date, "%H")))
+        return(chunk)
+        }
+
+    frml <- Grade ~ Hour + WeekDay
+
+    # create a seed to update with fresh data in the loop
+    chunk1 <- get(m)
+    bl <- biglm(frml, chunk1)
+
+    while (isOpen(m)) {
+        chunk <- get(m)
+        bl <- update(bl, chunk)
+    }
+    summary(bl)
+    closeAllConnections()
+
+    ...
+    Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]) :
+      contrasts can be applied only to factors with 2 or more levels
+    Calls: update ... model.matrix -> model.matrix.default -> contrasts<-
+    R> # It errors out because I didn't figure out how to handle reading to the end of the file
+    R> summary(bl)
+    Large data regression model: biglm(frml, chunk1)
+    Sample size =  47794669
+                     Coef (95%  CI) SE p
+    (Intercept)       2.8  2.8  2.8  0 0
+    Hour1             0.0  0.0  0.0  0 0
+    Hour2             0.0  0.0  0.0  0 0
+    Hour3            -0.1 -0.1  0.0  0 0
+    Hour4            -0.1 -0.1 -0.1  0 0
+    Hour5            -0.2 -0.2 -0.2  0 0
+    Hour6            -0.3 -0.3 -0.3  0 0
+    Hour7            -0.1 -0.1 -0.1  0 0
+    Hour8             0.1  0.1  0.1  0 0
+    Hour9             0.2  0.2  0.2  0 0
+    Hour10            0.3  0.3  0.3  0 0
+    Hour11            0.3  0.3  0.3  0 0
+    Hour12            0.3  0.3  0.3  0 0
+    Hour13            0.2  0.2  0.2  0 0
+    Hour14            0.2  0.2  0.2  0 0
+    Hour15            0.2  0.2  0.2  0 0
+    Hour16            0.1  0.1  0.1  0 0
+    Hour17            0.1  0.1  0.1  0 0
+    Hour18            0.1  0.1  0.1  0 0
+    Hour19            0.0  0.0  0.1  0 0
+    Hour20            0.0  0.0  0.0  0 0
+    Hour21            0.0  0.0  0.0  0 0
+    Hour22            0.0  0.0  0.0  0 0
+    Hour23            0.0  0.0  0.0  0 0
+    WeekDayMonday     0.0  0.0  0.0  0 0
+    WeekDaySaturday   0.0  0.0  0.0  0 0
+    WeekDaySunday     0.0  0.0  0.0  0 0
+    WeekDayThursday   0.0  0.0  0.0  0 0
+    WeekDayTuesday    0.0  0.0  0.0  0 0
+    WeekDayWednesday  0.0  0.0  0.0  0 0
+
+But hopefully 47,794,669 (48m) flashcard reviews is enough. So, pulling out the interesting coefficients - all the weekdays drop out as irrelevant - we get:
+
+    06            -0.3
+    05            -0.2
+    03            -0.1
+    04            -0.1
+    07            -0.1
+    08             0.1
+    16             0.1
+    17             0.1
+    18             0.1
+    09             0.2
+    13             0.2
+    14             0.2
+    15             0.2
+    10             0.3
+    11             0.3
+    12             0.3
+
+(We can ignore the p-values & confidence intervals, since at this sample scale, they're all going to be zero & point-values.) No apparent pattern when sorted by size, but the pattern jumps out when we graph by hour:
+
+    plot(c(0,0,-0.1,-0.1,-0.2,-0.3,-0.1,0.1,0.2,0.3,0.3,0.3,0.2,0.2,0.2,0.1,0.1,0.1,0,0,0,0,0))
+
+http://i.imgur.com/sum3toZ.png
+
+We get a beautiful-looking circadian rhythm: peak performance at noon, crappy performance in early morning, declining performance over the day into evening. I'm actually impressed at the effect sizes here: if you compare reviewing at noon vs reviewing at 6 AM, that's a difference of 0.6 - on a 1-5 scale where most grades are a 3 or 4! If this is reflecting actual memory performance and not some sort of response bias varying by time (like being too pessimistic when you're up too early/late)
+
+That's only about retrieval, though. I wonder if late at night (==near bedtime) would be best for subsequent recalls, but I'm not sure how to analyze that.
+
+This doesn't tell us how hour & day may combine like in my previous multilevel model. So let's rerun with:
+
+    frml <- Grade ~ Hour * WeekDay
+
+This will use up ~4x more RAM while running, BTW, so you may need to reduce how many rows you tell `read.csv` to read in. The results:
+
+    R> summary(bl)
+    Large data regression model: biglm(frml, chunk1)
+    Sample size =  47794669
+                            Coef (95%  CI) SE   p
+    (Intercept)              2.8  2.8  2.8  0 0.0
+    Hour1                    0.0  0.0  0.0  0 0.0
+    Hour2                    0.0  0.0  0.0  0 0.0
+    Hour3                    0.0  0.0  0.0  0 0.0
+    Hour4                   -0.1 -0.1 -0.1  0 0.0
+    Hour5                   -0.2 -0.2 -0.2  0 0.0
+    Hour6                   -0.3 -0.3 -0.3  0 0.0
+    Hour7                    0.0  0.0  0.0  0 0.0
+    Hour8                    0.1  0.1  0.1  0 0.0
+    Hour9                    0.1  0.1  0.1  0 0.0
+    Hour10                   0.3  0.3  0.3  0 0.0
+    Hour11                   0.3  0.3  0.3  0 0.0
+    Hour12                   0.3  0.3  0.3  0 0.0
+    Hour13                   0.2  0.2  0.2  0 0.0
+    Hour14                   0.2  0.2  0.2  0 0.0
+    Hour15                   0.2  0.2  0.2  0 0.0
+    Hour16                   0.1  0.1  0.1  0 0.0
+    Hour17                   0.1  0.1  0.1  0 0.0
+    Hour18                   0.1  0.1  0.1  0 0.0
+    Hour19                   0.0  0.0  0.0  0 0.0
+    Hour20                   0.1  0.1  0.1  0 0.0
+    Hour21                   0.1  0.0  0.1  0 0.0
+    Hour22                   0.1  0.1  0.1  0 0.0
+    Hour23                   0.0  0.0  0.0  0 0.0
+    WeekDayMonday            0.0  0.0  0.0  0 0.6
+    WeekDaySaturday          0.1  0.0  0.1  0 0.0
+    WeekDaySunday            0.0  0.0  0.0  0 0.0
+    WeekDayThursday          0.1  0.0  0.1  0 0.0
+    WeekDayTuesday           0.0  0.0  0.0  0 0.9
+    WeekDayWednesday         0.1  0.1  0.1  0 0.0
+    Hour1:WeekDayMonday      0.0  0.0  0.0  0 0.0
+    Hour2:WeekDayMonday      0.0 -0.1  0.0  0 0.0
+    Hour3:WeekDayMonday      0.0  0.0  0.0  0 0.0
+    Hour4:WeekDayMonday      0.0  0.0  0.0  0 0.4
+    Hour5:WeekDayMonday      0.0  0.0  0.0  0 0.0
+    Hour6:WeekDayMonday      0.1  0.1  0.1  0 0.0
+    Hour7:WeekDayMonday      0.0 -0.1  0.0  0 0.0
+    Hour8:WeekDayMonday      0.1  0.1  0.2  0 0.0
+    Hour9:WeekDayMonday      0.3  0.2  0.3  0 0.0
+    Hour10:WeekDayMonday     0.1  0.1  0.1  0 0.0
+    Hour11:WeekDayMonday     0.0  0.0  0.0  0 0.0
+    Hour12:WeekDayMonday     0.0  0.0  0.0  0 0.0
+    Hour13:WeekDayMonday     0.1  0.1  0.1  0 0.0
+    Hour14:WeekDayMonday     0.0  0.0  0.1  0 0.0
+    Hour15:WeekDayMonday     0.0  0.0  0.0  0 0.0
+    Hour16:WeekDayMonday     0.1  0.1  0.1  0 0.0
+    Hour17:WeekDayMonday     0.0  0.0  0.0  0 0.1
+    Hour18:WeekDayMonday     0.1  0.0  0.1  0 0.0
+    Hour19:WeekDayMonday     0.1  0.1  0.1  0 0.0
+    Hour20:WeekDayMonday     0.1  0.0  0.1  0 0.0
+    Hour21:WeekDayMonday     0.1  0.1  0.1  0 0.0
+    Hour22:WeekDayMonday     0.0  0.0  0.0  0 0.0
+    Hour23:WeekDayMonday     0.0  0.0  0.0  0 0.0
+    Hour1:WeekDaySaturday   -0.1 -0.1 -0.1  0 0.0
+    Hour2:WeekDaySaturday   -0.1 -0.1 -0.1  0 0.0
+    Hour3:WeekDaySaturday   -0.1 -0.1 -0.1  0 0.0
+    Hour4:WeekDaySaturday    0.0  0.0  0.0  0 0.3
+    Hour5:WeekDaySaturday    0.0  0.0  0.0  0 0.0
+    Hour6:WeekDaySaturday    0.1  0.1  0.1  0 0.0
+    Hour7:WeekDaySaturday   -0.2 -0.2 -0.2  0 0.0
+    Hour8:WeekDaySaturday    0.0  0.0  0.0  0 0.3
+    Hour9:WeekDaySaturday   -0.1 -0.1 -0.1  0 0.0
+    Hour10:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour11:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour12:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour13:WeekDaySaturday   0.0  0.0  0.0  0 0.0
+    Hour14:WeekDaySaturday   0.0  0.0  0.1  0 0.0
+    Hour15:WeekDaySaturday   0.0  0.0  0.0  0 0.1
+    Hour16:WeekDaySaturday   0.0  0.0  0.0  0 0.0
+    Hour17:WeekDaySaturday   0.0  0.0  0.0  0 0.9
+    Hour18:WeekDaySaturday   0.0  0.0  0.0  0 0.4
+    Hour19:WeekDaySaturday   0.0  0.0  0.0  0 0.0
+    Hour20:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour21:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour22:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour23:WeekDaySaturday  -0.1 -0.1 -0.1  0 0.0
+    Hour1:WeekDaySunday     -0.1 -0.1  0.0  0 0.0
+    Hour2:WeekDaySunday      0.0  0.0  0.0  0 0.0
+    Hour3:WeekDaySunday      0.0  0.0  0.0  0 0.1
+    Hour4:WeekDaySunday      0.0  0.0  0.0  0 0.0
+    Hour5:WeekDaySunday      0.0  0.0  0.0  0 0.0
+    Hour6:WeekDaySunday      0.1  0.1  0.1  0 0.0
+    Hour7:WeekDaySunday     -0.1 -0.1 -0.1  0 0.0
+    Hour8:WeekDaySunday      0.0  0.0  0.0  0 0.1
+    Hour9:WeekDaySunday      0.1  0.0  0.1  0 0.0
+    Hour10:WeekDaySunday     0.0  0.0  0.1  0 0.0
+    Hour11:WeekDaySunday    -0.1 -0.1 -0.1  0 0.0
+    Hour12:WeekDaySunday     0.0 -0.1  0.0  0 0.0
+    Hour13:WeekDaySunday     0.0  0.0  0.0  0 0.0
+    Hour14:WeekDaySunday     0.1  0.1  0.1  0 0.0
+    Hour15:WeekDaySunday     0.1  0.1  0.1  0 0.0
+    Hour16:WeekDaySunday     0.1  0.1  0.1  0 0.0
+    Hour17:WeekDaySunday     0.0  0.0  0.0  0 0.0
+    Hour18:WeekDaySunday     0.0  0.0  0.0  0 0.1
+    Hour19:WeekDaySunday     0.1  0.0  0.1  0 0.0
+    Hour20:WeekDaySunday     0.0  0.0  0.0  0 0.0
+    Hour21:WeekDaySunday    -0.1 -0.1  0.0  0 0.0
+    Hour22:WeekDaySunday    -0.1 -0.1 -0.1  0 0.0
+    Hour23:WeekDaySunday     0.0  0.0  0.0  0 0.0
+    Hour1:WeekDayThursday   -0.1 -0.1  0.0  0 0.0
+    Hour2:WeekDayThursday   -0.1 -0.1 -0.1  0 0.0
+    Hour3:WeekDayThursday   -0.1 -0.1  0.0  0 0.0
+    Hour4:WeekDayThursday    0.0  0.0  0.0  0 0.0
+    Hour5:WeekDayThursday   -0.1 -0.1  0.0  0 0.0
+    Hour6:WeekDayThursday    0.0 -0.1  0.0  0 0.0
+    Hour7:WeekDayThursday   -0.1 -0.2 -0.1  0 0.0
+    Hour8:WeekDayThursday    0.1  0.0  0.1  0 0.0
+    Hour9:WeekDayThursday    0.0  0.0  0.0  0 0.0
+    Hour10:WeekDayThursday   0.0  0.0  0.0  0 0.1
+    Hour11:WeekDayThursday   0.0 -0.1  0.0  0 0.0
+    Hour12:WeekDayThursday   0.0 -0.1  0.0  0 0.0
+    Hour13:WeekDayThursday   0.0  0.0  0.0  0 0.8
+    Hour14:WeekDayThursday   0.0  0.0  0.0  0 0.0
+    Hour15:WeekDayThursday   0.0  0.0  0.0  0 0.0
+    Hour16:WeekDayThursday   0.0  0.0  0.0  0 0.0
+    Hour17:WeekDayThursday   0.0  0.0  0.0  0 0.4
+    Hour18:WeekDayThursday   0.0 -0.1  0.0  0 0.0
+    Hour19:WeekDayThursday   0.0  0.0  0.0  0 0.0
+    Hour20:WeekDayThursday  -0.1 -0.1  0.0  0 0.0
+    Hour21:WeekDayThursday   0.0 -0.1  0.0  0 0.0
+    Hour22:WeekDayThursday  -0.1 -0.1 -0.1  0 0.0
+    Hour23:WeekDayThursday  -0.1 -0.1 -0.1  0 0.0
+    Hour1:WeekDayTuesday     0.0  0.0  0.0  0 0.0
+    Hour2:WeekDayTuesday     0.0  0.0  0.0  0 0.2
+    Hour3:WeekDayTuesday     0.0 -0.1  0.0  0 0.0
+    Hour4:WeekDayTuesday     0.0  0.0  0.0  0 0.0
+    Hour5:WeekDayTuesday     0.0  0.0  0.0  0 0.1
+    Hour6:WeekDayTuesday     0.1  0.1  0.1  0 0.0
+    Hour7:WeekDayTuesday     0.1  0.1  0.1  0 0.0
+    Hour8:WeekDayTuesday     0.1  0.1  0.2  0 0.0
+    Hour9:WeekDayTuesday     0.1  0.1  0.1  0 0.0
+    Hour10:WeekDayTuesday    0.0  0.0  0.0  0 0.6
+    Hour11:WeekDayTuesday    0.0  0.0  0.0  0 0.0
+    Hour12:WeekDayTuesday    0.0  0.0  0.0  0 0.0
+    Hour13:WeekDayTuesday    0.1  0.1  0.1  0 0.0
+    Hour14:WeekDayTuesday    0.0  0.0  0.0  0 0.0
+    Hour15:WeekDayTuesday    0.0  0.0  0.0  0 0.3
+    Hour16:WeekDayTuesday    0.0  0.0  0.0  0 0.0
+    Hour17:WeekDayTuesday    0.0  0.0  0.0  0 0.5
+    Hour18:WeekDayTuesday    0.0  0.0  0.0  0 0.6
+    Hour19:WeekDayTuesday    0.1  0.0  0.1  0 0.0
+    Hour20:WeekDayTuesday    0.0  0.0  0.0  0 0.5
+    Hour21:WeekDayTuesday    0.0  0.0  0.0  0 0.8
+    Hour22:WeekDayTuesday    0.0  0.0  0.0  0 0.0
+    Hour23:WeekDayTuesday    0.0  0.0  0.1  0 0.0
+    Hour1:WeekDayWednesday  -0.1 -0.1 -0.1  0 0.0
+    Hour2:WeekDayWednesday  -0.1 -0.1 -0.1  0 0.0
+    Hour3:WeekDayWednesday  -0.1 -0.1 -0.1  0 0.0
+    Hour4:WeekDayWednesday  -0.1 -0.1 -0.1  0 0.0
+    Hour5:WeekDayWednesday  -0.1 -0.1  0.0  0 0.0
+    Hour6:WeekDayWednesday  -0.1 -0.2 -0.1  0 0.0
+    Hour7:WeekDayWednesday  -0.2 -0.2 -0.2  0 0.0
+    Hour8:WeekDayWednesday   0.0 -0.1  0.0  0 0.0
+    Hour9:WeekDayWednesday   0.0  0.0  0.0  0 0.2
+    Hour10:WeekDayWednesday  0.0 -0.1  0.0  0 0.0
+    Hour11:WeekDayWednesday  0.0 -0.1  0.0  0 0.0
+    Hour12:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour13:WeekDayWednesday  0.0 -0.1  0.0  0 0.0
+    Hour14:WeekDayWednesday -0.1 -0.1  0.0  0 0.0
+    Hour15:WeekDayWednesday -0.1 -0.1  0.0  0 0.0
+    Hour16:WeekDayWednesday  0.0  0.0  0.0  0 0.0
+    Hour17:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour18:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour19:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour20:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour21:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour22:WeekDayWednesday -0.1 -0.1 -0.1  0 0.0
+    Hour23:WeekDayWednesday -0.1 -0.1  0.0  0 0.0
+
+So, we get very similar values as before for the hours of the day on their own. This time, we actually do get day of week effects for Wednesday, Thursday, and Saturday:
+
+                            Coef
+    WeekDaySaturday          0.1
+    WeekDayThursday          0.1
+    WeekDayWednesday         0.1
+
+And we get a pile of interactions:
+
+    Hour6:WeekDayMonday      0.1
+    Hour8:WeekDayMonday      0.1
+    Hour9:WeekDayMonday      0.3
+    Hour10:WeekDayMonday     0.1
+    Hour13:WeekDayMonday     0.1
+    Hour16:WeekDayMonday     0.1
+    Hour18:WeekDayMonday     0.1
+    Hour19:WeekDayMonday     0.1
+    Hour20:WeekDayMonday     0.1
+    Hour21:WeekDayMonday     0.1
+
+    Hour6:WeekDayTuesday     0.1
+    Hour7:WeekDayTuesday     0.1
+    Hour8:WeekDayTuesday     0.1
+    Hour9:WeekDayTuesday     0.1
+    Hour13:WeekDayTuesday    0.1
+    Hour19:WeekDayTuesday    0.1
+
+    Hour1:WeekDayWednesday  -0.1
+    Hour2:WeekDayWednesday  -0.1
+    Hour3:WeekDayWednesday  -0.1
+    Hour4:WeekDayWednesday  -0.1
+    Hour5:WeekDayWednesday  -0.1
+    Hour6:WeekDayWednesday  -0.1
+    Hour7:WeekDayWednesday  -0.2
+    Hour12:WeekDayWednesday -0.1
+    Hour14:WeekDayWednesday -0.1
+    Hour15:WeekDayWednesday -0.1
+    Hour17:WeekDayWednesday -0.1
+    Hour18:WeekDayWednesday -0.1
+    Hour19:WeekDayWednesday -0.1
+    Hour20:WeekDayWednesday -0.1
+    Hour21:WeekDayWednesday -0.1
+    Hour22:WeekDayWednesday -0.1
+    Hour23:WeekDayWednesday -0.1
+
+    Hour1:WeekDayThursday   -0.1
+    Hour2:WeekDayThursday   -0.1
+    Hour3:WeekDayThursday   -0.1
+    Hour5:WeekDayThursday   -0.1
+    Hour7:WeekDayThursday   -0.1
+    Hour8:WeekDayThursday    0.1
+    Hour20:WeekDayThursday  -0.1
+    Hour22:WeekDayThursday  -0.1
+    Hour23:WeekDayThursday  -0.1
+
+    Hour1:WeekDaySaturday   -0.1
+    Hour2:WeekDaySaturday   -0.1
+    Hour3:WeekDaySaturday   -0.1
+    Hour6:WeekDaySaturday    0.1
+    Hour7:WeekDaySaturday   -0.2
+    Hour9:WeekDaySaturday   -0.1
+    Hour10:WeekDaySaturday  -0.1
+    Hour11:WeekDaySaturday  -0.1
+    Hour12:WeekDaySaturday  -0.1
+    Hour20:WeekDaySaturday  -0.1
+    Hour21:WeekDaySaturday  -0.1
+    Hour22:WeekDaySaturday  -0.1
+    Hour23:WeekDaySaturday  -0.1
+
+    Hour1:WeekDaySunday     -0.1
+    Hour6:WeekDaySunday      0.1
+    Hour7:WeekDaySunday     -0.1
+    Hour9:WeekDaySunday      0.1
+    Hour11:WeekDaySunday    -0.1
+    Hour14:WeekDaySunday     0.1
+    Hour15:WeekDaySunday     0.1
+    Hour16:WeekDaySunday     0.1
+    Hour19:WeekDaySunday     0.1
+    Hour21:WeekDaySunday    -0.1
+    Hour22:WeekDaySunday    -0.1
+
+I don't really understand these estimates. For example, why would 6 AM be terrible in general, but be helpful on Sundays?
+-->
