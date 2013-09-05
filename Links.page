@@ -14,11 +14,11 @@ This page is about me; for information about `gwern.net`, see [About]().
 
 > Behind a remarkable scholar one often finds a mediocre man, and behind a mediocre artist, often, a very remarkable man.^[#137, "Part 2: The Free Spirit", [Friedrich Nietzsche](!Wikipedia)'s _[Beyond Good and Evil: Prelude to a Philosophy of the Future](!Wikipedia)_]
 
-I am a freelance writer & researcher. I have worked for [MIRI](!Wikipedia "Machine Intelligence Research Institute")[^SIAI-work] (formerly SIAI), [CFAR](http://appliedrationality.org/), [_A Global Village_](http://www.aglobalvillage.org/), [Quantimodo](http://quantimodo.com/), [New World Encyclopedia](http://www.newworldencyclopedia.org/entry/Info:Main_Page), [Bitcoin Weekly](http://bitcoinweekly.com/) and private clients; everything on `gwern.net` should be considered my own viewpoint or writing unless otherwise specified by a representative or publication. If you are interested in hiring me, see [contacting me](#contact).
+I am a freelance writer & researcher. I have worked for [MIRI](!Wikipedia "Machine Intelligence Research Institute")[^SIAI-work] (formerly SIAI), [CFAR](http://appliedrationality.org/), [_A Global Village_](http://www.aglobalvillage.org/), [Quantimodo](https://quantimodo.com/), [New World Encyclopedia](http://www.newworldencyclopedia.org/entry/Info:Main_Page), [Bitcoin Weekly](http://bitcoinweekly.com/) and private clients; everything on `gwern.net` should be considered my own viewpoint or writing unless otherwise specified by a representative or publication. If you are interested in hiring me, see [contacting me](#contact).
 
 [^SIAI-work]: When I say 'research assistant', I mean it in the older sense of someone who does detail work for another person's original research - so I spend a lot of time reading up on specific areas and making notes about stuff my boss needs, and only occasionally do independent work. Not all my work can be made public, but some of it is. A partial list in rough chronological order:
 
-    - ["Intelligence Explosion: Evidence and Import"](http://commonsenseatheism.com/wp-content/uploads/2012/02/Muehlhauser-Salamon-Intelligence-Explosion-Evidence-and-Import.pdf), Muehlhauser & Salamon 2012?
+    - ["Intelligence Explosion: Evidence and Import"](http://intelligence.org/files/IE-EI.pdf), Muehlhauser & Salamon 2012?
 
         One of my first projects was working on this paper - digging up citations for various claims and giving general feedback; most of my changes or comments are private when we switched to working through Google Docs, but some of my [initial comments](http://lesswrong.com/lw/8ox/intelligence_explosion_analysis_draft_2_snippet_1/5spf) were public.
     - [finding predictions/estimates for whole-genome sequencing costs](http://lesswrong.com/lw/9em/open_thread_january_1531_2012/5s7c)
@@ -137,7 +137,7 @@ I have been active on the English Wikipedia and related projects since January 2
 - [English Wikibooks](http://en.wikibooks.org/wiki/User:Gwern)
 - [Haskell wiki](http://haskell.org/haskellwiki/User:Gwern)
 
-I also run a [custom Google search tool](!Wikipedia "Google Co-op") at ["Wikipedia Reliable Sources for anime & manga"](http://www.google.com/cse/home?cx=009114923999563836576:1eorkzz2gp4); this is a custom Google search with >4542 websites on its [black](!Wikipedia "Blacklist (computing)")  and [whitelist](!Wikipedia)s. (The source/lists are [publicly available](/docs/gwern-google-cse.xml) & updated every 3 months.) It returns much more useful^[Compare the [CSE results](http://www.google.com/cse?cx=009114923999563836576%3A1eorkzz2gp4&q=Wings+of+Honneamise) with the [Google Results](http://www.google.com/search?q=Wings+of+Honneamise) for the anime _[Wings of Honnêamise](!Wikipedia)_. Which is more useful for an editor? For more details, see my [release announcement](http://www.mail-archive.com/wikien-l@lists.wikimedia.org/msg09145.html).] results for topics in popular culture, and as the name suggests, anime & manga in particular.
+I also run a [custom Google search tool](!Wikipedia "Google Co-op") at ["Wikipedia Reliable Sources for anime & manga"](https://www.google.com/cse/home?cx=009114923999563836576:1eorkzz2gp4); this is a custom Google search with >4542 websites on its [black](!Wikipedia "Blacklist (computing)")  and [whitelist](!Wikipedia)s. (The source/lists are [publicly available](/docs/gwern-google-cse.xml) & updated every 3 months.) It returns much more useful^[Compare the [CSE results](http://www.google.com/cse?cx=009114923999563836576%3A1eorkzz2gp4&q=Wings+of+Honneamise) with the [Google Results](http://www.google.com/search?q=Wings+of+Honneamise) for the anime _[Wings of Honnêamise](!Wikipedia)_. Which is more useful for an editor? For more details, see my [release announcement](http://www.mail-archive.com/wikien-l@lists.wikimedia.org/msg09145.html).] results for topics in popular culture, and as the name suggests, anime & manga in particular.
 
 ### Mailing lists
 
@@ -368,11 +368,11 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 
 ## wp-archivebot
 
-- Wrote and maintain it (see <http://www.haskell.org/pipermail/haskell/2009-June/021388.html>)
+- Wrote and maintain it (see [release ANN](http://web.archive.org/web/20130128105201/http://www.haskell.org/pipermail/haskell/2009-June/021388.html))
 
 ## archiver
 
-- Wrote and maintain it (see <http://www.haskell.org/pipermail/haskell-cafe/2010-December/087158.html>)
+- Wrote and maintain it (see [release ANN](http://web.archive.org/web/20130128105157/http://www.haskell.org/pipermail/haskell-cafe/2010-December/087158.html))
 
 ## Change-monger
 
@@ -382,8 +382,8 @@ I mostly contribute to projects in Haskell, my favorite language; I have contrib
 #### Base
 
 - Added [`Control.Monad.void`](!Hoogle "Control.Monad.void")
-- Helped replace [`Data.List.sort`](!Hoogle "Data.List.sort") with YHC's more efficient implementation (see <http://hackage.haskell.org/trac/ghc/ticket/2143>)
-- Improved [`System.Environment` doc](http://www.haskell.org/pipermail/libraries/2012-February/017520.html)
+- Helped replace [`Data.List.sort`](!Hoogle "Data.List.sort") with YHC's more efficient implementation (see [Ticket #2143](http://ghc.haskell.org/trac/ghc/ticket/2143 "Yhc's sort is faster than GHC's"))
+- Improved [`System.Environment` doc](http://web.archive.org/web/20130128105154/http://www.haskell.org/pipermail/libraries/2012-February/017520.html "Improve System.Environment haddocks")
 
 ### Unix
 
