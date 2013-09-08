@@ -25,6 +25,7 @@ main = do  hakyll $ do
              -- handle the simple non-.page files
              let static = route idRoute >> compile copyFileCompiler
              mapM_ (`match` static) ["docs/**",
+                                     "haskell/**",
                                      "images/**",
                                      "**.hs",
                                      "static/*",
