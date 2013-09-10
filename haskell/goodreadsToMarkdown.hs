@@ -12,7 +12,7 @@ Book Id,Title,Author,Author l-f,Additional Authors,ISBN,ISBN13,My Rating,Average
 Example CSV line:
 8535464,"The Geeks Shall Inherit the Earth: Popularity, Quirk Theory and Why Outsiders Thrive After High School","Alexandra Robbins","Robbins, Alexandra","",="1401302025",="9781401302023",2,"3.62","Hyperion","Hardcover","448",2009,2009,2011/10/15,2012/07/16,"","","read","Found it only OK. Basically extended anecdotes, with some light science mixed in to buttress her manifesto (and used for support, not illumination).","","","","","",0,,,,,
 -}
--- Background on Amazon: Generic ISBN search looks like this http://www.amazon.com/gp/search/ref=sr_adv_b/?search-alias=stripbooks&unfiltered=1&field-isbn=9781401302023
+-- Background on Amazon: Generic ISBN search looks like this: http://www.amazon.com/gp/search/ref=sr_adv_b/?search-alias=stripbooks&unfiltered=1&field-isbn=9781401302023
 
 {-# LANGUAGE OverloadedStrings #-}
 import Control.Applicative ((<*>), (<$>))
@@ -89,7 +89,7 @@ handleISBN i = case i of
                 Just i' -> (getAmazonPage i', "ISBN: " ++ show i')
 
                 where getAmazonPage :: Int -> String
-                      getAmazonPage ibn =  "http://www.amazon.com/gp/search?keywords="++show ibn++"&index=books"
+                      getAmazonPage ibn = "http://www.amazon.com/gp/search/ref=sr_adv_b/?search-alias=stripbooks&unfiltered=1&field-isbn=" ++ show ibn
 
 handleRating :: Int -> String
 handleRating stars = replicate stars '★'
