@@ -21,19 +21,18 @@ import Data.Csv (FromNamedRecord(..), (.:), decodeByName)
 import Data.List as L (sortBy)
 import Data.Maybe (catMaybes)
 import System.Environment (getArgs)
-import Text.Pandoc -- (Pandoc(..), Inline(..), Block(..), Meta(..), WriterOptions(..), defaultParserState, readMarkdown, writeMarkdown,)
-import Text.Pandoc.Builder as TPB (fromList, simpleTable, singleton, unBlocks, Blocks)
-import Text.Pandoc.Highlighting (pygments)
+import Text.Pandoc -- (Pandoc(..), Inline(..), Block(..), readMarkdown, writeMarkdown, strictExtensions, def, nullMeta, ReaderOptions(..))
+import Text.Pandoc.Builder as TPB (fromList, simpleTable, singleton, toList, Blocks)
+-- import Text.Pandoc.Definition (nullMeta)
 import qualified Data.ByteString.Lazy as B (readFile, ByteString)
-import qualified Data.Sequence as S (index)
 import qualified Data.Vector as V (toList, Vector)
 
 main :: IO ()
 main = do books <- fmap head getArgs >>= B.readFile
-          let books' = BLS.replace "=\"" ("\""::B.ByteString) books
+          let books' = BLS.replace ",=\"" (",\""::B.ByteString) books
           case decodeByName books' of
               Left err -> putStrLn err
-              Right (_, v) -> putStrLn (writeMarkdown def (Pandoc nullMeta [bookTable v]))
+              Right (_, v) -> putStrLn (writeMarkdown def (Pandoc undefined [bookTable v]))
 
 data GoodReads = GoodReads { title :: String, author :: String, isbn :: Maybe Int,
                              myRating :: Int,
@@ -50,15 +49,10 @@ instance FromNamedRecord GoodReads where
                           m .: "Date Read" <*>
                           m .: "My Review"
 
--- relevant types:
--- Table [Inline] [Alignment] [Double] [TableCell] [[TableCell]]
--- simpleTable :: [Blocks] -> [[Blocks]] -> Blocks
--- type Blocks  = Many Block
-
 bookTable :: V.Vector GoodReads -> Block
 bookTable books = let sorted = L.sortBy rating $ V.toList books
                       rows = map bookToRow sorted
-                      in S.index (unBlocks (simpleTable colHeaders rows)) 0
+                      in head (TPB.toList (simpleTable colHeaders rows))
          -- descending: 5 stars first; break ties with reviews
    where rating b1 b2
            | myRating b1 < myRating b2 = GT
@@ -96,45 +90,4 @@ handleRating stars = replicate stars '★'
 handleDate :: GoodReads -> String
 handleDate gr = show $ head $ catMaybes [yearPublished gr, originalYearPublished gr, Just 0]
 handleReview :: String -> [Block]
-handleReview rvw = let (Pandoc _ x) = readMarkdown defaultParserState rvw in x
-
-
-nullMeta :: Meta
-nullMeta = Meta { docTitle = []
-                , docAuthors = []
-                , docDate = [] }
-
-def :: WriterOptions
-def = WriterOptions { writerStandalone         = False
-                      , writerTemplate         = ""
-                      , writerVariables        = []
-                      , writerTabStop          = 4
-                      , writerTableOfContents  = False
-                      , writerSlideVariant     = NoSlides
-                      , writerIncremental      = False
-                      , writerHTMLMathMethod   = PlainMath
-                      , writerIgnoreNotes      = False
-                      , writerNumberSections   = False
-                      , writerSectionDivs      = False
-                      , writerReferenceLinks   = False
-                      , writerWrapText         = True
-                      , writerColumns          = 90
-                      , writerIdentifierPrefix = ""
-                      , writerSourceDirectory  = "."
-                      , writerUserDataDir      = Nothing
-                      , writerCiteMethod       = Citeproc
-                      , writerBiblioFiles      = []
-                      , writerHtml5            = False
-                      , writerBeamer           = False
-                      , writerSlideLevel       = Nothing
-                      , writerChapters         = False
-                      , writerListings         = False
-                      , writerHighlight        = False
-                      , writerSetextHeaders    = True
-                      , writerTeXLigatures     = True
-                      , writerEPUBMetadata     = ""
-                      , writerStrictMarkdown   = True
-                      , writerLiterateHaskell  = False
-                      , writerEmailObfuscation = undefined
-                      , writerHighlightStyle   = pygments
-                      , writerXeTeX = False }
+handleReview rvw = let (Pandoc _ x) = readMarkdown def { readerExtensions = strictExtensions } rvw in x
