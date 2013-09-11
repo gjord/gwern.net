@@ -549,18 +549,18 @@ alternative hypothesis: two.sided
 
 But seriously, it's nice to see that ABalytics does not seem to be broken & favoring either option and any results driven by placement in the array of options.
 
-## Link anchor color
+## Text & background color
 
-As part of the generally monochromatic color scheme, all links are colored light-black & underlined:
+As part of the generally monochromatic color scheme, the background is grey and text is black:
 
 ~~~{.Css}
-a {
-    color: #303C3C; /* off-black */
-    text-decoration: underline;
-}
+html { ...
+    background-color: #FCFCFC; /* off-white */
+    color: black;
+... }
 ~~~
 
-But maybe underlining is excessive? Perhaps in the dark ages of the Web, people needed obtrusive indications of hyperlinks like purple-colored text, but do they now? Perhaps the underline just jars. I should try deleting the underlining. (`text-decoration` accepts several other options, but they are hideous: `overline`/`line-through`/`blink`.)
+The hyperlinks, on the other hand, subtly make use of a off-black `color: #303C3C`. I wonder if the sauce is for the gander too, and if so, what combination is best? White/black? Off-white/black? Off-white/off-black? White/off-black? Let's try all 4 combinations here.
 
 ### Implementation
 
@@ -568,28 +568,38 @@ The usual:
 
 ~~~{.Html}
 hunk ./static/templates/default.html 30
--    <div class="null_class1"></div>
-+    <div class="underline_class1"></div>
+-    <div class="underline_class1"></div>
++    <div class="ground_class1"></div>
+hunk ./static/templates/default.html 155
+-      underline: [
++      ground: [
 hunk ./static/templates/default.html 157
--      null: [
-+      underline: [
-hunk ./static/templates/default.html 159
--      name: 'null1',
--      "null_class1": "",
--      "null_class2": ""
-+      name: 'underline1',
-+      "underline_class1": "<style>a { color: #303C3C; text-decoration: underline; }</style>",
-+      "underline_class2": ""
-hunk ./static/templates/default.html 164
--      name: 'null2',
--      "null_class1": "",
--      "null_class2": ""
-+      name: 'underline2',
-+      "underline_class1": "<style>a { color: #303C3C; text-decoration: none; }</style>",
-+      "underline_class2": ""
+-      name: 'underlined',
+-      "underline_class1": "<style>a { color: #303C3C; text-decoration: underline; }</style>",
+-      "underline_class2": ""
++      name: 'bw,
++      "ground_class1": "<style>html { background-color: white; color: black; }</style>",
++      "ground_class2": ""
+hunk ./static/templates/default.html 162
+-      name: 'notUnderlined',
+-      "underline_class1": "<style>a { color: #303C3C; text-decoration: none; }</style>",
+-      "underline_class2": ""
++      name: 'obw',
++      "ground_class1": "<style>html { background-color: white; color: #303C3C; }</style>",
++      "ground_class2": ""
++      },
++      {
++      name: 'bow,
++      "ground_class1": "<style>html { background-color: #FCFCFC; color: black; }</style>",
++      "ground_class2": ""
++      },
++      {
++      name: 'obow,
++      "ground_class1": "<style>html { background-color: #FCFCFC; color: #303C3C; }</style>",
++      "ground_class2": ""
 ... ]]
 ~~~
 
 ### Data
 
-I am a little curious about this one, so it gets a full month: 29 August - 30 September.
+I am a little curious about this one, so it gets a full month and half: 10 September - 20 October.
