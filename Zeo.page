@@ -36,6 +36,7 @@ http://norvig.com/experiment-design.html
 https://www.nytimes.com/2010/05/02/magazine/02self-measurement-t.html?_r=1&ref=magazine&pagewanted=all
 http://mobihealthnews.com/22410/can-personal-health-data-motivate-behavioral-change-it-depends/
 https://moalquraishi.wordpress.com/2013/07/24/10-months-at-harvard-quantified/
+http://www.wired.com/magazine/2011/06/ff_feedbackloop/all/
 -->
 
 # What is QS?
@@ -166,7 +167,7 @@ Around 15 May 2011, I gave up on the original headband - it was getting too dirt
 ![Said headband with plastic removed; notice discoloration of metal despite cleaning](/images/zeo/zeo-headband-fabric1.jpg) ![The reverse side](/images/zeo/zeo-headband-fabric2.jpg)/
 ![The new headband's wrapper](/images/zeo/zeo-wrapper.jpg) ![The new headband](/images/zeo/zeo-new-headband.jpg)/
 
-In the future, I might try to make my own; [eok.gnah](http://www.flickr.com/photos/eokgnah/5489407407/) claims that buying the silver fabric is apparently cheaper than ordering from Zeo, marciot [reports success in making headbands](http://www.instructables.com/id/DIY-Replacement-Zeo-Sleep-Monitor-Headband-Sensor/), and it seems one can even [hook up other sensors](http://web.archive.org/web/20120107073301/http://www.myzeo.com/sleep/node/594) to the headband. Another alternative is, since the Zeo headband is a one-electrode EEG headset, to take an approach similar to the EEG people and occasionally add small dabs of conductive paste, since fairly large quantities are cheap (eg. [12oz for $30](http://www.amazon.com/Ten20-EEG-Conductive-Paste-Tube/dp/B002R16OUK)).
+In the future, I might try to make my own; [eok.gnah](http://www.flickr.com/photos/eokgnah/5489407407/) claims that buying the silver fabric is apparently cheaper than ordering from Zeo, marciot [reports success in making headbands](http://www.instructables.com/id/DIY-Replacement-Zeo-Sleep-Monitor-Headband-Sensor/), and it seems one can even [hook up other sensors](http://web.archive.org/web/20120107073301/http://www.myzeo.com/sleep/node/594) to the headband. Another alternative is, since the Zeo headband is a one-electrode EEG headset, to take an approach similar to the EEG people and occasionally add small dabs of conductive paste, since fairly large quantities are cheap (eg. [12oz for $30](http://www.amazon.com/Ten20-EEG-Conductive-Paste-Tube/dp/B002R16OUK)). There was a [disposable adhesive gel ECG electrodes with offset press-stud connections](https://forum.quantifiedself.com/thread-zeo-shutting-down-export-your-data?pid=3412#pid3412) being experimented with by Zeo Inc, but they never entered wide use before it shut down.
 
 # Melatonin
 
@@ -1956,7 +1957,7 @@ The suggested mechanism is through melatonin secretion. So we'd look at all the 
 
 The earlier melatonin experiment found somewhat weak effects with >100 days of data, and one would expect that actually consuming 1.5mg of melatonin would be a stronger intervention than simply shifting my laptop screen color. (What if I don't use my laptop that night? What if I'm surrounded by white lights?) 30 days is probably too small, judging from the other experiments; 60 is more reasonable, but 90 feels more plausible.
 
-It may be time to learn some more statistics, specifically how to do [statistical power calculation](!Wikipedia)s for [sample size determination](!Wikipedia). As I understand it, a power calculation is an equation balancing your sample size, the effect size, and the significance level (eg the old _p_<0.05); if you have 2, you can deduce the third. So if you already knew your sample size and your effect size, you could predict what significance your results would have. In this specific case, we can specify our significance at the usual level, and we can guess at the effect size, but we want to know what sample size we *should* have.
+It may be time to learn some more statistics, specifically how to do [statistical power calculation](!Wikipedia)s for [sample size determination](!Wikipedia) ([introduction](http://www.ats.ucla.edu/stat/seminars/Intro_power/)). As I understand it, a power calculation is an equation balancing your sample size, the effect size, and the significance level (eg the old _p_<0.05); if you have 2, you can deduce the third. So if you already knew your sample size and your effect size, you could predict what significance your results would have. In this specific case, we can specify our significance at the usual level, and we can guess at the effect size, but we want to know what sample size we *should* have.
 
 Let's pin down the effect size: we expect any Redshift effect to be weaker than melatonin supplementation, and the most striking change in melatonin (the reduction in total sleep time by ~50 minutes) had an effect size of 0.37. As usual, R has a bunch of functions we can use. Stealing shamelessly from an [R guide](http://www.ats.ucla.edu/stat/R/dae/t_test_power3.htm), and reusing the means and standard deviations from the melatonin experiment, we can begin asking questions like: "suppose I wanted a 90% chance of my experiment producing a solid result of _p_>0.01 (not 0.05, so I can do multiple correction) if the Redshift data looks like the melatonin data and acts the same way?"
 
@@ -3634,15 +3635,33 @@ August
 23: 1 0
 24: 1 1
 25: 1 1
-26: 1 1?
+26: 1 1
+27: 0 1
+28: 1 0
+29: 1 1
+30: 0 0
+31: 0 0
+September
+01: 1 0
+02: 1 0
+03: 1 1
+04: 1 0
+05: 0 1
+06: 0 0
+07: 1 1
+08: 1 0
+09: 0 1
+10: 1 0
+11: 1 1
+12: 1 1?
 
 Underpopulated data cells:
-110: 1 1
-110: 1 0
-114: 0 1
-114: 0 0
+116: 1 0
+115: 1 1
+117: 0 0
+117: 0 1
 -->
-<!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July; 11, 12, 17, 24 August -->
+<!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July; 11, 12, 17, 24, 29 August; 2, 4, 11 September -->
 <!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03, 12, 16, 19 June; resumed 24 June -->
 
 # External links
@@ -3654,6 +3673,11 @@ Underpopulated data cells:
     - [Imminst](http://www.longecity.org/forum/topic/54364-vitamin-d-sleep-experiment/)
     - [_Business Insider_ blog](http://www.businessinsider.com/this-is-what-happens-when-you-track-your-sleep-obsessively-2012-2)
 - Reddit: [potassium discussion](http://www.reddit.com/r/Nootropics/comments/1578ly/does_potassium_hurt_anyone_elses_sleep/)
+- coping with Zeo Inc's shutdown:
+
+    - ["Zeo Firmware and Raw Data API on OpenYou github"](http://www.openyou.org/2013/06/11/zeo-firmware-and-raw-data-api-on-github/)
+    - ["Life Beyond Zeo"](http://eric-blue.com/2013/06/09/life-beyond-zeo/)
+    - ["Zeo Bedside Model Resources"](https://forum.quantifiedself.com/thread-zeo-shutting-down-export-your-data?pid=3373#pid3373)
 
 # Appendix
 ### Inverse correlation of sleep quality with productivity?
@@ -4533,3 +4557,19 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 24 Aug 2013: on -->
 <!-- Redshift: 25 Aug 2013: off -->
 <!-- Redshift: 26 Aug 2013: off -->
+<!-- Redshift: 27 Aug 2013: off -->
+<!-- Redshift: 28 Aug 2013: on -->
+<!-- Redshift: 29 Aug 2013: on -->
+<!-- Redshift: 30 Aug 2013: on -->
+<!-- Redshift: 31 Aug 2013: on -->
+<!-- Redshift: 01 Sep 2013: off -->
+<!-- Redshift: 02 Sep 2013: off -->
+<!-- Redshift: 03 Sep 2013: on -->
+<!-- Redshift: 04 Sep 2013: off -->
+<!-- Redshift: 05 Sep 2013: on -->
+<!-- Redshift: 06 Sep 2013: on -->
+<!-- Redshift: 07 Sep 2013: off -->
+<!-- Redshift: 08 Sep 2013: on -->
+<!-- Redshift: 09 Sep 2013: off -->
+<!-- Redshift: 11 Sep 2013: on -->
+<!-- Redshift: 12 Sep 2013: on -->
