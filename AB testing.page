@@ -577,7 +577,7 @@ hunk ./static/templates/default.html 157
 -      name: 'underlined',
 -      "underline_class1": "<style>a { color: #303C3C; text-decoration: underline; }</style>",
 -      "underline_class2": ""
-+      name: 'bw,
++      name: 'bw',
 +      "ground_class1": "<style>html { background-color: white; color: black; }</style>",
 +      "ground_class2": ""
 hunk ./static/templates/default.html 162
@@ -589,12 +589,12 @@ hunk ./static/templates/default.html 162
 +      "ground_class2": ""
 +      },
 +      {
-+      name: 'bow,
++      name: 'bow',
 +      "ground_class1": "<style>html { background-color: #FCFCFC; color: black; }</style>",
 +      "ground_class2": ""
 +      },
 +      {
-+      name: 'obow,
++      name: 'obow',
 +      "ground_class1": "<style>html { background-color: #FCFCFC; color: #303C3C; }</style>",
 +      "ground_class2": ""
 ... ]]
@@ -603,3 +603,62 @@ hunk ./static/templates/default.html 162
 ### Data
 
 I am a little curious about this one, so it gets a full month and half: 10 September - 20 October.
+
+### Analysis
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Black,White,N,Rate
+TRUE,FALSE,253,0.2648
+FALSE,FALSE,239,0.2092
+TRUE,TRUE,244,0.2008
+FALSE,TRUE,262,0.2061
+
+ground <- NULL
+for (i in 1:nrow(rates)) { x <- rates[i,]
+                           y <- do.call("rbind", replicate((x$N * x$Rate),     data.frame(Black=c(x$Black),White=c(x$White),Conversion=c(TRUE)),  simplify = FALSE))
+                           z <- do.call("rbind", replicate((x$N * (1-x$Rate)), data.frame(Black=c(x$Black),White=c(x$White),Conversion=c(FALSE)), simplify = FALSE))
+                           ground <- rbind(ground,y,z)
+}
+
+g <- glm(Conversion ~ Black*White, family=binomial, data=ground)
+summary(g); anova(g)
+
+Call:
+glm(formula = Conversion ~ Black * White, family = binomial,
+    data = ground)
+
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-0.779  -0.679  -0.674  -0.663   1.801
+
+Coefficients:
+                    Estimate Std. Error z value Pr(>|z|)
+(Intercept)          -1.3499     0.1603   -8.42   <2e-16
+BlackTRUE             0.3138     0.2150    1.46     0.14
+WhiteTRUE            -0.0173     0.2222   -0.08     0.94
+BlackTRUE:WhiteTRUE  -0.3484     0.3096   -1.13     0.26
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1040.7  on 993  degrees of freedom
+Residual deviance: 1036.8  on 990  degrees of freedom
+AIC: 1045
+
+Number of Fisher Scoring iterations: 4
+
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: Conversion
+
+Terms added sequentially (first to last)
+
+
+            Df Deviance Resid. Df Resid. Dev
+NULL                          993       1041
+Black        1     0.98       992       1040
+White        1     1.64       991       1038
+Black:White  1     1.27       990       1037
+~~~
