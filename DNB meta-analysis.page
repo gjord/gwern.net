@@ -9,7 +9,7 @@ belief: likely
 
 > I meta-analyze the >19 studies which measure IQ after an [n-back](DNB FAQ) intervention, confirming that there is a [gain](#analysis) of small-to-medium effect size. I also investigate several n-back claims, criticisms, and indicators of bias, finding:
 >
-> - [active vs passive control groups](#control-groups) criticism: found, and it accounts for half the total effect size (similar to [Zehdner et al 2009](/docs/dnb/2009-zehdner.pdf "Memory training effects in old age as markers of plasticity: a meta-analysis") & [Melby-Lervåg & Hulme 2013](http://www.apa.org/pubs/journals/releases/dev-49-2-270.pdf "Is Working Memory Training Effective? A Meta-Analytic Review"), and [Rappart et al 2013's](/docs/dnb/2013-rappart.pdf "Do programs designed to train working memory, other executive functions, and attention benefit children with ADHD? A meta-analytic review of cognitive, academic, and behavioral outcomes") blind vs unblinded ratings)
+> - [active vs passive control groups](#control-groups) criticism: found, and it accounts for half the total effect size
 > - [dose-response relationship](#training-time) of n-back training time & IQ gains claim: not found
 > - [payment reducing performance](#paymentextrinsic-motivation) claim: not found
 > - [kind of n-back](#training-type) matters: not found
@@ -66,23 +66,9 @@ The candidate studies:
 - Oelhafen et al 2013
 - Clouter 2013
 
-The `active` moderator variable is whether a control group was no-contact or trained on some other task. The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact control groups limited the validity of such studies, a criticism that was echoed with greater force by Shipstead, Redick, & Engle 2012; the Melby-Lervåg & Hulme 2013 meta-analysis then confirmed that use of no-contact controls inflated the effect size estimates[^Melby-active]. So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2013, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.)
+Variables:
 
-[^Melby-active]: Details about the treated (active) vs untreated (passive) differences in Melby-Lervåg & Hulme 2013:
-
-    > ...This controls for apparently irrelevant aspects of the training that might nevertheless affect performance. In a review of educational research Clark and Sugrue (1991) estimated that such Hawthorne or expectancy effects account for up to 0.3 standard deviations improvement in many studies.
-
-    The meta-analytic results:
-
-    1. Verbal WM: _d_=0.99 vs 0.69
-    2. Visuospatial WM: 0.63 vs 0.36
-    3. Nonverbal abilities: 0 vs 0.38
-    4. Stroop: 0.30 vs 0.35
-
-    > There was a significant difference in outcome between studies with treated controls and studies with only untreated controls. In fact, the studies with treated control groups had a mean effect size close to zero (notably, the 95% confidence intervals for untreated controls were _d_=-0.24 to 0.22, and for treated controls _d_=0.23 to 0.56). More specifically, several of the research groups demonstrated significant transfer effects to nonverbal ability when they used untreated control groups but did not replicate such effects when a treated control group was used (e.g., Jaeggi, Buschkuehl, Jonides, & Shah, 2011; Nutley, Söderqvist, Bryde, Thorell, Humphreys, & Klingberg, 2011). Similarly, the difference in outcome between randomized and nonrandomized studies was close to significance (_p_=.06), with the randomized studies giving a mean effect size that was close to zero. Notably, all the studies with untreated control groups are also nonrandomized; it is apparent from these analyses that the use of randomized designs with an alternative treatment control group are essential to give unambiguous evidence for training effects in this field.
-
-Other variables:
-
+0. `active` moderator variable: whether a control group was no-contact or trained on some other task.
 1. IQ type:
 
    0. BOMAT
@@ -279,7 +265,24 @@ This skeptical attitude is relevant to our examination of moderators.
 ## Moderators
 ### Control groups
 
-A major criticism of n-back studies is that the effect is being manufactured by the methodological problem of some studies using a no-contact or passive control group rather than an active control group. (Passive controls know they received no intervention and that the researchers don't expect them to do better on the post-test, which may reduce their efforts & lower their scores.) Each study has been coded appropriately, and we can ask whether it matters:
+A major criticism of n-back studies is that the effect is being manufactured by the methodological problem of some studies using a no-contact or passive control group rather than an active control group. (Passive controls know they received no intervention and that the researchers don't expect them to do better on the post-test, which may reduce their efforts & lower their scores.)
+
+The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact control groups limited the validity of such studies, a criticism that was echoed with greater force by Shipstead, Redick, & Engle 2012. The [Melby-Lervåg & Hulme 2013](http://www.apa.org/pubs/journals/releases/dev-49-2-270.pdf "Is Working Memory Training Effective? A Meta-Analytic Review") WM training meta-analysis then confirmed that use of no-contact controls inflated the effect size estimates[^Melby-active], similar to [Zehdner et al 2009](/docs/dnb/2009-zehdner.pdf "Memory training effects in old age as markers of plasticity: a meta-analysis") results in the aged and [Rappart et al 2013's](/docs/dnb/2013-rappart.pdf "Do programs designed to train working memory, other executive functions, and attention benefit children with ADHD? A meta-analytic review of cognitive, academic, and behavioral outcomes") blind vs unblinded ratings in WM/executive training of ADHD; and consistent with the increase of _d_=0.2 across many kinds of psychological therapies which was found by [Lipsey & Wilson 1993](http://www2.jura.uni-hamburg.de/instkrim/kriminologie/Mitarbeiter/Enzmann/Lehre/StatIIKrim/AP_1993_1181-1209.pdf "The Efficacy of Psychological, Educational, and Behavioral Treatment: Confirmation From Meta-Analysis").
+
+[^Melby-active]: Details about the treated (active) vs untreated (passive) differences in Melby-Lervåg & Hulme 2013:
+
+    > ...This controls for apparently irrelevant aspects of the training that might nevertheless affect performance. In a review of educational research Clark and Sugrue (1991) estimated that such Hawthorne or expectancy effects account for up to 0.3 standard deviations improvement in many studies.
+
+    The meta-analytic results:
+
+    1. Verbal WM: _d_=0.99 vs 0.69
+    2. Visuospatial WM: 0.63 vs 0.36
+    3. Nonverbal abilities: 0 vs 0.38
+    4. Stroop: 0.30 vs 0.35
+
+    > There was a significant difference in outcome between studies with treated controls and studies with only untreated controls. In fact, the studies with treated control groups had a mean effect size close to zero (notably, the 95% confidence intervals for untreated controls were _d_=-0.24 to 0.22, and for treated controls _d_=0.23 to 0.56). More specifically, several of the research groups demonstrated significant transfer effects to nonverbal ability when they used untreated control groups but did not replicate such effects when a treated control group was used (e.g., Jaeggi, Buschkuehl, Jonides, & Shah, 2011; Nutley, Söderqvist, Bryde, Thorell, Humphreys, & Klingberg, 2011). Similarly, the difference in outcome between randomized and nonrandomized studies was close to significance (_p_=.06), with the randomized studies giving a mean effect size that was close to zero. Notably, all the studies with untreated control groups are also nonrandomized; it is apparent from these analyses that the use of randomized designs with an alternative treatment control group are essential to give unambiguous evidence for training effects in this field.
+
+So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2013, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.) Each study has been coded appropriately, and we can ask whether it matters:
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 1,2):
