@@ -609,56 +609,46 @@ I am a little curious about this one, so it gets a full month and half: 10 Septe
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 Black,White,N,Rate
-TRUE,FALSE,253,0.2648
-FALSE,FALSE,239,0.2092
-TRUE,TRUE,244,0.2008
-FALSE,TRUE,262,0.2061
+TRUE,FALSE,835,0.2120
+TRUE,TRUE,812,0.2081
+FALSE,TRUE,847,0.1960
+FALSE,FALSE,854,0.1909
 
-ground <- NULL
-for (i in 1:nrow(rates)) { x <- rates[i,]
-                           y <- do.call("rbind", replicate((x$N * x$Rate),     data.frame(Black=c(x$Black),White=c(x$White),Conversion=c(TRUE)),  simplify = FALSE))
-                           z <- do.call("rbind", replicate((x$N * (1-x$Rate)), data.frame(Black=c(x$Black),White=c(x$White),Conversion=c(FALSE)), simplify = FALSE))
-                           ground <- rbind(ground,y,z)
-}
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
 
-g <- glm(Conversion ~ Black*White, family=binomial, data=ground)
+g <- glm(cbind(Successes,Failures) ~ Black*White, data=rates, family="binomial")
 summary(g); anova(g)
 
-Call:
-glm(formula = Conversion ~ Black * White, family = binomial,
-    data = ground)
-
-Deviance Residuals:
-   Min      1Q  Median      3Q     Max
--0.779  -0.679  -0.674  -0.663   1.801
-
+...
 Coefficients:
                     Estimate Std. Error z value Pr(>|z|)
-(Intercept)          -1.3499     0.1603   -8.42   <2e-16
-BlackTRUE             0.3138     0.2150    1.46     0.14
-WhiteTRUE            -0.0173     0.2222   -0.08     0.94
-BlackTRUE:WhiteTRUE  -0.3484     0.3096   -1.13     0.26
+(Intercept)          -1.4444     0.0871  -16.59   <2e-16
+BlackTRUE             0.1313     0.1215    1.08     0.28
+WhiteTRUE             0.0328     0.1228    0.27     0.79
+BlackTRUE:WhiteTRUE  -0.0560     0.1724   -0.32     0.75
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 1040.7  on 993  degrees of freedom
-Residual deviance: 1036.8  on 990  degrees of freedom
-AIC: 1045
+    Null deviance:  1.5515e+00  on 3  degrees of freedom
+Residual deviance: -3.8192e-14  on 0  degrees of freedom
+AIC: 34.97
 
-Number of Fisher Scoring iterations: 4
+Number of Fisher Scoring iterations: 3
 
 Analysis of Deviance Table
 
 Model: binomial, link: logit
 
-Response: Conversion
+Response: cbind(Successes, Failures)
 
 Terms added sequentially (first to last)
 
 
             Df Deviance Resid. Df Resid. Dev
-NULL                          993       1041
-Black        1     0.98       992       1040
-White        1     1.64       991       1038
-Black:White  1     1.27       990       1037
+NULL                            3      1.551
+Black        1    1.443         2      0.108
+White        1    0.003         1      0.106
+Black:White  1    0.106         0      0.000
 ~~~
