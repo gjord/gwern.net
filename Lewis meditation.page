@@ -192,6 +192,8 @@ R> # 4/11 have negative meditation estimates
 
 Both agree that there is definitely a practice effect, it's probably statistically-significant with such large t-values, and the effect size is cumulatively large - at -0.045 errors per day, we'd expect our error rate to decrease by 1.4 errors a month - which is a lot when we remember that the total average errors per session was 3.1!
 
+### Time of day
+
 So, that's the practice effect verified. What else? Roberts suggested "time-of-day effect (are tests later in the day faster?)" and "day-of-week effect". First we'll convert the times to hours and regress on that:
 
 ~~~{.R}
