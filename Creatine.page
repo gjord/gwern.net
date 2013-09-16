@@ -87,7 +87,7 @@ I decided to code multiple relevant variables:
 year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   dose   age      diet  sleep blind random IQ
 ---- ------------- ---   -----     ----   ---   -----   ----   ------ -------- ----- ----- ----- ------ ---
 2003 Rae           25    13.7      4.1    25     9.7    3.8    210    25.59    1     0     1     1      0
-2009 Ling          17    120       5.95   17     116    9.831  75     21       0     0     1     1      0
+2009 Ling          17    120.3     5.945  17     116.1  9.086  75     21       0     0     1     1      0
 2010 Hammett       11    5.48      0.63   11     5      0.63   110    27.59    0     0     1     1      0
 
 # Results
@@ -95,18 +95,13 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   dose   age      d
 The 3 studies turn in the expected statistically-significant positive result in the random-effects meta-analysis, due largely to Rae 2003:
 
 ~~~{.R}
-tau^2 (estimated amount of total heterogeneity): 0 (SE = 0.1247)
-tau (square root of estimated tau^2 value):      0
-I^2 (total heterogeneity / total variability):   0.00%
-H^2 (total variability / sampling variability):  1.00
-
 Test for Heterogeneity:
-Q(df = 2) = 1.2668, p-val = 0.5308
+Q(df = 2) = 1.0259, p-val = 0.5987
 
-Mode l Results:
+Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.7672   0.2019   3.8004   0.0001   0.3715   1.1629
+  0.7858   0.2021   3.8880   0.0001   0.3897   1.1819
 ~~~
 
 ![A forest plot of the 3 studies](/images/creatine/forest.png)
@@ -115,13 +110,13 @@ When vegetarianism is used as a covariate (this applies only to Rae 2003), the p
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 1.0648, p-val = 0.3021
+QM(df = 1) = 0.9007, p-val = 0.3426
 
 Model Results:
 
          estimate      se    zval    pval    ci.lb   ci.ub
-intrcpt    0.5775  0.2730  2.1154  0.0344   0.0424  1.1127
-diet       0.4185  0.4055  1.0319  0.3021  -0.3764  1.2133
+intrcpt    0.6108  0.2736  2.2326  0.0256   0.0746  1.1470
+diet       0.3852  0.4059  0.9491  0.3426  -0.4103  1.1808
 ~~~
 
 Unfortunately, with 3 studies I can't investigate dose meaningfully, nor try to check for publication bias. This leaves me quite skeptical: with more than a decade, have so few studies really been done, or are the proverbial filedrawers bulging with others I couldn't find?
@@ -193,13 +188,72 @@ Watanabe 2002, McMorris 2006, McMorris et al 2007, McMorris 2007, Rawson et al 2
 
 > Performance of the creatine group also improved significantly over the supplementation period, with the mean of 108 at baseline increasing to 120 (SD: 5.95) at the end of study
 
-total: n=34, mean=118, sd=7.89
-experimental: n=17, mean=120, sd=5.95
-placebo: n=17, mean = 116, sd = 9.831
+Using the spreadsheet of data Ling provided me:
 
-7.89 = 16*sd1 + 16*sd2 / 32
-7.89 = 16*5.95 + 16*sd2 / 32
-solve for sd2 using pooled variance formula, 9.831
+~~~{.R}
+R> ling <- read.csv(stdin(),header=TRUE)
+Creatine,IQ
+1,120
+1,118
+1,126
+1,121
+1,119
+1,118
+1,125
+1,117
+1,133
+1,116
+1,124
+1,114
+1,110
+1,130
+1,123
+1,116
+1,115
+2,110
+2,112
+2,105
+2,106
+2,115
+2,105
+2,112
+2,124
+2,119
+2,133
+2,116
+2,123
+2,122
+2,110
+2,125
+2,105
+2,131
+R> summary(ling)
+    Creatine         IQ
+ Min.   :1.0   Min.   :105
+ 1st Qu.:1.0   1st Qu.:112
+ Median :1.5   Median :118
+ Mean   :1.5   Mean   :118
+ 3rd Qu.:2.0   3rd Qu.:124
+ Max.   :2.0   Max.   :133
+R> i <- ling[ling$Creatine==1,]$IQ; mean(i); sd(i)
+[1] 120.3
+[1] 5.945
+R> i <- ling[ling$Creatine==2,]$IQ; mean(i); sd(i)
+[1] 116.1
+[1] 9.086
+R> t.test(IQ ~ Creatine, data=ling)
+
+    Welch Two Sample t-test
+
+data:  IQ by Creatine
+t = 1.608, df = 27.58, p-value = 0.1192
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -1.163  9.634
+sample estimates:
+mean in group 1 mean in group 2
+          120.3           116.1
+~~~
 
 ## 2010 Hammett
 
