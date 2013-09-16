@@ -1,0 +1,113 @@
+---
+title: Creatine Meta-analysis
+description: Does creatine increase IQ?
+created: 6 Sep 2013
+tags: psychology, meta-analysis
+status: notes
+belief: possible
+...
+
+creatine meta-analysis: effect on intelligence?
+
+`creatine AND (IQ OR intelligence OR "Raven's") -mutagen`
+http://scholar.google.com/scholar?q=creatine+AND+%28IQ+OR+intelligence+OR+%22Raven%27s%22%29+-mutagen&btnG=&hl=en&as_sdt=0%2C9 up to pg41
+https://www.ncbi.nlm.nih.gov/pubmed/?term=%28%22creatine%22[MeSH%20Terms]%20OR%20%22creatine%22[All%20Fields]%29%20AND%20%28IQ[All%20Fields]%20OR%20%28%22intelligence%22[MeSH%20Terms]%20OR%20%22intelligence%22[All%20Fields]%29%20OR%20%22Raven%27s%22[All%20Fields]%29%20AND%20%22humans%22[MeSH%20Terms]&cmd=DetailsSearch 129 results, reviewed all
+APA PsycNET `creatine` http://psycnet.apa.org/index.cfm?fa=search.searchResults 4 hits
+
+# Data
+
+covariates: age of subjects, sleep-deprivation, omnivore or vegetarian, blinding, randomization, total creatine dose, IQ test type
+
+1. diet: if no diet was specified, assume omnivorousness since as little as 5% of Western population are vegetarians
+
+    - 0: omnivore
+    - 1: vegan or vegetarian
+2. sleep:
+
+    - 0: no mention is made of sleep deprivation
+    - 1: if sleep deprivation in the experimental as opposed to control group
+3. IQ:
+
+    - 0: RAPM
+4. dose: total amount of creatine administered, in grams
+5. age: average mean of all subjects' age; medians were treated as means if that was provided instead, and means given of range endpoints if only that was provided
+
+year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   dose   age      diet  sleep blind random IQ
+---- ------------- ---   -----     ----   ---   -----   ----   ------ -------- ----- ----- ----- ------ ---
+2003 Rae           25    13.7      4.1    25     9.7    3.8    210    25.59    1     0     1     1      0
+2009 Ling          17    120       5.95   17     116    0.831  75     21       0     0     1     1      0
+2010 Hammett       11    5.48      0.63   11     5      0.63   110    27.59    0     0     1     1      0
+
+# Study details
+
+[Watanabe 2002](/docs/dnb/2002-watanabe.pdf "Effects of creatine on mental fatigue and cerebral oxygenation"), [McMorris 2006](/docs/dnb/2006-mcmorris.pdf "Effect of creatine supplementation and sleep deprivation, with mild exercise, on cognitive and psychomotor performance, mood state, and plasma concentrations of catecholamines and cortisol"), [McMorris et al 2007](/docs/dnb/2007-mcmorris-2.pdf "Creatine supplementation and cognitive performance in elderly individuals"), [McMorris 2007](/docs/dnb/2007-mcmorris-1.pdf "Creatine supplementation, sleep deprivation, cortisol, melatonin and behavior"), [Rawson et al 2008](/docs/dnb/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults"), [Benton & Donohue 2011](http://img2.timg.co.il/forums/1_161120651.pdf "The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores"): were excluded for not using a measure of intelligence.
+
+## Rae 2003
+
+[Rae et al 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial")
+
+> In this work, we tested the hypothesis that oral creatine supplementation (5 g d2 1 for six weeks) would enhance intelligence test scores and working memory performance in 45 young adult, vegetarian subjects in a double-blind, placebo-controlled, cross-over design. Creatine supplementation had a significant positive effect ( p , 0.0001) on both working memory (backward digit span) and intelligence (Raven’s Advanced Progressive Matrices), both tasks that require speed of processing.
+
+> Forty-five vegan or vegetarian subjects (12 males (median age of 27.5, range of 19–37 years), 33 females (median age of 24.9, range of 18–40 years); 18 vegan (median duration of 4.6 years, range of 0.7–17 years) and 27 vegetarian (median duration of 14.3, range of 1–23 years)) were recruited with informed consent from among the student population of The University of Sydney
+
+> The study followed a double-blind, placebo-controlled, cross-over design. Subjects were seen on four separate occasions, at six-week intervals, following an overnight fast to minimize any fluctuations in blood glucose.
+
+> A cognitive test battery was also administered. At the end of the first and third test sessions, subjects were given an envelope marked with their study number and containing 5 g doses of supplement (creatine monohydrate ((2-methylguanido)acetic acid); Pan Pharmaceuticals, Australia) or placebo (maltodextrin; Manildra Starches, Australia) in plastic vials. Subjects were asked to consume this supplement at the same time each day for the next six weeks and received advice on how best to take this supplement to ensure maximum solubility and absorption. Subjects returned the envelope with unused vials at the end of each six-week period and the number of vials remaining was used to assess compliance, validated against increases in red cell (tissue) creatine. Between visits 2 and 3, the subjects consumed no supplement. Note: six weeks has been shown to be an adequate ‘wash-out’ period (Harris et al. 1992).
+
+> Subjects completed timed (10 min) parallel versions of Raven’s Advanced Progressive Matrices (RAPMs) constructed to have equal levels of difficulty based on the published normative performance data and verified by us on an independent sample of 20 subjects.
+
+> Supplementation with oral creatine monohydrate significantly increased intelligence (as measured by RAPMs done under time pressure, figure 1a) compared with placebo (F3 ,33 = 32.3, p , 0.0001; repeated-measures ANOVA). There was no significant effect of treatment order (F1 ,33 = 1.62, p = 0.21), although there was a significant interaction with treatment order (F3 ,99 = 6.7, p = 0.0004). The mean RAPMs raw score under placebo was 9.7 (s.d. = 3.8) items correct in 10 min versus 13.7 (s.d. = 4.1) items correct under the experimental treatment. Supplementation with oral creatine monohydrate (figure 1b) significantly affected performance on BDS (F3 ,34 = 29.0, p , 0.0001), with no effect of order (F3 ,10 2 = 0.98, p = 0.40). Mean BDS under the placebo was 7.05 items (s.d. = 1.19), compared with a mean of 8.5 items under creatine treatment (s.d. = 1.76).
+
+## Ling 2009
+
+[Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation") saw the creatine group post-score 4 points higher than controls
+
+> There were 34 participants (including 12 females) who completed the study, with a mean age of 21 years (SD: 1.38; range: 18–24). Participants were excluded, if they presented with a medical history of drug and/or alcohol abuse, diagnosed psychiatric disorders, diabetes, renal insufficiency (kidney dysfunction) or had recently or were currently supplementing with a creatine-based substance. None of the participants was vegetarian.
+
+> The final task participants undertook was a modified version of Raven’s Advanced Progressive Matrices (e.g. Raven et al., 1998) presented on a PC using Macromedia Flash Player (http://iqtest.dk/main.swf). The difficulty of the 39 questions gradually increased and was constrained by a 40-min time limit.
+
+> At the end of the first testing phase, participants were given a large envelope that contained 15 plastic vials of either 5 g doses of CEE (obtained through the online store Discount Supplements) or a placebo, maltodextrin (obtained from the manufacturer Chemical Nutrition; http://www.cnpprofessional.co.uk).
+
+> There was a significant effect of test phase on performance in the IQ test [F(1,32) = 88.98, P < 0.01] with participants scoring a mean of 112 (SD: 9.44) at baseline, and 118 (7.89) at the end of the study. There was no significant main effect of supplement condition [F(1,32) = 0.56, NS]. However, the interaction was significant [F(1,32) = 81.18, P < 0.01]. Pairwise comparisons indicated that participants in the creatine condition performed worse than the placebo group in the first phase of testing, with baseline means for creatine group of 108 (SD: 7.42) and for placebo, 116 (SD: 9.60) (Tukey HSD, P < 0.01). Performance of the creatine group also improved significantly over the supplementation period, with the mean of 108 at baseline increasing to 120 (SD: 5.95) at the end of study (Tukey HSD, P < 0.01). Further pairwise comparisons indicated that there was no significant improvement in the performance of the placebo group over the supplementation period (P > 0.05).
+
+> Performance of the creatine group also improved significantly over the supplementation period, with the mean of 108 at baseline increasing to 120 (SD: 5.95) at the end of study
+
+total: n=34, mean=118, sd=7.89
+experimental: n=17, mean=120, sd=5.95
+placebo: n=17, mean = 116, sd = 9.831
+
+7.89 = 16*sd1 + 16*sd2 / 32
+7.89 = 16*5.95 + 16*sd2 / 32
+solve for sd2 using pooled variance formula, 9.831
+
+## 2010 Hammett
+
+["Dietary supplementation of creatine monohydrate reduces the human fMRI BOLD signal"](http://www.researchgate.net/publication/44694983_Dietary_supplementation_of_creatine_monohydrate_reduces_the_human_fMRI_BOLD_signal/file/9fcfd50bb2b9e2fba1.pdf), Hammett et al 2010; quotes relevant for calculating the variables:
+
+> To establish whether the magnitude of the BOLD response is influenced by Cr levels, we have measured responses to visual stimuli in the primary visual cortex (V1) of 22 healthy human volunteers using fMRI, before and after oral administration of Cr or a placebo (11 in the Cr group and 11 in the placebo group).
+
+> The mean and median age of the Cr group was 30.18 and 27 years (SD = 8.37) respectively and the mean and median age of the placebo group was 25 years (SD = 4.82).
+
+> Creatine supplementation (Sci-Mx: Gloucestershire, UK) was provided at a dose of 20 g/day for five days, followed by two additional days at a dose of 5 g/day.
+
+> In order to verify previous reports of cognitive enhancement following Cr supplementation we also measured performance on the Backwards Digit Span (BDS) [28] and Raven’s Advanced Progressive Matrices (RAPM) [24] prior to each scan. The BDS comprises a set of number sequences of increasing length with two different sequences of each length. Subjects were required to repeat each sequence backwards. The test was terminated when the subject failed to repeat two sequences of the same length. Different number sequences were used for the two testing sessions. Subjects were required to complete as many items of the RAPM as possible in 5 min. Since the RAPM tests are ordered in terms of difficulty, odd-numbered and even-numbered tests were administered on weeks 1 and 2 respectively.
+
+> Performance on the RAPM increased non-significantly by 9.6% following Cr (t = 1.882, df = 10, p = 0.0745) and reduced non-significantly by 4.5% (t = 0.7733, df = 10, p = 0.4572) following placebo. A Group × Week ANOVA revealed a main effect of week (F(1, 20) = 5.75, p = 0.026, two-tailed) and a significant interaction between week and compound (F(1, 20) = 8.58, p = 0.008, two-tailed) for BDS performance. No significant effects were found for RAPM performance.
+
+What's the standard deviation which produces a p-value of 0.0745 on an increase of 9.6% & a sample size of 11 in each group? Simulation, using 5 as a convenient mean score:
+
+~~~{.R}
+n <- 10000
+mn <- 5
+results <- vector(length=n)
+for (i in 1:n) {
+    while (TRUE) { newSd <- runif(1, min = 0, max = 5);
+                   control <- rnorm(11, mean = mn, sd = newSd);
+                   active <- 1.096*control;
+                   p <- t.test(control, active)$p.value
+                   if (p < 0.08 && p > 0.07) { results[i] <- newSd; break; }
+                 }
+}
+median(results)
+# 0.63
+~~~
