@@ -7,16 +7,68 @@ status: notes
 belief: possible
 ...
 
-creatine meta-analysis: effect on intelligence?
+> I attempt to meta-analyze conflicting studies about the cognitive benefits of creatine supplementation. The wide variety of psychological measures hampers any aggregation. 3 studies measured IQ and turn in a positive result, but suggestive of vegetarianism causing half the benefit.
 
-`creatine AND (IQ OR intelligence OR "Raven's") -mutagen`
-http://scholar.google.com/scholar?q=creatine+AND+%28IQ+OR+intelligence+OR+%22Raven%27s%22%29+-mutagen&btnG=&hl=en&as_sdt=0%2C9 up to pg41
-https://www.ncbi.nlm.nih.gov/pubmed/?term=%28%22creatine%22[MeSH%20Terms]%20OR%20%22creatine%22[All%20Fields]%29%20AND%20%28IQ[All%20Fields]%20OR%20%28%22intelligence%22[MeSH%20Terms]%20OR%20%22intelligence%22[All%20Fields]%29%20OR%20%22Raven%27s%22[All%20Fields]%29%20AND%20%22humans%22[MeSH%20Terms]&cmd=DetailsSearch 129 results, reviewed all
-APA PsycNET `creatine` http://psycnet.apa.org/index.cfm?fa=search.searchResults 4 hits
+[Creatine](!Wikipedia) is a chemical found throughout the body in a number of roles; it is most famous for its presence in muscles and enabling greater exertion, but it also plays a role in the nervous system. Some small psychology experiments in healthy adults have found cognitive benefits to supplementation but others disagree ([Wikipedia](!Wikipedia "Creatine#Improved cognitive ability"), [Examine.com](http://examine.com/supplements/Creatine/#summary6-12)), and these differences may be due to covariates like being vegetarian & hence creatine-deficient.
+
+When small studies conflict, one way to get answers is to try to meta-analyze them into a single more robust summary. In particular, I am interested in whether creatine supplementation increases IQ. One problem here is that the studies may not use enough of the same measures to include in the same meta-analysis; besides that, the studies are likely severely underpowered to detect plausible effects: IQ increases have been often claimed, but have rarely panned out (see, for example, [dual n-back](DNB meta-analysis)) and "extraordinary claims require extraordinary proof".
+
+# Background
+
+While creatine is famous for its athletic uses^[The author agrees with creatine's utility for athletics, having [used it](Nootropics#creatine) for that purpose himself.], it turns out to boost mental performance in some circumstances (eg. [Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation") saw the creatine group post-score 4 points higher than controls, or [Watanabe 2002](/docs/creatine/2002-watanabe.pdf "Effects of creatine on mental fatigue and cerebral oxygenation")'s less oxygen use during mental arithmetic; Jonathan Toomim recommends it highly, claiming that "I'm more confident that I've noticed effects [on mental performance] of creatine than of DnB.")
+
+The research results are a little mixed. There are studies showing benefits in:
+
+1. Vegetarians ([Rae 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial"))
+2. the sleep-deprived ([McMorris 2006](/docs/creatine/2006-mcmorris.pdf "Effect of creatine supplementation and sleep deprivation, with mild exercise, on cognitive and psychomotor performance, mood state, and plasma concentrations of catecholamines and cortisol"); [McMorris 2007](/docs/creatine/2007-mcmorris-1.pdf "Creatine supplementation, sleep deprivation, cortisol, melatonin and behavior"))
+3. the elderly ([McMorris et al 2007](/docs/creatine/2007-mcmorris-2.pdf "Creatine supplementation and cognitive performance in elderly individuals"))
+
+However, [Rawson et al 2008](/docs/creatine/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults") is a broad null result for healthy omnivores, who are probably most of the readers of this FAQ. ([Jonathan Toomim](https://groups.google.com/group/brain-training/msg/5d5ca4de825f7187) has criticized Rawson 2008 as statistically weak and using a possibly not sensitive test of mental performance.)
+
+# Search
+
+Besides the studies I already knew about through discussion, my own research, Wikipedia, or Examine, I also did several searches for additional studies modeled on the search query `creatine AND (IQ OR intelligence OR "Raven's") -mutagen` ('IQ' turns out to be the name of a mutagen which appears in many contexts with [creatine kinase](!Wikipedia)):
+
+- [Google](https://encrypted.google.com/search?q=creatine%20AND%20%28IQ%20OR%20intelligence%20OR%20%22Raven%27s%22%29%20-mutagen): up to pg10 of results
+- [Google Scholar](http://scholar.google.com/scholar?q=creatine+AND+%28IQ+OR+intelligence+OR+%22Raven%27s%22%29+-mutagen): up to pg41
+- [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/?term=%28%22creatine%22[MeSH%20Terms]%20OR%20%22creatine%22[All%20Fields]%29%20AND%20%28IQ[All%20Fields]%20OR%20%28%22intelligence%22[MeSH%20Terms]%20OR%20%22intelligence%22[All%20Fields]%29%20OR%20%22Raven%27s%22[All%20Fields]%29%20AND%20%22humans%22[MeSH%20Terms]&cmd=DetailsSearch): 129 results, reviewed all
+- [APA PsycNET](http://psycnet.apa.org/index.cfm?fa=search.searchResults): for just `creatine`, 4 hits
+
+I then set up a Google Alert, a Google Scholar alert, and a Pubmed alert for those searches in case any new studies come out.
+
+# Overview
+
+The searches yielded the following potentially useful studies:
+
+- [Watanabe 2002](/docs/creatine/2002-watanabe.pdf "Effects of creatine on mental fatigue and cerebral oxygenation")
+- [Rae 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial")
+- [McMorris 2006](/docs/creatine/2006-mcmorris.pdf "Effect of creatine supplementation and sleep deprivation, with mild exercise, on cognitive and psychomotor performance, mood state, and plasma concentrations of catecholamines and cortisol")
+- [McMorris 2007](/docs/creatine/2007-mcmorris-1.pdf "Creatine supplementation, sleep deprivation, cortisol, melatonin and behavior")
+- [McMorris et al 2007](/docs/creatine/2007-mcmorris-2.pdf "Creatine supplementation and cognitive performance in elderly individuals")
+- [Rawson et al 2008](/docs/creatine/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults")
+- [Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation")
+- [Hammett et al 2010](http://www.researchgate.net/publication/44694983_Dietary_supplementation_of_creatine_monohydrate_reduces_the_human_fMRI_BOLD_signal/file/9fcfd50bb2b9e2fba1.pdf "Dietary supplementation of creatine monohydrate reduces the human fMRI BOLD signal")
+- [Benton & Donohoe 2011](http://img2.timg.co.il/forums/1_161120651.pdf "The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores")
+
+These use a variety of psychological measures:
+
+Study                      Test
+-------------------------  ---------------------
+Watanabe 2002              Uchida-Kraepelin serial calculation test
+Rae 2003                   Raven's Advanced Progressive Matrices; Wechsler Auditory backward digit span
+McMorris 2006              Random movement generation (RMG) test; forward verbal recall; backwards verbal recall; 4-choice visual reaction time test; Hemmings mood state inventory
+McMorris 2007              Random number generation task; number recall test; four-choice visual reaction time test; Hemmings mood state inventory; NASA-TLX effort sub-scale
+McMorris et al 2007        Random number generation task; forward verbal recall; backwards verbal recall; forward Corsi Block Tapping test; backwards Corsi Block Tapping test; long-term memory test
+Rawson et al 2008          Simple reaction time; code substitution; code substitution delayed; logical reasoning symbolic; mathematical processing; running memory; Sternberg memory recall
+Ling et al 2009            Raven's Advanced Progressive Matrices; Memory Scanning task; Number-Pair Matching task; Sustained Attention task; Arrow Flanker task
+Hammett et al 2010         Raven's Advanced Progressive Matrices; Backwards Digit Span
+Benton & Donohoe 2011      Word recall; reaction-time; vigilance rapid information processing task; Controlled Oral Word Association Test
+
+In total, these 9 studies use <=31 distinct measures of cognitive functioning; this heterogeneity renders any summary very difficult as most measures were used in one and only one experiment. The Hemmings mood state inventory, random number generation task, backwards verbal recall, & forward verbal recall are used in 2 experiments each, but the RAPM is used in 3 experiments and would be better to analyze if possible.
 
 # Data
 
-covariates: age of subjects, sleep-deprivation, omnivore or vegetarian, blinding, randomization, total creatine dose, IQ test type
+I decided to code multiple relevant variables:
 
 1. diet: if no diet was specified, assume omnivorousness since as little as 5% of Western population are vegetarians
 
@@ -35,26 +87,95 @@ covariates: age of subjects, sleep-deprivation, omnivore or vegetarian, blinding
 year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   dose   age      diet  sleep blind random IQ
 ---- ------------- ---   -----     ----   ---   -----   ----   ------ -------- ----- ----- ----- ------ ---
 2003 Rae           25    13.7      4.1    25     9.7    3.8    210    25.59    1     0     1     1      0
-2009 Ling          17    120       5.95   17     116    0.831  75     21       0     0     1     1      0
+2009 Ling          17    120       5.95   17     116    9.831  75     21       0     0     1     1      0
 2010 Hammett       11    5.48      0.63   11     5      0.63   110    27.59    0     0     1     1      0
+
+# Results
+
+The 3 studies turn in the expected statistically-significant positive result in the random-effects meta-analysis, due largely to Rae 2003:
+
+~~~{.R}
+tau^2 (estimated amount of total heterogeneity): 0 (SE = 0.1247)
+tau (square root of estimated tau^2 value):      0
+I^2 (total heterogeneity / total variability):   0.00%
+H^2 (total variability / sampling variability):  1.00
+
+Test for Heterogeneity:
+Q(df = 2) = 1.2668, p-val = 0.5308
+
+Mode l Results:
+
+estimate       se     zval     pval    ci.lb    ci.ub
+  0.7672   0.2019   3.8004   0.0001   0.3715   1.1629
+~~~
+
+![A forest plot of the 3 studies](/images/creatine/forest.png)
+
+When vegetarianism is used as a covariate (this applies only to Rae 2003), the pooled Ling & Hammett estimate is then just barely statistically-significant:
+
+~~~{.R}
+Test of Moderators (coefficient(s) 2):
+QM(df = 1) = 1.0648, p-val = 0.3021
+
+Model Results:
+
+         estimate      se    zval    pval    ci.lb   ci.ub
+intrcpt    0.5775  0.2730  2.1154  0.0344   0.0424  1.1127
+diet       0.4185  0.4055  1.0319  0.3021  -0.3764  1.2133
+~~~
+
+Unfortunately, with 3 studies I can't investigate dose meaningfully, nor try to check for publication bias. This leaves me quite skeptical: with more than a decade, have so few studies really been done, or are the proverbial filedrawers bulging with others I couldn't find?
+
+<!-- pwr.t.test(n = sum(creatine$n.e), d = 0.57) -->
+
+# Source
+
+~~~{.R}
+set.seed(7777) # for reproducible numbers
+# TODO: factor out common parts of `png` (& make less square), and `rma` calls
+library(XML)
+creatine <- readHTMLTable(colClasses = c("integer", "character", rep("numeric", 11)),
+                          "http://www.gwern.net/Creatine")[[2]]
+# install.packages("metafor") # if not installed
+library(metafor)
+
+cat("Basic random-effects meta-analysis of all studies:\n")
+res1 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+            data = creatine); res1
+
+png(file="~/wiki/images/creatine/forest.png", width = 580, height = 580)
+forest(res1, slab = paste(creatine$study, creatine$year, sep = ", "))
+invisible(dev.off())
+
+cat("Random-effects with vegetarian covariate:\n")
+rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
+    data=creatine, mods = ~ diet)
+
+# optimize the generated graphs by cropping whitespace & losslessly compressing them
+system(paste('cd ~/wiki/images/creatine/ &&',
+             'for f in *.png; do convert "$f" -crop',
+             '`nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format',
+             '\'%wx%h%O\' info:` +repage "$f"; done'))
+system("optipng -o9 -fix ~/wiki/images/creatine/*.png", ignore.stdout = TRUE)
+~~~
 
 # Study details
 
-[Watanabe 2002](/docs/dnb/2002-watanabe.pdf "Effects of creatine on mental fatigue and cerebral oxygenation"), [McMorris 2006](/docs/dnb/2006-mcmorris.pdf "Effect of creatine supplementation and sleep deprivation, with mild exercise, on cognitive and psychomotor performance, mood state, and plasma concentrations of catecholamines and cortisol"), [McMorris et al 2007](/docs/dnb/2007-mcmorris-2.pdf "Creatine supplementation and cognitive performance in elderly individuals"), [McMorris 2007](/docs/dnb/2007-mcmorris-1.pdf "Creatine supplementation, sleep deprivation, cortisol, melatonin and behavior"), [Rawson et al 2008](/docs/dnb/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults"), [Benton & Donohue 2011](http://img2.timg.co.il/forums/1_161120651.pdf "The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores"): were excluded for not using a measure of intelligence.
+Watanabe 2002, McMorris 2006, McMorris et al 2007, McMorris 2007, Rawson et al 2008, Benton & Donohoe 2011: were excluded for not using a measure of intelligence.
 
 ## Rae 2003
 
 [Rae et al 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial")
 
-> In this work, we tested the hypothesis that oral creatine supplementation (5 g d2 1 for six weeks) would enhance intelligence test scores and working memory performance in 45 young adult, vegetarian subjects in a double-blind, placebo-controlled, cross-over design. Creatine supplementation had a significant positive effect ( p , 0.0001) on both working memory (backward digit span) and intelligence (Raven’s Advanced Progressive Matrices), both tasks that require speed of processing.
+> In this work, we tested the hypothesis that oral creatine supplementation (5 g d2 1 for six weeks) would enhance intelligence test scores and working memory performance in 45 young adult, vegetarian subjects in a double-blind, placebo-controlled, cross-over design. Creatine supplementation had a significant positive effect ( p , 0.0001) on both working memory (backward digit span) and intelligence (Raven's Advanced Progressive Matrices), both tasks that require speed of processing.
 
-> Forty-five vegan or vegetarian subjects (12 males (median age of 27.5, range of 19–37 years), 33 females (median age of 24.9, range of 18–40 years); 18 vegan (median duration of 4.6 years, range of 0.7–17 years) and 27 vegetarian (median duration of 14.3, range of 1–23 years)) were recruited with informed consent from among the student population of The University of Sydney
+> Forty-five vegan or vegetarian subjects (12 males (median age of 27.5, range of 19-37 years), 33 females (median age of 24.9, range of 18-40 years); 18 vegan (median duration of 4.6 years, range of 0.7-17 years) and 27 vegetarian (median duration of 14.3, range of 1-23 years)) were recruited with informed consent from among the student population of The University of Sydney
 
 > The study followed a double-blind, placebo-controlled, cross-over design. Subjects were seen on four separate occasions, at six-week intervals, following an overnight fast to minimize any fluctuations in blood glucose.
 
-> A cognitive test battery was also administered. At the end of the first and third test sessions, subjects were given an envelope marked with their study number and containing 5 g doses of supplement (creatine monohydrate ((2-methylguanido)acetic acid); Pan Pharmaceuticals, Australia) or placebo (maltodextrin; Manildra Starches, Australia) in plastic vials. Subjects were asked to consume this supplement at the same time each day for the next six weeks and received advice on how best to take this supplement to ensure maximum solubility and absorption. Subjects returned the envelope with unused vials at the end of each six-week period and the number of vials remaining was used to assess compliance, validated against increases in red cell (tissue) creatine. Between visits 2 and 3, the subjects consumed no supplement. Note: six weeks has been shown to be an adequate ‘wash-out’ period (Harris et al. 1992).
+> A cognitive test battery was also administered. At the end of the first and third test sessions, subjects were given an envelope marked with their study number and containing 5 g doses of supplement (creatine monohydrate ((2-methylguanido)acetic acid); Pan Pharmaceuticals, Australia) or placebo (maltodextrin; Manildra Starches, Australia) in plastic vials. Subjects were asked to consume this supplement at the same time each day for the next six weeks and received advice on how best to take this supplement to ensure maximum solubility and absorption. Subjects returned the envelope with unused vials at the end of each six-week period and the number of vials remaining was used to assess compliance, validated against increases in red cell (tissue) creatine. Between visits 2 and 3, the subjects consumed no supplement. Note: six weeks has been shown to be an adequate 'wash-out' period (Harris et al. 1992).
 
-> Subjects completed timed (10 min) parallel versions of Raven’s Advanced Progressive Matrices (RAPMs) constructed to have equal levels of difficulty based on the published normative performance data and verified by us on an independent sample of 20 subjects.
+> Subjects completed timed (10 min) parallel versions of Raven's Advanced Progressive Matrices (RAPMs) constructed to have equal levels of difficulty based on the published normative performance data and verified by us on an independent sample of 20 subjects.
 
 > Supplementation with oral creatine monohydrate significantly increased intelligence (as measured by RAPMs done under time pressure, figure 1a) compared with placebo (F3 ,33 = 32.3, p , 0.0001; repeated-measures ANOVA). There was no significant effect of treatment order (F1 ,33 = 1.62, p = 0.21), although there was a significant interaction with treatment order (F3 ,99 = 6.7, p = 0.0004). The mean RAPMs raw score under placebo was 9.7 (s.d. = 3.8) items correct in 10 min versus 13.7 (s.d. = 4.1) items correct under the experimental treatment. Supplementation with oral creatine monohydrate (figure 1b) significantly affected performance on BDS (F3 ,34 = 29.0, p , 0.0001), with no effect of order (F3 ,10 2 = 0.98, p = 0.40). Mean BDS under the placebo was 7.05 items (s.d. = 1.19), compared with a mean of 8.5 items under creatine treatment (s.d. = 1.76).
 
@@ -62,9 +183,9 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   dose   age      d
 
 [Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation") saw the creatine group post-score 4 points higher than controls
 
-> There were 34 participants (including 12 females) who completed the study, with a mean age of 21 years (SD: 1.38; range: 18–24). Participants were excluded, if they presented with a medical history of drug and/or alcohol abuse, diagnosed psychiatric disorders, diabetes, renal insufficiency (kidney dysfunction) or had recently or were currently supplementing with a creatine-based substance. None of the participants was vegetarian.
+> There were 34 participants (including 12 females) who completed the study, with a mean age of 21 years (SD: 1.38; range: 18-24). Participants were excluded, if they presented with a medical history of drug and/or alcohol abuse, diagnosed psychiatric disorders, diabetes, renal insufficiency (kidney dysfunction) or had recently or were currently supplementing with a creatine-based substance. None of the participants was vegetarian.
 
-> The final task participants undertook was a modified version of Raven’s Advanced Progressive Matrices (e.g. Raven et al., 1998) presented on a PC using Macromedia Flash Player (http://iqtest.dk/main.swf). The difficulty of the 39 questions gradually increased and was constrained by a 40-min time limit.
+> The final task participants undertook was a modified version of Raven's Advanced Progressive Matrices (e.g. Raven et al., 1998) presented on a PC using Macromedia Flash Player (http://iqtest.dk/main.swf). The difficulty of the 39 questions gradually increased and was constrained by a 40-min time limit.
 
 > At the end of the first testing phase, participants were given a large envelope that contained 15 plastic vials of either 5 g doses of CEE (obtained through the online store Discount Supplements) or a placebo, maltodextrin (obtained from the manufacturer Chemical Nutrition; http://www.cnpprofessional.co.uk).
 
@@ -90,7 +211,7 @@ solve for sd2 using pooled variance formula, 9.831
 
 > Creatine supplementation (Sci-Mx: Gloucestershire, UK) was provided at a dose of 20 g/day for five days, followed by two additional days at a dose of 5 g/day.
 
-> In order to verify previous reports of cognitive enhancement following Cr supplementation we also measured performance on the Backwards Digit Span (BDS) [28] and Raven’s Advanced Progressive Matrices (RAPM) [24] prior to each scan. The BDS comprises a set of number sequences of increasing length with two different sequences of each length. Subjects were required to repeat each sequence backwards. The test was terminated when the subject failed to repeat two sequences of the same length. Different number sequences were used for the two testing sessions. Subjects were required to complete as many items of the RAPM as possible in 5 min. Since the RAPM tests are ordered in terms of difficulty, odd-numbered and even-numbered tests were administered on weeks 1 and 2 respectively.
+> In order to verify previous reports of cognitive enhancement following Cr supplementation we also measured performance on the Backwards Digit Span (BDS) [28] and Raven's Advanced Progressive Matrices (RAPM) [24] prior to each scan. The BDS comprises a set of number sequences of increasing length with two different sequences of each length. Subjects were required to repeat each sequence backwards. The test was terminated when the subject failed to repeat two sequences of the same length. Different number sequences were used for the two testing sessions. Subjects were required to complete as many items of the RAPM as possible in 5 min. Since the RAPM tests are ordered in terms of difficulty, odd-numbered and even-numbered tests were administered on weeks 1 and 2 respectively.
 
 > Performance on the RAPM increased non-significantly by 9.6% following Cr (t = 1.882, df = 10, p = 0.0745) and reduced non-significantly by 4.5% (t = 0.7733, df = 10, p = 0.4572) following placebo. A Group × Week ANOVA revealed a main effect of week (F(1, 20) = 5.75, p = 0.026, two-tailed) and a significant interaction between week and compound (F(1, 20) = 8.58, p = 0.008, two-tailed) for BDS performance. No significant effects were found for RAPM performance.
 
