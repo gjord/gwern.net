@@ -102,7 +102,7 @@ The thing is, multiple monitors, touch-typing, speed-reading[^speed-reading] - t
 [^speed-reading]: When I was younger, I reasoned that early in life is the best time to learn to read fast since one reaps the greatest gains over the longest possible period (I still agree with my former reasoning) and so did a great deal of reading on [speed-reading](!Wikipedia) and the related academic literature, and spent more than a few hours working with tachistocopic-style software. My ultimate conclusion was that it was a good use of my time as it bumped my WPM up to ~400-500 WPM from the ordinary 300 WPM, but the techniques were not going to give any useful ability beyond that as greater speed becomes an indication one is reading too easy material or one should be using more sophisticated search capabilities. In particular, [tachistoscopes](!Wikipedia) weren't very useful for non-practice reading and were least useful on deep or heavily-hyperlinked content. "Photoreading", however, is simply a scam or very shallow skimming. Unfortunately, I omitted to take notes on specific studies or programs, though, being too young to care about being able to explain & defend my beliefs later - but that is just as well since by now, all the websites would be gone, programs bitrotten, and links broken. Readers will just have to do their own research on the topic if they care (much easier in this age of Wikipedia).
 
 <div style="float:right;margin:0 10px 10px 0">
-<img alt="Scumbag brain meme: needs to write 100kloc system / can’t keep &gt;7 items in memory" height="210" src="/images/dnb/scumbagbrain.jpg" title="Humorous description of the problem of WM shortage" width="300">
+<img alt="Scumbag brain meme: needs to write 100kloc system / can't keep &gt;7 items in memory" height="210" src="/images/dnb/scumbagbrain.jpg" title="Humorous description of the problem of WM shortage" width="300">
 </div>
 
 Just some speed. Just some time. And the more visible that type signature is, the faster you can type out that comment, the larger your 'memory' gets. And the larger your memory is, the more intelligent/productive you can be. (Think of this as the [Extended Mind](!Wikipedia "Extended Mind") thesis as applied to programming!) Great programmers often[^codersatwork][^knuth] talk vaguely about 'keeping a system in your head' or 'having a model', and hate distractions[^programming-distractions], saying they destroy one's [carefully developed thoughts](http://www.paulgraham.com/head.html); I think what they are talking about is trying to store all the relevant details inside their short-term or working memory. Learning programming has a correlation with WM.[^shute] (Once you start looking, you see this everywhere. Games, for example.[^angrybirds]) Or in bug rates - WM has been proposed as the reason why small or large chunks of programs have more proportional errors than medium sized chunks[^Hatton]. It remains to be seen whether [programming tools designed](http://www.cc.gatech.edu/~vector/papers/memoryfailures.pdf "'Programmer Information Needs After Memory Failure', Parnin & Rugaber 2012") with an eye to memory will be helpful, though.
@@ -1474,6 +1474,42 @@ total n-back: 28 18.7 (3.75)
 passive control: 15 19.9 (4.7)
 -->
 
+### Sprenger et al 2013
+
+["Training working memory: Limits of transfer"](/docs/dnb/2013-sprenger.pdf), Sprenger et al 2013; abstract:
+
+> In two experiments (totaling 253 adult participants), we examined the extent to which intensive working memory training led to improvements on untrained measures of cognitive ability. Although participants showed improvement on the trained task and on tasks that either shared task characteristics or stimuli, we found no evidence that training led to general improvements in working memory. Using Bayes Factor analysis, we show that the data generally support the hypothesis that working memory training was ineffective at improving general cognitive ability. This conclusion held even after controlling for a number of individual differences, including need for cognition, beliefs in the malleability of intelligence, and age.
+
+<!--
+> ...Of these, 138 participants (94 females) completed the pre-training assessment, the training regimen, and the post-training assessment
+>
+> ...Participants were compensated $30 for completing the pre-test and $70 for completing the post-test.
+>
+> ...Participants were randomly assigned to one of 4 possible conditions: a placebo control training group; an interference training group; a visuo-spatial training group, and a combination training group (which performed both the interference and visuo-spatial WM training tasks). Training took place remotely by logging onto a training website. Similar to Experiment 1 this study maintained a true double-blind pretest/posttest experimental design, in which neither participants nor study moderators had knowledge of the condition to which participants were assigned.
+>
+> ...Then participants completed an average of 14.03 h of cognitive (or active control) training, which was delivered via internet. Participants completed the training at home on their own computers, for 26 min/day for 28-35 days.
+>
+> ...6.3.2. Raven's Advanced Progressive Matrices (Raven, Raven, & Court, 1998)
+> Participants viewed eight black and white figures arranged in a 3 × 3 grid with one figure missing. Participants chose the image that best completed the pattern from eight possible choices. Participants completed either the odd or even problems at pre-test, and they then completed the complementary set of problems at post-test. Participants were given 10 min to complete as many problems as possible. The dependent variable was the number of correctly solved problems.
+>
+> ...6.4.2. Memory updating & interference training
+> The second group trained on the N-back task, similar to the n-back task in the first experiment, and a new task called "Floop" (a cross between the Flanker task and the Stroop task). Participants played each task for 13 min each day (for a total of 26 min of training/day). For the N-back task, participants viewed letter stimuli and decided (yes/no) whether the current stimulus matched the stimulus "n" trials before. Participants advanced through three lure conditions (no lures, lures at n + 2 and n − 2, and lures at n + 1 & n − 1). The total number of lures was the same as the number of targets. Participants advanced to the next lure or n level when they performed b=3 incorrect responses in the trial sequence, and fell back a step if they performed N=5 incorrect responses. When participants made 4 incorrect responses, they remained at the same difficulty level. Points were awarded for correct responses to 'targets' only, using the equation: 15 ∗ (2^(M − 1)), where M = the lesser of N + 2 or the number of correct responses from last incorrect response.
+>
+> ...6.4.4. Combination training
+> The fourth group trained on N-back, Floop, Shapebuilder, and Memnosyne (block span) each day, playing each task for 6.5 min/day.
+
+RAPM scores, post-test, from appendix B:
+
+control: n=37, 9.95 (3.42)
+interference (n-back): n=34, 9.76 (3.68)
+combination (n-back+others): n=34, 9.24 (3.34)
+
+training time:
+
+interference: 13min/day, 28-35 days, so 13*((28+35)/2) = 410
+combination: 6.5min/day, so 6.5*((28+35)/2) = 205
+-->
+
 ## Meta-analysis
 
 > I construct a meta-analysis of the >19 studies which measure IQ after an n-back intervention, confirming that there is a [gain](DNB meta-analysis#analysis) of small-to-medium effect size. I also investigate several n-back claims, criticisms, and indicators of bias, finding:
@@ -2158,8 +2194,8 @@ This concept is well-understood for a biologic variable, but how can this concep
 Therefore, very few promising drugs in early phase would be positive in phase III (if tested) and thus registrable for a heart failure indication. This is illustrated by the open circles below the curved line, interposed on the totality of early phase trials in Fig. 2. This line is curved because, of course, a strongly positive early phase study will make it more likely (but possibly still with low probability) of positive findings in phase III studies. Nevertheless, this still leaves a large number of trials strongly positive in early phase by chance alone (circled cluster) "regressing to the truth."
 -->
 <!-- "Trial unpredictability yields predictable therapy gains" Djulbegovic et al 2013 /docs/dnb/2013-djulbegovic.pdf
-Here we provide empirical evidence that the system’s success rate is optimal. We analysed hundreds of trials, published and unpublished, public and industry funded, involving hundreds of thousands of people over several decades. We find that just over half the time, RCTs show that new treatments are better than existing ones.
-...We conducted an analysis of 860 published and unpublished phase III RCTs performed by academics or pharmaceutical companies in six consecutive series of trials with a total of more than 350,000 patients: four series of 743 publicly sponsored trials over the past 50 years6, and two series of 117 publicly and commercially sponsored clinical trials over the past 30 years7 (see ‘The best medicine’). Our results show that the probability of finding that a new treatment is better than a standard treatment is about 50–60%, confirming the theoretical predictions we made more than 15 years ago4,5.
+Here we provide empirical evidence that the system's success rate is optimal. We analysed hundreds of trials, published and unpublished, public and industry funded, involving hundreds of thousands of people over several decades. We find that just over half the time, RCTs show that new treatments are better than existing ones.
+...We conducted an analysis of 860 published and unpublished phase III RCTs performed by academics or pharmaceutical companies in six consecutive series of trials with a total of more than 350,000 patients: four series of 743 publicly sponsored trials over the past 50 years6, and two series of 117 publicly and commercially sponsored clinical trials over the past 30 years7 (see 'The best medicine'). Our results show that the probability of finding that a new treatment is better than a standard treatment is about 50-60%, confirming the theoretical predictions we made more than 15 years ago4,5.
 We found that in publicly sponsored RCTs, the likelihood that new treatments would work better than existing ones ranges from 57% to 63% for patient survival and from 55% to 66% for all primary outcomes (such as survival without recurrence of disease, response to treatment, symptom frequency and measures of disability). The only available comparable rates for industry-sponsored RCTs show that, overall, new treatments are superior to existing treatments for measures of morbidity (nausea, for example) in 75% of trials, but similar (53%) for survival7. Over time, the pattern in all trials has converged at around 50% (probably because earlier studies used inferior comparators) and applies across various clinical fields and types of treatment6,7.
 -->
 <!--
@@ -2172,5 +2208,5 @@ Note that according to the FDA, only 1 in 1,000 drugs pass the preclinical stage
 Pharmaprojects contains information on 27,987 new branded drug entities that have reached the late stage development from 1980 to 2002. For the purposes of this study, we limited the sample size to the 3,328 drugs that have entered either Phase I, or Phase II, or Phase III of the human clinical trials somewhere in the world for the first time since 1989.
 
 On average, it takes just under 8 years for a drug to go from Phase I of human clinical trials to market launch in the US. The same figures for Phase II and Phase III drugs are 6.1 and 3.7 years respectively. More specifically, an average drug spends 1.7 years in Phase I, 2.4 years in Phase II, and 3.7 years in Phase III before launch.
-Graph 1 presents a graph showing the estimated duration for the drugs in the data set by their primary indication. While it takes just 5.5 years on average for HIV/AIDS drugs to get from Phase I to the market, it takes drugs for Parkinson’s disease almost twice that long to go through the same process. Drugs for arthritis also spend more than 9 years, and asthma drugs spend more than 8 years in clinical trials on average. HIV/AIDS, anti-hypertension, and leukemia cancer drugs are some drugs that spend less than 7 years in clinical development. Again, this result is suggestive, but more sophisticated analysis is necessary to determine whether more important drugs get to market faster, and why.
+Graph 1 presents a graph showing the estimated duration for the drugs in the data set by their primary indication. While it takes just 5.5 years on average for HIV/AIDS drugs to get from Phase I to the market, it takes drugs for Parkinson's disease almost twice that long to go through the same process. Drugs for arthritis also spend more than 9 years, and asthma drugs spend more than 8 years in clinical trials on average. HIV/AIDS, anti-hypertension, and leukemia cancer drugs are some drugs that spend less than 7 years in clinical development. Again, this result is suggestive, but more sophisticated analysis is necessary to determine whether more important drugs get to market faster, and why.
 -->
