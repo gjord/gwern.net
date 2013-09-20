@@ -32,7 +32,8 @@ Besides the studies I already knew about through discussion, my own research, Wi
 - [Google](https://encrypted.google.com/search?q=creatine%20AND%20%28IQ%20OR%20intelligence%20OR%20%22Raven%27s%22%29%20-mutagen): up to pg10 of results
 - [Google Scholar](http://scholar.google.com/scholar?q=creatine+AND+%28IQ+OR+intelligence+OR+%22Raven%27s%22%29+-mutagen): up to pg41
 - [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/?term=%28%22creatine%22[MeSH%20Terms]%20OR%20%22creatine%22[All%20Fields]%29%20AND%20%28IQ[All%20Fields]%20OR%20%28%22intelligence%22[MeSH%20Terms]%20OR%20%22intelligence%22[All%20Fields]%29%20OR%20%22Raven%27s%22[All%20Fields]%29%20AND%20%22humans%22[MeSH%20Terms]&cmd=DetailsSearch): 129 results, reviewed all
-- [APA PsycNET](http://psycnet.apa.org/index.cfm?fa=search.searchResults): for just `creatine`, 4 hits
+- [APA PsycNET](http://psycnet.apa.org/index.cfm?fa=search.searchResults): for just `creatine` (more complex queries are apparently not supported), 4 hits (none relevant)
+- ProQuest Dissertations & Theses Full Text and ERIC `all(creatine) AND (all(intelligence) OR all(IQ))`: 2 hits
 
 I then set up a Google Alert, a Google Scholar alert, and a Pubmed alert for those searches in case any new studies come out.
 
@@ -188,7 +189,7 @@ Watanabe 2002, McMorris 2006, McMorris et al 2007, McMorris 2007, Rawson et al 2
 
 > Performance of the creatine group also improved significantly over the supplementation period, with the mean of 108 at baseline increasing to 120 (SD: 5.95) at the end of study
 
-Using the spreadsheet of data Ling provided me:
+Using the [spreadsheet of data Ling provided me](/docs/creatine/2009-ling-data.xls):
 
 ~~~{.R}
 R> ling <- read.csv(stdin(),header=TRUE)
