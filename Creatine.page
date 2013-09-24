@@ -46,6 +46,7 @@ The searches yielded the following potentially useful studies:
 - [McMorris 2006](/docs/creatine/2006-mcmorris.pdf "Effect of creatine supplementation and sleep deprivation, with mild exercise, on cognitive and psychomotor performance, mood state, and plasma concentrations of catecholamines and cortisol")
 - [McMorris 2007](/docs/creatine/2007-mcmorris-1.pdf "Creatine supplementation, sleep deprivation, cortisol, melatonin and behavior")
 - [McMorris et al 2007](/docs/creatine/2007-mcmorris-2.pdf "Creatine supplementation and cognitive performance in elderly individuals")
+- [Gastner et al 2007](http://www.google.com/patents/DE102007030495A1 "Use of creatine containing preparation e.g. for improving memory, retentivity, long-term memory and for preventing mental fatigue condition, comprising e.g. Ginkgo biloba, ginseng and niacin")
 - [Rawson et al 2008](/docs/creatine/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults")
 - [Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation")
 - [Hammett et al 2010](http://www.researchgate.net/publication/44694983_Dietary_supplementation_of_creatine_monohydrate_reduces_the_human_fMRI_BOLD_signal/file/9fcfd50bb2b9e2fba1.pdf "Dietary supplementation of creatine monohydrate reduces the human fMRI BOLD signal")
@@ -56,16 +57,17 @@ These use a variety of psychological measures:
 Study                      Test
 -------------------------  ---------------------
 Watanabe 2002              Uchida-Kraepelin serial calculation test
-Rae 2003                   Raven's Advanced Progressive Matrices; Wechsler Auditory backward digit span
-McMorris 2006              Random movement generation (RMG) test; forward verbal recall; backwards verbal recall; 4-choice visual reaction time test; Hemmings mood state inventory
+Rae 2003                   Raven's Advanced Progressive Matrices; Backward Digit Span
+McMorris 2006              Random movement generation test; forward verbal recall; backwards verbal recall; 4-choice visual reaction time test; Hemmings mood state inventory
 McMorris 2007              Random number generation task; number recall test; four-choice visual reaction time test; Hemmings mood state inventory; NASA-TLX effort sub-scale
-McMorris et al 2007        Random number generation task; forward verbal recall; backwards verbal recall; forward Corsi Block Tapping test; backwards Corsi Block Tapping test; long-term memory test
+McMorris et al 2007        Random number generation task; forward verbal recall; backwards verbal recall; forward Corsi Block Tapping test; backward Corsi Block Tapping test; long-term memory test
+Gastner et al 2007         Raven's Advanced Progressive Matrices; Uchida-Kraepelin serial calculation test; Backward Digit Span
 Rawson et al 2008          Simple reaction time; code substitution; code substitution delayed; logical reasoning symbolic; mathematical processing; running memory; Sternberg memory recall
 Ling et al 2009            Raven's Advanced Progressive Matrices; Memory Scanning task; Number-Pair Matching task; Sustained Attention task; Arrow Flanker task
-Hammett et al 2010         Raven's Advanced Progressive Matrices; Backwards Digit Span
+Hammett et al 2010         Raven's Advanced Progressive Matrices; Backward Digit Span
 Benton & Donohoe 2011      Word recall; reaction-time; vigilance rapid information processing task; Controlled Oral Word Association Test
 
-In total, these 9 studies use <=31 distinct measures of cognitive functioning; this heterogeneity renders any summary very difficult as most measures were used in one and only one experiment. The Hemmings mood state inventory, random number generation task, backwards verbal recall, & forward verbal recall are used in 2 experiments each, but the RAPM is used in 3 experiments and would be better to analyze if possible.
+In total, these studies use <=31 distinct measures of cognitive functioning; this heterogeneity renders any summary very difficult as most measures were used in one and only one experiment. The Hemmings mood state inventory, random number generation task, forward verbal recall, & Uchida-Kraepelin serial calculation test are used in 2 experiments each, but the backward digit span is used in 3 experiments, and the RAPM is used in 4 experiments - so it would be best to analyze.
 
 # Data
 
@@ -159,6 +161,8 @@ system("optipng -o9 -fix ~/wiki/images/creatine/*.png", ignore.stdout = TRUE)
 
 Watanabe 2002, McMorris 2006, McMorris et al 2007, McMorris 2007, Rawson et al 2008, Benton & Donohoe 2011: were excluded for not using a measure of intelligence.
 
+Gastner et al 2007: excluded for lack of necessary details.
+
 ## Rae 2003
 
 [Rae et al 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial")
@@ -175,13 +179,43 @@ Watanabe 2002, McMorris 2006, McMorris et al 2007, McMorris 2007, Rawson et al 2
 
 > Supplementation with oral creatine monohydrate significantly increased intelligence (as measured by RAPMs done under time pressure, figure 1a) compared with placebo (F3 ,33 = 32.3, p , 0.0001; repeated-measures ANOVA). There was no significant effect of treatment order (F1 ,33 = 1.62, p = 0.21), although there was a significant interaction with treatment order (F3 ,99 = 6.7, p = 0.0004). The mean RAPMs raw score under placebo was 9.7 (s.d. = 3.8) items correct in 10 min versus 13.7 (s.d. = 4.1) items correct under the experimental treatment. Supplementation with oral creatine monohydrate (figure 1b) significantly affected performance on BDS (F3 ,34 = 29.0, p , 0.0001), with no effect of order (F3 ,10 2 = 0.98, p = 0.40). Mean BDS under the placebo was 7.05 items (s.d. = 1.19), compared with a mean of 8.5 items under creatine treatment (s.d. = 1.76).
 
+## Gastner et al 2007
+
+"Use of creatine containing preparation e.g. for improving memory, retentivity, long-term memory and for preventing mental fatigue condition, comprising e.g. Ginkgo biloba, ginseng and niacin" ([English translation](http://www.google.com/patents/DE102007030495A1), [original](http://www.google.com/patents/DE102007030495A1?cl=de)): German patent filed in June 2007 by Dr. Thomas Gastner, Frauke Selzer, Dr. Hans-Peter, Dr. Bendikt Hammer, for [Alzchem Trostberg Gmbh](http://www.alzchem.com/):
+
+> Use of a creatine containing preparation for improving memory, retentivity, long-term memory and for preventing mental fatigue conditions, comprising e.g. at least a further physiologically effective component of the series Ginkgo biloba, ginseng, taiga root, yam root, lecithin, choline, phosphatidylserine, dimethylamino ethanol, acetyl choline, acetyl-L-carnitine, glutathione, glutamine, cysteine, vitamin A, E, B1, B2, B6, B12, folic acid, pantothenic acid and/or zinc, is claimed. Use of a creatine-component containing preparation for improving memory, retentivity, long-term memory and for preventing mental fatigue conditions, comprising at least a further physiologically effective component of the series Ginkgo biloba, ginseng, taiga root, yam root, lecithin, choline, phosphatidylserine, dimethylamino ethanol, acetyl choline, acetyl-L-carnitine, glutathione, glutamine, cysteine, vitamin A, E, B1, B2, B6, B12, E, niacin, biotin, folic acid, pantothenic acid, zinc, manganese, selenium, magnesium, coenzyme Q10, glucose, colostrum, synephrine, octopamine, caffeine, theophylline, alpha -linolenic acid, eicosapentaenoic acid, omega-3-fatty acid, piracetam, aniracetam, memantine, pyritinol, galantamine, vinpocetin, pangamic acid and/or optionally organic or inorganic salts and/or optionally esters, is claimed.
+
+Section 2, "Effectiveness":
+
+> Subjects were divided randomly into four groups of 25 people each. The age of the subjects varied between 18 and 64 years. The four groups (a-d) were given twice per day for six weeks following each test substances in softgel capsules:
+>
+> a. placebo (1500 mg maltodextrin)
+> b. creatine monohydrate (1500 mg)
+> c. Ginkgo biloba leaves dry extract (120 mg)
+> d. creatine monohydrate (1500 mg) and Ginkgo biloba leaves dry extract (120 mg)
+
+It measured:
+
+1. Backward Digit Span
+2. Raven's Advanced Progressive Matrices
+3. Uchida-Kraepelin test
+
+But reported only pre and post-test scores, and not standard deviations; nor was any kind of statistical test reported, making it difficult to infer anything about the results.
+
+It is unclear where this experiment was done, by whom, or whether it was ever published. (The "in press" citation to Mielcarz et al 2007 turns out to refer to McMorris et al 2007.) Nothing in the English translation indicates that it was published anywhere else; searches failed to find anything related to this but the patent itself; the Uchida-Kraepelin test is very unusual and I tried searching for anything relating to it and creatine in Google/Google-Scholar in English & German but turned up nothing besides discussions of Watanabe 2002.
+
+On 23 September 2013, I attempted to reach Gastner via the [Alzchem contact form](http://www.alzchem.com/en/contacts). (Gastner knows English, as demonstrated by co-authoring "Creatine - its chemical synthesis, chemistry, and legal status" in _Creatine and Creatine Kinase in Health and Disease_.)
+
+<!-- TODO: if no response via contact form, try mailing a physical letter to Germany: "Degussa AG, Dr. Albert-Frank-Straße 32, D-83308 Trostberg, Germany"; from _Creatine and Creatine Kinase_
+If still no reply after a few months... are RAPM standard deviations sufficiently homogeneous to allow borrowing them from somewhere else...? -->
+
 ## Ling 2009
 
 [Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation") saw the creatine group post-score 4 points higher than controls
 
 > There were 34 participants (including 12 females) who completed the study, with a mean age of 21 years (SD: 1.38; range: 18-24). Participants were excluded, if they presented with a medical history of drug and/or alcohol abuse, diagnosed psychiatric disorders, diabetes, renal insufficiency (kidney dysfunction) or had recently or were currently supplementing with a creatine-based substance. None of the participants was vegetarian.
 
-> The final task participants undertook was a modified version of Raven's Advanced Progressive Matrices (e.g. Raven et al., 1998) presented on a PC using Macromedia Flash Player (http://iqtest.dk/main.swf). The difficulty of the 39 questions gradually increased and was constrained by a 40-min time limit.
+> The final task participants undertook was a modified version of Raven's Advanced Progressive Matrices (e.g. Raven et al., 1998) presented on a PC using [Macromedia Flash Player](http://iqtest.dk/main.swf). The difficulty of the 39 questions gradually increased and was constrained by a 40-min time limit.
 
 > At the end of the first testing phase, participants were given a large envelope that contained 15 plastic vials of either 5 g doses of CEE (obtained through the online store Discount Supplements) or a placebo, maltodextrin (obtained from the manufacturer Chemical Nutrition; http://www.cnpprofessional.co.uk).
 
@@ -249,7 +283,7 @@ R> t.test(IQ ~ Creatine, data=ling)
 data:  IQ by Creatine
 t = 1.608, df = 27.58, p-value = 0.1192
 alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
+95% confidence interval:
  -1.163  9.634
 sample estimates:
 mean in group 1 mean in group 2
