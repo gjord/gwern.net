@@ -61,7 +61,7 @@ I do recommend a few things, like [modafinil](Modafinil) or [melatonin](Melatoni
 
 <!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013 -->
 <!-- Multivitamin: started 24 August 2013 -->
-<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18 September -->
+<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21 September -->
 
 # Acetyl-l-carnitine (ALCAR)
 
@@ -775,8 +775,8 @@ The methodology would be essentially the same as the [vitamin D in the morning](
     2. 3 September - 6 September: 1
 21. twenty-first:
 
-    1. 7 September - 13 September: ?
-    2. 14? September - 20? September: ?
+    1. 7 September - 13 September: 1
+    2. 14 September - 20 September: 0
 
 ### VoI
 
@@ -850,6 +850,7 @@ Is 200 enough? There are no canned power functions for the ordinal logistic regr
 
 ~~~{.R}
 library(boot)
+library(rms)
 npt <- read.csv("http://www.gwern.net/docs/nootropics/2013-gwern-noopept.csv")
 n <- 200
 magteinPower <- function(dt, indices) {
@@ -919,9 +920,12 @@ PPV = (1 - β)R/(R - βR + α)
 1. 27 August - 2 September: 0
 
     3 September - 9 September: 1
-2. 10 September - 15 September: ?
+2. 10 September - 15 September: 0
 
-    17? September - 23? September: ?
+    16 September - 21 September: 1
+3. 22 September - 28? September: ?
+
+    29? September - 5? October: ?
 
 # Melatonin
 
@@ -1087,7 +1091,7 @@ I noticed on SR something I had never seen before, an offer for 150mgx10 of "Wak
 
 # Nicotine
 
-<!-- 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum -->
+<!-- 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum; 20 Sept, 1mg gum -->
 
 Following up on my little [investigation into performance & health benefits](Nicotine) of [nicotine](!Wikipedia), I decided to try it out myself since it would be both boring and hypocritical not to. The stimulant properties are well-established, and after reading up, I didn't think there was a >3% chance it might lead me to any [short](http://predictionbook.com/predictions/8179 "I will not smoke a tobacco product for the next 5 years") or [long-term](http://predictionbook.com/predictions/8180 "I will not smoke a tobacco product for the next 25 years") future cigarette use.
 
@@ -1609,9 +1613,12 @@ As it happened, [Health Supplement Wholesalers](http://healthsupplementwholesale
 
 It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to allocate the Noopept as evenly as possible (3 little scoops per pill) which the HSW packaging suggested would be 10-30mg; running out after 432 implies I managed to get ~12mg into each ($\frac{5000}{432}=11.6$). At 2 pills a day, the experiment will run under a year. I don't want to collide with the magnesium or lithium experiments, so I'll use paired blocks of 3 days, which will help with the reported tolerance of Noopept. To make things more interesting, I think I would like to try randomizing different dosages as well: 12mg, 24mg, and 36mg (1/2/3 pills). Then I can regress over dose amount, and then meta-regress including the previous experiment.
 
-1. 20mg: 15 September - 17 September: ?
+1. 20mg: 15 September - 17 September: 0
 
-    18 - 20? September: ?
+    18 - 20 September: 1
+2. 30mg: 21 September - 23? September: ?
+
+    24? - 26?: ?
 
 # Oxiracetam
 
@@ -2121,7 +2128,10 @@ Second day (8): escalated to 30 minutes on the forehead, tried an hour on joints
 Third day (9): skipped forehead stimulation, exclusively knee & ankle.
 Fourth day (10): forehead at various spots for 30 minutes; tiredness
 5/6/7/8th day (11/12/13/4): skipped
-Nineth: forehead, 20 minutes. No noticeable effects.
-10: skipped
-11: 20m
+Ninth: forehead, 20 minutes. No noticeable effects.
+10th: skipped
+11th: 20m
+Sep 21-22: skip
+Sep 23: 20m
+Sep 24: skip
 -->
