@@ -26,18 +26,20 @@ $ find ~/mail/ -type f -exec fgrep -l {} 'Google Alert -' \;
 /home/gwern/mail/new/1282125789.M55800P12266Q737Rd98db4aa1e58e9ed.craft
 ...
 $ find ~/mail/ -type f -exec fgrep -l 'Google Alert -' {} \; > alerts.txt
-$ mkdir 2013-07-01-gwern-googlealertsemails/
-$ mv `cat alerts.txt` 2013-07-01-gwern-googlealertsemails/
+$ mkdir 2013-09-25-gwern-googlealertsemails/
+$ mv `cat alerts.txt` 2013-09-25-gwern-googlealertsemails/
 ~~~
 
-I deleted emails from a few alerts which were private; the remaining 65M of emails are available at [`2013-07-01-gwern-googlealertsemails.tar.xz`](/docs/2013-07-01-gwern-googlealertsemails.tar.xz). Then a loop & some shell-scripting extracts the subject-line, the date, and how many instances of "http://" there are in an email:
+<!-- find 2013-09-25-gwern-googlealertsemails/ -type f -exec grep -l aaktgeb {} \; | xargs rm -->
+
+I deleted emails from a few alerts which were private; the remaining 72M of emails are available at [`2013-09-25-gwern-googlealertsemails.tar.xz`](/docs/2013-09-25-gwern-googlealertsemails.tar.xz). Then a loop & ad hoc shell-scripting extracts the subject-line, the date, and how many instances of "http://" there are in each email:
 
 ~~~{.Bash}
-cd 2013-07-01-gwern-googlealertsemails/
+cd 2013-09-25-gwern-googlealertsemails/
 
 echo "Search,Date,Links" >> alerts.csv # set up the header
+for EMAIL in *.craft *.elan; do
 
-for EMAIL in *.craft *.; do
     SUBJECT="`egrep '^Subject: Google Alert - ' $EMAIL  | sed -e 's/Subject: Google Alert - //'`"
     DATE="`egrep '^Date: ' $EMAIL | cut -d ' ' -f 3-5 | sed -e 's/<b>..*/ /'`"
     COUNT="`fgrep --no-filename --count 'http://' $EMAIL`"
@@ -51,28 +53,29 @@ The scripting isn't perfect and I had to delete several spurious lines before I 
 ~~~{.R}
 alerts <- read.csv("alerts.csv", quote=c(), colClasses=c("character","character","integer"))
 alerts$Date <- as.Date(alerts$Date, format="%d %b %Y")
-write.csv(alerts, file="2013-07-01-gwern-googlealerts.csv", row.names=FALSE)
+write.csv(alerts, file="2013-09-25-gwern-googlealerts.csv", row.names=FALSE)
 ~~~
 
 # Analysis
 ## Descriptive
 
 ~~~{.R}
-alerts <- read.csv("http://www.gwern.net/docs/2013-07-01-gwern-googlealerts.csv",
+alerts <- read.csv("http://www.gwern.net/docs/2013-09-25-gwern-googlealerts.csv",
                    colClasses=c("factor","Date","integer"))
 summary(alerts)
                      Search          Date                Links
  wikipedia              : 255   Min.   :2007-01-28   Min.   :  0.0
- Neon Genesis Evangelion: 247   1st Qu.:2008-11-25   1st Qu.: 11.0
- "Gene Wolfe"           : 238   Median :2011-01-03   Median : 22.5
- "Nick Bostrom"         : 220   Mean   :2010-09-05   Mean   : 37.7
- modafinil              : 178   3rd Qu.:2012-05-11   3rd Qu.: 44.0
- "Frank Herbert" -mason : 174   Max.   :2013-07-01   Max.   :563.0
- (Other)                :2498
+ Neon Genesis Evangelion: 247   1st Qu.:2008-12-29   1st Qu.: 10.0
+ "Gene Wolfe"           : 246   Median :2011-02-07   Median : 22.0
+ "Nick Bostrom"         : 224   Mean   :2010-10-06   Mean   : 37.9
+ modafinil              : 186   3rd Qu.:2012-06-15   3rd Qu.: 44.0
+ "Frank Herbert" -mason : 184   Max.   :2013-09-25   Max.   :563.0
+ (Other)                :2585
+
 # So many because I have deleted many topics I am no longer interested in,
 # and refined the search criteria of others
 length(unique(alerts$Search))
-[1] 63
+[1] 68
 
 plot(Links ~ Date, data=alerts)
 ~~~
@@ -93,22 +96,19 @@ alerts <- aggregate(Links ~ Search + Date, alerts, "sum")
 # a simple linear model agrees with *small* monthly increase, but notes that there is a tremendous
 # amount of unexplained variation
 lm <- lm(Links ~ Date, data=alerts); summary(lm)
-
-Call:
-lm(formula = Links ~ Date, data = alerts)
-
+...
 Residuals:
    Min     1Q Median     3Q    Max
--179.8 -112.0  -59.4   45.4  989.8
+-175.8 -110.0  -60.5   43.3  992.6
 
 Coefficients:
              Estimate Std. Error t value Pr(>|t|)
-(Intercept) -5.04e+02   1.15e+02   -4.39  1.2e-05
-Date         4.37e-02   7.73e-03    5.65  2.1e-08
+(Intercept) -4.13e+02   1.10e+02   -3.76  0.00018
+Date         3.73e-02   7.38e-03    5.06  4.9e-07
 
-Residual standard error: 175 on 1000 degrees of freedom
-Multiple R-squared:  0.031, Adjusted R-squared:  0.03
-F-statistic:   32 on 1 and 1000 DF,  p-value: 2.06e-08
+Residual standard error: 175 on 1046 degrees of freedom
+Multiple R-squared:  0.0239,    Adjusted R-squared:  0.023
+F-statistic: 25.6 on 1 and 1046 DF,  p-value: 4.89e-07
 
 plot(Links ~ Date, data=alerts)
 abline(lm)
@@ -116,7 +116,7 @@ abline(lm)
 
 ![Total links in each search, by month](/images/google/alerts/linkspermonth.png)
 
-No big difference with the original plot: still a generic increasing trend. Here is a basic problem with this regression: does this increase reflect an increase in the *number of alerts* I am subscribed to, tweaks to each alert to make each return more hits (shifting from old alerts to *new* alerts), or a increase per *unique* alert? It is only the last claim we are interested in, but any of these or other phenomenon could produce an increase.
+No big difference with the original plot: still a generic increasing trend. Here is a basic problem with this regression: does this increase reflect an increase in the *number of alerts* I am subscribed to, tweaks to each alert to make each return more hits (shifting from old alerts to *new* alerts), or a increase in links per *unique* alert? It is only the last claim we are interested in, but any of these or other phenomenon could produce an increase.
 
 ### Per alert
 
@@ -150,58 +150,48 @@ We'll start by fitting & comparing 2 models:
 library(lme4)
 mlm1 <- lmer(Links ~ Date + (1|Search), alerts); mlm1
 
-Linear mixed model fit by REML
-Formula: Links ~ Date + (1 | Search)
-   Data: alerts
-   AIC   BIC logLik deviance REMLdev
- 12440 12459  -6216    12432   12432
 Random effects:
  Groups   Name        Variance Std.Dev.
- Search   (Intercept) 31950    179
- Residual             11618    108
-Number of obs: 1002, groups: Search, 63
+ Search   (Intercept) 28943    170
+ Residual             12395    111
+Number of obs: 1048, groups: Search, 68
 
 Fixed effects:
-            Estimate Std. Error t value
-(Intercept) 329.0212   142.8165    2.30
-Date         -0.0126     0.0095   -1.32
+             Estimate Std. Error t value
+(Intercept) 427.93512  139.76994    3.06
+Date         -0.01984    0.00928   -2.14
 
 Correlation of Fixed Effects:
      (Intr)
-Date -0.987
+Date -0.988
 
 mlm2 <- lmer(Links ~ Date + (1+Date|Search), alerts); mlm2
 
-Linear mixed model fit by REML
-Formula: Links ~ Date + (1 + Date | Search)
-   Data: alerts
-   AIC   BIC logLik deviance REMLdev
- 12144 12173  -6066    12135   12132
 Random effects:
  Groups   Name        Variance Std.Dev. Corr
- Search   (Intercept) 6.46e+06 2541.044
-          Date        2.86e-02    0.169 -0.997
- Residual             7.82e+03   88.408
-Number of obs: 1002, groups: Search, 63
+ Search   (Intercept) 6.40e+06 2529.718
+          Date        2.78e-02    0.167 -0.998
+ Residual             8.36e+03   91.446
+Number of obs: 1048, groups: Search, 68
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) 6.54e+01   4.32e+02    0.15
-Date        6.86e-03   2.88e-02    0.24
+(Intercept) 295.5469   420.0588    0.70
+Date         -0.0090     0.0278   -0.32
 
 Correlation of Fixed Effects:
      (Intr)
 Date -0.998
+
 # compare the models: does model 2 buy us anything?
 anova(mlm1, mlm2)
 
-Data: alerts
-Models:
 mlm1: Links ~ Date + (1 | Search)
 mlm2: Links ~ Date + (1 + Date | Search)
-     Df   AIC   BIC logLik Chisq Chi Df Pr(>Chisq)
-mlm1  4 12440 12460  -6216
-mlm2  6 12147 12176  -6067   298      2     <2e-16
+     Df   AIC   BIC logLik deviance Chisq Chi Df Pr(>Chisq)
+mlm1  4 13070 13089  -6531    13062
+mlm2  6 12771 12801  -6379    12759   303      2     <2e-16
+
 ~~~
 
 Model 2 is better on both simplicity/fit criteria, so we'll look at that closer:
@@ -209,38 +199,40 @@ Model 2 is better on both simplicity/fit criteria, so we'll look at that closer:
 ~~~{.R}
 coef(mlm2)
 $Search
-                                                               (Intercept)       Date
-adult iodine supplementation (IQ OR intelligence OR cognitive)      697.38 -0.0418453
-AMD Pacifica virtualization                                        -984.79  0.0729847
-(anime OR manga) (half-Japanese OR hafu OR half-American)           897.29 -0.0555918
-caloric restriction                                               -2303.42  0.1739674
-"Death Note" (script OR live-action OR Parlapanides)                465.50 -0.0254431
-"dual n-back"                                                      4222.94 -0.2675752
-dual n-back                                                         878.35 -0.0516867
-Electric Sheep screensaver                                         -891.22  0.0665540
-"Frank Herbert"                                                    -272.63  0.0258926
-"Frank Herbert" -mason                                            10945.37 -0.6848497
-Freenet project                                                   -1328.94  0.0998159
-"Gene Wolfe"                                                        380.54 -0.0187238
-Gene Wolfe                                                           34.54  0.0093632
+                                                               (Intercept)      Date
+                                                                    763.48 -0.046763
+adult iodine supplementation (IQ OR intelligence OR cognitive)      718.80 -0.043157
+AMD pacifica virtualization                                        -836.63  0.062123
+(anime OR manga) (half-Japanese OR hafu OR half-American)           956.52 -0.059438
+caloric restriction                                               -2023.10  0.153667
+"Death Note" (script OR live-action OR Parlapanides)                866.63 -0.051314
+"dual n-back"                                                      4212.59 -0.266879
+dual n-back                                                        1213.85 -0.073265
+electric sheep screensaver                                         -745.78  0.055937
+"Frank Herbert"                                                     -93.28  0.013636
+"Frank Herbert" -mason                                            10815.19 -0.676188
+freenet project                                                   -1154.14  0.087199
+"Gene Wolfe"                                                        496.01 -0.026575
+Gene Wolfe                                                         1178.36 -0.072681
 ...
-WikiLeaks                                                          -482.00  0.0382767
-Wikipedia                                                         -1686.92  0.1352269
-Xen                                                                 309.96 -0.0113617
+wikileaks                                                         -3080.74  0.227583
+WikiLeaks                                                          -388.34  0.031441
+wikipedia                                                         -1668.94  0.133976
+Xen                                                                 390.01 -0.017209
 ~~~
 
-Date is in links per month, so when Xen has a slope of -0.01, that means that every month there is a tenth of a link less; so after a year, we'd expect not 310 links per month but more like 308. This is not a very big change. The single largest slope is
+Date is in links per month, so when Xen has a slope of -0.02, that means that every year it falls one link.
 
 ~~~{.R}
 max(abs(coef(mlm2)$Search$Date))
-[1] 0.6848
+[1] 0.6762
 ~~~
 
-Which comes from the `"Frank Herbert" -mason` search, probably reflecting how relatively new the search is or the effectiveness of the filter I added to the original `"Frank Herbert"` search. In general, the slopes are very similar, there seem to be as many positive slopes as there are negative, and the overall summary slope is a tiny positive slope in the second model (0.0286); very few of the searches' slopes exclude zero in the caterpillar plot:
+Which comes from the `"Frank Herbert" -mason` search, probably reflecting how relatively new the search is or the effectiveness of the filter I added to the original `"Frank Herbert"` search. In general, the slopes are very similar, there seem to be as many positive slopes as there are negative, and the overall summary slope is a tiny negative slope in the second model (-0.01); but most of the searches' slopes exclude zero in the caterpillar plot:
 
 ![`qqmath(ranef(mlm2, postVar=TRUE))`](/images/google/alerts/mlm2-slopes.png)
 
-This says to me that there is no real change over time happening within each alert, as the original claims went. When we plot the overall regression and the per-alert regressions, we see
+This says to me that there is no large change over time happening within each alert, as the original claims went, but there does seem to be something going on. When we plot the overall regression and the per-alert regressions, we see
 
 ~~~{.R}
 fixParam<-fixef(mlm2)
@@ -254,13 +246,14 @@ p +
   theme(legend.position = "none")
 ~~~
 
-![Multi-level regression, grand and individual lines](/images/google/alerts/monthlylinks-individualmlm.png)
+![Multi-level regression, grand and individual fits](/images/google/alerts/monthlylinks-individualmlm.png)
 
-This clearly makes more sense than regressing each alert separately, as we avoid crazily steep slopes when there are just a few emails to use and their regressions get shrunk to the overall regression. We also see no evidence for any large or statistically-significant change over time for alerts in general: some alerts do increase over time but some alerts also decrease over time, and there is no general decrease which we might blame on internal Google problems.
+This clearly makes more sense than regressing each alert separately, as we avoid crazily steep slopes when there are just a few emails to use and their regressions get shrunk to the overall regression. We also see no evidence for any large or statistically-significant change over time for alerts in general: some alerts do increase over time but some alerts also decrease over time, and there is only a small decrease which we might blame on internal Google problems.
 
+<!--
 ### Robustness
 
-How reliable *is* the slight positive overall correlation that we saw? We can do a posterior check of how much variation there is in the inferred model by randomly generating data from that model and seeing how often the overall `Date` fixed effect varies from positive to negative:
+How reliable *is* the slight negative overall correlation that we saw? We can do a posterior check of how much variation there is in the inferred model by randomly generating data from that model and seeing how often the overall `Date` fixed effect varies from positive to negative:
 
 ~~~{.R}
 library(arm)
@@ -274,6 +267,7 @@ hist(fixef.mlm2.sim[,2], main="Change in hits per month, 100k simulations", xlab
 ~~~
 
 ![Distribution of slopes estimated from 100k simulation runs](/images/google/alerts/mlm2-simulation.png)
+-->
 
 ## What about the fall?
 
@@ -287,52 +281,48 @@ wilcox.test(Links ~ Recent, conf.int=TRUE, data=alertsRecent)
     Wilcoxon rank sum test with continuity correction
 
 data:  Links by Recent
-W = 61370, p-value = 2.631e-08
+W = 71113, p-value = 6.999e-10
 alternative hypothesis: true location shift is not equal to 0
 95% confidence interval:
- 31 72
+ 34 75
 sample estimates:
 difference in location
-                    50
+                    53
 ~~~
 
-I avoided a normality-based test like [`t.test`](!Wikipedia "Student's t-test") and used instead [Wilcoxon](!Wikipedia "Mann-Whitney U") because there's no reason to expect the number of links per month to follow a normal distribution -regardless, there's a very big difference between the two time periods: 219 vs 144 links! A fall of 35% is certainly a serious decline, and it cannot be waved away as due to my Alerts settings (I always use "All results" and never "Only the best results") nor, as we'll see now, a confound like the possibilities that motivated multi-level model use:
+I avoided a normality-based test like [`t.test`](!Wikipedia "Student's t-test") and used instead [Wilcoxon](!Wikipedia "Mann-Whitney U") because there's no reason to expect the number of links per month to follow a normal distribution -regardless, there's a very big difference between the two time periods: 219 vs 140 links! A fall of 36% is certainly a serious decline, and it cannot be waved away as due to my Alerts settings (I always use "All results" and never "Only the best results") nor, as we'll see now, a confound like the possibilities that motivated multi-level model use:
 
 ~~~{.R}
 R> alerts$Recent <- year(alerts$Date) >= 2012
 R> mlm3 <- lmer(Links ~ Date + Recent + (1+Date|Search), alerts); mlm3
-Linear mixed model fit by REML
-Formula: Links ~ Date + Recent + (1 + Date | Search)
-   Data: alerts
-   AIC   BIC logLik deviance REMLdev
- 12129 12163  -6057    12125   12115
+
 Random effects:
  Groups   Name        Variance Std.Dev. Corr
- Search   (Intercept) 5.88e+06 2423.878
-          Date        2.61e-02    0.162 -0.997
- Residual             7.77e+03   88.167
-Number of obs: 1002, groups: Search, 63
+ Search   (Intercept) 9.22e+03 9.60e+01
+          Date        9.52e-05 9.75e-03 -0.164
+ Residual             1.18e+04 1.09e+02
+Number of obs: 1048, groups: Search, 68
 
 Fixed effects:
              Estimate Std. Error t value
-(Intercept) -308.5754   434.0001   -0.71
-Date           0.0327     0.0290    1.13
-RecentTRUE   -40.6539    12.8808   -3.16
+(Intercept) -440.1540   175.3630   -2.51
+Date           0.0413     0.0121    3.42
+RecentTRUE  -102.2273    13.3224   -7.67
 
 Correlation of Fixed Effects:
            (Intr) Date
-Date       -0.998
-RecentTRUE  0.277 -0.286
+Date       -0.993
+RecentTRUE  0.630 -0.647
 
 R> anova(mlm1, mlm2, mlm3)
 Models:
 mlm1: Links ~ Date + (1 | Search)
 mlm2: Links ~ Date + (1 + Date | Search)
 mlm3: Links ~ Date + Recent + (1 + Date | Search)
-     Df   AIC   BIC logLik  Chisq Chi Df Pr(>Chisq)
-mlm1  4 12440 12460  -6216
-mlm2  6 12147 12176  -6067 297.67      2     <2e-16
-mlm3  7 12139 12173  -6062   9.88      1     0.0017
+     Df   AIC   BIC logLik deviance Chisq Chi Df Pr(>Chisq)
+mlm1  4 13070 13089  -6531    13062
+mlm2  6 12771 12801  -6379    12759   303      2     <2e-16
+mlm3  7 13015 13050  -6500    13001     0      1          1
 ~~~
 
 ### It was mid-2011
@@ -356,13 +346,13 @@ wilcox.test(Links ~ Recent, conf.int=TRUE, data=alertsRecent)
     Wilcoxon rank sum test with continuity correction
 
 data:  Links by Recent
-W = 56790, p-value = 6.07e-11
+W = 63480, p-value = 4.61e-12
 alternative hypothesis: true location shift is not equal to 0
 95% confidence interval:
-  58 110
+  62 112
 sample estimates:
 difference in location
-                    84
+                    87
 ~~~
 
 And the fit improves by a large amount:
@@ -370,44 +360,37 @@ And the fit improves by a large amount:
 ~~~{.R}
 R> alerts$Recent <- alerts$Date > "2011-05-01"
 R> mlm4 <- lmer(Links ~ Date + Recent + (1+Date|Search), alerts); mlm4
-Linear mixed model fit by REML
-Formula: Links ~ Date + Recent + (1 + Date | Search)
-   Data: alerts
-   AIC   BIC logLik deviance REMLdev
- 12049 12083  -6017    12045   12035
+
 Random effects:
  Groups   Name        Variance Std.Dev. Corr
- Search   (Intercept) 5.23e+06 2285.925
-          Date        2.33e-02    0.153 -0.997
- Residual             7.16e+03   84.641
-Number of obs: 1002, groups: Search, 63
+ Search   (Intercept) 8.64e+03 9.30e+01
+          Date        9.28e-05 9.63e-03 -0.172
+ Residual             1.11e+04 1.05e+02
+Number of obs: 1048, groups: Search, 68
 
 Fixed effects:
              Estimate Std. Error t value
-(Intercept) -884.8992   409.0614   -2.16
-Date           0.0743     0.0274    2.71
-RecentTRUE  -127.1581    13.1081   -9.70
+(Intercept) -1.11e+03   1.87e+02   -5.91
+Date         8.86e-02   1.30e-02    6.83
+RecentTRUE  -1.65e+02   1.44e+01  -11.43
 
 Correlation of Fixed Effects:
            (Intr) Date
-Date       -0.998
-RecentTRUE  0.243 -0.258
+Date       -0.994
+RecentTRUE  0.709 -0.725
+
 R> anova(mlm1, mlm2, mlm3, mlm4)
-Data: alerts
-Models:
-mlm1: Links ~ Date + (1 | Search)
-mlm2: Links ~ Date + (1 + Date | Search)
-mlm3: Links ~ Date + Recent + (1 + Date | Search)
-mlm4: Links ~ Date + Recent + (1 + Date | Search)
-     Df   AIC   BIC logLik  Chisq Chi Df Pr(>Chisq)
-mlm1  4 12440 12460  -6216
-mlm2  6 12147 12176  -6067 297.67      2     <2e-16
-mlm3  7 12139 12173  -6062   9.88      1     0.0017
-mlm4  7 12059 12093  -6022  80.02      0     <2e-16
+     Df   AIC   BIC logLik deviance Chisq Chi Df Pr(>Chisq)
+mlm1  4 13070 13089  -6531    13062
+mlm2  6 12771 12801  -6379    12759 302.7      2     <2e-16
+mlm3  7 13015 13050  -6500    13001   0.0      1          1
+mlm4  7 12948 12983  -6467    12934  66.8      0     <2e-16
+
 ~~~
 
 #### Robustness
 
+<!--
 Given the foregoing, it's not surprising that the posterior simulation never spits out an estimate for `Recent` anywhere close to zero:
 
 ~~~{.R}
@@ -418,7 +401,10 @@ quantile(fixef.mlm4.sim[,3], probs = c(0, 0.025, 0.975, 1))
 -186.74 -152.69 -101.37  -69.05
 ~~~
 
-The posterior check is good, so I take a look at the other direction: is the fall robust against different samples of my data, using [bootstrapping](!Wikipedia "Bootstrapping (statistics)")? The answer is yes, and the Wilcoxon test even turns out to have given us a pretty good confidence interval earlier:
+The posterior check is good, so I take a look at the other direction:
+-->
+
+Is the fall robust against different samples of my data, using [bootstrapping](!Wikipedia "Bootstrapping (statistics)")? The answer is yes, and the Wilcoxon test even turns out to have given us a pretty good confidence interval earlier:
 
 ~~~{.R}
 library(boot)
@@ -431,16 +417,16 @@ bs <- boot(data=alerts, statistic=recentEstimate, R=10000, parallel="multicore",
 ...
 Bootstrap Statistics :
     original  bias    std. error
-t1*   -127.2  -1.807       14.62
+t1*   -164.8   34.06       17.44
 
 boot.ci(bs)
 ...
 Intervals :
 Level      Normal              Basic
-95%   (-154.0,  -96.7 )   (-152.7,  -95.4 )
+95%   (-233.0, -164.7 )   (-228.2, -156.7 )
 
 Level     Percentile            BCa
-95%   (-158.9, -101.6 )   (-155.4,  -99.6 )
+95%   (-172.9, -101.4 )   (-211.8, -156.7 )
 ~~~
 
 A confidence interval of -159,-95 is both statistically-significant in this context and also an effect size to be reckoned with. It seems this mid-2011 fall is real.
