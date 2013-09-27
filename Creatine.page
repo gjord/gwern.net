@@ -23,7 +23,7 @@ The research results are a little mixed. There are studies showing benefits in:
 2. the sleep-deprived ([McMorris 2006](/docs/creatine/2006-mcmorris.pdf "Effect of creatine supplementation and sleep deprivation, with mild exercise, on cognitive and psychomotor performance, mood state, and plasma concentrations of catecholamines and cortisol"); [McMorris 2007](/docs/creatine/2007-mcmorris-1.pdf "Creatine supplementation, sleep deprivation, cortisol, melatonin and behavior"))
 3. the elderly ([McMorris et al 2007](/docs/creatine/2007-mcmorris-2.pdf "Creatine supplementation and cognitive performance in elderly individuals"))
 
-However, [Rawson et al 2008](/docs/creatine/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults") is a broad null result for healthy omnivores, who are probably most of the readers of this FAQ. ([Jonathan Toomim](https://groups.google.com/group/brain-training/msg/5d5ca4de825f7187) has criticized Rawson 2008 as statistically weak and using a possibly not sensitive test of mental performance.)
+However, [Rawson et al 2008](/docs/creatine/2008-rawson.pdf "Creatine supplementation does not improve cognitive function in young adults") is a broad null result for healthy omnivores, who are probably most of the readers of this FAQ. ([Jonathan Toomim](https://groups.google.com/group/brain-training/msg/5d5ca4de825f7187) has criticized Rawson 2008 as statistically weak and using a possibly not sensitive test of mental performance; others have pointed out Rawson in total administered `(73.8 * 0.03) * (6 * 7)`=~93g of creatine, which is less than half that of Rae and 16% less than Ling)
 
 # Search
 
@@ -84,14 +84,17 @@ I decided to code multiple relevant variables:
 3. IQ:
 
     - 0: RAPM
-4. dose: total amount of creatine administered, in grams
+4. dose: total amount of creatine administered, in grams; average is total amount of creatine divided by number of days on which creatine is taken by a subject
 5. age: average mean of all subjects' age; medians were treated as means if that was provided instead, and means given of range endpoints if only that was provided
+6. type: creatine can be consumed in multiple forms.
 
-year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   dose   age      diet  sleep blind random IQ
----- ------------- ---   -----     ----   ---   -----   ----   ------ -------- ----- ----- ----- ------ ---
-2003 Rae           25    13.7      4.1    25     9.7    3.8    210    25.59    1     0     1     1      0
-2009 Ling          17    120.3     5.945  17     116.1  9.086  75     21       0     0     1     1      0
-2010 Hammett       11    5.48      0.63   11     5      0.63   110    27.59    0     0     1     1      0
+    [Creatine monohydrate](!Wikipedia) (CM) is the most common, but also used in a study is [creatine ethyl ester](!Wikipedia) (CEE). While CEE was developed to allow smaller doses than CM, [Katseres et al 2009](/docs/creatine/2009-katseres.pdf "Non-enzymatic hydrolysis of creatine ethyl ester") suggests it breaks down far too fast to be effective and so CEE doses may not be 1:1 equivalent with CM.
+
+year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   type        dose total  dose average age      diet  sleep blind random IQ
+---- ------------- ---   -----     ----   ---   -----   ----   ----------- ----------- ------------ -------- ----- ----- ----- ------ ---
+2003 Rae           25    13.7      4.1    25     9.7    3.8    Monohydrate 210         5            25.59    1     0     1     1      0
+2009 Ling          17    120.3     5.945  17     116.1  9.086  Ethyl ester 75          5            21       0     0     1     1      0
+2010 Hammett       11    13.45     2.25   11     11.45  3.8    Monohydrate 110         15.7         27.59    0     0     1     1      0
 
 # Results
 
@@ -99,12 +102,12 @@ The 3 studies turn in the expected statistically-significant positive result in 
 
 ~~~{.R}
 Test for Heterogeneity:
-Q(df = 2) = 1.0259, p-val = 0.5987
+Q(df = 2) = 1.1471, p-val = 0.5635
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.7858   0.2021   3.8880   0.0001   0.3897   1.1819
+  0.7606   0.2017   3.7709   0.0002   0.3653   1.1559
 ~~~
 
 ![A forest plot of the 3 studies](/images/creatine/forest.png)
@@ -113,18 +116,18 @@ When vegetarianism is used as a covariate (this applies only to Rae 2003), the p
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.9007, p-val = 0.3426
+QM(df = 1) = 1.1256, p-val = 0.2887
 
 Model Results:
 
          estimate      se    zval    pval    ci.lb   ci.ub
-intrcpt    0.6108  0.2736  2.2326  0.0256   0.0746  1.1470
-diet       0.3852  0.4059  0.9491  0.3426  -0.4103  1.1808
+intrcpt    0.5661  0.2726  2.0767  0.0378   0.0318  1.1003
+diet       0.4299  0.4052  1.0609  0.2887  -0.3643  1.2242
 ~~~
 
 Unfortunately, with 3 studies I can't investigate dose meaningfully, nor try to check for publication bias. This leaves me quite skeptical: with more than a decade, have so few studies really been done, or are the proverbial filedrawers bulging with others I couldn't find?
 
-<!-- pwr.t.test(n = sum(creatine$n.e), d = 0.57) -->
+<!-- library(pwr); pwr.t.test(n = sum(creatine$n.e), d = 0.57) -->
 
 # Source
 
@@ -167,7 +170,7 @@ Gastner et al 2007: excluded for lack of necessary details.
 
 [Rae et al 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial")
 
-> In this work, we tested the hypothesis that oral creatine supplementation (5 g d2 1 for six weeks) would enhance intelligence test scores and working memory performance in 45 young adult, vegetarian subjects in a double-blind, placebo-controlled, cross-over design. Creatine supplementation had a significant positive effect ( p , 0.0001) on both working memory (backward digit span) and intelligence (Raven's Advanced Progressive Matrices), both tasks that require speed of processing.
+> In this work, we tested the hypothesis that oral creatine supplementation (5g daily for six weeks) would enhance intelligence test scores and working memory performance in 45 young adult, vegetarian subjects in a double-blind, placebo-controlled, cross-over design. Creatine supplementation had a significant positive effect (_p_=0.0001) on both working memory (backward digit span) and intelligence (Raven's Advanced Progressive Matrices), both tasks that require speed of processing.
 
 > Forty-five vegan or vegetarian subjects (12 males (median age of 27.5, range of 19-37 years), 33 females (median age of 24.9, range of 18-40 years); 18 vegan (median duration of 4.6 years, range of 0.7-17 years) and 27 vegetarian (median duration of 14.3, range of 1-23 years)) were recruited with informed consent from among the student population of The University of Sydney
 
@@ -304,20 +307,11 @@ mean in group 1 mean in group 2
 
 > Performance on the RAPM increased non-significantly by 9.6% following Cr (t = 1.882, df = 10, p = 0.0745) and reduced non-significantly by 4.5% (t = 0.7733, df = 10, p = 0.4572) following placebo. A Group × Week ANOVA revealed a main effect of week (F(1, 20) = 5.75, p = 0.026, two-tailed) and a significant interaction between week and compound (F(1, 20) = 8.58, p = 0.008, two-tailed) for BDS performance. No significant effects were found for RAPM performance.
 
-What's the standard deviation which produces a p-value of 0.0745 on an increase of 9.6% & a sample size of 11 in each group? Simulation, using 5 as a convenient mean score:
+What's the standard deviation which produces a p-value of 0.0745 on an increase of 9.6% & a sample size of 11 in each group? Hard to tell, but Hammett provided me the pre/post scores:
 
-~~~{.R}
-n <- 10000
-mn <- 5
-results <- vector(length=n)
-for (i in 1:n) {
-    while (TRUE) { newSd <- runif(1, min = 0, max = 5);
-                   control <- rnorm(11, mean = mn, sd = newSd);
-                   active <- 1.096*control;
-                   p <- t.test(control, active)$p.value
-                   if (p < 0.08 && p > 0.07) { results[i] <- newSd; break; }
-                 }
-}
-median(results)
-# 0.63
-~~~
+                           pre      post
+------------- ------------ -------- ---------
+creatine      mean         12.27    13.45
+              SD           3.31     2.25
+placebo       mean         12       11.45
+              SD           3.52     3.8
