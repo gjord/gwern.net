@@ -11,13 +11,17 @@ do
         # warn if not text, perhaps due to bad copy-paste
         cat "$PAGE" | file - | fgp -v "text";
 
-        # find bad URLS, unacceptable domains, malformed syntax, unmatched apostrophes, illegitimate statistics
+        # find bad URLS, unacceptable domains, malformed syntax, unmatched apostrophes
         fgp -e "http://dl.dropbox" -e "http://news.ycombinator.com" -e "http://github.com" \
             -e "http://www.coursera.org" -e ".wiley.com/" -e "http://www.ncbi.nlm.nih.gov/pubmed/" \
-            -e "www.tandfonline.com/doi/abs/" -e "jstor.org"   "$PAGE";
+            -e "www.tandfonline.com/doi/abs/" -e "jstor.org" -e "springer.com" -e "springerlink.com" "$PAGE";
         egp -e "http://www.pnas.org/content/.*/.*/.*.abstract" "$PAGE";
         fgp -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
-              -e '~~~{.sh}' -e 'library("' -e ' significant ' -e ' significantly ' "$PAGE";
+              -e '~~~{.sh}' -e 'library("' "$PAGE";
+
+        # look for personal uses of illegitimate statistics, but filter out blockquotes
+        fgp -e ' significant ' -e ' significantly ' "$PAGE" | egrep -v '[[:space:]]*>';
+
         # force no highlighting, because the terminal escape codes trigger bracket-matching
         egrep --only-matching '^\[\^.*\]: ' "$PAGE" | sort | uniq --count | \
             fgrep --invert-match "      1 [^";
