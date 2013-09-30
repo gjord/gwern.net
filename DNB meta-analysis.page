@@ -28,9 +28,9 @@ For background on conducting meta-analyses, I am using [chapter 9](http://www.mr
 
 # Literature search
 
-The hard part of a meta-analysis is doing a thorough literature search, but the FAQ sections represent a _de facto_ literature search. I started the DNB FAQ in March 2009 after reading through all available previous discussions, and have kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and Pubmed alerts. The corresponding authors of most of the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions; none had a useful suggestion.
+The hard part of a meta-analysis is doing a thorough literature search, but the FAQ sections represent a _de facto_ literature search. I started the DNB FAQ in March 2009 after reading through all available previous discussions, and have kept it up to date with the results of discussions on the [DNB ML](http://groups.google.com/group/brain-training), along with alerts from Google Alerts, Google Scholar, and PubMed alerts. The corresponding authors of most of the candidate studies and Chandra Basak have been contacted with the initial list of candidate studies and asked for additional suggestions; none had a useful suggestion.
 
-In addition, in June 2013 I searched for `"n-back" AND ("fluid intelligence" OR "IQ")` in [Google Scholar](http://scholar.google.com/scholar?q=%22n-back%22+AND+%28%22fluid+intelligence%22+OR+%22IQ%22%29) & [PubMed](http://www.ncbi.nlm.nih.gov/pubmed/?term=%22n-back%22+AND+%28%22fluid+intelligence%22+OR+%22IQ%22%29). Pubmed yielded no new studies; Scholar yielded Jaeggi's 2005 thesis. Finally, I searched ProQuest Dissertations & Theses Full Text (master's theses & doctoral dissertations) for "n-back" and "n-back intelligence", which turned up no new works.
+In addition, in June 2013 I searched for `"n-back" AND ("fluid intelligence" OR "IQ")` in [Google Scholar](http://scholar.google.com/scholar?q=%22n-back%22+AND+%28%22fluid+intelligence%22+OR+%22IQ%22%29) & [PubMed](http://www.ncbi.nlm.nih.gov/pubmed/?term=%22n-back%22+AND+%28%22fluid+intelligence%22+OR+%22IQ%22%29). PubMed yielded no new studies; Scholar yielded Jaeggi's 2005 thesis. Finally, I searched ProQuest Dissertations & Theses Full Text (master's theses & doctoral dissertations) for "n-back" and "n-back intelligence", which turned up no new works.
 
 # Data
 
@@ -169,6 +169,8 @@ control n=26 14.15 3.32
 ## Table
 
 The data from the surviving studies:
+
+<!-- TODO: expand out abbreviations, like 'nbt' to 'N-back type' -->
 
 year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training   IQ   speed nbt paid
 ---- ------------- ---   -----     ----   ---   -----   ----   ------   --------   --   ----- --- ----
@@ -682,3 +684,7 @@ system(paste('cd ~/wiki/images/dnb/ &&',
              '\'%wx%h%O\' info:` +repage "$f"; done'))
 system("optipng -o9 -fix ~/wiki/images/dnb/*.png", ignore.stdout = TRUE)
 ~~~
+
+# External links
+
+- [Hacker News discussion](https://news.ycombinator.com/item?id=6469832)
