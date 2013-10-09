@@ -39,7 +39,7 @@ I then set up a Google Alert, a Google Scholar alert, and a Pubmed alert for tho
 
 # Overview
 
-The searches yielded the following potentially useful studies:
+The searches & alerts yielded the following potentially useful studies:
 
 - [Watanabe 2002](/docs/creatine/2002-watanabe.pdf "Effects of creatine on mental fatigue and cerebral oxygenation")
 - [Rae 2003](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691485/pdf/14561278.pdf "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial")
@@ -51,6 +51,8 @@ The searches yielded the following potentially useful studies:
 - [Ling et al 2009](http://jtoomim.org/files/Ling_2009-Cognitive_effects_of_creatine_ethyl_ester_supplementation.pdf "Cognitive effects of creatine ethyl ester supplementation")
 - [Hammett et al 2010](http://www.researchgate.net/publication/44694983_Dietary_supplementation_of_creatine_monohydrate_reduces_the_human_fMRI_BOLD_signal/file/9fcfd50bb2b9e2fba1.pdf "Dietary supplementation of creatine monohydrate reduces the human fMRI BOLD signal")
 - [Benton & Donohoe 2011](http://img2.timg.co.il/forums/1_161120651.pdf "The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores")
+- [Alves et al 2013](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0076301 "Creatine Supplementation Associated or Not with Strength Training upon Emotional and Cognitive Measures in Older Women: A Randomized Double-Blind Study")
+
 
 These use a variety of psychological measures:
 
@@ -66,10 +68,12 @@ Rawson et al 2008          Simple reaction time; code substitution; code substit
 Ling et al 2009            Raven's Advanced Progressive Matrices; Memory Scanning task; Number-Pair Matching task; Sustained Attention task; Arrow Flanker task
 Hammett et al 2010         Raven's Advanced Progressive Matrices; Backward Digit Span
 Benton & Donohoe 2011      Word recall; reaction-time; vigilance rapid information processing task; Controlled Oral Word Association Test
+Alves et al 2013           Forward Digit Span; Backward Digit Span; Mini-Mental State Examination; Stroop Test; Trail Making Test; Delay Recall Test
 
-In total, these studies use <=31 distinct measures of cognitive functioning; this heterogeneity renders any summary very difficult as most measures were used in one and only one experiment. The Hemmings mood state inventory, random number generation task, forward verbal recall, & Uchida-Kraepelin serial calculation test are used in 2 experiments each, but the backward digit span is used in 3 experiments, and the RAPM is used in 4 experiments - so it would be best to analyze.
+In total, these studies use <=31 distinct measures of cognitive functioning; this heterogeneity renders any summary very difficult as most measures were used in one and only one experiment. The Hemmings mood state inventory, random number generation task, forward verbal recall, & Uchida-Kraepelin serial calculation test are used in 2 experiments each, but the backward digit span is used in 4 experiments, and the RAPM is used in 4 experiments - so it would be best to analyze those two
 
-# Data
+# RAPM
+## Data
 
 I decided to code multiple relevant variables:
 
@@ -90,13 +94,13 @@ I decided to code multiple relevant variables:
 
     [Creatine monohydrate](!Wikipedia) (CM) is the most common, but also used in a study is [creatine ethyl ester](!Wikipedia) (CEE). While CEE was developed to allow smaller doses than CM, [Katseres et al 2009](/docs/creatine/2009-katseres.pdf "Non-enzymatic hydrolysis of creatine ethyl ester") suggests it breaks down far too fast to be effective and so CEE doses may not be 1:1 equivalent with CM.
 
-year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   type        dose total  dose average age      diet  sleep blind random IQ
----- ------------- ---   -----     ----   ---   -----   ----   ----------- ----------- ------------ -------- ----- ----- ----- ------ ---
-2003 Rae           25    13.7      4.1    25     9.7    3.8    Monohydrate 210         5            25.59    1     0     1     1      0
-2009 Ling          17    120.3     5.945  17     116.1  9.086  Ethyl ester 75          5            21       0     0     1     1      0
-2010 Hammett       11    13.45     2.25   11     11.45  3.8    Monohydrate 110         15.7         27.59    0     0     1     1      0
+year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   type        dose total  dose average age      diet
+---- ------------- ---   -----     ----   ---   -----   ----   ----------- ----------- ------------ -------- -----
+2003 Rae           25    13.7      4.1    25     9.7    3.8    Monohydrate 210         5            25.59    1
+2009 Ling          17    120.3     5.945  17     116.1  9.086  Ethyl ester 75          5            21       0
+2010 Hammett       11    13.45     2.25   11     11.45  3.8    Monohydrate 110         15.7         27.59    0
 
-# Results
+## Results
 
 The 3 studies turn in the expected statistically-significant positive result in the random-effects meta-analysis, due largely to Rae 2003:
 
@@ -129,6 +133,17 @@ Unfortunately, with 3 studies I can't investigate dose meaningfully, nor try to 
 
 <!-- library(pwr); pwr.t.test(n = sum(creatine$n.e), d = 0.57) -->
 
+# Backward Digit Span
+## Data
+
+year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   type        dose total  dose average age      diet
+---- ------------- ---   -----     ----   ---   -----   ----   ----------- ----------- ------------ -------- -----
+2010 Hammett       11                     11                   Monohydrate 110         15.7         27.59    0
+2003 Rae           25    8.5       1.76   25    7.05    1.19   Monohydrate 210         5            25.59    1
+2013 Alves         25    3.75      1.0    22    3.25    0.76   Monohydrate 25          4.17         66.8     0
+
+## Results
+
 # Source
 
 ~~~{.R}
@@ -152,7 +167,6 @@ cat("Random-effects with vegetarian covariate:\n")
 rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c, n1i = n.e, n2i = n.c,
     data=creatine, mods = ~ diet)
 
-# optimize the generated graphs by cropping whitespace & losslessly compressing them
 system(paste('cd ~/wiki/images/creatine/ &&',
              'for f in *.png; do convert "$f" -crop',
              '`nice convert "$f" -virtual-pixel edge -blur 0x5 -fuzz 10% -trim -format',
@@ -292,7 +306,7 @@ mean in group 1 mean in group 2
           120.3           116.1
 ~~~
 
-## 2010 Hammett
+## Hammett 2010
 
 ["Dietary supplementation of creatine monohydrate reduces the human fMRI BOLD signal"](http://www.researchgate.net/publication/44694983_Dietary_supplementation_of_creatine_monohydrate_reduces_the_human_fMRI_BOLD_signal/file/9fcfd50bb2b9e2fba1.pdf), Hammett et al 2010; quotes relevant for calculating the variables:
 
@@ -314,3 +328,24 @@ creatine      mean         12.27    13.45
               SD           3.31     2.25
 placebo       mean         12       11.45
               SD           3.52     3.8
+
+## Alves et al 2013
+
+[Alves data table](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0076301)
+
+> The CR and CR+ST groups received 20 g of creatine monohydrate (4 x 5 g/d) for five days followed by 5 g/d as a single dose throughout the trial.
+
+Alves et al 2013: combined the placebo & placebo+strength-training groups, and the creatine & creatine+strength-training groups
+
+<!--
+placebo: n=12 3.3 ± 0.8
+placebo+training: n=10 3.2 ± 0.7
+    10+12=22
+    ((3.3*12)+(3.2*10))/22=3.25
+    (((12-1) * 0.8) + ((10-1)*0.7))/(22-2)=0.76
+creatine: n=13 3.7 ± 0.9
+creatine+training: n=12 3.8 ± 1.1
+    13+12=25
+    ((3.7*13)+(3.8*12))/25=3.75
+    (((13-1) * 0.9) + ((12-1) * 1.1))/(25-2)=1.0
+-->
