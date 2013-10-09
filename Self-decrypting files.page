@@ -1,6 +1,6 @@
 ---
 title: Time-lock encryption
-description: How do you encrypt a file such that it can be broken after a date but not *before*?
+description: How do you encrypt a file such that it can be broken after a date but not before?
 created: 24 May 2011
 tags: computer science, cryptography
 status: finished
@@ -33,9 +33,9 @@ One approach is to focus on creating problems which can be solved with a large b
 
 [^Ebringer]: Ebringer 2008, applying time-lock puzzles to enhancing the ability of computer viruses & trojans to defeat anti-virus scanners, describes Rivest's original successive-squaring solution somewhat sarcastically:
 
-    > Even in the original paper, the authors struggled to find a plausible use for it. To actually use the construction as a 'time-lock' requires predicting the speed of CPUs in the future, resulting, at best, in a fuzzy release-date. This assumes that someone cares enough to want what is allegedly wrapped up in the puzzle to bother to compute the puzzle in the first place. It is not obvious that in the majority of situations, this would have a clear advantage over, say, leaving the information with a legal firm with instructions to release it on a particular date. Although this paper proposes a practical use for time-lock puzzles, the original authors would probably be dismayed that there is still not a widespread usage that appears to be of net benefit to humanity.
+    > Even in the original paper, the authors struggled to find a plausible use for it. To actually use the construction as a "time-lock" requires predicting the speed of CPUs in the future, resulting, at best, in a fuzzy release-date. This assumes that someone cares enough to want what is allegedly wrapped up in the puzzle to bother to compute the puzzle in the first place. It is not obvious that in the majority of situations, this would have a clear advantage over, say, leaving the information with a legal firm with instructions to release it on a particular date. Although this paper proposes a practical use for time-lock puzzles, the original authors would probably be dismayed that there is still not a widespread usage that appears to be of net benefit to humanity.
 
-    On the other hand, a similar criticism could and has been made about [Bitcoin](Bitcoin is Worse is Better) (supporters/users must expend massive computing power constantly just to keep it working, with no computational advantage over attackers), and that system has worked pretty well in practice.
+    On the other hand, a similar criticism could and has been made about [Bitcoin](Bitcoin is Worse is Better) (supporters/users must expend massive computing power constantly just to keep it working, with no computational advantage over attackers), and that system has worked well in practice.
 
 # Hashing
 
@@ -80,11 +80,17 @@ Rivest et al then points out that the most obvious approach - encrypt the file t
 
     > An important consideration to be made is that CPU-bound hash functions are still vulnerable to hardware implementations. For example, the literature provides efficient hardware implementations of SHA-1 in as low as 5000 gates, and able to produce a result in less than 400 clock cycles^[2](http://rfidsec2013.iaik.tugraz.at/RFIDSec08/Papers/Publication/04%20-%20ONeill%20-%20Low%20Cost%20SHA-1%20-%20Paper.pdf "'Low-Cost SHA-1 Hash Function Architecture for RFID Tags', O'Neill")^. Since multi-million gate FPGAs can be purchased at less than $100 price points^[3](http://www.xilinx.com/prs_rls/silicon_spart/0333spartan3.htm)^, it follows that an attacker can build a fully unrolled hardware cracker for about $5000. Such a design, if clocked at 100MHz can try about 300,000 keys/second for the algorithm proposed above.
 
-Rivest et al propose a scheme in which one encrypts the file with a very strong key as usual, but then one encrypts the key in such a way that one must calculate $\text{encryptedKey}^{2^t} \text{mod}(n)$ where _t_ is the adjustable difficulty factor. With the original numbers, one can easily avoid doing the [successive squarings](http://mathworld.wolfram.com/SuccessiveSquareMethod.html) since it's just $2^t = e \times \text{mod}(\Phi(n))$ (Rivest says). This has the nice property that the puzzle constructor invests only $O(n)$ computing power, but the solver has to spend $O(n^2)$ computing power. (This scheme works in the random oracle model, but [Barak & Mahmoody-Ghidary](http://www.cs.princeton.edu/~boaz/Papers/merkle.pdf) 2009 proves that is the best you can do.)
+Rivest et al propose a scheme in which one encrypts the file with a very strong key as usual, but then one encrypts the key in such a way that one must calculate $\text{encryptedKey}^{2^t} \text{mod}(n)$ where _t_ is the adjustable difficulty factor. With the original numbers, one can easily avoid doing the [successive squarings](http://mathworld.wolfram.com/SuccessiveSquareMethod.html) since it's just $2^t = e \times \text{mod}(\Phi(n))$ (Rivest says). This has the nice property that the puzzle constructor invests only $O(log(n))$ computing power, but the solver has to spend $O(n^2)$ computing power. (This scheme works in the random oracle model, but [Barak & Mahmoody-Ghidary](http://www.cs.princeton.edu/~boaz/Papers/merkle.pdf) 2009 proves that is the best you can do.)
 
-Rivest [has actually used](http://people.csail.mit.edu/rivest/lcs35-puzzle-description.txt) this scheme for a time capsule commemorating the [MIT Computer Science and Artificial Intelligence Laboratory](!Wikipedia); he expects his puzzle to take ~35 years. He offers some advice for anyone attempting to unlock this time-lock puzzle (may or may not be related to Mao's 2000 paper ["Time-Lock Puzzle with Examinable Evidence of Unlocking Time"](http://www.springerlink.com/content/f2886q60775051mn/)):
+Rivest [has actually used](http://people.csail.mit.edu/rivest/lcs35-puzzle-description.txt) this scheme for a time capsule commemorating the [MIT Computer Science and Artificial Intelligence Laboratory](!Wikipedia); he expects his puzzle to take ~35 years. As of 14 years later, [minimal progress](http://crypto.stackexchange.com/questions/5831/what-is-the-progress-on-the-mit-lcs35-time-capsule-crypto-puzzle "What is the progress on the MIT LCS35 Time Capsule Crypto-Puzzle?") seems to have been made; if anything, the breakdown of CPU clockspeeds seems to imply that it will take far more than 35 years[^Rivest-projection] Rivest offers some advice for anyone attempting to unlock this time-lock puzzle (may or may not be related to Mao's 2000 paper ["Time-Lock Puzzle with Examinable Evidence of Unlocking Time"](http://www.springerlink.com/content/f2886q60775051mn/)):
 
 > An interesting question is how to protect such a computation from errors. If you have an error in year 3 that goes undetected, you may waste the next 32 years of computing. Adi Shamir has proposed a slick means of checking your computation as you go, as follows. Pick a small (50-bit) prime _c_, and perform the computation modulo _cn_ rather than just modulo _n_. You can check the result modulo _c_ whenever you like; this should be a extremely effective check on the computation modulo _n_ as well.
+
+[^Rivest-projection]: As of 2013, the highest-frequency consumer CPU available, the AMD FX-9000, tops out at 5GHz with few prospects for substantial increases in frequency; Rivest projected 10GHz and increasing:
+
+    > Based on the SEMATECH National Technology Roadmap for Semiconductors (1997 edition), we can expect internal chip speeds to increase by a factor of approximately 13 overall up to 2012, when the clock rates reach about 10GHz.  After that improvements seem more difficult, but we estimate that another factor of five might be achievable by 2034. Thus, the overall rate of computation should go through approximately six doublings by 2034.
+
+    Moore's law, in the original formulation of transistors per dollar, may have continued post-1997, but the gains increasingly came by parallelism, which is not useful for repeated squaring.
 
 ## Constant factors
 
@@ -141,6 +147,8 @@ That is quite a difference between the hashes, especially considered that bcrypt
 # External links
 
 - ["Time capsule cryptography?"](http://crypto.stackexchange.com/questions/606/time-capsule-cryptography) -(Cryptography [StackExchange](!Wikipedia))
+- [Hacker News discussion](https://news.ycombinator.com/item?id=6508179)
+- [Reddit discussion](http://www.reddit.com/r/compsci/comments/1nx0n5/timelock_encryption/)
 
 <!-- TODO
 https://en.bitcoin.it/wiki/User:Gmaxwell/alt_ideas
