@@ -60,8 +60,6 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
                          Xah's text - did you find this article useful?
 
 - test the suggestions in https://code.google.com/p/better-web-readability-project/ http://www.vcarrer.com/2009/05/how-we-read-on-web-and-how-can-we.html
-- notes: choose high significance levels! I can afford them and I want long-term results
-- check how much AdSense is turning off readers and reducing reading. If it's damaging reader engagement substantially, maybe I can't afford to disable AdSense immediately, but I can remember that for when I *can* do so.
 
 # Testing
 ## `max-width`
@@ -602,17 +600,24 @@ hunk ./static/templates/default.html 162
 
 ### Data
 
-I am a little curious about this one, so it gets a full month and half: 10 September - 20 October.
+I am a little curious about this one, so I scheduled a full month and half: 10 September - 20 October. Due to far more traffic than anticipated from submissions to Hacker News, I cut it short by 10 days to avoid wasting traffic on a test which was done (a total _n_ of 231,599 was more than enough). The results:
+
+Version  _n_       Conversion
+----     ------    ---------
+bw       58,237    12.90%
+obow     58,132    12.62%
+bow      57,576    12.48%
+obw      57,654    12.44%
 
 ### Analysis
 
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 Black,White,N,Rate
-TRUE,TRUE,53528,0.1277
-FALSE,FALSE,53418,0.1252
-TRUE,FALSE,52846,0.1237
-FALSE,TRUE,53007,0.1237
+TRUE,TRUE,58237,0.1290
+FALSE,FALSE,58132,0.1262
+TRUE,FALSE,57576,0.1248
+FALSE,TRUE,57654,0.1244
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
@@ -624,14 +629,26 @@ summary(g)
 ...
 Coefficients:
                     Estimate Std. Error z value Pr(>|z|)
-(Intercept)          -1.9441     0.0131 -148.70   <2e-16
-BlackTRUE            -0.0138     0.0186   -0.74    0.458
-WhiteTRUE            -0.0138     0.0186   -0.74    0.458
-BlackTRUE:WhiteTRUE   0.0503     0.0262    1.92    0.055
+(Intercept)          -1.9350     0.0125 -154.93   <2e-16
+BlackTRUE            -0.0128     0.0177   -0.72     0.47
+WhiteTRUE            -0.0164     0.0178   -0.92     0.36
+BlackTRUE:WhiteTRUE   0.0545     0.0250    2.17     0.03
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance:  5.2157e+00  on 3  degrees of freedom
-Residual deviance: -4.2799e-12  on 0  degrees of freedom
-AIC: 50.03
+    Null deviance:  6.8625e+00  on 3  degrees of freedom
+Residual deviance: -1.1758e-11  on 0  degrees of freedom
+AIC: 50.4
+~~~
+
+So we can estimate the net effect of the 4 possibilities:
+
+1. Black, White: -0.0128 + -0.0164 + 0.0545 = 0.0253
+2. Off-black, Off-white: 0 + 0 + 0 = 0
+3. Black, Off-white: -0.0128 + 0 + 0 = -0.0128
+4. Off-black, White: 0 + -0.0164 + 0 = -0.0164
+
+The results exactly match the data's rankings, but that's may be because the sample size was so large (>57,000 datapoints in each cell).
+
+So, this suggests a change to the CSS: we switch the default background color from `#FCFCFC` to `white`, while leaving the default `color` its current `black`.
 ~~~
