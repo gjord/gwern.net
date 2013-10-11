@@ -61,7 +61,7 @@ I do recommend a few things, like [modafinil](Modafinil) or [melatonin](Melatoni
 
 <!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013 -->
 <!-- Multivitamin: started 24 August 2013 -->
-<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1 October -->
+<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7 October -->
 
 # Acetyl-l-carnitine (ALCAR)
 
@@ -777,6 +777,14 @@ The methodology would be essentially the same as the [vitamin D in the morning](
 
     1. 7 September - 13 September: 1
     2. 14 September - 20 September: 0
+22. twenty-second:
+
+    1. 21 September - 27 September: 0
+    2. 28 September - 4 October: 1
+23. twenty-third:
+
+    1. 5 October - 11? October: ?
+    2. 12? October - 18? October: ?
 
 ### VoI
 
@@ -923,9 +931,12 @@ PPV = (1 - β)R/(R - βR + α)
 2. 10 September - 15 September: 0
 
     16 September - 21 September: 1
-3. 22 September - 28? September: ?
+3. 22 September - 28? September: 0
 
-    29? September - 5? October: ?
+    29? September - 5? October: 1
+4. 6 October - 12? October: ?
+
+   13? October - 19? October: ?
 
 # Melatonin
 
@@ -935,7 +946,7 @@ See [Melatonin]() for information on effects & cost; I regularly use melatonin t
 
 See [Modafinil]() for background on performance improvements and side-effects; the following sections are about my usage.
 
-<!-- 03 June 2013: day usage, 200mg Modalert -->
+<!-- 03 June 2013: day usage, 200mg Modalert; 04 October 2013: 150mg Waklert -->
 
 ## SpierX
 
@@ -1091,7 +1102,7 @@ I noticed on SR something I had never seen before, an offer for 150mgx10 of "Wak
 
 # Nicotine
 
-<!-- 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum; 20 Sept, 1mg gum -->
+<!-- 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum; 20 Sept, 1mg gum; 2 October: 2mg -->
 
 Following up on my little [investigation into performance & health benefits](Nicotine) of [nicotine](!Wikipedia), I decided to try it out myself since it would be both boring and hypocritical not to. The stimulant properties are well-established, and after reading up, I didn't think there was a >3% chance it might lead me to any [short](http://predictionbook.com/predictions/8179 "I will not smoke a tobacco product for the next 5 years") or [long-term](http://predictionbook.com/predictions/8180 "I will not smoke a tobacco product for the next 25 years") future cigarette use.
 
@@ -1519,9 +1530,6 @@ mean in group 0 mean in group 1
 
 summary(lm(MP ~ Noopept + Magtein, data = npt))
 
-Call:
-lm(formula = MP ~ Noopept + Magtein, data = npt)
-
 Residuals:
     Min      1Q  Median      3Q     Max
 -1.1597 -0.8038 -0.0711  0.8403  1.1962
@@ -1572,7 +1580,7 @@ So for the observed effect size, the small Noopept sample had only 7% power to t
 ## Followup experiment
 ### Power
 
-In using powder, there are two opposite considerations: Russian Noopept is reportedly the best, so we might expect anything I buy online to be weaker or impure or inferior somehow and the effect size smaller than in the pilot experiment; but by buying my own supply & using powder I can double the dose to 20mg (to compensate for the original under-dosing of 10mg) and so the effect size larger than in the pilot experiment.
+In avoiding experimenting with more Russian Noopept pills and using instead the easily-purchased powder form of Noopept, there are two opposing considerations: Russian Noopept is reportedly the best, so we might expect anything I buy online to be weaker or impure or inferior somehow and the effect size smaller than in the pilot experiment; but by buying my own supply & using powder I can double or triple the dose to 20mg or 30mg (to compensate for the original under-dosing of 10mg) and so the effect size larger than in the pilot experiment.
 
 I'll first assume the effect size is the same. Using the usual alpha, we can find the necessary sample size by a slight variation on the magnesium bootstrap power calculation. Since the 56 days gave a power of 7% while we want closer to 80%, we probably want to start our power estimation much higher, with _n_ in the 300s:
 
@@ -1610,7 +1618,7 @@ print(c(n, sum(bs$t<=alpha)/length(bs$t)))
 
 ### Design
 
-As it happened, [Health Supplement Wholesalers](http://healthsupplementwholesalers.com/) offered me a sample of their products, including their [5g Noopept powder](http://healthsupplementwholesalers.com/products/noopept) ($13). I'd never used HSW before & they had [some issues in the past](http://www.reddit.com/r/Nootropics/wiki/faq#wiki_is_health_supplement_wholesalers_.28hsw.29_.2F_your_brain_and_body_supplements_.2F_build_own_blend_supplements_.28byob.29__.2F_supplement_nexus_.2F_nootropicnexus_.2F_supplements4less_.28they_go_by_many_names.29_a_reliable_supplier.3F); but I haven't seen any [recent complaints](http://www.reddit.com/r/Nootropics/search?q=%22Health+Supplement+Wholesalers%22+OR+HSW&sort=new&restrict_sr=on), so I was willing to try them. My 5g from batch #130830 arrived quickly. I tried some (tastes just slightly unpleasant, like an ultra-weak piracetam), and I set about capping the fluffy white flour-like powder with the tiny little scoop they provide.
+As it happened, [Health Supplement Wholesalers](http://healthsupplementwholesalers.com/) offered me a sample of their products, including their [5g Noopept powder](http://healthsupplementwholesalers.com/products/noopept) ($13). I'd never used HSW before & they had [some issues in the past](http://www.reddit.com/r/Nootropics/wiki/faq#wiki_is_health_supplement_wholesalers_.28hsw.29_.2F_your_brain_and_body_supplements_.2F_build_own_blend_supplements_.28byob.29__.2F_supplement_nexus_.2F_nootropicnexus_.2F_supplements4less_.28they_go_by_many_names.29_a_reliable_supplier.3F); but I haven't seen any [recent complaints](http://www.reddit.com/r/Nootropics/search?q=%22Health+Supplement+Wholesalers%22+OR+HSW&sort=new&restrict_sr=on), so I was willing to try them. My 5g from batch #130830 arrived quickly (photos: [packaging](/images/nootropics-noopept-hsw-packet.jpg), [powder contents](/images/nootropics-noopept-hsw-powder.jpg)). I tried some (tastes just slightly unpleasant, like an ultra-weak piracetam), and I set about capping the fluffy white flour-like powder with the tiny little scoop they provide.
 
 It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to allocate the Noopept as evenly as possible (3 little scoops per pill) which the HSW packaging suggested would be 10-30mg; running out after 432 implies I managed to get ~12mg into each ($\frac{5000}{432}=11.6$). At 2 pills a day, the experiment will run under a year. I don't want to collide with the magnesium or lithium experiments, so I'll use paired blocks of 3 days, which will help with the reported tolerance of Noopept. To make things more interesting, I think I would like to try randomizing different dosages as well: 12mg, 24mg, and 36mg (1/2/3 pills). Then I can regress over dose amount, and then meta-regress including the previous experiment.
 
@@ -1620,9 +1628,15 @@ It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to
 2. 30mg: 21 September - 23? September: 1
 
     24 - 26: 0
-3. 20mg: 27 - 29? September: ?
+3. 20mg: 27 - 29 September: 0
 
-    30? - 2? October: ?
+    30 - 2 October: 1
+4. 10mg: 3 - 5 October: 1
+
+    6 - 8 October: 0
+5. 30mg: 9 - 11? October: ?
+
+    12? - 14? October: ?
 
 # Oxiracetam
 
@@ -1943,7 +1957,7 @@ I have [elsewhere remarked](Melatonin#fn44) on the apparent lack of benefit to t
 - [Bacopa](!Wikipedia "Bacopa monnieri#Medicine") - The research looks interesting and it's [cheap](http://www.smartpowders.com/p-5255-bacopa-monnieri-20-powder-75-grams.aspx); but I am suspicious of anything [Ayurvedic](!Wikipedia "Ayurveda#Safety") because of heavy metals, and _Bacopa monnieri_ is a [hyperaccumulator](!Wikipedia "Bacopa monnieri#Phytoremediation") of heavy metals.
 - [Naringenin](!Wikipedia) - Timothy Ferriss in excerpt from _Four-hour Body_ claims it extends effectiveness of caffeine (how to buy - capsule? grape fruit concentrate?)
 - [Memantine](!Wikipedia) - linked with depression alleviation
-- Ginseng (cf. the [Cochrane Review](https://onlinelibrarystatic.wiley.com/store/10.1002/14651858.CD007769.pub2/asset/CD007769.pdf?v=1&t=h92xu1us&s=f16f5541aaf917e3a54b81bcf8533bb8cf4f89e1))
+- Ginseng (cf. the [Cochrane Review](http://www.researchgate.net/publication/49679958_Ginseng_for_cognition/file/3deec516fd98b981e2.pdf "'Ginseng for cognition (Review)', Geng et al 2010"))
 
 # Appendices
 ## Powder advantages
@@ -2005,7 +2019,8 @@ On the other metric, suppose we removed the creatine? Dropping 4 grams of materi
 - ["A rationalist's guide to psychoactive drugs"](http://lesswrong.com/lw/45u/a_rationalists_guide_to_psychoactive_drugs/)
 - [-racetam price search engine](http://www.noophound.com/)
 
-<!-- ## TULIP
+<!--
+## TULIP
 > Hey gwern, I'm a huge fan of your blog and your approach to nootropics. I would be honored if you would try TULIP. You don't have to publicly post about it but you are WAY better at blinding and quantifying than I am. I would be fascinated to privately hear your results.
 >
 > My friends at Longecity and I have been able to get the cost way down and it's pretty darn affordable now. If you have any questions or want links to studies, I've got a ton. Just let me know.
@@ -2143,4 +2158,6 @@ Sep 26: on
 27: on
 28: on
 1 Oct: on
+8 Oct: on
+9 Oct: on
 -->
