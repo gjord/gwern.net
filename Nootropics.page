@@ -59,10 +59,6 @@ I do recommend a few things, like [modafinil](Modafinil) or [melatonin](Melatoni
 
 (People aged <=18 shouldn't be using any of this except harmless stuff - where one may have nutritional deficits - like fish oil & vitamin D & maybe melatonin, if they're otherwise screwing themselves over with sleep deficits thanks to school schedules & electronics use. Changes in effects with age are real - amphetamines' stimulant effects and modafinil's histamine-like side-effects come to mind as examples.)
 
-<!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013 -->
-<!-- Multivitamin: started 24 August 2013 -->
-<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7 October -->
-
 # Acetyl-l-carnitine (ALCAR)
 
 No effects, alone or mixed with choline+piracetam. This is pretty much as expected from reports about [ALCAR](!Wikipedia) ([Examine.com](http://examine.com/supplements/L-Carnitine/)), but I had still been hoping for energy boosts or something. (Bought from Smart Powders.)
@@ -336,7 +332,7 @@ I noticed what may have been an effect on [my dual n-back scores](http://groups.
       effSz     -0.2917182 -0.2898252 -0.2621231 -0.7942141  0.1909223 12.11276
     ~~~
 
-    ![Graphs of the 2 datasets compared](/images/best-fishoil.jpg)
+    ![Graphs of the 2 datasets compared](/images/nootropics/best-fishoil.jpg)
 
 ### Power calculation
 
@@ -1269,7 +1265,7 @@ PARAMETER         mean     median       mode     HDIlow   HDIhigh pcgtZero
 
 The results graphed:
 
-![Daily data means, differences of inferred standard deviations & effect sizes: `BESTplot(on2, off2, mcmcChain=mcmc, ROPEeff=c(0.1,1.5))`](/images/nootropics-nicotine-dnb.png)
+![Daily data means, differences of inferred standard deviations & effect sizes: `BESTplot(on2, off2, mcmcChain=mcmc, ROPEeff=c(0.1,1.5))`](/images/nootropics/nicotine-dnb.png)
 
 We can read off the results from the table or graph: the nicotine days average 1.1% higher, for an effect size of 0.24; however, the 95% [credible interval](!Wikipedia) (equivalent of confidence interval) goes all the way from 0.93 to -0.44, so we cannot exclude 0 effect and certainly not claim confidence the effect size must be >0.1. Specifically, the analysis gives a 66% chance that the effect size is >0.1. (One might wonder if any increase is due purely to a "training effect" - getting better at DNB. Probably not[^nicotine-training-effect].)
 
@@ -1293,7 +1289,7 @@ We can read off the results from the table or graph: the nicotine days average 1
              33,60,38,28,60,45,64,50,44,38,50,42,31,50,30,35,61,56,30,44,37,43,38)
     ~~~
 
-    ![231 dual 5-back scores plotted in chronological order: `plot(dnb)`](/images/nootropics-nicotine-trainingeffect.png)
+    ![231 dual 5-back scores plotted in chronological order: `plot(dnb)`](/images/nootropics/nicotine-trainingeffect.png)
 
     The point about randomization is key, BTW, because the theoretical training effect is actually *greater* than the observed improvement between randomized days. Watch:
 
@@ -1309,7 +1305,7 @@ We can read off the results from the table or graph: the nicotine days average 1
     # 0.017 is a positive slope!
     ~~~
 
-    ![DNB scores per day with a linear fit overlaid; `plot(dnb); abline(lm(dnb ~ c(1:231)))`](/images/nootropics-nicotine-trainingeffect-linearmodel.png)
+    ![DNB scores per day with a linear fit overlaid; `plot(dnb); abline(lm(dnb ~ c(1:231)))`](/images/nootropics/nicotine-trainingeffect-linearmodel.png)
 
     It's not much of a slope but it's there. Now, I spent 200 rounds of n-back doing the randomized nicotine experiment, and those would be the latter 200 rounds graphed; how much of an improvement should I expect?
 
@@ -1358,7 +1354,7 @@ PARAMETER          mean      median        mode     HDIlow     HDIhigh pcgtZero
   effSz      0.09778545  0.09763823  0.09931263 -0.1895882   0.3907156 74.52276
 ~~~
 
-![Means, differences of inferred standard deviations & effect sizes: `BESTplot(on, off, mcmcChain=mcmc, ROPEeff=c(0.1,1.5))`](/images/nootropics-nicotine-dnb-full.png)
+![Means, differences of inferred standard deviations & effect sizes: `BESTplot(on, off, mcmcChain=mcmc, ROPEeff=c(0.1,1.5))`](/images/nootropics/nicotine-dnb-full.png)
 
 We see the standard deviation difference go away - now the difference estimate is almost centered on zero with a just 75% estimate the standard deviation differs in the observed direction. And to repeat the frequentist test:
 
@@ -1443,7 +1439,7 @@ active                        -0.27754064 -0.05727501
 mp                                         0.05238032
 ~~~
 
-![Plot scores for each mood/productivity level, split between placebo & nicotine: `boxplot(nicotine$score ~ (nicotine$active + nicotine$mp)^2)`](/images/nootropics-nicotine-dnb-bymp.png)
+![Plot scores for each mood/productivity level, split between placebo & nicotine: `boxplot(nicotine$score ~ (nicotine$active + nicotine$mp)^2)`](/images/nootropics/nicotine-dnb-bymp.png)
 
 Interesting. On days ranked '2' (below-average mood/productivity), nicotine seems to have boosted scores; on days ranked '3', nicotine hurts scores; there aren't enough '4's to tell, but even '5' days seem to see a boost from nicotine, which is not predicted by the theory. But I don't think much of a conclusion can be drawn: not enough data to make out any simple relationship. [Some modeling](http://stats.stackexchange.com/a/44376/16897) suggests no relationship in this data either (although also no difference in standard deviations, leading me to wonder if I screwed up the data recording - not all of the DNB scores seem to match the input data in the previous analysis). So although the '2' days in the graph are striking, the theory may not be right.
 
@@ -1478,8 +1474,8 @@ Related to the famous -racetams but reportedly better (and much less bulky), [No
 
 A Redditor ordered some Russian brand Noopept, but finding it was unpleasant & not working for him, gave the left-over half to me:
 
-![Russian Noopept box, front & back](/images/nootropics-noopept-box.jpg)
-![Russian Noopept blister-pack, front & back](/images/nootropics-noopept-pills.jpg)
+![Russian Noopept box, front & back](/images/nootropics/noopept-box.jpg)
+![Russian Noopept blister-pack, front & back](/images/nootropics/noopept-pills.jpg)
 
 It appeared in reasonably good shape, and closely matched the photographs in the Wikipedia article. I took 2 of the 25 10mg pills on successive days on top of my usual caffeine+piracetam stack, and didn't notice anything; in particular, I didn't find it unpleasant like he did.
 
@@ -1618,7 +1614,7 @@ print(c(n, sum(bs$t<=alpha)/length(bs$t)))
 
 ### Design
 
-As it happened, [Health Supplement Wholesalers](http://healthsupplementwholesalers.com/) offered me a sample of their products, including their [5g Noopept powder](http://healthsupplementwholesalers.com/products/noopept) ($13). I'd never used HSW before & they had [some issues in the past](http://www.reddit.com/r/Nootropics/wiki/faq#wiki_is_health_supplement_wholesalers_.28hsw.29_.2F_your_brain_and_body_supplements_.2F_build_own_blend_supplements_.28byob.29__.2F_supplement_nexus_.2F_nootropicnexus_.2F_supplements4less_.28they_go_by_many_names.29_a_reliable_supplier.3F); but I haven't seen any [recent complaints](http://www.reddit.com/r/Nootropics/search?q=%22Health+Supplement+Wholesalers%22+OR+HSW&sort=new&restrict_sr=on), so I was willing to try them. My 5g from batch #130830 arrived quickly (photos: [packaging](/images/nootropics-noopept-hsw-packet.jpg), [powder contents](/images/nootropics-noopept-hsw-powder.jpg)). I tried some (tastes just slightly unpleasant, like an ultra-weak piracetam), and I set about capping the fluffy white flour-like powder with the tiny little scoop they provide.
+As it happened, [Health Supplement Wholesalers](http://healthsupplementwholesalers.com/) offered me a sample of their products, including their [5g Noopept powder](http://healthsupplementwholesalers.com/products/noopept) ($13). I'd never used HSW before & they had [some issues in the past](http://www.reddit.com/r/Nootropics/wiki/faq#wiki_is_health_supplement_wholesalers_.28hsw.29_.2F_your_brain_and_body_supplements_.2F_build_own_blend_supplements_.28byob.29__.2F_supplement_nexus_.2F_nootropicnexus_.2F_supplements4less_.28they_go_by_many_names.29_a_reliable_supplier.3F); but I haven't seen any [recent complaints](http://www.reddit.com/r/Nootropics/search?q=%22Health+Supplement+Wholesalers%22+OR+HSW&sort=new&restrict_sr=on), so I was willing to try them. My 5g from batch #130830 arrived quickly (photos: [packaging](/images/nootropics/noopept-hsw-packet.jpg), [powder contents](/images/nootropics-noopept-hsw-powder.jpg)). I tried some (tastes just slightly unpleasant, like an ultra-weak piracetam), and I set about capping the fluffy white flour-like powder with the tiny little scoop they provide.
 
 It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to allocate the Noopept as evenly as possible (3 little scoops per pill) which the HSW packaging suggested would be 10-30mg; running out after 432 implies I managed to get ~12mg into each ($\frac{5000}{432}=11.6$). At 2 pills a day, the experiment will run under a year. I don't want to collide with the magnesium or lithium experiments, so I'll use paired blocks of 3 days, which will help with the reported tolerance of Noopept. To make things more interesting, I think I would like to try randomizing different dosages as well: 12mg, 24mg, and 36mg (1/2/3 pills). Then I can regress over dose amount, and then meta-regress including the previous experiment.
 
@@ -1634,9 +1630,12 @@ It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to
 4. 10mg: 3 - 5 October: 1
 
     6 - 8 October: 0
-5. 30mg: 9 - 11? October: ?
+5. 30mg: 9 - 11 October: 1
 
-    12? - 14? October: ?
+    12 - 14 October: 0
+6. 10mg: 15 - 17? October: ?
+
+    18? - 20? October: ?
 
 # Oxiracetam
 
@@ -1697,7 +1696,7 @@ Fortunately for me, the FDA decided Smart Powder's advertising was too explicit 
 
 I take my piracetam in the form of capped pills consisting (in descending order) of piracetam, choline bitartrate, anhydrous caffeine, and l-tyrosine. On 8 December 2012, I happened to run out of them and couldn't fetch more from my stock until 27 December. This forms a sort of (non-randomized, non-blind) short "[natural experiment](!Wikipedia)": did my daily 1-5 mood/productivity ratings fall during 8-27 December compared to November 2012 & January 2013? The graphed data[^piracetam-natural-experiment-data] suggests to me a decline:
 
-![See footnote for R code](/images/nootropics-piracetam-natural-data.png)
+![See footnote for R code](/images/nootropics/piracetam-natural-data.png)
 
 [^piracetam-natural-experiment-data]: Graphing each time period:
 
@@ -1714,7 +1713,7 @@ I take my piracetam in the form of capped pills consisting (in descending order)
 
 The BEST results[^piracetam-natural-experiment-BEST] give a small effect size of -0.26 and only partial exclusion of zero effect size (which a one-tailed _t_-test agrees with[^piracetam-natural-experiment-t-test]):
 
-![`postInfo = BESTplot(poff, c(pone, ptwo), mcmcChain)`](/images/nootropics-piracetam-natural-best.png)
+![`postInfo = BESTplot(poff, c(pone, ptwo), mcmcChain)`](/images/nootropics/piracetam-natural-best.png)
 
 [^piracetam-natural-experiment-BEST]: The usual:
 
@@ -2160,4 +2159,10 @@ Sep 26: on
 1 Oct: on
 8 Oct: on
 9 Oct: on
+12 Oct: on
+13 Oct: on
+15 Oct: on
 -->
+<!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013 -->
+<!-- Multivitamin: started 24 August 2013 -->
+<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7, 12, 14 October -->
