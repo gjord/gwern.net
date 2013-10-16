@@ -764,3 +764,41 @@ hunk ./static/templates/default.html 163
 +      "ulFontSize_class2": ""
 ... ]]
 ~~~
+
+### Analysis
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Ul,Size,N,Rate
+s,100,963,0.1755
+d,100,979,0.1645
+c,120,1,0.0121
+d,115,936,0.1603
+d,120,1,0.0161
+c,110,996,0.1576
+s,105,966,0.1563
+s,110,988,0.1549
+s,120,999,0.1532
+c,115,1,0.0591
+d,105,1,0.0321
+c,100,1,0.0281
+s,115,991,0.1473
+c,105,1,0.0361
+d,110,888,0.1351
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Ul * Size, data=rates, family="binomial"); summary(g)
+
+...
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.68e+00   1.91e+01   -0.09     0.93
+Uld          5.33e-01   1.91e+01    0.03     0.98
+Uls          8.87e-01   1.91e+01    0.05     0.96
+Size         4.46e-15   1.74e-01    0.00     1.00
+Uld:Size    -5.17e-03   1.74e-01   -0.03     0.98
+Uls:Size    -8.04e-03   1.74e-01   -0.05     0.96
+~~~
