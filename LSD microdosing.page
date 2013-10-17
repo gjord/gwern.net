@@ -9,13 +9,13 @@ belief: likely
 
 > Some early experimental studies with LSD suggested that doses of LSD too small to cause any noticeable effects may improve mood and creativity. Prompted by recent discussion of this claim and the purely anecdotal subsequent evidence for it, I decided to run a well-powered randomized blind trial of 3-day LSD microdoses from September 2012 to March 2013. No beneficial effects reached statistical-significance and there were worrisome negative trends. LSD microdosing did not help me.
 
-Intrigued by old scientific results & many positive anecdotes since, I experimented with "microdosing" [LSD](!Wikipedia "Lysergic acid diethylamide") - taking doses ~10μg, far below the level at which it causes its famous effects. At this level, the anecdotes claim the usual broad spectrum of positive effects on mood, depression, ability to do work, etc. After researching the matter a bit, I discovered that as far as I could tell, since the original experiment in the 1960s, no one had ever done a blind or even a randomized self-experiment on it.
+[Intrigued](#microdosing) by old scientific results & many positive anecdotes since, I experimented with "microdosing" [LSD](!Wikipedia "Lysergic acid diethylamide") - taking doses ~10μg, far below the level at which it causes its famous effects. At this dosage, the anecdotes claim the usual generic spectrum of positive effects on mood, depression, ability to do work, etc. After researching the matter a bit, I discovered that as far as I could tell, since the original experiment in the 1960s, no one had ever done a blind or even a randomized self-experiment on it.
 
-The self-experiment was simple: I ordered two tabs off Silk Road, dissolved one in distilled water, put the solution in one jar & tap water in the other, and took them in pairs of 3-day blocks.
+The self-experiment was simple: I calculated [how many doses I needed](#power-calculation) and whether the experiment was [worth running](#voi), ordered two tabs off [Silk Road](Silk Road#lsd-case-study), [designed](#design) the experiment (I dissolved one in distilled water, put the solution in one jar & tap water in the other, and took them in pairs of 3-day blocks), ran it, and analyzed it.
 
-The results of my pre-specified analysis on a well-powered randomized blind self-experiment:
+The [results of my pre-specified analysis](#testing-the-metrics):
 
-1. Sleep:
+1. Sleep (using my [Zeo]()):
 
     - latency: none (_p_=0.42)
     - total sleep: none (_p_=0.14)
@@ -23,28 +23,22 @@ The results of my pre-specified analysis on a well-powered randomized blind self
     - morning feel: increased (_p_=0.02)
 
         There is an increase in "Morning Feel" from 2.6 to 2.9, _d_=0.42 & _p_=0.023; correcting for performing 7 different tests, this result is not statistically-significant (it does not survive a [Bonferroni correction](!Wikipedia) (since $0.0231 > \frac{0.05}{7}$) nor the [_q_-value approach](Zeo#fn7) to family-wise correction).
-2. Mnemosyne flashcard scores: none (_p_=0.52)
+2. [Mnemosyne](Spaced repetition) flashcard scores: none (_p_=0.52)
 3. Mood/productivity: none (_d_=-0.18; _p_=0.86)
 4. Creativity: none (_d_=-0.19; _p_=0.87)
 
 I concluded that if anything, the LSD microdosing may done the opposite of what I wanted.
 
 <!--
-Wired: http://www.wired.com/science/discoveries/news/2006/01/70015
-discussion: https://news.ycombinator.com/item?id=2497360
-
-
 TODO:
 outstanding predictions:
     flashbacks http://predictionbook.com/predictions/8161 "LSD: I will experience any kind of 'flashback' within 5 years, 5%"
-when done:
-- link in [Silk Road]()
 
 Microdosing discussion:
 
 http://lesswrong.com/lw/e3a/open_thread_august_1631_2012/7927
 http://lesswrong.com/r/discussion/lw/ish/open_thread_october_7_october_12_2013/9v5i
-http://news.ycombinator.com/item?id=6114732
+https://news.ycombinator.com/item?id=6114732
 http://slatestarcodex.com/2013/09/30/links-for-octember/
 http://www.bluelight.ru/vb/threads/266623-The-Low-Dose-LSD-Appreciation-Thread
 http://www.fourhourworkweek.com/blog/2013/04/03/the-first-ever-quantified-self-notes-plus-lsd-as-cognitive-enhancer/
@@ -53,8 +47,9 @@ http://www.longecity.org/forum/topic/51969-low-dose-lsd-as-a-nootropic/
 http://www.reddit.com/r/Drugs/comments/1ok9iy/another_lsd_microdosing_experiment/
 http://www.reddit.com/r/Nootropics/comments/1n99k3/the_lsd_microdosing_experiment_xpost_rpsychonaut/
 http://www.reddit.com/r/Psychonaut/comments/1n93n4/the_lsd_microdosing_experiment/
-http://www.reddit.com/r/Psychonaut/comments/1n93n4/the_lsd_microdosing_experiment/ccgu3mz <-- memory scores
+http://www.reddit.com/r/Psychonaut/comments/1n93n4/the_lsd_microdosing_experiment/ccgu3mz for memory scores
 http://silkroad5v7dywlc.onion/index.php?topic=626.0
+#lesswrong
 
 ping http://www.reddit.com/user/MisterYouAreSoDumb
      sage@erowid.org
@@ -73,19 +68,19 @@ But I'd never actually tried any. Besides being illegal and relatively expensive
 
 I say "curiosity about the experience" because I am dubious about the actual epistemic value of the psychedelic experience; my interest, like [William James](http://www.theatlantic.com/past/issues/96may/nitrous/nitrous.htm "The Nitrous Oxide Philosopher: Do drugs make religious experience possible? They did for James and for other philosopher-mystics of his day. James's experiments with psychoactive drugs raise difficult questions about belief and its conditions"), is in what I can learn from the experience about myself and religion. The claims made by psychonauts are frequently extravagant and unjustified; the tangible benefits are either unrelated to the truth of the experience (such as lessened anxiety of death), purely internal (what one wants to do with one's life), or true but unrelated to the claims inferred from the experience and verifiable in a non-psychedelic context (the invention of [PCR](!Wikipedia)). If one feels at one with everything in the universe and decides to devote his life to feeding starving children, his devotion to charity proves nothing about the universe, and even if the experience were true at face-value, that would not be enough either - if one felt the opposite, that the universe were not one, would that somehow make the starving children OK? [Sam Harris](http://www.samharris.org/blog/item/drugs-and-the-meaning-of-life "'Drugs and the Meaning of Life', 5 July 2011") takes an approach very much like mine:
 
-> The mere existence of psychedelics would seem to establish the material basis of mental and spiritual life beyond any doubt - for the introduction of these substances into the brain is the obvious cause of any numinous apocalypse that follows. It is possible, however, if not actually plausible, to seize this datum from the other end and argue, and Aldous Huxley did in his classic essay, _The Doors of Perception_, that the primary function of the brain could be eliminative: its purpose could be to prevent some vast, transpersonal dimension of mind from flooding consciousness, thereby allowing apes like ourselves to make their way in the world without being dazzled at every step by visionary phenomena irrelevant to their survival. Huxley thought that if the brain were a kind of "reducing valve" for "Mind at Large," this would explain the efficacy of psychedelics: They could simply be a material means of opening the tap.
+> The mere existence of psychedelics would seem to establish the material basis of mental and spiritual life beyond any doubt - for the introduction of these substances into the brain is the obvious cause of any numinous apocalypse that follows. It is possible, however, if not actually plausible, to seize this datum from the other end and argue, and [Aldous Huxley](!Wikipedia) did in his classic essay, _[The Doors of Perception](!Wikipedia)_, that the primary function of the brain could be eliminative: its purpose could be to prevent some vast, transpersonal dimension of mind from flooding consciousness, thereby allowing apes like ourselves to make their way in the world without being dazzled at every step by visionary phenomena irrelevant to their survival. Huxley thought that if the brain were a kind of "reducing valve" for "Mind at Large," this would explain the efficacy of psychedelics: They could simply be a material means of opening the tap.
 >
-> ...Unfortunately, Huxley was operating under the erroneous assumption that psychedelics decrease brain activity. However, modern techniques of neuroimaging have shown that these drugs tend to increase activity in many regions of the cortex (and in subcortical structures as well) [Note 1/24/12: a recent study on psilocybin actually lends some support to Huxley's view. --SH] . Still, the action of these drugs does not rule out dualism, or the existence of realms of mind beyond the brain-but then nothing does. This is one of the problems with views of this kind: They appear to be unfalsifiable.[3]
+> ...Unfortunately, Huxley was operating under the erroneous assumption that psychedelics decrease brain activity. However, modern techniques of neuroimaging have shown that these drugs tend to increase activity in many regions of the cortex (and in subcortical structures as well) [Note 1/24/12: a recent study on [psilocybin](!Wikipedia) actually lends some support to Huxley's view. --SH] . Still, the action of these drugs does not rule out dualism, or the existence of realms of mind beyond the brain - but then nothing does. This is one of the problems with views of this kind: They appear to be unfalsifiable. [Physicalism, by contrast, could be easily falsified. If science ever established the existence of ghosts, or reincarnation, or any other phenomenon which would place the human mind (in whole or in part) outside the brain, physicalism would be dead. The fact that dualists can never say what would count as evidence against their views makes this ancient philosophical position very difficult to distinguish from religious faith.]
 >
 > Of course, the brain does filter an extraordinary amount of information from consciousness. And, like many who have taken these drugs, I can attest that psychedelics certainly throw open the gates. Needless to say, positing the existence of a "Mind at Large" is more tempting in some states of consciousness than in others. And the question of which view of reality we should privilege is, at times, worth considering. But these drugs can also produce mental states that are best viewed in clinical terms as forms of psychosis. As a general matter, I believe we should be very slow to make conclusions about the nature of the cosmos based upon inner experience - no matter how profound these experiences seem.
 
 The potential "mystical experience" or "encounter with God" has considerable interest for me, though. Even back when I was a very young child, I have always been [some sort of atheist](Mistakes#religion); at first, because it didn't seem like a very good explanation of the world, but then because my reading of various scriptures and Biblical criticism and philosophy books revealed no convincing arguments to me. I always wondered whether my disbelief was due to *reasoned grounds* as I claimed, or a simple lack of the right *experiences*: other people seem to have mystical experiences and find prayer satisfactory and believe fervently, and I sporadically hear of [converts](!Wikipedia "List of converts to Christianity from atheism") who have "road to Damascus" experiences (like SF author [John C. Wright](!Wikipedia "John C. Wright (author)") hallucinating and converting to Catholicism [after a heart attack](http://johncwright.livejournal.com/117818.html)). Sporadic hallucinations are a poor ground for belief, as a mental hospital demonstrates, but nevertheless they are quite convincing; it seems that for many, seeing really is believing. Many years later, I have yet to have a mystical or religious or ["peak"](!Wikipedia "Peak experience") experience which could either convert me or leave me unmoved, and thus empirically settle the issue as to why I am an atheist - absence of experience, or reasoned belief? Hence, it is tempting to force the issue. (If you have a psilocybin-induced hallucination of God and then become a theist, that's a good piece of evidence that stuff like the argument from evil or argument from silence *weren't* why you were an atheist. And so if you were claiming previously that they were, you were either lying or badly mistaken.) [Thomas Nagel](!Wikipedia): (["A Philosopher Defends Religion"](http://www.nybooks.com/articles/archives/2012/sep/27/philosopher-defends-religion/?pagination=false))
 
-> It is illuminating to have the starkness of the opposition between [Plantinga's](!Wikipedia "Alvin Plantinga") theism and the secular outlook so clearly explained. My instinctively atheistic perspective implies that if I ever found myself flooded with the conviction that what the [Nicene Creed](!Wikipedia) says is true, the most likely explanation would be that I was losing my mind, not that I was being granted the gift of faith. From Plantinga's point of view, by contrast, I suffer from a kind of spiritual blindness from which I am unwilling to be cured. http://www.nybooks.com/articles/archives/2012/sep/27/philosopher-defends-religion/?pagination=false
+> It is illuminating to have the starkness of the opposition between [Plantinga's](!Wikipedia "Alvin Plantinga") theism and the secular outlook so clearly explained. My instinctively atheistic perspective implies that if I ever found myself flooded with the conviction that what the [Nicene Creed](!Wikipedia) says is true, the most likely explanation would be that I was losing my mind, not that I was being granted the gift of faith. From Plantinga's point of view, by contrast, I suffer from a kind of spiritual blindness from which I am unwilling to be cured.
 
 Everything I've heard or read is consistent with what such experiences seem to be: the brain in a very unusual state, malfunctioning in many respects and perhaps functioning better in a few other respects. No one expects to discover a new truth about the universe in the throes of _delirium tremens_ or amphetamine psychosis - isn't it parsimonious to extend this to psychedelics as well? If there were some 'truthiness' to the states, I had to think: of the many thousands of mind-altering substances investigated over the centuries, it would be quite remarkable if the few which grant access to new truths were also the very same ones which produce pleasant or enjoyable trips!
 
-So the trip itself is of little direct value, but the 3 categories of effects I outlined are. Everyone talks about Openness (see later) and creativity in relation to psychedelics. I would offer a more concrete analogy: creativity is a kind of optimization activity like [simulated annealing](!Wikipedia) in which one searches through a vast number of possibilities for the right thing. (This seems to be similar to [James L. Kent's views](https://www.erowid.org/library/review/review.php?p=317 "Review: _Psychedelic Information Theory: Shamanism in the Age of Reason_, by James L. Kent").) In simulated annealing, we can think of the possibilities as a [fitness landscape](!Wikipedia) dotted with mountains and valleys, and we are trying to find the lowest point; we start at random points, and jump around randomly and see how low we wind up. How big are our jumps? This is the "temperature". The temperature starts high, since we may be a very long way away from the lowest point, but as we get lower and closer to the sea, we turn down the temperature and start making small jumps so we don't jump right back onto a mountain or something like that. (Imagine looking through a dictionary: you flip through whole chunks to get the letter right, then you start flipping through pages so you don't overshoot, and finally you read through an individual page.) The temperature has to change, or we will waste a lot of time and may never find our target: if the temperature is always high, no sooner have we found an excellent candidate than we have jumped half a continent away, but if it's always low, we will literally inch around and not find the low point a few miles away. Simulated annealing itself has been applied to neural networks, so it may be more than just an analogy to say our brains do something similar. At first you brainstorm, generating myriads of disparate ideas, but you focus on a few candidates, brainstorm variants, and begin carefully fine-tuning them. You hope you don't spend too much time tinkering that you miss your deadline, but also that you don't spend too little time brainstorming that you miss some brilliant elegant solution.
+So the trip itself is of little direct value, but the 3 categories of effects I outlined are. Everyone talks about Openness (see later) and creativity in relation to psychedelics (eg. [_Wired_](http://www.wired.com/science/discoveries/news/2006/01/70015?currentPage=all "LSD: The Geek's Wonder Drug?")/[discussion](https://news.ycombinator.com/item?id=2497360)). I would offer a more concrete analogy: creativity is a kind of optimization activity like [simulated annealing](!Wikipedia) in which one searches through a vast number of possibilities for the right thing. (This seems to be similar to [James L. Kent's views](https://www.erowid.org/library/review/review.php?p=317 "Review: _Psychedelic Information Theory: Shamanism in the Age of Reason_, by James L. Kent").) In simulated annealing, we can think of the possibilities as a [fitness landscape](!Wikipedia) dotted with mountains and valleys, and we are trying to find the lowest point; we start at random points, and jump around randomly and see how low we wind up. How big are our jumps? This is the "temperature". The temperature starts high, since we may be a very long way away from the lowest point, but as we get lower and closer to the sea, we turn down the temperature and start making small jumps so we don't jump right back onto a mountain or something like that. (Imagine looking through a dictionary: you flip through whole chunks to get the letter right, then you start flipping through pages so you don't overshoot, and finally you read through an individual page.) The temperature has to change, or we will waste a lot of time and may never find our target: if the temperature is always high, no sooner have we found an excellent candidate than we have jumped half a continent away, but if it's always low, we will literally inch around and not find the low point a few miles away. Simulated annealing itself has been applied to neural networks, so it may be more than just an analogy to say our brains do something similar. At first you brainstorm, generating myriads of disparate ideas, but you focus on a few candidates, brainstorm variants, and begin carefully fine-tuning them. You hope you don't spend too much time tinkering that you miss your deadline, but also that you don't spend too little time brainstorming that you miss some brilliant elegant solution.
 
 And LSD? Perhaps doses large enough that you become so 'creative' that you start seeing what is not there are analogous to turning the temperature up a thousand degrees: the frantic annealing may hit upon some remote undiscovered great idea (eg. PCR) but this will usually just throw away all one's current good results in favor of some random dreck. Genuine thought and breakthroughs are the pinnacle of human thought, achieved after endless labor and dependent on many dead-ends, bits of knowledge, and intuited truths; randomness seems like it would usually make things much worse[^Charlton], and in general, pharmacological interventions [have little luck improving things](Drug heuristics). Think of dreams: 4 or 5 a night, hugely random - and only occasionally if ever do they deliver real insight or a valid idea. Isn't it a standard joke that you discover the secret of the universe or the perfect song in a dream, wake up & write it down, and in the morning it is worthless? It's probably no accident that dreams so rarely produce useful insights and also parts of the brain - particularly parts of the prefrontal cortex - are [shut down](DNB FAQ#lucid-dreaming) or operating differently.
 
@@ -103,20 +98,20 @@ The [old research literature](https://www.erowid.org/chemicals/lsd/lsd_dose1.sht
 
 > "Micro-dosing turns out to be a totally different world," Fadiman extolled. "As someone said, the rocks don't glow, even a little bit. But what many people are reporting is, at the end of the day, they say, 'That was a really good day.' You know, that kind of day when things kind of work. You're doing a task you normally couldn't stand for two hours, but you do it for three or four. You eat properly. Maybe you do one more set of reps. Just a good day. That seems to be what we're discovering." Elsewhere Fadiman has been more specific about the logbooks he's received. One physician reported that micro-dosing got him "in touch with a deep place of ease and beauty." A vocalist said she could better hear and channel music. In general, study participants functioned normally in their work and relationships, Fadiman has said, but with increased focus, creativity, and emotional clarity. Until he releases his data archive in a comprehensive manner, it is, of course, not possible to scrutinize the validity of his claim..."I just got a report from someone who did this for six weeks," Fadiman said. "And his question to me was, 'Is there any reason to stop?'" More laughter throughout the hall, another adjustment of bifocals...it also allows him to follow the recommendation of a longtime, now-deceased friend, [Albert Hofmann](!Wikipedia), who, according to Fadiman, called micro-dosing "the most under-researched area of psychedelics."
 
-Fadiman was part of the team which ran the [Psychedelics in problem-solving experiment](!Wikipedia), administering 50μg doses of LSD - close to microdosing levels - to people working on unsolved technical problems, while they tried thinking about the problems again; they apparently often solved them. There are many fans of LSD microdosing in the relevant [Bluelight.ru](http://www.bluelight.ru/vb/threads/266623-The-Low-Dose-LSD-Appreciation-Thread) & [Longecity](http://www.longecity.org/forum/topic/51969-low-dose-lsd-as-a-nootropic/) & Reddit [1](http://www.reddit.com/r/Psychonaut/comments/1n93n4/the_lsd_microdosing_experiment/)/[2](http://www.reddit.com/r/Nootropics/comments/1n99k3/the_lsd_microdosing_experiment_xpost_rpsychonaut/)/[3](http://www.reddit.com/r/Drugs/comments/1ok9iy/another_lsd_microdosing_experiment/) discussions (though others [wonder about tolerance](http://www.drugs-forum.com/forum/showthread.php?t=116671) after repeated microdoses). Further, LSD used to be popular in Silicon Valley and used by many computing pioneers (see _[What the Dormouse Said](!Wikipedia)_, Markoff 2005).
+Fadiman was part of the team which ran the [Psychedelics in problem-solving experiment](!Wikipedia), administering 50μg doses of LSD - close to microdosing levels - to people working on unsolved technical problems, while they tried thinking about the problems again; they apparently often solved them. There are many fans of LSD microdosing in the relevant [Bluelight.ru](http://www.bluelight.ru/vb/threads/266623-The-Low-Dose-LSD-Appreciation-Thread) & [Longecity](http://www.longecity.org/forum/topic/51969-low-dose-lsd-as-a-nootropic/) & Reddit [1](http://www.reddit.com/r/Psychonaut/comments/1n93n4/the_lsd_microdosing_experiment/)/[2](http://www.reddit.com/r/Nootropics/comments/1n99k3/the_lsd_microdosing_experiment_xpost_rpsychonaut/)/[3](http://www.reddit.com/r/Drugs/comments/1ok9iy/another_lsd_microdosing_experiment/) & [Silk Road forum](/docs/sr/2013-10-16-lsdmicrodosing.maff) discussions (though others [wonder about tolerance](http://www.drugs-forum.com/forum/showthread.php?t=116671) after repeated microdoses). Further, LSD used to be popular in Silicon Valley and used by many computing pioneers (see _[What the Dormouse Said](!Wikipedia)_, Markoff 2005).
 
-None of this, however is particularly strong evidence. To address them in order: the problem-solving experiment was relatively small (drawing estimates from the [methodological, statistical, & meta-analytic literature](DNB FAQ#flaws-in-mainstream-science-and-psychology), we'd expect something like <17% chance the experiment would replicate) and the active placebo introduces concerns of its own (perhaps mescaline impedes problem solving rather than LSD helping); the linked anecdotes all are neither random nor blind (we know placebo effects can be extremely powerful - see the [Shulgin orange juice story](http://www.nytimes.com/2005/01/30/magazine/30ECSTASY.html?pagewanted=print&position=&_r=0 "Dr. Ecstasy") - and that water can be mistaken for LSD ([Abramson et al 1955](/docs/1955-abramson.pdf "Lysergic Acid Diethylamide (LSD-25): Xv. the Effects Produced By Substitution of a Tap Water Placebo"), [Linton & Langs 1962](/docs/1962-linton.pdf "Placebo Reactions in a Study of Lysergic Acid Diethylamide (LSD-25)"))) of unquantified benefits (nor are psychedelic users aren't famous for their reliable anecdotes or critical thinking) with haphazard selection introducing arbitrarily large systematic biases; and finally correlation is not causation, and it's curious that while supposedly something like 5-10% of the American population has at some time taken a psychedelic and we know many tech figures have used it, very few specific breakthroughs like PCR can be credited to LSD use - of course many would not admit to LSD use helping, but there should still be more than the documented handful of examples.
+None of this, however is particularly strong evidence. To address them in order: the problem-solving experiment was relatively small (drawing estimates from the [methodological, statistical, & meta-analytic literature](DNB FAQ#flaws-in-mainstream-science-and-psychology), we'd expect something like <17% chance the experiment would replicate) and the active placebo introduces concerns of its own (perhaps [mescaline](!Wikipedia) impedes problem solving rather than LSD helping); the linked anecdotes all are neither random nor blind (we know placebo effects can be extremely powerful - see the [Shulgin orange juice story](http://www.nytimes.com/2005/01/30/magazine/30ECSTASY.html?pagewanted=print&position=&_r=0 "Dr. Ecstasy") - and that water can be mistaken for LSD ([Abramson et al 1955](/docs/1955-abramson.pdf "Lysergic Acid Diethylamide (LSD-25): Xv. the Effects Produced By Substitution of a Tap Water Placebo"), [Linton & Langs 1962](/docs/1962-linton.pdf "Placebo Reactions in a Study of Lysergic Acid Diethylamide (LSD-25)"))) of unquantified benefits (nor are psychedelic users aren't famous for their reliable anecdotes or critical thinking) with haphazard selection introducing arbitrarily large systematic biases; and finally correlation is not causation, and it's curious that while supposedly something like 5-10% of the American population has at some time taken a psychedelic and we know many tech figures have used it, very few specific breakthroughs like PCR can be credited to LSD use - of course many would not admit to LSD use helping, but there should still be more than the documented handful of examples.
 
 # Experiment
 ## Design
 
 LSD is an acute water-soluble drug. This makes dosing easy: take a known dose of, say, 100μg, dissolve it in some water (refrigerated), and then consume 1/10th for a dose of 10μg. Some online anecdotes microdose daily, while others microdose every 2 or 3 days. I added 25ml of distilled water into an airtight mason jar (LSD is neutralized by [even small amounts of chlorine](!Wikipedia "LSD#Reactivity and degradation"); later I learned chlorine is not added to my well, so this precaution was probably unnecessary), dropped the blotter in, refrigerated overnight, and removed the blotter the next afternoon.
 
-Self-blinding a liquid is as straightforward as self-blinding pills: 2 opaque containers (one marked; both kept in refrigerator) into which a milliliter dropper puts a dose of LSD water and a dose of regular water.
+Self-blinding a liquid is as straightforward as [self-blinding pills](Nootropics#blinding-yourself): 2 opaque containers (one marked; both kept in refrigerator) into which a milliliter dropper puts a dose of LSD water and a dose of regular water.
 
 This suggests the following design: a randomized dose on day 1, followed by days 2 and 3 off, then on day 4, drinking the second container; on day 7, examine the containers recording whether active/placebo and finally, starting over as day 1 of a new pair of 3-day blocks.  The power analysis (see next section) indicates >19 active days are desirable, so 190+μg are needed; this can be diluted into 19ml of water and 1ml extracted each day. I ran this design by Dr. Fadiman, who did not object.
 
-(One additional step: temporarily suspending the [lithium experiment](Nootropics#lithium-experiment). There are many mostly-negative opinions online about the interactions of LSD & lithium, although most commenters seem to be talking about *therapeutic* doses of lithium - which are 10-15x larger than the 10mg of lithium orotate which I may have been taking if it wasn't a placebo week. (It later turned out that it was indeed a placebo week so my precaution was unnecessary.) But there is no point in risking the described negative effects or the weakening of the trip, so 2 weeks before, the experiment was paused.)
+I took one additional step: temporarily suspending my [lithium self-experiment](Nootropics#lithium-experiment). There are many mostly-negative opinions online about the interactions of LSD & lithium, although most commenters seem to be talking about *therapeutic* doses of lithium - which are 10-15x larger than the 10mg of lithium orotate which I may have been taking if it wasn't a placebo week. (It later turned out that it was indeed a placebo week so my precaution was unnecessary.) But there is no point in risking the described negative effects or the weakening of the trip, so 2 weeks before, the experiment was paused.
 
 The listed benefits are to mood, productivity, and creativity. We might also want to check other metrics to see if any LSD benefit came at a cost. So I will use my usual metrics plus a new creativity one:
 
@@ -137,7 +132,7 @@ The listed benefits are to mood, productivity, and creativity. We might also wan
     A prediction recorded at the end of each block on PredictionBook.com; this is not a dependent variable, but a check for whether there is a reliably noticeable subjective effect.
 - Before/after [Openness to experience](!Wikipedia) questionnaires
 
-    Openness is one of the Big Five personality traits, roughly linked with creativity, interest in novelty and variety; while [Conscientiousness](!Wikipedia) (think self-discipline & hard-work) tends to increase with age, Openness seems to decrease. Personality traits, like IQ, are notoriously hard to change & predictive of many things about a person. [MacLean et al 2011](http://ud13_26.ud13.udmedia.de/hexenopas-pilz-tagebuch/wordpress/wp-content/uploads/2011/10/J-Psychopharmacol-September-28-2011.pdf "Mystical Experiences Occasioned by the Hallucinogen Psilocybin Lead to Increases in the Personality Domain of Openness"), a rare RCT of [psilocybin](!Wikipedia), found that Openness was still increased a few percentage points >1 year after dosing. (While not that large in magnitude, MacLean et al 2011 compares it with the reduction in Openness over 4 decades and increase from successful antidepressants or substance abuse treatment.) The effect seemed to be driven by those reporting a *mystical* experience; despite identical starting Openness, those reporting a non-mystical experience seemed to see theirs fall. The study has [many weaknesses](http://hardsci.wordpress.com/2011/09/29/does-psilocybin-cause-changes-in-personality-maybe-but-not-so-fast/ "Does psilocybin cause changes in personality? Maybe, but not so fast"), but is still the best such study I know.
+    Openness is one of the Big Five personality traits, roughly linked with creativity, interest in novelty and variety; while [Conscientiousness](Conscientiousness and online education) (think self-discipline & hard-work) tends to increase with age, Openness seems to decrease. Personality traits, like IQ, are notoriously hard to change & predictive of many things about a person. [MacLean et al 2011](http://ud13_26.ud13.udmedia.de/hexenopas-pilz-tagebuch/wordpress/wp-content/uploads/2011/10/J-Psychopharmacol-September-28-2011.pdf "Mystical Experiences Occasioned by the Hallucinogen Psilocybin Lead to Increases in the Personality Domain of Openness"), a rare RCT of [psilocybin](!Wikipedia), found that Openness was still increased a few percentage points >1 year after dosing. (While not that large in magnitude, MacLean et al 2011 compares it with the reduction in Openness over 4 decades and increase from successful antidepressants or substance abuse treatment.) The effect seemed to be driven by those reporting a *mystical* experience; despite identical starting Openness, those reporting a non-mystical experience seemed to see theirs fall. The study has [many weaknesses](http://hardsci.wordpress.com/2011/09/29/does-psilocybin-cause-changes-in-personality-maybe-but-not-so-fast/ "Does psilocybin cause changes in personality? Maybe, but not so fast"), but is still the best such study I know.
 
     Since to maximize effectiveness, any full trip should be taken before micro-dosing, this suggest 3 samples: before-trip, after-trip, after-micro-dosing.
 
@@ -176,9 +171,9 @@ With background, design, and power calculation out of the way, we can calculate 
 
     1. Earlier, I looked into research bearing on the relation of [LSD and Schizophrenia](!Wikipedia), and concluded that the evidence was most consistent with LSD having small health risks (that is, the damaged or ill sought out all sorts of drugs including LSD, but LSD did not cause the damage or at best caused the illness to surface earlier) with some correlations of [psychiatric benefit from use](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0063972 "'Psychedelics and Mental Health: A Population Study', Krebs & Johansen 2013"); this was over the general LSD population including brain-frying large doses, so the risk for microdoses ought to be much smaller. Much later it occurred to me that the rarity of using LSD along with sheer small size of LSD actually reduces the risk of consumption compared to many other products, simply because dangerous doses of many contaminants or poisons won't fit: blotters reportedly max out at ~500μg. Compare that with, say, piracetam where people take <3g of powder daily; if the piracetam was just 0.3% contaminants, that's as much as 1mg of the stuff - but a blotter can't even hold 1mg of *any* substance, much less an active dose of some substance plus accidental contamination. Overall, I feel comfortable rounding it to zero. To estimate the possible impact on schizophrenia, I looked into estimates of hallucinogen consumption and found that estimates ranged from 7-12% of the entire American population (~22-38 million people) had consumed at some point, which over something like a 60-year lifespan (teenager to very old adult) implies something like 600,000 hallucinogen 'virgins' per year (a figure echoed in one of Fadiman's articles).
     2. Searching, I found a [1994 federal Sentencing Commission document](http://www.ussc.gov/Data_and_Statistics/Federal_Sentencing_Statistics/State_District_Circuit/1995/cae95.pdf) listing 83 sentences involving LSD that year (while searching I also found some information indicating that 400μg is considered 1 dose, so the microdose experiment would involve <1 dose!); news articles suggest many (most?) of those would be for sellers and manufacturers, so a further analysis would reduce the risk accordingly. In any case, even if we multiply by 50 for each state, $\frac{600000}{50\times83} = 145$ suggesting a rough estimate of 1 in 145 chance of being convicted. Leniency could be expected for a first-time non-violent non-trafficking offender, so we could set the cost of this outcome at perhaps just $100,000, or an expected loss/cost of $700.
-    3. Some reputational effects are clearly negative: a use of LSD would be a big issue in some roles like running for elected office or being CEO of a large company (unless one is a secular saint like Steve Jobs), especially since I would obviously be unable to make an excuse like "youthful experimentation" or "a momentary lapse of judgment", this writeup demonstrating that my use was thoroughly premeditated; however, this does not bother me inasmuch as I am unfitted by both temperament and talent for such positions. (Something similar could be said about security clearances.) In many more conservative regions, it would be a substantial negative, but I am already a poor fit for such regions and I don't know whether an LSD use would be very negative at the margin, or whether *any* of my experiments or essays have already done the damage.
+    3. Some reputational effects are clearly negative: a use of LSD would be a big issue in some roles like running for elected office or being CEO of a large company (unless one is a secular saint like [Steve Jobs](!Wikipedia)), especially since I would obviously be unable to make an excuse like "youthful experimentation" or "a momentary lapse of judgment", this writeup demonstrating that my use was thoroughly premeditated; however, this does not bother me inasmuch as I am unfitted by both temperament and talent for such positions. (Something similar could be said about security clearances.) In many more conservative regions, it would be a substantial negative, but I am already a poor fit for such regions and I don't know whether an LSD use would be very negative at the margin, or whether *any* of my experiments or essays have already done the damage.
 
-        On the positive side, however: in some groups or regions like California (which may yet lie in my future), a use of LSD may be a net positive as it indicates valued qualities like open-mindedness. The lifetime consumption rate implies that something like 12% of the population would not judge me harshly for any use. That I have been careful and responsible in my experimentation, and had multiple purposes in addition to mere recreation, will lessen the offense for many people (but possibly would increase my guilt in the eyes of others). There are many famous LSD users like Bill Gates, Richard Feynman, Oliver Sacks, [Francis Crick](https://news.ycombinator.com/item?id=4312369), Kary Mullis etc, but they seem to have discussed their drug use only after achieving mainstream success; worse, the famous users all seem to have been associated with the 1960s or with computers, suggesting tolerance for them may be a passing phase and younger people not so lenient (but on the other hand, marijuana legalization efforts are actually succeeding before and during 2012, suggesting that America may be even more tolerant in the future).
+        On the positive side, however: in some groups or regions like California (which may yet lie in my future), a use of LSD may be a net positive as it indicates valued qualities like open-mindedness. The lifetime consumption rate implies that something like 12% of the population would not judge me harshly for any use. That I have been careful and responsible in my experimentation, and had multiple purposes in addition to mere recreation, will lessen the offense for many people (but possibly would increase my guilt in the eyes of others). There are many famous LSD users like [Bill Gates](!Wikipedia), [Richard Feynman](!Wikipedia), [Oliver Sacks](!Wikipedia), [Francis Crick](https://news.ycombinator.com/item?id=4312369), [Kary Mullis](!Wikipedia) etc, but they seem to have discussed their drug use only after achieving mainstream success; worse, the famous users all seem to have been associated with the 1960s or with computers, suggesting tolerance for them may be a passing phase and younger people not so lenient (but on the other hand, [marijuana legalization](!Wikipedia "Legal history of cannabis in the United States") efforts are actually succeeding before and during 2012, suggesting that America may be more tolerant in the future).
 
         All considered: I am not sure what the reputational cost would be, nor do I have good ways to estimate it, and given the invisibility of many reputational costs - how do you know when someone *didn't* offer something to you or how people are bad-mouthing you? - I may never know the actual cost to me (compared to, say, being arrested for LSD possession).
 2. How much will the experiment cost to run?
@@ -361,7 +356,7 @@ log 0.50 * fromIntegral (length predictions)
 
 ### Testing the metrics
 
-Testing for a statistically-significant (_p_<0.05) difference on the listed metrics[^LSD-NHST]:
+Testing for a statistically-significant (_p_<0.05) difference on the listed metrics:
 
 1. Sleep:
 
@@ -370,7 +365,7 @@ Testing for a statistically-significant (_p_<0.05) difference on the listed metr
     - number of awakenings: none
     - morning feel: increased
 
-        There is an increase in "Morning Feel" from 2.6 to 2.9, _p_=0.023; correcting for performing 7 different tests, this result is not statistically-significant (it does not survive a [Bonferroni correction](!Wikipedia) (since $0.0231 > \frac{0.05}{7}$) nor the [_q_-value approach](Zeo#fn7) to family-wise correction[^LSD-q-value]).
+        There is an increase in "Morning Feel" from 2.6 to 2.9, _p_=0.023; correcting for performing 7 different tests, this result is not statistically-significant (it does not survive a [Bonferroni correction](!Wikipedia) (since $0.0231 > \frac{0.05}{7}$) nor the [_q_-value approach](Zeo#fn7) to family-wise correction).
 2. Flashcard scores: none
 3. Mood/productivity: none (_d_=-0.18)
 4. Creativity: none (_d_=-0.19)
@@ -379,137 +374,139 @@ Testing for a statistically-significant (_p_<0.05) difference on the listed metr
 
 Overall, there seems to have been no meaningful effects.
 
-[^LSD-NHST]: The full analysis:
+The full analysis:
 
-    ~~~{.R}
-    R> lsd <- read.csv("http://www.gwern.net/docs/2013-gwern-lsdmicrodose.csv")
-    R> # filter out baseline
-    R> lsd <- lsd[!is.na(lsd$LSD),]
-    R> # `paired=TRUE` reflects that all samples are draw from the same subject;
-    R> # but would it be more correct to specify `var.equal=TRUE` instead?
-    R> t.test(Time.to.Z ~ LSD, paired=TRUE, data=lsd)
+~~~{.R}
+R> lsd <- read.csv("http://www.gwern.net/docs/2013-gwern-lsdmicrodose.csv")
+R> # filter out baseline
+R> lsd <- lsd[!is.na(lsd$LSD),]
+R> # `paired=TRUE` reflects that all samples are draw from the same subject;
+R> # but would it be more correct to specify `var.equal=TRUE` instead?
+R> t.test(Time.to.Z ~ LSD, paired=TRUE, data=lsd)
 
-        Paired t-test
+    Paired t-test
 
-    data:  Time.to.Z by LSD
-    t = -0.819, df = 61, p-value = 0.416
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -6.994  2.930
-    sample estimates:
-    mean of the differences
-                     -2.032
-    R>
-    R> t.test(Total.Z ~ LSD, paired=TRUE, data=lsd)
+data:  Time.to.Z by LSD
+t = -0.819, df = 61, p-value = 0.416
+alternative hypothesis: true difference in means is not equal to 0
+95% confidence interval:
+ -6.994  2.930
+sample estimates:
+mean of the differences
+                 -2.032
+R>
+R> t.test(Total.Z ~ LSD, paired=TRUE, data=lsd)
 
-        Paired t-test
+    Paired t-test
 
-    data:  Total.Z by LSD
-    t = -1.466, df = 61, p-value = 0.1479
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -31.079   4.789
-    sample estimates:
-    mean of the differences
-                     -13.15
-    R>
-    R> t.test(Awakenings ~ LSD, paired=TRUE, data=lsd)
+data:  Total.Z by LSD
+t = -1.466, df = 61, p-value = 0.1479
+alternative hypothesis: true difference in means is not equal to 0
+95% confidence interval:
+ -31.079   4.789
+sample estimates:
+mean of the differences
+                 -13.15
+R>
+R> t.test(Awakenings ~ LSD, paired=TRUE, data=lsd)
 
-        Paired t-test
+    Paired t-test
 
-    data:  Awakenings by LSD
-    t = -0.9311, df = 61, p-value = 0.3554
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -1.3199  0.4812
-    sample estimates:
-    mean of the differences
-                    -0.4194
-    R>
-    R> t.test(Morning.Feel ~ LSD, paired=TRUE, data=lsd)
+data:  Awakenings by LSD
+t = -0.9311, df = 61, p-value = 0.3554
+alternative hypothesis: true difference in means is not equal to 0
+95% confidence interval:
+ -1.3199  0.4812
+sample estimates:
+mean of the differences
+                -0.4194
+R>
+R> t.test(Morning.Feel ~ LSD, paired=TRUE, data=lsd)
 
-        Paired t-test
+    Paired t-test
 
-    data:  Morning.Feel by LSD
-    t = -2.33, df = 61, p-value = 0.0231
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -0.62933 -0.04809
-    sample estimates:
-    mean of the differences
-                    -0.3387
-    R>
-    R> # alas! we can't use `paired=TRUE`: an imbalanced number of days are missing from Mnemosyne
-    R> # read `alternative="less"` as "the first sample being less (smaller) than the second sample"
-    R> t.test(Mnemosyne ~ LSD, alternative="less", data=lsd)
+data:  Morning.Feel by LSD
+t = -2.33, df = 61, p-value = 0.0231
+alternative hypothesis: true difference in means is not equal to 0
+95% confidence interval:
+ -0.62933 -0.04809
+sample estimates:
+mean of the differences
+                -0.3387
+R>
+R> # alas! we can't use `paired=TRUE`: an imbalanced number of days are missing from Mnemosyne
+R> # read `alternative="less"` as "the first sample being less (smaller) than the second sample"
+R> t.test(Mnemosyne ~ LSD, alternative="less", data=lsd)
 
-        Welch Two Sample t-test
+    Welch Two Sample t-test
 
-    data:  Mnemosyne by LSD
-    t = 0.0515, df = 103.8, p-value = 0.5205
-    alternative hypothesis: true difference in means is less than 0
-    95% confidence interval:
-        -Inf 0.04254
-    sample estimates:
-    mean in group 0 mean in group 1
-              3.817           3.816
-    R> # not combining Creativity and MP because they are only weakly correlated:
-    R> cor(lsd$Creativity, lsd$MP)
-    [1] 0.2841
-    R> t.test(MP ~ LSD, paired=TRUE, alternative="less", data=lsd[-1,])
+data:  Mnemosyne by LSD
+t = 0.0515, df = 103.8, p-value = 0.5205
+alternative hypothesis: true difference in means is less than 0
+95% confidence interval:
+    -Inf 0.04254
+sample estimates:
+mean in group 0 mean in group 1
+          3.817           3.816
+R> # not combining Creativity and MP because they are only weakly correlated:
+R> cor(lsd$Creativity, lsd$MP)
+[1] 0.2841
+R> t.test(MP ~ LSD, paired=TRUE, alternative="less", data=lsd[-1,])
 
-        Paired t-test
+    Paired t-test
 
-    data:  MP by LSD
-    t = 1.085, df = 62, p-value = 0.8589
-    alternative hypothesis: true difference in means is less than 0
-    95% confidence interval:
-       -Inf 0.3627
-    sample estimates:
-    mean of the differences
-                     0.1429
-    R> # MP is the most important metric; what is the effect size (Cohen's d) here?
-    R> (mean(lsd[lsd$LSD==1,]$MP) - mean(lsd[lsd$LSD==0,]$MP)) / sd(lsd$MP)
-    [1] -0.1782
-    R>
-    R> t.test(Creativity ~ LSD, paired=TRUE, alternative="less", data=lsd[-1,])
+data:  MP by LSD
+t = 1.085, df = 62, p-value = 0.8589
+alternative hypothesis: true difference in means is less than 0
+95% confidence interval:
+   -Inf 0.3627
+sample estimates:
+mean of the differences
+                 0.1429
+R> # MP is the most important metric; what is the effect size (Cohen's d) here?
+R> (mean(lsd[lsd$LSD==1,]$MP) - mean(lsd[lsd$LSD==0,]$MP)) / sd(lsd$MP)
+[1] -0.1782
+R>
+R> t.test(Creativity ~ LSD, paired=TRUE, alternative="less", data=lsd[-1,])
 
-        Paired t-test
+    Paired t-test
 
-    data:  Creativity by LSD
-    t = 1.154, df = 62, p-value = 0.8735
-    alternative hypothesis: true difference in means is less than 0
-    95% confidence interval:
-       -Inf 0.2719
-    sample estimates:
-    mean of the differences
-                     0.1111
-    R> (mean(lsd[lsd$LSD==1,]$Creativity) - mean(lsd[lsd$LSD==0,]$Creativity)) / sd(lsd$Creativity)
-    [1] -0.1921
-    R>
-    R> # since MP and Creativity are categorical responses, it would be more correct
-    R> # to use a χ² test or better yet, a ordinal logistic regression. The latter gives a t-value of -1.13, which is now much different, and
-    R> # The former gives larger p-values:
-    R> chisq.test(table(lsd$MP, lsd$LSD)[-1,], simulate.p.value = TRUE, B = 100000000)
+data:  Creativity by LSD
+t = 1.154, df = 62, p-value = 0.8735
+alternative hypothesis: true difference in means is less than 0
+95% confidence interval:
+   -Inf 0.2719
+sample estimates:
+mean of the differences
+                 0.1111
+R> (mean(lsd[lsd$LSD==1,]$Creativity) - mean(lsd[lsd$LSD==0,]$Creativity)) / sd(lsd$Creativity)
+[1] -0.1921
+R>
+R> # since MP and Creativity are categorical responses, it would be more correct
+R> # to use a χ² test or better yet, a ordinal logistic regression.
+R> # The latter gives a t-value of -1.13, which is now much different, and
+R> # The former gives larger p-values:
+R> chisq.test(table(lsd$MP, lsd$LSD)[-1,], simulate.p.value = TRUE, B = 100000000)
 
-       Pearson`s Chi-squared test with simulated p-value (based on 1e+08 replicates)
+   Pearson`s Chi-squared test with simulated p-value (based on 1e+08 replicates)
 
-    data:  table(lsd$MP, lsd$LSD)[-1, ]
-    X-squared = 1.127, df = NA, p-value = 0.6056
-    R>
-    R> chisq.test(table(lsd$Creativity, lsd$LSD), simulate.p.value = TRUE, B = 100000000)
+data:  table(lsd$MP, lsd$LSD)[-1, ]
+X-squared = 1.127, df = NA, p-value = 0.6056
+R>
+R> chisq.test(table(lsd$Creativity, lsd$LSD), simulate.p.value = TRUE, B = 100000000)
 
-        Pearson`s Chi-squared test with simulated p-value (based on 1e+08 replicates)
+    Pearson`s Chi-squared test with simulated p-value (based on 1e+08 replicates)
 
-    data:  table(lsd$Creativity, lsd$LSD)
-    X-squared = 1.923, df = NA, p-value = 0.4746
-    ~~~
-[^LSD-q-value]: None are greater than the normal cutoff after correction:
+data:  table(lsd$Creativity, lsd$LSD)
+X-squared = 1.923, df = NA, p-value = 0.4746
+~~~
 
-    ~~~{.R}
-    R> p.adjust(c(0.416, 0.1479, 0.3554, 0.0231, 0.5205, 0.8589, 0.8735), method="BH") < 0.05
-    [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-    ~~~
+None are greater than the normal cutoff after correction:
+
+~~~{.R}
+R> p.adjust(c(0.416, 0.1479, 0.3554, 0.0231, 0.5205, 0.8589, 0.8735), method="BH") < 0.05
+[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+~~~
 
 ### Microdose effect length
 
@@ -517,9 +514,6 @@ I classified by hand each day in the relevant period by how many days distant it
 
 ~~~{.R}
 model1 <- lm(MP ~ DaysSince, data=lsd); summary(model1)
-
-Call:
-lm(formula = MP ~ DaysSince, data = lsd)
 
 Residuals:
     Min      1Q  Median      3Q     Max
