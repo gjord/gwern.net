@@ -1924,9 +1924,9 @@ The results look almost identical to before[^potassium-2-mp]:
 
 A much higher-quality experiment with more favorable conditions for potassium showed a result consistent with some harm to my sleep, and no benefit. I will not continue using potassium.
 
-# X
+# LSD microdosing
 
-In the middle of the five-fold experiment, I paused part of it to run [a more interesting self-experiment using X](Nootropics#x); I included sleep metrics to check for disturbances. X did not seem to affect latency, total sleep, or awakenings, but did improve (_d_=0.42) the "morning feel" non-statistically-significantly (due to the multiple correction). Unfortunately, given that it seemed to negatively affect more important metrics like the self-rating of mood/productivity & creativity, this is not nearly enough to begin to justify use of X for me.
+In the middle of the five-fold experiment, I paused part of it to run [a more interesting self-experiment using LSD microdosing](LSD microdosing); I included sleep metrics to check for disturbances. It did not seem to affect latency, total sleep, or awakenings, but did improve (_d_=0.42) the "morning feel" non-statistically-significantly (due to the multiple correction). Unfortunately, given that it seemed to negatively affect more important metrics like the self-rating of mood/productivity & creativity, this is not nearly enough to begin to justify further use of LSD microdosing for me.
 
 # In progress
 
@@ -2097,7 +2097,7 @@ Kaul et al 2010 describes the long-term meditators as spending "2-3 hrs/day" in 
 The difference between the long-term meditators and their normal Indian counterparts was 5.2 hours of sleep per day versus 7.8. Assume the worst case of 3 hours, this implies that meditation is indeed a net cost in time (8.2 > 7.8), but also that each hour of meditation is equivalent to almost an hour of sleep ($\frac{7.8 - 5.2}{3} = 0.866...$). So at that conversion rate, 20 minutes of meditation translates to 17.32 minutes less sleep. We will steal code and data from the previous [Redshift power calculation](#power-calculation): assume the same control sleep, same standard deviation, and subtract 17.32 from the control to get the true mean of the intervention
 
 ~~~{.R}
-install.packages("pwr", depend = TRUE)
+# install.packages("pwr")
 library(pwr)
 pwr.t.test(d=(456.4783 - (456.4783 - 17.32))/131.4656,power=0.5,type="paired",alternative="greater")
 
@@ -3754,13 +3754,24 @@ October
 02: 0 0
 03: 0 1
 04: 0 0
-05: 1 0?
+05: 0 1
+06: 0 0
+07: 0 1
+08: 0 0
+09: 1 0
+10: 1 1
+11: 0 1
+12: 0 0
+13: 1 0
+14: 1 1
+15: 1 0
+16: 1 1?
 
 Underpopulated data cells:
-122: 1 1
-121: 1 0
-123: 0 0
-122: 0 1
+124: 1 1
+124: 1 0
+126: 0 0
+125: 0 1
 -->
 <!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July; 11, 12, 17, 24, 29 August; 2, 4, 11, 12, 16, 24, 25, 28 September -->
 <!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03, 12, 16, 19 June; resumed 24 June -->
@@ -4697,3 +4708,14 @@ So these general points suggest 3 future overlapping approaches:
 <!-- Redshift: 03 Oct 2013: on -->
 <!-- Redshift: 04 Oct 2013: on -->
 <!-- Redshift: 05 Oct 2013: off -->
+<!-- Redshift: 06 Oct 2013: off -->
+<!-- Redshift: 07 Oct 2013: on -->
+<!-- Redshift: 08 Oct 2013: on -->
+<!-- Redshift: 09 Oct 2013: off -->
+<!-- Redshift: 10 Oct 2013: off -->
+<!-- Redshift: 11 Oct 2013: off -->
+<!-- Redshift: 12 Oct 2013: on -->
+<!-- Redshift: 13 Oct 2013: off -->
+<!-- Redshift: 14 Oct 2013: on -->
+<!-- Redshift: 15 Oct 2013: off -->
+<!-- Redshift: 16 Oct 2013: on -->
