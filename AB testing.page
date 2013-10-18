@@ -770,35 +770,49 @@ hunk ./static/templates/default.html 163
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 Ul,Size,N,Rate
-s,100,963,0.1755
-d,100,979,0.1645
-c,120,1,0.0121
-d,115,936,0.1603
-d,120,1,0.0161
-c,110,996,0.1576
-s,105,966,0.1563
-s,110,988,0.1549
-s,120,999,0.1532
-c,115,1,0.0591
-d,105,1,0.0321
-c,100,1,0.0281
-s,115,991,0.1473
-c,105,1,0.0361
-d,110,888,0.1351
+s,100,2524,0.1577
+d,100,2547,0.1527
+c,100,2595,0.1514
+c,115,2642,0.1506
+c,120,2659,0.1493
+c,105,2664,0.1471
+s,115,2564,0.1463
+d,110,2441,0.1463
+c,110,2584,0.1455
+d,115,2494,0.1451
+d,105,2633,0.1432
+d,120,2557,0.1420
+s,105,2520,0.1409
+s,110,2561,0.1351
+s,120,2528,0.1321
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
 rates$Failures <-rates$N - rates$Successes
 
-g <- glm(cbind(Successes,Failures) ~ Ul * Size, data=rates, family="binomial"); summary(g)
+g <- glm(cbind(Successes,Failures) ~ Ul * Size, data=rates, family="binomial"); summary(g); step(g)
 
 ...
 Coefficients:
              Estimate Std. Error z value Pr(>|z|)
-(Intercept) -1.68e+00   1.91e+01   -0.09     0.93
-Uld          5.33e-01   1.91e+01    0.03     0.98
-Uls          8.87e-01   1.91e+01    0.05     0.96
-Size         4.46e-15   1.74e-01    0.00     1.00
-Uld:Size    -5.17e-03   1.74e-01   -0.03     0.98
-Uls:Size    -8.04e-03   1.74e-01   -0.05     0.96
+(Intercept) -1.732229   0.381924   -4.54  5.7e-06
+Uld          0.307610   0.546139    0.56     0.57
+Uls          0.758184   0.550193    1.38     0.17
+Size        -0.000106   0.003464   -0.03     0.98
+Uld:Size    -0.003015   0.004957   -0.61     0.54
+Uls:Size    -0.007369   0.004996   -1.47     0.14
+...
+Call:  glm(formula = cbind(Successes, Failures) ~ Size, family = "binomial",
+    data = rates)
+
+Coefficients:
+(Intercept)         Size
+   -1.38695     -0.00347
+
+Degrees of Freedom: 14 Total (i.e. Null);  13 Residual
+Null Deviance:	    12.5
+Residual Deviance: 9.59 	AIC: 128
+
+library(ggplot2)
+qplot(Size,Rate,color=Ul,data=rates)
 ~~~
