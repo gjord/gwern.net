@@ -1,5 +1,5 @@
 ---
-title: LSD microdosing
+title: LSD microdosing RCT
 description: Self-experiment with sub-psychedelic doses of LSD; no benefit
 created: 20 Aug 2012
 tags: nootropics, psychology, experiments, predictions, statistics
@@ -199,7 +199,7 @@ In retrospect (after observing the trends which didn't reach significance), sinc
 
 ## VoI
 
-> For background on "value of information" calculations, see the [Adderall calculation](#value-of-information-voi).
+> For background on "value of information" calculations, see the [Adderall calculation](Nootropics#value-of-information-voi).
 
 With background, design, and power calculation out of the way, we can calculate costs & values.
 
@@ -465,7 +465,7 @@ Overall, there seems to have been no meaningful effects, and worrisome trends. I
 
 #### Source code
 
-The full analysis, using a [multivariate regression](!Wikipedia) followed by [MANOVA](!Wikipedia):
+The full analysis, using a [multivariate linear regression](!Wikipedia) followed by [MANOVA](!Wikipedia):
 
 ~~~{.R}
 R> lsd <- read.csv("http://www.gwern.net/docs/2013-gwern-lsdmicrodose.csv")
