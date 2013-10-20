@@ -554,7 +554,7 @@ Roberts tried a fairly complicated randomized routine. I am simply alternating d
 
 ### One-legged standing analysis
 
-The initial results were promising. Of the first 5 days, 3 are 'on' and 2 are off; all 3 on-days had higher ZQs than the 2 off-days. Unfortunately, the full time series did not seem to bear this out. Looking at the ~70 recorded days between 11 June 2011 and 27 August 2011 ([raw CSV data](/docs/zeo/2011-zeo-oneleg.csv)), the averages looked like this (as before, the '3' means the intervention was used, '0' that it was not):
+The initial results were promising. Of the first 5 days, 3 are 'on' and 2 are off; all 3 on-days had higher ZQs than the 2 off-days. Unfortunately, the full time series did not seem to bear this out. Looking at the ~70 recorded days between 11 June 2011 and 27 August 2011 ([raw CSV data](/docs/zeo/2011-zeo-oneleg.csv)), the raw uncorrected averages looked like this (as before, the '3' means the intervention was used, '0' that it was not):
 
 ![Standing ZQ vs non-standing](/images/zeo/2011-oneleg-zq.png)
 ![Morning feel rating](/images/zeo/2011-oneleg-morningfeel.png)
@@ -564,108 +564,107 @@ The initial results were promising. Of the first 5 days, 3 are 'on' and 2 are of
 ![Number of times woken](/images/zeo/2011-oneleg-woken.png)
 ![Total time awake](/images/zeo/2011-oneleg-wake.png)
 
-With the [melatonin analysis](#melatonin-analysis), I had counted it as a success for melatonin inasmuch as sleep time had substantially fell but sleep quality and mental performance, as far as I could tell, had remained the same. R analysis[^R-oneleg-analysis]:
+R analysis, using multivariate linear regression[^R-oneleg-analysis] turns in a non-significant value for one-leggedness in general (_p_=0.23); by variable:
 
-- total sleep time (deep/REM/total) fell (513.8 vs 502.4, _p_=0.43)
-- REM fell (168.8 vs 152.7, _p_=0.018)
-- hence ZQ fell, which is ambiguous - good or bad? (96.05 vs 92.5, _p_=0.19)
-- but number of awakenings fell, which is good (4.18 vs 4, _p_=0.75)
-- as did total time awake which is good (12.8 vs 11.7, _p_=0.8)
--  morning feel improved, also good (2.81 vs 2.71, _p_=0.3)
+Variable         Effect              _p_-value   Coefficient's sign is...
+------------     ----------------    ----------- -------------------------
+`ZQ`             -1.24               0.16        worse
+`Total.Z`        -4.09               0.37        worse
+`Time.to.Z`       0.47               0.51        worse
+`Time.in.Wake`   -0.37               0.80        better
+`Time.in.REM`    -5.33               0.02        worse
+`Time.in.Light`   2.76               0.38        worse
+`Time.in.Deep`   -1.56               0.10        worse
+`Awakenings`     -0.05               0.79        better
+`Morning.Feel`   -0.05               0.32        worse
 
 No _p_-values survived multiple-correction[^leg-multiple-correction]:.
 
 [^R-oneleg-analysis]: The `R` interpreter session, loading a CSV as before:
 
     ~~~{.R}
-    t.test(Total.Z~SSCF.11, data=mydata)
+    R> zeo <- read.csv("http://www.gwern.net/docs/zeo/2011-zeo-oneleg.csv")
+    R> colnames(zeo)[24] <- "OneLeg"
+    R> l <- lm(cbind(ZQ, Total.Z, Time.to.Z, Time.in.Wake, Time.in.REM, Time.in.Light, Time.in.Deep, Awakenings, Morning.Feel)
+                ~ OneLeg, data=zeo)
+    R> summary(manova(l))
+              Df Pillai approx F num Df den Df Pr(>F)
+    OneLeg     1  0.177     1.37      9     57   0.23
+    Residuals 65
+    R> summary(l)
+    Response ZQ :
 
-        Welch Two Sample t-test
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   96.231      1.712   56.22   <2e-16
+    OneLeg        -1.244      0.883   -1.41     0.16
 
-    data:  Total.Z by SSCF.11
-    t = 0.8035, df = 48.455, p-value = 0.4256
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -17.09298  39.85727
-    sample estimates:
-    mean in group 0 mean in group 3
-           513.7750        502.3929
+    Response Total.Z :
 
-    t.test(Time.in.REM~SSCF.11, data=mydata)
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   514.67       8.84    58.2   <2e-16
+    OneLeg         -4.09       4.56    -0.9     0.37
 
-        Welch Two Sample t-test
+    Response Time.to.Z :
 
-    data:  Time.in.REM by SSCF.11
-    t = 2.4322, df = 54.225, p-value = 0.01834
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-      2.827521 29.343907
-    sample estimates:
-    mean in group 0 mean in group 3
-           168.8000        152.7143
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   14.949      1.373   10.89  2.7e-16
+    OneLeg         0.469      0.708    0.66     0.51
 
-    t.test(ZQ~SSCF.11, data=mydata)
+    Response Time.in.Wake :
 
-        Welch Two Sample t-test
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   12.821      2.786    4.60    2e-05
+    OneLeg        -0.369      1.436   -0.26      0.8
 
-    data:  ZQ by SSCF.11
-    t = 1.3406, df = 56.26, p-value = 0.1854
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -1.754009  8.854009
-    sample estimates:
-    mean in group 0 mean in group 3
-              96.05           92.50
+    Response Time.in.REM :
 
-    t.test(Awakenings~SSCF.11, data=mydata)
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   168.72       4.25   39.70   <2e-16
+    OneLeg         -5.33       2.19   -2.43    0.018
 
-        Welch Two Sample t-test
+    Response Time.in.Light :
 
-    data:  Awakenings by SSCF.11
-    t = 0.3177, df = 62.634, p-value = 0.7518
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -0.9259517  1.2759517
-    sample estimates:
-    mean in group 0 mean in group 3
-              4.175           4.000
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   277.15       6.06   45.75   <2e-16
+    OneLeg          2.76       3.12    0.88     0.38
 
-    t.test(Time.in.Wake~SSCF.11, data=mydata)
+    Response Time.in.Deep :
 
-        Welch Two Sample t-test
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   69.282      1.802   38.44   <2e-16
+    OneLeg        -1.558      0.929   -1.68    0.098
 
-    data:  Time.in.Wake by SSCF.11
-    t = 0.2617, df = 65.521, p-value = 0.7944
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -7.033471  9.154900
-    sample estimates:
-    mean in group 0 mean in group 3
-           12.77500        11.71429
+    Response Awakenings :
 
-    t.test(Morning.Feel~SSCF.11, data=mydata)
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   4.1538     0.3690   11.26   <2e-16
+    OneLeg       -0.0513     0.1902   -0.27     0.79
 
-        Welch Two Sample t-test
+    Response Morning.Feel :
 
-    data:  Morning.Feel by SSCF.11
-    t = 1.0479, df = 64.65, p-value = 0.2986
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -0.1427046  0.4577229
-    sample estimates:
-    mean in group 0 mean in group 3
-           2.871795        2.714286
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   2.8718     0.1014    28.3   <2e-16
+    OneLeg       -0.0525     0.0523    -1.0     0.32
     ~~~
-[^leg-multiple-correction]: If we correct for multiple comparisons (see [previous footnote](#fn7) on the Bonferroni correction) at _q_-value=0.05, of our 6 _p_-values (0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), none of them survive:
+[^leg-multiple-correction]: If we correct for multiple comparisons (see [previous footnote](#fn7) on the Bonferroni correction) at _q_-value=0.05, none of them survive:
 
     ~~~{.R}
-    R> p.adjust(c(0.01834, 0.1854, 0.2986, 0.4256, 0.7518, 0.7944), method="BH") < 0.05
-    [1] FALSE FALSE FALSE FALSE FALSE FALSE
+    R> p.adjust(c(0.16,0.37,0.51,0.80,0.02,0.38,0.10,0.79,0.32), method="BH") < 0.05
+    [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
     ~~~
 
     Oh well! Statistics is a harsh mistress indeed.
 
-While I did not replicate Roberts's setup exactly in the interest of time and ease, and obviously it was not blinded, I tried to compensate with an unusually large sample: 69 nights of data. This was a mixed experiment: there seems to be an effect, but none of the changes seem to have large effect sizes or strong _p_-values.
+While I did not replicate Roberts's setup exactly in the interest of time and ease, and obviously it was not blinded, I tried to compensate with an unusually large sample: 69 nights of data. This was a mixed experiment: there seems to be an negative effect, but none of the changes seem to have large effect sizes or strong _p_-values.
 
 The one-legged standing was not in exclusion to melatonin use, but I had used it most every night. I thought I might go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower, but I've abandoned it because it is a lot of work to use and the result looked weak. In the future, I should look into whether walks before bedtime help.
 
