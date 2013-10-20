@@ -1141,43 +1141,35 @@ Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other D
 
 As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with the usual assumptions[^morning-independence] about independence of the daily observations:
 
-[^morning-independence]: Gustavo Lacerda wondered if the two-sample t-test was really a justifiable test to use - could days be correlated, in which case the _p_-values would be overstated and my results actually much weaker than they look? He suggested testing my full Zeo dataset to see whether 'Morning Feel' can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
+[^morning-independence]: Gustavo Lacerda wondered if the two-sample _t_-test (or linear regressions in general) were really justifiable to use - could days be correlated, in which case the _p_-values would be overstated and my results actually weaker than they look? He suggested testing my full Zeo dataset to see whether `Morning Feel` can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
     ~~~{.R}
-    data <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv")
+    R> data <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv")
     # Master Zeo export file is periodically updated; your results may not be identical
-    n <- length(data$Morning.Feel); n
-    [1] 686
-    reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
-    summary(reg)
-
-    Call:
-    lm(formula = Morning.Feel[2:n] ~ Morning.Feel[1:(n - 1)], data = data)
-
-    Residuals:
-       Min     1Q Median     3Q    Max
-    -1.863 -0.742  0.197  0.258  1.318
+    R> n <- length(data$Morning.Feel); n
+    [1] 821
+    R> reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
+    R> summary(reg)
 
     Coefficients:
                             Estimate Std. Error t value Pr(>|t|)
-    (Intercept)               2.6217     0.1219   21.51   <2e-16
-    Morning.Feel[1:(n - 1)]   0.0603     0.0424    1.42     0.16
+    (Intercept)               2.5490     0.1093   23.33   <2e-16
+    Morning.Feel[1:(n - 1)]   0.0861     0.0379    2.27    0.023
 
-    Residual standard error: 0.723 on 554 degrees of freedom
+    Residual standard error: 0.739 on 689 degrees of freedom
       (129 observations deleted due to missingness)
-    Multiple R-squared: 0.00364,    Adjusted R-squared: 0.00185
-    F-statistic: 2.03 on 1 and 554 DF,  p-value: 0.155
+    Multiple R-squared:  0.00743,   Adjusted R-squared:  0.00599
+    F-statistic: 5.16 on 1 and 689 DF,  p-value: 0.0235
 
-    # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is <0.1
-    # with a residual error of 0.7, that doesn't seem very correlated?
+    # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is <0.01
+    # with a residual error of 0.74, that doesn't seem very correlated.
     # although the _p_ does indicate there's a real (but very small) correlation from
     # day to day, so I guess the p-values may be a *little* overstated
 
     cor(data$Morning.Feel[2:n], data$Morning.Feel[1:(n-1)], use = "complete.obs")
-    [1] 0.06037
+    [1] 0.08619
 
     # 129 observations missing? What's going on? Well, what does the data look like?
-
     data$Morning.Feel
       [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2  3  2  3 NA  3 NA
      [32] NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4 NA NA  4  4  3  4 NA NA NA NA NA NA
@@ -1201,8 +1193,11 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
     [590]  4  3  3  3  3  3  2  3  3  2  3  3  2  3  4  2  2  3  1  3  3  2  3  3  2  2  3  4  3  2  1
     [621]  3  3  3  3  2  4  2  3  3  3  3  4  3  3  3 NA  3 NA  4  3  2  2  2  2  3  3  3  4  3  2  3
     [652]  2  3  3  1  3  4  3  3  4  4  4  2  3  2  1  4  2  4  3  2  3  3  3  3  2  3  4  2  2  2  2
-    [683]  3  4  3  4
-
+    [683]  3  4  3  4  2  2  3  4  2  3  3  3  2  2  2  3  2  2  2  4  3  3  3  2  2  1  2  4  3  3  3
+    [714]  3  3  2  2  2  3  3  3  3  1  1  2  3  3  4  3  3  3  4  3  4  3  3  3  3  3  3  3  2  2  2
+    [745]  2  3  2  3  3  2  1  3  3  2  3  3  3  3  2  3  4  4  2  3  3  4  4  2  4  4  4  3  3  3  1
+    [776]  3  3  2  3  3  4  4  3  1  4  4  4  3  3  3  2  1  2  2  3  3  3  2  4  3  2  4  3  3  4  4
+    [807]  1  2  3  2  3  4  2  3  4  2  4  2  3  3  2
     # ah, I just wasn't good about recording "Morning Feel" early on, and since then
     # there have been occasional slips (literally, with the headband)
     ~~~
