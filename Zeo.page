@@ -13,7 +13,7 @@ belief: likely
 > 2. [melatonin](#melatonin) improves my sleep
 > 3. [one-legged standing](#one-legged-standing) does little
 > 4. Vitamin D ([at night](#vitamin-d-at-night-hurts)) damages my sleep
-> 5. Vitamin D ([in morning](#vitamin-d-at-morn-helps)) improves my morning mood
+> 5. Vitamin D ([in morning](#vitamin-d-at-morn-helps)) does not affect my sleep
 > 6. potassium ([over the day](#potassium-day-use) but not so much [the morning](#potassium-morning-use)) damages my sleep and does not improve my mood/productivity
 
 [Quantified Self](!Wikipedia) (QS) is a movement with many faces and as many variations as participants, but the core of everything is this: experiment with things that can improve your life.
@@ -669,7 +669,6 @@ While I did not replicate Roberts's setup exactly in the interest of time and ea
 The one-legged standing was not in exclusion to melatonin use, but I had used it most every night. I thought I might go on using one-legged standing, perhaps skipping it on nights when I am up particularly late or lack the willpower, but I've abandoned it because it is a lot of work to use and the result looked weak. In the future, I should look into whether walks before bedtime help.
 
 # Vitamin D
-
 ## Background
 
 [Seth Roberts has speculated](http://blog.sethroberts.net/category/sleep/vitamin-d3-and-sleep/) that [vitamin D](!Wikipedia), despite its myriads of [other benefits](Nootropics#vitamin-d), may harm sleep when taken in the evening and help sleep when taken in the morning based on some anecdotes (with [2 null results](http://blog.sethroberts.net/2012/02/03/vitamin-d3-and-sleep-story-11/)). The anecdotes are nearly worthless as sleep is pretty variable (look above or below, and you'll see swings of over 20 ZQ points night to night), and just a little carelessness or selection bias will persuade one that there is a major effect where there is none - especially since they are not using Zeos or accelerometers or even giving basic quantities like 'I felt bad in the morning 3/5 days'. But I began to wonder. Vitamin D is a chemical intimately involved in circadian rhythms (a '[zeitgeber](!Wikipedia)'), with some connections to systems involved in sleep (["The steroid hormone of sunlight soltriol (vitamin D) as a seasonal regulator of biological activities and photoperiodic rhythms"](http://www.unc.edu/~stumpfwe/steroid-hormone-of-sunlight-soltriol.pdf)); given its links to the *early* day and sunlight, one would expect it to affect sleep for the worse.
@@ -698,7 +697,7 @@ Comments:
 - I don't know about the overarching claims (I suspect most of the problem is [lighting](Melatonin#health-performance), and general demands on time), but the trial itself seems really important, especially since neither Roberts nor I had the slightest idea about it but seem to have reached similar results
 - the 2 patients suggested it, in an interesting example of the value of self-experimentation
 - the authors cover much more specific potential connections between vitamin D and sleep than just "circadian rhythms"
-- the methodology section is non-existent; how were these 1500 patients picked? how long did each use vitamin D? Unfortunately, I nor Roberts has taken vitamin D blood tests (as far as I know) and so we cannot verify that the authors' 60-80ng/ml range is what we fell into, but it's plausible. how is sleep quality being measured? are these results consistent or inconsistent with our two cases of morning mood/restedness improvement but little else? Although even if they were inconsistent, that could be explained by neither of us being sleep disorder sufferers and the effect being weaker in us
+- the methodology section is non-existent; how were these 1500 patients picked? how long did each use vitamin D? Unfortunately, I nor Roberts has taken vitamin D blood tests (as far as I know) and so we cannot verify that the authors' 60-80ng/ml range is what we fell into, but it's plausible. How is sleep quality being measured? Are these results consistent or inconsistent with the one case of morning mood/restedness improvement but little else? Although even if they were inconsistent, that could be explained by neither of us being sleep disorder sufferers and the effect being weaker in us
 
 In July 2012, preprints of [Huang et al 2012](/docs/zeo/2012-huang.pdf "Improvement of Pain, Sleep, and Quality of Life in Chronic Pain Patients With Vitamin D Supplementation") became available; it is a [case series](!Wikipedia) - the authors followed a group of veterans with chronic pain who received vitamin D supplements, finding improvements to pain but also reduction in sleep latency and increase in sleep duration. While I did not observe any effect on latency or duration in my following experiments, this would still be a promising datapoint but unfortunately, the sample had substantial dropout, and had no control group (hence no randomizing or blinding). This renders the study not very useful - the improvements being perhaps just [regression toward the mean](!Wikipedia) or a [selection bias](!Wikipedia). In 2013, a review ([McCarty et al 2013](http://andrewamarino.com/PDFs/173-SleepMedRev2013.pdf "The link between vitamin D metabolism and sleep medicine")) came out arguing that "low vitamin D levels increase the risk for autoimmune disease, chronic rhinitis, tonsillar hypertrophy, cardiovascular disease, and diabetes. These conditions are mediated by altered immunomodulation, increased propensity to infection, and increased levels of inflammatory  substances, including those that regulate sleep"; this might handle negative effects on sleep from chronically low vitamin D, but doesn't seem relevant to acute effects varying by time of administration.
 
@@ -908,15 +907,19 @@ Analysis will be the same Zeo parameters as before, but this time augmented by a
 ### Morning data
 
 1. Blocks:
+
     - 17-25F: guess: [placebo](http://predictionbook.com/predictions/6026) (last pill used morning 25; swapped jars and consumed pill from second jar the morning of 26); actual: placebo
     - 26F-8M: skipped multiple days for modafinil (omit March 1, 2); actual: active
 2. Blocks:
+
     - 9M-15M: guess: [active](http://predictionbook.com/predictions/6431) actual: placebo
     - 16-25: active (omit March 21)
 3. Blocks:
+
     - 26M-1A: guess: [placebo](http://predictionbook.com/predictions/6432) actual: placebo
     - 2A-8: active
 4. Blocks:
+
     - 9A-19: (omit April 11, 12) guess: [placebo](http://predictionbook.com/predictions/6720) actual: placebo
     - 20-27: active (omit April 21, 22)
 
@@ -924,8 +927,101 @@ Placebo/active coded as 0/1 in `SSCF.1`^[I originally input the data as 'Other D
 
 ### Morning analysis
 
-As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with the usual assumptions[^morning-independence] about independence of the daily observations:
+As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with the usual assumptions[^morning-independence] about independence of the daily observations.
 
+[^r-vitamin-d-morning]: The interpreter session:
+
+    ~~~{.R}
+    zeo <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind-morning.csv")
+    colnames(zeo)[2] <- "Vitamin.D"
+
+    R> # an example of the many intercorrelations which make simple t-tests misleading
+    R> # and motivate the use of multivariate linear regression:
+    R> cor(zeo[c(2,3,5:11, 25)], use="complete.obs")
+                  Vitamin.D     Mood  Total.Z Time.to.Z Time.in.Wake Time.in.REM Time.in.Light
+    Vitamin.D      1.000000 -0.06210  0.01007 -0.004528     -0.14399     0.01844      -0.02043
+    Mood          -0.062097  1.00000  0.03038 -0.229114      0.13365    -0.05137       0.06783
+    Total.Z        0.010067  0.03038  1.00000 -0.388734     -0.05258     0.77338       0.82402
+    Time.to.Z     -0.004528 -0.22911 -0.38873  1.000000      0.17821    -0.29690      -0.28948
+    Time.in.Wake  -0.143987  0.13365 -0.05258  0.178211      1.00000    -0.12396       0.15893
+    Time.in.REM    0.018437 -0.05137  0.77338 -0.296904     -0.12396     1.00000       0.35087
+    Time.in.Light -0.020427  0.06783  0.82402 -0.289484      0.15893     0.35087       1.00000
+    Time.in.Deep   0.054670  0.05648  0.57647 -0.299816     -0.35438     0.37922       0.24574
+    Awakenings    -0.074435  0.09076  0.07645  0.142952      0.67797     0.04007       0.21834
+    Morning.Feel   0.053450  0.11313  0.62368 -0.285966     -0.04032     0.56241       0.51081
+                  Time.in.Deep Awakenings Morning.Feel
+    Vitamin.D          0.05467   -0.07444      0.05345
+    Mood               0.05648    0.09076      0.11313
+    Total.Z            0.57647    0.07645      0.62368
+    Time.to.Z         -0.29982    0.14295     -0.28597
+    Time.in.Wake      -0.35438    0.67797     -0.04032
+    Time.in.REM        0.37922    0.04007      0.56241
+    Time.in.Light      0.24574    0.21834      0.51081
+    Time.in.Deep       1.00000   -0.28355      0.22280
+    Awakenings        -0.28355    1.00000      0.02151
+    Morning.Feel       0.22280    0.02151      1.00000
+    l <- lm(cbind(Total.Z,Time.in.REM,Time.in.Deep,Time.in.Wake,Awakenings,Morning.Feel,Time.to.Z,Mood) ~ Vitamin.D, data=zeo)
+    summary(manova(l))
+              Df Pillai approx F num Df den Df Pr(>F)
+    Vitamin.D  1 0.0363    0.213      9     51   0.99
+    summary(l)
+
+    Response Total.Z :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   525.21      10.06   52.20   <2e-16
+    Vitamin.D       1.07      13.89    0.08     0.94
+
+    Response Time.in.REM :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)  162.172      4.711   34.42   <2e-16
+    Vitamin.D      0.921      6.505    0.14     0.89
+
+    Response Time.in.Deep :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)    65.34       2.53   25.85   <2e-16
+    Vitamin.D       1.47       3.49    0.42     0.68
+
+    Response Time.in.Wake :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)    27.76       3.10    8.94  1.4e-12
+    Vitamin.D      -4.79       4.29   -1.12     0.27
+
+    Response Awakenings :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)    8.000      0.592   13.51   <2e-16
+    Vitamin.D     -0.469      0.818   -0.57     0.57
+
+    Response Morning.Feel :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   2.8276     0.1386   20.40   <2e-16
+    Vitamin.D     0.0787     0.1913    0.41     0.68
+
+    Response Time.to.Z :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   25.448      2.827    9.00  1.1e-12
+    Vitamin.D     -0.136      3.904   -0.03     0.97
+
+    Response Mood :
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)
+    (Intercept)   3.0931     0.1127   27.45   <2e-16
+    Vitamin.D    -0.0744     0.1556   -0.48     0.63
+    ~~~
 [^morning-independence]: Gustavo Lacerda wondered if the two-sample _t_-test (or linear regressions in general) were really justifiable to use - could days be correlated, in which case the _p_-values would be overstated and my results actually weaker than they look? He suggested testing my full Zeo dataset to see whether `Morning Feel` can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
     ~~~{.R}
@@ -991,21 +1087,20 @@ As before, we fire up `R` and analyze the spreadsheet[^r-vitamin-d-morning] with
 
     > And by the way, instead of regressing `Morning.Feel[n]` on `Drug[n]` (a discrete variable taking values in {0,1}), it would make more sense to regress on an [Exponentially-Weighted](!Wikipedia "Exponential smoothing") Moving Average of `Drug`, such as $Drug[n-1]+(\frac{1}{2} \times Drug[n-2])+(\frac{1}{4} \times Drug[n-3])+...$ which is modeling how much drug is present on the body. In the above example, I'm assuming a half-life of 1 day, so lambda=$\frac{1}{2}$. You could arguably select the lambda that gives you the best fit; just be wary of multiple testing.
 
-1. 'ZQ' increased, 94.3 vs 90.6 (_p_=0.34/0.16^[See previous footnotes about 'optimistic' versus 'pessimistic' assumptions about equal variance & correctly-predicted direction of effect for why these two _p_-values differ.])
-2. 'Total Z' increased, 526.3m vs 510.6m (_p_=0.44/0.21)
-3. 'Time in REM' increased, 163.1m vs 157.2m (_p_=0.48/0.23)
-4. 'Time in Deep' increased, 66.8m vs 64m (_p_=0.45/0.23)
-5. 'Time in Wake' decreased, 23m vs 27 (_p_=0.36/0.18)
-6. 'Awakenings' decreased, 7.53 vs 7.77 (_p_=0.78/0.39)
-7. 'Morning Feel' increased, 3.16 vs 2.62 (_p_=0.005/0.003!)
-8. 'Time to Z' did not change, 25.32m vs 25.33 (_p_=0.99/0.5)
-9. 'Mood' did not change (or decreased), 3.02 vs 3.1 (_p_=0.65)
+The MANOVA suggests no statistically-significant difference between days (_p_=0.99), and no variables seem to have changed much:
 
-As a quick look at the _p_-values indicates, of the 9 parameters, only 1 reaches any kind of significance: 'Morning Feel'. It survives multiple correction[^d-multiple-morning], and has a healthy effect size of 0.7.[^d-effect-size-morning]
+Variable         Effect              _p_-value   Coefficient's sign is...
+------------     ----------------    ----------- -------------------------
+`Total.Z`        1.07                 0.94       better
+`Time.in.REM`    0.92                 0.89       better
+`Time.in.Deep`   1.47                 0.68       better
+`Time.in.Wake`  -4.79                 0.27       better
+`Awakenings`    -0.47                 0.57       better
+`Morning.Feel`   0.08                 0.68       better
+`Time.to.Z`     -0.14                 0.97       better
+`Mood`          -0.07                 0.63       worse
 
-All the other changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. ('Mood' arguably was affected by an exogenous event - my car burning ruined that week - but still!) 'Morning Feel' particularly stands out because it was the most statistically-significant, but by a lot - none of the others even approached _p_=0.10, and 'Morning Feel' was 2 orders smaller, _p_=0.005. (This also lines up with Roberts's own observation that the only metric clearly affected was 'restedness'.) I have no idea how vitamin D could improve *only* my morning mood without affecting any of the other parameters. If it was improving my sleep in general with less awakenings or something, it should have shown up strongly on those parameters; or if vitamin D deficiency was causing depressive symptoms, it should have shown up in the overall Mood metric etc.
-
-If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning Feel', it looks like the effect on 'Morning Feel' is being driven by a greater quantity of '4' mornings, and not so much by a reduction in number of bad '2' mornings. (I also notices that when my car burned, my 'Mood' takes a clearly visible fall for a week, while my sleep looks like it was affected less - it seems that during that period, waking up was literally the best part of the day...)
+All the changes are junk, including ones I was fairly sure would change, like 'Time to Z' or 'Mood'. (An earlier version of this analysis found a statistically-significant effect increasing 'Morning Feel', but this turns out to be due to the _t_-tests' assumption that variables were not correlated, and the multivariate linear regression reduces the effect to non-significance.) 'Mood' arguably was affected by an exogenous event - my car burning ruined that particular week.. Graphing the raw data, I notice that when my car burned, my 'Mood' takes a clearly visible fall for a week, while my sleep looks like it was affected less - it seems that during that period, waking up was literally the best part of the day...
 
 ![Day Mood graphed against date/experimental-status](/images/zeo/2012-vitamind-morning-daymood.png)
 ![Morning Feel over the experiment (colors indicate placebo or active)](/images/zeo/2012-vitamind-morning-morningfeel.png)
@@ -1030,138 +1125,9 @@ If one looks at 2 R-generated graphs[^R-morning-graph] for 'Mood' and 'Morning F
     ggsave("morning.feel.png")
     ~~~
 
-So, vitamin D seems to improve my mood when I wake up in the morning, which is good, but that's it. Given how cheap it is and its apparent anti-cancer properties (among others), I will keep taking it but definitely in the morning and not at night. It's still useful.
+I conclude that the vitamin D in the morning did not damage any of the measured variables, unlike the vitamin D in the evening.
 
 (This experiment also afforded me a chance to test Seth Roberts's reaction to faked data which contradicted his vitamin D theory; he did not [take it gracefully](Prediction markets#case-study-testing-confirmation-bias), which is useful to know in weighing his future opinions.)
-
-[^r-vitamin-d-morning]: The interpreter session:
-
-    ~~~{.R}
-    mydata <- read.csv("http://www.gwern.net/docs/zeo/2012-zeo-vitamind-morning.csv")
-    t.test(ZQ~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  ZQ by SSCF.1
-    t = -0.9582, df = 49.202, p-value = 0.3427
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -11.394801   4.036468
-    sample estimates:
-    mean in group 0 mean in group 1
-           90.63333        94.31250
-
-    t.test(Total.Z~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Total.Z by SSCF.1
-    t = -0.7836, df = 44.939, p-value = 0.4374
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -55.87065  24.57482
-    sample estimates:
-    mean in group 0 mean in group 1
-           510.6333        526.2812
-
-    t.test(Time.in.REM~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Time.in.REM by SSCF.1
-    t = -0.7204, df = 42.881, p-value = 0.4752
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -22.26792  10.54709
-    sample estimates:
-    mean in group 0 mean in group 1
-           157.2333        163.0938
-
-    t.test(Time.in.Deep~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Time.in.Deep by SSCF.1
-    t = -0.7593, df = 59.53, p-value = 0.4507
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -10.10198   4.54365
-    sample estimates:
-    mean in group 0 mean in group 1
-           64.03333        66.81250
-
-    t.test(Time.in.Wake~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Time.in.Wake by SSCF.1
-    t = 0.9282, df = 56.632, p-value = 0.3572
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -4.627848 12.623682
-    sample estimates:
-    mean in group 0 mean in group 1
-           26.96667        22.96875
-
-    t.test(Awakenings~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Awakenings by SSCF.1
-    t = 0.2798, df = 54.725, p-value = 0.7807
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -1.451225  1.922059
-    sample estimates:
-    mean in group 0 mean in group 1
-           7.766667        7.531250
-
-    t.test(Morning.Feel~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Morning.Feel by SSCF.1
-    t = -2.8975, df = 58.965, p-value = 0.005272
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -0.9054147 -0.1657060
-    sample estimates:
-    mean in group 0 mean in group 1
-            2.62069         3.15625
-
-    t.test(Time.to.Z~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Time.to.Z by SSCF.1
-    t = 0.0055, df = 59.368, p-value = 0.9957
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -7.617116  7.658783
-    sample estimates:
-    mean in group 0 mean in group 1
-           25.33333        25.31250
-
-    t.test(Mood~SSCF.1, data=mydata)
-
-        Welch Two Sample t-test
-
-    data:  Mood by SSCF.1
-    t = 0.4591, df = 48.049, p-value = 0.6482
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -0.2407499  0.3832499
-    sample estimates:
-    mean in group 0 mean in group 1
-            3.09000         3.01875
-    ~~~
-[^d-multiple-morning]: [Correcting for multiple comparisons](#fn7) at _q_-value=0.05, of our 9 pessimistic _p_-values, 1 survives:
-
-    ~~~{.R}
-    R> p.adjust(c(0.34, 0.44, 0.48, 0.45, 0.36, 0.78, 0.005, 0.99, 0.65), method="BH") < 0.05
-    [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-    ~~~
-[^d-effect-size-morning]: We extract the standard deviation for 'Morning Feel with `sd(mydata$Morning.Feel, TRUE)` = 0.7682213; so Cohen's d = $\frac{3.15625 - 2.62069}{0.7682213} = 0.697 = 0.7$
 
 ### Control quality control
 
