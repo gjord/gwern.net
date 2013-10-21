@@ -549,7 +549,7 @@ But seriously, it's nice to see that ABalytics does not seem to be broken & favo
 
 ## Text & background color
 
-As part of the generally monochromatic color scheme, the background is grey and text is black:
+As part of the generally monochromatic color scheme, the background was off-white (grey) and the text was black:
 
 ~~~{.Css}
 html { ...
@@ -558,7 +558,7 @@ html { ...
 ... }
 ~~~
 
-The hyperlinks, on the other hand, subtly make use of a off-black `color: #303C3C`. I wonder if the sauce is for the gander too, and if so, what combination is best? White/black? Off-white/black? Off-white/off-black? White/off-black? Let's try all 4 combinations here.
+The hyperlinks, on the other hand, make use of a off-black `color: #303C3C`, partially motivated by Ian Storm Taylor's advice to ["Never Use Black"](http://ianstormtaylor.com/design-tip-never-use-black/). I wonder - should all the text be off-black too? And which combination is best? White/black? Off-white/black? Off-white/off-black? White/off-black? Let's try all 4 combinations here.
 
 ### Implementation
 
@@ -770,21 +770,22 @@ hunk ./static/templates/default.html 163
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 Ul,Size,N,Rate
-s,100,2524,0.1577
-d,100,2547,0.1527
-c,100,2595,0.1514
-c,115,2642,0.1506
-c,120,2659,0.1493
-c,105,2664,0.1471
-s,115,2564,0.1463
-d,110,2441,0.1463
-c,110,2584,0.1455
-d,115,2494,0.1451
-d,105,2633,0.1432
-d,120,2557,0.1420
-s,105,2520,0.1409
-s,110,2561,0.1351
-s,120,2528,0.1321
+s,100,2854,0.1580
+d,100,2876,0.1561
+c,115,2973,0.1537
+c,105,3021,0.1523
+c,120,3010,0.1522
+c,110,2906,0.1521
+c,100,2911,0.1518
+d,110,2759,0.1511
+s,115,2901,0.1506
+s,105,2839,0.1458
+d,120,2886,0.1455
+d,115,2805,0.1451
+d,105,2944,0.1433
+s,110,2931,0.1399
+s,120,2867,0.1360
+
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
@@ -794,24 +795,24 @@ g <- glm(cbind(Successes,Failures) ~ Ul * Size, data=rates, family="binomial"); 
 
 ...
 Coefficients:
-             Estimate Std. Error z value Pr(>|z|)
-(Intercept) -1.732229   0.381924   -4.54  5.7e-06
-Uld          0.307610   0.546139    0.56     0.57
-Uls          0.758184   0.550193    1.38     0.17
-Size        -0.000106   0.003464   -0.03     0.98
-Uld:Size    -0.003015   0.004957   -0.61     0.54
-Uls:Size    -0.007369   0.004996   -1.47     0.14
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.75099    0.35624   -4.92  8.9e-07
+Uld          0.33712    0.51020    0.66     0.51
+Uls          0.67403    0.51252    1.32     0.19
+Size         0.00032    0.00323    0.10     0.92
+Uld:Size    -0.00337    0.00463   -0.73     0.47
+Uls:Size    -0.00659    0.00465   -1.42     0.16
 ...
 Call:  glm(formula = cbind(Successes, Failures) ~ Size, family = "binomial",
     data = rates)
 
 Coefficients:
 (Intercept)         Size
-   -1.38695     -0.00347
+   -1.42280     -0.00291
 
 Degrees of Freedom: 14 Total (i.e. Null);  13 Residual
-Null Deviance:	    12.5
-Residual Deviance: 9.59 	AIC: 128
+Null Deviance:      12
+Residual Deviance: 9.61     AIC: 130
 
 library(ggplot2)
 qplot(Size,Rate,color=Ul,data=rates)
