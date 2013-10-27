@@ -49,7 +49,6 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
         CSS
                 differences from readability
                                                 narrower columns
-                                                floating left css quotes for blockquotes
                                                 href link color - not text black?
                 basically, every declaration in default.css!
         Donation
@@ -830,3 +829,139 @@ qplot(Size,Rate,color=Ul,data=rates)
 Immediately the negative effect of increasing the font size jumps out, but it's easier to understand the list icon estimates: square performs the best in the 100% (the original default) font size condition but it performs poorly in the other font sizes, which is why it seems to do only medium-well compared to the others. Given how much better 100% performs than the others, I'm inclined to ignore their results and keep the squares.
 
 100% and squares, however, were the original CSS settings, so this means I will make no changes to the existing CSS based on these results.
+
+## Blockquote formatting
+
+Another bit of formatting I've been meaning to test for a while is seeing how well [Readability](http://www.readability.com/)'s pull-quotes next to blockquotes perform, and to check whether my zebra-striping of nested blockquotes is helpful or harmful.
+
+The Readability thing goes like this:
+
+~~~{.Css}
+blockquote: : before {
+    content: "\201C";
+    filter: alpha(opacity=20);
+    font-family: "Constantia", Georgia, 'Hoefler Text', 'Times New Roman', serif;
+    font-size: 4em;
+    left: -0.5em;
+    opacity: .2;
+    position: absolute;
+    top: .25em }
+~~~
+
+The current blockquote striping goes thusly:
+
+~~~{.Css}
+blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote {
+    z-index: -2;
+    background-color: rgb(245, 245, 245); }
+blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote {
+    background-color: rgb(235, 235, 235); }
+~~~
+
+### Implementation
+
+This is another 2x2 design since we can use the Readability quotes or not, and the zebra-striping or not.
+
+~~~{.Diff}
+hunk ./static/css/default.css 271
+-blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote {
+-    z-index: -2;
+-    background-color: rgb(245, 245, 245); }
+-blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote {
+-    background-color: rgb(235, 235, 235); }
++/* blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { */
++/*     z-index: -2; */
++/*     background-color: rgb(245, 245, 245); } */
++/* blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { */
++/*     background-color: rgb(235, 235, 235); } */
+hunk ./static/templates/default.html 30
+-    <div class="ulFontSize_class1"></div>
++    <div class="blockquoteFormatting_class1"></div>
+hunk ./static/templates/default.html 148
+-      ulFontSize: [
++      blockquoteFormatting: [
+hunk ./static/templates/default.html 150
+-      name: 's100',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 100%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'rz',
++      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C'; filter: alpha(opacity=20); font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em; opacity: .2; position: absolute; top: .25em }; blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
++      "blockquoteFormatting_class2": ""
+hunk ./static/templates/default.html 155
+-      name: 's105',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 105%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'orz',
++      "blockquoteFormatting_class1": "<style>blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
++      "blockquoteFormatting_class2": ""
+hunk ./static/templates/default.html 160
+-      name: 's110',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 110%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'roz',
++      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C'; filter: alpha(opacity=20); font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em; opacity: .2; position: absolute; top: .25em }</style>",
++      "blockquoteFormatting_class2": ""
+hunk ./static/templates/default.html 165
+-      name: 's115',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 115%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 's120',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 120%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c100',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 100%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c105',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 105%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c110',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 110%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c115',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 115%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c120',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 120%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd100',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 100%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd105',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 105%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd110',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 110%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd115',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 115%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd120',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 120%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'oroz',
++      "blockquoteFormatting_class1": "<style></style>",
++      "blockquoteFormatting_class2": ""
+... ]]
+~~~
