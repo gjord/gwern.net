@@ -125,37 +125,7 @@ Ironically, I was warned at the beginning about both of these possible behaviors
 
 Oy vey! When I discovered Google had deleted my results, I decided to simply switch to 900px. Running a new test would not provide any better answers.
 
-## Readability blockquotes
-
-Blockquote before quote, stolen from Readability:
-
-~~~{.Css}
-blockquote: : before {
-    content: "\201C";
-    filter: alpha(opacity=20);
-    font-family: "Constantia", Georgia, 'Hoefler Text', 'Times New Roman', serif;
-    font-size: 4em;
-    left: -0.5em;
-    opacity: .2;
-    position: absolute;
-    top: .25em }
-~~~
-
 ## TODO
-
-2. blockquote striping
-
-~~~{.Css}
-blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(240, 240, 240); }
-blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(250, 250, 250); }
-~~~
-
-3. white on black vs variants
-
-~~~{.Css}
-html { padding: 0px; margin: 0px; background-color: white; color: black; font-family: sans-serif;}
-body { font:1em/1.625em "lucida grande","lucida sans unicode", sans-serif; background-color:#FFFEF0; font-size-adjust:none;font-style:normal;font-variant:normal;font-weight:normal;}
-~~~
 
 how about a blue background?
 see http://www.overcomingbias.com/2010/06/near-far-summary.html for more design ideas
@@ -165,12 +135,6 @@ see http://www.overcomingbias.com/2010/06/near-far-summary.html for more design 
 ~~~{.Css}
 tbody tr:hover td { background-color: #f5f5f5;}
 tbody tr:nth-child(odd) td { background-color: #f9f9f9;}
-~~~
-
-6. line height
-
-~~~{.Css}
-div#content { line-height: 130%;}
 ~~~
 
 7. number size
@@ -765,55 +729,104 @@ hunk ./static/templates/default.html 163
 ... ]]
 ~~~
 
+### Data
+
+I halted the A/B test on 27 October because I was noticing clear damage as compared to my default CSS. The results were:
+
+List icon   Font zoom   _n_   Reading conversion rate
+----------- --------- ------- -----------------------
+square      100%        4,763       16.38%
+disc        100%        4,759       16.18%
+disc        110%        4,716       16.09%
+circle      115%        4,933       15.95%
+circle      100%        4,872       15.85%
+circle      110%        4,920       15.53%
+circle      120%        5,114       15.51%
+square      115%        4,815       15.51%
+square      110%        4,927       15.47%
+circle      105%        5,101       15.33%
+square      105%        4,775       14.85%
+disc        115%        4,797       14.78%
+disc        105%        5,006       14.72%
+disc        120%        4,912       14.56%
+square      120%        4,786       13.96%
+                       73,196     15.38%
+
 ### Analysis
 
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 Ul,Size,N,Rate
-s,100,2854,0.1580
-d,100,2876,0.1561
-c,115,2973,0.1537
-c,105,3021,0.1523
-c,120,3010,0.1522
-c,110,2906,0.1521
-c,100,2911,0.1518
-d,110,2759,0.1511
-s,115,2901,0.1506
-s,105,2839,0.1458
-d,120,2886,0.1455
-d,115,2805,0.1451
-d,105,2944,0.1433
-s,110,2931,0.1399
-s,120,2867,0.1360
+s,100,4763,0.1638
+d,100,4759,0.1618
+d,110,4716,0.1609
+c,115,4933,0.1595
+c,100,4872,0.1585
+c,110,4920,0.1553
+c,120,5114,0.1551
+s,115,4815,0.1551
+s,110,4927,0.1547
+c,105,5101,0.1533
+s,105,4775,0.1485
+d,115,4797,0.1478
+d,105,5006,0.1472
+d,120,4912,0.1456
+s,120,4786,0.1396
 
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
 rates$Failures <-rates$N - rates$Successes
 
-g <- glm(cbind(Successes,Failures) ~ Ul * Size, data=rates, family="binomial"); summary(g); step(g)
+g <- glm(cbind(Successes,Failures) ~ Ul * Size, data=rates, family="binomial"); summary(g)
+
+...
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.68e+00   2.72e-01   -6.18  6.6e-10
+Uld          4.99e-01   3.89e-01    1.28    0.199
+Uls          6.71e-01   3.90e-01    1.72    0.086
+Size        -7.25e-05   2.46e-03   -0.03    0.977
+Uld:Size    -4.80e-03   3.53e-03   -1.36    0.173
+Uls:Size    -6.38e-03   3.54e-03   -1.80    0.072
+
+summary(step(g))
 
 ...
 Coefficients:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept) -1.75099    0.35624   -4.92  8.9e-07
-Uld          0.33712    0.51020    0.66     0.51
-Uls          0.67403    0.51252    1.32     0.19
-Size         0.00032    0.00323    0.10     0.92
-Uld:Size    -0.00337    0.00463   -0.73     0.47
-Uls:Size    -0.00659    0.00465   -1.42     0.16
+(Intercept) -1.29658    0.15971   -8.12  4.7e-16
+Size        -0.00372    0.00145   -2.56     0.01
+
+# examine just the list type alone, since the Size result is clear.
+summary(glm(cbind(Successes,Failures) ~ Ul, data=rates, family="binomial"))
+
 ...
-Call:  glm(formula = cbind(Successes, Failures) ~ Size, family = "binomial",
-    data = rates)
-
 Coefficients:
-(Intercept)         Size
-   -1.42280     -0.00291
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.6861     0.0174  -96.69   <2e-16
+Uld          -0.0287     0.0250   -1.15     0.25
+Uls          -0.0304     0.0250   -1.21     0.22
 
-Degrees of Freedom: 14 Total (i.e. Null);  13 Residual
-Null Deviance:      12
-Residual Deviance: 9.61     AIC: 130
+summary(glm(cbind(Successes,Failures) ~ Ul, data=rates[rates$Size==100,], family="binomial"))
 
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.6698     0.0392  -42.56   <2e-16
+Uld           0.0249     0.0556    0.45     0.65
+Uls           0.0393     0.0554    0.71     0.48
+~~~
+
+The results are a little confusing in factorial form: it seems pretty clear that `Size` is bad and that 100% performs best, but what's going on with the list icon type? Do we have too little data or is it interacting with the font size somehow? I find it a lot clearer when plotted:
+
+~~~{.R}
 library(ggplot2)
 qplot(Size,Rate,color=Ul,data=rates)
 ~~~
+
+![Reading rate, split by font size, then by list icon type](/images/2013-10-27-abtesting-ulfontsize.png)
+
+Immediately the negative effect of increasing the font size jumps out, but it's easier to understand the list icon estimates: square performs the best in the 100% (the original default) font size condition but it performs poorly in the other font sizes, which is why it seems to do only medium-well compared to the others. Given how much better 100% performs than the others, I'm inclined to ignore their results and keep the squares.
+
+100% and squares, however, were the original CSS settings, so this means I will make no changes to the existing CSS based on these results.
