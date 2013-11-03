@@ -9,6 +9,25 @@ belief: log
 Following my writing can be a little difficult: while I provide [an RSS feed of the edit history](http://www.gwern.net/atom.xml), it is too fine-grained to know what is an interesting update and what is housekeeping. So periodically I write up interesting changes in a human-readable format:
 
 # 2013
+## October
+
+My focus in October was coping with the fallout from the bust of Silk Road - dealing with the revelations, copying the SR forums, tracking down leads, talking to various people, recording the ensuing arrests, tracking the black markets popping up in its wake... I still have much material to work through, but some things I managed to do included:
+
+- [_Drugs 2.0_: "Your Crack's in the Post"](/docs/sr/2013-power) (book chapter)
+- rescuing the [vendor public profiles](https://archive.org/details/2013_06_07_SilkRoad_Vendors) and using some in my page
+- betting all and sundry that BlackMarket Reloaded & Sheep Marketplace will be [busted or shut down within a year](http://www.reddit.com/r/SilkRoad/comments/1pko9y/the_bet_bmr_and_sheep_to_die_in_a_year/) (no takers)
+- researching the ["digitalink" bust](http://www.reddit.com/r/SilkRoad/comments/1pfptu/maryland_man_charged_in_silk_road_drug/cd289fr)
+
+I decided to post my most extensive self-experiment yet, on [LSD microdosing](/LSD%20microdosing). While there was a lot of criticism, I still regard it was worthwhile and setting a new benchmark for any future research in that area.
+
+My [anti-linkrot](/Archiving%20URLs) system benefited from comments on Hacker News telling me how to use [archive.is](http://archive.is/); this may help me out quite a bit in the future.
+
+A/B testing has been active since Hacker News traffic furnished large sample sizes:
+
+- [foreground/background test](/AB%20testing#text-background-color): pure black/white was best
+- [font size 100-120%](/AB%20testing#list-symbol-and-font-size): default 100% was best
+- [blockquote formatting](/AB%20testing#blockquote-formatting) testing zebra striping: started but not yet finished
+
 ## September
 
 - compiled a small meta-analysis of [creatine's effect on intelligence](Creatine)
@@ -22,13 +41,13 @@ Following my writing can be a little difficult: while I provide [an RSS feed of 
 
 > [Original](https://plus.google.com/103530621949492999968/posts/fELMZsxmE5p)
 
-- A/B testing: [the lineheight test](http://www.gwern.net/AB%20testing#line-height) found no difference, so I did a quick one where I tested an empty test to check the [A/B testing tool I'm using](http://www.gwern.net/AB%20testing#null-test); I successfully failed to reject the null. The next test is whether underlining hyperlinks annoys people or not.
+- A/B testing: [the lineheight test](/AB%20testing#line-height) found no difference, so I did a quick one where I tested an empty test to check the [A/B testing tool I'm using](/AB%20testing#null-test); I successfully failed to reject the null. The next test is whether underlining hyperlinks annoys people or not.
 - [Book reviews](/Book reviews): I wrote a Haskell program to parse my GoodReads ratings & reviews into flat Pandoc Markdown; it works somewhat well, it seems to be eating blockquotes & neutering hyperlinks, I'm not sure why. Was also an opportunity to clean up some reviews: inline some of them, spellcheck, expand references & links, which was a lot of work. But it's nice to have my reviews gathered somewhere with a readable interface. kiba thinks the work may pay for itself in affiliate revenue with Amazon, but I'm skeptical.
 - [Scholz's _Radiance_](/docs/2002-radiance): Added a hundred pages or so. Annotating some of it is quite difficult; Scholz's familiarity with Wagner's operas is a challenge, since I've only ever read his Ring Cycle.
 - I've started two new self-experiments:
 
-    - [Magnesium citrate](http://www.gwern.net/Nootropics#citrate) on mood/productivity
-    - Treadmill desk usage on [spaced repetition scores](http://www.gwern.net/Treadmill#spaced-repetition)
+    - [Magnesium citrate](/Nootropics#citrate) on mood/productivity
+    - Treadmill desk usage on [spaced repetition scores](/Treadmill#spaced-repetition)
 - [Touhou music growth rate](Touhou#growth-over-time): made a little more progress on Touhou music, with an analysis # of releases vs time: seems like we may've reached peak Touhou in 2009.
 - [Silk Road mirrors](Silk Road#archives-of-sr-pages): I've started hosting public copies of subsets of the black markets; these are backups for particular incidents or timeseries
 - [Spaced repetition statistics](https://groups.google.com/forum/#!msg/mnemosyne-proj-users/8yZz9BbqKl4/BxAIjo_2WscJ): I've been analyzing my Mnemosyne data and the giant public database for time of day effects. While my results aren't conclusive, my analysis of 48m flashcard reviews from the public database finds that the best time to study your flashcards seem to be noon. A little surprising, you'd think that late at night, before bedtime, would be the best time.
@@ -59,9 +78,9 @@ Hm, what did I get done this June...
 It was a little boring, honestly; jury duty was a mental distraction where I couldn't plan ahead to do anything but I ultimately wound up going in once and not being picked up for the jury! So I spent a lot of time simply digging up fulltext papers for citations, so at least there's now something like another 100 papers available online for melatonin/nicotine/modafinil etc...
 
 - I was thinking of trying to meta-analyze the correlation of lithium in drinking-water with suicides/murders/mental-illness, but after I got copies of [all the citations I knew of](Nootropics#lithium), I'm not sure the data is homogenous to do that, which is disappointing, and the meta-analysis papers/textbooks I've checked don't seem to be very encouraging about the utility of doing it with epidemiology stuff.
-- And reorganizing & fixing broken links & updating various pages (I figured out how to make a [fun forest plot](http://www.gwern.net/images/dnb/forest-activevspassive.png) showing the active/passive split in dual n-back studies
+- And reorganizing & fixing broken links & updating various pages (I figured out how to make a [fun forest plot](/images/dnb/forest-activevspassive.png) showing the active/passive split in dual n-back studies
  )
-- My long-running font A/B test finished but with the most boring possible results of [close to zero difference between the 4 fonts](http://www.gwern.net/a-b-testing#fonts)
+- My long-running font A/B test finished but with the most boring possible results of [close to zero difference between the 4 fonts](/AB testing#fonts)
 - I researched an old family friend in his 90s who has never been willing to talk about his government work during the Cold War and found some stuff using released Census records, but that's not really of interest to other people, and I decided to not make it public. Likewise when I added ~40 book reviews from my old notes to my Goodreads account.
 - I managed to trace an arrested drug dealer back to his Silk Road account, which was somewhat interesting: [Reddit discussion](http://www.reddit.com/r/SilkRoad/comments/1gxiv7/srrelated_bitcoin_seizure/caoxlmg)
 - Is one familiar with Fukuyama & 'the end of history'? I think he's right but no one seems to agree with me, so I wrote a [short essay defending him](The%20Narrowing%20Circle#the-fukuyama-thesis) Like most political essays, it's probably worse than I realize.
@@ -72,17 +91,17 @@ It was a little boring, honestly; jury duty was a mental distraction where I cou
 > [Original](https://plus.google.com/103530621949492999968/posts/KnoE5gHvnr2)
 
 - I've made a little more progress on the Touhou project
-- Added 2 new studies to the DNB meta-analysis and also a new covariate (whether payment reduces gains: [it doesn't](http://www.gwern.net/DNB%20FAQ#paymentextrinsic-motivation))
-- updated my [analysis of SDr's sleep data](http://www.gwern.net/Zeo#sdr-lucid-dreaming-exploratory-data-analysis)
-- oh wait, I did do a new project: applied survival analysis to [modeling fiction reviews](http://www.gwern.net/hpmor#survival-analysis)
+- Added 2 new studies to the DNB meta-analysis and also a new covariate (whether payment reduces gains: [it doesn't](/DNB%20FAQ#paymentextrinsic-motivation))
+- updated my [analysis of SDr's sleep data](/Zeo#sdr-lucid-dreaming-exploratory-data-analysis)
+- oh wait, I did do a new project: applied survival analysis to [modeling fiction reviews](/hpmor#survival-analysis)
 
-   And in my Google analysis (which I credit to last month and not May, even if it went viral in early May), I added in [random survival forests](http://www.gwern.net/Google%20shutdowns#random-survival-forests), fixing that gap in evaluating prediction methods, which was a little burden of guilt off my mind.
+   And in my Google analysis (which I credit to last month and not May, even if it went viral in early May), I added in [random survival forests](/Google%20shutdowns#random-survival-forests), fixing that gap in evaluating prediction methods, which was a little burden of guilt off my mind.
 
    While I was at it, I replicated that [recent paper analyzing Bitcoin exchange shutdown](Silk%20Road#bitcoin-exchange-risk) or theft risk. The dude's since given me his source code. (What can I say? Survival analysis is a great hammer, and it cost me enough tears and sweat to learn how to use the R library that I plan to use it everywhere I can.)
-- I started a little Noopept self-experiment using the Noopept someone gave me, but unfortunately they gave me too little for the results to be very meaningful (see [the power analysis](http://www.gwern.net/Nootropics#experiment-2)); but maybe they will have a trend and I can try a bigger experiment later.
+- I started a little Noopept self-experiment using the Noopept someone gave me, but unfortunately they gave me too little for the results to be very meaningful (see [the power analysis](/Nootropics#experiment-2)); but maybe they will have a trend and I can try a bigger experiment later.
 
 - [TruBrain](http://trubrain.com/) sent me a month's supply of their all-in-one nootropic, but I haven't tried it yet because it would interfere with the Noopept. I also purchased magnesium l-threonate, which is a disappointment so far, and some nicotine patches, which I haven't used yet. A small sample order from a new modafinil website selling the usual Indian Modalert is in progress but hasn't arrived yet. (It ultimately did not arrive as the delivery required a signature.)
-- I have a weird little [literature/historical/survey article](http://www.gwern.net/Sand) in progress; we'll see where that goes
+- I have a weird little [literature/historical/survey article](/Sand) in progress; we'll see where that goes
 - I posted an analysis I wrote a few months ago in private of whether a particular vendor on Silk Road is a federal mole ([probably not](Silk%20Road#a-mole))
 
 Actually, I guess it was overall a pretty productive month. Probably helped that jury duty has so far turned out to be a bust: I've been on call since 21 May but have yet to actually go into the courthouse to do anything.
