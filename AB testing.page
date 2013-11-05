@@ -965,3 +965,29 @@ hunk ./static/templates/default.html 165
 +      "blockquoteFormatting_class2": ""
 ... ]]
 ~~~
+
+### Analysis
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Readability,Zebra,N,Rate
+FALSE,TRUE,3554,0.1874
+TRUE,TRUE,3550,0.1873
+FALSE,FALSE,3578,0.1842
+TRUE,FALSE,3466,0.1728
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Readability * Zebra, data=rates, family="binomial"); summary(g)
+
+...
+Coefficients:
+                          Estimate Std. Error z value Pr(>|z|)
+(Intercept)                -1.4883     0.0431  -34.51   <2e-16
+ReadabilityTRUE            -0.0775     0.0623   -1.24     0.21
+ZebraTRUE                   0.0212     0.0609    0.35     0.73
+ReadabilityTRUE:ZebraTRUE   0.0770     0.0870    0.88     0.38
+~~~
