@@ -111,8 +111,11 @@ data
 18850                                    anonnatymousMARTIN  2/28/10       1
 18851                                            wetterwaxs  2/28/10       1
 18852                                                Errrrr  2/28/10       1
-# Convert the date strings to R dates
-data <- data.frame(Chapter=data$Chapter, Date=as.Date(data$Date,"%m/%d/%Y"), User=data$User)
+# Parse the date strings into R date objects
+data$Date <- as.Date(data$Date,"%m/%d/%Y")
+# Reorganize columns (we care more about the chapter & date reviews were given on
+# than which user did a review):
+data <- data.frame(Chapter=data$Chapter, Date=data$Date, User=data$User)
 ~~~
 
 ## Descriptive
