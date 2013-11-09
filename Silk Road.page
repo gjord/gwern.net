@@ -1150,6 +1150,105 @@ What's my current opinion? Reading through all of the above, thinking about the 
 
 We'll see.
 
+## Estimating DPR's fortune minus expenses & exchange rate
+
+The [FBI indictment](http://www1.icsi.berkeley.edu/~nweaver/UlbrichtCriminalComplaint.pdf) states that SR/DPR earned ฿614,305 in commissions. It's [been suggested](http://www.reddit.com/r/Bitcoin/comments/1oaovv/the_postsilk_road_bitcoin_crash_is_over_btc_is/ccqco3g) that the expense of running SR, and the large changes in the exchange rate, may substantially reduce how many bitcoins DPR *actually* could have saved up, possibly to as low as ฿"150-200k". (The logic here is that if SR earns commissions of ฿100 in 2011 but needs to pay $100 of hosting bills, it needs to sell all ฿100 but in 2013, it would need to sell only ฿1.)
+
+DPR surely spent some of the commissions on running SR & himself, but running a website isn't that expensive, and how badly the exchange rate bites will depend on details like how it fluctuated over time, how sales grew over time, and how big the expenses really are. The reduction could be tiny, or it could be huge. It's hard to tell based just on a gut estimate.
+
+So: below, I take estimates of SR growth from [Christin 2013's crawl](https://www.andrew.cmu.edu/user/nicolasc/publications/Christin-WWW13.pdf "Traveling the Silk Road: A measurement analysis of a large anonymous online marketplace") and the FBI indictment, infer linear growth of SR sales, estimate daily expenses, and combine it with historical Bitcoin exchange rates to show that DPR probably has most of his bitcoins and 200k or lower is right out.
+
+### Model
+
+My strategy is to model Silk Road's growth as linear in dollar amounts, but with different amounts of bitcoins each day depending on the exchange rate, subtract a daily operating cost, and then sum the commissions.
+
+So say that on 1 January 2012, SR did $10k of business, and the exchange rate was 1:100, so ฿100 in turnover, and SR gets an average commission of 7.4%, so it would get ฿7.4.
+
+To do this, I need to estimate the revenue each day, the expenses each day, the commission each day, and the exchange rate each day. Then I can multiply revenue by commission, subtract the expense, and sum the left overs to get an estimate of the total bitcoins available to DPR which he could (or could not) have spent.
+
+### Expenses
+
+1. Employees: we know that Libertas and one or two others were employed at salaries of $1-2k per week. I'll assume there were 2 others, and each was paid the max of $2k per week, which means total daily employee expenses is (2 * 2000) / 7 = $571 per day. (Unfortunately, the indictment doesn't give any clear indication of their numbers, just referring to them as 'they'.)
+
+    This is a conservative estimate since I'm pretty sure that SR was a one-man operation until probably in 2012.
+2. The servers: we know there were at least 2 servers (the main site, and the forums). The task of hosting the sites does not seem to be too bandwidth or disk-space intensive, and servers are extremely cheap these days. The use of DataClub.biz and GigaTux suggest DPR was using cheap VPSes. I'll estimate a monthly expense of $500 ($250 a piece) which per day is $16.
+
+    This is also very conservative.
+3. DPR: his rent of $1000/month has been widely bruited about, and in general he reportedly spent little. Makes sense to me, I've met and seen the rooms of a few well-paid geeks in SF like DPR, and I would believe them if they said they didn't spend much money on anything but rent & food. I'll bump this up by $1000 for food and all expenses, since he apparently didn't even eat out very much. So $2000/31=$65.
+
+    Doubling his rent for total expenses is probably also conservative; for most people, rent is not >50% of income, but SF is incredibly expensive to live in.
+
+This gives a daily expense of $652 (or a monthly total of $19.1k in expenses). As you can see, the employees are by far the most expensive part of running SR in my estimate, which makes me wonder if maybe Libertas was the only employee.
+
+#### Hitmen
+
+Assuming the details about DPR hiring hitmen in the indictments are reasonably accurate, we can throw in two large expenses:
+
+1. an $80k expenditure for killing his Maryland employee. The first payment of $40k was made on 4 February 2013 and the second/final payment of $40k was made on 1 March 2013 (pg9). If we use the exchange rate of those two days, then the hit cost DPR (40000 / 20.42) + (40000 / 34.24) = ฿3127
+2. the second hit was priced in bitcoins (pg23):
+
+    > Through further messages exchanged on March 31,
+2013, DPR and redandwhite agreed upon a price of 1,670 Bitcoins
+
+So the hits cost DPR somewhere around ฿4797. An extremely large and painful amount, by most standards, but still nowhere near ฿10k - much less higher.
+
+### Revenue over time: first and last days
+
+Christin:
+
+> Table 3 provides a breakdown of the feedback ratings from 184,804 feedback instances we collected...In Figure 12, we plot an estimate of the daily commissions collected by Silk Road operators as a function of time. We simply reuse the previous estimates, and apply both the fixed 6.23% rate, and the schedule of Table 4 to each item. We find that the new schedule turns out to yield on average a commission corresponding to approximately 7.4% of the item price.
+
+The FBI:
+
+> From February 6, 2011 to July 23, 2013 there were approximately 1,229,465 transactions completed on the site...$79.8 million (USD) in commissions.
+
+According to Bitcoin Charts, on 23 July 2013, the MtGox price was [$91](http://bitcoincharts.com/charts/mtgoxUSD#rg180zczsg2013-07-23zeg2013-07-23ztgSzm1g10zm2g25zv). (As the most famous exchange, any FBI estimate almost certainly used it.) So that implies $79,800,000/91=฿876,923. Or to put it the other way, at $79.8m in transactions, then using Christin's 7.4% estimate, total sales were $1,078,000,000 or ฿10,780,000.
+
+Wikipedia says "These transactions involved 146,946 unique buyer accounts, and 3,877 unique vendor accounts.", and "The total revenue generated from transactions was 9,519,664 bitcoins. Commissions collected from the sales by Silk Road amounted to 614,305 bitcoins."
+
+(So the numbers aren't too different: 614k vs 876k and 10.8m vs 9.5m.)
+
+We'll set 6 February 2011 to $10 in sales (probably not too far from the truth). But what about 23 July 2013? pg20 of the indictment says:
+
+> For example, on July 21, 2013 alone, DPR received approximately 3,237 separate transfers of Bitcoins into his account, totaling approximately $19,459. Virtually all of these transactions are labeled "commission".
+
+19459 / 0.074 = $262,959 that day. $20k in commissions is extremely impressive, since Christin estimates only $4k/day commissions as late as the end of July 2012 - so SR must have grown by 500% from 2012 to 2013. We use this revenue estimate as our endpoint and interpolate from $10 to $262,959 over the ~900 days SR existed. This is a conservative way of modeling SR, since the graphs in Christin indicate that SR saw sigmoid growth in 2012, and 2013 would've seen even more growth (to be consistent with the 2013 July commission datapoint being 5x the 2012 July commission datapoint).
+
+### Exchange rate
+
+I grab weighted price for each day between [6 February 2011 & 23 July 2013](http://bitcoincharts.com/charts/mtgoxUSD#rg180zczsg2011-02-06zeg2013-07-23ztgSzm1g10zm2g25zv), and stuff it in [a CSV](https://dl.dropboxusercontent.com/u/182368464/dpr-exchangerate.csv).
+
+### Analysis
+
+~~~{.R}
+R> sr <- read.csv("http://www.gwern.net/docs/sr/dpr-exchangerate.csv")
+R> sr$Sales <- c(10, rep(NA, 890), 262959, NA, NA)
+R> # revenue increased by $300 a day:
+R> l <- lm(Sales ~ as.numeric(Date), data=sr); l
+
+Coefficients:
+     (Intercept)  as.numeric(Date)
+            -285               295
+R> sr$Sales <- predict(l, newdata=sr)
+R> sum(with(sr, (Sales * 0.074 - 652) / ExchangeRate))
+[1] 803397
+~~~
+
+Or we can run the estimate the other way: if DPR had to spend $652 a day and converted at that day's exchange rate, and we took into account the hitmen, how many bitcoins would he have spent in total?
+
+~~~{.R}
+R> sum(with(sr, 652 / ExchangeRate))
+[1] 127154
+R> (614305 - 127154) - 4797
+[1] 482354
+~~~
+
+### Conclusion
+
+Obviously ฿803k > ฿614k, which implies that the linear model overestimates sales in the early life of SR; but going the other direction and estimating just from costs & hitmen & total commission, we still wind up with nearly ฿500k (and that was after making a bunch of highly conservative assumptions). The fewer sales (and commissions) early on, the less of a fixed number of bitcoins will be sold. So, while it may initially sound plausible that DPR could have been forced to part with say ฿400k to pay for SR and sundry expenses, the distribution of sales and fluctuations of Bitcoin value mean that this simply does not seem to be the case.
+
+Unless there are some abandoned yachts floating around the SF Bay Area, DPR/Ross Ulbricht probably has ฿500k-614k.
+
 ## The Bet: BMR or Sheep to die in a year (by Oct 2014)
 
 On 30 October 2013, I offered to any comers 4 escrowed Bitcoin bets relating to whether BlackMarket Reloaded and Sheep Marketplace would survive the next year. I posted it to
