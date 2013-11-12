@@ -465,11 +465,21 @@ summary(data)
                                     (Other)           :23915
 ~~~
 
-Unlike _MoR_, multiple people have reviewed all (39) chapters. Let's look at reviews posted each calendar day:
+Unlike _MoR_, multiple people have reviewed all (39) chapters. Let's look at total reviews posted each calendar day:
+
+~~~{.R}
+plot(table(data$Date))
+~~~
+
+We'd like to see what a running or cumulative total reviews looks like: how fast is _UC_'s total review-count growing these days?
 
 ~~~{.R}
 plot(cumsum(table(data$Date)))
 ~~~
+
+![Total reviews as a function of time](/images/hpmor/uc-runningtotal.png)
+
+Visually, it's not quite a straight line, not quite a quadratic...
 
 ![A graph of each day UC has existed against reviews left that day](/images/hpmor/uc-perday.png)
 
@@ -481,15 +491,7 @@ plot(data$Chapter,data$Date)
 
 ![Total reviews on each chapter of UC](/images/hpmor/uc-perchapter.png)
 
-Finally, we'd like to see what a running or cumulative review total looks like: how fast is _UC_ growing these days?
-
-~~~{.R}
-plot(cumsum(table(data$Date)))
-~~~
-
-![Total reviews as a function of time](/images/hpmor/uc-runningtotal.png)
-
-Visually, it's not quite a straight line, not quite a quadratic... Let's start modeling.
+Let's start modeling.
 
 #### Linear model
 
