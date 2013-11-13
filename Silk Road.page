@@ -131,7 +131,7 @@ In May 2012, the high-volume cocaine Canadian seller "moveitnice" mentioned post
 
 ### England
 
-There is an anonymous claim of a May 2013 [UK controlled delivery & arrest](http://www.reddit.com/r/SilkRoad/comments/1ewt7k/uk_arrest/). After the SR bust in October 2013, the Devon UK seller of accessories like marijuana seeds/MBB+ packaging/[kratom](!Wikipedia) ("PlutoPete"), reported he had been [raided & questioned](/docs/sr/2013-10-03-plutopete.mht "Title: WARNING PLUTOPETE HAS BEEN RAIDED! MOVE YOUR DRUGS NOW; Post by: RR on October 03, 2013, 12:14 am") and likely charged with his personal drugs^["My solicitor is confidant [sic] I've broken no UK laws in selling my products, but they did find a small amount of class A and class B drugs that were for my own personal use so i will be charged with that at the very least."] but not charged over his SR sales. 3 more in Manchester were [arrested & charged](http://www.reddit.com/r/SilkRoad/comments/1nz4yl/four_men_arrested_in_uk_over_role_in_silk_road/); the description of a three-man seller mailing from Manchester seems to match at least two SR sellers, "JesusOfRave" and "TechnoHippy", the former of whom [denies being arrested](http://silkroad5v7dywlc.onion/index.php?topic=1381.0;all) while the latter last appeared on the SR forums in mid-September 2013.
+There is an anonymous claim of a May 2013 [UK controlled delivery & arrest](http://www.reddit.com/r/SilkRoad/comments/1ewt7k/uk_arrest/). After the SR bust in October 2013, the Devon UK seller of accessories like marijuana seeds/MBB+ packaging/[kratom](!Wikipedia) ("PlutoPete"), reported he had been [raided & questioned](/docs/sr/2013-10-03-plutopete.mht "Title: WARNING PLUTOPETE HAS BEEN RAIDED! MOVE YOUR DRUGS NOW; Post by: RR on October 03, 2013, 12:14 am") and likely charged with his personal drugs^["My solicitor is confidant [sic] I've broken no UK laws in selling my products, but they did find a small amount of class A and class B drugs that were for my own personal use so i will be charged with that at the very least."] but not charged over his SR sales. 3 more in Manchester were [arrested & charged](http://www.reddit.com/r/SilkRoad/comments/1nz4yl/four_men_arrested_in_uk_over_role_in_silk_road/); the description of a three-man seller mailing from Manchester seems to match at least two SR sellers, "JesusOfRave" and "TechnoHippy", the former of whom [quickly denied being arrested](http://silkroad5v7dywlc.onion/index.php?topic=1381.0;all), while the latter last appeared on the SR forums in mid-September 2013, he resurfaced on the SR2 forums [likewise denying any involvement](http://silkroad5v7dywlc.onion/index.php?topic=2889.0 "Technohippy is back! (and now verified)").
 
 ### Germany
 
@@ -1152,6 +1152,94 @@ What's my current opinion? Reading through all of the above, thinking about the 
 
 We'll see.
 
+## Bitcoin exchange risk
+
+["Beware the Middleman: Empirical Analysis of Bitcoin-Exchange Risk"](http://lyle.smu.edu/~tylerm/fc13.pdf "Moore & Christin 2013") compiles a list of Bitcoin exchanges and which ones have died or failed to return one's money; I was interested in the average risk per day, but the paper did not include the relevant figure, so I copied the raw data and partially replicated their analysis in R:
+
+~~~{.R}
+exchange <- read.csv("http://www.gwern.net/docs/2013-moorechristin-bitcoinexchanges.csv")
+# log transform busy-ness per paper
+exchange$ActiveDailyVolume <- log1p(exchange$ActiveDailyVolume)
+# calculate lifetime lengths
+exchange$Days <- as.integer(as.Date(exchange$Dates) - as.Date(exchange$Origin))
+# but the paper says "The median lifetime of exchanges is 381 days"!
+# The difference may be due to me defaulting each exchange opening/closing to the 1st of the month,
+# since the paper's table on pg3 only specifies month/year.
+summary(exchange$Days)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+     15     168     344     365     565     930
+
+# Rough daily risk percentage calculation: # of lossy exchange-days / total exchange-days:
+(sum(exchange$Repaid==0, na.rm=TRUE) / sum(exchange$Days)) * 100
+[1] 0.03421
+# eg. so leaving funds on an exchange for a month is ~1% (0.03 * 30 = 0.899 ~= 1)
+
+# replicate Cox model survival curve & regression
+library(survival)
+# plot aggregate survival curve
+surv <- survfit(Surv(exchange$Days, exchange$Closed, type="right") ~ 1)
+plot(surv, xlab="Days", ylab="Survival Probability")
+# http://i.imgur.com/lFZEKbv.png
+
+# see how the moderators help predict exchange death
+cmodel <- coxph(Surv(Days, Closed) ~ Breached + ActiveDailyVolume + AML, data = exchange)
+summary(cmodel)
+...
+  n=40, number of events=18
+
+                      coef exp(coef) se(coef)     z Pr(>|z|)
+Breached           0.80309   2.23242  0.57129  1.41    0.160
+ActiveDailyVolume -0.22233   0.80065  0.10493 -2.12    0.034
+AML                0.00156   1.00157  0.04230  0.04    0.970
+
+                  exp(coef) exp(-coef) lower .95 upper .95
+Breached              2.232      0.448     0.729     6.840
+ActiveDailyVolume     0.801      1.249     0.652     0.983
+AML                   1.002      0.998     0.922     1.088
+
+Concordance= 0.696  (se = 0.08 )
+Rsquare= 0.116   (max possible= 0.94 )
+Likelihood ratio test= 4.91  on 3 df,   p=0.178
+Wald test            = 5.22  on 3 df,   p=0.156
+Score (logrank) test = 5.41  on 3 df,   p=0.144
+
+predict(cmodel, type="risk")
+ [1] 1.0062 1.2807 1.8416 1.4132 0.6280 0.6687 2.5166 1.4629 1.3860 1.3283 0.8558 1.6955 1.1386
+[14] 0.9682 0.6275 1.9333 0.5593 1.1443 1.1941 1.8569 1.9889 3.6656 0.9899 0.9849 0.5649 0.6393
+[27] 0.5527 0.4847 0.5212 0.8798 0.5222 0.8132 0.8166 0.5222 0.4404 1.2850 0.6114 1.0574 0.9704
+[40] 1.8765
+# difference between the paper's risk ratios and the calculated risks:
+predict(cmodel, type="risk") - exchange$Risk.Ratio
+ [1] -0.1138438  0.0007105 -0.1684229 -0.1768372 -0.0219620  0.0586867 -1.3333981 -0.1070626
+ [9] -0.0639567 -0.1416868 -0.0841594 -0.1044674 -0.1013990 -0.0117733  0.0174954  0.0533416
+[17]  0.0293197  0.0543248  0.0540563 -0.2930878 -0.2411229 -0.7444104 -0.0901261  0.0348886
+[25]  0.0348513  0.0392880  0.0327111  0.0347424  0.0311519 -0.0302076  0.0321711  0.0532302
+[33]  0.0165801 -0.0178064 -0.0095536 -0.1650013 -0.0186322 -0.0825834 -0.0696364 -0.3535190
+summary(predict(cmodel, type="risk") - exchange$Risk.Ratio)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+-1.3300 -0.1090 -0.0203 -0.0992  0.0323  0.0587
+
+# Moving on; replicate the logistic regression they ran on predicting breaches:
+lbreach <- glm(Breached ~ ActiveDailyVolume + I(Days/30), family="binomial", data = exchange)
+summary(lbreach)
+...
+Deviance Residuals:
+   Min      1Q  Median      3Q     Max
+-1.158  -0.671  -0.283  -0.102   2.982
+
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)
+(Intercept)        -4.4996     1.7666   -2.55    0.011
+ActiveDailyVolume   0.7730     0.3182    2.43    0.015
+I(Days/30)         -0.1048     0.0698   -1.50    0.133
+
+    Null deviance: 42.653  on 39  degrees of freedom
+Residual deviance: 32.113  on 37  degrees of freedom
+AIC: 38.11
+~~~
+
+Moore has provided his original [R source code](http://lyle.smu.edu/~tylerm/data/bitcoin/bitcoinExScript.R), his [exchange data](http://lyle.smu.edu/~tylerm/data/bitcoin/sdatamodCC.csv), and [anti-money-laundering-laws data](http://lyle.smu.edu/~tylerm/data/bitcoin/compliance-aml-cft-whole.csv), so his original analysis can be replicated by anyone interested in the topic.
+
 ## Estimating DPR's fortune minus expenses & exchange rate
 
 The [FBI indictment](http://www1.icsi.berkeley.edu/~nweaver/UlbrichtCriminalComplaint.pdf) states that SR/DPR earned ฿614,305 in commissions. It's [been suggested](http://www.reddit.com/r/Bitcoin/comments/1oaovv/the_postsilk_road_bitcoin_crash_is_over_btc_is/ccqco3g) that the expense of running SR, and the large changes in the exchange rate, may substantially reduce how many bitcoins DPR *actually* could have saved up, possibly to as low as ฿"150-200k". (The logic here is that if SR earns commissions of ฿100 in 2011 but needs to pay $100 of hosting bills, it needs to sell all ฿100 but in 2013, it would need to sell only ฿1.)
@@ -1262,7 +1350,7 @@ On 30 October 2013, I offered to any comers 4 escrowed Bitcoin bets relating to 
 
 Reactions were generally extremely negative, accusing me of scamming, being LE, pretending to be the escrow nanotube, etc. No one took any of the bets and I shut the books on 6 November 2013. For posterity, I am archiving a copy of my statement below.
 
-## Original
+### Original
 
 > BMR & Sheep have demonstrated their danger, but few black-market-users seem to
 > genuinely appreciate this. I am publicly betting that they will fail in the
@@ -1280,7 +1368,7 @@ Sheep Marketplace.
 because I wish to use Markdown formatting; my PGP key is
 [available](http://www.gwern.net/Links#contact).)
 
-### Background
+#### Background
 
 With the fall of SR, we're all very sad: it was a good site which performed a
 useful function. But life goes on, so it's no surprise we're all moving on to
@@ -1288,7 +1376,7 @@ new black markets. That said, I am concerned by the accumulating pattern I am
 seeing around BMR and Sheep, and by the delusional optimism of many of the
 users.
 
-#### BMR
+##### BMR
 
 BlackMarket Reloaded, since the fall, has been marked by a pattern of arrogance,
 technical incompetence, dismissal of problems, tolerance for sellers keep buyer
@@ -1330,7 +1418,7 @@ And hardly anyone seems troubled by this! The BMR subreddit is full of bustle;
 people are even hailing backopy as a "hero" for allowing withdrawal of bitcoins.
 (How generous of him.)
 
-#### Sheep
+##### Sheep
 
 Is Sheep any better? No. BMR is troubled and probably infiltrated at this point,
 but Sheep may well be a dead market walking at this point. No one has a good
@@ -1349,7 +1437,7 @@ but at least 'altoid' didn't run an entire SR mirror! (He left that to
 `onion.to` & `tor2web.org`.). Sheep's likely about one subpoena of HexaGeek away
 from fun party times in the party-van.
 
-### The Wager
+#### The Wager
 
 I am uninterested in seeing Sheep/BMR busted and lots of newbies caught because
 they can't appreciate the patterns here. People don't take mere criticism
@@ -1361,7 +1449,7 @@ risks they're taking, I want them to reflexively use PGP, and I want them to
 leave balances on sites for as short a time as possible. So! I am putting my
 money where my mouth is.
 
-#### Bets
+##### Bets
 
 I and 3 others are publicly wagering ฿4 ($816 at today's rate), ฿1 each, on the
 following 4 bets:
@@ -1388,7 +1476,7 @@ The ฿4 are currently stored in
 is the signature by `1Az` of the string `"This address contains bitcoins for the
 BMR/Sheep bet run by gwern."`).
 
-#### Definitions
+##### Definitions
 
 - BMR = `kss62ljxtqiqdfuq.onion`
 - Sheep = `sheep5u64fi457aw.onion`
@@ -1402,7 +1490,7 @@ BMR/Sheep bet run by gwern."`).
     like widespread reports that a market has been raided and turned into a
     sting operation.
 
-#### Escrow
+##### Escrow
 
 Arbitration & escrow are being provided by Nanotube, a long-time
 [Bitcoin](https://en.bitcoin.it/wiki/User:Nanotube) user &
@@ -1416,7 +1504,7 @@ escrow this one as well; he has agreed to a nominal fee of 1%.
 exploitative rule-set, and I am not sure
 [Predictious](https://www.predictious.com/) would allow these bets.)
 
-#### HOWTO
+##### HOWTO
 
 If you disagree and are man enough to take our bets, post the amount you are
 betting on which bet, and Nanotube will supply an address for you to transfer
@@ -1424,97 +1512,191 @@ your bitcoin to. When it arrives in his wallet, then our bet will be in effect.
 
 May the most accurate beliefs win.
 
+### Statistical considerations
+
+In my past betting & predicting, I have found it useful to start with some simple base rates & statistical calculations as a way of anchoring my subjective considerations. Neither approach is extremely reliable, but they can help us figure out what are reasonable-looking estimates and we can increase or decrease them based on the observed security issues to get a final estimate which will be better than either random guessing based on gut-feel or blind acceptance of numbers spat out by a model.
+
+In my bet, I used an earlier version of this analysis, and after looking at the various results, settled on gut-estimates as follows:
+
+1. [BMR 6-month shutdown risk](http://predictionbook.com/predictions/21900): 35%
+2. [BMR 12-month](http://predictionbook.com/predictions/21901): 50%
+3. [Sheep 6-month](http://predictionbook.com/predictions/21902): 40%
+4. [Sheep 12-month](http://predictionbook.com/predictions/21903): 50%
+
+After expanding the data to include Deepbay and continuing to observe the black markets, I would personally decrease the risk for BMR and increase for Sheep.
+
+#### Basic data
+
+This data is current as of 12 November 2013.
+
+Market                Started           Ended/currently   Months operating   Status    Notes
+----------------      --------------    ----------------- ------------------ -------- -------
+Silk Road             January 2011      October 2013       33                closed   Raided
+Atlantis              26 March 2013     September 2013     6                 closed   Voluntary shut down; scam? Losses not clear
+Deepbay               June 2013         4 November 2013    5                 closed   [scam](http://www.reddit.com/r/Bitcoin/comments/1qaewa/deepbay_marketplace_owner_steals_sites_bitcoins/)
+Budster               10 October 2013   20 October 2013    0                 closed   [scam?](http://www.reddit.com/r/Budster/comments/1ove9w/has_anyone_made_a_purchase_yet/ccw8srh)
+Project Black Flag    14 October 2013   28 October 2013    0                 closed   [scam](http://www.reddit.com/r/DarkNetMarkets/comments/1peguv/pbf_rip/)
+BlackMarket Reloaded  June 2011         November 2013      30                open
+Sheep Marketplace     February 2013     November 2013      10                open
+BuyItNow              April? 2013       November 2013      8                 open     `buyitnowquyft7dx.onion`
+Pandora               21 October 2013   November 2013      1                 open     `pandorajodqp5zrr.onion`; not clear how operational
+Silk Road 2           6 November 2013   November 2013      0                 open
+Tormarket             7 November 2013   November 2013      0                 open     `tormarkozaegyvco.onion`; no reports of sales yet
+
+(Silk Road Reloaded & The Marketplace are excluded because they have not actually started selling, and the former project seems to've been abandoned. RAMP & Magic Shop are excluded because they're in Russian and I can't get good information about them.)
+
+#### Survival analysis
+
+I have some basic familiarity with [survival analysis](!Wikipedia) from my lengthy analysis of [how long Google services survive](Google shutdowns), so I thought I'd take a stab at a survival analysis of the black markets:
+
+~~~{.R}
+library(survival)
+library(rms)
+market <- read.csv(stdin(),header=TRUE, colClasses=c("factor","Date","Date","logical","factor"))
+Marketplace,Started,Ended,Dead,Cause
+SR,2011-01-27,2013-10-02,TRUE,external
+Atlantis,2013-03-26,2013-09-21,TRUE,internal
+Deepbay,2013-06-05,2013-11-04,TRUE,internal
+Budster,2013-10-20,2013-10-21,TRUE,internal
+ProjectBlackFlag,2013-10-14,2013-10-21,TRUE,internal
+BMR,2011-06-10,2013-11-12,FALSE,NA
+Sheep,2013-02-15,2013-11-12,FALSE,NA
+BuyItNow,2013-04-02,2013-11-12,FALSE,NA
+Pandora,2013-10-21,2013-11-12,FALSE,NA
+SR2,2013-11-06,2013-11-12,FALSE,NA
+Tormarket,2013-11-07,2013-11-12,FALSE,NA
+
+
+market$Days <- as.integer(market$Ended - market$Started)
+surv <- survfit(Surv(market$Days, market$Dead, type="right") ~ 1)
+summary(surv)
+
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1     11       1    0.909  0.0867        0.754            1
+    7      8       1    0.795  0.1306        0.577            1
+  152      6       1    0.663  0.1628        0.410            1
+  179      5       1    0.530  0.1761        0.277            1
+  979      1       1    0.000     NaN           NA           NA
+
+# Confidence intervals show not enough datapoints to really estimate!
+# 6-month mortality:
+sixm <- 1 - (1-((1-0.53)/179))^(365.25/2); sixm
+[1] 0.3813
+# 12-month mortality
+1 - (1-((1-0.53)/179))^(365.25)
+[1] 0.6172
+
+plot(surv, xlab="Days", ylab="Survival Probability function with 95% CI")
+~~~
+
+![A survival curve calculated from 11 black markets](/images/silkroad/survival-blackmarketsonly.png)
+
+So, a 40% risk of failing in 6 months and 62% in a year. Not good news. But can we do better?
+
+##### Expanded sample: Bitcoin exchanges
+
+As it happens, I previously wrote some R code to do another survival analysis as well, this one [of Bitcoin exchanges like MtGox](#bitcoin-exchange-risk), checking a published paper's results. A Bitcoin exchange is an online website which trades in Bitcoins, is a target for hackers, and is often of questionable legality - so they're actually quite a bit like black markets in some respects. What if we try to borrow strength by combining the black markets & exchanges into a single dataset, include a dummy variable indicating black market or exchange, estimate a survival curve from that dataset, and predict?
+
+Continuing from before:
+
+~~~{.R}
+market$Type  <- as.factor("black.market")
+
+exchange <- read.csv("http://www.gwern.net/docs/2013-moorechristin-bitcoinexchanges.csv")
+exchange <- with(exchange, data.frame(Marketplace=Exchange, Started=as.Date(Origin), Ended=as.Date(Dates), Dead=as.logical(Closed), Cause=NA))
+exchange$Days <- as.integer(as.Date(exchange$Ended) - as.Date(exchange$Started))
+exchange$Type <- as.factor("exchange")
+
+allSites <- rbind(exchange, market)
+
+# plot aggregate survival curve
+surv <- survfit(Surv(allSites$Days, allSites$Dead, type="right") ~ 1)
+plot(surv, xlab="Days", ylab="Survival Probability function with 95% CI")
+~~~
+
+![The 11 black markets lumped in with a few dozen Bitcoin exchange sites](/images/silkroad/survival-all.png)
+
+We can try asking whether the black markets seem to be riskier:
+
+~~~{.R}
+cpmodel <- cph(Surv(Days, Dead) ~ Type, data = allSites, x=TRUE, y=TRUE, surv=TRUE)
+cpmodel
+...
+                  Coef   S.E.   Wald Z Pr(>|Z|)
+Type=black.market 0.2128 0.5644 0.38   0.7061
+~~~
+
+The risk does seem to be higher (odds ratio of 1.24) but unsurprisingly we can't have much confidence in the estimate yet.
+
+With the survival curve and an estimate of black-market risk, we can extract survival estimates for the still-living black markets:
+
+~~~{.R}
+conditionalProbability <- function (d, followupUnits) {
+    chances <- rep(NA, nrow(d)) # stash results
+
+    for (i in 1:nrow(d)) {
+
+        # extract chance of particular subject surviving as long as it has:
+        beginProb <- survest(cpmodel, d[i,], times=(d[i,]$Days))$surv
+        if (length(beginProb)==0) { beginProb <- 1 } # set to a default
+
+        tmpFollowup <- followupUnits # reset in each for loop
+        while (TRUE) {
+            # extract chance of subject surviving as long as it has + an arbitrary additional time-units
+            endProb <- survest(cpmodel, d[i,], times=(d[i,]$Days + tmpFollowup))$surv
+            # survival curve may not reach that far! 'survexp returns 'numeric(0)' if it doesn't;
+            # so we shrink down 1 day and try again until 'survexp' *does* return a usable answer
+            if (length(endProb)==0) { tmpFollowup <- tmpFollowup - 1} else { break }
+        }
+
+        # if 50% of all subjects survive to time t, and 20% of all survive to time t+100, say, what chance
+        # does a survivor - at exactly time t - have of making it to time t+100? 40%: 0.20 / 0.50 = 0.40
+        chances[i] <- endProb / beginProb
+    }
+    return(chances)
+}
+allSites$SixMonth <- conditionalProbability(allSites, (365/2))
+allSites$OneYear <- conditionalProbability(allSites, 365)
+
+allSites[allSites$Type=="black.market" & !allSites$Dead,][c(1,8,9)]
+   Marketplace SixMonth OneYear
+46         BMR   1.0000  0.3679
+47       Sheep   0.8084  0.6429
+48    BuyItNow   0.8248  0.7286
+49     Pandora   0.6934  0.5720
+50         SR2   0.6765  0.5579
+51   Tormarket   0.6765  0.5579
+~~~
+
+While it seems reasonable to expect these markets to survive with high confidence for a few months, I am left quizzical by the estimate that BMR has a 100% chance of surviving for half a year, yet a 37% chance of surviving for a year. I could accept the 37% estimate, but 100% is bizarre and reflects the limits of this approach.
+
+#### Laplace
+
+A nifty way of estimating some things come from [Laplace's rule of succession](https://en.wikipedia.org/wiki/Rule_of_succession) ([additional derivations](http://zlkj.in/survival.html)): $s$ failures and $n$ total chances to fail, is $\frac{s+1}{n+2}$. Nsheppard offers a more general formula: the probability that the next site will last for at least 'z' time, given total running of all black markets of 't' months with 'n' shutdowns is $(t / (t+z))^{n+1}$.
+
+Pooled, all-markets (SR+BMR+Sheep+Deepbay+BIN+PBF+Budster+SR2+Tormarket), # of failures vs # number of live months:
+
+- by Laplace: 5/(33+6+5+0+0+30+10+8+1+0+0) = 5/93 = 0.0434 = 5.4% chance of closure per month; generally: 1 - (93 / (93+1))^5 = 100 - 95% = 5% chance of closure in the first month
+
+    1. 6 month survival: (93 / (93+6))^5 = 73% chance of survival = 27% closure
+    2. 12-month survival: (93 / (93+12))^5 = 54% chance of survival = 46% closure
+
+By market:
+
+- BMR:
+
+    1. 6-month: 33 / (6 + 33) = 0.84 = 84% survival = 16% closure
+    2. 12-month: 33 / (12 + 33) = 0.73 = 73% survival = 27% closure
+- Sheep:
+
+    1. 6-month: 9 / (6 + 9) = 0.60 = 60% survival = 40% closure
+    2. 12-month: 9 / (12 + 9) = 0.43 = 43% survival = 57% closure
+
+I believe both sets of estimates are lower than the true risk, given what I have discussed about the sites' security & anonymity.
+
 ## Precommitment
 
     43a4c3b7d0a0654e1919ad6e7cbfa6f8d41bcce8f1320fbe511b6d7c38609ce5a2d39328e02e9777b339152987ea02b3f8adb57d84377fa7ccb708658b7d2edc
-
-## Bitcoin exchange risk
-
-["Beware the Middleman: Empirical Analysis of Bitcoin-Exchange Risk"](http://lyle.smu.edu/~tylerm/fc13.pdf "Moore & Christin 2013") compiles a list of Bitcoin exchanges and which ones have died or failed to return one's money; I was interested in the average risk per day, but the paper did not include the relevant figure, so I copied the raw data and partially replicated their analysis in R:
-
-~~~{.R}
-exchange <- read.csv("http://www.gwern.net/docs/2013-moorechristin-bitcoinexchanges.csv")
-# log transform busy-ness per paper
-exchange$ActiveDailyVolume <- log1p(exchange$ActiveDailyVolume)
-# calculate lifetime lengths
-exchange$Days <- as.integer(as.Date(exchange$Dates) - as.Date(exchange$Origin))
-# but the paper says "The median lifetime of exchanges is 381 days"!
-# The difference may be due to me defaulting each exchange opening/closing to the 1st of the month,
-# since the paper's table on pg3 only specifies month/year.
-summary(exchange$Days)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-     15     168     344     365     565     930
-
-# Rough daily risk percentage calculation: # of lossy exchange-days / total exchange-days:
-(sum(exchange$Repaid==0, na.rm=TRUE) / sum(exchange$Days)) * 100
-[1] 0.03421
-# eg. so leaving funds on an exchange for a month is ~1% (0.03 * 30 = 0.899 ~= 1)
-
-# replicate Cox model survival curve & regression
-library(survival)
-# plot aggregate survival curve
-surv <- survfit(Surv(exchange$Days, exchange$Closed, type="right") ~ 1)
-plot(surv, xlab="Days", ylab="Survival Probability")
-# http://i.imgur.com/lFZEKbv.png
-
-# see how the moderators help predict exchange death
-cmodel <- coxph(Surv(Days, Closed) ~ Breached + ActiveDailyVolume + AML, data = exchange)
-summary(cmodel)
-...
-  n=40, number of events=18
-
-                      coef exp(coef) se(coef)     z Pr(>|z|)
-Breached           0.80309   2.23242  0.57129  1.41    0.160
-ActiveDailyVolume -0.22233   0.80065  0.10493 -2.12    0.034
-AML                0.00156   1.00157  0.04230  0.04    0.970
-
-                  exp(coef) exp(-coef) lower .95 upper .95
-Breached              2.232      0.448     0.729     6.840
-ActiveDailyVolume     0.801      1.249     0.652     0.983
-AML                   1.002      0.998     0.922     1.088
-
-Concordance= 0.696  (se = 0.08 )
-Rsquare= 0.116   (max possible= 0.94 )
-Likelihood ratio test= 4.91  on 3 df,   p=0.178
-Wald test            = 5.22  on 3 df,   p=0.156
-Score (logrank) test = 5.41  on 3 df,   p=0.144
-
-predict(cmodel, type="risk")
- [1] 1.0062 1.2807 1.8416 1.4132 0.6280 0.6687 2.5166 1.4629 1.3860 1.3283 0.8558 1.6955 1.1386
-[14] 0.9682 0.6275 1.9333 0.5593 1.1443 1.1941 1.8569 1.9889 3.6656 0.9899 0.9849 0.5649 0.6393
-[27] 0.5527 0.4847 0.5212 0.8798 0.5222 0.8132 0.8166 0.5222 0.4404 1.2850 0.6114 1.0574 0.9704
-[40] 1.8765
-# difference between the paper's risk ratios and the calculated risks:
-predict(cmodel, type="risk") - exchange$Risk.Ratio
- [1] -0.1138438  0.0007105 -0.1684229 -0.1768372 -0.0219620  0.0586867 -1.3333981 -0.1070626
- [9] -0.0639567 -0.1416868 -0.0841594 -0.1044674 -0.1013990 -0.0117733  0.0174954  0.0533416
-[17]  0.0293197  0.0543248  0.0540563 -0.2930878 -0.2411229 -0.7444104 -0.0901261  0.0348886
-[25]  0.0348513  0.0392880  0.0327111  0.0347424  0.0311519 -0.0302076  0.0321711  0.0532302
-[33]  0.0165801 -0.0178064 -0.0095536 -0.1650013 -0.0186322 -0.0825834 -0.0696364 -0.3535190
-summary(predict(cmodel, type="risk") - exchange$Risk.Ratio)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
--1.3300 -0.1090 -0.0203 -0.0992  0.0323  0.0587
-
-# Moving on; replicate the logistic regression they ran on predicting breaches:
-lbreach <- glm(Breached ~ ActiveDailyVolume + I(Days/30), family="binomial", data = exchange)
-summary(lbreach)
-...
-Deviance Residuals:
-   Min      1Q  Median      3Q     Max
--1.158  -0.671  -0.283  -0.102   2.982
-
-Coefficients:
-                  Estimate Std. Error z value Pr(>|z|)
-(Intercept)        -4.4996     1.7666   -2.55    0.011
-ActiveDailyVolume   0.7730     0.3182    2.43    0.015
-I(Days/30)         -0.1048     0.0698   -1.50    0.133
-
-    Null deviance: 42.653  on 39  degrees of freedom
-Residual deviance: 32.113  on 37  degrees of freedom
-AIC: 38.11
-~~~
-
-Moore has provided his original [R source code](http://lyle.smu.edu/~tylerm/data/bitcoin/bitcoinExScript.R), his [exchange data](http://lyle.smu.edu/~tylerm/data/bitcoin/sdatamodCC.csv), and [anti-money-laundering-laws data](http://lyle.smu.edu/~tylerm/data/bitcoin/compliance-aml-cft-whole.csv), so his original analysis can be replicated by anyone interested in the topic.
 
 ## Archives of SR pages
 
