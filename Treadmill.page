@@ -151,8 +151,8 @@ June 2012
 08: 2.6 w=201
 -->
 
-<!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66; 14 September: 0.64mi; 15: 1.66 24: 1.64mi 26: 2.42mi 28: 0.91mi; 14 October: 0.7mi  -->
-<!-- Mnemosyne reviews while on treadmill: 25, 26, 29 August; 14, 15, 24, 26 September; 14 October -->
+<!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66; 14 September: 0.64mi; 15: 1.66 24: 1.64mi 26: 2.42mi 28: 0.91mi; 14 October: 0.7mi; 8 November: 1.1mi; 10 Nov: 0.32mi; 11: 0.3; 13: 0.3; 14: 0.16  -->
+<!-- Mnemosyne reviews while on treadmill: 25, 26, 29 August; 14, 15, 24, 26 September; 14 October; 8 November; 10; 13; 14 -->
 
 <!--
 $ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
