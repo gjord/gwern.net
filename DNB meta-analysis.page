@@ -62,7 +62,6 @@ The candidate studies:
 - [Vartanian 2013](DNB FAQ#vartanian-2013)
 - Heinzel et al 2013
 - Smith et al 2013
-- Stephenson & Halpern 2013
 - Nussbaumer et al 2013
 - Oelhafen et al 2013
 - Clouter 2013
@@ -70,6 +69,7 @@ The candidate studies:
 - Jaeggi et al 2013
 - Colom et al 2013
 - Savage 2013
+- Stepankova et al 2013
 
 Variables:
 
@@ -79,7 +79,7 @@ Variables:
    0. BOMAT
    1. Raven's Advanced Progressive Matrices (RAPM)
    2. Raven's Standard Progressive Matrices (SPM)
-   3. other (eg. Cattell's Culture Fair Intelligence Test/CFIT)
+   3. other (eg. WAIS, Cattell's Culture Fair Intelligence Test/CFIT)
 2. record speed of IQ test: minutes allotted (upper bound if more details are given; if no time limits, default to 30 minutes since no subjects take longer)
 3. n-back type:
 
@@ -178,8 +178,6 @@ The data from the surviving studies:
 
 year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training   IQ   speed nbt paid
 ---- ------------- ---   -----     ----   ---   -----   ----   ------   --------   --   ----- --- ----
-2005 Jaeggi0.1     4     14        2.93   7     12.13   2.59   0        240        1    20    0   0
-2005 Jaeggi0.2     4     14        2.93   8     12.86   1.46   1        240        1    20    0   0
 2008 Jaeggi1.1     16    9.84      0.59   8.75  10.51   3.721  0        200        0    10    0   0
 2008 Jaeggi1.2     22    11.2      0.48   8.75  10.51   3.721  0        300        1    10    0   0
 2008 Jaeggi1.3     16    13.29     0.7    8.75  10.51   3.721  0        425        1    10    0   0
@@ -231,13 +229,12 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2013 Smith.2       5     11.5      2.99   20    12.15   2.735  1        340        1    10    0   3.9
 2013 Sprenger.1    34    9.76      3.68   18.5  9.95    3.42   1        410        1    10    1   100
 2013 Sprenger.2    34    9.24      3.34   18.5  9.95    3.42   1        205        1    10    1   100
-2013 Stephenson.a  25    15.32     4.15   8.6   14.15   3.32   0        400        1    10    2   2.18
-2013 Stephenson.d  28    17.54     4.04   8.6   14.15   3.32   0        400        1    10    0   2.18
-2013 Stephenson.v  29    15.34     4.83   8.6   14.15   3.32   0        400        1    10    1   2.18
 2013 Thompson.1    10    13.2      0.67   19    12.7    0.62   0        800        1    25    0   740
 2013 Thompson.2    10    13.2      0.67   19    13.3    0.5    1        800        1    25    0   740
 2013 Vartanian     17    11.18     2.53   17    10.41   2.24   1        60         1    10    1   0
 2013 Savage        23    11.61     2.5    27    11.21   2.5    1        625        1    20    0   0
+2013 Stepankova.1  20    20.25     3.77   12.5  17.04   5.02   0        250        3    30    1   29
+2013 Stepankova.2  20    21.1      2.95   12.5  17.04   5.02   0        500        3    30    1   29
 
 # Analysis
 
@@ -567,7 +564,6 @@ Going through them, I must note:
 - Heinzel et al 2013 mentions conducting a pilot study; I contacted Heinzel and no measures like Raven's were taken in it. The main study used both SPM and also "the Figural Relations subtest of a German intelligence test (LPS)"; as usual, I drop alternatives in favor of the more common test.
 - Thompson et al 2013; used RAPM rather than WAIS; treated the "multiple object tracking"/MOT as an active control group since it did not statistically-significantly improve RAPM scores
 - Smith et al 2013; 4 groups. Consistent with all the other studies, I have ignored the post-post-tests (a 4-week followup). To deal with the 4 groups, I have combined the _Brain Age_ & strategy game groups into a single active control group, and then split the dual n-back group in half over the original passive control group and the new active control group.
-- Stephenson & Halpern 2013: they administered multiple IQ tests; as usual, I chose RAPM (omitted "Cattell's Culture Fair Test, the Matrix Reasoning subtest for Wechsler's Abbreviated Scale of Intelligence (WASI), and the Matrix Reasoning subtest for the BETA-III")
 - Jaeggi 2005: Jaeggi et al 2008 is not clear about the source of its 4 experiments, but one of them seems to be experiment 7 from Jaeggi 2005, so I omit experiment 7 to avoid any double-counting, and only use experiment 6.
 - Oelhafen 2013: merged the lure and non-lure dual n-back groups
 - Sprenger 2013: split the active control group over the n-back+Floop group and the combo group; training time refers solely to time spent on n-back and not the other tasks
@@ -575,6 +571,7 @@ Going through them, I must note:
 - Clouter 2013: means & standard deviations, payment amount, and training time were provided by him; student participants could be paid in credit points as well as money, so to get $115, I combined the base payment of $75 with the no-credit-points option of another $40 (rather than try to assign any monetary value to credit points or figure out an average payment)
 - Colom 2013: the experiment group was trained with 2 weeks of visual single n-back, then 2 weeks of auditory n-back, then 2 weeks of dual n-back; since the IQ tests were simply pre/post it's impossible to break out the training gains separately, so I coded the n-back type as dual n-back since visual+auditory single n-back = dual n-back, and they finished with dual n-back. Colom administered 3 IQ tests - RAPM, DAT-AR, & PMA-R; as usual, I used RAPM.
 - Savage 2013: administered RAPM & CCFT; as usual, only used RAPM
+- Stepankova et al 2013: administered the Block Design (BD) & Matrix Reasoning (MR) nonverbal subtests of the WAIS-III
 
 <!-- Clouter:
 1. The post-training Mean and SD for the raw CFIT scores are: Control group mean = 28.83, SD = 2.68. Training group mean = 30.84, SD = 4.11.
