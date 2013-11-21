@@ -1,0 +1,185 @@
+---
+title: Lunar circadian rhythms
+description: Is sleep affected by the phase of the moon? No.
+created: 26 July 2013
+tags: experiments, biology, psychology, statistics
+status: in progress
+belief: highly likely
+...
+
+> I attempt to replicate, using 3 sets of [Zeo]()-recorded sleep data, a finding of a monthly circadian rhythm affecting sleep in a small sleep lab. I find only small non-statistically-significant correlations, despite being well-powered.
+
+I happened to see some news coverage of a sleep paper entitled ["Evidence that the Lunar Cycle Influences Human Sleep"](/docs/zeo/2013-cajochen.pdf) (Cajochen et al 2013):
+
+> ...Here we show that subjective and objective measures of sleep vary according to lunar phase and thus may reflect circalunar rhythmicity in humans. To exclude confounders such as increased light at night or the potential bias in perception regarding a lunar influence on sleep, we retrospectively analyzed sleep structure, electroencephalographic activity during non-rapid-eye-movement (NREM) sleep, and secretion of the hormones melatonin and cortisol found under stringently controlled laboratory conditions in a cross-sectional setting. At no point during and after the study were volunteers or investigators aware of the a posteriori analysis relative to lunar phase. We found that around full moon, electroencephalogram (EEG) delta activity during NREM sleep, an indicator of deep sleep, decreased by 30%, time to fall asleep increased by 5 min, and EEG-assessed total sleep duration was reduced by 20 min. These changes were associated with a decrease in subjective sleep quality and diminished endogenous melatonin levels. This is the first reliable evidence that a lunar rhythm can modulate sleep structure in humans when measured under the highly controlled conditions of a circadian laboratory study protocol without time cues...
+
+This interested me both because of the novelty of the claim and because if lunar phase has an impact on sleep, then adding it as a covariate could increase the power of my sleep analyses by reducing error (and best of all, could be calculated for any date - without requiring data I did not collect at the time). So I looked into it further.
+
+# Background
+
+I would the key claims in Cajochen et al 2013 as being (adding numbering):
+
+> We found that around the full moon,
+>
+> 1. electroencephalogram (EEG) delta activity during NREM sleep, an indicator of deep sleep, decreased by 30%, [total NREM time in lunar class 1: 78.1 (2.2); class 3: 74.5 (2.5); _d_=1.56]
+> 2. time to fall asleep increased by 5 min [class 1: 16.3 (1.9); class 3: 12.1 (1.3); _d_=2.6]
+> 3. and EEG-assessed total sleep duration was reduced by 20 min. [409 (7.9); 424.8 (11); _d_=1.7]
+> 4. These changes were associated with a decrease in subjective sleep quality [51.2 (3.7); 56.4 (3.5); _d_=1.44]
+
+Reading the paper, I didn't find it convincing. It's a small sample size (~64 nights across 33 people), there's a ton of measured variables they could look at for responses, some of the analysis choices are questionable (like how they binned phase of moon: why discretize it when the *easy* approach is to use some astronomical library to get an exact percentage visible? They never justify their "three lunar classes"), they show the scatterplot of only one of their variables which isn't terribly impressive, there's many possible covariates like gender & age, it's a post-hoc analysis they admit they thought up one night (so how many other analyses did they run and not publish...?), the data is very old which makes me wonder why now & where is the rest of the data from their sleep lab, and (as they say) the priors are against there being any effect since previous research has generally failed.
+
+Fortunately, I have been using a Zeo since 2010, so I can attempt a replication myself. While I don't have salivary melatonin or cortisol levels or raw EEGs, I do have all the summary metrics from my Zeo, which my latest export a few months ago gave me collectively ~821 days of data (~13x more nights, all from one subject with the reduced variability but also reduced external validity that implies). The analysis is easy enough, and I can even improve on their analysis by using a better phase variable than their arbitrary trichotomy; my life is not as well controlled as a sleep laboratory but here I have the advantage of no sleep disturbance from the laboratory or equipment an in any case, because I would be exposed to lunar cues like the full moon, we would expect the error here to be finding a relationship where there is not one due to circadian rhythms. 2 other Zeo users kindly offered me their Zeo data, giving me a total of 1620 nights of data. Hopefully with 1556 more nights, I can find their lunar correlations if they are real.
+
+# Analysis
+## Preparation
+
+~~~{.R}
+zeo1 <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv"); zeo1$Subject <- 1
+zeo2 <- read.csv("http://www.gwern.net/docs/zeo/2013-eva.csv"); zeo2$Subject <- 2
+zeo3 <- read.csv("http://www.gwern.net/docs/zeo/2013-fred.csv"); zeo3$Subject <- 3
+zeo <- rbind(zeo1, zeo2, zeo3)
+
+library(moonsun)
+zeo$Julian.Date <- julian(as.Date(zeo$Sleep.Date, format="%m/%d/%Y"))
+# "Percentage of bright area visible from Earth"
+zeo$Phase <- sapply(zeo$Julian.Date, function(date) { moon(date)$phase })
+~~~
+
+## Descriptive
+
+A high level overview is to just take the 4 key variables and plot them against fullness of moon; if there is any relationship, we should expect to see a clear trend (or at least a spike downwards at the right where 100% indicates a full or nearly full moon). Nevertheless, I, at least, see no lunar cycle in any of the graphs; plotting the raw data:
+
+![800 days of 4 sleep metrics (time in deep sleep, total sleep time, sleep latency, subjective restedness) plotted against lunar brightness](/images/zeo/2013-lunar.png)
+
+~~~
+par(mfrow=c(4,1), mar=c(1,4.5,1,0))
+plot(Time.in.Deep ~ Phase, data=zeo); plot(Total.Z ~ Phase, data=zeo)
+    plot(Time.to.Z ~ Phase, data=zeo); plot(Morning.Feel ~ Phase, data=zeo)
+~~~
+
+There's oversampling at 0% and 100% brightness, yes, but that merely shows the moon spends more time in being a full moon or new moon than in transitioning.
+
+## Regressions
+
+Walking through a bunch of statistical tests doesn't turn up much of anything either; throwing the kitchen sink at the data, there's a correlation of lunar brightness with total sleep time but it doesn't reach _p_<0.05.
+
+Download, combine, infer phase of moon for each day, and plot the raw data so we can look at it:
+
+
+Previously I listed the main findings for Cajochen et al 2013; to map them onto the Zeo data and give them a concrete interpretation:
+
+- 1 == negative correlation of `Phase` with `Time.in.Deep`
+- 2 == negative correlation of `Phase` with `Time.to.Z`
+- 3 == negative correlation of `Phase` with `Total.Z`
+- 4 == negative correlation of `Phase` with `Morning.Feel`
+
+### Multivariate linear model
+
+Pooling the 3 subjects' data together and performing a [multivariate regression](!Wikipedia) with a [MANOVA](!Wikipedia) to correct for the correlations of the 4 response variables:
+
+~~~{.R}
+# No overall difference:
+summary(manova(cbind(Morning.Feel, Time.to.Z, Total.Z, Time.in.Deep) ~ Phase, data=zeo))
+            Df  Pillai approx F num Df den Df Pr(>F)
+Phase        1 0.00279    0.804      4   1149   0.52
+
+# Show the specific coefficient estimates:
+summary(lm(cbind(Morning.Feel, Time.to.Z, Total.Z, Time.in.Deep) ~ Phase, data=zeo))
+
+Response Morning.Feel :
+...Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)  3.014059   0.041040   73.44   <2e-16
+Phase       -0.000194   0.000670   -0.29     0.77
+...
+Response Time.to.Z :
+...Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) 20.04714    0.73492   27.28   <2e-16
+Phase        0.00691    0.01200    0.58     0.56
+...
+Response Total.Z :
+...Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) 492.6806     3.6821   133.8   <2e-16
+Phase        -0.1023     0.0601    -1.7    0.089
+...
+Response Time.in.Deep :
+...Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) 71.89157    1.06248   67.66   <2e-16
+Phase       -0.00505    0.01735   -0.29     0.77
+~~~
+
+No outcome seems associated with lunar phase. (The `Total.Z` coefficient may seem to be of large effect size, but this is due to the mean being 464; if the variables are scaled with `scale()`, it seems little bigger than the others.)
+
+### Multi-level model
+
+This might be due to differences between subjects, so we switch to a [multi-level model](!Wikipedia), treating each outcome separately. (It would be nice to do a multivariate multi-level model, but this is apparently not easy with the current state of R's libraries.) To pick which possible MLM to use, I test with an ANOVA comparing them on the outcome variable which came closest to reaching statistical-significance:
+
+~~~{.R}
+library(lme4)
+l1 <- lmer(Total.Z ~ Phase + (1|Subject), data=zeo)
+l2 <- lmer(Total.Z ~ (Phase|Subject), data=zeo)
+l3 <- lmer(Total.Z ~ (Phase+1|Subject), data=zeo)
+l4 <- lmer(Total.Z ~ Phase + (Phase+1|Subject), data=zeo)
+anova(l1,l2,l3,l4)
+...Df   AIC   BIC logLik deviance Chisq Chi Df Pr(>Chisq)
+l1  4 18439 18461  -9216    18431
+l2  5 18444 18471  -9217    18434  0.00      1      1.000
+l3  5 18444 18471  -9217    18434  0.00      0      1.000
+l4  6 18443 18475  -9216    18431  3.22      1      0.073
+~~~
+
+`l4` fits almost well enough to use, but we'll stick with the simplest model: a fixed effect for `Phase`, and subject-specific intercepts. Regressing on the same outcome variables:
+
+~~~{.R}
+confint(lmer(Morning.Feel ~ Phase + (1|Subject), data=zeo))
+              2.5 %   97.5 %
+              ...
+Phase       -0.0014 0.001077
+
+confint(lmer(Time.to.Z ~ Phase + (1|Subject), data=zeo))
+...
+Phase       -0.005481  0.03785
+
+confint(lmer(Total.Z ~ Phase + (1|Subject), data=zeo))
+...
+Phase        -0.2479 4.402e-03
+
+confint(lmer(Time.in.Deep ~ Phase + (1|Subject), data=zeo))
+...
+Phase       -0.03088  0.01974
+~~~
+
+So, subject variability does not seem to be masking any lunar effect.
+
+## Power analysis
+
+A final consideration: was the sample size large enough to detect the correlations that Cajochen et al 2013 found? For example, `Total.Z` seemed to come near statistical-significance, could it be that with more data, we would reach the same conclusion?
+
+One way to approach the power analysis would be to take the data, *force* onto it the claimed relationship (minus 20 minutes at the full moon, and progressively less with less lunar visibility), and see in how many subsamples the multivariate linear model's estimate for `Total.Z` would turn up statistically-significant with a _p_-value < 0.05. The power turns out to be >99%:
+
+~~~{.R}
+library(boot)
+lunar <- function(dt, indices) {
+  d <- dt[indices,] # allows boot to select subsample
+  # scale the total sleep variable by phase and the effect size from Cajochen
+  weight <- d$Phase / 100
+  d$Total.Z <- d$Total.Z - (20 * weight)
+
+  l <- summary(lm(cbind(Morning.Feel, Time.to.Z, Total.Z, Time.in.Deep) ~ Phase, data=d))
+  pval <- (l$"Response Total.Z")$coefficients[8]
+  return(pval)
+  }
+bs <- boot(data=zeo, statistic=lunar, R=50000, parallel="multicore", ncpus=4); boot.ci(bs)
+...
+Level     Percentile            BCa
+95%   ( 0.0000,  0.0027 )   ( 0.0000,  0.0029 )
+
+# how often did the linear model produce p<0.05?
+sum(bs$t < 0.05) / length(bs$t)
+[1] 0.9987
+~~~
+
+So sample size is not an issue.
