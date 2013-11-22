@@ -387,6 +387,33 @@ Bitcoin cumulatively represents my largest ever wager in a prediction market; at
 
 (One might wonder why I don't use the fairly active [Bets of Bitcoin](https://en.bitcoin.it/wiki/Bets_of_Bitcoin) prediction market; that is because the payout rules are [insane](http://betsofbitco.in/help) and I have no idea how to translate the "total weighted bets" into actual probabilities. Betting blind is never a good idea.)
 
+#### Zerocoin
+
+[A research paper](http://zerocoin.org/media/pdf/ZerocoinOakland.pdf "'Zerocoin: Anonymous Distributed E-Cash from Bitcoin', Miers et al 2013") introduced [zero-knowledge proofs](!Wikipedia) for the destruction of coins in a hypothetical Bitcoin variant ([Zerocoin](http://zerocoin.org/)); this allowed the creation of new coins out of nothing while still keeping total coins constant (simply require a proof that for every new coin, an older coin was destroyed). In other words, truly *anonymous* coins rather than the pseudonymity and trackability of Bitcoin. Existing coin mixes are not guaranteed to work & to not steal your coins, so this scheme could be useful to Bitcoin user and worth adding. Efficiency concerns meant that the original version was impossible to add, but the researchers/developers kept working on it and shrunk the proofs to the point where they should be feasible to use. But they also announced they were looking into [launching the functionality into an altcoin](https://twitter.com/matthew_d_green/status/401797786347114496 "We're going to release it as an alt-coin. It will take a few months to get it to that point. Bitcoin can do what it wants.").
+
+This raises a question: would this potential "Zerocoin" altcoin be worth possessing? That is, might it be more than simply a testbed for the zero-knowledge proofs to see how they perform before merging into Bitcoin proper?
+
+I am generally extremely cynical about altcoins as being generally pump-and-dump schemes like Litecoin; I except [Namecoin](!Wikipedia) because distributed domain names is an interesting application of the global ledger and the proof-of-stake altcoins as interesting experiments on alternatives to Bitcoin's proof-of-work solution. Anonymity seems to me to be even more important than Namecoin's DNS functionality - witness the willingness of people to pay the fees to laundries like Bitcoin Fog without even guarantee they will receive safe bitcoins back (or look at the Tor network itself). So I see basically a few possible long-term outcomes:
+
+1. Zerocoin fizzles out and the network disintegrates because no one cares
+2. Zerocoin core functionality is captured in Bitcoin and it disintegrates because it is now redundant
+3. Zerocoin survives as an anonymity layer: people buy zerocoins with tainted bitcoins, then sell the zerocoins for unlinked bitcoins
+4. Zerocoin replaces Bitcoin
+
+Probability-wise, I'd rank outcome #1 as the most likely, #2 is likely but not very likely because the Bitcoin Foundation seems increasingly beholden to corporate and government overseers and even if not actively opposed, will engage in motivated reasoning looking for reasons to reject Zerocoin functionality and avoid rocking its boat; #3 seems a little less likely but still fairly probable; #4 very improbable, like 1%.
+
+Price-wise, #1 and #2 mean zerocoins go to zero, but on the plus side mining or buying at least signals support and may have positive effects on the Foundation or Bitcoin community. Outcome #4 (replacing Bitcoin) means obviously ludicrous profits as Zerocoin goes from pennies or a dollar each to $500+ (assuming for convenience Zerocoin also sets 21m coins). Interestingly, outcome #3 (anonymity layer) *also* means substantial profits: because the price of zerocoins will be more than pennies due to the float from Bitcoin users washing coins. Imagine that there are 1m zerocoins actively traded, and Bitcoin users want to launder $10m of bitcoins a year, and it on average takes a day for each Bitcoin user to finish moving in and out of zerocoins; then each day there's $27378 locked up in zerocoins and spread over the 1m zerocoins, then solely from the float alone, each zerocoin must be worth 3¢ (which is a nice profit for anyone who, say, bought zerocoins at 1¢ after the Zerocoin genesis block).
+
+I personally think Bitcoin should incorporate Zerocoin if the resource requirements are not too severe, and supporting Zerocoin may help this. And if it doesn't, then it may well be profitable. In either case, I benefit. So if/when the Zerocoin genesis block is released, I will consider trying to mine it or establishing a price floor (eg publicly committing $100 to buying zerocoins at 1¢ from any and all comers).
+
+Predictions:
+
+- Zerocoin as functioning altcoin network within a year: [65%](http://predictionbook.com/predictions/22178)
+- Zerocoin market cap >$7,700,000,000 within 5 years (conditional on launch): [1%](http://predictionbook.com/predictions/22179)
+- Zerocoin market cap >$7,000,000 within 5 years (conditional on launch): [7%](http://predictionbook.com/predictions/22180)
+- Zerocoin functionality incorporated into Bitcoin within 1 year: [33%](http://predictionbook.com/predictions/22181)
+- Zerocoin functionality incorporated into Bitcoin within 5 years: [45%](http://predictionbook.com/predictions/22182)
+
 # Personal bets
 
 > *Overall, I am for betting because I am against [bullshit](!Wikipedia "Bullshit#Harry Frankfurt's concept"). Bullshit is polluting our discourse and drowning the facts. A bet costs the bullshitter more than the non-bullshitter so the willingness to bet signals honest belief. A bet is a tax on bullshit; and it is a just tax, tribute paid by the bullshitters to those with genuine knowledge.^[Alex Tabarrok, ["A Bet is a Tax on Bullshit"](http://marginalrevolution.com/marginalrevolution/2012/11/a-bet-is-a-tax-on-bullshit.html)]
@@ -411,69 +438,6 @@ everyone           Sheep Marketplace to shut down in 6 months                   
 *                  BlackMarket Reloaded to shut down in 6 months                  No        30 Oct 2013    30 Apr 2013    ฿3.0   ฿1.0   35%                    *
 *                  BlackMarket Reloaded to shut down in 12 months                 No        30 Oct 2013    30 Oct 2014    ฿1.5   ฿1.0   50%                    *
 Delerrar           Nanotube is providing escrow for the 4 BMR/Sheep bets          No        30 Oct 2013    31 Oct 2013    ฿0.1   ฿0.1   <5%       Win          [Offer on Reddit](http://www.reddit.com/r/SilkRoad/comments/1pko9y/the_bet_bmr_and_sheep_to_die_in_a_year/cd3ar75)
-
-<!--
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA512
-
-19 October 2013; a bet between:
-
-1. Gwern of http://gwern.net
-2. qwertyoruiop of https://twitter.com/qwertyoruiop / http://qwertyoruiop.com/
-
-A bet on Bitcoin exchange rate movements: whether the Bitstamp exchange rate
-will at any point between 19 October 2013 and 19 December 2013 (inclusive)
-hit $50/฿ (one bitcoin sells for $50 or less).
-
-If the exchange rate does not fall to $50/฿ or lower, qwertyoruiop will pay
-฿0.1 to 1HKKEMTo2JGnLqpzRZ1Um8uN8bSNw9vWUc
-
-If the exchange rate does fall to $50/฿ or lower, Gwern will pay
-฿0.1 to 15mVEqcVCCd378aJHLbRqmT862qjVETbfS
-
-Disputes to be arbitrated by c0rw1n, nanotube, or another mutually
-acceptable third-party.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.15 (GNU/Linux)
-
-iEYEAREKAAYFAlJirmAACgkQvpDo5Pfl1oKnmQCfT0K/6JgQNfNkgfvk9sfpw9+c
-9HAAnjNTWeWjb/Bs5gm/IRu9BFGYt+6X
-=du8g
------END PGP SIGNATURE-----
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA512
-
-19 October 2013; a bet between:
-
-1. Gwern of http://gwern.net
-2. qwertyoruiop of https://twitter.com/qwertyoruiop / http://qwertyoruiop.com/
-
-A bet on Bitcoin exchange rate movements: whether the Bitstamp exchange rate
-will at any point between 19 October 2013 and 19 December 2013 (inclusive)
-hit $50/฿ (one bitcoin sells for $50 or less).
-
-If the exchange rate does not fall to $50/฿ or lower, qwertyoruiop will pay
-฿0.1 to 1HKKEMTo2JGnLqpzRZ1Um8uN8bSNw9vWUc
-
-If the exchange rate does fall to $50/฿ or lower, Gwern will pay
-฿0.1 to 15mVEqcVCCd378aJHLbRqmT862qjVETbfS
-
-Disputes to be arbitrated by c0rw1n, nanotube, or another mutually
-acceptable third-party.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG
-Comment: qwertyoruiop
-
-iQEcBAEBCgAGBQJSYq8EAAoJEA0qRmHvFjIvJ3QH/0tUtMxD2c/ZDrnj2SYubS62
-8ro2c6+pFujoaIRTCLFsOTrN/S2FhvfE9R4g+xI43CuvzaQrBxCmdtNSYVxCbn0t
-8kQuWvcKfTi9wqw43gSltrIBFWGMmtuyQ25ef+PLwAfOIsP0Qn3nl9YcDsWvX0t9
-EUgQfiY9hUrSl4nHQALlPXmLSkpwU8hF69j7gBJfjsVvTr1NRq9ZpJbmGiAM9kMq
-yhZiknusqeCvX4dXLdwEZGR9flM7UxaYBxLME3LFQ7Rsz0hzF95F/lxs9mu6MtOH
-NohxQK7CLpnqgIpzrvPmscvibcD1x4TJiR5bN3TUbxs5P8knGNXvN0iEydWJ11w=
-=Ra5w
------END PGP SIGNATURE-----
--->
 
 # Predictions
 
