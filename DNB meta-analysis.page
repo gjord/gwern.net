@@ -36,7 +36,6 @@ In addition, in June 2013 I searched for `"n-back" AND ("fluid intelligence" OR 
 
 The candidate studies:
 
-- Jaeggi 2005
 - [Jaeggi       2008](DNB FAQ#jaeggi-2008)
 - [Li et al 2008](http://library.mpib-berlin.mpg.de/ft/sli/SLI_Working_2008.pdf "Working Memory Plasticity in Old Age: Practice Gain, Transfer, and Maintenance")
 
@@ -70,6 +69,8 @@ The candidate studies:
 - Colom et al 2013
 - Savage 2013
 - Stepankova et al 2013
+- Minear et al 2013
+- Katz et al 2013
 
 Variables:
 
@@ -178,10 +179,11 @@ The data from the surviving studies:
 
 year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training   IQ   speed nbt paid
 ---- ------------- ---   -----     ----   ---   -----   ----   ------   --------   --   ----- --- ----
-2008 Jaeggi1.1     16    9.84      0.59   8.75  10.51   3.721  0        200        0    10    0   0
-2008 Jaeggi1.2     22    11.2      0.48   8.75  10.51   3.721  0        300        1    10    0   0
-2008 Jaeggi1.3     16    13.29     0.7    8.75  10.51   3.721  0        425        1    10    0   0
-2008 Jaeggi1.4     15    14.16     0.76   8.75  10.51   3.721  0        475        1    20    0   0
+2008 Jaeggi1.8     4     14        2.928  8     12.13   2.588  0        200        0    10    0   0
+2008 Jaeggi1.8     4     14        2.928  7     12.86   1.46   1        200        0    10    0   0
+2008 Jaeggi1.12    11    9.55      1.968  11    8.73    3.409  0        300        1    10    0   0
+2008 Jaeggi1.17    8     10.25     2.188  8     8       1.604  0        425        1    10    0   0
+2008 Jaeggi1.19    7     14.71     3.546  8     13.88   3.643  0        475        1    20    0   0
 2009 Qiu           9     132.1     3.2    10    130     5.3    0        250        2    25    0   0
 2009 polar         13    32.76     1.83   8     25.12   9.37   0        360        0    30    0   0
 2010 Jaeggi2.1     21    13.67     3.17   21.5  11.44   2.58   0        370        0    16    1   91
@@ -197,8 +199,6 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2011 Chooi.2.1     6.5   12.1      2.81   11    13.4    2.7    1        600        1    20    0   0
 2011 Chooi.2.2     6.5   12.1      2.81   23    11.9    2.64   0        600        1    20    0   0
 2011 Jaeggi3       32    16.94     4.75   30    16.2    5.1    1        287        2    10    1   1
-2011 Jaeggi4.d     25    14.96     2.7    13.5  14.74   2.8    1        500        1    30    0   0
-2011 Jaeggi4.v     26    15.23     2.44   13.5  14.74   2.8    1        500        1    30    2   0
 2011 Kundu1        3     31        1.73   3     30.3    4.51   1        1000       1    40    0   0
 2011 Schweizer     29    27.07     2.16   16    26.5    4.5    1        463        2    30    0   0
 2011 Zhong.1.05d   17.6  21.38     1.71   8.8   21.85   2.6    0        125        1    30    0   0
@@ -529,7 +529,7 @@ TODO:
 
 Going through them, I must note:
 
-- Jaeggi 2008 means & standard deviations estimated from graphs since I couldn't figure out how to extract them from the figures reported in the text; [Jonathan Toomim](https://groups.google.com/group/brain-training/msg/adab8135e7aa2351) counted pixels and gave a better value than I guesstimated, and I used his approach in estimating values for each training group. IQ test time is based on the description in Redick et al 2012:
+- Jaeggi 2008: group-level data provided by Jaeggi to Redick; the 8-session group included both active & passive controls, so experimental DNB group was split in half. IQ test time is based on the description in Redick et al 2012:
 
     > In addition, the 19-session groups were 20 min to complete BOMAT, whereas the 12- and 17-session groups received only 10 min (S. M. Jaeggi, personal communication, May 25, 2011). As shown in Figure 2, the use of the short time limit in the 12- and 17-session studies produced substantially lower scores than the 19-session study.
 - polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
@@ -548,7 +548,6 @@ Going through them, I must note:
 
     > A further possibility is to include each pair-wise comparison separately, but with shared intervention groups divided out approximately evenly among the comparisons. For example, if a trial compares 121 patients receiving acupuncture with 124 patients receiving sham acupuncture and 117 patients receiving no acupuncture, then two comparisons (of, say, 61 'acupuncture' against 124 'sham acupuncture', and of 60 'acupuncture' against 117 'no intervention') might be entered into the meta-analysis. For dichotomous outcomes, both the number of events and the total number of patients would be divided up. For continuous outcomes, only the total number of participants would be divided up and the means and standard deviations left unchanged. This method only partially overcomes the unit-of-analysis error (because the resulting comparisons remain correlated) so is not generally recommended. A potential advantage of this approach, however, would be that approximate investigations of heterogeneity across intervention arms are possible (for example, in the case of the example here, the difference between using sham acupuncture and no intervention as a control group).
 - Chooi: [the relevant table](/docs/dnb/2010-chooi-table.pdf) was provided in private communication; I split each experimental group in half to pair it up with the active and passive control groups which trained the same number of days
-- [Jaeggi 2011 Psychonomics poster](/docs/dnb/2011-jaeggi-poster.pdf "Working Memory Training and Transfer to Gf: Evidence for Domain Specificity?") (`Jaeggi4`): as-yet unpublished study; poster with table of scores provided in personal communication, used scores on the RAPM (not Cattell's CFT, BOMAT, or the BOMAT followup); 2 experimental groups (one was single audio n-back, the other dual n-back), one control group split
 - [Takeuchi et al 2012](/docs/dnb/2012-takeuchi.pdf "Effects of working memory training on functional connectivity and cerebral blood flow during rest"): subjects were trained on 3 WM tasks in addition to DNB for 27 days, 30-60 minutes; RAPM scores used, BOMAT & Tanaka B-type intelligence test scores omitted
 - Jaušovec 2012: IQ test time was calculated based on the description
 
@@ -567,7 +566,7 @@ Going through them, I must note:
 - Jaeggi 2005: Jaeggi et al 2008 is not clear about the source of its 4 experiments, but one of them seems to be experiment 7 from Jaeggi 2005, so I omit experiment 7 to avoid any double-counting, and only use experiment 6.
 - Oelhafen 2013: merged the lure and non-lure dual n-back groups
 - Sprenger 2013: split the active control group over the n-back+Floop group and the combo group; training time refers solely to time spent on n-back and not the other tasks
-- Jaeggi et al 2013: administered the RAPM, Cattell's Culture Fair Test / CFT, & BOMAT; in keeping with all previous choices, I used the RAPM data; the active control group is split over the two kinds of n-back training groups
+- Jaeggi et al 2013: administered the RAPM, Cattell's Culture Fair Test / CFT, & BOMAT; in keeping with all previous choices, I used the RAPM data; the active control group is split over the two kinds of n-back training groups. This was previously included in the meta-analysis as `Jaeggi4` based on the poster but deleted once it wa formally published as Jaeggi et al 2013.
 - Clouter 2013: means & standard deviations, payment amount, and training time were provided by him; student participants could be paid in credit points as well as money, so to get $115, I combined the base payment of $75 with the no-credit-points option of another $40 (rather than try to assign any monetary value to credit points or figure out an average payment)
 - Colom 2013: the experiment group was trained with 2 weeks of visual single n-back, then 2 weeks of auditory n-back, then 2 weeks of dual n-back; since the IQ tests were simply pre/post it's impossible to break out the training gains separately, so I coded the n-back type as dual n-back since visual+auditory single n-back = dual n-back, and they finished with dual n-back. Colom administered 3 IQ tests - RAPM, DAT-AR, & PMA-R; as usual, I used RAPM.
 - Savage 2013: administered RAPM & CCFT; as usual, only used RAPM
@@ -596,6 +595,9 @@ The following authors had their studies omitted and have been contacted for clar
 
 - Seidler, Jaeggi et al 2010 (experimental: _n_=47; control: _n_=45) did not report means or standard deviations
 - Preece's supervising researcher
+- Nussbaumer
+- Minear
+- Katz
 
 ## Source
 
