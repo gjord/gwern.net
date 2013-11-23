@@ -313,6 +313,8 @@ We can see the difference by splitting a forest plot on passive vs active:
 
 This is very damaging to the case that dual n-back increases IQ. Not only do the better studies find a drastically smaller effect, they are not sufficiently powered to find such a small effect at all, even aggregated in a meta-analysis, with a power of ~11%, which is dismal indeed when compared to the usual benchmark of 80%, and leads to worries that even that is too high an estimate and that the active control studies are aberrant somehow in being subject to a winner's curse or subject to other biases. (Because many studies used convenient passive control groups and the passive effect size is 3x larger, they in aggregate are very well-powered at 94%; however, we already know they are skewed upwards, so we don't care if we can detect a biased effect or not.) In particular, [Boot et al 2013](/docs/dnb/2013-boot.pdf "The Pervasive Problem With Placebos in Psychology: Why Active Control Groups Are Not Sufficient to Rule Out Placebo Effects") argues that active control groups do not suffice to identify the true causal effect because the subjects in the active control group can still have different expectations than the experimental group, and the group' differing awareness & expectations can cause differing performance on tests; they suggest recording expectancies (somewhat similar to Redick et al 2013), checking for a dose-response relationship (see the following section for whether dose-response exists for dual n-back/IQ), and using different experimental designs which actively manipulate subject expectations to identify how much effects are inflated by remaining placebo/expectancy effects.
 
+The active estimate of _d_=0.15 does allow us to estimate how many subjects a two-group experiment with an active control group would require in order for it to be well-powered (80%) to detect an effect of _d_≥0.15; a total _n_ of 1276 subjects (638 in each group).
+
 ### Training time
 
 Jaeggi et al 2008 observed a dose-response to training, where those who trained the longest apparently improved the most. Ever since, this has been cited as a factor in what studies will observe gains or as an explanation why some studies did not see improvements - perhaps they just didn't do enough training. `metafor` is able to look at the number of minutes subjects in each study trained for to see if there's any obvious linear relationship:
@@ -528,7 +530,7 @@ TODO:
 
 Going through them, I must note:
 
-- Jaeggi 2008: group-level data provided by Jaeggi to Redick; the 8-session group included both active & passive controls, so experimental DNB group was split in half. IQ test time is based on the description in Redick et al 2012:
+- Jaeggi 2008: group-level data provided by Jaeggi to Redick for Redick et al 2013; the 8-session group included both active & passive controls, so experimental DNB group was split in half. IQ test time is based on the description in Redick et al 2012:
 
     > In addition, the 19-session groups were 20 min to complete BOMAT, whereas the 12- and 17-session groups received only 10 min (S. M. Jaeggi, personal communication, May 25, 2011). As shown in Figure 2, the use of the short time limit in the 12- and 17-session studies produced substantially lower scores than the 19-session study.
 - polar: control, 2nd scores: 23,27,19,15,12,35,36,34; experiment, 2nd scores: 30,35,33,33,32,30,35,33,35,33,34,30,33
@@ -626,6 +628,8 @@ res0 <- rma(measure="SMD", m1i = mean.e, m2i = mean.c, sd1i = sd.e, sd2i = sd.c,
 cat("Power analysis of the passive control group sample, then the active:\n")
 with(dnb[dnb$active==0,],   power.t.test(n = mean(sum(n.c), sum(n.e)), delta=res0$b[1], sd = mean(c(sd.c, sd.e))))
 with(dnb[dnb$active==1,],   power.t.test(n = mean(sum(n.c), sum(n.e)), delta=res0$b[2], sd = mean(c(sd.c, sd.e))))
+cat("Calculate necesssary sample size for active-control experiment of 80% power:")
+power.t.test(delta = res0$b[2], power=0.8)
 
 # this is ridiculously ugly & fragile, I regret ever wanting to show the split.
 png(file="~/wiki/images/dnb/forest-activevspassive.png", width = 580, height = 780)
