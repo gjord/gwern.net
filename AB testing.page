@@ -1,6 +1,6 @@
 ---
-title: A/B testing Gwern.net
-description: a log of experiments done on the site design
+title: A/B testing long-form readability
+description: a log of experiments done on the site design, intended to render pages more readable
 created: 16 Jun 2012
 tags: experiments, statistics, computer science
 status: in progress
@@ -55,7 +55,7 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
                 placement - left, right, bottom
                 donation text
                          help pay for hosting
-                         help sponsor fish oil experiment
+                         help sponsor X experiment
                          Xah's text - did you find this article useful?
 
 - test the suggestions in https://code.google.com/p/better-web-readability-project/ http://www.vcarrer.com/2009/05/how-we-read-on-web-and-how-can-we.html
@@ -134,12 +134,6 @@ see http://www.overcomingbias.com/2010/06/near-far-summary.html for more design 
 ~~~{.Css}
 tbody tr:hover td { background-color: #f5f5f5;}
 tbody tr:nth-child(odd) td { background-color: #f9f9f9;}
-~~~
-
-7. number size
-
-~~~{.Css}
-.num { font-size: 85%; }
 ~~~
 
 8. link decoration
@@ -1026,8 +1020,173 @@ It was pointed out to me that in my previous font-size test, the clear linear tr
 
 And while the blockquote background coloring is a good idea, per the previous test, what about the other place on `gwern.net` where I use a light background shading: the Table of Contents? Perhaps it would be better with the same background shading as the blockquotes, or no shading?
 
-<!-- div#TOC
-background: #fff
-background: #eee;
-background-color: rgb(245, 245, 245);
--->
+Finally, because I am tired of just 2 factors, I throw in a third factor to make it really multifactorial. I picked the number-sizing from the existing list of suggestions.
+
+Each factor has 3 variants, giving 27 conditions:
+
+~~~{.Css}
+.num { font-size: 85%; }
+.num { font-size: 95%; }
+.num { font-size: 100%; }
+
+html { font-size: 85%; }
+html { font-size: 95%; }
+html { font-size: 100%; }
+
+div#TOC { background: #fff; }
+div#TOC { background: #eee; }
+div#TOC { background-color: rgb(245, 245, 245); }
+~~~
+
+### Implementation
+
+~~~{.Diff}
+hunk ./static/templates/default.html 30
+-    <div class="blockquoteFormatting_class1"></div>
++    <div class="tocFormatting_class1"></div>
+hunk ./static/templates/default.html 150
+-      blockquoteFormatting: [
++      tocFormatting: [
+hunk ./static/templates/default.html 152
+-      name: 'rz',
+-      "blockquoteFormatting_class1": "<style>blockquote:before { display: block; font-size: 200%; color: #ccc; content: open-quote; height: 0px; margin-left: -0.55em; position:relative; }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
+-      "blockquoteFormatting_class2": ""
++      name: '88f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
++      "tocFormatting_class2": ""
+hunk ./static/templates/default.html 157
+-      name: 'orz',
+-      "blockquoteFormatting_class1": "<style>blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
+-      "blockquoteFormatting_class2": ""
++      name: '88e',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
+hunk ./static/templates/default.html 162
+-      name: 'oroz',
+-      "blockquoteFormatting_class1": "<style></style>",
+-      "blockquoteFormatting_class2": ""
++      name: '88r',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '89f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '89e',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '89f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '81f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '81e',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '81r',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '98f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '98e',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '98r',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '99f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '99e',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '99f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '91f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '91e',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '91r',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '18f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '18e',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '18r',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '19f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '19e',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '19f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '11f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '11e',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '11r',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
+... ]]
+~~~
