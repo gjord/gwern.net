@@ -966,15 +966,35 @@ hunk ./static/templates/default.html 165
 ... ]]
 ~~~
 
+### Data
+
+Readability Quote       Blockquote highlighting N       Conversion Rate
+--------------------    ----------------------- ------  ---------------
+no                      yes                     11,663  20.04%
+yes                     yes                     11,514  19.86%
+no                      no                      11,464  19.21%
+yes                     no                      10,669  18.51%
+                                                45,310  19.42%
+
+I discovered during this experiment that I could graph the conversion rate of each condition separately:
+
+![Google Analytics view on blockquote factorial test conversions, by day](/images/2013-11-25-abtesting-blockquotehighlighting.png)
+
+What I like about this graph is how it demonstrates some basic statistical points:
+
+1. the more traffic, the smaller sampling error is and the closer the 4 conditions are to their true values as they cluster together. This illustrates how even what *seems* like a large difference based on a large amount of data, may still be - unintuitively - dominated by sampling error
+2. day to day, any condition can be on top; no matter which one proves superior and which version is the worst, we can spot days where the worst version looks better than the best version. This illustrates how insidious selection biases or choice of datapoints can be: we can easily lie and show black is white, if we can just manage to cherrypick a little bit.
+3. the underlying traffic does not itself appear to be completely stable or consistent. There are a lot of movements which look like the underlying visitors may be changing in composition slightly and responding slightly. This harks back to the paper's warning that for some tests, no answer was possible as the responses of visitors kept changing which version was performing best.
+
 ### Analysis
 
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 Readability,Zebra,N,Rate
-FALSE,TRUE,6520,0.1922
-TRUE,TRUE,6453,0.1911
-FALSE,FALSE,6471,0.1907
-TRUE,FALSE,6485,0.1813
+FALSE,TRUE,11663,0.2004
+TRUE,TRUE,11514,0.1986
+FALSE,FALSE,11464,0.1921
+TRUE,FALSE,10669,0.1851
 
 
 rates$Successes <- rates$N * rates$Rate
@@ -985,10 +1005,29 @@ g <- glm(cbind(Successes,Failures) ~ Readability * Zebra, data=rates, family="bi
 
 ...
                           Estimate Std. Error z value Pr(>|z|)
-(Intercept)               -1.44549    0.03164  -45.68   <2e-16
-ReadabilityTRUE           -0.06180    0.04517   -1.37     0.17
-ZebraTRUE                  0.00957    0.04460    0.21     0.83
-ReadabilityTRUE:ZebraTRUE  0.05467    0.06349    0.86     0.39
+(Intercept)                -1.4366     0.0237  -60.59   <2e-16
+ReadabilityTRUE            -0.0455     0.0344   -1.32     0.19
+ZebraTRUE                   0.0526     0.0331    1.59     0.11
+ReadabilityTRUE:ZebraTRUE   0.0346     0.0476    0.73     0.47
+
+summary(step(g))
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.4583     0.0172   -84.9   <2e-16
+ZebraTRUE     0.0690     0.0238     2.9   0.0037
 ~~~
 
-<!-- TODO: for the next test, throw in font-size changes to 90/95% to see whether the previous linear trend of increasing conversions toward 100% indicates that a *smaller* font would be better -->
+The top-performing variant is the status quo (no Readability-style quote, colored blocks). So we keep it.
+
+## Font size & ToC background
+
+It was pointed out to me that in my previous font-size test, the clear linear trend may have implied that larger fonts than 100% were bad, but that I was making an unjustified leap in implicitly assuming that 100% was best: if bigger is worse, then mightn't the optimal font size be something *smaller* than 100%, like 95%?
+
+And while the blockquote background coloring is a good idea, per the previous test, what about the other place on `gwern.net` where I use a light background shading: the Table of Contents? Perhaps it would be better with the same background shading as the blockquotes, or no shading?
+
+<!-- div#TOC
+background: #fff
+background: #eee;
+background-color: rgb(245, 245, 245);
+-->
