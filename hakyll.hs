@@ -95,8 +95,8 @@ pandocTransform :: Pandoc -> Pandoc
 pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks . addAmazonAffiliate))
 
 addAmazonAffiliate :: Inline -> Inline
-addAmazonAffiliate x@(Link r (l, t)) =  if "amazon.com/" `isInfixOf` l && not ("?tag=" `isInfixOf` l)
-                                        then Link r (l++"?tag=gwernnet-20", t) else x
+addAmazonAffiliate (Link r (l, t)) | ("?search" `isInfixOf` l)                               = Link r (l++"&tag=gwernnet-20", t)
+                                   | "amazon.com/" `isInfixOf` l && not ("?tag=" `isInfixOf` l) = Link r (l++"?tag=gwernnet-20", t)
 addAmazonAffiliate x = x
 
 -- GITIT -> HAKYLL LINKS PLUGIN
