@@ -676,7 +676,7 @@ But two further minor observations:
 
 ### Source code
 
-Data generation & formatting:
+Generation and pre-processing, using the shell & Haskell scripts from before:
 
 ~~~{.R}
 data <- read.csv("2013-hpmor-rawreviews.csv", colClasses=c("integer", "Date", "factor"))
@@ -716,7 +716,7 @@ for (i in 1:nrow(lifetimes)) { delay[i] <- intervals[lifetimes$LastChapter[i]] }
 lifetimes$Delay <- delay
 ~~~
 
-Analysis:
+Now that we have a clean set of data with the necessary variables like dates, we can analyze:
 
 ~~~{.R}
 lifetimes <- read.csv("http://www.gwern.net/docs/2013-hpmor-reviewers.csv",
