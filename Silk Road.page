@@ -898,7 +898,7 @@ Watching the fall of Atlantis, SR, and BMR, I have derived some basic recommenda
 3. the black market operators should specify in advance how long they will run the site, at what level of commissions they will cash out, and precommit to shutting down the site or handing it over to a new operator whenever either condition comes to pass. This enforces compartmentalization, impedes any ongoing investigations or later information leaks, and the operator avoids committing [gambler's ruin](!Wikipedia) and [becoming arrogant](!Wikipedia "Gambler's conceit") - where they never stop operating the site, and just keep running it until they are finally arrested. If Ross Ulbricht had passed SR on as he claimed in the _Forbes_ interview, say after he made his first ฿111k, it is likely that SR would not have been busted as soon as it was, he may never have been arrested because he could not be irrefutably tied to operating the site, and he would have had a chance to enjoy his fortune. An old proverb comes to mind:
 
     > If you must play, decide on three things at the start: the rules of the game, the stakes, and the quitting time.
-4. some post-SR buyer busts seem to be tied to the sellers keeping copies of the buyers' addresses. There is nothing a site operator can do *directly* about this problem, as they cannot know what goes on in the seller's computer, but they can at least institute a clear "death penalty" for any seller who reveals a buyer's address, threatens to reveal it, or claims to reveal it. The site operators of SR and BMR declined to sanction their sellers who did this, and thereby simultaneously put all buyers at risk and incentivized police raids on sellers (there is speculation that the SR seller Plutopete, who sold legal products, was targeted because they hoped to seize buyer addresses from him).
+4. some post-SR buyer busts seem to be tied to the sellers keeping copies of the buyers' addresses. There is nothing a site operator can do *directly* about this problem, as they cannot know what goes on in the seller's computer, but they can at least institute a clear "death penalty" for any seller who reveals a buyer's address, threatens to reveal it, or claims to reveal it. The site operators of SR and BMR declined to sanction their sellers who did this (eg. MMM/Moramoru on BMR), and thereby simultaneously put all buyers at risk and incentivized police raids on sellers (there is speculation that the SR seller Plutopete, who sold legal products, was targeted because they hoped to seize buyer addresses from him).
 
     This does not conflict with the mandatory use of PGP encryption, as if a buyer claims a seller threatened him in a PGP-encrypted message, the site operator can demand the secret key from the buyer - since they're making the claim, the onus is on them, after all - and decrypt the stored copy of the seller's message to the buyer. If the buyer's claims are true, the seller is immediately banned and their Bitcoin balance confiscated; while if the buyer lied, they are banned instead. To incentivize revelation of the sellers' misbehavior, the site operator can offer as a bounty to buyers whatever Bitcoin balance the seller had.
 5. Early Finalization should not be offered as a feature, or if it is, it should be automatically limited only to young buyer accounts or similar situations.
@@ -1041,6 +1041,34 @@ It's hard to tell, but from reading the forums, it seems like it is mostly techn
 I know other users disagree and take it only as a useful service or something of a FU to The Man, but many of us do see it as a principled statement. I believe that I am capable of researching and evaluating drugs, that I can accept the risks, and see how they do or do not work, and that the government should not be coercively imposing its beliefs on me.
 
 I am also horrified by the effects of the War on Drugs, which has been a greater disaster than Prohibition (which we at least had the sense to repeal after a few years). Buying on the Silk Road and writing about it is, if you will, my bit of patriotism. It's not very heroic, and I've never claimed to be a hero or to be doing anything particularly noteworthy, but perhaps it will change someone's mind - either that drugs are not so bad or that the War is not so practicable.
+
+## Mike Power questions
+
+On 29 November 2013, journalist [Mike Power](http://mikepower.pressfolios.com/) (of _Drugs 2.0_) asked me a few questions
+
+> 1. What will be the cultural and technological impact of the Silk Road bust, in your view?
+
+The cultural impact is that even more people are aware of SR. The flurry of coverage, while very negative and unflattering to SR (the attempted hits have badly tarnished SR's reputation), still serves to spread the news that there was a real functioning drug black market just as claimed, and that it worked fabulously well. This part of the pro-drug movement in America right now, in conjunction with the fact that marijuana legalization seems to be basically working out in the West, with minimal "reefer madness", is helping normalize illicit drug consumption and make a mockery of the War on Drugs. It's one thing for people to wonder if the persecution is more harmful than treatment would be, and to note that drugs continue to be available on the street, and quite another to realize it's almost as easy as ordering off Amazon!
+
+> 2. What future do you see for bitcoin, Tor and the new Silk Road?
+
+Bitcoin seems to be going from strength to strength. As an admirer of Bitcoins from when I first learned of them in 2010, I am pleased by its success and I think it will make the Internet much more useful for commerce. (I should note that the current price increases seem unsustainable to me, and I expect there to be a large correction at some point before ~$2600/btc, which is apparently roughly where this bubble will equal the previous bubble's percentage increases, but though there will no doubt be many nay-sayers at that point, I expect Bitcoin to keep steadily growing.)
+
+I don't expect Tor to be affected. Tor's problems stem from the recent research on it plus the revelations about the state of NSA attacks on Tor from 6 years ago; I would not be surprised if the NSA could now identify hidden servers. The question is whether they are willing to use that capability on black-markets. Given how many black-markets fall to internal factors (Atlantis, PBF, Deepbay, Sheep), the NSA wouldn't need to spend a cutting-edge attack on them.
+
+The black-markets themselves seem to be following the path set by BitTorrent: now that the business model has been proven beyond a doubt with audited figures about profitability (you can thank the FBI for that one), every geek in the world understands that they can become a millionaire if they dare. It's back to whack-a-mole: new markets will pop up, and will run until they get hammered down or rip-and-run. Evolution means the ones who leak their identities like Silk Road or Sheep, or who write bad code, like BMR, will either fix their problems or get weeded out & replaced.
+
+> 3. How would you summarise and characterise your experiences with [LSD microdosing]()?
+
+I found no benefits from it, and I'm not sure how meaningful my results are for other people. I wouldn't call it my best self-experiment ever, but not a waste of time either.
+
+> 4. Do you feel that governments have the right to police the computer activity, or the mindstates, of those who elect them?
+
+I think computer activity is, like any other activity, subject to government intervention if it is really justified (which it rarely is); taking place on a computer does not make it unreal or exempt. Policing mindstates, on the other hand, should basically be banned for all the same reasons we have free speech.
+
+> 5. What do you think of the marketplace, over on [I2P](!Wikipedia)? is it as serious as it looks to a non-coder, like myself?
+
+I have not actually set up I2P yet, so I've seen none of the I2P markets.
 
 ## Reddit advice
 
@@ -1734,4 +1762,11 @@ probability of shutdown in year 4: 0+1/3+2 = 1/5
 probability of surviving 4-8: (1 - 1/5) * (1 - 1/6) * (1 - 1/7) * (1 - 1/8) * (1 - 1/9) = 4/9 = 0.44
 
 http://zlkj.in/survival.html
+-->
+<!-- Questions for Ulbricht:
+
+1. did you realize how powerful the combination of Tor+Bitcoin+escrow would be? Was there an explicit realization on your part that there was huge drug demand but that existing online drug sellers were hobbled by the vulnerability of regular payment systems, equally vulnerable due to living on the clearnet, and could not succeed because they were rife with scams due to lack of escrow? Or were you mostly mimicking regular e-commerce sites like Amazon Marketplaces or eBay, and were as surprised as anyone how SR succeeded?
+2. When the community read the criminal complaints, there was almost universal shock and disbelief at your actions and casualness in employing hitmen or using bank accounts or not fleeing after being interviewed by DHS agents. One suggestion is that you basically succumbed to arrogance due to isolation and an echo chamber effect. What do you think?
+3. One question oft asked was why, given that you had dozens of millions of dollars of Bitcoin throughout 2013, did you not retire or hand over SR to another person?
+4. Did you actually grow the mushrooms to kickstart SR?
 -->
