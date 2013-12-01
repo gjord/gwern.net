@@ -254,6 +254,60 @@ And the following should *rarely* show up in the final rendered HTML:
 
 Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](/haskell/markdown-length-checker), and one for a bad habit of mine - [too-long footnotes](/haskell/markdown-footnote-length). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options). The shell script can be found at [`markdown-lint.sh`](markdown-lint.sh).
 
+### Anonymous feedback
+
+Back in November 2011, lukeprog posted ["Tell me what you think of me"](http://lesswrong.com/lw/8bt/tell_me_what_you_think_of_me/) where he described his use of a Google Docs form for anonymous receipt of textual feedback or comments. Typically, most forms of communication are non-anonymous, or if they are anonymous, they're public. One can set up pseudonyms and use those for private contact, but it's not always that easy, and is definitely a series of [trivial inconveniences](http://lesswrong.com/lw/f1/beware_trivial_inconveniences/) (if anonymous feedback is not solicited, one has to feel it's important enough to do and violate implicit norms against anonymous messages; one has to set up an identity; one has to compose and send off the message, etc).
+
+I thought it was a good idea to try out, and on 8 November 2011, I set up my own anonymous feedback form and stuck it in the footer of all pages on [gwern.net](http://www.gwern.net/) where it remains to this day. I did wonder if anyone would use the form, especially since I am easy to contact via email, use multiple sites like Reddit or Lesswrong, and even my Disqus comments allow anonymous comments - so who, if anyone, would be using this form? I scheduled a followup in 2 years on 30 November 2013 to review how the form fared.
+
+754 days, 2.884m page views, and 1.350m unique visitors later, I have received 116 pieces of feedback (mean of 24.8k visits per feedback). I categorize them as follows in descending order of frequency:
+
+- Corrections, problems (technical or otherwise), suggested edits: 34
+- Praise: 31
+- Question/request (personal, tech support, etc): 22
+- Misc (eg gibberish, socializing, Japanese): 13
+- Criticism: 9
+- News/suggestions: 5
+- Feature request: 4
+- Request for cybering: 1
+- Extortion: 1
+
+(Some submissions cover multiple angles (they can be quite long), sometimes people double-submitted or left it blank, etc, so the numbers won't sum to 116.)
+
+In general, a lot of the corrections were usable and fixed issues of varying importance, from typos to the entire site's CSS being broken due to being uploaded with the wrong MIME type. One of the news/suggestion feedbacks was very valuable, as it lead to writing the Silk Road mini-essay ["A Mole?"](Silk Road#a-mole) A lot of the questions were a waste of my time; I'd say half related to Tor/Bitcoin/Silk-Road. (I also got an irritating number of emails from people asking me to, say, buy LSD or heroin off SR for them.) The feature requests were usually for a better RSS feed, which I tried to oblige by starting the [Changelog]() page. The cybering and extortion were amusing, if nothing else. The praise was good for me mentally, as I don't interact much with people.
+
+I consider the anonymous feedback form to have been a success, I'm glad lukeprog brought it up on LW, and I plan to keep the feedback form indefinitely.
+
+#### Feedback causes
+
+One thing I wondered is whether feedback was purely a function of traffic (the more visits, the more people who could see the link in the footer and decide to leave a comment), or more related to time (perhaps people returning regularly and eventually being emboldened or noticing something to comment on). So I compiled daily hits, combined with the feedback dates, and looked at a graph of hits:
+
+![Hits over time for `gwern.net`](/images/2013-11-30-gwernnet-hitsovertime.png)
+
+The hits are obviously skewed (mostly Hacker News & Reddit spikes) and probably should be log transformed. Then I did a logistic regression on hits, log hits, and a simple time index:
+
+~~~{.R}
+feedback <- read.csv("http://www.gwern.net/docs/2013-gwernnet-anonymousfeedback.csv",
+                     colClasses=c("Date","logical","integer"))
+plot(Visits ~ Day, data=feedback)
+feedback$Time <- 1:nrow(feedback)
+summary(step(glm(Feedback ~ log(Visits) + Visits + Time, family=binomial, data=feedback)))
+...
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -7.363507   1.311703   -5.61  2.0e-08
+log(Visits)  0.749730   0.173846    4.31  1.6e-05
+Time        -0.000881   0.000569   -1.55     0.12
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 578.78  on 753  degrees of freedom
+Residual deviance: 559.94  on 751  degrees of freedom
+AIC: 565.9
+~~~
+
+The logged hits works out better than regular hits, and survives to the simplified model. And the traffic influence seems much larger than the time variable (which is, curiously, negative).
+
 # Technical aspects
 ## Popularity
 ### October 2010 - February 2011
