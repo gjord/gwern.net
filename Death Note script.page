@@ -9,7 +9,7 @@ belief: likely
 
 > I give a history of the 2009 leaked script, discuss internal & external evidence for its realness including stylometrics; and then give a simple step-by-step Bayesian analysis of each point. We finish with high confidence in the script being real, discussion of how this analysis was surprisingly enlightening, and what followup work the analysis suggests would be most valuable.
 
-Beginning in May 2009^[The earliest mention I've been able to find is a French site which [posted on 17 May 2009](http://web.archive.org/web/20090525025525/http://www.death-note.fr/home.php?page=news3) a translation of the beginning of the leaked script; no source is given, and it's not clear who did the translation, what script was used, or where the script was obtained. So while the script was clearly circulating by mid-May, I can't date the leak any earlier than that date.] and up to October 2009, [there appeared online](http://www.animevice.com/news/rumor-alert-death-note-movie-script-leaked/2653/ "Rumor Alert: Death Note Movie Script Leaked?") a [PDF file](http://www.mediafire.com/?ce13d3xdazwxj09) ([mirror](http://dl.getdropbox.com/u/74617/Death%20Note%20Script.pdf)) claiming to be a script for the [Hollywood remake](!Wikipedia "Death Note (film)#Remake") of the _[Death Note](!Wikipedia)_ anime (see Wikipedia or my own little [Death Note Ending]() essay for a general description). Such a leak inevitably raises the question: is it genuine? Of course the studio had "no comment".
+Beginning in May 2009^[The earliest mention I've been able to find is a French site which [posted on 17 May 2009](http://web.archive.org/web/20090525025525/http://www.death-note.fr/home.php?page=news3) a translation of the beginning of the leaked script; no source is given, and it's not clear who did the translation, what script was used, or where the script was obtained. So while the script was clearly circulating by mid-May, I can't date the leak any earlier than that date.] and up to October 2009, [there appeared online](http://www.animevice.com/news/rumor-alert-death-note-movie-script-leaked/2653/ "Rumor Alert: Death Note Movie Script Leaked?") a [PDF file](/docs/2009-anonymous-deathnotescript.pdf) ([original MediaFire download](http://www.mediafire.com/?ce13d3xdazwxj09)) claiming to be a script for the [Hollywood remake](!Wikipedia "Death Note (film)#Remake") of the _[Death Note](!Wikipedia)_ anime (see Wikipedia or my own little [Death Note Ending]() essay for a general description). Such a leak inevitably raises the question: is it genuine? Of course the studio had "no comment".
 
 I was skeptical at first - how many unproduced screenplays get leaked? I thought it rare even in this Internet age - so I downloaded a copy and read it.
 
@@ -175,7 +175,7 @@ The settings[^R-stylo-settings] are to: run a [cluster analysis](!Wikipedia) whi
     sampling.with.replacement=FALSE
     ~~~
 
-The script PDF, full corpus, intermediate files, and `stylo` source code are available as a [7zipped tarball](http://dl.dropbox.com/u/85192141/deathnotescript.tar.7z).
+The script PDF, full corpus, intermediate files, and `stylo` source code are available as a [XZed tarball](/docs/2012-gwern-deathnotescript-stylometricanalysis.tar.xz).
 
 ![The cluster analysis of the 30-strong corpus.](/images/deathnote-cluster.png)
 
@@ -239,9 +239,7 @@ I find this external legal evidence compelling, and in conjunction with the inte
 
 We could leave matters there with a bald statement that the evidence is "compelling", but [Richard Carrier](!Wikipedia) recently offered in [_Proving History: Bayes's Theorem and the Quest for the Historical Jesus_](http://www.amazon.com/Proving-History-Bayess-Theorem-Historical/dp/1616145595) (2012; [2008 handout](http://www.richardcarrier.info/CarrierDec08.pdf "Bayes's Theorem for Beginners: Formal Logic and Its Relevance to Historical Method"), [LW review](http://lesswrong.com/lw/9pm/minireview_proving_history_bayes_theorem_and_the/); excerpts: chapter [1](https://plus.google.com/103530621949492999968/posts/9w86gnaEdma), [2](https://plus.google.com/103530621949492999968/posts/bwzLYYdCfzb), [3](https://plus.google.com/103530621949492999968/posts/4DYMmh4hcf4), [4](https://plus.google.com/103530621949492999968/posts/CFiBkQVj44h), [5](https://plus.google.com/103530621949492999968/posts/SvhGj6dBCNb), [6](https://plus.google.com/103530621949492999968/posts/ZsChaHXzrEa)) a defense of how matters of history and authorship could be more rigorously investigated with some simple statistical thinking, and there's no reason we cannot try to give some rough numbers to each previous piece of evidence. Even if we can only agree on whether a piece of evidence is for or against the hypothesis of the Parlapanides' authorship, and not how strong a piece of evidence it is, the analysis will be useful in demonstrating how converging weak lines of reasoning can yield a strong conclusion.
 
-We'll principally use Bayes's theorem, no math more advanced than multiplication or division, common sense/[Fermi estimates](Notes#fermi-calculations), the Internet, and the strong assumption of [conditional independence](!Wikipedia)[^conditional-independence]. Despite these severe restrictions (what, no [integrals](!Wikipedia), [probability distributions](!Wikipedia), [credible intervals](!Wikipedia), [Bayes factors](!Wikipedia) or anything? You call this *statistics*‽), we'll get some answers anyway.
-
-[^conditional-independence]: Conditional independence is just the assumption that each argument is separate and lives or dies on its own. This is not true, since if someone were deliberately faking a script, then a good faker would be much more likely to not cut corners and carefully fake each observation while a careless faker would be much more likely to be lazy and miss many. Making this assumption means that our final estimate will probably overstate the probability, but in exchange, it makes life much easier: not only is it harder to even think about what conditional dependencies there might be between arguments, it makes the math too hard for me to do right now!
+We'll principally use Bayes's theorem, no math more advanced than multiplication or division, common sense/[Fermi estimates](Notes#fermi-calculations), the Internet, and the strong assumption of [conditional independence](!Wikipedia) (see the [conditional independence appendix](#conditional-independence)). Despite these severe restrictions (what, no [integrals](!Wikipedia), [probability distributions](!Wikipedia), [credible intervals](!Wikipedia), [Bayes factors](!Wikipedia) or anything? You call this *statistics*‽), we'll get some answers anyway.
 
 ## Priors
 
@@ -743,43 +741,9 @@ Why this pessimism of only 85%?
 2. one argument turned out to be an argument against being real
 3. several arguments turned out to be useless or unquantifiable
 4. several arguments rest on weak enough data that they could also turn out useless or negative; eg. the PDF timezone argument
-5. our applications of Bayes assumes, as mentioned previously, "conditional independence": that each argument is "independent" and can be taken at face-value. This is obviously false: several of the arguments are plausibly [correlated with each other](!Wikipedia "Covariance") (eg. a skilled forger might be expected to look up addresses and names and timezones), and so the true conclusion will be weaker, perhaps *much* weaker[^more-conditional]. Hopefully making conservative choices partially offset this overestimating tendency - but how much did it?
+5. our applications of Bayes assumes, as mentioned previously, "conditional independence": that each argument is "independent" and can be taken at face-value. This is obviously false: several of the arguments are plausibly [correlated with each other](!Wikipedia "Covariance") (eg. a skilled forger might be expected to look up addresses and names and timezones), and so the true conclusion will be weaker, perhaps *much* weaker. Hopefully making conservative choices partially offset this overestimating tendency - but how much did it?
 6. I made more mistakes than I care to admit working out each problem.
 7. And finally, I haven't been able to come up with multiple good arguments why the script is a fake, which suggests I am now personally invested in it being real and so my final 98% calculation is an substantial overestimate. One shouldn't be foolishly confident in one's statistics.
-
-[^more-conditional]: Alex Schell offers some helpful comments on this topic.
-
-    The odds form of Bayes' theorem is this:
-
-    $\frac{P(a|b)}{P(\lnot a|b)} = \frac{P(a)}{P(\lnot a)} \times \frac{P(b|a)}{P(b|\lnot a)}$
-
-    In English, the ratio of the posterior probabilities (the "posterior odds" of _a_) equals the product of the ratio of the prior probabilities and the likelihood ratio.
-
-    What we are interested in is the likelihood ratio $\frac{p(e|\text{is real})}{p(e|\text{is not real})}$, where _e_ is all external and internal evidence we have about the DN script.
-
-    _e_ is equivalent to the conjunction of each of the 13 individual pieces of evidence, which I'll refer to as _e~1~_ through _e~13~_:
-
-    $e = e_1 \& e_2 \& ... \& e_{13}$
-
-    So the likelihood ratio we're after can be written like this:
-
-    $\frac{p(e|\text{is real})}{p(e|\text{is not real})} = \frac{p(e_1 \& e_2 \& ... \& e_{13}|\text{is real})}{p(e_1 \& e_2 \& ... \& e_{13}|\text{is not real})}$
-
-    I abbreviate $\frac{p(b|\text{is real})}{p(b|\text{is not real})}$ as $LR(b)4, and $\frac{p(b|\text{is real} \& c)}{p(b|\text{is not real} \& c)}$ as $LR(b|c)$.
-
-    Now, it follows from probability theory that the above is equivalent to
-
-    $LR(e) = LR(e_1) \times LR(e_2|e_1) \times LR(e_3|e_1 \& e_2) \times LR(e_4|e_1 \& e_2 \& e_3) \times ... \times LR(e_{13}|e_1 \& e_2 \& ... \& e_12)$
-
-    (The ordering is arbitrary.) Now comes the point where the assumption of conditional independence simplifies things greatly. The assumption is that the "impact" of each evidence (i.e. the likelihood ratio associated with it) does not vary based on what other evidence we already have. That is, for any evidence _e~i~_ its likelihood ratio is the same no matter what other evidence you add to the right-hand side:
-
-    $LR(e_i|c) = LR(e_i)$ for any conjunction _c_ of other pieces of evidence
-
-    Assuming conditional independence simplifies the expression for $LR(e)$ greatly:
-
-    $LR(e) = LR(e_1) \times LR(e_2) \times LR(e_3) \times ... \times LR(e_{13})$
-
-    On the other hand, the conditional independence assumption is likely to have a substantial impact on what value $LR(e)$ takes. This is because most pieces of evidence are expected to correlate positively with one another instead of being independent. For example, if you know that the script is 20,000-words of Hollywood plot and that the stylometric analysis seems to check out, then if you are dealing with a fake script ("is not real") it is an extremely elaborate fake, and (e.g.) the PDF metadata are almost certain to "check out" and so provide much weaker evidence for "is real" than the calculation assuming conditional independence suggests. On the other hand, the evidence of legal takedowns seems unaffected by this concern, as even a competent faker would hardly be expected to create the evidence of takedowns.
 
 ## No comment
 
@@ -849,3 +813,42 @@ Reply:
 - [Hacker News discussion](https://news.ycombinator.com/item?id=5010846)
 - ["Inherited Improbabilities: Transferring the Burden of Proof"](http://lesswrong.com/lw/35d/inherited_improbabilities_transferring_the_burden/)
 - ["Odds again: Bayes made usable"](http://rationallyspeaking.blogspot.com/2012/11/odds-again-bayes-made-usable.html)
+
+# Appendix
+## Conditional independence
+
+The phrase "conditional independence" is just the assumption that each argument is separate and lives or dies on its own. This is not true, since if someone were deliberately faking a script, then a good faker would be much more likely to not cut corners and carefully fake each observation while a careless faker would be much more likely to be lazy and miss many. Making this assumption means that our final estimate will probably overstate the probability, but in exchange, it makes life much easier: not only is it harder to even think about what conditional dependencies there might be between arguments, it makes the math too hard for me to do right now!
+
+Alex Schell offers some helpful comments on this topic.
+
+> The odds form of Bayes' theorem is this:
+>
+> $\frac{P(a|b)}{P(\lnot a|b)} = \frac{P(a)}{P(\lnot a)} \times \frac{P(b|a)}{P(b|\lnot a)}$
+>
+> In English, the ratio of the posterior probabilities (the "posterior odds" of _a_) equals the product of the ratio of the prior probabilities and the likelihood ratio.
+>
+> What we are interested in is the likelihood ratio $\frac{p(e|\text{is real})}{p(e|\text{is not real})}$, where _e_ is all external and internal evidence we have about the DN script.
+>
+> _e_ is equivalent to the conjunction of each of the 13 individual pieces of evidence, which I'll refer to as _e~1~_ through _e~13~_:
+>
+> $e = e_1 \& e_2 \& ... \& e_{13}$
+>
+> So the likelihood ratio we're after can be written like this:
+>
+> $\frac{p(e|\text{is real})}{p(e|\text{is not real})} = \frac{p(e_1 \& e_2 \& ... \& e_{13}|\text{is real})}{p(e_1 \& e_2 \& ... \& e_{13}|\text{is not real})}$
+>
+> I abbreviate $\frac{p(b|\text{is real})}{p(b|\text{is not real})}$ as $LR(b)4, and $\frac{p(b|\text{is real} \& c)}{p(b|\text{is not real} \& c)}$ as $LR(b|c)$.
+>
+> Now, it follows from probability theory that the above is equivalent to
+>
+> $LR(e) = LR(e_1) \times LR(e_2|e_1) \times LR(e_3|e_1 \& e_2) \times LR(e_4|e_1 \& e_2 \& e_3) \times ... \times LR(e_{13}|e_1 \& e_2 \& ... \& e_12)$
+>
+> (The ordering is arbitrary.) Now comes the point where the assumption of conditional independence simplifies things greatly. The assumption is that the "impact" of each evidence (i.e. the likelihood ratio associated with it) does not vary based on what other evidence we already have. That is, for any evidence _e~i~_ its likelihood ratio is the same no matter what other evidence you add to the right-hand side:
+>
+> $LR(e_i|c) = LR(e_i)$ for any conjunction _c_ of other pieces of evidence
+>
+> Assuming conditional independence simplifies the expression for $LR(e)$ greatly:
+>
+> $LR(e) = LR(e_1) \times LR(e_2) \times LR(e_3) \times ... \times LR(e_{13})$
+>
+> On the other hand, the conditional independence assumption is likely to have a substantial impact on what value $LR(e)$ takes. This is because most pieces of evidence are expected to correlate positively with one another instead of being independent. For example, if you know that the script is 20,000-words of Hollywood plot and that the stylometric analysis seems to check out, then if you are dealing with a fake script ("is not real") it is an extremely elaborate fake, and (e.g.) the PDF metadata are almost certain to "check out" and so provide much weaker evidence for "is real" than the calculation assuming conditional independence suggests. On the other hand, the evidence of legal takedowns seems unaffected by this concern, as even a competent faker would hardly be expected to create the evidence of takedowns.
