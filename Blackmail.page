@@ -1,13 +1,13 @@
 ---
 title: Blackmail fail
-description: In which Gwern receives a surprising offer
+description: In which Gwern receives surprising offers
 tags: cryptography, Bitcoin, personal
 created: 10 Dec 2013
 status: finished
 belief: log
 ...
 
-> In December 2013, a crazy person tried to blackmail me for millions of dollars. I declined to pay.
+> In September 2012, I was extorted for $32. I declined to pay. In December 2013, a crazy person tried to blackmail me for millions of dollars. I declined to pay.
 
 I have long been interested in cryptographic topics, and in June 2011, I began researching the new black-markets, as epitomized by [Silk Road]() (SR). Between my sustained coverage of black-market topics, occasional interventions like my Sheep-MarketPlace/BlackMarketReloaded bet, and my minor role in the doxing of Sheep MarketPlace's owner, and my essay [Bitcoin is Worse is Better](), I have been sometimes accused of being more involved than I appear - possibly Dread Pirate Roberts (really Ross Ulbricht), Satoshi Nakamoto, a high-level seller, a law enforcement agent, or other things.
 
@@ -15,7 +15,98 @@ While sometimes flattering (I wish I was Satoshi Nakamoto), these are all quite 
 
 For example, on Reddit I was once sent a PGP-encrypted message to a key ID I did not have, with some accompanying text I interpreted as indicating a blackmail; I replied primly that I certainly did not possess the key that would decrypt the message - perish the thought - and generated a fresh key and insisted they encrypt to that. (Being able to decode the message is proof you possess the private key and so proof you are the person who used that key before; simply replying with knowledge of the message would then be proof I was whomever. Knowing this, the real DPR would ignore any DPR-encoded message sent to another identity.) They were then forced to admit that actually they were bluffing, they had copied the encrypted message from somewhere else and had no more idea what was in it than I did. So much for that!
 
-# No, *I* am Satoshi!
+# 2012
+## 10 September
+
+<!-- TODO: link on LW and the anonymous feedback section of /About -->
+
+On 10 September 2012, I returned from my dinner to discover in my inbox news of a message someone sent me at 4:55PM using my [anonymous feedback form](About#anonymous-feedback):
+
+> gwern \
+> I signed up usernames "gwern" and "gwernbranwen" at pivory.com \
+> I will release login info to you for a ransom. \
+> The ransom value decreases over time following exponential decay with a half-life of 365/2=182.5 days. \
+> It starts at 32 USD on 2012-09-11. I'll allow a 1 day precision. \
+> Payment is to be sent as Bitcoin using MtGox average price to 1LtiftPcu3AjTbXf2XFCbvNTaeRFL1yBAy \
+> After 365 days I will start using the accounts. \
+> notgwern@tormail.org
+
+Oh no! I was being extorted over a username on some forum site called [Pivory](http://pivory.com/). Was I going to pay up $32 to rescue my doppelganger from the clutches of a sinister extortionist? Did he plan to post threats against the President or child porn on this site to besmirch my good name? I knew I had to act swiftly to stanch the damage!
+
+I told him no.
+
+More precisely, I posted the following signed message [to Google+](https://plus.google.com/103530621949492999968/posts/5p1G9CZPBxR) and a private mailing list publicly committing to not paying him a single satoshi
+
+    -----BEGIN PGP SIGNED MESSAGE-----
+    Hash: SHA512
+
+    CCing cheshirecats as site owner; CCing OB-NYC as witnesses.
+
+    > gwern
+    > I signed up usernames "gwern" and "gwernbranwen" at pivory.com
+    > I will release login info to you for a ransom.
+    > The ransom value decreases over time following exponential decay with a half-life of 365/2=182.5 days.
+    > It starts at 32 USD on 2012-09-11. I'll allow a 1 day precision.
+    > Payment is to be sent as Bitcoin using MtGox average price to 1LtiftPcu3AjTbXf2XFCbvNTaeRFL1yBAy
+    > After 365 days I will start using the accounts.
+    > notgwern@tormail.org
+
+    Your message in my anonymous site feedback form leaves me deeply
+    amused, and I applaud your courtesy in setting the 365-day ransom at a
+    modest $8 (2 half-lives from $32); but I'm afraid I must decline your
+    offer permanently.
+
+    Since there are indefinitely many Internet sites which allow user
+    signups and publicly visible comments, accepting an extortion on any
+    of them for any amount exposes me to indefinitely large losses. Hence
+    by backward induction, there is a clear decision-theoretic verdict
+    against paying you any sum.
+
+    - --
+    gwern
+    http://www.gwern.net
+    -----BEGIN PGP SIGNATURE-----
+    Version: GnuPG v1.4.15 (GNU/Linux)
+
+    iEYEAREKAAYFAlKuIbAACgkQvpDo5Pfl1oLzlwCgltduvcnKy2GB5Lmz6EtBTknT
+    fRIAnRtF4DVLmoW8fGAR32fFFeuIqG24
+    =+rda
+    -----END PGP SIGNATURE-----
+
+### Discussion
+
+One curious aspect was that the payment *declined* with time, rather than, as one would expect, *increase* with time as a penalty. [Michael O'Kelly](https://plus.google.com/+MichaelOKelly/about) in the Google+ comments pointed out that the scheme was also in conflict with [option-value](!Wikipedia "Option value (cost benefit analysis)")/learning:
+
+> Am I missing something, or would it make more sense for the ransom to *increase* exponentially?  You will only really be tempted to pay if Pivory becomes the hot new thing, which becomes less ambiguous with time.
+
+I theorized that it was not motivated by a particular economic or decision-theoretic consideration, but more of a psychological hack:
+
+> Michael: I figured it was an attempt to hack convenience; if I paid up quickly, he'd make the most. Most people would not be patient enough to wait. (You're right that you and I would choose a compounding strategy, like any regular extortionist, to instead incentivize quick payment by all sorts of people.)
+>
+> Of course, he must not know me very well, because if he did, he would've known that I would simply put payment on my calendar for a year from now and pay as little as possible, or better yet, wait for him to actually start using the accounts and only paying up if it looked like he could do some damage with it.
+
+[Арсений Алексеев](https://plus.google.com/113212242446665079433/) pointed out an additional failing if we took the psychological view, that the extortionist provided a clear deadline and so there was less incentive to pay to reduce uncertainty (dislike of uncertainty seems related to [loss aversion](!Wikipedia)):
+
+> You would be tempted to pay early if the ending date was unknown. I am surprised he made that public.
+
+Finally, [Joshua Zelinsky](https://plus.google.com/103374245285362725470) speculated on broader implications of the extortionist's failure:
+
+> This suggests that people only take [exponential discounting](!Wikipedia) seriously when it isn't made explicit. If one thinks that [hyperbolic discounting](!Wikipedia) makes more sense though then this ransom doesn't really work.
+
+### Outcome
+
+I made 2 predictions about how my anonymous extortionist would react to my public declaration:
+
+1. He will reply: [65%](http://predictionbook.com/predictions/8217)
+
+    If he spent the time registering the username and contacting me, after such a rebuke, I expected a reply if only to justify his peculiar payment schedule. Unfortunately, I was wrong and as of 15 December 2013, I have not heard a peep from him, and further, the Bitcoin address [`1LtiftPcu3AjTbXf2XFCbvNTaeRFL1yBAy`](https://blockchain.info/address/1LtiftPcu3AjTbXf2XFCbvNTaeRFL1yBAy) has been inactive since.
+2. He will not attempt a second extortion: [65%](http://predictionbook.com/predictions/8218)
+
+    As I said at the time, "if it didn't work the first time, why would it work elsewhere?" Indeed. I'd said no and given a general explanation of why I *could not* pay for the entire class of extortion attempts.
+
+I paid nothing and suffered no harm, so I regard this mostly as an amusing example of the use of Bitcoin for extortion.
+
+# 2013
 
 Below is an example of something I hoped would be a useful lead, but which turned out to be a nuisance. (Messages below have their original formatting preserved as much as possible; where relevant, encrypted messages are decrypted and several successive comments by a party are combined into a single blockquote.)
 
@@ -55,7 +146,7 @@ Naturally, I opened the `Privnote.com` link to read the full message:
 
 Well. That was ominous. I recognized the address [`1933phfhK3ZgFQNLGSDXvqCn32k2buXY8a`](https://blockchain.info/address/1933phfhK3ZgFQNLGSDXvqCn32k2buXY8a) as being the notorious lost treasure of Dread Pirate Roberts - the ฿111,114 (~$92,224,620) the FBI failed to confiscate using Ross Ulbricht's laptop. Did Jack think I was the *real* DPR and Ross a patsy or minor employee? Certainly the mention of "team" suggested I had ongoing operations and that he might think I was the DPR2 running SR2, but I didn't know what might be meant by "scam coin". More disturbing was the sentence mentioning my "organized list of 'mistakes'", which was a clear allusion to [Mistakes]() and evidence that this was a targeted message and not some indiscriminate broadcast to, say, all Redditors who commented on SR-related articles. Regardless, this is a clear blackmail attempt.
 
-How to respond? I have no secret identities worth paying to keep secret, I do not possess ฿111,114 (heck, I don't even possess ฿111), and if I did, did he seriously think that I would pay up immediately on getting such a cryptic threat? Now, I know he must be wrong in whatever his accusation is, but that doesn't mean his information is worthless: he could have still stumbled over valuable information, even if his conclusion is wrong. And the purple prose was inherently amusing.
+How to respond? I have no secret identities worth paying to keep secret, I do not possess ฿111,114 (heck, I don't even possess ฿111), and if I did, did he seriously think that I would pay up immediately on getting such a cryptic threat? Now, I know he must be wrong in whatever his accusation is, but that doesn't mean his information is worthless: he could have still stumbled over valuable information, even if his conclusion is wrong. And the purple prose was inherently amusing (if a little disturbing in its own way - "What frightens us most in a madman is his sane conversation").
 
 How to find out what he knows? I can't simply tell him, "you are wrong, but could you please tell me what information led you to your outlandish conclusion?" I decided to employ the same strategy the last time someone accused me of being DPR: insist on setting up a new public key and talk via that. Naturally, I didn't care about Reddit eavesdropping on our conversation - what do they care about a mistaken dox or obscure bit of black-market trivia? The point was simply to give Jack an impression of guilt: after all, what *innocent* person would bother with such high security measures? Surely only the real DPR would insist on such iron-clad secure communications⸮
 
@@ -559,6 +650,6 @@ If he replied with any evidence, the monologue might be worth listening to furth
 >
 > I can say with great confidence, that this is a clear display of idiocy from several at its finest. Have a good day "friend".
 
-I can only shake my head at this - if I'm "obviously not Nate Silver" then what the hell was the "Nate" and "Silver Productions" before about? But Jack seems to be sticking to his Gavin story in bringing up "Michele Cook-Andresen" (Gavin Andresen's real wife, according to a [_WSJ_ profile of Andresen](http://online.wsj.com/news/articles/SB10001424127887323809304578429142650304564 "Bitcoin vs. Ben Bernanke: The chief scientist for the digital currency talks about its appeal-and pitfalls-in a world of fiat money")) and apparently claiming he has found Gavin's children's names (I did not check this part).
+I can only shake my head at this - if I'm "obviously not Nate Silver" then what the hell was the "Nate" and "Silver Productions" before about? But Jack seems to be sticking to his 'Natoshi Gwernvin' story in bringing up "Michele Cook-Andresen" (Gavin Andresen's real wife, according to a [_WSJ_ profile of Andresen](http://online.wsj.com/news/articles/SB10001424127887323809304578429142650304564 "Bitcoin vs. Ben Bernanke: The chief scientist for the digital currency talks about its appeal-and pitfalls-in a world of fiat money")) and apparently claiming he has found Gavin's children's names (I did not check this part).
 
 I am troubled at Jack bringing up Gavin's family. In particular, by the "I'm going to head out East" line: Gavin's public profiles like [his Twitter account](https://twitter.com/gavinandresen) state he lives in Amherst, MA - which would indeed be in the "East". So I emailed Andresen a copy of my writeup up to that point. I decided it was probably better to not reply further to Jack until I heard back.
