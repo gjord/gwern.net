@@ -9,7 +9,7 @@ belief: log
 
 > In September 2012, I was extorted for $32; I declined to pay. In November 2013, I called an encryption bluff. In December 2013, a crazy person tried to blackmail me for billions of dollars; I declined to pay.
 
-I have long been interested in cryptographic topics, and in June 2011, I began researching the new black-markets, as epitomized by [Silk Road]() (SR). Between my sustained coverage of black-market topics, occasional interventions like my Sheep-MarketPlace/BlackMarketReloaded bet, and my minor role in the doxing of Sheep MarketPlace's owner, and my essay [Bitcoin is Worse is Better](), I have been sometimes accused of being more involved than I appear - possibly Dread Pirate Roberts (really Ross Ulbricht), [Satoshi Nakamoto](!Wikipedia), a high-level seller, a law enforcement agent, or other things.
+I have long been interested in cryptographic topics, and in June 2011, I began researching the new black-markets, as epitomized by [Silk Road]() (SR). Between my sustained coverage of black-market topics, occasional interventions like my Sheep-MarketPlace/BlackMarket-Reloaded bet, and my minor role in the doxing of Sheep MarketPlace's owner, and my essay [Bitcoin is Worse is Better](), I have been sometimes accused of being more involved than I appear - possibly Dread Pirate Roberts (really Ross Ulbricht), [Satoshi Nakamoto](!Wikipedia), a high-level seller, a law enforcement agent, or other things.
 
 While sometimes flattering (I wish I was Satoshi Nakamoto), these are all quite wrong: I am but an impoverished writer who barely makes ends meet, and certainly not a Bitcoin billionaire. Still, some tinge of notoriety can be useful if it means people are willing to tell me private information. On the other hand, sometimes it is just plain irritating. They don't always go anywhere. Here are 3 examples of things that went nowhere, or at least, not where I wanted them to go.
 
@@ -238,14 +238,14 @@ And then sometime later, sent a longer reply:
 >
 > I will add that all totals will continue to be calculated in BTC on that days average if you fail to comply with any guidelines. Look forward to something more pleasant in discussion as soon as possible, best.
 
-The postscript confirmed my belief he was blackmailing me, but I couldn't figure out more. He had made the usual error of not formatting the PGP-encrypted message as a codeblock, so it got wrapped. Even after fixing that, the message was invalid:
+The postscript confirmed my belief he was blackmailing me, but I couldn't figure out more. He had made the usual error of not formatting the PGP-encrypted message as a code block, so it got wrapped. Even after fixing that, the message was invalid:
 
     $ xclip -o | gpg --decrypt
     gpg: encrypted with 2048-bit RSA key, ID C47A3D09, created 2013-12-11
           "jack0fnone <jack0fnone@safe-mail.net>"
     gpg: decryption failed: secret key not available
 
-It was encrypted to *his* public key? I decided to play security hardass, to further the impression of guilt (surely an *innocent* person would suggest simply messaging like normal people and not be so paranoid):
+It was encrypted to *his* public key? I decided to play security hard-ass, to further the impression of guilt (surely an *innocent* person would suggest simply messaging like normal people and not be so paranoid):
 
 > Please use that key. I don't mean to be rude, but if you cannot compartmentalize and follow basic opsec, there is nothing that can be safely said.
 
@@ -455,7 +455,7 @@ This provoked an astonishing torrent from Jack
 >
 > What am I even saying? At this point, I'll be eagerly checking in to see just how you things will add up. Now I hope you don't think you'll sway me into any more nonsense you think I should validate before moving forward with this. I need to get high and relax, this hunt has officially ended with ABSOLUTE certainty on my part, I know the right minds will fall into agreement with me.
 
-I was flabbergasted. I hadn't even heard of half of the names he gave in the first paragraph, or the others (eg. [ZipZap](http://www.coindesk.com/ripple-labs-now-taking-cash-payments-zipzap-snapswap/) is apparently something to do with [Ripple](!Wikipedia "Ripple (monetary system)"), and I had to do some searching to learn even that). Forget the complete absence of the evidence I asked for, this seemed like it was written by someone in the throes of full-blown psychosis or mania or schizophrenia with meaningless plans to somehow revolutionize the world. I do not have much experience dealing with crazy people, so I gave the matter some more thought before I replied the next day.
+I was flabbergasted. I hadn't even heard of half of the names he gave in the first paragraph, or the others (eg. [ZipZap](http://www.coindesk.com/ripple-labs-now-taking-cash-payments-zipzap-snapswap/) is apparently something to do with [Ripple](!Wikipedia "Ripple (monetary system)"), and I had to do some searching to learn even that). Forget the complete absence of the evidence I asked for, this seemed like it was written by someone in the throes of full-blown psychosis or mania or schizophrenia with meaningless plans to somehow revolutionize the world. (But to give Jack his due, some of his lines are hilarious: everyone should have a pet parliament which can be left blushing!) I do not have much experience dealing with crazy people, so I gave the matter some more thought before I replied the next day.
 
 ### 12 December
 
