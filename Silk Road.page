@@ -990,7 +990,8 @@ The first version of this article was commissioned by [_Bitcoin Weekly_](http://
     > And lose the name of action.
 
 # Appendices
-## BBC questions
+## Interviews
+### BBC questions
 
 In mid-January 2012, a reporter from BBC Radio's "[5 Live](!Wikipedia "BBC Radio 5 Live") Investigates" emailed me asking whether I'd answer questions for [their 5 February show](http://www.bbc.co.uk/programmes/b01bmpl4) they were doing on Bitcoin & Silk Road; I agreed. The following is the transcript:
 
@@ -1048,15 +1049,15 @@ I know other users disagree and take it only as a useful service or something of
 
 I am also horrified by the effects of the War on Drugs, which has been a greater disaster than Prohibition (which we at least had the sense to repeal after a few years). Buying on the Silk Road and writing about it is, if you will, my bit of patriotism. It's not very heroic, and I've never claimed to be a hero or to be doing anything particularly noteworthy, but perhaps it will change someone's mind - either that drugs are not so bad or that the War is not so practicable.
 
-## Mike Power questions
+### Mike Power questions
 
 On 29 November 2013, journalist [Mike Power](http://mikepower.pressfolios.com/) (of _Drugs 2.0_) asked me a few questions
 
-> 1. What will be the cultural and technological impact of the Silk Road bust, in your view?
+> 1\. What will be the cultural and technological impact of the Silk Road bust, in your view?
 
 The cultural impact is that even more people are aware of SR. The flurry of coverage, while very negative and unflattering to SR (the attempted hits have badly tarnished SR's reputation), still serves to spread the news that there was a real functioning drug black market just as claimed, and that it worked fabulously well. This part of the pro-drug movement in America right now, in conjunction with the fact that marijuana legalization seems to be basically working out in the West, with minimal "reefer madness", is helping normalize illicit drug consumption and make a mockery of the War on Drugs. It's one thing for people to wonder if the persecution is more harmful than treatment would be, and to note that drugs continue to be available on the street, and quite another to realize it's almost as easy as ordering off Amazon!
 
-> 2. What future do you see for bitcoin, Tor and the new Silk Road?
+> 2\. What future do you see for bitcoin, Tor and the new Silk Road?
 
 Bitcoin seems to be going from strength to strength. As an admirer of Bitcoins from when I first learned of them in 2010, I am pleased by its success and I think it will make the Internet much more useful for commerce. (I should note that the current price increases seem unsustainable to me, and I expect there to be a large correction at some point before ~$2600/btc, which is apparently roughly where this bubble will equal the previous bubble's percentage increases, but though there will no doubt be many nay-sayers at that point, I expect Bitcoin to keep steadily growing.)
 
@@ -1064,17 +1065,54 @@ I don't expect Tor to be affected. Tor's problems stem from the recent research 
 
 The black-markets themselves seem to be following the path set by BitTorrent: now that the business model has been proven beyond a doubt with audited figures about profitability (you can thank the FBI for that one), every geek in the world understands that they can become a millionaire if they dare. It's back to whack-a-mole: new markets will pop up, and will run until they get hammered down or rip-and-run. Evolution means the ones who leak their identities like Silk Road or Sheep, or who write bad code, like BMR, will either fix their problems or get weeded out & replaced.
 
-> 3. How would you summarise and characterise your experiences with [LSD microdosing]()?
+> 3\. How would you summarise and characterise your experiences with [LSD microdosing]()?
 
 I found no benefits from it, and I'm not sure how meaningful my results are for other people. I wouldn't call it my best self-experiment ever, but not a waste of time either.
 
-> 4. Do you feel that governments have the right to police the computer activity, or the mindstates, of those who elect them?
+> 4\. Do you feel that governments have the right to police the computer activity, or the mindstates, of those who elect them?
 
 I think computer activity is, like any other activity, subject to government intervention if it is really justified (which it rarely is); taking place on a computer does not make it unreal or exempt. Policing mindstates, on the other hand, should basically be banned for all the same reasons we have free speech.
 
-> 5. What do you think of the marketplace, over on [I2P](!Wikipedia)? is it as serious as it looks to a non-coder, like myself?
+> 5\. What do you think of the marketplace, over on [I2P](!Wikipedia)? is it as serious as it looks to a non-coder, like myself?
 
 I have not actually set up I2P yet, so I've seen none of the I2P markets.
+
+### NYT
+
+On 16 December, [Alan Feuer](http://topics.nytimes.com/top/reference/timestopics/people/f/alan_feuer/index.html) of _The New York Times_ emailed me with some questions about the recent (29 November 2013) failure of Sheep MarketPlace & theft of its user funds. I answered as best I could:
+
+> 1\. Why in general were you skeptical about SMP's survival in the first place? What about it struck you as unsustainable?
+
+In general, black-markets are not very stable: the market dynamics that power them and render them self-regulating and made Silk Road such a wonderful way to buy drugs require specific conditions to work, but conditions are always changing. This doesn't mean you can't get drugs from them, any more than restaurants always going out of business means you can't get good Mexican food when you want it, but it does mean that any particular black-market can't be expected to hang around more than a year or two. The SR model, with a single centralized site both buyers and sellers have to trust, did work but that trust can be abused by the site operator^[If we were to classify Silk Road / BMR / Atlantis / SMP as the first generation of Bitcoin+Tor black-markets and analogize them to Napster, then the second generation of black-markets, the BitTorrent of black-markets, will - I think - be the new black-markets which make use of "multi-signature escrow" to remove the weak point of a centralized site handling deposits/escrow which can then be hacked or stolen. "The Market Place" seems to be the pioneer here, but it's still too early to say whether multi-signatures work in practice like they do in theory or whether black-market users value the convenience of a centralized site too much.]. So inherently one expects black-markets to have fairly short lifetimes. (They are
+surprisingly like regular businesses or websites in this respect.)
+
+Sheep MarketPlace in particular struck me as dubious because it was so obviously modeled after SR (indicating a lack of originality and possible get-rich-quick mentality), the operators did not speak English well (despite English being the international language of programmers), it was hardly used (meaning that there was no feedback and it had not withstood any hackers the way SR had), and it received the lion's share of the post-SR market for no particular merit of its own other than its visual appearance and lingering distrust of BlackMarket Reloaded.
+
+> 2. What do you feel is the most convincing evidence that Jiřikovský is/was connected to SMP?
+
+The clearnet site. It was exactly the sort of rookie error I expected from someone with a casual attitude to security: that they could promote their site as they pleased, and as long as they maintained some level of plausible denialability, it was safe. Except security & anonymity are not a courtroom with all its legal niceties, circumstantial evidence is powerful, and once you began examining Tomas, everything falls into place. At that point, it's almost irrelevant if you find something like, for example, Tomas being the first person online to discuss the existence of Sheep Marketplace (the same mistake Ross Ulbricht/"altoid" made, incidentally). You've already done most of the intellectual work necessary to identify the operator of SMP. Simply by being so closely associated with a server that could only have been set up by someone working with SMP, he forfeited most of his anonymity and claims to innocence.
+
+(To understand what I mean by "most of the work", it may be helpful to read my hopefully-entertaining essay on [anonymity in _Death Note_](Death Note Anonymity).)
+
+Incidentally, you should probably see the [Reddit translation & discussion of Tomas's interview with _Lidové Noviny_ on SMP](http://www.reddit.com/r/SheepMarketplace/comments/1sdpkn/interview_with_alleged_scammer/) for Tomas's general failure to respond to the presented evidence, failure to say who *was* running the clearnet site on his server if not him, and in some cases, like his early mention of SMP, clear lying.
+
+> 3\. I had a bit of difficultly understanding the facts and significance of the Clearnet site. Would you help me understand that?
+
+See above. The clearnet site is very similar to how "altoid" posted on some forums about a new site called Silk Road, was the first identifiable person to ever discuss Silk Road, and then proved to be the account of a guy called Ross Ulbricht. It's incredibly suspicious and exactly what you might expect the operator to do in an attempt to drum up interest and attract attention and so is the best starting point for an investigation. It's not enough to prove in court he ran Silk Road - but we are not in court.
+
+> 4\. Is it your belief that the "heist" was in fact perpetrated by SMP's admins themselves?
+
+The heist was clearly perpetrated by the operator of SMP; even the SMP forum moderators admit as much.
+
+If you mean the story about "EBOOK101" hacking the site... I am agnostic on the topic.
+
+While it is a reasonable trigger for why Tomas might decide to grab the money and run, and we saw a similar hack prompt backopy to decide to close down BMR fully, the problem with the story is that no one seems to have ever dealt with an EBOOK101, EBOOK101 has not left any taunting messages or clues like the BMR hacker did, and SMP in retrospect seems to have been orchestrating the scam for at least a week in advance by shutting down withdrawals (on the pretext of adding tumbling), coaxing people into depositing even more money, and delaying tactics like adding a fancy countdown timer.
+
+And in any event, it's mostly a moot point: SMP stole far more money from its users than EBOOK101 was supposed to have. And suppose the story were true - Tomas's willingness to immediately give up after the hack suggests to me that he would not have been continuing SMP much longer regardless...
+
+> 5\. And your take on the FBI's role in all of this?
+
+I only know what my informant has told me; since he presented a convincing case for Tomas to me which he did not have to, I assumed he was also telling me the truth about him telling the FBI and them being very interested in what he had to say. So I assumed that they were on the case and understood the need for prompt action. But the FBI has issued no statements on the topic, I have not contacted Christopher Tarbell myself, and thus far there have been no arrests or other law enforcement action I am aware of. I am a little bewildered by the complete silence. So I no longer have any idea on their role. For all I know, they've completely given up. Or maybe they'll announce arrests tomorrow. You should ask Tarbell.
 
 ## Reddit advice
 
