@@ -960,9 +960,9 @@ PPV = (1 - β)R/(R - βR + α)
 9. 2 - 8 December: 1
 
     9 - 15 December: 0
-10. 16 - 17? December: ?
+10. 16 - 17 December: 0
 
-    18? - 19? December: ?
+    18 - 19 December: 1
 
     At this point, I discovered I had run out of magnesium pills and had forgotten to order the magnesium citrate powder I'd intended to. I still had a lot of Noopept pills for the concurrently running second Noopept self-experiment, but since I wanted to wrap up some other experiments with a big analysis at the end of the year, I decided to halt and resume in January 2014.
 
@@ -1690,9 +1690,12 @@ It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to
 14. 10mg: 8 - 10 December: 1
 
     11 - 13 December: 0
-15. 30mg: 14 - 16? December: ?
+15. 30mg: 14 - 16 December: 0
 
-    17? - 19? December: ?
+    17 - 19 December: 1
+16. 20mg: 20 - 22? December: ?
+
+    23? - 25? December: ?
 
 # Oxiracetam
 
@@ -2283,6 +2286,31 @@ All data, colored by LLLT-affected:
 http://i.imgur.com/dUEEPKI.png
 
 So you can see part of why I'm worried here: the third group of data looks very different from the other two groups, as not just are the scores all high, but they're also very narrowly bunched in an ascending line compared to the really spread out second group or even the first group. What's going on there? Pretty anomalous.
+
+Dose model:
+
+lllt <- read.csv("http://dl.dropboxusercontent.com/u/243666993/2013-12-18-enlilasko-lllt.csv")
+lllt$LLLT <- as.logical(lllt$LLLT)
+
+lllt$Dose <- c(rep(12, 10), rep(0, 20), rep(20, 10))
+summary(lllt)
+    LLLT         Choice.Reaction.Time Visual.Matching    Sorting    Finger.Tapping      Dose
+ Mode :logical   Min.   :506          Min.   :554     Min.   :592   Min.   :504    Min.   : 0
+ FALSE:20        1st Qu.:543          1st Qu.:581     1st Qu.:606   1st Qu.:542    1st Qu.: 0
+ TRUE :20        Median :566          Median :584     Median :614   Median :560    Median : 6
+ NA's :0         Mean   :564          Mean   :586     Mean   :616   Mean   :560    Mean   : 8
+                 3rd Qu.:583          3rd Qu.:593     3rd Qu.:622   3rd Qu.:583    3rd Qu.:14
+                 Max.   :609          Max.   :612     Max.   :645   Max.   :610    Max.   :20
+
+
+l1 <- lm(cbind(Choice.Reaction.Time, Visual.Matching, Sorting, Finger.Tapping) ~ LLLT, data=lllt)
+l2 <- lm(cbind(Choice.Reaction.Time, Visual.Matching, Sorting, Finger.Tapping) ~ Dose, data=lllt)
+anova(l1,l2)
+
+  Res.Df Df Gen.var. Pillai approx F num Df den Df Pr(>F)
+1     38         151
+2     38  0      138      0               0      0
+
 
 ----
 
