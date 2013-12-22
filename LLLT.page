@@ -203,7 +203,7 @@ The second dose model fits far better.
 
 ### Robustness
 
-Finally, one might ask based on the graph: is this all being driven by that anomalous third-group? Where the dose was increased? No, because even if we ignore the third group, the results are very similar:
+One might ask based on the graph: is this all being driven by that anomalous third-group? Where the dose was increased? No, because even if we ignore the third group, the results are very similar:
 
 ~~~{.R}
 summary(lm(cbind(Choice.Reaction.Time, Visual.Matching, Sorting, Finger.Tapping) ~ Dose, data=lllt[1:30,]))
@@ -238,6 +238,71 @@ Dose           2.942      0.493    5.97    2e-06
 ~~~
 
 The `Visual.Matching` response variable loses a lot of its strength, but in general, the results look the same as before: positive coefficients with statistically-significant effects of LLLT.
+
+### Training effects
+
+The anomalous third group prompts me to wonder if maybe it reflects a practice effect where subjects slowly get better at tasks over time. A quick cheap gesture towards time-series analysis is to just insert the index of each set of results and use that in the regression. But there seems to be only a small and statistically-insignificant result of all scores increasing with time:
+
+~~~{.R}
+lllt$Time <- 1:40
+l1 <- lm(cbind(Choice.Reaction.Time, Visual.Matching, Sorting, Finger.Tapping) ~ Dose, data=lllt)
+l2 <- lm(cbind(Choice.Reaction.Time, Visual.Matching, Sorting, Finger.Tapping) ~ Dose + Time, data=lllt)
+anova(l1, l2)
+  Res.Df Df Gen.var. Pillai approx F num Df den Df Pr(>F)
+1     38         138
+2     37 -1      137  0.131     1.28      4     34    0.3
+~~~
+
+Curiously, if I delete the anomalous third group and rerun, the `Time` variable becomes much more significant:
+
+~~~{.R}
+lllt <- lllt[1:30,]
+...
+anova(l1, l2)
+  Res.Df Df Gen.var. Pillai approx F num Df den Df Pr(>F)
+1     28         153
+2     27 -1      142  0.367     3.47      4     24  0.023
+~~~
+
+But the gain is being driven by `Choice.Reaction.Time` and 2 of the coefficients are now even negative:
+
+~~~{.R}
+summary(l2)
+
+Response Choice.Reaction.Time :
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)  511.143     12.531   40.79  < 2e-16
+Dose           4.427      0.896    4.94  3.6e-05
+Time           1.625      0.586    2.77   0.0099
+
+Response Visual.Matching :
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)  570.534      9.053   63.02   <2e-16
+Dose           1.027      0.648    1.59     0.12
+Time           0.498      0.423    1.18     0.25
+
+Response Sorting :
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)  608.885      7.212   84.43   <2e-16
+Dose           0.810      0.516    1.57     0.13
+Time          -0.109      0.337   -0.32     0.75
+
+Response Finger.Tapping :
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) 537.7977    12.1631   44.22   <2e-16
+Dose          2.9174     0.8700    3.35   0.0024
+Time         -0.0194     0.5686   -0.03   0.9730
+~~~
+
+So it seems that the third group is driving the apparent training effect.
 
 # Discussion
 
