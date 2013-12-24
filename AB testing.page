@@ -1260,3 +1260,309 @@ Coefficients:
             Estimate Std. Error z value Pr(>|z|)
 (Intercept)  -1.2933     0.0156   -82.7   <2e-16
 ~~~
+
+
+# Appendix
+## Covariate impact on power
+
+> Is it important in randomized testing to control for covariates, even powerful ones? A simulation using a website's data suggests not.
+
+In December 2013, I was discussing website testing with another site owner, which monetizes traffic by selling a product, while I just optimize for reading time. He argued (deleting identifying details since I will be using their real traffic & conversion numbers throughout):
+
+> I think a *big* part that gets lost out is the quality of traffic. For our [next website version]
+> (still speccing it all out), one of my biggest requirements for A/B testing
+> is that all referring traffic must be bucketed and split-test against them.
+> Buckets themselves are amorphous - they can be visitors of the same
+> resolution, visitors who have bought our guide, etc. But just comparing how
+> we did (and our affiliates did) on sales of our S-G Reference (an easy to
+> measure metric - our RPU), traffic matters so much. X sent 5x the
+> traffic that Y did, yet still generated 25% less sales. That
+> would destroy any meaningful A/B testing without splitting up the quality.
+
+I was a little skeptical that this was a major concern much less one worth expensively engineering into a site, and replied:
+
+> Eh. You would lose some power by not correcting for the covariates of
+> source, but the randomization would still work and deliver you
+> meaningful results. As long as visitors were being randomized into the
+> A and B variants, and there was no gross imbalance in cells between
+> Y and X, and Y and X visitors didn't react
+> differently, you'd still get the right results - just you would need
+> more traffic to get the same statistical power. I don't think 25%
+> difference between X and Y visitors would even cost you that
+> much power...
+
+In particular, if you lost a *lot* of power, wouldn't that imply randomized trials were inefficient or impossible? The point of randomization is that it eliminates the impact of the indefinitely many observed and unobserved variables to let you do causal inference.
+
+### Power simulation
+
+Since this seems like a relatively simple problem, I suspect there is an analytic answer, but I don't know it. So instead, we can set this up as a simulated power analysis: we generate random data where we *force* the hypothesis to be true by construction, we run our planned analysis, and we see how often we get a _p_-value underneath 0.05 (which is the true correct answer, by construction).
+
+Let's say Y's visitors convert at 10%, then X's must convert at 10% * 0.75, as he said, and let's imagine our A/B test of a blue site-design increases sales by 1%. (So in the better version, Y visitors convert at 11% and X convert at 8.5%.) We generate $\frac{n}{4}$ datapoints from each condition (X/blue, X/not-blue, Y/blue, Y/not-blue), and then we do the usual logistic regression looking for a difference in conversion rate, with and without the info about the source. So we regress Conversion ~ Color, to look at what would happen if we had no idea where visitors came from, and then we regress `Conversion ~ Color + Source`. These will spit out _p_-values on the `Color` coefficient which are *almost* the same, but not quite the same: the regression with the `Source` variable is slightly better so it should yield slightly lower _p_-values for `Color`. Then we count up all the times the _p_-value was below the magical amount for each regression, and we see how many statistically-significant _p_-values we lost when we threw out `Source`. Phew!
+
+So we might like to do this for each sample size to get an idea of how they change. _n_=100 may not the same for _n_=10,000. And ideally, for each _n_, we do the random data generation step many times, because it's a simulation and so any particular run may not be representative. Below, I'll look at _n_=1000, 1100, 1200, 1300, and so on up until _n_=10,000. And for each _n_, I'll generate 1000 replicates, which should be pretty accurate.
+
+#### Large _n_
+
+The whole schmeer in R:
+
+~~~{.R}
+set.seed(666)
+yP <- 0.10
+xP <- yP * 0.75
+blueP <- 0.01
+
+# examine various possible sizes of N
+controlledResults <- NULL
+uncontrolledResults <- NULL
+for (n in seq(1000,10000,by=100)) {
+
+ controlled <- NULL
+ uncontrolled <- NULL
+
+ # generate 100 hypothetical datasets
+ for (i in 1:1000) {
+
+ nn <- n/4
+ # generate 2x2=4 possible conditions, with different probabilities in each:
+ d1 <- data.frame(Converted=rbinom(nn, 1, xP   + blueP), X=TRUE,  Color=TRUE)
+ d2 <- data.frame(Converted=rbinom(nn, 1, yP + blueP), X=FALSE, Color=TRUE)
+ d3 <- data.frame(Converted=rbinom(nn, 1, xP   + 0),     X=TRUE,  Color=FALSE)
+ d4 <- data.frame(Converted=rbinom(nn, 1, yP + 0),     X=FALSE, Color=FALSE)
+ d <- rbind(d1, d2, d3, d4)
+
+ # analysis while controlling for X/Y
+ g1 <- summary(glm(Converted ~ Color + X, data=d, family="binomial"))
+ # pull out p-value for Color, which we care about; did we reach statistical-significance?
+ controlled[i] <- 0.05 > g1$coef[11]
+
+ # again, but not controlling
+ g2 <- summary(glm(Converted ~ Color        , data=d, family="binomial"))
+ uncontrolled[i] <- 0.05 > g2$coef[8]
+ }
+ controlledResults   <- c(controlledResults, (sum(controlled)/1000))
+ uncontrolledResults   <- c(uncontrolledResults, (sum(uncontrolled)/1000))
+}
+controlledResults
+uncontrolledResults
+uncontrolledResults / controlledResults
+~~~
+
+Results:
+
+~~~{.R}
+R> controlledResults
+ [1] 0.081 0.086 0.093 0.113 0.094 0.084 0.112 0.112 0.100 0.111 0.104 0.124 0.146 0.140 0.146 0.110
+[17] 0.125 0.141 0.162 0.138 0.142 0.161 0.170 0.161 0.184 0.182 0.199 0.154 0.202 0.180 0.189 0.202
+[33] 0.186 0.218 0.208 0.193 0.221 0.221 0.233 0.223 0.247 0.226 0.245 0.248 0.212 0.264 0.249 0.241
+[49] 0.255 0.228 0.285 0.271 0.255 0.278 0.279 0.288 0.333 0.307 0.306 0.306 0.306 0.311 0.329 0.294
+[65] 0.318 0.330 0.328 0.356 0.319 0.310 0.334 0.339 0.327 0.366 0.339 0.333 0.374 0.375 0.349 0.369
+[81] 0.366 0.400 0.363 0.384 0.380 0.404 0.365 0.408 0.387 0.422 0.411
+R> uncontrolledResults
+ [1] 0.079 0.086 0.093 0.113 0.092 0.084 0.111 0.112 0.099 0.111 0.103 0.124 0.146 0.139 0.146 0.110
+[17] 0.125 0.140 0.161 0.137 0.141 0.160 0.170 0.161 0.184 0.180 0.199 0.154 0.201 0.179 0.188 0.199
+[33] 0.186 0.218 0.206 0.193 0.219 0.221 0.233 0.223 0.245 0.226 0.245 0.248 0.211 0.264 0.248 0.241
+[49] 0.255 0.228 0.284 0.271 0.255 0.278 0.279 0.287 0.333 0.306 0.305 0.303 0.304 0.310 0.328 0.294
+[65] 0.316 0.330 0.328 0.356 0.319 0.310 0.334 0.339 0.326 0.366 0.338 0.331 0.374 0.372 0.348 0.369
+[81] 0.363 0.400 0.363 0.383 0.380 0.404 0.364 0.406 0.387 0.420 0.410
+R> uncontrolledResults / controlledResults
+ [1] 0.9753 1.0000 1.0000 1.0000 0.9787 1.0000 0.9911 1.0000 0.9900 1.0000 0.9904 1.0000 1.0000
+[14] 0.9929 1.0000 1.0000 1.0000 0.9929 0.9938 0.9928 0.9930 0.9938 1.0000 1.0000 1.0000 0.9890
+[27] 1.0000 1.0000 0.9950 0.9944 0.9947 0.9851 1.0000 1.0000 0.9904 1.0000 0.9910 1.0000 1.0000
+[40] 1.0000 0.9919 1.0000 1.0000 1.0000 0.9953 1.0000 0.9960 1.0000 1.0000 1.0000 0.9965 1.0000
+[53] 1.0000 1.0000 1.0000 0.9965 1.0000 0.9967 0.9967 0.9902 0.9935 0.9968 0.9970 1.0000 0.9937
+[66] 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 0.9969 1.0000 0.9971 0.9940 1.0000 0.9920
+[79] 0.9971 1.0000 0.9918 1.0000 1.0000 0.9974 1.0000 1.0000 0.9973 0.9951 1.0000 0.9953 0.9976
+~~~
+
+So at _n_=1000 we don't have decent statistical power to detect our true effect of 1% increase in conversion rate thanks to blue - only 8% of the time will we get our magical _p_<0.05 and rejoice in the knowledge that blue is boss. That's not great, but that's not what we were asking about.
+
+#### Small _n_
+
+Moving on to our original question, we see that the regressions controlling for source had a very similar power as to the regressions which didn't bother. It looks like you may pay a small price of 2% less statistical power, but probably even less than that because so many of the other entries yielded an estimate of 0% penalty. And obviously the penalty gets smaller as sample size increases and a mere 25% difference in conversion rate washes out as noise.
+
+What if we look at smaller samples? say, _n_=12-1012?
+
+~~~{.R}
+...
+for (n in seq(12,1012,by=10)) {
+... }
+
+R> controlledResults
+  [1] 0.000 0.000 0.000 0.001 0.003 0.009 0.010 0.009 0.024 0.032 0.023 0.027 0.033 0.032 0.045
+ [16] 0.043 0.035 0.049 0.048 0.060 0.047 0.043 0.035 0.055 0.051 0.069 0.055 0.057 0.045 0.046
+ [31] 0.037 0.049 0.057 0.057 0.050 0.061 0.055 0.054 0.053 0.062 0.076 0.064 0.055 0.057 0.064
+ [46] 0.077 0.059 0.062 0.073 0.059 0.053 0.059 0.058 0.062 0.073 0.070 0.060 0.045 0.075 0.067
+ [61] 0.077 0.072 0.068 0.069 0.082 0.062 0.072 0.067 0.076 0.069 0.074 0.074 0.062 0.076 0.087
+ [76] 0.079 0.073 0.065 0.076 0.087 0.059 0.070 0.079 0.084 0.068 0.077 0.089 0.077 0.081 0.086
+ [91] 0.094 0.080 0.080 0.087 0.085 0.087 0.082 0.084 0.073 0.083 0.077
+R> uncontrolledResults
+  [1] 0.000 0.000 0.000 0.001 0.002 0.009 0.005 0.007 0.024 0.031 0.023 0.024 0.033 0.032 0.044
+ [16] 0.043 0.035 0.048 0.047 0.060 0.047 0.043 0.035 0.055 0.051 0.068 0.054 0.057 0.045 0.045
+ [31] 0.037 0.048 0.057 0.057 0.050 0.060 0.055 0.054 0.053 0.062 0.074 0.063 0.055 0.057 0.059
+ [46] 0.077 0.058 0.062 0.073 0.059 0.053 0.059 0.057 0.061 0.071 0.068 0.060 0.045 0.074 0.067
+ [61] 0.076 0.072 0.068 0.069 0.082 0.062 0.072 0.066 0.076 0.069 0.073 0.073 0.061 0.074 0.085
+ [76] 0.079 0.073 0.065 0.076 0.087 0.058 0.066 0.076 0.084 0.067 0.077 0.089 0.077 0.081 0.086
+ [91] 0.094 0.080 0.080 0.087 0.085 0.087 0.080 0.081 0.071 0.083 0.076
+R> uncontrolledResults / controlledResults
+  [1]    NaN    NaN    NaN 1.0000 0.6667 1.0000 0.5000 0.7778 1.0000 0.9688 1.0000 0.8889 1.0000
+ [14] 1.0000 0.9778 1.0000 1.0000 0.9796 0.9792 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 0.9855
+ [27] 0.9818 1.0000 1.0000 0.9783 1.0000 0.9796 1.0000 1.0000 1.0000 0.9836 1.0000 1.0000 1.0000
+ [40] 1.0000 0.9737 0.9844 1.0000 1.0000 0.9219 1.0000 0.9831 1.0000 1.0000 1.0000 1.0000 1.0000
+ [53] 0.9828 0.9839 0.9726 0.9714 1.0000 1.0000 0.9867 1.0000 0.9870 1.0000 1.0000 1.0000 1.0000
+ [66] 1.0000 1.0000 0.9851 1.0000 1.0000 0.9865 0.9865 0.9839 0.9737 0.9770 1.0000 1.0000 1.0000
+ [79] 1.0000 1.0000 0.9831 0.9429 0.9620 1.0000 0.9853 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000
+ [92] 1.0000 1.0000 1.0000 1.0000 1.0000 0.9756 0.9643 0.9726 1.0000 0.9870
+~~~
+
+As expected, with tiny samples like 12, 22, or 32, the A/B test has essentially 0% power to detect any difference, and so it doesn't matter if one controls for source or not. In the _n_=42+ range, we start seeing some small penalty, but the fluctuations from a 33% penalty to 0% penalty to 50% to 23% to 0% show that once we start nearing _n_=100, the difference barely exists, and the long succession of 1.0000s say that past that, we must be talking a very small power penalty of like 1%.
+
+#### Larger differences
+
+> So let me pull up some real #s. I will give you source, # of unique visitors
+> to sales page, # of unique visitors to buy page, # of actual buyers. Also
+> note that I am doing it on a per-affiliate basis, and thus disregarding the
+> *origin* of traffic (more on that later):
+>
+> - Website.com - 3963 - 722 - 293
+> - X - 1232 - 198 - 8
+> - Y - 1284 - 193 - 77
+> - Z - 489 - 175 - 75
+>
+> So even the origin of traffic was everywhere. X was all website, but
+> pushed via FB. EC was email. Y was Facebook. Ours was 3 - email, Facebook, Twitter.
+> Email converted at 13.72%, Facebook at 8.35%, and Twitter at 1.39%. All had
+> \>500 clicks.
+>
+> So with that in mind, especially seeing how X and Y had the same # of
+> people visit the buy page, but X converted at 10% the rate (and
+> relatively to X, Y converted at 200%), I would wager that re-running
+> your numbers would find that the origin matters.
+
+Those are much bigger conversion differentials than the original 25% estimate, but the loss of power was so minute in the first case that I suspect that the penalty will still be *relatively* small.
+
+I can fix the power analysis by looking at each traffic source separately and tweaking the random generation appropriately with liberal use of copy-paste. For the website, he said 3x500 but there's 3963 hits so I'll assume the remainder is your general organic website traffic. That gives me a total table:
+
+- Email: 500 * 13.72% = 67
+- Facebook: 500 * 8.35% = 42
+- Twitter: 500 * 1.39% = 7
+- organic: 293-(67+42+7) = 177; 3963 - (3*500) = 2463; 177 / 2463 = 7.186%
+
+Switching to R for convenience:
+
+~~~{.R}
+R> website <- read.csv(stdin(),header=TRUE)
+Source,N,Rate
+"X",1232,0.006494
+"Y",1284,0.05997
+"Z",489,0.1534
+"Website email",500,0.1372
+"Website Facebook",500,0.0835
+"Website Twitter",500,0.0139
+"Website organic",2463,0.07186
+
+R> website$N / sum(website$N)
+[1] 0.17681 0.18427 0.07018 0.07176 0.07176 0.07176 0.35347
+~~~
+
+Change the power simulation appropriately:
+
+~~~{.R}
+set.seed(666)
+blueP <- 0.01
+controlledResults <- NULL
+uncontrolledResults <- NULL
+for (n in seq(1000,10000,by=1000)) {
+ controlled <- NULL
+ uncontrolled <- NULL
+ for (i in 1:1000) {
+
+ d1 <- data.frame(Converted=rbinom(n*0.17681, 1, 0.006494   + blueP), Source="X",  Color=TRUE)
+ d2 <- data.frame(Converted=rbinom(n*0.17681, 1, 0.006494   + 0),     Source="X",  Color=FALSE)
+
+ d3 <- data.frame(Converted=rbinom(n*0.18427, 1, 0.05997 + blueP), Source="Y", Color=TRUE)
+ d4 <- data.frame(Converted=rbinom(n*0.18427, 1, 0.05997 + 0),     Source="Y", Color=FALSE)
+
+ d5 <- data.frame(Converted=rbinom(n*0.07018, 1, 0.1534 + blueP), Source="Z", Color=TRUE)
+ d6 <- data.frame(Converted=rbinom(n*0.07018, 1, 0.1534 + 0),     Source="Z", Color=FALSE)
+
+ d7 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.1372 + blueP), Source="Website email", Color=TRUE)
+ d8 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.1372 + 0),     Source="Website email", Color=FALSE)
+
+ d9  <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0835 + blueP), Source="Website Facebook", Color=TRUE)
+ d10 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0835 + 0),     Source="Website Facebook", Color=FALSE)
+
+ d11 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0139 + blueP), Source="Website Twitter", Color=TRUE)
+ d12 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0139 + 0),     Source="Website Twitter", Color=FALSE)
+
+ d13 <- data.frame(Converted=rbinom(n*0.35347, 1, 0.07186 + blueP), Source="Website organic", Color=TRUE)
+ d14 <- data.frame(Converted=rbinom(n*0.35347, 1, 0.07186 + 0),     Source="Website organic", Color=FALSE)
+
+ d <- rbind(d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12)
+
+ g1 <- summary(glm(Converted ~ Color + Source, data=d, family="binomial"))
+ controlled[i] <- 0.05 > g1$coef[23]
+
+ g2 <- summary(glm(Converted ~ Color        , data=d, family="binomial"))
+ uncontrolled[i] <- 0.05 > g2$coef[8]
+ }
+ controlledResults   <- c(controlledResults, (sum(controlled)/1000))
+ uncontrolledResults   <- c(uncontrolledResults, (sum(uncontrolled)/1000))
+}
+controlledResults
+uncontrolledResults
+uncontrolledResults / controlledResults
+~~~
+
+An hour or so later:
+
+~~~{.R}
+R> controlledResults
+ [1] 0.105 0.175 0.268 0.299 0.392 0.432 0.536 0.566 0.589 0.631
+R> uncontrolledResults
+ [1] 0.093 0.167 0.250 0.285 0.379 0.416 0.520 0.542 0.576 0.618
+R> uncontrolledResults / controlledResults
+ [1] 0.8857 0.9543 0.9328 0.9532 0.9668 0.9630 0.9701 0.9576 0.9779 0.9794
+~~~
+
+In the most extreme case (total _n_=1000), where our controlled test's power is 0.105 or 10.5% (well, what do you expect from that small an A/B test?), our test where we throw away the Source info has a power of 0.093 or 9.3%. So we lost 0.1143 or 11% of the power.
+
+### Sample size implication
+
+That's not as bad as I feared when I saw the huge conversion rate differences, but maybe it has a bigger consequence than I guess?
+
+What does this 11% loss translate to in terms of extra sample size?
+
+Well, our original total conversion rate was 6.52%:
+
+~~~{.R}
+R> sum((website$N * website$Rate)) / sum(website$N)
+[1] 0.0652
+~~~
+
+We were examining a hypothetical increase by 1% to 7.52%. A regular 2-proportion power calculation (the closest thing to a binomial in the R standard library)
+
+~~~{.R}
+R> power.prop.test(n = 1000, p1 = 0.0652, p2 = 0.0752)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1000
+             p1 = 0.0652
+             p2 = 0.0752
+      sig.level = 0.05
+          power = 0.139
+     ...
+~~~
+
+Its 14% estimate is reasonably close to 10.5% given all the simplifications I'm doing here. So, imagine our 0.139 power here was the victim of the 11% loss, and the *true* power is x = 0.11*x + 0.139 where then x=0.15618. Given the p1 and p2 for our A/B test, how big would _n_ then have to be to reach our true power?
+
+~~~{.R}
+R> power.prop.test(p1 = 0.0652, p2 = 0.0752, power=0.15618)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1178
+     ...
+~~~
+
+So in this worst-case scenario with small sample size and very different true conversion rates, we would need another 178 page-views/visits to make up for completely throwing out the source covariate. This is usually a doable number of extra page-views.
