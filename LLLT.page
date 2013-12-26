@@ -15,7 +15,7 @@ There have been some small human neurological studies (many with severe methodol
 
 # Experiment
 
-The Longecity user [Nattzor](http://www.longecity.org/forum/user/20393-nattzor/) (male Swedish Caucasian college student), attracted by the discussion in [Lostfalco's Longecity thread on LLLT & other topics](http://www.longecity.org/forum/topic/63228-lostfalcos-extensive-nootropic-experiments/ "Lostfalco's Extensive Nootropic Experiments"), purchased a ["Details about  48 LED illuminator light CCTV IR Infrared Night Vision"](http://www.ebay.co.uk/itm/48-LED-illuminator-light-CCTV-IR-Infrared-Night-Vision-/180410200537) (~$13; 850nm^[808nm is more common in the research literature, but 850nm IR LEDs are easier to get.]) to run his own self-experiment.
+The Longecity user [Nattzor](http://www.longecity.org/forum/user/20393-nattzor/) (Reddit: [EnLilaSko](http://www.reddit.com/user/EnLilaSko)), a male Swedish Caucasian college student, attracted by the discussion in [Lostfalco's Longecity thread on LLLT & other topics](http://www.longecity.org/forum/topic/63228-lostfalcos-extensive-nootropic-experiments/ "Lostfalco's Extensive Nootropic Experiments"), purchased a ["Details about  48 LED illuminator light CCTV IR Infrared Night Vision"](http://www.ebay.co.uk/itm/48-LED-illuminator-light-CCTV-IR-Infrared-Night-Vision-/180410200537) (~$13; 850nm^[808nm is more common in the research literature, but 850nm IR LEDs are easier to get.]) to run his own self-experiment.
 
 Specifically, he did a _n_=40 with two pairs of randomized blocks (result: ABBA) from 16 September 2013 - 17 December 2013 (with occasional breaks).
 
@@ -79,6 +79,10 @@ All data, colored by test type:
 All data, colored by LLLT-affected:
 
 ![`ggplot(df.melt, aes(x=time, y=value, colour=LLLT)) + geom_point()`](/images/nootropics/2013-nattzor-lllt-bydose.png)
+
+Combined (LLLT dose against smoothed performance curves; code courtesy of [iGotMyPhdInThis](http://www.reddit.com/r/Nootropics/comments/1tibnk/an_lllt_selfexperiment/ce8og3f?context=3)):
+
+![`ggplot(df.melt, aes(x=time, y=value, colour=variable)) + geom_point(data = df.melt, aes(x=time, y=value, colour=LLLT)) + geom_smooth()`](/images/nootropics/2013-nattzor-lllt-both.png)
 
 The third (the second "A") group of data looks *very* different from the other two groups, as not just are the scores all high, but they're also very narrowly bunched in an ascending line compared to the really spread out second group or even the first group. What's going on there? Pretty anomalous. This is at least [partially related to the increased dose](#continuous-dose) Nattzor used, but I feel that still doesn't explain everything like why it's steeply increasing over time or why the variance seems to narrow drastically.
 
