@@ -1321,7 +1321,7 @@ for (n in seq(1000,10000,by=100)) {
  controlled <- NULL
  uncontrolled <- NULL
 
- # generate 100 hypothetical datasets
+ # generate 1000 hypothetical datasets
  for (i in 1:1000) {
 
  nn <- n/4
@@ -1556,7 +1556,7 @@ R> power.prop.test(n = 1000, p1 = 0.0652, p2 = 0.0752)
      ...
 ~~~
 
-Its 14% estimate is reasonably close to 10.5% given all the simplifications I'm doing here. So, imagine our 0.139 power here was the victim of the 11% loss, and the *true* power is x = 0.11*x + 0.139 where then x=0.15618. Given the p1 and p2 for our A/B test, how big would _n_ then have to be to reach our true power?
+Its 14% estimate is reasonably close to 10.5% given all the simplifications I'm doing here. So, imagine our 0.139 power here was the victim of the 11% loss, and the *true* power is $x = 0.11x + 0.139$ where then _x_=0.15618. Given the _p1_ and _p2_ for our A/B test, how big would _n_ then have to be to reach our true power?
 
 ~~~{.R}
 R> power.prop.test(p1 = 0.0652, p2 = 0.0752, power=0.15618)
@@ -1569,4 +1569,103 @@ R> power.prop.test(p1 = 0.0652, p2 = 0.0752, power=0.15618)
 
 So in this worst-case scenario with small sample size and very different true conversion rates, we would need another 178 page-views/visits to make up for completely throwing out the source covariate. This is usually a doable number of extra page-views.
 
-<!-- TODO: run a simulation using my own 'conversion' data - top converter vs lowest, eg HN vs StumbleUpon -->
+#### `Gwern.net`
+
+What are the implications for my own A/B tests, with less extreme "conversion" differences? It might be interesting to imagine a hypothetical where my traffic split between my highest conversion traffic source and my lowest, and see how much extra _n_ I must pay in my testing because I decline to figure out how to record source for tested traffic.
+
+Looking at my traffic for the year 26 December 2012-2013, I see that of the top 10 referral sources, the highest converting source is [bulletproofexec.com](http://www.bulletproofexec.com/) traffic at 29.95% of the 9461 visits, and the lowest is [t.co](!Wikipedia) (Twitter) at 8.35% of 15168. We'll split traffic 50/50 between these two sources.
+
+~~~{.R}
+set.seed(666)
+# model specification:
+bulletP <- 0.2995
+tcoP    <- 0.0835
+blueP   <- 0.0100
+
+sampleSizes <- seq(100,5000,by=100)
+replicates  <- 1000
+
+controlledResults <- NULL
+uncontrolledResults <- NULL
+
+for (n in sampleSizes) {
+
+ controlled <- NULL
+ uncontrolled <- NULL
+
+ # generate _m_ hypothetical datasets
+ for (i in 1:replicates) {
+
+ nn <- n/2
+ # generate 2x2=4 possible conditions, with different probabilities in each:
+ d1 <- data.frame(Converted=rbinom(nn, 1, bulletP + blueP), X=TRUE,  Color=TRUE)
+ d2 <- data.frame(Converted=rbinom(nn, 1, tcoP    + blueP), X=FALSE, Color=TRUE)
+ d3 <- data.frame(Converted=rbinom(nn, 1, bulletP + 0),     X=TRUE,  Color=FALSE)
+ d4 <- data.frame(Converted=rbinom(nn, 1, tcoP    + 0),     X=FALSE, Color=FALSE)
+ d0 <- rbind(d1, d2, d3, d4)
+
+ # analysis while controlling for Twitter/Bullet-Proof-Exec
+ g1 <- summary(glm(Converted ~ Color + X, data=d0, family="binomial"))
+ controlled[i]   <- g1$coef[11] < 0.05
+ g2 <- summary(glm(Converted ~ Color    , data=d0, family="binomial"))
+ uncontrolled[i] <- g2$coef[8]  < 0.05
+ }
+ controlledResults   <- c(controlledResults, (sum(controlled)/length(controlled)))
+ uncontrolledResults <- c(uncontrolledResults, (sum(uncontrolled)/length(uncontrolled)))
+}
+controlledResults
+uncontrolledResults
+uncontrolledResults / controlledResults
+~~~
+
+Results:
+
+~~~{.R}
+R> controlledResults
+ [1] 0.057 0.066 0.059 0.065 0.068 0.073 0.073 0.071 0.108 0.089 0.094 0.106 0.091 0.110 0.126 0.112
+[17] 0.123 0.125 0.139 0.117 0.144 0.140 0.145 0.137 0.161 0.165 0.170 0.148 0.146 0.171 0.197 0.171
+[33] 0.189 0.180 0.184 0.188 0.180 0.177 0.210 0.207 0.193 0.229 0.209 0.218 0.226 0.242 0.259 0.229
+[49] 0.254 0.271
+R> uncontrolledResults
+ [1] 0.046 0.058 0.046 0.056 0.057 0.066 0.053 0.062 0.095 0.080 0.078 0.090 0.077 0.100 0.099 0.103
+[17] 0.109 0.113 0.118 0.105 0.134 0.130 0.123 0.124 0.142 0.152 0.153 0.133 0.126 0.151 0.168 0.151
+[33] 0.163 0.163 0.168 0.170 0.160 0.162 0.189 0.183 0.170 0.209 0.192 0.198 0.209 0.215 0.233 0.208
+[49] 0.221 0.251
+R> uncontrolledResults / controlledResults
+ [1] 0.8070 0.8788 0.7797 0.8615 0.8382 0.9041 0.7260 0.8732 0.8796 0.8989 0.8298 0.8491 0.8462
+[14] 0.9091 0.7857 0.9196 0.8862 0.9040 0.8489 0.8974 0.9306 0.9286 0.8483 0.9051 0.8820 0.9212
+[27] 0.9000 0.8986 0.8630 0.8830 0.8528 0.8830 0.8624 0.9056 0.9130 0.9043 0.8889 0.9153 0.9000
+[40] 0.8841 0.8808 0.9127 0.9187 0.9083 0.9248 0.8884 0.8996 0.9083 0.8701 0.9262
+R> 1 - mean(uncontrolledResults / controlledResults)
+[1] 0.1194
+~~~
+
+So our power loss is not *too* severe in this worst-case scenario: we lose a mean of 12% of our power, or around half.
+
+We were examining a hypothetical conversion increase by 1% from 19.15% (`mean(c(bulletP, tcoP))`) to 20.15%. A regular 2-proportion power calculation (the closest thing to a binomial in the R standard library)
+
+~~~{.R}
+R> power.prop.test(n = 1000, p1 = 0.1915, p2 = 0.2015)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1000
+             p1 = 0.1915
+             p2 = 0.2015
+      sig.level = 0.05
+          power = 0.08116
+...
+
+~~~
+
+Its 14% estimate is reasonably close to 10.5% given all the simplifications I'm doing here. So, imagine our 0.08116 power here was the victim of the 12% loss, and the *true* power is $x = 0.12x + 0.08116$ where then _x_=0.0922273. Given the _p1_ and _p2_ for our A/B test, how big would _n_ then have to be to reach our true power?
+
+~~~{.R}
+R> power.prop.test(p1 = 0.1915, p2 = 0.2015, power=0.0922273)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1265
+~~~
+
+So this worst-case scenario means I must spend an extra _n_ of 265 or roughly a fifth of a day's traffic. Since it would probably cost me, on net, far more than a fifth of a day to find an implementation strategy, debug it, and incorporate it into all future analyses, I am happy to continue throwing out the source information & other covariates.
