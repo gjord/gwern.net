@@ -9,15 +9,13 @@ belief: log
 
 > In September 2012, I was extorted for $32 for being gwern; I declined to pay. In November 2013, I called an encryption bluff that I was Dread Pirate Roberts. In December 2013, a crazy person tried to blackmail me for billions of dollars for being Satoshi Nakamoto; I declined to pay.
 
-I have long been interested in cryptographic topics, and in June 2011, I began researching the new black-markets, as epitomized by [Silk Road]() (SR). Between my sustained coverage of black-market topics, occasional interventions like my Sheep-MarketPlace/BlackMarket-Reloaded bet, and my minor role in the doxing of Sheep MarketPlace's owner, and my essay [Bitcoin is Worse is Better](), I have been sometimes accused of being more involved than I appear - possibly Dread Pirate Roberts (really Ross Ulbricht), [Satoshi Nakamoto](!Wikipedia), a high-level seller, a law enforcement agent, or other things.
+I have long been interested in cryptographic topics, and in June 2011, I began researching the new black-markets, as epitomized by [Silk Road]() (SR). Between my sustained coverage of black-market topics, occasional interventions like my Sheep-MarketPlace/BlackMarket-Reloaded bet, and my minor role in the doxing of Sheep MarketPlace's owner, and my essays [Bitcoin is Worse is Better]() & [Time-lock cryptography](Self-decrypting files), I have been sometimes accused of being more involved than I appear - possibly Dread Pirate Roberts (really Ross Ulbricht), [Satoshi Nakamoto](!Wikipedia), a high-level seller, a law enforcement agent, or other things.
 
-While sometimes flattering (I wish I was Satoshi Nakamoto), these are all quite wrong: I am but an impoverished writer who barely makes ends meet, and certainly not a Bitcoin billionaire. Still, some tinge of notoriety can be useful if it means people are willing to tell me private information. On the other hand, sometimes it is just plain irritating. They don't always go anywhere. Here are 3 examples of things that went nowhere, or at least, not where I wanted them to go.
+While sometimes flattering (I wish I was Satoshi Nakamoto!), these are all quite wrong: I am but an impoverished writer who barely makes ends meet, and certainly not a Bitcoin billionaire or elite C++ P2P crypto programmer, though I write *about* Bitcoin/cryptography/black-markets. Still, some tinge of notoriety can be useful if it means people are willing to tell me private information. On the other hand, sometimes it is plain irritating. They don't always go anywhere. Here are 3 examples of things that went nowhere, or at least, not where I wanted them to go.
 
 # 2012
 ## Anonymous
 ### 10 September
-
-<!-- TODO: link on LW: http://lesswrong.com/lw/j8f/anonymous_feedback_forms_revisited/  -->
 
 On 10 September 2012, I returned from my dinner to discover in my inbox news of a message someone sent me at 4:55PM using my [anonymous feedback form](About#anonymous-feedback):
 
@@ -71,6 +69,8 @@ More precisely, I posted the following signed message [to Google+](https://plus.
     fRIAnRtF4DVLmoW8fGAR32fFFeuIqG24
     =+rda
     -----END PGP SIGNATURE-----
+
+(See [decision theory](!Wikipedia) and [backward induction](!Wikipedia) for background. I think my little argument may not be quite right, but it's still clear that a precommitment to not paying in such circumstances is optimal for the same reason one precommits to not negotiate with hostage-takers etc.)
 
 ### Discussion
 
@@ -261,7 +261,7 @@ His next response was to provide his (malformed) public key:
 >
 > resolved?
 
-No, not really, but I fixed it anyway to import `key 024414E5: "jack0fnone <jack0fnone@safe-mail.net>"`, and gave him an encrypted message explaining the issues since he wasn't figuring them out for himself:
+No, not really... but I fixed it anyway to import `key 024414E5: "jack0fnone <jack0fnone@safe-mail.net>"`, and gave him an encrypted message explaining the issues since he wasn't figuring them out for himself:
 
 > First, to use PGP on Reddit, it's best if you indent each line by 4 spaces to
 > preserve the newlines.
@@ -279,7 +279,7 @@ No, not really, but I fixed it anyway to import `key 024414E5: "jack0fnone <jack
 > correspondent: that way, if anyone gets a copy of one key, they only decrypt
 > that particular subset of messages.
 
-This was all perfectly true and the reasons why someone like DPR would act as I was acting. They just had nothing to do with why I was insisting on PGP.
+This was all perfectly true and the reasons why someone like DPR would act as I was acting. They just had nothing to do with why I was insisting on PGP. Instructing people on PGP use can be tedious, but being patient with sources *has* paid off for me in the past, so one grins and bears it.
 
 He replied with another malformed PGP-encrypted message... encrypted to his own public key again:
 
@@ -557,7 +557,11 @@ Jack's response came promptly the next day:
 >
 > Good bye for now Gwern.
 
-I was a little amused by the insinuation that I was the Sanjuro running "Assassination Market" and by Jack's continued high self-esteem ("an extremely competent analyst" no less!), but otherwise, this was getting boring: Jack's threats were even cruder than before, and his claims even less credible. I remarked that his writings sounded crazy, but he's kept it up long enough and made enough unsupported accusations I'm beginning to wonder: maybe Jack really *is* crazy, and not simply an immature teen or drunk on the prospect of gaining millions of dollars or adopting a persona or trying to foil stylometric analysis or bluffing me on the off-chance I am Satoshi (the threats are risk-free after all) or any of the other possibilities I had been considering. Paranoid schizophrenia? Bipolar disorder in a manic phase? Something more exotic? I try never to indulge in _ad hominems_ because it's far too tempting to write interlocutors off as lazy, stupid, or crazy - but crazy people do exist, after all. Thinking about it more, Jack may be the first crazy person I have seriously dealt with at length on the Internet. Oh, I've seen plenty of crazy people online - I've laughed at [Time Cube](!Wikipedia), I've looked over Hacker News's [Losethos](http://www.templeos.org/) (with a sense of 'there but for the grace of god'), I've watched other people argue with crazy people - but I think I've either never actually dealt with them or quickly flipped the bozo bit on them and disengaged. Under normal situations, on normal topics, I have no reason to talk with them at length and grandiloquence is unjustified....
+I was a little amused by the insinuation that I was the Sanjuro running "Assassination Market" and by Jack's continued high self-esteem ("an extremely competent analyst" no less!), but otherwise, this was getting boring: Jack's threats were even cruder than before, and his claims even less credible. I remarked that his writings sounded crazy, but he's kept it up long enough and made enough unsupported accusations I'm beginning to wonder: maybe Jack really *is* crazy, and not simply an immature teen or drunk on the prospect of gaining millions of dollars or adopting a persona or trying to foil stylometric analysis or bluffing me on the off-chance I am Satoshi (the threats are risk-free after all[^justanotheruser]) or any of the other possibilities I had been considering. Paranoid schizophrenia? Bipolar disorder in a manic phase? Something more exotic? I try never to indulge in _ad hominems_ because it's far too tempting to write interlocutors off as lazy, stupid, or crazy - but crazy people do exist, after all. Thinking about it more, Jack may be the first crazy person I have seriously dealt with at length on the Internet. Oh, I've seen plenty of crazy people online - I've laughed at [Time Cube](!Wikipedia), I've looked over Hacker News's [Losethos](http://www.templeos.org/) (with a sense of 'there but for the grace of god'), I've watched other people argue with crazy people - but I think I've either never actually dealt with them or quickly flipped the bozo bit on them and disengaged. Under normal situations, on normal topics, I have no reason to talk with them at length and grandiloquence is unjustified....
+
+[^justanotheruser]: A commenter on `#bitcoin` reasoned:
+
+    > Odds are Satoshi is an from an English-speaking country. There are 400 million people who live in an English-speaking country. I would guess there's about a 20% chance Satoshi has access to the nearly 1 million bitcoins he mined. If it takes me 5 minutes to send a message threatening to expose Satoshi, then I can send 12 messages per hour. That means my expected hourly return from sending blackmail messages to English-speaking people is $\frac{\frac{\text{1 million BTC}{400,000,000} \times 12)}{\text{hour}} \times 0.2$ = \$3.6/hour.
 
 At least part of the problem here is that in the crazy mirror land of the blackmarkets and Bitcoin in general, sanity is hard to distinguish from insanity, there really are key bits of information random parties can have, not everyone talks straight, blackmail does payoff, and there really are hidden millionaires & billionaires walking around in plain sight. (As an example of the mirrors of insanity, I invite anyone to read the Silk Road 2 forums and try to figure out what was going on in December 2013 - go and read the SSBD/Inigo/Libertas, the DPR2 key rotation, the Cirrus announcement, Raoul's quoted message from DPR2, the posts by Defcon, the 'accidental' access to the admin forum, Eiley Ormsby's comments, Oracle's insinuations, the TorMarket quote from the vendor forum, etc, and parse it into a single coherent sane narrative. And consider what Satoshi's estimated fortune is at any moment.)
 
@@ -692,7 +696,7 @@ If he replied with any evidence, the monologue might be worth listening to furth
 >
 > I can say with great confidence, that this is a clear display of idiocy from several at its finest. Have a good day "friend".
 
-I can only shake my head at this - if I'm "obviously not Nate Silver" then what the hell was the "Nate" and "Silver Productions" before about? But Jack seems to be sticking to his 'Natoshi Gwernvin' story in bringing up "Michele Cook-Andresen" (Gavin Andresen's real wife, according to a [_WSJ_ profile of Andresen](http://online.wsj.com/news/articles/SB10001424127887323809304578429142650304564 "Bitcoin vs. Ben Bernanke: The chief scientist for the digital currency talks about its appeal-and pitfalls-in a world of fiat money")) and apparently claiming he has found Gavin's children's names (I did not check this part).
+I can only shake my head at this - if I'm "obviously not Nate Silver" then what the hell was the "Nate" and "Silver Productions" before about? (Is "Roger" Roger Ver? Then "Erik" must be Erik Voorhees.) But Jack seems to be sticking to his 'Natoshi Gwernvin' story in bringing up "Michele Cook-Andresen" (Gavin Andresen's real wife, according to a [_WSJ_ profile of Andresen](http://online.wsj.com/news/articles/SB10001424127887323809304578429142650304564 "Bitcoin vs. Ben Bernanke: The chief scientist for the digital currency talks about its appeal-and pitfalls-in a world of fiat money")) and apparently claiming he has found Gavin's children's names (I did not check this part).
 
 I am troubled at Jack bringing up Gavin's family. In particular, by the "I'm going to head out East" line: Gavin's public profiles like [his Twitter account](https://twitter.com/gavinandresen) state he lives in Amherst, MA - which would indeed be in the "East" for most Americans. So I emailed Andresen a copy of my writeup. I decided it was probably better to not reply further to Jack until I heard back.
 
