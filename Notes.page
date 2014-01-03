@@ -546,7 +546,7 @@ Some time later, she was chatting with some farmer relatives who had gone to Rus
 
 My grandparents have long been friends with an old bachelor named Arthur Moulton (into his 80s by the time I knew him). He's long been a mysterious man to us.
 
-I've long prided myself on my search skills, and reminded of Arthur by his declining health, I thought on 15 June 2013 it might be an interesting exercise to dig up everything I could from public online sources, while relying on only the vaguest details about him (full name and age). The family was interested and as it turned out, the information could be useful for his obituary. I managed to find a fair bit of information on him and his brother, Roger.
+I've long prided myself on my search skills, and reminded of Arthur by his declining health, I thought on 15 June 2013 it might be an interesting exercise to dig up everything I could from public online sources, while relying on only the vaguest details about him (full name and age). The family was interested and as it turned out, the information could be useful for his obituary. I managed to find a fair bit of information on him and his brother, Roger. (As it happens, [reading his family's obituary for him](http://smnewsnet.com/archives/89255 "Arthur B. Moulton, 93") I noticed I had missed a few things, but overall, did fairly well.)
 
 I give my process & results below, with my reasoning as best as I can reconstruct it.
 
@@ -672,6 +672,66 @@ Unfortunately, further details seem hard to find. Aside from a mention on a [Yor
 
 I have to admit defeat at this point - I've checked all the databases I can easily think of, so for followup, I created a Google Alert in case additional materials surface on the public web (`"Arthur Bernard Moulton" OR "Arthur B Moulton" OR "Arthur B. Moulton" OR "Roger D. Moulton" OR "Roger D Moulton"`). We'll see. But by 28 December 2013, nothing useful had appeared.
 
+## Obesity rates
+
+While eating Christmas Eve dinner with my extended family in 2013, I happened to look up at one moment and suddenly realize: of the 17 people at the table (inclusive of myself), maybe 1, or 2, could be classified as either 'fat' or 'obese'. I remembered how struck I was, after my [trip to Europe in 2005](2005 Europe trip), to return to America and there in the JFK concourse realize, as fleshy blimps sailed serenely by me: *Americans are really fat*. As in, no fooling fat, a genuinely valid national stereotype. But if we're so fat, why is my family so thin?
+
+It could be that I am being too generous and many of them were fat by any historical standard, but let's run with the assumption there's genuinely only 2 fat people there or 12% of us. How improbable is this?
+
+Wikipedia, in [Obesity in the United States](!Wikipedia), gives a variety of estimates for various kinds of fatness; we'll go with overweight+obese in adults, which the 2 charts helpfully inform us encompasses 74% of adults. 74% seems a bit distant from 12%, over 17 people.
+
+If each person has a 74% chance of being fat or a 26% chance of not being fat independent of the others, then what's the chance of 15 or more of 17 people not being fat (so the total probability of there being 15, 16, or 17 not fat people)? If I had asked what was the odds of 2 specific people being fat, or what was the odds everyone was fat (or not fat), this would be easier to calculate, but unfortunately, I merely noticed that of the 17 people as much as 2 were fat, and it could've been any 2 or 1 or 0, so it's like a [birthday paradox](!Wikipedia), and involves painful combinatorial math and binomials:
+
+- $(\binom{17}{2} \times 0.26^{15} \times 0.74^2) + (\binom{17}{1} \times 0.26^{16} \times 0.74^1) + (\binom{17}{0} \times 0.26^{17} \times 0.74^0)$
+- $(\binom{17}{2} \times 0.26^{15} \times 0.74^2) + (17 \times 0.26^{16} \times 0.74) + (0.26^{17})$
+- $(\binom{17}{2} \times 1.677e^{-09} \times 0.5476) + (17 \times 4.361e^{-10} \times 0.74) + (1.134e^{-10})$
+- $(\binom{17}{2} \times 9.183e^{-10}) + (5.486e^{-09}) + (1.134e^{-10})$
+- $(\binom{17}{2} \times 9.183e^{-10}) + 5.599e^{-09}$
+- $(136 \times 9.183e^{-10}) + 5.599e^{-09}$
+- $(1.249e^{-07}) + 5.599e^{-09}$
+- $1.305e^{-07}$
+- $0.0000001305$
+
+or a very small number probability (multiply by 100 to turn it into a percentage does not help much).
+
+A (much easier to run) binomial test in R suggests the same thing:
+
+~~~{.R}
+R> binom.test(2, 17, p=0.74)
+
+    Exact binomial test
+
+data:  2 and 17
+number of successes = 2, number of trials = 17, p-value = 1.305e-07
+alternative hypothesis: true probability of success is not equal to 0.74
+95% confidence interval:
+ 0.01458 0.36441
+sample estimates:
+probability of success
+                0.1176
+~~~
+
+This seems a bit anomalous if the true fatness rate is close to 74%. On the other hand, 74% seems pretty high in general, and white people tend to be thinner than other groups - for example a [NY health page](http://www.health.ny.gov/prevention/obesity/statistics_and_impact/) puts white adults' overweight+obese rate at 61%. That would make thee results less extreme.
+
+Also, how sure am I that my '2 of 17' estimate is right? I didn't weigh or measure the height of anyone. The standard definition of 'overweight' seem to be defined as a BMI>25. I went and checked my own BMI and learned it was 28. So now I know my 2/17 was wrong and it must be at least 3/17. Can I do better? Thinking about it a little more, I was not the heaviest person there, I'd guess at least 4 of the others were similarly built as me (excluding the 2 people I already marked as overweight). So that shifts it to (2+1+4)/17, and gives us a new test:
+
+~~~{.R}
+R> binom.test(7, 17, p=0.61)
+
+    Exact binomial test
+
+data:  7 and 17
+number of successes = 7, number of trials = 17, p-value = 0.1334
+alternative hypothesis: true probability of success is not equal to 0.61
+95% confidence interval:
+ 0.1844 0.6708
+sample estimates:
+probability of success
+                0.4118
+~~~
+
+This is no longer so impressive; for example, it wouldn't pass the convention of _p_<0.05. So I guess the thinness of my family is no longer an anomaly: it's more likely that I misjudged what fraction of them were "overweight" or "obese" than we are really a weirdo set of outliers.
+
 # Night watch
 
 > The gloom of dusk. \
@@ -687,6 +747,7 @@ My own paranoia surprises me. At least once a night, I hear noises or see light,
 The tempo at night varies as well. It seems to me that the first 2 years, cars were coming and going every night. Cars would meet, one would stay and the other go; or a car would enter the lot and not leave for several days (with no one inside); or they would simply park for a while. School buses would congregate, as would police-cars, sometimes 4 or 5 of them. In the late morning around 5 AM, the tennis players would come. Sometimes when I left at 8 AM, all 4 or 5 courts would be busy - and some of the courts hosted 4 players. I would find 5 or 6 tennis balls inside the pool area, and would see how far I could drop-kick them. Now, I hardly ever find tennis balls, since I hardly ever see tennis players. A night in which some teenagers congregate around a car and smoke their cigarettes is a rarity. Few visit my lot.
 
 I wonder, does this have to do with the recession which began in 2008?
+
 
 ## Fiction
 
