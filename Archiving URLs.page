@@ -86,9 +86,9 @@ My first program in this vein of thought was a bot which fired off WebCite and I
 
 The core code was quickly adapted into a [gitit](!Hackage) wiki plugin which hooked into the save-page functionality and tried to archive every link in the newly-modified page, [Interwiki.hs](https://github.com/jgm/gitit/blob/master/plugins/Interwiki.hs)
 
-Finally, I wrote [archiver](!Hackage), a daemon which watches[^watch]/reads a text file. (Source is available via `darcs get http://community.haskell.org/~gwern/archiver/`.)
+Finally, I wrote [archiver](!Hackage), a daemon which watches[^watch]/reads a text file. (Source is available via `git clone https://github.com/gwern/archiver-bot.git`.)
 
-[^watch]: Version [0.1](http://hackage.haskell.org/package/archiver-0.1) of my `archiver` daemon didn't simply read the file until it was empty and exit, but actually watched it for modifications with [inotify](!Wikipedia). I removed this functionality when I realized that the required WebCite choking (just one URL every ~25 seconds) meant that `archiver` would *never* finish any reasonable workload.
+[^watch]: [Version 0.1](http://hackage.haskell.org/package/archiver-0.1) of my `archiver` daemon didn't simply read the file until it was empty and exit, but actually watched it for modifications with [inotify](!Wikipedia). I removed this functionality when I realized that the required WebCite choking (just one URL every ~25 seconds) meant that `archiver` would *never* finish any reasonable workload.
 
 The library half of `archiver` is a simple wrapper around the appropriate HTTP requests; the executable half reads a specified text file and loops as it (slowly) fires off requests and deletes the appropriate URL.
 
