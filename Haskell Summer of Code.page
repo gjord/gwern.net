@@ -528,7 +528,7 @@ For [2013](https://www.google-melange.com/gsoc/org/google/gsoc2013/haskell), Has
     > The goal of this project is to increase the functionality of Darcsden. Darcsden is an open source repository hosting platform for darcs, written in Haskell. The main features are authentication from Github/OpenID, Password Recovery, Editing repository files online, and Comparison between a repository and its forks.
 2. ["Overloaded record fields for GHC"](https://www.google-melange.com/gsoc/project/google/gsoc2013/adamgundry/23001); Adam Gundry, mentored by Simon Peyton Jones
 
-    > Haskell's record system lacks support for overloaded field names. This leads to unnecessarily cluttered code and inhibits code reuse. I propose to implement support for overloaded field names and polymorphic record projection as a GHC extension, with the aim to ultimately add them to the language standard in a future revision. This relatively straightforward change would remove a significant source of frustration for Haskell programmers.
+    > Haskell's record system lacks support for overloaded field names. This leads to unnecessarily cluttered code and inhibits code reuse. I propose to implement support for overloaded field names and polymorphic record projection as a GHC extension, with the aim to ultimately add them to the language standard in a future revision. This relatively straightforward change would remove a significant source of frustration for Haskell programmers....By September 23 I will have the final implementation on a GHC branch ready to merge into HEAD...The biggest risk to the project is that it may prove controversial, as has been seen by arguments over previous attempts to solve this problem. However, I am optimistic that sufficient consensus can be reached, as much of the disagreement is about syntax or implementation details rather than the user-visible aspects of the extension
 3. ["interactive-diagrams and a paste site with the ability for dynamic rendering of diagrams"](https://www.google-melange.com/gsoc/project/google/gsoc2013/difrumin/18001); Dan Frumin, mentored by Luite Stegeman
 
     > I want to build an active-diagrams library for compiling diagrams code into active HTML + JS widgets. The diagrams are active in the sense that user can interact with them: for example, a result of type `(Bool -> Diagram)` should be compiled to a widget that renders a diagram depending on the state of the checkbox. In addition, a pastebin site should be built, that can be used as an interactive scratchpad, where diagrams code can be automatically compiled and the graphical output shown along. This is useful for sharing graphical experiments, teaching beginners and so on. The rendered diagram, together with its interactive capabilities, should be easily embedded in third-party blogs, websites.
@@ -567,7 +567,7 @@ Compiling the 2006-2012 results, I get an overall base-rate of 47% successful, 4
 
 1. Darcsden: [65%](http://predictionbook.com/predictions/20625)
 2. Overloaded records: [40%](http://predictionbook.com/predictions/20626)
-3. interactive-digrams: [35%](http://predictionbook.com/predictions/20627)
+3. interactive-diagrams: [35%](http://predictionbook.com/predictions/20627)
 4. Pandoc Haddock: [55%](http://predictionbook.com/predictions/20628)
 5. Charts on Diagrams: [75%](http://predictionbook.com/predictions/20629)
 6. `darcs record: [65%](http://predictionbook.com/predictions/20630)
@@ -576,6 +576,20 @@ Compiling the 2006-2012 results, I get an overall base-rate of 47% successful, 4
 9. Parallel build: [33%](http://predictionbook.com/predictions/20633)
 10. Parallel modules: [33%](http://predictionbook.com/predictions/20634)
 11. Qt binding generator: [40%](http://predictionbook.com/predictions/20635)
+
+#### 2013 results
+
+As of 8 January 2014:
+
+1. Darcsden: checking the [Darcsden HEAD](http://hub.darcs.net/simon/darcsden) repository, I see patches by BSRK Aditya adding what looks like GitHub support, a repository comparison feature, resetting passwords, and file editing. I haven't actually verified that the additions are usable, but I have no reason to be that suspicious and so I will mark this SoC **successful**.
+2. Overloaded record fields for GHC: Gundry finished work on the extension apparently successfully, and submitted his patches in September 2013. The `ghc-devs` mailing list discussion petered out, though, and [in November 2013](http://www.well-typed.com/blog/84) Gundry explained:
+
+    > Unfortunately, the extension will not be ready for GHC 7.8, to allow time for the design to settle and the codebase changes to mature. However, it should land in HEAD soon after the 7.8 release is cut, so the adventurous are encouraged to build GHC and try it out. Feedback from users will let us polish the design before it is finally released in 7.10... Keep an eye out for the extension to land in GHC HEAD later this year, and please try it out and give your feedback!
+
+    However, GHC 7.8 apparently took longer to release than expected and so Gundry's work still has not been merged by 2014. Duncan Coutts and Gundry both seem optimistic that it would get added *eventually*, but nevertheless, 4 months after being finished, it had not been merged into GHC HEAD and fails my original judgment criterion, rendering it **unsuccessful**. This is definitely a SoC to revisit in the future to check out whether it ultimately got merged in or was abandoned to bitrot.
+3. Interactive diagrams: Frumin's [summation post](https://parenz.wordpress.com/2013/09/25/gsoc-2013-an-afterword/) links to his [working pastebin](http://paste.hskll.org/). I am surprised, but it's definitely there. So, marking this one **successful**.
+4. Haddock extension for Pandoc compatibility: this SoC was turned into a [rather different project](https://gist.github.com/Fuuzetsu/81253ba7d0c51ac88052); it still involved Haddock, but not Pandoc. Unclear what happened - most of the submitted patches do not seem to have been applied to the Github repository for Haddock. **Unsuccessful**?
+5. Port Diagrams to use Charts: the latest version recommends using the Charts backend, and Bracker [declared on `diagrams-discuss`](https://groups.google.com/d/msg/diagrams-discuss/p1vDRo6ldWw/WNZ5GWvTPVwJ "[GSoC 2013] Porting Charts to Diagrams - Final Report") the project "a full success". Marking **successful**.
 
 ### Lessons learned
 
