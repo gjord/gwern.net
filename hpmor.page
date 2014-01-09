@@ -197,7 +197,7 @@ totalreviews
 [76]  231  525  185  153  308  235  113   74  154  236
 # Now the hard part: map over the list of vectors, & filter out anything dated 7 days after the first date
 earlyreviews <- unlist(lapply(lapply(myList,
-    function(a) Filter(function(b) {if (b > a[1]+7) return(FALSE) else return(TRUE)}, a)), length))
+     function(a) Filter(function(b) {if (b > a[1]+7) return(FALSE) else return(TRUE)}, a)), length))
  [1]  17  11  13  42 341 191 204 210 296 282 117 136 162 144 126 155 199 199 159
 [20] 209 133 125 142 111  92 145 193  96  92  43 115 170  78  88   5  34  77  17
 [39]  48  71  88 129  18  10  40 164 246 100 124  82 150  51  32 168  32 129  62
@@ -214,7 +214,7 @@ Moving onward, we want to graph the date and then fit a [linear model](!Wikipedi
 
 ~~~{.R}
 # turn vector into a plottable table & plot it
-filtered=data.frame(Chapter=c(1:85),Reviews=earlyreviews)
+filtered <- data.frame(Chapter=c(1:85),Reviews=earlyreviews)
 plot(filtered$Chapter, filtered$Reviews)
 
 # run a linear model: is there any clear trend?
@@ -352,7 +352,7 @@ predict.lm(model2, newdata = data.frame(x = c(86:100)))
 So for example, the fitted quadratic model predicts ~503 total reviews for chapter 100. Making further assumptions (the error in estimating is independent of time, normally distributed, has zero mean, and constant variance), we [predict](http://predictionbook.com/predictions/9270 "HP MoR: chapter 100 will, after 1 month, have 215-792 reviews posted on FF.net") that our 95% confidence interval 215-792 total reviews of chapter 100:
 
 ~~~{.R}
-predict.lm(model2, newdata = data.frame(x = 100), interval="predict")
+predict.lm(model2, newdata = data.frame(x = 100), interval="prediction")
        fit    lwr      upr
   503.4821 215.05 791.9141
 ~~~
@@ -370,7 +370,7 @@ Coefficients:
 (Intercept)            x       I(x^2)
   178.41168     -3.54725      0.04012
 
-predict.lm(model, newdata = data.frame(x = 100), interval="predict")
+predict.lm(model, newdata = data.frame(x = 100), interval="prediction")
       fit      lwr      upr
 1 224.925 66.83383 383.0162
 ~~~
@@ -378,25 +378,25 @@ predict.lm(model, newdata = data.frame(x = 100), interval="predict")
 This *seems* like a fairly reasonable [prediction](http://predictionbook.com/predictions/9343 "HP MoR: chapter 100 will, after 7 days, have 66-383 reviews posted on FF.net"): 66-383 reviews posted within 7 days. But this is based purely off the model, is it taking into account that even the quadratic model has some pretty large residuals? Let's plot an entire [confidence band](!Wikipedia):
 
 ~~~{.R}
-filtered = data.frame(Chapter=c(1:85),Reviews=earlyreviews)
-y = filtered$Reviews; x = filtered$Chapter
+filtered <- data.frame(Chapter=c(1:85),Reviews=earlyreviews)
+y <- filtered$Reviews; x = filtered$Chapter
 plot(x, xlab="Chapter",
      y, ylab="Reviews posted within week",
-     main="7-Day Reviews per Chapter with Quadratic Fit and 95% Confidence Intervals")
+     main="7-Day Reviews per Chapter with Quadratic Fit and 95% Prediction Intervals")
 
-model = lm(y ~ x + I(x^2))
+model <- lm(y ~ x + I(x^2))
 xx <- seq(min(x),max(x),len=200)
 yy <- model$coef %*% rbind(1,xx,xx^2)
 lines(xx,yy,lwd=2,col=3)
 
-prd <- predict(model, newdata = data.frame(x = c(1:85)), interval="confidence",type="response")
+prd <- predict(model, newdata = data.frame(x = c(1:85)), interval="prediction", type="response")
 lines(c(1:85),prd[,2],col="red",lty=2)
 lines(c(1:85),prd[,3],col="red",lty=2)
 ~~~
 
-![7-Day Reviews per Chapter with Quadratic Fit and 95% Confidence Intervals](/images/hpmor/filteredreviews-quadratic-ci.png)
+![7-Day Reviews per Chapter with Quadratic Fit and 95% Prediction Intervals](/images/hpmor/filteredreviews-quadratic-ci.png)
 
-Obviously far more than 5% of the datapoints are falling outside the confidence band which was calculated from the quadratic model. So the predicted confidence intervals are too narrow - the large residuals bounce datapoints around a lot, both beneath and above the confidence band. This should temper our forecasting enthusiasm. What might predict the residuals better? Day of week? Length of chapter update? Interval between updates? Hard to know.
+The prediction bands look like they're more or less living up to their claimed coverage (7/85 isn't hugely far from 5/100) but do this by being very large and embarrassingly can't even exclude zero. This should temper our forecasting enthusiasm. What might predict the residuals better? Day of week? Length of chapter update? Interval between updates? Hard to know.
 
 ## Modeling conclusions
 
