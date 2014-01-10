@@ -1030,60 +1030,70 @@ Vitamin.D    -0.0744     0.1556   -0.48     0.63
 [^morning-independence]: Gustavo Lacerda wondered if the two-sample _t_-test (or linear regressions in general) were really justifiable to use - could days be correlated, in which case the _p_-values would be overstated and my results actually weaker than they look? He suggested testing my full Zeo dataset to see whether `Morning Feel` can be predicted from day to day by a (relatively) simple linear [autocorrelation](!Wikipedia) [regression](!Wikipedia "Simple linear regression") looking at all previous recorded days:
 
     ~~~{.R}
-    R> data <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv")
+    R> zeo <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv")
     # Master Zeo export file is periodically updated; your results may not be identical
     R> n <- length(data$Morning.Feel); n
-    [1] 821
-    R> reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=data)
+    [1] 1050
+    R> reg <- lm(Morning.Feel[2:n] ~ Morning.Feel[1:(n-1)], data=zeo)
     R> summary(reg)
 
     Coefficients:
                             Estimate Std. Error t value Pr(>|t|)
-    (Intercept)               2.5490     0.1093   23.33   <2e-16
-    Morning.Feel[1:(n - 1)]   0.0861     0.0379    2.27    0.023
+    (Intercept)               2.5727     0.0943    27.3   <2e-16
+    Morning.Feel[1:(n - 1)]   0.0689     0.0329     2.1    0.036
 
-    Residual standard error: 0.739 on 689 degrees of freedom
+    Residual standard error: 0.771 on 918 degrees of freedom
       (129 observations deleted due to missingness)
-    Multiple R-squared:  0.00743,   Adjusted R-squared:  0.00599
-    F-statistic: 5.16 on 1 and 689 DF,  p-value: 0.0235
+    Multiple R-squared:  0.00476,   Adjusted R-squared:  0.00368
+    F-statistic: 4.39 on 1 and 918 DF,  p-value: 0.0364
 
     # Given that pretty much all the ratings are 2, 3, or 4, and the r^2 is <0.01
-    # with a residual error of 0.74, that doesn't seem very correlated.
+    # with a residual error of 0.75, that doesn't seem very correlated.
     # although the _p_ does indicate there's a real (but very small) correlation from
     # day to day, so I guess the p-values may be a *little* overstated
 
-    cor(data$Morning.Feel[2:n], data$Morning.Feel[1:(n-1)], use = "complete.obs")
-    [1] 0.08619
+    cor(zeo$Morning.Feel[2:n], zeo$Morning.Feel[1:(n-1)], use = "complete.obs")
+    [1] 0.069
 
-    # 129 observations missing? What's going on? Well, what does the data look like?
-    data$Morning.Feel
-      [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2  3  2  3 NA  3 NA
-     [32] NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4 NA NA  4  4  3  4 NA NA NA NA NA NA
-     [63] NA  4 NA  2  3  3 NA NA  3 NA  3  3 NA  2 NA NA NA NA  3 NA NA NA NA NA NA NA  3  4 NA  4  3
-     [94]  3  3  4  4  3  3  3  2  3  3  2  3  3  3  2 NA  3  3  4  3 NA  3 NA  3 NA  3  3  3 NA  3  3
-    [125] NA NA NA NA NA  2 NA NA  3  2  3 NA NA NA NA NA NA  3  2  3  2  2  2  2  2  3  3  3  3 NA  3
-    [156]  3  2  2  3  3  2  3  2  3 NA  2 NA NA  4  3  3  3  2  3 NA  4  3  2  3  3  3  3  3  3  4  3
-    [187]  4  3  3  3  3  3  2  3  2  3  3  3 NA  3  1  4 NA  3  2  4  4  2  2  3  3  3  3  3  3  3  3
-    [218]  3  3  4  3  3  2  2  3  3  2  3  3  3  2  2  3  3  3  3  3  4  3  3  2  2  2  1  2  3  3 NA
-    [249]  3  3  3  3  3  3  3  3  2  3  2  3  2  3  3  3  2  3  3  2  3  3  3  3  4  3  3  4  3  4  2
-    [280]  3 NA  3  3  2  2  2  3  3  3  3  2  3  3  2  2  2  3  3  2  2  3  2  3  3  3  3  3  3  2  3
-    [311]  3  2  1  3  4  3  2  3  3  2  2  3  3  3  1  2 NA  2  3  2  2  3  3  2  3  3 NA  3 NA  3  3
-    [342]  2  3  2  2  3  3  3  3  1  3  3  3  2  1  3 NA  2  3  3  3  3  2  1  2  2  3  2  2  3  3  3
-    [373]  3  3  4  3  2  3  3  3  2  2  3 NA  3  2  3  4  4  3  3  2  4  3  2  3  3  4  3  4  3  3 NA
-    [404]  2  2  3  3  3  4  4  3  1  3  3  2  4  3  3  3  2  3  2  4  2  4  3  3  3  4 NA  2  3  3  3
-    [435]  3  2  1  2  2  3  2  3  1  4  3  3  4  3  3  2  2  2  2  3  1  3  3  3  4  3  3  2  3  3  4
-    [466]  4  2  2  3  3  2  2  4  3  3  3  2  3  2  2  3  2  3  2  3  2  3  2  3  2  3  3  3  2  3  3
-    [497]  2  3  1  2  3  3  3  3  2  2  3  3  1  3  2  3  3  4  1  3  4  1  4  3  4  3  3  2  3  2 NA
-    [528]  3  4  2  4  3  3  3  4  4  1  3  2  3  3  3  2  3  4  3  3  2  3  3  3  4  2  2  2  3  3  3
-    [559]  4  4  1  3  3  3  4  3  4  3  3  1  1  2  3  2  3  3  4  3  3  3  2  2  3  4  4  1  4  4  3
-    [590]  4  3  3  3  3  3  2  3  3  2  3  3  2  3  4  2  2  3  1  3  3  2  3  3  2  2  3  4  3  2  1
-    [621]  3  3  3  3  2  4  2  3  3  3  3  4  3  3  3 NA  3 NA  4  3  2  2  2  2  3  3  3  4  3  2  3
-    [652]  2  3  3  1  3  4  3  3  4  4  4  2  3  2  1  4  2  4  3  2  3  3  3  3  2  3  4  2  2  2  2
-    [683]  3  4  3  4  2  2  3  4  2  3  3  3  2  2  2  3  2  2  2  4  3  3  3  2  2  1  2  4  3  3  3
-    [714]  3  3  2  2  2  3  3  3  3  1  1  2  3  3  4  3  3  3  4  3  4  3  3  3  3  3  3  3  2  2  2
-    [745]  2  3  2  3  3  2  1  3  3  2  3  3  3  3  2  3  4  4  2  3  3  4  4  2  4  4  4  3  3  3  1
-    [776]  3  3  2  3  3  4  4  3  1  4  4  4  3  3  3  2  1  2  2  3  3  3  2  4  3  2  4  3  3  4  4
-    [807]  1  2  3  2  3  4  2  3  4  2  4  2  3  3  2
+    # we can also graph the lags:
+    R> acf(zeo$Morning.Feel, na.action=na.pass, main="Do days predict subsequent days at various temporal distances?")
+
+    # incidentally - 129 observations missing? What's going on?
+    zeo$Morning.Feel
+       [1] NA  2  3  3  4  3  3  2 NA NA  4  4 NA  3 NA  2  4  4 NA  4  3  3  3  4  2  3  2  3 NA  3 NA
+      [32] NA  4 NA  4 NA NA NA NA NA NA NA NA NA NA NA NA NA  3  4 NA NA  4  4  3  4 NA NA NA NA NA NA
+      [63] NA  4 NA  2  3  3 NA NA  3 NA  3  3 NA  2 NA NA NA NA  3 NA NA NA NA NA NA NA  3  4 NA  4  3
+      [94]  3  3  4  4  3  3  3  2  3  3  2  3  3  3  2 NA  3  3  4  3 NA  3 NA  3 NA  3  3  3 NA  3  3
+     [125] NA NA NA NA NA  2 NA NA  3  2  3 NA NA NA NA NA NA  3  2  3  2  2  2  2  2  3  3  3  3 NA  3
+     [156]  3  2  2  3  3  2  3  2  3 NA  2 NA NA  4  3  3  3  2  3 NA  4  3  2  3  3  3  3  3  3  4  3
+     [187]  4  3  3  3  3  3  2  3  2  3  3  3 NA  3  1  4 NA  3  2  4  4  2  2  3  3  3  3  3  3  3  3
+     [218]  3  3  4  3  3  2  2  3  3  2  3  3  3  2  2  3  3  3  3  3  4  3  3  2  2  2  1  2  3  3 NA
+     [249]  3  3  3  3  3  3  3  3  2  3  2  3  2  3  3  3  2  3  3  2  3  3  3  3  4  3  3  4  3  4  2
+     [280]  3 NA  3  3  2  2  2  3  3  3  3  2  3  3  2  2  2  3  3  2  2  3  2  3  3  3  3  3  3  2  3
+     [311]  3  2  1  3  4  3  2  3  3  2  2  3  3  3  1  2 NA  2  3  2  2  3  3  2  3  3 NA  3 NA  3  3
+     [342]  2  3  2  2  3  3  3  3  1  3  3  3  2  1  3 NA  2  3  3  3  3  2  1  2  2  3  2  2  3  3  3
+     [373]  3  3  4  3  2  3  3  3  2  2  3 NA  3  2  3  4  4  3  3  2  4  3  2  3  3  4  3  4  3  3 NA
+     [404]  2  2  3  3  3  4  4  3  1  3  3  2  4  3  3  3  2  3  2  4  2  4  3  3  3  4 NA  2  3  3  3
+     [435]  3  2  1  2  2  3  2  3  1  4  3  3  4  3  3  2  2  2  2  3  1  3  3  3  4  3  3  2  3  3  4
+     [466]  4  2  2  3  3  2  2  4  3  3  3  2  3  2  2  3  2  3  2  3  2  3  2  3  2  3  3  3  2  3  3
+     [497]  2  3  1  2  3  3  3  3  2  2  3  3  1  3  2  3  3  4  1  3  4  1  4  3  4  3  3  2  3  2 NA
+     [528]  3  4  2  4  3  3  3  4  4  1  3  2  3  3  3  2  3  4  3  3  2  3  3  3  4  2  2  2  3  3  3
+     [559]  4  4  1  3  3  3  4  3  4  3  3  1  1  2  3  2  3  3  4  3  3  3  2  2  3  4  4  1  4  4  3
+     [590]  4  3  3  3  3  3  2  3  3  2  3  3  2  3  4  2  2  3  1  3  3  2  3  3  2  2  3  4  3  2  1
+     [621]  3  3  3  3  2  4  2  3  3  3  3  4  3  3  3 NA  3 NA  4  3  2  2  2  2  3  3  3  4  3  2  3
+     [652]  2  3  3  1  3  4  3  3  4  4  4  2  3  2  1  4  2  4  3  2  3  3  3  3  2  3  4  2  2  2  2
+     [683]  3  4  3  4  2  2  3  4  2  3  3  3  2  2  2  3  2  2  2  4  3  3  3  2  2  1  2  4  3  3  3
+     [714]  3  3  2  2  2  3  3  3  3  1  1  2  3  3  4  3  3  3  4  3  4  3  3  3  3  3  3  3  2  2  2
+     [745]  2  3  2  3  3  2  1  3  3  2  3  3  3  3  2  3  4  4  2  3  3  4  4  2  4  4  4  3  3  3  1
+     [776]  3  3  2  3  3  4  4  3  1  4  4  4  3  3  3  2  1  2  2  3  3  3  2  4  3  2  4  3  3  4  4
+     [807]  1  2  3  2  3  4  2  3  4  2  4  2  3  3  2  3  2  3  3  3  2  3  2  2  3  4  2  0  3  2  2
+     [838]  1  3  3  4  4  3  2  3  2  3  3  2  1  2  3  3  1  0  3  3  2  3  2  3  3  3  2  3  3  2  2
+     [869]  3  2  3  2  3  3  3  0  2  3  2  2  2  2  2  3  3  3  2  3  2  3  3  2  2  3  4  3  3  3  2
+     [900]  3  3  3  3  4  2  3  3  2  3  0  1  3  2  3  3  3  2  2  3  3  3  3  3  2  2  3  4  0  3  3
+     [931]  3  2  3  4  2  3  3  3  3  3  4  2  3  3  2  3  2  3  4  4  3  3  1  3  4  3  0  3  4  3  3
+     [962]  4  2  2  3  1  2  4  4  3  3  3  2  3  0  3  4  3  2  4  2  3  0  3  3  3  2  4  2  3  3  2
+     [993]  3  3  3  3  3  3  4  3  4  3  3  3  4  3  3  3  2  3  3  3  2  2  3  3  4  3  4  2  3  3  3
+    [1024]  3  3  2  3  2  3  3  3  3  3  3  3  3  4  4  3  3  3  0  4  3  2  2  3  3  3  2
     # ah, I just wasn't good about recording "Morning Feel" early on, and since then
     # there have been occasional slips (literally, with the headband)
     ~~~
@@ -2472,7 +2482,15 @@ December
 31: 3
 2014
 January
-01:
+01: 4
+02: 3
+03: 2
+04: 3
+05: 4
+06: 3
+07: 2/3000
+08: 4
+09: 3
 -->
 
 <!-- Creativity 1-3
@@ -2992,7 +3010,15 @@ December
 31: 2
 2014
 January
-01:
+01: 1
+02: 1
+03: 1
+04: 1
+05: 1
+06: 1
+07: 1
+08: 1
+09: 1
 -->
 
 <!--
@@ -3662,17 +3688,24 @@ December
 January
 01: 0 0
 02: 1 0
-03: 1 1?
+03: 0 0
+04: 1 1
+05: 0 1
+06: 0 0
+07: 0 1
+08: 1 1
+09: 0 1
+10: 1 1?
 
 Underpopulated data cells:
-138: 1 1
+140: 1 1
 139: 1 0
-144: 0 0
-146: 0 1
+146: 0 0
+149: 0 1
 -->
-<!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July; 11, 12, 17, 24, 29 August; 2, 4, 11, 12, 16, 24, 25, 28 September; 23 October; 2 November; 28 November; 7 December; 16, 24, 25, 31 December; 2014: 02 January -->
+<!-- Alcohol log: May 2013 03; 08; 10; 13; 16; 17; 18; 02-04, 19, 30 June; 21, 23 July; 11, 12, 17, 24, 29 August; 2, 4, 11, 12, 16, 24, 25, 28 September; 23 October; 2 November; 28 November; 7 December; 16, 24, 25, 31 December; 2014: 02, 06, 09 January -->
 <!-- melatonin ran out; last day, 06 May 2013; used again on the 21st,29th; 01-03, 12, 16, 19 June; resumed 24 June -->
-<!-- morning caffeine pills: 4-9 Nov, off 10 Nov, on 11-13 Nov, off 14, on 15, off 16-18; on 19; off 20; on 21; off 22; on 23; off 24; on 25; off 26-28; on 29, off 30, on 1 December; off 2, 3; on: 4, 5; off: 6; on: 7; off: 8/9; on: 10; off: 11/12/13; on: 14; off: 15; on: 16; off: 17; on: 18; off: 19; on: 20; off: 21; on: 22; on: 23; off: 24-29; on: 30-31; 2014 January: 01: off; 02: on; 03: off -->
+<!-- morning caffeine pills: 4-9 Nov, off 10 Nov, on 11-13 Nov, off 14, on 15, off 16-18; on 19; off 20; on 21; off 22; on 23; off 24; on 25; off 26-28; on 29, off 30, on 1 December; off 2, 3; on: 4, 5; off: 6; on: 7; off: 8/9; on: 10; off: 11/12/13; on: 14; off: 15; on: 16; off: 17; on: 18; off: 19; on: 20; off: 21; on: 22; on: 23; off: 24-29; on: 30-31; 2014 January: 01: off; 02: on; 03/04: off; 05: on; 06: off; 07: on; 08/09/10: off -->
 <!-- vitamin D: ??? -->
 
 # External links
