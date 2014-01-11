@@ -251,7 +251,7 @@ And the following should *rarely* show up in the final rendered HTML:
     "$tags$"
     "$category$"
 
-Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](/haskell/markdown-length-checker), and one for a bad habit of mine - [too-long footnotes](/haskell/markdown-footnote-length). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options). The shell script can be found at [`markdown-lint.sh`](markdown-lint.sh).
+Another static warning is checking for too-long lines which will cause browsers to use scrollbars, for which I've written a [Pandoc script](/haskell/markdown-length-checker.hs), and one for a bad habit of mine - [too-long footnotes](/haskell/markdown-footnote-length.s). Combining checks for all these defects gives me a ["lint"](!Wikipedia "lint (software)") shell script for individual Markdown files which checks the page source and then the rendered HTML in various ways (I suggest adding `--color=auto` to your default `grep` options). The shell script can be found at [`markdown-lint.sh`](markdown-lint.sh).
 
 ### Anonymous feedback
 
