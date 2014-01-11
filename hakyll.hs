@@ -121,7 +121,6 @@ staticImg x@(TagOpen "img" xs) = do let path = lookup "src" xs
                                     case path of
                                            Nothing -> return x
                                            Just p -> do let p' = if head p == '/' then tail p else p
-                                                        print p'
                                                         (height,width) <- imageMagick p'
                                                         return (TagOpen "img" (uniq ([("height",height), ("width",width)]++xs)))
             where uniq = nub . sort
@@ -176,14 +175,7 @@ interwikiMap = M.fromList $ wpInterwikiMap ++ customInterwikiMap
 wpInterwikiMap, customInterwikiMap :: [(String, String)]
 customInterwikiMap = [("Hackage", "http://hackage.haskell.org/package/"),
                       ("Hawiki", "http://haskell.org/haskellwiki/"),
-                      ("Hayoo", "http://holumbus.fh-wedel.de/hayoo/hayoo.html#0:"),
                       ("Hoogle", "http://www.haskell.org/hoogle/?hoogle=")]
-wpInterwikiMap = [ ("Commons", "http://commons.wikimedia.org/wiki/"),
-                 ("EmacsWiki", "http://www.emacswiki.org/cgi-bin/wiki.pl?"),
-                 ("Wikimedia", "http://wikimediafoundation.org/wiki/"),
-                 ("Wikipedia", "http://en.wikipedia.org/wiki/"),
-                 ("Wikiquote", "http://en.wikiquote.org/wiki/"),
-                 ("Wikisource", "http://en.wikisource.org/wiki/"),
-                 ("Wiktionary", "http://en.wiktionary.org/wiki/"),
-                 ("WMF", "http://wikimediafoundation.org/wiki/"),
-                 ("Wookieepedia", "http://starwars.wikia.com/wiki/") ]
+wpInterwikiMap = [("Wikipedia", "http://en.wikipedia.org/wiki/"),
+                  ("Wikiquote", "http://en.wikiquote.org/wiki/"),
+                  ("Wiktionary", "http://en.wiktionary.org/wiki/")]
