@@ -1,101 +1,117 @@
 #!/usr/bin/env runhaskell
 {-# LANGUAGE OverloadedStrings #-}
+
 import Codec.Binary.UTF8.String (encode)
-import Control.Arrow (arr, (>>>), (>>^))
 import Data.ByteString.Lazy.Char8 (unpack)
 import Data.Char (isAlphaNum, isAscii)
-import Data.FileStore (darcsFileStore)
-import Data.FileStore.Utils (runShellCommand)
 import Data.List (isInfixOf, nub, sort)
-import Data.Monoid (mempty, mconcat)
+import Data.Monoid ((<>))
 import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString)
-import Text.HTML.TagSoup (renderTagsOptions,parseTags,renderOptions, optMinimize, Tag(TagOpen))
+import System.Directory (createDirectoryIfMissing)
+import System.IO.Unsafe (unsafePerformIO)
 import Text.Printf (printf)
 import qualified Data.Map as M (fromList, lookup, Map)
-import System.IO.Unsafe (unsafePerformIO)
 
-import Hakyll
+import Data.FileStore (darcsFileStore)
+import Data.FileStore.Utils (runShellCommand)
 import Feed (filestoreToXmlFeed, FeedConfig(..))
-import Text.Pandoc (bottomUp, defaultWriterOptions, HTMLMathMethod(MathML), Inline(Code, Link, Str), Pandoc, WriterOptions(..))
-import Text.Pandoc.Shared (ObfuscationMethod(NoObfuscation))
+import Hakyll ((.&&.), applyTemplateList, buildTags, compile, complement, compressCssCompiler, constField,
+               copyFileCompiler, dateField, defaultContext, defaultHakyllReaderOptions,
+               defaultHakyllWriterOptions, fromCapture, getRoute, hakyll, idRoute, itemIdentifier,
+               loadAll, loadAndApplyTemplate, loadBody, makeItem, match, modificationTimeField,
+               pandocCompilerWithTransform, preprocess, relativizeUrls, route, setExtension,
+               tagsField, tagsRules, templateCompiler, Compiler, Context, Item, Pattern, Tags)
+import Text.HTML.TagSoup (renderTagsOptions,parseTags,renderOptions, optMinimize, Tag(TagOpen))
+import Text.Pandoc (bottomUp, HTMLMathMethod(MathML), Inline(..),
+                    ObfuscationMethod(NoObfuscation), Pandoc(..), WriterOptions(..))
 
 main :: IO ()
-main = do  hakyll $ do
-             -- handle the simple non-.page files
+main = hakyll $ do
+             preprocess $ do rss <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
+                             createDirectoryIfMissing False "_site"
+                             writeFile "_site/atom.xml" rss
+
+             -- handle the simple static non-.page files
              let static = route idRoute >> compile copyFileCompiler
-             mapM_ (`match` static) ["docs/**",
-                                     "haskell/**",
+             mapM_ (`match` static) [ -- WARNING: match everything *except* Markdown
+                                      -- since rules are mutually-exclusive!
+                                     complement "docs/**.page" .&&. "docs/**",
+                                     "haskell/**.hs",
                                      "images/**",
                                      "**.hs",
                                      "static/*",
                                      "static/img/**",
                                      "static/js/**"]
-             _ <- match "**.css" $ route idRoute >> compile compressCssCompiler
-             _ <- match "static/templates/*.html" $ compile templateCompiler
+             match "**.css" $ route idRoute >> compile compressCssCompiler
+             match "static/templates/*.html" $ compile templateCompiler
 
-             -- handle the much more complex content pages, with tags & metadata etc.
-             pages <- group "html" $ match "**.page" $ do
-               route $ setExtension "" -- cool URLs
-               compile $ myPageCompiler
-                 >>> renderTagsField "prettytags" (fromCapture "tags/*" . escape)
-                 >>> arr (trySetField "author" "gwern") -- only docs/*.page set 'author:'
-                 >>> arr (trySetField "status" "N/A")
-                 >>> arr (trySetField "belief" "N/A")
-                 >>> renderModificationTime "modified" "%d %b %Y" -- populate $modified$
-                 >>> applyTemplateCompiler "static/templates/default.html"
+             tags <- buildTags "**.page" (fromCapture "tags/*")
 
-             -- Add a tag list compiler for every tag
-             _ <- create "tags" $ requireAll pages (\_ ps -> readTags ps :: Tags String)
-             match "tags/*" $ route $ setExtension ""
-             metaCompile $ require_ "tags"
-                 >>> arr tagsMap
-                 >>> arr (map (\(t, p) -> (fromCapture "tags/*" t, makeTagList t p)))
+             match "**.page" $ do
+                 route $ setExtension "" -- cool URLs
+                 compile $ pandocCompilerWithTransform defaultHakyllReaderOptions woptions pandocTransform
+                     >>= loadAndApplyTemplate "static/templates/default.html" (postCtx tags)
+                     >>= imgUrls
+                     >>= relativizeUrls
 
-           putStrLn "generating & copying RSS feed..."
-           writeFile "_site/atom.xml" =<< filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
+             tagsRules tags $ \tag pattern -> do
+                 let title = "Tag: " ++ tag
+                 route idRoute
+                 compile $ tagPage tags title pattern
 
-addPostList :: Compiler (Page String, [Page String]) (Page String)
-addPostList = setFieldA "posts" $
-    arr (reverse . chronological)
-        >>> require "static/templates/postitem.html" (\p t -> map (applyTemplate t) p)
-        >>> arr mconcat
-        >>> arr pageBody
+woptions :: WriterOptions
+woptions = defaultHakyllWriterOptions{ writerSectionDivs = True,
+                                       writerStandalone = True,
+                                       writerTableOfContents = True,
+                                       writerColumns = 120,
+                                       writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
+                                       writerHtml5 = True,
+                                       writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
+                                       writerEmailObfuscation = NoObfuscation }
 
-makeTagList :: String
-            -> [Page String]
-            -> Compiler () (Page String)
-makeTagList tag posts =
-    constA (mempty, posts)
-        >>> addPostList
-        >>> arr (setField "title" ("Posts tagged &#8216;" ++ tag ++ "&#8217;"))
-        >>> applyTemplateCompiler "static/templates/tags.html"
-        >>> relativizeUrlsCompiler
-
-options :: WriterOptions
-options = defaultWriterOptions{ writerSectionDivs = True,
-                                writerStandalone = True,
-                                writerTableOfContents = True,
-                                writerColumns = 120,
-                                writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
-                                writerHtml5 = True,
-                                writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
-                                writerEmailObfuscation = NoObfuscation }
 
 rssConfig :: FeedConfig
-rssConfig =  FeedConfig { fcTitle = "Joining Clouds", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
+rssConfig = FeedConfig { fcTitle = "Joining Clouds", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
 
-myPageCompiler :: Compiler Resource (Page String)
-myPageCompiler = cached "myPageCompiler" (readPageCompiler >>> addDefaultFields >>> arr (changeField "description" escapeHtml) >>> arr applySelf >>> myPageRenderPandocWith)
+postList :: Tags -> Pattern -> ([Item String] -> Compiler [Item String]) -> Compiler String
+postList tags pattern preprocess' = do
+    postItemTemplate <- loadBody "static/templates/postitem.html"
+    posts' <- loadAll pattern
+    posts <- preprocess' posts'
+    applyTemplateList postItemTemplate (postCtx tags) posts
+tagPage :: Tags -> String -> Pattern -> Compiler (Item String)
+tagPage tags title pattern = do
+    list <- postList tags pattern (return . id)
+    makeItem ""
+        >>= loadAndApplyTemplate "static/templates/tags.html"
+                (constField "posts" list <> constField "title" title <>
+                    defaultContext)
+        >>= relativizeUrls
 
-myPageRenderPandocWith :: Compiler (Page String) (Page String)
-myPageRenderPandocWith = pageReadPandocWith defaultHakyllParserState >>^ fmap pandocTransform >>^ fmap (writePandocWith options) >>^ fmap (unsafePerformIO . addImgDimensions)
+imgUrls :: Item String -> Compiler (Item String)
+imgUrls item = do
+    rte <- getRoute $ itemIdentifier item
+    return $ case rte of
+        Nothing -> item
+        Just _  -> fmap (unsafePerformIO . addImgDimensions) item
+
+postCtx :: Tags -> Context String
+postCtx tags =
+    tagsField "tags" tags <>
+    defaultContext <>
+    dateField "created" "%d %b %Y" <>
+    modificationTimeField "modified" "%d %b %Y" <>
+    constField "author" "gwern" <>
+    constField "status" "N/A" <>
+    constField "belief" "N/A" <>
+    constField "description" "N/A"
 
 pandocTransform :: Pandoc -> Pandoc
 pandocTransform = bottomUp (map (convertInterwikiLinks . convertHakyllLinks . addAmazonAffiliate))
 
 addAmazonAffiliate :: Inline -> Inline
-addAmazonAffiliate (Link r (l, t)) | ("?search" `isInfixOf` l)                               = Link r (l++"&tag=gwernnet-20", t)
+addAmazonAffiliate (Link r (l, t)) | "?search" `isInfixOf` l                                 = Link r (l++"&tag=gwernnet-20", t)
                                    | "amazon.com/" `isInfixOf` l && not ("?tag=" `isInfixOf` l) = Link r (l++"?tag=gwernnet-20", t)
 addAmazonAffiliate x = x
 
