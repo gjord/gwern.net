@@ -13,7 +13,7 @@ import System.IO.Unsafe (unsafePerformIO)
 import Text.Printf (printf)
 import qualified Data.Map as M (fromList, lookup, Map)
 
-import Data.FileStore (darcsFileStore)
+import Data.FileStore (gitFileStore)
 import Data.FileStore.Utils (runShellCommand)
 import Feed (filestoreToXmlFeed, FeedConfig(..))
 import Hakyll ((.&&.), applyTemplateList, buildTags, compile, complement, compressCssCompiler, constField,
@@ -28,7 +28,7 @@ import Text.Pandoc (bottomUp, HTMLMathMethod(MathML), Inline(..),
 
 main :: IO ()
 main = hakyll $ do
-             preprocess $ do rss <- filestoreToXmlFeed rssConfig (darcsFileStore "./")  Nothing
+             preprocess $ do rss <- filestoreToXmlFeed rssConfig (gitFileStore "./")  Nothing
                              createDirectoryIfMissing False "_site"
                              writeFile "_site/atom.xml" rss
 
