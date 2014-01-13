@@ -16,13 +16,13 @@ In 2009, a blogger & Debian developer wrote [a](http://www.milliways.fr/2009/01/
 
 # Judging Haskell SoCs
 
-Google describes SoC as
+[Google describes](http://www.google-melange.com/gsoc/homepage/google/gsoc2011 "How Google Summer of Code Works") SoC as
 
-> "...a global program that offers students stipends to write code for open source projects. We have worked with the open source community to identify and fund exciting projects for the upcoming summer."^[<http://www.google-melange.com/gsoc/homepage/google/gsoc2011>]
+> "...a global program that offers students stipends to write code for open source projects. We have worked with the open source community to identify and fund exciting projects for the upcoming summer."
 
-or
+[or](https://code.google.com/soc/)
 
-> "...a global program that offers student developers stipends to write code for various open source software projects. We have worked with several open source, free software, and technology-related groups to identify and fund several projects over a three month period. Since its inception in 2005, the program has brought together over 4500 successful student participants and over 3000 mentors from over 100 countries worldwide, all for the love of code. Through Google Summer of Code, accepted student applicants are paired with a mentor or mentors from the participating projects, thus gaining exposure to real-world software development scenarios and the opportunity for employment in areas related to their academic pursuits. In turn, the participating projects are able to more easily identify and bring in new developers. Best of all, more source code is created and released for the use and benefit of all."^[<https://code.google.com/soc/>]
+> "...a global program that offers student developers stipends to write code for various open source software projects. We have worked with several open source, free software, and technology-related groups to identify and fund several projects over a three month period. Since its inception in 2005, the program has brought together over 4500 successful student participants and over 3000 mentors from over 100 countries worldwide, all for the love of code. Through Google Summer of Code, accepted student applicants are paired with a mentor or mentors from the participating projects, thus gaining exposure to real-world software development scenarios and the opportunity for employment in areas related to their academic pursuits. In turn, the participating projects are able to more easily identify and bring in new developers. Best of all, more source code is created and released for the use and benefit of all."
 
 It is intended to produce source code for the 'use and benefit of all'; it is not meant to produce academic papers, code curiosities, forgotten blog posts, groundwork for distant projects, but 'exciting' new production code. This is the perspective I take in trying to assess SoC projects: did it ship *anything*? If standalone, are the results in active use by more than a few developers or other codebases? If a modification to an existing codebase, was it merged and now is actively maintained^[The Haskell ecosystem evolves fast, and strong static typing means that a package can quickly cease to be compilable if not maintained.]? And so on. Sterling Clover argues that this is far too demanding and does not consider whether an involved student is energized by his contribution to go on and contribute still more[^sclv]; I disagree about the former, and I have not done the latter because it would be too labor-intensive to track down every student and assess their later contributions, which would involve still more subjective appraisals^[For example, how long must a student 'continue to participate/make contributions to Haskell community'? Spencer Janssen, a successful 2006 SoC student, went on to be one of the 2 main developers on the popular [Xmonad](!Wikipedia) window manager, but then wound down his Haskell contributions and stopped entirely ~2009 (much to my dismay as an Xmonad developer). Is he a success for SoC?]. (Perhaps in the future I or another Haskeller will do that.)
 
@@ -131,8 +131,8 @@ The [2007 homepage](http://hackage.haskell.org/trac/summer-of-code/wiki/SoC2007)
 
 #### See also
 
-- [The Monad.Reader's](!Hawiki "The Monad Reader") [issue 9](http://www.haskell.org/wikiupload/5/5d/TMR-Issue9.pdf) covers SoC projects
-- <http://www.serpentine.com/blog/2007/04/12/haskellorg-and-googles-summer-of-code/>
+- [The Monad.Reader's](!Hawiki "The Monad Reader") [issue 9](http://www.haskell.org/wikiupload/5/5d/TMR-Issue9.pdf) covers 3 2007 SoC projects
+- ["Haskell.org and Google’s Summer of Code"](http://www.serpentine.com/blog/2007/04/12/haskellorg-and-googles-summer-of-code/) -(Bryan O'Sullivan; 12 April 2007)
 
 ### 2008
 
@@ -418,7 +418,7 @@ In [2012](http://www.google-melange.com/gsoc/org/google/gsoc2012/haskell), Haske
     > People are running into dependency hell when installing Haskell packages. I want to help move in the direction of solving it.
 7. ["multiuser browser-based interactive ghci, hpaste.org meets tryhaskell.org, for improved teaching of those new to Haskell."](http://www.google-melange.com/gsoc/project/google/gsoc2012/shapr/18001) ([proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/shapr/1)); Shae Erisson, mentored by Heinrich Apfelmus
 
-    > Many new users learn Haskell from the `#haskell` IRC channel. lambdabot's mueval is good for interactive teaching, but only allows short code snippets. hpaste allows large snippets to be shared, but not into an interactive ghci. Chris Done's <http://www.tryhaskell.org> allows larger snippets to be loaded, but is not explicitly multiuser. If tryhaskell allowed multiple users to view the same interpreter state, and allowed users to paste in new code, teaching and debugging would be much easier for people new to Haskell.
+    > Many new users learn Haskell from the `#haskell` IRC channel. `lambdabot`'s `mueval` is good for interactive teaching, but only allows short code snippets. `hpaste` allows large snippets to be shared, but not into an interactive `ghci`. Chris Done's [Try Haskell!](http://www.tryhaskell.org) allows larger snippets to be loaded, but is not explicitly multi-user. If Try Haskell! allowed multiple users to view the same interpreter state, and allowed users to paste in new code, teaching and debugging would be much easier for people new to Haskell.
 8. ["Haskell-Type-Exts"](http://www.google-melange.com/gsoc/project/google/gsoc2012/shayannajd/18001); Shayan Najd, mentored by Niklas Broberg
 
     > Following the proposal by Niklas Broberg [0], I am highly eager to expand the existing typechecker [1] for Haskell-Src-Exts [2] to support most of the features available in Haskell 2010 with the major extensions like GADTs, RankNTypes and Type-Functions. It is done by following the guidelines of "Typing Haskell in Haskell" [3] as the basis; adding support for RankNTypes [5]; and then introducing GADTs and Type-Functions by local assumptions [4]. [0] http://hackage.haskell.org/trac/summer-of-code/ticket/1620 [1] http://hackage.haskell.org/package/haskell-src-exts [2] http://hackage.haskell.org/package/haskell-type-exts [3] M. P. Jones. Typing Haskell in Haskell [4] D. Vytiniotis, S. Peyton Jones, T. Schrijvers, M. Sulzmann. OutsideIn(X) - Modular type inference with local assumptions
@@ -538,9 +538,9 @@ For [2013](https://www.google-melange.com/gsoc/org/google/gsoc2013/haskell), Has
 5. ["Port Charts to use Diagrams"](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/jbracker/1); jbracker, mentored by Tim Docker
 
     > Right now the Charts library uses Cairo as backend. Cairo can be difficult to build on platforms other then Linux. Goal of the project would be to port the Charts library to be independent of the used backend. Like that it can support to use Diagrams as backend. Diagrams supports a variety of backends (SVG, Postscript, Cairo (Optional!), Tikz, Gtk), some of which are written platform independent. As Diagrams is easy to install on every platform supported by Haskell, so will the Charts Library built upon Diagrams. This will make it easy for Haskellers to add charting capabilities to their own applications and libraries in a manner portable across all platforms without any pain.
-6. ["Better record command for darcs"](http://darcs.net/GSoC/2013-BetterRecord); José Neder, mentored by Guillaume Hoffmann
+6. ["Better `record` command for darcs"](http://darcs.net/GSoC/2013-BetterRecord); José Neder, mentored by Guillaume Hoffmann
 
-    > The objective of this project is to improve the darcs record command implementing several options...Diffing two given files can produce various correct outputs, depending on the algorithm used. The standard diff algorithm (used in darcs and many other places) has been criticized to sometimes produce counterintuitive diffs. We would like to try out the ["patience diff"](http://www.owenstephens.co.uk/programming/2010/12/24/scala-patience-diff.html) algorithm ([Issue 346](http://bugs.darcs.net/issue346)), which seems to produce more interesting chunks when used on source code. One downside of patience diff is that it may be slower than classic diff, so performance will have to be evaluated.
+    > The objective of this project is to improve the `darcs record` command implementing several options...Diffing two given files can produce various correct outputs, depending on the algorithm used. The standard diff algorithm (used in darcs and many other places) has been criticized to sometimes produce counterintuitive diffs. We would like to try out the ["patience diff"](http://www.owenstephens.co.uk/programming/2010/12/24/scala-patience-diff.html) algorithm ([Issue 346](http://bugs.darcs.net/issue346)), which seems to produce more interesting chunks when used on source code. One downside of patience diff is that it may be slower than classic diff, so performance will have to be evaluated.
     >
     > Moreover, just as the existing flag `--look-for-adds` proposes adding unversioned files to the new patch, we could use a `--look-for-moves` flag, which would be handful when one wants to record a file move after having done the move, ie, without using `darcs move` ([Issue 642](http://bugs.darcs.net/issue642)). Another cool flag would be `--look-for-replaces`, which would detect token renaming when one forgets about using `darcs replace` ([Issue 2209](http://bugs.darcs.net/issue2209)).
     >
@@ -551,15 +551,19 @@ For [2013](https://www.google-melange.com/gsoc/org/google/gsoc2013/haskell), Has
 8. ["Improve the feedback of the cabal-install dependency solver"](https://www.google-melange.com/gsoc/project/google/gsoc2013/mr_/23001); Martin, mentored by Andres Löh
 
     > The dependency solver can be a mysterious piece of the installation process. I want to give the user the possibility to see what is happening and also give them a better chance to understand what happened if something does not just work. Further, I would like to enable them to use that information to fix the installation in some cases.
-9.  [Parallelise `cabal build`](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/refold/71002); Mikhail Glushenkov, mentored by Johan Tibell
+9.  ["Parallelise `cabal build`"](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/refold/71002); Mikhail Glushenkov, mentored by Johan Tibell
 
     > This project aims to add support for module-level parallel builds to Cabal, a system for building and packaging Haskell libraries and programs. I suggest a novel solution for this problem in the context of GHC/Cabal that, unlike existing approaches, will make a more effective use of multi-core CPUs.
 10. ["Extending GHC to support building modules in parallel"](https://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/parcs/1); Patrick Palka, mentored by Thomas Schilling
 
     > The aim of this project is to implement native support for building modules in parallel in GHC. This entails making the compilation pipeline thread-safe, and writing a parallel compilation driver next to the existing sequential driver. Focus will be placed on correctness and deterministic output, with speed a latent concern. Nothing in the user's end should change other than there being a new `-j` flag that specifies the number of modules to build in parallel. The cabal-install project should be augmented with the ability to use this new `-j` flag to speed up builds, alongside its existing package-level parallelization.
-11. ["Haskell Qt Binding Generator"](https://www.google-melange.com/gsoc/project/google/gsoc2013/ofan/44001); Zhengliang Feng, mentored by Carter Schonwald
+11. ["Haskell Qt Binding Generator"](https://www.google-melange.com/gsoc/project/google/gsoc2013/ofan/44001); Zhengliang Feng, mentored by Carter Schonwald & Ian-Woo Kim
 
     > This project aims to provide a generation tool that creating Qt bindings automatically for Haskell and make generation as much automation as possible. It parses Qt header files and generates corresponding Qt-style Haskell interfaces (type classes, data types).
+
+    The mentor [clarified in August 2013](http://www.haskell.org/pipermail/haskell-cafe/2013-August/109548.html "[Haskell-cafe] [ANNOUNCE] fficxx : haskell-C++ FFI binding generator"):
+
+    > Speaking as the principle mentor on the relevant GSOC project (Ian is also co-mentoring, so he can correct me if I'm wrong anywhere): The QT binding project is a *subproject* of the *GSoC project*  whose principal focus for the summer is making a swig + fficxx based C++ FFI wrapper for haskell. The GSoC core project is moving apace, and will likely be usable by the close of the summer. Realistically, the QT bit is  gold plating / a nontrivial demo use case. Currently its unclear if we'll have time to get the QT ball rolling, but a lot of the support tooling for that subproject should be done by the close of the summer!
 
 #### 2013 predictions
 
@@ -586,10 +590,40 @@ As of 8 January 2014:
 
     > Unfortunately, the extension will not be ready for GHC 7.8, to allow time for the design to settle and the codebase changes to mature. However, it should land in HEAD soon after the 7.8 release is cut, so the adventurous are encouraged to build GHC and try it out. Feedback from users will let us polish the design before it is finally released in 7.10... Keep an eye out for the extension to land in GHC HEAD later this year, and please try it out and give your feedback!
 
-    However, GHC 7.8 apparently took longer to release than expected and so Gundry's work still has not been merged by 2014. Duncan Coutts and Gundry both seem optimistic that it would get added *eventually*, but nevertheless, 4 months after being finished, it had not been merged into GHC HEAD and fails my original judgment criterion, rendering it **unsuccessful**. This is definitely a SoC to revisit in the future to check out whether it ultimately got merged in or was abandoned to bitrot.
+    However, GHC 7.8 apparently took longer to release than expected and so Gundry's work still has not been merged by 2014. Duncan Coutts and Gundry both seem optimistic that it would get added *eventually*, but nevertheless, 4 months after being finished, it had not been merged into GHC HEAD and fails my original judgment criterion, rendering it **unsuccessful?** This is definitely a SoC to revisit in the future to check out whether it ultimately got merged in or was abandoned to bitrot.
 3. Interactive diagrams: Frumin's [summation post](https://parenz.wordpress.com/2013/09/25/gsoc-2013-an-afterword/) links to his [working pastebin](http://paste.hskll.org/). I am surprised, but it's definitely there. So, marking this one **successful**.
-4. Haddock extension for Pandoc compatibility: this SoC was turned into a [rather different project](https://gist.github.com/Fuuzetsu/81253ba7d0c51ac88052); it still involved Haddock, but not Pandoc. Unclear what happened - most of the submitted patches do not seem to have been applied to the Github repository for Haddock. **Unsuccessful**?
+4. Haddock extension for Pandoc compatibility: this SoC was turned into a [rather different project](https://gist.github.com/Fuuzetsu/81253ba7d0c51ac88052); it still involved Haddock, but not Pandoc. Unclear what happened - most of the submitted patches do not seem to have been applied to the Github repository for Haddock. Fuuzetsu tells me in an email on 8 January 2014 that the GHC integration had trouble and this delayed incorporation, but that he was actively working on getting the patches in & was optimistic that they would be "very soon" and "at worst before the end of the week". So this is a very similar situation as Gundry's overloaded record field patches: the work has not been merged into GHC HEAD (technically failing my criterion of "merged by 2014"), but the student is confident that it will be soon and apparently it was merged 12 January 2014 (so I will probably revise the judgment in the future). **Unsuccessful?**
 5. Port Diagrams to use Charts: the latest version recommends using the Charts backend, and Bracker [declared on `diagrams-discuss`](https://groups.google.com/d/msg/diagrams-discuss/p1vDRo6ldWw/WNZ5GWvTPVwJ "[GSoC 2013] Porting Charts to Diagrams - Final Report") the project "a full success". Marking **successful**.
+6. "Better `record` command for darcs": a check of the Darcs HEAD & issue 346 indicates that patience diff made it in, and likewise `--look-for-moves`, so per my criteria of 2 out of 3, marking **successful**.
+7. "Communicating with mobile devices": I specified in my original prediction the usual default criterion of looking for ≥_n_ reverse dependencies, in this case, ≥3. The author's [blog](http://gsoc2013cwithmobiledevices.blogspot.com.ar/) & [Github repository](https://github.com/MarcosPividori/GSoC-Communicating-with-mobile-devices) indicate he released a trio of packages; checking the reverse dependencies for [`push-notify`](http://packdeps.haskellers.com/reverse/push-notify)/[`push-notify-ccs`](http://packdeps.haskellers.com/reverse/push-notify-ccs)/, I see 0 reverse dependencies not to each other (and [Hackage indicates 15 total downloads of `push-notify`](http://hackage.haskell.org/package/push-notify) as of 13 January 2014, suggesting that there's not a lot of demand we're missing by looking at reverse dependencies). Marking **unsuccessful**.
+8. "Improve the feedback of the cabal-install dependency solver": Ruderer's code appears to have not been merged into Cabal HEAD as of 13 January 2014 and there's nothing on his blog or the `cabal-dev` mailing list indicating any work towards getting the code merged in. **Unsuccessful**.
+9. "Parallelise `cabal build`": judging from the [bug report discussion](https://github.com/haskell/cabal/issues/976), merging has gotten bogged down in discussion over [pull #1572](https://github.com/haskell/cabal/pull/1572)/[bug #1529](https://github.com/haskell/cabal/issues/1529). Hopefully the work will get merged in, but it has not yet, so this is another **unsuccessful?**
+10. "Extending GHC to support building modules in parallel": [bug #910](https://ghc.haskell.org/trac/ghc/ticket/910) was closed after the patches were merged in. Looks like parallelizing GHC was *finally* done and I can mark this **successful**!
+11. "Haskell Qt Binding Generator": a little confusing, but Feng's final submission is a tarball providing some source code and a Cabal file naming it to be `fficxx-swig`; which is not on Hackage at all nor does it have any reverse dependencies. I thought perhaps it was intended to be merged into `fficxx` (written by Feng's co-mentor Kim), but a check of the [`fficxx` contributors](https://github.com/wavewave/fficxx/graphs/contributors) shows only Ian-Woo Kim as author. A google of "fficxx-swig" turned up something more useful, a [`hqt` repository](https://github.com/ofan/hqt) by [ofan/Ryan Feng](https://github.com/ofan), which is described as "`hqt` is a set of tools that generate bindings from Qt library to Haskell automatically. The goal of this project is to make a usable and stable tool that can generate bindings for general C++ libraries." Perhaps *this* is what I should be looking at? But `hqt` turns out to also not be on Hackage, not have any reverse dependencies, and not even be mentioned in a google of `hqt site:haskell.org`. (A google of `haskell "hqt"` did turn up an interesting result, though: ["hqt - Haskell Quran Toolkit -- A Haskell library for dealing with Quran texts."](https://github.com/oqc/hqt) How about that?) Given the complete absence of evidence that anyone is using `hqt` in any way, I'm going to have to mark this one **unsuccessful**.
+
+The quick overview is 5 successful, 6 unsuccessful, so very similar to historical base-rates. Things get a little rosier when I note that 3 of the unsuccessful and 0 of the successful had to be given question marks because the project seemed to succeed but it was still uncertain whether the work would be integrated with HEAD, so if all 3 get merged, then we'd really have 8 successes and 3 failures, which seems like a reasonable rate.
+
+How did my predictions do? The simplest scoring is simply to ask how often I assigned >50% to a success or <50% to a failure; ignoring the question-marks, I then got 8/11. More sophisticated is a log scoring rule taking into account my confidence, and comparing it to a random guesser of 47% (the rough base-rate for success in past years)
+
+~~~{.haskell}
+let logScore = sum . map (\(result,p) -> if result then log p else log (1-p))
+logScore [(True,0.65), (False,0.40), (True,0.35), (False,0.55), (True,0.75), (True,0.65),
+          (False,0.25), (False,0.40), (False,0.33), (True,0.33), (False,0.40)]
+~> -6.326876860221628
+let br = 0.47 in logScore [(True,br), (False,br), (True,br), (False,br), (True,br), (True,br),
+                           (False,br), (False,br), (False,br), (True,br), (False,br)]
+~> -7.5843825560059805
+~~~
+
+Since smaller is worse under a log score, I managed to beat the base-rate. What happens if I decide to flip all 3 question-marks into successes (the best-case scenario for them)?
+
+~~~{.haskell}
+logScore [(True,0.65), (True,0.40), (True,0.35), (True,0.55), (True,0.75), (True,0.65),
+          (False,0.25), (False,0.40), (True,0.33), (True,0.33), (False,0.40)]
+~> -7.239856330792127
+~~~
+
+I still beat the base-rate but by a trivial amount. The problem here is that while I was accurate enough in predicting on the 2 Darcs-related projects and the FFI one, I gave the Cabal/GHC-related project low probabilities, and them flipping into success punishes my score. As is correct: I *am* surprised that those succeeded, and my predictions reflected my expectations. Was I wrong to be pessimistic about them and to be surprised by their success? Should I have expected them to succeed, perhaps under a theory like "third time's the charm"? Thinking back, I don't think so. I didn't have any particular reason to think that this time would be different, or that a special push was going to be made, or that some critical point had been passed. I think that if one just takes enough whacks at a hard nut, it'll crack eventually, and this year was GHC/Cabal parallelism's time to crack.
 
 ### Lessons learned
 
@@ -638,8 +672,7 @@ It's difficult to quantify how 'useful' a package is; it's easier to punt and as
       iii. some 2006-2009 [Hackage statistics](http://corp.galois.com/blog/2009/3/23/one-million-haskell-downloads.html) are available by [month](http://www.galois.com/~dons/hackage/hackage.html) & [ranking](http://www.galois.com/~dons/hackage/popularity.html); live Hackage statistics is an open [bug report](https://github.com/haskell/cabal/issues/155) which will be closed by Matthew Gruen's Hackage 2.0 (2010 SoC)
 2. [Reverse dependencies](https://web.archive.org/web/20100324194403/http://hackage.haskell.org/trac/hackage/ticket/576) can be examined several ways:
 
-    i. <http://bifunctor.homelinux.net/~roel/hackage/packages/hackage.html>
-    ii. <http://sparky.haskell.org:8080/>
+    i. [Hackage Dependency Monitor](http://packdeps.haskellers.com/)
     iii. [cabal-query](!Hackage)
     iv. [HackageOneFive](https://github.com/sol/HackageOneFive)
 3. Searching for mentions, blog posts, and unreleased packages elsewhere; key sites to search include:
@@ -647,8 +680,7 @@ It's difficult to quantify how 'useful' a package is; it's easier to punt and as
     i. [Haskell subreddit](http://www.reddit.com/r/haskell/)
     ii. [Github](https://github.com/)
     iii. [Google Code](http://code.google.com/)
-    iv. the [Haskell wiki](http://haskell.org/haskellwiki/index.php?title=&search=&fulltext=Search)
-    v. [Haskell mailing lists](http://dir.gmane.org/index.php?prefix=gmane.comp.lang.haskell)
+    iv. `haskell.org`, and specifically the [Haskell wiki](http://haskell.org/haskellwiki/index.php?title=&search=&fulltext=Search) & [mailing lists](http://dir.gmane.org/index.php?prefix=gmane.comp.lang.haskell)
 
 # External links
 
