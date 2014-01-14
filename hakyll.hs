@@ -133,12 +133,15 @@ addImgDimensions = fmap (renderTagsOptions renderOptions{optMinimize=whitelist})
  TagOpen "figcaption" [],TagText "Plot of page-hits (y-axis) versus date (x-axis)",
  TagClose "figcaption",TagText "\n",TagClose "figure" -}
 staticImg :: Tag String -> IO (Tag String)
-staticImg x@(TagOpen "img" xs) = do let path = lookup "src" xs
-                                    case path of
-                                           Nothing -> return x
-                                           Just p -> do let p' = if head p == '/' then tail p else p
-                                                        (height,width) <- imageMagick p'
-                                                        return (TagOpen "img" (uniq ([("height",height), ("width",width)]++xs)))
+staticImg x@(TagOpen "img" xs) = do let optimized = lookup "height" xs
+                                    case optimized of
+                                      Just _ -> return x
+                                      Nothing -> do let path = lookup "src" xs
+                                                    case path of
+                                                          Nothing -> return x
+                                                          Just p -> do let p' = if head p == '/' then tail p else p
+                                                                       (height,width) <- imageMagick p'
+                                                                       return (TagOpen "img" (uniq ([("height",height), ("width",width)]++xs)))
             where uniq = nub . sort
 staticImg x = return x
 -- | Use FileStore util to run imageMagick's 'identify', & extract the dimensions
