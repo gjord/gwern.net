@@ -209,24 +209,25 @@ PARAMETER       mean  median     mode   HDIlow HDIhigh pcgtZero
 
 ![Graphical summary of BEST results for full dataset](/images/lw-anchoring-yvain.png)
 
-The results are heavily skewed by Yvain's very popular post; we can't trust any results based on such a high scoring post. Let's try omitting Yvain's datapoint. BEST actually crashes displaying the result, perhaps due to making an assumption about there being at least 8 datapoints or something, so we'll fall back to a _t_-test:
+The results are heavily skewed by Yvain's very popular post; we can't trust any results based on such a high scoring post. Let's try omitting Yvain's datapoint. BEST actually crashes displaying the result, perhaps due to making an assumption about there being at least 8 datapoints or something; and it's question whether we should be using a normal-based test like BEST in the first place: just from graphing we can see it's definitely not a normal distribution. So we'll fall back to a distribution-free [Mann-Whitney U](!Wikipedia) two-sample test (rather than a _t_-test):
 
 ~~~{.R}
-t.test(neg,pos)
+wilcox.test(Post.karma ~ Anchor, data=lw)
 
-    Welch Two Sample t-test
+    Wilcoxon rank sum test with continuity correction
 
-data:  neg and pos
-t = -1.453, df = 9.139, p-value = 0.1796
-alternative hypothesis: true difference in means is not equal to 0
-95% confidence interval:
- -31.57   6.84
-sample estimates:
-mean of x mean of y
-    20.78     33.14
+data:  Post.karma by Anchor
+W = 19, p-value = 0.1117
+...
+wilcox.test(Post.karma ~ Anchor, data=(lw[lw$Post.karma<100,]))
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  Post.karma by Anchor
+W = 19, p-value = 0.203
 ~~~
 
-More reasonable. To work around the bug, let's replace Yvain by the mean for that group without him, 33; the new results:
+Reasonable. To work around the bug, let's replace Yvain by the mean for that group without him, 33; the new results:
 
 ~~~{.R}
            SUMMARY.INFO
@@ -276,24 +277,6 @@ Coefficients:
             Estimate Std. Error z value Pr(>|z|)
 (Intercept)   3.0339     0.0731   41.49   <2e-16
 Anchor        0.4669     0.0983    4.75    2e-06
-~~~
-
-For a non-distribution test or nonparametric test, we can try the [Mann-Whitney U](!Wikipedia) test, which hearteningly turns out to give a very similar answer as the _t_-test did:
-
-~~~{.R}
-wilcox.test(Post.karma ~ Anchor, data=lw)
-
-    Wilcoxon rank sum test with continuity correction
-
-data:  Post.karma by Anchor
-W = 19, p-value = 0.1117
-...
-wilcox.test(Post.karma ~ Anchor, data=(lw[lw$Post.karma<100,]))
-
-    Wilcoxon rank sum test with continuity correction
-
-data:  Post.karma by Anchor
-W = 19, p-value = 0.203
 ~~~
 
 (On a side note, I regard these _p_-values as evidence for an effect even thought they don't fall under 0.05 or another alpha I defined in advance: with this small sample size and hence low [statistical power](!Wikipedia), to reach _p_<0.05, each anchoring comment would have to have a grotesquely large effect on article karma - but anchoring comments having such an effect is highly unlikely! Anchoring, in psychology, isn't *that* omnipotent: it's relatively subtle. So we have a similar problem as with the [2013 Lewis meditation results](Lewis meditation) - they're the sort of situations where it'd be nicer to be talking in more relative terms like [Bayes factor](!Wikipedia)s.)
