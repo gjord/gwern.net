@@ -451,18 +451,13 @@ Dividing the two averages shows that the average clicks in this period were ~17.
       [1] 7 5 3 5 2 2 3 2 1 2 2 2 0 1 1 3 1 2 3 2 1 5 1 0 1 2 1 0 3 2 0 2 1 0 1 1 4
      [38] 2 1 1 1 0 1 0 1 4 0 1 1 0 0 0 0 2 0 0 2 1 0 0 0 1 1 0 1 0 1 1 2 1 2 1 1 3
      [75] 2 4 1 3 2 3 3 2 2 1 1 1 1 1 1 3 2 4 1 2 4 2 2 2 2 1 1
-    t.test(before$Pageviews, after$Pageviews)
 
-        Welch Two Sample t-test
+    wilcox.test(before$Pageviews, after$Pageviews)
+
+        Wilcoxon rank sum test with continuity correction
 
     data:  before$Pageviews and after$Pageviews
-    t = 18.1762, df = 253.073, p-value < 2.2e-16
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     6.688428 8.313929
-    sample estimates:
-    mean of x mean of y
-     9.095238  1.594059
+    W = 20084, p-value < 2.2e-16
     ~~~
 
     I'm not sure why R is reporting slightly different means than I listed previously, but the final result is not too surprising when you eyeball the data - this is a very large [effect size](!Wikipedia). Specifically, the effect size as Cohen's _d_ is 1.28 (where 0.5 is  described as "medium", and >0.8 is "large"):
