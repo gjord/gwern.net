@@ -244,10 +244,10 @@ Experiment design is complicated by his lack of use of any kind of objective tes
 1. dual n-back: testing his claims about concentration, increased energy & stamina, and increased alertness & lucidity.
 2. daily Mnemosyne flashcard scores: testing his claim about short & medium-term memory, viz.
 
-    > I have personally found that with respect to the NOOTROPIC effect(s) of all the RACETAMS, whilst I have experienced improvements in  concentration and working capacity / productivity, I have never experienced a noticable ongoing improvement in memory. COLURACETAM is the only RACETAM that I have taken wherein I noticed an improvement in MEMORY, both with regards to SHORT-TERM and MEDIUM-TERM MEMORY. To put matters into perspective, the memory improvement has been mild, yet still significant; whereas I have experienced no such improvement at all with the other RACETAMS.
+    > I have personally found that with respect to the NOOTROPIC effect(s) of all the RACETAMS, whilst I have experienced improvements in  concentration and working capacity / productivity, I have never experienced a noticeable ongoing improvement in memory. COLURACETAM is the only RACETAM that I have taken wherein I noticed an improvement in MEMORY, both with regards to SHORT-TERM and MEDIUM-TERM MEMORY. To put matters into perspective, the memory improvement has been mild, yet still significant; whereas I have experienced no such improvement at all with the other RACETAMS.
 3. daily mood/productivity log (1-5): for the anxiolytic and working claims.
 
-(In all 3, higher = better, so multiple-corrected one-tailed _t_-tests for each.)
+(In all 3, higher = better, so a multivariate result is easily interpreted..)
 
 He recommends a 10mg dose, but sublingually. He mentions "COLURACETAM's taste is more akin to that of PRAMIRACETAM than OXIRACETAM, in that it tastes absolutely vile" (not a surprise), so it is impossible to double-blind a sublingual administration - even if I knew of an inactive equally-vile-tasting substitute, I'm not sure I would subject myself to it. To compensate for ingesting the coluracetam, it would make sense to double the dose to 20mg (turning the 2g into <100 doses). Whether the effects persist over multiple days is not clear; I'll assume it does not until someone says it does, since this makes things much easier.
 
@@ -279,7 +279,7 @@ The placebos can be the usual pills filled with olive oil. The Nature's Answer f
 
 ### Quasi-experiment
 
-I noticed what may have been an effect on [my dual n-back scores](http://groups.google.com/group/brain-training/browse_thread/thread/78e54d222e2c268b/44526d276379dded); the difference is not that obvious (▃▆▃▃▂▂▂▂▄▅▂▄▂▃▅▃▄ vs ▃▄▂▂▃▅▂▂▄▁▄▃▅▂▃▂▄▂▁▇▃▂▂▄▄▃▃▂▃▂▂▂▃▄▄▃▆▄▄▂▃▄▃▁▂▂▂▃▂▄▂▁▁▂▄▁▃▂▄) and appears mostly in the averages - Toomim's quick two-sample [t-test](!Wikipedia) gave there being a difference only 77% (_p_>=0.23), although a more optimistic analysis gives 88% (_p_=0.118)[^fish-oil-analysis]. One issue with this before-after quasi-experiment is that one would expect my scores to slowly rise over time and hence a fish oil *after* would yield a score increase - the 3.2 point difference could be attributable to that, placebo effect, or random variation etc. But an accidentally noticed effect (_d_=0.28) is a promising start. An experiment may be worth doing given that fish oil does cost a fair bit each year: randomized blocks permitting an fish-oil-then-placebo comparison would take care of the first issue, and then blinding (olive oil capsules versus fish oil capsules?) would take care of the placebo worry.
+I noticed what may have been an effect on [my dual n-back scores](http://groups.google.com/group/brain-training/browse_thread/thread/78e54d222e2c268b/44526d276379dded); the difference is not that obvious (▃▆▃▃▂▂▂▂▄▅▂▄▂▃▅▃▄ vs ▃▄▂▂▃▅▂▂▄▁▄▃▅▂▃▂▄▂▁▇▃▂▂▄▄▃▃▂▃▂▂▂▃▄▄▃▆▄▄▂▃▄▃▁▂▂▂▃▂▄▂▁▁▂▄▁▃▂▄) and appears mostly in the averages - Toomim's quick two-sample [_t_-test](!Wikipedia "Student's t-test") gave _p_=0.23, although a another analysis gives _p_=0.1381[^fish-oil-analysis]. One issue with this before-after quasi-experiment is that one would expect my scores to slowly rise over time and hence a fish oil *after* would yield a score increase - the 3.2 point difference could be attributable to that, placebo effect, or random variation etc. But an accidentally noticed effect (_d_=0.28) is a promising start. An experiment may be worth doing given that fish oil does cost a fair bit each year: randomized blocks permitting an fish-oil-then-placebo comparison would take care of the first issue, and then blinding (olive oil capsules versus fish oil capsules?) would take care of the placebo worry.
 
 [^fish-oil-analysis]: If we assume the variance of the daily scores are equal and we exclude the hypothesis that fish oil might make scores *worse*, then we get a smaller _p_-value:
 
@@ -289,18 +289,14 @@ I noticed what may have been an effect on [my dual n-back scores](http://groups.
     after <- c(55,76,56,55,44,41,44,45,65,70,46,65,46,52,68,52,57,50,64,43,
                   41,50,69,44,47,63,34,57)
 
-    t.test(before,after,alternative="less",var.equal=TRUE)
+    wilcox.test(before,after,alternative="less")
 
-        Two Sample t-test
+        Wilcoxon rank sum test with continuity correction
 
     data:  before and after
-    t = -1.1981, df = 74, p-value = 0.1174
-    alternative hypothesis: true difference in means is less than 0
-    95% confidence interval:
-         -Inf 1.266297
-    sample estimates:
-    mean of x mean of y
-     50.29167  53.53571
+    W = 570.5, p-value = 0.1381
+    alternative hypothesis: true location shift is less than 0
+
 
     (mean(after) - mean(before)) / sd(append(before,after)) # the effect size
     0.28
@@ -364,7 +360,7 @@ pwr.t.test(d=0.28,type="paired",power=0.75,alternative="greater",sig.level=0.05)
 pwr.t.test(d=0.28,type="paired",alternative="greater",sig.level=0.05,n=9)
 
           power = 0.1908962
-> pwr.t.test(d=0.5,type="paired",alternative="greater",sig.level=0.05,n=9)
+pwr.t.test(d=0.5,type="paired",alternative="greater",sig.level=0.05,n=9)
 
           power = 0.3927739
 ~~~
@@ -538,7 +534,7 @@ Upon examining the photographs, I noticed no difference in eye color, *but* it s
 
 (I reasoned that this description is not actually deceptive: taking pills is indeed "artificial", as I would not 'naturally' consume so much iodine or seaweed extract, and I didn't know for sure that my eyes hadn't changed color so the correct description is indeed "may or may not have".)
 
-I [posted a link](https://plus.google.com/103530621949492999968/posts/XncycLmKi3P) to the survey on my Google+ account, and inserted the link at the top of all `gwern.net` pages; 51 people completed all 11 binary choices (most of them coming from North America & Europe), which seems adequate since the 11 questions are all asking the same question, and 561 responses to one question is quite a few. A few different statistical tests seem applicable: a chi-squared test whether there's a difference between all the answers, a t-test on the averages, and most meaningfully, summing up the responses as a single pair of numbers and doing a binomial test:
+I [posted a link](https://plus.google.com/103530621949492999968/posts/XncycLmKi3P) to the survey on my Google+ account, and inserted the link at the top of all `gwern.net` pages; 51 people completed all 11 binary choices (most of them coming from North America & Europe), which seems adequate since the 11 questions are all asking the same question, and 561 responses to one question is quite a few. A few different statistical tests seem applicable: a chi-squared test whether there's a difference between all the answers, a two-sample test on the averages, and most meaningfully, summing up the responses as a single pair of numbers and doing a binomial test:
 
 ~~~{.R}
 R> before <- c(27,31,18,26,22,29,20,13,18,31,27) # I split the 11 questions into how many picked,
@@ -555,18 +551,14 @@ R> chisq.test(before, after, simulate.p.value=TRUE)
 
 data:  before and after
 X-squared = 77, df = NA, p-value = 0.000135
-R> t.test(before, after)
+R> wilcox.test(before, after)
 
-    Welch Two Sample t-test
+    Wilcoxon rank sum test with continuity correction
 
 data:  before and after
-t = -1.319, df = 20, p-value = 0.202
-alternative hypothesis: true difference in means is not equal to 0
-95% confidence interval:
- -8.683  1.956
-sample estimates:
-mean of x mean of y
-    23.82     27.18
+W = 43, p-value = 0.2624
+alternative hypothesis: true location shift is not equal to 0
+
 R> binom.test(c(sum(before), sum(after)))
 
     Exact binomial test
@@ -581,7 +573,7 @@ probability of success
                  0.467
 ~~~
 
-So the chi-squared believes there is a statistically-significant difference, the _t_-test disagrees, and the binomial also disagrees. Since I regarded it as a dubious theory, can't see a difference, and the binomial seems like the most appropriate test, I conclude that several months of 1mg iodine did not change my eye color. (As a final test, when I posted the results on the Longecity forum where people were claiming the eye color change, I swapped the labels on the photos to see if anyone would claim something along the lines "when *I* look at the photos, I can see a difference!". I thought [someone might do that](http://predictionbook.com/predictions/11521 ">=1 Longecity users will claim my (swapped) sets of iodine eye photographs will reveal a lightening trend of my iris."), which would be a damning demonstration of their biases & wishful thinking, but no one did.)
+So the chi-squared believes there is a statistically-significant difference, the two-sample test disagrees, and the binomial also disagrees. Since I regarded it as a dubious theory, can't see a difference, and the binomial seems like the most appropriate test, I conclude that several months of 1mg iodine did not change my eye color. (As a final test, when I posted the results on the Longecity forum where people were claiming the eye color change, I swapped the labels on the photos to see if anyone would claim something along the lines "when *I* look at the photos, I can see a difference!". I thought [someone might do that](http://predictionbook.com/predictions/11521 ">=1 Longecity users will claim my (swapped) sets of iodine eye photographs will reveal a lightening trend of my iris."), which would be a damning demonstration of their biases & wishful thinking, but no one did.)
 
 # Kratom
 
@@ -1257,7 +1249,7 @@ logBinaryScore [(True,0.35),(False,0.40),(False,0.40),(True,0.60),(True,0.35),(F
 
 Ouch, so my guesses were actually *worse* than random; this isn't encouraging (if nicotine was helpful, why didn't I notice? Has 1mg tolerated?) but it does indicate the blinding was successful.
 
-Now we will examine the actual performance. Extracting the individual rounds scores from my [Brain Workshop log file](/docs/dnb/gwern-bw-stats.txt), we can average them in groups of 5 to get a daily average; then feed them into [BEST](http://www.indiana.edu/~kruschke/BEST/) (Bayesian equivalent of _t_-test; see [Kruschke 2012](http://www.indiana.edu/~kruschke/articles/Kruschke2012JEPG.pdf "Bayesian estimation supersedes the t-test")):
+Now we will examine the actual performance. Extracting the individual rounds scores from my [Brain Workshop log file](/docs/dnb/gwern-bw-stats.txt), we can average them in groups of 5 to get a daily average; then feed them into [BEST](http://www.indiana.edu/~kruschke/BEST/) (Bayesian equivalent of _t_-test; see [Kruschke 2012](http://www.indiana.edu/~kruschke/articles/Kruschke2012JEPG.pdf "Bayesian estimation supersedes the _t_-test")):
 
 ~~~{.R}
 # individual rounds; the imbalance is unfortunate but the experiment design means nothing can be done
@@ -1540,21 +1532,16 @@ Available as a [CSV](http://www.gwern.net/docs/nootropics/2013-gwern-noopept.csv
 Some quick tests turn in similar conclusions: both Noopept and the "Magtein" increased self-rating but not statistically-significantly (as expected from the beginning due to the lack of power).
 
 ~~~{.R}
-npt <- read.csv("http://www.gwern.net/docs/nootropics/2013-gwern-noopept.csv")
-t.test(MP ~ Noopept, alternative="less", var.equal=TRUE, data = npt)
+R> npt <- read.csv("http://www.gwern.net/docs/nootropics/2013-gwern-noopept.csv")
 
-    Two Sample t-test
+R> wilcox.test(MP ~ Noopept, alternative="less", data = npt)
+
+    Wilcoxon rank sum test with continuity correction
 
 data:  MP by Noopept
-t = -0.6459, df = 54, p-value = 0.2605
-alternative hypothesis: true difference in means is less than 0
-95% confidence interval:
-   -Inf 0.2138
-sample estimates:
-mean in group 0 mean in group 1
-          2.909           3.043
+W = 343, p-value = 0.2607
 
-summary(lm(MP ~ Noopept + Magtein, data = npt))
+R> summary(lm(MP ~ Noopept + Magtein, data = npt))
 
 Residuals:
     Min      1Q  Median      3Q     Max
@@ -1696,9 +1683,18 @@ It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to
 16. 20mg: 20 - 22 December: 0 <!-- skipped 23-26 due to Christmas at Laura's -->
 
     27 - 29 December: 1
-17. 10mg: 1 - 3? January 2014:
+17. 10mg: 1 - 3 January 2014: 1
 
-    4? - 6? January 2014:
+    4 - 6 January 2014: 0
+18. 30mg: 7 - 9 January: 1
+
+    10 - 12 January: 0
+19. 10mg: 13 - 15 January: 1
+
+    16 - 17 January: 0 <!-- Jan 17: 20mg, not 10mg. Accidentally forgot what dosage I was dealing with. -->
+20. 20mg: 18 - 20? January: ?
+
+    21? - 23? January: ?
 
 # Oxiracetam
 
@@ -1774,7 +1770,7 @@ I take my piracetam in the form of capped pills consisting (in descending order)
     points(57:92, ptwo, col="blue")
     ~~~
 
-The BEST results[^piracetam-natural-experiment-BEST] give a small effect size of -0.26 and only partial exclusion of zero effect size (which a one-tailed _t_-test agrees with[^piracetam-natural-experiment-t-test]):
+The BEST results[^piracetam-natural-experiment-BEST] give a small effect size of -0.26 and only partial exclusion of zero effect size (which a one-tailed two-sample test agrees with[^piracetam-natural-experiment-wilcox-test]):
 
 ![`postInfo = BESTplot(poff, c(pone, ptwo), mcmcChain)`](/images/nootropics/piracetam-natural-best.png)
 
@@ -1796,21 +1792,15 @@ The BEST results[^piracetam-natural-experiment-BEST] give a small effect size of
       nuLog10    1.61236  1.62325  1.63557  1.0515   2.1480       NA
       effSz     -0.26083 -0.26144 -0.28521 -0.7992   0.2774    17.07
     ~~~
-[^piracetam-natural-experiment-t-test]: We do a one-tailed test because the original hypothesis was that M/P would fall, certainly not that it would increase:
+[^piracetam-natural-experiment-wilcox-test]: We do a one-tailed test because the original hypothesis was that M/P would fall, certainly not that it would increase:
 
     ~~~{.R}
-    t.test(poff,c(pone,ptwo), alternative="less")
+    wilcox.test(poff,c(pone,ptwo), alternative="less")
 
-        Welch Two Sample t-test
+        Wilcoxon rank sum test with continuity correction
 
     data:  poff and c(pone, ptwo)
-    t = -0.9836, df = 26.77, p-value = 0.1671
-    alternative hypothesis: true difference in means is less than 0
-    95% confidence interval:
-       -Inf 0.1441
-    sample estimates:
-    mean of x mean of y
-        2.789     2.986
+    W = 593, p-value = 0.1502
     ~~~
 
 So the answer is yes, M/P did fall as I expected; but also as one would expect given daily variation and the small sample of 'off' days (19 days), the result is not very statistically robust (even ignoring the low quality of data from a natural experiment). But it was an easy 'experiment' to run and the result had the right sign, as they say.
@@ -2252,9 +2242,15 @@ December
 2014
 January
 01
+04
+07
+09
+11
+14
+17
 -->
 <!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013; break 23-26 Dec -->
 <!-- Multivitamin: started 24 August 2013; break 23-27 Dec -->
-<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7, 12, 14, 17, 22, 25, 28, 30 October; 3, 7, 10, 13, 16, 19, 22, 26, 29 November; 2, 5, 7, 12, 15, 17, 19, 21, 23, 28 December; 2014: 1 January; 03 Jan -->
-<!-- Nicotine: 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum; 20 Sept, 1mg gum; 2 October: 2mg; 16 October: 1mg; 22 October: 1mg; 29 Oct: 1mg; 6 Nov: 1mg; 8 Nov: 2mg; 14 Nov: 1mg; 15: 3mg; 21 Nov: 2mg; 30 Nov: 1mg; 30 Dec: 2mg -->
-<!-- Masturbation: 2009-2012; skip: 23-27 December 2013 -->
+<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7, 12, 14, 17, 22, 25, 28, 30 October; 3, 7, 10, 13, 16, 19, 22, 26, 29 November; 2, 5, 7, 12, 15, 17, 19, 21, 23, 28 December; 2014: 01 January; 03, 05, 08, 11, 15, 17 Jan -->
+<!-- Nicotine: 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum; 20 Sept, 1mg gum; 2 October: 2mg; 16 October: 1mg; 22 October: 1mg; 29 Oct: 1mg; 6 Nov: 1mg; 8 Nov: 2mg; 14 Nov: 1mg; 15: 3mg; 21 Nov: 2mg; 30 Nov: 1mg; 30 Dec: 2mg; 2014: January: 05: 4mg gum -->
+<!-- Masturbation: 2009-2012; skip: 23-27 December 2013, 11 January 2014 -->
