@@ -292,6 +292,7 @@ R> i <- ling[ling$Creatine==1,]$IQ; mean(i); sd(i)
 R> i <- ling[ling$Creatine==2,]$IQ; mean(i); sd(i)
 [1] 116.1
 [1] 9.086
+R> # we use a _t_-test rather than a Wilcoxon to replicate Ling's probable analysis
 R> t.test(IQ ~ Creatine, data=ling)
 
     Welch Two Sample t-test
