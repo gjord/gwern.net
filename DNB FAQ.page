@@ -1847,21 +1847,16 @@ My [BW data](/docs/dnb/gwern-bw-stats.txt) had to be parsed by hand and some Ema
       effSz     -0.03528 -0.03519 -0.03547 -0.3588   0.2851    41.54
     ~~~
 
-    For those who prefer a t-test:
+    For those who prefer a regular two-sample test:
 
     ~~~{.R}
-    R> t.test(off,on)
+    R> wilcox.test(off,on)
 
-        Welch Two Sample t-test
+        Wilcoxon rank sum test with continuity correction
 
     data:  off and on
-    t = -0.1597, df = 156, p-value = 0.8733
-    alternative hypothesis: true difference in means is not equal to 0
-    95% confidence interval:
-     -4.042  3.437
-    sample estimates:
-    mean of x mean of y
-        41.08     41.39
+    W = 3004, p-value = 0.7066
+    alternative hypothesis: true location shift is not equal to 0
     ~~~
 
 Since there's hardly any evidence even though this looks like plenty of data, I think I'll stop doing saccading. I can only speak for myself, so I would be pleased if other right-handed n-backers could adopt a similar procedure and see whether perhaps I am an exception.
