@@ -1268,7 +1268,7 @@ The table of contents tweak drops out entirely as irrelevant, leaving just the t
 
 ### Multifactorial roundup
 
-At this point it seems worth asking whether running multifactorials has been worthwhile. The analysis is a bit more difficult, and the more factors there are, the harder to interpret. I'm also not too keen on encoding the combinatorial explosion into a big JS array for ABalytics. In my tests so far, have there been many interactions? A quick tally of the `glm()` and `step()` results:
+At this point it seems worth asking whether running multifactorials has been worthwhile. The analysis is a bit more difficult, and the more factors there are, the harder to interpret. I'm also not too keen on encoding the combinatorial explosion into a big JS array for ABalytics. In my tests so far, have there been many interactions? A quick tally of the `glm()`/`step()` results:
 
 1. Text & background color:
 
@@ -1290,6 +1290,201 @@ At this point it seems worth asking whether running multifactorials has been wor
 So of the 11 main effects, 9 two-ways, & 2 three-ways, there were confirmed in the reduced models: 6 mains (55%), 2 two-ways (22%), & 0 three-ways (0%). And of the 2 interactions, only the black/white interaction was important (and even there, if I had regressed instead `cbind(Successes, Failures) ~ Black + White`, black & white would still have positive coefficients, they just would not be statistically-significant, and so I would likely have made the same choice as I did with the interaction data available).
 
 This is not a resounding endorsement so far.
+
+## Section header capitalization
+
+3 * 3:
+
+- `h1, h2, h3, h4, h5 { text-transform: uppercase; }`
+- `h1, h2, h3, h4, h5 { text-transform: none; }`
+- `h1, h2, h3, h4, h5 { text-transform: capitalize; }`
+- `div#header h1 { text-transform: uppercase; }`
+- `div#header h1 { text-transform: none; }`
+- `div#header h1 { text-transform: capitalize; }`
+
+~~~{.Diff}
+--- a/static/templates/default.html
++++ b/static/templates/default.html
+@@ -27,7 +27,7 @@
+   <body>
+
+     <!-- override CSS with A/B test -->
+-    <div class="tocFormatting_class1"></div>
++    <div class="headerCaps_class1"></div>
+
+     <div id="main">
+       <div id="sidebar">
+@@ -152,141 +152,51 @@
+       _gaq.push(['_setAccount', 'UA-18912926-1']);
+
+       ABalytics.init({
+-      tocFormatting: [
++      headerCaps: [
+       {
+-      name: '88f',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
+-      "tocFormatting_class2": ""
++      name: 'uu',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: uppercase; }; div#header h1 { text-transform: uppercase; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '88e',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'un',
++      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: none; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '88r',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
++      name: 'uc',
++      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: capitalize; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '89f',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'nu',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: uppercase; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '89e',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'nn',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: none; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '89r',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
++      name: 'nc',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: capitalize; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '81f',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'cu',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: uppercase; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '81e',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'cn',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: none; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '81r',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '98f',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '98e',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '98r',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '99f',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '99e',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '99r',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '91f',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '91e',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '91r',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '18f',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
+-      "tocFormatting_class2": ""
+-      {
+-      name: '18e',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '18r',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '19f',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '19e',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '19r',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '11f',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '11e',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '11r',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
++      name: 'cc',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: capitalize; }</style>",
++      "headerCaps_class2": ""
+       }
+       ],
+       }, _gaq);
+       ...)}
+~~~
 
 # Appendix
 ## Covariate impact on power
