@@ -48,7 +48,6 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
                 floating footnotes
         CSS
                 differences from readability
-                                                narrower columns
                                                 href link color - not text black?
                 basically, every declaration in default.css!
         Donation
@@ -580,9 +579,8 @@ rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
 rates$Failures <-rates$N - rates$Successes
 
-g <- glm(cbind(Successes,Failures) ~ Black*White, data=rates, family="binomial")
+g <- glm(cbind(Successes,Failures) ~ Black * White, data=rates, family="binomial")
 summary(g)
-
 ...
 Coefficients:
                     Estimate Std. Error z value Pr(>|z|)
@@ -596,6 +594,8 @@ BlackTRUE:WhiteTRUE   0.0545     0.0250    2.17     0.03
     Null deviance:  6.8625e+00  on 3  degrees of freedom
 Residual deviance: -1.1758e-11  on 0  degrees of freedom
 AIC: 50.4
+summary(step(g))
+# same thing
 ~~~
 
 So we can estimate the net effect of the 4 possibilities:
@@ -605,7 +605,7 @@ So we can estimate the net effect of the 4 possibilities:
 3. Black, Off-white: -0.0128 + 0 + 0 = -0.0128
 4. Off-black, White: 0 + -0.0164 + 0 = -0.0164
 
-The results exactly match the data's rankings, but that's may be because the sample size was so large (>57,000 datapoints in each cell).
+The results exactly match the data's rankings.
 
 So, this suggests a change to the CSS: we switch the default background color from `#FCFCFC` to `white`, while leaving the default `color` its current `black`.
 
@@ -1196,33 +1196,33 @@ hunk ./static/templates/default.html 162
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
 NumSize,FontSize,TocBg,N,Rate
-8,8,r,3472,0.1863
-1,1,f,3324,0.1859
-8,9,e,3456,0.1852
-8,8,e,3349,0.1845
-1,1,e,3532,0.1829
-1,1,r,3307,0.1826
-9,1,r,3665,0.1820
-8,8,f,3385,0.1808
-1,9,r,3529,0.1799
-1,8,r,3300,0.1800
-1,8,f,3386,0.1796
-9,1,f,3352,0.1793
-9,9,r,3418,0.1791
-9,8,r,3267,0.1781
-9,9,e,3270,0.1777
-1,8,e,3493,0.1775
-8,1,r,3445,0.1771
-1,9,f,3558,0.1759
-8,9,f,3334,0.1749
-8,1,f,3389,0.1738
-1,9,e,3551,0.1726
-9,1,e,3232,0.1711
-8,9,r,3329,0.1697
-9,8,f,3496,0.1688
-8,1,e,3379,0.1681
-9,9,f,3402,0.1681
-9,8,e,3488,0.1677
+1,1,r,4068,0.1898
+8,9,e,4249,0.1876
+8,8,f,4210,0.1872
+8,8,e,4118,0.1870
+9,1,r,4445,0.1854
+8,8,r,4269,0.1844
+9,9,r,4190,0.1826
+9,8,r,4027,0.1818
+1,8,f,4143,0.1815
+9,1,f,4094,0.1808
+1,1,f,4097,0.1801
+1,9,f,4400,0.1798
+8,1,r,4239,0.1798
+1,9,r,4274,0.1797
+1,8,e,4285,0.1785
+1,1,e,4382,0.1785
+9,9,e,4004,0.1778
+1,9,e,4330,0.1767
+1,8,r,4094,0.1761
+8,9,r,4105,0.1752
+8,9,f,4076,0.1747
+8,1,e,4141,0.1744
+9,9,f,4114,0.1736
+8,1,f,4143,0.1735
+9,1,e,3976,0.1718
+9,8,f,4258,0.1721
+9,8,e,4316,0.1701
 
 
 rates[rates$NumSize==1,]$NumSize <- 100
@@ -1240,30 +1240,56 @@ g <- glm(cbind(Successes,Failures) ~ NumSize * FontSize * TocBg, data=rates, fam
 ...
 Coefficients:
                          Estimate Std. Error z value Pr(>|z|)
-(Intercept)              3.709104   3.357016    1.10     0.27
-NumSize                 -0.055532   0.035879   -1.55     0.12
-FontSize                -0.054945   0.035900   -1.53     0.13
-TocBgf                  -1.800534   4.769448   -0.38     0.71
-TocBgr                  -1.309431   4.739498   -0.28     0.78
-NumSize:FontSize         0.000581   0.000384    1.51     0.13
-NumSize:TocBgf           0.017593   0.050984    0.35     0.73
-NumSize:TocBgr           0.014394   0.050692    0.28     0.78
-FontSize:TocBgf          0.016880   0.051001    0.33     0.74
-FontSize:TocBgr          0.011560   0.050694    0.23     0.82
-NumSize:FontSize:TocBgf -0.000163   0.000545   -0.30     0.77
-NumSize:FontSize:TocBgr -0.000125   0.000542   -0.23     0.82
+(Intercept)              1.915786   3.012752    0.64     0.52
+NumSize                 -0.035803   0.032204   -1.11     0.27
+FontSize                -0.034009   0.032215   -1.06     0.29
+TocBgf                   0.796185   4.272729    0.19     0.85
+TocBgr                   0.942710   4.255739    0.22     0.82
+NumSize:FontSize         0.000352   0.000344    1.02     0.31
+NumSize:TocBgf          -0.008410   0.045687   -0.18     0.85
+NumSize:TocBgr          -0.012440   0.045522   -0.27     0.78
+FontSize:TocBgf         -0.011933   0.045707   -0.26     0.79
+FontSize:TocBgr         -0.013845   0.045506   -0.30     0.76
+NumSize:FontSize:TocBgf  0.000127   0.000489    0.26     0.80
+NumSize:FontSize:TocBgr  0.000176   0.000487    0.36     0.72
 
 summary(step(g))
 
 ...
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
-                  Estimate Std. Error z value Pr(>|z|)
-(Intercept)       2.686414   1.941676    1.38    0.166
-NumSize          -0.045038   0.020765   -2.17    0.030
-FontSize         -0.045599   0.020766   -2.20    0.028
-NumSize:FontSize  0.000487   0.000222    2.19    0.028
+(Intercept)       2.480485   1.741092    1.42    0.154
+NumSize          -0.042618   0.018623   -2.29    0.022
+FontSize         -0.042427   0.018622   -2.28    0.023
+NumSize:FontSize  0.000452   0.000199    2.27    0.023
 ~~~
+
+The table of contents tweak drops out entirely as irrelevant, leaving just the two size tweaks, which turn out to be unambiguously negative (and an almost negligible interaction term probably reflecting reader preference for consistency in sizes of letters and numbers - as one gets smaller, the other does better if it's smaller too).
+
+### Multifactorial roundup
+
+At this point it seems worth asking whether running multifactorials has been worthwhile. The analysis is a bit more difficult, and the more factors there are, the harder to interpret. I'm also not too keen on encoding the combinatorial explosion into a big JS array for ABalytics. In my tests so far, have there been many interactions? A quick tally of the `glm()` and `step()` results:
+
+1. Text & background color:
+
+    - original: 2 main, 1 two-way interaction
+    - survived: 2 main, 1 two-way interaction
+2. List symbol and font-size:
+
+    - original: 3 main, 2 two-way interactions
+    - survived: 1 main
+3. Blockquote formatting:
+
+    - original: 2 main, 1 two-way
+    - survived: 1 main
+4. Font size & ToC background:
+
+    - original: 4 mains, 5 two-ways, 2 three-ways
+    - survived: 2 mains, 1 two-way
+
+So of the 11 main effects, 9 two-ways, & 2 three-ways, there were confirmed in the reduced models: 6 mains (55%), 2 two-ways (22%), & 0 three-ways (0%). And of the 2 interactions, only the black/white interaction was important (and even there, if I had regressed instead `cbind(Successes, Failures) ~ Black + White`, black & white would still have positive coefficients, they just would not be statistically-significant, and so I would likely have made the same choice as I did with the interaction data available).
+
+This is not a resounding endorsement so far.
 
 # Appendix
 ## Covariate impact on power
