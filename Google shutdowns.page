@@ -118,7 +118,9 @@ Simply collecting the data is useful since it allows us to make some estimates l
 
     1. A *service* is anything primarily accessed through a web browser or API or the Internet; so Gmail or a browser loading fonts from a Google server, but not a Gmail notification program one runs on one's computer or a FLOSS font available for download & distribution.
     2. A *program* is anything which is an application, plugin, library, framework, or all of these combined; some are very small (Authenticator) and some are very large (Android). This does include programs which require Internet connections or Google APIs as well as programs for which the source code has not been released, so things in the program category are not immune to shutdown and may be useful only as long as Google supports them.
-    3. A *thing* is anything which is primarily a physical object. A cellphone or laptop running Android would be an example.
+    3. A *thing* is anything which is primarily a physical object. A cellphone running Android or a Chromebook would be an example.
+
+        In retrospect, I probably should have excluded this category entirely: there's no reason to expect cellphones to follow the same lifecycle as a service or program, it leads to even worse classification problems (when does an Android cellphone 'die'? should one even be looking at individual cellphones or laptops rather than entire product lines?), there tend to be many iterations of a product and they're all hard to research, etc.
     4. *Other* is the catch-all category for things which don't quite seem to fit. Where does a Google think-tank, charity, conference, or venture capital fund fit in? They certainly aren't software, but they don't seem to be quite services either.
 - `Profit`: whether Google *directly* makes money off a product
 
@@ -714,6 +716,7 @@ Google+ Auto Backup ios/android application closed-source non-profit start: 24 J
 7 February 2014 Schemer http://googlesystem.blogspot.com/2013/12/schemer-to-be-discontinued.html to be shut down in 2014? confirmed: "All your schemes are available for download until February 7, 2014, after which all data will be permanently deleted." https://plus.google.com/+Schemer/posts/AhXkhvzRtek
 Google Talk Windows client? http://www.tbreak.ae/news/google-killing-google-talk-windows-client "Connections from the Google Talk client to Google Talk will continue to operate for the first two months of 2014. Users may continue to see the deprecation warning in the client during this time. After this period has elapsed the client will be unable to connect to the Google Talk service."
 Timely 2014-01-04 closed-source application Bitspin acquisition non-profit (since Google made the paid Android Timely app free) http://www.bitspin.ch/google http://www.pcworld.com/article/2084140/google-makes-timely-buy-of-swiss-app-maker.html "For new and existing users, Timely will continue to work as it always has." '"google timely"' 2014-01-08: 25,400 results
+Nest: "Nest Learning Thermostat", "Protect"  13 January 2013 https://investor.google.com/releases/2014/0113.html http://techcrunch.com/2014/01/13/google-just-bought-connected-device-company-nest-for-3-2b-in-cash/ https://nest.com/blog/2014/01/13/nest-google-and-you/ acquisition thing for-profit "google nest"  'About 87,300,000 results (0.42 seconds) '
 -->
 
 # Appendix
