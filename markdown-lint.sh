@@ -32,8 +32,8 @@ do
         # indicates broken copy-paste of image location
         egp --only-matching '\!\[.*\]\(wiki/.*\)' "$PAGE";
 
-        markdown-length-checker "$PAGE";
-        markdown-footnote-length "$PAGE";
+        markdown-length-checker.hs "$PAGE";
+        markdown-footnote-length.hs "$PAGE";
 
         HTML=$(tail -n +3 "$PAGE" | pandoc --mathml --standalone -)
         echo "$HTML" | fgp -e "<""del"">";
