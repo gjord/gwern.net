@@ -207,6 +207,8 @@ On 25 November 2013, a possible SR seller, Brandon Howell, [was arrested](http:/
 
 On 17 December 2013, 4 members of the methamphetamine group seller ["hammertime"](/docs/sr/hammertime-profile.htm) [were arrested in Oregon](http://www.kgw.com/news/Wash-county-tactical-police-conducting-3-dawn-raids-236190011.html "Suspected drug trafficking ring busted in Aloha") ([PACER](/docs/sr/2013-12-19-hammertime-pacer.maff), [indictment](/docs/sr/2013-12-10-hammertime-indictment.pdf)). On [19 December 2013](http://www.justice.gov/usao/nys/pressreleases/December13/JonesetalArrestsSilkRoad2PR.php) ([indictment](http://www.justice.gov/usao/nys/pressreleases/December13/JonesetalArrestsSilkRoad2PR/Jones,%20Andrew,%20et%20al%20\(Silk%20Road\)%20Indictment.pdf); [girlfriend's report](http://www.reddit.com/r/SilkRoad/comments/1tb2yl/sr_admin_and_mod_just_got_arrestedmy_boyfriend/)), the former SR administrator/employee "Inigo" was arrested in Virginia.
 
+On 26 January 2014, the Bitcoin seller "BTCKing" ([SR1](/docs/sr/btcking-profile-1.htm)/[2](/docs/sr/btcking-profile-2.htm)) & an accomplice at [BitInstant](!Wikipedia) were arrested in Florida & NY (respectively) after an IRS investigation ([indictment](http://www.justice.gov/usao/nys/pressreleases/January14/SchremFaiellaChargesPR/Faiella,%20Robert%20M.%20and%20Charlie%20Shrem%20Complaint.pdf)); BTCKing offered a service in which he sent buyers a bank account number to deposit cash to (which he then converted into bitcoins via BitInstant), then transferred bitcoins to the buyer on Silk Road. He was arrested after an undercover agent (starting in August 2012) made purchases, received the bank account information, and obtained his bank records; the case was further cemented by using the SR messages from the FBI's copy of the servers (apparently BTCKing did not believe in using PGP), the home IP embedded in BTCKing's emails with BitInstant (BTCKing used Safe-mail.net but apparently did not connect over Tor), and his accomplice's Gmail emails & chats obtained. (Ironically, BTCKing had declined Dread Pirate Robert's July 2013 invitation to join him in creating an "Anonymous Bitcoin Exchange" by pointing out his vulnerability to investigation: "All LE has to do is go to the bank and ask who is the Trustee of RMF Trust and BANG... They will seize the funds and me.")
+
 <!-- http://www.reddit.com/r/SilkRoad/comments/1riid6/i_am_a_corrections_officerwe_now_have_our_first/
 http://www.reddit.com/r/SheepMarketplace/comments/1rnf0d/the_weed_vendor_hanfliebhaber_apparently_has_been/ -->
 
@@ -457,9 +459,9 @@ Both the seller and the example above had standard [PGP](!Wikipedia "Pretty Good
 
     This is a very real concern: in September 2011, an older online drug market, "Farmer's Market", was busted and 8 administrators or sellers were [indicted](http://www.wired.com/images_blogs/threatlevel/2012/04/WILLEMSIndictment-FILED.045.pdf). No users/buyers seem to have been arrested, indicted, or convicted yet, but [reportedly](http://www.shroomery.org/forums/showflat.php/Number/17056146/fpart/all/vc/1 "Department of Justice letter") former customers have gotten love-letter-equivalents from the Department of Justice warning them & asking for information.
 
-    The indictment doesn't reveal how all the evidence was obtained (aside from the drugs purchased by and mailed to agents), but the defendants all used a Canadian email service called [Hushmail](!Wikipedia) which provides a Web interface for emails encrypted using PGP. Hushmail either provides or runs the encryption code for the user, and as such, can compromise users at any time, and indeed, [has](!Wikipedia "Hushmail#Compromises to email privacy") turned over decrypted emails to law enforcement in the past ("Operation Raw Deal" yielded "12 CDs" of emails). I personally stopped using Hushmail when this was revealed in 2007, but it seems the defendants did not. In October 2012, [a Tor developer attended an FBI conference](http://blog.torproject.org/blog/trip-report-october-fbi-conference) where a DEA agent told them that "they just had random Americans receive the Paypal payments, take a cut, and then turn them into a Panama-based digital currency [Pecunix], and the Panama company didn't want to help trace where the money went...the two main people used Hushmail to communicate. After a subpoena (and apparently a lot of patience since Canada still isn't quite the same as the US), Hushmail rolled over and gave up copies of all the emails." (The litany of detailed financial records in the indictment is also a vivid demonstration of how insecure non-Bitcoin services can be.) Another sobering example comes from an Australian child pornography ring which practiced remarkable operational security in its use of PGP and Usenet message groups ([as described in the 2008 Castleman affidavit](/docs/sr/2008-gov.uscourts.txnd.174855.2.0-castlemanaffidavit.pdf) & a [summary by Baal](http://dee.su/uploads/baal.html)): after a member was flipped due to offline activities, the length investigation succeeded in prosecuting less than half of its members, principally those members which had placed their trust in a third-party email/VPN service called `Privacy.LI`.
+    The indictment doesn't reveal how all the evidence was obtained (aside from the drugs purchased by and mailed to agents), but the defendants all used a Canadian email service called [Hushmail](!Wikipedia) which provides a Web interface for emails encrypted using PGP. Hushmail either provides or runs the encryption code for the user, and as such, can compromise users at any time, and indeed, [has](!Wikipedia "Hushmail#Compromises to email privacy") turned over decrypted emails to law enforcement in the past ("Operation Raw Deal" yielded "12 CDs" of emails). I personally stopped using Hushmail when this was revealed in 2007, but it seems the defendants did not. In October 2012, [a Tor developer attended an FBI conference](http://blog.torproject.org/blog/trip-report-october-fbi-conference) where a DEA agent told them that "they just had random Americans receive the Paypal payments, take a cut, and then turn them into a Panama-based digital currency [Pecunix], and the Panama company didn't want to help trace where the money went...the two main people used Hushmail to communicate. After a subpoena (and apparently a lot of patience since Canada still isn't quite the same as the US), Hushmail rolled over and gave up copies of all the emails." (The litany of detailed financial records in the indictment is also a vivid demonstration of how insecure non-Bitcoin services can be.) Another sobering example comes from an Australian child pornography ring which practiced remarkable operational security in its use of PGP and Usenet message groups ([as described in the 2008 Castleman affidavit](/docs/sr/2008-gov.uscourts.txnd.174855.2.0-castlemanaffidavit.pdf) & a [summary by Baal](http://dee.su/uploads/baal.html)): after a member was flipped due to offline activities, the length investigation succeeded in prosecuting less than half of its members, principally those members which had placed their trust in a third-party email/VPN service called `Privacy.LI`. Finally, [Tor Mail](!Wikipedia) was popular with black-market users for providing a hidden service, and while it did not betray its users, its French servers were seized in the [Freedom Hosting](!Wikipedia) raid and its emails [have since been employed by the FBI](http://www.wired.com/threatlevel/2014/01/tormail/ "While investigating a hosting company known for sheltering child porn last year the FBI incidentally seized the entire e-mail database of a popular anonymous webmail service called TorMail. Now the FBI is tapping that vast trove of e-mail in unrelated investigations.").
 
-I add it to my cart (no one-click checkout, so at least SR doesn't have to worry about Amazon!):
+I add it to my cart:
 
 ![Selegiline: shopping cart form - fill in form and push the button, if you dare](/images/silkroad/selegiline-shoppingcart.png)
 
@@ -1699,7 +1701,7 @@ RoadSilk/Pirate Market   29 November 2013                     2                 
 The BlackBox Market      12 November 2013                     2                 open     `77yqlxe7pnxhnxvi.onion`                                               Quite an interesting site, but not sure it should be listed here. Start date based on [Reddit](http://www.reddit.com/r/onions/comments/1qhj76/the_blackbox_market_legal_private_encrypted/)
 GreyRoad                 4 January 2014                       0                 open     `greyroaderw4qymd.onion`                                               Went public [4 January 2013](http://www.reddit.com/r/DarkNetMarkets/comments/1ue777/ask_lord_voldemort_anything/), operator claims to have been selling for a while but refuses to provide any specifics & very few sellers on market so opening date is used; forums: `grforums5qwzbhkl.onion`
 Dream Market             15 November 2013?                    2?                open     `ltxocqh4nvwkofil.onion`                                               Site claims to've opened 15 November 2013; first mention of it I found was on 7 January 2014.
-drugslist                8 January 2013                       0                 open     `drugslisvdknitqd.onion`
+drugslist                8 January 2014                       0                 open     `drugslisvdknitqd.onion`
 Outlaw Market            29 December 2013                     0                 open     `drugs26ucskmvcef.onion`                                               Open date based on the date of the ["Welcome" post on the OM forum](http://hmxutiksabsj4ozi.onion/index.php?topic=2.msg0)
 Cantina                  20 January 2014                      0                 open     `vsudl2g3em6qhcw4.onion`                                               Cantina [spammed vendors on SRF2](http://silkroad5v7dywlc.onion/index.php?topic=18574.0) on 20 Jan 2014; earliest known mention of the market.
 evolution                14 January 2014                      0                 open     `k5zq47j6wd3wdvjq.onion`                                               [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1vmufh/latest_news_from_tcf/) 20 Jan, but forums [claim first sale on 14 January](http://i25c62nvu4cgeqyz.onion/viewtopic.php?pid=121#p121); forums: `i25c62nvu4cgeqyz.onion`
@@ -1707,9 +1709,85 @@ Doge Road                18 January 2014                      0                 
 
 (Three Hares / Bad Wolf Hosting are excluded for apparently not being active yet.) <!-- Three Hares? http://www.reddit.com/r/DarkNetMarkets/comments/1qsbdp/three_hares_marketplace_is_now_live/ http://3haresyyuxpqqqdz.onion/ not selling as of 16 November 2013; projected live: 20 Dec 2013; inaccessible on 26 December 2013, apparently down on the 15th  What on earth is Bad Wolf Hosting? http://www.reddit.com/r/badwolfhosting AWOL: http://www.reddit.com/r/DarkNetMarkets/comments/1vk190/missing_site_missing_orders/ -->
 
-See also the [Hidden Wiki's "Comparison of Darknet Markets"](http://kpvz7ki2v5agwt35.onion/wiki/index.php/Comparison_of_Darknet_Markets) (but note that the Hidden Wiki is notorious for vandals providing phishing links).
+<!-- See also the [Hidden Wiki's "Comparison of Darknet Markets"](http://kpvz7ki2v5agwt35.onion/wiki/index.php/Comparison_of_Darknet_Markets) (but note that the Hidden Wiki is notorious for vandals providing phishing links). -->
 
 <!-- Utopia Market: public 30 December 2013, but not open for business http://ysas7uv4drg7rlwv.onion/index.php -->
+<!-- What was TCF? Tor Carding Forum http://i25c62nvu4cgeqyz.onion/viewtopic.php?pid=3504#p3504 "Note: This is a backup from 10 January. It is the last one where I can be sure no passwords were changed. As a result, PMs sent after this date are not stored. Please do not contact me about this or anything other than escrow for the moment." down 5 January, inferred from http://www.reddit.com/r/DarkNetMarkets/comments/1ulyet/tcf_tor_carding_forum/ -->
+<!-- http://www.reddit.com/r/DarkNetMarkets/comments/1vu0aa/new_inviteonly_darknet_site_what_do_you_think/ http://www.topixslhezyytrvm.onion/ registered email 22 Jan 2014 -->
+<!-- 'country club' a$ap was setting up with jack n hoff: a new marketplace, invite only, with monthly dues http://silkroad5v7dywlc.onion/index.php?topic=16620.0;all "The forum is going live. A$AP is out of the picture. The Country Club is offering a 'trial month' for new users.  Buyers pay nothing so long as they are invited and vendors pay $20 the first month and $60 a month afterwards assuming everything goes alright.  There are no fee-based transactions. Just the recurring monthly rate." -->
+<!-- Vault 43 http://www.reddit.com/r/DarkNetMarkets/comments/1v5xgs/vault_43_is_starting_to_come_online_the_door/ http://www.reddit.com/r/onions/comments/1vbj96/vault_43_has_opened_23_factor_escrow_operational/ http://vault43nodowhdmy.onion/res/forum/ -->
+
+<!--
+library(survival)
+library(rms)
+market <- read.csv(stdin(),header=TRUE, colClasses=c("factor","Date","Date","logical","factor"))
+Marketplace,Started,Ended,Dead,Cause
+SR,2011-01-27,2013-10-02,TRUE,external
+Atlantis,2013-03-26,2013-09-21,TRUE,internal
+Deepbay,2013-06-05,2013-11-04,TRUE,internal
+Budster,2013-10-20,2013-10-21,TRUE,internal
+ProjectBlackFlag,2013-10-14,2013-10-21,TRUE,internal
+Sheep,2013-02-15,2013-11-29,TRUE,external
+BMR,2011-06-10,2013-12-02,TRUE,internal
+TorMarket,2013-11-07,2013-12-22,TRUE,internal
+FloMarket,2013-12-01,2014-01-01,TRUE,external
+Tortuga,2013-12-16,2014-01-05,TRUE,internal
+BuyItNow,2013-04-02,2014-01-26,FALSE,NA
+Pandora,2013-10-21,2014-01-26,FALSE,NA
+SR2,2013-11-06,2014-01-26,FALSE,NA
+TMP,2013-11-28,2014-01-26,FALSE,NA
+BlueSky,2013-12-03,2014-01-26,FALSE,NA
+Agora,2013-12-05,2014-01-26,FALSE,NA
+FreeBay,2013-12-02,2014-01-26,FALSE,NA
+TorBay,2013-12-18,2014-01-26,FALSE,NA
+WhiteRabbit,2013-12-23,2014-01-26,FALSE,NA
+BlackServicesMarket,2013-12-02,2014-01-26,FALSE,NA
+RoadSilk,2013-11-29,2014-01-26,FALSE,NA
+TheBlackboxMarket,2013-11-12,2014-01-26,FALSE,NA
+GreyRoad,2014-01-04,2014-01-26,FALSE,NA
+DreamMarket,2013-11-15,2014-01-26,FALSE,NA
+drugslist,2014-01-8,2014-01-26,FALSE,NA
+OutLawMarket,2013-12-29,2014-01-26,FALSE,NA
+Cantina,2014-01-20,2014-01-26,FALSE,NA
+evolution,2014-01-14,2014-01-26,FALSE,NA
+DogeRoad,2014-01-18,2014-01-26,FALSE,NA
+
+
+market$Days <- as.integer(market$Ended - market$Started)
+surv <- survfit(Surv(market$Days, market$Dead, type="right") ~ 1)
+summary(surv)
+
+Call: survfit.formula(formula = Surv(market$Days, market$Dead, type = "right") ~
+    1)
+
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1     29       1    0.966  0.0339       0.9013        1.000
+    7     27       1    0.930  0.0479       0.8404        1.000
+   20     23       1    0.889  0.0605       0.7783        1.000
+   31     20       1    0.845  0.0720       0.7149        0.998
+   45     17       1    0.795  0.0832       0.6478        0.976
+  152      6       1    0.663  0.1394       0.4387        1.000
+  179      5       1    0.530  0.1628       0.2904        0.968
+  287      4       1    0.398  0.1676       0.1741        0.908
+  906      2       1    0.199  0.1636       0.0396        0.998
+  979      1       1    0.000     NaN           NA           NA
+
+# three year risk using new numbers:
+R> 906 / (365.25 * 2)
+[1] 1.24
+R> 1.24 * 0.199
+[1] 0.2468
+# looks like a type II/III curve?
+R> plot(surv)
+# http://i.imgur.com/76lzyI2.png
+
+still looks very similar: http://i.imgur.com/76lzyI2.png vs http://www.gwern.net/images/silkroad/survival-blackmarketsonly.png
+
+R> (1-(1.24 * 0.199))^3
+[1] 0.4274
+
+I extract from the model a roughly 43% risk that one of the 3 will survive 2 years. Personally, I think the model is wrong and we've entered a new high-risk period, but I don't know quite yet how to model 'time-varying' risks. (I was interested in doing it for my Google analysis too, but the documentations were quite intimidating.)
+-->
 
 #### Survival analysis
 
