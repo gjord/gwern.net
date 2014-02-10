@@ -1048,7 +1048,7 @@ It's not very important because I have little interest in the drugs law enforcem
 
 > How important is Bitcoin?
 
-I'd say the Bitcoin part is probably even more important than Tor. Law enforcement is not known for its NSA-style traffic analysis because it wouldn't be usable in court^[Dismissal of LE as too incompetent to mount attacks feasible for the NSA has become much less tenable as the news has leaked how [the NSA has shared data with the DEA](http://www.reuters.com/article/2013/08/05/us-dea-sod-idUSBRE97409R20130805 "Exclusive: U.S. directs agents to cover up program used to investigate Americans; a secretive U.S. Drug Enforcement Administration unit is funneling information from intelligence intercepts, wiretaps, informants and a massive database of telephone records to authorities across the nation to help them launch criminal investigations of Americans.")'s "Special Operations Division". Given the mounting weaknesses in the Tor network & hidden services, it is likely the NSA could find SR if it wants. The only positive aspect to the Snowden leaks for SR is that [the documents show](http://www.nytimes.com/2013/09/06/us/nsa-foils-much-internet-encryption.html?_r=1&&pagewanted=all) that the NSA goes to considerable effort to reveal data gathered through its advanced capabilities only when it is possible to come up with a more innocent possible source (a "parallel construction"), and there doesn't seem to be any obvious way to do that for a SR bust.], and the other benefit is that there's no domain name to be seized or filtered; but neither of these is very important. They can be gotten around or dealt with.
+I'd say the Bitcoin part is probably even more important than Tor. Law enforcement is not known for its NSA-style traffic analysis because it wouldn't be usable in court^[Dismissal of LE as too incompetent to mount attacks feasible for the NSA has become much less tenable as the news has leaked how [the NSA has shared data with the DEA](http://www.reuters.com/article/2013/08/05/us-dea-sod-idUSBRE97409R20130805 "Exclusive: U.S. directs agents to cover up program used to investigate Americans; a secretive U.S. Drug Enforcement Administration unit is funneling information from intelligence intercepts, wiretaps, informants and a massive database of telephone records to authorities across the nation to help them launch criminal investigations of Americans.")'s "Special Operations Division". Given the mounting weaknesses in the Tor network & hidden services, it is likely the NSA could find SR if it wants. The only positive aspect to the Snowden leaks for SR is that [the documents show](http://www.nytimes.com/2013/09/06/us/nsa-foils-much-internet-encryption.html?_r=1&&pagewanted=all) that the NSA goes to considerable effort to reveal data gathered through its advanced capabilities only when it is possible to come up with a more innocent possible source (a "parallel construction"), and there doesn't seem to be any obvious way to do that for a SR bust. The most obvious place that parallel construction might enter into SR is the Customs search which - mirabile dictu - just happened to uncover Ulbricht's fake IDs, inasmuch as the [DEA training materials on parallel construction](https://www.muckrock.com/news/archives/2014/feb/03/dea-parallel-construction-guides/) emphasize the value of searches.], and the other benefit is that there's no domain name to be seized or filtered; but neither of these is very important. They can be gotten around or dealt with.
 
 But being able to get money to the sellers, and the sellers being able to turn it back into usable cash on Mt.Gox or another exchange, that is crucial. You cannot buy and sell drugs for free.
 
@@ -1162,6 +1162,64 @@ This is a common problem with blockchain analysis. People at first think that Bi
 > Also did your informant tell you why he/she reached out to you instead of him posting the suspicions about SMP online himself?
 
 Well, he didn't post publicly at the time because he didn't want to interfere with the FBI investigation. Why didn't he post after Tomas had been doxed by the other Redditor, when I felt free to post his results? I'm not sure. I get the impression he doesn't much care about publicity or helping out the black-market communities, so while he allowed me to post what I knew, he felt no particular need to post anything himself. As well, my precommitment and reputation meant that any posting would mean more coming from me.
+
+<!--
+> sorry for bothering you all of a sudden. my name is Paul-Philipp, I'm a journalist from Germany (you can see my writings here: http://www.nansenundpiccard.de/de/Wir/Hanske) and I'm doing for the German magazine capital a piece about bitcoins and the big sheep market scam. I know that this topic is quite old but I was just wondering what happened about the scam.
+
+https://en.wikipedia.org/wiki/Capital_%28German_magazine%29
+
+> So, I would take the liberty of asking some questions about the SMP scam and deepnetmarkets in general. As I told it before: many thanks in advance for answering them...
+>
+> According to [this report](http://www.theguardian.com/technology/2013/dec/09/recovering-stolen-bitcoin-sheep-marketplace-trading-digital-currency-money) the chase for the thief went wrong. What's your estimation? What happened?
+
+What happened was simple: the bitcoins got moved around, and at some point, the thief was given unlinked bitcoins, without the hobbyists realizing it. The problem with the blockchain is that people start off thinking Bitcoin is completely anonymous; when they realize they are wrong, they flip to assuming it's completely public & transparent & any transaction can be easily understood, which is less wrong but still not right. At any transaction, control can be transferred without any visible sign. The transaction could have been to an online wallet, an exchange, a prediction market, a black market, a laundry/mixer, Shared Send, etc. The blockchain merely records transactions among addresses and it does not give you any meaning beyond that. People forget the limitations and escalating uncertainty, and so the Sheep chasers found themselves at a BTC-E cold wallet address. Presumably the Sheep thief then withdrew bitcoins (being paid from the then-hot-wallet) or sold & withdrew some fiat or both.
+
+> If the chasers traced the wrong amount of bitcoins: how could the thief hide such a big amount? Do you think he sold it?
+
+The amount in Bitcoins can be easily hidden: just scatter it among multiple addresses to make the balances small enough they would not draw any attention. I don't know if he sold it. I think he should not sell much, as to handle a large amount would require an exchange which might require paperwork & using his real identity; but then, I would not have wasted hundreds of bitcoins trying to send such a huge sum through the Bitcoin Fog mix, so I do not think the Sheep thief is the most rational or knowledgeable person around.
+
+> what's your estimation how much was stolen?
+
+The best estimate right now seems to be ~฿39k, although some of this may have been what the hacker (apparently a Profesorhouse) earned.
+
+> Is there still strong evidence that Jiřikovský is part of the scam?
+
+The evidence remains largely the same, I think. Jiřikovský backed down on his threats of legal action against a Czech redditor, and he gave a strange interview with a Czech papers which struck me as ignoring most of the circumstantial evidence, arrogant, and making incoherent/wrong technological claims. I have heard of no related arrests, but that doesn't mean much: Ross Ulbricht wasn't arrested for almost a year after paying for a hit with his Australian bank account, after all, and many investigations take longer.
+
+> If he (or his group) would be part of it: isn't it now terribly dangerous for them? A lot of people are angry...
+
+Probably. But it's unlikely anyone will act on speculation.
+
+> What's your latest estimation about the role of the FBI in this case?
+
+I don't think they're doing much but waiting. If there's active investigations, I'd guess all the work is being done by agencies in the EU with physical access.
+
+> Do you think anyone complained to the police because of the scam?
+
+No. I'm impressed that Plutopete has the chutzpah to challenge the Silk Road seizure, but I still can't see anyone actually complaining to the police about losses on an illegal black-market.
+
+> one last question concerning deepnetmarkets: I'm very fascinated by operators of these websites. What do you think is their motivation? Only earning money?
+
+Of the operators of the ~20 sites active at this moment, the majority seem to be entirely non-ideological and pragmatic: a few seem to have mixed motives relating to cryptopunk or marijuana or public service, and SR2's DPR2/Defcon/Hux may be libertarians (assuming they're not just imitating Ulbricht), but the rest? They're in it for the money.
+
+One of the interesting parts of the post-SR fallout and the new crop of marketplaces is seeing to what extent SR's longevity was due to Ulbricht's principles. It may be that we overestimated the value of running a marketplace, that the incentives to scam first-generation marketplaces (without multi-signature escrow) are too great.
+
+> Or also some libertarian beliefs as Ross Ulbricht claimed to have?
+
+I don't see any reason for skepticism about that.
+
+> In general: how strong do you think is the connection between deepnetmarkets and libertarian thinking?
+
+It was strong in the beginning, but like Bitcoin itself, I think it's become too popularized to remain strongly ideological. I suspect most users strongly agree with the libertarian position on the War on Drugs, but maybe not much beyond that.
+
+> (and now the REALLY last question, a very personal one...) - what do you think is the best deepnetmarket in the moment?
+
+From a design perspective, I'm interested in The Marketplace for pioneering what I think may be the next step forward for black-markets, multi-signature escrow; they've used it longest, and from a security perspective, that puts them ahead of almost all of their competitors. From a more practical perspective, SR2 still seem to have the widest selection and most business, although their problems with getting basic functionality working has driven off a lot of buyers & sellers.
+
+> Where did the most vendors go to? (it would be great if this market would be so big that you could also browse for German vendors... ;)
+
+It's hard to estimate since I haven't yet extracted counts of products and vendors, but the biggest sites seem to be SR2, Agora, Pandora, Blue Sky, and The Marketplace. I'm sure there are German sellers on some of them.
+-->
 
 ## Reddit advice
 
@@ -1670,25 +1728,31 @@ Pandora               21 October 2013   November 2013      1                 ope
 Silk Road 2           6 November 2013   November 2013      0                 open
 Tormarket             7 November 2013   November 2013      0                 open     `tormarkozaegyvco.onion`; no reports of sales yet
 
-(Silk Road Reloaded & The Marketplace are excluded because they had not actually started selling as of 12 November 2013, and the former project seems to've been abandoned. RAMP & Magic Shop are excluded because they're in Russian and I can't get good information about them. DrugMarket is excluded because it reportedly has always been a scam. Start dates are, when possible, the date of the first known sale; likewise for closure)
+(Silk Road Reloaded & The Marketplace are excluded because they had not actually started selling as of 12 November 2013, and the former project seems to've been abandoned. RAMP & Magic Shop are excluded because they're in Russian and I can't get good information about them. DrugMarket (`4yjes6zfucnh7vcj.onion`) is excluded because it reportedly has always been a scam. The Majestic Garden & Underground Market Board 3.0 are excluded because they are forums and do not do escrow for their users. Start dates are, when possible, the date of the first known sale; likewise for closure.)
 
 A more up to date table (30 December 2013):
 
 Market                   Started           Ended             Months operating   Status   URL                       Closure                                      Notes
 ----------------         --------------    ----------------- ------------------ -------- ------------------------- -------------------------------------------  -------
 Silk Road                January 2011      October 2013       33                closed   `silkroadvb5piz3r.onion`  Raided
+BlackMarket Reloaded     June 2011         2 December 2013    30                closed   `r6rcmz6lga4i5vb4.onion`  voluntary+hack                               backopy closed buying on 2 Dec aggravated in part by a big theft, fully shutdown by 23 December. May reopen.
 Atlantis                 26 March 2013     September 2013     6                 closed   `atlantisrky4es5q.onion`  voluntary; scam?                             Losses not clear
+Sheep Marketplace        February 2013     29 November 2013   10                closed   `sheep5u64fi457aw.onion`  scam+hack                                    withdrawals were closed before 29 Nov, but deposits & sales were ongoing. I choose 29 Nov as the day where the Sheep scam became irrefutably obvious
 Deepbay                  June 2013         4 November 2013    5                 closed   `deepbay4xr3sw2va.onion`  scam                                         http://www.reddit.com/r/Bitcoin/comments/1qaewa/deepbay_marketplace_owner_steals_sites_bitcoins/
 Budster                  10 October 2013   20 October 2013    0                 closed   `budsterga5hcdxjn.onion`  scam                                         http://www.reddit.com/r/Budster/comments/1ove9w/has_anyone_made_a_purchase_yet/ccw8srh
 Project Black Flag       14 October 2013   28 October 2013    0                 closed   `ajd4yqq7ngzmqo3p.onion`  scam                                         http://www.reddit.com/r/DarkNetMarkets/comments/1peguv/pbf_rip/
-Sheep Marketplace        February 2013     29 November 2013   10                closed   `sheep5u64fi457aw.onion`  scam+hack                                    withdrawals were closed before 29 Nov, but deposits & sales were ongoing. I choose 29 Nov as the day where the Sheep scam became irrefutably obvious
-BlackMarket Reloaded     June 2011         2 December 2013    30                closed   `r6rcmz6lga4i5vb4.onion`  voluntary+hack                               backopy closed buying on 2 Dec aggravated in part by a big theft, fully shutdown by 23 December. May reopen.
 TorMarket                7 November 2013   22 December 2013   1                 closed   `tormarkozaegyvco.onion`  scam
 FloMarket                1 December 2013   1 January 2014     1                 closed   `fmkt3wixc772jxyj.onion`  hack?                                        Apparently [hacked 20 December 2013](http://silkroad5v7dywlc.onion/index.php?topic=10489.msg191044#msg191044) (previously [noted to be hackable](http://www.reddit.com/r/DarkNetMarkets/comments/1tm4rf/be_careful_with_flomarket_and_bluesky/)); withdrawals began failing [on 1 January 2014](http://www.deepdotweb.com/2014/01/02/warning-reports-of-flomarket-possible-scam-hack/) & FloMarket announced a [*second*](http://www.reddit.com/r/DarkNetMarkets/comments/1ujjsw/flo_is_down_for_good_another_scam_in_the_books/) hack on 6 January 2014; for the operator's explanation, see [his interview](http://www.deepdotweb.com/2014/01/09/flomarket-admin-im-not-a-scammer-an-exculsive-interview/)
 Tortuga                  16 December 2013  5? January 2014    1                 closed   `tortugauwngwecwd.onion`  voluntary?                                   Advertised in the [SRF2](http://silkroad5v7dywlc.onion/index.php?topic=9940.msg179819#msg179819) on 19 Dec; advertised on the [BMR forums](/docs/sr/2013-12-16-bmr-tortugannouncement.mht) on 16 Dec. Up on 1 January 2014, down on 9 January 2014 & afterwards. [No news](http://www.reddit.com/r/DarkNetMarkets/comments/1vhygj/tortuga_gone/) about reasons for its closure.
+BlackBox Market          12 November 2013  1 February 2014    3                 closed  `77yqlxe7pnxhnxvi.onion`   voluntary?                                   Interesting site, but not sure it should be listed here. Start date based on [Reddit](http://www.reddit.com/r/onions/comments/1qhj76/the_blackbox_market_legal_private_encrypted/). Site stopped responding 1 February 2014.
+GreyRoad                 4 January 2014    1 February 2014    1                 closed  `greyroaderw4qymd.onion`   voluntary?                                   Went public [4 January 2013](http://www.reddit.com/r/DarkNetMarkets/comments/1ue777/ask_lord_voldemort_anything/), operator claims to have been selling for a while but refuses to provide any specifics & very few sellers on market so opening date is used; forums: `grforums5qwzbhkl.onion`. URL stopped working 1 February 2014
+Cantina                  20 January 2014   7 February 2014    0                 closed   `vsudl2g3em6qhcw4.onion`  hacked                                       Cantina [spammed vendors on SRF2](http://silkroad5v7dywlc.onion/index.php?topic=18574.0) on 20 Jan 2014; earliest known mention of the market. It was [repeatedly hacked & doxed](http://www.reddit.com/r/DarkNetMarkets/comments/1whket/cantina_market_mega_thread_up_vote_for_visibility/)
+Breaking Bad             1 February 2014                      0                 closed   `breakingnartglxd.onion`  voluntary?                                   [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1wqhcm/breaking_bad/); site went down 6 February without any explanation or announcements.
+Black Goblin Market      3 February 2014   4 February 2014    0                 closed   `ua4aptglh45m5p6b.onion`  hacked                                       [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1wwjg3/black_goblin_market_is_now_open/); I [de-anonymized the site](http://www.reddit.com/r/DarkNetMarkets/comments/1xeeni/black_goblin_obituary/), so it closed.
+Cannabis Road            3 February 2014   7 February 2014    0                 closed   `ji4wrifhsnawaw7t.onion`  hacked                                       Announced on The Hub; [thoroughly hacked & de-anonymized](http://www.reddit.com/r/DarkNetMarkets/comments/1xe943/cannabisroad_obituary/)
 BuyItNow                 April? 2013                          9                 open     `buyitnowquyft7dx.onion`
 Pandora                  21 October 2013                      2                 open     `pandorajodqp5zrr.onion`
-Silk Road 2              6 November 2013                      2                 open                               scam?                                        Forum moderator Cirrus advises considering SR2 compromised (22 December 2013). Escrow disappeared late December 2013; current operator "Defcon" promises to repay by May 2014.
+Silk Road 2              6 November 2013                      2                 open                               scam?                                        Forum moderator Cirrus advises considering SR2 compromised (22 December 2013). New operators Defcon/Hux/etc deny it. There are escrow issues.
 The Marketplace          28 November 2013                     1                 open     `themarketplace.i2p`                                                   start date from personal communication; Tor Proxy: `p5caydkgrwx5xwrj.onion`
 Blue Sky                 3 December 2013                      1                 open     `blueskyplzv4fsti.onion`                                               or is the opening [12 December 2013](http://www.reddit.com/r/DarkNetMarkets/comments/1ss07e/bought_from_a_vendor_on_bluesky_appears_to_be_the/)?
 Agora                    5? December 2013                     1                 open     `agorabasakxmewww.onion`
@@ -1697,30 +1761,28 @@ TorBay                   18 December 2013                     1                 
 White Rabbit             23 December 2013                     1                 open     `rabbittorvr74veg.onion`                                               Start date based on [Reddit](http://www.reddit.com/r/themarketplace/comments/1to7sk/a_new_alternative_themarketplace/) [posts](http://www.reddit.com/r/SilkRoad/comments/1to8d7/a_new_alternative_sr/)
 Black Services Market    2? December 2013                     1                 open     `thebsm6okkbx7fik.onion`                                               Start date based on oldest listing when I checked on 26 December 2013
 RoadSilk/Pirate Market   29 November 2013                     2                 open     `yjhzeedl5osagmmr.onion`                                               Start date based on [Reddit](http://www.reddit.com/r/RoadSilk/comments/1td4g2/about_roadsilk/)
-
-The BlackBox Market      12 November 2013                     2                 open     `77yqlxe7pnxhnxvi.onion`                                               Quite an interesting site, but not sure it should be listed here. Start date based on [Reddit](http://www.reddit.com/r/onions/comments/1qhj76/the_blackbox_market_legal_private_encrypted/)
-GreyRoad                 4 January 2014                       0                 open     `greyroaderw4qymd.onion`                                               Went public [4 January 2013](http://www.reddit.com/r/DarkNetMarkets/comments/1ue777/ask_lord_voldemort_anything/), operator claims to have been selling for a while but refuses to provide any specifics & very few sellers on market so opening date is used; forums: `grforums5qwzbhkl.onion`
 Dream Market             15 November 2013?                    2?                open     `ltxocqh4nvwkofil.onion`                                               Site claims to've opened 15 November 2013; first mention of it I found was on 7 January 2014.
 drugslist                8 January 2014                       0                 open     `drugslisvdknitqd.onion`
-Outlaw Market            29 December 2013                     0                 open     `drugs26ucskmvcef.onion`                                               Open date based on the date of the ["Welcome" post on the OM forum](http://hmxutiksabsj4ozi.onion/index.php?topic=2.msg0)
-Cantina                  20 January 2014                      0                 open     `vsudl2g3em6qhcw4.onion`                                               Cantina [spammed vendors on SRF2](http://silkroad5v7dywlc.onion/index.php?topic=18574.0) on 20 Jan 2014; earliest known mention of the market. <!-- down as of 29 Jan 2014 -->
+Outlaw Market            29 December 2013                     0                 open     `drugs26ucskmvcef.onion`                                               Open date based on the date of the ["Welcome" post on the OM forum](http://hmxutiksabsj4ozi.onion/index.php?topic=2.msg0); apparently formerly "Drugs'n'Bets"
 evolution                14 January 2014                      0                 open     `k5zq47j6wd3wdvjq.onion`                                               [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1vmufh/latest_news_from_tcf/) 20 Jan, but forums [claim first sale on 14 January](http://i25c62nvu4cgeqyz.onion/viewtopic.php?pid=121#p121); forums: `i25c62nvu4cgeqyz.onion`
 Doge Road                18 January 2014                      0                 open     `dogeroadiqt6olb6.onion`                                               [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1vjxap/xpost_rdogecoin_announcement_the_doge_road_is_now/); forums: `dogeroadqmu2yzcg.onion`
-UltraVioletCity          30 January 2014                      0                 open     `ultracityi2gdwhq.onion`                                               [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1wj4r1/ultravioletcity_market_no_site_wallets_free/)
-Breaking Bad             1 February 2014                      0                 open     `breakingnartglxd.onion`                                               [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1wqhcm/breaking_bad/)
+UltraVioletCity          30 January 2014                      0                 open     `ultracityi2gdwhq.onion`                                               [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/1wj4r1/ultravioletcity_market_no_site_wallets_free/); forums: `7y26aczl3wdyujkc.onion`
+Tor Escrow               2 February 2014                      0                 open     `torescrow7upglhe.onion`                                               Initially just an escrow, but [TE expanded](http://www.reddit.com/r/DarkNetMarkets/comments/1wt3bj/te_expands_and_becomes_a_market/) into a market.
+Tor Bazaar               26 January 2014                      0                 open     `3p42y56a76g6okuv.onion`                                               [Announced on The Hub](http://thehubaoydxrommh.onion/index.php?topic=237.0)
+Utopia                   3 February 2014                      0                 open     `ggvow6fj3sehlm45.onion`                                               forums: `ysas7uv4drg7rlwv.onion`; forms opened in early January, site opened to ex-BMR sellers late January, general buyers only allowed in February
+BlackBank Market         5 February 2014                      0                 open     `omo6o7akcampiryq.onion`                                               Active before its [Reddit announcement](http://www.reddit.com/r/BlackBank/comments/1x2pjp/blackbank_market_a_new_emerging_featurerich_and/) but no apparent sales.
 
 (Three Hares / Bad Wolf Hosting are excluded for apparently not being active yet.) <!-- Three Hares? http://www.reddit.com/r/DarkNetMarkets/comments/1qsbdp/three_hares_marketplace_is_now_live/ http://3haresyyuxpqqqdz.onion/ not selling as of 16 November 2013; projected live: 20 Dec 2013; inaccessible on 26 December 2013, apparently down on the 15th  What on earth is Bad Wolf Hosting? http://www.reddit.com/r/badwolfhosting AWOL: http://www.reddit.com/r/DarkNetMarkets/comments/1vk190/missing_site_missing_orders/ -->
 
 <!-- See also the [Hidden Wiki's "Comparison of Darknet Markets"](http://kpvz7ki2v5agwt35.onion/wiki/index.php/Comparison_of_Darknet_Markets) (but note that the Hidden Wiki is notorious for vandals providing phishing links). -->
 
-<!-- Utopia Market: public 30 December 2013, but not open for business http://ysas7uv4drg7rlwv.onion/index.php http://www.reddit.com/r/DarkNetMarkets/comments/1wd0j5/utopia_market_opening_process/ market URL: http://ggvow6fj3sehlm45.onion/ opens to buyers a week after 28 Jan = 3 Feb  -->
 <!-- What was TCF? Tor Carding Forum http://i25c62nvu4cgeqyz.onion/viewtopic.php?pid=3504#p3504 "Note: This is a backup from 10 January. It is the last one where I can be sure no passwords were changed. As a result, PMs sent after this date are not stored. Please do not contact me about this or anything other than escrow for the moment." down 5 January, inferred from http://www.reddit.com/r/DarkNetMarkets/comments/1ulyet/tcf_tor_carding_forum/ -->
-<!-- http://www.reddit.com/r/DarkNetMarkets/comments/1vu0aa/new_inviteonly_darknet_site_what_do_you_think/ http://www.topixslhezyytrvm.onion/ registered email 22 Jan 2014 -->
+<!-- http://www.reddit.com/r/DarkNetMarkets/comments/1vu0aa/new_inviteonly_darknet_site_what_do_you_think/ http://www.topixslhezyytrvm.onion/ registered email 22 Jan 2014; 'Login or register if you have an invite.' 9 Feb 2014 -->
 <!-- 'country club' a$ap was setting up with jack n hoff: a new marketplace, invite only, with monthly dues http://silkroad5v7dywlc.onion/index.php?topic=16620.0;all "The forum is going live. A$AP is out of the picture. The Country Club is offering a 'trial month' for new users.  Buyers pay nothing so long as they are invited and vendors pay $20 the first month and $60 a month afterwards assuming everything goes alright.  There are no fee-based transactions. Just the recurring monthly rate." -->
 <!-- Vault 43 http://www.reddit.com/r/DarkNetMarkets/comments/1v5xgs/vault_43_is_starting_to_come_online_the_door/ http://www.reddit.com/r/onions/comments/1vbj96/vault_43_has_opened_23_factor_escrow_operational/ http://vault43nodowhdmy.onion/res/forum/ -->
 <!-- 'Black Market Union'? http://www.reddit.com/r/DarkNetMarkets/comments/1vzn9b/creating_a_new_marketplace_called_black_market/ 2 weeks from 24 Jan, so ~8 February 2014 http://www.reddit.com/r/DarkNetMarkets/comments/1wlkg9/update_on_black_market_union/ 1 Feb? -->
-<!-- Cantina down 29 January 2014  http://www.reddit.com/r/DarkNetMarkets/comments/1wkbnp/what_current_and_potential_future_cantina/ http://www.reddit.com/r/DarkNetMarkets/comments/1whket/cantina_market_mega_thread_up_vote_for_visibility/ ; back up 30-31 January 2014 -->
-<!-- http://silkroad5v7dywlc.onion/index.php?topic=21564.0 'Middle-Earth Marketplace feb 3rd URL will be made public n registration opened' -->
+<!-- http://silkroad5v7dywlc.onion/index.php?topic=21564.0 'Middle-Earth Marketplace feb 3rd URL will be made public n registration opened' pinged on The Hub too -->
+<!-- Ultraviolet City down 9 February 2014 -->
 
 <!--
 library(survival)
