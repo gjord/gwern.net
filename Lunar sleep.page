@@ -42,10 +42,10 @@ What would the results mean? If I found a lunar pattern, it would be consistent 
 ## Preparation
 
 ~~~{.R}
-zeo1 <- read.csv("wiki/docs/zeo/gwern-zeodata.csv"); zeo1$Subject <- 1
-zeo2 <- read.csv("wiki/docs/zeo/2013-eva.csv"); zeo2$Subject <- 2
-zeo3 <- read.csv("wiki/docs/zeo/2013-fred.csv"); zeo3$Subject <- 3
-zeo4 <- read.csv("wiki/docs/zeo/2014-jay.csv"); zeo4$Subject <- 4
+zeo1 <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv"); zeo1$Subject <- 1
+zeo2 <- read.csv("http://www.gwern.net/docs/zeo/2013-eva.csv"); zeo2$Subject <- 2
+zeo3 <- read.csv("http://www.gwern.net/docs/zeo/2013-fred.csv"); zeo3$Subject <- 3
+zeo4 <- read.csv("http://www.gwern.net/docs/zeo/2014-jay.csv"); zeo4$Subject <- 4
 zeo <- rbind(zeo1, zeo2, zeo3, zeo4)
 
 library(moonsun)
