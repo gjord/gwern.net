@@ -34,7 +34,7 @@ The two graphs showing patterns when plotted by lunar phase:
 
 Reading the paper, I didn't find it convincing. It's a small sample size (~64 nights across 33 people), there's a ton of measured variables they could look at for responses, some of the analysis choices are questionable (like how they binned phase of moon: why discretize it when the *easy* approach is to use some astronomical library to get an exact percentage visible? They never justify their "three lunar classes"), they show the scatterplot of only one of their variables which isn't terribly impressive, there's many possible covariates like gender & age, it's a post-hoc analysis they admit they thought up one night (so how many other analyses did they run and not publish...?), the data is very old which makes me wonder why now & where is the rest of the data from their sleep lab, and (as they say) the priors are against there being any effect since previous research has generally failed.
 
-Fortunately, I have been using a Zeo since 2010, so I can attempt a replication myself. While I don't have salivary melatonin or cortisol levels or raw EEGs, I do have all the summary metrics from my Zeo, which my latest export in January 2014 gives me ~1050 days of data (~16x more nights, all from one subject with the reduced variability but also reduced external validity that implies). The analysis is easy enough, and I can even improve on their analysis by using a better phase variable than their arbitrary trichotomy; my life is not as well controlled as a sleep laboratory but here I have the advantage of no sleep disturbance from the laboratory or equipment an in any case, because I would be exposed to lunar cues like the full moon, we would expect the error here to be finding a relationship where there is not one due to circadian rhythms. 2 other Zeo users kindly offered me their Zeo data, giving me a total of 1849 nights of data. Hopefully with 28x more nights of data, I can find their lunar correlations - if they are real.
+Fortunately, I have been using a Zeo since 2010, so I can attempt a replication myself. While I don't have salivary melatonin or cortisol levels or raw EEGs, I do have all the summary metrics from my Zeo, which my latest export in January 2014 gives me ~1050 days of data (~16x more nights, all from one subject with the reduced variability but also reduced external validity that implies). The analysis is easy enough, and I can even improve on their analysis by using a better phase variable than their arbitrary trichotomy; my life is not as well controlled as a sleep laboratory but here I have the advantage of no sleep disturbance from the laboratory or equipment an in any case, because I would be exposed to lunar cues like the full moon, we would expect the error here to be finding a relationship where there is not one due to circadian rhythms. 3 other Zeo users kindly offered me their Zeo data, giving me a total of 2431 nights of data. Hopefully with >28x more nights of data, I can find their lunar correlations - if they are real.
 
 What would the results mean? If I found a lunar pattern, it would be consistent with their results, but on its own, it cannot prove that there is a lunar *circadian* pattern, since it could be due to, say, the direct effects of moonlight increasing ambient light. On the other hand, if there is no lunar pattern in the data, then that suggests that there are no lunar-related effects at all - much less a lunar circadian rhythm. (If A ~> C, and C, then by affirming the consequent, probabilistically A is more likely to be true; but if ~C, then ~A by modus tollens.)
 
@@ -42,10 +42,11 @@ What would the results mean? If I found a lunar pattern, it would be consistent 
 ## Preparation
 
 ~~~{.R}
-zeo1 <- read.csv("http://www.gwern.net/docs/zeo/gwern-zeodata.csv"); zeo1$Subject <- 1
-zeo2 <- read.csv("http://www.gwern.net/docs/zeo/2013-eva.csv"); zeo2$Subject <- 2
-zeo3 <- read.csv("http://www.gwern.net/docs/zeo/2013-fred.csv"); zeo3$Subject <- 3
-zeo <- rbind(zeo1, zeo2, zeo3)
+zeo1 <- read.csv("wiki/docs/zeo/gwern-zeodata.csv"); zeo1$Subject <- 1
+zeo2 <- read.csv("wiki/docs/zeo/2013-eva.csv"); zeo2$Subject <- 2
+zeo3 <- read.csv("wiki/docs/zeo/2013-fred.csv"); zeo3$Subject <- 3
+zeo4 <- read.csv("wiki/docs/zeo/2014-jay.csv"); zeo4$Subject <- 4
+zeo <- rbind(zeo1, zeo2, zeo3, zeo4)
 
 library(moonsun)
 zeo$Julian.Date <- julian(as.Date(zeo$Sleep.Date, format="%m/%d/%Y"))
@@ -85,94 +86,101 @@ Pooling the 3 subjects' data together and performing a [multivariate regression]
 ~~~{.R}
 # No overall difference:
 summary(manova(cbind(Morning.Feel, Time.to.Z, Total.Z, Time.in.Deep) ~ Phase, data=zeo))
-            Df  Pillai approx F num Df den Df Pr(>F)
-Phase        1 0.00123    0.424      4   1378   0.79
-Residuals 1381
+            Df   Pillai approx F num Df den Df Pr(>F)
+Phase        1 0.000724    0.347      4   1916   0.85
+Residuals 1919
 
 # Show the specific coefficient estimates:
 summary(lm(cbind(Morning.Feel, Time.to.Z, Total.Z, Time.in.Deep) ~ Phase, data=zeo))
+Response Morning.Feel :
+...Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)  2.949748   0.028052  105.15   <2e-16
+Phase       -0.000130   0.000459   -0.28     0.78
 
+Residual standard error: 0.709 on 1919 degrees of freedom
+  (510 observations deleted due to missingness)
+Multiple R-squared:  4.18e-05,  Adjusted R-squared:  -0.000479
+F-statistic: 0.0802 on 1 and 1919 DF,  p-value: 0.777
+
+
+Response Time.to.Z :
 ...Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept) 2.95e+00   3.83e-02   77.02   <2e-16
-Phase       1.23e-05   6.25e-04    0.02     0.98
+(Intercept) 17.95433    0.51277    35.0   <2e-16
+Phase        0.00500    0.00839     0.6     0.55
 
-Residual standard error: 0.819 on 1381 degrees of freedom
-  (466 observations deleted due to missingness)
-Multiple R-squared:  2.78e-07,  Adjusted R-squared:  -0.000724
-F-statistic: 0.000385 on 1 and 1381 DF,  p-value: 0.984
+Residual standard error: 13 on 1919 degrees of freedom
+  (510 observations deleted due to missingness)
+Multiple R-squared:  0.000185,  Adjusted R-squared:  -0.000336
+F-statistic: 0.355 on 1 and 1919 DF,  p-value: 0.551
 
-...Response Time.to.Z :
 
-Coefficients:
+Response Total.Z :
+...Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept) 19.97757    0.65355   30.57   <2e-16
-Phase        0.00385    0.01067    0.36     0.72
+(Intercept) 457.1112     3.5068  130.35   <2e-16
+Phase        -0.0405     0.0574   -0.71     0.48
 
-Residual standard error: 14 on 1381 degrees of freedom
-  (466 observations deleted due to missingness)
-Multiple R-squared:  9.43e-05,  Adjusted R-squared:  -0.00063
-F-statistic: 0.13 on 1 and 1381 DF,  p-value: 0.718
+Residual standard error: 88.6 on 1919 degrees of freedom
+  (510 observations deleted due to missingness)
+Multiple R-squared:  0.00026,   Adjusted R-squared:  -0.000261
+F-statistic: 0.498 on 1 and 1919 DF,  p-value: 0.48
 
-...Response Total.Z :
 
-Coefficients:
+Response Time.in.Deep :
+...Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept) 494.6867     3.4113  145.01   <2e-16
-Phase        -0.0683     0.0557   -1.23     0.22
+(Intercept) 56.47089    1.14024   49.53   <2e-16
+Phase        0.00357    0.01866    0.19     0.85
 
-Residual standard error: 72.9 on 1381 degrees of freedom
-  (466 observations deleted due to missingness)
-Multiple R-squared:  0.00109,   Adjusted R-squared:  0.000363
-F-statistic:  1.5 on 1 and 1381 DF,  p-value: 0.221
-
-...Response Time.in.Deep :
-
-Coefficients:
-             Estimate Std. Error t value Pr(>|t|)
-(Intercept) 70.416714   0.924178   76.19   <2e-16
-Phase       -0.000812   0.015089   -0.05     0.96
+Residual standard error: 28.8 on 1919 degrees of freedom
+  (510 observations deleted due to missingness)
+Multiple R-squared:  1.91e-05,  Adjusted R-squared:  -0.000502
+F-statistic: 0.0366 on 1 and 1919 DF,  p-value: 0.848
 ~~~
 
 No outcome seems associated with lunar phase. (The `Total.Z` coefficient may seem to be of large effect size, but this is due to the mean being 464; if the variables are scaled with `scale()`, it seems little bigger than the others.)
 
 ### Multi-level model
 
-This might be due to differences between subjects, so we switch to a [multi-level model](!Wikipedia), treating each outcome separately. (It would be nice to do a multivariate multi-level model, but this is apparently not easy with the current state of R's libraries.) To pick which possible MLM to use, I test with an ANOVA comparing them on the outcome variable which came closest to reaching statistical-significance:
+This might be due to differences between subjects, so we switch to a [multi-level model](!Wikipedia), treating each outcome separately. (It would be nice to do a multivariate multi-level model, but this is apparently not easy with the current state of R's libraries.) To pick which possible MLM to use, I test with an ANOVA comparing them on the outcome variable which came closest to reaching statistical-significance, `Total.Z`:
 
 ~~~{.R}
 library(lme4)
+
 l1 <- lmer(Total.Z ~ Phase + (1|Subject), data=zeo)
 l2 <- lmer(Total.Z ~ (Phase|Subject), data=zeo)
 l3 <- lmer(Total.Z ~ (Phase+1|Subject), data=zeo)
 l4 <- lmer(Total.Z ~ Phase + (Phase+1|Subject), data=zeo)
+
 anova(l1,l2,l3,l4)
 ...Df   AIC   BIC logLik deviance Chisq Chi Df Pr(>Chisq)
-l1  4 21081 21103 -10536    21073
-l2  5 21085 21112 -10538    21075  0.00      1      1.000
-l3  5 21085 21112 -10538    21075  0.00      0      1.000
-l4  6 21084 21117 -10536    21072  2.86      1      0.091
+l1  4 27387 27410 -13689    27379
+l2  5 27391 27420 -13691    27381   0.0      1       1.00
+l3  5 27391 27420 -13691    27381   0.0      0       1.00
+l4  6 27391 27425 -13689    27379   2.6      1       0.11
 ~~~
 
-`l4` fits almost well enough to use, but we'll stick with the simplest model: a fixed effect for `Phase`, and subject-specific intercepts. Regressing on the same outcome variables:
+`l4` comes closest, but the simplest model is still the best: a fixed effect for `Phase`, and subject-specific intercepts. Regressing on the same outcome variables:
 
 ~~~{.R}
 confint(lmer(Morning.Feel ~ Phase + (1|Subject), data=zeo))
               2.5 %   97.5 %
               ...
-Phase       -0.001116 0.001201
+Phase       -0.0009201 0.0007839
 
 confint(lmer(Time.to.Z ~ Phase + (1|Subject), data=zeo))
 ...
-Phase       -0.007123  0.03234
+Phase       -0.005427  0.02578
 
 confint(lmer(Total.Z ~ Phase + (1|Subject), data=zeo))
 ...
-Phase        -0.2086   0.02243
+Phase        -0.1714   0.013
 
 confint(lmer(Time.in.Deep ~ Phase + (1|Subject), data=zeo))
 ...
-Phase       -0.02493  0.02062
+Phase       -0.02382  0.01461
 ~~~
 
 So, subject variability does not seem to be masking any lunar effect.
@@ -200,17 +208,17 @@ bs <- boot(data=zeo, statistic=lunar, R=10000, parallel="multicore", ncpus=4); b
 ...
 Intervals :
 Level      Normal              Basic
-95%   (-0.0208,  0.0190 )   (-0.0054,  0.0000 )
+95%   (-0.0469,  0.0402 )   (-0.0265,  0.0001 )
 
 Level     Percentile            BCa
-95%   ( 0.0000,  0.0054 )   ( 0.0000,  0.0057 )
+95%   ( 0.0000,  0.0265 )   ( 0.0000,  0.0260 )
 
 # how often did the linear model produce _p_<0.05?
 sum(bs$t < 0.05) / length(bs$t)
-[1] 0.9967
+[1] 0.9854
 ~~~
 
-So sample size is not an issue. (Even if we edit it to halve the effect size to a maximum of 10 minutes rather than 20, power is still 85%.)
+At 99% power, sample size is not an issue. (Even if we halve the effect size to a maximum effect of 10 minutes rather than 20, power is still 68%.)
 
 <!-- TODO:
 moar samples!
