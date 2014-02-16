@@ -169,6 +169,8 @@ On 11 December 2013, another 3 NZers were arrested over various orders of "small
 
 ### American
 
+<!-- TODO: What happened with SuperTrips? see ICE reference in http://arstechnica.com/tech-policy/2014/02/dread-pirate-roberts-2-0-an-interview-with-silk-roads-new-boss/ "Nobody complains to me when they know I am breathing down the neck of would-be infiltrators and have already locked down over 15 law enforcement honeypot vendors or when our team is busy fighting off an armada of hackers. I do, however, confess it was quite boring the third time law enforcement decided to use the “SuperTrips” moniker and claiming to be him as a free man, when I know just as well as ICE where he is now." -->
+
 Despite making up much of SR's customer-base and being one of the largest drug markets in the world, American cases are rarer than one might expect.
 
 In September 2011, the Silk Road buyer of LSD & MDMA [Stacy Litz](http://www.reddit.com/r/SilkRoad/comments/1v5g5u/september_2011_sr_prosecution_stacy_litz/) was arrested in Pennsylvania after selling LSD to an undercover officer; she became an informant.
@@ -765,7 +767,7 @@ The obvious way to quantify risk is to just take the feedback at face-value: a 9
 
 An objection: "Are you seriously saying that a seller with 1 bad review out of 100 is *equally* trustworthy as a seller with 3 bad reviews out of 300, and that both of them are *less* trustworthy than a vendor with 0 bad reviews out of 10?" It does seem intuitive that the 300 guy's 99% is more reliable than the 100 guy's 99%; the 10 guy may have a perfect 100% now, but could easily wind up with something much lower after he's sold 100 or 300 things, and we would rather not be one of the buyers who causes those shifts downward.
 
-So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](!Wikipedia). We're not interested in the optimistic question of "how *good* could these sellers turn out to be?", but rather we are interested in finding out how *bad* these sellers might truly be. What's the worst plausible vendor future rating given their existing ratings? We can ask for a [confidence interval](!Wikipedia) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](/docs/1994-falk "'The Ups and Downs of the Hope Function In a Fruitless Search', Falk et al 1994"), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul; the actual SR feedback system seems to use some sort of weighted average.) This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". What are the results? The numbers were calculated as follows:
+So. Suppose we pretended reviews were like polling or surveys which are drawing votes from a population with an unknown number of bad apples. We could call it a draw from a [binomial distribution](!Wikipedia). We're not interested in the optimistic question of "how *good* could these sellers turn out to be?", but rather we are interested in finding out how *bad* these sellers might truly be. What's the worst plausible vendor future rating given their existing ratings? We can ask for a [confidence interval](!Wikipedia) and look at the lower bound. (Lower bounds remind us no vendor is 100% trustworthy, and indeed, pace the [hope function](/docs/statistics/1994-falk "'The Ups and Downs of the Hope Function In a Fruitless Search', Falk et al 1994"), the higher their rating the greater their incentive to require FEs and disappear with one last giant haul; the actual SR feedback system seems to use some sort of weighted average.) This gives us the pessimistic percentage of feedback which we can then interpret as the risk that *we* will be one of those bad feedbacks, and then we can finally do the simple expected-value calculation of "μg/฿ times probability of being happy". What are the results? The numbers were calculated as follows:
 
 ~~~{.R}
 # Frequentist analysis:
@@ -948,6 +950,7 @@ Watching the fall of Atlantis, SR, and BMR, I have derived some basic recommenda
 - [SR's guide](http://silkroadlink.com/); [forum guide](/docs/sr/2012-10-12-forumguide.mht)
 
     - ["An Interview With A Digital Drug Lord: The Silk Road's Dread Pirate Roberts (Q&A)"](http://www.forbes.com/sites/andygreenberg/2013/08/14/an-interview-with-a-digital-drug-lord-the-silk-roads-dread-pirate-roberts-qa/print/) (Andy Greenberg, _Forbes_)
+    - ["Ambition has no rest: the long education of the Silk Road money launderer [StExo]"](https://web.archive.org/web/20131208043600/http://weirderweb.com/2013/06/10/ambition-has-no-rest-the-long-education-of-a-silk-road-money-launderer/); ["Dread Pirate Roberts 2.0: An interview with Silk Road's new boss"](http://arstechnica.com/tech-policy/2014/02/dread-pirate-roberts-2-0-an-interview-with-silk-roads-new-boss/)
 - Reddit:
 
   - [Silk Road subreddit](http://www.reddit.com/r/SilkRoad/)
@@ -1468,8 +1471,7 @@ Assuming the details about DPR hiring hitmen in the indictments are reasonably a
 1. an $80k expenditure for killing his Maryland employee. The first payment of $40k was made on 4 February 2013 and the second/final payment of $40k was made on 1 March 2013 (pg9). If we use the exchange rate of those two days, then the hit cost DPR (40000 / 20.42) + (40000 / 34.24) = ฿3127
 2. the second hit was priced in bitcoins (pg23):
 
-    > Through further messages exchanged on March 31,
-2013, DPR and redandwhite agreed upon a price of 1,670 Bitcoins
+    > Through further messages exchanged on March 31, 2013, DPR and redandwhite agreed upon a price of 1,670 Bitcoins
 
 So the hits cost DPR somewhere around ฿4797. An extremely large and painful amount, by most standards, but still nowhere near ฿10k - much less higher.
 
@@ -1788,7 +1790,6 @@ Armory Vendor Market     6 Feb 2014                           0                 
 <!-- What was TCF? Tor Carding Forum http://i25c62nvu4cgeqyz.onion/viewtopic.php?pid=3504#p3504 "Note: This is a backup from 10 January. It is the last one where I can be sure no passwords were changed. As a result, PMs sent after this date are not stored. Please do not contact me about this or anything other than escrow for the moment." down 5 January, inferred from http://www.reddit.com/r/DarkNetMarkets/comments/1ulyet/tcf_tor_carding_forum/ -->
 <!-- http://www.reddit.com/r/DarkNetMarkets/comments/1vu0aa/new_inviteonly_darknet_site_what_do_you_think/ http://www.topixslhezyytrvm.onion/ registered email 22 Jan 2014; 'Login or register if you have an invite.' 9 Feb 2014 -->
 <!-- 'country club' a$ap was setting up with jack n hoff: a new marketplace, invite only, with monthly dues http://silkroad5v7dywlc.onion/index.php?topic=16620.0;all "The forum is going live. A$AP is out of the picture. The Country Club is offering a 'trial month' for new users.  Buyers pay nothing so long as they are invited and vendors pay $20 the first month and $60 a month afterwards assuming everything goes alright.  There are no fee-based transactions. Just the recurring monthly rate." -->
-<!-- Vault 43 http://www.reddit.com/r/DarkNetMarkets/comments/1v5xgs/vault_43_is_starting_to_come_online_the_door/ http://www.reddit.com/r/onions/comments/1vbj96/vault_43_has_opened_23_factor_escrow_operational/ http://vault43nodowhdmy.onion/res/forum/ -->
 <!-- 'Black Market Union'? http://www.reddit.com/r/DarkNetMarkets/comments/1vzn9b/creating_a_new_marketplace_called_black_market/ 2 weeks from 24 Jan, so ~8 February 2014 http://www.reddit.com/r/DarkNetMarkets/comments/1wlkg9/update_on_black_market_union/ 1 Feb? -->
 <!-- http://silkroad5v7dywlc.onion/index.php?topic=21564.0 'Middle-Earth Marketplace feb 3rd URL will be made public n registration opened' pinged on The Hub too -->
 <!-- Ultraviolet City down 9 February 2014, up 11 February 2014 -->
@@ -1797,6 +1798,7 @@ Armory Vendor Market     6 Feb 2014                           0                 
 <!-- BigShop http://bigshopcucn64ae6.onion/about -->
 <!-- http://cardr2kvh7pth3wz.onion/login -->
 <!-- Black Services Market: reports of issues starting ~8 Feb 2014: http://www.reddit.com/r/DarkNetMarkets/comments/1xbex3/bsm_black_services_market_is_a_scam/ http://thebsm6okkbx7fik.onion/forum/viewtopic.php?id=38 http://thebsm6okkbx7fik.onion/forum/viewtopic.php?id=44 And the r5 forum account was last seen '2014-01-18 23:04: Here is a thread where you can see their are multiple people experiencing the same thing: http://thebsm6okkbx7fik.onion/forum/viewtopic.php?id=38 Here are product listings on the site that show the admin is not around: http://thebsm6okkbx7fik.onion/index.php?page=item&id=1215 http://thebsm6okkbx7fik.onion/index.php?page=item&id=1212 http://thebsm6okkbx7fik.onion/index.php?page=item&id=1209 http://thebsm6okkbx7fik.onion/index.php?page=item&id=1202 http://thebsm6okkbx7fik.onion/index.php?page=item&id=1193 -->
+<!-- Vault 43 http://www.reddit.com/r/DarkNetMarkets/comments/1v5xgs/vault_43_is_starting_to_come_online_the_door/ http://www.reddit.com/r/onions/comments/1vbj96/vault_43_has_opened_23_factor_escrow_operational/ http://vault43nodowhdmy.onion/res/forum/ up 9 Feb, down 15 Feb http://www.reddit.com/r/DarkNetMarkets/comments/1y00yp/is_vault43_down/ -->
 
 <!--
 library(survival)
