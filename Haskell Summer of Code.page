@@ -209,13 +209,13 @@ In general, these looked good. Most of them will be widely useful -- especially 
 
 [7 projects](http://donsbot.wordpress.com/2010/04/26/the-7-haskell-projects-in-the-google-summer-of-code/) were accepted:
 
-- [Improvements to Cabal's test support](http://google-melange.appspot.com/gsoc/project/google/gsoc2010/ttuegel/2001); Thomas Tuegel, mentored by Johan Tibell
+- [Improvements to Cabal's test support](http://webcitation.org/6FTUJT4sx); Thomas Tuegel, mentored by Johan Tibell
 
     **Successful**? The functionality is now in a released version of `cabal-install` and a number of packages use the provided test syntax.^[As of 18 March 2011, I have local copies of 8 repositories which seem to make use of the new syntax: `angle, cabal, concurrent-extra, hashable, rrt, safeint, spatialIndex, unordered-containers, wai-app-static`.] <!-- TODO: update using shell command in ~/bin: find . -name "*.cabal" -exec fgrep - - files-with-matches - - ignore-case 'test-suite ' {} \; | fgrep -v share | fgrep -v 'abal/tests/' | sort -->
 - [Infrastructure for a more social Hackage 2.0](http://cogracenotes.wordpress.com/hackage-proposal/); Matthew Gruen, mentored by Edward Kmett
 
     **Unknown**. [Gruen's blog](http://cogracenotes.wordpress.com/) was last updated October 2010, and Hackage still hasn't switched over and gotten the new features & benefit of the rewrite. But the code exists and there is a running [public demo](http://sparky.haskell.org:8080/), so this may yet be a success.
-- [A high performance HTML generation library](http://google-melange.appspot.com/gsoc/project/google/gsoc2010/jaspervdj/18001); Jasper Van der Jeugt, mentored by Simon Meier
+- [A high performance HTML generation library](http://webcitation.org/6JQ1LLFnH); Jasper Van der Jeugt, mentored by Simon Meier
 
     **Successful** [blaze-html](!Hackage) has been released and is actively developed; version 0.4.0.0 has [50 total reverse dependencies](http://sparky.haskell.org:8080/package/blaze-html/reverse/all) and [blaze-builder](!Hackage) has [97 reverse dependencies](http://sparky.haskell.org:8080/package/blaze-builder/reverse/all) though there's much overlap. (This site is built on [hakyll](!Hackage), which uses blaze-html.)
 - [Improvements to the GHC LLVM backend](http://web.archive.org/web/20100501033720/http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/haskell/t127230760615); Alp Mestanogullari, mentored by Maximilian Bolingbroke
@@ -258,9 +258,9 @@ Of my original predictions, I think I was right about the Immix GC & GObject & D
 
 ### 2011
 
-[Haskell.org](http://www.google-melange.com/gsoc/org/google/gsoc2011/haskell) got 7 projects again for 2011. They are:
+[Haskell.org](http://webcitation.org/6AMifPmeW) got 7 projects again for 2011. They are:
 
-1. ["Improve EclipseFP"](http://www.google-melange.com/gsoc/project/google/gsoc2011/serras/50001); Alejandro Serrano, mentored by Thomas Schilling
+1. ["Improve EclipseFP"](http://webcitation.org/6AMIWPTNl); Alejandro Serrano, mentored by Thomas Schilling
 
     > "Eclipse is one of the most popular IDEs in our days. EclipseFP is a project developing a plug-in for it that supports Haskell. Now, it has syntax highlighting, integration of GHCi and supports some properties of Cabal files. My idea is to extend the set of tools available, at least with:
     > - Autocompletion and better links to documentation,
