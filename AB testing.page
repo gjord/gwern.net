@@ -9,7 +9,7 @@ belief: possible
 
 > To gain some statistical & web development experience and to improve my readers' experiences, I have been running a series of CSS A/B tests since June 2012. As expected, most do not show any meaningful difference.
 
-# background
+# Background
 
 - https://www.google.com/analytics/siteopt/exptlist?account=18912926
 - http://www.pqinternet.com/196.htm
@@ -48,7 +48,6 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
                 floating footnotes
         CSS
                 differences from readability
-                                                href link color - not text black?
                 basically, every declaration in default.css!
         Donation
                 placement - left, right, bottom
@@ -1389,7 +1388,7 @@ This is not a resounding endorsement so far.
 
 ## Section header capitalization
 
-3 * 3:
+3x3:
 
 - `h1, h2, h3, h4, h5 { text-transform: uppercase; }`
 - `h1, h2, h3, h4, h5 { text-transform: none; }`
@@ -1633,7 +1632,119 @@ Sectionsu     0.0833     0.0337    2.47    0.013
 OldTRUE       0.2920     0.0283   10.33   <2e-16
 ~~~
 
-Uppercase and 'none' beat 'capitalize' in both page titles & section headers. So I toss in a CSS declaration to uppercase section headers as well as the status quo of the title.
+Uppercase and 'none' beat 'capitalize' in both page titles & section headers (interaction does not survive). So I toss in a CSS declaration to uppercase section headers as well as the status quo of the title.
+
+## ToC formatting
+
+After the page title, the next thing a reader will generally see on my pages in the table of contents. It's been tweaked over the years (particularly by suggestions from Hacker News) but still has some untested aspects, particularly the first two parts of `div#TOC`:
+
+~~~{.Css}
+    float: left;
+    width: 25%;
+~~~
+
+I'd like to test left vs right, and 15,20,25,30,35%, so that's a 2x5 design. Usual implementation:
+
+~~~{.Diff}
+diff --git a/static/templates/default.html b/static/templates/default.html
+index 83c6f9c..11c4ada 100644
+--- a/static/templates/default.html
++++ b/static/templates/default.html
+@@ -27,7 +27,7 @@
+   <body>
+
+     <!-- override CSS with A/B test -->
+-    <div class="headerCaps_class1"></div>
++    <div class="tocAlign_class1"></div>
+
+     <div id="main">
+       <div id="sidebar">
+@@ -152,51 +152,56 @@
+       _gaq.push(['_setAccount', 'UA-18912926-1']);
+
+       ABalytics.init({
+-      headerCaps: [
++      tocAlign: [
+       {
+-      name: 'uu',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: uppercase; }; div#header h1 { text-transform: uppercase; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l15',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 15%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'un',
+-      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: none; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l20',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 20%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'uc',
+-      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: capitalize; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l25',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 25%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'nu',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: uppercase; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l30',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 30%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'nn',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: none; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l35',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 35%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'nc',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: capitalize; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r15',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 15%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'cu',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: uppercase; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r20',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 20%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'cn',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: none; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r25',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 25%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'cc',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: capitalize; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r30',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 30%; }</style>",
++      "tocAlign_class2": ""
++      },
++      {
++      name: 'r35',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 35%; }</style>",
++      "tocAlign_class2": ""
+       }
+       ],
+       }, _gaq));
+~~~
 
 # Appendix
 ## Covariate impact on power
