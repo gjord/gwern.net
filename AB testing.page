@@ -1582,6 +1582,59 @@ This is not a resounding endorsement so far.
        ...)}
 ~~~
 
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Sections,Title,Old,N,Rate
+c,u,FALSE,2362, 0.1808
+c,n,FALSE,2356,0.1855
+c,c,FALSE,2342,0.2003
+u,u,FALSE,2341,0.1965
+u,c,FALSE,2333,0.1989
+n,u,FALSE,2329,0.1928
+n,c,FALSE,2323,0.1941
+n,n,FALSE,2321,0.1978
+u,n,FALSE,2315,0.1965
+c,c,TRUE,1370,0.2190
+n,u,TRUE,1302,0.2558
+u,u,TRUE,1271,0.2919
+c,n,TRUE,1258,0.2377
+u,c,TRUE,1228,0.2272
+n,c,TRUE,1211,0.2337
+n,n,TRUE,1200,0.2400
+c,u,TRUE,1135,0.2396
+u,n,TRUE,1028,0.2442
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Sections * Title + Old, data=rates, family="binomial"); summary(g)
+...
+Coefficients:
+(Intercept)       -1.4552     0.0422  -34.50   <2e-16
+Sectionsn          0.0111     0.0581    0.19    0.848
+Sectionsu          0.0163     0.0579    0.28    0.779
+Titlen            -0.0153     0.0579   -0.26    0.791
+Titleu            -0.0318     0.0587   -0.54    0.588
+OldTRUE            0.2909     0.0283   10.29   <2e-16
+Sectionsn:Titlen   0.0429     0.0824    0.52    0.603
+Sectionsu:Titlen   0.0419     0.0829    0.51    0.613
+Sectionsn:Titleu   0.0732     0.0825    0.89    0.375
+Sectionsu:Titleu   0.1553     0.0820    1.89    0.058
+
+summary(step(g))
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.4710     0.0263  -55.95   <2e-16
+Sectionsn     0.0497     0.0337    1.47    0.140
+Sectionsu     0.0833     0.0337    2.47    0.013
+OldTRUE       0.2920     0.0283   10.33   <2e-16
+~~~
+
+Uppercase and 'none' beat 'capitalize' in both page titles & section headers. So I toss in a CSS declaration to uppercase section headers as well as the status quo of the title.
+
 # Appendix
 ## Covariate impact on power
 
