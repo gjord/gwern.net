@@ -9,7 +9,7 @@ belief: highly likely
 
 > A compilation of Haskell-related student projects 2006-2013, with evaluations of their usefulness to the Haskell community, thoughts on what makes a good project, and predictions for 2011-2013.
 
-As part of Google's [Summer of Code](!Wikipedia "Google Summer of Code") [program](http://code.google.com/soc/), they sponsor 5-10 SoC [projects for Haskell](http://hackage.haskell.org/trac/summer-of-code/).
+As part of Google's [Summer of Code](!Wikipedia "Google Summer of Code") program, they sponsor 5-10 SoC [projects for Haskell](http://hackage.haskell.org/trac/summer-of-code/).
 
 The Haskell Summer of Codes have often produced excellent results, but how excellent is excellent? Are there any features or commonalities between successful projects or unsuccessful ones?
 
@@ -23,7 +23,7 @@ In 2009, a blogger & Debian developer wrote [a](http://www.milliways.fr/2009/01/
 
 > "...a global program that offers students stipends to write code for open source projects. We have worked with the open source community to identify and fund exciting projects for the upcoming summer."
 
-[or](https://code.google.com/soc/)
+[or](https://developers.google.com/open-source/soc/)
 
 > "...a global program that offers student developers stipends to write code for various open source software projects. We have worked with several open source, free software, and technology-related groups to identify and fund several projects over a three month period. Since its inception in 2005, the program has brought together over 4500 successful student participants and over 3000 mentors from over 100 countries worldwide, all for the love of code. Through Google Summer of Code, accepted student applicants are paired with a mentor or mentors from the participating projects, thus gaining exposure to real-world software development scenarios and the opportunity for employment in areas related to their academic pursuits. In turn, the participating projects are able to more easily identify and bring in new developers. Best of all, more source code is created and released for the use and benefit of all."
 
@@ -328,7 +328,7 @@ To summarize my feelings:
     **Successful**. Jasper published 2 posts on benchmarking the converted `text` against the original (["Text/UTF-8: Initial results"](http://jaspervdj.be/posts/2011-07-10-text-utf8-initial-results.html) & ["Text/UTF-8: Studying memory usage"](http://jaspervdj.be/posts/2011-08-09-text-utf8-memory-usage.html)); discussing the results in ["Text/UTF-8: Aftermath"](http://jaspervdj.be/posts/2011-08-19-text-utf8-the-aftermath.html), the upshot is that the conversion has a real but small advantage, potentially would cause interoperability problems, requires considerable testing, and won't be merged in (the fork will be maintained against hopes of future GHC optimizations). Jaspers says the benefits wound up being a bigger & cleaner test/benchmark suite, and some optimizations made for the UTF-8 version can be applied to the original. Since Edward Kmett [seems pleased](http://jaspervdj.be/posts/2011-08-19-text-utf8-the-aftermath.html#comment-291037007), I have marked it a success (although I remain dubious about whether it was a good SoC).
 5. "Build multiple Cabal packages in parallel"; Mikhail Glushenkov, by Johan Tibell
 
-    **Successful** Glushenkov reported in ["Parallelising cabal-install: Results"](http://coldwa.st/e/blog/2011-08-22-GSoC-Final.html) that the patches were done and people could play with his repository; the comments report that it basically works and does offer speedups. However, as before, no patch by him appears in the mainline Cabal, and the last discussion was 6 November 2011 where [he provides a patch bundle](https://github.com/haskell/cabal/issues/440#issuecomment-5892025). No one commented; Mikhail says the patches may be "too invasive" and need reworking before merging.[^Mikhail] The code was ultimately released as part of [cabal-install 1.16](http://web.archive.org/web/20130128085047/http://www.haskell.org/pipermail/haskell-cafe/2012-October/103746.html "[Haskell-cafe] ANN: cabal-install-1.16.0 (and Cabal-1.16.0.1)") and is reportedly working well.
+    **Successful** Glushenkov reported in ["Parallelising cabal-install: Results"](http://coldwa.st/e/blog/2011-08-22-GSoC-Final.html) that the patches were done and people could play with his repository; the comments report that it works and does offer speedups. However, as before, no patch by him appears in the mainline Cabal, and the last discussion was 6 November 2011 where [he provides a patch bundle](https://github.com/haskell/cabal/issues/440#issuecomment-5892025). No one commented; Mikhail says the patches may be "too invasive" and need reworking before merging.[^Mikhail] The code was ultimately released as part of [cabal-install 1.16](http://web.archive.org/web/20130128085047/http://www.haskell.org/pipermail/haskell-cafe/2012-October/103746.html "[Haskell-cafe] ANN: cabal-install-1.16.0 (and Cabal-1.16.0.1)") and is reportedly working well.
 6. "Darcs Bridge"; Owen Stephens, by Ganesh Sittampalam
 
     **Successful**? Owen's [blog posts](http://blog.owenstephens.co.uk/blog/tags/gsoc.html) conclude with ["GSoC: Darcs Bridge - Results"](http://blog.owenstephens.co.uk/blog/2011/09/03/gsoc_darcs_bridge__results.html) summarizing the final features: he succeeded in most of the functionality. Brent Yorgey tells me that he has successfully used the tool to convert repositories to put onto Github, but says there are "some critical bugs" and use is still "clunky" (eg. currently requiring Darcs HEAD; see the usage guide on the [Darcs wiki](http://wiki.darcs.net/DarcsBridgeUsage)). Whether the bugs will be fixed and the package polished to the point where it will be widely used remains to be seen.
@@ -496,7 +496,7 @@ As of 1 January 2013:
     Erisson [finished in August](http://ghclive.wordpress.com/2012/08/20/ghclive-project-escapes/) with a [Hackage upload](http://hackage.haskell.org/package/ghclive) and some [nice slides](http://www.scannedinavian.com/~shae/ghclive.pdf "Web based teaching through real-time collaboration with ghcLiVE"). Unfortunately, there is no live server where one can actually *use* ghcLiVE; someone suggested that Erisson might've given up on the sandboxing aspects which would have made it usable on the public Internet (per his original proposal). One wonders how many people will ever use it, given how much Haskell instruction is done remotely, but maybe it would be useful in offline university classes. In any case, my criterion was clear: "whether multi-user sessions have gone live"; and so despite my high hopes, I must mark this **unsuccessful**. ([Edward Kmett](http://www.reddit.com/r/haskell/comments/15sjur/summer_of_code_2012_retrospective/c7pejlq) disagrees with this assessment; Erisson sort of agrees and disagrees[^ghcLiVE].)
 8. Haskell type-checker library
 
-    This one is a little confusing. The Hackage library remains untouched since April 2012, although there is a [largely complete library](http://cleantypecheck.wordpress.com/2012/09/05/hte-v-haskell-2010-at-github/) (main missing feature is records support, which is important but not a huge gap) available on [Github](https://github.com/shayan-najd/HTE). Another [blog post implies](http://cleantypecheck.wordpress.com/2012/09/17/hiw-2012-haskell-suite/) that it is but a small part of a grander research scheme entirely, and that my reverse dependencies judgment criteria is simply off-base entirely although it suggests the SoC was unsuccessful. (The obvious alternative, looking at whether it is pushed to the HEAD of haskell-type-exts, would also suggest unsuccessful.) I am not sure whether this should be considered successful or unsuccessful.
+    This one is a little confusing. The Hackage library remains untouched since April 2012, although there is a [largely complete library](http://cleantypecheck.wordpress.com/2012/09/05/hte-v-haskell-2010-at-github/) (main missing feature is records support, which is important but not a huge gap) available on [Github](https://github.com/shayan-najd/HTE). Another [blog post implies](http://cleantypecheck.wordpress.com/2012/09/17/hiw-2012-haskell-suite/) that it is but a small part of a grander research scheme entirely, and that my reverse dependencies judgment criteria is simply off-base entirely although it suggests the SoC was unsuccessful. (The alternative, looking at whether it is pushed to the HEAD of `haskell-type-exts`, would also suggest unsuccessful.) I am not sure whether this should be considered successful or unsuccessful.
 
 [^ghcLiVE]: On [Google+](https://plus.google.com/u/0/103530621949492999968/posts/V96rYrcm4jp):
 
@@ -646,6 +646,11 @@ There are 2 major collections of ideas for future SoC projects, aside from the g
 
 - The [Haskell proposals](http://www.reddit.com/r/haskell_proposals/top/?t=all) [subreddit](http://www.urlesque.com/2011/01/06/whats-a-subreddit-how-reddit-works/), with ideas ranked by popularity
 - the [Haskell Summer of Code](http://hackage.haskell.org/trac/summer-of-code/report/1) [trac](!Wikipedia)
+- Johann Tibell:
+
+    - [2011 suggestions](http://blog.johantibell.com/2011/03/summer-of-code-project-suggestions.html)
+    - [2013](http://blog.johantibell.com/2013/04/haskellorg-gsoc-ideas.html)
+    - [2014](http://blog.johantibell.com/2014/03/google-summer-of-code-projects.html)
 
 Let's look at the first 12 and see whether they're good ideas, bad ideas, or indifferent.
 
