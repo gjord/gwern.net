@@ -17,7 +17,7 @@ do
             -e "http://www.coursera.org" -e ".wiley.com/" -e "http://www.ncbi.nlm.nih.gov/pubmed/" \
             -e "www.tandfonline.com/doi/abs/" -e "jstor.org" -e "springer.com" -e "springerlink.com" "$PAGE";
         egp -e "http://www.pnas.org/content/.*/.*/.*.abstract" -e '[^\.]t\.test\(' "$PAGE";
-        fgp -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e " percent " -e "    Pearson'" \
+        fgp -e "<q>" -e "</q>" -e "(www" -e ")www" -e "![](" -e "]()" -e " percent " -e "    Pearson'" \
             -e '~~~{.sh}' -e 'library("' "$PAGE";
 
         # look for personal uses of illegitimate statistics & weasel words, but filter out blockquotes
