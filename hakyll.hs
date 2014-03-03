@@ -72,7 +72,7 @@ woptions = defaultHakyllWriterOptions{ writerSectionDivs = True,
 
 
 rssConfig :: FeedConfig
-rssConfig = FeedConfig { fcTitle = "Joining Clouds", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
+rssConfig = FeedConfig { fcTitle = "Gwern", fcBaseUrl  = "http://www.gwern.net", fcFeedDays = 30 }
 
 postList :: Tags -> Pattern -> ([Item String] -> Compiler [Item String]) -> Compiler String
 postList tags pattern preprocess' = do
