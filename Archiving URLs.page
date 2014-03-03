@@ -52,7 +52,7 @@ With that in mind, one can consider remedies. (If we lie to ourselves and say it
 > knowing what is at its heart \
 > by the scattering storm winds.^[Shōtetsu; 101, 'Buddhism related to Blossoms'; [_Unforgotten Dreams: Poems by the Zen monk Shōtetsu_](http://www.amazon.com/Unforgotten-Dreams-Steven-D-Carter/dp/0231105762/); trans. Steven D. Carter, ISBN 0-231-10576-2]
 
-The first and most obvious remedy is to learn about broken links as soon as they happen, which allows one to react quickly and scrape archives or search engine caches (['lazy preservation'](http://www.cs.odu.edu/~fmccown/research/lazy/)). I currently use [`linkchecker`](http://wummel.github.io/linkchecker/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
+The first remedy is to learn about broken links as soon as they happen, which allows one to react quickly and scrape archives or search engine caches (['lazy preservation'](http://www.cs.odu.edu/~fmccown/research/lazy/)). I currently use [`linkchecker`](http://wummel.github.io/linkchecker/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
 
 ~~~{.bash}
 @monthly linkchecker www.gwern.net --ignore-url=^mailto --ignore-url=^irc --anchors --file-output=html
@@ -76,7 +76,7 @@ We can ask a third party to keep a cache for us. There are several [archive site
 6. [Pinboard](https://pinboard.in/) (with the $25/yr archiving option^[Since Pinboard is a bookmarking service more than an archive site, I asked whether treating it as such would be acceptable and Maciej said "Your current archive size, growing at 20 GB a year, should not be a problem. I'll put you on the heavy-duty server where my own stuff lives."])
 7. [Hiyo.jp](http://hiyo.jp/) & [Megalodon.jp](http://megalodon.jp/) (may be difficult to use)
 
-There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which obviously are not publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](https://news.ycombinator.com/item?id=2880427).]
+There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which would not be publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](https://news.ycombinator.com/item?id=2880427).]
 
 <!-- TODO: develop and cover Pinboard, Archive.is, and Peeep.us support -->
 
@@ -143,7 +143,7 @@ For example, in conjunction with the big `local-archiver` runs, I have `archiver
 
 Alternately, you might use `curl` or a specialized archive downloader like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
 
-The space consumed by such a backup is not that bad; only 30-50 gigabytes for a year of browsing, and less depending on how hard you prune the downloads. (More, of course, if you use `linkchecker` to archive entire sites and not just the pages you visit.) Storing this is quite viable in the long term; while page sizes have [increased 7x](http://www.websiteoptimization.com/speed/tweak/average-web-page/) between 2003 and 2011 and pages average around 400kb^[An older [2010 Google article](https://code.google.com/speed/articles/web-metrics.html) put the average at 320kb, but that was an average over the entire Web, including all the old content.], [Kryder's law](!Wikipedia) has also been operating and has increased disk capacity by ~128x - in 2011, \$80 will buy you at least [2 terabytes](http://forre.st/storage#hdd), that works out to 4 cents a gigabyte or 80 cents for the low estimate for downloads; that is much better than the $25 annual fee that somewhere like [Pinboard](http://pinboard.in/upgrade/) charges. Of course, you need to back this up yourself. We're relatively fortunate here - most Internet documents are 'born digital' and easy to migrate to new formats or inspect in the future. We can basically just download them and worry about how to view them only when we need a particular document, and Web browser backwards-compatibility already stretches back to files written in the early 1990s. (Of course, we're probably screwed if we discover the content we wanted was presented only in Adobe Flash or as an inaccessible 'cloud' service.) In contrast, if we were trying to preserve programs or software libraries instead, we would face a much more formidable task in keeping a working ladder of binary-compatible virtual machines or interpreters^[Already one runs old games like the classic [LucasArts adventure games](!Wikipedia) in emulators of the DOS operating system like [DOSBox](!Wikipedia); but those emulators will not always be maintained. Who will emulate the emulators? Presumably in 2050, one will instead emulate some ancient but compatible OS - Windows 7 or Debian 6.0, perhaps - and inside *that* run DOSBox (to run the DOS which can run the game).]. The situation with [digital movie preservation](http://www.davidbordwell.net/blog/2012/02/13/pandoras-digital-box-pix-and-pixels/ "Pandora's digital box: Pix and pixels") hardly bears thinking on.
+The space consumed by such a backup is not that bad; only 30-50 gigabytes for a year of browsing, and less depending on how hard you prune the downloads. (More, of course, if you use `linkchecker` to archive entire sites and not just the pages you visit.) Storing this is quite viable in the long term; while page sizes have [increased 7x](http://www.websiteoptimization.com/speed/tweak/average-web-page/) between 2003 and 2011 and pages average around 400kb^[An older [2010 Google article](https://code.google.com/speed/articles/web-metrics.html) put the average at 320kb, but that was an average over the entire Web, including all the old content.], [Kryder's law](!Wikipedia) has also been operating and has increased disk capacity by ~128x - in 2011, \$80 will buy you at least [2 terabytes](http://forre.st/storage#hdd), that works out to 4 cents a gigabyte or 80 cents for the low estimate for downloads; that is much better than the $25 annual fee that somewhere like [Pinboard](http://pinboard.in/upgrade/) charges. Of course, you need to back this up yourself. We're relatively fortunate here - most Internet documents are 'born digital' and easy to migrate to new formats or inspect in the future. We can download them and worry about how to view them only when we need a particular document, and Web browser backwards-compatibility already stretches back to files written in the early 1990s. (Of course, we're probably screwed if we discover the content we wanted was presented only in Adobe Flash or as an inaccessible 'cloud' service.) In contrast, if we were trying to preserve programs or software libraries instead, we would face a much more formidable task in keeping a working ladder of binary-compatible virtual machines or interpreters^[Already one runs old games like the classic [LucasArts adventure games](!Wikipedia) in emulators of the DOS operating system like [DOSBox](!Wikipedia); but those emulators will not always be maintained. Who will emulate the emulators? Presumably in 2050, one will instead emulate some ancient but compatible OS - Windows 7 or Debian 6.0, perhaps - and inside *that* run DOSBox (to run the DOS which can run the game).]. The situation with [digital movie preservation](http://www.davidbordwell.net/blog/2012/02/13/pandoras-digital-box-pix-and-pixels/ "Pandora's digital box: Pix and pixels") hardly bears thinking on.
 
 There are ways to cut down on the size; if you tar it all up and run [7-Zip](!Wikipedia) with maximum compression options, you could probably compact it to 1/5th the size. I found that the uncompressed files could be reduced by around 10% by using [fdupes](!Wikipedia) ([homepage](http://netdial.caribe.net/~adrian2/fdupes.html)) to look for duplicate files and turning the duplicates into a space-saving [hard link](!Wikipedia) to the original with a command like `fdupes --recurse --hardlink ~/www/`. (Apparently there are a *lot* of bit-identical JavaScript (eg. [JQuery](!Wikipedia)) and images out there.)
 
@@ -278,3 +278,184 @@ rm full.txt trimmed.txt
 ~~~
 
 This shrunk my archive by 9GB from 65GB to 56GB, although at the cost of some archiving fidelity by removing many filetypes like CSS or JavaScript or GIF images.
+
+## `sort --key` compression trick
+
+One way to look at data compression is as a form of intelligence (see the [Hutter Prize](!Wikipedia) & [Burfoot 2011](http://arxiv.org/abs/1104.5466 "Notes on a New Philosophy of Empirical Science")): a compression tool like [`xz`](!Wikipedia "xz") is being asked to predict what the next bit of the original file is, and the better its predictions, the less data needs to be stored to correct its mistaken predictions ("I know how to spell 'banana', I just don't know when to stop"). The smarter the program is, the better its compression will be; but on the flip side, you can also improve the compression ratio by giving it a little help and organizing the data into an equivalent form the program can understand better - for example, by using the [Burrows-Wheeler transform](!Wikipedia). Or by preserving spatial locality: keeping similar data together, and not dispersing it all over. (This also explains why multimedia files barely compress: because the lossy encodings are the product of decades of work specialized to the particular domain of audio or images or video, and a general-purpose lossless compression would have to be *very* intelligent, on par with [PAQ](!Wikipedia), to beat them at their own game.) Files on one topic should be compressed together.
+
+### Locality
+
+Spatial locality can be subtle. For example, natural language text, though not structured line-by-line as visibly as a dictionary, is still far from random and has many local correlations a compression tool might be able to pick up. If this is true, we would expect that with a sufficiently smart compressor, a text file would compress better in its natural form than if it were randomly shuffled. Is this the case, or are compression utilities are too stupid to see any different between random lines and English prose? Taking 14M of text from `gwern.net`, we can see for ourselves:
+
+~~~{.Bash}
+# uncompressed
+$ cat *.page */*.page */*/*.page |                                                 wc --bytes
+13588814
+
+# compressed, files in lexicographic order
+$ cat *.page */*.page */*/*.page |                      xz -9 --extreme --stdout | wc --bytes
+3626732
+# compressed, all lines sorted alphabetically
+$ cat *.page */*.page */*/*.page | sort               | xz -9 --extreme --stdout | wc --bytes
+3743756
+# compressed, all lines randomly shuffled except for non-unique lines sorted together
+$ cat *.page */*.page */*/*.page | sort --random-sort | xz -9 --extreme --stdout | wc --bytes
+3831740
+# compressed, all lines randomly shuffled
+$ cat *.page */*.page */*/*.page | shuf               | xz -9 --extreme --stdout | wc --bytes
+3862632
+~~~
+
+<!-- $ -->
+
+The unmolested text compresses to 3.626M, but the *same* text randomly shuffled is 3.862M! I also included an intermediate form of randomization: despite the name, the `--random-sort` option to `sort` is not actually a random shuffle but a random *hash* (this is not documented in the man page, though it is in the info page) and so any repeated non-unique lines will be sorted together (allowing for some easy duplication deletion), and so we would expect the only-partial randomization of `--random-sort` to maybe perform a bit better than the true random shuffle of `shuf`. And it does.
+
+### Web archives
+
+Spatial locality also applies to our web archiving. If you are mirroring websites, or otherwise compiling a lot of directories with redundant data on a file-by-file level, there's a cute trick to massively improve your compression ratios: don't sort the usual lexicographic way, but sort by a subdirectory. (I learned about this trick a few years ago while messing around with archiving my home directory using `find` and `tar`.) This is one of the issues with archiving gigabytes of crawls from thousands of domains: URLs have a historical oddity where they are not consistently hierarchical. URLs were originally modeled after hierarchical Unix filesystems; this page, for example, lives at the name `/home/gwern/wiki/Archiving URLs.page`, which follows a logical left-to-right pattern of increasing narrowness. If one lists my entire filesystem in lexicographic order, all the files in `/home/gwern/` will be consecutive, and the files in `wiki/` will be consecutive, and so on. unfortunately, the top level of URLs breaks this scheme - one does not visit `https://com/google/mail/?shva=1#search/l%3aunread`, one visits `https://mail.google.com/mail/?shva=1#search/l%3aunread`; one does not visit `http://net/www/gwern/Archiving%20URLs` but `http://www.gwern.net/Archiving%20URLs`. So if I download `a.google.com` and then later `z.google.com`, a lexicographic list of downloaded files will separate the files as much as possible (even though they are semantically probably similar). A quick example from my current WWW archive:
+
+~~~{.Bash}
+$ ls
+...
+typemoon.wikia.com/
+tytempletonart.wordpress.com/
+ubc-emotionlab.ca/
+ubook.info/
+ucblibrary3.berkeley.edu/
+uhaweb.hartford.edu/
+ujsportal.pacourts.us/
+ukpmc.ac.uk/
+uk.reuters.com/
+ultan.org.uk/
+...
+~~~
+
+The directories are indeed sorted, but aside from the initial 2 letters or so, look nothing like each other: a Wikia subdomain rubs shoulders with a Wordpress blog, a `.ca` domain is between a `.com`, a `.info`, and a `.edu` (with a `.us` and ` .uk` thrown in for variety), and so on. Is there any way to sort these directories with a bit of parsing thrown in? For example, maybe we could reverse each line? Some web browsers store URLs reversed right-to-left to enable more efficient database operations, as do Google's [BigTable](!Wikipedia) systems[^BigTable-sort] (to assist their relatively weak compression utility [Snappy](!Wikipedia "Snappy (software)")). Turns out GNU [`sort`](!Wikipedia "sort (Unix)") already supports something similar, the `--key` & `--field-separator` options; the man page is not very helpful but the [info](!Wikipedia "info (Unix)") page tells us:
+
+    '-t SEPARATOR'
+    '--field-separator=SEPARATOR'
+         Use character SEPARATOR as the field separator when finding the
+         sort keys in each line.  By default, fields are separated by the
+         empty string between a non-blank character and a blank character.
+         By default a blank is a space or a tab, but the 'LC_CTYPE' locale
+         can change this.
+
+         That is, given the input line ' foo bar', 'sort' breaks it into
+         fields ' foo' and ' bar'.  The field separator is not considered
+         to be part of either the field preceding or the field following,
+         so with 'sort -t " "' the same input line has three fields: an
+         empty field, 'foo', and 'bar'.  However, fields that extend to the
+         end of the line, as '-k 2', or fields consisting of a range, as
+         '-k 2,3', retain the field separators present between the
+         endpoints of the range.
+
+
+    '-k POS1[,POS2]'
+    '--key=POS1[,POS2]'
+         Specify a sort field that consists of the part of the line between
+         POS1 and POS2 (or the end of the line, if POS2 is omitted),
+         _inclusive_.
+
+         Each POS has the form 'F[.C][OPTS]', where F is the number of the
+         field to use, and C is the number of the first character from the
+         beginning of the field.  Fields and character positions are
+         numbered starting with 1; a character position of zero in POS2
+         indicates the field's last character.  If '.C' is omitted from
+         POS1, it defaults to 1 (the beginning of the field); if omitted
+         from POS2, it defaults to 0 (the end of the field).  OPTS are
+         ordering options, allowing individual keys to be sorted according
+         to different rules; see below for details.  Keys can span multiple
+         fields.
+
+         Example:  To sort on the second field, use '--key=2,2' ('-k 2,2').
+         See below for more notes on keys and more examples.  See also the
+         '--debug' option to help determine the part of the line being used
+         in the sort.
+
+[^BigTable-sort]: ["BigTable: A Distributed Storage System for Structured Data"](http://research.google.com/archive/bigtable-osdi06.pdf), Chang et al 2006:
+
+    > BigTable maintains data in lexicographic order by row key. The row range for a table is dynamically partitioned. Each row range is called a *tablet*, which is the unit of distribution and load balancing. As a result, reads of short row ranges are efficient and typically require communication with only a small number of machines. Clients can exploit this property by selecting their row keys so that they get good locality for their data accesses. For example, in Webtable, pages in the same domain are grouped together into contiguous rows by reversing the hostname components of the URLs. For example, we store data for `maps.google.com/index.html` under the key `com.google.maps/index.html`. Storing pages from the same domain near each other makes some host and domain analyses more efficient.
+
+Hence, we can do better by ordering `sort` to break on the dots and focus on the second part of a URL, like so:
+
+~~~{.Bash}
+$ ls | sort --key=2 --field-separator="."
+...
+uhaweb.hartford.edu/
+adsabs.harvard.edu/
+chandra.harvard.edu/
+cmt.harvard.edu/
+dash.harvard.edu/
+gking.harvard.edu/
+isites.harvard.edu/
+...
+~~~
+
+### Separate mirrors
+
+Top-level domains are not the only thing we might want to sort differently on. To take my mirrors of black-market drug sites such as [Silk Road](): I download a site each time as a separate `wget` run in a timestamped folder. So in my Silk Road 2 folder, I have both `2013-12-25/` & `2014-01-15/`. These share many similar & identical files so they compress together with `xz` down from 1.8GB to 0.3GB.
+
+But they *could* compress even better: the similar files may be thousands of files and hundreds of megabytes away by alphabetical or file-inode order, so even with a very large window and a top-notch compressor, it will fail to spot many long-range redundancies. In between `2013-12-25/default.css` and `2014-01-15/default.css` is going to be all sorts of files which have nothing to do with CSS, like `2014-01-16/items/2-grams-of-pure-vanilla-ketamine-powder-dutchdope?vendor_feedback_page=5` and `2014-01-16/items/10-generic-percocet-10-325-plus-1-30mg-morphine`. You see the problem.
+
+Because we sort the files by 'all files starting with "2013"' and then 'all files starting "2014"', we lose all proximity. If instead, we could sort by subfolder and only then by the top-level folder, then we'd have everything line up nicely. Fortunately, we already know how to do this! Reuse the sort-key trick, specify "/" as the delimiter to parse on, and the nth field to sort on.  We feed it a file list, tell it to break filenames by "/", and then to sort on a lower level, and if we did it right, we will indeed get output like `2013-12-25/default.css` just before `2014-01-15/default.css`, which will do wonders for our compression, and which will pay ever more dividends as we accumulate more partially-redundant mirrors.
+
+Here is an example of output for my Pandora mirrors, where, due to frequent rumors of its demise triggering mirroring on my part, I have 5 full mirrors at the time of testing; and naturally, if we employ the sort-key trick (`find . -type f | sort --unique --key=3 --field-separator="/"`), we find a lot of similar-sounding files:
+
+~~~{.Bash}
+./2014-01-15/profile/5a66e5238421f0422706b267b735d2df/6
+./2014-01-16/profile/5a9df4f5482d55fb5a8997c270a1e22d
+./2013-12-25/profile/5a9df4f5482d55fb5a8997c270a1e22d/1
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d.1
+./2013-12-25/profile/5a9df4f5482d55fb5a8997c270a1e22d/2
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d.2
+./2013-12-25/profile/5a9df4f5482d55fb5a8997c270a1e22d/3
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d/4
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d/5
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d/6
+./2013-12-25/profile/5abb81db167294478a23ca110284c587
+./2013-12-25/profile/5acc44d370e305e252dd4e2b91fda9d0/1
+./2014-01-15/profile/5acc44d370e305e252dd4e2b91fda9d0.1
+./2013-12-25/profile/5acc44d370e305e252dd4e2b91fda9d0/2
+./2014-01-15/profile/5acc44d370e305e252dd4e2b91fda9d0.2
+~~~
+
+Note the interleaving of 5 different mirrors, impossible in a normal left-to-right alphabetical sort. You can bet that these 4 files (in 15 versions) are going to compress much better than if they were separated by a few thousand other profile pages.
+
+So here's an example invocation (doing everything in pipelines to avoid disk IO):
+
+~~~{.R}
+find . -type f -print0 | sort --zero-terminated --unique --key=3 --field-separator="/"
+ | tar --no-recursion --null --files-from - -c
+ | xz -9 --extreme --stdout
+ > ../mirror.tar.xz
+~~~
+
+Used on my two Silk Road 2 mirrors which together weigh 1800M, a normal run without the `--key`/`--field-separator` options, as mentioned before, yields a 308M archive. That's not too bad. Certainly much better than hauling around almost 2GB. However - if I switch to the sort-key trick, however, the archive is now 271M, or 37M less. Same compression algorithm, same files, same unpacked results, same speed, just 2 little obscure `sort` options... and I get an archive 87% the size of the original.
+
+Not impressed? Well, I did say that the advantage increases with the number of mirrors to extract redundancy from. With only 2 mirrors, the SR2 results can't be too impressive. How about the Pandora mirrors? 5 of them gives the technique more scope to shine. And as expected, it's even more impressive when I compare the Pandora archives: 71M vs 162M. The sort-keyed archive is 44% of the regular archive!
+
+### Alternatives
+
+The sort-key trick is most useful when we can infer a lot of spatial locality just from parts of the file names, it's not a panacea. There are other approaches:
+
+1. if we have multiple temporally-ordered datasets and we don't mind making it more difficult to access older copies, it may be simpler to store the data as a DVCS like [git](!Wikipedia "Git (software)") where each dataset is a large patch
+2. sort files by minimizing binary differences between them using Timm S. Müller's [`binsort`](http://neoscientists.org/~tmueller/binsort/) utility
+
+    The default optimization setting of `-o15` underperforms the sort-key trick on both the SR2 and Pandora datasets by 5-10MB, and a higher setting like `-o1000` is best. Note that `binsort` is $O(n^2)$ in number of files, so it's limited to sorting <10,000 files. An example pipeline for compressing posts from the Silk Road forums regarding [a minor Ponzi scheme there](http://www.reddit.com/r/SilkRoad/comments/1yzndq/a_trip_down_memory_lane_vladimir_limetless_and/), since the filenames offer little guidance for a semantically-meaningful sort:
+
+    ~~~{.Bash}
+    find dkn255hz262ypmii.onion/ -type f -exec fgrep -i -l vladimir  {} \; >> ponzi.txt
+    find dkn255hz262ypmii.onion/ -type f -exec fgrep -i -l Limetless {} \; >> ponzi.txt
+
+    mkdir ponzi/ && cp `cat ponzi.txt` ponzi/
+    ~/bin/binsort/binsort -t 6 -o 1000 ponzi/ > ponzi-list.txt
+    cat ponzi-list.txt | tar --no-recursion --files-from - -c | xz -9 --extreme --stdout > ~/srf1-ponzi.tar.xz
+    ~~~
+
+    (Embarrassingly, `binsort` seems to underperform on this dataset: the files are 380M uncompressed, 3.536M sort-keyed, and 3.450M sorted.)
+3. if we know there are many duplications but they are far apart by a lexicographic sort and we don't have any good way to sort filenames (or no sort is good) and a lot of RAM, we can try out a compression tool which specifically looks for long-range redundancies throughout the entire bitstream, such as [`lrzip`](!Wikipedia "rzip") ([homepage](http://ck.kolivas.org/apps/lrzip/)/[Arch wiki](https://wiki.archlinux.org/index.php/Lrzip). `lrzip` is packaged in Debian and should be at least as good as `xz` since it too uses LZMA; but it is an obscure tool which is not a default install on Linux distributions like `xz` is, and this makes distributing archives to other people difficult.
+
+### External links
+
+- ["Sorting multiple keys with Unix `sort`"](https://stackoverflow.com/questions/357560/sorting-multiple-keys-with-unix-sort)
+- ["SimHash: Hash-based Similarity Detection"](http://simhash.googlecode.com/svn/trunk/paper/SimHashWithBib.pdf "Sadowski & Levin 2007") (see also [MinHash](!Wikipedia))
