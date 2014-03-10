@@ -1746,7 +1746,7 @@ index 83c6f9c..11c4ada 100644
        }, _gaq));
 ~~~
 
-I decided to end this test early because I wanted to move onto the BeeLine Reader test, so the results aren't as clear as usual:
+I decided to end this test early on 10 March 2014 because I wanted to move onto the BeeLine Reader test, so it's underpowered & the results aren't as clear as usual:
 
 ~~~{.R}
 rates <- read.csv(stdin(),header=TRUE)
@@ -1788,6 +1788,33 @@ Alignmentr:Width  0.00450    0.00580    0.78     0.44
 ~~~
 
 So, as I expected, putting the ToC on the right performed worse; the larger ToC widths don't seem to be better but it's unclear what's going on there. A visual inspection of the Width data (`library(ggplot2); qplot(Width,Rate,color=Alignment,data=rates)`) suggests that 20% width was the best variant, so might as well go with that.
+
+## BeeLine Reader
+
+[BeeLine Reader](http://www.beelinereader.com/) (BLR) is an interesting new browser plugin which launched around October 2013; I learned of it from the [Hacker News discussion](https://news.ycombinator.com/item?id=6335784 "Show HN: Ditch Black Text to Read Faster, Easier; +723, 266 comments"). The idea is that part of the difficulty in reading text is that when one finishes a line and saccades left to the continuation of the next line, the uncertainty of where it is adds a bit of stress, so one can make reading easier by adding some sort of guide to the next line; in this case, each matching pair of half-lines is colored differently, so if you are on a red half-line, when you saccade left, you look for a line also colored red, then you switch to blue in the middle of that line, and so on. A colorful variant on [boustrophedon](!Wikipedia) writing. I found the default BLR coloring garish & distracting, but I couldn't see any reason that a subtle gray variant would not help: the idea seems plausible. And very long text pages (like mine) are where BLR should shine most.
+
+I asked if there were a JavaScript version I could try in an A/B test; the initial JS implementation was not fast enough, but by 10 March 2014 it was good enough. BLR has several themes, including "gray"; I decided to test no BLR, "dark", "blues", & expanded the gray selection to include grays `#222222`/`#333333`/`#444444`/`#555555`/`#666666`/`#777777` (they vary in how blatant the highlighting is) for a total of 9 variants.
+
+The implementation is *mostly* straightforward (load the CSS & JS libraries, load ABalytics, specify the necessary incantation as a minified & JS-escaped `<script>` string, put in the stub):
+
+~~~{.Diff}
+       ABalytics.init({
+-      TODO: [
++      blr: [
++      {
++      name: 'default',
++      "blr_class1": ""
++      },
++      {
++      name: 'dark',
++      "blr_class1": "\x3Cscript\x3Evar elements=document.querySelectorAll(\\\"body\\\");for(var i=0;i\x3Celements.length;i++){var beeline=new BeeLineReader(elements[i]);beeline.setOptions({theme:\\\"dark\\\",skipBackgroundColor:true});beeline.color()}\x3C\x2Fscript\x3E"
++      },
+... ]]})
+~~~
+
+Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
+
+Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser). Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further.
 
 # Appendix
 ## Covariate impact on power
