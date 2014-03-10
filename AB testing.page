@@ -1746,6 +1746,49 @@ index 83c6f9c..11c4ada 100644
        }, _gaq));
 ~~~
 
+I decided to end this test early because I wanted to move onto the BeeLine Reader test, so the results aren't as clear as usual:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Alignment,Width,Old,N,Rate
+r,25,FALSE,1040,0.1673
+r,30,FALSE,1026,0.1891
+l,20,FALSE,1023,0.1896
+l,25,FALSE,1022,0.1800
+l,35,FALSE,1022,0.1820
+l,30,FALSE,1016,0.1781
+l,15,FALSE,1010,0.1851
+r,15,FALSE,991,0.1554
+r,20,FALSE,989,0.1881
+r,35,FALSE,969,0.1672
+l,30,TRUE,584,0.2414
+l,25,TRUE,553,0.2224
+l,20,TRUE,520,0.3096
+r,15,TRUE,512,0.2539
+l,35,TRUE,496,0.2520
+r,25,TRUE,494,0.2105
+l,15,TRUE,482,0.2282
+r,35,TRUE,480,0.2417
+r,20,TRUE,460,0.2326
+r,30,TRUE,455,0.2549
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Alignment * Width + Old, data=rates, family="binomial"); summary(g)
+Coefficients:
+                 Estimate Std. Error z value Pr(>|z|)
+(Intercept)      -1.43309    0.10583  -13.54   <2e-16
+Alignmentr       -0.17726    0.15065   -1.18     0.24
+Width            -0.00253    0.00403   -0.63     0.53
+OldTRUE           0.40092    0.04184    9.58   <2e-16
+Alignmentr:Width  0.00450    0.00580    0.78     0.44
+~~~
+
+So, as I expected, putting the ToC on the right performed worse; the larger ToC widths don't seem to be better but it's unclear what's going on there. A visual inspection of the Width data (`library(ggplot2); qplot(Width,Rate,color=Alignment,data=rates)`) suggests that 20% width was the best variant, so might as well go with that.
+
 # Appendix
 ## Covariate impact on power
 
