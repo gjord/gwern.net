@@ -1795,24 +1795,39 @@ So, as I expected, putting the ToC on the right performed worse; the larger ToC 
 
 I asked if there were a JavaScript version I could try in an A/B test; the initial JS implementation was not fast enough, but by 10 March 2014 it was good enough. BLR has several themes, including "gray"; I decided to test no BLR, "dark", "blues", & expanded the gray selection to include grays `#222222`/`#333333`/`#444444`/`#555555`/`#666666`/`#777777` (they vary in how blatant the highlighting is) for a total of 9 variants.
 
-The implementation is *mostly* straightforward (load the CSS & JS libraries, load ABalytics, specify the necessary incantation as a minified & JS-escaped `<script>` string, put in the stub):
+The usual implementation using ABalytics doesn't work because it uses a `innerHTML` call to substitute the various fragments, and while HTML & CSS get interpreted fine, JavaScript does not; the [offered solutions](https://stackoverflow.com/questions/1197575/can-scripts-be-inserted-with-innerhtml) were sufficiently baroque I wound up implementing a custom subset of ABalytics hardwired for BLR inside the Analytics script:
 
 ~~~{.Diff}
-       ABalytics.init({
--      TODO: [
-+      blr: [
-+      {
-+      name: 'default',
-+      "blr_class1": ""
-+      },
-+      {
-+      name: 'dark',
-+      "blr_class1": "\x3Cscript\x3Evar elements=document.querySelectorAll(\\\"body\\\");for(var i=0;i\x3Celements.length;i++){var beeline=new BeeLineReader(elements[i]);beeline.setOptions({theme:\\\"dark\\\",skipBackgroundColor:true});beeline.color()}\x3C\x2Fscript\x3E"
-+      },
-... ]]})
+     <script id="googleAnalytics" type="text/javascript">
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-18912926-1']);
+...
++      // A/B test: heavily based on ABalytics
++      if (typeof(start_slot) == 'undefined') start_slot = 1;
++      var experiment = "blr2";
++      var variant_names = ["none", "dark", "blues", "gray1", "gray2", "gray3", "gray4", "gray5", "gray6"];
++      var variant_id = Math.floor(Math.random()*variant_names.length);
++      function beelinefy (COLOR) {
++      if (COLOR != "none") {
++          var elements=document.querySelectorAll("body");
++          for(var i=0;i < elements.length;i++){var beeline=new BeeLineReader(elements[i]);
++                                             beeline.setOptions({theme:COLOR,skipBackgroundColor:true});
++                                             beeline.color()
++                                            }
++                            }
+       }
++      beelinefy(variant_names[variant_id]);
++      _gaq.push(['_setCustomVar',
++                  start_slot,
++                  experiment,                 // The name of the custom variable = name of the experiment
++                  variant_names[variant_id],  // The value of the custom variable = variant shown
++                  3                           // Sets the scope to page-level
++                 ]);
+
+       _gaq.push(['_trackPageview']);
 ~~~
 
-Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
+(I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not.) Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
 
 Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser). Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further.
 
