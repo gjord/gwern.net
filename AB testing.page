@@ -1829,7 +1829,82 @@ The usual implementation using ABalytics doesn't work because it uses a `innerHT
 
 (I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not.) Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
 
-Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser). Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further.
+Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser, which I'm not looking forward to. Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Variant,Color,Old,N,Rate
+gray3,gray,FALSE,150,0.1533
+dark,dark,FALSE,146,0.1507
+gray5,gray,FALSE,138,0.1449
+gray4,gray,FALSE,137,0.1898
+gray6,gray,FALSE,130,0.2308
+gray2,gray,FALSE,125,0.1840
+blues,blue,FALSE,124,0.1290
+gray1,gray,FALSE,116,0.2155
+gray3,gray,TRUE,70,0.2857
+gray5,gray,TRUE,66,0.1818
+gray4,gray,TRUE,61,0.1639
+gray6,gray,TRUE,58,0.2241
+none,none,FALSE,58,0.1207
+gray2,gray,TRUE,56,0.3214
+blues,blue,TRUE,54,0.3889
+gray1,gray,TRUE,54,0.2407
+dark,dark,TRUE,46,0.2391
+none,none,TRUE,21,0.3333
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+# specify the control groups
+rates$Variant <- relevel(rates$Variant, ref="none")
+rates$Color <- relevel(rates$Color, ref="none")
+
+# normal:
+g1 <- glm(cbind(Successes,Failures) ~ Old + Variant, data=rates, family=binomial); summary(g1)
+...Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.68985    0.29911   -5.65  1.6e-08
+OldTRUE       0.51719    0.13107    3.95  7.9e-05
+Variantblues  0.17862    0.34938    0.51     0.61
+Variantdark  -0.02268    0.35282   -0.06     0.95
+Variantgray1  0.26443    0.34911    0.76     0.45
+Variantgray2  0.28627    0.34566    0.83     0.41
+Variantgray3  0.09261    0.34179    0.27     0.79
+Variantgray4  0.00815    0.34912    0.02     0.98
+Variantgray5 -0.17962    0.35362   -0.51     0.61
+Variantgray6  0.29943    0.34363    0.87     0.38
+
+# multi-level: variants nested in a color
+library(lme4)
+g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), data=rates, family=binomial); summary(g2); ranef(g2)
+...Groups        Name        Variance Std.Dev.
+   Variant:Color (Intercept) 6.37e-12 2.52e-06
+   Color         (Intercept) 0.00e+00 0.00e+00
+Number of obs: 18, groups: Variant:Color, 9; Color, 4
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.5798     0.0793  -19.93   <2e-16
+OldTRUE       0.5193     0.1306    3.98    7e-05
+
+Correlation of Fixed Effects:
+        (Intr)
+OldTRUE -0.607
+$`Variant:Color`
+           (Intercept)
+none:none   -8.343e-12
+blues:blue   1.230e-11
+dark:dark   -2.404e-11
+gray1:gray   2.739e-11
+gray2:gray   3.343e-11
+gray3:gray  -3.996e-12
+gray4:gray  -1.971e-11
+gray5:gray  -5.449e-11
+gray6:gray   3.746e-11
+~~~
 
 # Appendix
 ## Covariate impact on power
