@@ -1801,33 +1801,49 @@ The usual implementation using ABalytics doesn't work because it uses a `innerHT
      <script id="googleAnalytics" type="text/javascript">
        var _gaq = _gaq || [];
        _gaq.push(['_setAccount', 'UA-18912926-1']);
-...
-+      // A/B test: heavily based on ABalytics
++     // A/B test: heavily based on ABalytics
++      function readCookie (name) {
++        var nameEQ = name + "=";
++        var ca = document.cookie.split(';');
++        for(var i=0;i < ca.length;i++) {
++            var c = ca[i];
++            while (c.charAt(0)==' ') c = c.substring(1,c.length);
++            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
++        }
++        return null;
++      }
++
 +      if (typeof(start_slot) == 'undefined') start_slot = 1;
-+      var experiment = "blr2";
++      var experiment = "blr3";
 +      var variant_names = ["none", "dark", "blues", "gray1", "gray2", "gray3", "gray4", "gray5", "gray6"];
++
++      var variant_id = this.readCookie("ABalytics_"+experiment);
++      if (!variant_id || !variant_names[variant_id]) {
 +      var variant_id = Math.floor(Math.random()*variant_names.length);
++      document.cookie = "ABalytics_"+experiment+"="+variant_id+"; path=/";
++                        }
 +      function beelinefy (COLOR) {
-+      if (COLOR != "none") {
-+          var elements=document.querySelectorAll("body");
-+          for(var i=0;i < elements.length;i++){var beeline=new BeeLineReader(elements[i]);
-+                                             beeline.setOptions({theme:COLOR,skipBackgroundColor:true});
-+                                             beeline.color()
-+                                            }
-+                            }
-       }
++       if (COLOR != "none") {
++          var elements=document.querySelectorAll("p");
++          for(var i=0;i < elements.length;i++) {
++                          var beeline=new BeeLineReader(elements[i], { theme: COLOR, skipBackgroundColor: true, skipTags: ['math', 'svg', 'h1', 'h2', 'h3', 'h4'] });
++                          beeline.color();
++                          }
++       }
++      }
 +      beelinefy(variant_names[variant_id]);
 +      _gaq.push(['_setCustomVar',
 +                  start_slot,
 +                  experiment,                 // The name of the custom variable = name of the experiment
 +                  variant_names[variant_id],  // The value of the custom variable = variant shown
-+                  3                           // Sets the scope to page-level
++                  2                           // Sets the scope to session-level
 +                 ]);
-
-       _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageview']);
 ~~~
 
-(I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not.) Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
+(Why "bl*3*"? I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not; this broke the original test. Then I discovered that BLR by default broke all the MathML/Mathjax, causing nasty-looking errors over pages with math expressions; this broke the second test.)
+
+Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
 
 Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser, which I'm not looking forward to. Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further:
 
