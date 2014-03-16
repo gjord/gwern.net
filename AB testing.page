@@ -224,7 +224,33 @@ Width (px) Visits Conversion
 
 ### Analysis
 
-1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58), and we might want more data.
+1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58), and we might want more data; worse, there is no clear linear relation between conversion and width (the plot is erratic, and a linear fit a dismal _p_=0.89):
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Width,N,Rate
+1100,18164,0.1449
+1300,18071,0.1428
+1200,18150,0.1399
+800,18599,0.1394
+900,18419,0.1378
+1400,18378,0.1368
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Width, data=rates, family="binomial")
+...Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.82e+00   4.65e-02  -39.12   <2e-16
+Width        5.54e-06   4.10e-05    0.14     0.89
+# not much better:
+rates$Width <- as.factor(rates$Width)
+rates$Width <- relevel(rates$Width, ref="900")
+g2 <- glm(cbind(Successes,Failures) ~ Width, data=rates, family="binomial"); summary(g2)
+~~~
 
 But I want to move on to the next test and by the same logic it is highly unlikely that the difference between them is large or much in 1300px's favor (the kind of mistake I care about: switching between 2 equivalent choices doesn't matter, missing out on an improvement *does* matter - maximizing β, not minimizing α).
 
@@ -360,7 +386,29 @@ alternative hypothesis: two.sided
  -0.002564  0.004564
 ~~~
 
-Nothing doing there either.
+Nothing doing there either. More generally:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Font,Serif,N,Rate
+Trebuchet,FALSE,35473,0.1381
+Baskerville,TRUE,6021,0.1373
+Helvetica,FALSE,35656,0.1343
+Georgia,TRUE,5833,0.1331
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Font, data=rates, family="binomial"); summary(g)
+...Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)   -1.83745    0.03744  -49.08   <2e-16
+FontGeorgia   -0.03692    0.05374   -0.69     0.49
+FontHelvetica -0.02591    0.04053   -0.64     0.52
+FontTrebuchet  0.00634    0.04048    0.16     0.88
+~~~
 
 With essentially no meaningful differences between conversion rates, this suggests that however fonts matter, they don't matter for reading duration. So I feel free to pick the font that appeals to me visually, which is Baskerville.
 
@@ -434,6 +482,28 @@ X-squared = 1.591, df = 1, p-value = 0.2072
 
 I changed the 150% to 130% for the heck of it, even though the difference between 130 and 150 was trivially small.
 
+<!-- rates <- read.csv(stdin(),header=TRUE)
+Width,N,Rate
+130,18124,0.1526
+150,17459,0.1522
+120,17773,0.1492
+140,17927,0.1492
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+rates$Width <- as.factor(rates$Width)
+g <- glm(cbind(Successes,Failures) ~ Width, data=rates, family="binomial")
+...Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.74e+00   2.11e-02  -82.69   <2e-16
+Width130     2.65e-02   2.95e-02    0.90     0.37
+Width140     9.17e-06   2.97e-02    0.00     1.00
+Width150     2.32e-02   2.98e-02    0.78     0.44
+-->
+
 ## Null test
 
 One of the suggestions in the A/B testing papers was to run a "null" A/B test where the payload is empty but the A/B testing framework is still measuring conversions etc. By definition, the null hypothesis of "no difference" should be true and at an alpha of 0.05, only 5% of the time would the null tests yield a _p_<0.05 (which is very different from the usual situation). The interest here is that it's possible that something is going wrong in one's A/B setup or in general, and so if one gets a "statistically-significant" result, it may be worthwhile investigating this anomaly.
@@ -486,7 +556,7 @@ null1  7,488  15.89%
 
 ### Analysis
 
-Ah, but can we reject the null hypothesis that ""==""? In a victory for null-hypothesis-significance-testing, we do not commit a Type I error:
+Ah, but can we reject the null hypothesis that ""==""? In a rare victory for null-hypothesis-significance-testing, we do not commit a Type I error:
 
 ~~~{.R}
 R> x1 <- 7359; x2 <- 7488; prop.test(c(x1*0.1623, x2*0.1589), c(x1,x2))
@@ -500,7 +570,7 @@ alternative hypothesis: two.sided
  -0.008547  0.015347
 ~~~
 
-But seriously, it's nice to see that ABalytics does not seem to be broken & favoring either option and any results driven by placement in the array of options.
+But seriously, it is nice to see that ABalytics does not seem to be broken & favoring either option and any results driven by placement in the array of options.
 
 ## Text & background color
 
@@ -573,6 +643,7 @@ TRUE,TRUE,58237,0.1290
 FALSE,FALSE,58132,0.1262
 TRUE,FALSE,57576,0.1248
 FALSE,TRUE,57654,0.1244
+
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
@@ -1824,7 +1895,7 @@ The usual implementation using ABalytics doesn't work because it uses a `innerHT
 +                        }
 +      function beelinefy (COLOR) {
 +       if (COLOR != "none") {
-+          var elements=document.querySelectorAll("p");
++          var elements=document.querySelectorAll("#content");
 +          for(var i=0;i < elements.length;i++) {
 +                          var beeline=new BeeLineReader(elements[i], { theme: COLOR, skipBackgroundColor: true, skipTags: ['math', 'svg', 'h1', 'h2', 'h3', 'h4'] });
 +                          beeline.color();
@@ -1896,31 +1967,86 @@ Variantgray6  0.29943    0.34363    0.87     0.38
 # multi-level: variants nested in a color
 library(lme4)
 g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), data=rates, family=binomial); summary(g2); ranef(g2)
-...Groups        Name        Variance Std.Dev.
-   Variant:Color (Intercept) 6.37e-12 2.52e-06
-   Color         (Intercept) 0.00e+00 0.00e+00
+...Random effects:
+ Groups        Name        Variance Std.Dev.
+ Variant:Color (Intercept) 5.95e-12 2.44e-06
+ Color         (Intercept) 2.94e-11 5.42e-06
 Number of obs: 18, groups: Variant:Color, 9; Color, 4
 
 Fixed effects:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.5798     0.0793  -19.93   <2e-16
-OldTRUE       0.5193     0.1306    3.98    7e-05
+(Intercept)  -1.4862     0.0943  -15.77  < 2e-16
+OldTRUE       0.6523     0.1599    4.08  4.5e-05
 
 Correlation of Fixed Effects:
         (Intr)
-OldTRUE -0.607
+OldTRUE -0.590
 $`Variant:Color`
            (Intercept)
-none:none   -8.343e-12
-blues:blue   1.230e-11
-dark:dark   -2.404e-11
-gray1:gray   2.739e-11
-gray2:gray   3.343e-11
-gray3:gray  -3.996e-12
-gray4:gray  -1.971e-11
-gray5:gray  -5.449e-11
-gray6:gray   3.746e-11
+none:none   -2.005e-11
+blues:blue   1.143e-11
+dark:dark   -1.624e-11
+gray1:gray   3.215e-12
+gray2:gray  -8.934e-12
+gray3:gray   4.046e-11
+gray4:gray  -1.858e-11
+gray5:gray  -1.124e-12
+gray6:gray   9.828e-12
+
+$Color
+     (Intercept)
+none  -9.899e-11
+blue   5.641e-11
+dark  -8.017e-11
+gray   1.227e-10
+
+# Bayesian (Wishart prior)
+library(blme)
+bg2 <- bglmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), fixef.prior = normal, data=rates, family=binomial); ranef(bg2)
+...$`Variant:Color`
+           (Intercept)
+none:none    -0.031726
+blues:blue    0.028430
+dark:dark    -0.021790
+gray1:gray    0.003723
+gray2:gray   -0.030472
+gray3:gray    0.105292
+gray4:gray   -0.055907
+gray5:gray   -0.009360
+gray6:gray    0.019080
+
+$Color
+     (Intercept)
+none    -0.05091
+blue     0.04562
+dark    -0.03497
+gray     0.05192
 ~~~
+
+<!-- unstepped main effects extracted from all past A/B experiments:
+x <- c(0.01360, 0.05859, 0.01754, 0.04173,-0.00843, 5.54e-06,-0.03692,-0.02591, 0.00634,2.65e-02,
+       9.17e-06,2.32e-02,0.0034,-0.009219, 0.000837,-0.103201, 0.055036,-0.004397,-0.0277,
+       0.0327,-0.022262,-0.012775, 4.042812, 5.356794, 0.0111, 0.0163,-0.0153,-0.0318,-0.17726,-0.00253)
+library(MASS)
+fitdistr(x,"cauchy")
+   location      scale
+  0.0004184   0.0184542
+ (0.0048720) (0.0046524)
+R> fitdistr(abs(x),"gamma")
+    shape     rate
+  0.22991   0.67727
+ (0.04594) (0.29123)
+
+
+penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184542, log = TRUE)
+bg2 <- bglmer(Rate ~ (Variant|Color), data=rates, cov.prior = custom(penaltyFn, chol = TRUE, scale = "log")); ranef(bg2)
+
+ gamma(shape = 0.22991, rate = 0.67727, posterior.scale = "sd")
+
+penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184542, log = TRUE)
+fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
+              cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
+-->
 
 # Appendix
 ## Covariate impact on power
