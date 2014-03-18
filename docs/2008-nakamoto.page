@@ -1,0 +1,120 @@
+---
+title: Dai/Nakamoto emails
+description: Emails between Wei Dai and Satoshi Nakamoto discussing Bitcoin
+tags: Bitcoin
+created: 17 Mar 2014
+status: finished
+belief: log
+...
+
+Below are 3 emails 2008-2009 between cryptographers Wei Dai & [Satoshi Nakamoto](!Wikipedia); they were quoted in the _Sunday Times_'s 2 March 2014 article ["Desperately seeking Satoshi; From nowhere, bitcoin is now worth billions. Where did it come from? Andrew Smithset off to find Satoshi Nakamoto, the mysterious genius behind the hit e-currency"](/docs/2014-smithset.pdf):
+
+> ...Szabo, an American computer scientist who has also served as law professor at George Washington University, developed a system for "bit gold" between 1998 and 2005, which has been seen as a precursor to Bitcoin. Is he saying that Szabo is Satoshi? "No, I'm pretty sure it's not him." you, then? "No. When I said just Nick and me, I meant before Satoshi" So where could this person have come from? "Well, when I came up with b-money I was still in college, or just recently graduated, and Nick was at a similar age when he came up with bit gold, so I think Satoshi could be someone like that." "Someone young, with the energy for that kind of commitment?" "yeah, someone with energy and time, and that isn't obligated to publish papers under their real name."
+>
+> ...I go back to Szabo's pal, Wei Dai. "Wei", I say, "the other night you said you were sure Nick Szabo wasn't Satoshi. What made you sure?" "Two reasons", he replies. "One: in Satoshi's early emails to me he was apparently unaware of Nick Szabo's ideas and talks about how bitcoin 'expands on your ideas into a complete working system' and 'it achieves nearly all the goals you set out to solve in your b-money paper'. I can't see why, if Nick was Satoshi, he would say things like that to me in private. And, two: Nick isn't known for being a C++ programmer."
+>
+> Perversely, a point in Szabo's favour. But Wei forwards me the relevant emails, and it's true: Satoshi had been ignorant of Szabo's bit-gold plan until Wei mentioned it. Furthermore, a trawl through Szabo's work finds him blogging and fielding questions about bit gold on his Unenumerated blog on December 27, 2008, while Satoshi was preparing bitcoin to meet the world a week later. Why? Because Szabo didn't know about bitcoin: almost no one outside the Cryptography Mailing List did, and I can find no evidence of him ever having been there. Indeed, by 2011, the bit-gold inventor is blogging in defence of bitcoin, pointing out several improvements on the system he devised.
+
+The full emails are being provided publicly by Wei Dai to [support his judgment](http://lesswrong.com/r/discussion/lw/jgz/aalwa_ask_any_lesswronger_anything/apb5?context=1#apb5) that Satoshi is not Nick Szabo:
+
+> ...the more important reason for me thinking Nick isn't Satoshi is the parts of Satoshi's emails to me that are quoted in the _Sunday Times_. Nick considers his ideas to be at least an independent invention from b-money so why would Satoshi say "expands on your ideas into a complete working system" to me, and cite b-money but not Bit Gold in his paper, if Satoshi was Nick? An additional reason that I haven't mentioned previously is that Satoshi's writings just don't read like Nick's to me.
+
+# Emails
+## 1
+
+Satoshi Nakamoto:
+
+    From: "Satoshi Nakamoto" <satoshi@anonymousspeech.com>
+    Sent: Friday, August 22, 2008 4:38 PM
+    To: "Wei Dai" <weidai@ibiblio.org>
+    Cc: "Satoshi Nakamoto" <satoshi@anonymousspeech.com>
+    Subject: Citation of your b-money page
+
+    I was very interested to read your b-money page.  I'm getting ready to
+    release a paper that expands on your ideas into a complete working system.
+    Adam Back (hashcash.org) noticed the similarities and pointed me to your
+    site.
+
+    I need to find out the year of publication of your b-money page for the
+    citation in my paper.  It'll look like:
+    [1] W. Dai, "b-money," http://www.weidai.com/bmoney.txt, (2006?).
+
+    You can download a pre-release draft at
+    http://www.upload.ae/file/6157/ecash-pdf.html  Feel free to forward it to
+    anyone else you think would be interested.
+
+    Title: Electronic Cash Without a Trusted Third Party
+
+    Abstract: A purely peer-to-peer version of electronic cash would allow
+    online payments to be sent directly from one party to another without the
+    burdens of going through a financial institution.  Digital signatures
+    offer part of the solution, but the main benefits are lost if a trusted
+    party is still required to prevent double-spending.  We propose a solution
+    to the double-spending problem using a peer-to-peer network.  The network
+    timestamps transactions by hashing them into an ongoing chain of
+    hash-based proof-of-work, forming a record that cannot be changed without
+    redoing the proof-of-work.  The longest chain not only serves as proof of
+    the sequence of events witnessed, but proof that it came from the largest
+    pool of CPU power.  As long as honest nodes control the most CPU power on
+    the network, they can generate the longest chain and outpace any
+    attackers.  The network itself requires minimal structure.  Messages are
+    broadcasted on a best effort basis, and nodes can leave and rejoin the
+    network at will, accepting the longest proof-of-work chain as proof of
+    what happened while they were gone.
+
+    Satoshi
+
+The "pre-release draft" link is now broken; I have been unable to find a copy, and Dai & Adam Back did not keep one.
+
+## 2
+
+Dai:
+
+    Hi Satoshi. b-money was announced on the cypherpunks mailing list in 1998.
+    Here's the archived post:
+    http://cypherpunks.venona.com/date/1998/11/msg00941.html
+
+    There are some discussions of it at
+    http://cypherpunks.venona.com/date/1998/12/msg00194.html.
+
+    Thanks for letting me know about your paper. I'll take a look at it and let
+    you know if I have any comments or questions.
+
+## 3
+
+Nakamoto:
+
+    From: Satoshi Nakamoto
+    Sent: Saturday, January 10, 2009 11:17 AM
+    To: weidai@weidai.com
+    Subject: Re: Citation of your b-money page
+
+    I wanted to let you know, I just released the full implementation of the
+    paper I sent you a few months ago, Bitcoin v0.1.  Details, download and
+    screenshots are at www.bitcoin.org
+
+    I think it achieves nearly all the goals you set out to solve in your
+    b-money paper.
+
+    The system is entirely decentralized, without any server or trusted
+    parties.  The network infrastructure can support a full range of escrow
+    transactions and contracts, but for now the focus is on the basics of
+    money and transactions.
+
+    There was a discussion of the design on the Cryptography mailing list.
+    Hal Finney gave a good high-level overview:
+    | One thing I might mention is that in many ways bitcoin is two independent
+    | ideas: a way of solving the kinds of problems James lists here, of
+    | creating a globally consistent but decentralized database; and then using
+    | it for a system similar to Wei Dai's b-money (which is referenced in the
+    | paper) but transaction/coin based rather than account based. Solving the
+    | global, massively decentralized database problem is arguably the harder
+    | part, as James emphasizes. The use of proof-of-work as a tool for this
+    | purpose is a novel idea well worth further review IMO.
+
+    Satoshi
+
+# See Also
+
+- ["The Crypto-Currency: Bitcoin and its mysterious inventor"](/docs/2011-davis) (_New Yorker_ 2011)
+- [Bitcoin is Worse is Better](/Bitcoin is Worse is Better)
