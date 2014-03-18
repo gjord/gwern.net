@@ -1,0 +1,125 @@
+---
+title: Hacker News submission analysis
+description: Describing HN submissions; estimating manipulability
+created: 25 Sep 2013
+tags: statistics
+status: notes
+belief: likely
+...
+
+Related:
+
+- http://nathanael.hevenet.com/the-best-time-to-post-on-hacker-news-a-comprehensive-answer/
+- http://minimaxir.com/2014/02/hacking-hacker-news/
+- http://karpathy.ca/myblog/2013/11/27/quantifying-hacker-news-with-50-days-of-data/
+- http://metamarkets.com/2011/hacking-hacker-news-headlines/
+- http://danluu.com/randomize-hn/
+- http://www.bayesianwitch.com/blog/2013/why_hn_shouldnt_use_randomized_algorithms.html
+- http://gkosev.blogspot.com/2012/08/fixing-hacker-news-mathematical-approach.html
+
+Page view counts:
+- 11.8k https://web.archive.org/web/20130719064119/http://aberrant.me/front-page-of-hacker-news/
+- 15k http://www.mikedellanoce.com/2012/09/my-first-hacker-news-effect-experience.html
+- 30k, 12k http://shkspr.mobi/blog/2012/11/whats-the-front-page-of-hackernews-worth/
+- 8.5k http://tumbling.alastair.is/post/17661390124/fun-with-analytics-pitting-hacker-news-and
+- 15k http://najafali.com/zero-to-fifteen-thousand-in-twenty-four-hours.html
+- 15.2k http://www.matvoz.com/blog/2013/10/interesting-facts-about-when-you-get-hit-by-hacker-news-tsunami/
+- 7k unique visitors http://greig.cc/journal/2013/1/what-does-a-hacker-news-traffic-spike-look-like
+- 10k unique visitors https://whoapi.com/blog/554/how-hacker-news-hit-us-with-10-000-unique-visitors-in-10-hours/
+
+
+# Submissions
+
+Question: is submitting to HN worthwhile?
+
+Simple experiment: submit each day one link to gwern.net + 2 links to other domains. These serve as both a rough control for that day's difficulty of front page, any benefits or penalties applied to my account, and repayment to HN for the potential spamming.
+
+per nathanael's post, I tried to consistently post around 10AM EST (I don't get up early enough to do 7-8AM EST). Apparently he's wrong? Oh well.
+
+https://news.ycombinator.com/submitted?id=gwern
+extract stats from http://hn.algolia.com/#!/story/sort_by_date/prefix/0/author%3Agwern ? API: https://hn.algolia.com/api
+
+Sep 2013, started with: '"Equoid" (Charles Stross meets My Little Pony)' (http://www.tor.com/stories/2013/09/equoid) https://news.ycombinator.com/item?id=6445266 5 points by gwern 6 months ago; 0 comments
+
+multi-level Poisson model? Group by Domain and cross group by Day. mixture model? seems appropriate for two different groups (those who make front page and those who don't)
+
+can't filter GA by ycombinator.com: https breaks referrers
+
+# /newest
+
+While using HN, as a sort of 'public service', I occasionally made sure to visit the [newest submissions](https://news.ycombinator.com/newest "New Links") page rather than just the [main front page](https://news.ycombinator.com/news) most people read; after a while, I noticed that the links I upvoted there seemed to be turning up a lot on the front page, more than I would expect from my usual pattern of upvoting perhaps 5 links out of the 30 available. A horrible suspicion struck me: could the apparent arbitrariness of what links made the front page be caused by the /newest page being *so* sparsely voted upon that a single upvote made a meaningful difference?
+
+I decided to do a simple experiment to test: On /newest, take the first 5 links, flip a coin to decide whether to upvote or ignore; and make no votes on any other /newest items. After 30 or so (should be enough if the difference is as dramatic as I expect) do a nonparametric test of the two groups; then can dichotomize into front-page/not, do a logistic regression to calculate the specific odds increase due to 1 upvote, extract page views & time on page from my old Analytics, letting me calculate 'how much time am I steering with, say, 10 upvotes on /newest?'
+
+upvoted:
+https://news.ycombinator.com/item?id=7410094
+https://news.ycombinator.com/item?id=7410068
+https://news.ycombinator.com/item?id=7410065
+https://news.ycombinator.com/item?id=7410052
+https://news.ycombinator.com/item?id=7411076
+https://news.ycombinator.com/item?id=7411073
+https://news.ycombinator.com/item?id=7412318
+https://news.ycombinator.com/item?id=7416907
+https://news.ycombinator.com/item?id=7416897
+https://news.ycombinator.com/item?id=7416891
+https://news.ycombinator.com/item?id=7418265
+https://news.ycombinator.com/item?id=7418223
+https://news.ycombinator.com/item?id=7419205
+https://news.ycombinator.com/item?id=7419194
+https://news.ycombinator.com/item?id=7419188
+https://news.ycombinator.com/item?id=7419183
+
+ignored:
+https://news.ycombinator.com/item?id=7410071
+https://news.ycombinator.com/item?id=7411079
+https://news.ycombinator.com/item?id=7411066
+https://news.ycombinator.com/item?id=7411060
+https://news.ycombinator.com/item?id=7412315
+https://news.ycombinator.com/item?id=7412294
+https://news.ycombinator.com/item?id=7412252
+https://news.ycombinator.com/item?id=7412241
+https://news.ycombinator.com/item?id=7416935
+https://news.ycombinator.com/item?id=7416922
+https://news.ycombinator.com/item?id=7418230
+https://news.ycombinator.com/item?id=7418225
+https://news.ycombinator.com/item?id=7418222
+https://news.ycombinator.com/item?id=7419192
+
+basic analysis:
+~~~{.Bash}
+$ for URL in `xclip -o`; do elinks -dump $URL | grep ' points* by '; done
+~~~
+
+~~~{.R}
+upvoted <- c(2,27,2,18,60,2,2,2) - 1
+1,26,1,17,59,1,1,1
+
+ignored <- c(1,1,1,2,1,1,2,1,1)
+wilcox.test(upvoted, ignored)
+...W = 44.5, p-value = 0.339
+
+hn <- data.frame(FrontPage = c(upvoted>10, ignored>10), Upvoted = c(rep(TRUE, length(upvoted)), rep(FALSE, length(ignored))))
+summary(glm(FrontPage ~ Upvoted, family="binomial", data = hn)) # currently ill-behaved, need more data
+...Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)    -19.6     3584.7   -0.01        1
+UpvotedTRUE     19.1     3584.7    0.01        1
+~~~
+
+One might wonder if HN is uniquely aberrant in this lottery; the most natural comparison is the social news site Reddit. I picked /r/prog's [/new/](http://www.reddit.com/r/programming/new/) to do the same thing to:
+
+upvoted:
+http://www.reddit.com/r/programming/comments/20nypu/get_certified_and_become_a_real_licensed_software/
+http://www.reddit.com/r/programming/comments/20nvtk/writing_the_perfect_question_by_jon_skeet/
+http://www.reddit.com/r/programming/comments/20ns9t/wit_natural_language_for_the_internet_of_things/
+http://www.reddit.com/r/programming/comments/20nowy/lazyrouter_translates_requests_into_method_calls/
+http://www.reddit.com/r/programming/comments/20ofgx/hiring_front_and_back_end_dev_in_southern/
+http://www.reddit.com/r/programming/comments/20ofbs/the_chinese_wikipedia_article_on_quicksort_has/
+http://www.reddit.com/r/programming/comments/20o6vp/refreshing_part_of_a_page_using_jquery_load_and/
+http://www.reddit.com/r/programming/comments/20o32o/i_have_been_in_my_current_job_for_a_while_and_i/
+
+ignored:
+http://www.reddit.com/r/programming/comments/20o0me/2048_4d/
+http://www.reddit.com/r/programming/comments/20odeq/can_anyone_help_me_decode_this_cfltk/
+
+Just a test of differences here, because I'm not sure what the equivalent of 'front page' is for Reddit.
