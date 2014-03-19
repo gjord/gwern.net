@@ -68,6 +68,12 @@ https://news.ycombinator.com/item?id=7419205
 https://news.ycombinator.com/item?id=7419194
 https://news.ycombinator.com/item?id=7419188
 https://news.ycombinator.com/item?id=7419183
+https://news.ycombinator.com/item?id=7422967
+https://news.ycombinator.com/item?id=7422954
+https://news.ycombinator.com/item?id=7422948
+https://news.ycombinator.com/item?id=7426089
+https://news.ycombinator.com/item?id=7426084
+https://news.ycombinator.com/item?id=7426073
 
 ignored:
 https://news.ycombinator.com/item?id=7410071
@@ -84,26 +90,40 @@ https://news.ycombinator.com/item?id=7418230
 https://news.ycombinator.com/item?id=7418225
 https://news.ycombinator.com/item?id=7418222
 https://news.ycombinator.com/item?id=7419192
+https://news.ycombinator.com/item?id=7422960
+https://news.ycombinator.com/item?id=7422959
+https://news.ycombinator.com/item?id=7424951
+https://news.ycombinator.com/item?id=7424928
+https://news.ycombinator.com/item?id=7424923
+https://news.ycombinator.com/item?id=7424910
+https://news.ycombinator.com/item?id=7424896
+https://news.ycombinator.com/item?id=7426094
+https://news.ycombinator.com/item?id=7426074
 
 basic analysis:
+
 ~~~{.Bash}
-$ for URL in `xclip -o`; do elinks -dump $URL | grep ' points* by '; done
+for URL in `xclip -o`; do elinks -dump $URL | egrep ' points* by '; done
 ~~~
 
 ~~~{.R}
-upvoted <- c(2,27,2,18,60,2,2,2) - 1
-1,26,1,17,59,1,1,1
-
-ignored <- c(1,1,1,2,1,1,2,1,1)
+upvoted <- c(2,27,2,18,60,2,64,2,14,6,68,9,2,2,2,53,2,2,2,3) - 1
+ignored <- c(1,1,1,2,1,2,2,1,1,2,1,2,5,115,1,1,2,2,1,1,1)
 wilcox.test(upvoted, ignored)
-...W = 44.5, p-value = 0.339
+...W = 255, p-value = 0.2049
 
 hn <- data.frame(FrontPage = c(upvoted>10, ignored>10), Upvoted = c(rep(TRUE, length(upvoted)), rep(FALSE, length(ignored))))
-summary(glm(FrontPage ~ Upvoted, family="binomial", data = hn)) # currently ill-behaved, need more data
+summary(glm(FrontPage ~ Upvoted, family="binomial", data = hn))
 ...Coefficients:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)    -19.6     3584.7   -0.01        1
-UpvotedTRUE     19.1     3584.7    0.01        1
+(Intercept)    -3.00       1.02   -2.92   0.0035
+UpvotedTRUE     2.38       1.13    2.11   0.0349
+R> exp(-3); exp(2.38)
+[1] 0.04979
+[1] 10.8
+R> 0.04979 * 10.8
+[1] 0.5377
+# a single upvote on /newest is currently estimated as increasing the odds of making the front page by 10x (from 4.9% to 54%)!
 ~~~
 
 One might wonder if HN is uniquely aberrant in this lottery; the most natural comparison is the social news site Reddit. I picked /r/prog's [/new/](http://www.reddit.com/r/programming/new/) to do the same thing to:
@@ -117,9 +137,29 @@ http://www.reddit.com/r/programming/comments/20ofgx/hiring_front_and_back_end_de
 http://www.reddit.com/r/programming/comments/20ofbs/the_chinese_wikipedia_article_on_quicksort_has/
 http://www.reddit.com/r/programming/comments/20o6vp/refreshing_part_of_a_page_using_jquery_load_and/
 http://www.reddit.com/r/programming/comments/20o32o/i_have_been_in_my_current_job_for_a_while_and_i/
+http://www.reddit.com/r/programming/comments/20q8zs/mozilla_and_unity_bring_unity_game_engine_to_webgl/
+http://www.reddit.com/r/programming/comments/20q4la/native_interconnect_the_isthmus_in_the_jvm/
+http://www.reddit.com/r/programming/comments/20qjp4/my_experience_with_mob_programming/
+http://www.reddit.com/r/programming/comments/20qjeg/on_replacing_objective_c/
+http://www.reddit.com/r/programming/comments/20r1ht/illconsidered_choices_coffee_and_its_effects_on/
+http://www.reddit.com/r/programming/comments/20qukz/an_interesting_erlang_alternative_to_ruby_on_rails/
+http://www.reddit.com/r/programming/comments/20qssi/how_to_nuget_jquery_1_the_right_way/
+http://www.reddit.com/r/programming/comments/20rmuc/why_not_automate_your_development_environment_too/
 
 ignored:
 http://www.reddit.com/r/programming/comments/20o0me/2048_4d/
 http://www.reddit.com/r/programming/comments/20odeq/can_anyone_help_me_decode_this_cfltk/
+http://www.reddit.com/r/programming/comments/20q7vg/5_things_you_can_build_with_pubnub_presence/
+http://www.reddit.com/r/programming/comments/20q72f/is_goto_still_considered_harmful/
+http://www.reddit.com/r/programming/comments/20q5xn/implementing_a_watch_only_bitcoin_wallet/
+http://www.reddit.com/r/programming/comments/20qk8a/are_reactive_programming_microprocessors_our/
+http://www.reddit.com/r/programming/comments/20qiu3/configure_before_you_boot/
+http://www.reddit.com/r/programming/comments/20qiee/using_jpa_and_jta_with_spring/
+http://www.reddit.com/r/programming/comments/20qs4k/setting_up_a_mysql_cluster_with_mariadb_galera/
+http://www.reddit.com/r/programming/comments/20qrso/an_introduction_to_x86_64_assembly_language/
+http://www.reddit.com/r/programming/comments/20rmhv/nodejs_backbone_wearther/
+http://www.reddit.com/r/programming/comments/20rl34/design_patterns_cheat_sheet/
+http://www.reddit.com/r/programming/comments/20rdrz/python_for_beginners_reading_manipulating_csv/
+http://www.reddit.com/r/programming/comments/20rbem/typesafe_go_reactive_with_java_8/
 
 Just a test of differences here, because I'm not sure what the equivalent of 'front page' is for Reddit.
