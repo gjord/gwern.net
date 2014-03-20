@@ -74,6 +74,13 @@ https://news.ycombinator.com/item?id=7422948
 https://news.ycombinator.com/item?id=7426089
 https://news.ycombinator.com/item?id=7426084
 https://news.ycombinator.com/item?id=7426073
+https://news.ycombinator.com/item?id=7426670
+https://news.ycombinator.com/item?id=7429611
+https://news.ycombinator.com/item?id=7430953
+https://news.ycombinator.com/item?id=7432226
+https://news.ycombinator.com/item?id=7432225
+https://news.ycombinator.com/item?id=7433186
+https://news.ycombinator.com/item?id=7433144
 
 ignored:
 https://news.ycombinator.com/item?id=7410071
@@ -99,31 +106,62 @@ https://news.ycombinator.com/item?id=7424910
 https://news.ycombinator.com/item?id=7424896
 https://news.ycombinator.com/item?id=7426094
 https://news.ycombinator.com/item?id=7426074
+https://news.ycombinator.com/item?id=7426699
+https://news.ycombinator.com/item?id=742665
+https://news.ycombinator.com/item?id=7426643
+https://news.ycombinator.com/item?id=7426640
+https://news.ycombinator.com/item?id=7429618
+https://news.ycombinator.com/item?id=7429616
+https://news.ycombinator.com/item?id=7429609
+https://news.ycombinator.com/item?id=7429604
+https://news.ycombinator.com/item?id=7430954
+https://news.ycombinator.com/item?id=7430949
+https://news.ycombinator.com/item?id=7430946
+https://news.ycombinator.com/item?id=7430939
+https://news.ycombinator.com/item?id=7432227
+https://news.ycombinator.com/item?id=7432222
+https://news.ycombinator.com/item?id=7432217
+https://news.ycombinator.com/item?id=7433188
+https://news.ycombinator.com/item?id=7433184
+https://news.ycombinator.com/item?id=7433160
+https://news.ycombinator.com/item?id=7433144
 
 basic analysis:
 
 ~~~{.Bash}
-for URL in `xclip -o`; do elinks -dump $URL | egrep ' points* by '; done
+for URL in `xclip -o`; do elinks -dump $URL | egrep ' points* by '; sleep 2s; done
 ~~~
 
 ~~~{.R}
-upvoted <- c(2,27,2,18,60,2,64,2,14,6,68,9,2,2,2,53,2,2,2,3) - 1
-ignored <- c(1,1,1,2,1,2,2,1,1,2,1,2,5,115,1,1,2,2,1,1,1)
+upvoted <- c(2,27,2,18,60,2,66,2,14,6,71,9,2,2,2,57,2,3,28,2,2,27,2,2) - 1
+ignored <- c(1,1,1,2,1,2,2,1,1,2,1,2,5,150,1,1,6,2,1,2,1,10,2,1,1,6,1,1,1,2,145,5,1,1,21)
 wilcox.test(upvoted, ignored)
-...W = 255, p-value = 0.2049
+...W = 484.5, p-value = 0.2879
 
-hn <- data.frame(FrontPage = c(upvoted>10, ignored>10), Upvoted = c(rep(TRUE, length(upvoted)), rep(FALSE, length(ignored))))
-summary(glm(FrontPage ~ Upvoted, family="binomial", data = hn))
+hn <- data.frame(Scores = c(upvoted, ignored), FrontPage = c(upvoted>10, ignored>10), Upvoted = c(rep(TRUE, length(upvoted)), rep(FALSE, length(ignored))))
+g1 <- glm(FrontPage ~ Upvoted, family="binomial", data = hn); summary(g1)
 ...Coefficients:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)    -3.00       1.02   -2.92   0.0035
-UpvotedTRUE     2.38       1.13    2.11   0.0349
-R> exp(-3); exp(2.38)
-[1] 0.04979
-[1] 10.8
-R> 0.04979 * 10.8
-[1] 0.5377
-# a single upvote on /newest is currently estimated as increasing the odds of making the front page by 10x (from 4.9% to 54%)!
+(Intercept)   -2.367      0.604   -3.92  8.8e-05
+UpvotedTRUE    1.856      0.736    2.52    0.012
+R> exp(coef(g1))
+(Intercept) UpvotedTRUE
+    0.09375     6.40000
+R> Reduce(`*`, exp(coef(g1)), 1)
+[1] 0.6
+
+# a single upvote on /newest is currently estimated as increasing the odds of making the front page by 7x (from 9% to 60%)!
+# or to put it another way, from a mean score of +10 to a mean score of +16
+R> g2 <- glm(Scores ~ Upvoted, family="poisson", data = hn); summary(g2)
+...Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   2.3953     0.0510   46.94  < 2e-16
+UpvotedTRUE   0.3825     0.0721    5.31  1.1e-07
+R> exp(coef(g2))
+(Intercept) UpvotedTRUE
+     10.971       1.466
+R> exp(Reduce(`+`, coef(g2), 0))
+[1] 16.08
 ~~~
 
 One might wonder if HN is uniquely aberrant in this lottery; the most natural comparison is the social news site Reddit. I picked /r/prog's [/new/](http://www.reddit.com/r/programming/new/) to do the same thing to:
@@ -145,6 +183,25 @@ http://www.reddit.com/r/programming/comments/20r1ht/illconsidered_choices_coffee
 http://www.reddit.com/r/programming/comments/20qukz/an_interesting_erlang_alternative_to_ruby_on_rails/
 http://www.reddit.com/r/programming/comments/20qssi/how_to_nuget_jquery_1_the_right_way/
 http://www.reddit.com/r/programming/comments/20rmuc/why_not_automate_your_development_environment_too/
+http://www.reddit.com/r/programming/comments/20rl34/design_patterns_cheat_sheet/
+http://www.reddit.com/r/programming/comments/20rbem/typesafe_go_reactive_with_java_8/
+http://www.reddit.com/r/programming/comments/20r5n0/samsung_releases_sdk_for_wristwatch_apps/
+http://www.reddit.com/r/programming/comments/20thjg/john_boyd_and_the_origins_of_agility/
+http://www.reddit.com/r/programming/comments/20tghe/announcing_the_oculus_rift_development_kit_2_dk2/
+http://www.reddit.com/r/programming/comments/20t58p/ubuntu_1404_now_runs_well_on_the_2013_macbook_air/
+http://www.reddit.com/r/programming/comments/20tzve/a_dead_simple_terminal_version_of_2048_with_a/
+http://www.reddit.com/r/programming/comments/20tvl3/views_in_java_collections_framework/
+http://www.reddit.com/r/programming/comments/20tufm/there_is_no_single_mental_model_for_programming/
+http://www.reddit.com/r/programming/comments/20ttvw/accelerated_development_not_planning_is_for_losers/
+http://www.reddit.com/r/programming/comments/20trth/creating_a_better_nrpe_agent/
+http://www.reddit.com/r/programming/comments/20ua1t/the_history_of_computing_lectures/
+http://www.reddit.com/r/programming/comments/20u9gx/kirks_quest_online_coding_contest_the_future_of/
+http://www.reddit.com/r/programming/comments/20u7sc/flash_is_dead_long_live_openfl/
+http://www.reddit.com/r/programming/comments/20ulsv/refactoring_taming_the_bunnies/
+http://www.reddit.com/r/programming/comments/20uezj/open_by_default_releasing_my_campaign_platform_a/
+http://www.reddit.com/r/programming/comments/20ud73/not_sure_if_correct_subbreddit_but_heres_a_very/
+http://www.reddit.com/r/programming/comments/20u1um/software_laws_2014_pdf/
+http://www.reddit.com/r/programming/comments/20v0fq/the_inverted_software_datablock_quick_start/
 
 ignored:
 http://www.reddit.com/r/programming/comments/20o0me/2048_4d/
@@ -161,5 +218,16 @@ http://www.reddit.com/r/programming/comments/20rmhv/nodejs_backbone_wearther/
 http://www.reddit.com/r/programming/comments/20rl34/design_patterns_cheat_sheet/
 http://www.reddit.com/r/programming/comments/20rdrz/python_for_beginners_reading_manipulating_csv/
 http://www.reddit.com/r/programming/comments/20rbem/typesafe_go_reactive_with_java_8/
+http://www.reddit.com/r/programming/comments/20rdrz/python_for_beginners_reading_manipulating_csv/
+http://www.reddit.com/r/programming/comments/20r8vu/factual_errors_in_git_vs_mercurial_why_git_from/
+http://www.reddit.com/r/programming/comments/20t9ri/concurrency_and_fault_tolerance_made_easy_an/
+http://www.reddit.com/r/programming/comments/20t8zd/javascript_the_high_road_the_low_road_fluent_2014/
+http://www.reddit.com/r/programming/comments/20u9rl/flappy_2048/
+http://www.reddit.com/r/programming/comments/20u7h7/three_questions_for_leslie_lamport_winner_of/
+http://www.reddit.com/r/programming/comments/20u75s/the_corruption_of_agile/
+http://www.reddit.com/r/programming/comments/20uyd3/joel_spolsky_how_to_have_nice_things/
+http://www.reddit.com/r/programming/comments/20uw2k/debug_31_miguel_de_icaza_on_mono/
+http://www.reddit.com/r/programming/comments/20uuvm/lookalike_lightweight_kdtree_implementation_for/
+http://www.reddit.com/r/programming/comments/20uubz/parsing_the_kafka_protocol_with_erlang_pattern/
 
 Just a test of differences here, because I'm not sure what the equivalent of 'front page' is for Reddit.
