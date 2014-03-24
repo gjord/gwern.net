@@ -71,6 +71,7 @@ The candidate studies:
 - Stepankova et al 2013
 - Minear et al 2013
 - Katz et al 2013
+- Burki et al 2014
 
 Variables:
 
@@ -236,26 +237,30 @@ year study         n.e   mean.e    sd.e   n.c   mean.c  sd.c   active   training
 2013 Stepankova.1  20    20.25     3.77   12.5  17.04   5.02   0        250        3    30    1   29
 2013 Stepankova.2  20    21.1      2.95   12.5  17.04   5.02   0        500        3    30    1   29
 2013 Nussbaumer    29    13.69     2.54   27    11.89   2.24   1        450        1    30    0   0
+2014 Burki         11    37.41     6.43   20    35.95   7.55   1        300        1    30    1   0
+2014 Burki         11    37.41     6.43   21    36.86   6.55   0        300        1    30    1   0
+2014 Burki         11    28.86     7.10   20    31.20   6.67   1        300        2    30    1   0
+2014 Burki         11    28.86     7.10   23    27.61   6.82   0        300        2    30    1   0
 
 # Analysis
 
 The result of the meta-analysis:
 
 ~~~{.R}
-Random-Effects Model (k = 57; tau^2 estimator: REML)
+Random-Effects Model (k = 61; tau^2 estimator: REML)
 
-tau^2 (estimated amount of total heterogeneity): 0.1378 (SE = 0.0550)
-tau (square root of estimated tau^2 value):      0.3713
-I^2 (total heterogeneity / total variability):   48.51%
-H^2 (total variability / sampling variability):  1.94
+tau^2 (estimated amount of total heterogeneity): 0.1274 (SE = 0.0509)
+tau (square root of estimated tau^2 value):      0.3569
+I^2 (total heterogeneity / total variability):   46.64%
+H^2 (total variability / sampling variability):  1.87
 
 Test for Heterogeneity:
-Q(df = 56) = 119.3010, p-val < .0001
+Q(df = 60) = 124.4381, p-val < .0001
 
 Model Results:
 
 estimate       se     zval     pval    ci.lb    ci.ub
-  0.4375   0.0725   6.0310   <.0001   0.2953   0.5797
+  0.4077   0.0686   5.9415   <.0001   0.2732   0.5422
 ~~~
 
 To depict the random-effects model in a more graphic form, we use the "[forest plot](!Wikipedia)":
@@ -264,16 +269,15 @@ To depict the random-effects model in a more graphic form, we use the "[forest p
 
 The overall effect is reasonably strong. But there seems to be substantial differences between studies: this heterogeneity may be what is showing up as a high τ^2^ and [_i_^2^](http://eprints.lincoln.ac.uk/1932/1/MetaAnalysisPaper.pdf "'Measuring inconsistency in meta-analyses', Higgins et al 2003"); and indeed, if we look at the computed SMDs, we see one sample with _d_=2.59 (!) and some instances of _d_<0. The high heterogeneity means that the fixed-effects model is inappropriate, as clearly the studies are not all measuring the same effect, so we use a random-effects.
 
-The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems, for two reasons:
+The confidence interval excludes zero, so one might conclude that n-back does increase IQ scores. From a Bayesian standpoint, it's worth pointing out that this is not nearly as conclusive as it seems, for several reasons:
 
 1. meta-analyses are generally believed to be biased towards larger effects due to systematic biases like publication bias
-2. our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with extremely few exceptions (eg. pre-natal [iodine](Iodine) or iron supplementation), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. As the saying goes, "extraordinary claims require extraordinary evidence". (For further reading, see [the statistics/methodology discussion in the DNB FAQ](DNB FAQ#flaws-in-mainstream-science-and-psychology).) David Hambrick [explains it informally](http://www.nytimes.com/2012/05/06/opinion/sunday/iq-points-for-sale-cheap.html "I.Q. Points for Sale, Cheap"):
+2. our prior that any particular intervention would increase the underlying genuine fluid intelligence is extremely small, as scores or hundreds of attempts to increase IQ over the past century have all eventually turned out to be failures, with few exceptions (eg pre-natal [iodine](Iodine) or iron supplementation), so very strong evidence is necessary to conclude that a particular attempt is one of those extremely rare exceptions. As the saying goes, "extraordinary claims require extraordinary evidence". (For further reading, see [the statistics/methodology discussion in the DNB FAQ](DNB FAQ#flaws-in-mainstream-science-and-psychology).) David Hambrick [explains it informally](http://www.nytimes.com/2012/05/06/opinion/sunday/iq-points-for-sale-cheap.html "I.Q. Points for Sale, Cheap"):
 
     > ...Yet I and many other intelligence researchers are skeptical of this research. Before anyone spends any more time and money looking for a quick and easy way to boost intelligence, it's important to explain why we're not sold on the idea...Does this [Jaeggi et al 2008] sound like an extraordinary claim? It should. There have been many attempts to demonstrate large, lasting gains in intelligence through educational interventions, with few successes. When gains in intelligence have been achieved, they have been modest and the result of many years of effort. For instance, in a University of North Carolina study known as the [Abecedarian Early Intervention Project](!Wikipedia), children received an intensive educational intervention from infancy to age 5 designed to increase intelligence^[To give an idea of how intensive, it cost ~$14,000 (2002) or $18,200 (2013) per child per year.]. In follow-up tests, these children showed an advantage of six I.Q. points over a control group (and as adults, they were four times more likely to graduate from college). By contrast, the increase implied by the findings of the Jaeggi study was six I.Q. points after only *six hours* of training - an I.Q. point an hour. Though the Jaeggi results are intriguing, many researchers have failed to demonstrate statistically significant gains in intelligence using other, similar cognitive training programs, like Cogmed's... We shouldn't be surprised if extraordinary claims of quick gains in intelligence turn out to be wrong. Most extraordinary claims are.
+3. it's not clear that just because IQ tests like Raven's are valid and useful for measuring levels of intelligence, that an increase on the tests can be interpreted as an increase of intelligence. [Haier 2014](http://journal.frontiersin.org/Journal/10.3389/fnsys.2014.00034/full "Increased Intelligence is a Myth (so far)") analogizes claims of breakthrough IQ increases to the initial reports of cold fusion and comments:
 
-[Haier 2014](http://journal.frontiersin.org/Journal/10.3389/fnsys.2014.00034/full "Increased Intelligence is a Myth (so far)") analogizes claims of breakthrough IQ increases to the initial reports of cold fusion and comments:
-
-> The basic misunderstanding is assuming that intelligence test scores are units of measurement like inches or liters or grams. They are not. Inches, liters and grams are ratio scales where zero means zero and 100 units are twice 50 units. Intelligence test scores estimate a construct using interval scales and have meaning only relative to other people of the same age and sex. People with high scores generally do better on a broad range of mental ability tests, but someone with an IQ score of 130 is not 30% smarter then someone with an IQ score of 100...This makes simple interpretation of intelligence test score changes impossible. Most recent studies that have claimed increases in intelligence after a cognitive training intervention rely on comparing an intelligence test score before the intervention to a second score after the intervention. If there is an average change score increase for the training group that is statistically significant (using a dependent t-test or similar statistical test), this is treated as evidence that intelligence has increased. This reasoning is correct if one is measuring ratio scales like inches, liters or grams before and after some intervention (assuming suitable and reliable instruments like rulers to avoid erroneous Cold Fusion-like conclusions that apparently were based on faulty heat measurement); it is not correct for intelligence test scores on interval scales that only estimate a relative rank order rather than measure the construct of intelligence....Studies that use a single test to estimate intelligence before and after an intervention are using less reliable and more variable scores (bigger standard errors) than studies that combine scores from a battery of tests....Speaking about science, Carl Sagan observed that extraordinary claims require extraordinary evidence. So far, we do not have it for claims about increasing intelligence after cognitive training or, for that matter, any other manipulation or treatment, including early childhood education. Small statistically significant changes in test scores may be important observations about attention or memory or some other elemental cognitive variable or a specific mental ability assessed with a ratio scale like milliseconds, but they are not sufficient proof that general intelligence has changed.
+    > The basic misunderstanding is assuming that intelligence test scores are units of measurement like inches or liters or grams. They are not. Inches, liters and grams are ratio scales where zero means zero and 100 units are twice 50 units. Intelligence test scores estimate a construct using interval scales and have meaning only relative to other people of the same age and sex. People with high scores generally do better on a broad range of mental ability tests, but someone with an IQ score of 130 is not 30% smarter then someone with an IQ score of 100...This makes simple interpretation of intelligence test score changes impossible. Most recent studies that have claimed increases in intelligence after a cognitive training intervention rely on comparing an intelligence test score before the intervention to a second score after the intervention. If there is an average change score increase for the training group that is statistically significant (using a dependent t-test or similar statistical test), this is treated as evidence that intelligence has increased. This reasoning is correct if one is measuring ratio scales like inches, liters or grams before and after some intervention (assuming suitable and reliable instruments like rulers to avoid erroneous Cold Fusion-like conclusions that apparently were based on faulty heat measurement); it is not correct for intelligence test scores on interval scales that only estimate a relative rank order rather than measure the construct of intelligence....Studies that use a single test to estimate intelligence before and after an intervention are using less reliable and more variable scores (bigger standard errors) than studies that combine scores from a battery of tests....Speaking about science, Carl Sagan observed that extraordinary claims require extraordinary evidence. So far, we do not have it for claims about increasing intelligence after cognitive training or, for that matter, any other manipulation or treatment, including early childhood education. Small statistically significant changes in test scores may be important observations about attention or memory or some other elemental cognitive variable or a specific mental ability assessed with a ratio scale like milliseconds, but they are not sufficient proof that general intelligence has changed.
 
 This skeptical attitude is relevant to our examination of moderators.
 
@@ -300,27 +304,17 @@ The review Morrison & Chein 2011[^Chein-no-contact] noted that no-contact contro
 So I wondered if this held true for the subset of n-back & IQ studies. (Age is an interesting moderator in Melby-Lervåg & Hulme 2013, but in the following DNB & IQ studies there is only 1 study involving children - all the others are adults or young adults.) Each study has been coded appropriately, and we can ask whether it matters:
 
 ~~~{.R}
-Mixed-Effects Model (k = 57; tau^2 estimator: REML)
-
-tau^2 (estimated amount of residual heterogeneity):     0.0950 (SE = 0.0466)
-tau (square root of estimated tau^2 value):             0.3082
-I^2 (residual heterogeneity / unaccounted variability): 39.25%
-H^2 (unaccounted variability / sampling variability):   1.65
-
-Test for Residual Heterogeneity:
-QE(df = 55) = 105.1080, p-val < .0001
-
 Test of Moderators (coefficient(s) 1,2):
-QM(df = 2) = 50.4929, p-val < .0001
+QM(df = 2) = 49.9322, p-val < .0001
 
 Model Results:
 
                  estimate      se    zval    pval    ci.lb   ci.ub
-factor(active)0    0.5938  0.0866  6.8572  <.0001   0.4241  0.7635
-factor(active)1    0.1951  0.1047  1.8633  0.0624  -0.0101  0.4003
+factor(active)0    0.5644  0.0825  6.8443  <.0001   0.4028  0.7260
+factor(active)1    0.1727  0.0983  1.7574  0.0789  -0.0199  0.3652
 ~~~
 
-The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals overlap only partially. The effect with passive control groups is a dramatic _d_=0.6 while with active control groups, the IQ gains shrink to a small effect (whose 95% CI does not exclude _d_=0). Indeed, the confidence intervals do not overlap (upper of 0.40 & lower of 0.42).
+The active/control variable confirms the criticism: lack of active control groups *is* responsible for a large chunk of the overall effect, with the confidence intervals overlap only partially. The effect with passive control groups is a dramatic _d_=0.6 while with active control groups, the IQ gains shrink to a small effect (whose 95% CI does not exclude _d_=0). Indeed, the confidence intervals do not overlap (upper of 0.36 & lower of 0.40).
 
 We can see the difference by splitting a forest plot on passive vs active:
 
@@ -328,7 +322,7 @@ We can see the difference by splitting a forest plot on passive vs active:
 
 This is very damaging to the case that dual n-back increases IQ. Not only do the better studies find a drastically smaller effect, they are not sufficiently powered to find such a small effect at all, even aggregated in a meta-analysis, with a power of ~11%, which is dismal indeed when compared to the usual benchmark of 80%, and leads to worries that even that is too high an estimate and that the active control studies are aberrant somehow in being subject to a winner's curse or subject to other biases. (Because many studies used convenient passive control groups and the passive effect size is 3x larger, they in aggregate are very well-powered at 94%; however, we already know they are skewed upwards, so we don't care if we can detect a biased effect or not.) In particular, [Boot et al 2013](/docs/dnb/2013-boot.pdf "The Pervasive Problem With Placebos in Psychology: Why Active Control Groups Are Not Sufficient to Rule Out Placebo Effects") argues that active control groups do not suffice to identify the true causal effect because the subjects in the active control group can still have different expectations than the experimental group, and the group' differing awareness & expectations can cause differing performance on tests; they suggest recording expectancies (somewhat similar to Redick et al 2013), checking for a dose-response relationship (see the following section for whether dose-response exists for dual n-back/IQ), and using different experimental designs which actively manipulate subject expectations to identify how much effects are inflated by remaining placebo/expectancy effects.
 
-The active estimate of _d_=0.19 does allow us to estimate how many subjects a two-group experiment with an active control group would require in order for it to be well-powered (80%) to detect an effect of _d_≥0.19; a total _n_ of 828 subjects (414 in each group).
+The active estimate of _d_=0.17 does allow us to estimate how many subjects a two-group experiment with an active control group would require in order for it to be well-powered (80%) to detect an effect; a total _n_ of 1056 subjects (528 in each group).
 
 ### Training time
 
@@ -336,13 +330,13 @@ Jaeggi et al 2008 observed a dose-response to training, where those who trained 
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.1788, p-val = 0.6724
+QM(df = 1) = 0.0373, p-val = 0.8468
 
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.4919  0.1465   3.3574  0.0008   0.2047  0.7791
-mods      -0.0001  0.0003  -0.4229  0.6724  -0.0007  0.0004
+intrcpt    0.4317  0.1388   3.1111  0.0019   0.1597  0.7036
+mods      -0.0001  0.0003  -0.1932  0.8468  -0.0006  0.0005
 ~~~
 
 The estimate of the relationship is that there is none at all: the estimated coefficient has a large _p_-value, and further, that coefficient is negative. This may seem initially implausible but if we graph the time spent training per study with the final (unweighted) effect size, we see why:
@@ -355,13 +349,13 @@ Similarly, Moody 2009 identified the 10 minute test-time or "speeding" of the RA
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.0924, p-val = 0.7612
+QM(df = 1) = 0.4499, p-val = 0.5024
 
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.4847  0.1687   2.8740  0.0041   0.1542  0.8153
-mods      -0.0023  0.0076  -0.3040  0.7612  -0.0172  0.0126
+intrcpt    0.5084  0.1641   3.0975  0.0020   0.1867  0.8301
+mods      -0.0048  0.0072  -0.6708  0.5024  -0.0189  0.0093
 ~~~
 
 A tiny slope which is extremely non-statistically-significant; graphing the (unweighted) studies suggests as much:
@@ -374,14 +368,14 @@ One question of interest both for issues of validity and for effective training 
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 1,2,3):
-QM(df = 3) = 34.9491, p-val < .0001
+QM(df = 3) = 35.4433, p-val < .0001
 
 Model Results:
 
               estimate      se    zval    pval    ci.lb   ci.ub
-factor(nbt)0    0.4518  0.0872  5.1817  <.0001   0.2809  0.6227
-factor(nbt)1    0.3987  0.1580  2.5241  0.0116   0.0891  0.7084
-factor(nbt)2    0.4342  0.3303  1.3146  0.1886  -0.2131  1.0815
+factor(nbt)0    0.4503  0.0846  5.3239  <.0001   0.2845  0.6160
+factor(nbt)1    0.3035  0.1318  2.3027  0.0213   0.0452  0.5618
+factor(nbt)2    0.4299  0.3207  1.3403  0.1802  -0.1988  1.0585
 ~~~
 
 There are not enough studies using the other kinds of n-back to say anything conclusive other than there seem to be differences, but it's interesting that single visual n-back and single auditory n-back have weaker results so far.
@@ -398,41 +392,41 @@ More specifically, if we check payment as a binary variable, we get a decrease w
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 3.4993, p-val = 0.0614
+QM(df = 1) = 2.3265, p-val = 0.1272
 
 Model Results:
 
                       estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt                 0.5391  0.0896   6.0159  <.0001   0.3634  0.7147
-as.logical(paid)TRUE   -0.2716  0.1452  -1.8706  0.0614  -0.5561  0.0130
+intrcpt                 0.4835  0.0843   5.7339  <.0001   0.3182  0.6487
+as.logical(paid)TRUE   -0.2161  0.1417  -1.5253  0.1272  -0.4937  0.0616
 ~~~
 
 If we instead regress against the total payment size (perhaps larger payments discourage one more?), the effect of each additional dollar is very small and 0 is far from excluded as the coefficient:
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2):
-QM(df = 1) = 0.9496, p-val = 0.3298
+QM(df = 1) = 0.6797, p-val = 0.4097
 
 Model Results:
 
          estimate      se     zval    pval    ci.lb   ci.ub
-intrcpt    0.4659  0.0782   5.9562  <.0001   0.3126  0.6192
-paid      -0.0005  0.0005  -0.9745  0.3298  -0.0015  0.0005
+intrcpt    0.4298  0.0738   5.8223  <.0001   0.2851  0.5745
+paid      -0.0004  0.0005  -0.8244  0.4097  -0.0014  0.0006
 ~~~
 
-Why would treating payment as a category yield a major result when there is only a small slope within the paid studies? As I've mentioned before, the difference in effect size between active and passive control groups is quite striking, and I noticed that eg. the Redick et al 2012 experiment paid subjects a lot of money to put up with all its tests and ensure subject retention & Thompson et al 2013 paid a lot to put up with the fMRI machine and long training sessions, and likewise with Oelhafen et al 2013; so what happens if we look for an interaction?
+Why would treating payment as a binary category yield a major result when there is only a small slope within the paid studies? As I've mentioned before, the difference in effect size between active and passive control groups is quite striking, and I noticed that eg. the Redick et al 2012 experiment paid subjects a lot of money to put up with all its tests and ensure subject retention & Thompson et al 2013 paid a lot to put up with the fMRI machine and long training sessions, and likewise with Oelhafen et al 2013; so what happens if we look for an interaction?
 
 ~~~{.R}
 Test of Moderators (coefficient(s) 2,3,4):
-QM(df = 3) = 13.5711, p-val = 0.0036
+QM(df = 3) = 12.5603, p-val = 0.0057
 
 Model Results:
 
                              estimate      se     zval    pval    ci.lb    ci.ub
-intrcpt                        0.7057  0.1083   6.5166  <.0001   0.4934   0.9179
-active                        -0.4102  0.1675  -2.4481  0.0144  -0.7385  -0.0818
-as.logical(paid)TRUE          -0.2862  0.1715  -1.6683  0.0953  -0.6224   0.0500
-active:as.logical(paid)TRUE    0.0160  0.2705   0.0590  0.9530  -0.5142   0.5461
+intrcpt                        0.6497  0.1032   6.2987  <.0001   0.4476   0.8519
+active                        -0.4007  0.1580  -2.5352  0.0112  -0.7104  -0.0909
+as.logical(paid)TRUE          -0.2301  0.1687  -1.3642  0.1725  -0.5607   0.1005
+active:as.logical(paid)TRUE    0.0063  0.2653   0.0237  0.9811  -0.5137   0.5263
 ~~~
 
 Active control groups cuts the observed effect of n-back by more than half, as before, and payment decreases the effect size, potentially supporting claims about motivation, but then in studies with both active controls & payment, the effect size increases slightly again, which seems a little curious.
@@ -508,7 +502,7 @@ N-back has been presented in some popular & academic medias in an entirely uncri
 ### Funnel plot
 
 ~~~{.R}
-test for funnel plot asymmetry: z = 2.5191, p = 0.0118
+test for funnel plot asymmetry: z = 2.5887, p = 0.0096
 ~~~
 
 The asymmetry has reached statistical-significance, so let's visualize it:
@@ -524,7 +518,7 @@ This looks reasonably good, although we see that studies are crowding the edges 
 The trim-and-fill estimate:
 
 ~~~{.R}
-Estimated number of missing studies on the left side: 0 (SE = 4.2659)
+Estimated number of missing studies on the left side: 0 (SE = 4.4078)
 ~~~
 
 Graphing it:
@@ -588,6 +582,7 @@ Going through them, I must note:
 - Savage 2013: administered RAPM & CCFT; as usual, only used RAPM
 - Stepankova et al 2013: administered the Block Design (BD) & Matrix Reasoning (MR) nonverbal subtests of the WAIS-III
 - Nussbaumer et al 2013: administered RAPM & I-S-T 2000 R tests; participants were trained in 3 conditions: non-adaptive single 1-back ("low"); non-adaptive single 3-back ("medium"); adaptive dual n-back ("high"). Given the low training time, I decided to drop the medium group as being unclear whether the intervention is doing anything, and treat the high group as the experimental group vs a "low" active control group.
+- Burki et al 2014: split experimental groups across the passive & active controls; young and old groups were left unpooled because they used RAPM and RSPM respectively
 
 <!-- Clouter:
 1. The post-training Mean and SD for the raw CFIT scores are: Control group mean = 28.83, SD = 2.68. Training group mean = 30.84, SD = 4.11.
