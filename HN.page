@@ -53,6 +53,13 @@ While using HN, as a sort of 'public service', I occasionally made sure to visit
 
 I decided to do a simple experiment to test: On /newest, take the first 5 links, flip a coin to decide whether to upvote or ignore; and make no votes on any other /newest items. After 30 or so (should be enough if the difference is as dramatic as I expect) do a nonparametric test of the two groups; then can dichotomize into front-page/not, do a logistic regression to calculate the specific odds increase due to 1 upvote, extract page views & time on page from my old Analytics, letting me calculate 'how much time am I steering with, say, 10 upvotes on /newest?'
 
+A power calculation for sample size is hard to do: I don't have a Poisson power function handy, and I don't expect the data to fit a Poisson too well due to the stark contrast between the front-page and /newest.
+(And I do want a well-powered experiment - the only thing more wasteful than an overpowered experiment is an underpowered weak experiment.)
+However, I do expect the necessary sample to be quite large by the standards of continuous normally-distributed data.
+Most submissions to /newest fail to gain more than an upvote or two, which means that most of the sample contains little information about whether the extra upvote helped them reach the front-page or not.
+Further, I don't just want to estimate whether the effect of upvoting is non-zero, I would like a reasonably precise estimate of *what* the effect is: knowing that it's, say, 0.1-10, is not very satisfactory. ("The oncoming car is somewhere between 10 meters and a kilometer away.")
+All in all, I don't expect the necessary _n_ to be <200.
+
 upvoted:
 https://news.ycombinator.com/item?id=7410094
 https://news.ycombinator.com/item?id=7410068
@@ -122,6 +129,17 @@ https://news.ycombinator.com/item?id=7462233
 https://news.ycombinator.com/item?id=7462356
 https://news.ycombinator.com/item?id=7462345
 https://news.ycombinator.com/item?id=7462326
+https://news.ycombinator.com/item?id=7463289
+https://news.ycombinator.com/item?id=7463259
+https://news.ycombinator.com/item?id=7463235
+https://news.ycombinator.com/item?id=7466412
+https://news.ycombinator.com/item?id=7466409
+https://news.ycombinator.com/item?id=7466404
+https://news.ycombinator.com/item?id=7467802
+https://news.ycombinator.com/item?id=7467788
+https://news.ycombinator.com/item?id=7470701
+https://news.ycombinator.com/item?id=7470633
+https://news.ycombinator.com/item?id=7470619
 
 ignored:
 https://news.ycombinator.com/item?id=7410071
@@ -227,6 +245,20 @@ https://news.ycombinator.com/item?id=7462232
 https://news.ycombinator.com/item?id=7462223
 https://news.ycombinator.com/item?id=7462348
 https://news.ycombinator.com/item?id=7462344
+https://news.ycombinator.com/item?id=7463279
+https://news.ycombinator.com/item?id=7463247
+https://news.ycombinator.com/item?id=7466408
+https://news.ycombinator.com/item?id=7466402
+https://news.ycombinator.com/item?id=7467813
+https://news.ycombinator.com/item?id=7467795
+https://news.ycombinator.com/item?id=7467784
+https://news.ycombinator.com/item?id=7469237
+https://news.ycombinator.com/item?id=7469230
+https://news.ycombinator.com/item?id=7469219
+https://news.ycombinator.com/item?id=7469216
+https://news.ycombinator.com/item?id=7469215
+https://news.ycombinator.com/item?id=7470681
+https://news.ycombinator.com/item?id=7470620
 
 basic analysis:
 
@@ -387,6 +419,16 @@ http://www.reddit.com/r/programming/comments/218yff/popcorn_time_goodbye/
 http://www.reddit.com/r/programming/comments/219pvt/goodbye_firefox_marketplace_on_brendan_eich/
 http://www.reddit.com/r/programming/comments/219lnd/this_week_in_rust/
 http://www.reddit.com/r/programming/comments/219jg6/using_q_and_jquery_promises_to_compose_complex/
+http://www.reddit.com/r/programming/comments/21bud5/now_anyone_in_the_world_can_learn_web_development/
+http://www.reddit.com/r/programming/comments/21btl8/clojure_16_released/
+http://www.reddit.com/r/programming/comments/21brwc/easy_money_code_html5_forms_and_sell_them_here/
+http://www.reddit.com/r/programming/comments/21bq6i/solving_puzzles_with_f_or_how_to_impress_your/
+http://www.reddit.com/r/programming/comments/21cd09/join_the_resistance_teaser_for_codingame_0426/
+http://www.reddit.com/r/programming/comments/21c6r7/using_aws_apis_without_a_server/
+http://www.reddit.com/r/programming/comments/21c6o5/how_to_build_speechtotext_chat_with_pubnub_and_wit/
+http://www.reddit.com/r/programming/comments/21clv3/what_its_like_to_use_haskell_in_production/
+http://www.reddit.com/r/programming/comments/21cos2/six_degrees_of_kevin_bacon_in_six_languages_over/
+http://www.reddit.com/r/programming/comments/21ckx6/cooperative_zombies_programming_game/
 
 ignored:
 http://www.reddit.com/r/programming/comments/20o0me/2048_4d/
@@ -448,6 +490,15 @@ http://www.reddit.com/r/programming/comments/218zp5/mozilla_leadership_changes_b
 http://www.reddit.com/r/programming/comments/218yqw/using_and_abusing_macros/
 http://www.reddit.com/r/programming/comments/219suc/2048_in_sed/
 http://www.reddit.com/r/programming/comments/219ffp/tips_and_tricks_hidden_features_of_perl/
+http://www.reddit.com/r/programming/comments/21bt86/learn_git_branching/
+http://www.reddit.com/r/programming/comments/21cbby/jsdelivr_api_from_a_casual_experiment_to_success/
+http://www.reddit.com/r/programming/comments/21c8k2/a_system_called_mylar_makes_it_possible_to_build/
+http://www.reddit.com/r/programming/comments/21cpv0/text_cleverbot_from_your_phone/
+http://www.reddit.com/r/programming/comments/21cpal/angularjs_one_framework_to_rule_them_all/
+http://www.reddit.com/r/programming/comments/21cos2/six_degrees_of_kevin_bacon_in_six_languages_over/
+http://www.reddit.com/r/programming/comments/21ckx6/cooperative_zombies_programming_game/
+http://www.reddit.com/r/programming/comments/21d1s7/reverse_engineering_nand_flash_for_fun_and_profit/
+http://www.reddit.com/r/programming/comments/21d3ry/google_awards_geohot_150000_for_revealing/
 
 Just a test of differences here, because I'm not sure what the equivalent of 'front page' is for Reddit.
 
