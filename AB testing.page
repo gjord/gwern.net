@@ -1919,108 +1919,113 @@ Since I'm particularly interested in these results, and I think many other peopl
 Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser, which I'm not looking forward to. Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further:
 
 ~~~{.R}
+# Pivot table view on custom variable (`Pivot by: Custom Variable (Value 01); Pivot metrics: Visits Time reading (Goal 1 Conversion Rate)`)
 rates <- read.csv(stdin(),header=TRUE)
 Variant,Color,Old,N,Rate
-gray3,gray,FALSE,150,0.1533
-dark,dark,FALSE,146,0.1507
-gray5,gray,FALSE,138,0.1449
-gray4,gray,FALSE,137,0.1898
-gray6,gray,FALSE,130,0.2308
-gray2,gray,FALSE,125,0.1840
-blues,blue,FALSE,124,0.1290
-gray1,gray,FALSE,116,0.2155
-gray3,gray,TRUE,70,0.2857
-gray5,gray,TRUE,66,0.1818
-gray4,gray,TRUE,61,0.1639
-gray6,gray,TRUE,58,0.2241
-none,none,FALSE,58,0.1207
-gray2,gray,TRUE,56,0.3214
-blues,blue,TRUE,54,0.3889
-gray1,gray,TRUE,54,0.2407
-dark,dark,TRUE,46,0.2391
-none,none,TRUE,21,0.3333
+blues,blue,FALSE,854,0.1920
+blues,blue,TRUE,428,0.2850
+dark,dark,FALSE,917,0.1974
+dark,dark,TRUE,471,0.2229
+gray1,gray,FALSE,893,0.2004
+gray1,gray,TRUE,382,0.2723
+gray2,gray,FALSE,929,0.2013
+gray2,gray,TRUE,421,0.2375
+gray3,gray,FALSE,897,0.1795
+gray3,gray,TRUE,446,0.2646
+gray4,gray,FALSE,921,0.1878
+gray4,gray,TRUE,485,0.2062
+gray5,gray,FALSE,893,0.1669
+gray5,gray,TRUE,426,0.2629
+gray6,gray,FALSE,900,0.1967
+gray6,gray,TRUE,495,0.2485
+none,none,FALSE,886,0.1941
+none,none,TRUE,423,0.2530
 
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
 rates$Failures <-rates$N - rates$Successes
 
-# specify the control groups
+# specify the control group is 'none'
 rates$Variant <- relevel(rates$Variant, ref="none")
 rates$Color <- relevel(rates$Color, ref="none")
 
 # normal:
 g1 <- glm(cbind(Successes,Failures) ~ Old + Variant, data=rates, family=binomial); summary(g1)
 ...Coefficients:
-             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.68985    0.29911   -5.65  1.6e-08
-OldTRUE       0.51719    0.13107    3.95  7.9e-05
-Variantblues  0.17862    0.34938    0.51     0.61
-Variantdark  -0.02268    0.35282   -0.06     0.95
-Variantgray1  0.26443    0.34911    0.76     0.45
-Variantgray2  0.28627    0.34566    0.83     0.41
-Variantgray3  0.09261    0.34179    0.27     0.79
-Variantgray4  0.00815    0.34912    0.02     0.98
-Variantgray5 -0.17962    0.35362   -0.51     0.61
-Variantgray6  0.29943    0.34363    0.87     0.38
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.424776   0.069746  -20.43  < 2e-16
+OldTRUE       0.344266   0.046357    7.43  1.1e-13
+Variantblues  0.054814   0.095387    0.57     0.57
+Variantdark  -0.048749   0.094875   -0.51     0.61
+Variantgray1  0.060470   0.095605    0.63     0.53
+Variantgray2  0.000749   0.094983    0.01     0.99
+Variantgray3 -0.035813   0.095506   -0.37     0.71
+Variantgray4 -0.125343   0.095622   -1.31     0.19
+Variantgray5 -0.093873   0.096819   -0.97     0.33
+Variantgray6  0.000170   0.094052    0.00     1.00
 
 # multi-level: variants nested in a color
 library(lme4)
 g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), data=rates, family=binomial); summary(g2); ranef(g2)
 ...Random effects:
  Groups        Name        Variance Std.Dev.
- Variant:Color (Intercept) 5.95e-12 2.44e-06
- Color         (Intercept) 2.94e-11 5.42e-06
+ Variant:Color (Intercept) 0        0
+ Color         (Intercept) 0        0
 Number of obs: 18, groups: Variant:Color, 9; Color, 4
 
 Fixed effects:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.4862     0.0943  -15.77  < 2e-16
-OldTRUE       0.6523     0.1599    4.08  4.5e-05
+(Intercept)  -1.4453     0.0283   -51.1  < 2e-16
+OldTRUE       0.3423     0.0463     7.4  1.5e-13
 
 Correlation of Fixed Effects:
         (Intr)
-OldTRUE -0.590
+OldTRUE -0.611
 $`Variant:Color`
            (Intercept)
-none:none   -2.005e-11
-blues:blue   1.143e-11
-dark:dark   -1.624e-11
-gray1:gray   3.215e-12
-gray2:gray  -8.934e-12
-gray3:gray   4.046e-11
-gray4:gray  -1.858e-11
-gray5:gray  -1.124e-12
-gray6:gray   9.828e-12
+none:none            0
+blues:blue           0
+dark:dark            0
+gray1:gray           0
+gray2:gray           0
+gray3:gray           0
+gray4:gray           0
+gray5:gray           0
+gray6:gray           0
 
 $Color
      (Intercept)
-none  -9.899e-11
-blue   5.641e-11
-dark  -8.017e-11
-gray   1.227e-10
+none           0
+blue           0
+dark           0
+gray           0
 
 # Bayesian (Wishart prior)
 library(blme)
 bg2 <- bglmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), fixef.prior = normal, data=rates, family=binomial); ranef(bg2)
 ...$`Variant:Color`
            (Intercept)
-none:none    -0.031726
-blues:blue    0.028430
-dark:dark    -0.021790
-gray1:gray    0.003723
-gray2:gray   -0.030472
-gray3:gray    0.105292
-gray4:gray   -0.055907
-gray5:gray   -0.009360
-gray6:gray    0.019080
+none:none     0.003525
+blues:blue    0.017952
+dark:dark    -0.009408
+gray1:gray    0.034027
+gray2:gray    0.011124
+gray3:gray   -0.003321
+gray4:gray   -0.038729
+gray5:gray   -0.025430
+gray6:gray    0.011189
 
 $Color
      (Intercept)
-none    -0.05091
-blue     0.04562
-dark    -0.03497
-gray     0.05192
+none     0.00440
+blue     0.02241
+dark    -0.01174
+gray    -0.01390
+
+library(lattice)
+q <- qqmath(ranef(bg2, condVar=TRUE))
+q$`Variant:Color`
 ~~~
 
 <!-- unstepped main effects extracted from all past A/B experiments:
@@ -2037,7 +2042,6 @@ R> fitdistr(abs(x),"gamma")
   0.22991   0.67727
  (0.04594) (0.29123)
 
-
 penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184542, log = TRUE)
 bg2 <- bglmer(Rate ~ (Variant|Color), data=rates, cov.prior = custom(penaltyFn, chol = TRUE, scale = "log")); ranef(bg2)
 
@@ -2047,6 +2051,7 @@ penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184
 fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
               cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
 -->
+<!-- 4 complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC -->
 
 # Appendix
 ## Covariate impact on power
