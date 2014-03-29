@@ -49,16 +49,46 @@ can't filter GA by ycombinator.com: https breaks referrers
 
 # /newest
 
-While using HN, as a sort of 'public service', I occasionally made sure to visit the [newest submissions](https://news.ycombinator.com/newest "New Links") page rather than just the [main front page](https://news.ycombinator.com/news) most people read; after a while, I noticed that the links I upvoted there seemed to be turning up a lot on the front page, more than I would expect from my usual pattern of upvoting perhaps 5 links out of the 30 available. A horrible suspicion struck me: could the apparent arbitrariness of what links made the front page be caused by the /newest page being *so* sparsely voted upon that a single upvote made a meaningful difference?
+> The social news service Hacker News has a two-layered organization, where newly submitted links are displayed on a '/newest' page seen by few users, and the best (as determined by users voting on each submission) are automatically selected for display on the high-traffic main front-page which most HN users read.
+> I hypothesized that there is a lack of traffic on /newest and this implies that even one vote can substantially affect the chance a particular submission will reach the front-page, its ultimate score, and page-views of the submitted link.
+> A randomized experiment in upvoting small batches of links confirms that the effect is real & large: TODO.
 
-I decided to do a simple experiment to test: On /newest, take the first 5 links, flip a coin to decide whether to upvote or ignore; and make no votes on any other /newest items. After 30 or so (should be enough if the difference is as dramatic as I expect) do a nonparametric test of the two groups; then can dichotomize into front-page/not, do a logistic regression to calculate the specific odds increase due to 1 upvote, extract page views & time on page from my old Analytics, letting me calculate 'how much time am I steering with, say, 10 upvotes on /newest?'
+While using HN, as a sort of 'public service', I occasionally made sure to visit the [newest submissions](https://news.ycombinator.com/newest "New Links") page rather than just the [main front page](https://news.ycombinator.com/news) most people read.
+After a while, I noticed that the links I upvoted there seemed to be turning up a lot on the front page, more than I would expect from my usual pattern of upvoting perhaps 5 links out of the 30 available.
+A horrible suspicion struck me: could the apparent arbitrariness of what links made the front page be caused by the /newest page being *so* sparsely voted upon that a single upvote made a meaningful difference?
+
+## Methodology
+
+I decided to do a randomized parallel groups experiment to test:
+On /newest, take the first 5 links (#1-5, to maximize impact), do a simple 50-50 randomization on each to decide whether to upvote or ignore (I have a shell function for randomization: `echo "$((RANDOM % 2 < 1))"`);
+and make no votes on any other /newest items (I allowed myself my usual browsing & upvoting on the main page while I was there).
+As I have 'noprocast' turned on for 180 minutes, each group of 5 links should have been separated by a minimum of 3 hours (more than enough time for all links to fall off /newest).
+This was typically done during HN's busiest hours: 11AM-midnight EST.
+I was not blinded during the experiment, but the writeup & list were never public while the experiment was running.
+I used my existing high-karma (>7k) account since there doesn't seem to be any weighting of upvotes, reading through ["Inside the news.yc ranking formula"](http://www.righto.com/2009/06/how-does-newsyc-ranking-work.html), ["How Hacker News ranking algorithm works"](http://amix.dk/blog/post/19574) & [discussion](https://news.ycombinator.com/item?id=1781013).
 
 A power calculation for sample size is hard to do: I don't have a Poisson power function handy, and I don't expect the data to fit a Poisson too well due to the stark contrast between the front-page and /newest.
 (And I do want a well-powered experiment - the only thing more wasteful than an overpowered experiment is an underpowered weak experiment.)
 However, I do expect the necessary sample to be quite large by the standards of continuous normally-distributed data.
 Most submissions to /newest fail to gain more than an upvote or two, which means that most of the sample contains little information about whether the extra upvote helped them reach the front-page or not.
-Further, I don't just want to estimate whether the effect of upvoting is non-zero, I would like a reasonably precise estimate of *what* the effect is: knowing that it's, say, 0.1-10, is not very satisfactory. ("The oncoming car is somewhere between 10 meters and a kilometer away.")
+Further, I don't just want to estimate whether the net effect of upvoting is >1, I would like a reasonably precise estimate of *what* the effect is: knowing that it's, say, +2-10, is not very satisfactory. ("The oncoming car is somewhere between 10 meters and a kilometer away.")
 All in all, I don't expect the necessary _n_ to be <200.
+I decided to stop at _n_=300.
+
+The experiment ran from 16 March 2014 - TODO March 2014.
+
+## Analysis plan
+
+The analysis strategy is:
+
+1. a non-parametric test of difference in mean scores
+2. dichotomize the items by <10 as a proxy for having made it to the front-page for a meaningful amount of time, for a [logistic regression](!Wikipedia) to estimate increase in front-page odds
+3. attempt a Poisson regression on scores, to extract an estimate of the difference in means
+4. something fancier, suggested by the data (such as a [mixture model](!Wikipedia) of Poissons, perhaps, to split between front-page and non-front-page)
+
+TODO: extract page views & time on page from my old Analytics, letting me calculate 'how much time am I steering with, say, 10 upvotes on /newest?'
+
+## Data
 
 upvoted:
 https://news.ycombinator.com/item?id=7410094
@@ -155,6 +185,37 @@ https://news.ycombinator.com/item?id=7477629
 https://news.ycombinator.com/item?id=7477600
 https://news.ycombinator.com/item?id=7478328
 https://news.ycombinator.com/item?id=7478333
+https://news.ycombinator.com/item?id=7481022
+https://news.ycombinator.com/item?id=7481021
+https://news.ycombinator.com/item?id=7481012
+https://news.ycombinator.com/item?id=7481011
+https://news.ycombinator.com/item?id=7482433
+https://news.ycombinator.com/item?id=7482392
+https://news.ycombinator.com/item?id=7482391
+https://news.ycombinator.com/item?id=7483717
+https://news.ycombinator.com/item?id=7483718
+https://news.ycombinator.com/item?id=7484560
+https://news.ycombinator.com/item?id=7484554
+https://news.ycombinator.com/item?id=7484541
+https://news.ycombinator.com/item?id=7484539
+https://news.ycombinator.com/item?id=7484522
+https://news.ycombinator.com/item?id=7485210
+https://news.ycombinator.com/item?id=7487677
+https://news.ycombinator.com/item?id=7488960
+https://news.ycombinator.com/item?id=7490310
+https://news.ycombinator.com/item?id=7490307
+https://news.ycombinator.com/item?id=7490306
+https://news.ycombinator.com/item?id=7490287
+https://news.ycombinator.com/item?id=7491047
+https://news.ycombinator.com/item?id=7491031
+https://news.ycombinator.com/item?id=7491030
+https://news.ycombinator.com/item?id=7492283
+https://news.ycombinator.com/item?id=7492281
+https://news.ycombinator.com/item?id=7492276
+https://news.ycombinator.com/item?id=7492264
+https://news.ycombinator.com/item?id=7492964
+https://news.ycombinator.com/item?id=7492939
+https://news.ycombinator.com/item?id=7492938
 
 ignored:
 https://news.ycombinator.com/item?id=7410071
@@ -181,7 +242,6 @@ https://news.ycombinator.com/item?id=7424896
 https://news.ycombinator.com/item?id=7426094
 https://news.ycombinator.com/item?id=7426074
 https://news.ycombinator.com/item?id=7426699
-https://news.ycombinator.com/item?id=742665
 https://news.ycombinator.com/item?id=7426643
 https://news.ycombinator.com/item?id=7426640
 https://news.ycombinator.com/item?id=7429618
@@ -282,12 +342,42 @@ https://news.ycombinator.com/item?id=7477616
 https://news.ycombinator.com/item?id=7478348
 https://news.ycombinator.com/item?id=7478335
 https://news.ycombinator.com/item?id=7478329
+https://news.ycombinator.com/item?id=7481025
+https://news.ycombinator.com/item?id=7482435
+https://news.ycombinator.com/item?id=7482404
+https://news.ycombinator.com/item?id=7483729
+https://news.ycombinator.com/item?id=7483728
+https://news.ycombinator.com/item?id=7483723
+https://news.ycombinator.com/item?id=7485245
+https://news.ycombinator.com/item?id=7485238
+https://news.ycombinator.com/item?id=7485206
+https://news.ycombinator.com/item?id=7485203
+https://news.ycombinator.com/item?id=7487691
+https://news.ycombinator.com/item?id=7487685
+https://news.ycombinator.com/item?id=7487673
+https://news.ycombinator.com/item?id=7487669
+https://news.ycombinator.com/item?id=7487667
+https://news.ycombinator.com/item?id=7488958
+https://news.ycombinator.com/item?id=7488952
+https://news.ycombinator.com/item?id=7488950
+https://news.ycombinator.com/item?id=7488948
+https://news.ycombinator.com/item?id=7490316
+https://news.ycombinator.com/item?id=7491026
+https://news.ycombinator.com/item?id=7491003
+https://news.ycombinator.com/item?id=7492252
+https://news.ycombinator.com/item?id=7492943
+https://news.ycombinator.com/item?id=7492928
 
-basic analysis:
+The 2 groups are not exactly balanced due to the simple randomization.
+The _n_ should be divisible by 5, but is off by TODO 1; I think I must have failed to copy-paste one link at some point.
 
 ~~~{.Bash}
 for URL in `xclip -o`; do elinks -dump $URL | egrep ' points* by '; sleep 2s; done
 ~~~
+
+## Analysis
+
+basic analysis:
 
 ~~~{.R}
 upvoted <- c(3,27,2,19,60,2,69,2,14,6,72,9,2,2,2,57,2,3,31,2,2,32,2,3,2,2,33,2,8,2,2,2,8,4,2,2,8,4,55,2,10,7,325,35,57,70,6,14,3,2,2,78,3,2,70,2,5,4,7,21,2,2,13) - 1
@@ -373,7 +463,15 @@ R> BIC(fit3)
 
 ~~~
 
-One might wonder if HN is uniquely aberrant in this lottery; the most natural comparison is the social news site Reddit. I picked /r/prog's [/new/](http://www.reddit.com/r/programming/new/) to do the same thing to:
+Note that the submissions were chosen to maximize the impact of an upvote by upvoting the first 5 links on /newest and hence the most recently submitted: a submission at the very bottom, like #30, will benefit least from an upvote since its time is up and it's almost vanished.
+If the effect on the first 5 is TODO, and the effect on the last link (#30) is 0, then a reasonable guess at the mean effect over all links is simply TODO/2.
+
+## Reddit comparison
+
+One might wonder if HN is uniquely aberrant in this lottery; the most natural comparison is the social news site Reddit.
+I picked /r/prog (a very large subreddit comparable to HN in size) and manipulated their [/new/](http://www.reddit.com/r/programming/new/) the same way
+
+### Data
 
 upvoted:
 http://www.reddit.com/r/programming/comments/20nypu/get_certified_and_become_a_real_licensed_software/
@@ -463,6 +561,29 @@ http://www.reddit.com/r/programming/comments/21gnmn/text_mode_2048_game_in_c_for
 http://www.reddit.com/r/programming/comments/21gim9/coding_interview_practice/
 http://www.reddit.com/r/programming/comments/21gq5o/quick_start_test_driven_development_channel_9/
 http://www.reddit.com/r/programming/comments/21g3iq/a_beginners_guide_to_contributing_to_open_source/
+http://www.reddit.com/r/programming/comments/21icfm/facebook_with_help_from_google_linkedin_twitter/
+http://www.reddit.com/r/programming/comments/21iav6/c_status/
+http://www.reddit.com/r/programming/comments/21i7gd/ccv_06_open_sources_near_stateoftheart_image/
+http://www.reddit.com/r/programming/comments/21i19h/a_generic_cc_makefile/
+http://www.reddit.com/r/programming/comments/21ixzp/bram_cohens_patience_diff_a_brief_summary/
+http://www.reddit.com/r/programming/comments/21iwup/programming_laws_and_reality_do_we_know_what_we/
+http://www.reddit.com/r/programming/comments/21jron/switching_web_programming_paradigms_with_vertx/
+http://www.reddit.com/r/programming/comments/21jpf5/show_reddit_my_own_little_reddit_clone_in_c_and/
+http://www.reddit.com/r/programming/comments/21iza1/spatial_data_structures_for_better_map/
+http://www.reddit.com/r/programming/comments/21l81x/perl_encryption_primer_hashes/
+http://www.reddit.com/r/programming/comments/21l2ya/udi_dahan_looselycoupled_orchestration_with/
+http://www.reddit.com/r/programming/comments/21lx00/cube_drone_consistent_hashing/
+http://www.reddit.com/r/programming/comments/21lxd9/what_does_writing_directly_to_video_memory_really/
+http://www.reddit.com/r/programming/comments/21n1zs/why_enterprise_java_beans/
+http://www.reddit.com/r/programming/comments/21mx0b/marching_squares_for_procedural_tile_placement/
+http://www.reddit.com/r/programming/comments/21mvuv/should_everybody_learn_to_code_computerphile/
+http://www.reddit.com/r/programming/comments/21o6xt/the_software_equality_logo/
+http://www.reddit.com/r/programming/comments/21o6bz/codeplay_introduction_to_sycl_abstraction_layer/
+http://www.reddit.com/r/programming/comments/21o6bb/bannalia_trivial_notes_on_themes_diverse/
+http://www.reddit.com/r/programming/comments/21o4et/artificial_intelligence_where_to_put_your_time/
+http://www.reddit.com/r/programming/comments/21od4e/participate_in_10_hours_development_of_a_game/
+http://www.reddit.com/r/programming/comments/21o21d/introduction_to_artificial_neural_networks_part_2/
+http://www.reddit.com/r/programming/comments/21nxpv/working_without_fear_on_test_driven_code/
 
 ignored:
 http://www.reddit.com/r/programming/comments/20o0me/2048_4d/
@@ -546,7 +667,24 @@ http://www.reddit.com/r/programming/comments/21gm76/boston_college_mba_brings_ma
 http://www.reddit.com/r/programming/comments/21g7op/bringing_the_magic_of_qt_to_windows_runtime/
 http://www.reddit.com/r/programming/comments/21g64n/an_overview_of_webkits_css_jit_compiler_a_gain_of/
 http://www.reddit.com/r/programming/comments/21fwnn/cube_drone_hashing_for_data_structures_in_90/
+http://www.reddit.com/r/programming/comments/21idvi/regexr_v20_has_launched_and_will_soon_be_released/
+http://www.reddit.com/r/programming/comments/21jdko/drop_all_your_shit_here_comes_the_64bit_temple/
+http://www.reddit.com/r/programming/comments/21j6tf/f_functions_as_types_types_types_everywhere/
+http://www.reddit.com/r/programming/comments/21iza1/spatial_data_structures_for_better_map/
+http://www.reddit.com/r/programming/comments/21jnvj/99_problems_solved_in_ocaml/
+http://www.reddit.com/r/programming/comments/21j6tf/f_functions_as_types_types_types_everywhere/
+http://www.reddit.com/r/programming/comments/21la4n/the_complete_visual_guide_to_sublime_text_3/
+http://www.reddit.com/r/programming/comments/21l9pr/i_created_a_replacement_new_tab_that_shows_a/
+http://www.reddit.com/r/programming/comments/21l326/dataoriented_design_or_why_you_might_be_shooting/
+http://www.reddit.com/r/programming/comments/21lz1x/quickfind_a_fuzzy_file_matcher_for_the_terminal/
+http://www.reddit.com/r/programming/comments/21lymm/androids_overblown_fragmentation_problem_revisited/
+http://www.reddit.com/r/programming/comments/21lyl2/composition_over_inheritance_object_oriented/
+http://www.reddit.com/r/programming/comments/21mus2/advanced_redis_command_loading/
+http://www.reddit.com/r/programming/comments/21mr8u/the_modern_test_lab_build_the_lab_team/
+http://www.reddit.com/r/programming/comments/21o21d/introduction_to_artificial_neural_networks_part_2/
+http://www.reddit.com/r/programming/comments/21o8jz/javascript_understanding_this/
+http://www.reddit.com/r/programming/comments/21nwak/html5_and_javascript_game_engine_libraries/
 
-Just a test of differences here, because I'm not sure what the equivalent of 'front page' is for Reddit.
+No logistic regression; I'm not sure what the equivalent of 'front page' is for Reddit.
 
-I wondered if my upvote was weighted in some way due to my account's >7k karma on HN; but reading through ["Inside the news.yc ranking formula"](http://www.righto.com/2009/06/how-does-newsyc-ranking-work.html), ["How Hacker News ranking algorithm works"](http://amix.dk/blog/post/19574) & [discussion](https://news.ycombinator.com/item?id=1781013), there seems to be no extra weight assigned to anyone's upvotes.
+
