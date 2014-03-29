@@ -1,0 +1,285 @@
+---
+title: Bitcoin donations on The Pirate Bay
+description: Downloading and parsing TPB metadata to estimate Bitcoin usage and revenue for uploaders
+tags: statistics, Bitcoin
+created: 25 Feb 2014
+status: notes
+...
+
+    19:58:06 SDr> gwern, here's a shiny new angle for your cryptocurrencies knowledge file: do crypto donations to warez distributors, like work?
+    19:59:02 gwern> SDr: how would that work? they put addresses in the READMEs of their torrents or something?
+    19:59:34 SDr> gwern, specifically eg. scraping Pirate Bay's NFO files for wallet addresses & cross-referencing it with blockchain, is there volume for it,
+                    such that distributors are incentivized to provide clean cracks / keygens, as opposed to bundling blackmail-ware with it?
+
+TODO: compare against Paypal, Flattr, Gittip?
+
+watashi kininarimasu!
+
+https://github.com/karan/TPB
+
+~~~{.Bash}
+sudo apt-get install libxml2-dev libxslt-dev
+pip install --install-option="--prefix=$HOME/.local" ThePirateBay
+~~~
+
+~~~{.Python}
+from tpb import TPB
+from tpb import CATEGORIES, ORDERS
+t = TPB('https://thepiratebay.se')
+
+
+# get top torrents in Movies category
+t.top().category(CATEGORIES.VIDEO.MOVIES)
+
+# print all torrent descriptions
+for torrent in t.category(CATEGORIES.VIDEO.MOVIES):
+    print(torrent.info)
+~~~
+
+https://archive.org/details/Backup_of_The_Pirate_Bay_32xxxxx-to-79xxxxx
+https://github.com/andronikov/tpb2csv
+
+more efficient to not download comments
+
+~~~{.Diff}
+diff --git a/download.py b/download.py
+index 82837e2..9fed0aa 100644
+--- a/download.py
++++ b/download.py
+@@ -6,12 +6,12 @@
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+-#
++#
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+-#
++#
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+@@ -21,7 +21,7 @@ import HTMLParser
+
+ import torrent_page
+ import filelist
+-import comments
++# import comments
+
+ import requests
+ import datetime
+@@ -39,10 +39,10 @@ def main():
+             tp_status_code = torrent_page.get_torrent_page(torrent_id, protocol)
+             if (tp_status_code == 200):
+                 filelist.get_filelist(torrent_id, protocol)
+-                comments.get_comments(torrent_id, protocol)
++                # comments.get_comments(torrent_id, protocol)
+             elif (tp_status_code == 404):
+                 print "Skipping filelist..."
+-                print "Skipping comments..."
++                # print "Skipping comments..."
+             else:
+                 print "ERROR: HTTP " + str(tp_status_code)
+                 error_file.write(datetime.datetime.utcnow().strftime("[%Y-%m-%dT%H:%M:%SZ]") + ' ' + str(torrent_id) + ": ERROR: HTTP " + str(tp_status_code) + '\n')
+@@ -58,10 +58,10 @@ def main():
+             tp_status_code = torrent_page.get_torrent_page(torrent_id, protocol)
+             if (tp_status_code == 200):
+                 filelist.get_filelist(torrent_id, protocol)
+-                comments.get_comments(torrent_id, protocol)
++                # comments.get_comments(torrent_id, protocol)
+             else:
+                 print "Skipping filelist..."
+-                print "Skipping comments..."
++                # print "Skipping comments..."
+             time_log.write(datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ") + ' ' + str(torrent_id) + " " + str(tp_status_code) + '\n')
+             time_log.flush()
+             break # Success! Break out of the while loop
+@@ -72,10 +72,10 @@ def main():
+             tp_status_code = torrent_page.get_torrent_page(torrent_id, protocol)
+             if (tp_status_code == 200):
+                 filelist.get_filelist(torrent_id, protocol)
+-                comments.get_comments(torrent_id, protocol)
++                # comments.get_comments(torrent_id, protocol)
+             else:
+                 print "Skipping filelist..."
+-                print "Skipping comments..."
++                # print "Skipping comments..."
+             time_log.write(datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ") + ' ' + str(torrent_id) + " " + str(tp_status_code) + '\n')
+             time_log.flush()
+             break # Success! Break out of the while loop
+@@ -102,7 +102,7 @@ if (len(sys.argv) == 2+offset):
+     torrent_id = sys.argv[1+offset]
+     print torrent_id
+     main()
+-
++
+ elif (len(sys.argv) == 3+offset):
+     if (int(sys.argv[1+offset]) > (int(sys.argv[2+offset])+1)):
+         for torrent_id in range(int(sys.argv[1+offset]),int(sys.argv[2+offset])-1, -1):
+@@ -112,6 +112,6 @@ elif (len(sys.argv) == 3+offset):
+         for torrent_id in range(int(sys.argv[1+offset]),int(sys.argv[2+offset])+1):
+             print torrent_id
+             main()
+-
++
+ elif (len(sys.argv) > 3 and not https):
+     print "ERROR: Too many arguments"
+~~~
+
+started 25 February 2014, 8:51PM EST
+
+~~~{.Bash}
+sudo apt-get install python-requests python-beautifulsoup
+git clone git@github.com:andronikov/tpb2csv.git
+cd tpb2csv
+sed -i -e 's/thepiratebay\.sx/thepiratebay.se/' *.py
+
+# End:
+# http://thepiratebay.se/recent
+# most recent: http://thepiratebay.se/torrent/9666564/Blonde_Avenger_008_%28BlitzWeasel_-_1995%29_%28Talon-Novus-HD%29_%5BNVS-D%5D
+# ID: 9666564
+
+python download.py 1 9666564
+~~~
+
+8,xxx,xxx
+
+21:02:44 <@gwern> https://github.com/tpb-archive?tab=repositories oh, I think I understand: they post only each set of million torrents
+21:03:15 <@gwern> before 3m apparently is unavailable, and the latest TPB torrent when I checked a little bit ago was #9,666,564 as in, the 9x series isn't
+                  ready yet
+21:03:32 <@gwern> so, it goes 3m, 4m, 5m, 6m, 7m, 8m
+21:04:01 <@gwern> so I can download those, and use tpb2csv to pick up the 666k most recent ones
+21:04:25 <@quanticle> gwern: If I might ask, why are you archiving TPB torrents?
+21:04:45 <@gwern> quanticle: SDr asked how many torrent authors provide bitcoin donation addresses, and how much they'd received
+
+09:06 PM 0Mb$ python download.py 9000000 9666564
+
+git clone https://github.com/tpb-archive/3xxxxxx.git
+git clone https://github.com/tpb-archive/4xxxxxx.git
+git clone https://github.com/tpb-archive/5xxxxxx.git
+git clone https://github.com/tpb-archive/6xxxxxx.git
+git clone https://github.com/tpb-archive/7xxxxxx.git
+git clone https://github.com/tpb-archive/8xxxxxx.git
+
+http://thepiratebay.se/recent
+http://thepiratebay.se/torrent/9669888/Aimi_Nagano_-_Girls_Do_Not_Sit_On_The_Bus
+
+$ cd home/gwern/tpb2csv/ && python download.py 9000977 9666564
+
+cd ~/tpb2csv/ && while true; do (LATEST=$(find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6 | sort --numeric-sort | tail --lines=1); python download.py $LATEST 9670000; sleep 5s); done
+
+problems with tpb2csv:
+
+- hardwired to .sx, eeds .se
+- fragile, easily bombs out after a few connection failures
+- doesn't check for already-downloaded?
+
+desired features:
+- default final target from http://thepiratebay.se/recent
+- optionally disable comments, filelist, metadata, description
+
+cd ~/tpb2csv/ && while true; do (LATEST=$(find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6 | sort --numeric-sort | tail --lines=1); JUMP="$((LATEST + 25000))"; python download.py $JUMP 9670000; sleep 5s); done
+
+
+http://thepiratebay.se/torrent/9674067/Barely.Legal.POV.3.XXX.DVDRip.XviD-FLESHLiGHT
+
+9000003 - 9674067 (674,064 total; I have 18,396)
+
+find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6|sort -u|tail -n +2 >> ids.txt
+
+9000003
+9000011
+9000018
+9000023
+9000071
+9000082
+9000092
+9000093
+9000095
+9000099
+...
+
+could do it with range:
+eg with 9000003 / 9000011, I want to emit 9000004 / 9000010
+
+[9000003..9674067]
+
+but could also just figure out all missing ids
+
+`countmissing.hs`:
+
+~~~{.Haskell}
+import Data.Set (fromList, difference, toList)
+import System.Environment (getArgs)
+main :: IO ()
+main = do args <- getArgs
+          let latest = read (head args) :: Int
+          ids <- readFile "ids.txt"
+          let numbers = Data.Set.fromList ((Prelude.map read $ lines ids) :: [Int])
+          let allIDs = Data.Set.fromList [9000000..latest]
+          let missing = Data.Set.difference allIDs numbers
+          writeFile "missing.txt" $ unlines $ Prelude.map show $ Data.Set.toList missing
+~~~
+
+and finally, GNU `parallel` to download each torrent ID separately without mucking around with ranges:
+
+~~~{.Bash}
+cd ~/tpb/tpb2csv/ && rm ids.txt missing.txt randomized.txt
+
+find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6 | sort --unique | tail --lines=+2 > ids.txt
+runhaskell countmissing.hs 9848329
+sort --random-sort missing.txt > randomized.txt
+
+# cat randomized.txt | parallel --max-chars=40 --ungroup --jobs 11 -- python -OO download.py
+cat missing.txt | tac | parallel --max-chars=40 --ungroup --jobs 11 -- nice python -OO download.py
+~~~
+
+http://thepiratebay.se/torrent/9848329/Paranormal_Activity_The_Marked_Ones_2014_EXTENDED_BRRip_XviD_AC3
+
+
+16:01:04 <@gwern> there are an amazing number of 404s on tpb. I wonder why
+16:01:12 <@gwern> why would they ever delete a page?
+16:01:18 <@gwern> short of CP
+
+~~~{.Bash}
+$ find . -type f -name "description.txt" -exec grep --extended-regexp '[13][a-zA-Z0-9]{26,33}' {} \;
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+UniqueID/String                          : 198031419884096486800071953706812228345 (0x94FB76D26E78C1B7A2EA96FDDB10C2F9)
+http://easyimghost.com/ImageHosting/8102_7346420e085511e2ba4022000a1e89327.jpg.html
+http://easyimghost.com/ImageHosting/8104_83901b420fe611e29797123138133f0a7.jpg.html
+http://sharepic.biz/show-image.php?id=b264f152debff549632be27bfe965f86
+http://image.bayimg.com/08f6b9b52398b07c3c86e1dc1f3b3d36594e67b8.jpg
+http://image.bayimg.com/0b397e88fdefe06fa99acddf86190f4cd2ef3922.jpg
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+http://image.bayimg.com/34eae2b9725eb15e7a58fd6bf6e2fedb2c5af0a7.jpg
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+d17a78495f673990bb6d3ea096e5830bcc7dc4dd
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+http://rss.thepiratebay.se/user/01997b95ece549c293b824450ea84389
+http://rss.thepiratebay.se/user/01997b95ece549c293b824450ea84389
+B0A544F55125A26C21622D4118739305B9088448
+http://rss.thepiratebay.se/user/01997b95ece549c293b824450ea84389
+http://image.bayimg.com/6cd5e44b139c1506dfa8f8d59003187454700627.jpg
+Want to help us out? BitCoin: 1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+http://rss.thepiratebay.se/user/01997b95ece549c293b824450ea84389
+http://image.bayimg.com/0070020142c02ecbadd55e73f0d60a7169367885.jpg
+http://photosex.biz/v.php?id=a7f013597a02d5ec0fffe529da47e7eb
+http://image.bayimg.com/b6a1d70ca01e50d91f30ef683756442d4d52a357.jpg
+
+
+$ find . -type f -name "description.txt" -exec grep --only-matching --extended-regexp '[13][a-zA-Z0-9]{26,33}' {} \;
+1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+1980314198840964868000719537068122
+346420e085511e2ba4022000a1e89327
+3901b420fe611e29797123138133f0a7
+152debff549632be27bfe965f86
+398b07c3c86e1dc1f3b3d36594e67b8
+397e88fdefe06fa99acddf86190f4cd2ef
+1Fw4sRdZYFwULfeE7oQ91GLYKy8j5EcuFW
+34eae2b9725eb15e7a58fd6bf6e2fedb2c
+~~~
