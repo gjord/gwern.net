@@ -28,7 +28,7 @@ Page view counts:
 - 15.2k http://www.matvoz.com/blog/2013/10/interesting-facts-about-when-you-get-hit-by-hacker-news-tsunami/
 - 7k unique visitors http://greig.cc/journal/2013/1/what-does-a-hacker-news-traffic-spike-look-like
 - 10k unique visitors https://whoapi.com/blog/554/how-hacker-news-hit-us-with-10-000-unique-visitors-in-10-hours/
-
+- >40k unique visitors https://news.ycombinator.com/item?id=7427542 "in one 24 hour period, 35,000 visits and 32,000 uniques"
 
 # Submissions
 
@@ -75,7 +75,7 @@ Further, I don't just want to estimate whether the net effect of upvoting is >1,
 All in all, I don't expect the necessary _n_ to be <200.
 I decided to stop at _n_=300.
 
-The experiment ran from 16 March 2014 - TODO March 2014.
+The experiment ran from 16 March 2014 - 31 March 2014.
 
 ## Analysis plan
 
@@ -216,6 +216,21 @@ https://news.ycombinator.com/item?id=7492264
 https://news.ycombinator.com/item?id=7492964
 https://news.ycombinator.com/item?id=7492939
 https://news.ycombinator.com/item?id=7492938
+https://news.ycombinator.com/item?id=7493774
+https://news.ycombinator.com/item?id=7493736
+https://news.ycombinator.com/item?id=7493730
+https://news.ycombinator.com/item?id=7496906
+https://news.ycombinator.com/item?id=7497795
+https://news.ycombinator.com/item?id=7498485
+https://news.ycombinator.com/item?id=7498474
+https://news.ycombinator.com/item?id=7499221
+https://news.ycombinator.com/item?id=7499218
+https://news.ycombinator.com/item?id=7499183
+https://news.ycombinator.com/item?id=7501511
+https://news.ycombinator.com/item?id=7501500
+https://news.ycombinator.com/item?id=7502814
+https://news.ycombinator.com/item?id=7502802
+https://news.ycombinator.com/item?id=7502801
 
 ignored:
 https://news.ycombinator.com/item?id=7410071
@@ -367,8 +382,29 @@ https://news.ycombinator.com/item?id=7491003
 https://news.ycombinator.com/item?id=7492252
 https://news.ycombinator.com/item?id=7492943
 https://news.ycombinator.com/item?id=7492928
+https://news.ycombinator.com/item?id=7493776
+https://news.ycombinator.com/item?id=7493716
+https://news.ycombinator.com/item?id=7496943
+https://news.ycombinator.com/item?id=7496925
+https://news.ycombinator.com/item?id=7496923
+https://news.ycombinator.com/item?id=7496921
+https://news.ycombinator.com/item?id=7497764
+https://news.ycombinator.com/item?id=7497758
+https://news.ycombinator.com/item?id=7497744
+https://news.ycombinator.com/item?id=7497742
+https://news.ycombinator.com/item?id=7498462
+https://news.ycombinator.com/item?id=7498455
+https://news.ycombinator.com/item?id=7498452
+https://news.ycombinator.com/item?id=7499254
+https://news.ycombinator.com/item?id=7499240
+https://news.ycombinator.com/item?id=7501530
+https://news.ycombinator.com/item?id=7501519
+https://news.ycombinator.com/item?id=7501516
+https://news.ycombinator.com/item?id=7502812
+https://news.ycombinator.com/item?id=7502804
 
 The 2 groups are not exactly balanced due to the simple randomization.
+One URL suffered a typo and I could not figure out what the original was, so for one block I randomized an extra link (a #6).
 The _n_ should be divisible by 5, but is off by TODO 1; I think I must have failed to copy-paste one link at some point.
 
 ~~~{.Bash}
@@ -380,10 +416,10 @@ for URL in `xclip -o`; do elinks -dump $URL | egrep ' points* by '; sleep 2s; do
 basic analysis:
 
 ~~~{.R}
-upvoted <- c(3,27,2,19,60,2,69,2,14,6,72,9,2,2,2,57,2,3,31,2,2,32,2,3,2,2,33,2,8,2,2,2,8,4,2,2,8,4,55,2,10,7,325,35,57,70,6,14,3,2,2,78,3,2,70,2,5,4,7,21,2,2,13) - 1
-ignored <- c(1,1,1,2,1,2,2,1,1,2,1,2,5,154,1,1,8,2,1,2,1,10,2,1,1,7,1,1,1,2,327,5,1,1,94,2,1,1,2,1,3,1,1,3,132,1,2,1,2,1,2,2,1,2,2,1,3,1,3,2,5,3,12,62,3,1,1,2,12,111,1,1,2,6,3,2,1,1,1,1,14,1,1,1,2,1,39,4,3,1,1,1,1,3,2,1,1,56,1)
+upvoted <- c(3,27,2,19,60,2,69,2,14,6,72,9,2,2,2,57,2,3,31,2,2,32,2,3,2,2,33,2,8,2,2,2,8,4,2,2,8,4,55,2,10,7,327,35,58,70,6,14,3,2,2,79,3,2,100,2,5,4,7,72,2,2,158,2,3,2,73,59,54,2,76,7,141,2,424,11,2,6,2,3,3,3,2,2,2,2,3,126,3,2,2,3,2,3,2,7,4,2,6,2,2,42,2,2,2,3,2,5,77,2,5,5,13,85,19,2,2,2,6,6,2,2,30,72,2,2,6,2,2,4,17,2) - 1
+ignored <- c(1,1,1,2,1,2,2,1,1,2,1,2,5,154,1,1,8,2,1,2,1,2,1,1,7,1,1,1,2,329,5,1,1,94,2,1,1,2,1,3,1,1,3,132,1,2,1,2,1,2,2,1,3,2,1,3,1,3,2,5,3,14,62,3,1,1,2,12,112,1,1,2,6,3,2,1,1,1,1,14,1,1,1,2,1,39,4,3,1,1,1,1,9,3,1,1,84,1,5,4,5,1,1,4,270,1,1,1,1,1,5,1,1,1,1,1,3,1,30,5,244,1,1,45,7,4,1,5,1,1,2,1,2,4,1,1,11,61,1,1,1,82,1,2,8,68,7,2,4,89,5,62,25,2,2,2,1,124,179,1,2)
 wilcox.test(upvoted, ignored)
-...W = 3812, p-value = 0.01216
+...W = 11758, p-value = 0.09914
 
 hn <- data.frame(Scores = c(upvoted, ignored), FrontPage = c(upvoted>10, ignored>10), Upvoted = c(rep(TRUE, length(upvoted)), rep(FALSE, length(ignored))))
 library(ggplot2)
@@ -394,73 +430,78 @@ histStack(hn$Scores, hn$Upvoted, breaks=25)
 g1 <- glm(FrontPage ~ Upvoted, family="binomial", data = hn); summary(g1)
 ...Coefficients:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)   -2.079      0.320   -6.50  7.9e-11
-UpvotedTRUE    1.314      0.419    3.14   0.0017
+(Intercept)   -1.742      0.221   -7.87  3.5e-15
+UpvotedTRUE    0.723      0.296    2.44    0.015
 
 R> exp(coef(g1))
 (Intercept) UpvotedTRUE
-      0.125       3.721
+     0.1752      2.0597
+
 R> exp(confint(g1))
-Waiting for profiling to be done...
-              2.5 % 97.5 %
-(Intercept) 0.06305 0.2236
-UpvotedTRUE 1.66415 8.7101
+             2.5 % 97.5 %
+(Intercept) 0.1108 0.2649
+UpvotedTRUE 1.1579 3.7167
 
 R> Reduce(`*`, exp(coef(g1)), 1)
-[1] 0.4651
+[1] 0.3608
 
-# a single upvote on /newest is currently estimated as increasing the odds of making the front page by 3.7x (from 12.5% to 47%)!
-# or to put it another way, from a mean score of +12 to a mean score of +19
+# a single upvote on /newest is currently estimated as increasing the odds of making the front page by 2.25x (from 16% to 36%)
+# or to put it another way, from a mean score of +16 to a mean score of +22
 g2 <- glm(Scores ~ Upvoted, family="poisson", data = hn); summary(g2)
 ...Coefficients:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)   2.4815     0.0291    85.4   <2e-16
-UpvotedTRUE   0.4982     0.0406    12.3   <2e-16
+(Intercept)   2.7907     0.0195   142.9   <2e-16
+UpvotedTRUE   0.2914     0.0270    10.8   <2e-16
 
 R> exp(coef(g2))
 (Intercept) UpvotedTRUE
-     11.960       1.646
+     16.292       1.338
 R> exp(Reduce(`+`, coef(g2), 0))
-[1] 19.68
+[1] 21.28
 R> library(flexmix)
-R> fit <- stepFlexmix(Scores ~ 1, data=hn, model = FLXMRglmfix(family = "poisson", fixed = ~Upvoted), k=3, nrep=20)
-3 : * * * * * * * * * * * * * * * * * * * *
-R> summary(refit(fit))
+fit4 <- (stepFlexmix(Scores ~ Upvoted, data=hn, model = FLXMRglmfix(family = "poisson"), k=4, nrep=20))
+summary(fit4)
+4 : * * * * * * * * * * * * * * * * * * * *
+
+Call:
+stepFlexmix(Scores ~ Upvoted, data = hn, model = FLXMRglmfix(family = "poisson"),
+    k = 4, nrep = 20)
+
+        prior size post>0 ratio
+Comp.1 0.0643   19     28 0.679
+Comp.2 0.4506  133    140 0.950
+Comp.3 0.1126   32     90 0.356
+Comp.4 0.3725  109    114 0.956
+
+'log Lik.' -1154 (df=11)
+AIC: 2330   BIC: 2371
+
+summary(refit(fit4))
 $Comp.1
             Estimate Std. Error z value Pr(>|z|)
-UpvotedTRUE   0.0878     0.0496    1.77    0.076
-(Intercept)   0.9592     0.0558   17.18   <2e-16
+(Intercept)    2.485      0.120    20.7   <2e-16
+UpvotedTRUE    1.892      0.123    15.4   <2e-16
 
 $Comp.2
             Estimate Std. Error z value Pr(>|z|)
-UpvotedTRUE   0.0878     0.0496    1.77    0.076
-(Intercept)   5.4337     0.0352  154.17   <2e-16
+(Intercept)   0.6002     0.0734    8.18  2.9e-16
+UpvotedTRUE   5.3254     0.0820   64.95  < 2e-16
 
 $Comp.3
             Estimate Std. Error z value Pr(>|z|)
-UpvotedTRUE   0.0878     0.0496    1.77    0.076
-(Intercept)   3.9495     0.0465   85.02   <2e-16
-R> exp(0.9592)
-[1] 2.61
-R> exp(3.9495)
-[1] 51.91
-R> exp(5.4337)
-[1] 229
+(Intercept)   4.3955     0.0309   142.4   <2e-16
+UpvotedTRUE  -3.5918     0.0794   -45.3   <2e-16
 
-# BIC is minimized by k=3 (can't fit k>=4)
-R> fit3 <- stepFlexmix(Scores ~ 1, data=hn, model = FLXMRglmfix(family = "poisson", fixed = ~Upvoted), k=3, nrep=20)
-3 : * * * * * * * * * * * * * * * * * * * *
-R> fit2 <- stepFlexmix(Scores ~ 1, data=hn, model = FLXMRglmfix(family = "poisson", fixed = ~Upvoted), k=2, nrep=20)
-2 : * * * * * * * * * * * * * * * * * * * *
-R> fit1 <- stepFlexmix(Scores ~ 1, data=hn, model = FLXMRglmfix(family = "poisson", fixed = ~Upvoted), k=1, nrep=20)
-1 : * * * * * * * * * * * * * * * * * * * *
-R> BIC(fit1)
-[1] 7835
-R> BIC(fit2)
-[1] 2139
-R> BIC(fit3)
-[1] 1648
+$Comp.4
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   5.4605     0.0292   187.1   <2e-16
+UpvotedTRUE  -2.3164     0.0712   -32.5   <2e-16
 
+R> exp(0.6002); exp(2.485); exp(4.3955); exp(5.4605)
+[1] 1.822
+[1] 12
+[1] 81.09
+[1] 235.2
 ~~~
 
 Note that the submissions were chosen to maximize the impact of an upvote by upvoting the first 5 links on /newest and hence the most recently submitted: a submission at the very bottom, like #30, will benefit least from an upvote since its time is up and it's almost vanished.
@@ -584,6 +625,25 @@ http://www.reddit.com/r/programming/comments/21o4et/artificial_intelligence_wher
 http://www.reddit.com/r/programming/comments/21od4e/participate_in_10_hours_development_of_a_game/
 http://www.reddit.com/r/programming/comments/21o21d/introduction_to_artificial_neural_networks_part_2/
 http://www.reddit.com/r/programming/comments/21nxpv/working_without_fear_on_test_driven_code/
+http://www.reddit.com/r/programming/comments/21ow20/introducing_rwolfram_a_subreddit_dedicated_to_the/
+http://www.reddit.com/r/programming/comments/21ooex/wic_file_open_dialog_using_ifileopendialog/
+http://www.reddit.com/r/programming/comments/21nwak/html5_and_javascript_game_engine_libraries/
+http://www.reddit.com/r/programming/comments/21quwy/tools_for_building_a_better_software_development/
+http://www.reddit.com/r/programming/comments/21rn0p/bringing_simd_to_javascript/
+http://www.reddit.com/r/programming/comments/21rfyf/class_hierarchies_dont_do_that/
+http://www.reddit.com/r/programming/comments/21r3tc/lawsuit_waze_owes_opensource_programmers_150/
+http://www.reddit.com/r/programming/comments/21qvp8/write_your_own_ai_for_2048/
+http://www.reddit.com/r/programming/comments/21s7tn/the_strangeness_of_scale_at_twitter/
+http://www.reddit.com/r/programming/comments/21smyy/crittercism_provides_insight_into_why_your_app/
+http://www.reddit.com/r/programming/comments/21skaq/scrubbed_digitalocean_droplets_still_recoverable/
+http://www.reddit.com/r/programming/comments/21shnk/convert_your_generators_into_coroutines_with_a/
+http://www.reddit.com/r/programming/comments/21se3g/how_do_i_convert_a_batch_file_into_a_powershell/
+http://www.reddit.com/r/programming/comments/21ttxs/turings_sunflower/
+http://www.reddit.com/r/programming/comments/21tszv/increasing_performance_with_static_polymorphism/
+http://www.reddit.com/r/programming/comments/21tqge/summary_of_the_actor_model/
+http://www.reddit.com/r/programming/comments/21tnkc/writing_micro_compiler_in_ocaml/
+http://www.reddit.com/r/programming/comments/21ubo9/api_driven_development/
+http://www.reddit.com/r/programming/comments/21uap9/programming_on_mobile_devices/
 
 ignored:
 http://www.reddit.com/r/programming/comments/20o0me/2048_4d/
@@ -684,6 +744,22 @@ http://www.reddit.com/r/programming/comments/21mr8u/the_modern_test_lab_build_th
 http://www.reddit.com/r/programming/comments/21o21d/introduction_to_artificial_neural_networks_part_2/
 http://www.reddit.com/r/programming/comments/21o8jz/javascript_understanding_this/
 http://www.reddit.com/r/programming/comments/21nwak/html5_and_javascript_game_engine_libraries/
+http://www.reddit.com/r/programming/comments/21ozuc/a_simple_kernelspace_ondisk_filesystem_from_the/
+http://www.reddit.com/r/programming/comments/21nsba/thoughts_on_xamarin_for_ios_development/
+http://www.reddit.com/r/programming/comments/21r3tc/lawsuit_waze_owes_opensource_programmers_150/
+http://www.reddit.com/r/programming/comments/21r1iv/ranking_functions_in_sql_server/
+http://www.reddit.com/r/programming/comments/21r0zz/combining_the_awesomeness_of_valgrind_and_gdb/
+http://www.reddit.com/r/programming/comments/21qzz2/an_overview_of_floating_point_realm/
+http://www.reddit.com/r/programming/comments/21rlzz/vector_math_in_python_3_critique/
+http://www.reddit.com/r/programming/comments/21rjjw/how_to_build_and_run_the_mojarra_automated_tests/
+http://www.reddit.com/r/programming/comments/21s7bf/one_step_forward_two_steps_back_by_chris_done/
+http://www.reddit.com/r/programming/comments/21s4oa/digest_a_tiny_program_to_compute_many_common_hash/
+http://www.reddit.com/r/programming/comments/21s2sq/refactoring_with_lz77_compression_is_compilation/
+http://www.reddit.com/r/programming/comments/21spg7/differences_in_mapreduce_between_ravendb_mongodb/
+http://www.reddit.com/r/programming/comments/21tu9c/programming_is_a_knowledge_acquisition_activity/
+http://www.reddit.com/r/programming/comments/21ubim/a_binary_chimera_3_headers_1_data_body_in_a/
+http://www.reddit.com/r/programming/comments/21ua0s/api_days_berlin/
+http://www.reddit.com/r/programming/comments/21u7zp/cron_in_production_that_is_a_double_edged_sword/
 
 No logistic regression; I'm not sure what the equivalent of 'front page' is for Reddit.
 
