@@ -2051,7 +2051,9 @@ penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184
 fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
               cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
 -->
-<!-- 4 complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC -->
+<!-- 4 complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC; 1 mention; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing -->
+
+On 31 March, with total _n_ having reached 15652, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant `gray1`'s 22.38%, and wasting traffic.
 
 # Appendix
 ## Covariate impact on power
