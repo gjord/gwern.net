@@ -2,7 +2,7 @@
 title: A/B testing long-form readability
 description: a log of experiments done on the site design, intended to render pages more readable
 created: 16 Jun 2012
-tags: experiments, statistics, computer science
+tags: experiments, statistics, computer science, meta
 status: in progress
 belief: possible
 ...
@@ -1922,24 +1922,24 @@ Analysis will be a little bit different. As usual, I'll be including old vs new 
 # Pivot table view on custom variable (`Pivot by: Custom Variable (Value 01); Pivot metrics: Visits Time reading (Goal 1 Conversion Rate)`)
 rates <- read.csv(stdin(),header=TRUE)
 Variant,Color,Old,N,Rate
-blues,blue,FALSE,854,0.1920
-blues,blue,TRUE,428,0.2850
-dark,dark,FALSE,917,0.1974
-dark,dark,TRUE,471,0.2229
-gray1,gray,FALSE,893,0.2004
-gray1,gray,TRUE,382,0.2723
-gray2,gray,FALSE,929,0.2013
-gray2,gray,TRUE,421,0.2375
-gray3,gray,FALSE,897,0.1795
-gray3,gray,TRUE,446,0.2646
-gray4,gray,FALSE,921,0.1878
-gray4,gray,TRUE,485,0.2062
-gray5,gray,FALSE,893,0.1669
-gray5,gray,TRUE,426,0.2629
-gray6,gray,FALSE,900,0.1967
-gray6,gray,TRUE,495,0.2485
-none,none,FALSE,886,0.1941
-none,none,TRUE,423,0.2530
+blues,blue,FALSE,3103,0.1463
+blues,blue,TRUE,1118,0.2397
+dark,dark,FALSE,3275,0.1420
+dark,dark,TRUE,1127,0.2076
+gray1,gray,FALSE,3117,0.1434
+gray1,gray,TRUE,1044,0.2452
+gray2,gray,FALSE,3304,0.1383
+gray2,gray,TRUE,1154,0.2166
+gray3,gray,FALSE,3173,0.1399
+gray3,gray,TRUE,1134,0.2178
+gray4,gray,FALSE,1174,0.1857
+gray4,gray,TRUE,667,0.2009
+gray5,gray,FALSE,3225,0.1222
+gray5,gray,TRUE,1105,0.2172
+gray6,gray,FALSE,3246,0.1312
+gray6,gray,TRUE,1221,0.2211
+none,none,FALSE,3261,0.1420
+none,none,TRUE,1112,0.2221
 
 
 rates$Successes <- rates$N * rates$Rate
@@ -1953,46 +1953,46 @@ rates$Color <- relevel(rates$Color, ref="none")
 # normal:
 g1 <- glm(cbind(Successes,Failures) ~ Old + Variant, data=rates, family=binomial); summary(g1)
 ...Coefficients:
-              Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.424776   0.069746  -20.43  < 2e-16
-OldTRUE       0.344266   0.046357    7.43  1.1e-13
-Variantblues  0.054814   0.095387    0.57     0.57
-Variantdark  -0.048749   0.094875   -0.51     0.61
-Variantgray1  0.060470   0.095605    0.63     0.53
-Variantgray2  0.000749   0.094983    0.01     0.99
-Variantgray3 -0.035813   0.095506   -0.37     0.71
-Variantgray4 -0.125343   0.095622   -1.31     0.19
-Variantgray5 -0.093873   0.096819   -0.97     0.33
-Variantgray6  0.000170   0.094052    0.00     1.00
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)   -1.8017     0.0424  -42.53   <2e-16
+OldTRUE        0.5541     0.0302   18.36   <2e-16
+Variantblues   0.0568     0.0582    0.98    0.329
+Variantdark   -0.0278     0.0584   -0.48    0.635
+Variantgray1   0.0502     0.0585    0.86    0.391
+Variantgray2  -0.0310     0.0583   -0.53    0.595
+Variantgray3  -0.0198     0.0586   -0.34    0.736
+Variantgray4   0.1367     0.0725    1.88    0.059
+Variantgray5  -0.1238     0.0597   -2.08    0.038
+Variantgray6  -0.0609     0.0584   -1.04    0.297
 
 # multi-level: variants nested in a color
 library(lme4)
 g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), data=rates, family=binomial); summary(g2); ranef(g2)
 ...Random effects:
  Groups        Name        Variance Std.Dev.
- Variant:Color (Intercept) 0        0
- Color         (Intercept) 0        0
+ Variant:Color (Intercept) 0.00216  0.0465
+ Color         (Intercept) 0.00000  0.0000
 Number of obs: 18, groups: Variant:Color, 9; Color, 4
 
 Fixed effects:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.4453     0.0283   -51.1  < 2e-16
-OldTRUE       0.3423     0.0463     7.4  1.5e-13
+(Intercept)  -1.8100     0.0237   -76.5   <2e-16
+OldTRUE       0.5564     0.0302    18.5   <2e-16
 
 Correlation of Fixed Effects:
         (Intr)
-OldTRUE -0.611
+OldTRUE -0.439
 $`Variant:Color`
            (Intercept)
-none:none            0
-blues:blue           0
-dark:dark            0
-gray1:gray           0
-gray2:gray           0
-gray3:gray           0
-gray4:gray           0
-gray5:gray           0
-gray6:gray           0
+none:none     0.004223
+blues:blue    0.035962
+dark:dark    -0.011289
+gray1:gray    0.031960
+gray2:gray   -0.013166
+gray3:gray   -0.006798
+gray4:gray    0.053515
+gray5:gray   -0.062971
+gray6:gray   -0.029867
 
 $Color
      (Intercept)
@@ -2006,22 +2006,22 @@ library(blme)
 bg2 <- bglmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), fixef.prior = normal, data=rates, family=binomial); ranef(bg2)
 ...$`Variant:Color`
            (Intercept)
-none:none     0.003525
-blues:blue    0.017952
-dark:dark    -0.009408
-gray1:gray    0.034027
-gray2:gray    0.011124
-gray3:gray   -0.003321
-gray4:gray   -0.038729
-gray5:gray   -0.025430
-gray6:gray    0.011189
+none:none    0.0004119
+blues:blue   0.0295241
+dark:dark   -0.0137998
+gray1:gray   0.0445175
+gray2:gray  -0.0157407
+gray3:gray  -0.0073325
+gray4:gray   0.0846883
+gray5:gray  -0.0830870
+gray6:gray  -0.0379749
 
 $Color
      (Intercept)
-none     0.00440
-blue     0.02241
-dark    -0.01174
-gray    -0.01390
+none   0.0002509
+blue   0.0179861
+dark  -0.0084068
+gray  -0.0090949
 
 library(lattice)
 q <- qqmath(ranef(bg2, condVar=TRUE))
@@ -2051,9 +2051,10 @@ penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184
 fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
               cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
 -->
-<!-- 4 complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC; 1 mention; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing -->
+<!-- complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC; 1 mention; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing; 1 mention in gwern.net comments -->
+<!-- HN complaints: https://news.ycombinator.com/item?id=7539390 6 complaints -->
 
-On 31 March, with total _n_ having reached 15652, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant `gray1`'s 22.38%, and wasting traffic.
+On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant `gray1`'s 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038).
 
 # Appendix
 ## Covariate impact on power
