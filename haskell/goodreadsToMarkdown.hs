@@ -2,7 +2,7 @@
 -- $ cabal install cassava stringsearch
 -- $ wget http://www.gwern.net/docs/gwern-goodreads.csv
 -- # Demonstration usage:
--- $ ./goodreadsToMarkdown.hs gwern-goodreads.csv > book-reviews.page
+-- $ cd ~/wiki/ && ./haskell/goodreadsToMarkdown.hs docs/gwern-goodreads.csv > book-reviews.page
 
 {- Background on parsing the GoodReads CSV export:
 
