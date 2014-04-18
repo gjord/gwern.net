@@ -2051,10 +2051,10 @@ penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184
 fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
               cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
 -->
-<!-- complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC; 1 mention; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing; 1 mention in gwern.net comments -->
+<!-- complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC, 1 email; 1 mention; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing, 1 dislike; 2 mentions in gwern.net comments -->
 <!-- HN complaints: https://news.ycombinator.com/item?id=7539390 6 complaints -->
 
-On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant `gray1`'s 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038).
+On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant `gray1`'s 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038). On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted. On 17 April, `dark` (16.00% vs 16.94%) was deleted.
 
 # Appendix
 ## Covariate impact on power
