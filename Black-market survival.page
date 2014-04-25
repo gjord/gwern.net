@@ -1,3 +1,16 @@
+<!--
+---
+title: Black-market risks
+description: Analysis of lifespans, deaths, and predictive factors
+created: 30 Oct 2013
+tags: statistics, predictions, Bitcoin, Silk Road
+status: in progress
+belief: possible
+...
+-->
+
+> I compile a dataset of 53 black-markets in the vein of the famous [Silk Road](Silk Road), recording their openings/closing and relevant characteristics. A survival analysis indicates the markets follow a Type TODO lifespan, with a median life of TODO months. Risk factors include TODO. With the best model, I generate estimates for the currently-operating markets.
+
 I am interested in websites selling drugs over Tor or i2p, using cryptocurrencies like Bitcoin/Litecoin/Dogecoin, allowing multiple sellers other than the site operators, and providing some sort of escrow functionality. This excludes clearnet sites like Topix, single-vendor shops like Modern Culture or Bungee54, carding shops like Tor Carders Market, hosting services like Cryuserv or Bad Wolf, black-market-focused forums like The Hub, and forums for buyers & sellers to deal directly with each other like The Majestic Garden.
 
 Silk Road Reloaded seems to've been abandoned. RAMP, Magic Shop, Silkk are excluded because they're in Russian or Finnish and I can't get good information about them. DrugMarket (`4yjes6zfucnh7vcj.onion`) is excluded because it reportedly has always been a scam. The Majestic Garden & Underground Market Board 3.0 are excluded because they are forums and do not do escrow for their users.
@@ -26,7 +39,7 @@ Market                   Start       End       Alive Closure   URL              
 Silk Road                2011-01-31 2013-10-02 FALSE raided    `silkroadvb5piz3r.onion` FALSE    FALSE BTC   custom     FALSE  FALSE 2     TRUE  -0.216 0.018  SR1 temporarily sold guns as part of "the Armory" but only for a brief time as sales were poor.
 BlackMarket Reloaded     2011-06-31 2013-12-02 FALSE hacked    `r6rcmz6lga4i5vb4.onion` FALSE    FALSE BTC   custom     TRUE   TRUE  1            4.170 0.102  backopy stopped buying on 2 Dec aggravated in part by a big theft, fully shutdown by 23 December. May reopen. BMR permitted gun sales, and also seems to have permitted credit card information sales, judging by angry feedback.
 Atlantis                 2013-03-26 2013-09-20 FALSE scam      `atlantisrky4es5q.onion` FALSE    FALSE BTC              FALSE  FALSE 0     FALSE  0.103 0.024  Atlantis's shutdown seems, judging by comments [on](http://www.reddit.com/r/atlantis/comments/1n5a2q/the_fall_of_atlantis_a_moderator_tells/) [Reddit](http://www.reddit.com/r/atlantis/comments/1ms7f9/alert_atlantis_marketplace_closing_down/) [pages](http://www.reddit.com/r/atlantis/comments/1n3qc7/atlantis_is_it_site_down_for_good/) & [All Things Vice](http://allthingsvice.com/2013/09/26/the-fall-of-atlantis-a-moderator-tells/) to have initially allowed withdrawals, but disabled it after a few days and then stole the remaining deposits+escrow+vendor-bonds.
-Sheep Marketplace        2013-02-28 2013-11-29 FALSE scam      `sheep5u64fi457aw.onion` FALSE    FALSE BTC   Nette      FALSE  TRUE  1     TRUE   4.759 0.093  withdrawals were halted before 29 Nov, but deposits & sales were ongoing. I choose 29 Nov as the day where the Sheep scam became irrefutably obvious
+Sheep Marketplace        2013-02-28 2013-11-29 FALSE scam      `sheep5u64fi457aw.onion` FALSE    FALSE BTC   Nette      FALSE  TRUE  1     TRUE   4.759 0.093  withdrawals were halted before 29 Nov, but deposits & sales were ongoing. I choose 29 Nov as the day where the Sheep scam became irrefutable
 Deepbay                  2013-06-31 2013-11-04 FALSE scam      `deepbay4xr3sw2va.onion` FALSE    FALSE BTC                           0     FALSE  0.859 0.035  http://www.reddit.com/r/Bitcoin/comments/1qaewa/deepbay_marketplace_owner_steals_sites_bitcoins/
 Budster                  2013-10-10 2013-10-20 FALSE scam      `budsterga5hcdxjn.onion` FALSE    FALSE BTC   WordPress  FALSE  FALSE 1     TRUE   0.327 0.056  http://www.reddit.com/r/Budster/comments/1ove9w/has_anyone_made_a_purchase_yet/ccw8srh http://www.reddit.com/r/DarkNetMarkets/comments/1xyixa/psa_cyruserv_is_down_for_good_budster_taf_hosting/ Budster did not seem to use genuine multisig and this enabled the scam: http://www.reddit.com/r/SilkRoad/comments/1opmha/budster_the_worlds_first_p2p_marketplace/
 Project Black Flag       2013-10-14 2013-10-28 FALSE scam      `ajd4yqq7ngzmqo3p.onion` FALSE    FALSE BTC   custom                  1     FALSE  0.506 0.063  http://www.reddit.com/r/DarkNetMarkets/comments/1peguv/pbf_rip/
@@ -75,25 +88,24 @@ Underground Market       2014-04-09            TRUE            `unground6baopdio
 Silk Street              2014-04-08            TRUE            `silkr2xyqsu73qhh.onion` FALSE    FALSE BTC   Bitwasp                 0     FALSE -0.141 0.075    [Announced on The Hub](http://thehub7dnl5nmcz5.onion/index.php?topic=2678.0)
 1776                     2014-04-19            TRUE            `n6tzonxy7sod7eqt.onion` FALSE    FALSE BTC                           0     FALSE -0.141 0.075    [Announced by DeepDotWeb](http://www.deepdotweb.com/2014/04/19/1776-market-automated-multi-signature-escrow/) & [on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/23gb2s/1776_market_automated_multisignature_escrow/). Not Bitwasp, given [the traceback on error pages](http://thehub7dnl5nmcz5.onion/index.php?topic=2889.msg22662#msg22662).
 Pigeon Market            2014-04-14            TRUE            `pigeonkcmw5h44lq.onion` FALSE    FALSE BTC              TRUE   TRUE  0     FALSE -0.141 0.075
-Alpaca Marketplace       2014-04-20            TRUE            `alpaca7bcqv2rnu3.onion` TRUE     FALSE BTC              TRUE   TRUE  0     FALSE -0.141 0.075    [Announced on The Hub](http://thehub7dnl5nmcz5.onion/index.php?topic=1428.0;all); policies based on [Secret Laboratory writeup](http://secretlaboratory.org/?p=10064 " *NEW* Alpaca Marketplace: Another new Dark Net Market ... but at least it has multi-signature escrow.")
+Alpaca Marketplace       2014-04-20            TRUE            `alpaca7bcqv2rnu3.onion` TRUE     FALSE BTC              TRUE   TRUE  0     FALSE -0.141 0.075    [Announced on The Hub](http://thehub7dnl5nmcz5.onion/index.php?topic=1428.0;all); policies based on [Secret Laboratory writeup](http://secretlaboratory.org/?p=10064 "*NEW* Alpaca Marketplace: Another new Dark Net Market ... but at least it has multi-signature escrow.")
 Tortuga 2                2014-04-23            TRUE            `l6hkncqo46wgzx7y.onion` FALSE    TRUE  LTC   Drupal     FALSE  FALSE 0     FALSE -0.141 0.075    [Announced on Reddit](http://www.reddit.com/r/DarkNetMarkets/comments/23sxwa/new_market_tortuga/); i2p: `wtat6dgz57j5xllu2j7htb7aydq5rgls6edg7e6lf2tumqn5ej3a.b32.i2p`/`tortuga-marketplace.i2p`
 
-<!--
-possible other variables: 2-factor-authentication, Vendor PGP enforced, FE status, ideology
-volume
-whether the operator seems ideological. how much money was lost when the site scammed or was hacked. apparent nationality of operator.
-media coverage
-number of employees
--->
-<!-- "The death rate of bitwasp marketplaces will always be higher because it lowers the barrier of entry to starting and launching your own BTC marketplace so less technical people with lesser funds to start the marketplace will use it and that demographic has a higher chance of failure."
+See also [DeepDotWeb's list](http://www.deepdotweb.com/2013/10/28/updated-llist-of-hidden-marketplaces-tor-i2p/ "Updated: List of Hidden Marketplaces (Tor & I2P)"), and the [DNM market list](http://www.reddit.com/r/DarkNetMarkets/wiki/index/sidebar).
 
-From a predictive standpoint, it doesn't much matter why Bitwasp correlates with shorter lifetimes - whether it's through greater likelihood of being hacked or self-selection by weakwilled/poor/uncommitted/incompetent operators. As long as it does, it'll improve predictions by predicting shorter lifetimes for Bitwasp-using marketplaces, and so it's less safe for buyers: even if the marketplace is using multisig, there's still some limited scope for an exit scam; it wastes one's investment in learning how to use a marketplace; and sellers lose any bond they put up. (Multisig is great and I've been advocating for it for a long time, but it's not a silver bullet.)
+I may add to the table other variables; possibly useful ones:
 
-In any case, I can try checking if using Bitwasp correlates with being hacked, not just shut down. The sample is currently small enough that the results won't mean much regardless, though. -->
+- 2-factor-authentication
+- Vendor PGP enforced
+- FE status
+- ideology: whether the operator seems ideological (I theorize SR1 may have lasted longer than most post-SR1 markets because Ulbricht's agorist ideology meant he was not profit-motivated & refused to do an exit scam or shutdown)
+- volume (at what time?)
+- how much money was lost when the site scammed or was hacked (only reasonably known for a few scams...)
+- apparent nationality of operator
+- media coverage
+- number of employees (can official claims be trusted?)
 
 <!-- I can't spider with wget: blue sky -->
-
-See also [DeepDotWeb's list](http://www.deepdotweb.com/2013/10/28/updated-llist-of-hidden-marketplaces-tor-i2p/ "Updated: List of Hidden Marketplaces (Tor & I2P)"), and the [DNM market list](http://www.reddit.com/r/DarkNetMarkets/wiki/index/sidebar).
 
 <!-- (Three Hares / Bad Wolf Hosting are excluded for apparently not being active yet.) Three Hares? http://www.reddit.com/r/DarkNetMarkets/comments/1qsbdp/three_hares_marketplace_is_now_live/ http://3haresyyuxpqqqdz.onion/ not selling as of 16 November 2013; projected live: 20 Dec 2013; inaccessible on 26 December 2013, apparently down on the 15th  What on earth is Bad Wolf Hosting? http://www.reddit.com/r/badwolfhosting AWOL: http://www.reddit.com/r/DarkNetMarkets/comments/1vk190/missing_site_missing_orders/ -->
 <!-- http://www.reddit.com/r/DarkNetMarkets/comments/1vu0aa/new_inviteonly_darknet_site_what_do_you_think/ http://www.topixslhezyytrvm.onion/ registered email 22 Jan 2014; 'Login or register if you have an invite.' 9 Feb 2014 -->
@@ -109,6 +121,22 @@ See also [DeepDotWeb's list](http://www.deepdotweb.com/2013/10/28/updated-llist-
 <!-- Darkroad planned: http://thehub7dnl5nmcz5.onion/index.php?topic=1699.0 https://bitcointalk.org/index.php?topic=499012.0;all -->
 <!-- TorBazaar: alpha & beta servers down 24 April 2014, forums up -->
 
+# Analysis
+
+<!-- "The death rate of bitwasp marketplaces will always be higher because it lowers the barrier of entry to starting and launching your own BTC marketplace so less technical people with lesser funds to start the marketplace will use it and that demographic has a higher chance of failure."
+
+From a predictive standpoint, it doesn't much matter why Bitwasp correlates with shorter lifetimes - whether it's through greater likelihood of being hacked or self-selection by weakwilled/poor/uncommitted/incompetent operators. As long as it does, it'll improve predictions by predicting shorter lifetimes for Bitwasp-using marketplaces, and so it's less safe for buyers: even if the marketplace is using multisig, there's still some limited scope for an exit scam; it wastes one's investment in learning how to use a marketplace; and sellers lose any bond they put up. (Multisig is great and I've been advocating for it for a long time, but it's not a silver bullet.)
+
+In any case, I can try checking if using Bitwasp correlates with being hacked, not just shut down. The sample is currently small enough that the results won't mean much regardless, though. -->
+
+# Predictions
+
+# See also
+
+- [Silk Road](Silk Road)
+- [Google products survival analysis](Google shutdowns) -(a similar analysis of a corpus of Google websites/services/products/software)
+- [Bitcoin is Worse is Better](Bitcoin is Worse is Better)
+
 # Appendix
 ## Return & volatility
 
@@ -121,7 +149,8 @@ dead <- as.Date(c("2013-10-02","2013-12-02","2013-09-20","2013-11-29","2013-11-0
                   "2014-03-28","2014-03-01","2014-04-07","2014-04-19","2014-04-20",
                   "2014-04-20","2014-03-20"))
 live <- as.Date("2014-04-24") # yesterday, default for live markets
-volatility <- read.csv("http://btcvol.info/csv", colClasses=c("Date","numeric","numeric","numeric", "numeric"))
+volatility <- read.csv("http://btcvol.info/csv",
+                       colClasses=c("Date","numeric","numeric","numeric", "numeric"))
 
 # 30-day return
 sapply(dead, function(d) { post   <- volatility[volatility$date==d,]$price;
