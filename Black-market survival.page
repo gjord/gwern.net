@@ -133,15 +133,162 @@ In any case, I can try checking if using Bitwasp correlates with being hacked, n
 <!--
 library(XML)
 black <- readHTMLTable(colClasses = c("character", "factor", "factor", "logical", "factor", "character", "logical", "logical", "factor", "factor", "logical", "logical", "integer", "logical", "numeric", "numeric", "character"), "/tmp/burl14902V6W.html")[[1]]
+black[black$Codebase=="",]$Codebase <- NA
 black$Start <- as.Date(black$Start); black$End <- as.Date(black$End)
 black[is.na(black$End),]$End <- as.Date("2014-04-25")
 black$Age <- black$End - black$Start
 black$Age <- as.integer(black$End - black$Start)
 
 library(survival)
-plot(survfit(Surv(Age, Alive, type="right") ~ 1, data=black))
+# plot(survfit(Surv(Age, Alive, type="right") ~ 1, data=black))
 
 cmodel <- coxph(Surv(Age, Alive) ~ Multisig + I2P + Coin + Codebase + Guns + Fraud + Hacks + Doxed + RoI + σ, data = black); cmodel
+
+black$End <- NULL;
+black$Start <- NULL;
+black$URL <- NULL;
+black$Notes <- NULL;
+black$Market <- NULL;
+
+library(mice)
+blackimp <- mice(black, m=100, printFlag=FALSE)
+fit <- with(blackimp, coxph(Surv(Age, Alive) ~ Multisig + I2P + Coin + Codebase + Guns + Fraud + Hacks + Doxed + RoI + σ, data = black))
+print(pool(fit))
+
+coxph.mids(Surv(Age, Alive) ~ Multisig + I2P + Coin + Codebase + Guns + Fraud + Hacks + Doxed + RoI + σ, blackimp)
+
+R> fit <- coxph.mids(Surv(Age, Alive) ~ Multisig + I2P + Coin + Guns + Fraud + Hacks + Doxed + RoI + σ, blackimp)
+There were 50 or more warnings (use warnings() to see the first 50)
+R> summary.impute(pool.impute(fit))
+Call: coxph.mids(formula = Surv(Age, Alive) ~ Multisig + I2P + Coin +
+    Guns + Fraud + Hacks + Doxed + RoI + σ, data = blackimp)
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+MultisigTRUE    1.056      0.617    1.71    0.115
+I2PTRUE        -0.501      1.016   -0.49    0.632
+Coin2         -14.539   9514.767    0.00    0.999
+Coin3         -13.956   9514.767    0.00    0.999
+Coin4           1.079      0.880    1.23    0.246
+Guns            0.661      0.644    1.03    0.329
+Fraud          -1.045      0.702   -1.49    0.168
+Hacks          -1.856      0.885   -2.10    0.060
+DoxedTRUE      -0.213      0.858   -0.25    0.808
+RoI            -1.753      2.393   -0.73    0.479
+σ              75.649     24.656    3.07    0.011
+
+Fraction of information about the coefficients
+                                      missing due to nonresponse:
+MultisigTRUE      I2PTRUE        Coin2        Coin3        Coin4         Guns        Fraud
+   6.387e-03    1.728e-02    1.678e-09    9.425e-10    5.840e-03    9.398e-02    1.036e-01
+       Hacks    DoxedTRUE          RoI            σ
+   1.683e-02    9.764e-03    1.415e-02    5.607e-02
+
+????? being hacked increases lifespan ????
+
+coxph.mids <- function (formula, data, ...) {
+
+     call <- match.call()
+     if (!is.mids(data)) stop("The data must have class mids")
+
+     analyses <- as.list(1:data$m)
+
+     for (i in 1:data$m) {
+       data.i        <- complete(data, i)
+       analyses[[i]] <- coxph(formula, data = data.i, ...)
+     }
+
+     object <- list(call = call, call1 = data$call,
+                    nmis = data$nmis, analyses = analyses)
+
+     return(object)
+}
+
+pool.impute <- function (object, method = "smallsample") {
+
+     if ((m <- length(object$analyses)) < 2)
+       stop("At least two imputations are needed for pooling.\n")
+
+     analyses <- object$analyses
+
+     k     <- length(coef(analyses[[1]]))
+     names <- names(coef(analyses[[1]]))
+     qhat  <- matrix(NA, nrow = m, ncol = k, dimnames = list(1:m,names))
+     u     <- array(NA, dim = c(m, k, k),
+                    dimnames = list(1:m, names, names))
+
+     for (i in 1:m) {
+       fit       <- analyses[[i]]
+       qhat[i, ] <- coef(fit)
+       u[i, , ]  <- vcov(fit)
+     }
+
+     qbar <- apply(qhat, 2, mean)
+     ubar <- apply(u, c(2, 3), mean)
+     e <- qhat - matrix(qbar, nrow = m, ncol = k, byrow = TRUE)
+     b <- (t(e) %*% e)/(m - 1)
+     t <- ubar + (1 + 1/m) * b
+     r <- (1 + 1/m) * diag(b/ubar)
+     f <- (1 + 1/m) * diag(b/t)
+     df <- (m - 1) * (1 + 1/r)^2
+
+     if (method == "smallsample") {
+
+       if( any( class(fit) == "coxph" ) ){
+
+         ### this loop is the hack for survival analysis ###
+
+         status   <- fit$y[ , 2]
+         n.events <- sum(status == max(status))
+         p        <- length( coefficients( fit )  )
+         dfc      <- n.events - p
+
+       } else {
+
+         dfc <- fit$df.residual
+       }
+
+       df <- dfc/((1 - (f/(m + 1)))/(1 - f) + dfc/df)
+     }
+
+     names(r) <- names(df) <- names(f) <- names
+     fit <- list(call = call, call1 = object$call, call2 = object$call1,
+                 nmis = object$nmis, m = m, qhat = qhat, u = u,
+                 qbar = qbar, ubar = ubar, b = b, t = t, r = r, df = df,
+                 f = f)
+
+     return(fit)
+}
+
+summary.impute <- function(object){
+
+      if (!is.null(object$call1)){
+        cat("Call: ")
+        dput(object$call1)
+      }
+
+      est  <- object$qbar
+      se   <- sqrt(diag(object$t))
+      tval <- est/se
+      df   <- object$df
+      pval <- 2 * pt(abs(tval), df, lower.tail = FALSE)
+
+      coefmat <- cbind(est, se, tval, pval)
+      colnames(coefmat) <- c("Estimate", "Std. Error",
+                                           "t value", "Pr(>|t|)")
+
+      cat("\nCoefficients:\n")
+      printCoefmat( coefmat, P.values=T, has.Pvalue=T, signif.legend=T )
+
+      cat("\nFraction of information about the coefficients
+                                      missing due to nonresponse:","\n")
+      print(object$f)
+
+      ans <- list( coefficients=coefmat, df=df,
+                   call=object$call1, fracinfo.miss=object$f )
+      invisible( ans )
+  }
+
 -->
 
 # Predictions
