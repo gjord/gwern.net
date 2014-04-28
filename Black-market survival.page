@@ -124,13 +124,15 @@ I may add to the table other variables; possibly useful ones:
 
 # Analysis
 
-<!-- "The death rate of bitwasp marketplaces will always be higher because it lowers the barrier of entry to starting and launching your own BTC marketplace so less technical people with lesser funds to start the marketplace will use it and that demographic has a higher chance of failure."
+TODO:
 
-From a predictive standpoint, it doesn't much matter why Bitwasp correlates with shorter lifetimes - whether it's through greater likelihood of being hacked or self-selection by weakwilled/poor/uncommitted/incompetent operators. As long as it does, it'll improve predictions by predicting shorter lifetimes for Bitwasp-using marketplaces, and so it's less safe for buyers: even if the marketplace is using multisig, there's still some limited scope for an exit scam; it wastes one's investment in learning how to use a marketplace; and sellers lose any bond they put up. (Multisig is great and I've been advocating for it for a long time, but it's not a silver bullet.)
+>> "The death rate of bitwasp marketplaces will always be higher because it lowers the barrier of entry to starting and launching your own BTC marketplace so less technical people with lesser funds to start the marketplace will use it and that demographic has a higher chance of failure."
+>
+> From a predictive standpoint, it doesn't much matter why Bitwasp correlates with shorter lifetimes - whether it's through greater likelihood of being hacked or self-selection by weakwilled/poor/uncommitted/incompetent operators. As long as it does, it'll improve predictions by predicting shorter lifetimes for Bitwasp-using marketplaces, and so it's less safe for buyers: even if the marketplace is using multisig, there's still some limited scope for an exit scam; it wastes one's investment in learning how to use a marketplace; and sellers lose any bond they put up. (Multisig is great and I've been advocating for it for a long time, but it's not a silver bullet.)
+>
+> In any case, I can try checking if using Bitwasp correlates with being hacked, not just shut down. The sample is currently small enough that the results won't mean much regardless, though.
 
-In any case, I can try checking if using Bitwasp correlates with being hacked, not just shut down. The sample is currently small enough that the results won't mean much regardless, though. -->
-
-<!--
+~~~{.R}
 library(XML)
 black <- readHTMLTable(colClasses = c("character", "factor", "factor", "logical", "factor", "character", "logical", "logical", "factor", "factor", "logical", "logical", "integer", "logical", "numeric", "numeric", "character"), "/tmp/burl14902V6W.html")[[1]]
 black[black$Codebase=="",]$Codebase <- NA
@@ -154,6 +156,28 @@ library(mice)
 blackimp <- mice(black, m=100, printFlag=FALSE)
 fit <- with(blackimp, coxph(Surv(Age, Alive) ~ Multisig + I2P + Coin + Codebase + Guns + Fraud + Hacks + Doxed + RoI + σ, data = black))
 print(pool(fit))
+
+fit <- with(blackimp, step(glm(Alive ~ Multisig + I2P + Coin + Guns + Fraud + Hacks + Doxed + RoI + σ, family=binomial), trace=0))
+formulas <- lapply(fit$an, formula)
+terms <- lapply(formulas, terms)
+vars <- unlist(lapply(terms, labels))
+(table(vars) / length(fit$analyses)) > 0.5
+vars
+   Doxed    Fraud     Guns    Hacks Multisig      RoI        σ
+    TRUE     TRUE    FALSE     TRUE     TRUE     TRUE     TRUE
+
+R> sfit <- with(blackimp, glm(Alive ~ Multisig + Fraud + Hacks + Doxed + RoI + σ, family=binomial)); summary(pool(sfit))
+                est        se         t    df Pr(>|t|)     lo 95     hi 95 nmis     fmi    lambda
+(Intercept)  -3.148    1.6996 -1.852497 44.69  0.07057    -6.572    0.2753   NA 0.05102 9.479e-03
+MultisigTRUE 18.597 2188.4131  0.008498 45.12  0.99326 -4388.782 4425.9760   NA 0.04157 9.753e-10
+Fraud        -1.230    1.0490 -1.172123 39.28  0.24821    -3.351    0.8918    6 0.16552 1.241e-01
+Hacks        -1.810    0.9734 -1.859646 44.41  0.06957    -3.772    0.1511    0 0.05715 1.562e-02
+DoxedTRUE    -1.831    1.2577 -1.455498 44.87  0.15249    -4.364    0.7027   NA 0.04711 5.561e-03
+RoI          -4.413    3.9271 -1.123841 44.93  0.26705   -12.323    3.4965    0 0.04581 4.257e-03
+σ            54.286   22.9068  2.369880 44.08  0.02224     8.123  100.4497    0 0.06432 2.281e-02
+
+Time-varying confounds: Multisig, RoI, and σ.
+
 
 coxph.mids(Surv(Age, Alive) ~ Multisig + I2P + Coin + Codebase + Guns + Fraud + Hacks + Doxed + RoI + σ, blackimp)
 
@@ -185,6 +209,9 @@ MultisigTRUE      I2PTRUE        Coin2        Coin3        Coin4         Guns   
    1.683e-02    9.764e-03    1.415e-02    5.607e-02
 
 ????? being hacked increases lifespan ????
+
+# written by Adaikalavan Ramasamy (https://stat.ethz.ch/pipermail/r-help/2007-May/132123.html)
+# modified by Robert Long (http://r.789695.n4.nabble.com/Plotting-survival-curves-after-multiple-imputation-td4658552.html)
 
 coxph.mids <- function (formula, data, ...) {
 
@@ -289,7 +316,7 @@ summary.impute <- function(object){
       invisible( ans )
   }
 
--->
+~~~
 
 # Predictions
 
