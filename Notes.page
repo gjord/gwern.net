@@ -177,7 +177,7 @@ And ["Mental Models and Programming Aptitude"](http://www.daimi.au.dk/~mec/publi
 
 > A test was designed that apparently examined a student's knowledge of assignment and sequence before a first course in programming but in fact was designed to capture their reasoning strategies. An experiment found two distinct populations of students: one could build and consistently apply a mental model of program execution; the other appeared either unable to build a model or to apply one consistently. The first group performed very much better in their end-of-course examination than the second in terms of success or failure. The test does not very accurately predict levels of performance, but by combining the result of six replications of the experiment, five in UK and one in Australia. We show that consistency does have a strong effect on success in early learning to program but background programming experience, on the other hand, has little or no effect.
 
-Nevertheless, I think there's something to this: your first computer language is really hard no matter your experience but the second is almost trivial, unless it's a truly alien paradigm.
+Nevertheless, I think there's something to this: your first computer language is really hard no matter your experience but the second is almost trivial, unless it's a truly alien paradigm. (This is interestingly different from growing up learning a natural language, where the first is very easy but the second is very difficult unless also learned in childhood.)
 
 This suggests some questions to me. Obviously on a raw information level, a natural language is *much* more complex than a computer language (the former are almost indefinitely complex with vocabulary, and the latter are engineered to be simple). Is it, relatively speaking, easier to learn a second natural language, or a second computer language? That is, if the difficulty of learning a second computer language is perhaps 10% of learning the first language, is that better or worse than the difficulty of learning a second natural language after one's native language? My own impression is that learning Haskell after I knew some Java was a lot easier than my first attempt at learning Haskell; when I learned some French after learning Haskell, it seemed easier than before but not *that* much easier. If this is so, it suggests that computer languages share more deep similarities than natural languages. What is the knack of programming? Why do people never seem to cease being programmers - what irreversible paradigm shift happens in their heads?
 
@@ -2115,3 +2115,91 @@ How was it? Well, it would've been better with more sauce. The cicadas themselve
 I have no one to blame but myself there. (Given how late I went hunting and many of my cicadas were crispy/hollow, I suspect I caught mostly males who had failed to mate.) I also somewhat miscalculated portions, and wound up stuffed to the gills with cicada & pasta.
 
 Overall, an interesting experience. The next cicada emergence I am near, I'll try the chocolate chip cicada cookie recipes.
+
+# Technology epigrams
+
+On programming:
+
+- The soul of modern man is so fallen & mutilated that he can feel despair only when trapped in dependency hell.
+- One programmer's dependency solution is another's version conflict.
+- Whether to check preconditions before a loop, or after: this is to define sanity and insanity.
+- Programmers' chairs and keyboards cause RSIs of the body; but what RSIs of the mind?
+- Will a just & merciful developer condemn good programs to bad smartphones?
+- To test whether a language despises its users, merely see whether "if (a = 1) {...}" is valid.
+- We have abstracted away from for-loops over arrays; but what idiom will abstract away the loops of our lives?
+- Backups are confronting one's fallibility & the transience of the world; we should not be surprised so few can do it.
+- When was the last time you saw Americans worry about Indians? A lesson there. But don't ask an Indian developer what, ask an American.
+- The pre-Internet PC was the real Wild West: a lone programmer and his compiler against hordes of quandaries.
+- A pause on my keyboard for thought - and how peaceful it must be in the CPU, as the nanoseconds slowly tick by...
+- "Bugs in working code are moments for reflection: how much we take on faith, because it *seems* to work!"
+- "Helping newbies requires an active memory - of all the times we ourselves failed to read the fucking manual."
+- Is programming Christian or Buddhist? Ask yourself how many of your programs have the Three Marks: _anitya_, _anatmain_, & _dukkha_.
+- "Once a program has taken on a definite form, it does not lose it until deletion."
+- How can we fear machines will separate humans when even in their source code, we can read the stamp of personality & style?
+- "Data, and the formats by which data are communicated, inevitably create a system permeated by illusions."
+- "A truck driver may drive for 20 years without ever improving; it must be confessed that many programmers do little better."
+- "Anyone satisfied by last year's code is not learning enough."
+- "I do not like this algorithm/language/tool" "Why?" "I am not up to it" - anyone, ever?
+- "The Internet is embarrassed by the browser."
+- "The HTML page is a stark data format: everywhere it goes, there is duplication of process. It is perfect for hiding information."
+- Web browser devs are condemned to reinvent the OS, poorly. What is to be done about this? What could ever have been done about this?
+- Mozilla now has its own community, browser, cloud, language, userland, and in a final concession to the obvious - Firefox OS!
+- There is but one constant in every program; and it is [see VM table entry 0x000007FEFC831010 ~> 0x00885ED010 ~> faulting in page...]
+- When you become frustrated with computers, please remember they are only cleverly-arranged sand. (When you become frustrated with people...)
+- We have made an AI breakthrough! With Prolog, we have created the intelligence of a 2-year-old child: "No. No. No. No."
+- "Uproot your functions from their ground and the dangling roots will be seen. More functions!"
+- Single-paradigm languages are admirable for pushing until it breaks - or doesn't!; cf Einstein & Brownian motion; Columbus & 'spherical Earth'
+
+Programming languages:
+
+- C, C#, Go, R, Rust: are these unsearchable names testimony to some feet of clay, or testaments to monstrous egos?
+- "Haskellers knows the type of everything & the value of nothing." Unless they've turned on extensions, then neither
+- C - fast and efficient and for when you don't have enough memory to remember things like why you don't want to use C.
+- "C programmers stay sane by imagining that all the other insecure buggy programs are thanks to avoidable unrepresentative reasons."
+- "Creating a new good programming language is so difficult it tends to be only fools who try."
+- "Just as winds preserve seas from stagnation, so also corruption in languages is the result of prolonged calm."
+- "That code is ill-written of which one must repent; as long as the PHP bears no evil fruit, the fool thinks it sweet as honey."
+
+Statistics:
+
+- Paleo? Atkins? Low-carb? Mediterranean? Maybe it is time to step back and ask: what should be the epistemology of food?
+- Power vs error vs sample size: painful tradeoff of statistics. Sins of omission, commission, & risk aversion - painful tradeoff of life?
+- Surprising linear models work at all, when they are the worst functional language ever: only operator \*, _n_ variables, _n_ steps, & output=sum.
+- "Often, I must calculate otherwise than I think. That is called diplomacy."
+
+Black-markets & Bitcoin:
+
+- "Ulbricht, Ulbricht, Ulbricht! A million coins were not enough for Ulbricht!"
+- We criticize Ulbricht for not knowing when to quit & enjoy life; but what are we ourselves refusing to quit?
+- DPR was a genius until he was a fool & a knave; Satoshi was a genius until...?
+- "A beginning is the time for taking the most delicate care; this every student of the OP SECurity knows."
+- Is crypto-libertarianism self-undermining? Can we handle the sausage factory of the black-markets?
+- When a centralized escrow market claims 1% commissions, it should append an asterisk: "and a one-time 100% fee if hacked or shut down".
+- Multisig vs centralized escrow: proof that convenience is a drug faster & more addictive than the finest heroin.
+- Lust for lucre is the root of all evil? Alert the theologians: the number of centralized black-markets is an index of Satanic activity!
+- If you find yourself surprised by man or market, remember you have learned as much about your own thinking as them: revelation comes in twos.
+- Bitcoin involves no new primitives or fancy proofs; perhaps cryptographers should all along have been studying sociology, not mathematics.
+- The horror of Bitcoin: money really is a social construct! & not always by nice-smelling well-groomed people in sharp suits.
+- A modest proposal: end tenure for computer security researchers. Given the status quo, if they're not rich, they can't be any good.
+- "What is the price of two satoshis - one copper coin? But not a single satoshi can fall to fees without your Eternal Blockchain knowing it."
+- The bravery of innovators: what sustained Satoshi during those lonely days in 2009 when no one cared enough even to attack Bitcoin?
+- One weird philo trick for analysis! Imagine worlds where X failed: "Sure Bitcoin died: a deflationary currency requiring ever more waste?"
+- Let us hope Karpeles will not be the Alcibiades of Bitcoin.
+
+General:
+
+- "Ricardo's theorem is the pons asinorum of economics": it always seems to be employed by asses with oddly high salaries.
+- "Neo, what if I told you... *everything you knew was correct*?" (That would be the biggest disappointment ever.)
+- Everything looks permanent until its secret is known. For all too many things, the beginning of fear is the beginning of knowledge.
+- At times, tolerance can be the most radical of positions to take; just watch when a weak group gains power.
+- I have always found the Mohs scale hard to remember.
+- "Reading a flame war: and all you people must once have been little children, who smiled of a summer day."
+
+Meta:
+
+- An aphorism is an algorithm, of we know not what input, we know not what output.
+- "It is easier to write an incorrect epigram than understand a correct one."
+- The epigram is a compressed, golfed, idea, with all the virtues - and sins - of golfed code.
+- If we measure the entropy of epigrams by how many people understand them, who is the gzip of epigrams? The xz? (...the ZPAQ...?)
+- Remember! Most strings are incompressible, most reals uncomputable, most theorems unprovable, most programs undecidable.
+- Should languages support the writer's convenience or the reader's understanding? Frame it as a status debate, and all becomes clear.
