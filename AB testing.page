@@ -1919,27 +1919,27 @@ Since I'm particularly interested in these results, and I think many other peopl
 Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser, which I'm not looking forward to. Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further:
 
 ~~~{.R}
-# Pivot table view on custom variable (`Pivot by: Custom Variable (Value 01); Pivot metrics: Visits Time reading (Goal 1 Conversion Rate)`)
+# Pivot table view on custom variable ("Secondary dimension: User Type"; "Pivot by: Custom Variable (Value 01); Pivot metrics: Sessions | Time reading (Goal 1 Conversion Rate)")
 rates <- read.csv(stdin(),header=TRUE)
 Variant,Color,Old,N,Rate
-blues,blue,FALSE,3103,0.1463
-blues,blue,TRUE,1118,0.2397
-dark,dark,FALSE,3275,0.1420
-dark,dark,TRUE,1127,0.2076
-gray1,gray,FALSE,3117,0.1434
-gray1,gray,TRUE,1044,0.2452
-gray2,gray,FALSE,3304,0.1383
-gray2,gray,TRUE,1154,0.2166
-gray3,gray,FALSE,3173,0.1399
-gray3,gray,TRUE,1134,0.2178
-gray4,gray,FALSE,1174,0.1857
-gray4,gray,TRUE,667,0.2009
-gray5,gray,FALSE,3225,0.1222
-gray5,gray,TRUE,1105,0.2172
-gray6,gray,FALSE,3246,0.1312
-gray6,gray,TRUE,1221,0.2211
-none,none,FALSE,3261,0.1420
-none,none,TRUE,1112,0.2221
+blues,blue,FALSE,8413,0.1586
+blues,blue,TRUE,3398,0.2340
+dark,dark,FALSE,5240,0.1405
+dark,dark,TRUE,2156,0.2059
+gray1,gray,FALSE,8645,0.1584
+gray1,gray,TRUE,3333,0.2436
+gray2,gray,FALSE,8635,0.1553
+gray2,gray,TRUE,3301,0.2287
+gray3,gray,FALSE,8541,0.1590
+gray3,gray,TRUE,3573,0.2275
+gray4,gray,FALSE,1176,0.1854
+gray4,gray,TRUE,671,0.1997
+gray5,gray,FALSE,3245,0.1220
+gray5,gray,TRUE,1180,0.2153
+gray6,gray,FALSE,4022,0.1330
+gray6,gray,TRUE,1723,0.2066
+none,none,FALSE,8626,0.1569
+none,none,TRUE,3353,0.2422
 
 
 rates$Successes <- rates$N * rates$Rate
@@ -1954,45 +1954,45 @@ rates$Color <- relevel(rates$Color, ref="none")
 g1 <- glm(cbind(Successes,Failures) ~ Old + Variant, data=rates, family=binomial); summary(g1)
 ...Coefficients:
              Estimate Std. Error z value Pr(>|z|)
-(Intercept)   -1.8017     0.0424  -42.53   <2e-16
-OldTRUE        0.5541     0.0302   18.36   <2e-16
-Variantblues   0.0568     0.0582    0.98    0.329
-Variantdark   -0.0278     0.0584   -0.48    0.635
-Variantgray1   0.0502     0.0585    0.86    0.391
-Variantgray2  -0.0310     0.0583   -0.53    0.595
-Variantgray3  -0.0198     0.0586   -0.34    0.736
-Variantgray4   0.1367     0.0725    1.88    0.059
-Variantgray5  -0.1238     0.0597   -2.08    0.038
-Variantgray6  -0.0609     0.0584   -1.04    0.297
+(Intercept)  -1.66547    0.02479  -67.19  < 2e-16
+OldTRUE       0.49388    0.01969   25.08  < 2e-16
+Variantblues -0.00736    0.03386   -0.22     0.83
+Variantdark  -0.15754    0.03981   -3.96  7.6e-05
+Variantgray1  0.01004    0.03367    0.30     0.77
+Variantgray2 -0.03355    0.03394   -0.99     0.32
+Variantgray3 -0.01830    0.03368   -0.54     0.59
+Variantgray4  0.02227    0.06414    0.35     0.73
+Variantgray5 -0.24265    0.04883   -4.97  6.7e-07
+Variantgray6 -0.19583    0.04367   -4.48  7.3e-06
 
 # multi-level: variants nested in a color
 library(lme4)
 g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), data=rates, family=binomial); summary(g2); ranef(g2)
 ...Random effects:
  Groups        Name        Variance Std.Dev.
- Variant:Color (Intercept) 0.00216  0.0465
+ Variant:Color (Intercept) 0.00724  0.0851
  Color         (Intercept) 0.00000  0.0000
 Number of obs: 18, groups: Variant:Color, 9; Color, 4
 
 Fixed effects:
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.8100     0.0237   -76.5   <2e-16
-OldTRUE       0.5564     0.0302    18.5   <2e-16
+(Intercept)  -1.7334     0.0312   -55.5   <2e-16
+OldTRUE       0.4941     0.0197    25.1   <2e-16
 
 Correlation of Fixed Effects:
         (Intr)
-OldTRUE -0.439
+OldTRUE -0.226
 $`Variant:Color`
            (Intercept)
-none:none     0.004223
-blues:blue    0.035962
-dark:dark    -0.011289
-gray1:gray    0.031960
-gray2:gray   -0.013166
-gray3:gray   -0.006798
-gray4:gray    0.053515
-gray5:gray   -0.062971
-gray6:gray   -0.029867
+none:none      0.06290
+blues:blue     0.05601
+dark:dark     -0.07869
+gray1:gray     0.07224
+gray2:gray     0.03174
+gray3:gray     0.04595
+gray4:gray     0.06031
+gray5:gray    -0.14008
+gray6:gray    -0.10813
 
 $Color
      (Intercept)
@@ -2006,22 +2006,22 @@ library(blme)
 bg2 <- bglmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), fixef.prior = normal, data=rates, family=binomial); ranef(bg2)
 ...$`Variant:Color`
            (Intercept)
-none:none    0.0004119
-blues:blue   0.0295241
-dark:dark   -0.0137998
-gray1:gray   0.0445175
-gray2:gray  -0.0157407
-gray3:gray  -0.0073325
-gray4:gray   0.0846883
-gray5:gray  -0.0830870
-gray6:gray  -0.0379749
+none:none      0.03862
+blues:blue     0.03412
+dark:dark     -0.05602
+gray1:gray     0.07876
+gray2:gray     0.03726
+gray3:gray     0.05181
+gray4:gray     0.07168
+gray5:gray    -0.14585
+gray6:gray    -0.10969
 
 $Color
      (Intercept)
-none   0.0002509
-blue   0.0179861
-dark  -0.0084068
-gray  -0.0090949
+none    0.022730
+blue    0.020078
+dark   -0.032969
+gray   -0.009433
 
 library(lattice)
 q <- qqmath(ranef(bg2, condVar=TRUE))
@@ -2051,10 +2051,10 @@ penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184
 fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
               cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
 -->
-<!-- complaints so far: 1 on Reddit, 2 anonymously, 1 on IRC, 1 email; 1 mention; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing, 1 dislike; 2 mentions in gwern.net comments -->
+<!-- complaints so far: 2 on Reddit, 2 anonymously, 1 on IRC, 1 email; 2 mentions on IRC; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing, 1 dislike; 2 mentions in gwern.net comments -->
 <!-- HN complaints: https://news.ycombinator.com/item?id=7539390 6 complaints -->
 
-On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant `gray1`'s 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038). On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted. On 17 April, `dark` (16.00% vs 16.94%) was deleted.
+On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant's 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038). On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted. On 17 April, `dark` (16.00% vs 16.94%) was deleted. On 30 April, I deleted `gray2` (17.56% vs 18.07%).
 
 # Appendix
 ## Covariate impact on power
