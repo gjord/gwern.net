@@ -6,8 +6,6 @@ status: in progress
 belief: likely
 ...
 
-<!-- <a href="http://examine.com/referfriend/examinecom/gwern1"><img alt="Advertisement for the Examine.com supplement guide" src="http://e004777c130eade00234-5ddb36df15af65ab8482e83373c53fe5.r41.cf1.rackcdn.com/images/353.png"></a> -->
-
 A record of [nootropics](!Wikipedia) I have tried, with thoughts about which ones worked and did not work for me. These anecdotes should be considered only as anecdotes, and one's efforts with nootropics a hobby to put only limited amounts of time into due to the inherent limits of drugs as a force-multiplier compared to other things like programming[^Brand]; for an ironic counterpoint, I suggest the reader listen to [a video](http://www.youtube.com/watch?v=DGxPHolNU3c) of [Jonathan Coulton](!Wikipedia)'s ["I Feel Fantastic"](http://www.jonathancoulton.com/wiki/index.php/I_Feel_Fantastic) while reading.
 
 [^Brand]: [Stewart Brand](http://www.guardian.co.uk/books/2013/may/05/stewart-brand-whole-earth-catalog "Stewart Brand's Whole Earth Catalog, the book that changed the world: Stewart Brand was at the heart of 60s counterculture and is now widely revered as the tech visionary whose book anticipated the web. We meet the man for whom big ideas are a way of life") on the '60s:
@@ -164,6 +162,34 @@ The [adrafinil](!Wikipedia)/Olmifon (bought simultaneously with the [hydergine](
 # Aniracetam
 
 Very expensive; I noticed minimal improvements when combined with sulbutiamine & piracetam+choline. Definitely not worthwhile for me.
+
+<!--
+
+# Bacopa monnieri
+
+https://en.wikipedia.org/wiki/Bacopa_monnieri
+http://examine.com/supplements/Bacopa+monnieri/
+http://www.reddit.com/r/Nootropics/search?q=bacopa&restrict_sr=on&sort=relevance&t=all
+http://www.google.com/cse?cx=partner-pub-9915544980764832:1644670702&ie=UTF-8&q=bacopa#gsc.tab=0&gsc.q=bacopa&gsc.page=1
+sleepiness? http://lesswrong.com/lw/e6h/group_rationality_diary_82012/78ua
+
+"The Cognitive-Enhancing Effects ofBacopa monnieri: A Systematic Review of Randomized, Controlled Human Clinical Trials" 2012
+"Meta-analysis of randomized controlled trials on cognitive effects of Bacopa monnieri extract" 2014
+weak reviews http://slatestarcodex.com/2014/02/16/nootropics-survey-results-and-analysis/
+
+Bacognize http://www.reddit.com/r/Nootropics/comments/21zqvh/purityheavy_metals_testing_results/
+http://nootropicsdepot.com/bacopa-monnieri-45-bacosides-extract-powder/
+$24.99
+125g x 1
+45%
+5.0g/$
+
+http://www.amazon.com/Vitacost-Bacopa-Extract-Featuring-Bacognize/dp/B00GO6022K/
+$13
+0.3g x 120
+45%
+2.8g/$
+-->
 
 # Beta-phenylethylamine (PEA)
 
@@ -975,9 +1001,15 @@ PPV = (1 - β)R/(R - βR + α)
 14. 9 - 15 March: 1
 
     16 - 22 March: 0
-15. 23 - 29? March: ?
+15. 23 - 29 March: 0
 
-    30? March - 5? April: ?
+    30 March - 5 April: 1
+16. 6 - 12 April: 0
+
+    13 - 19 April: 1
+17. 20 - 26 April: 0
+
+    27 April - 3 May: 1 <!-- subsequent non-randomized: 4 May -->
 
 # Melatonin
 
@@ -1654,7 +1686,7 @@ print(c(n, sum(bs$t<=alpha)/length(bs$t)))
 
 As it happened, [Health Supplement Wholesalers](http://healthsupplementwholesalers.com/) offered me a sample of their products, including their [5g Noopept powder](http://healthsupplementwholesalers.com/products/noopept) (\$13). I'd never used HSW before & they had [some issues in the past](http://www.reddit.com/r/Nootropics/wiki/faq#wiki_is_health_supplement_wholesalers_.28hsw.29_.2F_your_brain_and_body_supplements_.2F_build_own_blend_supplements_.28byob.29__.2F_supplement_nexus_.2F_nootropicnexus_.2F_supplements4less_.28they_go_by_many_names.29_a_reliable_supplier.3F); but I haven't seen any [recent complaints](http://www.reddit.com/r/Nootropics/search?q=%22Health+Supplement+Wholesalers%22+OR+HSW&sort=new&restrict_sr=on), so I was willing to try them. My 5g from batch #130830 arrived quickly (photos: [packaging](/images/nootropics/noopept-hsw-packet.jpg), [powder contents](/images/nootropics/noopept-hsw-powder.jpg)). I tried some (tastes just slightly unpleasant, like an ultra-weak piracetam), and I set about capping the fluffy white flour-like powder with the tiny little scoop they provide.
 
-It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to allocate the Noopept as evenly as possible (3 little scoops per pill) which the HSW packaging suggested would be 10-30mg; running out after 432 implies I managed to get ~12mg into each ($\frac{5000}{432}=11.6$). At 2 pills a day, the experiment will run under a year. I don't want to collide with the magnesium or lithium experiments, so I'll use paired blocks of 3 days, which will help with the reported tolerance of Noopept. To make things more interesting, I think I would like to try randomizing different dosages as well: 12mg, 24mg, and 36mg (1/2/3 pills). Then I can regress over dose amount, and then meta-regress including the previous experiment.
+It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to allocate the Noopept as evenly as possible (3 little scoops per pill) which the HSW packaging suggested would be 10-30mg; running out after 432 implies I managed to get ~12mg into each ($\frac{5000}{432}=11.6$). At 2 pills a day, the experiment will run under a year. I don't want to collide with the magnesium or lithium experiments, so I'll use paired blocks of 3 days, which will help with the reported tolerance of Noopept. To make things more interesting, I think I would like to try randomizing different dosages as well: 12mg, 24mg, and 36mg (1-3 pills); on 5 May 2014, because I wanted to finish up the experiment earlier, I decided to add 2 larger doses of 48 & 60mg (4-5 pills) as options. Then I can regress over dose amount, and then meta-regress including the previous experiment.
 
 1. 20mg: 15 September - 17 September: 0
 
@@ -1737,16 +1769,37 @@ It took 4 hours to cap 432 Noopept pills and another 432 flour pills. I tried to
 27. 10mg: 4 March - 6 March: 1
 
     7 March - 9 March: 0
-28. 30mg: 10 - 11 March: 0; accidentally unblinded & restarted on the 12th (a spare rice placebo, which is visibly different from the flour/noopept capsules,  was mixed in)
+28. 30mg: 10 - 11 March: 0; accidentally unblinded & restarted on the 12th (a spare rice placebo, which is visibly different from the flour/Noopept capsules,  was mixed in)
 29. 30mg: 12 - 14 March : 1
 
     15 - 17 March: 0
 30. 20mg: 18 - 20 March: 0
 
     21 - 23 March: 1
-31. 10mg: 24 - 26? March: ?
+31. 10mg: 24 - 26 March: 1
 
-    27? - 30? March: ?
+    27 - 29 March: 0
+32. 20mg: 30 - 1 April: 0
+
+    2 - 4 April: 1
+33. 10mg: 5 - 7 April: 1
+
+    8 - 10 April: 0
+34. 30mg: 11 - 13 April: 1
+
+    14 - 16 April: 0
+35. 20mg: 17 - 19 April: 0
+
+    20 - 22 April: 1
+36. 10mg: 23 - 25 April: 1
+
+    26 - 28 April: 0
+37. 30mg: 29 - 1 May: 1
+
+    2 - 4 May: 0
+38. 40mg: 5 - 7? May: ?
+
+    8? - 10? May: ?
 
 # Oxiracetam
 
@@ -2263,9 +2316,10 @@ Sep 23: 20m
 26
 27
 28
-1 Oct
-8
-9
+Oct
+01
+08
+09
 12
 13
 15
@@ -2330,9 +2384,22 @@ March
 23
 25
 27
+29
+April
+03
+05
+13
+17
+21
+23
+26
+28
+May
+01
+04
 -->
 <!-- Aspirin: http://lesswrong.com/r/discussion/lw/b1g/daily_lowdose_aspirin_round_2/9lld started 24 August 2013; break 23-26 Dec -->
 <!-- Multivitamin: started 24 August 2013; break 23-27 Dec -->
-<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7, 12, 14, 17, 22, 25, 28, 30 October; 3, 7, 10, 13, 16, 19, 22, 26, 29 November; 2, 5, 7, 12, 15, 17, 19, 21, 23, 28 December; 2014: 01 January; 03, 05, 08, 11, 15, 17, 20, 26, 28 Jan; 2, 5, 7, 13, 17, 21, 24 February; 2, 7, 8, 13, 17, 25 March -->
+<!-- Iron: 24, 25, 26, 28 August 2013; 2, 4, 8, 14, 18, 21, 25, 28 September; 1, 4, 7, 12, 14, 17, 22, 25, 28, 30 October; 3, 7, 10, 13, 16, 19, 22, 26, 29 November; 2, 5, 7, 12, 15, 17, 19, 21, 23, 28 December; 2014: 01 January; 03, 05, 08, 11, 15, 17, 20, 26, 28 Jan; 2, 5, 7, 13, 17, 21, 24 February; 2, 7, 8, 13, 17, 25, 31 March; 3, 5, 18, 22, 26, 30 April; 2 May -->
 <!-- Nicotine: 03, 07 June 2013: 4mg gum; 22 June 2013: 2mg gum; 24 June 2013: 2mg gum; 1 July: 2mg gum; 9 July, 2mg gum; 20 July, 2mg gum; 20 August, 3mg gum; 5, 6 September, 1mg gum; 20 Sept, 1mg gum; 2 October: 2mg; 16 October: 1mg; 22 October: 1mg; 29 Oct: 1mg; 6 Nov: 1mg; 8 Nov: 2mg; 14 Nov: 1mg; 15: 3mg; 21 Nov: 2mg; 30 Nov: 1mg; 30 Dec: 2mg; 2014: January: 05: 4mg gum; 20 February: 1mg gum; 18 March: 1mg gum -->
 <!-- Masturbation: 2009-2012; skip: 23-27 December 2013, 11 January 2014 -->
