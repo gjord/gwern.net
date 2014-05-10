@@ -53,14 +53,6 @@ The shutdown of the popular service [Google Reader](!Wikipedia), announced on [1
 
     The most popular feed on Google Reader in March 2013 had [24.3m subscribers](http://googlesystem.blogspot.com/2013/03/google-reader-data-points.html) (some [pixel-counting](http://googlesystem.blogspot.com/2013/03/google-reader-data-points.html?google_comment_id=z12wjrqpao3qhjgl223zzv1h4s2hx5na504) of [an official user-count graph](http://googlereader.blogspot.com/2010/09/welcome-and-look-back.html) & inference from a [leaked video](http://blogoscoped.com/forum/108194.html) suggests Reader in total may've had >36m users in Jan 2011). Jason Scott in 2009 reminded us that this lack of transparency is completely predictable: "Since the dawn of time, companies have hired people whose entire job is to tell you everything is all right and you can completely trust them and the company is as stable as a rock, and to do so until they, themselves, are fired because the company is out of business."
 
-<!-- https://groups.google.com/d/msg/google-ajax-search-api/OaGf0eP57js/aViIaxWxL4UJ
-"Hi everyone,
-
-This week's Google Reader announcement has no impact on the Feed API.  As in the past, we will continue to post explicitly whenever we have news about changes to this or other APIs.
-
-Thanks,
-Adam" followup on Feed API scheduled on 6 May 2014 -->
-
 In the case of Reader, while Reader destroyed the original RSS reader market, there still exist some usable alternatives; the main damage is a shrinkage in the RSS audience as inevitably many users choose not to invest in a new reader or give up, and an irreversible loss of Reader's uniquely comprehensive RSS archives covering back to 2005. Although to be fair, I should mention two major points in favor of Google:
 
 1. a reason I did and still do use Google services is that, with a few lapses like [Website Optimizer](AB testing#max-width) aside, they are almost unique in enabling users to back up their data via the work of the [Google Data Liberation Front](!Wikipedia) and have been far more proactive than many companies in encouraging users to back up data from dead services - for example, in automatically copying Buzz users' data to their Google Drive.
@@ -719,6 +711,8 @@ Timely 2014-01-04 closed-source application Bitspin acquisition non-profit (sinc
 Nest: "Nest Learning Thermostat", "Protect"  13 January 2013 https://investor.google.com/releases/2014/0113.html http://techcrunch.com/2014/01/13/google-just-bought-connected-device-company-nest-for-3-2b-in-cash/ https://nest.com/blog/2014/01/13/nest-google-and-you/ acquisition thing for-profit "google nest"  'About 87,300,000 results (0.42 seconds) '
 Google Currents: dead 19 February 2014 http://www.androidpolice.com/2014/02/19/google-currents-is-officially-dead-with-latest-update-transitions-users-to-play-newsstand-and-disappears-for-good/
 Wildfire 31 July 2012 http://wildfireapp.blogspot.com/2012/07/wildfire-is-joining-google.html acquisition social for-profit Maintenance stops 1 September 2014 "A source tells us that Wildfire has begun contacting its clients — which have included Cisco, Amazon, DQ, Gap, Jamba Juice, and McCann — to tell them that their business would no longer be serviced after the end of 2015."; shutdown: http://wildfireapp.blogspot.com/2014/03/accelerating-our-wildfire-integration.html
+Know Your Candidate http://www.google.co.in/elections/ed/in/districts http://www.businessinsider.in/Indian-Election-Fever-Has-Hit-Google-As-They-Launch-KnowYour-Candidate-Tool/articleshow/33444019.cms 8 April 2014 website nonprofit non-FLOSS 'google "know your candidate"' 25 April 2014: 2,190,000 results
+TODO: Hangout, Photo
 -->
 
 # Appendix
@@ -1030,7 +1024,7 @@ system("optipng -o9 -fix ~/wiki/images/google/*.png", ignore.stdout = TRUE)
 
 While the hit-counts are a possible form of leakage, I accidentally caused a clear case of leakage while seeing how random forests would do in predicting shutdowns.
 
-One way to get data leakage is if we include the end-date; early on in my analysis I removed the `Dead` variable but it didn't occur to me to remove the `Ended` date factor. The random forest would predict correctly *every single shutdown* except for 8. How did it turn in this astonishingly correct set of predictions and why did it get those wrong? Because the 8 products are correctly marked in the original dataset as "dead", but had been scheduled by Google to die *after* the day I was running the code. So it turned out that the random forests were just emitting 'dead' for everything with an end date before 2013-04-04, and alive for everything thereafter!
+One way to get data leakage is if we include the end-date; early on in my analysis I removed the `Dead` variable but it didn't occur to me to remove the `Ended` date factor. The random forest would predict correctly *every single shutdown* except for 8, for an error-rate of 2%. How did it turn in this nearly-omniscient set of predictions and why did it get those 8 wrong? Because the 8 products are correctly marked in the original dataset as "dead" because their shutdown had been announced by Google, but had been scheduled by Google to die *after* the day I was running the code. So it turned out that the random forests were just emitting 'dead' for 'anything with an end date before 2013-04-04', and alive for everything thereafter!
 
 ~~~{.R}
 library(randomForest)
@@ -1066,3 +1060,10 @@ Confusion matrix:
 FALSE   226    0     0.00000
 TRUE      8  115     0.06504
 ~~~
+
+<!--
+http://blog.detectify.com/post/82370846588/how-we-got-read-access-on-googles-production-servers
+13:03:04 <@gwern> '... And this is why you want to discontinue products and services your engineers can't be motivated to maintain. Amazing. This should scare
+                  anyone who has ever left an old side project running; I could see a lot of companies doing a product/service portfolio review based on this
+                  as a case study.' https://news.ycombinator.com/item?id=7571942 no kidding
+-->
