@@ -2085,6 +2085,10 @@ I was a little skeptical that this was a major concern much less one worth expen
 > difference between X and Y visitors would even cost you that
 > much power...
 
+[Lewis & Rao 2013](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2367103 "On the Near Impossibility of Measuring the Returns to Advertising") note that:
+
+> ...we conditioned on the user level covariates listed in the column labeled by the vector W in Table 1 using several methods to strengthen power; such panel techniques predict and absorb residual variation. Lagged sales are the best predictor and are used wherever possible, reducing variance in the dependent variable by as much as 40%...However, seemingly large improvements in R^2^ lead to only modest reductions in standard errors. A little math shows that going from $R^2 = 0$ in the univariate regression to $R^2_{|w}$ = 50% yields a sublinear reduction in standard errors of 29%. Hence, the modeling is as valuable as doubling the sample - a significant improvement, but one that does not materially change the measurement difficulty. An order-of-magnitude reduction in standard errors would require $R^2_{|w}$ = 99%, perhaps a “nearly impossible” goal.
+
 In particular, if you lost a *lot* of power, wouldn't that imply randomized trials were inefficient or impossible? The point of randomization is that it eliminates the impact of the indefinitely many observed and unobserved variables to let you do causal inference.
 
 ### Power simulation
