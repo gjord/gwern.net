@@ -83,7 +83,7 @@ handleISBN i = case i of
                 Just i' -> (getAmazonPage i', "ISBN: " ++ show i')
 
                 where getAmazonPage :: Int -> String
-                      getAmazonPage ibn = "http://www.amazon.com/gp/search/ref=sr_adv_b/?search-alias=stripbooks&unfiltered=1&field-isbn=" ++ show ibn
+                      getAmazonPage ibn = "http://www.amazon.com/s?ie=UTF8&field-isbn=" ++ show ibn ++ "&page=1&rh=i:stripbooks"
 
 handleRating :: Int -> String
 handleRating stars = replicate stars '★'
