@@ -345,7 +345,7 @@ The original hits variable has the wrong sign, as expected of data leakage; now 
 
 The logistic regression helped winnow down the variables but is limited to the binary outcome of shutdown or not; it can't use the potentially very important variable of how many days a product has survived for the obvious reason that *of course* mortality will increase with time! ("But this long run is a misleading guide to current affairs. In the long run we are all dead.")
 
-For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration. Not being previously familiar with the area, I drew on Wikipedia, [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf), [Bewick et al 2004](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1065034/ "Statistics review 12: Survival analysis"), [Zhou's tutorial](http://www.www.ms.uky.edu/~mai/Rsurv.pdf "Use Software R to do Survival Analysis and Simulation. A tutorial"), and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/) for the following results using the `survival` library (see also [CRAN Task View: Survival Analysis](http://cran.r-project.org/web/views/Survival.html)). Any errors are mine.
+For looking at survival over time, [survival analysis](!Wikipedia) might be a useful elaboration. Not being previously familiar with the area, I drew on Wikipedia, [Fox & Weisberg's appendix](http://socserv.mcmaster.ca/jfox/Books/Companion/appendix/Appendix-Cox-Regression.pdf), [Bewick et al 2004](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1065034/ "Statistics review 12: Survival analysis"), [Zhou's tutorial](https://web.archive.org/web/20130402204254/http://www.ms.uky.edu/~mai/Rsurv.pdf "Use Software R to do Survival Analysis and Simulation. A tutorial"), and Hosmer & Lemeshow's [_Applied Survival Analysis_](http://www.amazon.com/Applied-Survival-Analysis-Regression-Probability/dp/0471754994/) for the following results using the `survival` library (see also [CRAN Task View: Survival Analysis](http://cran.r-project.org/web/views/Survival.html)). Any errors are mine.
 
 The initial characterization gives us an optimistic median of 2824 days (note that this is higher than Arthur's mean of 1459 days because it addressed the conditionality issue discussed earlier by including products which were never canceled, and I made a stronger effort to collect pre-2009 products), but the lower bound is not tight and too little of the sample has died to get an upper bound:
 
@@ -461,7 +461,7 @@ This all makes sense to me. I find particularly interesting the profit and socia
 
 ### Random forests
 
-Because I can, I was curious how [random forests](!Wikipedia) ([Breiman 2001](http://www.oz.berkeley.edu/~breiman/randomforest2001.pdf "Random Forests")) might stack up to the logistic regression and against a base-rate predictor (that nothing was shut down, since ~65% of the products are still alive).
+Because I can, I was curious how [random forests](!Wikipedia) ([Breiman 2001](https://web.archive.org/web/20140430075247/http://oz.berkeley.edu/~breiman/randomforest2001.pdf "Random Forests")) might stack up to the logistic regression and against a base-rate predictor (that nothing was shut down, since ~65% of the products are still alive).
 
 With [`randomForest`](http://cran.r-project.org/web/packages/randomForest/index.html), I trained a random forest as a classifier, yielding reasonable looking error rates:
 
@@ -713,6 +713,7 @@ Google Currents: dead 19 February 2014 http://www.androidpolice.com/2014/02/19/g
 Wildfire 31 July 2012 http://wildfireapp.blogspot.com/2012/07/wildfire-is-joining-google.html acquisition social for-profit Maintenance stops 1 September 2014 "A source tells us that Wildfire has begun contacting its clients — which have included Cisco, Amazon, DQ, Gap, Jamba Juice, and McCann — to tell them that their business would no longer be serviced after the end of 2015."; shutdown: http://wildfireapp.blogspot.com/2014/03/accelerating-our-wildfire-integration.html
 Know Your Candidate http://www.google.co.in/elections/ed/in/districts http://www.businessinsider.in/Indian-Election-Fever-Has-Hit-Google-As-They-Launch-KnowYour-Candidate-Tool/articleshow/33444019.cms 8 April 2014 website nonprofit non-FLOSS 'google "know your candidate"' 25 April 2014: 2,190,000 results
 TODO: Hangout, Photo
+6 May 2014 http://www.digitaljournal.com/pr/1903697 for-profit acquisition service https://www.google.com/search?num=100&q=google%20ezanga 14 May 2014 '34,400 results'
 -->
 
 # Appendix
