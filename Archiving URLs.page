@@ -55,7 +55,7 @@ With that in mind, one can consider remedies. (If we lie to ourselves and say it
 The first remedy is to learn about broken links as soon as they happen, which allows one to react quickly and scrape archives or search engine caches (['lazy preservation'](http://www.cs.odu.edu/~fmccown/research/lazy/)). I currently use [`linkchecker`](http://wummel.github.io/linkchecker/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
 
 ~~~{.bash}
-@monthly linkchecker www.gwern.net --ignore-url=^mailto --ignore-url=^irc --anchors --file-output=html
+@monthly linkchecker --check-extern --timeout=35 --no-warnings --ignore-url=^mailto --ignore-url=^irc --ignore-url=http://.*\.onion --ignore-url=paypal.com --ignore-url=web.archive.org --file-output=html http://www.gwern.net
 ~~~
 
 Just this command would turn up many false positives. For example, there would be several hundred warnings on Wikipedia links because I link to redirects; and `linkchecker` respects [robots.txt](!Wikipedia)s which forbid it to check liveness, but emits a warning about this. These can be suppressed by editing `~/.linkchecker/linkcheckerrc` to say `ignorewarnings=http-moved-permanent,http-robots-denied` (the available warning classes are listed in `linkchecker -h`).
@@ -188,7 +188,7 @@ So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in 
 Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
 
 ~~~{.bash}
-nice linkchecker -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org
+nice linkchecker --check-extern -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org
     | fgrep http
     | fgrep -v -e "label=" -e "->" -e '" [' -e '" ]' -e "/ "
     | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //"
