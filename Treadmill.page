@@ -143,7 +143,7 @@ June 2012
 27: 1.08 w=198.8
 28: 2.45
 29: 2.03 w=207.4
-30-03 July: treadmill broken
+30 June - 03 July: treadmill broken
 04: 1.66
 05: 2.7 w=206.6
 06: 0 w=203
@@ -151,11 +151,53 @@ June 2012
 08: 2.6 w=201
 -->
 
-<!-- treadmill: 8 August: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66; 14 September: 0.64mi; 15: 1.66 24: 1.64mi 26: 2.42mi 28: 0.91mi; 14 October: 0.7mi; 8 November: 1.1mi; 10 Nov: 0.32mi; 11: 0.3; 13: 0.3; 14: 0.16; 29: 0.5; 5 Dec: 0.49mi; 7: 0.38mi  -->
-<!-- Mnemosyne reviews while on treadmill: 25, 26, 29 August; 14, 15, 24, 26 September; 14 October; 8 November; 10; 13; 14; 29; 5, 7 Dec -->
+<!-- treadmill:
+8 August 2013: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66
+14 September: 0.64mi; 15: 1.66; 24: 1.64mi 26: 2.42mi 28: 0.91mi
+14 October: 0.7mi
+8 November: 1.1mi; 10 Nov: 0.32mi; 11: 0.3; 13: 0.3; 14: 0.16; 29: 0.5
+5 Dec: 0.49mi; 7: 0.38mi
+28 January 2014: 1.26mi
+10 February: 1.51mi; 15 February: 0.5mi; 25 February: 1.44mi; 27: 0.84mi; 28 February: 1.22mi
+4 March: 0.68; 5 March: 0.85mi; 7 March: 1.03mi; 9 March: 0.14mi; 18 March: 1.07mi; 19 March: 0.63mi; 24 March: 0.52mi; 25 March: 0.4mi; 26 March: 0.5mi
+3 April: 0.43mi; 22 April: 0.52mi; 30 April: 1.14mi
+4 May: 0.9mi; 5 May: 0.94mi; 6 May: 0.98mi; 28 May: 1.27mi; 29 May: 0.9mi -->
 
 <!--
-$ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
+$ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,easiness,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
+$ R
+mnemosyne <- read.csv("gwern-mnemosyne.csv", header=FALSE, col.names=c("Timestamp", "ID", "Easiness", "Grade"), colClasses=c("integer", "factor", "numeric", "integer"))
+mnemosyne$Timestamp <- as.POSIXct(mnemosyne$Timestamp, origin = "1970-01-01", tz = "EST")
+mnemosyne$WeekDay <- as.factor(weekdays(mnemosyne$Timestamp))
+mnemosyne$Hour <- as.factor(as.numeric(format(mnemosyne$Timestamp, "%H")))
+mnemosyne$Date <- as.Date(mnemosyne$Timestamp)
+mnemosyneFormatted <- with(mnemosyne, data.frame(Timestamp=Timestamp, Date=Date, WeekDay=WeekDay, Hour=Hour, ID=ID, Easiness=Easiness, Grade=Grade))
+treadmill <- mnemosyneFormatted[mnemosyneFormatted$Date > as.Date("2013-08-22") && mnemosyneFormatted$Date < as.Date("2014-06-01"),]
+treadmill$Treadmill <- FALSE
+treadmillDates <- as.Date(c("2013-08-25", "2013-08-26", "2013-08-28", "2013-09-14", "2013-09-27", "2013-10-14", "2013-11-09", "2013-11-10", "2013-11-14", "2013-11-29", "2013-12-05", "2013-12-07 ", "2014-01-29", "2014-02-10", "2014-02-15", "2014-02-25", "2014-02-28", "2014-03-04", "2014-03-05", "2014-03-07", "2014-03-09", "2014-03-19", "2014-03-19", "2014-03-24", "2014-03-25", "2014-03-26 ", "2014-04-03", "2014-04-22", "2014-05-01 ", "2014-05-05", "2014-05-06", "2014-05-28", "2014-05-29"))
+for (i in 1:length(treadmillDates)) { treadmill[treadmill$Date==treadmillDates[i],]$Treadmill <- TRUE; }
+
+library(ordinal)
+c0 <- clmm(ordered(Grade) ~ Treadmill + Easiness + ID + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
+c1 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
+c2 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay),            data=treadmill)
+c3 <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay) + (1|Hour), data=treadmill)
+c4 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date)               + (1|Hour), data=treadmill)
+c5 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date),                          data=treadmill)
+c6 <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay),            data=treadmill)
+c7 <- clmm(ordered(Grade) ~ Treadmill + Easiness      +                          (1|Hour), data=treadmill)
+anova(c0, c1,c2,c3,c4,c5,c6,c7)
+
+Coefficients:
+TreadmillTRUE      Easiness
+        -1.41          3.38
+
+library(lme4)
+l1 <- lmer(Grade ~ Treadmill + Easiness + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill); summary(l1)
+
+
+<!--
+$ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,easiness,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
 $ R
 mnemosyne <- read.csv("http://dl.dropboxusercontent.com/u/182368464/gwern-mnemosyne.csv", header=FALSE, col.names=c("Date", "ID", "Grade"), colClasses=c("integer", "factor", "numeric"))
 mnemosyne$Date <- as.POSIXct(mnemosyne$Date, origin = "1970-01-01", tz = "UTC")
