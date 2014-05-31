@@ -2054,7 +2054,20 @@ fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
 <!-- complaints so far: 2 on Reddit, 4 anonymously, 2 on IRC, 2 email; 2 mentions on IRC; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing, 1 dislike; 3 mentions in gwern.net comments -->
 <!-- HN complaints: https://news.ycombinator.com/item?id=7539390 6 complaints -->
 
-On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant's 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038). On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted. On 17 April, `dark` (16.00% vs 16.94%) was deleted. On 30 April, I deleted `gray2` (17.56% vs 18.07%). 11 May, `blues` was gone (18.11% vs 18.53%).
+On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant's 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038). On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted. On 17 April, `dark` (16.00% vs 16.94%) was deleted. On 30 April, I deleted `gray2` (17.56% vs 18.07%). 11 May, `blues` was gone (18.11% vs 18.53%), and on 31 May, I deleted `gray3` (18.04% vs 18.24%).
+
+<!--
+It's surprising how much the grays differed from each other. I assumed
+they would all be pretty similar. I also didn't expect 'blues' to last
+as long as it did. This suggests to me that you might want to look
+into testing many more sets of colorings, since your current ones are
+unlikely to be the best ones.
+
+gray1's current performance is not going to be
+statistically-significant, and an increase of ~0.3% isn't worth
+loading up a JS library and fielding the occasional reader complaint,
+so my conclusion in another week or so is almost certainly going to be
+that BLR doesn't seem worth using by default on my site. -->
 
 # Appendix
 ## Covariate impact on power
