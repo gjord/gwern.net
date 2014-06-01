@@ -3,13 +3,13 @@ title: Treadmill desk observations
 description: Notes relating to my use of a treadmill desk
 created: 19 June 2012
 tags: experiments, biology, psychology, statistics
-status: in progress
+status: finished
 belief: likely
 ...
 
-<!-- TODO: at the end of this experiment, ping Seth Roberts and the blogs listed in http://www.nytimes.com/2008/09/18/health/nutrition/18fitness.html?_r=1 -->
+# Sleep
 
-In June 2012, early in the experiment, my neighbors threw out a treadmill that turned out to be easily repaired and so I set up an improvised [treadmill desk](!Wikipedia) with my laptop and a spare board. I had read about them before, had since seen a number of negative reports about being sedentary or sitting, and my physical fitness had declined markedly since leaving university (with ready access to the gym, fencing club, and Taekwondo class), so it seemed like the obvious thing to do. The lowest setting on the treadmill (no incline, 1MPH) was initially fairly exhausting but I improved. I started with one mile a day and moved up in a few days to 3-4 miles a day (putting me at the high end of my daily steps as recorded by my pedometer, which annoyingly I lost just 2 days before finding the treadmill); for some reason, this seemed to affect my weight, which went from 218 pounds to 214 a week later and 213 the next day. I finetuned the treadmill desk for typing on my laptop by increasing the height of the board with book supports. My productivity suffered drastically the first days, and I was concerned it would rendered typing difficult, but my scores in my typing practice program ([Amphetype](https://code.google.com/p/amphetype/)) did not seem to change very much when I tested them on all subsequent days that I used the treadmill. I suspect that my average WPM went down somewhat, though my statistical analysis indicated it fell only slightly if at all[^Amphetype]. The gear on the treadmill itself began to loosen, which led to the rubber band slipping off the motor or the gear, and I had to stop for a few days while I figured out solutions. (The epoxy was a mistake as it required a 'hardener' I didn't have; a thin nail couldn't be hammered between the gear and treadmill bar as a shim; and I had to let the Gorilla Glue harden for a day before it performed admirably during the test run.) A few days later, the mat began slipping and just stopping, and I discovered that the gear was rotating freely on the treadmill bar - the friction and glue had apparently lost! I lost several days hoping it would dry. It did and seemed to work again, but to help deal with it, I lubricated the underside of the mat with WD-40. It seemed to work
+In June 2012, early in the experiment, my neighbors threw out a treadmill that turned out to be easily repaired and so I set up an improvised [treadmill desk](!Wikipedia) with my laptop and a spare board. I had read about them before, had since seen a number of negative reports about being sedentary or sitting, and my physical fitness had declined markedly since leaving university (with ready access to the gym, fencing club, and Taekwondo class), so it seemed like a good thing to do. The lowest setting on the treadmill (no incline, 1MPH) was initially fairly exhausting but I improved. I started with one mile a day and moved up in a few days to 3-4 miles a day (putting me at the high end of my daily steps as recorded by my pedometer, which annoyingly I lost just 2 days before finding the treadmill); for some reason, this seemed to affect my weight, which went from 218 pounds to 214 a week later and 213 the next day. I finetuned the treadmill desk for typing on my laptop by increasing the height of the board with book supports. My productivity suffered drastically the first days, and I was concerned it would rendered typing difficult, but my scores in my typing practice program ([Amphetype](https://code.google.com/p/amphetype/)) did not seem to change very much when I tested them on all subsequent days that I used the treadmill. I suspect that my average WPM went down somewhat, though my statistical analysis indicated it fell slightly (see the [typing section](#typing)). The gear on the treadmill itself began to loosen, which led to the rubber band slipping off the motor or the gear, and I had to stop for a few days while I figured out solutions. (The epoxy was a mistake as it required a 'hardener' I didn't have; a thin nail couldn't be hammered between the gear and treadmill bar as a shim; and I had to let the Gorilla Glue harden for a day before it performed admirably during the test run.) A few days later, the mat began slipping and just stopping, and I discovered that the gear was rotating freely on the treadmill bar - the friction and glue had apparently lost! I lost several days hoping it would dry. It did and seemed to work again, but to help deal with it, I lubricated the underside of the mat with WD-40. It seemed to work
 
 My expectations are that the treadmill will increase how much I sleep, decrease sleep latency, and possibly have a small negative effect on productivity (which may be offset by an improvement in mood and less need to get a daily walk). Subjectively, whenever I use the treadmill, it feels like I can't work on hard material like programming or statistics, and I need to sit down and be still to really focus; I wonder if it is because my head bobbles slightly as I walk, and if a VR solution like an [Oculus Rift](!Wikipedia) might fix the jiggling issue? (If the walking were intense aerobic fitness, I might expect an increase in cognitive abilities or various sorts, but it's not, so I don't expect any effect on Mnemosyne scores.)
 
@@ -17,12 +17,12 @@ My expectations are that the treadmill will increase how much I sleep, decrease 
 
 Fortunately, I had used Amphetype for typing practice for 3 years prior to finding the treadmill, so I could compare my daily treadmill typing sessions to a very long dataseries.
 
-![WPM (top) and accuracy scores (bottom) plotted over time on a time-scaled X-axis with undampened values. The tight group at the far right is the week or two of typing practice while using a treadmill.](/images/zeo/2012-amphetype.png)
+![WPM (top) and accuracy scores (bottom) plotted over time on a time-scaled X-axis with undamped values. The tight group at the far right is the week or two of typing practice while using a treadmill.](/images/zeo/2012-amphetype.png)
 
 The graph looks like WPM (but not Accuracy) may have been damaged, but it's not clear at all: we should do statistics. Amphetype stores the graphed data in a [SQLite](!Wikipedia) database, which after a little tinkering I figured out how to extract the WPM & Accuracy scores:
 
 ~~~{.Bash}
-sqlite3 -batch gwern.db 'SELECT w real, wpm real, accuracy real FROM result;' > ~/stats.txt
+$ sqlite3 -batch gwern.db 'SELECT w real, wpm real, accuracy real FROM result;' > ~/stats.txt
 ~~~
 
 Which gives a file like
@@ -114,19 +114,228 @@ Nth          1.63e-06   2.54e-07    6.44  1.4e-10
 Treadmill   -7.34e-04   5.22e-04   -1.41     0.16
 ~~~
 
-This is more as expected: so walking on the treadmill cost me -1.5WPM in typing speed, and a day of practice correlates with +0.004WPM (and so a full month of practice would be worth 0.12WPM, so it's probably time to call typing practice quits as having reached diminishing returns).
+This is more as expected: so walking on the treadmill cost me -1.5WPM in typing speed, and a day of practice correlates with +0.004WPM (and so a full month of practice would be worth 0.12WPM).
+Having reached diminishing returns, I decided to stop typing practice.
 
-# Spaced repetition
+# Treadmill effect on Spaced repetition performance: randomized experiment
 
-[Starting in 2010](http://blog.sethroberts.net/category/walking-and-learning/), Seth Roberts began claiming that he found his [Anki](!Wikipedia "Anki (software)") flashcard reviews ([spaced repetition](Spaced repetition)) to be easier when he did them while using his treadmill, and offers some just-so evolutionary psychology theorizing that walking may cue knowledge absorption in a "thirst for knowledge".
+> It has been claimed that doing spaced repetition review while on a walking treadmill improves memory performance. I did a randomized experiment August 2013 - May 2014 and found that using a treadmill damaged my recall performance.
 
-An effect strikes me as plausible: flashcard review does not require fine motor skills or difficult thinking, and the walking might well wake one up if nothing else. But on the other hand, the walking might also be simply a distraction from the work of recall and damage real performance, much like how a lot of people claim playing music while studying "helps them focus" (for example, [Perham & Sykora 2012](/docs/dnb/2012-perham.pdf "Disliked Music can be Better for Performance than Liked Music") found music damaged memory recall, and enjoyed music the most).
+## Background
 
-Since Anki, like Mnemosyne, records detailed statistics about flashcard reviews, he has the data to show some objective performance measurements like whether days on the treadmill increase the average flashcard scores; he would have years of data, far more than he needs to show what he believes to be "a big effect". As far as I know, he has never made any use of the Anki data. He does [quote some data](http://blog.sethroberts.net/2012/09/05/new-treadmill-catalyzes-learning-results/) from a [2012 presentation by Jeremy Howard](http://vimeo.com/40265872), who claims a 5% review error-rate while walking and 8% while not-walking, and to be "40% faster [at learning]".
+<!-- TODO: at the end of this experiment, ping Seth Roberts and the blogs listed in http://www.nytimes.com/2008/09/18/health/nutrition/18fitness.html?_r=1 -->
 
-Having acquired a treadmill, and being a long-time user of Mnemosyne, this seems eminently testable. While trying to adapt to the treadmill, I simply randomize whether I do my daily Mnemosyne review before or after getting on the treadmill. (Unfortunately, I can think of no way to blind treadmill use, so randomization is it.)
+[Starting in 2010](http://blog.sethroberts.net/category/walking-and-learning/), Seth Roberts claimed that he found his [Anki](!Wikipedia "Anki (software)") flashcard reviews (for [spaced repetition](Spaced repetition)) to be easier & better when he did them while using his treadmill, and offers some just-so evolutionary psychology theorizing that walking may cue knowledge absorption in a "thirst for knowledge".
+He doesn't offer any hard data, but he does [quote some data](http://blog.sethroberts.net/2012/09/05/new-treadmill-catalyzes-learning-results/) from a [2012 presentation by Jeremy Howard](http://vimeo.com/40265872 "Jeremy Howard - Language Acquisition Performance"), who claims a 5% review error-rate while walking and 8% while not-walking, and to be "40% faster [at learning]"; a near-halving of lower grades is certainly an effect to be reckoned with and well worthwhile.
 
-One concern, prompted by the [2013 Lewis meditation](Lewis meditation) results, is that there may be time-of-day effects on flashcard review; I tend to not use the treadmill in the morning (I am not a morning person), so if recall improved in the afternoon, then it might be conflated with the treadmill. So I have downloaded the 4GB public Mnemosyne dataset (every Mnemosyne user is offered the option to anonymously submit statistical data about their flashcards) to try to analyze it and estimate fixed effects of time which will control for such issues.
+An effect strikes me as plausible: flashcard review does not require fine motor skills or (too) difficult thinking, and the walking might well wake one up if nothing else.
+And it would be convenient if it were true, since spaced repetition on one's treadmill would be two birds with one stone.
+
+But on the other hand, the walking might be a distraction from the work of recall and damage real performance, much like how many students claim playing music while studying "helps them focus" which is dubious (eg [Perham & Sykora 2012](/docs/dnb/2012-perham.pdf "Disliked Music can be Better for Performance than Liked Music") found music damaged memory recall, and music you enjoyed was the worst).
+Consistent with this, my own experience with treadmills was that it impeded concentration.
+And I couldn't help but notice Robert's failure to present hard data: since Anki (like almost all spaced-repetition software), records detailed statistics about flashcard reviews in order to implement the scheduling algorithm, he had access to the data to show some objective performance measurements like whether days on the treadmill increase the average flashcard scores; all he had to do was record his treadmill use and then extract it, which wouldn't take too long to show "a big effect" (a month or two would likely be enough).
+But as far as I know, he never made any use of his Anki data.
+
+Having acquired a treadmill, and being a long-time user of Mnemosyne, this seems eminently testable!
+I simply randomize whether I do my daily Mnemosyne review before or after getting on the treadmill.
+(Unfortunately, I can think of no way to blind treadmill use, so randomization is it.)
+
+One concern, prompted by the [2013 Lewis meditation](Lewis meditation) results, is that there may be time-of-day effects on flashcard review; I tend to not use the treadmill in the morning (I am not a morning person), so if recall improved in the afternoon, then it might be conflated with the treadmill.
+I downloaded the [4GB public Mnemosyne dataset](https://groups.google.com/d/msg/mnemosyne-proj-users/tPHlkTFVX_4/oF61BF44iQkJ "Mnemosyne data set available") (every Mnemosyne user is offered the option to anonymously submit statistical data about their flashcards) to try to analyze it and estimate fixed effects of time.
+The full dataset showed many such effects, so time variables will be included in the analysis.
+
+## Method
+
+Each day I decided to do spaced repetition, I randomly flipped a bit (50-50) in Bash to determine whether I would do it seated or on my treadmill (which is set to 1mph), and recorded whether that day was treadmill-affected after review.
+This was done from August 2013 to May 2014.
+Eventually I noticed that the experiment was becoming a [trivial inconvenience](http://wiki.lesswrong.com/wiki/Trivial_inconvenience) that was damaging my hard-earned spaced repetition habit, and ended the experiment.
+I didn't do a formal power analysis, but my intuition was that this would be enough data to show an effect, especially if the effect was as large as claimed.
+
+The endpoint is the grades given flashcards each day; analysis will be multilevel ordinal logistic regression.
+
+## Data
+
+Extract the raw data from my Mnemosyne database:
+
+~~~{.Bash}
+$ sqlite3 -batch ~/.local/share/mnemosyne/default.db \
+          "SELECT timestamp,easiness,grade FROM log WHERE event_type==9;" | \
+  tr "|" "," \
+  > gwern-mnemosyne.csv
+~~~
+
+Processing:
+
+~~~{.R}
+## read into R
+mnemosyne <- read.csv("gwern-mnemosyne.csv", header=FALSE,
+                      col.names =c("Timestamp", "Easiness", "Grade"),
+                      colClasses=c("integer",   "numeric",  "integer"))
+mnemosyne$Timestamp <- as.POSIXct(mnemosyne$Timestamp, origin = "1970-01-01", tz = "EST")
+
+## extract the temporal covariates from the timestamp
+mnemosyne$WeekDay <- as.factor(weekdays(mnemosyne$Timestamp))
+mnemosyne$Hour    <- as.factor(as.numeric(format(mnemosyne$Timestamp, "%H")))
+mnemosyne$Date    <- as.Date(mnemosyne$Timestamp)
+
+## select data from during the experiment
+mnemosyneFormatted <- with(mnemosyne, data.frame(Timestamp=Timestamp, Date=Date, WeekDay=WeekDay,
+                                                  Hour=Hour, Easiness=Easiness, Grade=Grade))
+treadmill <- mnemosyneFormatted[mnemosyneFormatted$Date > as.Date("2013-08-22") &
+                                mnemosyneFormatted$Date < as.Date("2014-06-01"),]
+
+## code which days' review was done on the treadmill
+treadmill$Treadmill <- FALSE
+treadmillDates <- as.Date(c("2013-08-25", "2013-08-26", "2013-08-28", "2013-09-14", "2013-09-27",
+                            "2013-10-14", "2013-11-09", "2013-11-10", "2013-11-14", "2013-11-29",
+                            "2013-12-05", "2013-12-07", "2014-01-29", "2014-02-10", "2014-02-15",
+                            "2014-02-25", "2014-02-28", "2014-03-04", "2014-03-05", "2014-03-07",
+                            "2014-03-09", "2014-03-19", "2014-03-19", "2014-03-24", "2014-03-25",
+                            "2014-03-26", "2014-04-03", "2014-04-22", "2014-05-01", "2014-05-05",
+                            "2014-05-06", "2014-05-28", "2014-05-29", "2014-05-31"))
+for (i in 1:length(treadmillDates)) { treadmill[treadmill$Date==treadmillDates[i],]$Treadmill <- TRUE; }
+
+## serialize clean CSV for analysis
+write.csv(treadmill, "2014-05-31-mnemosyne-treadmill.csv", row.names=FALSE)
+~~~
+
+## Analysis
+### Exploratory
+
+~~~{.R}
+treadmill <- read.csv("http://www.gwern.net/docs/spacedrepetition/2014-05-31-mnemosyne-treadmill.csv")
+summary(treadmill)
+#                Timestamp            Date           WeekDay          Hour         Easiness
+#  2013-11-26 19:24:44:   2   2013-09-25: 254   Friday   : 577   Min.   : 9.0   Min.   :1.30
+#  2013-11-26 22:22:12:   2   2014-02-10: 171   Monday   : 711   1st Qu.:15.0   1st Qu.:1.44
+#  2013-12-01 18:21:49:   2   2014-02-28: 163   Saturday : 856   Median :17.0   Median :1.93
+#  2013-12-01 18:22:04:   2   2013-11-09: 162   Sunday   : 869   Mean   :17.2   Mean   :1.87
+#  2013-08-23 22:56:28:   1   2013-11-14: 155   Thursday :1034   3rd Qu.:20.0   3rd Qu.:2.16
+#  2013-08-23 22:56:36:   1   2014-04-22: 145   Tuesday  :1021   Max.   :23.0   Max.   :3.00
+#  (Other)            :5843   (Other)   :4803   Wednesday: 785
+#      Grade      Treadmill
+#  Min.   :2.00   Mode :logical
+#  1st Qu.:4.00   FALSE:2695
+#  Median :4.00   TRUE :3158
+#  Mean   :3.78   NA's :0
+#  3rd Qu.:4.00
+#  Max.   :5.00
+
+## graphing all 5853 reviews is unreadable, so summarize by day & throw out outliers
+daily <- aggregate(Grade ~ Date + Treadmill, treadmill, mean)
+daily <- daily[order(daily$Date),]
+daily <- daily[daily$Grade>=3 & daily$Grade<=4,]
+qplot(Date, Grade, color=Treadmill, size=I(5), data=daily)
+~~~~
+
+![Mnemosyne spaced-repetition flashcard reviews, averaged by day, colored by whether reviewed while using a walking treadmill or not](/images/spaced-repetition-2014-05-31-mnemosyne-treadmill-dailyaverage.png)
+
+### Tests
+
+Because there's only 4 possible responses in the dataset (2/3/4/5) & they don't look like a normal distribution (even with _n_=5853), my analysis preference is for an [ordinal logistic regression](!Wikipedia "Ordered logit") which captures that structure.
+Reviews are grouped by day, so I want a [multilevel](!Wikipedia "Multilevel model") ordinal logistic regression to reflect that inherent structure.
+And because my earlier analysis of the ~50m response Mnemosyne dataset confirmed that there are meaningful hour-of-day and day-of-week effects, I'll want to include those as covariates.
+(I was originally going to include card ID as a random-effects variable to reflect the easiness of each card and help reduce the unpredictability of grades; but the most any card had been reviewed during the experiment was 7 times, so the possible gain was limited, and when an analysis with card IDs as a variable took >2 hours to run and still hadn't finished, I decided to simply use Mnemosyne's internal estimate of "easiness".)
+I'll also check with a U test that any effect isn't being completely driven by the covariates.
+
+The best-fitting such model confirms that there's an effect: it's negative.
+The proportional odds effect on grades is -1.381 (-2.086 to -0.6755; _p_=0.00012) or, to use a multilevel linear model, a lower mean grade by 0.1 (-0.14732 to -0.02029).
+
+~~~{.R}
+wilcox.test(Grade ~ Treadmill, conf.int=TRUE, data=treadmill)
+#
+#     Wilcoxon rank sum test with continuity correction
+#
+# data:  Grade by Treadmill
+# W = 4363353, p-value = 0.01656
+# alternative hypothesis: true location shift is not equal to 0
+# 95% confidence interval:
+#  -2.355e-05  5.387e-05
+# sample estimates:
+# difference in location
+#              4.155e-05
+
+library(ordinal)
+c1  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
+c2  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay)           , data=treadmill)
+c3  <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay) + (1|Hour), data=treadmill)
+c4  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date)               + (1|Hour), data=treadmill)
+c5  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date)                         , data=treadmill)
+c6  <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay)           , data=treadmill)
+c7  <- clmm(ordered(Grade) ~ Treadmill + Easiness      +                          (1|Hour), data=treadmill)
+c8  <- clm(ordered(Grade)  ~ Treadmill + Easiness                                         , data=treadmill)
+c9  <- clm(ordered(Grade)  ~ Treadmill                                                    , data=treadmill)
+c10 <- clm(ordered(Grade)  ~ Treadmill                                                    , data=treadmill)
+c11 <- clm(ordered(Grade)  ~ 1                                                            , data=treadmill)
+anova(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11)
+# ...
+#     no.par  AIC logLik LR.stat df Pr(>Chisq)
+# c11      3 8215  -4104
+# c9       4 8211  -4101    5.77  1      0.016
+# c10      4 8211  -4101    0.00  0
+# c8       5 6959  -3475 1253.46  1     <2e-16
+# c5       6 6842  -3415  119.16  1     <2e-16
+# c6       6 6951  -3470 -108.79  0
+# c7       6 6946  -3467    5.16  0
+# c2       7 6842  -3414  106.17  1     <2e-16
+# c3       7 6939  -3462  -96.90  0
+# c4       7 6833  -3409  106.03  0
+# c1       8 6834  -3409    0.32  1      0.570
+
+summary(c4)
+# ...
+# Random effects:
+#  Groups Name        Variance Std.Dev.
+#  Date   (Intercept) 2.008    1.417
+#  Hour   (Intercept) 0.179    0.423
+# Number of groups:  Date 97,  Hour 15
+#
+# Coefficients:
+#               Estimate Std. Error z value Pr(>|z|)
+# TreadmillTRUE   -1.381      0.360   -3.84  0.00012
+# Easiness         3.365      0.121   27.73  < 2e-16
+#
+# Threshold coefficients:
+#     Estimate Std. Error z value
+# 2|3    1.751      0.338    5.19
+# 3|4    2.842      0.338    8.41
+# 4|5    9.814      0.388   25.28
+
+## easier to interpret a linear model: how much does average grade fall on treadmill?
+library(lme4)
+l4 <- lmer(Grade ~ Treadmill + Easiness + (1|Date) + (1|Hour), data=treadmill); summary(l4)
+# ...
+# Fixed effects:
+#               Estimate Std. Error t value
+# (Intercept)     2.7003     0.0422    64.0
+# TreadmillTRUE  -0.0805     0.0296    -2.7
+# Easiness        0.6085     0.0180    33.8
+
+confint(c4)
+#                2.5 %  97.5 %
+# 2|3            1.089  2.4124
+# 3|4            2.180  3.5047
+# 4|5            9.053 10.5749
+# TreadmillTRUE -2.086 -0.6755
+# Easiness       3.127  3.6032
+
+confint(l4)
+# Computing profile confidence intervals ...
+#                  2.5 %   97.5 %
+# .sig01         0.06273  0.14300
+# .sig02         0.01809  0.08734
+# .sigma         0.54550  0.56598
+# (Intercept)    2.61418  2.78532
+# TreadmillTRUE -0.14732 -0.02029
+# Easiness       0.57313  0.64363
+~~~
+
+## Conclusion
+
+While the result seems highly likely to be true for me, I don't know how well it might generalize to other people.
+For example, perhaps more fit people can use a treadmill without harm and the negative effect is due to the treadmill usage tiring & distracting me; I try to walk 2 miles a day, but that's not much compared to some people.
+
+Given this harmful impact, I will avoid doing spaced repetition on my treadmill in the future, and given this & the typing result, will relegate any computer+treadmill usage to non-intellectually-demanding work like watching movies.
 
 <!--
 Treadmill data
@@ -150,7 +359,6 @@ June 2012
 07: 5 w=205
 08: 2.6 w=201
 -->
-
 <!-- treadmill:
 8 August 2013: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66
 14 September: 0.64mi; 15: 1.66; 24: 1.64mi 26: 2.42mi 28: 0.91mi
@@ -161,40 +369,7 @@ June 2012
 10 February: 1.51mi; 15 February: 0.5mi; 25 February: 1.44mi; 27: 0.84mi; 28 February: 1.22mi
 4 March: 0.68; 5 March: 0.85mi; 7 March: 1.03mi; 9 March: 0.14mi; 18 March: 1.07mi; 19 March: 0.63mi; 24 March: 0.52mi; 25 March: 0.4mi; 26 March: 0.5mi
 3 April: 0.43mi; 22 April: 0.52mi; 30 April: 1.14mi
-4 May: 0.9mi; 5 May: 0.94mi; 6 May: 0.98mi; 28 May: 1.27mi; 29 May: 0.9mi -->
-
-<!--
-$ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,easiness,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
-$ R
-mnemosyne <- read.csv("gwern-mnemosyne.csv", header=FALSE, col.names=c("Timestamp", "ID", "Easiness", "Grade"), colClasses=c("integer", "factor", "numeric", "integer"))
-mnemosyne$Timestamp <- as.POSIXct(mnemosyne$Timestamp, origin = "1970-01-01", tz = "EST")
-mnemosyne$WeekDay <- as.factor(weekdays(mnemosyne$Timestamp))
-mnemosyne$Hour <- as.factor(as.numeric(format(mnemosyne$Timestamp, "%H")))
-mnemosyne$Date <- as.Date(mnemosyne$Timestamp)
-mnemosyneFormatted <- with(mnemosyne, data.frame(Timestamp=Timestamp, Date=Date, WeekDay=WeekDay, Hour=Hour, ID=ID, Easiness=Easiness, Grade=Grade))
-treadmill <- mnemosyneFormatted[mnemosyneFormatted$Date > as.Date("2013-08-22") && mnemosyneFormatted$Date < as.Date("2014-06-01"),]
-treadmill$Treadmill <- FALSE
-treadmillDates <- as.Date(c("2013-08-25", "2013-08-26", "2013-08-28", "2013-09-14", "2013-09-27", "2013-10-14", "2013-11-09", "2013-11-10", "2013-11-14", "2013-11-29", "2013-12-05", "2013-12-07 ", "2014-01-29", "2014-02-10", "2014-02-15", "2014-02-25", "2014-02-28", "2014-03-04", "2014-03-05", "2014-03-07", "2014-03-09", "2014-03-19", "2014-03-19", "2014-03-24", "2014-03-25", "2014-03-26 ", "2014-04-03", "2014-04-22", "2014-05-01 ", "2014-05-05", "2014-05-06", "2014-05-28", "2014-05-29"))
-for (i in 1:length(treadmillDates)) { treadmill[treadmill$Date==treadmillDates[i],]$Treadmill <- TRUE; }
-
-library(ordinal)
-c0 <- clmm(ordered(Grade) ~ Treadmill + Easiness + ID + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
-c1 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
-c2 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay),            data=treadmill)
-c3 <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay) + (1|Hour), data=treadmill)
-c4 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date)               + (1|Hour), data=treadmill)
-c5 <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date),                          data=treadmill)
-c6 <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay),            data=treadmill)
-c7 <- clmm(ordered(Grade) ~ Treadmill + Easiness      +                          (1|Hour), data=treadmill)
-anova(c0, c1,c2,c3,c4,c5,c6,c7)
-
-Coefficients:
-TreadmillTRUE      Easiness
-        -1.41          3.38
-
-library(lme4)
-l1 <- lmer(Grade ~ Treadmill + Easiness + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill); summary(l1)
-
+4 May: 0.9mi; 5 May: 0.94mi; 6 May: 0.98mi; 28 May: 1.27mi; 29 May: 0.9mi; 31 May: 1.13mi -->
 
 <!--
 $ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,easiness,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
