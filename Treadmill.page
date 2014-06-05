@@ -7,6 +7,40 @@ status: finished
 belief: likely
 ...
 
+<!--
+Treadmill data
+31 inches per step, so 1 mile = 2040 steps
+June 2012
+16: 1.5 w=218
+17: 2.88
+18: 4 w=214
+19: 2.85 w=213.4
+20: 2.0 w=212.8
+21: 3.4 w=212
+22: 2 w=213.8
+23-26: treadmill broken
+27: 1.08 w=198.8
+28: 2.45
+29: 2.03 w=207.4
+30 June - 03 July: treadmill broken
+04: 1.66
+05: 2.7 w=206.6
+06: 0 w=203
+07: 5 w=205
+08: 2.6 w=201
+-->
+<!-- treadmill:
+8 August 2013: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66
+14 September: 0.64mi; 15: 1.66; 24: 1.64mi 26: 2.42mi 28: 0.91mi
+14 October: 0.7mi
+8 November: 1.1mi; 10 Nov: 0.32mi; 11: 0.3; 13: 0.3; 14: 0.16; 29: 0.5
+5 Dec: 0.49mi; 7: 0.38mi
+28 January 2014: 1.26mi
+10 February: 1.51mi; 15 February: 0.5mi; 25 February: 1.44mi; 27: 0.84mi; 28 February: 1.22mi
+4 March: 0.68; 5 March: 0.85mi; 7 March: 1.03mi; 9 March: 0.14mi; 18 March: 1.07mi; 19 March: 0.63mi; 24 March: 0.52mi; 25 March: 0.4mi; 26 March: 0.5mi
+3 April: 0.43mi; 22 April: 0.52mi; 30 April: 1.14mi
+4 May: 0.9mi; 5 May: 0.94mi; 6 May: 0.98mi; 28 May: 1.27mi; 29 May: 0.9mi; 31 May: 1.13mi -->
+
 # Sleep
 
 In June 2012, early in the experiment, my neighbors threw out a treadmill that turned out to be easily repaired and so I set up an improvised [treadmill desk](!Wikipedia) with my laptop and a spare board. I had read about them before, had since seen a number of negative reports about being sedentary or sitting, and my physical fitness had declined markedly since leaving university (with ready access to the gym, fencing club, and Taekwondo class), so it seemed like a good thing to do. The lowest setting on the treadmill (no incline, 1MPH) was initially fairly exhausting but I improved. I started with one mile a day and moved up in a few days to 3-4 miles a day (putting me at the high end of my daily steps as recorded by my pedometer, which annoyingly I lost just 2 days before finding the treadmill); for some reason, this seemed to affect my weight, which went from 218 pounds to 214 a week later and 213 the next day. I finetuned the treadmill desk for typing on my laptop by increasing the height of the board with book supports. My productivity suffered drastically the first days, and I was concerned it would rendered typing difficult, but my scores in my typing practice program ([Amphetype](https://code.google.com/p/amphetype/)) did not seem to change very much when I tested them on all subsequent days that I used the treadmill. I suspect that my average WPM went down somewhat, though my statistical analysis indicated it fell slightly (see the [typing section](#typing)). The gear on the treadmill itself began to loosen, which led to the rubber band slipping off the motor or the gear, and I had to stop for a few days while I figured out solutions. (The epoxy was a mistake as it required a 'hardener' I didn't have; a thin nail couldn't be hammered between the gear and treadmill bar as a shim; and I had to let the Gorilla Glue harden for a day before it performed admirably during the test run.) A few days later, the mat began slipping and just stopping, and I discovered that the gear was rotating freely on the treadmill bar - the friction and glue had apparently lost! I lost several days hoping it would dry. It did and seemed to work again, but to help deal with it, I lubricated the underside of the mat with WD-40. It seemed to work
@@ -236,7 +270,7 @@ Because there's only 4 possible responses in the dataset (2/3/4/5) & they don't 
 Reviews are grouped by day, so I want a [multilevel](!Wikipedia "Multilevel model") ordinal logistic regression to reflect that inherent structure.
 And because my earlier analysis of the ~50m response Mnemosyne dataset confirmed that there are meaningful hour-of-day and day-of-week effects, I'll want to include those as covariates.
 (I was originally going to include card ID as a random-effects variable to reflect the easiness of each card and help reduce the unpredictability of grades; but the most any card had been reviewed during the experiment was 7 times, so the possible gain was limited, and when an analysis with card IDs as a variable took >2 hours to run and still hadn't finished, I decided to simply use Mnemosyne's internal estimate of "easiness".)
-I'll also check with a U test that any effect isn't being completely driven by the covariates.
+I'll also check with a U-test that any effect isn't being completely driven by the covariates.
 
 The best-fitting such model confirms that there's an effect: it's negative.
 The proportional odds effect on grades is -1.381 (-2.086 to -0.6755; _p_=0.00012) or, to use a multilevel linear model, a lower mean grade by 0.1 (-0.14732 to -0.02029).
@@ -256,17 +290,17 @@ wilcox.test(Grade ~ Treadmill, conf.int=TRUE, data=treadmill)
 #              4.155e-05
 
 library(ordinal)
-c1  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
-c2  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date) + (1|WeekDay)           , data=treadmill)
-c3  <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay) + (1|Hour), data=treadmill)
-c4  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date)               + (1|Hour), data=treadmill)
-c5  <- clmm(ordered(Grade) ~ Treadmill + Easiness      + (1|Date)                         , data=treadmill)
-c6  <- clmm(ordered(Grade) ~ Treadmill + Easiness      +            (1|WeekDay)           , data=treadmill)
-c7  <- clmm(ordered(Grade) ~ Treadmill + Easiness      +                          (1|Hour), data=treadmill)
-c8  <- clm(ordered(Grade)  ~ Treadmill + Easiness                                         , data=treadmill)
-c9  <- clm(ordered(Grade)  ~ Treadmill                                                    , data=treadmill)
-c10 <- clm(ordered(Grade)  ~ Treadmill                                                    , data=treadmill)
-c11 <- clm(ordered(Grade)  ~ 1                                                            , data=treadmill)
+c1  <- clmm(ordered(Grade) ~ Treadmill + Easiness + (1|Date) + (1|WeekDay) + (1|Hour), data=treadmill)
+c2  <- clmm(ordered(Grade) ~ Treadmill + Easiness + (1|Date) + (1|WeekDay)           , data=treadmill)
+c3  <- clmm(ordered(Grade) ~ Treadmill + Easiness +            (1|WeekDay) + (1|Hour), data=treadmill)
+c4  <- clmm(ordered(Grade) ~ Treadmill + Easiness + (1|Date)               + (1|Hour), data=treadmill)
+c5  <- clmm(ordered(Grade) ~ Treadmill + Easiness + (1|Date)                         , data=treadmill)
+c6  <- clmm(ordered(Grade) ~ Treadmill + Easiness +            (1|WeekDay)           , data=treadmill)
+c7  <- clmm(ordered(Grade) ~ Treadmill + Easiness +                          (1|Hour), data=treadmill)
+c8  <- clm(ordered(Grade)  ~ Treadmill + Easiness                                    , data=treadmill)
+c9  <- clm(ordered(Grade)  ~ Treadmill                                               , data=treadmill)
+c10 <- clm(ordered(Grade)  ~ Treadmill                                               , data=treadmill)
+c11 <- clm(ordered(Grade)  ~ 1                                                       , data=treadmill)
 anova(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11)
 # ...
 #     no.par  AIC logLik LR.stat df Pr(>Chisq)
@@ -338,266 +372,113 @@ For example, perhaps more fit people can use a treadmill without harm and the ne
 Given this harmful impact, I will avoid doing spaced repetition on my treadmill in the future, and given this & the typing result, will relegate any computer+treadmill usage to non-intellectually-demanding work like watching movies.
 
 <!--
-Treadmill data
-31 inches per step, so 1 mile = 2040 steps
-June 2012
-16: 1.5 w=218
-17: 2.88
-18: 4 w=214
-19: 2.85 w=213.4
-20: 2.0 w=212.8
-21: 3.4 w=212
-22: 2 w=213.8
-23-26: treadmill broken
-27: 1.08 w=198.8
-28: 2.45
-29: 2.03 w=207.4
-30 June - 03 July: treadmill broken
-04: 1.66
-05: 2.7 w=206.6
-06: 0 w=203
-07: 5 w=205
-08: 2.6 w=201
--->
-<!-- treadmill:
-8 August 2013: 1.94miles; 9 August: 4.54mi ; 10: 1.5mi; 11: 2.67mi; 12: 4.39mi; 15: 3.33mi; 16: 1.5mi; 20: 1.66mi; 25: 1.31mi; 26: 2.27mi; 28: 2.25; 29: 1.66
-14 September: 0.64mi; 15: 1.66; 24: 1.64mi 26: 2.42mi 28: 0.91mi
-14 October: 0.7mi
-8 November: 1.1mi; 10 Nov: 0.32mi; 11: 0.3; 13: 0.3; 14: 0.16; 29: 0.5
-5 Dec: 0.49mi; 7: 0.38mi
-28 January 2014: 1.26mi
-10 February: 1.51mi; 15 February: 0.5mi; 25 February: 1.44mi; 27: 0.84mi; 28 February: 1.22mi
-4 March: 0.68; 5 March: 0.85mi; 7 March: 1.03mi; 9 March: 0.14mi; 18 March: 1.07mi; 19 March: 0.63mi; 24 March: 0.52mi; 25 March: 0.4mi; 26 March: 0.5mi
-3 April: 0.43mi; 22 April: 0.52mi; 30 April: 1.14mi
-4 May: 0.9mi; 5 May: 0.94mi; 6 May: 0.98mi; 28 May: 1.27mi; 29 May: 0.9mi; 31 May: 1.13mi -->
+# Appendix: time-varying spaced repetition performance
+## Personal
 
-<!--
-$ sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,easiness,grade FROM log WHERE event_type==9;" | tr '|' ',' > gwern-mnemosyne.csv
-$ R
-mnemosyne <- read.csv("http://dl.dropboxusercontent.com/u/182368464/gwern-mnemosyne.csv", header=FALSE, col.names=c("Date", "ID", "Grade"), colClasses=c("integer", "factor", "numeric"))
+Extract all my data:
+
+~~~{.Bash}
+sqlite3 -batch ~/.local/share/mnemosyne/default.db "SELECT timestamp,object_id,easiness,grade FROM log WHERE event_type==9;" | tr '|' ',' > 2014-05-31-gwern-mnemosyne.csv
+~~~
+
+~~~{.R}
+mnemosyne <- read.csv("2014-05-31-gwern-mnemosyne.csv", header=FALSE, col.names=c("Date", "ID", "Easiness", "Grade"), colClasses=c("integer", "factor", "numeric", "integer"))
 mnemosyne$Date <- as.POSIXct(mnemosyne$Date, origin = "1970-01-01", tz = "UTC")
+mnemosyne$Year <- as.factor(as.Date(mnemosyne$Date, "%Y"))
+mnemosyne$Month <- as.factor(months(mnemosyne$Date))
 mnemosyne$WeekDay <- as.factor(weekdays(mnemosyne$Date))
-mnemosyne$Hour <- as.factor(as.numeric(format(mnemosyne$Date, "%H")))
+mnemosyne$Day    <- as.factor(as.Date(mnemosyne$Date))
+mnemosyne$Hour <- as.factor(as.Date(mnemosyne$Date, "%H"))
 mnemosyne <- mnemosyne[order(mnemosyne$ID),]
 
 nrow(mnemosyne)
-[1] 136006
+# [1] 141699
+
 summary(mnemosyne)
-      Date                                   ID             Grade           WeekDay
- Min.   :2009-05-31 23:06:25.00   088b40ad.inv:    43   Min.   :0.00   Friday   :19155
- 1st Qu.:2009-12-09 18:22:59.50   e8764710    :    39   1st Qu.:3.00   Monday   :21208
- Median :2010-07-19 10:21:03.00   27fc28b3    :    37   Median :4.00   Saturday :15692
- Mean   :2010-10-20 13:56:42.72   86b870ac    :    37   Mean   :3.63   Sunday   :20172
- 3rd Qu.:2011-06-22 00:37:01.50   1644a7c7    :    35   3rd Qu.:4.00   Thursday :19577
- Max.   :2013-08-28 18:49:38.00   7b0e88b5    :    34   Max.   :5.00   Tuesday  :19108
-                                  (Other)     :135781                  Wednesday:21094
-      Hour
- 17     :11154
- 18     : 9522
- 15     : 9293
- 16     : 9042
- 14     : 8613
- 3      : 6935
-R> summary(lm(Grade ~ Hour + WeekDay, data=mnemosyne))
+#       Date                                   ID            Easiness        Grade
+#  Min.   :2009-05-31 23:06:25.00   088b40ad.inv:    44   Min.   :1.30   Min.   :0.00
+#  1st Qu.:2009-12-17 04:08:26.50   e8764710    :    40   1st Qu.:1.78   1st Qu.:3.00
+#  Median :2010-08-04 16:41:04.00   27fc28b3    :    38   Median :2.05   Median :4.00
+#  Mean   :2010-12-07 05:30:08.64   86b870ac    :    38   Mean   :1.99   Mean   :3.64
+#  3rd Qu.:2011-08-25 02:38:16.50   1644a7c7    :    36   3rd Qu.:2.24   3rd Qu.:4.00
+#  Max.   :2014-05-31 23:44:07.00   7b0e88b5    :    36   Max.   :3.29   Max.   :5.00
+#                                   (Other)     :141467
+#          Year             Month            WeekDay              Day                 Hour
+#  2009-07-13:   779   July    :17729   Friday   :19942   2009-07-13:   779   2009-07-13:   779
+#  2009-12-26:   767   August  :16296   Monday   :22064   2009-12-26:   767   2009-12-26:   767
+#  2009-07-19:   717   December:13449   Saturday :16467   2009-07-19:   717   2009-07-19:   717
+#  2009-07-22:   683   June    :13165   Sunday   :20894   2009-07-22:   683   2009-07-22:   683
+#  2009-08-09:   653   January :12218   Thursday :20438   2009-08-09:   653   2009-08-09:   653
+#  2009-12-27:   648   November:11023   Tuesday  :19911   2009-12-27:   648   2009-12-27:   648
+#  (Other)   :137452   (Other) :57819   Wednesday:21983   (Other)   :137452   (Other)   :137452
 
-Call:
-lm(formula = Grade ~ Hour + WeekDay, data = mnemosyne)
 
-Residuals:
-   Min     1Q Median     3Q    Max
--3.665 -0.558  0.344  0.384  1.547
+library(ordinal)
+c1 <- clm(ordered(Grade) ~ Hour + WeekDay + Month + Year + Easiness, data=mnemosyne); summary(c1)
 
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)       3.60571    0.01219  295.85  < 2e-16
-Hour1             0.00427    0.01490    0.29  0.77444
-Hour2             0.02998    0.01453    2.06  0.03902
-Hour3             0.05026    0.01430    3.51  0.00044
-Hour4             0.08360    0.01499    5.58  2.5e-08
-Hour5            -0.01255    0.01648   -0.76  0.44627
-Hour6            -0.12910    0.01709   -7.55  4.3e-14
-Hour7             0.03412    0.01851    1.84  0.06533
-Hour8             0.01991    0.01889    1.05  0.29187
-Hour9            -0.05590    0.01986   -2.81  0.00489
-Hour10           -0.00116    0.01562   -0.07  0.94068
-Hour11            0.06561    0.01515    4.33  1.5e-05
-Hour12           -0.08372    0.02694   -3.11  0.00188
-Hour13            0.00773    0.01578    0.49  0.62409
-Hour14            0.04938    0.01372    3.60  0.00032
-Hour15            0.03429    0.01352    2.54  0.01123
-Hour16            0.10032    0.01359    7.38  1.6e-13
-Hour17            0.07692    0.01311    5.87  4.5e-09
-Hour18            0.10567    0.01346    7.85  4.2e-15
-Hour19            0.01149    0.01459    0.79  0.43105
-Hour20            0.03121    0.01471    2.12  0.03388
-Hour21            0.02553    0.01452    1.76  0.07865
-Hour22           -0.03006    0.01659   -1.81  0.07011
-Hour23            0.03909    0.01498    2.61  0.00906
-WeekDayMonday    -0.01263    0.00771   -1.64  0.10146
-WeekDaySaturday  -0.02119    0.00834   -2.54  0.01107
-WeekDaySunday    -0.02362    0.00783   -3.02  0.00256
-WeekDayThursday   0.01129    0.00787    1.43  0.15164
-WeekDayTuesday   -0.01783    0.00792   -2.25  0.02442
-WeekDayWednesday  0.00066    0.00773    0.09  0.93195
+Warning message:
+(2) Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+In addition: Absolute and relative convergence criteria were met
+formula: ordered(Grade) ~ Hour + WeekDay + Month + Year + Easiness
+data:    mnemosyne
 
-Residual standard error: 0.77 on 135976 degrees of freedom
-Multiple R-squared:  0.00397,   Adjusted R-squared:  0.00376
-F-statistic: 18.7 on 29 and 135976 DF,  p-value: <2e-16
-
-R> summary(glm(Grade ~ Hour + WeekDay, data=mnemosyne, family=poisson))
-
-Call:
-glm(formula = Grade ~ Hour + WeekDay, family = poisson, data = mnemosyne)
-
-Deviance Residuals:
-   Min      1Q  Median      3Q     Max
--2.707  -0.304   0.177   0.198   0.779
+ link  threshold nobs   logLik     AIC       niter max.grad cond.H
+ logit flexible  141699 -122137.75 244369.51 8(0)  2.42e-07 2.0e+12
 
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)
-(Intercept)       1.282496   0.008339  153.79   <2e-16
-Hour1             0.001185   0.010207    0.12   0.9076
-Hour2             0.008298   0.009933    0.84   0.4035
-Hour3             0.013870   0.009767    1.42   0.1556
-Hour4             0.022972   0.010216    2.25   0.0245
-Hour5            -0.003502   0.011300   -0.31   0.7566
-Hour6            -0.036503   0.011835   -3.08   0.0020
-Hour7             0.009439   0.012644    0.75   0.4554
-Hour8             0.005517   0.012921    0.43   0.6694
-Hour9            -0.015663   0.013683   -1.14   0.2523
-Hour10           -0.000325   0.010699   -0.03   0.9757
-Hour11            0.018069   0.010332    1.75   0.0803
-Hour12           -0.023645   0.018656   -1.27   0.2050
-Hour13            0.002145   0.010804    0.20   0.8426
-Hour14            0.013633   0.009380    1.45   0.1461
-Hour15            0.009484   0.009249    1.03   0.3052
-Hour16            0.027505   0.009265    2.97   0.0030
-Hour17            0.021157   0.008956    2.36   0.0182
-Hour18            0.028956   0.009178    3.16   0.0016
-Hour19            0.003182   0.009987    0.32   0.7500
-Hour20            0.008634   0.010059    0.86   0.3907
-Hour21            0.007070   0.009933    0.71   0.4766
-Hour22           -0.008396   0.011397   -0.74   0.4613
-Hour23            0.010808   0.010238    1.06   0.2911
-WeekDayMonday    -0.003475   0.005256   -0.66   0.5085
-WeekDaySaturday  -0.005829   0.005686   -1.03   0.3053
-WeekDaySunday    -0.006508   0.005342   -1.22   0.2231
-WeekDayThursday   0.003098   0.005359    0.58   0.5632
-WeekDayTuesday   -0.004907   0.005401   -0.91   0.3636
-WeekDayWednesday  0.000180   0.005265    0.03   0.9728
+Hour1            -3.62e-02   4.16e-02   -0.87  0.38427
+Hour2             6.39e-02   4.05e-02    1.58  0.11481
+Hour3             1.41e-01   4.00e-02    3.51  0.00044
+Hour4             3.60e-01   4.34e-02    8.28  < 2e-16
+Hour5             1.11e-01   4.77e-02    2.33  0.01966
+Hour6            -1.56e-01   5.13e-02   -3.04  0.00237
+Hour7             2.68e-01   5.60e-02    4.79  1.7e-06
+Hour8             2.46e-01   5.60e-02    4.40  1.1e-05
+Hour9            -1.33e-02   5.68e-02   -0.23  0.81424
+Hour10            2.47e-01   4.72e-02    5.23  1.7e-07
+Hour11            3.92e-01   4.59e-02    8.55  < 2e-16
+Hour12           -1.08e-01   7.70e-02   -1.40  0.16188
+Hour13            1.34e-01   4.48e-02    2.99  0.00279
+Hour14            1.84e-01   3.91e-02    4.71  2.5e-06
+Hour15            1.35e-02   3.83e-02    0.35  0.72363
+Hour16            6.32e-02   3.87e-02    1.63  0.10274
+Hour17            2.20e-02   3.69e-02    0.60  0.55021
+Hour18            8.62e-02   3.82e-02    2.26  0.02390
+Hour19           -1.89e-01   4.09e-02   -4.62  3.9e-06
+Hour20           -1.06e-01   4.05e-02   -2.61  0.00905
+Hour21           -1.44e-02   4.06e-02   -0.36  0.72194
+Hour22           -1.86e-01   4.59e-02   -4.06  4.9e-05
+Hour23           -2.78e-02   4.12e-02   -0.67  0.49990
+WeekDayMonday    -7.13e-03   2.19e-02   -0.33  0.74439
+WeekDaySaturday  -4.45e-02   2.36e-02   -1.88  0.05969
+WeekDaySunday    -2.94e-02   2.22e-02   -1.32  0.18527
+WeekDayThursday   4.04e-02   2.25e-02    1.80  0.07180
+WeekDayTuesday   -5.39e-02   2.24e-02   -2.40  0.01624
+WeekDayWednesday  1.02e-03   2.19e-02    0.05  0.96275
+MonthAugust      -2.49e-01   3.14e-02   -7.92  2.4e-15
+MonthDecember    -2.68e-01   3.05e-02   -8.78  < 2e-16
+MonthFebruary     2.43e-02   3.30e-02    0.74  0.46185
+MonthJanuary     -1.48e-01   3.13e-02   -4.73  2.2e-06
+MonthJuly        -2.43e-01   3.22e-02   -7.55  4.5e-14
+MonthJune        -3.71e-01   3.01e-02  -12.36  < 2e-16
+MonthMarch        6.60e-02   3.34e-02    1.98  0.04792
+MonthMay         -2.04e-01   3.22e-02   -6.33  2.5e-10
+MonthNovember    -5.09e-02   3.18e-02   -1.60  0.10867
+MonthOctober      9.00e-02   3.33e-02    2.70  0.00695
+MonthSeptember    1.48e-02   3.30e-02    0.45  0.65311
+Year              8.20e-04   1.55e-05   53.03  < 2e-16
+Easiness          1.51e+00   1.71e-02   88.03  < 2e-16
 
-(Dispersion parameter for poisson family taken to be 1)
+Threshold coefficients:
+    Estimate Std. Error z value
+0|1    6.003      0.339    17.7
+1|2    9.845      0.245    40.1
+2|3   13.129      0.243    53.9
+3|4   13.967      0.244    57.3
+4|5   18.751      0.248    75.7
 
-    Null deviance: 25258  on 136005  degrees of freedom
-Residual deviance: 25170  on 135976  degrees of freedom
-AIC: 453224
-
-Number of Fisher Scoring iterations: 4
-
-R> summary(glm(Grade ~ Hour + WeekDay, data=mnemosyne, family=gaussian))
-
-Call:
-glm(formula = Grade ~ Hour + WeekDay, family = gaussian, data = mnemosyne)
-
-Deviance Residuals:
-   Min      1Q  Median      3Q     Max
--3.665  -0.558   0.344   0.384   1.547
-
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)       3.60571    0.01219  295.85  < 2e-16
-Hour1             0.00427    0.01490    0.29  0.77444
-Hour2             0.02998    0.01453    2.06  0.03902
-Hour3             0.05026    0.01430    3.51  0.00044
-Hour4             0.08360    0.01499    5.58  2.5e-08
-Hour5            -0.01255    0.01648   -0.76  0.44627
-Hour6            -0.12910    0.01709   -7.55  4.3e-14
-Hour7             0.03412    0.01851    1.84  0.06533
-Hour8             0.01991    0.01889    1.05  0.29187
-Hour9            -0.05590    0.01986   -2.81  0.00489
-Hour10           -0.00116    0.01562   -0.07  0.94068
-Hour11            0.06561    0.01515    4.33  1.5e-05
-Hour12           -0.08372    0.02694   -3.11  0.00188
-Hour13            0.00773    0.01578    0.49  0.62409
-Hour14            0.04938    0.01372    3.60  0.00032
-Hour15            0.03429    0.01352    2.54  0.01123
-Hour16            0.10032    0.01359    7.38  1.6e-13
-Hour17            0.07692    0.01311    5.87  4.5e-09
-Hour18            0.10567    0.01346    7.85  4.2e-15
-Hour19            0.01149    0.01459    0.79  0.43105
-Hour20            0.03121    0.01471    2.12  0.03388
-Hour21            0.02553    0.01452    1.76  0.07865
-Hour22           -0.03006    0.01659   -1.81  0.07011
-Hour23            0.03909    0.01498    2.61  0.00906
-WeekDayMonday    -0.01263    0.00771   -1.64  0.10146
-WeekDaySaturday  -0.02119    0.00834   -2.54  0.01107
-WeekDaySunday    -0.02362    0.00783   -3.02  0.00256
-WeekDayThursday   0.01129    0.00787    1.43  0.15164
-WeekDayTuesday   -0.01783    0.00792   -2.25  0.02442
-WeekDayWednesday  0.00066    0.00773    0.09  0.93195
-
-(Dispersion parameter for gaussian family taken to be 0.5922)
-
-    Null deviance: 80842  on 136005  degrees of freedom
-Residual deviance: 80521  on 135976  degrees of freedom
-AIC: 314739
-
-Number of Fisher Scoring iterations: 2
-
-R> lrm(Grade ~ Hour + WeekDay, data = mnemosyne)
-
-Logistic Regression Model
-
-lrm(formula = Grade ~ Hour + WeekDay, data = mnemosyne)
-
-Frequencies of Responses
-
-    0     1     2     3     4     5
-   18   817 17638 16523 96581  4429
-
-                      Model Likelihood     Discrimination    Rank Discrim.
-                         Ratio Test            Indexes          Indexes
-Obs        136006    LR chi2     411.69    R2       0.004    C       0.529
-max |deriv| 6e-11    d.f.            29    g        0.130    Dxy     0.059
-                     Pr(> chi2) <0.0001    gr       1.138    gamma   0.062
-                                           gp       0.015    tau-a   0.027
-                                           Brier    0.117
-
-                  Coef    S.E.   Wald Z Pr(>|Z|)
-y>=1               8.8943 0.2381  37.35 <0.0001
-y>=2               5.0512 0.0484 104.45 <0.0001
-y>=3               1.8112 0.0346  52.35 <0.0001
-y>=4               1.0182 0.0342  29.74 <0.0001
-y>=5              -3.4421 0.0370 -92.97 <0.0001
-Hour=1             0.0227 0.0419   0.54 0.5880
-Hour=2             0.0502 0.0408   1.23 0.2180
-Hour=3             0.1246 0.0404   3.09 0.0020
-Hour=4             0.1934 0.0425   4.55 <0.0001
-Hour=5            -0.0687 0.0461  -1.49 0.1355
-Hour=6            -0.3181 0.0476  -6.68 <0.0001
-Hour=7             0.0940 0.0532   1.77 0.0773
-Hour=8             0.0164 0.0532   0.31 0.7584
-Hour=9            -0.2097 0.0540  -3.88 0.0001
-Hour=10            0.0096 0.0441   0.22 0.8275
-Hour=11            0.1634 0.0432   3.78 0.0002
-Hour=12           -0.2266 0.0745  -3.04 0.0024
-Hour=13           -0.0375 0.0438  -0.85 0.3926
-Hour=14            0.0729 0.0384   1.90 0.0580
-Hour=15            0.0417 0.0378   1.10 0.2704
-Hour=16            0.2269 0.0384   5.91 <0.0001
-Hour=17            0.1580 0.0369   4.28 <0.0001
-Hour=18            0.2412 0.0381   6.34 <0.0001
-Hour=19            0.0388 0.0409   0.95 0.3427
-Hour=20            0.0390 0.0411   0.95 0.3435
-Hour=21            0.0315 0.0406   0.78 0.4379
-Hour=22           -0.0740 0.0461  -1.60 0.1088
-Hour=23            0.0525 0.0418   1.26 0.2094
-WeekDay=Monday    -0.0400 0.0218  -1.84 0.0663
-WeekDay=Saturday  -0.0518 0.0235  -2.20 0.0278
-WeekDay=Sunday    -0.0602 0.0220  -2.73 0.0063
-WeekDay=Thursday   0.0314 0.0223   1.41 0.1599
-WeekDay=Tuesday   -0.0496 0.0223  -2.22 0.0266
-WeekDay=Wednesday -0.0093 0.0219  -0.42 0.6725
 
 
 # install.packages("lme4")
