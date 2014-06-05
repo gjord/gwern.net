@@ -334,7 +334,7 @@ write.csv(touhou, file="2013-vgmdb-touhou.csv", row.names=FALSE)
 ## Personal downloads
 ### 4chan /jp/ C83 threads
 
-A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.org/jp/1) subforum collaborate each Comiket to upload and distribute doujin manga, games, and music released at that Comiket; some are uploaded by Comiket attendees, some are bought from resellers like [Comic Toranoana](!Wikipedia), and many files are harvested from Japanese P2P filesharing networks like [Winny](!Wikipedia)/[Share](!Wikipedia "Share (P2P)")/[Perfect Dark](!Wikipedia "Perfect Dark (P2P)"). I compiled a list of ~400 files from the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/15pp33/c83_resource_thread/) C83 thread (principally from the 4chan links) & the blog [All Doujin Music](http://alldoujinmusic.wordpress.com) and gradually downloaded them from January to March 2013. After dead links, I was left with 400-500 files. Many are not music, or even Touhou-related, so I hand-filtered albums, looking for signs of being Touhou doujin works (credits to ZUN, Touhou characters in the artwork, themes I recognized as Touhou, etc); when I was not sure, I erred on the side of exclusion. The [final compilation](/docs/touhou/2013-c83-downloads.txt) yielded 3503 files (evenly split: 1776 Touhou vs 1728 "other") with 953 Touhou music files.
+A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.org/jp/) subforum collaborate each Comiket to upload and distribute doujin manga, games, and music released at that Comiket; some are uploaded by Comiket attendees, some are bought from resellers like [Comic Toranoana](!Wikipedia), and many files are harvested from Japanese P2P filesharing networks like [Winny](!Wikipedia)/[Share](!Wikipedia "Share (P2P)")/[Perfect Dark](!Wikipedia "Perfect Dark (P2P)"). I compiled a list of ~400 files from the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/15pp33/c83_resource_thread/) C83 thread (principally from the 4chan links) & the blog [All Doujin Music](http://alldoujinmusic.wordpress.com) and gradually downloaded them from January to March 2013. After dead links, I was left with 400-500 files. Many are not music, or even Touhou-related, so I hand-filtered albums, looking for signs of being Touhou doujin works (credits to ZUN, Touhou characters in the artwork, themes I recognized as Touhou, etc); when I was not sure, I erred on the side of exclusion. The [final compilation](/docs/touhou/2013-c83-downloads.txt) yielded 3503 files (evenly split: 1776 Touhou vs 1728 "other") with 953 Touhou music files.
 
 ~~~{.R}
 # exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory
@@ -361,6 +361,12 @@ touhou[touhou=="-"] <- NA
 Playback length:
 
 find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|g "Playback length"
+
+### 4chan /jp/ C84 threads
+
+591 Touhou music files:
+
+/docs/touhou/2013-c84-downloads.json
 
 ### 4chan /jp/ Reitaisai 10 threads
 
