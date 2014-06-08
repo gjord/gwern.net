@@ -376,7 +376,7 @@ shellToGit u = do (_,y,_) <- readProcessWithExitCode "git" ["clone", u] ""
                   print y
 ~~~
 
-In retrospect, it might have been a better idea to try to use [runCommand](!Hoogle) or [System.Cmd](!Hoogle). Alternatively, we could use the same shelling out functionality from the original [patch-tag.com](https://patch-tag.com/r/tphyahoo/mirrorpatchtag/snapshot/current/content/pretty/patch-tag-mirror.hs) script:
+In retrospect, it might have been a better idea to try to use [`runCommand`](!Hoogle "runCommand") or [`System.Cmd`](!Hoogle "System.Cmd"). Alternatively, we could use the same shelling out functionality from the original [patch-tag.com](http://patch-tag.com/r/tphyahoo/mirrorpatchtag/snapshot/current/content/pretty/patch-tag-mirror.hs) script:
 
 ~~~{.haskell}
 mapM_ (\x -> runProcess "darcs" ["get", "--lazy", "http://patch-tag.com"++x]
