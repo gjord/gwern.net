@@ -2120,6 +2120,81 @@ Some limitations to this experiment:
 - did not include web browser type as a covariate, which might have shown that particular combinations of browser & theme substantially outperformed the control (then BLR could have improved their code for the bad browsers or a browser check done before highlighting any text)
 - did not use formal adaptive trial methodology, so the _p_-values have no particular interpretation
 
+## Floating footnotes
+
+One of the site features I like the most is how the endnotes pop-out/float when the mouse hovers over the link, so the reader doesn't have to jump to the endnotes and back, jarring their concentration and breaking their train of thought.
+I got the JS from [Luka Mathis back in 2010](http://ignorethecode.net/blog/2010/04/20/footnotes/).
+But sometimes the mouse hovers by accident, and with big footnotes, the popped-up footnote can cover the screen and be unreadable.
+So I've wondered if it's as cool as I think it is.
+
+### Implementation
+
+~~~{.Diff}
+diff --git a/static/js/footnotes.js b/static/js/footnotes.js
+index 69088fa..e08d63c 100644
+--- a/static/js/footnotes.js
++++ b/static/js/footnotes.js
+@@ -1,7 +1,3 @@
+-$(document).ready(function() {
+-    Footnotes.setup();
+-});
+-
+
+diff --git a/static/templates/default.html b/static/templates/default.html
+index 4395130..8c97954 100644
+--- a/static/templates/default.html
++++ b/static/templates/default.html
+@@ -133,6 +133,9 @@
+     <!-- Load infrastructure from Google's CDN: http://code.google.com/apis/libraries/devguide.html -->
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
++    <!-- floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
++    <script type="text/javascript" src="/static/js/footnotes.js"></script>
++
+     <!-- Load Google Analytics & setup A/B test -->
+     <script id="googleAnalytics" type="text/javascript">
+       var _gaq = _gaq || [];
+@@ -151,14 +154,23 @@
+
+       if (typeof(start_slot) == 'undefined') start_slot = 1;
+-      var experiment = "blr3";
+-      var variant_names = ["none", "gray1"];
++      var experiment = "floating_footnotes";
++      var variant_names = ["none", "float"];
+
+       var variant_id = this.readCookie("ABalytics_"+experiment);
+       if (!variant_id || !variant_names[variant_id]) {
+       var variant_id = Math.floor(Math.random()*variant_names.length);
+       document.cookie = "ABalytics_"+experiment+"="+variant_id+"; path=/";
+                         }
++      // enable the floating footnotes
++      function footnotefy (VARIANT) {
++       if (VARIANT != "none") {
++         $(document).ready(function() {
++                        Footnotes.setup();
++                        });
++       }
++      }
++      footnotefy(variant_names[variant_id]);
+       _gaq.push(['_setCustomVar',
+                   start_slot,
+                   experiment,                 // The name of the custom variable = name of the experiment
+                   ...)]
+@@ -196,9 +208,6 @@
+     <!-- Handle cross-browser MathML rendering -->
+     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+-    <!-- floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
+-    <script type="text/javascript" src="/static/js/footnotes.js"></script>
+-
+     <!-- http://tablesorter.com/docs/ -->
+     <script type="text/javascript" src="/static/js/tablesorter.js"></script>
+     <script type="text/javascript" id="tablesorter">
+~~~
+
+### Data
+### Analysis
+
 # Appendix
 ## Covariate impact on power
 
