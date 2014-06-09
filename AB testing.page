@@ -48,7 +48,7 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
                 floating footnotes
         CSS
                 differences from readability
-                basically, every declaration in default.css!
+                every declaration in default.CSS?
         Donation
                 placement - left, right, bottom
                 donation text
@@ -147,7 +147,7 @@ In March 2013, I decided to give A/B testing another whack. Google Analytics Exp
 
 ## `max-width` redux
 
-The obvious test case is to rerun the `max-width` test, and this time get the data.
+The test case is to rerun the `max-width` test and finish it.
 
 ### Implementation
 
@@ -155,7 +155,8 @@ The exact changes:
 
 ~~~{.Diff}
 Sun Mar 17 11:25:39 EDT 2013  gwern@gwern.net
-  * default.html: setup ABalytics a/b testing https://github.com/danmaz74/ABalytics (hope this doesn't break anything...)
+  * default.html: setup ABalytics a/b testing https://github.com/danmaz74/ABalytics
+                  (hope this doesn't break anything...)
     addfile ./static/js/abalytics.js
     hunk ./static/js/abalytics.js 1
 ...
@@ -973,10 +974,12 @@ blockquote: : before {
 The current blockquote striping goes thusly:
 
 ~~~{.Css}
-blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote {
+blockquote, blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote {
     z-index: -2;
     background-color: rgb(245, 245, 245); }
-blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote {
+blockquote blockquote, blockquote blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote blockquote {
     background-color: rgb(235, 235, 235); }
 ~~~
 
@@ -986,15 +989,19 @@ This is another 2x2 design since we can use the Readability quotes or not, and t
 
 ~~~{.Diff}
 hunk ./static/css/default.css 271
--blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote {
+-blockquote, blockquote blockquote blockquote,
+- blockquote blockquote blockquote blockquote blockquote {
 -    z-index: -2;
 -    background-color: rgb(245, 245, 245); }
--blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote {
+-blockquote blockquote, blockquote blockquote blockquote blockquote,
+- blockquote blockquote blockquote blockquote blockquote blockquote {
 -    background-color: rgb(235, 235, 235); }
-+/* blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { */
++/* blockquote, blockquote blockquote blockquote, */
++/* blockquote blockquote blockquote blockquote blockquote { */
 +/*     z-index: -2; */
 +/*     background-color: rgb(245, 245, 245); } */
-+/* blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { */
++/* blockquote blockquote, blockquote blockquote blockquote blockquote, */
++/*blockquote blockquote blockquote blockquote blockquote blockquote { */
 +/*     background-color: rgb(235, 235, 235); } */
 hunk ./static/templates/default.html 30
 -    <div class="ulFontSize_class1"></div>
@@ -1007,21 +1014,33 @@ hunk ./static/templates/default.html 150
 -      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 100%; }</style>",
 -      "ulFontSize_class2": ""
 +      name: 'rz',
-+      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C'; filter: alpha(opacity=20); font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em; opacity: .2; position: absolute; top: .25em }; blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
++      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C';
+filter: alpha(opacity=20);
+font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em;
+opacity: .2; position: absolute; top: .25em }; blockquote, blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); };
+blockquote blockquote, blockquote blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
 +      "blockquoteFormatting_class2": ""
 hunk ./static/templates/default.html 155
 -      name: 's105',
 -      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 105%; }</style>",
 -      "ulFontSize_class2": ""
 +      name: 'orz',
-+      "blockquoteFormatting_class1": "<style>blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
++      "blockquoteFormatting_class1": "<style>blockquote, blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); };
+blockquote blockquote, blockquote blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
 +      "blockquoteFormatting_class2": ""
 hunk ./static/templates/default.html 160
 -      name: 's110',
 -      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 110%; }</style>",
 -      "ulFontSize_class2": ""
 +      name: 'roz',
-+      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C'; filter: alpha(opacity=20); font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em; opacity: .2; position: absolute; top: .25em }</style>",
++      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C';
+filter: alpha(opacity=20);
+font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em;
+opacity: .2; position: absolute; top: .25em }</style>",
 +      "blockquoteFormatting_class2": ""
 hunk ./static/templates/default.html 165
 -      name: 's115',
@@ -1860,11 +1879,26 @@ Alignmentr:Width  0.00450    0.00580    0.78     0.44
 
 So, as I expected, putting the ToC on the right performed worse; the larger ToC widths don't seem to be better but it's unclear what's going on there. A visual inspection of the Width data (`library(ggplot2); qplot(Width,Rate,color=Alignment,data=rates)`) suggests that 20% width was the best variant, so might as well go with that.
 
-## BeeLine Reader
+## BeeLine Reader text highlighting
 
-[BeeLine Reader](http://www.beelinereader.com/) (BLR) is an interesting new browser plugin which launched around October 2013; I learned of it from the [Hacker News discussion](https://news.ycombinator.com/item?id=6335784 "Show HN: Ditch Black Text to Read Faster, Easier; +723, 266 comments"). The idea is that part of the difficulty in reading text is that when one finishes a line and saccades left to the continuation of the next line, the uncertainty of where it is adds a bit of stress, so one can make reading easier by adding some sort of guide to the next line; in this case, each matching pair of half-lines is colored differently, so if you are on a red half-line, when you saccade left, you look for a line also colored red, then you switch to blue in the middle of that line, and so on. A colorful variant on [boustrophedon](!Wikipedia) writing. I found the default BLR coloring garish & distracting, but I couldn't see any reason that a subtle gray variant would not help: the idea seems plausible. And very long text pages (like mine) are where BLR should shine most.
+> BLR is a JS library for highlighting textual paragraphs with pairs of half-lines to make reading easier.
+> I run a randomized experiment on several differently-colored versions to see if default site-wide usage of BLR will improve time-on-page for `gwern.net` readers, indicating easier reading of the long-form textual content.
+> Most versions perform worse than the control of no-highlighting; the best version performs slightly better but the improvement is not statistically-significant.
 
-I asked if there were a JavaScript version I could try in an A/B test; the initial JS implementation was not fast enough, but by 10 March 2014 it was good enough. BLR has several themes, including "gray"; I decided to test no BLR, "dark", "blues", & expanded the gray selection to include grays `#222222`/`#333333`/`#444444`/`#555555`/`#666666`/`#777777` (they vary in how blatant the highlighting is) for a total of 9 variants.
+[BeeLine Reader](http://www.beelinereader.com/) (BLR) is an interesting new browser plugin which launched around October 2013; I learned of it from the [Hacker News discussion](https://news.ycombinator.com/item?id=6335784 "Show HN: Ditch Black Text to Read Faster, Easier; +723, 266 comments").
+The idea is that part of the difficulty in reading text is that when one finishes a line and saccades left to the continuation of the next line, the uncertainty of where it is adds a bit of stress, so one can make reading easier by adding some sort of guide to the next line; in this case, each matching pair of half-lines is colored differently, so if you are on a red half-line, when you saccade left, you look for a line also colored red, then you switch to blue in the middle of that line, and so on.
+A colorful variant on [boustrophedon](!Wikipedia) writing.
+I found the default BLR coloring garish & distracting, but I couldn't see any reason that a subtle gray variant would not help: the idea seems plausible.
+And very long text pages (like mine) are where BLR should shine most.
+
+I asked if there were a JavaScript version I could use in an A/B test; the initial JS implementation was not fast enough, but by 10 March 2014 it was good enough.
+BLR has several themes, including "gray"; I decided to test the variants no BLR, "dark", "blues", & expanded the gray selection to include grays `#222222`/`#333333`/`#444444`/`#555555`/`#666666`/`#777777` (`gray`-`6`; they vary in how blatant the highlighting is) for a total of 9 equally-randomized variants.
+
+Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
+I'm only interested in the *best* variant, not estimating each variant exactly (what do I care if the ugly `dark` is 15% rather than 14%? I just want to know it's worse than the control) so conceptually I want something like a [sequential analysis](!Wikipedia) or [adaptive clinical trial](!wikipedia) or [multi-armed bandit](!Wikipedia) where bad variants get dropped over time; unfortunately, I haven't studied them yet (and MABs would be hard to implement on a static site), so I'll just ad hoc drop the worst variant every week or two.
+(Maybe next experiment I'll do a formal adaptive trial.)
+
+### Setup
 
 The usual implementation using ABalytics doesn't work because it uses a `innerHTML` call to substitute the various fragments, and while HTML & CSS get interpreted fine, JavaScript does not; the [offered solutions](https://stackoverflow.com/questions/1197575/can-scripts-be-inserted-with-innerhtml) were sufficiently baroque I wound up implementing a custom subset of ABalytics hardwired for BLR inside the Analytics script:
 
@@ -1912,35 +1946,92 @@ The usual implementation using ABalytics doesn't work because it uses a `innerHT
       _gaq.push(['_trackPageview']);
 ~~~
 
-(Why "bl*3*"? I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not; this broke the original test. Then I discovered that BLR by default broke all the MathML/Mathjax, causing nasty-looking errors over pages with math expressions; this broke the second test.)
+The themes are defined in `beeline.min.js` as:
 
-Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
+~~~{.Javascript}
+r.THEMES={
+ dark: ["#000000","#970000","#000000","#00057F","#FBFBFB"],
+ blues:["#000000","#0000FF","#000000","#840DD2","#FBFBFB"],
+ gray1:["#000000","#222222","#000000","#222222","#FBFBFB"],
+ gray2:["#000000","#333333","#000000","#333333","#FBFBFB"],
+ gray3:["#000000","#444444","#000000","#444444","#FBFBFB"],
+ gray4:["#000000","#555555","#000000","#555555","#FBFBFB"],
+ gray5:["#000000","#666666","#000000","#666666","#FBFBFB"],
+ gray6:["#000000","#777777","#000000","#777777","#FBFBFB"]
+}
+~~~
 
-Analysis will be a little bit different. As usual, I'll be including old vs new visitors as a covariate, but the BLR people say that there may be cross-browser differences, so I'll be throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser, which I'm not looking forward to. Finally, because I expect the gray variants to perform very similar to each other and different from the others, I think I will try out a multi-level model with nesting for grays to increase the power further:
+(Why "bl*3*"? I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not; this broke the original test.
+Then I discovered that BLR by default broke all the MathML/MathJax, causing nasty-looking errors over pages with math expressions; this broke the second test, and I had to get a fixed version.)
+
+### Data
+
+On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant's 22.38%, and wasting traffic.
+On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038).
+On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted.
+On 17 April, `dark` (16.00% vs 16.94%) was deleted.
+On 30 April, I deleted `gray2` (17.56% vs 18.07%).
+11 May, `blues` was gone (18.11% vs 18.53%), and on 31 May, I deleted `gray3` (18.04% vs 18.24%).
+
+Due to caching, the deletions didn't necessarily drop data collection instantly to zero.
+Traffic was also heterogeneous: Hacker News traffic is much less likely to spend much time on page than the usual traffic.
+
+The conversion data, segmented by period, and ordered by when a variant was deleted:
+
+Variant   Old     Total: _n_ (%)        10-31 March     1-6 April     7-9 April     10-17 April     18-30 April     1-11 May       12-31 May     1-8 June
+-------   -----   ----------------     -------------   -----------   -----------   -------------   -------------   ------------   -----------   ------------
+`none`    FALSE   17648   (16.01%)      1189 (19.26%)  3607 (13.97%) 460 (17.39%)  1182 (16.58%)   3444 (17.04%)   2397 (14.39%)  3997 (17.39%) 2563 (16.35%)
+`none`    TRUE    8009    (23.65%)      578  (24.91%)  1236 (22.09%) 226 (20.35%)  570  (23.86%)   1364 (27.05%)   1108 (23.83%)  2142 (22.46%) 1363 (23.84%)
+`gray1`   FALSE   17579   (16.28%)      1177 (19.71%)  3471 (14.06%) 475 (13.47%)  1200 (17.33%)   3567 (17.49%)   2365 (13.57%)  3896 (18.17%) 2605 (17.24%)
+`gray1`   TRUE    7694    (23.85%)      515  (28.35%)  1183 (23.58%) 262 (21.37%)  518  (21.43%)   1412 (26.56%)   1090 (24.86%)  2032 (22.69%) 1197 (23.56%)
+`gray3`   FALSE   14871   (15.81%)      1192 (18.29%)  3527 (14.15%) 446 (15.47%)  1160 (15.43%)   3481 (17.98%)   2478 (14.65%)  3776 (16.26%) 3    (33.33%)
+`gray3`   TRUE    6631    (23.06%)      600  (24.83%)  1264 (21.52%) 266 (18.05%)  638  (21.79%)   1447 (25.22%)   1053 (24.60%)  1912 (23.17%) 51    (5.88%)
+`blues`   FALSE   10844   (15.34%)      1157 (18.93%)  3470 (14.35%) 449 (16.04%)  1214 (15.57%)   3346 (17.54%)   2362 (13.46%)  3     (0.00%)
+`blues`   TRUE    4544    (23.04%)      618  (27.18%)  1256 (23.81%) 296 (20.27%)  584  (22.09%)   1308 (24.46%)   1052 (22.15%)  48   (12.50%)
+`gray2`   FALSE   8646    (15.51%)      1220 (20.33%)  3649 (13.81%) 416 (15.14%)  1144 (15.03%)   3433 (17.54%)   4     (0.00%)
+`gray2`   TRUE    3366    (22.82%)      585  (22.74%)  1271 (21.79%) 230 (16.52%)  514  (21.60%)   1298 (25.42%)   44   (27.27%)  6     (0.00%) 3     (0.00%)
+`dark`    FALSE   5240    (14.05%)      1224 (20.59%)  3644 (13.83%) 420 (13.81%)  1175 (14.81%)   1    (0.00%)
+`dark`    TRUE    2161    (20.59%)      618  (21.52%)  1242 (20.85%) 276 (21.74%)  574  (20.56%)   64   (10.94%)   1     (0.00%)  2     (0.00%) 2    (50.00%)
+`gray6`   FALSE   4022    (13.30%)      1153 (19.51%)  3610 (12.88%) 409 (17.11%)  1     (0.00%)   2     (0.00%)   3     (0.00%)
+`gray6`   TRUE    1727    (20.61%)      654  (23.70%)  1358 (22.02%) 259 (18.92%)  95    (7.37%)   11    (9.09%)                  1     (0.00%)
+`gray5`   FALSE   3245    (12.20%)      1175 (16.68%)  3242 (12.21%) 3    (0.00%)
+`gray5`   TRUE    1180    (21.53%)      559  (25.94%)  1130 (21.77%) 34  (17.65%)  16   (12.50%)
+`gray4`   FALSE   1176    (18.54%)      1174 (18.57%)  1174 (18.57%)                               2     (0.00%)
+`gray4`   TRUE    673     (19.91%)      650  (20.31%)  669  (20.03%)               1     (0.00%)   1     (0.00%)   2     (0.00%)
+                  137438  (18.27%)
+
+Graphed:
+
+![Weekly conversion rates for each of the BeeLine Reader settings](/images/2014-06-08-abtesting-blr-byweek.png)
+
+I also received a number of complaints while running the BLR test (principally due to the `dark` and `blues` variants, but also apparently triggered by some of the less popular gray variants; the number of complaints dropped off considerably by halfway through):
+
+- 2 in emails
+- 2 on IRC unsolicited; when I later asked, there were 2 complaints of slowness loading pages & after reflowing
+- 2 on Reddit
+- 3 mentions in `gwern.net` comments
+- 4 through my anonymous feedback form
+- 6 complaints [on Hacker News](https://news.ycombinator.com/item?id=7539390)
+- total: 19
+
+### Analysis
+
+The BLR people say that there may be cross-browser differences, so I thought about throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser.
+This turned out to be enough work that I decided to not bother.
+
+As usual, a logistic regression on the various BLR themes with new vs returning visitors (`Old`) as a covariate.
+Because of the heterogeneity in traffic (and because I bothered breaking out the data by time period this time for the table), I also include each block as a factor.
+Finally, because I expected the 6 gray variants to perform similarly, I try out a multilevel model nesting the grays together.
+
+The results are not impressive: only 2 gray variants out of the 8 variants have a positive estimate, and neither is statistically-significant; the best variant was `gray1` ("#222222" & "#FBFBFB"), at an estimated increase from 19.52% to 20.04% conversion rate.
+More surprising, the nesting turns out to not matter at all, and in fact the worst variant was gray.
+(The best-fitting multilevel model ignore the variants entirely, although it did not fit better than the regular logistic model incorporating all of the time periods, `Old`, and variants.)
 
 ~~~{.R}
-# Pivot table view on custom variable ("Secondary dimension: User Type"; "Pivot by: Custom Variable (Value 01); Pivot metrics: Sessions | Time reading (Goal 1 Conversion Rate)")
-rates <- read.csv(stdin(),header=TRUE)
-Variant,Color,Old,N,Rate
-blues,blue,FALSE,8413,0.1586
-blues,blue,TRUE,3398,0.2340
-dark,dark,FALSE,5240,0.1405
-dark,dark,TRUE,2156,0.2059
-gray1,gray,FALSE,8645,0.1584
-gray1,gray,TRUE,3333,0.2436
-gray2,gray,FALSE,8635,0.1553
-gray2,gray,TRUE,3301,0.2287
-gray3,gray,FALSE,8541,0.1590
-gray3,gray,TRUE,3573,0.2275
-gray4,gray,FALSE,1176,0.1854
-gray4,gray,TRUE,671,0.1997
-gray5,gray,FALSE,3245,0.1220
-gray5,gray,TRUE,1180,0.2153
-gray6,gray,FALSE,4022,0.1330
-gray6,gray,TRUE,1723,0.2066
-none,none,FALSE,8626,0.1569
-none,none,TRUE,3353,0.2422
-
+# Pivot table view on custom variable:
+# ("Secondary dimension: User Type"; "Pivot by: Custom Variable (Value 01); Pivot metrics: Sessions | Time reading (Goal 1 Conversion Rate)")
+# then hand-edited to add Color and Date variables
+rates <- read.csv("http://www.gwern.net/docs/2014-06-08-abtesting-blr.csv")
 
 rates$Successes <- rates$N * rates$Rate
 rates$Successes <- round(rates$Successes,0)
@@ -1951,81 +2042,42 @@ rates$Variant <- relevel(rates$Variant, ref="none")
 rates$Color <- relevel(rates$Color, ref="none")
 
 # normal:
-g1 <- glm(cbind(Successes,Failures) ~ Old + Variant, data=rates, family=binomial); summary(g1)
-...Coefficients:
-             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.66547    0.02479  -67.19  < 2e-16
-OldTRUE       0.49388    0.01969   25.08  < 2e-16
-Variantblues -0.00736    0.03386   -0.22     0.83
-Variantdark  -0.15754    0.03981   -3.96  7.6e-05
-Variantgray1  0.01004    0.03367    0.30     0.77
-Variantgray2 -0.03355    0.03394   -0.99     0.32
-Variantgray3 -0.01830    0.03368   -0.54     0.59
-Variantgray4  0.02227    0.06414    0.35     0.73
-Variantgray5 -0.24265    0.04883   -4.97  6.7e-07
-Variantgray6 -0.19583    0.04367   -4.48  7.3e-06
+g0 <- glm(cbind(Successes,Failures) ~ Old + Variant + Date, data=rates, family=binomial); summary(g0)
+# ...Coefficients:
+#                  Estimate Std. Error z value Pr(>|z|)
+# (Intercept)     -1.633959   0.027712  -58.96  < 2e-16
+# OldTRUE          0.465491   0.014559   31.97  < 2e-16
+# Date10-17 April -0.021047   0.037563   -0.56   0.5753
+# Date10-31 March  0.150498   0.035017    4.30  1.7e-05
+# Date1-11 May    -0.107965   0.035133   -3.07   0.0021
+# Date12-31 May    0.009534   0.032448    0.29   0.7689
+# Date1-6 April   -0.138053   0.031809   -4.34  1.4e-05
+# Date18-30 April  0.095898   0.031817    3.01   0.0026
+# Date7-9 April   -0.129704   0.047314   -2.74   0.0061
+#
+# Variantgray5    -0.114487   0.040429   -2.83   0.0046
+# Variantdark     -0.060299   0.033912   -1.78   0.0754
+# Variantgray2    -0.027338   0.028518   -0.96   0.3378
+# Variantblues    -0.012120   0.026330   -0.46   0.6453
+# Variantgray3    -0.005484   0.023441   -0.23   0.8150
+# Variantgray4    -0.003556   0.047273   -0.08   0.9400
+# Variantgray6     0.000536   0.036308    0.01   0.9882
+# Variantgray1     0.026765   0.021757    1.23   0.2186
 
-# multi-level: variants nested in a color
 library(lme4)
-g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), data=rates, family=binomial); summary(g2); ranef(g2)
-...Random effects:
- Groups        Name        Variance Std.Dev.
- Variant:Color (Intercept) 0.00724  0.0851
- Color         (Intercept) 0.00000  0.0000
-Number of obs: 18, groups: Variant:Color, 9; Color, 4
-
-Fixed effects:
-            Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -1.7334     0.0312   -55.5   <2e-16
-OldTRUE       0.4941     0.0197    25.1   <2e-16
-
-Correlation of Fixed Effects:
-        (Intr)
-OldTRUE -0.226
-$`Variant:Color`
-           (Intercept)
-none:none      0.06290
-blues:blue     0.05601
-dark:dark     -0.07869
-gray1:gray     0.07224
-gray2:gray     0.03174
-gray3:gray     0.04595
-gray4:gray     0.06031
-gray5:gray    -0.14008
-gray6:gray    -0.10813
-
-$Color
-     (Intercept)
-none           0
-blue           0
-dark           0
-gray           0
-
-# Bayesian (Wishart prior)
-library(blme)
-bg2 <- bglmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant), fixef.prior = normal, data=rates, family=binomial); ranef(bg2)
-...$`Variant:Color`
-           (Intercept)
-none:none      0.03862
-blues:blue     0.03412
-dark:dark     -0.05602
-gray1:gray     0.07876
-gray2:gray     0.03726
-gray3:gray     0.05181
-gray4:gray     0.07168
-gray5:gray    -0.14585
-gray6:gray    -0.10969
-
-$Color
-     (Intercept)
-none    0.022730
-blue    0.020078
-dark   -0.032969
-gray   -0.009433
-
-library(lattice)
-q <- qqmath(ranef(bg2, condVar=TRUE))
-q$`Variant:Color`
+g1 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant) + (1|Date), data=rates, family=binomial)
+g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color)         + (1|Date), data=rates, family=binomial)
+g3 <- glmer(cbind(Successes,Failures) ~ Old +                     (1|Date), data=rates, family=binomial)
+g4 <- glmer(cbind(Successes,Failures) ~ Old + (1|Variant),                  data=rates, family=binomial)
+g5 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color),                    data=rates, family=binomial)
+AIC(g0, g1, g2, g3, g4, g5)
+#    df  AIC
+# g0 17 1035
+# g1  5 1059
+# g2  4 1058
+# g3 13 1041
+# g4  3 1252
+# g5  3 1264
 ~~~
 
 <!-- unstepped main effects extracted from all past A/B experiments:
@@ -2051,30 +2103,30 @@ penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184
 fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
               cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
 -->
-<!-- complaints so far: 2 on Reddit, 4 anonymously, 2 on IRC, 2 email; 2 mentions on IRC; when I brought it up on IRC, 2 complaint of slowness loading and after reflowing, 1 dislike; 3 mentions in gwern.net comments -->
-<!-- HN complaints: https://news.ycombinator.com/item?id=7539390 6 complaints -->
 
-On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant's 22.38%, and wasting traffic. On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038). On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted. On 17 April, `dark` (16.00% vs 16.94%) was deleted. On 30 April, I deleted `gray2` (17.56% vs 18.07%). 11 May, `blues` was gone (18.11% vs 18.53%), and on 31 May, I deleted `gray3` (18.04% vs 18.24%).
+### Conclusion
 
-<!--
-It's surprising how much the grays differed from each other. I assumed
-they would all be pretty similar. I also didn't expect 'blues' to last
-as long as it did. This suggests to me that you might want to look
-into testing many more sets of colorings, since your current ones are
-unlikely to be the best ones.
+An unlikely +0.5% to reading rates isn't enough for me to want to add a dependency another JS library, so I will be removing BLR.
+I'm not surprised by this result, since most tests don't show an improvement, BLR coloring test is pretty unusual for a website, and users wouldn't have any understanding of what it is or ability to opt out of it; using BLR by default doesn't work, but the browser extension might be useful since the user expects the coloring & can choose their preferred color scheme.
 
-gray1's current performance is not going to be
-statistically-significant, and an increase of ~0.3% isn't worth
-loading up a JS library and fielding the occasional reader complaint,
-so my conclusion in another week or so is almost certainly going to be
-that BLR doesn't seem worth using by default on my site. -->
+I was surprised that the gray variants could perform so wildly different, from slightly better than the control to horribly worse, considering that they didn't strike me as looking *that* different when I was previewing them locally.
+I also didn't expect `blues` to last as long as it did, and thought I would be deleting it as soon as `dark`.
+This makes me wonder: are there color themes only subtly different from the ones I tried which might work unpredictably well?
+Since BLR by default offers only a few themes, I think BLR should try out as many color themes as possible to locate good ones they've missed.
+
+Some limitations to this experiment:
+
+- no way for users to disable BLR or change color themes
+- did not include web browser type as a covariate, which might have shown that particular combinations of browser & theme substantially outperformed the control (then BLR could have improved their code for the bad browsers or a browser check done before highlighting any text)
+- did not use formal adaptive trial methodology, so the _p_-values have no particular interpretation
 
 # Appendix
 ## Covariate impact on power
 
 > Is it important in randomized testing to control for covariates, even powerful ones? A simulation using a website's data suggests not.
 
-In December 2013, I was discussing website testing with another site owner, which monetizes traffic by selling a product, while I just optimize for reading time. He argued (deleting identifying details since I will be using their real traffic & conversion numbers throughout):
+In December 2013, I was discussing website testing with another site owner, which monetizes traffic by selling a product, while I just optimize for reading time.
+He argued (deleting identifying details since I will be using their real traffic & conversion numbers throughout):
 
 > I think a *big* part that gets lost out is the quality of traffic. For our [next website version]
 > (still speccing it all out), one of my biggest requirements for A/B testing
@@ -2189,7 +2241,7 @@ So at _n_=1000 we don't have decent statistical power to detect our true effect 
 
 #### Small _n_
 
-Moving on to our original question, we see that the regressions controlling for source had a very similar power as to the regressions which didn't bother. It looks like you may pay a small price of 2% less statistical power, but probably even less than that because so many of the other entries yielded an estimate of 0% penalty. And obviously the penalty gets smaller as sample size increases and a mere 25% difference in conversion rate washes out as noise.
+Moving on to our original question, we see that the regressions controlling for source had a very similar power as to the regressions which didn't bother. It looks like you may pay a small price of 2% less statistical power, but probably even less than that because so many of the other entries yielded an estimate of 0% penalty. And the penalty gets smaller as sample size increases and a mere 25% difference in conversion rate washes out as noise.
 
 What if we look at smaller samples? say, _n_=12-1012?
 
