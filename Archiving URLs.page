@@ -399,7 +399,7 @@ But they *could* compress even better: the similar files may be thousands of fil
 
 Because we sort the files by 'all files starting with "2013"' and then 'all files starting "2014"', we lose all proximity. If instead, we could sort by subfolder and only then by the top-level folder, then we'd have everything line up nicely. Fortunately, we already know how to do this! Reuse the sort-key trick, specify "/" as the delimiter to parse on, and the nth field to sort on.  We feed it a file list, tell it to break filenames by "/", and then to sort on a lower level, and if we did it right, we will indeed get output like `2013-12-25/default.css` just before `2014-01-15/default.css`, which will do wonders for our compression, and which will pay ever more dividends as we accumulate more partially-redundant mirrors.
 
-Here is an example of output for my Pandora mirrors, where, due to frequent rumors of its demise triggering mirroring on my part, I have 5 full mirrors at the time of testing; and naturally, if we employ the sort-key trick (`find . -type f | sort --unique --key=3 --field-separator="/"`), we find a lot of similar-sounding files:
+Here is an example of output for my Pandora mirrors, where, due to frequent rumors of its demise triggering mirroring on my part, I have 5 full mirrors at the time of testing; and naturally, if we employ the sort-key trick (`find . -type f | sort --key=3 --field-separator="/"`), we find a lot of similar-sounding files:
 
 ~~~{.Bash}
 ./2014-01-15/profile/5a66e5238421f0422706b267b735d2df/6
@@ -424,7 +424,7 @@ Note the interleaving of 5 different mirrors, impossible in a normal left-to-rig
 So here's an example invocation (doing everything in pipelines to avoid disk IO):
 
 ~~~{.R}
-find . -type f -print0 | sort --zero-terminated --unique --key=3 --field-separator="/"
+find . -type f -print0 | sort --zero-terminated --key=3 --field-separator="/"
  | tar --no-recursion --null --files-from - -c
  | xz -9 --extreme --stdout
  > ../mirror.tar.xz
