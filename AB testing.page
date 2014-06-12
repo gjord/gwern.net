@@ -1976,7 +1976,7 @@ On 30 April, I deleted `gray2` (17.56% vs 18.07%).
 Due to caching, the deletions didn't necessarily drop data collection instantly to zero.
 Traffic was also heterogeneous: Hacker News traffic is much less likely to spend much time on page than the usual traffic.
 
-The conversion data, segmented by period, and ordered by when a variant was deleted:
+The conversion data, with new vs returning visitor, segmented by period, and ordered by when a variant was deleted:
 
 Variant   Old     Total: _n_ (%)        10-31 March     1-6 April     7-9 April     10-17 April     18-30 April     1-11 May       12-31 May     1-8 June
 -------   -----   ----------------     -------------   -----------   -----------   -------------   -------------   ------------   -----------   ------------
@@ -2170,7 +2170,7 @@ index 4395130..8c97954 100644
 +      // enable the floating footnotes
 +      function footnotefy (VARIANT) {
 +       if (VARIANT != "none") {
-+         $(document).ready(function() {
++         $$(document).ready(function() {
 +                        Footnotes.setup();
 +                        });
 +       }
