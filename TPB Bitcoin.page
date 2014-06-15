@@ -6,35 +6,19 @@ created: 25 Feb 2014
 status: notes
 ...
 
-    19:58:06 SDr> gwern, here's a shiny new angle for your cryptocurrencies knowledge file: do crypto donations to warez distributors, like work?
-    19:59:02 gwern> SDr: how would that work? they put addresses in the READMEs of their torrents or something?
-    19:59:34 SDr> gwern, specifically eg. scraping Pirate Bay's NFO files for wallet addresses & cross-referencing it with blockchain, is there volume for it,
-                    such that distributors are incentivized to provide clean cracks / keygens, as opposed to bundling blackmail-ware with it?
+# Background
+
+    SDr> gwern, here's a shiny new angle for your cryptocurrencies knowledge file: do crypto donations to warez distributors, like work?
+    gwern> SDr: how would that work? they put addresses in the READMEs of their torrents or something?
+    SDr> gwern, specifically eg. scraping Pirate Bay's NFO files for wallet addresses & cross-referencing it with blockchain, is there volume for it,
+           such that distributors are incentivized to provide clean cracks / keygens, as opposed to bundling blackmail-ware with it?
 
 TODO: compare against Paypal, Flattr, Gittip?
 
-watashi kininarimasu!
+_Watashi kininarimasu_!
 
-https://github.com/karan/TPB
-
-~~~{.Bash}
-sudo apt-get install libxml2-dev libxslt-dev
-pip install --install-option="--prefix=$HOME/.local" ThePirateBay
-~~~
-
-~~~{.Python}
-from tpb import TPB
-from tpb import CATEGORIES, ORDERS
-t = TPB('https://thepiratebay.se')
-
-
-# get top torrents in Movies category
-t.top().category(CATEGORIES.VIDEO.MOVIES)
-
-# print all torrent descriptions
-for torrent in t.category(CATEGORIES.VIDEO.MOVIES):
-    print(torrent.info)
-~~~
+# Data
+## Download
 
 https://archive.org/details/Backup_of_The_Pirate_Bay_32xxxxx-to-79xxxxx
 https://github.com/andronikov/tpb2csv
@@ -180,32 +164,6 @@ desired features:
 - default final target from http://thepiratebay.se/recent
 - optionally disable comments, filelist, metadata, description
 
-cd ~/tpb2csv/ && while true; do (LATEST=$(find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6 | sort --numeric-sort | tail --lines=1); JUMP="$((LATEST + 25000))"; python download.py $JUMP 9670000; sleep 5s); done
-
-
-http://thepiratebay.se/torrent/9674067/Barely.Legal.POV.3.XXX.DVDRip.XviD-FLESHLiGHT
-
-9000003 - 9674067 (674,064 total; I have 18,396)
-
-find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6|sort -u|tail -n +2 >> ids.txt
-
-9000003
-9000011
-9000018
-9000023
-9000071
-9000082
-9000092
-9000093
-9000095
-9000099
-...
-
-could do it with range:
-eg with 9000003 / 9000011, I want to emit 9000004 / 9000010
-
-[9000003..9674067]
-
 but could also just figure out all missing ids
 
 `countmissing.hs`:
@@ -229,19 +187,21 @@ and finally, GNU `parallel` to download each torrent ID separately without mucki
 cd ~/tpb/tpb2csv/ && rm ids.txt missing.txt randomized.txt
 
 find ./data/9xxxxxx/ -type d | cut --delimiter='/' --fields=6 | sort --unique | tail --lines=+2 > ids.txt
-runhaskell countmissing.hs 9848329
+runhaskell countmissing.hs 10364783
 sort --random-sort missing.txt > randomized.txt
 
-# cat randomized.txt | parallel --max-chars=40 --ungroup --jobs 11 -- python -OO download.py
-cat missing.txt | tac | parallel --max-chars=40 --ungroup --jobs 11 -- nice python -OO download.py
+# cat randomized.txt | parallel --max-chars=40 --ungroup --jobs 10 -- python -OO download.py
+cat missing.txt | tac | parallel --max-chars=40 --ungroup --jobs 10 -- nice python -OO download.py
 ~~~
 
-http://thepiratebay.se/torrent/9848329/Paranormal_Activity_The_Marked_Ones_2014_EXTENDED_BRRip_XviD_AC3
-
+https://thepiratebay.se/torrent/10364783/Bootyfull.Babes.Riley.Winter.Just.lean.back.and.watch.XXX.cPORN.
+http://thepiratebay.se/recent
 
 16:01:04 <@gwern> there are an amazing number of 404s on tpb. I wonder why
 16:01:12 <@gwern> why would they ever delete a page?
 16:01:18 <@gwern> short of CP
+
+## Processing
 
 ~~~{.Bash}
 $ find . -type f -name "description.txt" -exec grep --extended-regexp '[13][a-zA-Z0-9]{26,33}' {} \;
