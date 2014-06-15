@@ -45,7 +45,6 @@ But unfortunately, simply lowering the timeout will have minimal returns as Anal
 
         JS:
                 disqus
-                floating footnotes
         CSS
                 differences from readability
                 every declaration in default.CSS?
@@ -2125,7 +2124,9 @@ Some limitations to this experiment:
 One of the site features I like the most is how the endnotes pop-out/float when the mouse hovers over the link, so the reader doesn't have to jump to the endnotes and back, jarring their concentration and breaking their train of thought.
 I got the JS from [Luka Mathis back in 2010](http://ignorethecode.net/blog/2010/04/20/footnotes/).
 But sometimes the mouse hovers by accident, and with big footnotes, the popped-up footnote can cover the screen and be unreadable.
-So I've wondered if it's as cool as I think it is.
+I've wondered if it's as cool as I think it is, or whether it might be damaging.
+So now that I've hacked up an ABalytics clone which can handle JS in order to run the BLR experiment, I might as well run an A/B test to verify that the floating footnotes are not badly damaging conversions.
+(I'm not demanding the floating footnotes increase conversions by 1% or anything, just that the floating isn't coming at *too* steep a price.)
 
 ### Implementation
 
