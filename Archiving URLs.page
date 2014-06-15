@@ -455,8 +455,43 @@ The sort-key trick is most useful when we can infer a lot of spatial locality ju
     (Embarrassingly, `binsort` seems to underperform on this dataset: the files are 380M uncompressed, 3.536M sort-keyed, and 3.450M sorted.)
 3. if we know there are many duplicates but they are far apart by a lexicographic sort and we don't have any good way to sort filenames and a lot of RAM, we can try out a compression tool which specifically looks for long-range redundancies throughout the entire bitstream, such as [`lrzip`](!Wikipedia "rzip") ([homepage](http://ck.kolivas.org/apps/lrzip/)/[Arch wiki](https://wiki.archlinux.org/index.php/Lrzip). `lrzip` is packaged in Debian and should be at least as good as `xz` since it too uses LZMA; but it is an obscure tool which is not a default install on Linux distributions like `xz` is, and this makes distributing archives to other people difficult.
 
-<!-- for my WWW archive, sorting by file extension: `find . -type f -printf '%f/%p\n' | head -10000 | sort --field-separator="." --key=2 | cut -f2- -d/` -->
+<!-- for my WWW archive
 
+Size of uncompressed unsorted tarball, which eliminates filesystem overhead and tells us how much compression is really saving:
+
+1. cd ~/www/ && find ./ -type f -print0 | tar c --to-stdout --no-recursion --null --files-from - | wc --bytes
+86469734400
+
+Size of sorted tarball:
+
+2. cd ~/www/ && find . -type f -print0 | sort --zero-terminated | tar c --to-stdout --no-recursion --null --files-from - | wc --bytes
+86469734400
+
+Sort normally, in lexicographic order (subdomain, domain, TLD, subdirectories & files etc):
+
+3. cd ~/www/ && find . -type f -print0           | sort --zero-terminated                                          | tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes &> /home/gwern/compression/3.txt
+23967317664
+
+sort by file names, simply by reversing, sorting, unreverse ('foo.png ... bar.png' reverse to 'gnp.oof ... gnp.rab', which sort together, and then lossslessly unreverse back to 'bar.png / foo.png / ...'):
+
+4. cd ~/www/ && find . -type f | rev | sort | rev | tar c --to-stdout --no-recursion --files-from -        | xz -9 --stdout | wc --bytes &> /home/gwern/compression/4.txt
+24970605748
+
+(Note that find+rev doesn't correctly handle filenames with the wrong/non-UTF-8 encoding; I ultimately used brute force in the form of [`detox`](http://linux.die.net/man/1/detox) to find all the non-UTF-8 files and rename them.)
+
+sort by file suffixes, trying to parsing the filenames first:
+
+5. cd ~/www/ && find . -type f -printf '%f/%p\n' | sort --field-separator="." --key=2               | cut -f2- -d/ | tar c --to-stdout --no-recursion --files-from -        | xz -9 --stdout | wc --bytes &> /home/gwern/compression/5.txt
+24097155132
+
+sort by middle of domain:
+
+6. cd ~/www/ && find . -type f -print0           | sort --zero-terminated --key=3 --field-separator="."          | tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes &> /home/gwern/compression/6.txt
+
+sort by first subdirectory (ie. if there's a bunch of 'domain.com/wp-content/' files, then the '/wp-content/' files will all sort together; similarly for 'domain.com/images/', 'domain.com/css/' etc)
+
+7. cd ~/www/ && find . -type f           | sort --key=3 --field-separator="/"  | tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes &> /home/gwern/compression/7.txt
+-->
 
 ### External links
 
