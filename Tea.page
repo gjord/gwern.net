@@ -160,7 +160,7 @@ In roughly chronological order:
 - Daniel Clough, Golden Lily Wulong (★★★☆☆)
 
     1 of 4 oolongs gifted me by Clough after his travels in China. Interesting and not what I expected, since the tea looked more like a tieguanyin. The Golden Lily almost doesn't taste like an oolong at all: it tastes sweet, perhaps like honey?, and something harder to describe - googling, it seems the usual description is milky, which on further reflection seems like it's a good analogy.
-- Clough, unknown ginseng (★★☆☆☆)
+- Clough, Lan Gui Ren ginseng (★★☆☆☆)
 
     A ginseng oolong like the previous Tea's Etc; there's no 'straw' in it, and the coated pellets are much smaller, although unlike the other, the pellets do open up into tea leaves. Weakly ginseng, sweeter, and almost completely tasteless after the first steep. This one was a disappointment; I hope the other ginseng turns out to be better.
 - Clough, unknown ginseng (★★★☆☆)
@@ -360,3 +360,39 @@ Having learned my lessons about ignoring user reviews, this third time I'm going
 <!-- Order gyokuro & genmai from http://www.hibiki-an.com/ ? -->
 
 ![Taste-testing 9 teas side by side](/images/2011-teatasting-5.jpg "Taste-testing 9 teas side by side")
+
+<!--
+I'm not sure how much statistical/machine-learning recommendation
+techniques would really add over the obvious white/green/oolong/black
+type clustering and basic user ratings ('if someone buys mostly
+oolong, recommend all the 5-star oolongs to them'). All datasets are
+incomplete and limited and put limits on how much can be inferred from
+them...* I think it would depend on how good a dataset one could
+acquire: you'd want at least a few hundred ratings over a few dozen
+teas with good metadata like
+name/type/price-per-oz/country/description.
+
+* for example, tea harvests vary from year to year but when a seller
+ships a tea, you don't know what year it is from; you don't know how
+it was stored or for how long; for that matter, you don't know what
+farm a given tea is coming from even if you are buying the same
+'product' from the same seller. These may be the crucial factors which
+overwhelmingly determine how people will like a particular purchase
+beyond what is determined by simply being oolong/green/etc. Or they
+might not.
+We could imagine doing chemical analyses to try to pin down tastes to
+particular concentrations or combinations of chemicals so you could
+just test each batch, but what am I, a chemist? Who'd fund the initial
+testing? And would consumers really appreciate accurate testing and
+evaluation like that? Doesn't seem likely, they'd balk at the higher
+built-in prices likely...
+
+previous research: http://scholar.google.com/scholar?q=tea+taste+OR+flavor+factor+analysis&btnG=&hl=en&as_sdt=0%2C9
+
+possible tea rating sources:
+1. Amazon
+2. http://ratetea.com/
+3. http://www.teaviews.com/
+4. http://steepster.com/
+5. http://www.teareviewblog.com/
+-->
