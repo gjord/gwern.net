@@ -195,3 +195,45 @@ Final Notes: The rules for sperm donation reflect Norwegian idiosyncrasies. In N
 > Because of the difficulty in recruiting sperm donors in Norway, clinics imported sperm for 10 years up to 2005 from a Danish sperm bank.^["Assistert befruktning er regulert i bioteknologilovens § 2"]
 
 Sperm donors in Norway do get paid, to cover travel expenses (250[kr](!Wikipedia "Norwegian krone"), about two hours worth of a basic laborer's wages after tax - easily covering public transport). I have been unable, as yet, to unearth anyone who is a sperm donor that I could speak to; this is unfortunate, since it would likely provide hints on how to act during the interview with the doctor.
+
+<!--
+# fluoride
+
+> There was a lot of variance of the effect size, but the net effect size on IQ in the meta-analysis was -0.45 IQ points
+
+(The fulltext of Choi et al 2012 is available at http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3491930/ )
+
+This isn't correct; you're misinterpreting the units used in the meta-analysis. Meta-analyses always use standardized effect sizes like odds ratios or mean differences in standard deviations, and the abstract is perfectly clear that they aren't using a converted unit like IQ points when they reported the -0.45 point-estimate:
+
+> The standardized weighted mean difference in IQ score between exposed and reference populations was –0.45 (95% confidence interval: –0.56, –0.35) using a random-effects model.
+
+As in, the two groups differed by 0.45 standard deviations. If the -0.45 was being reported as IQ points, then the actual SMD would be (assuming the usual IQ scale of 15 points per standard deviation) -0.03, but you can check the forest plot and see that the result definitely isn't -0.03: http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3491930/figure/f2/
+
+So the actual correlation is 15x larger than you think it is: -6.75 IQ points. This is a concerning result.
+
+To put -6.75 in perspective, if you have a population at 100 IQ and drop the mean by 10 points, then you triple the number of people <70 (the usual cutoff for retardation), and cut to a third the number of people in the bright category (such as the sort of people who become doctors); or to put in more concrete terms: it's about 2/3rds the black-white difference in IQ, half the loss from iodine deficiency (the problem that gave English the word 'cretin'), similar to the Hispanic-white difference, and in regressions of IQ against income in the USA (see the citations in http://lesswrong.com/lw/7e1/rationality_quotes_september_2011/4r01 ), translates to something like lowering annual income by $12,000 (important in a country where median income has stagnated so much over the past decades).
+
+Incidentally, one could also know that "-0.45 IQ points" is a mistake because of the relationship between power, significance, and sample size: if -0.45 had been in IQ points, then an effect size of -0.03 would be incredibly small, subtle, hard to detect, and it would take an enormous sample size to deliver a confidence interval which excluded zero. (I'm not sure I've ever seen a meta-analysis in psychology which had a sample size so large it could reject the null hypothesis for an effect size of -0.03). Specifically, a random-effects meta-analysis for d=-0.03 would require something like n>35,000!* A look at the forest plot, and one knows that the total sample size was nowhere near that big...
+
+* estimate from a t-test power analysis for d=-0.03 and power of 80%; a fixed-effects meta-analysis of SMDs is similar to a t-test; random-effects meta-analyses usually require more samples than a fixed-effects; hence, 35k is a lower bound
+
+> In other words – fluoridated water in the US has the same level of fluoride as the control or low fluoride groups in the China studies reviewed in the recent article, and the negative association with IQ was only found where fluoride levels were much higher – generally above EPA limits.
+
+Why would the harmful effect stop at the EPA limit? Did they ever run randomized experiments measuring cognitive functioning showing that there is a sharp threshold where at 4mg/L harmful effects abruptly go to zero? The linear-no-threshold model is used for a lot of things, why not fluoride?
+
+LindaRosaRN:
+
+> Not taken into account was the practice of burning in the home coal that contains high levels of fluoride, as well as other likely contaminants (e.g. arsenic and tainted grain).
+
+Measurement error biases coefficients to zero. Similarly, unless there's systematic covariation between the coal usage and fluoride levels, that's just part of the random heterogeneity which we already know about from the high I^2.
+
+iAccidentally:
+
+> I agree with the paper that more studies are warranted, but in the meantime, is the potential upside worth the risk?
+
+Depends on what the risk is, and also how bad 'neurotoxicity' is. I hope we all agree here that cost-benefit is the right approach for this sort of question...?
+
+It's fashionable to argue that IQ doesn't matter, but it affects a lot of things, as we can see in natural experiments like the iodization of America and Switzerland, and we can extract direct financial estimates of its value. To reuse the $12k figure from above, across the American population, that gives an upper bound of $3 trillion a year lost. America spends ~$100 billion annually on dentistry or ~$333 per capita. Let's be conservative and imagine that fluoridation fully halves dentistry bills and that fluoridated toothpaste isn't an option, so not fluoridating would mean spending $666 per capita. Then the two choices, compared to the status quo, are $12000 - (666 - 333) = $11667 (we reap the gain of higher IQ but we have to pay on the margin for more dentistry), and $333 (no gain from higher IQ, but also cheaper dentistry); if there's a >3% chance fluoridation does such damage, then the expected-value is higher with the no-fluoridate option. So that's an example of how you might calculate whether the upside of cheaper dentistry is worth the risk of neurotoxicity.
+
+Definitely the sort of problem which urgently justifies more studies, and specifically, *randomized* experiments. We can argue about correlational results from China until the cows come home without reaching much more confident conclusions ('garbage in, garbage out'), but it's only randomized experiments which will give us causal inferences. The good news is that if the loss is half a standard deviation for high levels vs normal levels, then the loss for normal vs low/zero levels should be fairly easy to measure (halve the effect to d=0.225, demand extreme power of 99%, and you only need ~1500 people). And it's not like experiments have to be hard to run: you could settle for cluster randomization of local drinking suppliers - and how much does it cost to *not* fluoridate water and then monitor the next decade of local school grades & ACT/SAT scores (an already-being-collected proxy for intelligence)?
+-->
