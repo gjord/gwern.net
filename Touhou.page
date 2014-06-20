@@ -355,12 +355,13 @@ for (filter in c("/home/gwern/c83/touhou/", "\\[touhou.vnsharing.net\\]", " \\(3
  { touhou$Directory <- sub(filter, "", as.character(touhou$Directory)) }
 touhou[touhou==""] <- NA
 touhou[touhou=="-"] <- NA
-
 ~~~
 
 Playback length:
 
-find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|g "Playback length"
+~~~{.Bash}
+find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|fgrep "Playback length"
+~~~
 
 ### 4chan /jp/ C84 threads
 
@@ -378,8 +379,17 @@ find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|g "Playback length"
 
 Similarly to above, drawing on the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/1f3ikk/the_reitaisai_10_resource_thread/) discussion and manually pruning duplicates & non-Touhou down to 491 music files.
 
-exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date */*.ogg >> ~/2013-reitaisai-downloads.json
+~~~{.Bash}
+exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date */*.ogg > ~/2013-reitaisai-downloads.json
+~~~
 
+### Reitaisai 10 torrent
+
+In May & June 2013, an anonymous person compiled 67 albums and released two torrents of Reitaisai 10 albums ([vol. 1](http://www.nyaa.se/?page=view&tid=438733), [vol. 2](http://www.nyaa.se/?page=view&tid=440787))
+
+~~~{.Bash}
+exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date */*.ogg > ~/2013-reitaisai-downloads-torrent.json
+~~~
 
 # Analysis
 
