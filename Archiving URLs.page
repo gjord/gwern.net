@@ -97,7 +97,16 @@ The library half of `archiver` is a simple wrapper around the appropriate HTTP r
 
 That is, `archiver` is a daemon which will process a specified text file, each line of which is a URL, and will one by one request that the URLs be archived or spidered
 
-Usage of `archiver` might look like `archiver ~/.urls.txt gwern@gwern.net`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern@gwern.net; done`. If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern@gwern.net; done'`.
+Usage of `archiver` might look like `archiver ~/.urls.txt gwern@gwern.net`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern@gwern.net; done`.
+If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern@gwern.net; done'`.
+Finally, rather than start it manually, I use a cron job to start it at boot, for a final invocation of
+
+~~~{.Bash}
+@reboot sleep 4m && screen -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern2@gwern.net \
+        "cd ~/www && nice -n 20 ionice -c3 torify wget --unlink --limit-rate=20k --page-requisites --timestamping \
+        -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm \
+        --user-agent='Firefox/4.9'" 200; done'
+~~~
 
 ## Local caching
 
@@ -120,7 +129,7 @@ rm ~/.tmp
 
 cd ~/www/
 for file in ~/.tmp-urls*;
- do (wget --continue --page-requisites --timestamping --input-file $file && rm $file &);
+ do (wget --unlink --continue --page-requisites --timestamping --input-file $file && rm $file &);
 done
 
 find ~/www -size +4M -delete
@@ -142,7 +151,7 @@ A local copy is not the best resource - what if a link goes dead in a way your t
 
 `archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way.
 
-For example, in conjunction with the big `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern@gwern.net "cd ~/www && wget --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm --user-agent='Firefox/3.5' 120"; done'`.
+For example, in conjunction with the big `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern@gwern.net "cd ~/www && wget --unlink --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm --user-agent='Firefox/3.5' 120"; done'`.
 
 Alternately, you might use `curl` or a specialized archive downloader like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
 
@@ -151,7 +160,6 @@ The space consumed by such a backup is not that bad; only 30-50 gigabytes for a 
 There are ways to cut down on the size; if you tar it all up and run [7-Zip](!Wikipedia) with maximum compression options, you could probably compact it to 1/5th the size. I found that the uncompressed files could be reduced by around 10% by using [fdupes](!Wikipedia) ([homepage](http://netdial.caribe.net/~adrian2/fdupes.html)) to look for duplicate files and turning the duplicates into a space-saving [hard link](!Wikipedia) to the original with a command like `fdupes --recurse --hardlink ~/www/`. (Apparently there are a *lot* of bit-identical JavaScript (eg. [JQuery](!Wikipedia)) and images out there.)
 
 ### URL sources
-
 #### Browser history
 
 There are a number of ways to populate the source text file. For example, I have a script `firefox-urls`:
