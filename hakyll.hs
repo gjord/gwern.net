@@ -6,6 +6,7 @@ import Data.ByteString.Lazy.Char8 (unpack)
 import Data.Char (isAlphaNum, isAscii)
 import Data.List (isInfixOf, nub, sort)
 import Data.Monoid ((<>))
+import Data.Set (filter)
 import Network.HTTP (urlEncode)
 import Network.URI (unEscapeString)
 import System.Directory (createDirectoryIfMissing)
@@ -23,8 +24,8 @@ import Hakyll ((.&&.), applyTemplateList, buildTags, compile, complement, compre
                pandocCompilerWithTransform, preprocess, relativizeUrls, route, setExtension,
                tagsField, tagsRules, templateCompiler, Compiler, Context, Item, Pattern, Tags)
 import Text.HTML.TagSoup (renderTagsOptions,parseTags,renderOptions, optMinimize, Tag(TagOpen))
-import Text.Pandoc (bottomUp, HTMLMathMethod(MathML), Inline(..),
-                    ObfuscationMethod(NoObfuscation), Pandoc(..), WriterOptions(..))
+import Text.Pandoc (bottomUp, Extension(Ext_markdown_in_html_blocks), HTMLMathMethod(MathML), Inline(..),
+                    ObfuscationMethod(NoObfuscation), Pandoc(..), ReaderOptions(..), WriterOptions(..))
 
 main :: IO ()
 main = hakyll $ do
@@ -50,7 +51,9 @@ main = hakyll $ do
 
              match "**.page" $ do
                  route $ setExtension "" -- cool URLs
-                 compile $ pandocCompilerWithTransform defaultHakyllReaderOptions woptions pandocTransform
+                 -- https://groups.google.com/forum/#!topic/pandoc-discuss/HVHY7-IOLSs
+                 let readerOptions = defaultHakyllReaderOptions { readerExtensions = Data.Set.filter (/=Ext_markdown_in_html_blocks) $ readerExtensions defaultHakyllReaderOptions }
+                 compile $ pandocCompilerWithTransform readerOptions woptions pandocTransform
                      >>= loadAndApplyTemplate "static/templates/default.html" (postCtx tags)
                      >>= imgUrls
                      >>= relativizeUrls
