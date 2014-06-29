@@ -1739,7 +1739,7 @@ If it turns out the treadmill is not helpful, I can probably sell it for ~$100 b
 
 ## Morning caffeine pills
 
-With the coming of winter, I, like so many other people, have started to find sleeping in to be too tempting: why get out of bed into the cold air when I can just snuggle under my covers and drowse another hour? This is bad because I was getting sufficient sleep as it was and didn't need more, and because I think it may exacerbate sleep inertia as the waking process is dragged out for a long time. All in all, the days seemed less productive and drearer whenever I crawled out of bed an hour later than usual.
+With the coming of winter, I, like so many other people, have started to find sleeping in to be too tempting: why get out of bed into the cold air when I can just snuggle under my covers and drowse another hour? This is bad because I was getting sufficient sleep as it was and didn't need more, and because I think it may exacerbate sleep inertia as the waking process is dragged out for a long time. All in all, the days seemed less productive and drearier whenever I crawled out of bed an hour later than usual.
 
 Then I was reminded [by Kaj Sotala](http://lesswrong.com/lw/h2m/solved_problems_repository/8ol7) of an Anders Sandberg blog post I'd seen a while back, ["The Early Bird gets the Caffeine Pill"](http://www.aleph.se/andart/archives/2007/11/the_early_bird_gets_the_caffeine_pill.html):
 
@@ -1747,7 +1747,156 @@ Then I was reminded [by Kaj Sotala](http://lesswrong.com/lw/h2m/solved_problems_
 
 It sounds logical enough (why *wouldn't* a caffeine pill work?), and he cites [a study successfully trying a similar trick with naps](http://faculty.vet.upenn.edu/uep/user_documents/Van_Dongen_etal_Sleep_24_7_2001.pdf "'Caffeine eliminates psychomotor vigilance deficits from sleep inertia', Van Dongen et al 2001"). I'd meant to try it out at some point, and winter was as good a reason as any. I already had an ample supply of caffeine pills (technically, piracetam+caffeine+others), so I had just been procrastinating on doing a design & setting up my usual RCT. I decided that I might as well try it out as a simple easy non-blinded alternate-day pilot experiment and if I felt like it after a month or two of data, I might try an RCT.
 
-So on 4 November 2013, I started keeping a little jar of my caffeine+piracetam pills by my bedside and using them on alternate days (specifically, my Zeo SmartWake fires in the 9-9:30AM window and I take it then, while I may or may not snooze on). Thus far they do seem to wake me up.
+So on 4 November 2013, I started keeping a little jar of my caffeine+piracetam pills by my bedside and using them on alternate days (specifically, my Zeo SmartWake fires in the 9-9:30AM window and I take it then, while I may or may not snooze on). Thus far they do seem to wake me up. I stopped around April 2014.
+
+### Pilot analysis
+
+The correlational data shows a 20 minute difference in rise-time between caffeine & non-caffeine days; graphed:
+
+![What time I got up in the morning, November - June 2014; colored by whether affected by a caffeine wake-up pill](/images/zeo/2014-06-28-gwern-zeodata-caffeinecorrelation.png)
+
+Using _d_=0.35 as an effect size estimate, a proper blind experiment (blocking pairs of days) will take 100 days total. I began 29 June 2014.
+
+~~~{.R}
+zeo <- read.csv("http://www.gwern.net/docs/zeo/2014-06-28-gwern-zeodata-caffeinecorrelation.csv")
+zeo$Morning.Caffeine <- as.logical(zeo$Morning.Caffeine)
+
+## does morning caffeine affect total sleep? wouldn't think so, since it's aimed at reducing morning wakefulness.
+wilcox.test(Total.Z ~ Morning.Caffeine, data=zeo)
+#
+#   Wilcoxon rank sum test with continuity correction
+#
+# data:  Total.Z by Morning.Caffeine
+# W = 2244, p-value = 0.7168
+# alternative hypothesis: true location shift is not equal to 0
+
+## time awake doesn't seem any better
+wilcox.test(Time.in.Wake ~ Morning.Caffeine, conf.int=TRUE, data=zeo)
+#
+#   Wilcoxon rank sum test with continuity correction
+#
+# data:  Time.in.Wake by Morning.Caffeine
+# W = 2090, p-value = 0.7623
+# alternative hypothesis: true location shift is not equal to 0
+# 95 percent confidence interval:
+#  -5  3
+# sample estimates:
+# difference in location
+#                     -1
+
+## let's examine time *that* I wake up, the rise-time. This is what's really supposed to be affected
+# convert "05/12/2014 06:45" to "06:45"
+zeo$Rise.Time <- sapply(strsplit(as.character(zeo$Rise.Time), " "), function(x) { x[[2]] })
+# convert "06:45" to 24300
+interval <- function(x) { if (!is.na(x)) { if (grepl(" s",x)) as.integer(sub(" s","",x))
+                                           else { y <- unlist(strsplit(x, ":"));
+                                                  as.integer(y[[1]])*60 + as.integer(y[[2]]); }
+                                                  }
+                          else NA
+                          }
+zeo$Rise.Time <- sapply(zeo$Rise.Time, interval)
+## `hist(zeo$Rise.Time)` looks normally distributed, but there's a big outlier, so we'll use a U-test:
+wilcox.test(Rise.Time ~ Morning.Caffeine, conf.int=TRUE, data=zeo)
+#
+#   Wilcoxon rank sum test with continuity correction
+#
+# data:  Rise.Time by Morning.Caffeine
+# W = 2705, p-value = 0.01863
+# alternative hypothesis: true location shift is not equal to 0
+# 95 percent confidence interval:
+#   5 40
+# sample estimates:
+# difference in location
+#                     20
+
+## A definite hit! Rising 20 minutes earlier seems plausible, too.
+## Let's take a look at the graph of rise-time over time:
+zeo$Sleep.Date <- as.Date(zeo$Sleep.Date, format="%m/%d/%Y")
+library(ggplot2)
+qplot(Sleep.Date, Rise.Time, color=Morning.Caffeine, data=zeo)
+#
+## two observations immediately jump out:
+## 1. the blue points (caffeine-affected) do seem to generally be below the red points
+##    (caffeine-free) and the U-test's claim is believable
+## 2. there seem to be very distinct temporal patterns, which make any correlations or
+##    analysis treacherous: before/after experiments will be worthless since they will
+##    sample from distinct periods of rising-time, so an experiment should definitely be
+##    blocked as pairs-of-days to minimize the clear drift or sinusoidal pattern.
+
+## let's look for damage to my sleep; it's no good avoiding sleeping in if that then makes me feel like shit:
+wilcox.test(ZQ ~ Morning.Caffeine, conf.int=TRUE, data=zeo)
+#
+#   Wilcoxon rank sum test with continuity correction
+#
+# data:  ZQ by Morning.Caffeine
+# W = 2086, p-value = 0.7491
+# alternative hypothesis: true location shift is not equal to 0
+# 95 percent confidence interval:
+#  -4  3
+# sample estimates:
+# difference in location
+#                     -1
+wilcox.test(Morning.Feel ~ Morning.Caffeine, conf.int=TRUE, data=zeo)
+#
+#   Wilcoxon rank sum test with continuity correction
+#
+# data:  Morning.Feel by Morning.Caffeine
+# W = 2069, p-value = 0.6568
+# alternative hypothesis: true location shift is not equal to 0
+# 95 percent confidence interval:
+#  -1.34e-05  1.98e-05
+# sample estimates:
+# difference in location
+#             -5.209e-05
+#
+## These are the 2o main measures of whether sleep quality have degraded, and both look good. So it seems
+## the morning caffeine correlates with earlier risings but not with worse sleep or feeling bad when I get up.
+
+## Correlation!=causation; there's a plausible alternative: on days when I feel like sleeping in,
+## I 'forgot' to take a caffeine pill.
+## So it's worth testing. How long does the experiment need to be for 80% power and a shift of 20 minutes?
+
+## Calculate effect size, plug into power formula:
+t.test(Rise.Time ~ Morning.Caffeine, data=zeo)
+#
+#     Welch Two Sample t-test
+#
+# data:  Rise.Time by Morning.Caffeine
+# t = 2.746, df = 81.84, p-value = 0.007417
+# alternative hypothesis: true difference in means is not equal to 0
+# 95 percent confidence interval:
+#   6.23 38.99
+# sample estimates:
+# mean in group FALSE  mean in group TRUE
+#               299.9               277.2
+sd(zeo$Rise.Time)
+# [1] 65.19
+(299.9 - 277.2) / 65.19
+# [1] 0.3482
+power.t.test(d=0.3482, power=0.80, type="paired", alternative="one.sided")
+#
+#      Paired t test power calculation
+#
+#               n = 52.37
+#           delta = 0.3482
+#              sd = 1
+#       sig.level = 0.05
+#           power = 0.8
+#     alternative = one.sided
+#
+# NOTE: n is number of *pairs*, sd is std.dev. of *differences* within pairs
+#
+## So: 100 days (50 placebo pills, 50 caffeine pills).
+~~~
+
+<!-- R conversion routine for merging old and new Zeo Data:
+# need to delete redundant entries
+zeoOld <- read.csv("gwern-zeodata-old.csv")
+zeoNew <- read.csv("2014-06-28-gwern-zeodata.csv")
+foo <- merge(zeoOld, zeoNew, all=TRUE)
+summary(foo)
+write.csv(foo, "bar.csv", row.names=FALSE)
+-->
 
 <!--
 date pushups
@@ -2577,11 +2726,30 @@ June
 05: 0 0
 06: 0 1
 07: 0 1
-08: 1 1?
+08: 1 0
+09: 1 1
+10: 0 1
+11: 1 1
+12: 0 0
+13: 0 1
+14: 0 1
+15: 0 0
+16: 0 0
+17: 1 0
+18: 0 1
+19: 1 0
+20: 0 1
+21: 0 1
+22: 0 1
+23: 0 0
+24: 0 0
+25: 1 1
+26: 0 0
+27: 1 0
+28: 1 1?
 -->
-<!-- Alcohol log: 14, 15, 23, 28, 29, 31 Jan 2014; 2, 4, 6, 9, 12, 14, 16, 18, 20, 22, 24, 26 February; 2, 4, 8, 10, 12, 14, 16, 18, 22, 23, 25, 28, 30, 31 March; 2, 4, 6, 7, 9, 10, 15, 16, 19, 26, 27 April; 2, 3, 5, 10, 11, 14, 16, 17, 20, 21, 25, 27 May; 7 June -->
+<!-- Alcohol log: 14, 15, 23, 28, 29, 31 Jan 2014; 2, 4, 6, 9, 12, 14, 16, 18, 20, 22, 24, 26 February; 2, 4, 8, 10, 12, 14, 16, 18, 22, 23, 25, 28, 30, 31 March; 2, 4, 6, 7, 9, 10, 15, 16, 19, 26, 27 April; 2, 3, 5, 10, 11, 14, 16, 17, 20, 21, 25, 27 May; 7, 9, 10, 12, 15, 17, 22 June -->
 <!-- melatonin: last night of Now's melatonin+niacin+B6+magnesium 19 Feb 2014; began Nature's Bounty 1mg 21 March 2014 -->
-<!-- morning caffeine pills: 4-9 Nov, off 10 Nov, on 11-13 Nov, off 14, on 15, off 16-18; on 19; off 20; on 21; off 22; on 23; off 24; on 25; off 26-28; on 29, off 30, on 1 December; off 2, 3; on: 4, 5; off: 6; on: 7; off: 8/9; on: 10; off: 11/12/13; on: 14; off: 15; on: 16; off: 17; on: 18; off: 19; on: 20; off: 21; on: 22; on: 23; off: 24-29; on: 30-31; 2014 January: 01: off; 02: on; 03/04: off; 05: on; 06: off; 07: on; 08/09/10: off; 11: on; 12: off; 13: on; 14: off; 15: off; 16: off; 17: on; 18: off; 19: off; 20: on; 21: off; 22: on; 23, 24: off; 25: on; 26: off; 27: on; 28-29: off; 30: on; 31: off; 01 February: off; 02: on; 3-12: off; 13: on; 14-15: off; 16: on; 17-22: off; 23: on; 24: off; 25: on; 26-28: off; 1 March: on; 2-4 March: off; 5 March: on; 6-31: off; 1-6 April: off -->
 <!-- vitamin D: ??? -->
 
 # External links
