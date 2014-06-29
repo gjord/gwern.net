@@ -19,7 +19,7 @@ import Control.Applicative ((<*>), (<$>))
 import Data.ByteString.Lazy.Search as BLS (replace)
 import Data.Csv (FromNamedRecord(..), (.:), decodeByName)
 import Data.List as L (sortBy)
-import Data.Maybe (catMaybes)
+import Data.Maybe (catMaybes, isJust)
 import Debug.Trace (trace)
 import System.Environment (getArgs)
 import Text.Pandoc (Pandoc(..), Inline(..), Block(..), readMarkdown, writeMarkdown, strictExtensions, def, ReaderOptions(..))
@@ -38,6 +38,7 @@ main = do books <- fmap head getArgs >>= B.readFile
 data GoodReads = GoodReads { title :: String,
                              author :: String,
                              isbn :: Maybe String, -- ISBNs aren't integers! eg '981068276X'
+                             isbn13 :: Maybe String,
                              myRating :: Int,
                              yearPublished :: Maybe Int,
                              originalYearPublished :: Maybe Int,
@@ -48,6 +49,7 @@ instance FromNamedRecord GoodReads where
                           m .: "Title" <*>
                           m .: "Author" <*>
                           m .: "ISBN" <*>
+                          m .: "ISBN13" <*>
                           m .: "My Rating" <*>
                           m .: "Year Published" <*>
                           m .: "Original Publication Year" <*>
@@ -75,7 +77,7 @@ colHeaders = Prelude.map TPB.singleton [Plain [Str "Title"],
 
 bookToRow :: GoodReads -> [Blocks]
 bookToRow gr = if  myRating gr == 0 then [] else -- 0 as rating means unread/unrated
-                  Prelude.map TPB.singleton [Plain [Emph (titleOrIsbnToLink (title gr) (isbn gr))],
+                  Prelude.map TPB.singleton [Plain [Emph (titleOrIsbnToLink (title gr) (isbn gr) (isbn13 gr))],
                                           Plain [Str (author gr)],
                                           Plain [Str (handleRating (myRating gr))],
                                           Plain [Str (handleDate gr)],
@@ -89,14 +91,14 @@ handleDate gr = show $ head $ catMaybes [yearPublished gr, originalYearPublished
 handleReview :: String -> [Block]
 handleReview rvw = let (Pandoc _ x) = readMarkdown def { readerExtensions = strictExtensions } rvw in x
 
--- Most books have an ISBN; if there is an ISBN, we want to link to the Amazon
+-- Most books have an ISBN; if there is an ISBN (either -10 or -13), we want to link to the Amazon
 -- search page so readers can find out more about it (and hopefully buy it). On
 -- the other hand, there may well be no ISBN - it's online fanfiction, a visual
 -- novel not released in America, a short story, a novella, etc. In that case,
 -- we see if there's a manually-specified known URL for the title; and if there isn't anything in
 -- the map, then we just don't link the title at all.
-titleOrIsbnToLink :: String -> Maybe String -> [Inline]
-titleOrIsbnToLink ttle i = let url = case i of
+titleOrIsbnToLink :: String -> Maybe String -> Maybe String -> [Inline]
+titleOrIsbnToLink ttle i10 i13 = let url = case i of
                                                  Just i' -> getAmazonPage i'
                                                  Nothing -> case M.lookup ttle isbnDB of
                                                                   Just i'' -> getAmazonPage i''
@@ -105,7 +107,10 @@ titleOrIsbnToLink ttle i = let url = case i of
                                                                                   -- warn
                                                                                   Nothing -> trace ("Error! " ++ ttle) ""
                       in [Link [Str ttle] (url, "")]
-                where getAmazonPage :: String -> String
+                where -- we prefer the shorter ISBN; if both i10 & i13 are
+                      -- Nothing, the case expression above will handle it
+                      i = if isJust i10 then i10 else i13
+                      getAmazonPage :: String -> String
                       getAmazonPage ibn = "http://www.amazon.com/s?ie=UTF8&field-isbn=" ++ ibn ++ "&page=1&rh=i:stripbooks"
 
 isbnDB, urlDB :: M.Map String String
@@ -145,6 +150,7 @@ urlDB = M.fromList [
      ("It's behind you - The making of a computer Game", "http://bizzley.com/"),
      ("Legend of the Golden Witch (Umineko no Naku Koro ni #1)", "https://en.wikipedia.org/wiki/Umineko:_When_They_Cry"),
      ("Luminosity", "http://luminous.elcenia.com/"),
+     ("Manna", "http://www.marshallbrain.com/manna1.htm"),
      ("Monstrous Regiment", "https://en.wikipedia.org/wiki/Monstrous_Regiment_%28novel%29"),
      ("Mother Earth Mother Board", "http://archive.wired.com/wired/archive/4.12/ffglass_pr.html"),
      ("Orphan Of The Helix", "http://bookre.org/reader?file=283363"),
